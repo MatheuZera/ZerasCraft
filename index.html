@@ -3,35 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mundo Zera's Craft</title>
+  <title>Mundo Zera's Craft - Servidor Minecraft & Discord</title>
   <style>
     body {
       margin: 0;
+      background: #121212;
       font-family: 'Arial', sans-serif;
-      background-color: #1e1e1e;
-      color: #fff;
-      line-height: 1.6;
+      color: #f0f0f0;
     }
     header {
-      background: url('https://images.unsplash.com/photo-1594824476967-d2c2d0b4d1b3') center/cover no-repeat;
-      height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      padding: 60px 20px;
       text-align: center;
-      padding: 20px;
+      color: #00ffcc;
+      box-shadow: 0 0 20px #00ffcc;
     }
     header h1 {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      border-radius: 10px;
-      font-size: 2.8rem;
-      box-shadow: 0 0 20px #0ff;
+      font-size: 3rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    .buttons {
+      margin-top: 30px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 10px;
+      border: 2px solid #00ffcc;
+      background: transparent;
+      color: #00ffcc;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.4s ease;
+    }
+    .btn:hover {
+      background: #00ffcc;
+      color: #121212;
+      box-shadow: 0 0 20px #00ffcc;
+      transform: scale(1.05);
     }
     section {
-      padding: 40px 20px;
-      max-width: 1000px;
+      padding: 50px 20px;
+      max-width: 900px;
       margin: auto;
+      text-align: center;
+    }
+    section h2 {
+      color: #00ffcc;
+      margin-bottom: 20px;
     }
     .portfolio {
       display: grid;
@@ -39,11 +63,11 @@
       gap: 20px;
     }
     .portfolio-item {
-      background-color: #2e2e2e;
-      border-radius: 10px;
+      background: #1e1e1e;
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-      transition: transform 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+      transition: transform 0.4s ease;
     }
     .portfolio-item img {
       width: 100%;
@@ -51,17 +75,17 @@
       object-fit: cover;
     }
     .portfolio-item:hover {
-      transform: scale(1.05);
+      transform: translateY(-10px);
     }
     footer {
-      background-color: #111;
-      text-align: center;
+      background: #0f0f0f;
       padding: 20px;
+      text-align: center;
+      border-top: 2px solid #00ffcc;
       font-size: 0.9rem;
-      border-top: 2px solid #0ff;
     }
-    a {
-      color: #0ff;
+    footer a {
+      color: #00ffcc;
       text-decoration: none;
     }
   </style>
@@ -70,30 +94,35 @@
 
 <header>
   <h1>Mundo Zera's Craft</h1>
+  <p>Servidor Minecraft & Comunidade no Discord</p>
+  <div class="buttons">
+    <a href="https://discord.gg/seuconvite" class="btn">Entrar no Discord</a>
+    <a href="#sobre" class="btn">Sobre o Servidor</a>
+  </div>
 </header>
 
-<section>
-  <h2>Sobre Nós</h2>
-  <p>Bem-vindo ao Mundo Zera's Craft! Somos um servidor de Minecraft focado em aventura, sobrevivência e muita diversão. Explore, construa e crie seu próprio caminho nesse universo único.</p>
+<section id="sobre">
+  <h2>Sobre o Mundo Zera's Craft</h2>
+  <p>Servidor focado em aventura, sobrevivência e eventos únicos no Minecraft, com integração total ao nosso Discord! Construa, explore e jogue com nossa comunidade!</p>
 </section>
 
 <section>
-  <h2>Nosso Mundo</h2>
+  <h2>Galeria do Servidor</h2>
   <div class="portfolio">
     <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1558981033-0e9c5e7a6d0f" alt="Imagem 1">
+      <img src="https://images.unsplash.com/photo-1594824476967-d2c2d0b4d1b3" alt="Mundo 1">
     </div>
     <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1586075010920-13c37b66e655" alt="Imagem 2">
+      <img src="https://images.unsplash.com/photo-1586075010920-13c37b66e655" alt="Mundo 2">
     </div>
     <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1594824476967-d2c2d0b4d1b3" alt="Imagem 3">
+      <img src="https://images.unsplash.com/photo-1558981033-0e9c5e7a6d0f" alt="Mundo 3">
     </div>
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2025 Mundo Zera's Craft. Todos os direitos reservados.</p>
+  <p>&copy; 2025 Mundo Zera's Craft. Todos os direitos reservados. | <a href="https://discord.gg/seuconvite">Discord</a></p>
 </footer>
 
 </body>
