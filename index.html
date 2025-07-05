@@ -231,9 +231,6 @@
         Seu navegador não suporta a reprodução de áudio.
     </audio>
 
-    <button id="audio-control-btn" class="audio-control-btn">
-        <span id="audio-icon">&#x1F507;</span> </button>
-
     <script>
         // Script para o menu responsivo (toggle)
         document.addEventListener('DOMContentLoaded', () => {
@@ -243,32 +240,6 @@
             if (menuToggle && mainNav) {
                 menuToggle.addEventListener('click', () => {
                     mainNav.classList.toggle('active');
-                });
-            }
-
-            // Script para controle de áudio
-            const backgroundAudio = document.getElementById('background-audio');
-            const audioControlBtn = document.getElementById('audio-control-btn');
-            const audioIcon = document.getElementById('audio-icon');
-
-            if (backgroundAudio && audioControlBtn && audioIcon) {
-                // Tenta reproduzir o áudio (mutado) no carregamento
-                // Isso pode falhar dependendo das políticas do navegador, mas é a melhor prática.
-                backgroundAudio.play().catch(error => {
-                    console.warn('Reprodução automática de áudio bloqueada pelo navegador. O usuário precisa interagir para ativar o som.');
-                    backgroundAudio.muted = true; // Garante que esteja mutado
-                    audioIcon.textContent = '\uD83D\uDD07'; // Ícone 🔇
-                });
-
-                audioControlBtn.addEventListener('click', () => {
-                    if (backgroundAudio.muted) {
-                        backgroundAudio.muted = false;
-                        backgroundAudio.play(); // Garante que comece a tocar se não estiver tocando
-                        audioIcon.textContent = '\uD83D\uDD0A'; // Ícone 🔊
-                    } else {
-                        backgroundAudio.muted = true;
-                        audioIcon.textContent = '\uD83D\uDD07'; // Ícone 🔇
-                    }
                 });
             }
         });
