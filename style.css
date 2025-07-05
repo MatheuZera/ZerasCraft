@@ -157,7 +157,7 @@ a:hover {
 
 .header-content {
     display: flex;
-    justify-content: space-between; /* Ajusta em desktop */
+    justify-content: center; /* Centraliza o logo horizontalmente */
     align-items: center;
 }
 
@@ -167,47 +167,13 @@ a:hover {
     font-weight: 700;
     color: var(--text-color-light);
     text-decoration: none;
-    order: 0; /* Ordem em desktop */
+    /* Remover 'order' pois é o único item */
 }
 
-/* Menu de Navegação (Desktop) */
-.main-nav {
-    display: flex; /* Visível por padrão em desktop */
-    justify-content: flex-end;
-    align-items: center;
-    order: 1; /* Ordem em desktop */
-}
-
-.main-nav .nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.main-nav .nav-item {
-    color: var(--text-color-light);
-    text-decoration: none;
-    padding: 10px 15px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
-}
-
-.main-nav .nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Ícone Hamburger (visível apenas em mobile) */
+/* Menu de Navegação (Removido) */
+.main-nav,
 .hamburger-menu {
-    display: none; /* Esconde por padrão em desktop */
-    background: none;
-    border: none;
-    color: var(--text-color-light);
-    font-size: 1.8rem; /* Tamanho do ícone */
-    cursor: pointer;
-    padding: 5px;
-    order: -1; /* Força o ícone para o início em mobile */
+    display: none; /* Esconde completamente o menu e o hamburger */
 }
 
 /* Hero Section - Otimizada para Mobile e Desktop */
@@ -537,57 +503,13 @@ a:hover {
 /* Responsividade */
 @media (max-width: 992px) {
     .header-content {
-        justify-content: space-between;
-        flex-wrap: nowrap;
+        justify-content: center; /* Centraliza o logo em mobile */
     }
 
     .header-logo {
         font-size: 1.4rem; /* Título menor para mobile */
         text-align: center;
-        flex-grow: 1; /* Permite que o logo ocupe espaço */
-    }
-
-    .hamburger-menu {
-        display: block; /* Mostra o ícone hamburger */
-    }
-
-    .main-nav {
-        /* Estilos para o menu mobile */
-        display: flex;
-        flex-direction: column;
-        width: 250px; /* Largura do menu lateral */
-        height: 100vh; /* Altura total da tela */
-        background-color: var(--dark-bg); /* Cor de fundo do menu */
-        position: fixed;
-        top: 0;
-        left: -250px; /* Esconde o menu fora da tela */
-        padding-top: 80px; /* Espaço para o cabeçalho fixo */
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-        transition: left 0.3s ease-in-out; /* Transição suave */
-        z-index: 999; /* Abaixo do header, mas acima do conteúdo */
-        align-items: flex-start; /* Alinha itens à esquerda */
-    }
-
-    .main-nav.mobile-active {
-        left: 0; /* Mostra o menu quando ativo */
-    }
-
-    .main-nav .nav-list {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .main-nav .nav-item {
-        color: var(--text-color-light); /* Garante que os itens do menu fiquem brancos */
-        padding: 15px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        width: 100%;
-        text-align: left; /* Alinha o texto à esquerda */
-        font-size: 1rem; /* Atalhos menores para mobile */
-    }
-
-    .main-nav .nav-item:last-child {
-        border-bottom: none;
+        flex-grow: 0; /* Não precisa mais crescer */
     }
 
     .hero-title {
@@ -726,12 +648,5 @@ a:hover {
     }
     .header-logo {
         font-size: 1.2rem;
-    }
-    .hamburger-menu {
-        font-size: 1.6rem;
-    }
-    .main-nav {
-        width: 200px; /* Menu um pouco mais estreito */
-        left: -200px;
     }
 }
