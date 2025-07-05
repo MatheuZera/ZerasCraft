@@ -186,7 +186,7 @@ a:hover {
     text-align: center;
     color: var(--text-color-light);
     /* **IMAGEM DE FUNDO DO BANNER GRANDE (AGORA um GIF SEPARADO):** */
-    background: url('images/banner-fundo-hero.gif') no-repeat center center/cover; /* <--- MUDANÇA AQUI */
+    background: url('images/banner-fundo-hero.gif') no-repeat center center/cover;
     background-attachment: fixed;
     padding-top: 80px; /* Espaço para o cabeçalho fixo */
     padding-bottom: 60px;
@@ -581,10 +581,11 @@ a:hover {
         font-size: 2rem;
     }
 
+    /* Em telas menores que 992px, as grids se tornam 1 coluna */
     .services-grid,
     .roles-grid,
     .events-grid,
-    .community-images-grid {
+    .community-grid { /* Ajustado para incluir community-grid */
         grid-template-columns: 1fr;
     }
 }
@@ -625,6 +626,17 @@ a:hover {
 
     .hero-title {
         font-size: 3.5rem;
+    }
+
+    /* Em telas maiores que 993px, as grids tentam ter no máximo 3 colunas */
+    .services-grid,
+    .roles-grid,
+    .community-grid { /* community-grid agora também usa 3 colunas */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado minmax para favorecer 3 colunas */
+    }
+    
+    .events-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Eventos com cards um pouco maiores, também favorecendo 2 ou 3 colunas */
     }
 
     .event-card {
