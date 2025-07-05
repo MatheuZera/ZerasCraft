@@ -396,7 +396,7 @@ a:hover {
     margin-bottom: 8px;
     border-radius: 5px;
     font-size: 0.95rem;
-    color: var(--text-color-dark);
+    color: var(--text-color-light); /* CORRIGIDO: Texto agora é claro para contraste */
     display: flex;
     align-items: center;
 }
