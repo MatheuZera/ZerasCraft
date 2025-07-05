@@ -8,6 +8,7 @@
     --text-color-dark: #343a40; /* Texto escuro */
     --text-color-light: #ffffff; /* Texto claro */
     --border-color: #dee2e6; /* Cor da borda */
+    --card-color: #ffffff;
 }
 
 body {
@@ -355,7 +356,7 @@ a:hover {
 }
 
 .role-category-card {
-    background-color: #d87575;
+    background-color: var(--card-color);
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -391,7 +392,7 @@ a:hover {
 }
 
 .role-list li {
-    background-color: #d87575;
+    background-color: var(--card-color);
     padding: 8px 15px;
     margin-bottom: 8px;
     border-radius: 5px;
