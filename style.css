@@ -462,21 +462,49 @@ a:hover {
     text-align: left;
 }
 
-/* Community Images Grid */
-.community-images-grid {
+/* Estilos para a seção Comunidade & Parcerias */
+.community-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
-.community-images-grid img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+.community-card,
+.partnership-card {
+    background-color: #343a40; /* Cor de fundo dos cards (igual a outras seções) */
+    color: var(--text-color-light);
+    padding: 25px;
     border-radius: 8px;
-    border: 2px solid var(--accent-color);
+    text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.community-card:hover,
+.partnership-card:hover {
+    transform: translateY(-5px);
+}
+
+.community-card h3,
+.partnership-card h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.community-card p,
+.partnership-card p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 15px;
+}
+
+.community-card .btn-secondary,
+.partnership-card .btn-secondary {
+    /* Herdam estilos gerais do .btn-secondary */
+    display: inline-block;
+    margin-top: 10px;
 }
 
 /* Call to Action Section */
