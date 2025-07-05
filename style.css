@@ -155,18 +155,27 @@ a:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.main-header .container {
+.header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Ajusta em desktop */
     align-items: center;
 }
 
 .header-logo {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* Tamanho padrão para desktop */
     font-weight: 700;
     color: var(--text-color-light);
     text-decoration: none;
+    order: 0; /* Ordem em desktop */
+}
+
+/* Menu de Navegação (Desktop) */
+.main-nav {
+    display: flex; /* Visível por padrão em desktop */
+    justify-content: flex-end;
+    align-items: center;
+    order: 1; /* Ordem em desktop */
 }
 
 .main-nav .nav-list {
@@ -189,13 +198,16 @@ a:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.menu-toggle {
-    display: none; /* Esconde o botão em telas grandes */
+/* Ícone Hamburger (visível apenas em mobile) */
+.hamburger-menu {
+    display: none; /* Esconde por padrão em desktop */
     background: none;
     border: none;
     color: var(--text-color-light);
-    font-size: 2rem;
+    font-size: 1.8rem; /* Tamanho do ícone */
     cursor: pointer;
+    padding: 5px;
+    order: -1; /* Força o ícone para o início em mobile */
 }
 
 /* Hero Section */
@@ -517,19 +529,40 @@ a:hover {
 
 /* Responsividade */
 @media (max-width: 992px) {
-    .main-nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: var(--dark-bg);
-        position: absolute;
-        top: 70px; /* Ajuste conforme a altura do seu header */
-        left: 0;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    .header-content {
+        justify-content: space-between; /* Mantém o logo no centro e hamburger na esquerda */
+        flex-wrap: nowrap; /* Impede quebras inesperadas */
     }
 
-    .main-nav.active {
+    .header-logo {
+        font-size: 1.4rem; /* Título menor para mobile */
+        text-align: center;
+        flex-grow: 1; /* Permite que o logo ocupe espaço */
+    }
+
+    .hamburger-menu {
+        display: block; /* Mostra o ícone hamburger */
+    }
+
+    .main-nav {
+        /* Estilos para o menu mobile */
         display: flex;
+        flex-direction: column;
+        width: 250px; /* Largura do menu lateral */
+        height: 100vh; /* Altura total da tela */
+        background-color: var(--dark-bg); /* Cor de fundo do menu */
+        position: fixed;
+        top: 0;
+        left: -250px; /* Esconde o menu fora da tela */
+        padding-top: 80px; /* Espaço para o cabeçalho fixo */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        transition: left 0.3s ease-in-out; /* Transição suave */
+        z-index: 999; /* Abaixo do header, mas acima do conteúdo */
+        align-items: flex-start; /* Alinha itens à esquerda */
+    }
+
+    .main-nav.mobile-active {
+        left: 0; /* Mostra o menu quando ativo */
     }
 
     .main-nav .nav-list {
@@ -540,11 +573,13 @@ a:hover {
     .main-nav .nav-item {
         padding: 15px 20px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        text-align: center;
+        width: 100%;
+        text-align: left; /* Alinha o texto à esquerda */
+        font-size: 1rem; /* Atalhos menores para mobile */
     }
 
-    .menu-toggle {
-        display: block;
+    .main-nav .nav-item:last-child {
+        border-bottom: none;
     }
 
     .hero-title {
@@ -616,36 +651,6 @@ a:hover {
 }
 
 @media (max-width: 576px) {
-    .main-header .container {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .header-logo {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    .menu-toggle {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-title {
-        font-size: 1.8rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    .btn-primary, .btn-secondary {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-    }
+    /* Não são necessárias muitas mudanças aqui, pois as regras de 992px já cobrem bem */
+    /* Apenas pequenos ajustes se necessário */
 }
