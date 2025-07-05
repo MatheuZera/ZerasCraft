@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header class="main-header">
-        <div class="container">
+        <div class="container header-content">
+            <button class="hamburger-menu" aria-label="Abrir menu de navegação">
+                <i class="fas fa-bars"></i>
+            </button>
             <a href="#" class="header-logo">Mundo Zera's Craft</a>
             <nav class="main-nav">
                 <ul class="nav-list">
@@ -24,7 +28,6 @@
                     <li><a href="#junte-se" class="nav-item">Junte-se!</a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" aria-label="Abrir Menu">&#9776;</button>
         </div>
     </header>
 
@@ -71,7 +74,7 @@
                         <p class="card-description">Eventos divertidos com prêmios exclusivos para a comunidade.</p>
                     </div>
                     <div class="service-card">
-                        <img src="https://via.placeholder.com/80x80/555555/dddddd?text=C" alt="Ícone de Clãs" class="card-icon">
+                        <img src="https://via.placeholder.1/80x80/555555/dddddd?text=C" alt="Ícone de Clãs" class="card-icon">
                         <h3 class="card-title">Sistema de Clãs</h3>
                         <p class="card-description">Monte seu clã e conquiste territórios no jogo.</p>
                     </div>
@@ -233,12 +236,32 @@
     <script>
         // Script para o menu responsivo (toggle)
         document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.querySelector('.menu-toggle');
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
             const mainNav = document.querySelector('.main-nav');
 
-            if (menuToggle && mainNav) {
-                menuToggle.addEventListener('click', () => {
-                    mainNav.classList.toggle('active');
+            if (hamburgerMenu && mainNav) {
+                hamburgerMenu.addEventListener('click', () => {
+                    mainNav.classList.toggle('mobile-active');
+                    // Alterna o ícone do hamburger para X e vice-versa
+                    const icon = hamburgerMenu.querySelector('i');
+                    if (mainNav.classList.contains('mobile-active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times'); // Ícone de X
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+
+                // Fecha o menu ao clicar em um item de navegação
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        mainNav.classList.remove('mobile-active');
+                        // Garante que o ícone retorne ao hamburger
+                        const icon = hamburgerMenu.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    });
                 });
             }
         });
@@ -257,12 +280,6 @@
                     top: offsetPosition,
                     behavior: "smooth"
                 });
-
-                // Fechar o menu em mobile após o clique
-                const mainNav = document.querySelector('.main-nav');
-                if (mainNav.classList.contains('active')) {
-                    mainNav.classList.remove('active');
-                }
             });
         });
     </script>
