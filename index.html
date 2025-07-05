@@ -1,24 +1,124 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mundo Zera's Craft</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Fontes: Pixel e Moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Nome | Portfólio Charmoso</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <div class="hero">
-    <div class="content">
-      <h1>Mundo Zera's Craft</h1>
-      <p>Um mundo épico no estilo Minecraft! Explore, construa e sobreviva.</p>
-      <a href="#" class="button">Jogar Agora</a>
-    </div>
-  </div>
+    <header class="main-header">
+        <div class="container">
+            <h1 class="logo">Seu Nome</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#sobre">Sobre Mim</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <footer>
-    &copy; 2025 Mundo Zera's Craft. Todos os direitos reservados.
-  </footer>
+    <section id="hero" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-intro">Olá, eu sou</p>
+                <h2 class="hero-title">Seu Nome Completo</h2>
+                <p class="hero-subtitle">Desenvolvedor Web com paixão por criar experiências digitais incríveis.</p>
+                <a href="#projetos" class="btn btn-primary">Ver Meus Projetos</a>
+            </div>
+            <div class="hero-image">
+                <img src="sua-foto.jpg" alt="Sua Foto de Perfil">
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <p>Sou um desenvolvedor apaixonado por tecnologia e por construir soluções elegantes e funcionais. Minha jornada no mundo da programação começou com... (conte sua história, suas paixões, tecnologias que domina).</p>
+                <p>Sempre busco aprender e me aprimorar, explorando novas ferramentas e conceitos para criar experiências web inovadoras e de alto impacto.</p>
+                <div class="skills-grid">
+                    <h3>Minhas Habilidades:</h3>
+                    <ul>
+                        <li><i class="fab fa-html5"></i> HTML5</li>
+                        <li><i class="fab fa-css3-alt"></i> CSS3</li>
+                        <li><i class="fab fa-js"></i> JavaScript</li>
+                        <li><i class="fab fa-react"></i> React</li>
+                        <li><i class="fab fa-node-js"></i> Node.js</li>
+                        <li><i class="fas fa-database"></i> SQL / NoSQL</li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projetos" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Meus Projetos</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="projeto1.jpg" alt="Projeto 1">
+                    <h3>Nome do Projeto 1</h3>
+                    <p>Uma breve descrição do projeto, destacando as tecnologias usadas e o que ele faz.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank" class="btn btn-secondary"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
+                        <a href="#" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> Código</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="projeto2.jpg" alt="Projeto 2">
+                    <h3>Nome do Projeto 2</h3>
+                    <p>Uma breve descrição do projeto, destacando as tecnologias usadas e o que ele faz.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank" class="btn btn-secondary"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
+                        <a href="#" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> Código</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="projeto3.jpg" alt="Projeto 3">
+                    <h3>Nome do Projeto 3</h3>
+                    <p>Uma breve descrição do projeto, destacando as tecnologias usadas e o que ele faz.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank" class="btn btn-secondary"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
+                        <a href="#" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> Código</a>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="contact-intro">Adoraria conversar sobre novas oportunidades ou projetos interessantes.</p>
+            <div class="contact-info">
+                <a href="mailto:seuemail@exemplo.com" class="contact-link"><i class="fas fa-envelope"></i> seuemail@exemplo.com</a>
+                <a href="https://linkedin.com/in/seuperfil" target="_blank" class="contact-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/seugithub" target="_blank" class="contact-link"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            <form class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
+                <input type="text" name="name" placeholder="Seu Nome" required>
+                <input type="email" name="email" placeholder="Seu E-mail" required>
+                <textarea name="message" placeholder="Sua Mensagem" rows="6" required></textarea>
+                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Seu Nome. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="https://github.com/seugithub" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/seuperfil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://twitter.com/seutwitter" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+        </div>
+    </footer>
 </body>
 </html>
