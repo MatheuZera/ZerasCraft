@@ -355,7 +355,7 @@ a:hover {
 }
 
 .role-category-card {
-    background-color: var(--light-bg);
+    background-color: #f5f5f5; /* Um cinza muito, muito claro */
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
