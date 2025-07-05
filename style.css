@@ -3,9 +3,9 @@
     --primary-color: #4A90E2;   /* Um azul mais vibrante e moderno, que se destaca */
     --secondary-color: #6B778D; /* Um cinza azulado, mais sofisticado e que combina bem com o primary */
     --accent-color: #FFD166;    /* Um amarelo mais dourado e suave, excelente para destaque */
-    --dark-bg: #2C3E50;         /* Um azul escuro quase preto, muito profundo e ideal para fundos */
-    --light-bg: #ECF0F1;        /* Um cinza muito claro, quase branco, para fundos claros */
-    --text-color-dark: #34495E; /* Um cinza escuro para texto, que contrasta bem com fundos claros */
+    --dark-bg: #e7e7e7;         /* Um azul escuro quase preto, muito profundo e ideal para fundos */
+    --light-bg: #5a5a5a;        /* Um cinza muito claro, quase branco, para fundos claros */
+    --text-color-dark: #b6b6b6; /* Um cinza escuro para texto, que contrasta bem com fundos claros */
     --text-color-light: #FDFEFE; /* Um branco muito levemente acinzentado, para texto sobre fundos escuros */
     --border-color: #BDC3C7;    /* Um cinza claro para bordas, discreto mas visível */
 }
