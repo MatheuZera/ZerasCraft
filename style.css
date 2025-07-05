@@ -233,7 +233,7 @@ a:hover {
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    margin-top: -50px;
+    margin-top: -80px;
     z-index: 4;
 }
 
