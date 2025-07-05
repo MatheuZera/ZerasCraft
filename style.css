@@ -157,7 +157,7 @@ a:hover {
 
 .header-content {
     display: flex;
-    justify-content: center; /* Centraliza o logo horizontalmente */
+    justify-content: space-between; /* Ajusta em desktop */
     align-items: center;
 }
 
@@ -167,13 +167,38 @@ a:hover {
     font-weight: 700;
     color: var(--text-color-light);
     text-decoration: none;
-    /* Remover 'order' pois é o único item */
 }
 
-/* Menu de Navegação (Removido) */
-.main-nav,
+/* Menu de Navegação (Desktop) */
+.main-nav {
+    display: flex; /* Visível por padrão em desktop */
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.main-nav .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav .nav-item {
+    color: var(--text-color-light);
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.main-nav .nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ícone Hamburger (Escondido por padrão, só vai aparecer em mobile se for reativado) */
 .hamburger-menu {
-    display: none; /* Esconde completamente o menu e o hamburger */
+    display: none; /* Esconde o ícone hamburger por padrão */
 }
 
 /* Hero Section - Otimizada para Mobile e Desktop */
@@ -509,7 +534,15 @@ a:hover {
     .header-logo {
         font-size: 1.4rem; /* Título menor para mobile */
         text-align: center;
-        flex-grow: 0; /* Não precisa mais crescer */
+    }
+
+    /* Esconde o menu de navegação e o hamburger em telas menores */
+    .main-nav {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: none;
     }
 
     .hero-title {
