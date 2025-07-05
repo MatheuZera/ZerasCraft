@@ -3,12 +3,12 @@
     --primary-color: #235383; /* Azul vibrante */
     --secondary-color: #6c757d; /* Cinza médio */
     --accent-color: #ffce3a; /* Amarelo para destaque */
-    --dark-bg: #212529; /* Fundo escuro */
+    --dark-bg: #2b3136; /* Fundo escuro */
     --light-bg: #ffd8d8; /* Fundo Cinza */
     --text-color-dark: #343a40; /* Texto escuro */
     --text-color-light: #ffffff; /* Texto claro */
     --border-color: #dee2e6; /* Cor da borda */
-    --card-color: #a5a5a5;
+    --card-color: #595ab6;
 }
 
 body {
