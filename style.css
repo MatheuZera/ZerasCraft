@@ -170,7 +170,10 @@ a:hover {
     text-align: center; /* Garante que o texto do logo esteja centralizado */
 }
 
-/* Remover quaisquer estilos para .main-nav e .hamburger-menu */
+/* Remover quaisquer estilos para .main-nav e .hamburger-menu (garantindo que não apareçam) */
+.main-nav, .hamburger-menu {
+    display: none !important; /* Força a ocultação */
+}
 
 
 /* Hero Section - Otimizada para Mobile e Desktop */
@@ -182,6 +185,7 @@ a:hover {
     align-items: center;
     text-align: center;
     color: var(--text-color-light);
+    /* **IMAGEM DE FUNDO DO BANNER:** */
     background: url('images/villager-minecraft.gif') no-repeat center center/cover;
     background-attachment: fixed;
     padding-top: 80px; /* Espaço para o cabeçalho fixo */
@@ -216,7 +220,8 @@ a:hover {
     width: 100%;
     max-width: 500px;
     height: auto;
-    border: 3px solid var(--primary-color);
+    /* REMOVIDO: border: 3px solid var(--primary-color); */
+    border: none; /* OU border: 3px solid transparent; se quiser manter a "estrutura" da borda */
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
