@@ -185,7 +185,6 @@ a:hover {
     align-items: center;
     text-align: center;
     color: var(--text-color-light);
-    /* **IMAGEM DE FUNDO DO BANNER GRANDE (AGORA um GIF SEPARADO):** */
     background: url('images/banner-fundo-hero.gif') no-repeat center center/cover;
     background-attachment: fixed;
     padding-top: 80px; /* Espaço para o cabeçalho fixo */
@@ -232,39 +231,39 @@ a:hover {
 
 /* Server Branding (Banner e Ícone) */
 .server-branding {
-    position: relative; /* Para o ícone ser posicionado em relação a este div */
+    position: relative;
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Espaçamento entre o banner e o ícone, se estivessem um abaixo do outro */
+    gap: 15px;
     width: 90%;
-    max-width: 500px; /* Mantém largura máxima do container do mini-banner e ícone */
-    margin-top: 20px; /* Espaçamento do topo da seção */
-    pointer-events: none; /* Permite clicar através do branding para o hero-content */
+    max-width: 500px;
+    margin-top: 20px;
+    pointer-events: none;
 }
 
 .server-banner {
     width: 100%;
-    max-width: 500px; /* Este controla a largura máxima do seu MINI-BANNER GIF */
+    max-width: 500px;
     height: auto;
-    border: none; /* Removido borda padrão */
+    border: none;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .server-icon {
-    width: 100px; /* Tamanho padrão do ícone */
+    width: 100px;
     height: 100px;
     border: 4px solid var(--text-color-light);
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    margin-top: -50px; /* Ajuste para sobrepor o banner. Mude este valor para mover para baixo */
-    z-index: 4; /* Garante que o ícone fique acima do banner */
-    position: relative; /* Permite o uso de margin-top negativo para sobreposição */
-    background-color: var(--dark-bg); /* Fundo para o ícone, caso a imagem tenha transparência */
-    padding: 3px; /* Pequeno padding para a borda branca ser mais visível */
+    margin-top: -50px;
+    z-index: 4;
+    position: relative;
+    background-color: var(--dark-bg);
+    padding: 3px;
 }
 
 
@@ -298,7 +297,8 @@ a:hover {
 /* Services Grid */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Ajustado para aumentar a largura mínima e forçar menos colunas (máx 3) */
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Aumentado de 300px */
     gap: 30px;
     text-align: center;
 }
@@ -350,7 +350,8 @@ a:hover {
 /* Roles Grid (Canais e Cargos) */
 .roles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Ajustado para aumentar a largura mínima e forçar menos colunas (máx 3) */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Aumentado de 280px */
     gap: 25px;
 }
 
@@ -360,34 +361,34 @@ a:hover {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border: 1px solid var(--border-color);
-    display: flex; /* Adicionado para layout interno com ícone */
-    flex-direction: column; /* Organiza os itens em coluna */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    text-align: center; /* Centraliza o texto dentro do card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 /* Estilos para os ícones nas categorias de cargos */
 .role-category-icon {
-    width: 60px; /* Tamanho do ícone */
-    height: 60px; /* Tamanho do ícone */
-    object-fit: contain; /* Garante que a imagem inteira seja visível */
-    margin-bottom: 15px; /* Espaçamento abaixo do ícone */
-    display: block; /* Garante que o margin-bottom funcione */
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    display: block;
 }
 
 .role-category-card .card-title {
     font-size: 1.3rem;
     color: var(--primary-color);
     margin-bottom: 15px;
-    text-align: center; /* Centraliza o título */
+    text-align: center;
 }
 
 .role-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: left; /* Alinha a lista de volta para a esquerda */
-    width: 100%; /* Garante que a lista ocupe toda a largura */
+    text-align: left;
+    width: 100%;
 }
 
 .role-list li {
@@ -396,7 +397,7 @@ a:hover {
     margin-bottom: 8px;
     border-radius: 5px;
     font-size: 0.95rem;
-    color: var(--text-color-light); /* CORRIGIDO: Texto agora é claro para contraste */
+    color: var(--text-color-light);
     display: flex;
     align-items: center;
 }
@@ -413,7 +414,8 @@ a:hover {
 /* Events Grid */
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Ajustado para aumentar a largura mínima e garantir bom espaço (provável 2 colunas) */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Aumentado de 350px */
     gap: 40px;
 }
 
@@ -424,8 +426,8 @@ a:hover {
     overflow: hidden;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
-    display: flex; /* Para fazer a imagem e o conteúdo ficarem lado a lado em desktop */
-    flex-direction: column; /* Padrão para mobile */
+    display: flex;
+    flex-direction: column;
 }
 
 .event-card:hover {
@@ -433,7 +435,7 @@ a:hover {
 }
 
 .event-image {
-    width: 100%; /* Ocupa 100% da largura em mobile */
+    width: 100%;
     height: 250px;
     object-fit: cover;
     display: block;
@@ -465,14 +467,15 @@ a:hover {
 /* Estilos para a seção Comunidade & Parcerias */
 .community-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Ajustado para aumentar a largura mínima e forçar menos colunas (máx 3) */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Aumentado de 300px */
     gap: 20px;
     margin-top: 30px;
 }
 
 .community-card,
 .partnership-card {
-    background-color: #343a40; /* Cor de fundo dos cards (igual a outras seções) */
+    background-color: #343a40;
     color: var(--text-color-light);
     padding: 25px;
     border-radius: 8px;
@@ -502,7 +505,6 @@ a:hover {
 
 .community-card .btn-secondary,
 .partnership-card .btn-secondary {
-    /* Herdam estilos gerais do .btn-secondary */
     display: inline-block;
     margin-top: 10px;
 }
@@ -585,7 +587,7 @@ a:hover {
     .services-grid,
     .roles-grid,
     .events-grid,
-    .community-grid { /* Ajustado para incluir community-grid */
+    .community-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -602,19 +604,19 @@ a:hover {
         top: auto;
         left: auto;
         transform: none;
-        max-width: 700px; /* Mantém largura máxima do branding */
+        max-width: 700px;
         width: 90%;
         flex-direction: column;
         gap: 20px;
         margin-top: 0;
-        margin-bottom: 40px; /* Ajuste para espaçamento entre o branding e o título hero */
+        margin-bottom: 40px;
     }
 
     .server-icon {
         width: 120px;
         height: 120px;
-        margin-top: -60px; /* Mantém a sobreposição do ícone no banner */
-        background-color: var(--dark-bg); /* Garante que o fundo do ícone seja escuro */
+        margin-top: -60px;
+        background-color: var(--dark-bg);
     }
 
     .hero-content {
@@ -628,25 +630,27 @@ a:hover {
         font-size: 3.5rem;
     }
 
-    /* Em telas maiores que 993px, as grids tentam ter no máximo 3 colunas */
+    /* Em telas maiores que 993px, as grids tentam ter no máximo 3 colunas, com mais espaço */
+    /* Ajustes para forçar a organização em no máximo 3 colunas na maioria dos casos */
     .services-grid,
     .roles-grid,
-    .community-grid { /* community-grid agora também usa 3 colunas */
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado minmax para favorecer 3 colunas */
+    .community-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Aumentado minmax para dar mais espaço */
     }
-    
+
+    /* Events Grid pode ser um pouco maior, então ajustado para talvez 2 colunas */
     .events-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Eventos com cards um pouco maiores, também favorecendo 2 ou 3 colunas */
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Aumentado minmax para dar mais espaço */
     }
 
     .event-card {
-        flex-direction: row; /* Imagem e conteúdo lado a lado no desktop */
+        flex-direction: row;
     }
 
     .event-image {
-        width: 250px; /* Largura fixa para a imagem em desktop */
-        height: auto; /* Ajusta altura automaticamente */
-        flex-shrink: 0; /* Impede que a imagem encolha */
+        width: 250px;
+        height: auto;
+        flex-shrink: 0;
     }
 }
 
@@ -662,7 +666,7 @@ a:hover {
     .server-branding {
         max-width: 95%;
         gap: 10px;
-        margin-top: 0; /* Reset para mobile */
+        margin-top: 0;
     }
 
     .server-banner {
@@ -672,9 +676,9 @@ a:hover {
     .server-icon {
         width: 70px;
         height: 70px;
-        margin-top: -35px; /* Ajuste a sobreposição para mobile */
+        margin-top: -35px;
         border-width: 3px;
-        padding: 2px; /* Reduz o padding para a borda */
+        padding: 2px;
     }
 
     .hero-content {
@@ -701,8 +705,8 @@ a:hover {
     .server-icon {
         width: 60px;
         height: 60px;
-        margin-top: -30px; /* Ajuste a sobreposição para telas muito pequenas */
+        margin-top: -30px;
         border-width: 3px;
-        padding: 1px; /* Reduz o padding para a borda */
+        padding: 1px;
     }
 }
