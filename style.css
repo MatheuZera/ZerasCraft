@@ -1,16 +1,27 @@
 /* Importação de Fontes do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;700;900&family=Orbitron:wght@400;700&display=swap');
 
-/* Variáveis de Cores (personalize aqui para um design 'super bonito'!) */
+/* Variáveis de Cores e Configurações Globais */
 :root {
-    --primary-color: #6A0DAD; /* Roxo vibrante */
-    --secondary-color: #FFC000; /* Laranja/Amarelo dourado */
-    --text-color: #E0E0E0; /* Texto claro */
-    --background-dark: #1A1A2E; /* Fundo principal escuro */
-    --background-light: #20204A; /* Fundo secundário um pouco mais claro */
-    --card-bg: #2C2C54; /* Fundo para cards */
-    --border-color: #4A0D8F; /* Bordas e divisores */
-    --button-hover-color: #FFAA00; /* Cor do botão ao passar o mouse */
+    /* Paleta Principal - Dark & Cyberpunk-ish Minecraft */
+    --color-dark-bg: #1A1A2E; /* Fundo principal muito escuro */
+    --color-dark-alt-bg: #20204A; /* Fundo secundário um pouco mais claro */
+    --color-card-bg: #2C2C54; /* Fundo de cards/elementos */
+
+    --color-primary-accent: #6A0DAD; /* Roxo vibrante - para botões, destaques */
+    --color-secondary-accent: #FFC000; /* Amarelo/Laranja dourado - para títulos, ícones */
+    --color-tertiary-accent: #00BCD4; /* Ciano/Turquesa - para detalhes, hover effects */
+
+    --color-text-light: #E0E0E0; /* Texto claro principal */
+    --color-text-muted: #B0B0B0; /* Texto secundário/sutil */
+
+    --color-border-subtle: rgba(74, 13, 143, 0.4); /* Roxo para bordas sutis */
+    --color-border-strong: #4A0D8F; /* Roxo para bordas mais fortes */
+
+    /* Sombras */
+    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.5);
+    --shadow-strong: 0 12px 35px rgba(0, 0, 0, 0.7);
 }
 
 /* Reset Básico */
@@ -22,27 +33,70 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--background-dark);
-    color: var(--text-color);
-    line-height: 1.6;
+    background-color: var(--color-dark-bg);
+    color: var(--color-text-light);
+    line-height: 1.7; /* Melhorar legibilidade */
     scroll-behavior: smooth; /* Rolagem suave para âncoras */
+    overflow-x: hidden; /* Evitar rolagem horizontal indesejada */
 }
 
+/* Container de Conteúdo Centralizado */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 25px; /* Mais padding nas laterais para telas grandes */
 }
 
-/* Header */
+/* Headers Globais */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--color-secondary-accent);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.8em; /* Aumentado */
+    text-align: center;
+    margin-bottom: 60px; /* Mais espaço */
+}
+
+h3 {
+    font-size: 1.8em;
+    text-align: center;
+    color: var(--color-primary-accent);
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 1.2em;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--color-text-light);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Header Principal do Site */
 header {
-    background-color: var(--background-dark);
+    background-color: var(--color-dark-bg);
     padding: 20px 0;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--color-border-strong);
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-medium);
+    animation: fadeInDown 1s ease-out; /* Animação ao carregar */
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 header .container {
@@ -52,130 +106,219 @@ header .container {
 }
 
 .site-logo {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 28px;
-    color: var(--secondary-color);
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-    white-space: nowrap; /* Evita quebra de linha em nomes longos */
+    font-size: 30px;
+    color: var(--color-secondary-accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px var(--color-primary-accent);
+    white-space: nowrap;
 }
 
 header nav ul {
-    list-style: none;
     display: flex;
 }
 
 header nav ul li {
-    margin-left: 30px;
+    margin-left: 35px; /* Mais espaçamento */
 }
 
 header nav ul li a {
-    color: var(--text-color);
+    color: var(--color-text-light);
     text-decoration: none;
     font-weight: 700;
+    font-size: 1.1em;
+    padding: 8px 0;
+    position: relative;
     transition: color 0.3s ease, text-shadow 0.3s ease;
-    padding: 5px 0;
+}
+
+header nav ul li a::after { /* Linha de destaque no hover */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-primary-accent);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+header nav ul li a:hover::after,
+header nav ul li a.active::after {
+    width: 100%;
 }
 
 header nav ul li a:hover,
-header nav ul li a.active { /* Adicione 'active' para a seção atual se usar JS */
-    color: var(--primary-color);
-    text-shadow: 0 0 12px var(--primary-color);
+header nav ul li a.active {
+    color: var(--color-tertiary-accent);
+    text-shadow: 0 0 15px var(--color-tertiary-accent);
 }
 
-/* Seções Principais */
-main section {
-    padding: 80px 0;
-    text-align: center;
-    position: relative; /* Para garantir que o z-index funcione se houver sobreposição */
-    overflow: hidden; /* Para conter elementos flutuantes */
-}
 
-main section h2 {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 38px;
-    color: var(--secondary-color);
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-}
-
-main section p {
-    font-size: 18px;
-    margin-bottom: 20px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-main section ul {
-    list-style: none;
-    padding: 0;
-    max-width: 900px;
-    margin: 20px auto;
-    text-align: left;
-}
-
-main section ul li {
-    font-size: 18px;
-    margin-bottom: 10px;
-    padding-left: 30px;
-    position: relative;
-    color: var(--text-color); /* Garante a cor do texto para itens de lista */
-}
-
-main section ul li::before {
-    content: '⛏️'; /* Ícone de picareta para listas */
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-size: 20px;
-    line-height: 1.6;
-}
-
-.section-alt {
-    background-color: var(--background-light);
-}
-
-/* Hero Banner */
+/* Seção Hero/Banner Principal */
 .hero-banner {
-    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1800x900/1e1e3b/ffffff?text=Banner+Minecraft+Aqui') no-repeat center center/cover; /* SUBSTITUA ESTA URL PELA SUA IMAGEM DE FUNDO! */
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://via.placeholder.com/1920x1080/1a1a2e/ffffff?text=SEU+BANNER+PRINCIPAL+AQUI') no-repeat center center/cover; /* SUBSTITUA ESTA URL! */
     color: white;
     padding: 180px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 85vh; /* Ajuste para ter mais altura */
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    min-height: 90vh; /* Ocupa quase toda a altura da tela */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
     position: relative;
+    overflow: hidden;
+    animation: slideInUp 1s ease-out;
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-banner::before { /* Efeito de glitch sutil */
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.02) 0,
+        rgba(255, 255, 255, 0.02) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    z-index: 1;
+    opacity: 0.1;
+}
+
+.hero-banner .container {
+    position: relative;
+    z-index: 2; /* Garante que o texto fique acima do glitch */
 }
 
 .hero-banner h2 {
-    font-size: 60px;
-    margin-bottom: 25px;
-    color: white;
-    line-height: 1.2;
+    font-size: 4.5em; /* Gigante e impactante */
+    margin-bottom: 0.5em;
+    color: white; /* H2 do banner é branco */
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+    font-family: 'Orbitron', sans-serif; /* Fonte futurista para o banner */
+    letter-spacing: 2px;
 }
 
-/* Botão Principal */
+.hero-banner p {
+    font-size: 1.3em;
+    margin-bottom: 2em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Botões */
 .btn-primary {
     display: inline-block;
-    background-color: var(--primary-color);
+    background-color: var(--color-primary-accent);
     color: white;
-    padding: 18px 40px;
+    padding: 18px 45px;
     text-decoration: none;
-    border-radius: 50px; /* Mais arredondado */
+    border-radius: 50px;
     font-weight: 700;
-    font-size: 22px;
-    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-    border: none; /* Remove borda sólida padrão */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    letter-spacing: 1px;
+    font-size: 1.2em;
+    transition: all 0.4s ease-in-out;
+    border: 2px solid var(--color-primary-accent);
+    box-shadow: var(--shadow-medium);
     text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Para o efeito de "passar" */
+}
+
+.btn-primary::before { /* Efeito de brilho ao passar o mouse */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-30deg);
+    transition: all 0.4s ease-in-out;
 }
 
 .btn-primary:hover {
-    background-color: var(--button-hover-color);
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    background-color: var(--color-secondary-accent);
+    border-color: var(--color-secondary-accent);
+    transform: translateY(-7px) scale(1.03);
+    box-shadow: var(--shadow-strong);
+    color: var(--color-dark-bg); /* Texto escuro no hover */
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+
+/* Seções Gerais */
+main section {
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-alt {
+    background-color: var(--color-dark-alt-bg);
+}
+
+/* Estilo para listas em seções (ex: Canais e Cargos) */
+section ul li {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    padding-left: 35px;
+    position: relative;
+    text-align: left;
+    color: var(--color-text-light);
+}
+
+section ul li::before {
+    content: '⚡'; /* Ícone de raio ou outro icone relacionado ao tema */
+    position: absolute;
+    left: 0;
+    color: var(--color-tertiary-accent);
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+
+/* Seção "Sobre o Servidor" (com imagem flutuante) */
+#sobre .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    gap: 40px;
+}
+
+#sobre .content-wrapper {
+    flex: 1;
+    min-width: 300px;
+    max-width: 700px;
+}
+
+#sobre .image-wrapper {
+    flex: 0 0 400px; /* Largura fixa para a imagem */
+    height: 300px;
+    background: url('https://via.placeholder.com/400x300/333366/ffffff?text=IMAGEM+SOBRE+NOS') no-repeat center center/cover; /* SUBSTITUA ESTA URL! */
+    border-radius: 15px;
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.4s ease;
+}
+
+#sobre .image-wrapper:hover {
+    transform: scale(1.03);
 }
 
 /* Grid de Serviços */
@@ -183,66 +326,99 @@ main section ul li::before {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .service-card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 15px;
+    padding: 35px;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before { /* Efeito de borda luminosa */
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--color-primary-accent), var(--color-tertiary-accent));
+    z-index: -1;
+    border-radius: 18px;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover::before {
+    opacity: 0.6;
 }
 
 .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    transform: translateY(-12px);
+    box-shadow: var(--shadow-strong);
+    border-color: var(--color-primary-accent);
 }
 
 .service-card h3 {
     font-family: 'Press Start 2P', cursive;
-    color: var(--secondary-color);
-    font-size: 22px;
+    color: var(--color-secondary-accent);
+    font-size: 1.5em;
     margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .service-card p {
-    font-size: 16px;
-    color: var(--text-color);
+    font-size: 1em;
+    color: var(--color-text-muted);
 }
 
 
 /* Grid de Cargos */
 .roles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
-    text-align: left;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adaptado para cards maiores */
+    gap: 30px;
+    margin-top: 50px;
 }
 
 .role-category-card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
 }
 
 .role-category-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
 }
 
 .role-category-card h3 {
     font-family: 'Roboto', sans-serif;
-    color: var(--primary-color);
-    font-size: 20px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
+    font-weight: 700;
+    color: var(--color-primary-accent);
+    font-size: 1.5em;
+    margin-bottom: 20px;
     padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-border-subtle);
+    display: flex; /* Para alinhar o ícone */
+    align-items: center;
+}
+
+.role-category-card h3::before { /* Ícone para título da categoria */
+    content: '✨'; /* Pode ser um emoji ou um ícone customizado */
+    margin-right: 10px;
+    font-size: 1.2em;
 }
 
 .role-category-card ul {
@@ -252,96 +428,149 @@ main section ul li::before {
 }
 
 .role-category-card ul li {
-    font-size: 16px;
+    font-size: 1em;
     margin-bottom: 8px;
-    color: var(--text-color);
-    padding-left: 0; /* Remove padding extra do li geral */
+    color: var(--color-text-muted);
+    padding-left: 0;
+    position: relative;
 }
 
 .role-category-card ul li::before {
-    content: '⭐'; /* Ícone personalizado para lista de cargos */
-    margin-right: 8px;
-    color: var(--secondary-color);
-    position: static; /* Remove posicionamento absoluto do ::before geral */
-    font-size: 16px;
+    content: '○'; /* Bolinha simples ou outro ícone */
+    position: absolute;
+    left: -15px; /* Ajuste para fora da linha do texto */
+    color: var(--color-secondary-accent);
+    font-size: 0.8em;
+    line-height: 1.6;
+    opacity: 0.8;
 }
-
 
 /* Cards de Eventos */
 .event-card {
-    background-color: var(--card-bg);
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 35px;
-    margin: 25px auto;
-    max-width: 800px;
+    background-color: var(--color-card-bg);
+    border: 2px solid var(--color-border-strong);
+    border-radius: 18px;
+    padding: 40px;
+    margin: 30px auto;
+    max-width: 900px;
     text-align: left;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: var(--shadow-strong);
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card::before { /* Efeito de background sutil */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(106, 13, 173, 0.1), transparent 70%);
+    z-index: 0;
 }
 
 .event-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    transform: translateY(-15px) scale(1.01);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+    background-color: #38386B; /* Levemente mais claro no hover */
 }
 
 .event-card h3 {
     font-family: 'Press Start 2P', cursive;
-    color: var(--primary-color);
-    font-size: 26px;
-    margin-bottom: 18px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    color: var(--color-primary-accent);
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 1; /* Para garantir que o título fique acima do before */
 }
 
 .event-card p {
-    font-size: 17px;
+    font-size: 1.1em;
     margin-bottom: 15px;
-    max-width: none; /* Remove max-width para parágrafos dentro do card */
+    max-width: none;
+    position: relative;
+    z-index: 1;
 }
 
 .event-card p.event-details {
-    font-size: 16px;
-    color: var(--secondary-color);
-    margin-top: 15px;
+    font-size: 0.95em;
+    color: var(--color-secondary-accent);
+    margin-top: 20px;
     font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+/* Seção de Segurança (com imagem de fundo e overlay) */
+#seguranca {
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1920x600/101020/ffffff?text=IMAGEM+DE+SEGURANÇA+AQUI') no-repeat center center/cover; /* SUBSTITUA ESTA URL! */
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+#seguranca h2 {
+    color: var(--color-secondary-accent); /* Títulos podem ser laranjas aqui */
+}
+
+#seguranca p {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Call to Action Section Final */
 .call-to-action {
-    background: linear-gradient(90deg, var(--primary-color), var(--border-color));
+    background: linear-gradient(135deg, var(--color-primary-accent), var(--color-dark-alt-bg)); /* Gradiente mais dinâmico */
     color: white;
-    padding: 70px 0;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    margin-top: 60px; /* Margem superior para separar de outras seções */
-    margin-bottom: 60px;
+    padding: 80px 0;
+    border-radius: 20px; /* Bordas mais suaves */
+    box-shadow: var(--shadow-strong);
+    margin: 80px auto; /* Mais margem */
+    max-width: 1000px;
+    animation: pulse 2s infinite ease-in-out; /* Animação de pulso */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: var(--shadow-strong); }
+    50% { transform: scale(1.02); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8); }
+    100% { transform: scale(1); box-shadow: var(--shadow-strong); }
 }
 
 .call-to-action h2 {
     color: white;
-    font-size: 45px;
+    font-size: 3.5em; /* Aumentado */
+    margin-bottom: 25px;
 }
+
+.call-to-action p {
+    font-size: 1.2em;
+    margin-bottom: 35px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
 
 /* Footer */
 footer {
-    background-color: var(--background-dark);
-    color: var(--text-color);
+    background-color: var(--color-dark-bg);
+    color: var(--color-text-muted);
     text-align: center;
-    padding: 30px 0;
-    border-top: 2px solid var(--border-color);
-    font-size: 14px;
+    padding: 35px 0;
+    border-top: 2px solid var(--color-border-strong);
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
 }
 
 /* Media Queries para Responsividade */
-@media (max-width: 992px) {
-    .hero-banner h2 {
-        font-size: 48px;
-    }
-    main section h2 {
-        font-size: 32px;
-    }
-    .site-logo {
-        font-size: 24px;
+@media (max-width: 1024px) {
+    h2 { font-size: 2.2em; }
+    .hero-banner h2 { font-size: 3.5em; }
+    .btn-primary { font-size: 1.1em; padding: 16px 35px; }
+    .site-logo { font-size: 26px; }
+    header nav ul li { margin-left: 25px; }
+    .services-grid, .roles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
     }
 }
 
@@ -355,26 +584,37 @@ footer {
         justify-content: center;
     }
     header nav ul li {
-        margin: 5px 15px;
+        margin: 5px 12px;
     }
     .hero-banner {
-        padding: 120px 0;
+        padding: 100px 0;
     }
     .hero-banner h2 {
-        font-size: 36px;
+        font-size: 2.8em;
     }
     main section h2 {
-        font-size: 28px;
+        font-size: 2em;
+        margin-bottom: 30px;
     }
-    .btn-primary {
-        font-size: 18px;
-        padding: 15px 30px;
+    main section p {
+        font-size: 1em;
     }
-    .services-grid, .roles-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    #sobre .container {
+        flex-direction: column;
+        text-align: center;
     }
-    .event-card h3 {
-        font-size: 20px;
+    #sobre .image-wrapper {
+        width: 100%;
+        max-width: 400px;
+        height: 250px;
+    }
+    .event-card, .call-to-action {
+        padding: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .call-to-action h2 {
+        font-size: 2.5em;
     }
 }
 
@@ -386,19 +626,38 @@ footer {
         margin: 5px 8px;
     }
     .hero-banner h2 {
-        font-size: 28px;
+        font-size: 2em;
     }
-    main section h2 {
-        font-size: 24px;
-    }
-    main section p, main section ul li {
-        font-size: 15px;
+    .hero-banner p {
+        font-size: 0.9em;
     }
     .btn-primary {
-        font-size: 16px;
+        font-size: 1em;
         padding: 12px 25px;
     }
-    .service-card, .role-category-card, .event-card {
-        padding: 20px;
+    main section h2 {
+        font-size: 1.8em;
+    }
+    main section p {
+        font-size: 0.95em;
+    }
+    .services-grid, .roles-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+    }
+    .role-category-card h3 {
+        font-size: 1.3em;
+    }
+    .event-card h3 {
+        font-size: 1.5em;
+    }
+    .event-card p {
+        font-size: 0.9em;
+    }
+    .call-to-action h2 {
+        font-size: 2em;
+    }
+    footer {
+        padding: 20px 0;
+        font-size: 0.8em;
     }
 }
