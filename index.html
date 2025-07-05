@@ -3,65 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Site Profissional</title>
+  <title>Mundo Zera's Craft</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Fonte bonita (Google Fonts) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Menu Navegação -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">MeuSite</div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Sobre</a></li>
-        <li><a href="#">Serviços</a></li>
-        <li><a href="#">Contato</a></li>
-      </ul>
-      <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-    </nav>
-  </header>
+  <div class="container">
+    <h1>Mundo Zera's Craft</h1>
+    <p>Bem-vindo ao nosso servidor de Minecraft!</p>
+    <a href="#" class="button">Entrar no Servidor</a>
+  </div>
 
-  <!-- Seção com Animação -->
-  <section class="fade-in">
-    <h2>Bem-vindo ao Meu Site</h2>
-    <p>Este é um site profissional gratuito hospedado no GitHub Pages.</p>
-  </section>
-
-  <!-- Outra Seção -->
-  <section class="fade-in">
-    <h2>Sobre Nós</h2>
-    <p>Somos especialistas em desenvolvimento web e design moderno.</p>
-  </section>
-
-  <!-- Rodapé -->
   <footer>
-    &copy; 2025 MeuSite. Todos os direitos reservados.
+    &copy; 2025 Mundo Zera's Craft. Todos os direitos reservados.
   </footer>
-
-  <!-- Scripts -->
-  <script>
-    function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('active');
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const elements = document.querySelectorAll('.fade-in');
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      });
-
-      elements.forEach(element => {
-        observer.observe(element);
-      });
-    });
-  </script>
 
 </body>
 </html>
