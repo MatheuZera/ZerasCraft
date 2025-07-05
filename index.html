@@ -7,28 +7,12 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+    </head>
 <body>
     <header class="main-header">
         <div class="container header-content">
-            <button class="hamburger-menu" aria-label="Abrir menu de navegação">
-                <i class="fas fa-bars"></i>
-            </button>
             <a href="#" class="header-logo">Mundo Zera's Craft</a>
-            <nav class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="#inicio" class="nav-item">Início</a></li>
-                    <li><a href="#sobre" class="nav-item">Sobre</a></li>
-                    <li><a href="#servicos" class="nav-item">Serviços</a></li>
-                    <li><a href="#canais-cargos" class="nav-item">Canais & Cargos</a></li>
-                    <li><a href="#eventos" class="nav-item">Eventos</a></li>
-                    <li><a href="#seguranca" class="nav-item">Segurança</a></li>
-                    <li><a href="#comunidade" class="nav-item">Comunidade</a></li>
-                    <li><a href="#junte-se" class="nav-item">Junte-se!</a></li>
-                </ul>
-            </nav>
-        </div>
+            </div>
     </header>
 
     <main>
@@ -74,7 +58,7 @@
                         <p class="card-description">Eventos divertidos com prêmios exclusivos para a comunidade.</p>
                     </div>
                     <div class="service-card">
-                        <img src="https://via.placeholder.com/80x80/555555/dddddd?text=C" alt="Ícone de Clãs" class="card-icon">
+                        <img src="https://via.placeholder.1/80x80/555555/dddddd?text=C" alt="Ícone de Clãs" class="card-icon">
                         <h3 class="card-title">Sistema de Clãs</h3>
                         <p class="card-description">Monte seu clã e conquiste territórios no jogo.</p>
                     </div>
@@ -233,55 +217,5 @@
         </div>
     </footer>
 
-    <script>
-        // Script para o menu responsivo (toggle)
-        document.addEventListener('DOMContentLoaded', () => {
-            const hamburgerMenu = document.querySelector('.hamburger-menu');
-            const mainNav = document.querySelector('.main-nav');
-
-            if (hamburgerMenu && mainNav) {
-                hamburgerMenu.addEventListener('click', () => {
-                    mainNav.classList.toggle('mobile-active');
-                    // Alterna o ícone do hamburger para X e vice-versa
-                    const icon = hamburgerMenu.querySelector('i');
-                    if (mainNav.classList.contains('mobile-active')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times'); // Ícone de X
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                });
-
-                // Fecha o menu ao clicar em um item de navegação
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    item.addEventListener('click', () => {
-                        mainNav.classList.remove('mobile-active');
-                        // Garante que o ícone retorne ao hamburger
-                        const icon = hamburgerMenu.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    });
-                });
-            }
-        });
-
-        // Script para rolagem suave da navegação
-        document.querySelectorAll('.nav-item').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                const headerOffset = document.querySelector('.main-header').offsetHeight; // Altura do cabeçalho fixo
-                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - headerOffset - 20; // Ajuste de 20px extra para padding
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            });
-        });
-    </script>
-</body>
+    </body>
 </html>
