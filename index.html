@@ -3,90 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mundo Zera's Craft - Servidor Minecraft & Discord</title>
+  <title>Mundo Zera's Craft - Minecraft & Discord</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      background: #121212;
-      font-family: 'Arial', sans-serif;
-      color: #f0f0f0;
+      background-color: #ffffff;
+      color: #333;
     }
+
     header {
-      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-      padding: 60px 20px;
+      background: url('https://images.unsplash.com/photo-1594824476967-d2c2d0b4d1b3') center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       text-align: center;
-      color: #00ffcc;
-      box-shadow: 0 0 20px #00ffcc;
+      color: #fff;
     }
+
     header h1 {
       font-size: 3rem;
-      margin: 0;
+      text-shadow: 0 0 10px #000;
     }
+
     header p {
       font-size: 1.2rem;
-      margin-top: 10px;
+      text-shadow: 0 0 5px #000;
     }
-    .buttons {
+
+    section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .testimonials {
+      text-align: center;
+      background-color: #f9f9f9;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .testimonials img {
+      width: 80px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .counters {
+      background: url('https://images.unsplash.com/photo-1586075010920-13c37b66e655') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .counters h3 {
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .skills img {
+      width: 250px;
+      border-radius: 10px;
+    }
+
+    .progress-bar {
+      background: #eee;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+
+    .progress-bar span {
+      display: block;
+      background-color: #00bfa6;
+      height: 20px;
+      width: 0;
+      border-radius: 20px;
+      transition: width 1s ease-in-out;
+    }
+
+    .destinations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
       margin-top: 30px;
     }
-    .btn {
-      display: inline-block;
-      padding: 15px 30px;
-      margin: 10px;
-      border: 2px solid #00ffcc;
-      background: transparent;
-      color: #00ffcc;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.4s ease;
+
+    .destinations img {
+      width: 100%;
+      border-radius: 10px;
+      height: 150px;
+      object-fit: cover;
     }
-    .btn:hover {
-      background: #00ffcc;
-      color: #121212;
-      box-shadow: 0 0 20px #00ffcc;
-      transform: scale(1.05);
-    }
-    section {
-      padding: 50px 20px;
-      max-width: 900px;
-      margin: auto;
-      text-align: center;
-    }
-    section h2 {
-      color: #00ffcc;
-      margin-bottom: 20px;
-    }
-    .portfolio {
+
+    .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-    }
-    .portfolio-item {
-      background: #1e1e1e;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
-      transition: transform 0.4s ease;
-    }
-    .portfolio-item img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-    .portfolio-item:hover {
-      transform: translateY(-10px);
-    }
-    footer {
-      background: #0f0f0f;
-      padding: 20px;
       text-align: center;
-      border-top: 2px solid #00ffcc;
-      font-size: 0.9rem;
     }
-    footer a {
-      color: #00ffcc;
-      text-decoration: none;
+
+    .services div {
+      border: 1px solid #ccc;
+      padding: 30px 20px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .services div:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .highlight {
+      text-align: center;
+      padding: 30px;
+      border: 2px dashed #00bfa6;
+      border-radius: 10px;
+      margin-top: 40px;
+    }
+
+    footer {
+      background-color: #111;
+      color: #aaa;
+      padding: 30px;
+      text-align: center;
+    }
+
+    /* Animação automática das barras de progresso */
+    .progress-bar span.active {
+      width: var(--progress);
     }
   </style>
 </head>
@@ -95,34 +152,65 @@
 <header>
   <h1>Mundo Zera's Craft</h1>
   <p>Servidor Minecraft & Comunidade no Discord</p>
-  <div class="buttons">
-    <a href="https://discord.gg/seuconvite" class="btn">Entrar no Discord</a>
-    <a href="#sobre" class="btn">Sobre o Servidor</a>
-  </div>
 </header>
 
-<section id="sobre">
-  <h2>Sobre o Mundo Zera's Craft</h2>
-  <p>Servidor focado em aventura, sobrevivência e eventos únicos no Minecraft, com integração total ao nosso Discord! Construa, explore e jogue com nossa comunidade!</p>
+<section class="testimonials">
+  <h2>O Que Dizem Sobre Nós</h2>
+  <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Depoimento">
+  <p>"Servidor incrível, cheio de aventuras e uma comunidade super amigável!"</p>
+  <strong>João Gamer</strong><br>
+  <small>Membro Ativo</small>
+</section>
+
+<section class="counters">
+  <h3>12</h3>
+  <p>EVENTOS CONCLUÍDOS</p>
+  <h3>194</h3>
+  <p>MISSÕES COMPLETAS</p>
+  <h3>2K+</h3>
+  <p>JOGADORES REGISTRADOS</p>
+  <h3>25</h3>
+  <p>MEMBROS DA STAFF</p>
+</section>
+
+<section class="skills">
+  <img src="https://images.unsplash.com/photo-1558981033-0e9c5e7a6d0f" alt="Staff">
+  <div>
+    <h2>Por Que Escolher Nosso Servidor?</h2>
+    <div class="progress-bar"><span style="--progress: 85%;" class="active"></span> <p>Exploração - 85%</p></div>
+    <div class="progress-bar"><span style="--progress: 75%;" class="active"></span> <p>Economia - 75%</p></div>
+    <div class="progress-bar"><span style="--progress: 90%;" class="active"></span> <p>Eventos - 90%</p></div>
+  </div>
 </section>
 
 <section>
-  <h2>Galeria do Servidor</h2>
-  <div class="portfolio">
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1594824476967-d2c2d0b4d1b3" alt="Mundo 1">
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1586075010920-13c37b66e655" alt="Mundo 2">
-    </div>
-    <div class="portfolio-item">
-      <img src="https://images.unsplash.com/photo-1558981033-0e9c5e7a6d0f" alt="Mundo 3">
-    </div>
+  <h2>Locais Mais Populares do Servidor</h2>
+  <div class="destinations">
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Cidade 1">
+    <img src="https://images.unsplash.com/photo-1543342386-1b7ef66a46f0" alt="Cidade 2">
+    <img src="https://images.unsplash.com/photo-1588444141801-2490e7fcef71" alt="Cidade 3">
+    <img src="https://images.unsplash.com/photo-1533106418989-88406c7e3bc8" alt="Cidade 4">
   </div>
 </section>
 
+<section>
+  <h2>Nossos Serviços</h2>
+  <div class="services">
+    <div><h3>Suporte 24/7</h3><p>Ajuda imediata em qualquer momento no Discord.</p></div>
+    <div><h3>Eventos Semanais</h3><p>Eventos divertidos com prêmios exclusivos!</p></div>
+    <div><h3>Sistema de Clãs</h3><p>Monte seu clã e conquiste territórios!</p></div>
+    <div><h3>Loja no Jogo</h3><p>Compre itens exclusivos com moedas do servidor.</p></div>
+  </div>
+</section>
+
+<section class="highlight">
+  <h2>Participe Agora!</h2>
+  <p>Junte-se ao Mundo Zera's Craft e comece sua jornada.</p>
+  <a href="https://discord.gg/seuconvite" style="color:#00bfa6; font-weight:bold;">Entrar no Discord</a>
+</section>
+
 <footer>
-  <p>&copy; 2025 Mundo Zera's Craft. Todos os direitos reservados. | <a href="https://discord.gg/seuconvite">Discord</a></p>
+  <p>&copy; 2025 Mundo Zera's Craft - Todos os direitos reservados.</p>
 </footer>
 
 </body>
