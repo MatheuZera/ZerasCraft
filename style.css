@@ -730,3 +730,75 @@ a:hover {
     margin-top: -40px; 
 }
 */
+
+/* * NOVO CÓDIGO PARA O BOTÃO DE ÁUDIO 
+ * Posicionado no canto inferior direito e estilizado.
+ */
+#playAudioBtn {
+    position: fixed; /* Fixa o botão na tela, independentemente do scroll */
+    bottom: 30px;    /* 30px da parte inferior da tela */
+    right: 30px;     /* 30px da parte direita da tela */
+    z-index: 1000;   /* Garante que o botão fique acima de outros elementos */
+    border-radius: 50%; /* Transforma o botão em um círculo */
+    width: 60px;     /* Largura do botão */
+    height: 60px;    /* Altura do botão */
+    display: flex;   /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    font-size: 1.5rem; /* Tamanho do ícone/texto */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
+    background-color: var(--accent-color); /* Cor de destaque (amarelo) */
+    color: var(--dark-bg); /* Cor do texto/ícone (escuro) */
+    border: none; /* Remove a borda padrão do btn-primary se não for desejada aqui */
+    cursor: pointer; /* Indica que é clicável */
+    transition: all 0.3s ease; /* Transição suave para hover */
+    padding: 0; /* Remove padding extra que pode ser herdado */
+    /* Se você preferir apenas o ícone, remova o texto "Tocar Som do Minecraft" do HTML */
+    text-indent: -9999px; /* Esconde o texto, mantendo-o acessível para leitores de tela */
+    overflow: hidden; /* Garante que o texto escondido não apareça */
+}
+
+#playAudioBtn:hover {
+    background-color: #e0a800; /* Escurece um pouco no hover */
+    transform: scale(1.05); /* Pequeno aumento de tamanho no hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Adiciona o ícone de nota musical dentro do botão */
+#playAudioBtn::before {
+    content: '🎵'; /* Ícone de nota musical (Unicode) */
+    position: absolute; /* Centraliza o ícone dentro do botão */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem; /* Ajuste o tamanho do ícone */
+    text-indent: 0; /* Desfaz o text-indent para o ícone */
+}
+
+
+/* Ajustes de responsividade para o botão de áudio */
+@media (max-width: 768px) {
+    #playAudioBtn {
+        width: 50px;     /* Diminui o tamanho em telas menores */
+        height: 50px;
+        bottom: 20px;    /* Posição um pouco mais próxima da borda */
+        right: 20px;
+        font-size: 1.2rem; /* Diminui o tamanho da fonte do ícone */
+    }
+    #playAudioBtn::before {
+        font-size: 1.5rem; /* Ajusta o tamanho do ícone em telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    #playAudioBtn {
+        width: 45px;
+        height: 45px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 1rem;
+    }
+    #playAudioBtn::before {
+        font-size: 1.3rem;
+    }
+}
