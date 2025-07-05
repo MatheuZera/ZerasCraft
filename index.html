@@ -1,166 +1,194 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mundo Zera's Craft</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #121212;
-      color: #f0f0f0;
-    }
-
-    /* Navbar */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background-color: #1e1e1e;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.8);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo img {
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
-      margin-right: 10px;
-    }
-
-    .nav-links a {
-      color: #00ffcc;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #00ffaa;
-    }
-
-    /* Banner */
-    header {
-      background: url('https://images.unsplash.com/photo-1594824476967-d2c2d0b4d1b3') center/cover no-repeat;
-      height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      color: #ffffff;
-      text-shadow: 0 0 10px #000;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      color: #cccccc;
-      text-shadow: 0 0 5px #000;
-    }
-
-    /* Conteúdo principal */
-    main {
-      padding: 40px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    section {
-      margin-bottom: 50px;
-    }
-
-    h2 {
-      color: #00ffcc;
-      margin-bottom: 15px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 30px;
-      background: #00ffcc;
-      color: #121212;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: 0.4s ease;
-    }
-
-    .btn:hover {
-      background: #00ffaa;
-      transform: scale(1.05);
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      background-color: #1e1e1e;
-      border-top: 2px solid #00ffcc;
-      font-size: 0.9rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Zera's Craft - Sua Aventura Minecraft!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+    <header>
+        <div class="container">
+            <h1 class="site-logo">Mundo Zera's Craft</h1>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#canais-cargos">Canais & Cargos</a></li>
+                    <li><a href="#eventos">Eventos</a></li>
+                    <li><a href="#seguranca">Segurança</a></li>
+                    <li><a href="#comunidade">Comunidade</a></li>
+                    <li><a href="#junte-se">Junte-se!</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<!-- Navbar -->
-<nav>
-  <div class="logo">
-    <img src="https://raw.githubusercontent.com/matheuzera/ZerasCraft/main/logo.png" alt="Logo">
-    <span>Mundo Zera's Craft</span>
-  </div>
-  <div class="nav-links">
-    <a href="https://discord.gg/seuconvite" target="_blank">Discord</a>
-    <a href="https://loja.exemplo.com" target="_blank">Loja</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#eventos">Eventos</a>
-    <a href="#galeria">Galeria</a>
-  </div>
-</nav>
+    <main>
+        <section id="inicio" class="hero-banner">
+            <div class="container">
+                <h2>Sua Próxima Grande Aventura em Minecraft Começa Aqui!</h2>
+                <p>Entre para a nossa comunidade vibrante e prepare-se para levar sua paixão por blocos a um novo nível!</p>
+                <a href="[LINK_CONVITE_DISCORD_AQUI]" class="btn-primary" target="_blank">Entrar no Servidor Discord!</a>
+            </div>
+        </section>
 
-<!-- Banner -->
-<header>
-  <h1>Mundo Zera's Craft</h1>
-  <p>Servidor Minecraft & Comunidade no Discord</p>
-</header>
+        <section id="sobre" class="section-padded">
+            <div class="container">
+                <h2>🌍 Sobre o Mundo Zera's Craft</h2>
+                <p>Somos mais que um servidor de Minecraft; somos um universo onde a paixão por blocos e aventuras nos une. Nosso objetivo é proporcionar uma experiência única e personalizada para cada jogador, seja você um construtor lendário, um explorador incansável ou um mestre do PvP.</p>
+                <p>Aqui, você encontra um ambiente acolhedor e cheio de possibilidades, focado em fazer você viver o Minecraft de um jeito totalmente novo, conectado a outros jogadores com seus mesmos interesses.</p>
+            </div>
+        </section>
 
-<!-- Conteúdo principal -->
-<main>
-  <section id="sobre">
-    <h2>Sobre o Servidor</h2>
-    <p>Somos uma comunidade apaixonada por Minecraft, com foco em aventuras, clãs, economia e grandes eventos. Nosso Discord é o ponto de encontro para todos os jogadores!</p>
-  </section>
+        <section id="servicos" class="section-padded section-alt">
+            <div class="container">
+                <h2>✨ Nossos Serviços & Diferenciais</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Suporte 24/7</h3>
+                        <p>Ajuda mediada em qualquer momento no Discord.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Eventos Semanais</h3>
+                        <p>Eventos divertidos com prêmios exclusivos para a comunidade.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Sistema de Clãs</h3>
+                        <p>Monte seu clã e conquiste territórios no jogo.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Loja no Jogo</h3>
+                        <p>Compre itens e acessórios com moedas do servidor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="eventos">
-    <h2>Próximos Eventos</h2>
-    <p>✔️ Torneios PVP<br>✔️ Caça ao Tesouro<br>✔️ Construções Temáticas<br>✔️ Maratonas de Sobrevivência</p>
-    <a href="https://discord.gg/seuconvite" class="btn" target="_blank">Participar dos Eventos</a>
-  </section>
+        <section id="canais-cargos" class="section-padded">
+            <div class="container">
+                <h2>💬 Canais & Cargos: Sua Experiência Personalizada</h2>
+                <p>Nossa estrutura de canais é otimizada para que você encontre facilmente o que busca. Com categorias claras, a navegação é fluida.</p>
+                <p>O sistema de cargos do nosso servidor é um dos mais completos, permitindo que você personalize sua experiência e se conecte com quem realmente importa, de acordo com seus interesses:</p>
+                <div class="roles-grid">
+                    <div class="role-category-card">
+                        <h3>Staff & Organização</h3>
+                        <ul>
+                            <li>Cargos de Liderança (Dono, Sub Donos, ADMs, Moderadores)</li>
+                            <li>Coordenadores e Equipe de Suporte Geral</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <h3>Pings & Notificações</h3>
+                        <ul>
+                            <li>Pings para Ajuda, Atualizações, Avisos, Críticos, Eventos, Quero Jogar, Minecraft, Parcerias, etc.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <h3>Interesses (Hobbies)</h3>
+                        <ul>
+                            <li>Animadores, Construtores, Criadores de Addons, Exploradores, Farmers, Mineradores, Modeladores, Pixel Art, Programadores, PvP.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <h3>Minecraft & Launchers</h3>
+                        <ul>
+                            <li>Bedrock (Multiplataforma), Java Edition, Minecraft Dungeons, Minecraft Legends.</li>
+                            <li>Launchers específicos: Pojav, ATLauncher, Badlion, CurseForge, GDLauncher, Lunar, MultiMC, Prism, SKLauncher, TLauncher.</li>
+                        </ul>
+                    </div>
+                     <div class="role-category-card">
+                        <h3>Plataformas de Jogo</h3>
+                        <ul>
+                            <li>Celular, Tablet, PlayStation, Notebook, PC, Xbox.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <h3>Experiência & Nível (XP)</h3>
+                        <ul>
+                            <li>Cargos baseados em XP, desde Cobre (2xp) até Bedrock (200xp).</li>
+                        </ul>
+                    </div>
+                     <div class="role-category-card">
+                        <h3>Guildas & Competições</h3>
+                        <ul>
+                            <li>Líderes, Co-Líderes e ADMs de Guildas.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <h3>Status & Benefícios</h3>
+                        <ul>
+                            <li>Cargos de Eventos (Campeões MCTU, Fan-Jam Crafters).</li>
+                            <li>Cargos VIP (Primário, Elite, Cristal, Supremo, Ultimato).</li>
+                            <li>Cargos Principais (Aniversariantes, Doadores/Membros YT, Influencers, Inscritos Fixos, Parceiros).</li>
+                            <li>Cargos Exclusivos (Membros Estrelas, Membros do Dia, Colaboradores).</li>
+                            <li>Booster (Impulsionador, Nitro Boosters, Já Fui Booster).</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <h3>Redes Sociais & Interesses Pessoais</h3>
+                        <ul>
+                            <li>Cargos para plataformas (Instagram, Kwai, Facebook, Reddit, TikTok, Twitter, Twitch, YouTube).</li>
+                            <li>Cargos de interesses pessoais: Ajudar Pessoas, Ativo(a) no Servidor, Criar Coisas, Divertir no Servidor, Fazer Novas Amizades, Jogar Minecraft, Participar de Eventos, Tagarela nas Calls.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="galeria">
-    <h2>Galeria do Servidor</h2>
-    <p>Confira algumas imagens dos nossos melhores momentos!</p>
-    <a href="https://imgur.com/" class="btn" target="_blank">Ver Galeria Completa</a>
-  </section>
-</main>
+        <section id="eventos" class="section-padded section-alt">
+            <div class="container">
+                <h2>🏆 Eventos Épicos: Competição e Criatividade</h2>
+                <p>Participe de nossos torneios e mostre suas habilidades!</p>
 
-<!-- Rodapé -->
-<footer>
-  &copy; 2025 Mundo Zera's Craft | Todos os direitos reservados
-</footer>
+                <div class="event-card">
+                    <h3>⚔️ MCTU (Minecraft Team Ultimate)</h3>
+                    <p>Um campeonato exclusivo para guildas, testando habilidades de PvP, construção, redstone e muito mais. Forme sua equipe, treine e lute pela glória em um servidor dedicado ao torneio!</p>
+                    <p class="event-details">**Detalhes:** Competição de Guildas, Desafios Variados, Servidor Exclusivo, Cargos de Campeão.</p>
+                </div>
 
+                <div class="event-card">
+                    <h3>🎨 CRAFTJAM: Torneio de Criação</h3>
+                    <p>Libere seu artista interior! Desafie-se a criar algo único dentro de um tema específico (construções, addons, texturas, fanarts, animações e mapas). Sua arte pode te render reconhecimento e prêmios!</p>
+                    <p class="event-details">**Detalhes:** Tema Secreto, Múltiplas Categorias, Votação Comunitária (baseada nas publicações mais recentes e únicas em canal específico), Cargos de Criador.</p>
+                </div>
+                </div>
+        </section>
+
+        <section id="seguranca" class="section-padded">
+            <div class="container">
+                <h2>🛡️ Administração & Segurança</h2>
+                <p>Sua segurança e uma experiência fluida são nossas prioridades. Nossa equipe de administração e moderação garante um ambiente justo e respeitoso.</p>
+                <p>Contamos com ferramentas avançadas, como nosso bot exclusivo **Pixel Craft**, que é responsável por moderar o servidor e gerenciar comandos utilitários para que nossos eventos funcionem conforme o planejado. Ele foi criado por @MatheuZera e o Mundo Zera's Craft.</p>
+                <p>Além disso, utilizamos sistemas de prevenção e recuperação avançados (como o **Xeon Bot** para backups e o **Shine Bot** para bloquear bots maliciosos) para garantir que sua experiência no Mundo Zera's Craft seja sempre segura e protegida contra raids e outros imprevistos.</p>
+                <p>Você tem sugestões? Participe do nosso Fórum de Sugestões para nos ajudar a melhorar!</p>
+            </div>
+        </section>
+
+        <section id="comunidade" class="section-padded section-alt">
+            <div class="container">
+                <h2>🤝 Comunidade & Parcerias</h2>
+                <p>Nossa comunidade é vibrante e ativa! Conecte-se com outros criadores, compartilhe seus projetos, e acesse conteúdos exclusivos. Temos canais para marketplace de criações, wiki da comunidade e muito mais.</p>
+                <p>Também valorizamos parcerias que enriquecem a experiência de todos. Estamos sempre buscando novas conexões para expandir o universo do Mundo Zera's Craft e trazer mais benefícios para nossos membros.</p>
+            </div>
+        </section>
+
+        <section id="junte-se" class="section-padded call-to-action">
+            <div class="container">
+                <h2>🚀 Não Fique de Fora!</h2>
+                <p>Milhares de aventuras e amigos esperam por você. Venha fazer parte da família Mundo Zera's Craft!</p>
+                <a href="[LINK_CONVITE_DISCORD_AQUI]" class="btn-primary" target="_blank">Entrar no Servidor Agora!</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mundo Zera's Craft. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
