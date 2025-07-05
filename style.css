@@ -710,3 +710,23 @@ a:hover {
         padding: 1px;
     }
 }
+
+/* ADIÇÕES PARA AJUSTAR O ESPAÇAMENTO DA SEÇÃO "NOSSOS SERVIÇOS & DIFERENCIAIS" */
+
+/* Reduz o padding inferior da seção "Sobre o Mundo Zera's Craft" (a seção acima) */
+#sobre {
+    padding-bottom: 40px; /* Era 80px por causa de .section-padded, reduzido para 40px */
+}
+
+/* Opcional: Você pode ajustar também o padding superior da seção "Serviços" se ainda precisar de mais ajuste */
+#servicos {
+    padding-top: 60px; /* Era 80px por causa de .section-padded, reduzido para 60px */
+}
+
+/* Se as alterações acima não forem suficientes ou se quiser um controle mais direto, você pode usar margin-top negativo */
+/* CUIDADO: Usar margin-top negativo pode, em alguns layouts, sobrepor elementos. Teste bem. */
+/*
+#servicos {
+    margin-top: -40px; 
+}
+*/
