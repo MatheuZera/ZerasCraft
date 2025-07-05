@@ -1,13 +1,13 @@
 /* Estilos Gerais */
 :root {
-    --primary-color: #4A90E2;   /* Um azul mais vibrante e moderno, que se destaca */
-    --secondary-color: #6B778D; /* Um cinza azulado, mais sofisticado e que combina bem com o primary */
-    --accent-color: #FFD166;    /* Um amarelo mais dourado e suave, excelente para destaque */
-    --dark-bg: #e7e7e7;         /* Um azul escuro quase preto, muito profundo e ideal para fundos */
-    --light-bg: #b8b8b8;        /* Um cinza muito claro, quase branco, para fundos claros */
-    --text-color-dark: #919191; /* Um cinza escuro para texto, que contrasta bem com fundos claros */
-    --text-color-light: #e7e7e7; /* Um branco muito levemente acinzentado, para texto sobre fundos escuros */
-    --border-color: #BDC3C7;    /* Um cinza claro para bordas, discreto mas visível */
+    --primary-color: #007bff; /* Azul vibrante */
+    --secondary-color: #6c757d; /* Cinza médio */
+    --accent-color: #ffc107; /* Amarelo para destaque */
+    --dark-bg: #212529; /* Fundo escuro */
+    --light-bg: #979797; /* Fundo Cinza */
+    --text-color-dark: #343a40; /* Texto escuro */
+    --text-color-light: #ffffff; /* Texto claro */
+    --border-color: #dee2e6; /* Cor da borda */
 }
 
 body {
