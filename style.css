@@ -157,21 +157,21 @@ a:hover {
 
 .header-content {
     display: flex;
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    justify-content: center; /* Centraliza o logo horizontalmente */
     align-items: center;
 }
 
 .header-logo {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.4rem; /* Tamanho do título para mobile e PC */
+    font-size: 1.4rem; /* Tamanho padrão para mobile e PC */
     font-weight: 700;
     color: var(--text-color-light);
     text-decoration: none;
-    text-align: center; /* Garante centralização do texto se houver mais de um item no header-content */
-    flex-grow: 1; /* Permite que o logo ocupe o espaço disponível e se centralize */
+    text-align: center; /* Garante que o texto do logo esteja centralizado */
 }
 
-/* Removido .main-nav e .hamburger-menu do CSS, pois foram removidos do HTML */
+/* Remover quaisquer estilos para .main-nav e .hamburger-menu */
+
 
 /* Hero Section - Otimizada para Mobile e Desktop */
 .hero-section {
@@ -496,7 +496,7 @@ a:hover {
     font-size: 0.9rem;
 }
 
-/* Responsividade - Simplificado, pois o cabeçalho será o mesmo em todas as telas */
+/* Responsividade - Ajuste para o tamanho do logo em telas menores, se necessário */
 @media (max-width: 992px) {
     .hero-title {
         font-size: 2.2rem;
@@ -633,6 +633,6 @@ a:hover {
         padding: 10px 0;
     }
     .header-logo {
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* Mantém o logo menor em telas muito pequenas */
     }
 }
