@@ -186,7 +186,7 @@ a:hover {
     text-align: center;
     color: var(--text-color-light);
     /* **IMAGEM DE FUNDO DO BANNER:** */
-    background: url('images/villager-minecraft.gif') no-repeat center center/cover;
+    background: url('images/banner.gif') no-repeat center center/cover;
     background-attachment: fixed;
     padding-top: 80px; /* Espaço para o cabeçalho fixo */
     padding-bottom: 60px;
