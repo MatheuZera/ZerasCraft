@@ -1,0 +1,404 @@
+/* Importação de Fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
+/* Variáveis de Cores (personalize aqui para um design 'super bonito'!) */
+:root {
+    --primary-color: #6A0DAD; /* Roxo vibrante */
+    --secondary-color: #FFC000; /* Laranja/Amarelo dourado */
+    --text-color: #E0E0E0; /* Texto claro */
+    --background-dark: #1A1A2E; /* Fundo principal escuro */
+    --background-light: #20204A; /* Fundo secundário um pouco mais claro */
+    --card-bg: #2C2C54; /* Fundo para cards */
+    --border-color: #4A0D8F; /* Bordas e divisores */
+    --button-hover-color: #FFAA00; /* Cor do botão ao passar o mouse */
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-color);
+    line-height: 1.6;
+    scroll-behavior: smooth; /* Rolagem suave para âncoras */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background-color: var(--background-dark);
+    padding: 20px 0;
+    border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-logo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 28px;
+    color: var(--secondary-color);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    white-space: nowrap; /* Evita quebra de linha em nomes longos */
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 30px;
+}
+
+header nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    padding: 5px 0;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active { /* Adicione 'active' para a seção atual se usar JS */
+    color: var(--primary-color);
+    text-shadow: 0 0 12px var(--primary-color);
+}
+
+/* Seções Principais */
+main section {
+    padding: 80px 0;
+    text-align: center;
+    position: relative; /* Para garantir que o z-index funcione se houver sobreposição */
+    overflow: hidden; /* Para conter elementos flutuantes */
+}
+
+main section h2 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 38px;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+main section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main section ul {
+    list-style: none;
+    padding: 0;
+    max-width: 900px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+main section ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    position: relative;
+    color: var(--text-color); /* Garante a cor do texto para itens de lista */
+}
+
+main section ul li::before {
+    content: '⛏️'; /* Ícone de picareta para listas */
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.section-alt {
+    background-color: var(--background-light);
+}
+
+/* Hero Banner */
+.hero-banner {
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1800x900/1e1e3b/ffffff?text=Banner+Minecraft+Aqui') no-repeat center center/cover; /* SUBSTITUA ESTA URL PELA SUA IMAGEM DE FUNDO! */
+    color: white;
+    padding: 180px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh; /* Ajuste para ter mais altura */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.hero-banner h2 {
+    font-size: 60px;
+    margin-bottom: 25px;
+    color: white;
+    line-height: 1.2;
+}
+
+/* Botão Principal */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 18px 40px;
+    text-decoration: none;
+    border-radius: 50px; /* Mais arredondado */
+    font-weight: 700;
+    font-size: 22px;
+    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+    border: none; /* Remove borda sólida padrão */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: var(--button-hover-color);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Grid de Serviços */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.service-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.service-card h3 {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--secondary-color);
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+
+/* Grid de Cargos */
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.role-category-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.role-category-card:hover {
+    transform: translateY(-3px);
+}
+
+.role-category-card h3 {
+    font-family: 'Roboto', sans-serif;
+    color: var(--primary-color);
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.role-category-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.role-category-card ul li {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    padding-left: 0; /* Remove padding extra do li geral */
+}
+
+.role-category-card ul li::before {
+    content: '⭐'; /* Ícone personalizado para lista de cargos */
+    margin-right: 8px;
+    color: var(--secondary-color);
+    position: static; /* Remove posicionamento absoluto do ::before geral */
+    font-size: 16px;
+}
+
+
+/* Cards de Eventos */
+.event-card {
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 35px;
+    margin: 25px auto;
+    max-width: 800px;
+    text-align: left;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.event-card h3 {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--primary-color);
+    font-size: 26px;
+    margin-bottom: 18px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.event-card p {
+    font-size: 17px;
+    margin-bottom: 15px;
+    max-width: none; /* Remove max-width para parágrafos dentro do card */
+}
+
+.event-card p.event-details {
+    font-size: 16px;
+    color: var(--secondary-color);
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+/* Call to Action Section Final */
+.call-to-action {
+    background: linear-gradient(90deg, var(--primary-color), var(--border-color));
+    color: white;
+    padding: 70px 0;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    margin-top: 60px; /* Margem superior para separar de outras seções */
+    margin-bottom: 60px;
+}
+
+.call-to-action h2 {
+    color: white;
+    font-size: 45px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--background-dark);
+    color: var(--text-color);
+    text-align: center;
+    padding: 30px 0;
+    border-top: 2px solid var(--border-color);
+    font-size: 14px;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 992px) {
+    .hero-banner h2 {
+        font-size: 48px;
+    }
+    main section h2 {
+        font-size: 32px;
+    }
+    .site-logo {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+    }
+    header nav ul {
+        margin-top: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    header nav ul li {
+        margin: 5px 15px;
+    }
+    .hero-banner {
+        padding: 120px 0;
+    }
+    .hero-banner h2 {
+        font-size: 36px;
+    }
+    main section h2 {
+        font-size: 28px;
+    }
+    .btn-primary {
+        font-size: 18px;
+        padding: 15px 30px;
+    }
+    .services-grid, .roles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .event-card h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-logo {
+        font-size: 20px;
+    }
+    header nav ul li {
+        margin: 5px 8px;
+    }
+    .hero-banner h2 {
+        font-size: 28px;
+    }
+    main section h2 {
+        font-size: 24px;
+    }
+    main section p, main section ul li {
+        font-size: 15px;
+    }
+    .btn-primary {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+    .service-card, .role-category-card, .event-card {
+        padding: 20px;
+    }
+}
