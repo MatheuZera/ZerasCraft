@@ -373,11 +373,88 @@ a:hover {
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-color); /* Borda inicial */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    cursor: pointer; /* Indica que é interativo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Adicionadas transições */
+}
+
+/* Animações ao passar o mouse */
+.role-category-card:hover {
+    transform: translateY(-8px) scale(1.02); /* Eleva e aumenta um pouco */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+    border-color: var(--accent-color); /* Borda amarela/destaque */
+}
+
+/* Estilos para os ícones nas categorias de cargos */
+.role-category-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    display: block;
+    transition: transform 0.3s ease; /* Transição para a rotação do ícone */
+}
+
+/* Animação do ícone ao passar o mouse no card */
+.role-category-card:hover .role-category-icon {
+    transform: rotate(5deg); /* Leve rotação */
+}
+
+.role-category-card .card-title {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    text-align: center;
+    transition: color 0.3s ease; /* Transição para a cor do título */
+}
+
+/* Animação da cor do título ao passar o mouse no card */
+.role-category-card:hover .card-title {
+    color: var(--accent-color); /* Título fica amarelo/destaque */
+}
+
+.role-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    flex-grow: 1; /* Permite que a lista ocupe o espaço restante */
+}
+
+.role-list li {
+    background-color: var(--text-color-dark);
+    padding: 8px 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    color: var(--text-color-light);
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease; /* Transição para o item da lista */
+}
+
+/* Efeito sutil nos itens da lista ao passar o mouse no CARD */
+.role-category-card:hover .role-list li {
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo mais claro */
+}
+
+.role-list li::before {
+    content: '•';
+    color: var(--primary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Alterar a cor do bullet ao passar o mouse no CARD */
+.role-category-card:hover .role-list li::before {
+    color: var(--accent-color);
 }
 
 /* Estilos para os ícones nas categorias de cargos */
