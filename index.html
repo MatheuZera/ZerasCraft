@@ -488,17 +488,27 @@
         </div>
     </footer>
 
-    <audio id="clickSound" src="audios/click.mp3" preload="auto"></audio>
+<body>
 
-        <div class="audio-control-button-container">
-        <button id="audioControlButton" class="audio-control-button" aria-label="Controle de música de fundo">
-            <span class="neon-effect"></span>
-
-            <i class="audio-icon on-icon fas fa-volume-mute"></i> <i class="audio-icon off-icon fas fa-volume-up"></i> <span id="currentMusicTitle">Carregando...</span>
-
-            <div id="audioProgressArc" class="audio-progress-arc"></div>
+    <div class="audio-control-button-container">
+        <button id="audioControlButton" class="audio-control-button">
+            <span class="audio-icon on-icon"><i class="fas fa-volume-mute"></i></span>
+            <span class="audio-icon off-icon"><i class="fas fa-volume-up"></i></span>
+            <span id="currentMusicTitle" class="audio-text">Música Desligada</span>
+            <svg class="audio-progress-arc" viewBox="0 0 36 36">
+                <path class="arc-background" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="arc-progress" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
         </button>
+        <audio id="backgroundMusic" loop preload="auto">
+            <source src="https://www.bensound.com/bensound-music/bensound-memories.mp3" type="audio/mpeg">
+            <source src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+        </audio>
     </div>
+
+    <script src="js/music-player.js"></script>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script> </body>
 
     <script src="js/main.js"></script>
 </body>
