@@ -945,3 +945,37 @@ a:hover {
     right: 20px;
     z-index: 1000; /* Garante que ele fique acima de outros elementos */
 }
+
+/* Estilos para o card de segurança, se quiser que ele se destaque */
+.security-card {
+    background-color: #36393f; /* Um fundo ligeiramente diferente para o card, se desejar */
+    border: 1px solid #4f545c; /* Borda para destacá-lo */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px; /* Espaço abaixo do card de segurança */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para os itens de "grade" dentro do card de segurança */
+.security-grid-item {
+    background-color: #2f3136; /* Fundo para cada item individual */
+    border-left: 4px solid #7289da; /* Uma linha vertical para destacar */
+    padding: 15px;
+    margin-bottom: 15px; /* Espaço entre os itens da grade */
+    border-radius: 4px;
+}
+
+.security-grid-item:last-child {
+    margin-bottom: 0; /* Remove a margem do último item */
+}
+
+.security-grid-item h4 {
+    color: #7289da; /* Cor para os títulos dos itens */
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.security-grid-item p {
+    color: #dcddde;
+    line-height: 1.6;
+}
