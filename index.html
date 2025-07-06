@@ -163,65 +163,75 @@
         <section id="pixel-legends" class="section-padded section-light-bg">
             <div class="container">
                 <h2 class="section-title">
-                    <img src="images/site/coroa-pixel-legends.png" alt="Coroa Pixel Legends" class="section-icon">
+                    <img src="images/icons/pixel-legends-icon.png" alt="Ícone Pixel Legends" class="section-icon">
                     Pixel Legends: Seu Reino, Suas Regras!
                 </h2>
-                <p class="section-description">
-                    Participe de batalhas épicas de guildas no universo Minecraft!
-                </p>
+                <p class="section-description">Participe de batalhas épicas de guildas no universo Minecraft!</p>
 
-                <h3>O Que é o Pixel Legends?</h3>
-                <p>Este é nosso servidor oficial dentro do Minecraft! Lá você **cria sua própria Guilda**, e batalha contra outras pessoas para pegar recursos, faz parcerias com outros Líderes, formam alianças e etc.. Cada um tem o direito de criar sua própria guilda para evoluírem juntos(as). :D</p>
-
-                <h3>Como Crio Minha Própria Guilda?</h3>
-                <p>Acesse o canal <a href="https://discord.com/channels/YOUR_SERVER_ID/YOUR_GUILD_ROLES_CHANNEL_ID" class="discord-channel-link" target="_blank">#cargos-guildas</a> para mais detalhes sobre Guildas aqui no nosso servidor.</p>
-                <p>Bem, basta formar uma equipe e ir chamando mais e mais pessoas para transformar sua Guilda na mais forte possível!</p>
-
-                <h3>Como Funcionam os Cargos Administrativos da Guilda?</h3>
-                <ul class="role-list">
-                    <li><strong>Líder da Guilda:</strong> É responsável por tudo o que rola dentro da Guilda, tudo mesmo!</li>
-                    <li><strong>Co-Líder da Guilda:</strong> Ajuda os Líderes em coisas diversas, e também quando estão ausentes, estas pessoas lideram sua Guilda até a volta do Líder.</li>
-                    <li><strong>Administrador da Guilda:</strong> Coordena os Membros a arrumar a defesa, avisar sobre alguma coisa e etc.</li>
-                </ul>
-
-                <h3>Como Funciona o MC Team Ultimate?</h3>
-                <p>Acesse o canal <a href="https://discord.com/channels/YOUR_SERVER_ID/YOUR_MCTU_CHANNEL_ID" class="discord-channel-link" target="_blank">#eventos-mctu</a> para mais detalhes sobre..</p>
-                
-                <h2 class="section-title">Funcionalidades do Servidor Pixel Legends</h2>
-                
-                <h4>Software</h4>
-                <ul>
-                    <li>SPIGOT/BUKKIT</li>
-                </ul>
-                <h4>Plugins</h4>
-                <ol>
-                    <li><strong>DISCORD SRV:</strong> Conexão com os Chats do Discord.</li>
-                    <li><strong>GEYSER MC:</strong> Conecta os Jogadores da Bedrock com Java simultaneamente.</li>
-                    <li><strong>MULTIVERSE CORE:</strong> Possibilidade de criar múltiplos mundos um dentro do outro, como um server de minigames.</li>
-                    <li><strong>VIA VERSION:</strong> Permite que jogadores entrem no servidor estando **um pouco** desatualizado da versão atual do servidor.</li>
-                </ol>
-            </div>
-        </section>
-
-        <section id="acesso-servidor" class="section-padded section-alt-bg">
-            <div class="container">
-                <h2 class="section-title">Acesso ao Servidor: Mundo Vortex Craft</h2>
-                
-                <div class="access-cards-grid">
-                    <div class="access-card">
-                        <h3>BEDROCK EDITION</h3>
-                        <p>IP: <code id="bedrock-ip-display">MundoVortexCraft.aternos.me</code></p>
-                        <p>PORTA: <code id="bedrock-port-display">57178</code></p>
-                        <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me:57178">Copiar IP & Porta</button>
+                <div class="pixel-legends-interactive-card" id="pixelLegendsCard">
+                    <div class="card-header">
+                        <h3 class="card-main-title">O Que é o Pixel Legends?</h3>
+                        <button class="expand-btn" aria-expanded="false" aria-controls="cardContent">
+                            <span class="icon-plus">➕</span>
+                            <span class="icon-minus" style="display: none;">➖</span>
+                        </button>
                     </div>
+                    <div class="card-content-wrapper" id="cardContent">
+                        <div class="card-content">
+                            <p>Este é nosso servidor oficial dentro do Minecraft! Lá você **cria sua própria Guilda**, e batalha contra outras pessoas para pegar recursos, faz parcerias com outros Líderes, formam alianças e etc.. Cada um tem o direito de criar sua própria guilda para evoluírem juntos(as). :D</p>
 
-                    <div class="access-card">
-                        <h3>JAVA EDITION</h3>
-                        <p>ENDEREÇO: <code id="java-address-display">MundoVortexCraft.aternos.me:57178</code></p>
-                        <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me:57178">Copiar Endereço</button>
+                            <h4>Como Crio Minha Própria Guilda?</h4>
+                            <p>Acesse o canal <a href="#" class="discord-channel-link">#cargos-guildas</a> para mais detalhes sobre Guildas aqui no nosso servidor.</p>
+                            <p>Bem, basta formar uma equipe e ir chamando mais e mais pessoas para transformar sua Guilda na mais forte possível!</p>
+
+                            <h4>Como Funcionam os Cargos Administrativos da Guilda?</h4>
+                            <ul class="role-list-compact">
+                                <li><strong>Líder da Guilda:</strong> É responsável por tudo o que rola dentro da Guilda, tudo mesmo!</li>
+                                <li><strong>Co-Líder da Guilda:</strong> Ajuda os Líderes em coisas diversas, e também quando estão ausentes, estas pessoas lideram sua Guilda até a volta do Líder.</li>
+                                <li><strong>Administrador da Guilda:</strong> Coordena os Membros a arrumar a defesa, avisar sobre alguma coisa e etc.</li>
+                            </ul>
+
+                            <h4>Como Funciona o MC Team Ultimate?</h4>
+                            <p>Acesse o canal <a href="#" class="discord-channel-link">#eventos-mctu</a> para mais detalhes sobre..</p>
+
+                            <h4>Funcionalidades do Servidor Pixel Legends</h4>
+                            <ul class="features-list">
+                                <li><strong>Software:</strong> SPIGOT/BUKKIT</li>
+                                <li><strong>Plugins:</strong>
+                                    <ul>
+                                        <li><strong>DISCORD SRV:</strong> Conexão com os Chats do Discord.</li>
+                                        <li><strong>GEYSER MC:</strong> Conecta os Jogadores da Bedrock com Java simultaneamente.</li>
+                                        <li><strong>MULTIVERSE CORE:</strong> Possibilidade de criar múltiplos mundos um dentro do outro, como um server de minigames.</li>
+                                        <li><strong>VIA VERSION:</strong> Permite que jogadores entrem no servidor estando **um pouco** desatualizado da versão atual do servidor.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <div class="access-server-section">
+                                <h3>Acesso ao Servidor: Mundo Vortex Craft</h3>
+                                <div class="access-cards-grid">
+                                    <div class="access-card">
+                                        <h3>BEDROCK EDITION</h3>
+                                        <p>IP: <code>MundoVortexCraft.aternos.me</code></p>
+                                        <p>PORTA: <code>57178</code></p>
+                                        <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me" data-port="57178">
+                                            <i class="fas fa-copy"></i> Copiar IP & Porta
+                                        </button>
+                                    </div>
+
+                                    <div class="access-card">
+                                        <h3>JAVA EDITION</h3>
+                                        <p>ENDEREÇO: <code>MundoVortexCraft.aternos.me:57178</code></p>
+                                        <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me:57178">
+                                            <i class="fas fa-copy"></i> Copiar Endereço
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </section>
         <section id="eventos" class="section-padded"> <div class="container">
                 <h2 class="section-title">🏆 Eventos Épicos: Competição e Criatividade</h2>

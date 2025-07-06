@@ -1230,4 +1230,275 @@ a:hover {
         height: auto;
         flex-shrink: 0;
     }
+/* ========================================= */
+/* PIXEL LEGENDS INTERACTIVE CARD (NOVO) */
+/* ========================================= */
+
+.pixel-legends-interactive-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    max-width: 900px;
+    margin: 40px auto;
+    overflow: hidden; /* Importante para a animação de altura */
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transition for height */
+    position: relative; /* Para o background animado */
+    border: 2px solid var(--card-bg); /* Borda padrão */
+    will-change: height, border-color, box-shadow; /* Otimização de performance */
+    cursor: pointer; /* Indica que o card é clicável */
+}
+
+/* Fundo Animado do Card */
+.pixel-legends-interactive-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a1a, #36393f, #1a1a1a); /* Gradiente escuro sutil */
+    background-size: 200% 200%;
+    animation: backgroundPan 15s ease infinite;
+    z-index: 0;
+    opacity: 0.7; /* Para não brigar com o conteúdo */
+    transition: opacity 0.5s ease;
+}
+
+@keyframes backgroundPan {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.pixel-legends-interactive-card:hover::before {
+    opacity: 0.9;
+    animation: backgroundPan 10s ease infinite; /* Mais rápido no hover */
+}
+
+.pixel-legends-interactive-card.expanded::before {
+    opacity: 1; /* Opacidade total quando expandido */
+}
+
+
+.pixel-legends-interactive-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    background-color: rgba(54, 57, 63, 0.9); /* Um pouco transparente para ver o fundo animado */
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1; /* Acima do background */
+}
+
+.pixel-legends-interactive-card .card-main-title {
+    color: var(--accent-color); /* Título principal em destaque */
+    margin: 0;
+    font-size: 1.8rem;
+    transition: color 0.3s ease;
+}
+
+.pixel-legends-interactive-card:hover .card-main-title {
+    color: var(--primary-color);
+}
+
+.pixel-legends-interactive-card.expanded .card-main-title {
+    color: var(--primary-color); /* Mantém a cor principal quando expandido */
+}
+
+
+.pixel-legends-interactive-card .expand-btn {
+    background: none;
+    border: none;
+    color: var(--text-color-light);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    padding: 0 10px; /* Adicionado padding para facilitar o clique */
+    position: relative;
+    z-index: 1; /* Acima do background */
+}
+
+.pixel-legends-interactive-card .expand-btn:hover {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+.pixel-legends-interactive-card.expanded .expand-btn .icon-plus {
+    display: none;
+}
+
+.pixel-legends-interactive-card.expanded .expand-btn .icon-minus {
+    display: inline-block;
+}
+
+.pixel-legends-interactive-card .card-content-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transition */
+    position: relative;
+    z-index: 1; /* Acima do background */
+}
+
+.pixel-legends-interactive-card.expanded .card-content-wrapper {
+    max-height: 2000px; /* Um valor grande o suficiente para conter todo o conteúdo */
+}
+
+.pixel-legends-interactive-card .card-content {
+    padding: 25px;
+    background-color: rgba(36, 39, 43, 0.95); /* Fundo mais escuro e transparente para o conteúdo expandido */
+}
+
+.pixel-legends-interactive-card .card-content h4 {
+    color: var(--accent-color);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.pixel-legends-interactive-card .card-content p,
+.pixel-legends-interactive-card .card-content ul li {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.pixel-legends-interactive-card .card-content ul {
+    list-style-type: none;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.pixel-legends-interactive-card .card-content ul li::before {
+    content: '•';
+    color: var(--primary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.pixel-legends-interactive-card .card-content .discord-channel-link {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+.pixel-legends-interactive-card .card-content .discord-channel-link:hover {
+    color: var(--accent-color);
+}
+
+/* Estilos para as listas dentro do card */
+.pixel-legends-interactive-card .role-list-compact,
+.pixel-legends-interactive-card .features-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.pixel-legends-interactive-card .role-list-compact li,
+.pixel-legends-interactive-card .features-list li {
+    background-color: var(--dark-bg);
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.95rem;
+    color: var(--text-color-light);
+    display: flex;
+    align-items: flex-start;
+    border-left: 4px solid var(--primary-color);
+}
+
+.pixel-legends-interactive-card .features-list li ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.pixel-legends-interactive-card .features-list li ul li {
+    background-color: transparent;
+    border-left: none;
+    padding: 5px 0;
+    margin-bottom: 0;
+    font-size: 0.9em;
+    color: var(--secondary-color);
+}
+
+.pixel-legends-interactive-card .features-list li ul li::before {
+    content: '- ';
+    color: var(--accent-color);
+}
+
+
+/* Estilo para a seção de acesso ao servidor dentro do card */
+.pixel-legends-interactive-card .access-server-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.pixel-legends-interactive-card .access-server-section h3 {
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+}
+
+.pixel-legends-interactive-card .access-cards-grid {
+    gap: 20px; /* Reduzir um pouco o gap dentro do card */
+}
+
+/* No estado expandido, o card tem uma borda de destaque */
+.pixel-legends-interactive-card.expanded {
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsividade para o card */
+@media (max-width: 768px) {
+    .pixel-legends-interactive-card {
+        margin: 20px auto;
+    }
+
+    .pixel-legends-interactive-card .card-header {
+        padding: 20px;
+    }
+
+    .pixel-legends-interactive-card .card-main-title {
+        font-size: 1.5rem;
+    }
+
+    .pixel-legends-interactive-card .expand-btn {
+        font-size: 1.8rem;
+    }
+
+    .pixel-legends-interactive-card .card-content {
+        padding: 20px;
+    }
+
+    .pixel-legends-interactive-card .card-content h4 {
+        font-size: 1.2rem;
+    }
+
+    .pixel-legends-interactive-card .card-content p,
+    .pixel-legends-interactive-card .card-content ul li {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pixel-legends-interactive-card .card-main-title {
+        font-size: 1.3rem;
+    }
+
+    .pixel-legends-interactive-card .expand-btn {
+        font-size: 1.5rem;
+    }
+
+    .pixel-legends-interactive-card .card-content {
+        padding: 15px;
+    }
+
+    .pixel-legends-interactive-card .access-cards-grid {
+        grid-template-columns: 1fr; /* Força uma coluna em telas muito pequenas */
+    }
+}
 }
