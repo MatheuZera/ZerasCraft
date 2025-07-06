@@ -297,10 +297,14 @@ a:hover {
 /* Services Grid */
 .services-grid {
     display: grid;
-    /* Ajustado para aumentar a largura mínima e forçar menos colunas (máx 3) */
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Aumentado de 300px */
+    /* Ajustado para garantir no máximo 3 colunas em telas grandes.
+       O minmax é alto o suficiente para que 4 colunas não caibam na largura usual. */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Reduzido o minmax um pouco, mas ainda alto */
     gap: 30px;
     text-align: center;
+    justify-content: center; /* Centraliza a grid se ela tiver menos de 3 colunas na última linha */
+    max-width: 1100px; /* Limita a largura máxima da grid para que 4 colunas não caibam */
+    margin: 0 auto; /* Centraliza a grid */
 }
 
 .service-card {
@@ -309,6 +313,11 @@ a:hover {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    /* Adicionado flexbox para manter o conteúdo verticalmente alinhado em cards de alturas diferentes */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .section-alt-bg .service-card {
@@ -341,6 +350,7 @@ a:hover {
 .card-description {
     font-size: 1rem;
     color: var(--secondary-color);
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
 }
 
 .section-alt-bg .card-description {
@@ -350,9 +360,12 @@ a:hover {
 /* Roles Grid (Canais e Cargos) */
 .roles-grid {
     display: grid;
-    /* Ajustado para aumentar a largura mínima e forçar menos colunas (máx 3) */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Aumentado de 280px */
+    /* Ajustado para garantir no máximo 3 colunas em telas grandes */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado minmax */
     gap: 25px;
+    justify-content: center; /* Centraliza a grid */
+    max-width: 1100px; /* Limita a largura máxima da grid */
+    margin: 0 auto; /* Centraliza a grid */
 }
 
 .role-category-card {
@@ -389,6 +402,7 @@ a:hover {
     margin: 0;
     text-align: left;
     width: 100%;
+    flex-grow: 1; /* Permite que a lista ocupe o espaço restante */
 }
 
 .role-list li {
@@ -412,14 +426,39 @@ a:hover {
 }
 
 /* Events Grid */
-.events-grid {
-    display: grid;
-    /* Ajustado para aumentar a largura mínima e garantir bom espaço (provável 2 colunas) */
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Aumentado de 350px */
+/* Esta grid terá um comportamento diferente, pois o primeiro item é full-width e os outros em 2 colunas */
+.events-grid-wrapper {
+    display: flex;
+    flex-direction: column;
     gap: 40px;
+    max-width: 1200px; /* Limita a largura máxima para alinhar com o container */
+    margin: 0 auto;
 }
 
-.event-card {
+.event-card-main {
+    background-color: #3f5368;
+    color: var(--text-color-light);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Padrão para mobile/topo */
+}
+
+.event-card-main:hover {
+    transform: translateY(-8px);
+}
+
+.events-sub-grid {
+    display: grid;
+    /* Ajustado para no máximo 2 colunas para os eventos secundários */
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Aumentado minmax para 2 colunas */
+    gap: 40px;
+    justify-content: center; /* Centraliza a sub-grid */
+}
+
+.event-card { /* Este é para os eventos menores na sub-grid */
     background-color: #3f5368;
     color: var(--text-color-light);
     border-radius: 10px;
@@ -441,20 +480,28 @@ a:hover {
     display: block;
 }
 
-.event-card .card-content {
+.event-card .card-content,
+.event-card-main .card-content {
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
 }
 
-.event-card .card-title {
+.event-card .card-title,
+.event-card-main .card-title {
     color: var(--accent-color);
     font-size: 1.6rem;
     text-align: left;
+    margin-bottom: 10px; /* Ajuste para evitar muito espaço */
 }
 
-.event-card .card-description {
+.event-card .card-description,
+.event-card-main .card-description {
     color: rgba(255, 255, 255, 0.8);
     text-align: left;
     margin-bottom: 15px;
+    flex-grow: 1; /* Permite que a descrição ocupe o espaço restante */
 }
 
 .event-details {
@@ -464,13 +511,18 @@ a:hover {
     text-align: left;
 }
 
+
 /* Estilos para a seção Comunidade & Parcerias */
 .community-grid {
     display: grid;
-    /* Ajustado para aumentar a largura mínima e forçar menos colunas (máx 3) */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Aumentado de 300px */
+    /* Ajustado para garantir no máximo 3 colunas em telas grandes */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado minmax */
     gap: 20px;
     margin-top: 30px;
+    justify-content: center; /* Centraliza a grid */
+    max-width: 1100px; /* Limita a largura máxima da grid */
+    margin-left: auto; /* Centraliza a grid */
+    margin-right: auto; /* Centraliza a grid */
 }
 
 .community-card,
@@ -482,6 +534,11 @@ a:hover {
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
+    /* Adicionado flexbox para manter o conteúdo verticalmente alinhado */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .community-card:hover,
@@ -501,12 +558,13 @@ a:hover {
     font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 15px;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
 }
 
 .community-card .btn-secondary,
 .partnership-card .btn-secondary {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: auto; /* Empurra o botão para o final do card */
 }
 
 /* Call to Action Section */
@@ -586,9 +644,18 @@ a:hover {
     /* Em telas menores que 992px, as grids se tornam 1 coluna */
     .services-grid,
     .roles-grid,
-    .events-grid,
+    .events-sub-grid, /* Ajustado para a sub-grid de eventos */
     .community-grid {
         grid-template-columns: 1fr;
+        max-width: none; /* Remove o max-width para 1 coluna */
+    }
+
+    .event-card-main { /* Em mobile, o card principal também é full-width, mas com estilo de coluna */
+        flex-direction: column;
+    }
+
+    .event-image { /* Para cards de evento em mobile */
+        height: 200px; /* Altura um pouco menor */
     }
 }
 
@@ -630,25 +697,22 @@ a:hover {
         font-size: 3.5rem;
     }
 
-    /* Em telas maiores que 993px, as grids tentam ter no máximo 3 colunas, com mais espaço */
-    /* Ajustes para forçar a organização em no máximo 3 colunas na maioria dos casos */
-    .services-grid,
-    .roles-grid,
-    .community-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Aumentado minmax para dar mais espaço */
+    /* Event Card Main em desktop */
+    .event-card-main {
+        flex-direction: row;
+    }
+    .event-card-main .event-image {
+        width: 300px; /* Largura para a imagem do card principal em desktop */
+        height: auto;
+        flex-shrink: 0;
     }
 
-    /* Events Grid pode ser um pouco maior, então ajustado para talvez 2 colunas */
-    .events-grid {
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Aumentado minmax para dar mais espaço */
-    }
-
-    .event-card {
+    .event-card { /* Para os cards menores dentro da sub-grid de eventos */
         flex-direction: row;
     }
 
-    .event-image {
-        width: 250px;
+    .event-card .event-image {
+        width: 200px; /* Ajuste a largura da imagem para os cards menores */
         height: auto;
         flex-shrink: 0;
     }
@@ -723,15 +787,7 @@ a:hover {
     padding-top: 60px; /* Era 80px por causa de .section-padded, reduzido para 60px */
 }
 
-/* Se as alterações acima não forem suficientes ou se quiser um controle mais direto, você pode usar margin-top negativo */
-/* CUIDADO: Usar margin-top negativo pode, em alguns layouts, sobrepor elementos. Teste bem. */
-/*
-#servicos {
-    margin-top: -40px; 
-}
-*/
-
-/* * NOVO CÓDIGO PARA O BOTÃO DE ÁUDIO 
+/* * CÓDIGO PARA O BOTÃO DE ÁUDIO 
  * Posicionado no canto inferior direito e estilizado.
  */
 #playAudioBtn {
