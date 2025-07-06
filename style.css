@@ -1053,6 +1053,20 @@ a:hover {
     padding: 10px 20px;
 }
 
+.call-to-action {
+    /* Remova ou comente a linha background-color para usar a imagem */
+    /* background-color: var(--primary-color); */ 
+    background-image: url(images/site/nao-fique-de-fora.gif); /* Substitua pelo caminho real da sua imagem */
+    background-size: cover; /* Garante que a imagem cubra toda a área */
+    background-position: center center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-attachment: scroll; /* Ou 'fixed' se quiser o efeito paralaxe */
+    
+    color: var(--text-color-light);
+    text-align: center;
+    padding: 60px 0;
+}
+
 /* --- RESPONSIVIDADE ESPECÍFICA PARA OS CARDS --- */
 @media (max-width: 768px) {
     .community-grid {
