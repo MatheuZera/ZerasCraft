@@ -27,17 +27,23 @@
 
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="main.js" defer></script>
 </head>
 <body>
 
     <div class="audio-control-button-container">
         <button id="audioControlButton" class="audio-control-button off">
-            <span class="audio-icon on-icon"><i class="fas fa-volume-up"></i></span> <span class="audio-icon off-icon"><i class="fas fa-volume-mute"></i></span> <span class="neon-effect"></span>
-            <div class="audio-progress-arc"></div>
+            <span class="audio-icon on-icon"><i class="fas fa-volume-up"></i></span>
+            <span class="audio-icon off-icon"><i class="fas fa-volume-mute"></i></span>
+            
+            <svg class="audio-progress-arc" viewBox="0 0 36 36">
+                <path class="arc-background" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="arc-progress" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <div class="neon-effect"></div>
         </button>
-        <span id="currentMusicTitle">Música Desligada</span>
-    </div>
+        </div>
 
     <header class="main-header">
         <div class="header-content container">
@@ -488,40 +494,5 @@
         </div>
     </footer>
 
-<body>
-
-<div class="audio-control-button-container">
-    <button id="audioControlButton" class="audio-control-button">
-        <span class="audio-icon on-icon"><i class="fas fa-volume-mute"></i></span>
-        <span class="audio-icon off-icon"><i class="fas fa-volume-up"></i></span>
-        <span id="currentMusicTitle" class="audio-text">Música Desligada</span>
-        <svg class="audio-progress-arc" viewBox="0 0 36 36">
-            <path class="arc-background" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path class="arc-progress" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-        </svg>
-        <div class="neon-effect"></div> </button>
-</div>
-
-    <script src="js/music-player.js"></script>
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script> </body>
-
-
-   <audio id="cardHoverSound" src="audios/select.mp3" preload="auto"></audio>
-    <audio id="backgroundMusic" preload="auto"></audio>
-
-    <div class="audio-control-button-container">
-        <button id="audioControlButton" class="audio-control-button" aria-label="Controlar Música de Fundo">
-            <span class="audio-icon"><i class="fas fa-music"></i></span>
-            <svg class="audio-progress-arc" viewBox="0 0 36 36">
-                <path class="arc-background" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                <path class="arc-progress" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            </svg>
-            <div class="neon-effect"></div>
-        </button>
-    </div>
-
-    <div id="centralMessage" class="central-message" aria-live="polite"></div>
-
-    <script src="js/main.js"></script> </body>
 </body>
 </html>
