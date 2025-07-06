@@ -1049,7 +1049,193 @@
             .audio-control-button span {
                 max-width: 60px; /* Reduz ainda mais o tamanho do texto em mobile */
             }
+            /* Estilos para o contêiner da grade de eventos */
+            .events-sub-grid {
+                display: grid;
+                /* Isso cria colunas que se ajustam automaticamente.
+                minmax(280px, 1fr) significa que cada coluna terá no mínimo 280px
+                e no máximo 1 fração do espaço disponível. */
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+                gap: 20px; /* Espaçamento entre os cards */
+                padding: 20px 0; /* Opcional: Adicione um pouco de padding vertical ao contêiner da grade */
+                justify-content: center; /* Centraliza os cards na grade se houver espaço extra */
+                align-items: stretch; /* Garante que os cards na mesma linha tenham a mesma altura */
+            }
+
+            /* Estilos para os cards de eventos individuais */
+            .event-card {
+                background-color: var(--card-background-color, #2a2a2a); /* Use uma cor de fundo do seu tema */
+                border-radius: 12px; /* Cantos mais arredondados */
+                overflow: hidden; /* Garante que a imagem e outros conteúdos se encaixem */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais suave */
+                display: flex;
+                flex-direction: column; /* Organiza conteúdo em coluna (imagem em cima, texto abaixo) */
+                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação de hover para o card */
+                cursor: pointer; /* Indica que o card é clicável/interativo */
+            }
+
+            .event-card-image {
+                width: 100%; /* Imagem preenche a largura do card */
+                height: 180px; /* Altura fixa para a imagem do card */
+                object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+                border-bottom: 2px solid var(--primary-color, #4CAF50); /* Pequena linha para separar imagem do texto */
+            }
+
+            .event-card-inner {
+                padding: 20px;
+                text-align: center;
+                flex-grow: 1; /* Permite que o conteúdo interno ocupe o espaço restante */
+                display: flex; /* Para centralizar conteúdo interno verticalmente se necessário */
+                flex-direction: column;
+                justify-content: space-between; /* Empurra o botão para baixo se houver espaço */
+            }
+
+            .event-card h3 {
+                font-size: 1.5em; /* Tamanho do título do card */
+                margin-bottom: 10px;
+                color: var(--text-color-light, #e0e0e0); /* Cor do título */
+            }
+
+            .event-card h3 i { /* Icone dentro do h3 */
+                margin-right: 8px;
+                color: var(--primary-color, #4CAF50); /* Cor do ícone */
+            }
+
+            .event-card p {
+                font-size: 0.95em;
+                line-height: 1.6;
+                color: var(--text-color-main, #cccccc); /* Cor do parágrafo */
+                margin-bottom: 15px;
+            }
+
+            .event-card .event-details {
+                font-size: 0.85em;
+                color: var(--text-color-secondary, #b0b0b0);
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+
+            .event-card .btn-link {
+                display: inline-block; /* Permite definir largura e padding */
+                background-color: var(--primary-color, #4CAF50);
+                color: var(--button-text-color, #ffffff);
+                padding: 10px 20px;
+                border-radius: 6px;
+                text-decoration: none;
+                font-weight: bold;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                margin-top: auto; /* Empurra o botão para o final do card-inner */
+            }
+
+            .event-card .btn-link:hover {
+                background-color: var(--primary-color-dark, #388E3C);
+                transform: translateY(-2px); /* Pequeno efeito de elevação no hover do botão */
+            }
+
+            /* Responsividade para a grade de eventos */
+            @media (max-width: 768px) {
+                .events-sub-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 15px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .events-sub-grid {
+                    grid-template-columns: 1fr; /* Uma única coluna em telas muito pequenas */
+                    gap: 15px;
+                }
+                .event-card-image {
+                    height: 150px; /* Ajusta a altura da imagem em telas menores */
+                }
+            }
+            /* --- Estilos Gerais de Animação para Cards e Elementos Internos --- */
+
+            /* Animação para o Card Inteiro */
+            /* Inclui todos os cards que você quer animar ao passar o mouse */
+            .service-card,
+            .role-card,
+            .event-card, /* Adicionado para incluir os cards de eventos */
+            .collaborator-card,
+            .partnership-card,
+            .access-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição para mover e sombrear o card */
+                cursor: pointer; /* Indica interatividade */
+                position: relative; /* Necessário para posicionamento de elementos filhos se houver */
+            }
+
+            .service-card:hover,
+            .role-card:hover,
+            .event-card:hover,
+            .collaborator-card:hover,
+            .partnership-card:hover,
+            .access-card:hover {
+                transform: translateY(-8px); /* Move o card para cima */
+                box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6); /* Sombra mais intensa para profundidade */
+            }
+
+            /* Animação para Ícones dentro dos Cards (geral) */
+            /* Isso inclui ícones Font Awesome ou imagens de perfil/círculos */
+            .service-card .icon i,
+            .role-card .icon i,
+            .event-card h3 i, /* Ícones nos títulos dos cards de evento */
+            .collaborator-card .profile-circle,
+            .partnership-card .partnership-circle,
+            .access-card .access-image-container img /* Imagem no card de acesso */ {
+                transition: transform 0.3s ease, color 0.3s ease; /* Transição para escala e cor */
+            }
+
+            .service-card:hover .icon i,
+            .role-card:hover .icon i,
+            .event-card:hover h3 i,
+            .collaborator-card:hover .profile-circle,
+            .partnership-card:hover .partnership-circle,
+            .access-card:hover .access-image-container img {
+                transform: scale(1.15); /* Aumenta o ícone/imagem em 15% */
+                color: var(--accent-color, #FFD700); /* Muda a cor do ícone para um destaque (ex: dourado) */
+            }
+
+            /* Animação para Textos dentro dos Cards (títulos e parágrafos) */
+            .service-card h3, .service-card p,
+            .role-card h3, .role-card li,
+            .event-card h3, .event-card p, .event-card .event-details,
+            .collaborator-card h3, .collaborator-card p,
+            .partnership-card h3, .partnership-card p,
+            .access-card h3, .access-card p, .access-card span {
+                transition: color 0.3s ease; /* Transição suave para a cor do texto */
+            }
+
+            .service-card:hover h3, .service-card:hover p,
+            .role-card:hover h3, .role-card:hover li,
+            .event-card:hover h3, .event-card:hover p, .event-card:hover .event-details,
+            .collaborator-card:hover h3, .collaborator-card:hover p,
+            .partnership-card:hover h3, .partnership-card:hover p,
+            .access-card:hover h3, .access-card:hover p, .access-card:hover span {
+                color: var(--primary-color-light, #76FF03); /* Altera a cor do texto para um tom mais claro ou de destaque */
+                /* Você pode ajustar esta cor para combinar com o seu tema */
+            }
+
+            /* Animação para links/botões dentro dos cards, se houver */
+            .btn-link, .btn-primary, .saiba-mais-btn { /* Aplica a todos os botões/links genéricos */
+                transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            }
+
+            .btn-link:hover, .btn-primary:hover, .saiba-mais-btn:hover {
+                transform: translateY(-3px); /* Leve elevação no hover do botão */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            }
+
+            /* O ícone do título da seção de eventos (h2) */
+            h2 .fas.fa-trophy {
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+
+            h2:hover .fas.fa-trophy { /* Quando o mouse passa sobre o H2 inteiro */
+                transform: rotate(10deg) scale(1.1); /* Rotação sutil e zoom */
+                color: var(--primary-color, #4CAF50); /* Mantém ou muda a cor */
+            }
         }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>

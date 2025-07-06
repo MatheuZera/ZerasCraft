@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundMusic = document.getElementById('backgroundMusic');
     const audioControlButton = document.getElementById('audioControlButton');
     const currentMusicTitleSpan = document.getElementById('currentMusicTitle');
-    const selectSound = document.getElementById('selectSound');
-    const hoverSound = document.getElementById('hoverSound'); // Novo elemento de áudio para hover
+    const selectSound = document.getElementById('selectSound'); // Elemento de áudio para click.mp3
+    const hoverSound = document.getElementById('hoverSound');   // Elemento de áudio para hover.mp3
 
     let isPlaying = false;
     let currentTrackIndex = 0;
@@ -68,25 +68,36 @@ document.addEventListener('DOMContentLoaded', () => {
         title: source.dataset.title || 'Música Desconhecida'
     }));
 
-    // Função para tocar o som de clique
-    function playSelectSound() {
-        if (selectSound && !selectSound.paused) {
-            selectSound.pause();
-            selectSound.currentTime = 0;
+    // Função genérica para tocar um som
+    function playAudioElement(audioElement) {
+        if (!audioElement) {
+            console.warn("Elemento de áudio não encontrado para reprodução.");
+            return;
         }
-        if (selectSound) {
-            selectSound.play().catch(e => console.log("Erro ao tocar som de clique:", e));
+        // Para permitir que o som toque novamente rapidamente (múltiplos cliques/hovers)
+        if (!audioElement.paused) {
+            audioElement.pause();
+            audioElement.currentTime = 0; // Reinicia o som
         }
+        audioElement.play().catch(e => {
+            // Captura o erro se o autoplay for bloqueado ou se o arquivo não for encontrado
+            console.log(`Erro ao tocar som: ${audioElement.id || 'desconhecido'} - ${e.message}`, e);
+            // Opcional: mostrar um toast para o usuário se o som é importante
+            // showToast("Clique na página para ativar os sons!", 3000); 
+        });
     }
 
-    // Função para tocar o som de hover
+    // Funções específicas para os sons (agora usando playAudioElement)
+    function playSelectSound() {
+        playAudioElement(selectSound);
+    }
+
     function playHoverSound() {
-        if (hoverSound && !hoverSound.paused) {
-            hoverSound.pause();
-            hoverSound.currentTime = 0;
-        }
-        if (hoverSound) {
-            hoverSound.play().catch(e => console.log("Erro ao tocar som de hover:", e));
+        // Altere esta condição conforme sua preferência:
+        // Se quiser que o som de hover toque SEMPRE: remova 'if (isPlaying)'
+        // Se quiser que o som de hover toque APENAS quando a música de fundo estiver ativa: mantenha 'if (isPlaying)'
+        if (isPlaying) { 
+            playAudioElement(hoverSound);
         }
     }
 
@@ -103,12 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
         backgroundMusic.src = playlist[currentTrackIndex].src;
         currentMusicTitleSpan.textContent = playlist[currentTrackIndex].title;
         backgroundMusic.load(); // Garante que a nova fonte seja carregada
-        
+
         if (isPlaying) {
             backgroundMusic.play().catch(e => {
-                console.error("Erro ao tentar tocar música:", e);
-                // Autoplay pode ser bloqueado, atualiza o UI para refletir isso
-                isPlaying = false;
+                console.error("Erro ao tentar tocar música (autoplay pode estar bloqueado):", e);
+                isPlaying = false; // Atualiza o estado para refletir que não está tocando
                 audioControlButton.classList.remove('on');
                 audioControlButton.classList.add('off');
                 audioControlButton.innerHTML = '<i class="fas fa-volume-mute"></i> <span>Música Desativada</span>';
@@ -126,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
             audioControlButton.innerHTML = '<i class="fas fa-volume-mute"></i> <span>Música Desativada</span>';
             isPlaying = false;
         } else {
-            // Tenta tocar a música, tratando a possível rejeição do autoplay
             backgroundMusic.play().then(() => {
                 audioControlButton.classList.remove('off');
                 audioControlButton.classList.add('on');
@@ -135,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }).catch(e => {
                 console.error("Autoplay impedido ou outro erro ao tocar:", e);
                 showToast("Para ouvir a música, por favor, interaja com a página primeiro.", 5000);
-                // Garante que o estado do botão permaneça "mute" se o play falhar
                 audioControlButton.classList.remove('on');
                 audioControlButton.classList.add('off');
                 audioControlButton.innerHTML = '<i class="fas fa-volume-mute"></i> <span>Música Desativada</span>';
@@ -144,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Inicializa o botão com base no estado inicial
     function initializeAudioButton() {
         if (backgroundMusic.paused) {
             audioControlButton.classList.add('off');
@@ -167,7 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeAudioButton();
     });
 
-    audioControlButton.addEventListener('click', toggleAudio);
+    if (audioControlButton) {
+        audioControlButton.addEventListener('click', toggleAudio);
+    }
 
     // Carrega a primeira faixa ao iniciar
     loadAndPlayTrack(currentTrackIndex);
@@ -178,24 +187,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // Efeitos Sonoros de Hover nos Ícones dos Títulos
+    // Efeitos Sonoros de Interação (Cliques e Hovers)
     // =========================================
-    // Seleciona todos os ícones dentro dos elementos <h2> que têm o atributo data-sound-effect
-    const titleIcons = document.querySelectorAll('h2 i[data-sound-effect]');
 
+    // 1. Ícones de Título (H2) - Som de hover
+    const titleIcons = document.querySelectorAll('h2 i[data-sound-effect]');
     titleIcons.forEach(icon => {
-        icon.addEventListener('mouseenter', () => {
-            // Verifica se a música de fundo está tocando antes de tocar o som de hover
-            // Isso evita sobrecarga de áudio se o usuário não quiser áudio
-            if (isPlaying) { // Só toca se a música de fundo estiver ativa
-                playHoverSound();
-            }
-        });
+        icon.addEventListener('mouseenter', playHoverSound);
+        // Opcional: Se quiser um som de clique nos ícones do título também, descomente a linha abaixo
+        // icon.addEventListener('click', playSelectSound); 
     });
 
-    // Adiciona o som de clique aos botões de cópia para feedback visual/auditivo
+    // 2. Botões de Copiar (Acesso ao Servidor) - Som de clique
+    // Esta parte já estava funcional.
     const copyButtons = document.querySelectorAll('.access-card .btn-primary');
     copyButtons.forEach(button => {
         button.addEventListener('click', playSelectSound);
     });
+
+    // 3. Botões de "Saiba Mais" e outros links/botões genéricos - Som de clique
+    // Alvo: botões com a classe 'btn-link', e todos os 'btn-primary' exceto os de cópia (já tratados acima),
+    // e botões com a classe 'saiba-mais-btn'.
+    const generalLinksButtons = document.querySelectorAll('.btn-link, .btn-primary:not(.access-card .btn-primary), .saiba-mais-btn');
+    generalLinksButtons.forEach(button => {
+        button.addEventListener('click', playSelectSound);
+    });
+
+    // 4. Cards Inteiros - Som de clique (e opcionalmente hover)
+    // Inclui todos os tipos de cards para um som ao clicar em qualquer parte deles.
+    // Garantimos que o som não seja duplicado se o clique for em um botão/link dentro do card.
+    const clickableCards = document.querySelectorAll(
+        '.service-card, .role-card, .event-card, .collaborator-card, .partnership-card, .access-card'
+    );
+
+    clickableCards.forEach(card => {
+        card.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+            const isButtonOrLinkInside = clickedElement.closest('.btn-link') || 
+                                         clickedElement.closest('.btn-primary') ||
+                                         clickedElement.closest('.saiba-mais-btn');
+            
+            if (!isButtonOrLinkInside) {
+                playSelectSound();
+            }
+        });
+        
+        // Opcional: Adicionar som de hover para o card inteiro. Descomente a linha abaixo se desejar.
+        // card.addEventListener('mouseenter', playHoverSound); 
+    });
+
+    // Listener para o botão de controle de áudio (já tinha playSelectSound dentro de toggleAudio)
+    // Isso é redundante aqui, pois toggleAudio já é chamado no listener de click do audioControlButton.
+    // Remover a linha abaixo se já estiver no bloco de inicialização do audioControlButton.
+    // if (audioControlButton) {
+    //     audioControlButton.addEventListener('click', toggleAudio); 
+    // }
 });
