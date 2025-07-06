@@ -52,6 +52,7 @@
 
     /* Transições */
     --transicao-padrao: all 0.3s ease;
+    --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease; /* Transição específica para hover de card */
 }
 
 /* Reset Básico para consistência entre navegadores */
@@ -369,7 +370,7 @@ h2 .fas, h3 .fas {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-/* Estilo base para todos os cards */
+/* Estilo base para todos os cards - AGORA INCLUI TRANSFORMAÇÕES DE HOVER AQUI */
 .service-card,
 .role-category-card,
 .access-card,
@@ -381,26 +382,26 @@ h2 .fas, h3 .fas {
     padding: var(--padding-card);
     text-align: center;
     box-shadow: var(--sombra-leve);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+    transition: var(--transicao-card-hover); /* Usando a variável de transição para cards */
     border: 1px solid rgba(255, 255, 255, 0.05); /* Borda sutil */
     display: flex; /* Para flexibilizar conteúdo interno */
     flex-direction: column;
     justify-content: space-between; /* Empurra o botão para baixo */
 }
 
-/* Efeito hover para cards */
+/* Efeito hover para cards - APLICADO AO PRÓPRIO CARD */
 .service-card:hover,
 .role-category-card:hover,
 .access-card:hover,
 .community-card:hover,
 .partnership-card:hover,
 .event-card:hover {
-    transform: translateY(-8px); /* Card sobe */
-    box-shadow: var(--sombra-card); /* Sombra mais intensa */
+    transform: translateY(-5px) rotate(0.8deg); /* Card sobe um pouco e rotaciona 2 graus */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Sombra mais intensa e um pouco maior */
     background-color: var(--cor-card-hover); /* Fundo do card muda */
 }
 
-/* Estilos para os ícones dentro dos cards */
+/* Estilos para os ícones e imagens dentro dos cards (estáticos no hover do card) */
 .service-card .card-icon,
 .role-category-card .role-category-icon,
 .community-card .member-avatar,
@@ -413,7 +414,10 @@ h2 .fas, h3 .fas {
     margin: 0 auto 20px auto; /* Centraliza e adiciona espaço abaixo */
     border: 2px solid var(--cor-primaria);
     display: block; /* Garante que a transformação funcione corretamente */
-    transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
+    transition: none; /* REMOVE A TRANSIÇÃO NO HOVER DO ÍCONE, ELE FICARÁ ESTÁTICO */
+    /* Se você quiser que os ícones tenham uma transição de escala/rotação própria ao passar o mouse SOMENTE sobre eles,
+       e não quando o card inteiro se move, podemos ajustar isso. Mas para "imagem estática no card animado",
+       "transition: none;" é o caminho. */
 }
 
 /* Exceção para avatares e logos que são circulares */
@@ -424,7 +428,7 @@ h2 .fas, h3 .fas {
     height: 100px;
 }
 
-/* Tratamento específico para as imagens de evento se forem <img> ou divs */
+/* Tratamento específico para as imagens de evento (estáticas no hover do card) */
 .event-card .event-card-image {
     width: 100%;
     height: 200px;
@@ -433,19 +437,21 @@ h2 .fas, h3 .fas {
     border-top-right-radius: var(--border-radius);
     margin-bottom: 0;
     border-bottom: 2px solid var(--cor-primaria);
-    display: block; /* Garante que a transformação funcione */
-    transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
+    display: block; /* Garante que ocupe o espaço */
+    transition: none; /* REMOVE A TRANSIÇÃO NO HOVER DA IMAGEM, ELA FICARÁ ESTÁTICA */
 }
 
-/* Animação de rotação e escala no hover do card */
+/* REMOVIDO: Animação de rotação e escala no hover do card (AGORA APLICADA NO PRÓPRIO CARD) */
+/*
 .service-card:hover .card-icon,
 .role-category-card:hover .role-category-icon,
 .community-card:hover .member-avatar,
 .partnership-card:hover .partnership-logo,
 .access-card:hover .card-icon,
 .event-card:hover .event-card-image {
-    transform: rotate(10deg) scale(1.1); /* Rotaciona 10 graus e escala 10% */
+    transform: rotate(10deg) scale(1.1);
 }
+*/
 
 
 .card-title {
