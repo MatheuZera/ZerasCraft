@@ -360,14 +360,63 @@
             border: 4px solid var(--secondary-color);
         }
 
-        /* Services Grid */
-        .services-grid {
+        /* Grid System for Cards (NEW/MODIFIED) */
+        /* Configurações padrão para todas as grades de cards */
+        .services-grid,
+        .roles-grid,
+        .access-cards-grid,
+        .events-sub-grid,
+        .community-grid {
             display: grid;
+            /* Auto-ajuste para o número de colunas baseado na largura e no minmax */
+            /* Cada coluna terá no mínimo 280px e no máximo 1 fração do espaço disponível */
+            /* Por padrão, tenta encaixar o máximo possível de cards com no mínimo 280px */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 30px; /* Espaçamento entre os cards */
+            align-items: stretch; /* Garante que os cards na mesma linha tenham a mesma altura */
         }
 
-        .service-card {
+        /* Controladores de Limite de Colunas (Opcional - para ajustar o número máximo de cards por linha) */
+        /* Exemplo: 3 colunas fixas para serviços em telas maiores */
+        .services-grid.max-3-columns {
+            grid-template-columns: repeat(auto-fit, minmax(280px, calc(33.333% - 20px))); /* Ajusta para 3 colunas */
+            /* Ou uma forma mais simples, mas menos flexível: */
+            /* grid-template-columns: repeat(3, 1fr); */
+            /* minmax(280px, 1fr) ainda ajuda a quebrar para menos colunas em telas pequenas */
+        }
+
+        /* Exemplo: 4 colunas fixas para roles/canais em telas maiores */
+        .roles-grid.max-4-columns {
+            grid-template-columns: repeat(auto-fit, minmax(250px, calc(25% - 22.5px))); /* Ajusta para 4 colunas */
+            /* grid-template-columns: repeat(4, 1fr); */
+        }
+
+        /* Exemplo: 2 colunas fixas para acesso ao servidor em telas maiores */
+        .access-cards-grid.max-2-columns {
+            grid-template-columns: repeat(auto-fit, minmax(300px, calc(50% - 15px))); /* Ajusta para 2 colunas */
+            /* grid-template-columns: repeat(2, 1fr); */
+        }
+
+        /* Exemplo: 3 colunas fixas para eventos em telas maiores */
+        .events-sub-grid.max-3-columns {
+            grid-template-columns: repeat(auto-fit, minmax(320px, calc(33.333% - 20px))); /* Ajusta para 3 colunas */
+            /* grid-template-columns: repeat(3, 1fr); */
+        }
+
+        /* Exemplo: 3 colunas fixas para comunidade/parceiros em telas maiores */
+        .community-grid.max-3-columns {
+            grid-template-columns: repeat(auto-fit, minmax(280px, calc(33.333% - 20px))); /* Ajusta para 3 colunas */
+            /* grid-template-columns: repeat(3, 1fr); */
+        }
+        /* FIM: Controladores de Limite de Colunas */
+
+        /* Card base styling */
+        .service-card,
+        .role-category-card,
+        .access-card,
+        .event-card-inner, /* Apply to the inner content of event cards */
+        .community-card,
+        .partnership-card {
             background-color: var(--card-background);
             padding: 30px;
             border-radius: 10px;
@@ -375,13 +424,29 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            height: 100%; /* Important for equal height in CSS Grid */
+            display: flex;
+            flex-direction: column; /* Organizes content vertically */
+            justify-content: space-between; /* Distributes space */
         }
 
-        .service-card:hover {
+
+        .service-card:hover,
+        .role-category-card:hover,
+        .access-card:hover,
+        .event-card:hover .event-card-inner, /* Hover on event card applies to inner */
+        .community-card:hover,
+        .partnership-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
             border-color: var(--primary-color);
         }
+
+        /* Specific hover for partnership cards */
+        .partnership-card:hover {
+            border-color: var(--secondary-color); /* Overrides if needed for different hover color */
+        }
+
 
         .card-icon {
             width: 80px;
@@ -400,33 +465,14 @@
         .card-description {
             font-size: 1rem;
             color: var(--text-color);
+            margin-bottom: 20px; /* Aumentado para melhor espaçamento com justify-content */
+            flex-grow: 1; /* Permite que a descrição ocupe o espaço restante */
         }
 
-        /* Roles Grid (Canais & Cargos) */
-        .roles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
 
+        /* Roles Grid (Canais & Cargos) - Ajustes específicos */
         .role-category-card {
-            background-color: var(--card-background);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            text-align: center;
-        }
-
-        .role-category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
-            border-color: var(--primary-color);
         }
 
         .role-category-icon {
@@ -448,6 +494,8 @@
             text-align: left;
             width: 100%;
             margin-top: 15px;
+            flex-grow: 1; /* Permite que a lista ocupe o espaço restante */
+            margin-bottom: 20px; /* Espaçamento antes do final do card */
         }
 
         .role-list li {
@@ -512,22 +560,6 @@
         }
         
         /* Access Server Section */
-        .access-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .access-card {
-            background-color: var(--card-background);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
         .access-card h3 {
             color: var(--primary-color);
             margin-bottom: 20px;
@@ -553,33 +585,18 @@
         }
 
         .copy-btn {
-            margin-top: 20px;
+            margin-top: auto; /* Empurra o botão para a parte inferior */
             width: auto; /* Permite que o botão se ajuste ao texto */
             padding: 12px 25px;
+            align-self: center; /* Centraliza o botão dentro do flexbox */
         }
 
         /* Events Section */
-        .events-sub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
         .event-card-inner {
-            display: flex;
             flex-direction: row; /* Alinha os itens em linha */
             align-items: stretch; /* Estende os itens para a altura máxima */
-            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .event-card:hover .event-card-inner { /* Aplicando o hover no inner para consistência */
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
-            border-color: var(--primary-color);
+            padding: 0; /* Remove padding do inner, a imagem e o conteúdo terão seus próprios */
         }
 
         .event-image-container {
@@ -686,31 +703,6 @@
         }
 
         /* Community & Partners Section */
-        .community-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .community-card, .partnership-card {
-            background-color: var(--card-background);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .community-card:hover, .partnership-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
-            border-color: var(--secondary-color);
-        }
-
         .member-avatar, .partnership-logo {
             width: 120px;
             height: 120px;
@@ -741,18 +733,6 @@
             color: var(--secondary-color);
         }
 
-        .community-card p, .partnership-card p {
-            font-size: 0.95rem;
-            color: #CCC;
-            flex-grow: 1; /* Permite que a descrição ocupe espaço */
-            margin-bottom: 20px;
-        }
-
-        .community-card .btn-secondary, .partnership-card .btn-secondary {
-            margin-top: auto; /* Empurra o botão para a parte inferior */
-            width: auto;
-            align-self: center; /* Centraliza o botão */
-        }
 
         /* Call to Action Section */
         .call-to-action {
@@ -855,8 +835,13 @@
                 font-size: 0.9rem;
             }
 
-            .services-grid, .roles-grid, .access-cards-grid, .events-sub-grid, .community-grid {
-                grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+            /* Em telas menores, a grade automaticamente se ajustará para menos colunas */
+            .services-grid,
+            .roles-grid,
+            .access-cards-grid,
+            .events-sub-grid,
+            .community-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Aumenta o min-width para evitar colunas muito estreitas */
             }
 
             .role-list li {
@@ -912,6 +897,15 @@
             .btn-primary, .btn-secondary {
                 width: 100%; /* Botões ocupam largura total */
                 box-sizing: border-box;
+            }
+
+            /* Em telas muito pequenas, uma única coluna pode ser o ideal */
+            .services-grid,
+            .roles-grid,
+            .access-cards-grid,
+            .events-sub-grid,
+            .community-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1046,7 +1040,7 @@
         <section id="servicos" class="section-padded section-alt-bg">
             <div class="container">
                 <h2 class="section-title">✨ Nossos Recursos & Apoio</h2>
-                <div class="services-grid">
+                <div class="services-grid max-3-columns">
                     <div class="service-card">
                         <img src="images/recursos/suporte.png" alt="Ícone de Suporte" class="card-icon">
                         <h3 class="card-title">Suporte 24/7</h3>
@@ -1067,6 +1061,11 @@
                         <h3 class="card-title">Loja no Jogo</h3>
                         <p class="card-description">Crie suas invenções e mostre para todos da Comunidade! As pessoas podem lhe ajudar em alguma coisa que você esteja com dificuldades, então não tenha medo.. pergunte e ajude quem precisar. :D</p>
                     </div>
+                    <div class="service-card">
+                        <img src="images/recursos/suporte.png" alt="Ícone de Novo Recurso" class="card-icon">
+                        <h3 class="card-title">Novo Recurso Incrível!</h3>
+                        <p class="card-description">Este é um exemplo de um card com mais texto para demonstrar o alinhamento de altura e o comportamento da grade.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1076,7 +1075,7 @@
                 <h2 class="section-title">💬 Canais & Cargos: Sua Experiência Personalizada!</h2>
                 <p class="section-description">Nossa estrutura de canais é otimizada para que você encontre facilmente o que busca. Com categorias claras, a navegação é fluida.</p>
                 <p class="section-description">O sistema de cargos do nosso servidor é um dos mais completos, permitindo que você personalize sua experiência e se conecte com quem realmente importa, de acordo com seus interesses:</p>
-                <div class="roles-grid">
+                <div class="roles-grid max-4-columns">
                     <div class="role-category-card">
                         <img src="images/canais-e-cargos/staff.png" class="role-category-icon">
                         <h3 class="card-title">Staff & Organização</h3>
@@ -1147,6 +1146,16 @@
                             <li>Cargos de interesses pessoais: Ajudar Pessoas, Ativo(a) no Servidor, Criar Coisas, Divertir no Servidor, Fazer Novas Amizades, Jogar Minecraft, Participar de Eventos, Tagarela nas Calls.</li>
                         </ul>
                     </div>
+                     <div class="role-category-card">
+                        <img src="images/canais-e-cargos/xp.png" class="role-category-icon">
+                        <h3 class="card-title">Cargos Teste de Texto Muito Longo para Demonstrar Alinhamento</h3>
+                        <ul class="role-list">
+                            <li>Este é um item de lista que pode ser longo para testar a altura do card.</li>
+                            <li>Outro item longo que adiciona mais conteúdo ao card para ver como ele se comporta na grade.</li>
+                            <li>Mais um item para garantir que o alinhamento de altura funcione corretamente.</li>
+                            <li>Um quarto item para preencher ainda mais o card.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1192,7 +1201,7 @@
         <section id="acesso-servidor" class="section-padded section-alt-bg">
             <div class="container">
                 <h2 class="section-title">Acesso ao Servidor: Mundo Vortex Craft</h2>
-                <div class="access-cards-grid">
+                <div class="access-cards-grid max-2-columns">
                     <div class="access-card">
                         <h3>BEDROCK EDITION</h3>
                         <p>IP: <code id="bedrock-ip">MundoVortexCraft.aternos.me</code></p>
@@ -1204,6 +1213,12 @@
                         <p>GERAL: <code id="java-address">MundoVortexCraft.aternos.me:57178</code></p>
                         <button class="btn-primary copy-btn" data-target="java-address" data-ip="MundoVortexCraft.aternos.me:57178">Copiar Endereço</button>
                     </div>
+                    <div class="access-card">
+                        <h3>NOVO TIPO DE ACESSO</h3>
+                        <p>Descrição para este novo tipo de acesso, explicando o que é.</p>
+                        <p>Endereço: <code id="new-access-address">outro.servidor.com:12345</code></p>
+                        <button class="btn-primary copy-btn" data-target="new-access-address" data-ip="outro.servidor.com:12345">Copiar Endereço</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1212,7 +1227,7 @@
             <div class="container">
                 <h2 class="section-title">🏆 Eventos Épicos: Competição e Criatividade</h2>
                 <p class="section-description">Participe de nossos torneios e mostre suas habilidades!</p>
-                <div class="events-sub-grid">
+                <div class="events-sub-grid max-3-columns">
                     <div class="event-card">
                         <div class="event-card-inner">
                             <div class="event-image-container">
@@ -1258,9 +1273,9 @@
                                 <img src="images/eventos/vazio.jpg" class="event-image" alt="Evento em breve">
                             </div>
                             <div class="card-content">
-                                <h3 class="card-title">Evento em Breve</h3>
-                                <p class="card-description">Novos eventos estão sendo preparados para a comunidade!</p>
-                                <p class="event-details"><strong>Detalhes:</strong> Fique atento aos nossos anúncios para mais informações.</p>
+                                <h3 class="card-title">Evento em Breve - Muito Texto Aqui para Testar a Altura do Card</h3>
+                                <p class="card-description">Novos eventos estão sendo preparados para a comunidade! Este texto é intencionalmente longo para testar o alinhamento de altura entre os cards da mesma linha. É importante que todos os cards na mesma linha tenham a mesma altura, independentemente do conteúdo.</p>
+                                <p class="event-details"><strong>Detalhes:</strong> Fique atento aos nossos anúncios para mais informações e prepare-se para as próximas aventuras emocionantes que estamos planejando para você e toda a comunidade do Mundo Zera's Craft.</p>
                                 <a href="#" class="btn-link" target="_blank">Saiba Mais</a>
                             </div>
                         </div>
@@ -1333,7 +1348,7 @@
                     Valorizamos a nossa comunidade e as parcerias estratégicas que enriquecem a experiência de todos no Mundo Zera's Craft. Conheça aqueles que fazem parte da nossa jornada.
                 </p>
 
-                <div class="community-grid">
+                <div class="community-grid max-3-columns">
                     <div class="community-card">
                         <img src="images/parceiros/icone.webp" alt="Esperando Colaborador" class="member-avatar">
                         <h3>Esperando Colaborador(a)</h3>
@@ -1370,6 +1385,12 @@
                         <h3>Esperando Parceria</h3>
                         <p>Interessado em se tornar um parceiro do Mundo Zera's Craft? Entre em contato para explorar oportunidades de colaboração.</p>
                         <a href="#" class="btn-secondary">Saiba Mais</a>
+                    </div>
+                     <div class="partnership-card">
+                        <img src="images/parceiros/icone.webp" alt="Nova Parceria Disponível" class="partnership-logo">
+                        <h3>Nova Parceria Disponível: Queremos Você!</h3>
+                        <p>Estamos entusiasmados em anunciar que estamos ativamente buscando novas parcerias com criadores de conteúdo, comunidades e projetos de Minecraft que compartilhem de nossa paixão por inovação e por construir um ambiente incrível para todos. Se você tem uma ideia de colaboração que pode beneficiar ambas as partes, adoraríamos ouvir de você! Entre em contato conosco e vamos explorar como podemos crescer juntos.</p>
+                        <a href="#" class="btn-secondary">Proponha uma Parceria</a>
                     </div>
                 </div>
             </div>
