@@ -3,1246 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Zera's Craft - Sua Aventura Minecraft!</title>
-    <link rel="icon" href="images/site/icone.webp" type="image/x-icon">
-
-    <meta property="og:title" content="Mundo Zera's Craft - Website" />
-    <meta property="og:description" content="Entre para a nossa comunidade vibrante de Minecraft! Servidor com eventos épicos, sistema de guildas, cargos personalizados e muita criatividade. Junte-se à aventura!" />
-    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/imagens/site/icone.webp" />
-    <meta property="og:url" content="https://matheuzera.github.io/ZerasCraft/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Mundo Zera's Craft" />
-    <meta property="og:locale" content="pt_BR" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Mundo Zera's Craft - Website" />
-    <meta name="twitter:description" content="Entre para a nossa comunidade vibrante de Minecraft! Servidor com eventos épicos, sistema de guildas, cargos personalizados e muita criatividade. Junte-se à aventura!" />
-    <meta property="twitter:image" content="https://matheuzera.github.io/ZerasCraft/images/site/banner_og_discord.jpg" />
-    <meta name="twitter:creator" content="@SeuHandleDoTwitter" />
-
-    <style>
-        /* ========================================= */
-        /* DEFINIÇÃO DAS FONTES MINECRAFT            */
-        /* ========================================= */
-        @font-face {
-            font-family: 'MinecraftFiftySolid';
-            src: url('fonts/Minecraft-Fifty-Solid.woff2') format('woff2'),
-                 url('fonts/Minecraft-Fifty-Solid.woff') format('woff'),
-                 url('fonts/Minecraft-Fifty-Solid.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap; /* Carrega a fonte de forma assíncrona */
-        }
-
-        @font-face {
-            font-family: 'MinecraftStandard';
-            src: url('fonts/Minecraft-Standard.woff2') format('woff2'),
-                 url('fonts/Minecraft-Standard.woff') format('woff'),
-                 url('fonts/Minecraft-Standard.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap; /* Carrega a fonte de forma assíncrona */
-        }
-
-        /* Estilos CSS do seu arquivo style.css */
-        :root {
-            --primary-color: #4CAF50; /* Um verde Minecraft */
-            --secondary-color: #FFC107; /* Um amarelo/laranja */
-            --dark-background: #1A1A1A; /* Fundo escuro geral */
-            --light-background: #252525; /* Fundo de seção alternativa */
-            --text-color: #E0E0E0; /* Cor do texto claro */
-            --card-background: #2E2E2E; /* Fundo dos cards */
-            --border-color: #444; /* Cor da borda para elementos */
-            --hover-glow: #6fdd72; /* Efeito de brilho no hover */
-            --button-hover-darken: #3e8e41; /* Tom mais escuro para hover de botão */
-            --button-shadow: rgba(0, 0, 0, 0.4);
-            --toast-background: rgba(0, 0, 0, 0.8);
-            --toast-text-color: #fff;
-            --toast-border-radius: 5px;
-            --toast-padding: 10px 15px;
-            --toast-margin: 20px;
-            --toast-font-size: 1rem;
-
-            /* Novas variáveis para cores do botão de áudio */
-            --audio-btn-dark-blue: #2c3e50;
-            --audio-btn-dark-blue-border: #34495e;
-            --audio-btn-light-blue: #3498db;
-            --audio-btn-light-blue-border: #2980b9;
-            --audio-btn-off-grey: #7f8c8d;
-            --audio-btn-off-grey-border: #6a7475;
-            /* --audio-progress-arc-color: #f39c12; */ /* Removido */
-        }
-
-        body {
-            font-family: 'MinecraftStandard', sans-serif; /* Fonte para textos normais */
-            margin: 0;
-            padding: 0;
-            background-color: var(--dark-background);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'MinecraftFiftySolid', sans-serif; /* Fonte para títulos */
-            color: var(--primary-color);
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-weight: normal;
-            text-rendering: optimizeLegibility;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-            color: var(--secondary-color);
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 40px;
-            display: flex; /* Para alinhar ícone e texto */
-            justify-content: center; /* Centralizar o conteúdo */
-            align-items: center;
-            gap: 15px; /* Espaço entre ícone e texto */
-        }
-
-        h2 i {
-            font-size: 2.2rem; /* Tamanho do ícone igual ao h2 */
-            color: var(--secondary-color); /* Cor do ícone */
-            transition: transform 0.3s ease; /* Animação para o hover */
-        }
-
-        h2:hover i {
-            transform: scale(1.1) rotate(5deg); /* Animação no hover */
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            color: var(--text-color);
-            margin-bottom: 10px;
-        }
-
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--secondary-color);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        .main-header {
-            background-color: var(--light-background);
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .header-logo {
-            font-family: 'MinecraftFiftySolid', sans-serif;
-            font-weight: normal;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 5px 10px;
-            border: 2px solid var(--primary-color);
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .header-logo:hover {
-            color: var(--secondary-color);
-            border-color: var(--secondary-color);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--hover-glow);
-        }
-
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #fff;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://matheuzera.github.io/ZerasCraft/images/site/banner-inicio.png') no-repeat center center/cover;
-            filter: blur(5px);
-            transform: scale(1.05);
-            z-index: 1;
-        }
-
-        .hero-image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            padding: 20px;
-            max-width: 900px;
-            animation: fadeInScale 1.5s ease-out forwards;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .server-branding {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .server-banner {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border: 4px solid var(--primary-color);
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .server-banner:hover {
-            transform: scale(1.02);
-        }
-
-        .server-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid var(--secondary-color);
-            box-shadow: 0 0 15px rgba(255, 193, 7, 0.8);
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .server-icon:hover {
-            transform: rotate(10deg) scale(1.1);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* General Section Styling */
-        .section-padded {
-            padding: 80px 0;
-        }
-
-        .section-alt-bg {
-            background-color: var(--light-background);
-        }
-
-        .section-description {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 50px auto;
-            font-size: 1.1rem;
-            color: var(--text-color);
-        }
-
-        /* Buttons */
-        .btn-primary, .btn-secondary {
-            display: inline-block;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-family: 'MinecraftStandard', sans-serif;
-            font-weight: normal;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 8px var(--button-shadow);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--button-hover-darken);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px var(--button-shadow), 0 0 20px var(--hover-glow);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px var(--button-shadow);
-        }
-
-        .btn-link {
-            color: var(--secondary-color);
-            text-decoration: underline;
-            font-weight: normal;
-            transition: color 0.3s ease;
-        }
-
-        .btn-link:hover {
-            color: var(--primary-color);
-        }
-
-        .content-two-columns {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
-
-        .content-two-columns > div {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .content-two-columns .text-content {
-            padding-right: 20px;
-        }
-
-        .content-two-columns .text-content p {
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-        }
-
-        .content-two-columns .image-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .responsive-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        }
-
-        .bordered-image {
-            border: 4px solid var(--secondary-color);
-        }
-
-        /* Grid System for Cards */
-        .services-grid,
-        .roles-grid,
-        .access-cards-grid,
-        .events-sub-grid,
-        .community-grid {
-            display: grid;
-            gap: 20px; /* Espaçamento menor entre os cards */
-            align-items: stretch; /* Garante que os cards na mesma linha tenham a mesma altura */
-        }
-
-        /* Controladores de Limite de Colunas */
-        .services-grid.max-3-columns {
-            grid-template-columns: repeat(auto-fit, minmax(200px, calc(33.333% - 13.33px))); /* Cards menores */
-        }
-
-        .roles-grid.max-4-columns {
-            grid-template-columns: repeat(auto-fit, minmax(200px, calc(25% - 15px))); /* Cards mais largos e menos compridos */
-        }
-
-        .access-cards-grid.max-2-columns {
-            grid-template-columns: repeat(auto-fit, minmax(300px, calc(50% - 10px)));
-        }
-
-        /* Removido max-3-columns para eventos e ajustado minmax */
-        .events-sub-grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta para max 2-3 colunas dependendo do espaço */
-        }
-
-        .community-grid.max-3-columns {
-            grid-template-columns: repeat(auto-fit, minmax(200px, calc(33.333% - 13.33px))); /* Ajustado para largura menor */
-        }
-        /* FIM: Controladores de Limite de Colunas */
-
-        /* Card base styling */
-        .service-card,
-        .role-category-card,
-        .access-card,
-        .event-card-inner,
-        .community-card,
-        .partnership-card {
-            background-color: var(--card-background);
-            padding: 20px; /* Reduzindo o padding geral dos cards */
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            height: auto; /* Ajustando a altura para o conteúdo */
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; /* Alinhando o conteúdo ao topo */
-        }
-
-        .service-card:hover,
-        .role-category-card:hover,
-        .access-card:hover,
-        .event-card:hover .event-card-inner,
-        .community-card:hover,
-        .partnership-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
-            border-color: var(--primary-color);
-        }
-
-        .partnership-card:hover {
-            border-color: var(--secondary-color);
-        }
-
-        /* Reduzindo o brilho dos ícones e adicionando animação */
-        .card-icon, .role-category-icon, .community-card .member-avatar, .partnership-card .partnership-logo {
-            width: 60px; /* Ícones menores */
-            height: 60px;
-            margin: 0 auto 10px auto; /* Centralizando e reduzindo a margem inferior */
-            filter: drop-shadow(0 0 1px var(--primary-color)); /* Brilho reduzido */
-            transition: transform 0.3s ease, filter 0.3s ease; /* Adiciona transição para a animação */
-        }
-
-        .role-category-card .role-category-icon {
-            filter: drop-shadow(0 0 1px var(--secondary-color)); /* Mantém o brilho reduzido */
-        }
-
-        .community-card .member-avatar {
-            filter: drop-shadow(0 0 1px rgba(76, 175, 80, 0.5)); /* Mantém o brilho reduzido */
-        }
-
-        .partnership-card .partnership-logo {
-            filter: drop-shadow(0 0 1px rgba(255, 193, 7, 0.5)); /* Mantém o brilho reduzido */
-        }
-
-        /* Animação lateral dos ícones */
-        .card-icon:hover, .role-category-icon:hover, .community-card .member-avatar:hover, .partnership-card .partnership-logo:hover {
-            transform: translateX(5px);
-            filter: drop-shadow(0 0 5px var(--secondary-color));
-        }
-
-        .card-title {
-            color: var(--secondary-color);
-            font-size: 1.3rem; /* Títulos menores */
-            margin-bottom: 8px; /* Menos margem abaixo do título */
-            font-family: 'MinecraftFiftySolid', sans-serif;
-            text-align: center; /* Centralizando o título */
-        }
-
-        .card-description {
-            font-size: 0.9rem; /* Descrições menores */
-            color: var(--text-color);
-            margin-bottom: 15px; /* Menos margem abaixo da descrição */
-            flex-grow: 1;
-            text-align: center; /* Centralizando a descrição */
-        }
-
-        /* Roles Grid (Canais & Cargos) - Ajustes específicos */
-        .role-category-card {
-            align-items: center;
-            padding: 15px; /* Reduzindo o padding do card de cargo */
-        }
-
-        .role-category-icon {
-            width: 50px; /* Ícones menores */
-            height: 50px;
-            margin-bottom: 10px; /* Menos margem abaixo do ícone */
-            filter: drop-shadow(0 0 1px var(--secondary-color)); /* Brilho reduzido */
-            transition: transform 0.3s ease, filter 0.3s ease; /* Adiciona transição para a animação */
-        }
-
-        .role-list {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            width: 100%;
-            margin-top: 10px; /* Menos margem no topo da lista */
-            flex-grow: 1;
-            margin-bottom: 10px; /* Menos margem na parte inferior da lista */
-        }
-
-        .role-list li {
-            background-color: #383838;
-            padding: 6px 10px; /* Padding menor nos itens da lista */
-            border-radius: 5px;
-            margin-bottom: 5px; /* Menos margem entre os itens da lista */
-            display: flex;
-            align-items: center;
-            font-size: 0.85rem; /* Fonte menor nos itens da lista */
-            color: #ccc;
-        }
-
-        .role-list li::before {
-            content: '⛏️'; /* Ícone de picareta */
-            margin-right: 8px; /* Menos margem para o ícone */
-        }
-
-        .discord-channel-link {
-            font-weight: normal;
-            color: var(--secondary-color);
-            transition: color 0.3s ease;
-        }
-
-        .discord-channel-link:hover {
-            color: var(--primary-color);
-            text-decoration: underline;
-        }
-
-        /* Pixel Legends Section */
-        #pixel-legends h3 {
-            color: var(--primary-color);
-            margin-top: 30px;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        #pixel-legends ul,
-        #pixel-legends ol {
-            list-style-type: disc;
-            margin-left: 20px;
-            margin-bottom: 20px;
-            color: var(--text-color);
-        }
-
-        #pixel-legends ol {
-            list-style-type: decimal;
-        }
-
-        #pixel-legends li {
-            margin-bottom: 10px;
-            font-size: 1.05rem;
-        }
-
-        #pixel-legends code {
-            background-color: #3a3a3a;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'MinecraftStandard', monospace;
-            color: var(--secondary-color);
-            font-size: 0.95em;
-        }
-
-        /* Nova Embed para Pixel Legends */
-        .pixel-legends-embed {
-            background-color: #2F3136; /* Cor de fundo mais escura, como um embed do Discord */
-            border-left: 5px solid var(--primary-color); /* Barra lateral colorida */
-            border-radius: 5px;
-            padding: 20px 25px;
-            margin-top: 40px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .pixel-legends-embed h4 {
-            font-family: 'MinecraftFiftySolid', sans-serif;
-            color: var(--secondary-color);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 193, 7, 0.2);
-            padding-bottom: 5px;
-        }
-
-        .pixel-legends-embed p {
-            font-size: 1rem;
-            color: #DCDCDC;
-            margin-bottom: 0;
-            text-align: left;
-        }
-
-        .pixel-legends-embed ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .pixel-legends-embed ul li {
-            background-color: #383B40;
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
-            color: #C0C0C0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .pixel-legends-embed ul li:last-child {
-            margin-bottom: 0;
-        }
-
-        .pixel-legends-embed ul li::before {
-            content: '⚔️'; /* Ícone de espada */
-            color: var(--primary-color);
-        }
-
-        /* Access Server Section */
-        .access-card {
-            background-color: var(--card-background);
-            padding: 20px; /* Reduz o padding */
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            height: auto; /* Ajusta a altura para o conteúdo */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .access-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px; /* Reduz a margem */
-            font-size: 1.6rem;
-        }
-
-        .access-card p {
-            font-size: 1rem; /* Diminui a fonte */
-            margin-bottom: 8px; /* Reduz a margem */
-            color: var(--text-color);
-        }
-
-        .access-card .pixel-legends-text {
-            font-size: 0.9rem; /* Fonte menor para o texto adicional */
-            color: #b0b0b0; /* Cor mais suave */
-            margin-bottom: 12px; /* Margem para separar do código */
-            line-height: 1.4;
-        }
-
-
-        .access-card code {
-            display: block;
-            background-color: #3a3a3a;
-            padding: 8px; /* Reduz o padding do código */
-            border-radius: 5px;
-            margin: 8px auto; /* Reduz o margin */
-            font-family: 'MinecraftStandard', monospace;
-            color: var(--secondary-color);
-            font-size: 0.95em;
-            word-break: break-all; /* Garante que o texto quebre se for muito longo */
-        }
-
-        /* Eventos Épicos Section */
-        .event-card {
-            display: flex;
-            flex-direction: column;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%; /* Garante que todos os cards na mesma linha tenham a mesma altura */
-        }
-
-        .event-card-image {
-            width: 100%;
-            height: 180px; /* Altura fixa para as imagens */
-            object-fit: cover;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .event-card-inner {
-            flex-grow: 1; /* Permite que o conteúdo interno ocupe o espaço restante */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Empurra o botão para baixo */
-            padding: 20px;
-            background-color: var(--card-background);
-            border-radius: 0 0 10px 10px; /* Arredonda apenas os cantos inferiores */
-            border-top: none; /* Remove a borda superior para se conectar com a imagem */
-        }
-
-        .event-card h3 {
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-
-        .event-card p {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            margin-bottom: 15px;
-            flex-grow: 1; /* Permite que a descrição ocupe o espaço */
-        }
-
-        .event-card .btn-link {
-            display: block;
-            margin-top: auto; /* Empurra o botão para a parte inferior */
-            align-self: flex-start;
-        }
-
-        /* Comunidade Section */
-        .community-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .community-card .member-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary-color);
-            margin-bottom: 10px;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
-        }
-
-        .community-card h3 {
-            color: var(--primary-color);
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-        }
-
-        .community-card p {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-            margin-bottom: 15px;
-        }
-
-        /* Parcerias Section */
-        .partnership-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .partnership-card .partnership-logo {
-            width: 80px;
-            height: 80px;
-            object-fit: contain; /* Para logos que podem não ser quadrados */
-            border-radius: 5px;
-            border: 3px solid var(--secondary-color);
-            margin-bottom: 10px;
-            box-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
-        }
-
-        .partnership-card h3 {
-            color: var(--secondary-color);
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-        }
-
-        .partnership-card p {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-            margin-bottom: 15px;
-        }
-
-        .partnership-proposal-card {
-            background-color: var(--card-background);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            margin-top: 50px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .partnership-proposal-card h3 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .partnership-proposal-card p {
-            font-size: 1.1rem;
-            color: var(--text-color);
-            margin-bottom: 30px;
-        }
-
-        /* Footer */
-        .main-footer {
-            background-color: var(--light-background);
-            color: var(--text-color);
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 80px;
-            border-top: 1px solid var(--border-color);
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
-            font-size: 0.9rem;
-        }
-
-        .main-footer p {
-            margin: 0;
-        }
-
-        .main-footer .footer-logo {
-            font-family: 'MinecraftFiftySolid', sans-serif;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            display: inline-block; /* Para aplicar margin-bottom */
-        }
-
-        /* Toast Notifications */
-        .toast-container {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;;
-            transform: translateX(-50%);
-            z-index: 10000;
-            display: flex;
-            flex-direction: column-reverse; /* Novas toasts aparecem acima das antigas */
-            align-items: center;
-            pointer-events: none; /* Permite cliques através do container */
-        }
-
-        .toast-message {
-            background-color: var(--toast-background);
-            color: var(--toast-text-color);
-            padding: var(--toast-padding);
-            border-radius: var(--toast-border-radius);
-            margin-top: 10px; /* Espaçamento entre toasts */
-            font-size: var(--toast-font-size);
-            opacity: 0;
-            animation: fadeInToast 0.5s forwards, fadeOutToast 0.5s 2.5s forwards; /* 3s total: 0.5s fade-in, 2s display, 0.5s fade-out */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            pointer-events: auto; /* Permite que o próprio toast seja interativo se precisar */
-        }
-
-        @keyframes fadeInToast {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeOutToast {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-20px); }
-        }
-
-        /* Botão de controle de áudio */
-        .audio-control-button-container {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            z-index: 1000;
-        }
-
-        .audio-control-button {
-            width: auto; /* Largura automática para acomodar o texto */
-            min-width: 60px; /* Largura mínima com o ícone */
-            height: 60px;
-            border-radius: 50%; /* Mantém a forma de pílula se o texto for longo, mas arredondada no geral */
-            background-color: var(--audio-btn-dark-blue);
-            border: 2px solid var(--audio-btn-dark-blue-border);
-            color: white;
-            font-size: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px; /* Espaçamento entre ícone e texto */
-            padding: 0 15px; /* Espaçamento interno */
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease; /* Adicionado border-radius */
-            position: relative;
-            overflow: hidden; /* Garante que o texto não "vaze" */
-        }
-
-        .audio-control-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-        }
-
-        .audio-control-button.on {
-            background-color: var(--audio-btn-light-blue);
-            border-color: var(--audio-btn-light-blue-border);
-        }
-
-        .audio-control-button.off {
-            background-color: var(--audio-btn-off-grey);
-            border-color: var(--audio-btn-off-grey-border);
-            animation: pulseOff 1.5s infinite alternate; /* Nova animação para desligado */
-        }
-
-        @keyframes pulseOff {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.05); opacity: 1; }
-        }
-
-        .audio-control-button i {
-            font-size: 1.5rem;
-            pointer-events: none; /* Garante que o clique vá para o botão */
-        }
-
-        .audio-control-button span {
-            white-space: nowrap; /* Não quebra a linha do texto */
-            overflow: hidden;
-            text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
-            max-width: 120px; /* Limita a largura do texto para não esticar demais o botão */
-            pointer-events: none; /* Garante que o clique vá para o botão */
-            font-family: 'MinecraftStandard', sans-serif; /* Garante que a fonte seja a do Minecraft */
-        }
-
-        /* Estilos Responsivos */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
-            h2 { font-size: 1.8rem; flex-direction: column; gap: 10px;}
-            h2 i { font-size: 1.8rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .btn-primary, .btn-secondary { padding: 12px 20px; font-size: 0.9rem; }
-            .section-padded { padding: 60px 0; }
-
-            .content-two-columns {
-                flex-direction: column;
-                gap: 30px;
-            }
-            .content-two-columns .text-content {
-                padding-right: 0;
-            }
-
-            .services-grid.max-3-columns,
-            .roles-grid.max-4-columns,
-            .access-cards-grid.max-2-columns,
-            .events-sub-grid,
-            .community-grid.max-3-columns {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 1 ou 2 colunas */
-            }
-
-            .card-title { font-size: 1.2rem; }
-            .card-description { font-size: 0.85rem; }
-
-            .access-card h3 { font-size: 1.4rem; }
-            .access-card p { font-size: 0.9rem; }
-            .access-card code { font-size: 0.85em; }
-
-            .event-card h3 { font-size: 1.3rem; }
-            .event-card p { font-size: 0.9rem; }
-
-            .community-card h3, .partnership-card h3 { font-size: 1.3rem; }
-            .community-card p, .partnership-card p { font-size: 0.85rem; }
-
-            .partnership-proposal-card {
-                padding: 20px;
-            }
-            .partnership-proposal-card h3 { font-size: 1.6rem; }
-            .partnership-proposal-card p { font-size: 1rem; }
-
-            .pixel-legends-embed {
-                padding: 15px;
-            }
-            .pixel-legends-embed h4 {
-                font-size: 1.3rem;
-            }
-            .pixel-legends-embed p, .pixel-legends-embed ul li {
-                font-size: 0.9rem;
-            }
-
-            .main-footer {
-                font-size: 0.8rem;
-            }
-
-            .audio-control-button {
-                width: auto;
-                min-width: 50px;
-                height: 50px;
-                font-size: 0.9rem;
-                right: 15px;
-                bottom: 15px;
-                padding: 0 12px;
-            }
-            .audio-control-button i {
-                font-size: 1.3rem;
-            }
-            .audio-control-button span {
-                max-width: 80px; /* Reduz o tamanho máximo do texto em mobile */
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 1.8rem; }
-            h2 { font-size: 1.6rem; }
-            .hero-subtitle { font-size: 1rem; }
-
-            .btn-primary, .btn-secondary { padding: 10px 18px; font-size: 0.85rem; }
-
-            .services-grid.max-3-columns,
-            .roles-grid.max-4-columns,
-            .access-cards-grid.max-2-columns,
-            .events-sub-grid,
-            .community-grid.max-3-columns {
-                grid-template-columns: 1fr; /* Força uma coluna */
-            }
-
-            .card-title { font-size: 1.1rem; }
-            .card-description { font-size: 0.8rem; }
-
-            .pixel-legends-embed h4 {
-                font-size: 1.2rem;
-            }
-            .pixel-legends-embed p, .pixel-legends-embed ul li {
-                font-size: 0.85rem;
-            }
-
-            .audio-control-button {
-                min-width: 45px;
-                height: 45px;
-                font-size: 0.8rem;
-                right: 10px;
-                bottom: 10px;
-                padding: 0 10px;
-            }
-            .audio-control-button i {
-                font-size: 1.2rem;
-            }
-            .audio-control-button span {
-                max-width: 60px; /* Reduz ainda mais o tamanho do texto em mobile */
-            }
-            /* Estilos para o contêiner da grade de eventos */
-            .events-sub-grid {
-                display: grid;
-                /* Isso cria colunas que se ajustam automaticamente.
-                minmax(280px, 1fr) significa que cada coluna terá no mínimo 280px
-                e no máximo 1 fração do espaço disponível. */
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-                gap: 20px; /* Espaçamento entre os cards */
-                padding: 20px 0; /* Opcional: Adicione um pouco de padding vertical ao contêiner da grade */
-                justify-content: center; /* Centraliza os cards na grade se houver espaço extra */
-                align-items: stretch; /* Garante que os cards na mesma linha tenham a mesma altura */
-            }
-
-            /* Estilos para os cards de eventos individuais */
-            .event-card {
-                background-color: var(--card-background-color, #2a2a2a); /* Use uma cor de fundo do seu tema */
-                border-radius: 12px; /* Cantos mais arredondados */
-                overflow: hidden; /* Garante que a imagem e outros conteúdos se encaixem */
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais suave */
-                display: flex;
-                flex-direction: column; /* Organiza conteúdo em coluna (imagem em cima, texto abaixo) */
-                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação de hover para o card */
-                cursor: pointer; /* Indica que o card é clicável/interativo */
-            }
-
-            .event-card-image {
-                width: 100%; /* Imagem preenche a largura do card */
-                height: 180px; /* Altura fixa para a imagem do card */
-                object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
-                border-bottom: 2px solid var(--primary-color, #4CAF50); /* Pequena linha para separar imagem do texto */
-            }
-
-            .event-card-inner {
-                padding: 20px;
-                text-align: center;
-                flex-grow: 1; /* Permite que o conteúdo interno ocupe o espaço restante */
-                display: flex; /* Para centralizar conteúdo interno verticalmente se necessário */
-                flex-direction: column;
-                justify-content: space-between; /* Empurra o botão para baixo se houver espaço */
-            }
-
-            .event-card h3 {
-                font-size: 1.5em; /* Tamanho do título do card */
-                margin-bottom: 10px;
-                color: var(--text-color-light, #e0e0e0); /* Cor do título */
-            }
-
-            .event-card h3 i { /* Icone dentro do h3 */
-                margin-right: 8px;
-                color: var(--primary-color, #4CAF50); /* Cor do ícone */
-            }
-
-            .event-card p {
-                font-size: 0.95em;
-                line-height: 1.6;
-                color: var(--text-color-main, #cccccc); /* Cor do parágrafo */
-                margin-bottom: 15px;
-            }
-
-            .event-card .event-details {
-                font-size: 0.85em;
-                color: var(--text-color-secondary, #b0b0b0);
-                margin-top: 10px;
-                margin-bottom: 20px;
-            }
-
-            .event-card .btn-link {
-                display: inline-block; /* Permite definir largura e padding */
-                background-color: var(--primary-color, #4CAF50);
-                color: var(--button-text-color, #ffffff);
-                padding: 10px 20px;
-                border-radius: 6px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: background-color 0.3s ease, transform 0.2s ease;
-                margin-top: auto; /* Empurra o botão para o final do card-inner */
-            }
-
-            .event-card .btn-link:hover {
-                background-color: var(--primary-color-dark, #388E3C);
-                transform: translateY(-2px); /* Pequeno efeito de elevação no hover do botão */
-            }
-
-            /* Responsividade para a grade de eventos */
-            @media (max-width: 768px) {
-                .events-sub-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                    gap: 15px;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .events-sub-grid {
-                    grid-template-columns: 1fr; /* Uma única coluna em telas muito pequenas */
-                    gap: 15px;
-                }
-                .event-card-image {
-                    height: 150px; /* Ajusta a altura da imagem em telas menores */
-                }
-            }
-            /* --- Estilos Gerais de Animação para Cards e Elementos Internos --- */
-
-            /* Animação para o Card Inteiro */
-            /* Inclui todos os cards que você quer animar ao passar o mouse */
-            .service-card,
-            .role-card,
-            .event-card, /* Adicionado para incluir os cards de eventos */
-            .collaborator-card,
-            .partnership-card,
-            .access-card {
-                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição para mover e sombrear o card */
-                cursor: pointer; /* Indica interatividade */
-                position: relative; /* Necessário para posicionamento de elementos filhos se houver */
-            }
-
-            .service-card:hover,
-            .role-card:hover,
-            .event-card:hover,
-            .collaborator-card:hover,
-            .partnership-card:hover,
-            .access-card:hover {
-                transform: translateY(-8px); /* Move o card para cima */
-                box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6); /* Sombra mais intensa para profundidade */
-            }
-
-            /* Animação para Ícones dentro dos Cards (geral) */
-            /* Isso inclui ícones Font Awesome ou imagens de perfil/círculos */
-            .service-card .icon i,
-            .role-card .icon i,
-            .event-card h3 i, /* Ícones nos títulos dos cards de evento */
-            .collaborator-card .profile-circle,
-            .partnership-card .partnership-circle,
-            .access-card .access-image-container img /* Imagem no card de acesso */ {
-                transition: transform 0.3s ease, color 0.3s ease; /* Transição para escala e cor */
-            }
-
-            .service-card:hover .icon i,
-            .role-card:hover .icon i,
-            .event-card:hover h3 i,
-            .collaborator-card:hover .profile-circle,
-            .partnership-card:hover .partnership-circle,
-            .access-card:hover .access-image-container img {
-                transform: scale(1.15); /* Aumenta o ícone/imagem em 15% */
-                color: var(--accent-color, #FFD700); /* Muda a cor do ícone para um destaque (ex: dourado) */
-            }
-
-            /* Animação para Textos dentro dos Cards (títulos e parágrafos) */
-            .service-card h3, .service-card p,
-            .role-card h3, .role-card li,
-            .event-card h3, .event-card p, .event-card .event-details,
-            .collaborator-card h3, .collaborator-card p,
-            .partnership-card h3, .partnership-card p,
-            .access-card h3, .access-card p, .access-card span {
-                transition: color 0.3s ease; /* Transição suave para a cor do texto */
-            }
-
-            .service-card:hover h3, .service-card:hover p,
-            .role-card:hover h3, .role-card:hover li,
-            .event-card:hover h3, .event-card:hover p, .event-card:hover .event-details,
-            .collaborator-card:hover h3, .collaborator-card:hover p,
-            .partnership-card:hover h3, .partnership-card:hover p,
-            .access-card:hover h3, .access-card:hover p, .access-card:hover span {
-                color: var(--primary-color-light, #76FF03); /* Altera a cor do texto para um tom mais claro ou de destaque */
-                /* Você pode ajustar esta cor para combinar com o seu tema */
-            }
-
-            /* Animação para links/botões dentro dos cards, se houver */
-            .btn-link, .btn-primary, .saiba-mais-btn { /* Aplica a todos os botões/links genéricos */
-                transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            }
-
-            .btn-link:hover, .btn-primary:hover, .saiba-mais-btn:hover {
-                transform: translateY(-3px); /* Leve elevação no hover do botão */
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-            }
-
-            /* O ícone do título da seção de eventos (h2) */
-            h2 .fas.fa-trophy {
-                transition: transform 0.3s ease, color 0.3s ease;
-            }
-
-            h2:hover .fas.fa-trophy { /* Quando o mouse passa sobre o H2 inteiro */
-                transform: rotate(10deg) scale(1.1); /* Rotação sutil e zoom */
-                color: var(--primary-color, #4CAF50); /* Mantém ou muda a cor */
-            }
-        }
-
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Mundo Zera's Craft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="main-header">
         <div class="header-content container">
             <a href="#" class="header-logo">Mundo Zera's Craft</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#resources">Recursos</a></li>
+                    <li><a href="#roles">Cargos</a></li>
+                    <li><a href="#pixel-legends">Pixel Legends</a></li>
+                    <li><a href="#access">Acesso</a></li>
+                    <li><a href="#events">Eventos</a></li>
+                    <li><a href="#community">Comunidade</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
@@ -1258,7 +38,7 @@
                 <p class="hero-subtitle">
                     Entre para a nossa comunidade vibrante e prepare-se para levar sua paixão por blocos a um novo nível!
                 </p>
-                <a href="https://discord.gg/yourinvite" target="_blank" class="btn-primary">Entrar no Servidor Discord!</a>
+                <a href="https://discord.gg/yourinvite" target="_blank" class="btn-primary" data-sound-effect="select">Entrar no Servidor Discord!</a>
             </div>
         </section>
 
@@ -1277,7 +57,7 @@
                         o Mundo Zera's Craft tem algo especial para você. Nossa equipe está sempre trabalhando
                         para trazer novos eventos, recursos e desafios que manterão a sua experiência fresca e emocionante.
                     </p>
-                    <a href="#resources" class="btn-link">Conheça nossos recursos!</a>
+                    <a href="#resources" class="btn-link" data-sound-effect="select">Conheça nossos recursos!</a>
                 </div>
                 <div class="image-content">
                     <img src="https://matheuzera.github.io/ZerasCraft/images/site/sobre-o-mundo.gif" alt="Imagem Ilustrativa sobre o Mundo Zera's Craft" class="responsive-image bordered-image">
@@ -1292,42 +72,42 @@
                     Explore as funcionalidades que tornam o Mundo Zera's Craft o seu lugar ideal para jogar Minecraft!
                 </p>
                 <div class="services-grid max-3-columns">
-                    <div class="service-card">
+                    <div class="service-card" data-hover-sound-effect="true">
                         <img src="images/recursos/suporte.png" alt="Suporte 24/7" class="card-icon">
                         <h3 class="card-title">Suporte 24/7</h3>
                         <p class="card-description">
                             Ajuda mediada em qualquer momento no Discord.
                         </p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-hover-sound-effect="true">
                         <img src="images/recursos/eventos.png" alt="Eventos Semanais" class="card-icon">
                         <h3 class="card-title">Eventos Semanais</h3>
                         <p class="card-description">
                             Eventos divertidos com prêmios exclusivos para a comunidade.
                         </p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-hover-sound-effect="true">
                         <img src="images/recursos/guildas.png" alt="Sistema de Clãs" class="card-icon">
                         <h3 class="card-title">Sistema de Clãs</h3>
                         <p class="card-description">
                             Monte sua Guilda e conquiste territórios no jogo.
                         </p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-hover-sound-effect="true">
                         <img src="images/recursos/minecraft.png" alt="Lojas no Jogo" class="card-icon">
                         <h3 class="card-title">Loja no Jogo</h3>
                         <p class="card-description">
                             Crie suas invenções e mostre para todos da Comunidade! As pessoas podem lhe ajudar em alguma coisa que você esteja com dificuldades, então não tenha medo... pergunte e ajude quem precisar. :D
                         </p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-hover-sound-effect="true">
                         <img src="images/recursos/criacoes.png" alt="Novo Recurso Incrível!" class="card-icon">
                         <h3 class="card-title">Novo Recurso Incrível!</h3>
                         <p class="card-description">
                             Este é um exemplo de um card com mais texto para demonstrar o alinhamento de altura e o comportamento da grade.
                         </p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-hover-sound-effect="true">
                         <img src="images/recursos/diretrizes.png" alt="Diretrizes da Comunidade" class="card-icon">
                         <h3 class="card-title">Diretrizes da Comunidade</h3>
                         <p class="card-description">
@@ -1347,7 +127,7 @@
                 O sistema de cargos do nosso servidor é um dos mais completos, permitindo que você personalize sua experiência e se conecte com quem realmente importa, de acordo com seus interesses:
             </p>
             <div class="roles-grid max-4-columns">
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/staff.png" alt="Staff & Organização" class="role-category-icon">
                     <h3 class="card-title">Staff & Organização</h3>
                     <ul class="role-list">
@@ -1356,7 +136,7 @@
                         <li>Equipe de Suporte Geral</li>
                     </ul>
                 </div>
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/pings.png" alt="Pings & Notificações" class="role-category-icon">
                     <h3 class="card-title">Pings & Notificações</h3>
                     <ul class="role-list">
@@ -1367,7 +147,7 @@
                         <li>Minecraft, Parcerias, etc.</li>
                     </ul>
                 </div>
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/hobbies.png" alt="Interesses (Hobbies)" class="role-category-icon">
                     <h3 class="card-title">Interesses<br>(Hobbies)</h3>
                     <ul class="role-list">
@@ -1379,7 +159,7 @@
                         <li>Modeladores, Pixel Art, Programadores, PvP.</li>
                     </ul>
                 </div>
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/minecraft-launchers.png" alt="Minecraft & Launchers" class="role-category-icon">
                     <h3 class="card-title">Minecraft & Launchers</h3>
                     <ul class="role-list">
@@ -1387,7 +167,7 @@
                         <li>Launchers específicos: Pojav, ATLauncher, Badlion, CurseForge, GDLauncher, Lunar, MultiMC, Prism, SKLauncher, TLauncher.</li>
                     </ul>
                 </div>
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/plataformas.png" alt="Plataformas de Jogo" class="role-category-icon">
                     <h3 class="card-title">Plataformas de <br> Jogo</h3>
                     <ul class="role-list">
@@ -1395,28 +175,28 @@
                         <li>Playstation, Notebook.</li>
                     </ul>
                 </div>
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/xp.png" alt="Experiência & Nível (XP)" class="role-category-icon">
                     <h3 class="card-title">Experiência & Nível <br>(XP)</h3>
                     <ul class="role-list">
                         <li>Cargos baseados em XP desde <a href="#" class="discord-channel-link">Conhecido (Xp)</a> até <a href="#" class="discord-channel-link">Barbaro (200k)</a>.</li>
                     </ul>
                 </div>
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/guildas.png" alt="Guildas & Competições" class="role-category-icon">
                     <h3 class="card-title">Guildas & Competições</h3>
                     <ul class="role-list">
                         <li>Líderes, Co-Líderes e ADMs de Guildas.</li>
                     </ul>
                 </div>
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/status.png" alt="Status & Benefícios" class="role-category-icon">
                     <h3 class="card-title">Status & Benefícios</h3>
                     <ul class="role-list">
                         <li>Cargos de Eventos (<a href="#" class="discord-channel-link">Campeão MCTU</a>, <a href="#" class="discord-channel-link">FanJam (Crafter)</a>).</li>
                     </ul>
                 </div>
-                <div class="role-category-card">
+                <div class="role-category-card" data-hover-sound-effect="true">
                     <img src="images/canais-e-cargos/redes-sociais.png" alt="Redes Sociais" class="role-category-icon">
                     <h3 class="card-title">Redes Sociais</h3>
                     <ul class="role-list">
@@ -1485,34 +265,34 @@
                 Junte-se à aventura! Escolha a edição do Minecraft que você joga e conecte-se à nossa comunidade.
             </p>
             <div class="access-cards-grid max-2-columns">
-                <div class="access-card">
+                <div class="access-card" data-hover-sound-effect="true">
                     <h3>BEDROCK EDITION</h3>
                     <p>IP:</p>
                     <code id="serverIp">MundoVortexCraft.aternos.me</code>
                     <p>PORTA:</p>
                     <code id="serverPort">57178</code>
-                    <button id="copyIpPortBtn" class="btn-primary">Copiar IP & Porta</button>
+                    <button id="copyIpPortBtn" class="btn-primary" data-sound-effect="select">Copiar IP & Porta</button>
                     <p class="pixel-legends-text">
-                        (Ao entrar na Bedrock, você também pode digitar "/login <sua senha>" para logar e depois "/register <sua senha> <sua senha>" para se registrar se for sua primeira vez).
+                        (Ao entrar na Bedrock, você também pode digitar "/login &lt;sua senha&gt;" para logar e depois "/register &lt;sua senha&gt; &lt;sua senha&gt;" para se registrar se for sua primeira vez).
                     </p>
                 </div>
-                <div class="access-card">
+                <div class="access-card" data-hover-sound-effect="true">
                     <h3>JAVA EDITION</h3>
                     <p>GERAL:</p>
                     <code id="serverAddress">MundoVortexCraft.aternos.me:57178</code>
-                    <button id="copyAddressBtn" class="btn-primary">Copiar Endereço</button>
+                    <button id="copyAddressBtn" class="btn-primary" data-sound-effect="select">Copiar Endereço</button>
                     <p class="pixel-legends-text">
-                        (Ao entrar na Java, você também pode digitar "/login <sua senha>" para logar e depois "/register <sua senha> <sua senha>" para se registrar se for sua primeira vez).
+                        (Ao entrar na Java, você também pode digitar "/login &lt;sua senha&gt;" para logar e depois "/register &lt;sua senha&gt; &lt;sua senha&gt;" para se registrar se for sua primeira vez).
                     </p>
                 </div>
-                <div class="access-card">
+                <div class="access-card" data-hover-sound-effect="true">
                     <h3>NOVO TIPO DE ACESSO</h3>
                     <p class="pixel-legends-text">
                         Descrição para este novo tipo de acesso, explicando o que é.
                     </p>
                     <p>Endereço:</p>
                     <code id="newAccessAddress">outro.servidor.com:12345</code>
-                    <button id="copyNewAccessBtn" class="btn-primary">Copiar Endereço</button>
+                    <button id="copyNewAccessBtn" class="btn-primary" data-sound-effect="select">Copiar Endereço</button>
                 </div>
             </div>
         </section>
@@ -1524,7 +304,7 @@
                     Participe de nossos torneios e mostre suas habilidades!
                 </p>
                 <div class="events-sub-grid">
-                    <div class="event-card">
+                    <div class="event-card" data-hover-sound-effect="true">
                         <img src="images/eventos/staff.jpg" alt="SEJA STAFF/ADM!" class="event-card-image">
                         <div class="event-card-inner">
                             <h3><i class="fas fa-bell"></i> SEJA STAFF/ADM: <br> Formulário para Cargos!</h3>
@@ -1535,10 +315,10 @@
                                 Detalhes:<br>
                                 Dependendo de como os Administradores checam seu Formulário, você pode ser Aceito(a) ou Recusado(a)!
                             </p>
-                            <a href="#" class="btn-link">Saiba Mais</a>
+                            <a href="#" class="btn-link" data-sound-effect="select">Saiba Mais</a>
                         </div>
                     </div>
-                    <div class="event-card">
+                    <div class="event-card" data-hover-sound-effect="true">
                         <img src="images/eventos/mctu.jpg" alt="MCTU (Minecraft Team Ultimate)" class="event-card-image">
                         <div class="event-card-inner">
                             <h3><i class="fas fa-crosshairs"></i> MCTU <br>(Minecraft Team Ultimate)</h3>
@@ -1549,10 +329,10 @@
                                 Detalhes:<br>
                                 Competição de Guildas, Desafios Variados, Servidor Exclusivo, Cargos de Campeão.
                             </p>
-                            <a href="#" class="btn-link">Saiba Mais</a>
+                            <a href="#" class="btn-link" data-sound-effect="select">Saiba Mais</a>
                         </div>
                     </div>
-                    <div class="event-card">
+                    <div class="event-card" data-hover-sound-effect="true">
                         <img src="images/eventos/craftjam.png" alt="CRAFTJAM: Torneio de Criação" class="event-card-image">
                         <div class="event-card-inner">
                             <h3><i class="fas fa-palette"></i> CRAFTJAM: <br> Torneio de Criação</h3>
@@ -1562,10 +342,10 @@
                             <p class="event-details">
                                 Detalhes: Tema Secreto, Múltiplas Categorias, Votação Comunitária (baseada nas publicações mais recentes e únicas em canal específico), Cargos de Criador.
                             </p>
-                            <a href="#" class="btn-link">Saiba Mais</a>
+                            <a href="#" class="btn-link" data-sound-effect="select">Saiba Mais</a>
                         </div>
                     </div>
-                    <div class="event-card">
+                    <div class="event-card" data-hover-sound-effect="true">
                         <img src="images/eventos/vazio.jpg" alt="EVENTO VAZIO" class="event-card-image">
                         <div class="event-card-inner">
                             <h3><i class="fas fa-palette"></i> EVENTO VAZIO: <br> -</h3>
@@ -1575,22 +355,10 @@
                             <p class="event-details">
                                 Detalhes: Vazio, igual o End.
                             </p>
-                            <a href="#" class="btn-link">Saiba Mais</a>
-                        </div>
-                    <div class="event-card">
-                        <img src="images/eventos/vazio.jpg" alt="EVENTO VAZIO" class="event-card-image">
-                        <div class="event-card-inner">
-                            <h3><i class="fas fa-palette"></i> EVENTO VAZIO: <br> -</h3>
-                            <p>
-                                Nada para ver aqui.
-                            </p>
-                            <p class="event-details">
-                                Detalhes: Vazio, igual o End.
-                            </p>
-                            <a href="#" class="btn-link">Saiba Mais</a>
+                            <a href="#" class="btn-link" data-sound-effect="select">Saiba Mais</a>
                         </div>
                     </div>
-                    <div class="event-card">
+                    <div class="event-card" data-hover-sound-effect="true">
                         <img src="images/eventos/vazio.jpg" alt="EVENTO VAZIO" class="event-card-image">
                         <div class="event-card-inner">
                             <h3><i class="fas fa-palette"></i> EVENTO VAZIO: <br> -</h3>
@@ -1600,7 +368,20 @@
                             <p class="event-details">
                                 Detalhes: Vazio, igual o End.
                             </p>
-                            <a href="#" class="btn-link">Saiba Mais</a>
+                            <a href="#" class="btn-link" data-sound-effect="select">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="event-card" data-hover-sound-effect="true">
+                        <img src="images/eventos/vazio.jpg" alt="EVENTO VAZIO" class="event-card-image">
+                        <div class="event-card-inner">
+                            <h3><i class="fas fa-palette"></i> EVENTO VAZIO: <br> -</h3>
+                            <p>
+                                Nada para ver aqui.
+                            </p>
+                            <p class="event-details">
+                                Detalhes: Vazio, igual o End.
+                            </p>
+                            <a href="#" class="btn-link" data-sound-effect="select">Saiba Mais</a>
                         </div>
                     </div>
                 </div>
@@ -1613,72 +394,72 @@
                 Conheça aqueles que fazem parte da nossa jornada no Mundo Zera's Craft.
             </p>
             <div class="community-grid max-3-columns">
-                <div class="community-card">
+                <div class="community-card" data-hover-sound-effect="true">
                     <img src="images/parceria/membros/icone.webp" alt="Esperando Colaborador(a)" class="member-avatar">
                     <h3 class="card-title">Esperando Colaborador(a)</h3>
                     <p class="card-description">
                         Estamos buscando talentos para nossa comunidade! Se você contribui com o Mundo Zera's Craft, sua foto e descrição podem aparecer aqui.
                     </p>
-                    <a href="#" class="btn-primary">Ver Perfil</a>
+                    <a href="#" class="btn-primary" data-sound-effect="select">Ver Perfil</a>
                 </div>
-                <div class="community-card">
+                <div class="community-card" data-hover-sound-effect="true">
                     <img src="images/parceria/membros/icone.webp" alt="Esperando Colaborador(a)" class="member-avatar">
                     <h3 class="card-title">Esperando Colaborador(a)</h3>
                     <p class="card-description">
                         Estamos buscando talentos para nossa comunidade! Se você contribui com o Mundo Zera's Craft, sua foto e descrição podem aparecer aqui.
                     </p>
-                    <a href="#" class="btn-primary">Ver Perfil</a>
+                    <a href="#" class="btn-primary" data-sound-effect="select">Ver Perfil</a>
                 </div>
-                <div class="community-card">
+                <div class="community-card" data-hover-sound-effect="true">
                     <img src="images/parceria/membros/icone.webp" alt="Esperando Colaborador(a)" class="member-avatar">
                     <h3 class="card-title">Esperando Colaborador(a)</h3>
                     <p class="card-description">
                         Estamos buscando talentos para nossa comunidade! Se você contribui com o Mundo Zera's Craft, sua foto e descrição podem aparecer aqui.
                     </p>
-                    <a href="#" class="btn-primary">Ver Perfil</a>
+                    <a href="#" class="btn-primary" data-sound-effect="select">Ver Perfil</a>
                 </div>
-                <div class="partnership-card">
+                <div class="partnership-card" data-hover-sound-effect="true">
                     <img src="images/parceria/icone.webp" alt="Esperando Parceria" class="partnership-logo">
                     <h3 class="card-title">Esperando Parceria</h3>
                     <p class="card-description">
                         Sua marca ou comunidade pode aparecer aqui! Conecte-se conosco para explorar oportunidades de colaboração que beneficiem ambas as partes.
                     </p>
-                    <a href="#" class="btn-primary">Ver Perfil</a>
+                    <a href="#" class="btn-primary" data-sound-effect="select">Ver Perfil</a>
                 </div>
-                <div class="partnership-card">
+                <div class="partnership-card" data-hover-sound-effect="true">
                     <img src="images/parceria/icone.webp" alt="Esperando Parceria" class="partnership-logo">
                     <h3 class="card-title">Esperando Parceria</h3>
                     <p class="card-description">
                         Sua marca ou comunidade pode aparecer aqui! Conecte-se conosco para explorar oportunidades de colaboração que beneficiem ambas as partes.
                     </p>
-                    <a href="#" class="btn-primary">Ver Perfil</a>
+                    <a href="#" class="btn-primary" data-sound-effect="select">Ver Perfil</a>
                 </div>
-                <div class="partnership-card">
+                <div class="partnership-card" data-hover-sound-effect="true">
                     <img src="images/parceria/icone.webp" alt="Esperando Parceria" class="partnership-logo">
                     <h3 class="card-title">Esperando Parceria</h3>
                     <p class="card-description">
                         Sua marca ou comunidade pode aparecer aqui! Conecte-se conosco para explorar oportunidades de colaboração que beneficiem ambas as partes.
                     </p>
-                    <a href="#" class="btn-primary">Ver Perfil</a>
+                    <a href="#" class="btn-primary" data-sound-effect="select">Ver Perfil</a>
                 </div>
             </div>
-            <div class="partnership-proposal-card">
+            <div class="partnership-proposal-card" data-hover-sound-effect="true">
                 <h3>Quer ser um Parceiro ou Colaborador?</h3>
                 <p>
                     Se você tem uma comunidade, um projeto ou é um criador de conteúdo e gostaria de colaborar conosco, adoraríamos ouvir de você! Entre em contato conosco e vamos explorar como podemos crescer juntos.
                 </p>
-                <a href="#" class="btn-primary">Proponha uma Parceria</a>
+                <a href="#" class="btn-primary" data-sound-effect="select">Proponha uma Parceria</a>
             </div>
         </section>
 
         <section class="section-padded section-alt-bg">
-            <div class="container" style="text-align: center;">
-                <img src="https://matheuzera.github.io/ZerasCraft/images/site/nao-fique-de-fora.jpg" alt="Não Fique de Fora!" style="max-width: 100%; height: auto; margin-bottom: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);">
+            <div class="container text-center">
+                <img src="https://matheuzera.github.io/ZerasCraft/images/site/nao-fique-de-fora.jpg" alt="Não Fique de Fora!" class="responsive-image bordered-image margin-bottom-30">
                 <h2><i class="fas fa-rocket" data-sound-effect="select"></i> Não Fique de Fora!</h2>
-                <p class="section-description" style="margin-bottom: 40px;">
+                <p class="section-description margin-bottom-40">
                     Milhares de aventuras e amigos esperam por você. Venha fazer parte da família Mundo Zera's Craft!
                 </p>
-                <a href="https://discord.gg/yourinvite" target="_blank" class="btn-primary">ENTRAR NO SERVIDOR AGORA!</a>
+                <a href="https://discord.gg/yourinvite" target="_blank" class="btn-primary" data-sound-effect="select">ENTRAR NO SERVIDOR AGORA!</a>
             </div>
         </section>
     </main>
@@ -1691,7 +472,9 @@
     </footer>
 
     <div class="audio-control-button-container">
-        <button id="audioControlButton" class="audio-control-button off"> <i class="fas fa-volume-mute"></i> <span id="currentMusicTitle">Carregando...</span>
+        <button id="audioControlButton" class="audio-control-button off">
+            <i class="fas fa-volume-mute"></i> <span id="currentMusicTitle">Carregando...</span>
+            <div class="audio-progress-arc" id="audioProgressArc"></div>
         </button>
     </div>
 
@@ -1720,6 +503,8 @@
 
     <audio id="selectSound" src="audios/effects/select.mp3" preload="auto"></audio>
     <audio id="hoverSound" src="audios/effects/hover.mp3" preload="auto"></audio>
+
+    <div class="toast-container"></div>
 
     <script src="script.js"></script>
 </body>
