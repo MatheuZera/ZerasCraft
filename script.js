@@ -1,17 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Função para detectar se é um dispositivo touch (simplificada)
+
+    /* ========================================= */
+    /* UTILITIES                                 */
+    /* ========================================= */
+
+    /**
+     * Detecta se o dispositivo é touch.
+     * @returns {boolean} True se for um dispositivo touch, false caso contrário.
+     */
     function isTouchDevice() {
         return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
     }
 
     const isMobile = isTouchDevice(); // Detecta uma vez na inicialização
 
-    // --- Lógica para o botão de áudio de fundo (Minecraft Audio) ---
-    const playAudioBtn = document.getElementById('playAudioBtn');
+    /* ========================================= */
+    /* BACKGROUND AUDIO (MINECRAFT-STYLE)        */
+    /* ========================================= */
 
-    // Lista de músicas para a playlist aleatória
+    const playAudioBtn = document.getElementById('playAudioBtn');
     const playlist = [
-        'audios/musics/Aria-Math-Lofi-Remake.mp3', // ALtere para os nomes reais dos seus arquivos
+        'audios/musics/Aria-Math-Lofi-Remake.mp3',
         'audios/musics/Aria-Math.mp3',
         'audios/musics/Begining.mp3',
         'audios/musics/Biome-Fest.mp3',
@@ -36,11 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     let currentTrackIndex = -1; // -1 para indicar que nenhuma música foi selecionada ainda
-    const backgroundAudio = new Audio(); // Crie um objeto de áudio sem src inicial
+    const backgroundAudio = new Audio();
     backgroundAudio.volume = 0.7; // AJUSTE ESTE VALOR
-    backgroundAudio.preload = 'auto'; // Carrega o áudio mais rápido
+    backgroundAudio.preload = 'auto';
 
-    // Função para tocar a próxima música aleatoriamente
+    /**
+     * Toca a próxima música aleatória da playlist.
+     */
     function playNextRandomTrack() {
         if (playlist.length === 0) {
             console.warn("Playlist vazia. Não há músicas para tocar.");
@@ -50,39 +61,34 @@ document.addEventListener('DOMContentLoaded', function() {
         let nextTrackIndex;
         do {
             nextTrackIndex = Math.floor(Math.random() * playlist.length);
-        } while (nextTrackIndex === currentTrackIndex && playlist.length > 1); // Evita tocar a mesma música duas vezes seguidas, se houver mais de uma
+        } while (nextTrackIndex === currentTrackIndex && playlist.length > 1);
 
         currentTrackIndex = nextTrackIndex;
         backgroundAudio.src = playlist[currentTrackIndex];
-        
+
         backgroundAudio.play().catch(e => {
             console.warn("Reprodução do áudio de fundo bloqueada ou falhou:", e);
-            // Se a reprodução falhou (geralmente por autoplay policy), o botão permanecerá OFF
-            // E o estado 'isPlaying' não será atualizado para true imediatamente.
+            // Se a reprodução falhou (geralmente por autoplay policy), o botão permanecerá OFF.
+            // O estado 'isPlaying' não será atualizado para true imediatamente por aqui.
         });
     }
 
     if (playAudioBtn) {
         playAudioBtn.classList.add('play-audio-btn-off');
         playAudioBtn.classList.add('animating'); // Adiciona a classe de animação inicialmente
-        let isPlaying = false; 
+        let isPlaying = false; // Estado interno para controlar se o áudio está tocando
 
         playAudioBtn.addEventListener('click', function() {
             if (isPlaying) {
                 backgroundAudio.pause();
                 backgroundAudio.currentTime = 0; // Opcional: Reinicia a música ao pausar
-                isPlaying = false;
-                playAudioBtn.classList.remove('play-audio-btn-on');
-                playAudioBtn.classList.add('play-audio-btn-off');
-                playAudioBtn.classList.add('animating'); // Começa a animar quando pausado
+                // isPlaying é atualizado pelo listener 'pause'
             } else {
-                // Ao clicar para tocar, toca a próxima música aleatória
                 playNextRandomTrack();
-                isPlaying = true; // Assume que vai tocar, mas o catch() pode ajustar
-                playAudioBtn.classList.remove('play-audio-btn-off');
-                playAudioBtn.classList.add('play-audio-btn-on');
-                playAudioBtn.classList.remove('animating'); // Para a animação quando tocando
+                // isPlaying é atualizado pelo listener 'play'
             }
+            // A atualização das classes 'play-audio-btn-on/off' e 'animating'
+            // é feita pelos listeners 'play' e 'pause' do backgroundAudio.
         });
 
         // Evento quando uma música termina: toca a próxima aleatoriamente
@@ -90,13 +96,15 @@ document.addEventListener('DOMContentLoaded', function() {
             playNextRandomTrack();
         });
 
-        // Eventos para gerenciar o estado visual do botão
+        // Eventos para gerenciar o estado visual do botão com base no player de áudio
         backgroundAudio.addEventListener('pause', function() {
-            if (isPlaying && backgroundAudio.paused) { // Verifica se estava tocando e foi pausado
+            // Verifica se a pausa foi intencional (pelo usuário) ou automática (final da música)
+            // Se o áudio foi pausado e não está mais tocando, atualiza o estado
+            if (!backgroundAudio.playing) { // 'playing' é uma propriedade não padrão, mas podemos inferir
                 isPlaying = false;
                 playAudioBtn.classList.remove('play-audio-btn-on');
                 playAudioBtn.classList.add('play-audio-btn-off');
-                playAudioBtn.classList.add('animating');
+                playAudioBtn.classList.add('animating'); // Começa a animar quando pausado
             }
         });
 
@@ -104,31 +112,32 @@ document.addEventListener('DOMContentLoaded', function() {
             isPlaying = true;
             playAudioBtn.classList.remove('play-audio-btn-off');
             playAudioBtn.classList.add('play-audio-btn-on');
-            playAudioBtn.classList.remove('animating');
+            playAudioBtn.classList.remove('animating'); // Para a animação quando tocando
         });
 
     } else {
         console.error("Erro: Elemento 'playAudioBtn' não encontrado no DOM. Verifique seu ID no HTML.");
     }
 
-    // --- Lógica para o som de clique em interações GERAIS (incluindo botões e links) ---
+    /* ========================================= */
+    /* CLICK SOUNDS FOR INTERACTIVE ELEMENTS     */
+    /* ========================================= */
+
     const clickAudio = new Audio('audios/click.mp3');
-    clickAudio.preload = 'auto'; 
+    clickAudio.preload = 'auto';
     clickAudio.volume = 0.4;
 
     document.addEventListener('click', function(event) {
         const clickedElement = event.target;
-        // Adicionado '.btn-pixel-legends' e '.btn-copy-ip'
         const isClickable = clickedElement.tagName === 'A' ||
                             clickedElement.tagName === 'BUTTON' ||
                             clickedElement.classList.contains('btn-primary') ||
                             clickedElement.classList.contains('btn-secondary') ||
-                            clickedElement.classList.contains('btn-link') ||
-                            clickedElement.classList.contains('btn-pixel-legends') || 
-                            clickedElement.classList.contains('btn-copy-ip');
-        
+                            clickedElement.classList.contains('btn-link');
+                            
         const isMainAudioButton = clickedElement.id === 'playAudioBtn';
 
+        // Toca o som de clique apenas se o elemento for clicável E NÃO for o botão de áudio principal
         if (isClickable && !isMainAudioButton) {
             clickAudio.currentTime = 0;
             clickAudio.play().catch(e => {
@@ -137,179 +146,108 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Lógica para reproduzir select.mp3 nos cards (diferente para PC e Mobile) ---
+    /* ========================================= */
+    /* HOVER/TOUCH SOUNDS FOR CARDS (SELECT.MP3) */
+    /* ========================================= */
+
     const interactiveCardsGeneral = document.querySelectorAll(
-        '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card, .access-card, .feature-card' // Adicionado .access-card e .feature-card
+        '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card'
     );
-
-    const selectAudioGeneral = new Audio('audios/select.mp3');
-    selectAudioGeneral.preload = 'auto';
-    selectAudioGeneral.volume = 0.3;
-
-    function playSelectSoundGeneral() {
-        selectAudioGeneral.currentTime = 0;
-        selectAudioGeneral.play().catch(e => {
-            console.warn("Reprodução de áudio 'select.mp3' (geral) bloqueada ou falhou:", e);
-        });
-    }
-
-    interactiveCardsGeneral.forEach(card => {
-        if (!isMobile) {
-            // Se for PC, usa mouseenter (passar o cursor)
-            card.addEventListener('mouseenter', playSelectSoundGeneral);
-        } else {
-            // Lógica para mobile: tocar no card sem deslizar
-            let startX, startY;
-            let touchMoved = false;
-            const DRAG_THRESHOLD_PX = 10; // 10 pixels de movimento para considerar deslize
-
-            card.addEventListener('touchstart', function(event) {
-                startX = event.touches[0].clientX;
-                startY = event.touches[0].clientY;
-                touchMoved = false; // Reseta a flag de movimento
-            });
-
-            card.addEventListener('touchmove', function(event) {
-                const currentX = event.touches[0].clientX;
-                const currentY = event.touches[0].clientY;
-                const deltaX = Math.abs(currentX - startX);
-                const deltaY = Math.abs(currentY - startY);
-
-                if (deltaX > DRAG_THRESHOLD_PX || deltaY > DRAG_THRESHOLD_PX) {
-                    touchMoved = true; // Se moveu além do limite, marca como deslize
-                }
-            });
-
-            card.addEventListener('touchend', function(event) {
-                // Se o toque terminou e NÃO houve deslize significativo
-                if (!touchMoved) {
-                    // Evita tocar o som de select se o clique for em um link/botão interno
-                    // Atualizado para incluir os novos botões
-                    if (!event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link, .btn-pixel-legends, .btn-copy-ip')) { 
-                        playSelectSoundGeneral();
-                    } else if (event.target.tagName !== 'A' && event.target.tagName !== 'BUTTON' && !event.target.classList.contains('btn-pixel-legends') && !event.target.classList.contains('btn-copy-ip')) { 
-                        // Se clicou no card mas não diretamente em um link/botão dentro dele
-                        playSelectSoundGeneral();
-                    }
-                }
-            });
-
-            // Adiciona um listener 'touchcancel' para garantir que o estado seja resetado
-            card.addEventListener('touchcancel', function() {
-                touchMoved = false;
-            });
-        }
-    });
-
-    // --- Lógica para reproduzir select.mp3 para CADA ITEM DA GRADE DE SEGURANÇA ---
     const securityGridItems = document.querySelectorAll('.security-grid-item');
 
-    securityGridItems.forEach(item => {
-        const itemSelectAudio = new Audio('audios/select.mp3');
-        itemSelectAudio.preload = 'auto';
-        itemSelectAudio.volume = 0.2;
+    const DRAG_THRESHOLD_PX = 10; // 10 pixels de movimento para considerar deslize
 
-        if (!isMobile) {
-            // Se for PC, usa mouseenter
-            item.addEventListener('mouseenter', function() {
-                itemSelectAudio.currentTime = 0;
-                itemSelectAudio.play().catch(e => {
-                    console.warn("Reprodução de áudio 'select.mp3' para item da grade bloqueada ou falhou:", e);
-                });
-            });
-        } else {
-            // Lógica para mobile: tocar no item sem deslizar
-            let startX, startY;
-            let touchMoved = false;
-            const DRAG_THRESHOLD_PX = 10; // 10 pixels de movimento para considerar deslize
+    /**
+     * Configura listeners de áudio de "seleção" para cards,
+     * diferenciando mouseenter para desktop e toque para mobile.
+     * @param {NodeList} elements - Coleção de elementos (cards) a serem monitorados.
+     * @param {number} volume - Volume para o áudio de seleção.
+     * @param {boolean} preventClickBubble - Se true, verifica se o clique é em um sub-elemento clicável.
+     */
+    function setupCardHoverSound(elements, volume, preventClickBubble = false) {
+        const selectAudio = new Audio('audios/select.mp3');
+        selectAudio.preload = 'auto';
+        selectAudio.volume = volume;
 
-            item.addEventListener('touchstart', function(event) {
-                startX = event.touches[0].clientX;
-                startY = event.touches[0].clientY;
-                touchMoved = false;
-            });
-
-            item.addEventListener('touchmove', function(event) {
-                const currentX = event.touches[0].clientX;
-                const currentY = event.touches[0].clientY;
-                const deltaX = Math.abs(currentX - startX);
-                const deltaY = Math.abs(currentY - startY);
-
-                if (deltaX > DRAG_THRESHOLD_PX || deltaY > DRAG_THRESHOLD_PX) {
-                    touchMoved = true;
-                }
-            });
-
-            item.addEventListener('touchend', function(event) {
-                if (!touchMoved) {
-                    itemSelectAudio.currentTime = 0;
-                    itemSelectAudio.play().catch(e => {
-                        console.warn("Reprodução de áudio 'select.mp3' para item da grade (toque) bloqueada ou falhou:", e);
-                    });
-                }
-            });
-
-            item.addEventListener('touchcancel', function() {
-                touchMoved = false;
+        function playSound() {
+            selectAudio.currentTime = 0;
+            selectAudio.play().catch(e => {
+                console.warn(`Reprodução de áudio 'select.mp3' (volume ${volume}) bloqueada ou falhou:`, e);
             });
         }
-    });
 
-    // --- Nova Lógica: Copiar IP do Servidor ---
-    const copyButtons = document.querySelectorAll('.btn-copy-ip');
-    // Carrega o som de notificação uma vez
-    const notificationSound = document.getElementById('notificationSound');
-    if (notificationSound) {
-        notificationSound.preload = 'auto';
-        notificationSound.volume = 0.5;
-    } else {
-        console.warn("Elemento de áudio 'notificationSound' não encontrado. O som de cópia não será reproduzido.");
-    }
-    
+        elements.forEach(card => {
+            if (!isMobile) {
+                // Se for PC, usa mouseenter (passar o cursor)
+                card.addEventListener('mouseenter', playSound);
+            } else {
+                // Lógica para mobile: tocar no card sem deslizar
+                let startX, startY;
+                let touchMoved = false;
 
-    copyButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            let textToCopy = this.dataset.ip;
-            const port = this.dataset.port;
-            if (port) {
-                textToCopy += `:${port}`; // Adiciona a porta se existir
+                card.addEventListener('touchstart', function(event) {
+                    startX = event.touches[0].clientX;
+                    startY = event.touches[0].clientY;
+                    touchMoved = false;
+                });
+
+                card.addEventListener('touchmove', function(event) {
+                    const currentX = event.touches[0].clientX;
+                    const currentY = event.touches[0].clientY;
+                    const deltaX = Math.abs(currentX - startX);
+                    const deltaY = Math.abs(currentY - startY);
+
+                    if (deltaX > DRAG_THRESHOLD_PX || deltaY > DRAG_THRESHOLD_PX) {
+                        touchMoved = true;
+                    }
+                });
+
+                card.addEventListener('touchend', function(event) {
+                    if (!touchMoved) {
+                        // Se preventClickBubble for true, verifica se o clique foi em um elemento interativo interno
+                        if (preventClickBubble && event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link')) {
+                            // Clicou em um link/botão dentro do card, não toca o som de select
+                            return;
+                        }
+                        playSound();
+                    }
+                });
+
+                card.addEventListener('touchcancel', function() {
+                    touchMoved = false;
+                });
             }
-
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                const originalText = this.textContent;
-                this.textContent = 'Copiado!';
-                this.disabled = true; // Desabilita temporariamente
-
-                if (notificationSound) {
-                    notificationSound.currentTime = 0;
-                    notificationSound.play().catch(e => console.warn("Erro ao reproduzir som de notificação:", e));
-                }
-                
-                setTimeout(() => {
-                    this.textContent = originalText;
-                    this.disabled = false; // Reabilita o botão
-                }, 1500); // Volta ao texto original após 1.5 segundos
-            }).catch(err => {
-                console.error('Falha ao copiar:', err);
-                alert('Erro ao copiar o IP. Tente manualmente: ' + textToCopy);
-            });
         });
-    });
+    }
 
-    // --- Lógica para mostrar o botão de áudio após a primeira interação ---
-    let userInteracted = false; 
+    // Aplica a lógica para os cards gerais
+    setupCardHoverSound(interactiveCardsGeneral, 0.3, true);
 
+    // Aplica a lógica para os itens da grade de segurança (com volume diferente)
+    setupCardHoverSound(securityGridItems, 0.2); // Não precisa de preventClickBubble para esses itens se eles não têm links/botões internos que devem ser ignorados.
+
+    /* ========================================= */
+    /* INITIAL USER INTERACTION HANDLER          */
+    /* ========================================= */
+
+    let userInteracted = false;
+
+    /**
+     * Manipula a primeira interação do usuário para habilitar o áudio de fundo
+     * e mostrar o botão de controle de áudio.
+     */
     function handleUserInteraction() {
         if (!userInteracted) {
             if (playAudioBtn) {
-                playAudioBtn.style.display = 'block';
+                playAudioBtn.style.display = 'block'; // Mostra o botão
             }
             
-            // Toca a música aleatória de fundo na primeira interação do usuário
-            // Isso também é importante para contornar políticas de autoplay de navegadores.
-            playNextRandomTrack(); // Chama a função para tocar a primeira música aleatória
+            // Toca a música aleatória de fundo na primeira interação do usuário.
+            // Isso é crucial para contornar políticas de autoplay de navegadores.
+            playNextRandomTrack();
             
             userInteracted = true;
+            // Remove os listeners após a primeira interação para evitar execução desnecessária
             document.removeEventListener('scroll', handleUserInteraction);
             document.removeEventListener('mousemove', handleUserInteraction);
             document.removeEventListener('click', handleUserInteraction);
@@ -317,8 +255,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Adiciona listeners para detectar a primeira interação do usuário
     document.addEventListener('scroll', handleUserInteraction);
     document.addEventListener('mousemove', handleUserInteraction);
     document.addEventListener('click', handleUserInteraction);
     document.addEventListener('touchstart', handleUserInteraction);
+
 });
