@@ -1336,4 +1336,48 @@ a:hover {
         font-size: 0.85em;
         color: #aaa;
     }
+    /* Adicione esta regra para a borda animada do card no hover, se ainda não tiver */
+    .interactive-card {
+        border: 3px solid transparent; /* Cor inicial transparente */
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    .interactive-card:hover {
+        border-color: #28a745; /* Cor verde no hover */
+        cursor: pointer; /* Indica que o card é clicável */
+    }
+
+    /* --- Animação do Ícone --- */
+
+    /* Wrapper para o ícone, para centralizá-lo e aplicar rotação/translação */
+    .card-icon-wrapper {
+        width: 80px; /* Largura do wrapper, ajuste conforme o tamanho do seu ícone */
+        height: 80px; /* Altura do wrapper */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px; /* Espaço abaixo do ícone */
+    }
+
+    .card-icon-animatable {
+        /* Estilo base para o ícone */
+        font-size: 3em; /* Tamanho do ícone, ajuste conforme necessário */
+        color: #f0c808; /* Cor padrão do ícone */
+        transition: transform 0.3s ease-in-out; /* Transição para a animação */
+    }
+
+    /* Animação ao passar o mouse sobre o CARD */
+    .interactive-card:hover .card-icon-animatable {
+        transform: translateX(10px) rotate(5deg); /* Exemplo: move para a direita e rotaciona um pouco */
+        /* Ajuste 'translateX' e 'rotate' para simular a animação da raposa de lado */
+    }
+
+    /* Animação ao clicar no CARD (pode ser a mesma ou diferente) */
+    .interactive-card:active .card-icon-animatable {
+        transform: translateX(5px) rotate(2deg) scale(0.95); /* Exemplo: um pequeno "recuo" ao clicar */
+        transition: transform 0.1s ease-in-out; /* Transição mais rápida para o clique */
+    }
+    .interactive-card:hover .fox-icon-animatable {
+        transform: translateX(10px); /* Apenas movimento horizontal para a raposa */
+    }
 }
