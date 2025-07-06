@@ -14,6 +14,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const isMobile = isTouchDevice(); // Detecta uma vez na inicialização
 
+    /**
+     * Copia o texto fornecido para a área de transferência.
+     * @param {string} text - O texto a ser copiado.
+     * @returns {Promise<void>} Uma Promise que resolve se a cópia for bem-sucedida.
+     */
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true; // Retorna true para indicar sucesso
+        } catch (err) {
+            console.error('Falha ao copiar:', err);
+            // Fallback para métodos antigos se a API moderna falhar ou não estiver disponível
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed"; // Evita que role para fora da tela
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                return true;
+            } catch (fallbackErr) {
+                console.error('Falha ao copiar via fallback:', fallbackErr);
+                document.body.removeChild(textArea);
+                return false; // Retorna false para indicar falha
+            }
+        }
+    }
+
+    /**
+     * Mostra uma notificação de "toast" temporária na tela.
+     * @param {string} message - A mensagem a ser exibida.
+     * @param {number} duration - Duração em milissegundos que o toast ficará visível (padrão: 3000).
+     */
+    function showToast(message, duration = 3000) {
+        const toast = document.createElement('div');
+        toast.classList.add('toast-notification');
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        // Forçar reflow para garantir que a transição CSS funcione
+        void toast.offsetWidth;
+
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            toast.addEventListener('transitionend', () => {
+                toast.remove();
+            }, { once: true });
+        }, duration);
+    }
+
     /* ========================================= */
     /* BACKGROUND AUDIO (MINECRAFT-STYLE)        */
     /* ========================================= */
@@ -100,7 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
         backgroundAudio.addEventListener('pause', function() {
             // Verifica se a pausa foi intencional (pelo usuário) ou automática (final da música)
             // Se o áudio foi pausado e não está mais tocando, atualiza o estado
-            if (!backgroundAudio.playing) { // 'playing' é uma propriedade não padrão, mas podemos inferir
+            // Não confie em backgroundAudio.playing, pois não é padrão. Use backgroundAudio.paused
+            if (backgroundAudio.paused) {
                 isPlaying = false;
                 playAudioBtn.classList.remove('play-audio-btn-on');
                 playAudioBtn.classList.add('play-audio-btn-off');
@@ -225,6 +281,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Aplica a lógica para os itens da grade de segurança (com volume diferente)
     setupCardHoverSound(securityGridItems, 0.2); // Não precisa de preventClickBubble para esses itens se eles não têm links/botões internos que devem ser ignorados.
+
+    /* ========================================= */
+    /* COPY IP/PORT BUTTONS                      */
+    /* ========================================= */
+
+    const copyButtons = document.querySelectorAll('.copy-ip-btn'); // Seleciona todos os botões com essa classe
+
+    copyButtons.forEach(button => {
+        button.addEventListener('click', async function() {
+            const ipToCopy = this.dataset.ip; // Pega o IP/Porta do atributo data-ip
+            if (ipToCopy) {
+                const success = await copyToClipboard(ipToCopy);
+                if (success) {
+                    showToast('Copiado: ' + ipToCopy, 2000); // Mostra toast por 2 segundos
+                } else {
+                    showToast('Falha ao copiar. Tente novamente!', 3000);
+                }
+            } else {
+                console.warn('Atributo data-ip não encontrado no botão de cópia.');
+            }
+        });
+    });
 
     /* ========================================= */
     /* INITIAL USER INTERACTION HANDLER          */
