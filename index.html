@@ -434,6 +434,12 @@
             height: 70px;
             margin-bottom: 15px;
             filter: drop-shadow(0 0 5px var(--secondary-color));
+            transition: transform 0.3s ease, filter 0.3s ease; /* Adicionando transição para a animação */
+        }
+
+        .role-category-icon:hover { /* Nova animação para os ícones */
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px var(--primary-color));
         }
 
         .role-list {
@@ -562,7 +568,7 @@
         .event-card-inner {
             display: flex;
             flex-direction: row; /* Alinha os itens em linha */
-            align-items: flex-start; /* Alinha os itens no topo */
+            align-items: stretch; /* Estende os itens para a altura máxima */
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid var(--border-color);
@@ -577,8 +583,8 @@
         }
 
         .event-image-container {
-            width: 180px; /* Largura da imagem lateral */
-            height: 100%;
+            width: 180px; /* Largura fixa da imagem lateral */
+            height: auto; /* A altura será determinada pelo conteúdo */
             overflow: hidden;
             border-right: 1px solid var(--border-color);
             flex-shrink: 0; /* Impede que a imagem encolha */
@@ -586,8 +592,8 @@
 
         .event-image {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: 100%; /* Imagem preenche a altura do container*/
+            object-fit: cover; /* Garante que a imagem cubra a área, cortando se necessário*/
             display: block; /* Remove espaço extra abaixo da imagem */
         }
 
@@ -1475,13 +1481,14 @@
                 'audios/musics/Danny.mp3',
                 'audios/musics/Dreiton.mp3',
                 'audios/musics/Dry-Hands.mp3',
-                'audios/musics/Floating.mp3',
+                'audios/musics/Floating-Trees.mp3', /* Ajustado conforme pasta de áudios */
                 'audios/musics/Haggstrom.mp3',
                 'audios/musics/haunt-Muskie.mp3',
                 'audios/musics/Key.mp3',
                 'audios/musics/Living-Mice.mp3',
+                'audios/musics/Mice-On-Venus.mp3', /* Ajustado conforme pasta de áudios */
                 'audios/musics/Minecraft.mp3',
-                'audios/musics/Moong-City.mp3',
+                'audios/musics/Moog-City-2.mp3', /* Ajustado conforme pasta de áudios */
                 'audios/musics/Mutation.mp3',
                 'audios/musics/Oxygène.mp3',
                 'audios/musics/Subwoofer-Lullaby.mp3',
@@ -1599,7 +1606,6 @@
 
             const interactiveCardsGeneral = document.querySelectorAll(
                 '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card, .pixel-legends-btn'
-                // Added the '.pixel-legends-btn' class here
             );
             const securityGridItems = document.querySelectorAll('.security-grid-item');
 
