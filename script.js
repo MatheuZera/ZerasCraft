@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const playAudioBtn = document.getElementById('playAudioBtn');
 
     if (minecraftAudio) {
-        minecraftAudio.volume = 0.7; // AJUSTE ESTE VALOR
+        minecraftAudio.volume = 0.6; // AJUSTE ESTE VALOR
     }
 
     if (playAudioBtn && minecraftAudio) {
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Lógica para o som de clique em interações ---
     const clickAudio = new Audio('audios/click.mp3');
     clickAudio.preload = 'auto'; 
-    clickAudio.volume = 0.4; // AJUSTE ESTE VALOR
+    clickAudio.volume = 0.3; // AJUSTE ESTE VALOR
 
     document.addEventListener('click', function(event) {
         const clickedElement = event.target;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cria uma ÚNICA instância para os cards gerais (que não são os itens de segurança)
     const selectAudioGeneral = new Audio('audios/select.mp3');
     selectAudioGeneral.preload = 'auto';
-    selectAudioGeneral.volume = 0.3; // AJUSTE ESTE VALOR
+    selectAudioGeneral.volume = 0.1; // AJUSTE ESTE VALOR
 
     function playSelectSoundGeneral() {
         selectAudioGeneral.currentTime = 0;
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Para cada item, crie uma NOVA instância de áudio
         const itemSelectAudio = new Audio('audios/select.mp3');
         itemSelectAudio.preload = 'auto';
-        itemSelectAudio.volume = 0.2; // AJUSTE O VOLUME PARA OS ITENS DA GRADE (pode ser menor)
+        itemSelectAudio.volume = 0.1; // AJUSTE O VOLUME PARA OS ITENS DA GRADE (pode ser menor)
 
         item.addEventListener('mouseenter', function() {
             itemSelectAudio.currentTime = 0; // Reinicia o som para este item
