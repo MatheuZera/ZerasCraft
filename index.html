@@ -3,241 +3,1261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Zera's Craft - Sua Aventura Começa Aqui!</title>
+    <title>Mundo Zera's Craft - Sua Aventura Minecraft!</title>
+    <style>
+        /* Variáveis CSS para fácil customização */
+        :root {
+            --primary-color: #4CAF50; /* Verde vibrante */
+            --primary-color-dark: #388E3C; /* Verde mais escuro */
+            --secondary-color: #FFC107; /* Amarelo Minecraft */
+            --accent-color: #2196F3; /* Azul para links/botões secundários */
+            --text-color: #ECEFF1; /* Texto claro */
+            --dark-text-color: #263238; /* Texto escuro */
+            --bg-dark: #2C3E50; /* Fundo escuro principal (Azul Petróleo) */
+            --bg-light: #34495E; /* Fundo mais claro para seções alternativas */
+            --card-bg: #34495E; /* Fundo para cards */
+            --border-color: #555;
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --shadow-dark: rgba(0, 0, 0, 0.4);
+            --font-main: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+
+        /* Reset Básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            color: var(--text-color);
+            background-color: var(--bg-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color-dark);
+        }
+
+        /* Botões */
+        .btn-primary, .btn-secondary {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            white-space: nowrap; /* Impede quebra de linha */
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 10px var(--shadow-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 2px 5px var(--shadow-light);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-link {
+            color: var(--accent-color);
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .btn-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Títulos de Seção */
+        .section-title {
+            font-family: var(--font-main);
+            font-size: 2.8em;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            text-align: center;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Seções Gerais */
+        .section-padded {
+            padding: 80px 0;
+            position: relative; /* Para hero-image-overlay */
+        }
+
+        .section-alt-bg {
+            background-color: var(--bg-light);
+        }
+
+        .section-light-bg {
+            background-color: var(--bg-light);
+        }
+
+        /* Cabeçalho */
+        .main-header {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 15px 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-family: var(--font-main);
+            font-size: 1.8em;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px var(--shadow-dark);
+        }
+
+        /* Seção Hero */
+        .hero-section {
+            background: url('images/site/background-site.webp') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+            min-height: 700px; /* Ajuste a altura conforme necessário */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden; /* Garante que o overlay não vaze */
+        }
+
+        .hero-image-overlay {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .server-branding {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .server-banner {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px var(--shadow-dark);
+            margin-bottom: 20px;
+            border: 3px solid var(--primary-color); /* Adicione uma borda */
+        }
+
+        .server-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid var(--secondary-color);
+            box-shadow: 0 5px 15px var(--shadow-dark);
+            background-color: var(--card-bg); /* Fundo caso a imagem seja transparente */
+            object-fit: cover; /* Garante que a imagem preencha o círculo */
+        }
+
+        .hero-title {
+            font-family: var(--font-main);
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 3px 3px 6px var(--shadow-dark);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Seção Sobre */
+        .content-two-columns {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .content-two-columns .text-content {
+            flex: 1;
+            min-width: 300px;
+            color: var(--text-color);
+        }
+
+        .content-two-columns .text-content p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .content-two-columns .image-content {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .responsive-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .responsive-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px var(--shadow-dark);
+        }
+
+        .bordered-image {
+            border: 3px solid var(--primary-color);
+        }
+
+        /* Cards de Serviços/Recursos */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 6px 15px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Alinha o conteúdo ao topo */
+            min-height: 250px; /* Garante altura mínima para uniformidade */
+        }
+
+        .service-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            background-color: var(--primary-color-dark); /* Fundo para os ícones */
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 3px 8px var(--shadow-dark);
+        }
+
+        .card-title {
+            font-family: var(--font-main);
+            font-size: 1.8em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .card-description {
+            font-size: 1.05em;
+            color: var(--text-color);
+            flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
+            text-align: center;
+        }
+
+        /* Canais e Cargos */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .role-category-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 15px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .role-category-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .role-category-icon {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .role-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .role-list li {
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 0.95em;
+            color: var(--text-color);
+        }
+
+        .role-list li::before {
+            content: '⛏️'; /* Ícone de picareta para lista */
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Seções de Cartões de Conteúdo (Geral para Segurança e Pixel Legends) */
+        .content-section-card {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px;
+            background-color: var(--card-bg); /* Fundo do card principal */
+            border-radius: 15px;
+            box-shadow: 0 8px 20px var(--shadow-dark);
+        }
+
+        .content-section-card h3 {
+            font-family: var(--font-main);
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .content-section-card p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .content-item-card {
+            background-color: rgba(0, 0, 0, 0.2); /* Fundo sutil para cada item */
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary-color);
+            text-align: left;
+        }
+
+        .content-item-card h4 {
+            font-family: var(--font-main);
+            color: var(--accent-color);
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .content-item-card p {
+            font-size: 1em;
+            margin-bottom: 0; /* Remove margem inferior extra aqui */
+        }
+
+        /* Estilos específicos para a seção de Acesso ao Servidor dentro de Pixel Legends */
+        .access-server-section {
+            background-color: var(--bg-dark); /* Fundo para a área de acesso ao servidor */
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .access-server-section h3 {
+            font-family: var(--font-main);
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .access-server-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .access-cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .access-card {
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-dark);
+            min-width: 280px;
+            flex: 1;
+            max-width: 400px; /* Limita a largura do card */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .access-card h3 {
+            font-family: var(--font-main);
+            color: var(--primary-color);
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            position: static; /* Remove o posicionamento absoluto do h3 geral */
+            padding-bottom: 0;
+        }
+        .access-card h3::after {
+            content: none; /* Remove o underline extra */
+        }
+
+        .access-card p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .access-card code {
+            display: block;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: var(--secondary-color);
+            overflow-wrap: break-word; /* Garante que o IP quebre a linha se for muito longo */
+        }
+
+        .access-card .btn-primary {
+            width: 100%;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1em;
+        }
+
+        /* Eventos */
+        .events-sub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .event-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px var(--shadow-dark);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .event-card .card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .event-card .card-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            text-align: left;
+        }
+
+        .event-card .card-description {
+            font-size: 0.95em;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            flex-grow: 1; /* Permite que ocupe espaço para uniformidade */
+            text-align: left;
+        }
+
+        .event-details {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Parceiros */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .community-card, .partnership-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 6px 15px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .community-card:hover, .partnership-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .member-avatar, .partnership-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 3px 8px var(--shadow-dark);
+        }
+
+        .partnership-logo {
+            border-radius: 10px; /* Para logos que não são círculos */
+        }
+
+        .community-card h3, .partnership-card h3 {
+            font-family: var(--font-main);
+            font-size: 1.6em;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .community-card p, .partnership-card p {
+            font-size: 0.95em;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            flex-grow: 1; /* Garante que o texto ocupe espaço para uniformidade */
+        }
+
+        /* Call to Action */
+        .call-to-action {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            color: white;
+            padding: 80px 0;
+            border-radius: 15px;
+            margin: 50px auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            transition: transform 0.3s ease;
+        }
+
+        .call-to-action:hover {
+            transform: translateY(-5px);
+        }
+
+        .call-to-action .section-title {
+            color: white; /* Sobrescreve a cor amarela padrão */
+            margin-bottom: 20px;
+        }
+
+        .call-to-action .section-title::after {
+            background-color: var(--secondary-color); /* Underline amarelo */
+        }
+
+        .call-to-action .section-description {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        /* Rodapé */
+        .main-footer {
+            background-color: #1a1a1a;
+            color: #bbb;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9em;
+            border-top: 3px solid var(--primary-color-dark);
+        }
+
+        /* Botão de Áudio Flutuante */
+        #playAudioBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            border-radius: 50px; /* Torna o botão redondo */
+            width: 60px; /* Largura e altura para um círculo */
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em; /* Ajusta o tamanho da fonte */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            text-indent: -9999px; /* Esconde o texto, mantendo-o para leitores de tela */
+            overflow: hidden; /* Garante que o texto escondido não seja visível */
+            background-image: url('images/icons/music-play.png'); /* Ícone de play */
+            background-size: 60%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-color: var(--primary-color); /* Cor de fundo padrão */
+            border: 2px solid var(--secondary-color);
+        }
+
+        #playAudioBtn.playing {
+            background-image: url('images/icons/music-pause.png'); /* Ícone de pause quando tocando */
+            background-color: var(--primary-color-dark);
+        }
+
+        #playAudioBtn:hover {
+            transform: translateY(-3px) scale(1.05);
+            background-color: var(--primary-color-dark);
+        }
+
+        /* Ícones de Seção (para títulos) */
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8em;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2em;
+            }
+
+            .content-two-columns {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content-two-columns .text-content,
+            .content-two-columns .image-content {
+                width: 100%;
+            }
+
+            .responsive-image {
+                margin-top: 30px;
+            }
+
+            .section-title {
+                font-size: 2.2em;
+                margin-bottom: 30px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .section-title .section-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .services-grid,
+            .roles-grid,
+            .events-sub-grid,
+            .community-grid,
+            .access-cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 120px 0 80px;
+                min-height: 600px;
+            }
+
+            .hero-title {
+                font-size: 2.2em;
+            }
+
+            .hero-subtitle {
+                font-size: 1em;
+            }
+
+            .server-banner {
+                max-width: 90%;
+            }
+
+            .server-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .section-padded {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+                margin-bottom: 25px;
+            }
+
+            .section-description {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+
+            .content-section-card { /* Ajuste para o card principal */
+                padding: 30px;
+            }
+
+            .content-section-card h3 {
+                font-size: 1.8em;
+            }
+
+            .content-item-card h4 {
+                font-size: 1.2em;
+            }
+
+            .access-card {
+                min-width: unset;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-logo {
+                font-size: 1.5em;
+            }
+
+            .hero-section {
+                padding: 100px 0 60px;
+            }
+
+            .hero-title {
+                font-size: 1.8em;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9em;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .server-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+                gap: 5px;
+            }
+
+            .section-title .section-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .card-title {
+                font-size: 1.5em;
+            }
+
+            .card-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .role-category-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .content-section-card h3 {
+                font-size: 1.5em;
+            }
+
+            .content-item-card h4 {
+                font-size: 1.1em;
+            }
+
+            #playAudioBtn {
+                width: 50px;
+                height: 50px;
+                font-size: 0.7em;
+            }
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/site/icone.webp" type="image/x-icon">
+
+    <meta property="og:title" content="Mundo Zera's Craft - Website" />
+    <meta property="og:description" content="Entre para a nossa comunidade vibrante de Minecraft! Servidor com eventos épicos, sistema de guildas, cargos personalizados e muita criatividade. Junte-se à aventura!" />
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/imagens/site/icone.webp" /> 
+    <meta property="og:url" content="https://matheuzera.github.io/ZerasCraft/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mundo Zera's Craft" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mundo Zera's Craft - Website" />
+    <meta name="twitter:description" content="Entre para a nossa comunidade vibrante de Minecraft! Servidor com eventos épicos, sistema de guildas, cargos personalizados e muita criatividade. Junte-se à aventura!" />
+    <meta name="twitter:image" content="https://matheuzera.github.io/ZerasCraft/images/site/banner_og_discord.jpg" /> 
+    <meta name="twitter:creator" content="@SeuHandleDoTwitter" /> 
 </head>
 <body>
     <header class="main-header">
         <div class="container header-content">
             <a href="#" class="header-logo">Mundo Zera's Craft</a>
-            </div>
+        </div>
     </header>
-
-    <main>
-        <section class="hero-section">
+    <main> 
+        <section id="inicio" class="hero-section">
             <div class="hero-image-overlay"></div>
-            <div class="hero-content">
+            <div class="container hero-content">
                 <div class="server-branding">
-                    <img src="images/site/mini-banner-principal.gif" alt="Mini Banner do Mundo Zera's Craft" class="server-banner">
+                    <img src="images/site/mini-banner.gif" alt="Mini Banner do Mundo Zera's Craft" class="server-banner">
                     <img src="images/site/icone.webp" alt="Ícone do Servidor Mundo Zera's Craft" class="server-icon">
                 </div>
                 <h1 class="hero-title">Sua Próxima Grande Aventura em Minecraft Começa Aqui!</h1>
                 <p class="hero-subtitle">Entre para a nossa comunidade vibrante e prepare-se para levar sua paixão por blocos a um novo nível!</p>
-                <a href="https://discord.gg/GYGVBqGEwP" class="btn-primary" target="_blank">Entrar no Discord</a>
-                <a href="#sobre" class="btn-secondary">Saiba Mais</a>
+                <a href="https://discord.gg/GYGVBqGEwP" class="btn-primary" target="_blank">Entrar no Servidor Discord!</a>
             </div>
         </section>
-
         <section id="sobre" class="section-padded">
             <div class="container content-two-columns">
                 <div class="text-content">
-                    <h2 class="section-title">
-                        <img src="images/recursos/icone-planeta.webp" alt="Ícone Planeta" style="height: 1.8em; vertical-align: middle; margin-right: 10px;">
-                        Sobre o Mundo Zera's Craft
-                    </h2>
+                    <h2 class="section-title">🌍 Sobre o Mundo Zera's Craft</h2>
                     <p>Somos mais que um servidor de Minecraft; somos um universo onde a paixão por blocos e aventuras nos une. Nosso objetivo é proporcionar uma experiência única e personalizada para cada jogador, seja você um construtor lendário, um explorador incansável ou um mestre do PvP.</p>
                     <p>Aqui, você encontra um ambiente acolhedor e cheio de possibilidades, focado em fazer você viver o Minecraft de um jeito totalmente novo, conectado a outros jogadores com seus mesmos interesses.</p>
-                    <a href="#" class="btn-primary">Saiba Mais</a>
+                    <a href="link" class="btn-secondary">Saiba Mais</a>
                 </div>
                 <div class="image-content">
-                    <img src="images/site/sobre-o-mundo.jpg" alt="Imagem ilustrativa do Mundo Zera's Craft" class="responsive-image bordered-image">
+                    <img src="images/site/sobre-o-mundo.gif" class="responsive-image bordered-image" alt="Imagem Ilustrativa sobre o Mundo Zera's Craft">
                 </div>
             </div>
         </section>
-
         <section id="servicos" class="section-padded section-alt-bg">
             <div class="container">
-                <h2 class="section-title">Nossos Serviços e Recursos</h2>
-                <p class="section-description">Descubra o que o Mundo Zera's Craft tem a oferecer para a sua jornada.</p>
+                <h2 class="section-title">✨ Nossos Recursos & Apoio</h2>
                 <div class="services-grid">
                     <div class="service-card">
-                        <img src="images/recursos/icone-construcao.webp" alt="Ícone de Construção" class="card-icon">
-                        <h3 class="card-title">Modo Sobrevivência Avançado</h3>
-                        <p class="card-description">Experimente um survival único com desafios diários, economia balanceada e clãs.</p>
+                        <img src="images/recursos/suporte.png" alt="Ícone de Suporte" class="card-icon">
+                        <h3 class="card-title">Suporte 24/7</h3>
+                        <p class="card-description">Ajuda mediada em qualquer momento no Discord.</p>
                     </div>
                     <div class="service-card">
-                        <img src="images/recursos/icone-minigames.webp" alt="Ícone de Minigames" class="card-icon">
-                        <h3 class="card-title">Minigames Viciantes</h3>
-                        <p class="card-description">Divirta-se em arenas PvP, parkour, SkyWars e muito mais.</p>
+                        <img src="images/recursos/eventos.png" alt="Ícone de Eventos" class="card-icon">
+                        <h3 class="card-title">Eventos Semanaais</h3>
+                        <p class="card-description">Eventos divertidos com prêmios exclusivos para a comunidade.</p>
                     </div>
                     <div class="service-card">
-                        <img src="images/recursos/icone-comunidade.webp" alt="Ícone de Comunidade" class="card-icon">
-                        <h3 class="card-title">Comunidade Ativa</h3>
-                        <p class="card-description">Faça novos amigos, participe de eventos e construa juntos.</p>
+                        <img src="images/recursos/guildas.png" alt="Ícone de Guildas" class="card-icon">
+                        <h3 class="card-title">Sistema de Clãs</h3>
+                        <p class="card-description">Monte sua Guilda e conquiste territórios no jogo.</p>
                     </div>
+                    <div class="service-card">
+                        <img src="images/recursos/criacoes.png" alt="Ícone de Criação" class="card-icon">
+                        <h3 class="card-title">Loja no Jogo</h3>
+                        <p class="card-description">Crie suas invenções e mostre para todos da Comunidade! As pessoas podem lhe ajudar em alguma coisa que você esteja com dificuldades, então não tenha medo.. pergunte e ajude quem precisar. :D</p>
                     </div>
+                </div>
             </div>
         </section>
-
         <section id="canais-cargos" class="section-padded">
             <div class="container">
-                <h2 class="section-title">Canais e Cargos</h2>
-                <p class="section-description">Descubra os principais canais do nosso Discord e os cargos disponíveis para aprimorar sua experiência.</p>
+                <h2 class="section-title">💬 Canais & Cargos: Sua Experiência Personalizada!</h2>
+                <p class="section-description">Nossa estrutura de canais é otimizada para que você encontre facilmente o que busca. Com categorias claras, a navegação é fluida.</p>
+                <p class="section-description">O sistema de cargos do nosso servidor é um dos mais completos, permitindo que você personalize sua experiência e se conecte com quem realmente importa, de acordo com seus interesses:</p>
                 <div class="roles-grid">
                     <div class="role-category-card">
-                        <img src="images/canais-e-cargos/icone-geral.webp" alt="Ícone de Canais Gerais" class="role-category-icon">
-                        <h3 class="card-title">Canais Gerais</h3>
+                        <img src="images/canais-e-cargos/staff.png" class="role-category-icon">
+                        <h3 class="card-title">Staff & Organização</h3>
                         <ul class="role-list">
-                            <li>#geral - Converse sobre tudo!</li>
-                            <li>#comandos - Use os comandos dos bots.</li>
-                            <li>#regras - Leia as regras do servidor.</li>
+                            <li>Cargos de Liderança (Dono, Sub Donos, ADMs, Moderadores)</li>
+                            <li>Coordenadores e Equipe de Suporte Geral</li>
                         </ul>
                     </div>
                     <div class="role-category-card">
-                        <img src="images/canais-e-cargos/icone-jogos.webp" alt="Ícone de Canais de Jogos" class="role-category-icon">
-                        <h3 class="card-title">Canais de Jogos</h3>
+                        <img src="images/canais-e-cargos/pings.png" class="role-category-icon">
+                        <h3 class="card-title">Pings & Notificações</h3>
                         <ul class="role-list">
-                            <li>#lfg - Procure grupos para jogar.</li>
-                            <li>#minecraft - Discussões sobre Minecraft.</li>
-                            <li>#outros-jogos - Fale sobre outros games.</li>
+                            <li>Pings para Ajuda, Atualizações, Avisos, Críticos, Eventos, Quero Jogar, Minecraft, Parcerias, etc.</li>
                         </ul>
                     </div>
                     <div class="role-category-card">
-                        <img src="images/canais-e-cargos/icone-cargos.webp" alt="Ícone de Cargos" class="role-category-icon">
-                        <h3 class="card-title">Cargos Especiais</h3>
+                        <img src="images/canais-e-cargos/hobbies.png" class="role-category-icon">
+                        <h3 class="card-title">Interesses (Hobbies)</h3>
                         <ul class="role-list">
-                            <li>Membro VIP</li>
-                            <li>Apoaidor</li>
-                            <li>Construtor</li>
+                            <li>Animadores, Construtores, Criadores de Addons, Exploradores, Farmers, Mineradores, Modeladores, Pixel Art, Programadores, PvP.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/minecraft-launchers.png" class="role-category-icon">
+                        <h3 class="card-title">Minecraft & Launchers</h3>
+                        <ul class="role-list">
+                            <li>Bedrock (Multiplataforma), Java Edition, Minecraft Dungeons, Minecraft Legends.</li>
+                            <li>Launchers específicos: Pojav, ATLauncher, Badlion, CurseForge, GDLauncher, Lunar, MultiMC, Prism, SKLauncher, TLauncher.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/plataformas.png" class="role-category-icon">
+                        <h3 class="card-title">Plataformas de Jogo</h3>
+                        <ul class="role-list">
+                            <li>Celular, Tablet, PlayStation, Notebook, PC, Xbox.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/xp.png" class="role-category-icon">
+                        <h3 class="card-title">Experiência & Nível (XP)</h3>
+                        <ul class="role-list">
+                            <li>Cargos baseados em XP, desde Cobre (2xp) até Bedrock (200xp).</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/guildas.png" class="role-category-icon">
+                        <h3 class="card-title">Guildas & Competições</h3>
+                        <ul class="role-list">
+                            <li>Líderes, Co-Líderes e ADMs de Guildas.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/status.png" class="role-category-icon">
+                        <h3 class="card-title">Status & Benefícios</h3>
+                        <ul class="role-list">
+                            <li>Cargos de Eventos (Campeões MCTU, Fan-Jam Crafters).</li>
+                            <li>Cargos VIP (Primário, Elite, Cristal, Supremo, Ultimato).</li>
+                            <li>Cargos Principais (Aniversariantes, Doadores/Membros YT, Influencers, Inscritos Fixos, Parceiros).</li>
+                            <li>Cargos Exclusivos (Membros Estrelas, Membros do Dia, Colaboradores).</li>
+                            <li>Booster (Impulsionador, Nitro Boosters, Já Fui Booster).</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/redes-sociais.png" class="role-category-icon">
+                        <h3 class="card-title">Redes Sociais & Interesses Pessoais</h3>
+                        <ul class="role-list">
+                            <li>Cargos para plataformas (Instagram, Kwai, Facebook, Reddit, TikTok, Twitter, Twitch, YouTube).</li>
+                            <li>Cargos de interesses pessoais: Ajudar Pessoas, Ativo(a) no Servidor, Criar Coisas, Divertir no Servidor, Fazer Novas Amizades, Jogar Minecraft, Participar de Eventos, Tagarela nas Calls.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="eventos" class="section-padded section-alt-bg">
+        <section id="pixel-legends" class="section-padded section-light-bg">
             <div class="container">
+                <h2 class="section-title">
+                    <img src="images/icons/pixel-legends-icon.png" alt="Ícone Pixel Legends" class="section-icon">
+                    Pixel Legends: Seu Reino, Suas Regras!
+                </h2>
+                <p class="section-description">Participe de batalhas épicas de guildas no universo Minecraft!</p>
+
+                <div class="content-section-card">
+                    <h3>Pixel Legends</h3>
+                    <p>Este é nosso servidor oficial dentro do Minecraft! Lá você **cria sua própria Guilda**, e batalha contra outras pessoas para pegar recursos, faz parcerias com outros Líderes, formam alianças e etc.. Cada um tem o direito de criar sua própria guilda para evoluírem juntos(as). :D</p>
+                    
+                    <div class="content-item-card">
+                        <h4>Como Crio Minha Própria Guilda?</h4>
+                        <p>Acesse o canal <a href="#" class="discord-channel-link">#cargos-guildas</a> para mais detalhes sobre Guildas aqui no nosso servidor.</p>
+                        <p>Bem, basta formar uma equipe e ir chamando mais e mais pessoas para transformar sua Guilda na mais forte possível!</p>
+                    </div>
+
+                    <div class="content-item-card">
+                        <h4>Como Funcionam os Cargos Administrativos da Guilda?</h4>
+                        <ul class="role-list-compact">
+                            <li><strong>Líder da Guilda:</strong> É responsável por tudo o que rola dentro da Guilda, tudo mesmo!</li>
+                            <li><strong>Co-Líder da Guilda:</strong> Ajuda os Líderes em coisas diversas, e também quando estão ausentes, estas pessoas lideram sua Guilda até a volta do Líder.</li>
+                            <li><strong>Administrador da Guilda:</strong> Coordena os Membros a arrumar a defesa, avisar sobre alguma coisa e etc.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-item-card">
+                        <h4>Como Funciona o MC Team Ultimate?</h4>
+                        <p>Acesse o canal <a href="#" class="discord-channel-link">#eventos-mctu</a> para mais detalhes sobre..</p>
+                    </div>
+
+                    <div class="content-item-card">
+                        <h4>Funcionalidades do Servidor Pixel Legends</h4>
+                        <ul class="features-list">
+                            <li><strong>Software:</strong> SPIGOT/BUKKIT</li>
+                            <li><strong>Plugins:</strong>
+                                <ul>
+                                    <li><strong>DISCORD SRV:</strong> Conexão com os Chats do Discord.</li>
+                                    <li><strong>GEYSER MC:</strong> Conecta os Jogadores da Bedrock com Java simultaneamente.</li>
+                                    <li><strong>MULTIVERSE CORE:</strong> Possibilidade de criar múltiplos mundos um dentro do outro, como um server de minigames.</li>
+                                    <li><strong>VIA VERSION:</strong> Permite que jogadores entrem no servidor estando **um pouco** desatualizado da versão atual do servidor.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="access-server-section">
+                        <h3>Acesso ao Servidor: Mundo Vortex Craft</h3>
+                        <div class="access-cards-grid">
+                            <div class="access-card">
+                                <h3>BEDROCK EDITION</h3>
+                                <p>IP: <code>MundoVortexCraft.aternos.me</code></p>
+                                <p>PORTA: <code>57178</code></p>
+                                <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me" data-port="57178">
+                                    <i class="fas fa-copy"></i> Copiar IP & Porta
+                                </button>
+                            </div>
+
+                            <div class="access-card">
+                                <h3>JAVA EDITION</h3>
+                                <p>ENDEREÇO: <code>MundoVortexCraft.aternos.me:57178</code></p>
+                                <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me:57178">
+                                    <i class="fas fa-copy"></i> Copiar Endereço
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="eventos" class="section-padded"> <div class="container">
                 <h2 class="section-title">🏆 Eventos Épicos: Competição e Criatividade</h2>
                 <p class="section-description">Participe de nossos torneios e mostre suas habilidades!</p>
-                <div class="events-grid-wrapper">
-                    <div class="event-card-main">
-                        <img src="images/eventos/evento-principal.jpg" alt="Evento Principal do Servidor" class="event-image">
+                <div class="events-sub-grid"> 
+                    <div class="event-card">
+                        <img src="images/eventos/staff.jpg" class="event-image" alt="Imagem do Evento SEJA STAFF/ADM">
                         <div class="card-content">
-                            <h3 class="card-title">Seja STAFF/ADM: Formulário para Cargos!</h3>
-                            <p class="card-description">Participe e concorra a Cargos Admin no servidor, podendo subir de cargos de acordo com sua avaliação e colaborações</p>
-                            <div class="event-details">
-                                </div>
-                            <a href="#" class="btn-link">Saiba Mais</a>
+                            <h3 class="card-title">🔔 SEJA STAFF/ADM: Formulário para Cargos!</h3>
+                            <p class="card-description">Participe e concorra a Cargos Admin no servidor, podendo subir de cargos de acordo com sua interação e colaborações</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Dependendo de como os Administradores checam seu Formulário, você pode ser Aceito(a) ou Recusado(a)!</p>
+                            <a href="https://discord.com/channels/1390120239588577482/1390696511255347241" class="btn-link" target="_blank">Saiba Mais</a>
                         </div>
                     </div>
-
-                    <div class="events-sub-grid">
-                        <div class="event-card">
-                            <img src="images/eventos/evento-mctu.jpg" alt="Evento M C T U" class="event-image">
-                            <div class="card-content">
-                                <h3 class="card-title">MCTU (Minecraft Team Ultimate)</h3>
-                                <p class="card-description">Um campeonato exclusivo para guildas, usando habilidades de PvP, construção, roxine e muito mais. Forme sua equipe, treine e luve pela glória em um servidor delicado ao torneio!</p>
-                                <div class="event-details">
-                                    </div>
-                                <a href="#" class="btn-link">Saiba Mais</a>
-                            </div>
+                    <div class="event-card">
+                        <img src="images/eventos/mctu.jpg" class="event-image" alt="Imagem do Evento MCTU">
+                        <div class="card-content">
+                            <h3 class="card-title">⚔️ MCTU (Minecraft Team Ultimate)</h3>
+                            <p class="card-description">Um campeonato exclusivo para guildas, testando habilidades de PvP, construção, redstone e muito mais. Forme sua equipe, treine e lute pela glória em um servidor dedicado ao torneio!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Competição de Guildas, Desafios Variados, Servidor Exclusivo, Cargos de Campeão.</p>
+                            <a href="https://discord.com/channels/1390120239588577482/1390696511255347241" class="btn-link" target="_blank">Saiba Mais</a>
                         </div>
-                        <div class="event-card">
-                            <img src="images/eventos/evento-craftjam.jpg" alt="Evento CraftJam" class="event-image">
-                            <div class="card-content">
-                                <h3 class="card-title">CraftJam: Torneio de Criação</h3>
-                                <p class="card-description">Mostre suas habilidades de construção em nosso torneio CraftJam mensal! Com temas variados e prêmios incríveis, é a sua chance de brilhar e se tornar o melhor construtor do servidor. Entre agora e comece a criar!</p>
-                                <div class="event-details">
-                                    </div>
-                                <a href="#" class="btn-link">Saiba Mais</a>
-                            </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/craftjam.png" class="event-image" alt="Imagem do Evento CraftJam">
+                        <div class="card-content">
+                            <h3 class="card-title">🎨 CRAFTJAM: Torneio de Criação</h3>
+                            <p class="card-description">Libere seu artista interior! Desafie-se a criar algo único dentro de um tema específico (construções, addons, texturas, fanarts, animações e mapas). Sua arte pode te render reconhecimento e prêmios!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Tema Secreto, Múltiplas Categorias, Votação Comunitária (baseada nas publicações mais recentes e únicas em canal específico), Cargos de Criador.</p>
+                            <a href="https://discord.com/channels/1390120239588577482/1390696565198557276" class="btn-link" target="_blank">Saiba Mais</a>
                         </div>
-                         <div class="event-card">
-                            <img src="images/eventos/evento-vazio.jpg" alt="Evento Vazio" class="event-image">
-                            <div class="card-content">
-                                <h3 class="card-title">Evento Vazio</h3>
-                                <p class="card-description">Em breve novos eventos! Fique ligado em nosso Discord para não perder as novidades.</p>
-                                <div class="event-details">
-                                    </div>
-                                <a href="#" class="btn-link">Saiba Mais</a>
-                            </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Evento em breve">
+                        <div class="card-content">
+                            <h3 class="card-title">Evento em Breve!</h3>
+                            <p class="card-description">Fique ligado(a) para mais novidades e desafios emocionantes no Mundo Zera's Craft!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Novidades serão anunciadas em nosso Discord!</p>
+                            <a href="https://discord.gg/GYGVBqGEwP" class="btn-link" target="_blank">Acompanhe no Discord</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Evento em breve">
+                        <div class="card-content">
+                            <h3 class="card-title">Evento em Breve!</h3>
+                            <p class="card-description">Fique ligado(a) para mais novidades e desafios emocionantes no Mundo Zera's Craft!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Novidades serão anunciadas em nosso Discord!</p>
+                            <a href="https://discord.gg/GYGVBqGEwP" class="btn-link" target="_blank">Acompanhe no Discord</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Evento em breve">
+                        <div class="card-content">
+                            <h3 class="card-title">Evento em Breve!</h3>
+                            <p class="card-description">Fique ligado(a) para mais novidades e desafios emocionantes no Mundo Zera's Craft!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Novidades serão anunciadas em nosso Discord!</p>
+                            <a href="https://discord.gg/GYGVBqGEwP" class="btn-link" target="_blank">Acompanhe no Discord</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="administracao-seguranca" class="section-padded">
-            <div class="container admin-security-section">
+        <section class="admin-security-section section-padded section-light-bg"> <div class="container">
                 <h2 class="section-title">
-                    <img src="images/recursos/icone-seguranca.webp" alt="Ícone de Segurança" style="height: 1.8em; vertical-align: middle; margin-right: 10px;">
-                    Administração & Segurança
+                    <img src="images/seguranca/seguranca.webp" alt="Ícone de Segurança" class="section-icon"> Administração & Segurança
                 </h2>
-                <div class="content-two-columns reverse-columns">
-                    <div class="text-content">
-                        <p>Sua segurança e uma experiência fluida são nossas prioridades. Nossa equipe de administração e moderação garante um ambiente justo e respeitoso.</p>
 
-                        <div class="security-card">
-                            <h3>Bots de Segurança</h3>
-                            <p>Contamos com ferramentas avançadas, como nosso bot exclusivo, Pixel Craft, que é responsável por moderar o servidor e gerenciar comandos utilitários para que nossos eventos funcionem conforme o planejado. Ele foi criado por @MatheuZera e o Mundo Zera's Craft.</p>
-                        </div>
-
-                        <div class="security-card">
-                            <h3>Sistemas de Recuperação</h3>
-                            <p>Além disso, utilizamos sistemas de prevenção e recuperação avançados (como o Xeom Bot para backups e o Shine Bot para bloquear bots maliciosos) para garantir que sua experiência no Mundo Zera's Craft seja sempre segura e protegida contra raids e outros imprevistos.</p>
-                        </div>
-                        
-                        <div class="security-card">
-                            <h3>Sugestões e Melhorias</h3>
-                            <p>Você tem sugestões? Participe do nosso Fórum de Sugestões para nos ajudar a melhorar!</p>
-                            <a href="#" class="btn-link">Fórum de Sugestões</a>
-                        </div>
-                        <div class="security-card">
-                            <h3>TESTE 1</h3>
-                            <p>Este é um item de teste abaixo da seção de segurança principal.</p>
-                        </div>
-
+                <div class="content-section-card"> <h3>SEGURANÇA</h3>
+                    <p>Sua segurança e uma experiência fluida são nossas prioridades. Nossa equipe de administração e moderação garante um ambiente justo e respeitoso.</p>
+                    
+                    <div class="content-item-card">
+                        <h4>Bots de Segurança</h4>
+                        <p>Contamos com ferramentas avançadas, como nosso bot exclusivo, Pixel Craft, que é responsável por moderar o servidor e gerenciar comandos utilitários para que nossos eventos funcionem conforme o planejado. Ele foi criado por @MatheuZera e o Mundo Zera's Craft.</p>
                     </div>
-                    <div class="image-content">
-                        <img src="images/seguranca/icone-armadura.webp" alt="Ícone de Armadura" class="responsive-image bordered-image">
+
+                    <div class="content-item-card">
+                        <h4>Sistemas de Recuperação</h4>
+                        <p>Além disso, utilizamos sistemas de prevenção e recuperação avançados (como o Xeom Bot para backups e o Shine Bot para bloquear bots maliciosos) para garantir que sua experiência no Mundo Zera's Craft seja sempre segura e protegida contra raids e outros imprevistos.</p>
+                    </div>
+
+                    <div class="content-item-card">
+                        <h4>Sugestões e Melhorias</h4>
+                        <p>Você tem sugestões? Participe do nosso Fórum de Sugestões para nos ajudar a melhorar!</p>
+                        <a href="https://discord.gg/GYGVBqGEwP" class="btn-link" target="_blank">Fórum de Sugestões</a>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="comunidade-parcerias" class="section-padded section-alt-bg">
+        <section id="parcerias" class="section-padded section-alt-bg">
             <div class="container">
-                <h2 class="section-title">🤝 Comunidade & Parcerias</h2>
-                <p class="section-description">Também valorizamos parcerias que enriquecem a experiência de todos. Estamos sempre buscando novas conexões para expandir o universo do Mundo Zera's Craft e trazer mais benefícios para nossos membros.</p>
+                <h2 class="section-title">Nossos Membros & Parceiros</h2>
+                <p class="section-description">
+                    Valorizamos a nossa comunidade e as parcerias estratégicas que enriquecem a experiência de todos no Mundo Zera's Craft. Conheça aqueles que fazem parte da nossa jornada.
+                </p>
 
                 <div class="community-grid">
                     <div class="community-card">
-                        <img src="images/parceiros/membro-1.webp" alt="Avatar do Membro 1" class="member-avatar">
-                        <h3>Membro da Comunidade 1</h3>
-                        <p>Breve descrição sobre este membro.</p>
+                        <img src="images/parceiros/icone.webp" alt="Esperando Colaborador" class="member-avatar">
+                        <h3>Esperando Colaborador(a)</h3>
+                        <p>Espaço disponível para destacar um membro ou colaborador importante da nossa comunidade.</p>
                         <a href="#" class="btn-secondary">Ver Perfil</a>
                     </div>
                     <div class="community-card">
-                        <img src="images/parceiros/membro-2.webp" alt="Avatar do Membro 2" class="member-avatar">
-                        <h3>Membro da Comunidade 2</h3>
-                        <p>Breve descrição sobre este membro.</p>
+                        <img src="images/parceiros/icone.webp" alt="Esperando Colaborador" class="member-avatar">
+                        <h3>Esperando Colaborador(a)</h3>
+                        <p>Espaço disponível para destacar um membro ou colaborador importante da nossa comunidade.</p>
                         <a href="#" class="btn-secondary">Ver Perfil</a>
                     </div>
                     <div class="community-card">
-                        <img src="images/parceiros/membro-3.webp" alt="Avatar do Membro 3" class="member-avatar">
-                        <h3>Membro da Comunidade 3</h3>
-                        <p>Breve descrição sobre este membro.</p>
+                        <img src="images/parceiros/icone.webp" alt="Esperando Colaborador" class="member-avatar">
+                        <h3>Esperando Colaborador(a)</h3>
+                        <p>Espaço disponível para destacar um membro ou colaborador importante da nossa comunidade.</p>
                         <a href="#" class="btn-secondary">Ver Perfil</a>
                     </div>
-                </div>
 
-                <div class="community-grid" style="margin-top: 40px;"> <div class="partnership-card">
-                        <img src="images/parceiros/logo-parceria-1.webp" alt="Logo da Parceria 1" class="partnership-logo">
-                        <h3>Parceria 1</h3>
-                        <p>Saiba mais sobre nossa parceria com...</p>
+                    <div class="partnership-card">
+                        <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
+                        <h3>Esperando Parceria</h3>
+                        <p>Espaço para apresentar um de nossos parceiros oficiais e sua contribuição.</p>
                         <a href="#" class="btn-secondary">Saiba Mais</a>
                     </div>
                     <div class="partnership-card">
-                        <img src="images/parceiros/logo-parceria-2.webp" alt="Logo da Parceria 2" class="partnership-logo">
-                        <h3>Parceria 2</h3>
-                        <p>Conheça os benefícios desta parceria.</p>
+                        <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
+                        <h3>Esperando Parceria</h3>
+                        <p>Espaço para apresentar um de nossos parceiros oficiais e sua contribuição.</p>
+                        <a href="#" class="btn-secondary">Saiba Mais</a>
+                    </div>
+                    <div class="partnership-card">
+                        <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
+                        <h3>Esperando Parceria</h3>
+                        <p>Espaço para apresentar um de nossos parceiros oficiais e sua contribuição.</p>
                         <a href="#" class="btn-secondary">Saiba Mais</a>
                     </div>
                 </div>
             </div>
         </section>
-
         <section id="junte-se" class="section-padded call-to-action">
             <div class="container">
                 <h2 class="section-title">🚀 Não Fique de Fora!</h2>
@@ -246,18 +1266,71 @@
             </div>
         </section>
     </main>
-
     <footer class="main-footer">
         <div class="container">
             <p>&copy; Mundo Zera's Craft. Todos os direitos reservados. :D [v1.0.3]</p>
         </div>
     </footer>
 
-    <button id="playAudioBtn" class="play-audio-btn-off">
-        Tocar Música
-    </button>
-    <audio id="backgroundAudio" loop></audio>
+    <button id="playAudioBtn" class="btn-primary" aria-label="Tocar ou Pausar Música de Fundo">Tocar Som do Minecraft</button>
 
-    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+    <script>
+        // Script para a funcionalidade do botão de expandir/contrair da seção Pixel Legends
+        // Este script foi removido pois a estrutura foi alterada para a nova formatação
+
+        // Script para copiar IP e Porta (mantido e reforçado)
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyIpButtons = document.querySelectorAll('.copy-ip-btn');
+            copyIpButtons.forEach(button => {
+                button.addEventListener('click', async () => {
+                    const ip = button.dataset.ip;
+                    const port = button.dataset.port;
+                    let textToCopy = ip;
+
+                    if (port) {
+                        textToCopy = `${ip}:${port}`;
+                    }
+
+                    try {
+                        await navigator.clipboard.writeText(textToCopy);
+                        const originalHtml = button.innerHTML; // Salva o HTML original do botão
+                        button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                        button.style.backgroundColor = '#28a745'; // Altera a cor para verde temporariamente
+                        
+                        setTimeout(() => {
+                            button.innerHTML = originalHtml; // Restaura o HTML original
+                            button.style.backgroundColor = ''; // Remove o estilo inline para voltar ao CSS
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Falha ao copiar: ', err);
+                        alert('Erro ao copiar. Por favor, tente manualmente: ' + textToCopy);
+                    }
+                });
+            });
+
+            // Script para tocar/pausar áudio
+            const playAudioBtn = document.getElementById('playAudioBtn');
+            let audio = new Audio('audio/minecraft-music.mp3'); // Certifique-se de ter este arquivo de áudio
+            audio.loop = true; // Faz o áudio repetir
+
+            playAudioBtn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        playAudioBtn.classList.add('playing');
+                        playAudioBtn.setAttribute('aria-label', 'Pausar Música de Fundo');
+                    }).catch(error => {
+                        console.error("Erro ao tentar tocar o áudio:", error);
+                        // Mensagem mais amigável ao usuário, se preferir:
+                        // alert("Seu navegador impediu a reprodução automática de áudio. Por favor, interaja com a página para ativá-lo.");
+                    });
+                } else {
+                    audio.pause();
+                    playAudioBtn.classList.remove('playing');
+                    playAudioBtn.setAttribute('aria-label', 'Tocar Música de Fundo');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
