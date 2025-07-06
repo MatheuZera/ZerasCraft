@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundo Zera's Craft</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -371,19 +371,6 @@
                             <a href="#" class="btn-link" data-sound-effect="select">Saiba Mais</a>
                         </div>
                     </div>
-                    <div class="event-card" data-hover-sound-effect="true">
-                        <img src="images/eventos/vazio.jpg" alt="EVENTO VAZIO" class="event-card-image">
-                        <div class="event-card-inner">
-                            <h3><i class="fas fa-palette"></i> EVENTO VAZIO: <br> -</h3>
-                            <p>
-                                Nada para ver aqui.
-                            </p>
-                            <p class="event-details">
-                                Detalhes: Vazio, igual o End.
-                            </p>
-                            <a href="#" class="btn-link" data-sound-effect="select">Saiba Mais</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -471,40 +458,35 @@
         </div>
     </footer>
 
-    <div class="audio-control-button-container">
-        <button id="audioControlButton" class="audio-control-button off">
-            <i class="fas fa-volume-mute"></i> <span id="currentMusicTitle">Carregando...</span>
-            <div class="audio-progress-arc" id="audioProgressArc"></div>
-        </button>
-    </div>
-
     <audio id="backgroundMusic" loop preload="auto">
-        <source src="audios/musics/Aria-Math.mp3" type="audio/mpeg" data-title="Aria Math">
-        <source src="audios/musics/Beginning 2.mp3" type="audio/mpeg" data-title="Beginning 2">
-        <source src="audios/musics/Biome-Fest.mp3" type="audio/mpeg" data-title="Biome Fest">
-        <source src="audios/musics/Blind-Spots.mp3" type="audio/mpeg" data-title="Blind Spots">
-        <source src="audios/musics/Clark.mp3" type="audio/mpeg" data-title="Clark">
-        <source src="audios/musics/Danny.mp3" type="audio/mpeg" data-title="Danny">
-        <source src="audios/musics/Dreiton.mp3" type="audio/mpeg" data-title="Dreiton">
-        <source src="audios/musics/Dry-Hands.mp3" type="audio/mpeg" data-title="Dry Hands">
-        <source src="audios/musics/Floating-Trees.mp3" type="audio/mpeg" data-title="Floating Trees">
-        <source src="audios/musics/Haggstrom.mp3" type="audio/mpeg" data-title="Haggstrom">
-        <source src="audios/musics/Key.mp3" type="audio/mpeg" data-title="Key">
-        <source src="audios/musics/Living-Mice.mp3" type="audio/mpeg" data-title="Living Mice">
-        <source src="audios/musics/Mice-On-Venus.mp3" type="audio/mpeg" data-title="Mice On Venus">
-        <source src="audios/musics/Minecraft.mp3" type="audio/mpeg" data-title="Minecraft">
-        <source src="audios/musics/Moog-City 2.mp3" type="audio/mpeg" data-title="Moog City 2">
-        <source src="audios/musics/Mutation.mp3" type="audio/mpeg" data-title="Mutation">
-        <source src="audios/musics/Sweden.mp3" type="audio/mpeg" data-title="Sweden">
-        <source src="audios/musics/Taswell.mp3" type="audio/mpeg" data-title="Taswell">
-        <source src="audios/musics/Wet-Hands.mp3" type="audio/mpeg" data-title="Wet Hands">
-        Seu navegador não suporta o elemento de áudio.
+        <source src="audios/music/Aria-Math-Lofi-Remake.mp3" type="audio/mpeg" data-title="Aria Math Lofi Remake">
+        <source src="audios/music/Aria-Math.mp3" type="audio/mpeg" data-title="Aria Math">
+        <source src="audios/music/Beginning 2.mp3" type="audio/mpeg" data-title="Beginning 2">
+        <source src="audios/music/Biome-Fest.mp3" type="audio/mpeg" data-title="Biome Fest">
+        <source src="audios/music/Blind-Spots.mp3" type="audio/mpeg" data-title="Blind Spots">
+        <source src="audios/music/Clark.mp3" type="audio/mpeg" data-title="Clark">
+        <source src="audios/music/Danny.mp3" type="audio/mpeg" data-title="Danny">
+        <source src="audios/music/Dreiton.mp3" type="audio/mpeg" data-title="Dreiton">
+        <source src="audios/music/Dry-Hands.mp3" type="audio/mpeg" data-title="Dry Hands">
+        <source src="audios/music/Floating-Trees.mp3" type="audio/mpeg" data-title="Floating Trees">
+        <source src="audios/music/Haggstrom.mp3" type="audio/mpeg" data-title="Haggstrom">
+        <source src="audios/music/Key.mp3" type="audio/mpeg" data-title="Key">
+        <source src="audios/music/Living-Mice.mp3" type="audio/mpeg" data-title="Living Mice">
+        <source src="audios/music/Mice-on-Venus.mp3" type="audio/mpeg" data-title="Mice on Venus">
+        <source src="audios/music/Mutation.mp3" type="audio/mpeg" data-title="Mutation">
+        <source src="audios/music/Oxygene.mp3" type="audio/mpeg" data-title="Oxygene">
+        <source src="audios/music/Subwoofer-Lullaby.mp3" type="audio/mpeg" data-title="Subwoofer Lullaby">
+        <source src="audios/music/Sweden-Lofi-Remake.mp3" type="audio/mpeg" data-title="Sweden Lofi Remake">
+        <source src="audios/music/Sweden.mp3" type="audio/mpeg" data-title="Sweden">
+        <source src="audios/music/Wet-Hands.mp3" type="audio/mpeg" data-title="Wet Hands">
     </audio>
 
-    <audio id="selectSound" src="audios/effects/select.mp3" preload="auto"></audio>
-    <audio id="hoverSound" src="audios/effects/hover.mp3" preload="auto"></audio>
-
-    <div class="toast-container"></div>
+    <div class="audio-control-button-container">
+        <button id="audioControlButton" class="audio-control-button off">
+            <span class="neon-effect"></span> <i class="fas fa-volume-up audio-icon off-icon"></i> <i class="fas fa-volume-mute audio-icon on-icon"></i> <span id="currentMusicTitle">Desligado</span>
+            <div id="audioProgressArc" class="audio-progress-arc"></div>
+        </button>
+    </div>
 
     <script src="script.js"></script>
 </body>
