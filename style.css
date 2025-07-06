@@ -1,5 +1,5 @@
 /* ========================================= */
-/* ESTILOS GERAIS                          */
+/* ESTILOS GERAIS                            */
 /* ========================================= */
 
 :root {
@@ -59,20 +59,22 @@ a:hover {
 }
 
 /* ========================================= */
-/* BOTÕES                                  */
+/* BOTÕES                                    */
 /* ========================================= */
 
 .btn-primary,
 .btn-secondary,
-.btn-link {
+.btn-link,
+.pixel-legends-btn { /* Adicionada a classe aqui */
     display: inline-block;
     padding: 12px 25px;
     border-radius: 5px;
     font-weight: 600;
     text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Adicionado transform e box-shadow para a transição */
     white-space: nowrap;
     text-decoration: none; /* Garante que links com classe btn não tenham underline */
+    cursor: pointer; /* Garante que tenha o cursor de ponteiro */
 }
 
 .btn-primary {
@@ -109,8 +111,26 @@ a:hover {
     border-color: #e0a800;
 }
 
+/* NOVO ESTILO PARA BOTÕES DO PIXEL LEGENDS (ou outros com animação similar) */
+.pixel-legends-btn {
+    /* Estilos base, se diferentes dos btn-primary/secondary.
+       Se forem iguais, apenas o :hover é necessário */
+    background-color: var(--primary-color); /* Exemplo: podem ser como btn-primary */
+    color: var(--text-color-light);
+    border: 2px solid var(--primary-color);
+}
+
+.pixel-legends-btn:hover,
+.pixel-legends-btn:focus {
+    transform: translateY(-5px); /* Move o botão 5px para cima */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Exemplo de sombra */
+    background-color: var(--accent-color); /* Exemplo: muda para cor de destaque no hover */
+    border-color: var(--accent-color);
+    color: var(--dark-bg); /* Texto escuro no fundo amarelo */
+}
+
 /* ========================================= */
-/* SEÇÕES                                  */
+/* SEÇÕES                                    */
 /* ========================================= */
 
 .section-padded {
@@ -193,7 +213,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* HEADER                                  */
+/* HEADER                                    */
 /* ========================================= */
 
 .main-header {
@@ -229,7 +249,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO HERO                              */
+/* SEÇÃO HERO                                */
 /* ========================================= */
 
 .hero-section {
@@ -326,7 +346,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* CONTEÚDO EM DUAS COLUNAS                */
+/* CONTEÚDO EM DUAS COLUNAS                  */
 /* ========================================= */
 
 .content-two-columns {
@@ -356,7 +376,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE SERVIÇOS                        */
+/* GRID DE SERVIÇOS                          */
 /* ========================================= */
 
 .services-grid {
@@ -412,7 +432,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE CARGOS (ROLES)                  */
+/* GRID DE CARGOS (ROLES)                    */
 /* ========================================= */
 
 .roles-grid {
@@ -681,7 +701,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO CALL TO ACTION                    */
+/* SEÇÃO CALL TO ACTION                      */
 /* ========================================= */
 
 .call-to-action {
@@ -722,7 +742,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* FOOTER                                  */
+/* FOOTER                                    */
 /* ========================================= */
 
 .main-footer {
@@ -734,7 +754,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* BOTÃO DE ÁUDIO                          */
+/* BOTÃO DE ÁUDIO                            */
 /* ========================================= */
 
 #playAudioBtn {
@@ -811,7 +831,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* CARDS DE SEGURANÇA E ITENS              */
+/* CARDS DE SEGURANÇA E ITENS                */
 /* ========================================= */
 
 .admin-security-section .section-title img {
@@ -872,7 +892,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* RESPONSIVIDADE                          */
+/* RESPONSIVIDADE                            */
 /* ========================================= */
 
 /* Mobile-first: estilos padrão para telas menores, depois sobrescreve para maiores */
