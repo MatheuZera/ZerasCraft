@@ -175,16 +175,17 @@ a:hover {
     display: none !important;
 }
 
-/* Hero Section */
 .hero-section {
     position: relative;
-    min-height: 100vh;
+    min-height: 100vh; /* Garante que a seção ocupe a altura total da viewport */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     color: var(--text-color-light);
-    background: url('images/site/banner-fundo-hero.gif') no-repeat center center contain;
+    /* **Alterado aqui:** */
+    background: url('images/site/banner-fundo.gif') no-repeat center center;
+    background-size: cover; /* Faz a imagem cobrir toda a área, cortando se necessário */
     background-attachment: fixed;
     padding-top: 80px;
     padding-bottom: 60px;
