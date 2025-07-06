@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioControlButton = document.getElementById('audioControlButton');
     const currentMusicTitle = document.getElementById('currentMusicTitle');
     const audioProgressArc = document.getElementById('audioProgressArc');
-    const onIcon = audioControlButton.querySelector('.on-icon');   // Ícone com X
-    const offIcon = audioControlButton.querySelector('.off-icon'); // Ícone sem X
+    const onIcon = audioControlButton.querySelector('.on-icon');   // Ícone com X (para mute)
+    const offIcon = audioControlButton.querySelector('.off-icon'); // Ícone sem X (para volume normal)
 
     // Coleta todas as fontes de música do HTML
     const musicSources = Array.from(audio.querySelectorAll('source')).map(source => ({
@@ -18,40 +18,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     let currentMusicIndex = -1; // Índice da música atualmente selecionada
-    let isPlaying = false;      // Estado de reprodução da música de fundo
+    // 'isPlaying' será determinado pelo estado real do 'audio' element, não por uma variável booleana simples
+    // let isPlaying = false; // Removido ou será inferido
 
     console.log(`Músicas encontradas: ${musicSources.length}`, musicSources);
 
-    // Função para atualizar o estado visual do botão (classes, ícones, texto)
+    /**
+     * Atualiza o estado visual do botão de controle de áudio (classes, ícones, texto, progresso).
+     * Esta função agora se baseia no estado real do elemento <audio>.
+     */
     function updateAudioButtonState() {
-        console.log(`updateAudioButtonState: isPlaying = ${isPlaying}`);
+        // console.log(`updateAudioButtonState: audio.paused = ${audio.paused}, audio.src = ${audio.src}`);
 
-        if (isPlaying) {
+        // A música está "tocando" se não estiver pausada E tiver uma fonte definida
+        const isCurrentlyPlaying = !audio.paused && audio.src;
+
+        if (isCurrentlyPlaying) {
             audioControlButton.classList.remove('off');
-            audioControlButton.classList.add('on');
-            onIcon.style.display = 'inline-block'; // Mostra o ícone de mute (com X)
-            offIcon.style.display = 'none';        // Esconde o ícone de volume normal
+            audioControlButton.classList.add('on'); // Adiciona a classe 'on' para ativar o neon
+            onIcon.style.display = 'inline-block';
+            offIcon.style.display = 'none';
             audioControlButton.setAttribute('aria-label', `Música tocando: ${currentMusicTitle.textContent}. Clique para pausar.`);
             updateProgressBar(); // Inicia/continua a atualização da barra de progresso
         } else {
-            audioControlButton.classList.remove('on');
+            audioControlButton.classList.remove('on'); // Remove a classe 'on' para desativar o neon
             audioControlButton.classList.add('off');
-            onIcon.style.display = 'none';          // Esconde o ícone de mute
-            offIcon.style.display = 'inline-block'; // Mostra o ícone de volume normal
+            onIcon.style.display = 'none';
+            offIcon.style.display = 'inline-block';
             audioControlButton.setAttribute('aria-label', 'Música pausada. Clique para tocar.');
             audioProgressArc.style.transform = `rotate(-45deg)`; // Reseta a barra de progresso
-            // O texto 'Desligado' ou 'Erro ao tocar música' já é definido por playRandomMusic ou pauseMusic
+            // O texto já foi definido por pauseMusic ou pelo catch de playRandomMusic
         }
     }
 
-    // Função para reproduzir uma música aleatória
+    /**
+     * Reproduz uma música aleatória da lista.
+     * Tenta lidar com a política de autoplay e erros de reprodução.
+     */
     function playRandomMusic() {
         console.log("playRandomMusic: Tentando iniciar reprodução...");
 
         if (musicSources.length === 0) {
             currentMusicTitle.textContent = 'Nenhuma música encontrada.';
             audioControlButton.disabled = true;
-            isPlaying = false;
             updateAudioButtonState();
             console.warn("Nenhuma fonte de música configurada no HTML.");
             return;
@@ -59,66 +68,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let randomIndex;
         if (musicSources.length > 1) {
-            // Garante que a próxima música seja diferente da atual, se houver mais de uma
             do {
                 randomIndex = Math.floor(Math.random() * musicSources.length);
             } while (randomIndex === currentMusicIndex);
         } else {
-            // Se houver apenas uma música, toque-a
             randomIndex = 0;
         }
 
         currentMusicIndex = randomIndex;
         const selectedMusic = musicSources[currentMusicIndex];
 
-        audio.src = selectedMusic.src; // Define a fonte da música
-        audio.load(); // Carrega a nova fonte (essencial para alguns navegadores/cenários)
+        audio.src = selectedMusic.src;
+        audio.load(); // Carrega a nova fonte
+
+        currentMusicTitle.textContent = selectedMusic.title; // Atualiza o título imediatamente
 
         console.log(`playRandomMusic: Carregando '${selectedMusic.title}' de '${selectedMusic.src}'`);
 
-        // Tenta tocar a música
         audio.play()
             .then(() => {
-                isPlaying = true;
-                currentMusicTitle.textContent = selectedMusic.title;
-                updateAudioButtonState(); // Atualiza para o estado ON
                 console.log(`playRandomMusic: Reproduzindo '${selectedMusic.title}' com sucesso.`);
+                updateAudioButtonState(); // Atualiza para o estado ON (com neon)
             })
             .catch(error => {
-                isPlaying = false; // Garante que o estado seja falso se houver erro
-                currentMusicTitle.textContent = 'Erro ao tocar música.';
-                updateAudioButtonState(); // Atualiza para o estado OFF (com mensagem de erro)
+                // A promessa de play foi rejeitada.
+                // Isso pode acontecer devido a:
+                // 1. NotAllowedError (autoplay bloqueado) - o mais comum.
+                // 2. DOMException (interrompido por pause() rápido, ou outro erro).
+                // 3. NotSupportedError (formato de áudio não suportado, caminho errado).
+
                 console.error(`playRandomMusic: Falha ao reproduzir '${selectedMusic.title}' de '${selectedMusic.src}':`, error);
 
-                // Tipos de erro comuns:
-                // DOMException: The play() request was interrupted by a call to pause() - normal ao alternar rapidamente
-                // NotAllowedError: play() failed because the user didn't interact with the document first. - autoplay bloqueado
-                // NotSupportedError: The element has no supported sources. - caminho do áudio errado ou formato não suportado
-
-                // Se o erro for um bloqueio de autoplay (NotAllowedError), não tentamos a próxima automaticamente.
-                // Se for um erro de carregamento ou outro problema, podemos tentar a próxima.
-                if (error.name !== 'NotAllowedError' && musicSources.length > 1) {
-                    console.log("Tentando a próxima música devido a um erro de reprodução...");
-                    setTimeout(playRandomMusic, 1000); // Tenta a próxima após 1 segundo
+                if (error.name === 'NotAllowedError') {
+                    // Música não pôde ser iniciada por falta de interação do usuário.
+                    // O UI deve refletir que a música não está tocando.
+                    currentMusicTitle.textContent = 'Clique para tocar.';
+                    // Não chamamos pauseMusic aqui, apenas atualizamos o estado visual
+                    // para indicar que está "parado" esperando o clique.
+                    audio.pause(); // Garante que esteja pausado no modelo do navegador
+                    updateAudioButtonState(); // Atualiza para o estado OFF
+                    console.log("Autoplay bloqueado. Aguardando interação do usuário.");
+                } else if (error.name === 'NotSupportedError' || error.name === 'AbortError') {
+                    // Problema com o arquivo (não suportado, carregamento abortado)
+                    currentMusicTitle.textContent = 'Erro ao carregar música.';
+                    audio.pause(); // Garante que esteja pausado
+                    updateAudioButtonState(); // Atualiza para o estado OFF
+                    console.error("Erro no formato ou carregamento do áudio:", error);
+                    // Opcional: Tentar a próxima música se houver muitas e for um erro de arquivo
+                    if (musicSources.length > 1) {
+                         console.log("Tentando a próxima música devido a um erro de arquivo...");
+                         setTimeout(playRandomMusic, 1500); // Tenta a próxima após um pequeno atraso
+                    }
+                } else {
+                    // Outro tipo de erro geral (DOMException etc.)
+                    currentMusicTitle.textContent = 'Erro de reprodução.';
+                    audio.pause(); // Garante que esteja pausado
+                    updateAudioButtonState(); // Atualiza para o estado OFF
+                    console.error("Erro inesperado durante a reprodução:", error);
                 }
             });
     }
 
-    // Função para pausar a música
+    /**
+     * Pausa a música em reprodução.
+     */
     function pauseMusic() {
         console.log("pauseMusic: Pausando reprodução.");
         audio.pause();
-        isPlaying = false;
         currentMusicTitle.textContent = 'Desligado'; // Volta o texto para "Desligado"
-        updateAudioButtonState(); // Atualiza para o estado OFF
+        updateAudioButtonState(); // Atualiza para o estado OFF (sem neon)
     }
 
     // Event Listener para o clique no botão de controle de áudio
     audioControlButton.addEventListener('click', () => {
-        console.log("Botão de controle de áudio clicado. isPlaying antes do toggle:", isPlaying);
-        if (isPlaying) {
+        // A lógica agora se baseia diretamente no estado 'paused' do elemento audio
+        if (!audio.paused) { // Se não estiver pausado, está tocando
+            console.log("Botão clicado: Música tocando, pausando.");
             pauseMusic();
         } else {
+            console.log("Botão clicado: Música pausada, tentando tocar.");
             playRandomMusic();
         }
     });
@@ -129,43 +157,52 @@ document.addEventListener('DOMContentLoaded', () => {
         playRandomMusic();
     });
 
+    // Evento quando o áudio é pausado (via código ou UI)
+    audio.addEventListener('pause', () => {
+        console.log("Evento 'pause' disparado.");
+        // O currentMusicTitle e o estado já foram ajustados por pauseMusic(),
+        // mas garante que o UI está correto.
+        updateAudioButtonState();
+    });
+
+    // Evento quando o áudio começa a tocar (via código ou UI)
+    audio.addEventListener('play', () => {
+        console.log("Evento 'play' disparado.");
+        // Garante que o UI está no estado de reprodução
+        updateAudioButtonState();
+    });
+
     // Evento de erro geral do elemento de áudio (para debug)
     audio.addEventListener('error', (e) => {
-        console.error("Erro no elemento <audio>:", e);
-        // isPlaying já deve ser false se o erro for do play() promise, mas garante aqui
-        isPlaying = false;
+        console.error("Erro no elemento <audio>:", e.message, e);
         currentMusicTitle.textContent = 'Erro de áudio!';
-        updateAudioButtonState();
+        audio.pause(); // Garante que o áudio pare
+        updateAudioButtonState(); // Atualiza para o estado OFF
     });
 
     // Função para atualizar a barra de progresso circular
     function updateProgressBar() {
-        if (isPlaying && !isNaN(audio.duration) && audio.duration > 0) {
-            const progress = (audio.currentTime / audio.duration); // Progresso de 0 a 1
-            const rotation = progress * 360; // Rotação total em graus
-            audioProgressArc.style.transform = `rotate(${rotation - 45}deg)`; // -45deg para alinhar o início no topo
-
-            requestAnimationFrame(updateProgressBar); // Solicita o próximo frame
+        // Só atualiza se o áudio estiver realmente tocando e tiver duração válida
+        if (!audio.paused && !isNaN(audio.duration) && audio.duration > 0) {
+            const progress = (audio.currentTime / audio.duration);
+            const rotation = progress * 360;
+            audioProgressArc.style.transform = `rotate(${rotation - 45}deg)`;
+            requestAnimationFrame(updateProgressBar);
         } else {
             audioProgressArc.style.transform = `rotate(-45deg)`; // Reseta a barra
         }
     }
 
     // Inicialização do estado do botão de áudio quando a página carrega
-    // Começa no estado "Desligado"
     if (musicSources.length > 0) {
-        audioControlButton.disabled = false; // Habilita o botão
-        audioControlButton.classList.add('off'); // Garante a classe 'off'
-        currentMusicTitle.textContent = 'Desligado'; // Texto inicial
-        onIcon.style.display = 'none';            // Ícone X escondido
-        offIcon.style.display = 'inline-block';  // Ícone normal visível
-        console.log("Botão de áudio inicializado para o estado 'Desligado'.");
+        audioControlButton.disabled = false;
+        currentMusicTitle.textContent = 'Clique para tocar.'; // Mensagem inicial clara
+        updateAudioButtonState(); // Define o estado visual inicial como "off"
+        console.log("Botão de áudio inicializado para 'Clique para tocar'.");
     } else {
-        audioControlButton.disabled = true; // Desabilita o botão se não houver músicas
+        audioControlButton.disabled = true;
         currentMusicTitle.textContent = 'Nenhuma música disponível.';
-        audioControlButton.classList.add('off');
-        onIcon.style.display = 'none';
-        offIcon.style.display = 'inline-block';
+        updateAudioButtonState(); // Define o estado visual inicial como "off" e desabilitado
         console.warn("Nenhuma música configurada. Botão de áudio desabilitado.");
     }
 
@@ -176,26 +213,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
 
     // Efeitos Sonoros de Clique
-    const clickSound = new Audio('audios/effects/click.mp3'); // Verifique o caminho!
+    const clickSound = new Audio('audios/effects/click.mp3');
     document.querySelectorAll('a, button[data-sound-effect="select"]').forEach(element => {
-        if (!element.classList.contains('audio-control-button')) { // Evita conflito com o botão de áudio principal
+        // Evita conflito com o botão de áudio principal e seus filhos
+        if (!element.closest('#audioControlButton')) {
              element.addEventListener('click', () => {
-                console.log("Click sound: Tentando tocar.");
-                clickSound.currentTime = 0; // Reinicia o áudio para tocar múltiplas vezes
-                clickSound.play().catch(e => console.error("Erro ao tocar som de clique:", e));
+                // console.log("Click sound: Tentando tocar.");
+                clickSound.currentTime = 0;
+                clickSound.play().catch(e => console.error("Erro ao tocar som de clique:", e.message));
             });
         }
     });
 
     // Efeitos Sonoros de Hover
-    const selectSound = new Audio('audios/effects/select.mp3'); // Verifique o caminho!
+    const selectSound = new Audio('audios/effects/select.mp3');
     document.querySelectorAll(
         '.service-card, .role-category-card, .access-card, .event-card, .community-card, .partnership-card, .partnership-proposal-card'
     ).forEach(element => {
         element.addEventListener('mouseenter', () => {
-            console.log("Select sound: Tentando tocar.");
-            selectSound.currentTime = 0; // Reinicia o áudio
-            selectSound.play().catch(e => console.error("Erro ao tocar som de hover:", e));
+            // console.log("Select sound: Tentando tocar.");
+            selectSound.currentTime = 0;
+            selectSound.play().catch(e => console.error("Erro ao tocar som de hover:", e.message));
         });
     });
 
