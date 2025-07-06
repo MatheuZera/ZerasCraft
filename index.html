@@ -1,38 +1,1756 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Zera's Craft</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mundo Zera's Craft - Sua Aventura Minecraft!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/site/icone.webp" type="image/x-icon">
+
+    <meta property="og:title" content="Mundo Zera's Craft - Website" />
+    <meta property="og:description" content="Entre para a nossa comunidade vibrante de Minecraft! Servidor com eventos épicos, sistema de guildas, cargos personalizados e muita criatividade. Junte-se à aventura!" />
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/imagens/site/icone.webp" />
+    <meta property="og:url" content="https://matheuzera.github.io/ZerasCraft/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mundo Zera's Craft" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mundo Zera's Craft - Website" />
+    <meta name="twitter:description" content="Entre para a nossa comunidade vibrante de Minecraft! Servidor com eventos épicos, sistema de guildas, cargos personalizados e muita criatividade. Junte-se à aventura!" />
+    <meta name="twitter:image" content="https://matheuzera.github.io/ZerasCraft/images/site/banner_og_discord.jpg" />
+    <meta name="twitter:creator" content="@SeuHandleDoTwitter" />
+
+    <style>
+        /* Estilos CSS do seu arquivo style.css */
+        :root {
+            --primary-color: #4CAF50; /* Um verde Minecraft */
+            --secondary-color: #FFC107; /* Um amarelo/laranja */
+            --dark-background: #1A1A1A; /* Fundo escuro geral */
+            --light-background: #252525; /* Fundo de seção alternativa */
+            --text-color: #E0E0E0; /* Cor do texto claro */
+            --card-background: #2E2E2E; /* Fundo dos cards */
+            --border-color: #444; /* Cor da borda para elementos */
+            --hover-glow: #6fdd72; /* Efeito de brilho no hover */
+            --button-hover-darken: #3e8e41; /* Tom mais escuro para hover de botão */
+            --button-shadow: rgba(0, 0, 0, 0.4);
+            --toast-background: rgba(0, 0, 0, 0.8);
+            --toast-text-color: #fff;
+            --toast-border-radius: 5px;
+            --toast-padding: 10px 15px;
+            --toast-margin: 20px;
+            --toast-font-size: 1rem;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-background);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            color: var(--secondary-color);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: var(--light-background);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: center; /* Centraliza o logo */
+            align-items: center;
+        }
+
+        .header-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .header-logo:hover {
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--hover-glow);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 80vh; /* Ajuste para melhor visualização em telas maiores */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden; /* Para esconder qualquer transbordamento da imagem/overlay */
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://matheuzera.github.io/ZerasCraft/images/site/banner-inicio.png') no-repeat center center/cover;
+            filter: blur(5px); /* Efeito de desfoque para a imagem de fundo */
+            transform: scale(1.05); /* Pequeno zoom para evitar bordas brancas com o blur */
+            z-index: 1;
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Overlay escuro */
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 20px;
+            max-width: 900px;
+            animation: fadeInScale 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .server-branding {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .server-banner {
+            width: 100%;
+            max-width: 600px; /* Ajuste o tamanho máximo do banner GIF */
+            height: auto;
+            border: 4px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .server-banner:hover {
+            transform: scale(1.02);
+        }
+
+        .server-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--secondary-color);
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.8);
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .server-icon:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* General Section Styling */
+        .section-padded {
+            padding: 80px 0;
+        }
+
+        .section-alt-bg {
+            background-color: var(--light-background);
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* Buttons */
+        .btn-primary, .btn-secondary {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px var(--button-shadow);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--button-hover-darken);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px var(--button-shadow), 0 0 20px var(--hover-glow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px var(--button-shadow);
+        }
+
+        .btn-link {
+            color: var(--secondary-color);
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .btn-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Two Column Content */
+        .content-two-columns {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .content-two-columns > div {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .content-two-columns .text-content {
+            padding-right: 20px;
+        }
+
+        .content-two-columns .text-content p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .content-two-columns .image-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .responsive-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .bordered-image {
+            border: 4px solid var(--secondary-color);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
+            border-color: var(--primary-color);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 5px var(--primary-color));
+        }
+
+        .card-title {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Roles Grid (Canais & Cargos) */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .role-category-card {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .role-category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
+            border-color: var(--primary-color);
+        }
+
+        .role-category-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 5px var(--secondary-color));
+        }
+
+        .role-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .role-list li {
+            background-color: #383838;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        .role-list li::before {
+            content: '⛏️'; /* Ícone de picareta */
+            margin-right: 10px;
+        }
+
+        .discord-channel-link {
+            font-weight: bold;
+            color: var(--secondary-color);
+            transition: color 0.3s ease;
+        }
+
+        .discord-channel-link:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Pixel Legends Section */
+        #pixel-legends h3 {
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        #pixel-legends ul,
+        #pixel-legends ol {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        #pixel-legends ol {
+            list-style-type: decimal;
+        }
+
+        #pixel-legends li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        #pixel-legends code {
+            background-color: #3a3a3a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: var(--secondary-color);
+            font-size: 0.95em;
+        }
+        
+        /* Access Server Section */
+        .access-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .access-card {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .access-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .access-card p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .access-card code {
+            display: block;
+            background-color: #3a3a3a;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: var(--secondary-color);
+            font-size: 1.05rem;
+            word-break: break-all; /* Para IPs longos */
+        }
+
+        .copy-btn {
+            margin-top: 20px;
+            width: auto; /* Permite que o botão se ajuste ao texto */
+            padding: 12px 25px;
+        }
+
+        /* Events Section */
+        .events-sub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
+            border-color: var(--primary-color);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .event-card .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .event-card .card-description {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            flex-grow: 1; /* Permite que a descrição ocupe espaço */
+        }
+
+        .event-details {
+            font-size: 0.95rem;
+            color: #AAA;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Admin & Security Section */
+        .admin-security-section .section-title img {
+            height: 1.5em; /* Ajusta o tamanho do ícone */
+            vertical-align: middle;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+        }
+
+        .admin-security-section .security-card {
+            background-color: var(--card-background);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            text-align: left;
+            max-width: 900px;
+            margin: 0 auto; /* Centraliza o card */
+        }
+
+        .admin-security-section .security-card h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .security-grid-item {
+            background-color: #383838;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-left-color 0.3s ease;
+        }
+
+        .security-grid-item:hover {
+            transform: translateX(5px);
+            border-left-color: var(--primary-color);
+        }
+
+        .security-grid-item h4 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .security-grid-item p {
+            color: #CCC;
+            font-size: 1rem;
+        }
+
+        .admin-security-section .btn-link {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        /* Community & Partners Section */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .community-card, .partnership-card {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .community-card:hover, .partnership-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px var(--hover-glow);
+            border-color: var(--secondary-color);
+        }
+
+        .member-avatar, .partnership-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px auto;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .partnership-logo {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .member-avatar:hover, .partnership-logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .community-card h3, .partnership-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .partnership-card h3 {
+            color: var(--secondary-color);
+        }
+
+        .community-card p, .partnership-card p {
+            font-size: 0.95rem;
+            color: #CCC;
+            flex-grow: 1; /* Permite que a descrição ocupe espaço */
+            margin-bottom: 20px;
+        }
+
+        .community-card .btn-secondary, .partnership-card .btn-secondary {
+            margin-top: auto; /* Empurra o botão para a parte inferior */
+            width: auto;
+            align-self: center; /* Centraliza o botão */
+        }
+
+        /* Call to Action Section */
+        .call-to-action {
+            text-align: center;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 80px 0;
+            background-image: url('https://matheuzera.github.io/ZerasCraft/images/site/call-to-action-bg.jpg'); /* Adicione uma imagem de fundo para o CTA */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .call-to-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Overlay escuro */
+            z-index: 1;
+        }
+
+        .call-to-action .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .call-to-action .section-title {
+            color: var(--secondary-color);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .call-to-action .section-description {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--light-background);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #999;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .content-two-columns {
+                flex-direction: column;
+            }
+
+            .content-two-columns .text-content {
+                padding-right: 0;
+            }
+
+            .content-two-columns .image-content {
+                order: -1; /* Move a imagem para cima em telas menores */
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-padded {
+                padding: 60px 0;
+            }
+
+            .hero-section {
+                height: 70vh;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            .services-grid, .roles-grid, .access-cards-grid, .events-sub-grid, .community-grid {
+                grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+            }
+
+            .role-list li {
+                font-size: 0.9rem;
+            }
+
+            .event-image {
+                height: 180px;
+            }
+
+            .event-card .card-title {
+                font-size: 1.4rem;
+            }
+
+            .call-to-action .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                height: 60vh;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .server-icon {
+                width: 90px;
+                height: 90px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%; /* Botões ocupam largura total */
+                box-sizing: border-box;
+            }
+        }
+
+        /* Toast Notification Styling */
+        .toast-notification {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--toast-background);
+            color: var(--toast-text-color);
+            text-align: center;
+            border-radius: var(--toast-border-radius);
+            padding: var(--toast-padding);
+            position: fixed;
+            z-index: 10000;
+            left: 50%;
+            bottom: var(--toast-margin);
+            transform: translateX(-50%);
+            font-size: var(--toast-font-size);
+            opacity: 0;
+            transition: opacity 0.5s, visibility 0.5s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast-notification.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Audio Button */
+        #playAudioBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0; /* Hide text, use icon */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            overflow: hidden; /* Hide anything outside */
+        }
+
+        #playAudioBtn::before {
+            content: '🎵'; /* Unicode for musical note */
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        #playAudioBtn.play-audio-btn-on {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        #playAudioBtn.play-audio-btn-on::before {
+            content: '🔊'; /* Unicode for speaker with sound waves */
+            transform: scale(1.1);
+        }
+
+        #playAudioBtn.play-audio-btn-off {
+            background-color: #888; /* Grey when off */
+            border-color: #888;
+        }
+
+        #playAudioBtn.play-audio-btn-off::before {
+            content: '🔇'; /* Unicode for muted speaker */
+        }
+
+        /* Animation for the button when off/animating */
+        #playAudioBtn.animating {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px var(--hover-glow);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <header>
-        <h1>Mundo Zera's Craft</h1>
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="#" class="header-logo">Mundo Zera's Craft</a>
+        </div>
     </header>
 
     <main>
-        <section class="hero-banner">
-            <div class="mini-banner">
-                <img src="images/site/icone.webp" alt="Ícone Mundo Zera's Craft" class="website-icon">
-                <h2>Sua Próxima Grande Aventura em Minecraft <br> Começa Aqui!</h2>
-                <p>Entre para a nossa comunidade vibrante e prepare-se para levar sua paixão por blocos a um novo nível!</p>
-                <a href="URL_DO_SEU_DISCORD" target="_blank" class="discord-button">Entrar no Servidor Discord!</a>
+        <section id="inicio" class="hero-section">
+            <div class="hero-image-overlay"></div>
+            <div class="container hero-content">
+                <div class="server-branding">
+                    <img src="images/site/mini-banner.gif" alt="Mini Banner do Mundo Zera's Craft" class="server-banner">
+                    <img src="images/site/icone.webp" alt="Ícone do Servidor Mundo Zera's Craft" class="server-icon">
+                </div>
+                <h1 class="hero-title">Sua Próxima Grande Aventura em Minecraft Começa Aqui!</h1>
+                <p class="hero-subtitle">Entre para a nossa comunidade vibrante e prepare-se para levar sua paixão por blocos a um novo nível!</p>
+                <a href="https://discord.gg/GYGVBqGEwP" class="btn-primary" target="_blank">Entrar no Servidor Discord!</a>
             </div>
         </section>
 
-        <section class="info-section">
-            <h2>Sobre o Mundo Zera's Craft</h2>
-            <p>Somos uma comunidade dedicada de Minecraft, focada em proporcionar uma experiência de jogo única e divertida. Junte-se a nós para construir, explorar e criar amizades em um ambiente acolhedor e cheio de aventura!</p>
-            <p>Se você é um construtor, um explorador ou um guerreiro, temos um lugar para você!</p>
+        <section id="sobre" class="section-padded">
+            <div class="container content-two-columns">
+                <div class="text-content">
+                    <h2 class="section-title">🌍 Sobre o Mundo Zera's Craft</h2>
+                    <p>Somos mais que um servidor de Minecraft; somos um universo onde a paixão por blocos e aventuras nos une. Nosso objetivo é proporcionar uma experiência única e personalizada para cada jogador, seja você um construtor lendário, um explorador incansável ou um mestre do PvP.</p>
+                    <p>Aqui, você encontra um ambiente acolhedor e cheio de possibilidades, focado em fazer você viver o Minecraft de um jeito totalmente novo, conectado a outros jogadores com seus mesmos interesses.</p>
+                    <a href="link" class="btn-secondary">Saiba Mais</a>
+                </div>
+                <div class="image-content">
+                    <img src="images/site/sobre-o-mundo.gif" class="responsive-image bordered-image" alt="Imagem Ilustrativa sobre o Mundo Zera's Craft">
+                </div>
+            </div>
         </section>
 
+        <section id="servicos" class="section-padded section-alt-bg">
+            <div class="container">
+                <h2 class="section-title">✨ Nossos Recursos & Apoio</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <img src="images/recursos/suporte.png" alt="Ícone de Suporte" class="card-icon">
+                        <h3 class="card-title">Suporte 24/7</h3>
+                        <p class="card-description">Ajuda mediada em qualquer momento no Discord.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="images/recursos/eventos.png" alt="Ícone de Eventos" class="card-icon">
+                        <h3 class="card-title">Eventos Semanais</h3>
+                        <p class="card-description">Eventos divertidos com prêmios exclusivos para a comunidade.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="images/recursos/guildas.png" alt="Ícone de Guildas" class="card-icon">
+                        <h3 class="card-title">Sistema de Clãs</h3>
+                        <p class="card-description">Monte sua Guilda e conquiste territórios no jogo.</p>
+                    </div>
+                    <div class="service-card">
+                        <img src="images/recursos/criacoes.png" alt="Ícone de Criação" class="card-icon">
+                        <h3 class="card-title">Loja no Jogo</h3>
+                        <p class="card-description">Crie suas invenções e mostre para todos da Comunidade! As pessoas podem lhe ajudar em alguma coisa que você esteja com dificuldades, então não tenha medo.. pergunte e ajude quem precisar. :D</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="canais-cargos" class="section-padded">
+            <div class="container">
+                <h2 class="section-title">💬 Canais & Cargos: Sua Experiência Personalizada!</h2>
+                <p class="section-description">Nossa estrutura de canais é otimizada para que você encontre facilmente o que busca. Com categorias claras, a navegação é fluida.</p>
+                <p class="section-description">O sistema de cargos do nosso servidor é um dos mais completos, permitindo que você personalize sua experiência e se conecte com quem realmente importa, de acordo com seus interesses:</p>
+                <div class="roles-grid">
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/staff.png" class="role-category-icon">
+                        <h3 class="card-title">Staff & Organização</h3>
+                        <ul class="role-list">
+                            <li>Cargos de Liderança (Dono, Sub Donos, ADMs, Moderadores)</li>
+                            <li>Coordenadores e Equipe de Suporte Geral</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/pings.png" class="role-category-icon">
+                        <h3 class="card-title">Pings & Notificações</h3>
+                        <ul class="role-list">
+                            <li>Pings para Ajuda, Atualizações, Avisos, Críticos, Eventos, Quero Jogar, Minecraft, Parcerias, etc.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/hobbies.png" class="role-category-icon">
+                        <h3 class="card-title">Interesses (Hobbies)</h3>
+                        <ul class="role-list">
+                            <li>Animadores, Construtores, Criadores de Addons, Exploradores, Farmers, Mineradores, Modeladores, Pixel Art, Programadores, PvP.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/minecraft-launchers.png" class="role-category-icon">
+                        <h3 class="card-title">Minecraft & Launchers</h3>
+                        <ul class="role-list">
+                            <li>Bedrock (Multiplataforma), Java Edition, Minecraft Dungeons, Minecraft Legends.</li>
+                            <li>Launchers específicos: Pojav, ATLauncher, Badlion, CurseForge, GDLauncher, Lunar, MultiMC, Prism, SKLauncher, TLauncher.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/plataformas.png" class="role-category-icon">
+                        <h3 class="card-title">Plataformas de Jogo</h3>
+                        <ul class="role-list">
+                            <li>Celular, Tablet, PlayStation, Notebook, PC, Xbox.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/xp.png" class="role-category-icon">
+                        <h3 class="card-title">Experiência & Nível (XP)</h3>
+                        <ul class="role-list">
+                            <li>Cargos baseados em XP, desde Cobre (2xp) até Bedrock (200xp).</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/guildas.png" class="role-category-icon">
+                        <h3 class="card-title">Guildas & Competições</h3>
+                        <ul class="role-list">
+                            <li>Líderes, Co-Líderes e ADMs de Guildas.</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/status.png" class="role-category-icon">
+                        <h3 class="card-title">Status & Benefícios</h3>
+                        <ul class="role-list">
+                            <li>Cargos de Eventos (Campeões MCTU, Fan-Jam Crafters).</li>
+                            <li>Cargos VIP (Primário, Elite, Cristal, Supremo, Ultimato).</li>
+                            <li>Cargos Principais (Aniversariantes, Doadores/Membros YT, Influencers, Inscritos Fixos, Parceiros).</li>
+                            <li>Cargos Exclusivos (Membros Estrelas, Membros do Dia, Colaboradores).</li>
+                            <li>Booster (Impulsionador, Nitro Boosters, Já Fui Booster).</li>
+                        </ul>
+                    </div>
+                    <div class="role-category-card">
+                        <img src="images/canais-e-cargos/redes-sociais.png" class="role-category-icon">
+                        <h3 class="card-title">Redes Sociais & Interesses Pessoais</h3>
+                        <ul class="role-list">
+                            <li>Cargos para plataformas (Instagram, Kwai, Facebook, Reddit, TikTok, Twitter, Twitch, YouTube).</li>
+                            <li>Cargos de interesses pessoais: Ajudar Pessoas, Ativo(a) no Servidor, Criar Coisas, Divertir no Servidor, Fazer Novas Amizades, Jogar Minecraft, Participar de Eventos, Tagarela nas Calls.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pixel-legends" class="section-padded section-light-bg">
+            <div class="container">
+                <h2 class="section-title">
+                    <img src="images/site/coroa-pixel-legends.png" alt="Coroa Pixel Legends" style="height: 1em; vertical-align: middle; margin-right: 10px;">
+                    Pixel Legends: Seu Reino, Suas Regras!
+                </h2>
+                <p class="section-description">Participe de batalhas épicas de guildas no universo Minecraft!</p>
+
+                <h3>O Que é o Pixel Legends?</h3>
+                <p>Este é nosso servidor oficial dentro do Minecraft! Lá você **cria sua própria Guilda**, e batalha contra outras pessoas para pegar recursos, faz parcerias com outros Líderes, formam alianças e etc.. Cada um tem o direito de criar sua própria guilda para evoluírem juntos(as). :D</p>
+
+                <h3>Como Crio Minha Própria Guilda?</h3>
+                <p>Acesse o canal <a href="#" class="discord-channel-link">#cargos-guildas</a> para mais detalhes sobre Guildas aqui no nosso servidor.</p>
+                <p>Bem, basta formar uma equipe e ir chamando mais e mais pessoas para transformar sua Guilda na mais forte possível!</p>
+
+                <h3>Como Funciona os Cargos Administrativos da Guilda?</h3>
+                <p><strong>Líder da Guilda:</strong> É responsável por tudo o que rola dentro da Guilda, tudo mesmo!</p>
+                <p><strong>Co-Líder da Guilda:</strong> Ajuda os Líderes em coisas diversas, e também quando estão ausentes, estas pessoas lideram sua Guilda até a volta do Líder,</p>
+                <p><strong>Administrador da Guilda:</strong> Coordena os Membros a arrumar a defesa, avisar sobre alguma coisa e etc..</p>
+
+                <h3>Como Funciona o MC Team Ultimate?</h3>
+                <p>Acesse o canal <a href="#" class="discord-channel-link">#eventos-mctu</a> para mais detalhes sobre..</p>
+
+                <h2 class="section-title">Funcionalidades do Servidor</h2>
+                <h3>Software</h3>
+                <ul>
+                    <li>SPIGOT/BUKKIT</li>
+                </ul>
+                <h3>Plugins</h3>
+                <ol>
+                    <li>DISCORD SRV: Conexão com os Chats do Discord,</li>
+                    <li>GEYSER MC: Conecta os Jogadores da Bedrock com Java simultaneamente,</li>
+                    <li>MULTIVERSE CORE: Possibilidade de criar múltiplos mundos um dentro do outro, como um server de minigames,</li>
+                    <li>VIA VERSION: Permite que jogadores entrem no servidor estando **um pouco** desatualizado da versão atual do servidor.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="acesso-servidor" class="section-padded section-alt-bg">
+            <div class="container">
+                <h2 class="section-title">Acesso ao Servidor: Mundo Vortex Craft</h2>
+                <div class="access-cards-grid">
+                    <div class="access-card">
+                        <h3>BEDROCK EDITION</h3>
+                        <p>IP: <code id="bedrock-ip">MundoVortexCraft.aternos.me</code></p>
+                        <p>PORTA: <code id="bedrock-port">57178</code></p>
+                        <button class="btn-primary copy-btn" data-target="bedrock-ip-port" data-ip="MundoVortexCraft.aternos.me" data-port="57178">Copiar IP & Porta</button>
+                    </div>
+                    <div class="access-card">
+                        <h3>JAVA EDITION</h3>
+                        <p>GERAL: <code id="java-address">MundoVortexCraft.aternos.me:57178</code></p>
+                        <button class="btn-primary copy-btn" data-target="java-address" data-ip="MundoVortexCraft.aternos.me:57178">Copiar Endereço</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="eventos" class="section-padded section-alt-bg">
+            <div class="container">
+                <h2 class="section-title">🏆 Eventos Épicos: Competição e Criatividade</h2>
+                <p class="section-description">Participe de nossos torneios e mostre suas habilidades!</p>
+                <div class="events-sub-grid">
+                    <div class="event-card">
+                        <img src="images/eventos/staff.jpg" class="event-image" alt="Imagem do Evento Seja Staff/ADM">
+                        <div class="card-content">
+                            <h3 class="card-title">🔔 SEJA STAFF/ADM: Formulário para Cargos!</h3>
+                            <p class="card-description">Participe e concorra a Cargos Admin no servidor, podendo subir de cargos de acordo com sua interação e colaborações</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Dependendo de como os Administradores checam seu Formulário, você pode ser Aceito(a) ou Recusado(a)!</p>
+                            <a href="https://discord.com/channels/1390120239588577482/1390696511255347241" class="btn-link" target="_blank">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/mctu.jpg" class="event-image" alt="Imagem do Evento MCTU">
+                        <div class="card-content">
+                            <h3 class="card-title">⚔️ MCTU (Minecraft Team Ultimate)</h3>
+                            <p class="card-description">Um campeonato exclusivo para guildas, testando habilidades de PvP, construção, redstone e muito mais. Forme sua equipe, treine e lute pela glória em um servidor dedicado ao torneio!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Competição de Guildas, Desafios Variados, Servidor Exclusivo, Cargos de Campeão.</p>
+                            <a href="https://discord.com/channels/1390120239588577482/1390696511255347241" class="btn-link" target="_blank">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/craftjam.png" class="event-image" alt="Imagem do Evento CraftJam">
+                        <div class="card-content">
+                            <h3 class="card-title">🎨 CRAFTJAM: Torneio de Criação</h3>
+                            <p class="card-description">Libere seu artista interior! Desafie-se a criar algo único dentro de um tema específico (construções, addons, texturas, fanarts, animações e mapas). Sua arte pode te render reconhecimento e prêmios!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Tema Secreto, Múltiplas Categorias, Votação Comunitária (baseada nas publicações mais recentes e únicas em canal específico), Cargos de Criador.</p>
+                            <a href="https://discord.com/channels/1390120239588577482/1390696565198557276" class="btn-link" target="_blank">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Evento em breve">
+                        <div class="card-content">
+                            <h3 class="card-title">Evento em Breve</h3>
+                            <p class="card-description">Novos eventos estão sendo preparados para a comunidade!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Fique atento aos nossos anúncios para mais informações.</p>
+                            <a href="#" class="btn-link" target="_blank">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Evento em breve">
+                        <div class="card-content">
+                            <h3 class="card-title">Evento em Breve</h3>
+                            <p class="card-description">Novos eventos estão sendo preparados para a comunidade!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Fique atento aos nossos anúncios para mais informações.</p>
+                            <a href="#" class="btn-link" target="_blank">Saiba Mais</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Evento em breve">
+                        <div class="card-content">
+                            <h3 class="card-title">Evento em Breve</h3>
+                            <p class="card-description">Novos eventos estão sendo preparados para a comunidade!</p>
+                            <p class="event-details"><strong>Detalhes:</strong> Fique atento aos nossos anúncios para mais informações.</p>
+                            <a href="#" class="btn-link" target="_blank">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-security-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <img src="images/seguranca/seguranca.webp" alt="Ícone de Segurança"> Administração & Segurança
+                </h2>
+                <div class="service-card security-card">
+                    <div class="card-content">
+                        <h3>SEGURANÇA</h3>
+                        <p>Sua segurança e uma experiência fluida são nossas prioridades. Nossa equipe de administração e moderação garante um ambiente justo e respeitoso.</p>
+
+                        <div class="security-grid-item">
+                            <h4>Bots de Segurança</h4>
+                            <p>Contamos com ferramentas avançadas, como nosso bot exclusivo, Pixel Craft, que é responsável por moderar o servidor e gerenciar comandos utilitários para que nossos eventos funcionem conforme o planejado. Ele foi criado por @MatheuZera e o Mundo Zera's Craft.</p>
+                        </div>
+
+                        <div class="security-grid-item">
+                            <h4>Sistemas de Recuperação</h4>
+                            <p>Além disso, utilizamos sistemas de prevenção e recuperação avançados (como o Xeom Bot para backups e o Shine Bot para bloquear bots maliciosos) para garantir que sua experiência no Mundo Zera's Craft seja sempre segura e protegida contra raids e outros imprevistos.</p>
+                        </div>
+
+                        <div class="security-grid-item">
+                            <h4>Sugestões e Melhorias</h4>
+                            <p>Você tem sugestões? Participe do nosso Fórum de Sugestões para nos ajudar a melhorar!</p>
+                            <a href="#" class="btn-link">Fórum de Sugestões</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="parcerias" class="section-padded section-alt-bg">
+            <div class="container">
+                <h2 class="section-title">Nossos Membros & Parceiros</h2>
+                <p class="section-description">
+                    Valorizamos a nossa comunidade e as parcerias estratégicas que enriquecem a experiência de todos no Mundo Zera's Craft. Conheça aqueles que fazem parte da nossa jornada.
+                </p>
+
+                <div class="community-grid">
+                    <div class="community-card">
+                        <img src="images/parceiros/icone.webp" alt="Esperando Colaborador" class="member-avatar">
+                        <h3>Esperando Colaborador(a)</h3>
+                        <p>Estamos buscando talentos para nossa comunidade! Se você contribui com o Mundo Zera's Craft, sua foto e descrição podem aparecer aqui.</p>
+                        <a href="#" class="btn-secondary">Ver Perfil</a>
+                    </div>
+                    <div class="community-card">
+                        <img src="images/parceiros/icone.webp" alt="Esperando Colaborador" class="member-avatar">
+                        <h3>Esperando Colaborador(a)</h3>
+                        <p>Estamos buscando talentos para nossa comunidade! Se você contribui com o Mundo Zera's Craft, sua foto e descrição podem aparecer aqui.</p>
+                        <a href="#" class="btn-secondary">Ver Perfil</a>
+                    </div>
+                    <div class="community-card">
+                        <img src="images/parceiros/icone.webp" alt="Esperando Colaborador" class="member-avatar">
+                        <h3>Esperando Colaborador(a)</h3>
+                        <p>Estamos buscando talentos para nossa comunidade! Se você contribui com o Mundo Zera's Craft, sua foto e descrição podem aparecer aqui.</p>
+                        <a href="#" class="btn-secondary">Ver Perfil</a>
+                    </div>
+
+                    <div class="partnership-card">
+                        <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
+                        <h3>Esperando Parceria</h3>
+                        <p>Interessado em se tornar um parceiro do Mundo Zera's Craft? Entre em contato para explorar oportunidades de colaboração.</p>
+                        <a href="#" class="btn-secondary">Saiba Mais</a>
+                    </div>
+                    <div class="partnership-card">
+                        <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
+                        <h3>Esperando Parceria</h3>
+                        <p>Interessado em se tornar um parceiro do Mundo Zera's Craft? Entre em contato para explorar oportunidades de colaboração.</p>
+                        <a href="#" class="btn-secondary">Saiba Mais</a>
+                    </div>
+                    <div class="partnership-card">
+                        <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
+                        <h3>Esperando Parceria</h3>
+                        <p>Interessado em se tornar um parceiro do Mundo Zera's Craft? Entre em contato para explorar oportunidades de colaboração.</p>
+                        <a href="#" class="btn-secondary">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="junte-se" class="section-padded call-to-action">
+            <div class="container">
+                <h2 class="section-title">🚀 Não Fique de Fora!</h2>
+                <p class="section-description">Milhares de aventuras e amigos esperam por você. Venha fazer parte da família Mundo Zera's Craft!</p>
+                <a href="https://discord.gg/GYGVBqGEwP" class="btn-primary" target="_blank">Entrar no Servidor Agora!</a>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Mundo Zera's Craft. Todos os direitos reservados.</p>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; Mundo Zera's Craft. Todos os direitos reservados. :D [v1.0.3]</p>
+        </div>
     </footer>
 
+    <button id="playAudioBtn" class="btn-primary">Tocar Som do Minecraft</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            /* ========================================= */
+            /* UTILITIES                                 */
+            /* ========================================= */
+
+            /**
+             * Detects if the device is touch.
+             * @returns {boolean} True if it's a touch device, false otherwise.
+             */
+            function isTouchDevice() {
+                return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+            }
+
+            const isMobile = isTouchDevice(); // Detects once on initialization
+
+            /**
+             * Copies the provided text to the clipboard.
+             * @param {string} text - The text to be copied.
+             * @returns {Promise<boolean>} A Promise that resolves to true if the copy is successful, false otherwise.
+             */
+            async function copyToClipboard(text) {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    return true; // Returns true to indicate success
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    // Fallback for older methods if the modern API fails or is unavailable
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    textArea.style.position = "fixed"; // Prevents scrolling off-screen
+                    textArea.style.left = "-9999px";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        return true;
+                    } catch (fallbackErr) {
+                        console.error('Failed to copy via fallback:', fallbackErr);
+                        document.body.removeChild(textArea);
+                        return false; // Returns false to indicate failure
+                    }
+                }
+            }
+
+            /**
+             * Shows a temporary "toast" notification on the screen.
+             * @param {string} message - The message to be displayed.
+             * @param {number} duration - Duration in milliseconds the toast will be visible (default: 3000).
+             */
+            function showToast(message, duration = 3000) {
+                const toast = document.createElement('div');
+                toast.classList.add('toast-notification');
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                // Force reflow to ensure CSS transition works
+                void toast.offsetWidth;
+
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    toast.addEventListener('transitionend', () => {
+                        toast.remove();
+                    }, {
+                        once: true
+                    });
+                }, duration);
+            }
+
+            /* ========================================= */
+            /* BACKGROUND AUDIO (MINECRAFT-STYLE)        */
+            /* ========================================= */
+
+            const playAudioBtn = document.getElementById('playAudioBtn');
+            const playlist = [
+                'audios/musics/Aria-Math-Lofi-Remake.mp3',
+                'audios/musics/Aria-Math.mp3',
+                'audios/musics/Begining.mp3',
+                'audios/musics/Biome-Fest.mp3',
+                'audios/musics/Blind-Spots.mp3',
+                'audios/musics/Clark.mp3',
+                'audios/musics/Danny.mp3',
+                'audios/musics/Dreiton.mp3',
+                'audios/musics/Dry-Hands.mp3',
+                'audios/musics/Floating.mp3',
+                'audios/musics/Haggstrom.mp3',
+                'audios/musics/haunt-Muskie.mp3',
+                'audios/musics/Key.mp3',
+                'audios/musics/Living-Mice.mp3',
+                'audios/musics/Minecraft.mp3',
+                'audios/musics/Moong-City.mp3',
+                'audios/musics/Mutation.mp3',
+                'audios/musics/Oxygène.mp3',
+                'audios/musics/Subwoofer-Lullaby.mp3',
+                'audios/musics/Sweden.mp3',
+                'audios/musics/Taswell.mp3',
+                'audios/musics/Wet-Hands.mp3',
+            ];
+
+            let currentTrackIndex = -1; // -1 to indicate no song has been selected yet
+            const backgroundAudio = new Audio();
+            backgroundAudio.volume = 0.7; // ADJUST THIS VALUE
+            backgroundAudio.preload = 'auto';
+
+            /**
+             * Plays the next random song from the playlist.
+             */
+            function playNextRandomTrack() {
+                if (playlist.length === 0) {
+                    console.warn("Empty playlist. No songs to play.");
+                    return;
+                }
+
+                let nextTrackIndex;
+                do {
+                    nextTrackIndex = Math.floor(Math.random() * playlist.length);
+                } while (nextTrackIndex === currentTrackIndex && playlist.length > 1);
+
+                currentTrackIndex = nextTrackIndex;
+                backgroundAudio.src = playlist[currentTrackIndex];
+
+                backgroundAudio.play().catch(e => {
+                    console.warn("Background audio playback blocked or failed:", e);
+                    // If playback failed (usually due to autoplay policy), the button will remain OFF.
+                    // The 'isPlaying' state will not be updated to true immediately from here.
+                });
+            }
+
+            if (playAudioBtn) {
+                playAudioBtn.classList.add('play-audio-btn-off');
+                playAudioBtn.classList.add('animating'); // Adds the animation class initially
+                let isPlaying = false; // Internal state to control if audio is playing
+
+                playAudioBtn.addEventListener('click', function() {
+                    if (isPlaying) {
+                        backgroundAudio.pause();
+                        backgroundAudio.currentTime = 0; // Optional: Resets the song when paused
+                        // isPlaying is updated by the 'pause' listener
+                    } else {
+                        playNextRandomTrack();
+                        // isPlaying is updated by the 'play' listener
+                    }
+                    // The update of 'play-audio-btn-on/off' and 'animating' classes
+                    // is done by the 'play' and 'pause' listeners of backgroundAudio.
+                });
+
+                // Event when a song ends: plays the next randomly
+                backgroundAudio.addEventListener('ended', function() {
+                    playNextRandomTrack();
+                });
+
+                // Events to manage the visual state of the button based on the audio player
+                backgroundAudio.addEventListener('pause', function() {
+                    // Checks if the pause was intentional (by the user) or automatic (end of song)
+                    // If the audio was paused and is no longer playing, updates the state
+                    // Don't rely on backgroundAudio.playing, as it's not standard. Use backgroundAudio.paused
+                    if (backgroundAudio.paused) {
+                        isPlaying = false;
+                        playAudioBtn.classList.remove('play-audio-btn-on');
+                        playAudioBtn.classList.add('play-audio-btn-off');
+                        playAudioBtn.classList.add('animating'); // Starts animating when paused
+                    }
+                });
+
+                backgroundAudio.addEventListener('play', function() {
+                    isPlaying = true;
+                    playAudioBtn.classList.remove('play-audio-btn-off');
+                    playAudioBtn.classList.add('play-audio-btn-on');
+                    playAudioBtn.classList.remove('animating'); // Stops animation when playing
+                });
+
+            } else {
+                console.error("Error: Element 'playAudioBtn' not found in DOM. Check its ID in HTML.");
+            }
+
+            /* ========================================= */
+            /* CLICK SOUNDS FOR INTERACTIVE ELEMENTS     */
+            /* ========================================= */
+
+            const clickAudio = new Audio('audios/click.mp3');
+            clickAudio.preload = 'auto';
+            clickAudio.volume = 0.4;
+
+            document.addEventListener('click', function(event) {
+                const clickedElement = event.target;
+                const isClickable = clickedElement.tagName === 'A' ||
+                    clickedElement.tagName === 'BUTTON' ||
+                    clickedElement.classList.contains('btn-primary') ||
+                    clickedElement.classList.contains('btn-secondary') ||
+                    clickedElement.classList.contains('btn-link');
+
+                const isMainAudioButton = clickedElement.id === 'playAudioBtn';
+
+                // Plays the click sound only if the element is clickable AND NOT the main audio button
+                if (isClickable && !isMainAudioButton) {
+                    clickAudio.currentTime = 0;
+                    clickAudio.play().catch(e => {
+                        console.warn("Error playing click sound:", e);
+                    });
+                }
+            });
+
+            /* ========================================= */
+            /* HOVER/TOUCH SOUNDS FOR CARDS (SELECT.MP3) */
+            /* ========================================= */
+
+            const interactiveCardsGeneral = document.querySelectorAll(
+                '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card, .pixel-legends-btn'
+                // Added the '.pixel-legends-btn' class here
+            );
+            const securityGridItems = document.querySelectorAll('.security-grid-item');
+
+            const DRAG_THRESHOLD_PX = 10; // 10 pixels of movement to consider a swipe
+
+            /**
+             * Sets up "selection" audio listeners for cards,
+             * differentiating mouseenter for desktop and touch for mobile.
+             * @param {NodeList} elements - Collection of elements (cards) to be monitored.
+             * @param {number} volume - Volume for the selection audio.
+             * @param {boolean} preventClickBubble - If true, checks if the click is on a clickable sub-element.
+             */
+            function setupCardHoverSound(elements, volume, preventClickBubble = false) {
+                const selectAudio = new Audio('audios/select.mp3');
+                selectAudio.preload = 'auto';
+                selectAudio.volume = volume;
+
+                function playSound() {
+                    selectAudio.currentTime = 0;
+                    selectAudio.play().catch(e => {
+                        console.warn(`'select.mp3' audio playback (volume ${volume}) blocked or failed:`, e);
+                    });
+                }
+
+                elements.forEach(card => {
+                    if (!isMobile) {
+                        // If it's a PC, use mouseenter (hover the cursor)
+                        card.addEventListener('mouseenter', playSound);
+                    } else {
+                        // Logic for mobile: tap the card without swiping
+                        let startX, startY;
+                        let touchMoved = false;
+
+                        card.addEventListener('touchstart', function(event) {
+                            startX = event.touches[0].clientX;
+                            startY = event.touches[0].clientY;
+                            touchMoved = false;
+                        });
+
+                        card.addEventListener('touchmove', function(event) {
+                            const currentX = event.touches[0].clientX;
+                            const currentY = event.touches[0].clientY;
+                            const deltaX = Math.abs(currentX - startX);
+                            const deltaY = Math.abs(currentY - startY);
+
+                            if (deltaX > DRAG_THRESHOLD_PX || deltaY > DRAG_THRESHOLD_PX) {
+                                touchMoved = true;
+                            }
+                        });
+
+                        card.addEventListener('touchend', function(event) {
+                            if (!touchMoved) {
+                                // If preventClickBubble is true, check if the click was on an internal interactive element
+                                if (preventClickBubble && event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link')) {
+                                    // Clicked on a link/button inside the card, do not play the select sound
+                                    return;
+                                }
+                                playSound();
+                            }
+                        });
+
+                        card.addEventListener('touchcancel', function() {
+                            touchMoved = false;
+                        });
+                    }
+                });
+            }
+
+            // Applies the logic for general cards
+            setupCardHoverSound(interactiveCardsGeneral, 0.3, true);
+
+            // Applies the logic for security grid items (with different volume)
+            setupCardHoverSound(securityGridItems, 0.2); // No need for preventClickBubble for these items if they don't have internal links/buttons that should be ignored.
+
+            /* ========================================= */
+            /* COPY IP/PORT BUTTONS                      */
+            /* ========================================= */
+
+            const copyButtons = document.querySelectorAll('.copy-btn'); // Selects all buttons with this class
+
+            copyButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const targetId = this.dataset.target;
+                    let textToCopy = '';
+
+                    if (targetId === 'bedrock-ip-port') {
+                        const ip = document.getElementById('bedrock-ip').textContent;
+                        const port = document.getElementById('bedrock-port').textContent;
+                        textToCopy = `${ip}:${port}`;
+                    } else if (targetId === 'java-address') {
+                        textToCopy = document.getElementById('java-address').textContent;
+                    }
+
+                    if (textToCopy) {
+                        const success = await copyToClipboard(textToCopy);
+                        if (success) {
+                            showToast('Copiado: ' + textToCopy, 2000); // Shows toast for 2 seconds
+                        } else {
+                            showToast('Falha ao copiar. Tente novamente!', 3000);
+                        }
+                    } else {
+                        console.warn('Conteúdo para copiar não encontrado.');
+                    }
+                });
+            });
+
+
+            /* ========================================= */
+            /* INITIAL USER INTERACTION HANDLER          */
+            /* ========================================= */
+
+            let userInteracted = false;
+
+            /**
+             * Handles the first user interaction to enable background audio
+             * and show the audio control button.
+             */
+            function handleUserInteraction() {
+                if (!userInteracted) {
+                    if (playAudioBtn) {
+                        playAudioBtn.style.display = 'flex'; // Shows the button as flex to center content
+                    }
+
+                    // Plays random background music on the first user interaction.
+                    // This is crucial to bypass browser autoplay policies.
+                    playNextRandomTrack();
+
+                    userInteracted = true;
+                    // Removes listeners after the first interaction to avoid unnecessary execution
+                    document.removeEventListener('scroll', handleUserInteraction);
+                    document.removeEventListener('mousemove', handleUserInteraction);
+                    document.removeEventListener('click', handleUserInteraction);
+                    document.removeEventListener('touchstart', handleUserInteraction);
+                }
+            }
+
+            // Adds listeners to detect the first user interaction
+            document.addEventListener('scroll', handleUserInteraction);
+            document.addEventListener('mousemove', handleUserInteraction);
+            document.addEventListener('click', handleUserInteraction);
+            document.addEventListener('touchstart', handleUserInteraction);
+
+            // ========================================= //
+            // FUNCTIONS AND EVENTS FOR THE PIXEL LEGENDS INTERACTIVE CARD //
+            // ========================================= //
+
+            const pixelLegendsCard = document.getElementById('pixelLegendsCard');
+            // The expandBtn and cardContentWrapper are not found in the provided HTML.
+            // These lines might cause errors if pixelLegendsCard exists but these sub-elements don't.
+            // For now, they are kept for completeness, assuming they might be added or are part of a different logic.
+            const expandBtn = pixelLegendsCard ? pixelLegendsCard.querySelector('.expand-btn') : null;
+            const cardContentWrapper = pixelLegendsCard ? pixelLegendsCard.querySelector('.card-content-wrapper') : null;
+
+            // Loads the sounds (ensure these paths are correct, potentially "audios/select.mp3" etc.)
+            const selectSound = new Audio('audios/select.mp3'); // Corrected path assumption
+            const clickSound = new Audio('audios/click.mp3');    // Corrected path assumption
+            selectSound.preload = 'auto';
+            clickSound.preload = 'auto';
+
+            // Function to play the selection sound
+            function playSelectSound() {
+                if (!selectSound.paused) {
+                    selectSound.pause();
+                    selectSound.currentTime = 0;
+                }
+                selectSound.play().catch(e => console.error("Error playing 'select.mp3' sound:", e));
+            }
+
+            // Function to play the click sound
+            function playClickSound() {
+                if (!clickSound.paused) {
+                    clickSound.pause();
+                    clickSound.currentTime = 0;
+                }
+                clickSound.play().catch(e => console.error("Error playing 'click.mp3' sound:", e));
+            }
+
+            // Hover event for the card (plays select.mp3)
+            if (pixelLegendsCard) {
+                pixelLegendsCard.addEventListener('mouseenter', () => {
+                    playSelectSound();
+                });
+            }
+
+            // Click event for the expand button (plays click.mp3 and expands)
+            if (expandBtn && cardContentWrapper && pixelLegendsCard) {
+                expandBtn.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevents the click from propagating to the entire card
+                    playClickSound();
+
+                    const isExpanded = pixelLegendsCard.classList.toggle('expanded');
+                    expandBtn.setAttribute('aria-expanded', isExpanded);
+                });
+
+                // Click event on the card to expand/collapse (except on the button or internal links/buttons)
+                pixelLegendsCard.addEventListener('click', (event) => {
+                    // If the click was not on the expand button, or on a link/button inside the content
+                    if (!expandBtn.contains(event.target) && !event.target.closest('a') && !event.target.closest('button')) {
+                        playClickSound();
+                        const isExpanded = pixelLegendsCard.classList.toggle('expanded');
+                        expandBtn.setAttribute('aria-expanded', isExpanded);
+                    }
+                });
+            }
+
+            // ========================================= //
+            // RESTART AUDIO BUTTON ANIMATION (EXISTING) //
+            // ========================================= //
+
+            // Note: The original code had a redundant 'playAudioBtn' query here.
+            // The global 'playAudioBtn' is used.
+            if (playAudioBtn) {
+                // Removes and adds the class to restart the animation
+                // This ensures the animation starts on page load
+                playAudioBtn.classList.remove('animating');
+                void playAudioBtn.offsetWidth; // Trigger reflow
+                playAudioBtn.classList.add('animating');
+                playAudioBtn.style.display = 'flex'; // Ensures the button is visible
+            }
+        });
+    </script>
 </body>
 </html>
