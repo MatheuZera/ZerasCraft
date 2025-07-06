@@ -1,5 +1,5 @@
 /* ========================================= */
-/* ESTILOS GERAIS */
+/* ESTILOS GERAIS                           */
 /* ========================================= */
 
 :root {
@@ -7,29 +7,15 @@
     --secondary-color: #99aab5; /* Cinza claro para texto secundário */
     --accent-color: #f7b000; /* Amarelo dourado para destaque/aviso */
     --dark-bg: #2c2f33; /* Fundo mais escuro */
-    --light-bg: #40444b; /* Fundo de elementos claros em tema escuro (substitui card-bg para cards gerais) */
+    --light-bg: #40444b; /* Fundo de elementos claros em tema escuro */
     --text-color-dark: #23272a; /* Texto bem escuro (para contraste mínimo) */
     --text-color-light: #ffffff; /* Texto claro principal */
     --border-color: #4f545c; /* Cor da borda para elementos escuros */
+    --card-bg: #36393f; /* Cor de fundo para cards */
 
     /* NOVAS VARIÁVEIS PARA FUNDO DE SEÇÃO CLARA E TEXTO NO FUNDO CLARO */
     --light-section-bg: #f9f9f9; /* Um cinza muito claro, quase branco, para seções claras */
     --text-color-on-light-bg: #333333; /* Cor do texto em seções de fundo claro */
-
-    /* Variáveis para consistência de bordas e sombras */
-    --border-radius: 10px;
-    --border-radius-sm: 5px;
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.3);
-    --shadow-hover: 0 12px 25px rgba(0, 0, 0, 0.2);
-    --code-bg: #23272a; /* Fundo para blocos de código/IP */
-    --code-text-color: var(--accent-color); /* Cor do texto dentro do código */
-
-    /* Novas variáveis para cards mais complexos */
-    --card-hover-scale: 1.03;
-    --card-border-thickness: 2px;
-    --card-inner-border-color: rgba(255, 255, 255, 0.05); /* Borda interna sutil */
 }
 
 body {
@@ -52,13 +38,11 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
     color: var(--text-color-light); /* Títulos claros */
     margin-bottom: 1rem;
-    line-height: 1.2; /* Para melhor legibilidade */
 }
 
 h1 { font-size: 2.8rem; }
 h2 { font-size: 2.2rem; }
 h3 { font-size: 1.8rem; }
-h4 { font-size: 1.4rem; } /* Adicionado */
 
 p {
     margin-bottom: 1rem;
@@ -75,7 +59,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* BOTÕES */
+/* BOTÕES                                   */
 /* ========================================= */
 
 .btn-primary,
@@ -84,7 +68,7 @@ a:hover {
 .pixel-legends-btn { /* Adicionada a classe aqui */
     display: inline-block;
     padding: 12px 25px;
-    border-radius: var(--border-radius-sm); /* Usando variável */
+    border-radius: 5px;
     font-weight: 600;
     text-align: center;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Adicionado transform e box-shadow para a transição */
@@ -96,7 +80,7 @@ a:hover {
 .btn-primary {
     background-color: var(--primary-color);
     color: var(--text-color-light);
-    border: var(--card-border-thickness) solid var(--primary-color);
+    border: 2px solid var(--primary-color);
 }
 
 .btn-primary:hover {
@@ -107,7 +91,7 @@ a:hover {
 .btn-secondary {
     background-color: transparent;
     color: var(--primary-color);
-    border: var(--card-border-thickness) solid var(--primary-color);
+    border: 2px solid var(--primary-color);
 }
 
 .btn-secondary:hover {
@@ -118,7 +102,7 @@ a:hover {
 .btn-link {
     background-color: var(--accent-color);
     color: var(--dark-bg); /* Texto escuro no botão de link amarelo */
-    border: var(--card-border-thickness) solid var(--accent-color);
+    border: 2px solid var(--accent-color);
     padding: 8px 15px; /* Ajuste o padding para ser mais de link */
 }
 
@@ -130,10 +114,10 @@ a:hover {
 /* NOVO ESTILO PARA BOTÕES DO PIXEL LEGENDS (ou outros com animação similar) */
 .pixel-legends-btn {
     /* Estilos base, se diferentes dos btn-primary/secondary.
-        Se forem iguais, apenas o :hover é necessário */
+       Se forem iguais, apenas o :hover é necessário */
     background-color: var(--primary-color); /* Exemplo: podem ser como btn-primary */
     color: var(--text-color-light);
-    border: var(--card-border-thickness) solid var(--primary-color);
+    border: 2px solid var(--primary-color);
 }
 
 .pixel-legends-btn:hover,
@@ -154,9 +138,8 @@ a:hover {
     color: var(--text-color-light);
 }
 
-
 /* ========================================= */
-/* SEÇÕES */
+/* SEÇÕES                                   */
 /* ========================================= */
 
 .section-padded {
@@ -184,7 +167,7 @@ a:hover {
 
 /* ESTILO PARA SEÇÕES DE FUNDO ESCURO (Como Eventos) */
 .section-alt-bg {
-    background-color: var(--dark-bg); /* Usando a cor de dark-bg para seções alternativas (escuro) */
+    background-color: var(--card-bg); /* Usando a cor de card para seções alternativas (escuro) */
     color: var(--text-color-light); /* Texto claro */
 }
 
@@ -197,7 +180,6 @@ a:hover {
     color: var(--text-color-light); /* Títulos, descrições e parágrafos claros */
 }
 
-
 .section-alt-bg .section-title::after {
     background-color: var(--accent-color); /* Sublinhado do título amarelo */
 }
@@ -208,15 +190,6 @@ a:hover {
     font-size: 2.5rem;
     position: relative;
     padding-bottom: 10px;
-    display: flex; /* Para alinhar ícone e texto */
-    align-items: center;
-    justify-content: center;
-}
-
-.section-title .section-icon {
-    height: 1.8em; /* Tamanho do ícone relativo ao tamanho da fonte do título */
-    vertical-align: middle;
-    margin-right: 15px; /* Espaço entre o ícone e o texto */
 }
 
 .section-title::after {
@@ -248,7 +221,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* HEADER */
+/* HEADER                                   */
 /* ========================================= */
 
 .main-header {
@@ -284,7 +257,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO HERO */
+/* SEÇÃO HERO                               */
 /* ========================================= */
 
 .hero-section {
@@ -341,7 +314,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SERVER BRANDING (ÍCONE E BANNER) */
+/* SERVER BRANDING (ÍCONE E BANNER)         */
 /* ========================================= */
 
 .server-branding {
@@ -362,7 +335,7 @@ a:hover {
     max-width: 500px;
     height: auto;
     border: none;
-    border-radius: var(--border-radius); /* Usando variável */
+    border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
@@ -381,7 +354,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* CONTEÚDO EM DUAS COLUNAS */
+/* CONTEÚDO EM DUAS COLUNAS                 */
 /* ========================================= */
 
 .content-two-columns {
@@ -411,7 +384,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE SERVIÇOS */
+/* GRID DE SERVIÇOS                         */
 /* ========================================= */
 
 .services-grid {
@@ -425,23 +398,20 @@ a:hover {
 }
 
 .service-card {
-    background-color: var(--light-bg); /* Fundo dos cards agora é light-bg */
+    background-color: var(--card-bg); /* Usando a nova variável de cor de card */
     padding: 30px;
-    border-radius: var(--border-radius); /* Usando variável */
-    box-shadow: var(--shadow-sm); /* Usando variável */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     color: var(--text-color-light); /* Garante que o texto dentro do card seja claro */
-    border: var(--card-border-thickness) solid var(--border-color); /* Borda para todos os cards */
 }
 
 .service-card:hover {
-    transform: translateY(-8px) scale(var(--card-hover-scale));
-    box-shadow: var(--shadow-hover); /* Usando variável */
-    border-color: var(--primary-color); /* Destaca a borda no hover */
+    transform: translateY(-5px);
 }
 
 .card-icon {
@@ -451,13 +421,6 @@ a:hover {
     border-radius: 50%;
     border: 3px solid var(--primary-color);
     object-fit: cover;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Sombra para o ícone */
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.service-card:hover .card-icon {
-    transform: rotate(5deg);
-    border-color: var(--accent-color); /* Ícone muda a cor da borda no hover */
 }
 
 .section-alt-bg .card-icon {
@@ -470,10 +433,6 @@ a:hover {
     color: var(--primary-color); /* Ajusta a cor do título do card */
 }
 
-.service-card:hover .card-title {
-    color: var(--accent-color); /* Título do card muda a cor no hover */
-}
-
 .card-description {
     font-size: 1rem;
     color: var(--secondary-color); /* Texto secundário com cor mais clara */
@@ -481,7 +440,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE CARGOS (ROLES) */
+/* GRID DE CARGOS (ROLES)                   */
 /* ========================================= */
 
 .roles-grid {
@@ -494,11 +453,11 @@ a:hover {
 }
 
 .role-category-card {
-    background-color: var(--light-bg); /* Fundo dos cards agora é light-bg */
+    background-color: var(--card-bg); /* Usando a nova variável de cor de card */
     padding: 25px;
-    border-radius: var(--border-radius); /* Usando variável */
-    box-shadow: var(--shadow-md); /* Usando variável */
-    border: var(--card-border-thickness) solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -508,8 +467,8 @@ a:hover {
 }
 
 .role-category-card:hover {
-    transform: translateY(-8px) scale(var(--card-hover-scale));
-    box-shadow: var(--shadow-hover); /* Usando variável */
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
     border-color: var(--accent-color);
 }
 
@@ -551,18 +510,12 @@ a:hover {
     background-color: var(--dark-bg); /* Fundo escuro para itens da lista de cargos */
     padding: 8px 15px;
     margin-bottom: 8px;
-    border-radius: var(--border-radius-sm); /* Usando variável */
+    border-radius: 5px;
     font-size: 0.95rem;
     color: var(--text-color-light);
     display: flex;
     align-items: center;
-    transition: background-color 0.2s ease, border-left-color 0.2s ease;
-    border-left: 4px solid var(--border-color); /* Borda esquerda sutil */
-}
-
-.role-list li:hover {
-    background-color: #3a3d42; /* Um pouco mais claro no hover do item */
-    border-left-color: var(--primary-color); /* Destaca a borda esquerda no hover */
+    transition: background-color 0.2s ease;
 }
 
 .role-category-card:hover .role-list li {
@@ -583,7 +536,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE EVENTOS */
+/* GRID DE EVENTOS                          */
 /* ========================================= */
 
 .events-grid-wrapper {
@@ -595,21 +548,18 @@ a:hover {
 }
 
 .event-card-main {
-    background-color: var(--light-bg); /* Usando a nova variável de cor de card */
+    background-color: var(--card-bg); /* Usando a nova variável de cor de card */
     color: var(--text-color-light);
-    border-radius: var(--border-radius); /* Usando variável */
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: var(--shadow-lg); /* Usando variável */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    border: var(--card-border-thickness) solid var(--border-color);
 }
 
 .event-card-main:hover {
-    transform: translateY(-8px) scale(var(--card-hover-scale));
-    box-shadow: var(--shadow-hover);
-    border-color: var(--accent-color);
+    transform: translateY(-8px);
 }
 
 .events-sub-grid {
@@ -620,21 +570,18 @@ a:hover {
 }
 
 .event-card {
-    background-color: var(--light-bg); /* Usando a nova variável de cor de card */
+    background-color: var(--card-bg); /* Usando a nova variável de cor de card */
     color: var(--text-color-light);
-    border-radius: var(--border-radius); /* Usando variável */
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: var(--shadow-lg); /* Usando variável */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    border: var(--card-border-thickness) solid var(--border-color);
 }
 
 .event-card:hover {
-    transform: translateY(-8px) scale(var(--card-hover-scale));
-    box-shadow: var(--shadow-hover);
-    border-color: var(--accent-color);
+    transform: translateY(-8px);
 }
 
 .event-image {
@@ -676,7 +623,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO COMUNIDADE & PARCERIAS */
+/* SEÇÃO COMUNIDADE & PARCERIAS             */
 /* ========================================= */
 
 .community-grid {
@@ -691,24 +638,22 @@ a:hover {
 
 .community-card,
 .partnership-card {
-    background-color: var(--light-bg);
+    background-color: var(--card-bg);
     color: var(--text-color-light);
     padding: 35px 25px 25px; /* Ajustado padding: topo para imagens, lateral e inferior */
-    border-radius: var(--border-radius); /* Usando variável */
-    box-shadow: var(--shadow-md); /* Usando variável */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border: var(--card-border-thickness) solid var(--border-color);
 }
 
 .community-card:hover,
 .partnership-card:hover {
-    transform: translateY(-8px) scale(var(--card-hover-scale));
-    box-shadow: var(--shadow-hover); /* Usando variável */
-    border-color: var(--primary-color);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .member-avatar {
@@ -764,7 +709,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO CALL TO ACTION */
+/* SEÇÃO CALL TO ACTION                     */
 /* ========================================= */
 
 .call-to-action {
@@ -805,7 +750,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* FOOTER */
+/* FOOTER                                   */
 /* ========================================= */
 
 .main-footer {
@@ -817,7 +762,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* BOTÃO DE ÁUDIO */
+/* BOTÃO DE ÁUDIO                           */
 /* ========================================= */
 
 #playAudioBtn {
@@ -894,7 +839,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* CARDS DE SEGURANÇA E ITENS */
+/* CARDS DE SEGURANÇA E ITENS               */
 /* ========================================= */
 
 .admin-security-section .section-title img {
@@ -905,21 +850,13 @@ a:hover {
 
 .security-card {
     background-color: var(--light-bg); /* Um fundo ligeiramente mais claro que o dark-bg */
-    border: var(--card-border-thickness) solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: var(--text-color-light);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
-
-.security-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    border-color: var(--primary-color);
-}
-
 
 .security-card h3 {
     color: var(--primary-color); /* Título "SEGURANÇA" em azul */
@@ -963,331 +900,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* ACCESS SERVER SECTION (ADICIONADO/REVISADO) */
-/* ========================================= */
-
-.access-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajustado min-width para melhor responsividade em telas menores */
-    gap: 2rem; /* Mantido em rem para consistência com suas outras medidas */
-    margin-top: 2rem;
-    justify-content: center; /* Centraliza os cards no grid */
-}
-
-.access-card {
-    background-color: var(--light-bg); /* Alterado para light-bg */
-    border-radius: var(--border-radius); /* Usando variável */
-    padding: 2rem;
-    box-shadow: var(--shadow-sm); /* Usando variável */
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    display: flex; /* Adicionado para centralizar conteúdo verticalmente */
-    flex-direction: column;
-    align-items: center;
-    border: var(--card-border-thickness) solid var(--border-color);
-}
-
-.access-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover); /* Usando variável */
-    border-color: var(--primary-color);
-}
-
-.access-card h3 {
-    color: var(--secondary-color); /* Mudado para secondary-color para destaque */
-    margin-bottom: 1rem;
-    font-size: 1.5rem; /* Ajustado para consistência com h3 de outros cards */
-}
-
-.access-card p {
-    margin-bottom: 0.5rem;
-    color: var(--text-color-light); /* Cor do texto do IP/Porta */
-    font-size: 1.1em;
-}
-
-.access-card code {
-    background-color: var(--code-bg); /* Usando nova variável para fundo de código */
-    color: var(--code-text-color); /* Usando nova variável para texto de código */
-    padding: 0.3em 0.6em;
-    border-radius: var(--border-radius-sm); /* Usando variável */
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.9em;
-    white-space: nowrap; /* Evita que o código quebre em várias linhas */
-    overflow-x: auto; /* Adiciona scroll se o código for muito longo */
-    display: inline-block; /* Permite padding e margin, mas mantém o comportamento inline */
-    max-width: 100%; /* Garante que não exceda o pai */
-    margin-top: 10px; /* Adicionado espaço entre o parágrafo e o código */
-    margin-bottom: 15px; /* Adicionado espaço entre o código e o botão */
-    border: 1px solid var(--code-text-color); /* Borda ao redor do código */
-}
-
-/* ========================================= */
-/* DISCORD CHANNEL LINK (ADICIONADO) */
-/* ========================================= */
-.discord-channel-link {
-    color: var(--primary-color); /* Cor que remeta ao Discord */
-    text-decoration: underline;
-    font-weight: 600;
-    transition: color 0.2s ease;
-}
-
-.discord-channel-link:hover {
-    color: var(--accent-color); /* Pode ser um hover mais claro ou similar ao primary-color */
-    text-decoration: none;
-}
-
-/* ========================================= */
-/* UTILITIES - TOAST NOTIFICATION (ADICIONADO) */
-/* ========================================= */
-.toast-notification {
-    visibility: hidden; /* Escondido por padrão */
-    min-width: 250px;
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
-    text-align: center;
-    border-radius: var(--border-radius-sm); /* Usando variável */
-    padding: 16px;
-    position: fixed;
-    z-index: 1000; /* Acima de tudo */
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 30px;
-    font-size: 17px;
-    opacity: 0;
-    transition: visibility 0s linear 0.3s, opacity 0.3s ease-in-out; /* Atraso para visibility */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
-}
-
-.toast-notification.show {
-    visibility: visible;
-    opacity: 1;
-    transition: visibility 0s linear 0s, opacity 0.3s ease-in-out;
-}
-
-/* ========================================= */
-/* PIXEL LEGENDS INTERACTIVE CARD (NOVO) */
-/* ========================================= */
-
-.pixel-legends-interactive-card {
-    background-color: var(--light-bg); /* Fundo do card */
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-lg);
-    max-width: 900px;
-    margin: 40px auto;
-    overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    border: var(--card-border-thickness) solid var(--border-color);
-    will-change: height, border-color, box-shadow;
-    cursor: pointer;
-}
-
-/* Fundo Animado do Card */
-.pixel-legends-interactive-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #1a1a1a, #36393f, #1a1a1a); /* Gradiente escuro sutil */
-    background-size: 200% 200%;
-    animation: backgroundPan 15s ease infinite;
-    z-index: 0;
-    opacity: 0.7; /* Para não brigar com o conteúdo */
-    transition: opacity 0.5s ease;
-}
-
-@keyframes backgroundPan {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.pixel-legends-interactive-card:hover::before {
-    opacity: 0.9;
-    animation: backgroundPan 10s ease infinite; /* Mais rápido no hover */
-}
-
-.pixel-legends-interactive-card.expanded::before {
-    opacity: 1; /* Opacidade total quando expandido */
-}
-
-
-.pixel-legends-interactive-card .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px;
-    background-color: rgba(54, 57, 63, 0.9); /* Um pouco transparente para ver o fundo animado */
-    border-bottom: 1px solid var(--border-color);
-    position: relative;
-    z-index: 1; /* Acima do background */
-}
-
-.pixel-legends-interactive-card .card-main-title {
-    color: var(--accent-color); /* Título principal em destaque */
-    margin: 0;
-    font-size: 1.8rem;
-    transition: color 0.3s ease;
-}
-
-.pixel-legends-interactive-card:hover .card-main-title {
-    color: var(--primary-color);
-}
-
-.pixel-legends-interactive-card.expanded .card-main-title {
-    color: var(--primary-color); /* Mantém a cor principal quando expandido */
-}
-
-
-.pixel-legends-interactive-card .expand-btn {
-    background: none;
-    border: none;
-    color: var(--text-color-light);
-    font-size: 2rem;
-    cursor: pointer;
-    transition: transform 0.3s ease, color 0.3s ease;
-    padding: 0 10px; /* Adicionado padding para facilitar o clique */
-    position: relative;
-    z-index: 1; /* Acima do background */
-}
-
-.pixel-legends-interactive-card .expand-btn:hover {
-    transform: scale(1.1);
-    color: var(--primary-color);
-}
-
-.pixel-legends-interactive-card.expanded .expand-btn .icon-plus {
-    display: none;
-}
-
-.pixel-legends-interactive-card.expanded .expand-btn .icon-minus {
-    display: inline-block;
-}
-
-.pixel-legends-interactive-card .card-content-wrapper {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transition */
-    position: relative;
-    z-index: 1; /* Acima do background */
-}
-
-.pixel-legends-interactive-card.expanded .card-content-wrapper {
-    max-height: 2000px; /* Um valor grande o suficiente para conter todo o conteúdo */
-}
-
-.pixel-legends-interactive-card .card-content {
-    padding: 25px;
-    background-color: rgba(36, 39, 43, 0.95); /* Fundo mais escuro e transparente para o conteúdo expandido */
-}
-
-.pixel-legends-interactive-card .card-content h4 {
-    color: var(--accent-color);
-    margin-top: 25px;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
-}
-
-.pixel-legends-interactive-card .card-content p,
-.pixel-legends-interactive-card .card-content ul li {
-    color: var(--secondary-color);
-    margin-bottom: 10px;
-}
-
-.pixel-legends-interactive-card .card-content ul {
-    list-style-type: none;
-    padding-left: 20px;
-    margin-bottom: 20px;
-}
-
-.pixel-legends-interactive-card .card-content ul li::before {
-    content: '•';
-    color: var(--primary-color);
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
-}
-
-.pixel-legends-interactive-card .card-content .discord-channel-link {
-    color: var(--primary-color);
-    text-decoration: underline;
-}
-.pixel-legends-interactive-card .card-content .discord-channel-link:hover {
-    color: var(--accent-color);
-}
-
-/* Estilos para as listas dentro do card */
-.pixel-legends-interactive-card .role-list-compact,
-.pixel-legends-interactive-card .features-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-.pixel-legends-interactive-card .role-list-compact li,
-.pixel-legends-interactive-card .features-list li {
-    background-color: var(--dark-bg);
-    padding: 10px 15px;
-    margin-bottom: 8px;
-    border-radius: var(--border-radius-sm);
-    font-size: 0.95rem;
-    color: var(--text-color-light);
-    display: flex;
-    align-items: flex-start;
-    border-left: 4px solid var(--primary-color);
-}
-
-.pixel-legends-interactive-card .features-list li ul {
-    list-style: none;
-    padding-left: 20px;
-    margin-top: 5px;
-    margin-bottom: 0;
-}
-
-.pixel-legends-interactive-card .features-list li ul li {
-    background-color: transparent;
-    border-left: none;
-    padding: 5px 0;
-    margin-bottom: 0;
-    font-size: 0.9em;
-    color: var(--secondary-color);
-}
-
-.pixel-legends-interactive-card .features-list li ul li::before {
-    content: '- ';
-    color: var(--accent-color);
-}
-
-
-/* Estilo para a seção de acesso ao servidor dentro do card */
-.pixel-legends-interactive-card .access-server-section {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px dashed rgba(255, 255, 255, 0.2);
-}
-
-.pixel-legends-interactive-card .access-server-section h3 {
-    color: var(--primary-color);
-    text-align: center;
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-}
-
-.pixel-legends-interactive-card .access-cards-grid {
-    gap: 20px; /* Reduzir um pouco o gap dentro do card */
-}
-
-/* No estado expandido, o card tem uma borda de destaque */
-.pixel-legends-interactive-card.expanded {
-    border-color: var(--primary-color);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-}
-
-/* ========================================= */
-/* RESPONSIVIDADE */
+/* RESPONSIVIDADE                           */
 /* ========================================= */
 
 /* Mobile-first: estilos padrão para telas menores, depois sobrescreve para maiores */
@@ -1393,10 +1006,6 @@ a:hover {
     .section-title {
         font-size: 2rem;
     }
-     .section-title .section-icon {
-        height: 1.5em; /* Ajusta o tamanho do ícone em telas menores */
-        margin-right: 10px;
-    }
 
     .services-grid,
     .roles-grid,
@@ -1411,36 +1020,6 @@ a:hover {
 
     .event-image {
         height: 200px;
-    }
-
-    /* Responsividade para o card Pixel Legends */
-    .pixel-legends-interactive-card {
-        margin: 20px auto;
-    }
-
-    .pixel-legends-interactive-card .card-header {
-        padding: 20px;
-    }
-
-    .pixel-legends-interactive-card .card-main-title {
-        font-size: 1.5rem;
-    }
-
-    .pixel-legends-interactive-card .expand-btn {
-        font-size: 1.8rem;
-    }
-
-    .pixel-legends-interactive-card .card-content {
-        padding: 20px;
-    }
-
-    .pixel-legends-interactive-card .card-content h4 {
-        font-size: 1.2rem;
-    }
-
-    .pixel-legends-interactive-card .card-content p,
-    .pixel-legends-interactive-card .card-content ul li {
-        font-size: 0.95rem;
     }
 }
 
@@ -1470,33 +1049,6 @@ a:hover {
         margin-top: -30px;
         border-width: 3px;
         padding: 1px;
-    }
-
-    /* Responsividade específica para o toast */
-    .toast-notification {
-        width: 90%;
-        left: 5%;
-        transform: translateX(0);
-        bottom: 20px;
-        font-size: 15px;
-        padding: 12px;
-    }
-
-    /* Responsividade para o card Pixel Legends */
-    .pixel-legends-interactive-card .card-main-title {
-        font-size: 1.3rem;
-    }
-
-    .pixel-legends-interactive-card .expand-btn {
-        font-size: 1.5rem;
-    }
-
-    .pixel-legends-interactive-card .card-content {
-        padding: 15px;
-    }
-
-    .pixel-legends-interactive-card .access-cards-grid {
-        grid-template-columns: 1fr; /* Força uma coluna em telas muito pequenas */
     }
 }
 
@@ -1556,5 +1108,69 @@ a:hover {
         width: 200px;
         height: auto;
         flex-shrink: 0;
+    }
+}
+
+/* Adicione isso ao seu CSS existente, se desejar um layout de cards específico para o acesso */
+.access-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+.access-card {
+    background-color: var(--card-bg); /* O mesmo background dos outros cards */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adicionado para animação no hover */
+}
+
+/* Adicionado: Efeito de hover para o access-card */
+.access-card:hover {
+    transform: translateY(-8px); /* Move o card ligeiramente para cima */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25); /* Aumenta a sombra */
+}
+
+.access-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.access-card p {
+    color: var(--text-color-light); /* Para o texto IP/Porta */
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    word-break: break-all; /* Garante que o texto longo não transborde */
+}
+
+.access-card code {
+    background-color: var(--dark-bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Consolas', 'monospace';
+    color: var(--accent-color); /* Destaca o código */
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 1em; /* Garante que o tamanho da fonte seja adequado */
+    white-space: pre-wrap; /* Permite quebras de linha se o texto for muito longo */
+}
+
+.access-card .btn-primary {
+    margin-top: 20px;
+    width: fit-content; /* Ajusta a largura do botão ao conteúdo */
+}
+
+/* Responsividade para os cards de acesso */
+@media (max-width: 768px) {
+    .access-cards-grid {
+        grid-template-columns: 1fr;
     }
 }
