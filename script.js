@@ -219,33 +219,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+  document.addEventListener('DOMContentLoaded', () => {
+    // ... (seu código existente para controle de áudio, clickSoundEffect, etc.) ...
+
     // =====================================
     // 2. Seus Outros Scripts Existentes
-    // (Consolidados e integrados aqui)
+    // (Mantidos e integrados aqui)
     // =====================================
 
-    // Click Sound Effects
-    const clickSoundEffect = new Audio('audios/effects/click.mp3'); // Renamed to avoid conflict
+    // Click Sound Effects (mantido como está, para links e botões específicos)
+    const clickSoundEffect = new Audio('audios/effects/click.mp3');
     document.querySelectorAll('a, button[data-sound-effect="select"]').forEach(element => {
-        // Avoid conflict with the main audio control button and its children
-        if (audioControlButton && !element.closest('#audioControlButton')) {
-            element.addEventListener('click', (event) => {
-                // console.log("Click sound: Attempting to play.");
-                clickSoundEffect.currentTime = 0; // Reset audio to play multiple times
-                clickSoundEffect.play().catch(e => console.error("Error playing click sound effect:", e.message));
-
-                // If it's a link, prevent default and navigate after sound
-                if (element.tagName === 'A' && element.href) {
-                    event.preventDefault();
-                    setTimeout(() => {
-                        window.location.href = element.href;
-                    }, 200); // Adjust time as needed
-                }
-            });
-        } else if (!audioControlButton) { // If audioControlButton doesn't exist, apply to all buttons/links
+        if (!element.closest('#audioControlButton')) { // Avoid conflict with the main audio control button
              element.addEventListener('click', (event) => {
                 clickSoundEffect.currentTime = 0;
                 clickSoundEffect.play().catch(e => console.error("Error playing click sound effect:", e.message));
+
                 if (element.tagName === 'A' && element.href) {
                     event.preventDefault();
                     setTimeout(() => {
@@ -256,17 +245,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Hover Sound Effects
+    // HOVER/INTERACTION Sound Effects for CARDS
     const selectSound = new Audio('audios/effects/select.mp3');
-    document.querySelectorAll(
-        '.service-card, .role-category-card, .access-card, .event-card, .community-card, .partnership-card, .partnership-proposal-card'
-    ).forEach(element => {
+
+    // **IMPORTANTE:** Revise esta lista de seletores para incluir *TODAS* as classes que definem seus "cards".
+    // Se você tem uma classe genérica para todos os cards (ex: .card), use apenas ela para simplificar.
+    const cardSelectors = [
+        '.service-card',
+        '.role-category-card',
+        '.access-card',
+        '.event-card',
+        '.community-card',
+        '.partnership-card',
+        '.partnership-proposal-card',
+        // Adicione aqui QUALQUER outra classe que você usa para cards. Exemplo:
+        // '.my-custom-card',
+        // '.product-item',
+        // '.grid-item',
+        // Se todos os seus cards têm uma classe base como 'card', você pode usar:
+        // '.card'
+    ].join(', '); // Junta todos os seletores com vírgulas para o querySelectorAll
+
+    document.querySelectorAll(cardSelectors).forEach(element => {
+        // Evento de mouse enter (quando o mouse entra no card)
         element.addEventListener('mouseenter', () => {
-            // console.log("Select sound: Attempting to play.");
-            selectSound.currentTime = 0; // Reset audio
-            selectSound.play().catch(e => console.error("Error playing hover sound:", e.message));
+            console.log("Select sound: Mouse entered a card.");
+            selectSound.currentTime = 0; // Reset audio to play from start
+            selectSound.play().catch(e => console.error("Error playing hover sound on mouseenter:", e.message));
+        });
+
+        // Opcional: Evento de click (se você quiser que o som toque também ao clicar)
+        // CUIDADO: Isso pode gerar muitos sons se o card for também um link/botão que já tem clickSoundEffect.
+        // Pense se quer ter AMBOS os sons tocando no clique, ou apenas um.
+        element.addEventListener('click', (event) => {
+            console.log("Select sound: Card clicked.");
+            selectSound.currentTime = 0;
+            selectSound.play().catch(e => console.error("Error playing hover sound on click:", e.message));
+            // Se o card for um link, você pode querer prevenir o default do link
+            // ou deixar o clickSoundEffect lidar com isso.
+            // if (element.tagName === 'A') {
+            //     event.preventDefault();
+            //     setTimeout(() => window.location.href = element.href, 200);
+            // }
+        });
+
+        // Opcional: Evento de foco (para navegação por teclado)
+        element.addEventListener('focus', () => {
+            console.log("Select sound: Card focused.");
+            selectSound.currentTime = 0;
+            selectSound.play().catch(e => console.error("Error playing hover sound on focus:", e.message));
         });
     });
+
+    // ... (restante do seu código para copiar IP/Porta, etc.) ...
+});
 
     // Copy IP and Port Logic
     const copyIpPortBtn = document.getElementById('copyIpPortBtn');
