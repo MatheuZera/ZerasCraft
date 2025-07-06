@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="audio-control-button-container">
+        <button id="audioControlButton" class="audio-control-button off">
+            <span class="audio-icon on-icon"><i class="fas fa-volume-up"></i></span> <span class="audio-icon off-icon"><i class="fas fa-volume-mute"></i></span> <span class="neon-effect"></span>
+            <div class="audio-progress-arc"></div>
+        </button>
+        <span id="currentMusicTitle">Música Desligada</span>
+    </div>
+
     <header class="main-header">
         <div class="header-content container">
             <a href="#" class="header-logo">Mundo Zera's Craft</a>
@@ -466,28 +475,3 @@
         <source src="audios/music/Blind-Spots.mp3" type="audio/mpeg" data-title="Blind Spots">
         <source src="audios/music/Clark.mp3" type="audio/mpeg" data-title="Clark">
         <source src="audios/music/Danny.mp3" type="audio/mpeg" data-title="Danny">
-        <source src="audios/music/Dreiton.mp3" type="audio/mpeg" data-title="Dreiton">
-        <source src="audios/music/Dry-Hands.mp3" type="audio/mpeg" data-title="Dry Hands">
-        <source src="audios/music/Floating-Trees.mp3" type="audio/mpeg" data-title="Floating Trees">
-        <source src="audios/music/Haggstrom.mp3" type="audio/mpeg" data-title="Haggstrom">
-        <source src="audios/music/Key.mp3" type="audio/mpeg" data-title="Key">
-        <source src="audios/music/Living-Mice.mp3" type="audio/mpeg" data-title="Living Mice">
-        <source src="audios/music/Mice-on-Venus.mp3" type="audio/mpeg" data-title="Mice on Venus">
-        <source src="audios/music/Mutation.mp3" type="audio/mpeg" data-title="Mutation">
-        <source src="audios/music/Oxygene.mp3" type="audio/mpeg" data-title="Oxygene">
-        <source src="audios/music/Subwoofer-Lullaby.mp3" type="audio/mpeg" data-title="Subwoofer Lullaby">
-        <source src="audios/music/Sweden-Lofi-Remake.mp3" type="audio/mpeg" data-title="Sweden Lofi Remake">
-        <source src="audios/music/Sweden.mp3" type="audio/mpeg" data-title="Sweden">
-        <source src="audios/music/Wet-Hands.mp3" type="audio/mpeg" data-title="Wet Hands">
-    </audio>
-
-    <div class="audio-control-button-container">
-        <button id="audioControlButton" class="audio-control-button off">
-            <span class="neon-effect"></span> <i class="fas fa-volume-up audio-icon off-icon"></i> <i class="fas fa-volume-mute audio-icon on-icon"></i> <span id="currentMusicTitle">Desligado</span>
-            <div id="audioProgressArc" class="audio-progress-arc"></div>
-        </button>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
