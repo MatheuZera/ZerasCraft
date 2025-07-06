@@ -1,0 +1,316 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Função para exibir toast notifications
+    function showToast(message, duration = 3000) {
+        const toastContainer = document.querySelector('.toast-container') || (() => {
+            const div = document.createElement('div');
+            div.className = 'toast-container';
+            document.body.appendChild(div);
+            return div;
+        })();
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+
+        // Força o reflow para garantir que a transição CSS funcione
+        void toast.offsetWidth; // eslint-disable-line no-unused-vars
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+        }, duration);
+    }
+
+    // Funcionalidade de copiar IP/Porta e Endereço
+    const copyIpPortBtn = document.getElementById('copyIpPortBtn');
+    const copyAddressBtn = document.getElementById('copyAddressBtn');
+    const copyNewAccessBtn = document.getElementById('copyNewAccessBtn'); // Novo botão
+
+    // Função genérica para copiar e dar feedback visual
+    function setupCopyButton(button, targetElementId, messagePrefix) {
+        if (button) {
+            button.addEventListener('click', () => {
+                const targetElement = document.getElementById(targetElementId);
+                if (!targetElement) {
+                    console.error(`Elemento com ID '${targetElementId}' não encontrado para copiar.`);
+                    showToast('Erro ao copiar: elemento não encontrado.', 3000);
+                    return;
+                }
+
+                let textToCopy;
+                let copiedMessage;
+
+                if (targetElementId === 'serverIp') { // Special handling for IP:Port
+                    const ip = document.getElementById('serverIp').textContent;
+                    const port = document.getElementById('serverPort').textContent;
+                    textToCopy = `${ip}:${port}`;
+                    copiedMessage = `${messagePrefix}: ${ip}:${port}`;
+                } else {
+                    textToCopy = targetElement.textContent;
+                    copiedMessage = `${messagePrefix}: ${textToCopy}`;
+                }
+
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        showToast(copiedMessage);
+                        // Feedback visual temporário no botão
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                        }, 2000); // Volta ao texto original após 2 segundos
+                    })
+                    .catch(err => {
+                        console.error(`Erro ao copiar ${messagePrefix.toLowerCase()}:`, err);
+                        showToast(`Erro ao copiar ${messagePrefix.toLowerCase()}.`, 3000);
+                    });
+            });
+        }
+    }
+
+    setupCopyButton(copyIpPortBtn, 'serverIp', 'IP e Porta copiados'); // 'serverIp' is a placeholder to trigger special handling
+    setupCopyButton(copyAddressBtn, 'serverAddress', 'Endereço copiado');
+    setupCopyButton(copyNewAccessBtn, 'newAccessAddress', 'Novo Endereço copiado');
+
+    // =========================================
+    // Áudio de Fundo e Controles
+    // =========================================
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const audioControlButton = document.getElementById('audioControlButton');
+    const currentMusicTitleSpan = document.getElementById('currentMusicTitle');
+    const selectSound = document.getElementById('selectSound'); // Elemento de áudio para click.mp3
+    const hoverSound = document.getElementById('hoverSound');    // Elemento de áudio para hover.mp3
+    const volumeSlider = document.getElementById('volumeSlider'); // Novo slider de volume
+    const prevTrackButton = document.getElementById('prevTrackButton'); // Novo botão
+    const nextTrackButton = document.getElementById('nextTrackButton'); // Novo botão
+
+
+    let isPlaying = false;
+    let currentTrackIndex = 0;
+    const playlist = Array.from(backgroundMusic.querySelectorAll('source')).map(source => ({
+        src: source.src,
+        title: source.dataset.title || 'Música Desconhecida'
+    }));
+
+    // Preload SFX
+    if (selectSound) selectSound.load();
+    if (hoverSound) hoverSound.load();
+
+    // Função genérica para tocar um som
+    function playAudioElement(audioElement) {
+        if (!audioElement) {
+            console.warn("Elemento de áudio não encontrado para reprodução.");
+            return;
+        }
+        // Para permitir que o som toque novamente rapidamente (múltiplos cliques/hovers)
+        if (!audioElement.paused) {
+            audioElement.pause();
+            audioElement.currentTime = 0; // Reinicia o som
+        }
+        audioElement.play().catch(e => {
+            // Captura o erro se o autoplay for bloqueado ou se o arquivo não for encontrado
+            console.log(`Erro ao tocar som: ${audioElement.id || 'desconhecido'} - ${e.message}`, e);
+            // Opcional: mostrar um toast para o usuário se o som é importante
+            // showToast("Clique na página para ativar os sons!", 3000); 
+        });
+    }
+
+    // Funções específicas para os sons (agora usando playAudioElement)
+    function playSelectSound() {
+        playAudioElement(selectSound);
+    }
+
+    function playHoverSound() {
+        // Altere esta condição conforme sua preferência:
+        // Se quiser que o som de hover toque SEMPRE: remova 'if (isPlaying)'
+        // Se quiser que o som de hover toque APENAS quando a música de fundo estiver ativa: mantenha 'if (isPlaying)'
+        if (isPlaying) {
+            playAudioElement(hoverSound);
+        }
+    }
+
+    function loadAndPlayTrack(index) {
+        if (playlist.length === 0) {
+            console.warn("Playlist vazia, não há músicas para tocar.");
+            currentMusicTitleSpan.textContent = "Nenhuma Música";
+            return;
+        }
+        currentTrackIndex = index % playlist.length;
+        if (currentTrackIndex < 0) {
+            currentTrackIndex = playlist.length - 1; // Volta para o final se for abaixo de 0
+        }
+        backgroundMusic.src = playlist[currentTrackIndex].src;
+        currentMusicTitleSpan.textContent = playlist[currentTrackIndex].title;
+        backgroundMusic.load(); // Garante que a nova fonte seja carregada
+
+        if (isPlaying) {
+            backgroundMusic.play().catch(e => {
+                console.error("Erro ao tentar tocar música (autoplay pode estar bloqueado):", e);
+                isPlaying = false; // Atualiza o estado para refletir que não está tocando
+                audioControlButton.classList.remove('on');
+                audioControlButton.classList.add('off');
+                audioControlButton.innerHTML = '<i class="fas fa-volume-mute"></i> <span>Música Desativada</span>';
+                showToast("Para ouvir a música, interaja com a página.", 5000);
+            });
+        }
+    }
+
+    function playNextTrack() {
+        playSelectSound();
+        loadAndPlayTrack(currentTrackIndex + 1);
+    }
+
+    function playPreviousTrack() {
+        playSelectSound();
+        loadAndPlayTrack(currentTrackIndex - 1);
+    }
+
+    function toggleAudio() {
+        playSelectSound(); // Toca o som de clique ao interagir com o botão de áudio
+
+        if (isPlaying) {
+            backgroundMusic.pause();
+            audioControlButton.classList.remove('on');
+            audioControlButton.classList.add('off');
+            audioControlButton.innerHTML = '<i class="fas fa-volume-mute"></i> <span>Música Desativada</span>';
+            isPlaying = false;
+        } else {
+            backgroundMusic.play().then(() => {
+                audioControlButton.classList.remove('off');
+                audioControlButton.classList.add('on');
+                audioControlButton.innerHTML = '<i class="fas fa-volume-up"></i> <span>' + playlist[currentTrackIndex].title + '</span>';
+                isPlaying = true;
+            }).catch(e => {
+                console.error("Autoplay impedido ou outro erro ao tocar:", e);
+                showToast("Para ouvir a música, por favor, interaja com a página primeiro.", 5000);
+                audioControlButton.classList.remove('on');
+                audioControlButton.classList.add('off');
+                audioControlButton.innerHTML = '<i class="fas fa-volume-mute"></i> <span>Música Desativada</span>';
+                isPlaying = false;
+            });
+        }
+    }
+
+    function initializeAudioButton() {
+        if (backgroundMusic.paused || backgroundMusic.ended || backgroundMusic.src === "") {
+            audioControlButton.classList.add('off');
+            audioControlButton.innerHTML = '<i class="fas fa-volume-mute"></i> <span>Música Desativada</span>';
+            isPlaying = false;
+        } else {
+            audioControlButton.classList.add('on');
+            audioControlButton.innerHTML = '<i class="fas fa-volume-up"></i> <span>' + playlist[currentTrackIndex].title + '</span>';
+            isPlaying = true;
+        }
+    }
+
+    // Tenta tocar automaticamente (pode ser bloqueado pelo navegador)
+    backgroundMusic.play().then(() => {
+        isPlaying = true;
+        initializeAudioButton();
+    }).catch(e => {
+        console.warn("Autoplay inicial bloqueado. O áudio começará mudo. Erro:", e);
+        isPlaying = false;
+        initializeAudioButton();
+    });
+
+    // Event listeners para os controles de áudio
+    if (audioControlButton) {
+        audioControlButton.addEventListener('click', toggleAudio);
+    }
+    if (prevTrackButton) {
+        prevTrackButton.addEventListener('click', playPreviousTrack);
+    }
+    if (nextTrackButton) {
+        nextTrackButton.addEventListener('click', playNextTrack);
+    }
+
+    // Volume Slider Control
+    if (volumeSlider) {
+        // Set initial volume from the slider (default to 0.5 if not set)
+        backgroundMusic.volume = parseFloat(localStorage.getItem('backgroundMusicVolume') || '0.5');
+        volumeSlider.value = backgroundMusic.volume;
+
+        volumeSlider.addEventListener('input', (event) => {
+            backgroundMusic.volume = event.target.value;
+            localStorage.setItem('backgroundMusicVolume', event.target.value); // Save volume preference
+        });
+
+        // Add hover sound to the volume slider thumb
+        volumeSlider.addEventListener('mouseenter', playHoverSound);
+    }
+
+    // Carrega a primeira faixa ao iniciar
+    loadAndPlayTrack(currentTrackIndex);
+
+    // Escuta o evento 'ended' para tocar a próxima música
+    backgroundMusic.addEventListener('ended', () => {
+        loadAndPlayTrack(currentTrackIndex + 1);
+    });
+
+    // =========================================
+    // Efeitos Sonoros de Interação (Cliques e Hovers)
+    // =========================================
+
+    // 1. Ícones de Título (H2) - Som de hover
+    const titleIcons = document.querySelectorAll('h2 i[data-sound-effect]');
+    titleIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', playHoverSound);
+        // Opcional: Se quiser um som de clique nos ícones do título também, descomente a linha abaixo
+        // icon.addEventListener('click', playSelectSound); 
+    });
+
+    // 2. Botões de Copiar (Acesso ao Servidor) - Som de clique
+    // Esta parte já estava funcional, a função setupCopyButton já adiciona o playSelectSound
+    // ao evento de click. Não precisamos de um loop separado aqui.
+
+    // 3. Botões de "Saiba Mais" e outros links/botões genéricos - Som de clique
+    // Alvo: botões com a classe 'btn-link', e todos os 'btn-primary' exceto os de cópia (já tratados acima),
+    // e botões com a classe 'saiba-mais-btn'.
+    const generalLinksButtons = document.querySelectorAll(
+        '.btn-link, .btn-primary:not(#copyIpPortBtn):not(#copyAddressBtn):not(#copyNewAccessBtn), .saiba-mais-btn'
+    );
+    generalLinksButtons.forEach(button => {
+        button.addEventListener('click', playSelectSound);
+    });
+
+    // 4. Cards Inteiros - Som de clique (e opcionalmente hover)
+    // Inclui todos os tipos de cards para um som ao clicar em qualquer parte deles.
+    // Garantimos que o som não seja duplicado se o clique for em um botão/link dentro do card.
+    const clickableCards = document.querySelectorAll(
+        '.service-card, .role-card, .event-card, .collaborator-card, .partnership-card, .access-card'
+    );
+
+    clickableCards.forEach(card => {
+        card.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+            const isButtonOrLinkInside = clickedElement.closest('.btn-link') ||
+                                         clickedElement.closest('.btn-primary') ||
+                                         clickedElement.closest('.saiba-mais-btn');
+            
+            if (!isButtonOrLinkInside) {
+                playSelectSound();
+            }
+        });
+        
+        // Opcional: Adicionar som de hover para o card inteiro. Descomente a linha abaixo se desejar.
+        card.addEventListener('mouseenter', playHoverSound); 
+    });
+
+    // Adiciona som de hover para todos os botões e links que não são especificamente tratados acima
+    // para evitar duplicação ou conflito com o som de clique.
+    const allInteractiveElements = document.querySelectorAll(
+        'button, a, input[type="submit"], input[type="button"], .interactive-element' // Add a generic class for other interactive elements if needed
+    );
+
+    allInteractiveElements.forEach(element => {
+        // Evita adicionar o hover sound a elementos que já têm um listener de hover específico ou que são filhos de cards com hover
+        // Para manter a lógica consistente, você pode ajustar as seleções conforme necessário.
+        if (!element.closest('.access-card .btn-primary') && !element.closest('h2 i[data-sound-effect]')) {
+             element.addEventListener('mouseenter', playHoverSound);
+        }
+    });
+
+
+});
