@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Função para detectar se é um dispositivo touch (simplificada)
+    function isTouchDevice() {
+        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+    }
+
+    const isMobile = isTouchDevice(); // Detecta uma vez na inicialização
+
     // --- Lógica para o botão de áudio de fundo (Minecraft Audio) ---
     const minecraftAudio = document.getElementById('minecraftAudio');
     const playAudioBtn = document.getElementById('playAudioBtn');
@@ -58,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("Erro: Elementos 'playAudioBtn' ou 'minecraftAudio' não encontrados no DOM. Verifique seus IDs no HTML.");
     }
 
-    // --- Lógica para o som de clique em interações ---
+    // --- Lógica para o som de clique em interações GERAIS (incluindo botões e links) ---
     const clickAudio = new Audio('audios/click.mp3');
     clickAudio.preload = 'auto'; 
     clickAudio.volume = 0.4;
@@ -81,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Lógica para reproduzir select.mp3 ao passar o mouse (mouseenter) nos cards GERAIS ---
+    // --- Lógica para reproduzir select.mp3 nos cards (diferente para PC e Mobile) ---
     const interactiveCardsGeneral = document.querySelectorAll(
         '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card'
     );
@@ -98,11 +105,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     interactiveCardsGeneral.forEach(card => {
-        card.addEventListener('mouseenter', playSelectSoundGeneral); // Mantido para desktop
-        // REMOVIDO: card.addEventListener('touchstart', playSelectSoundGeneral);
+        if (!isMobile) {
+            // Se for PC, usa mouseenter (passar o cursor)
+            card.addEventListener('mouseenter', playSelectSoundGeneral);
+        } else {
+            // Se for Mobile, usa click (tocar)
+            card.addEventListener('click', function(event) {
+                // Previne que o click do card acione o som de clique padrão de links/botões,
+                // se o card contiver um link ou botão e você quiser apenas o som de select.
+                // Se o card NÃO tiver um link/botão interno direto, pode remover esta linha.
+                if (!event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link')) {
+                    playSelectSoundGeneral();
+                } else if (event.target.tagName !== 'A' && event.target.tagName !== 'BUTTON') {
+                    // Se clicou no card mas não diretamente em um link/botão dentro dele
+                     playSelectSoundGeneral();
+                }
+            });
+        }
     });
 
-    // --- Lógica para reproduzir select.mp3 ao passar o mouse (mouseenter) para CADA ITEM DA GRADE DE SEGURANÇA ---
+    // --- Lógica para reproduzir select.mp3 para CADA ITEM DA GRADE DE SEGURANÇA ---
     const securityGridItems = document.querySelectorAll('.security-grid-item');
 
     securityGridItems.forEach(item => {
@@ -110,15 +132,24 @@ document.addEventListener('DOMContentLoaded', function() {
         itemSelectAudio.preload = 'auto';
         itemSelectAudio.volume = 0.2;
 
-        item.addEventListener('mouseenter', function() { // Mantido para desktop
-            itemSelectAudio.currentTime = 0;
-            itemSelectAudio.play().catch(e => {
-                console.warn("Reprodução de áudio 'select.mp3' para item da grade bloqueada ou falhou:", e);
+        if (!isMobile) {
+            // Se for PC, usa mouseenter
+            item.addEventListener('mouseenter', function() {
+                itemSelectAudio.currentTime = 0;
+                itemSelectAudio.play().catch(e => {
+                    console.warn("Reprodução de áudio 'select.mp3' para item da grade bloqueada ou falhou:", e);
+                });
             });
-        });
-        // REMOVIDO: item.addEventListener('touchstart', function() { ... });
+        } else {
+            // Se for Mobile, usa click
+            item.addEventListener('click', function() {
+                itemSelectAudio.currentTime = 0;
+                itemSelectAudio.play().catch(e => {
+                    console.warn("Reprodução de áudio 'select.mp3' para item da grade (touch) bloqueada ou falhou:", e);
+                });
+            });
+        }
     });
-
 
     // --- Lógica para mostrar o botão de áudio após a primeira interação ---
     let userInteracted = false; 
@@ -129,22 +160,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 playAudioBtn.style.display = 'block';
             }
             
+            // Tenta reproduzir o som de select inicial
             selectAudioGeneral.currentTime = 0;
             selectAudioGeneral.play().catch(e => {
                 console.warn("Reprodução inicial de 'select.mp3' após interação falhou:", e);
             });
 
             userInteracted = true;
+            // Remove os listeners de primeira interação
             document.removeEventListener('scroll', handleUserInteraction);
             document.removeEventListener('mousemove', handleUserInteraction);
             document.removeEventListener('click', handleUserInteraction);
-            // REMOVIDO: document.removeEventListener('touchstart', handleUserInteraction);
+            document.removeEventListener('touchstart', handleUserInteraction); // Mantém para primeira interação via touch
         }
     }
 
-    // Adiciona o listener para a primeira interação (ainda inclui touchstart para permitir a permissão de áudio inicial)
+    // Adiciona listeners para a primeira interação (que pode vir de qualquer fonte, incluindo touch)
     document.addEventListener('scroll', handleUserInteraction);
     document.addEventListener('mousemove', handleUserInteraction);
     document.addEventListener('click', handleUserInteraction);
-    document.addEventListener('touchstart', handleUserInteraction); // MANTIDO para que a permissão de áudio possa ser acionada por um toque
+    document.addEventListener('touchstart', handleUserInteraction); // Essencial para habilitar áudio em mobile
 });
