@@ -28,8 +28,11 @@
     /* Cores específicas para o botão de áudio */
     --audio-btn-on-color-base: var(--cor-primaria); /* Base verde para o efeito neon */
     --audio-btn-off-color: var(--cor-terciaria); /* Verde escuro quando desligado/pausado */
-    --neon-flame-color1: #04FF00; /* Verde neon */
-    --neon-flame-color2: #00FFFF; /* Ciano neon */
+    --neon-flame-color1: #04FF00; /* Verde neon (para background-gradient) */
+    --neon-flame-color2: #00FFFF; /* Ciano neon (para background-gradient) */
+    /* NOVAS VARIÁVEIS RGB para usar em rgba() no box-shadow */
+    --neon-flame-color1-rgb: 4, 255, 0; /* Valores RGB para rgba() */
+    --neon-flame-color2-rgb: 0, 255, 255; /* Valores RGB para rgba() */
 
 
     /* Fontes */
@@ -378,7 +381,6 @@ h2 .fas, h3 .fas {
     padding: var(--padding-card);
     text-align: center;
     box-shadow: var(--sombra-leve);
-    /* TRANSITION: Adicionado para incluir transform e box-shadow para o hover */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.05); /* Borda sutil */
     display: flex; /* Para flexibilizar conteúdo interno */
@@ -399,13 +401,11 @@ h2 .fas, h3 .fas {
 }
 
 /* Estilos para os ícones dentro dos cards */
-/* Este seletor tenta cobrir a maioria dos ícones/imagens que você possa ter */
-/* É crucial que este seletor corresponda ao seu HTML! */
 .service-card .card-icon,
 .role-category-card .role-category-icon,
 .community-card .member-avatar,
 .partnership-card .partnership-logo,
-.access-card .card-icon { /* Adicionado .access-card .card-icon */
+.access-card .card-icon {
     width: 80px; /* Tamanho padrão para ícones de card */
     height: 80px;
     object-fit: cover;
@@ -442,7 +442,7 @@ h2 .fas, h3 .fas {
 .role-category-card:hover .role-category-icon,
 .community-card:hover .member-avatar,
 .partnership-card:hover .partnership-logo,
-.access-card:hover .card-icon, /* Adicionado para os cards de acesso */
+.access-card:hover .card-icon,
 .event-card:hover .event-card-image {
     transform: rotate(10deg) scale(1.1); /* Rotaciona 10 graus e escala 10% */
 }
@@ -535,7 +535,6 @@ h2 .fas, h3 .fas {
     overflow: hidden; /* Esconde partes da imagem que podem vazar */
 }
 
-/* NOTA: event-card-image já está definida acima para a transição */
 .event-card-inner {
     padding: var(--padding-card);
     text-align: left; /* Alinhamento de texto para o conteúdo do card */
@@ -614,48 +613,91 @@ h2 .fas, h3 .fas {
 }
 
 /* ===================================== */
-/* 12. Controle de Áudio                 */
+/* 12. Controle de Áudio - REVISADO      */
 /* ===================================== */
 
-/* ... (código anterior do .audio-control-button-container e .audio-control-button) ... */
+/* Container para posicionamento fixo */
+.audio-control-button-container {
+    position: fixed;
+    bottom: 30px; /* Distância da parte inferior */
+    right: 30px; /* Distância da parte direita */
+    z-index: 1050; /* Garante que fique acima de outros elementos */
+    display: flex; /* Para centralizar o botão dentro dele, se necessário */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo base para o botão de controle de áudio */
+#audioControlButton.audio-control-button { /* Usando ID e classe para seletividade */
+    position: relative; /* Necessário para posicionar o .neon-effect e .audio-progress-arc */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 50px; /* Botão mais arredondado */
+    background-color: var(--audio-btn-off-color); /* Cor padrão quando desligado */
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-titulo);
+    font-size: 1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: 2px solid transparent; /* Borda transparente por padrão */
+    box-shadow: var(--sombra-leve);
+    overflow: hidden; /* Esconde o excesso do neon-effect e progress arc */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+#audioControlButton.audio-control-button:hover:not(.on) {
+    background-color: var(--cor-secundaria);
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+#audioControlButton.audio-control-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: var(--cor-terciaria);
+    box-shadow: none;
+}
+
 
 /* Estilo para os ícones */
 .audio-control-button .audio-icon {
     font-size: 1.2em;
     display: inline-block;
-    width: 1.2em; /* Fixa a largura para evitar "saltos" */
+    width: 1.2em;
     text-align: center;
+    position: relative; /* Z-index para estar acima do neon e arco */
+    z-index: 3; /* Mais alto que o arco e neon */
 }
 
 /* Controle de visibilidade dos ícones */
-
-/* Quando o áudio NÃO ESTÁ TOCANDO (botão sem a classe .on) */
-.audio-control-button .on-icon { /* Ícone com X (mute) */
-    display: inline-block; /* Visível: "Desligado" ou pausado, então mostre o X */
+.audio-control-button .on-icon { /* Ícone com X (para mute) */
+    display: inline-block; /* Por padrão, visível (música pausada/desligada) */
 }
-
-.audio-control-button .off-icon { /* Ícone sem X (volume up) */
-    display: none; /* Escondido: não tocando, então esconda o sem X */
+.audio-control-button .off-icon { /* Ícone sem X (para volume normal) */
+    display: none; /* Por padrão, escondido */
 }
 
 /* Estado ON: Fundo verde primário + efeito neon + ícone SEM X */
 .audio-control-button.on {
-    background-color: var(--audio-btn-on-color-base); /* Fundo verde claro para ser base do neon */
-    box-shadow: 0 0 15px rgba(var(--neon-flame-color1), 0.7), /* Pequeno brilho base */
-                0 0 30px rgba(var(--neon-flame-color2), 0.5); /* Brilho mais difuso */
+    background-color: var(--audio-btn-on-color-base); /* Fundo base para o neon */
+    border-color: var(--cor-primaria); /* Borda verde sólida no estado ON */
+    /* Box-shadow para o brilho externo do neon. As cores RGB para rgba() */
+    box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8), /* Brilho interno */
+                0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6), /* Brilho intermediário */
+                0 0 30px rgba(var(--neon-flame-color1-rgb), 0.4); /* Brilho externo difuso */
 }
 
-.audio-control-button.on .on-icon { /* Ícone com X (mute) */
-    display: none; /* Escondido: tocando, então esconda o X */
+.audio-control-button.on .on-icon {
+    display: none; /* Esconde o ícone com X */
 }
 
-.audio-control-button.on .off-icon { /* Ícone sem X (volume up) */
-    display: inline-block; /* Visível: tocando, então mostre o sem X */
+.audio-control-button.on .off-icon {
+    display: inline-block; /* Mostra o ícone sem X */
 }
-
-/* ... (o restante do código do botão de áudio, incluindo neon-effect, currentMusicTitle, audio-progress-arc) ... */
-
-/* O restante do código do botão de áudio permanece o mesmo */
 
 /* Efeito de Chamas Neon */
 .audio-control-button .neon-effect {
@@ -666,7 +708,7 @@ h2 .fas, h3 .fas {
     height: 100%;
     background: linear-gradient(
         45deg,
-        var(--neon-flame-color1) 0%,
+        var(--neon-flame-color1) 0%, /* Usando as cores originais aqui */
         var(--neon-flame-color2) 25%,
         var(--neon-flame-color1) 50%,
         var(--neon-flame-color2) 75%,
@@ -677,51 +719,10 @@ h2 .fas, h3 .fas {
     opacity: 0;
     transition: opacity 0.4s ease;
     border-radius: inherit;
-    z-index: 0;
+    z-index: 0; /* Fica abaixo de tudo */
     pointer-events: none;
 }
 
-.audio-control-button.on .neon-effect {
-    opacity: 0.7;
-    animation: neon-flame-animation 2s linear infinite;
-}
-
-@keyframes neon-flame-animation {
-    0% { background-position: 0% 0; }
-    100% { background-position: 100% 0; }
-}
-
-#currentMusicTitle {
-    white-space: nowrap;
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 1;
-    position: relative;
-    z-index: 1;
-}
-
-.audio-progress-arc {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    transform: rotate(-45deg);
-    box-sizing: border-box;
-    transition: transform 0.1s linear, opacity 0.3s ease;
-    z-index: 2;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.audio-control-button.on .audio-progress-arc {
-    opacity: 1;
-}
-
-/* Animação das chamas neon quando o botão está ON */
 .audio-control-button.on .neon-effect {
     opacity: 0.7; /* Torna o efeito visível */
     animation: neon-flame-animation 2s linear infinite; /* Animação das chamas */
@@ -739,11 +740,12 @@ h2 .fas, h3 .fas {
     overflow: hidden;
     text-overflow: ellipsis;
     flex-shrink: 1;
-    position: relative; /* Garante que o texto fique acima do efeito neon */
+    position: relative;
     z-index: 1; /* Coloca o texto acima do neon-effect */
+    color: var(--cor-btn-text); /* Garante que o texto seja claro */
 }
 
-/* Barra de progresso circular (manter, mas sem a linha amarela) */
+/* Barra de progresso circular */
 .audio-progress-arc {
     position: absolute;
     top: 0;
@@ -752,16 +754,18 @@ h2 .fas, h3 .fas {
     height: 100%;
     border-radius: 50%;
     border: 3px solid transparent; /* Transparente por padrão */
-    transform: rotate(-45deg);
+    /* A cor visível do progresso será controlada pelo JS via border-top-color/border-right-color */
+    transform: rotate(-45deg); /* Inicia a 45 graus para o topo */
     box-sizing: border-box;
     transition: transform 0.1s linear, opacity 0.3s ease;
     z-index: 2; /* Fica acima do neon-effect e abaixo dos ícones/texto */
     opacity: 0;
     pointer-events: none;
-    /* Se você quiser que o arco de progresso tenha uma cor (não a aura),
-        pode descomentar e ajustar as cores aqui para o estado ON: */
-    /* border-top-color: rgba(255, 255, 255, 0.5); */
-    /* border-right-color: rgba(255, 255, 255, 0.5); */
+    /* Definir uma cor base para o arco, será sobrescrita pelo JS */
+    border-top-color: var(--cor-destaque); /* Exemplo: amarelo dourado */
+    border-right-color: var(--cor-destaque); /* Necessário para um arco completo */
+    border-bottom-color: transparent;
+    border-left-color: transparent;
 }
 
 .audio-control-button.on .audio-progress-arc {
@@ -816,12 +820,21 @@ h2 .fas, h3 .fas {
     .header-content {
         flex-direction: column;
         gap: 20px;
+        align-items: center;
+        justify-content: center;
     }
     .main-nav ul {
         flex-direction: column;
         gap: 10px;
         align-items: center;
+        padding: 0;
+        width: 100%;
     }
+    .main-nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
 
     .hero-section {
         height: auto;
@@ -852,12 +865,12 @@ h2 .fas, h3 .fas {
         padding: 20px;
     }
 
+    /* Ajuste do botão de áudio para telas menores */
     .audio-control-button-container {
         bottom: 15px;
         right: 15px;
     }
-
-    .audio-control-button {
+    #audioControlButton.audio-control-button { /* Usar o seletor completo */
         padding: 8px 15px;
         font-size: 0.9em;
     }
@@ -888,143 +901,4 @@ h2 .fas, h3 .fas {
     .card-title {
         font-size: 1.3em;
     }
-    /* A parte do CSS para animação de ícones não deve estar aqui dentro
-       de uma media query, a menos que seja um ajuste específico para
-       telas pequenas. Removi a duplicação daqui. */
 }
-
-/* === INÍCIO DAS ANIMAÇÕES DOS ÍCONES DOS CARDS === */
-/* Movido para fora da media query para ser global e ajustado */
-
-/* As transições de hover dos cards já incluem transform e box-shadow */
-/* .service-card,
-.role-category-card,
-.community-card,
-.partnership-card,
-.event-card,
-.access-card {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
-}
-
-.service-card:hover,
-.role-category-card:hover,
-.community-card:hover,
-.partnership-card:hover,
-.event-card:hover,
-.access-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--sombra-card);
-    background-color: var(--cor-card-hover);
-} */
-
-/* Estilo para os ícones dentro dos cards */
-/* Seletores mais específicos para garantir que as transformações sejam aplicadas aos ícones corretos.
-   Adicione 'i' se estiver usando Font Awesome diretamente, ou 'img' para imagens.
-   Se o ícone estiver dentro de um div com uma classe específica, use essa classe. */
-.service-card .card-icon,
-.role-category-card .role-category-icon,
-.community-card .member-avatar,
-.partnership-card .partnership-logo,
-.access-card .card-icon, /* Incluindo cards de acesso, se eles tiverem um ícone com essa classe */
-/* Adicione outros seletores se seus ícones forem diferentes (e.g., .event-card .event-icon) */
-.service-card .fas, .role-category-card .fas, .community-card .fas, .partnership-card .fas, .access-card .fas /* Para Font Awesome */
-{
-    /* Garanta que o elemento seja um bloco ou inline-block para que a transformação funcione */
-    display: block; /* ou inline-block */
-    margin: 0 auto 20px auto; /* Centraliza e adiciona espaço abaixo */
-    transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
-}
-
-/* Tratamento específico para as imagens de evento se forem <img> ou divs com background */
-.event-card .event-card-image { /* Se for uma <img> */
-    display: block;
-    width: 100%;
-    height: 200px; /* Altura fixa para as imagens dos eventos */
-    object-fit: cover;
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
-    margin-bottom: 0;
-    border-bottom: 2px solid var(--cor-primaria);
-    transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
-}
-/* ... (seu código CSS anterior) ... */
-
-@media (max-width: 768px) {
-    .main-header {
-        text-align: center; /* Garante que o conteúdo dentro do cabeçalho seja centralizado */
-    }
-    .header-content {
-        flex-direction: column;
-        gap: 20px;
-        align-items: center; /* Mantém os itens flexíveis centralizados */
-        justify-content: center; /* Adicionado para garantir centralização horizontal se houver espaço */
-    }
-    .main-nav ul {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center; /* Centraliza os itens da lista de navegação */
-        padding: 0; /* Garante que não há padding extra empurrando a lista */
-        width: 100%; /* Permite que a lista ocupe toda a largura disponível para centralização */
-    }
-    .main-nav ul li {
-        width: 100%; /* Garante que cada item da lista ocupe a largura total para centralizar seu texto */
-        text-align: center; /* Centraliza o texto de cada item da lista */
-    }
-
-
-    .hero-section {
-        height: auto;
-        padding: 80px 20px;
-    }
-
-    .hero-content h1 {
-        font-size: 2.5em;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1em;
-    }
-
-    .section-padded {
-        padding: 60px 0;
-    }
-
-    .services-grid,
-    .roles-grid,
-    .access-cards-grid,
-    .community-grid,
-    .events-sub-grid {
-        grid-template-columns: 1fr; /* Uma coluna em telas menores */
-    }
-
-    .pixel-legends-embed {
-        padding: 20px;
-    }
-
-    .audio-control-button-container {
-        bottom: 15px;
-        right: 15px;
-    }
-
-    .audio-control-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
-    }
-}
-
-/* ... (o restante do seu código CSS) ... */
-
-/* Animação de rotação e escala no hover do card */
-/* Aplica-se ao ÍCONE quando o MOUSE está sobre o CARD pai */
-.service-card:hover .card-icon,
-.role-category-card:hover .role-category-icon,
-.community-card:hover .member-avatar,
-.partnership-card:hover .partnership-logo,
-.access-card:hover .card-icon, /* Efeito de hover nos ícones dos cards de acesso */
-.event-card:hover .event-card-image, /* Efeito de hover nas imagens de evento */
-.service-card:hover .fas, .role-category-card:hover .fas, .community-card:hover .fas, .partnership-card:hover .fas, .access-card:hover .fas /* Para Font Awesome */
-{
-    transform: rotate(10deg) scale(1.1); /* Rotaciona 10 graus e escala 10% */
-}
-
-/* === FIM DAS ANIMAÇÕES DOS ÍCONES DOS CARDS === */
