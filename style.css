@@ -24,15 +24,17 @@
     --cor-link: #8bc34a; /* Cor de link padrão */
     --cor-link-hover: #aed581; /* Cor de link ao passar o mouse */
     --cor-btn-text: #FFFFFF; /* Texto dos botões */
+    /* Cores do neon (ajuste para o seu verde/ciano neon) */
+    --neon-flame-color1: #00FF00; /* Verde Neon */
+    --neon-flame-color2: #00FFFF; /* Ciano Neon */
+    --neon-flame-color1-rgb: 0, 255, 0; /* RGB para sombras */
+    --neon-flame-color2-rgb: 0, 255, 255; /* RGB para sombras */
 
-    /* Cores específicas para o botão de áudio */
-    --audio-btn-on-color-base: var(--cor-primaria); /* Base verde para o efeito neon */
-    --audio-btn-off-color: var(--cor-terciaria); /* Verde escuro quando desligado/pausado */
-    --neon-flame-color1: #04FF00; /* Verde neon (para background-gradient) */
-    --neon-flame-color2: #00FFFF; /* Ciano neon (para background-gradient) */
-    /* NOVAS VARIÁVEIS RGB para usar em rgba() no box-shadow */
-    --neon-flame-color1-rgb: 4, 255, 0; /* Valores RGB para rgba() */
-    --neon-flame-color2-rgb: 0, 255, 255; /* Valores RGB para rgba() */
+    --border-radius: 8px;
+    --fonte-titulo: 'Arial', sans-serif; /* Exemplo, use sua fonte real */
+    --cor-fundo-card: #2c2f33; /* Cor de fundo dos cards */
+    --cor-texto-card: #e0e0e0; /* Cor do texto dos cards */
+    --cor-borda-card-hover: #4CAF50; /* Cor da borda do card no hover */
 
 
     /* Fontes */
@@ -53,6 +55,15 @@
     /* Transições */
     --transicao-padrao: all 0.3s ease;
     --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease; /* Transição específica para hover de card */
+}
+/* Estilos gerais para o corpo da página (apenas para contexto) */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* Fundo escuro */
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita barra de rolagem horizontal */
 }
 
 /* Reset Básico para consistência entre navegadores */
@@ -627,76 +638,69 @@ h2 .fas, h3 .fas {
     bottom: 30px; /* Distância da parte inferior da tela */
     right: 30px; /* Distância da parte direita da tela */
     z-index: 1050; /* Garante que o botão fique acima da maioria dos outros elementos */
-    display: flex; /* Para centralizar o botão dentro dele */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* Estilo base para o botão principal de controle de áudio */
 #audioControlButton.audio-control-button {
-    position: relative; /* Essencial para posicionar o SVG e o efeito neon */
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza o conteúdo horizontalmente (ícone/texto) */
-    gap: 10px; /* Espaçamento entre o ícone e o texto */
-    padding: 15px; /* Aumenta o padding para um botão circular */
+    justify-content: center;
     width: 70px; /* Largura fixa para o círculo */
     height: 70px; /* Altura fixa para o círculo */
     border-radius: 50%; /* Transforma o botão em um círculo perfeito */
-    background-color: var(--audio-btn-off-color); /* Cor de fundo quando a música está desligada/pausada */
-    color: var(--cor-btn-text); /* Cor do texto e dos ícones */
-    font-family: var(--fonte-titulo);
-    font-size: 1em; /* Tamanho da fonte para o texto (se visível) */
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer; /* Indica que é clicável */
-    border: 2px solid transparent; /* Borda transparente inicial, será alterada com o neon */
-    box-shadow: var(--sombra-leve); /* Sombra sutil para profundidade */
-    overflow: hidden; /* Importante para que o SVG de progresso e o efeito neon não transbordem */
-    /* Transições suaves para as propriedades visuais do botão */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-    /* Remover min-width, pois agora é um círculo de tamanho fixo */
+    background-color: transparent; /* Fundo transparente para mostrar apenas o neon */
+    color: var(--cor-btn-text); /* Cor do ícone */
+    cursor: pointer;
+    border: 2px solid transparent; /* Borda transparente inicial */
+    box-shadow: none; /* Sem sombra padrão */
+    overflow: hidden; /* Importante para o SVG e o efeito neon */
+    transition: transform 0.2s ease; /* Transição para o hover */
+    padding: 0; /* Remover padding para centralizar melhor o ícone */
 }
 
-/* Efeito de hover para o botão quando não está tocando (sem o neon) */
-#audioControlButton.audio-control-button:hover:not(.is-playing) {
-    background-color: var(--cor-secundaria); /* Escurece o fundo no hover */
+/* Efeito de hover para o botão (sempre, pois o neon já é animado quando tocando) */
+#audioControlButton.audio-control-button:hover {
     transform: scale(1.05); /* Efeito sutil de "crescer" no hover */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Sombra mais pronunciada */
 }
 
-/* Estilo para o botão desabilitado */
+/* Estilo para o botão desabilitado (se necessário) */
 #audioControlButton.audio-control-button:disabled {
     cursor: not-allowed;
     opacity: 0.6;
-    background-color: var(--cor-terciaria);
+    background-color: #555;
     box-shadow: none;
 }
 
-/* Estilo base para os spans dos ícones dentro do botão */
+/* Estilo para o ícone de música dentro do botão */
 .audio-control-button .audio-icon {
-    font-size: 1.8em; /* Aumenta o tamanho do ícone para o círculo */
-    display: inline-block;
-    width: 1em; /* Ajusta a largura para o ícone */
-    text-align: center;
+    font-size: 2.2em; /* Tamanho do ícone */
     position: relative;
-    z-index: 3; /* Garante que os ícones fiquem acima do arco de progresso e do neon */
-    transition: transform 0.3s ease; /* Adiciona transição para o ícone girar */
+    z-index: 3; /* Acima do neon e do progresso */
+    transition: transform 0.3s ease; /* Transição para a rotação */
+    display: flex; /* Para centralizar o ícone Font Awesome */
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ocupa a largura total do botão para centralização */
+    height: 100%; /* Ocupa a altura total do botão para centralização */
 }
 
-/* Controle de visibilidade dos ícones de volume/mudo */
-.audio-control-button .on-icon { /* Este é o ícone de MUTO (fa-volume-mute) */
-    display: inline-block;
+/* Ícone girando quando a música está tocando */
+#audioControlButton.is-playing .audio-icon {
+    animation: icon-spin 2s linear infinite; /* Animação de rotação contínua */
 }
-.audio-control-button .off-icon { /* Este é o ícone de VOLUME (fa-volume-up) */
-    display: none;
+
+/* Keyframes para a animação de rotação do ícone */
+@keyframes icon-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Estilo do botão quando a música está tocando (classe 'is-playing' adicionada via JS) */
 #audioControlButton.is-playing {
-    background-color: var(--audio-btn-on-color-base); /* Fundo base para o efeito neon */
-    border-color: var(--cor-primaria); /* Borda sólida da cor primária */
     /* Múltiplas sombras para criar o efeito de brilho externo do neon */
     box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8), /* Brilho interno */
                 0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6), /* Brilho intermediário */
@@ -706,33 +710,8 @@ h2 .fas, h3 .fas {
 
 /* Keyframes para a animação de pulsação da borda */
 @keyframes pulse-border {
-    0% { border-color: var(--cor-primaria); }
-    100% { border-color: var(--cor-destaque); } /* Muda a cor da borda para destaque */
-}
-
-
-/* Animação do ícone quando a música está tocando */
-#audioControlButton.is-playing .audio-icon {
-    animation: icon-spin 2s linear infinite; /* Ícone girando continuamente */
-}
-
-/* Keyframes para a animação de rotação do ícone */
-@keyframes icon-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Alterna a visibilidade dos ícones quando a música está tocando */
-#audioControlButton.is-playing .on-icon { /* Esconde o ícone de MUTO */
-    display: none;
-}
-#audioControlButton.is-playing .off-icon { /* Mostra o ícone de VOLUME */
-    display: inline-block;
-}
-
-/* Estilo para o span que exibe o título da música - ESCONDIDO NESTE LAYOUT CIRCULAR */
-.audio-text {
-    display: none; /* Esconde o texto da música em todos os tamanhos para o botão circular */
+    0% { box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8), 0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6); }
+    100% { box-shadow: 0 0 15px rgba(var(--neon-flame-color2-rgb), 1), 0 0 25px rgba(var(--neon-flame-color1-rgb), 0.8); }
 }
 
 /* Estilo para o elemento SVG que cria o arco de progresso circular */
@@ -743,7 +722,7 @@ h2 .fas, h3 .fas {
     width: 100%;
     height: 100%;
     transform: rotate(-90deg); /* Gira o SVG para que o progresso comece no topo (12 horas) */
-    z-index: 0; /* Fica abaixo dos ícones e texto */
+    z-index: 1; /* Fica abaixo do ícone, mas acima do neon-effect */
     pointer-events: none; /* Garante que o SVG não intercepte cliques no botão */
     opacity: 0; /* Invisível por padrão */
     transition: opacity 0.3s ease; /* Transição para aparecer/desaparecer */
@@ -756,7 +735,7 @@ h2 .fas, h3 .fas {
 
 /* Estilo do fundo do arco de progresso (a parte não preenchida) */
 .audio-progress-arc .arc-background {
-    stroke: rgba(0, 0, 0, 0.2); /* Cor do fundo do arco (transparente preto) */
+    stroke: rgba(255, 255, 255, 0.1); /* Cor do fundo do arco (transparente branco) */
     stroke-width: 3.5; /* Espessura do arco */
     fill: none; /* Não preenche o círculo */
 }
@@ -770,7 +749,7 @@ h2 .fas, h3 .fas {
     transition: stroke-dasharray 0.1s linear; /* Animação suave do preenchimento */
 }
 
-/* Pseudo-elemento ou div para o efeito de "chama" neon que se move */
+/* Elemento para o efeito de "chama" neon que se move */
 .audio-control-button .neon-effect {
     position: absolute;
     top: 0;
@@ -780,18 +759,18 @@ h2 .fas, h3 .fas {
     /* Gradiente que simula as cores do neon */
     background: linear-gradient(
         45deg,
-        var(--neon-flame-color1) 0%, /* Verde neon */
-        var(--neon-flame-color2) 25%, /* Ciano neon */
+        var(--neon-flame-color1) 0%,
+        var(--neon-flame-color2) 25%,
         var(--neon-flame-color1) 50%,
         var(--neon-flame-color2) 75%,
         var(--neon-flame-color1) 100%
     );
     background-size: 200% 100%; /* Duplica o tamanho para permitir a animação de movimento */
-    filter: blur(8px); /* Aumenta o desfoque para um brilho mais suave e intenso */
+    filter: blur(8px); /* Aplica um desfoque para o efeito de brilho */
     opacity: 0; /* Invisível por padrão */
     transition: opacity 0.4s ease; /* Transição para aparecer/desaparecer */
     border-radius: inherit; /* Herda o border-radius do botão pai */
-    z-index: 0; /* Fica abaixo de tudo, atrás dos ícones, texto e SVG */
+    z-index: 0; /* Fica no fundo */
     pointer-events: none; /* Não interfere com cliques */
     animation: neon-gradient-spin 10s linear infinite; /* Animação de rotação do gradiente neon */
 }
@@ -807,23 +786,115 @@ h2 .fas, h3 .fas {
     100% { transform: rotate(360deg); }
 }
 
-/* Media Queries para responsividade do botão de áudio */
+/* ===================================== */
+/* 13. Mensagem Central na Tela          */
+/* ===================================== */
+.central-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semitransparente escuro */
+    color: var(--cor-btn-text);
+    padding: 20px 30px;
+    border-radius: var(--border-radius);
+    font-family: var(--fonte-titulo);
+    font-size: 1.8em; /* Tamanho maior para destaque */
+    font-weight: bold;
+    text-align: center;
+    opacity: 0; /* Inicialmente invisível */
+    visibility: hidden; /* Esconde completamente quando não está visível */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transição suave */
+    z-index: 1060; /* Acima de tudo */
+    pointer-events: none; /* Não deve interferir com cliques */
+    white-space: nowrap; /* Impede quebra de linha */
+    box-shadow: 0 0 15px rgba(var(--neon-flame-color2-rgb), 0.5); /* Sombra sutil neon */
+}
+
+/* Classe para mostrar a mensagem */
+.central-message.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===================================== */
+/* 14. Estilos dos Cards (Exemplo)       */
+/* ===================================== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 50px auto; /* Centraliza a grade */
+}
+
+.card {
+    background-color: var(--cor-fundo-card);
+    color: var(--cor-texto-card);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Transições para hover */
+    border: 2px solid transparent; /* Borda transparente inicial */
+    cursor: pointer; /* Indica que é clicável */
+}
+
+.card:hover {
+    transform: translateY(-8px); /* Eleva o card */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+    border-color: var(--cor-borda-card-hover); /* Muda a cor da borda no hover */
+}
+
+.card-icon {
+    font-size: 3em;
+    color: var(--cor-primaria); /* Cor do ícone do card */
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: var(--cor-destaque);
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.card ul li {
+    margin-bottom: 5px;
+}
+
+/* Media Queries para responsividade */
 @media (max-width: 768px) {
     .audio-control-button-container {
-        bottom: 15px; /* Reduz a distância da parte inferior */
-        right: 15px; /* Reduz a distância da parte direita */
+        bottom: 15px;
+        right: 15px;
     }
     #audioControlButton.audio-control-button {
-        width: 60px; /* Mantém o círculo menor em telas pequenas */
+        width: 60px;
         height: 60px;
-        padding: 10px; /* Ajusta o padding para o tamanho menor */
     }
     .audio-control-button .audio-icon {
-        font-size: 1.6em; /* Ajusta o tamanho do ícone para telas menores */
+        font-size: 1.8em;
+    }
+    .central-message {
+        font-size: 1.2em;
+        padding: 15px 20px;
+    }
+    .card-grid {
+        padding: 15px;
+    }
+    .card {
+        padding: 20px;
     }
 }
 
-/* Media Query para telas ainda menores, se necessário */
 @media (max-width: 480px) {
     .audio-control-button-container {
         bottom: 10px;
@@ -832,10 +903,13 @@ h2 .fas, h3 .fas {
     #audioControlButton.audio-control-button {
         width: 55px;
         height: 55px;
-        padding: 8px;
     }
     .audio-control-button .audio-icon {
-        font-size: 1.5em;
+        font-size: 1.6em;
+    }
+    .central-message {
+        font-size: 1em;
+        padding: 10px 15px;
     }
 }
 

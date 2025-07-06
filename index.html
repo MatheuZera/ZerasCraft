@@ -505,148 +505,23 @@
     <script src="js/music-player.js"></script>
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script> </body>
 
-    <script src="js/main.js"></script>
-</body>
-</html>
-<audio id="cardHoverSound" src="audios/select.mp3" preload="auto"></audio>
 
-    <audio id="backgroundMusic" loop>
-        <source src="audios/musics/Aria-Math.mp3" type="audio/mpeg" data-title="Aria Math">
-        <source src="audios/musics/Beginning 2.mp3" type="audio/mpeg" data-title="Beginning 2">
-        <source src="audios/musics/Biome-Fest.mp3" type="audio/mpeg" data-title="Biome Fest">
-        <source src="audios/musics/Blind-Spots.mp3" type="audio/mpeg" data-title="Blind Spots">
-        <source src="audios/musics/Clark.mp3" type="audio/mpeg" data-title="Clark">
-        <source src="audios/musics/Danny.mp3" type="audio/mpeg" data-title="Danny">
-        <source src="audios/musics/Dreiton.mp3" type="audio/mpeg" data-title="Dreiton">
-        <source src="audios/musics/Dry-Hands.mp3" type="audio/mpeg" data-title="Dry Hands">
-        <source src="audios/musics/Floating-Trees.mp3" type="audio/mpeg" data-title="Floating Trees">
-        <source src="audios/musics/Haggstrom.mp3" type="audio/mpeg" data-title="Haggstrom">
-        <source src="audios/musics/Key.mp3" type="audio/mpeg" data-title="Key">
-        <source src="audios/musics/Living-Mice.mp3" type="audio/mpeg" data-title="Living Mice">
-        <source src="audios/musics/Mice-On-Venus.mp3" type="audio/mpeg" data-title="Mice On Venus">
-        <source src="audios/musics/Minecraft.mp3" type="audio/mpeg" data-title="Minecraft">
-        <source src="audios/musics/Moog-City 2.mp3" type="audio/mpeg" data-title="Moog City 2">
-        <source src="audios/musics/Mutation.mp3" type="audio/mpeg" data-title="Mutation">
-        <source src="audios/musics/Sweden.mp3" type="audio/mpeg" data-title="Sweden">
-        <source src="audios/musics/Taswell.mp3" type="audio/mpeg" data-title="Taswell">
-        <source src="audios/musics/Wet-Hands.mp3" type="audio/mpeg" data-title="Wet Hands">
-        Seu navegador não suporta o elemento de áudio.
-    </audio>
+   <audio id="cardHoverSound" src="audios/select.mp3" preload="auto"></audio>
+    <audio id="backgroundMusic" preload="auto"></audio>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verifica se o som de clique existe
-            const clickSound = document.getElementById('clickSound');
-            if (!clickSound) {
-                console.warn('Elemento de áudio com ID "clickSound" não encontrado. O som de clique não funcionará.');
-                return; // Sai da função se o elemento não for encontrado
-            }
+    <div class="audio-control-button-container">
+        <button id="audioControlButton" class="audio-control-button" aria-label="Controlar Música de Fundo">
+            <span class="audio-icon"><i class="fas fa-music"></i></span>
+            <svg class="audio-progress-arc" viewBox="0 0 36 36">
+                <path class="arc-background" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="arc-progress" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <div class="neon-effect"></div>
+        </button>
+    </div>
 
-            // Seleciona todos os elementos <a> e <button> que têm o atributo data-sound-effect="select"
-            const clickableElements = document.querySelectorAll('a[data-sound-effect="select"], button[data-sound-effect="select"], i[data-sound-effect="select"]');
+    <div id="centralMessage" class="central-message" aria-live="polite"></div>
 
-            clickableElements.forEach(element => {
-                element.addEventListener('click', function(event) {
-                    // Evita a ação padrão do link/botão para dar tempo ao som
-                    // Isso é importante especialmente para links (<a>)
-                    if (this.tagName === 'A') {
-                        event.preventDefault();
-                    }
-
-                    clickSound.currentTime = 0; // Reinicia o áudio para que possa ser tocado novamente
-                    clickSound.play()
-                        .then(() => {
-                            // Se for um link e tiver um href, navega após o som ter começado a tocar
-                            if (this.tagName === 'A' && this.href) {
-                                // Pequeno atraso para o som começar. Ajuste conforme a duração do seu 'click.mp3'
-                                setTimeout(() => {
-                                    window.location.href = this.href;
-                                }, 150); // 150ms é um bom ponto de partida
-                            }
-                            // Se for um botão, a ação padrão já não é navegar, então ele apenas tocará o som.
-                            // Para ícones, a ação dependerá de outros scripts que você possa ter.
-                        })
-                        .catch(error => {
-                            console.error('Erro ao tentar reproduzir o som de clique:', error);
-                            // Em caso de erro (ex: autoplay policy), ainda tenta navegar/executar a ação
-                            if (this.tagName === 'A' && this.href) {
-                                window.location.href = this.href;
-                            }
-                        });
-                });
-            });
-
-            // --- Gerenciamento da Música de Fundo (se você tiver um script para isso) ---
-            // Se você já tem um script separado (ex: script.js) que lida com backgroundMusic,
-            // pode integrar o som de clique nele ou mantê-lo separado como acima.
-            // O código abaixo é apenas um exemplo de como o botão de música funcionaria.
-
-            const audioControlButton = document.getElementById('audioControlButton');
-            const backgroundMusic = document.getElementById('backgroundMusic');
-            const currentMusicTitleSpan = document.getElementById('currentMusicTitle');
-            let currentTrackIndex = 0;
-            let tracks = [];
-
-            // Função para carregar as faixas do elemento <audio>
-            function loadTracks() {
-                tracks = Array.from(backgroundMusic.querySelectorAll('source')).map(source => ({
-                    src: source.src,
-                    title: source.dataset.title || 'Música Desconhecida'
-                }));
-                if (tracks.length > 0) {
-                    backgroundMusic.src = tracks[currentTrackIndex].src;
-                    currentMusicTitleSpan.textContent = tracks[currentTrackIndex].title;
-                }
-            }
-
-            // Função para alternar a reprodução/pausa
-            function togglePlayPause() {
-                if (backgroundMusic.paused) {
-                    backgroundMusic.play()
-                        .then(() => {
-                            audioControlButton.classList.remove('off');
-                            audioControlButton.classList.add('on');
-                            currentMusicTitleSpan.textContent = tracks[currentTrackIndex].title;
-                        })
-                        .catch(error => {
-                            console.error('Erro ao tentar reproduzir música de fundo:', error);
-                            alert('Erro ao tentar iniciar a música. O navegador pode ter bloqueado a reprodução automática. Por favor, interaja com a página para ativá-la.');
-                            audioControlButton.classList.add('off'); // Mantém o botão como "off" se falhar
-                            currentMusicTitleSpan.textContent = 'Erro ao tocar música';
-                        });
-                } else {
-                    backgroundMusic.pause();
-                    audioControlButton.classList.remove('on');
-                    audioControlButton.classList.add('off');
-                    currentMusicTitleSpan.textContent = 'Música Desligada';
-                }
-            }
-
-            // Event listener para o botão de controle de áudio
-            if (audioControlButton) {
-                audioControlButton.addEventListener('click', togglePlayPause);
-            }
-
-            // Event listener para quando a música termina, para tocar a próxima
-            backgroundMusic.addEventListener('ended', () => {
-                currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-                backgroundMusic.src = tracks[currentTrackIndex].src;
-                currentMusicTitleSpan.textContent = tracks[currentTrackIndex].title;
-                backgroundMusic.play().catch(error => {
-                    console.error('Erro ao tocar a próxima música:', error);
-                    currentMusicTitleSpan.textContent = 'Erro ao tocar próxima';
-                });
-            });
-
-            // Carrega as faixas assim que o DOM estiver pronto
-            loadTracks();
-
-            // Apenas para demonstração: se você quiser iniciar a música automaticamente,
-            // a maioria dos navegadores modernos bloqueará isso se não houver interação do usuário.
-            // O botão de controle de áudio já é a melhor forma de iniciar.
-            // Se você quiser tentar iniciar no carregamento (mas será bloqueado):
-            // togglePlayPause(); // Descomente para tentar iniciar no carregamento
-        });
-    </script>
+    <script src="js/main.js"></script> </body>
 </body>
 </html>

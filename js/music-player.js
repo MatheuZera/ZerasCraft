@@ -1,36 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('backgroundMusic');
+    // --- Referências aos Elementos DOM ---
+    const backgroundMusic = document.getElementById('backgroundMusic');
     const audioControlButton = document.getElementById('audioControlButton');
-    const currentMusicTitle = document.getElementById('currentMusicTitle');
-    const progressArc = audioControlButton.querySelector('.arc-progress'); // O caminho do arco de progresso SVG
+    const centralMessage = document.getElementById('centralMessage');
+    const progressArc = audioControlButton.querySelector('.arc-progress');
+    const audioIcon = audioControlButton.querySelector('.audio-icon i'); // O ícone de música Font Awesome
+
+    // --- Referência para o som de hover dos cards ---
     const cardHoverSound = document.getElementById('cardHoverSound');
-    const cards = document.querySelectorAll('.card'); // Exemplo: se seus cards têm a classe 'card'
-    const audioIcons = {
-        on: audioControlButton.querySelector('.on-icon'), // Ícone para quando está tocando/mutado
-        off: audioControlButton.querySelector('.off-icon') // Ícone para quando está parado/desligado
-    };
 
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            if (cardHoverSound) {
-                cardHoverSound.currentTime = 0; // Reinicia o áudio para que ele toque sempre do início
-                cardHoverSound.play().catch(e => {
-                    // console.warn("Erro ao tocar o som de hover do card:", e);
-                    // Erros de reprodução automática sem interação explícita do usuário são comuns em navegadores.
-                });
-            }
-        });
-    });
+    // --- Seleciona todos os cards ---
+    // IMPORTANTE: Substitua '.card' pela CLASSE REAL dos seus cards.
+    const cards = document.querySelectorAll('.card'); //
 
-    // Playlist de exemplo. Adicione os nomes dos arquivos MP3 aqui.
-    // Certifique-se de que os caminhos em <audio> <source> correspondam a estes.
+    // --- Playlist de Músicas ---
     const playlist = [
         { title: "Aria-Math", src: "audios/musics/Aria-Math.mp3" },
         { title: "Beginning 2", src: "audios/musics/Beginning 2.mp3" },
         { title: "Biome-Fest", src: "audios/musics/Biome-Fest.mp3" },
         { title: "Blind-Spots", src: "audios/musics/Blind-Spots.mp3" },
         { title: "Clark", src: "audios/musics/Clark.mp3" },
-        { title: "Danny", src: "audios/musics/Danny.mp3" }, //
+        { title: "Danny", src: "audios/musics/Danny.mp3" },
         { title: "Dreiton", src: "audios/musics/Dreiton.mp3" },
         { title: "Dry-Hands", src: "audios/musics/Dry-Hands.mp3" },
         { title: "Floating-Trees", src: "audios/musics/Floating-Trees.mp3" },
@@ -44,97 +34,138 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: "Sweden", src: "audios/musics/Sweden.mp3" },
         { title: "Taswell", src: "audios/musics/Taswell.mp3" },
         { title: "Wet-Hands", src: "audios/musics/Wet-Hands.mp3" }
-];
-        // Adicione mais músicas aqui
     ];
     let currentTrackIndex = 0;
+    const circumference = 100; // Valor para o SVG do progresso
+    let messageTimeout; // Para controlar o timeout da mensagem central
 
-    const circumference = 100; // Circunferência total do nosso arco SVG para cálculo do progresso
+    // --- Funções do Player de Música ---
 
-    // Função para atualizar o arco de progresso
     function updateProgressBar() {
-        if (!audio.paused && !audio.ended) {
-            const percentage = (audio.currentTime / audio.duration) * 100;
+        if (!backgroundMusic.paused && !backgroundMusic.ended) {
+            const percentage = (backgroundMusic.currentTime / backgroundMusic.duration) * 100;
             const offset = circumference - (percentage / 100) * circumference;
-            progressArc.style.strokeDasharray = `${percentage}, ${circumference}`; // Preenche a porcentagem
-            progressArc.style.strokeDashoffset = offset; // Move o início do traço
+            progressArc.style.strokeDasharray = `${percentage}, ${circumference}`;
+            progressArc.style.strokeDashoffset = offset;
         } else {
-            // Reinicia o progresso quando a música pausa ou termina
             progressArc.style.strokeDasharray = `0, ${circumference}`;
             progressArc.style.strokeDashoffset = circumference;
         }
     }
 
-    // Função para carregar e reproduzir a próxima música da playlist
     function playNextTrack() {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-        audio.src = playlist[currentTrackIndex].src;
-        currentMusicTitle.textContent = playlist[currentTrackIndex].title;
-        audio.load(); // Recarrega a nova fonte
-        audio.play().catch(e => console.error("Erro ao reproduzir a próxima música:", e));
+        loadAndPlayCurrentTrack(); // Carrega e toca a próxima música
     }
 
-    // Função para carregar e iniciar a música com base no índice atual
-    function loadAndPlayCurrentTrack() {
-        audio.src = playlist[currentTrackIndex].src;
-        currentMusicTitle.textContent = playlist[currentTrackIndex].title;
-        audio.load();
-        audio.play().then(() => {
+    // Atualiza o estado visual do botão (classe 'is-playing' e rotação do ícone)
+    function updateButtonState(isPlaying) {
+        if (isPlaying) {
             audioControlButton.classList.add('is-playing');
-            audioIcons.on.style.display = 'none'; // Esconde ícone de "mute"
-            audioIcons.off.style.display = 'inline-block'; // Mostra ícone de "volume"
+            // O ícone de música já está fixo, então não precisa alternar classes de ícone
+        } else {
+            audioControlButton.classList.remove('is-playing');
+            // Garante que o ícone de música esteja sempre visível e sem rotação quando pausado
+            audioIcon.style.transform = 'rotate(0deg)';
+        }
+    }
+
+    // Exibe a mensagem central na tela
+    function showCentralMessage(message) {
+        centralMessage.textContent = message;
+        centralMessage.classList.add('show');
+
+        clearTimeout(messageTimeout); // Limpa qualquer timeout anterior
+
+        // Define um timeout para remover a mensagem após 3 segundos
+        messageTimeout = setTimeout(() => {
+            centralMessage.classList.remove('show');
+        }, 3000);
+    }
+
+    // Carrega e tenta tocar a música atual da playlist
+    function loadAndPlayCurrentTrack() {
+        const currentTrack = playlist[currentTrackIndex];
+        if (!currentTrack) {
+            showCentralMessage("Erro: Playlist vazia ou música não encontrada.");
+            console.error("Playlist vazia ou índice de música inválido.");
+            updateButtonState(false);
+            return;
+        }
+
+        backgroundMusic.src = currentTrack.src;
+        backgroundMusic.load(); // Recarrega a nova fonte
+
+        backgroundMusic.play().then(() => {
+            updateButtonState(true); // Música tocando
+            showCentralMessage(`Tocando: ${currentTrack.title}`);
         }).catch(e => {
             console.error("Erro ao iniciar a reprodução automática:", e);
-            // Se a reprodução automática falhar (bloqueada pelo navegador),
-            // mostramos o estado pausado e o usuário terá que interagir.
-            audioControlButton.classList.remove('is-playing');
-            audioIcons.on.style.display = 'inline-block';
-            audioIcons.off.style.display = 'none';
-            currentMusicTitle.textContent = "Clique para iniciar";
+            updateButtonState(false); // Música pausada ou não iniciada
+            showCentralMessage("Clique para iniciar a música");
+            // Se a reprodução automática falhar, o usuário terá que interagir.
         });
     }
 
-    // Verifica a preferência do usuário no localStorage ao carregar a página
+    // --- Inicialização ao Carregar a Página ---
     const userPrefersMusic = localStorage.getItem('musicEnabled');
 
     if (userPrefersMusic === 'true') {
-        // Se a música estava ligada, tentamos reproduzir.
-        // Alguns navegadores podem bloquear autoplay sem interação.
+        // Tenta tocar a música se a preferência for 'true'
         loadAndPlayCurrentTrack();
     } else {
-        // Se a música estava desligada ou nunca foi definida
-        audio.pause();
-        audioControlButton.classList.remove('is-playing');
-        audioIcons.on.style.display = 'inline-block'; // Mostra ícone de "mute"
-        audioIcons.off.style.display = 'none'; // Esconde ícone de "volume"
-        currentMusicTitle.textContent = "Música Desligada";
+        // Garante que o estado inicial seja "desligado"
+        backgroundMusic.pause();
+        updateButtonState(false);
     }
 
-    // Event Listener para o clique no botão
+    // --- Event Listeners ---
+
+    // Listener para o clique no botão de controle de áudio
     audioControlButton.addEventListener('click', () => {
-        if (audio.paused) {
-            // Se estiver pausado, tenta tocar
-            loadAndPlayCurrentTrack(); // Tenta tocar a música atual
+        if (backgroundMusic.paused) {
+            loadAndPlayCurrentTrack();
             localStorage.setItem('musicEnabled', 'true');
         } else {
-            // Se estiver tocando, pausa
-            audio.pause();
-            audioControlButton.classList.remove('is-playing');
-            audioIcons.on.style.display = 'inline-block'; // Mostra ícone de "mute"
-            audioIcons.off.style.display = 'none'; // Esconde ícone de "volume"
-            currentMusicTitle.textContent = "Música Desligada";
+            backgroundMusic.pause();
+            updateButtonState(false);
+            showCentralMessage("Música Pausada");
             localStorage.setItem('musicEnabled', 'false');
         }
     });
 
-    // Event Listener para quando a música terminar (para playlist)
-    audio.addEventListener('ended', () => {
-        playNextTrack(); // Toca a próxima música
+    // Listener para quando a música atual termina
+    backgroundMusic.addEventListener('ended', playNextTrack);
+
+    // Listeners para atualizar a barra de progresso
+    backgroundMusic.addEventListener('timeupdate', updateProgressBar);
+    backgroundMusic.addEventListener('loadedmetadata', updateProgressBar);
+
+    // --- Listener para o som de hover dos cards ---
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            if (cardHoverSound) {
+                cardHoverSound.currentTime = 0; // Reinicia o áudio para que ele toque sempre do início
+                cardHoverSound.play().catch(e => {
+                    // console.warn("Erro ao tocar o som de hover do card:", e);
+                    // Erros de reprodução automática sem interação explícita do usuário são comuns em navegadores.
+                    // Manter em warn ou comentar para evitar poluir o console em produção.
+                });
+            }
+        });
     });
 
-    // Event Listener para atualizar a barra de progresso durante a reprodução
-    audio.addEventListener('timeupdate', updateProgressBar);
-
-    // Event Listener para lidar com o carregamento da metadados (para obter a duração)
-    audio.addEventListener('loadedmetadata', updateProgressBar);
+    // --- Verificação para cliques em links (se eles não estiverem funcionando) ---
+    // Se seus links não estão funcionando, pode ser que algum script esteja impedindo o comportamento padrão.
+    // Este código é um exemplo e deve ser adaptado.
+    // const allLinks = document.querySelectorAll('a');
+    // allLinks.forEach(link => {
+    //     link.addEventListener('click', (event) => {
+    //         // Se você tem algum código que impede o comportamento padrão do link, como:
+    //         // event.preventDefault();
+    //         // Remova-o ou adicione uma lógica condicional para permitir a navegação.
+    //         console.log("Link clicado:", link.href);
+    //         // Se o link deve navegar, não adicione event.preventDefault() aqui.
+    //     });
+    // });
 });
