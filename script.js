@@ -207,7 +207,8 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ========================================= */
 
     const interactiveCardsGeneral = document.querySelectorAll(
-        '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card'
+        '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card, .pixel-legends-btn'
+        // Adicionada a classe '.pixel-legends-btn' aqui
     );
     const securityGridItems = document.querySelectorAll('.security-grid-item');
 
