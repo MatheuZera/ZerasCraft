@@ -15,9 +15,27 @@ document.addEventListener('DOMContentLoaded', () => {
         volume: audioControlButton.querySelector('.off-icon') // Este é o ícone de volume-up
     };
 
-    const playlist = [
-        { title: "Bensound - Memories", src: "https://www.bensound.com/bensound-music/bensound-memories.mp3" },
-        { title: "Bensound - Ukulele", src: "https://www.bensound.com/bensound-music/bensound-ukulele.mp3" }
+const playlist = [
+    { title: "Aria-Math", src: "audios/musics/Aria-Math.mp3" },
+    { title: "Beginning 2", src: "audios/musics/Beginning 2.mp3" },
+    { title: "Biome-Fest", src: "audios/musics/Biome-Fest.mp3" },
+    { title: "Blind-Spots", src: "audios/musics/Blind-Spots.mp3" },
+    { title: "Clark", src: "audios/musics/Clark.mp3" },
+    { title: "Danny", src: "audios/musics/Danny.mp3" }, //
+    { title: "Dreiton", src: "audios/musics/Dreiton.mp3" },
+    { title: "Dry-Hands", src: "audios/musics/Dry-Hands.mp3" },
+    { title: "Floating-Trees", src: "audios/musics/Floating-Trees.mp3" },
+    { title: "Haggstrom", src: "audios/musics/Haggstrom.mp3" },
+    { title: "Key", src: "audios/musics/Key.mp3" },
+    { title: "Living-Mice", src: "audios/musics/Living-Mice.mp3" },
+    { title: "Mice-On-Venus", src: "audios/musics/Mice-On-Venus.mp3" },
+    { title: "Minecraft", src: "audios/musics/Minecraft.mp3" },
+    { title: "Moog-City 2", src: "audios/musics/Moog-City 2.mp3" },
+    { title: "Mutation", src: "audios/musics/Mutation.mp3" },
+    { title: "Sweden", src: "audios/musics/Sweden.mp3" },
+    { title: "Taswell", src: "audios/musics/Taswell.mp3" },
+    { title: "Wet-Hands", src: "audios/musics/Wet-Hands.mp3" }
+];
     ];
     let currentTrackIndex = 0;
     const circumference = 100;
