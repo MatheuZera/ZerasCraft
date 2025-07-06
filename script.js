@@ -11,11 +11,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Lista de músicas para a playlist aleatória
     const playlist = [
-        'audios/musics/minecraft-music-1.mp3', // ALtere para os nomes reais dos seus arquivos
-        'audios/musics/minecraft-music-2.mp3',
-        'audios/musics/minecraft-music-3.mp3',
-        'audios/musics/minecraft-music-4.mp3'
-        // Adicione mais músicas aqui se tiver
+        'audios/musics/Aria-Math-Lofi-Remake.mp3', // ALtere para os nomes reais dos seus arquivos
+        'audios/musics/Aria-Math.mp3',
+        'audios/musics/Begining.mp3',
+        'audios/musics/Biome-Fest.mp3',
+        'audios/musics/Blind-Spots.mp3',
+        'audios/musics/Clark.mp3',
+        'audios/musics/Danny.mp3',
+        'audios/musics/Dreiton.mp3',
+        'audios/musics/Dry-Hands.mp3',
+        'audios/musics/Floating.mp3',
+        'audios/musics/Haggstrom.mp3',
+        'audios/musics/haunt-Muskie.mp3',
+        'audios/musics/Key.mp3',
+        'audios/musics/Living-Mice.mp3',
+        'audios/musics/Minecraft.mp3',
+        'audios/musics/Moong-City.mp3',
+        'audios/musics/Mutation.mp3',
+        'audios/musics/Oxygène.mp3',
+        'audios/musics/Subwoofer-Lullaby.mp3',
+        'audios/musics/Sweden.mp3',
+        'audios/musics/Taswell.mp3',
+        'audios/musics/Wet-Hands.mp3',
     ];
 
     let currentTrackIndex = -1; // -1 para indicar que nenhuma música foi selecionada ainda
