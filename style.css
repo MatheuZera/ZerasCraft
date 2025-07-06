@@ -1198,4 +1198,142 @@ a:hover {
         transform: rotate(10deg) scale(1.1); /* Rotação sutil e zoom */
         color: var(--primary-color, #4CAF50); /* Mantém ou muda a cor */
     }
+
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #2a2a2a; /* Fundo escuro */
+    color: #e0e0e0; /* Texto claro */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .minimal-header {
+        background-color: #333;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .site-title-small {
+        font-size: 1.2em; /* Texto pequeno */
+        color: #28a745; /* Cor verde para o título principal */
+        margin: 0;
+        padding: 0;
+    }
+
+    .section-title-small {
+        font-size: 1.4em; /* Títulos de seção um pouco maiores, mas ainda pequenos */
+        color: #f0c808; /* Cor amarela para títulos de seção */
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    .section-title-small i {
+        margin-right: 8px; /* Espaçamento para ícones nos títulos */
+    }
+
+    .section-description {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #ccc;
+    }
+
+    /* Estilos para os cards */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .access-card, .collaborator-card, .partnership-card, .resource-card {
+        background-color: #3a3a3a;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between; /* Ajusta o espaçamento interno */
+    }
+
+    .card-title {
+        font-size: 1.1em;
+        color: #28a745; /* Verde para títulos de card */
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .access-card .card-info {
+        font-size: 0.95em;
+        color: #f0c808; /* Amarelo para IPs/Endereços */
+        word-break: break-all; /* Garante que longos endereços quebrem a linha */
+        margin-bottom: 5px;
+    }
+
+    .card-text {
+        font-size: 0.9em;
+        color: #ccc;
+        margin-bottom: 15px;
+    }
+
+    .collaborator-icon, .partnership-icon, .resource-icon {
+        width: 80px;
+        height: 80px;
+        background-color: #555; /* Placeholder para os ícones/imagens */
+        border-radius: 50%;
+        margin-bottom: 10px;
+        /* Adicione estilos para as bordas verdes/amarelas se desejar */
+    }
+
+    .collaborator-icon {
+        border: 3px solid #28a745; /* Borda verde */
+    }
+    .partnership-icon {
+        border: 3px solid #f0c808; /* Borda amarela */
+    }
+
+
+    /* Estilos para a seção de guildas (lista) */
+    .guild-info-section ul {
+        list-style: none;
+        padding: 0;
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    .guild-info-section ul li {
+        background-color: #3a3a3a;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        font-size: 0.95em;
+        color: #ccc;
+    }
+
+    .guild-info-section ul li i {
+        color: #f0c808; /* Ícone amarelo */
+        margin-right: 10px;
+        font-size: 1.1em;
+    }
+
+    /* Rodapé */
+    .minimal-footer {
+        background-color: #333;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: 50px;
+        font-size: 0.85em;
+        color: #aaa;
+    }
 }
