@@ -403,134 +403,52 @@
             color: var(--primary-color);
         }
 
-        /* Pixel Legends (Expandable Card) */
-        .pixel-legends-interactive-card {
-            background-color: var(--card-bg);
+        /* Seções de Cartões de Conteúdo (Geral para Segurança e Pixel Legends) */
+        .content-section-card {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px;
+            background-color: var(--card-bg); /* Fundo do card principal */
             border-radius: 15px;
             box-shadow: 0 8px 20px var(--shadow-dark);
-            margin-top: 50px;
-            overflow: hidden; /* Para o efeito de expansão */
         }
 
-        .pixel-legends-interactive-card .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 35px;
-            background-color: var(--primary-color-dark);
-            cursor: pointer;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-        }
-
-        .pixel-legends-interactive-card .card-main-title {
+        .content-section-card h3 {
             font-family: var(--font-main);
             font-size: 2em;
-            color: var(--secondary-color);
-            margin: 0;
-        }
-
-        .expand-btn {
-            background: none;
-            border: none;
-            font-size: 2.5em;
-            color: white;
-            cursor: pointer;
-            padding: 0;
-            line-height: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .expand-btn[aria-expanded="true"] .icon-plus {
-            display: none;
-        }
-        .expand-btn[aria-expanded="true"] .icon-minus {
-            display: inline;
-        }
-        .expand-btn[aria-expanded="false"] .icon-plus {
-            display: inline;
-        }
-        .expand-btn[aria-expanded="false"] .icon-minus {
-            display: none;
-        }
-
-
-        .card-content-wrapper {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.7s ease-out, padding 0.7s ease-out;
-        }
-
-        .card-content-wrapper.expanded {
-            max-height: 2000px; /* Valor grande o suficiente para a maioria dos conteúdos */
-            padding: 30px 35px;
-        }
-
-        .pixel-legends-interactive-card .card-content {
-            padding-top: 0;
-            padding-bottom: 0;
-            color: var(--text-color);
-        }
-
-        .pixel-legends-interactive-card .card-content h4 {
-            font-family: var(--font-main);
-            font-size: 1.5em;
             color: var(--primary-color);
-            margin-top: 25px;
-            margin-bottom: 15px;
+            margin-bottom: 30px;
         }
 
-        .pixel-legends-interactive-card .card-content p {
-            margin-bottom: 15px;
-            font-size: 1.05em;
+        .content-section-card p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
             line-height: 1.7;
         }
 
-        .discord-channel-link {
+        .content-item-card {
+            background-color: rgba(0, 0, 0, 0.2); /* Fundo sutil para cada item */
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary-color);
+            text-align: left;
+        }
+
+        .content-item-card h4 {
+            font-family: var(--font-main);
             color: var(--accent-color);
-            font-weight: 600;
-            text-decoration: underline;
-        }
-
-        .role-list-compact {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-        .role-list-compact li {
+            font-size: 1.4em;
             margin-bottom: 10px;
-            font-size: 1em;
-            color: var(--text-color);
-        }
-        .role-list-compact li strong {
-            color: var(--secondary-color);
         }
 
-        .features-list {
-            list-style: none;
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-        .features-list li {
-            margin-bottom: 10px;
+        .content-item-card p {
             font-size: 1em;
-            color: var(--text-color);
-        }
-        .features-list li::before {
-            content: '✔️'; /* Checkmark */
-            margin-left: -20px;
-            margin-right: 10px;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-        .features-list ul { /* Para as listas aninhadas de plugins */
-            list-style: disc; /* Bolinhas padrão para sub-listas */
-            padding-left: 20px;
-            margin-top: 5px;
-        }
-        .features-list ul li::before {
-            content: none; /* Remove o checkmark das sub-listas */
+            margin-bottom: 0; /* Remove margem inferior extra aqui */
         }
 
+        /* Estilos específicos para a seção de Acesso ao Servidor dentro de Pixel Legends */
         .access-server-section {
             background-color: var(--bg-dark); /* Fundo para a área de acesso ao servidor */
             padding: 30px;
@@ -675,48 +593,6 @@
             font-size: 0.9em;
             color: var(--primary-color);
             margin-bottom: 20px;
-        }
-
-        /* Administração e Segurança */
-        .security-card {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .security-card h3 {
-            font-family: var(--font-main);
-            font-size: 2em;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-        }
-
-        .security-card p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            line-height: 1.7;
-        }
-
-        .security-grid-item {
-            background-color: rgba(0, 0, 0, 0.2); /* Fundo sutil para cada item */
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--secondary-color);
-            text-align: left;
-        }
-
-        .security-grid-item h4 {
-            font-family: var(--font-main);
-            color: var(--accent-color);
-            font-size: 1.4em;
-            margin-bottom: 10px;
-        }
-
-        .security-grid-item p {
-            font-size: 1em;
-            margin-bottom: 0; /* Remove margem inferior extra aqui */
         }
 
         /* Parceiros */
@@ -937,16 +813,16 @@
                 margin-bottom: 30px;
             }
 
-            .pixel-legends-interactive-card .card-main-title {
-                font-size: 1.6em;
+            .content-section-card { /* Ajuste para o card principal */
+                padding: 30px;
             }
 
-            .pixel-legends-interactive-card .card-header {
-                padding: 20px;
+            .content-section-card h3 {
+                font-size: 1.8em;
             }
 
-            .expand-btn {
-                font-size: 2em;
+            .content-item-card h4 {
+                font-size: 1.2em;
             }
 
             .access-card {
@@ -1006,16 +882,12 @@
                 height: 50px;
             }
 
-            .pixel-legends-interactive-card .card-main-title {
-                font-size: 1.4em;
+            .content-section-card h3 {
+                font-size: 1.5em;
             }
 
-            .pixel-legends-interactive-card .card-content h4 {
-                font-size: 1.2em;
-            }
-
-            .security-card h3 {
-                font-size: 1.6em;
+            .content-item-card h4 {
+                font-size: 1.1em;
             }
 
             #playAudioBtn {
@@ -1188,70 +1060,68 @@
                 </h2>
                 <p class="section-description">Participe de batalhas épicas de guildas no universo Minecraft!</p>
 
-                <div class="pixel-legends-interactive-card" id="pixelLegendsCard">
-                    <div class="card-header">
-                        <h3 class="card-main-title">O Que é o Pixel Legends?</h3>
-                        <button class="expand-btn" aria-expanded="false" aria-controls="cardContent">
-                            <span class="icon-plus">➕</span>
-                            <span class="icon-minus" style="display: none;">➖</span>
-                        </button>
+                <div class="content-section-card">
+                    <h3>Pixel Legends</h3>
+                    <p>Este é nosso servidor oficial dentro do Minecraft! Lá você **cria sua própria Guilda**, e batalha contra outras pessoas para pegar recursos, faz parcerias com outros Líderes, formam alianças e etc.. Cada um tem o direito de criar sua própria guilda para evoluírem juntos(as). :D</p>
+                    
+                    <div class="content-item-card">
+                        <h4>Como Crio Minha Própria Guilda?</h4>
+                        <p>Acesse o canal <a href="#" class="discord-channel-link">#cargos-guildas</a> para mais detalhes sobre Guildas aqui no nosso servidor.</p>
+                        <p>Bem, basta formar uma equipe e ir chamando mais e mais pessoas para transformar sua Guilda na mais forte possível!</p>
                     </div>
-                    <div class="card-content-wrapper" id="cardContent">
-                        <div class="card-content">
-                            <p>Este é nosso servidor oficial dentro do Minecraft! Lá você **cria sua própria Guilda**, e batalha contra outras pessoas para pegar recursos, faz parcerias com outros Líderes, formam alianças e etc.. Cada um tem o direito de criar sua própria guilda para evoluírem juntos(as). :D</p>
 
-                            <h4>Como Crio Minha Própria Guilda?</h4>
-                            <p>Acesse o canal <a href="#" class="discord-channel-link">#cargos-guildas</a> para mais detalhes sobre Guildas aqui no nosso servidor.</p>
-                            <p>Bem, basta formar uma equipe e ir chamando mais e mais pessoas para transformar sua Guilda na mais forte possível!</p>
+                    <div class="content-item-card">
+                        <h4>Como Funcionam os Cargos Administrativos da Guilda?</h4>
+                        <ul class="role-list-compact">
+                            <li><strong>Líder da Guilda:</strong> É responsável por tudo o que rola dentro da Guilda, tudo mesmo!</li>
+                            <li><strong>Co-Líder da Guilda:</strong> Ajuda os Líderes em coisas diversas, e também quando estão ausentes, estas pessoas lideram sua Guilda até a volta do Líder.</li>
+                            <li><strong>Administrador da Guilda:</strong> Coordena os Membros a arrumar a defesa, avisar sobre alguma coisa e etc.</li>
+                        </ul>
+                    </div>
 
-                            <h4>Como Funcionam os Cargos Administrativos da Guilda?</h4>
-                            <ul class="role-list-compact">
-                                <li><strong>Líder da Guilda:</strong> É responsável por tudo o que rola dentro da Guilda, tudo mesmo!</li>
-                                <li><strong>Co-Líder da Guilda:</strong> Ajuda os Líderes em coisas diversas, e também quando estão ausentes, estas pessoas lideram sua Guilda até a volta do Líder.</li>
-                                <li><strong>Administrador da Guilda:</strong> Coordena os Membros a arrumar a defesa, avisar sobre alguma coisa e etc.</li>
-                            </ul>
+                    <div class="content-item-card">
+                        <h4>Como Funciona o MC Team Ultimate?</h4>
+                        <p>Acesse o canal <a href="#" class="discord-channel-link">#eventos-mctu</a> para mais detalhes sobre..</p>
+                    </div>
 
-                            <h4>Como Funciona o MC Team Ultimate?</h4>
-                            <p>Acesse o canal <a href="#" class="discord-channel-link">#eventos-mctu</a> para mais detalhes sobre..</p>
+                    <div class="content-item-card">
+                        <h4>Funcionalidades do Servidor Pixel Legends</h4>
+                        <ul class="features-list">
+                            <li><strong>Software:</strong> SPIGOT/BUKKIT</li>
+                            <li><strong>Plugins:</strong>
+                                <ul>
+                                    <li><strong>DISCORD SRV:</strong> Conexão com os Chats do Discord.</li>
+                                    <li><strong>GEYSER MC:</strong> Conecta os Jogadores da Bedrock com Java simultaneamente.</li>
+                                    <li><strong>MULTIVERSE CORE:</strong> Possibilidade de criar múltiplos mundos um dentro do outro, como um server de minigames.</li>
+                                    <li><strong>VIA VERSION:</strong> Permite que jogadores entrem no servidor estando **um pouco** desatualizado da versão atual do servidor.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
 
-                            <h4>Funcionalidades do Servidor Pixel Legends</h4>
-                            <ul class="features-list">
-                                <li><strong>Software:</strong> SPIGOT/BUKKIT</li>
-                                <li><strong>Plugins:</strong>
-                                    <ul>
-                                        <li><strong>DISCORD SRV:</strong> Conexão com os Chats do Discord.</li>
-                                        <li><strong>GEYSER MC:</strong> Conecta os Jogadores da Bedrock com Java simultaneamente.</li>
-                                        <li><strong>MULTIVERSE CORE:</strong> Possibilidade de criar múltiplos mundos um dentro do outro, como um server de minigames.</li>
-                                        <li><strong>VIA VERSION:</strong> Permite que jogadores entrem no servidor estando **um pouco** desatualizado da versão atual do servidor.</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                    <div class="access-server-section">
+                        <h3>Acesso ao Servidor: Mundo Vortex Craft</h3>
+                        <div class="access-cards-grid">
+                            <div class="access-card">
+                                <h3>BEDROCK EDITION</h3>
+                                <p>IP: <code>MundoVortexCraft.aternos.me</code></p>
+                                <p>PORTA: <code>57178</code></p>
+                                <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me" data-port="57178">
+                                    <i class="fas fa-copy"></i> Copiar IP & Porta
+                                </button>
+                            </div>
 
-                            <div class="access-server-section">
-                                <h3>Acesso ao Servidor: Mundo Vortex Craft</h3>
-                                <div class="access-cards-grid">
-                                    <div class="access-card">
-                                        <h3>BEDROCK EDITION</h3>
-                                        <p>IP: <code>MundoVortexCraft.aternos.me</code></p>
-                                        <p>PORTA: <code>57178</code></p>
-                                        <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me" data-port="57178">
-                                            <i class="fas fa-copy"></i> Copiar IP & Porta
-                                        </button>
-                                    </div>
-
-                                    <div class="access-card">
-                                        <h3>JAVA EDITION</h3>
-                                        <p>ENDEREÇO: <code>MundoVortexCraft.aternos.me:57178</code></p>
-                                        <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me:57178">
-                                            <i class="fas fa-copy"></i> Copiar Endereço
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="access-card">
+                                <h3>JAVA EDITION</h3>
+                                <p>ENDEREÇO: <code>MundoVortexCraft.aternos.me:57178</code></p>
+                                <button class="btn-primary copy-ip-btn" data-ip="MundoVortexCraft.aternos.me:57178">
+                                    <i class="fas fa-copy"></i> Copiar Endereço
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </section>
         <section id="eventos" class="section-padded"> <div class="container">
                 <h2 class="section-title">🏆 Eventos Épicos: Competição e Criatividade</h2>
@@ -1319,28 +1189,24 @@
                     <img src="images/seguranca/seguranca.webp" alt="Ícone de Segurança" class="section-icon"> Administração & Segurança
                 </h2>
 
-                <div class="service-card security-card">
-                    <div class="card-content">
-                        <h3>SEGURANÇA</h3>
-                        <p>Sua segurança e uma experiência fluida são nossas prioridades. Nossa equipe de administração e moderação garante um ambiente justo e respeitoso.</p>
-                        
-                        <div class="security-grid-item">
-                            <h4>Bots de Segurança</h4>
-                            <p>Contamos com ferramentas avançadas, como nosso bot exclusivo, Pixel Craft, que é responsável por moderar o servidor e gerenciar comandos utilitários para que nossos eventos funcionem conforme o planejado. Ele foi criado por @MatheuZera e o Mundo Zera's Craft.</p>
-                        </div>
+                <div class="content-section-card"> <h3>SEGURANÇA</h3>
+                    <p>Sua segurança e uma experiência fluida são nossas prioridades. Nossa equipe de administração e moderação garante um ambiente justo e respeitoso.</p>
+                    
+                    <div class="content-item-card">
+                        <h4>Bots de Segurança</h4>
+                        <p>Contamos com ferramentas avançadas, como nosso bot exclusivo, Pixel Craft, que é responsável por moderar o servidor e gerenciar comandos utilitários para que nossos eventos funcionem conforme o planejado. Ele foi criado por @MatheuZera e o Mundo Zera's Craft.</p>
+                    </div>
 
-                        <div class="security-grid-item">
-                            <h4>Sistemas de Recuperação</h4>
-                            <p>Além disso, utilizamos sistemas de prevenção e recuperação avançados (como o Xeom Bot para backups e o Shine Bot para bloquear bots maliciosos) para garantir que sua experiência no Mundo Zera's Craft seja sempre segura e protegida contra raids e outros imprevistos.</p>
-                        </div>
+                    <div class="content-item-card">
+                        <h4>Sistemas de Recuperação</h4>
+                        <p>Além disso, utilizamos sistemas de prevenção e recuperação avançados (como o Xeom Bot para backups e o Shine Bot para bloquear bots maliciosos) para garantir que sua experiência no Mundo Zera's Craft seja sempre segura e protegida contra raids e outros imprevistos.</p>
+                    </div>
 
-                        <div class="security-grid-item">
-                            <h4>Sugestões e Melhorias</h4>
-                            <p>Você tem sugestões? Participe do nosso Fórum de Sugestões para nos ajudar a melhorar!</p>
-                            <a href="https://discord.gg/GYGVBqGEwP" class="btn-link" target="_blank">Fórum de Sugestões</a>
-                        </div>
-
-                        </div>
+                    <div class="content-item-card">
+                        <h4>Sugestões e Melhorias</h4>
+                        <p>Você tem sugestões? Participe do nosso Fórum de Sugestões para nos ajudar a melhorar!</p>
+                        <a href="https://discord.gg/GYGVBqGEwP" class="btn-link" target="_blank">Fórum de Sugestões</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1411,18 +1277,10 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
     <script>
         // Script para a funcionalidade do botão de expandir/contrair da seção Pixel Legends
+        // Este script foi removido pois a estrutura foi alterada para a nova formatação
+
+        // Script para copiar IP e Porta (mantido e reforçado)
         document.addEventListener('DOMContentLoaded', () => {
-            const pixelLegendsCard = document.getElementById('pixelLegendsCard');
-            const expandBtn = pixelLegendsCard.querySelector('.expand-btn');
-            const cardContentWrapper = pixelLegendsCard.querySelector('.card-content-wrapper');
-
-            expandBtn.addEventListener('click', () => {
-                const isExpanded = expandBtn.getAttribute('aria-expanded') === 'true';
-                expandBtn.setAttribute('aria-expanded', !isExpanded);
-                cardContentWrapper.classList.toggle('expanded');
-            });
-
-            // Script para copiar IP e Porta
             const copyIpButtons = document.querySelectorAll('.copy-ip-btn');
             copyIpButtons.forEach(button => {
                 button.addEventListener('click', async () => {
@@ -1436,10 +1294,13 @@
 
                     try {
                         await navigator.clipboard.writeText(textToCopy);
-                        const originalText = button.innerHTML;
+                        const originalHtml = button.innerHTML; // Salva o HTML original do botão
                         button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                        button.style.backgroundColor = '#28a745'; // Altera a cor para verde temporariamente
+                        
                         setTimeout(() => {
-                            button.innerHTML = originalText;
+                            button.innerHTML = originalHtml; // Restaura o HTML original
+                            button.style.backgroundColor = ''; // Remove o estilo inline para voltar ao CSS
                         }, 2000);
                     } catch (err) {
                         console.error('Falha ao copiar: ', err);
@@ -1460,7 +1321,8 @@
                         playAudioBtn.setAttribute('aria-label', 'Pausar Música de Fundo');
                     }).catch(error => {
                         console.error("Erro ao tentar tocar o áudio:", error);
-                        alert("Não foi possível tocar a música automaticamente. Verifique as permissões ou tente novamente.");
+                        // Mensagem mais amigável ao usuário, se preferir:
+                        // alert("Seu navegador impediu a reprodução automática de áudio. Por favor, interaja com a página para ativá-lo.");
                     });
                 } else {
                     audio.pause();
