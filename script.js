@@ -47,34 +47,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Nova lógica para o som de clique em interações ---
-    // Crie um novo elemento de áudio para o som de clique
     const clickAudio = new Audio('audios/click.mp3');
-    clickAudio.preload = 'auto'; // Pré-carrega o áudio
+    clickAudio.preload = 'auto';
 
-    // Adiciona um ouvinte de evento de clique ao documento inteiro
     document.addEventListener('click', function(event) {
-        // Encontra o elemento que foi clicado
         const clickedElement = event.target;
-
-        // Verifica se o elemento clicado é um link (<a>)
-        // OU um botão (<button>)
-        // OU um elemento com as classes de botão que você usa
         const isClickable = clickedElement.tagName === 'A' ||
                             clickedElement.tagName === 'BUTTON' ||
                             clickedElement.classList.contains('btn-primary') ||
                             clickedElement.classList.contains('btn-secondary') ||
                             clickedElement.classList.contains('btn-link');
-
-        // Adicionalmente, queremos evitar que o som de clique toque no próprio botão de áudio principal
-        // para não ter dois sons ao mesmo tempo no mesmo clique.
+        
         const isMainAudioButton = clickedElement.id === 'playAudioBtn';
 
         if (isClickable && !isMainAudioButton) {
-            // Se for clicável e não for o botão de áudio principal, reproduza o som de clique
+            clickAudio.currentTime = 0; // Reinicia o som para tocar novamente
             clickAudio.play().catch(e => {
-                // Captura e exibe qualquer erro de reprodução (ex: autoplay block)
                 console.warn("Erro ao reproduzir som de clique:", e);
             });
         }
     });
+
+    // --- Lógica para reproduzir select.mp3 ao passar o mouse/toque nas abas/cards ---
+    const selectAudio = document.getElementById('selectAudio');
+
+    if (selectAudio) { // Certifica-se de que o elemento selectAudio existe
+        const interactiveCards = document.querySelectorAll(
+            '.service-card, .role-category-card, .event-card, .community-card, .partnership-card'
+        );
+
+        // Função para tocar o áudio select.mp3
+        function playSelectSound() {
+            selectAudio.currentTime = 0; // Reinicia o áudio para que ele possa ser tocado rapidamente
+            selectAudio.play().catch(e => {
+                // Captura e ignora o erro se a reprodução automática foi bloqueada
+                console.warn("Reprodução de áudio 'select.mp3' bloqueada ou falhou:", e);
+            });
+        }
+
+        // Adiciona o event listener 'mouseenter' para cada card interativo
+        interactiveCards.forEach(card => {
+            card.addEventListener('mouseenter', playSelectSound);
+            // Para suporte a toque, 'touchstart' pode ser usado, mas pode ser redundante com 'mouseenter'
+            // em alguns dispositivos ou pode causar um comportamento inesperado (som ao rolar).
+            // Se precisar, adicione com cautela e teste bem:
+            // card.addEventListener('touchstart', playSelectSound); 
+        });
+
+    } else {
+        console.error("Erro: Elemento de áudio 'selectAudio' não encontrado no DOM. Certifique-se de que está no HTML.");
+    }
 });
