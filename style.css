@@ -1,5 +1,5 @@
 /* ========================================= */
-/* ESTILOS GERAIS              */
+/* ESTILOS GERAIS                           */
 /* ========================================= */
 
 :root {
@@ -12,6 +12,10 @@
     --text-color-light: #ffffff; /* Texto claro principal */
     --border-color: #4f545c; /* Cor da borda para elementos escuros */
     --card-bg: #36393f; /* Cor de fundo para cards */
+
+    /* NOVAS VARIÁVEIS PARA FUNDO DE SEÇÃO CLARA E TEXTO NO FUNDO CLARO */
+    --light-section-bg: #f9f9f9; /* Um cinza muito claro, quase branco, para seções claras */
+    --text-color-on-light-bg: #333333; /* Cor do texto em seções de fundo claro */
 }
 
 body {
@@ -55,7 +59,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* BOTÕES                    */
+/* BOTÕES                                   */
 /* ========================================= */
 
 .btn-primary,
@@ -106,21 +110,50 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÕES                   */
+/* SEÇÕES                                   */
 /* ========================================= */
 
 .section-padded {
     padding: 80px 0;
 }
 
+/* ESTILO PARA SEÇÕES DE FUNDO CLARO (Como Pixel Legends) */
+.section-light-bg {
+    background-color: var(--light-section-bg); /* Usa a nova variável de fundo claro */
+    color: var(--text-color-on-light-bg); /* Texto escuro para contraste */
+}
+
+.section-light-bg h2,
+.section-light-bg h3,
+.section-light-bg .section-title,
+.section-light-bg .section-description,
+.section-light-bg p,
+.section-light-bg a { /* Adicionado 'p' e 'a' para garantir texto escuro */
+    color: var(--text-color-on-light-bg); /* Garante que os títulos, descrições e parágrafos sejam escuros */
+}
+
+.section-light-bg .section-title::after {
+    background-color: var(--primary-color); /* Sublinhado do título azul */
+}
+
+/* ESTILO PARA SEÇÕES DE FUNDO ESCURO (Como Eventos) */
 .section-alt-bg {
-    background-color: var(--card-bg); /* Usando a cor de card para seções alternativas */
-    color: var(--text-color-light);
+    background-color: var(--card-bg); /* Usando a cor de card para seções alternativas (escuro) */
+    color: var(--text-color-light); /* Texto claro */
 }
 
 .section-alt-bg h2,
-.section-alt-bg h3 {
-    color: var(--text-color-light);
+.section-alt-bg h3,
+.section-alt-bg .section-title,
+.section-alt-bg .section-description,
+.section-alt-bg p,
+.section-alt-bg a { /* Adicionado 'p' e 'a' para garantir texto claro */
+    color: var(--text-color-light); /* Títulos, descrições e parágrafos claros */
+}
+
+
+.section-alt-bg .section-title::after {
+    background-color: var(--accent-color); /* Sublinhado do título amarelo */
 }
 
 .section-title {
@@ -139,12 +172,8 @@ a:hover {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Padrão para títulos sem section-alt-bg */
     border-radius: 2px;
-}
-
-.section-alt-bg .section-title::after {
-    background-color: var(--accent-color);
 }
 
 .section-description {
@@ -164,7 +193,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* HEADER                  */
+/* HEADER                                   */
 /* ========================================= */
 
 .main-header {
@@ -200,7 +229,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO HERO                  */
+/* SEÇÃO HERO                               */
 /* ========================================= */
 
 .hero-section {
@@ -257,7 +286,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SERVER BRANDING (ÍCONE E BANNER)  */
+/* SERVER BRANDING (ÍCONE E BANNER)         */
 /* ========================================= */
 
 .server-branding {
@@ -297,7 +326,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* CONTEÚDO EM DUAS COLUNAS         */
+/* CONTEÚDO EM DUAS COLUNAS                 */
 /* ========================================= */
 
 .content-two-columns {
@@ -327,7 +356,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE SERVIÇOS            */
+/* GRID DE SERVIÇOS                         */
 /* ========================================= */
 
 .services-grid {
@@ -383,7 +412,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE CARGOS (ROLES)           */
+/* GRID DE CARGOS (ROLES)                   */
 /* ========================================= */
 
 .roles-grid {
@@ -479,7 +508,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE EVENTOS             */
+/* GRID DE EVENTOS                          */
 /* ========================================= */
 
 .events-grid-wrapper {
@@ -566,7 +595,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO COMUNIDADE & PARCERIAS          */
+/* SEÇÃO COMUNIDADE & PARCERIAS             */
 /* ========================================= */
 
 .community-grid {
@@ -652,7 +681,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO CALL TO ACTION           */
+/* SEÇÃO CALL TO ACTION                     */
 /* ========================================= */
 
 .call-to-action {
@@ -693,7 +722,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* FOOTER                   */
+/* FOOTER                                   */
 /* ========================================= */
 
 .main-footer {
@@ -705,7 +734,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* BOTÃO DE ÁUDIO                 */
+/* BOTÃO DE ÁUDIO                           */
 /* ========================================= */
 
 #playAudioBtn {
@@ -782,7 +811,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* CARDS DE SEGURANÇA E ITENS          */
+/* CARDS DE SEGURANÇA E ITENS               */
 /* ========================================= */
 
 .admin-security-section .section-title img {
@@ -843,7 +872,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* RESPONSIVIDADE               */
+/* RESPONSIVIDADE                           */
 /* ========================================= */
 
 /* Mobile-first: estilos padrão para telas menores, depois sobrescreve para maiores */
