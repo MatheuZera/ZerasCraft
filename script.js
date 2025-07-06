@@ -36,7 +36,6 @@ const playlist = [
     { title: "Taswell", src: "audios/musics/Taswell.mp3" },
     { title: "Wet-Hands", src: "audios/musics/Wet-Hands.mp3" }
 ];
-    ];
     let currentTrackIndex = 0;
     const circumference = 100;
 

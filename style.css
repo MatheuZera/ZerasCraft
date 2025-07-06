@@ -627,7 +627,7 @@ h2 .fas, h3 .fas {
     bottom: 30px; /* Distância da parte inferior da tela */
     right: 30px; /* Distância da parte direita da tela */
     z-index: 1050; /* Garante que o botão fique acima da maioria dos outros elementos */
-    display: flex; /* Para flexibilizar o posicionamento interno, se necessário */
+    display: flex; /* Para centralizar o botão dentro dele */
     justify-content: center;
     align-items: center;
 }
@@ -637,13 +637,16 @@ h2 .fas, h3 .fas {
     position: relative; /* Essencial para posicionar o SVG e o efeito neon */
     display: flex;
     align-items: center;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente (ícone/texto) */
     gap: 10px; /* Espaçamento entre o ícone e o texto */
-    padding: 10px 20px;
-    border-radius: 50px; /* Transforma o botão em um formato de pílula (arredondado) */
+    padding: 15px; /* Aumenta o padding para um botão circular */
+    width: 70px; /* Largura fixa para o círculo */
+    height: 70px; /* Altura fixa para o círculo */
+    border-radius: 50%; /* Transforma o botão em um círculo perfeito */
     background-color: var(--audio-btn-off-color); /* Cor de fundo quando a música está desligada/pausada */
     color: var(--cor-btn-text); /* Cor do texto e dos ícones */
     font-family: var(--fonte-titulo);
-    font-size: 1em;
+    font-size: 1em; /* Tamanho da fonte para o texto (se visível) */
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -653,51 +656,70 @@ h2 .fas, h3 .fas {
     overflow: hidden; /* Importante para que o SVG de progresso e o efeito neon não transbordem */
     /* Transições suaves para as propriedades visuais do botão */
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-    min-width: 180px; /* Largura mínima para acomodar o texto e o ícone */
-    justify-content: flex-start; /* Alinha o conteúdo à esquerda dentro do botão */
+    /* Remover min-width, pois agora é um círculo de tamanho fixo */
 }
 
 /* Efeito de hover para o botão quando não está tocando (sem o neon) */
 #audioControlButton.audio-control-button:hover:not(.is-playing) {
     background-color: var(--cor-secundaria); /* Escurece o fundo no hover */
-    transform: translateY(-2px); /* Efeito sutil de "subir" */
+    transform: scale(1.05); /* Efeito sutil de "crescer" no hover */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Sombra mais pronunciada */
 }
 
 /* Estilo para o botão desabilitado */
 #audioControlButton.audio-control-button:disabled {
-    cursor: not-allowed; /* Altera o cursor para indicar que não é clicável */
-    opacity: 0.6; /* Deixa o botão um pouco transparente */
-    background-color: var(--cor-terciaria); /* Cor de fundo mais neutra */
-    box-shadow: none; /* Remove qualquer sombra */
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: var(--cor-terciaria);
+    box-shadow: none;
 }
 
 /* Estilo base para os spans dos ícones dentro do botão */
 .audio-control-button .audio-icon {
-    font-size: 1.2em; /* Tamanho do ícone */
-    display: inline-block; /* Garante que o span ocupe seu próprio espaço */
-    width: 1.2em; /* Largura para centralizar o ícone */
-    text-align: center; /* Centraliza o ícone horizontalmente */
-    position: relative; /* Permite controlar o z-index em relação ao SVG */
-    z-index: 3; /* Garante que os ícones fiquem acima do arco de progresso */
+    font-size: 1.8em; /* Aumenta o tamanho do ícone para o círculo */
+    display: inline-block;
+    width: 1em; /* Ajusta a largura para o ícone */
+    text-align: center;
+    position: relative;
+    z-index: 3; /* Garante que os ícones fiquem acima do arco de progresso e do neon */
+    transition: transform 0.3s ease; /* Adiciona transição para o ícone girar */
 }
 
 /* Controle de visibilidade dos ícones de volume/mudo */
 .audio-control-button .on-icon { /* Este é o ícone de MUTO (fa-volume-mute) */
-    display: inline-block; /* Visível por padrão quando a música não está tocando */
+    display: inline-block;
 }
 .audio-control-button .off-icon { /* Este é o ícone de VOLUME (fa-volume-up) */
-    display: none; /* Escondido por padrão */
+    display: none;
 }
 
 /* Estilo do botão quando a música está tocando (classe 'is-playing' adicionada via JS) */
 #audioControlButton.is-playing {
     background-color: var(--audio-btn-on-color-base); /* Fundo base para o efeito neon */
     border-color: var(--cor-primaria); /* Borda sólida da cor primária */
-    /* Múltiplas sombras para criar o efeito de brilho neon */
+    /* Múltiplas sombras para criar o efeito de brilho externo do neon */
     box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8), /* Brilho interno */
                 0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6), /* Brilho intermediário */
                 0 0 30px rgba(var(--neon-flame-color1-rgb), 0.4); /* Brilho externo difuso */
+    animation: pulse-border 1.5s infinite alternate; /* Animação de pulsação na borda externa */
+}
+
+/* Keyframes para a animação de pulsação da borda */
+@keyframes pulse-border {
+    0% { border-color: var(--cor-primaria); }
+    100% { border-color: var(--cor-destaque); } /* Muda a cor da borda para destaque */
+}
+
+
+/* Animação do ícone quando a música está tocando */
+#audioControlButton.is-playing .audio-icon {
+    animation: icon-spin 2s linear infinite; /* Ícone girando continuamente */
+}
+
+/* Keyframes para a animação de rotação do ícone */
+@keyframes icon-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Alterna a visibilidade dos ícones quando a música está tocando */
@@ -708,31 +730,9 @@ h2 .fas, h3 .fas {
     display: inline-block;
 }
 
-/* Animação de "marquee" para o texto da música quando tocando */
-#audioControlButton.is-playing .audio-text {
-    animation: marquee 10s linear infinite; /* Animação contínua */
-    white-space: nowrap; /* Impede que o texto quebre linha */
-    text-overflow: clip; /* Garante que o texto não tenha "..." durante a animação */
-}
-
-/* Keyframes para a animação de marquee (rolagem do texto) */
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    /* Calcula o deslocamento para que o texto role totalmente, deixando 150px de espaço final */
-    100% { transform: translateX(calc(-100% + 150px)); }
-}
-
-/* Estilo para o span que exibe o título da música */
+/* Estilo para o span que exibe o título da música - ESCONDIDO NESTE LAYOUT CIRCULAR */
 .audio-text {
-    white-space: nowrap; /* Evita quebra de linha */
-    max-width: 150px; /* Limita a largura visível do texto para que o marquee funcione */
-    overflow: hidden; /* Esconde o texto que excede o max-width */
-    text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo e não estiver em marquee */
-    flex-shrink: 1; /* Permite que o texto encolha se necessário */
-    position: relative;
-    z-index: 1; /* Coloca o texto acima do SVG de progresso */
-    color: var(--cor-btn-text); /* Cor do texto */
-    margin-right: 5px; /* Pequeno espaçamento à direita do texto */
+    display: none; /* Esconde o texto da música em todos os tamanhos para o botão circular */
 }
 
 /* Estilo para o elemento SVG que cria o arco de progresso circular */
@@ -771,8 +771,6 @@ h2 .fas, h3 .fas {
 }
 
 /* Pseudo-elemento ou div para o efeito de "chama" neon que se move */
-/* O HTML deve ter um <div class="neon-effect"> dentro do botão para isso funcionar como está. */
-/* Se não quiser adicionar mais HTML, pode usar ::before ou ::after aqui, mas precisaria de content: ''. */
 .audio-control-button .neon-effect {
     position: absolute;
     top: 0;
@@ -789,24 +787,24 @@ h2 .fas, h3 .fas {
         var(--neon-flame-color1) 100%
     );
     background-size: 200% 100%; /* Duplica o tamanho para permitir a animação de movimento */
-    filter: blur(5px); /* Aplica um desfoque para o efeito de brilho */
+    filter: blur(8px); /* Aumenta o desfoque para um brilho mais suave e intenso */
     opacity: 0; /* Invisível por padrão */
     transition: opacity 0.4s ease; /* Transição para aparecer/desaparecer */
     border-radius: inherit; /* Herda o border-radius do botão pai */
-    z-index: 0; /* Fica abaixo de tudo, atrás dos ícones e texto */
+    z-index: 0; /* Fica abaixo de tudo, atrás dos ícones, texto e SVG */
     pointer-events: none; /* Não interfere com cliques */
+    animation: neon-gradient-spin 10s linear infinite; /* Animação de rotação do gradiente neon */
 }
 
 /* Ativa o efeito neon quando a música está tocando */
 #audioControlButton.is-playing .neon-effect {
     opacity: 0.7; /* Torna o efeito visível */
-    animation: neon-flame-animation 2s linear infinite; /* Aplica a animação de movimento da "chama" */
 }
 
-/* Keyframes para a animação do efeito neon */
-@keyframes neon-flame-animation {
-    0% { background-position: 0% 0; } /* Inicia a posição do background */
-    100% { background-position: 100% 0; } /* Move o background para a direita */
+/* Keyframes para a animação de rotação do gradiente neon */
+@keyframes neon-gradient-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Media Queries para responsividade do botão de áudio */
@@ -816,17 +814,28 @@ h2 .fas, h3 .fas {
         right: 15px; /* Reduz a distância da parte direita */
     }
     #audioControlButton.audio-control-button {
-        padding: 8px 15px; /* Ajusta o padding */
-        font-size: 0.9em; /* Reduz o tamanho da fonte */
-        min-width: unset; /* Remove a largura mínima para permitir um redimensionamento mais livre */
-        width: 60px; /* Define uma largura fixa para torná-lo circular */
-        height: 60px; /* Define uma altura fixa para torná-lo circular */
-        border-radius: 50%; /* Transforma o botão em um círculo perfeito */
-        justify-content: center; /* Centraliza o ícone dentro do círculo */
-        gap: 0; /* Remove o espaçamento entre ícone e texto (já que o texto será escondido) */
+        width: 60px; /* Mantém o círculo menor em telas pequenas */
+        height: 60px;
+        padding: 10px; /* Ajusta o padding para o tamanho menor */
     }
-    #audioControlButton .audio-text {
-        display: none; /* Esconde o texto da música em telas menores */
+    .audio-control-button .audio-icon {
+        font-size: 1.6em; /* Ajusta o tamanho do ícone para telas menores */
+    }
+}
+
+/* Media Query para telas ainda menores, se necessário */
+@media (max-width: 480px) {
+    .audio-control-button-container {
+        bottom: 10px;
+        right: 10px;
+    }
+    #audioControlButton.audio-control-button {
+        width: 55px;
+        height: 55px;
+        padding: 8px;
+    }
+    .audio-control-button .audio-icon {
+        font-size: 1.5em;
     }
 }
 
