@@ -1,5 +1,5 @@
 /* ========================================= */
-/* ESTILOS GERAIS                           */
+/* ESTILOS GERAIS                          */
 /* ========================================= */
 
 :root {
@@ -59,7 +59,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* BOTÕES                                   */
+/* BOTÕES                                  */
 /* ========================================= */
 
 .btn-primary,
@@ -110,7 +110,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÕES                                   */
+/* SEÇÕES                                  */
 /* ========================================= */
 
 .section-padded {
@@ -193,7 +193,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* HEADER                                   */
+/* HEADER                                  */
 /* ========================================= */
 
 .main-header {
@@ -229,7 +229,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO HERO                               */
+/* SEÇÃO HERO                              */
 /* ========================================= */
 
 .hero-section {
@@ -286,7 +286,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SERVER BRANDING (ÍCONE E BANNER)         */
+/* SERVER BRANDING (ÍCONE E BANNER)        */
 /* ========================================= */
 
 .server-branding {
@@ -326,7 +326,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* CONTEÚDO EM DUAS COLUNAS                 */
+/* CONTEÚDO EM DUAS COLUNAS                */
 /* ========================================= */
 
 .content-two-columns {
@@ -356,7 +356,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE SERVIÇOS                         */
+/* GRID DE SERVIÇOS                        */
 /* ========================================= */
 
 .services-grid {
@@ -412,7 +412,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE CARGOS (ROLES)                   */
+/* GRID DE CARGOS (ROLES)                  */
 /* ========================================= */
 
 .roles-grid {
@@ -508,7 +508,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* GRID DE EVENTOS                          */
+/* GRID DE EVENTOS                           */
 /* ========================================= */
 
 .events-grid-wrapper {
@@ -595,7 +595,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO COMUNIDADE & PARCERIAS             */
+/* SEÇÃO COMUNIDADE & PARCERIAS            */
 /* ========================================= */
 
 .community-grid {
@@ -681,7 +681,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* SEÇÃO CALL TO ACTION                     */
+/* SEÇÃO CALL TO ACTION                    */
 /* ========================================= */
 
 .call-to-action {
@@ -722,7 +722,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* FOOTER                                   */
+/* FOOTER                                  */
 /* ========================================= */
 
 .main-footer {
@@ -734,7 +734,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* BOTÃO DE ÁUDIO                           */
+/* BOTÃO DE ÁUDIO                          */
 /* ========================================= */
 
 #playAudioBtn {
@@ -811,7 +811,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* CARDS DE SEGURANÇA E ITENS               */
+/* CARDS DE SEGURANÇA E ITENS              */
 /* ========================================= */
 
 .admin-security-section .section-title img {
@@ -872,7 +872,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* RESPONSIVIDADE                           */
+/* RESPONSIVIDADE                          */
 /* ========================================= */
 
 /* Mobile-first: estilos padrão para telas menores, depois sobrescreve para maiores */
@@ -925,6 +925,9 @@ a:hover {
     }
 
     /* Responsividade específica para os cards */
+    .access-cards-grid {
+        grid-template-columns: 1fr;
+    }
     .community-grid {
         grid-template-columns: 1fr; /* Uma coluna em telas menores */
         max-width: none; /* Permite que a grid ocupe toda a largura */
@@ -1077,5 +1080,60 @@ a:hover {
         width: 200px;
         height: auto;
         flex-shrink: 0;
+    }
+}
+
+/* Adicione isso ao seu CSS existente, se desejar um layout de cards específico para o acesso */
+.access-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+.access-card {
+    background-color: var(--card-bg); /* O mesmo background dos outros cards */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.access-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.access-card p {
+    color: var(--text-color-light); /* Para o texto IP/Porta */
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    word-break: break-all; /* Garante que o texto longo não transborde */
+}
+
+.access-card code {
+    background-color: var(--dark-bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Consolas', 'monospace';
+    color: var(--accent-color); /* Destaca o código */
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.access-card .btn-primary {
+    margin-top: 20px;
+    width: fit-content; /* Ajusta a largura do botão ao conteúdo */
+}
+
+/* Responsividade para os cards de acesso */
+@media (max-width: 768px) {
+    .access-cards-grid {
+        grid-template-columns: 1fr;
     }
 }
