@@ -1,274 +1,66 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Função para detectar se é um dispositivo touch (simplificada)
-    function isTouchDevice() {
-        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
-    }
-
-    const isMobile = isTouchDevice(); // Detecta uma vez na inicialização
-
-    // --- Lógica para o botão de áudio de fundo (Minecraft Audio) ---
     const playAudioBtn = document.getElementById('playAudioBtn');
+    const minecraftAudio = document.getElementById('minecraftAudio');
 
-    // Lista de músicas para a playlist aleatória
-    const playlist = [
-        'audios/musics/Aria-Math-Lofi-Remake.mp3', // ALtere para os nomes reais dos seus arquivos
-        'audios/musics/Aria-Math.mp3',
-        'audios/musics/Begining.mp3',
-        'audios/musics/Biome-Fest.mp3',
-        'audios/musics/Blind-Spots.mp3',
-        'audios/musics/Clark.mp3',
-        'audios/musics/Danny.mp3',
-        'audios/musics/Dreiton.mp3',
-        'audios/musics/Dry-Hands.mp3',
-        'audios/musics/Floating.mp3',
-        'audios/musics/Haggstrom.mp3',
-        'audios/musics/haunt-Muskie.mp3',
-        'audios/musics/Key.mp3',
-        'audios/musics/Living-Mice.mp3',
-        'audios/musics/Minecraft.mp3',
-        'audios/musics/Moong-City.mp3',
-        'audios/musics/Mutation.mp3',
-        'audios/musics/Oxygène.mp3',
-        'audios/musics/Subwoofer-Lullaby.mp3',
-        'audios/musics/Sweden.mp3',
-        'audios/musics/Taswell.mp3',
-        'audios/musics/Wet-Hands.mp3',
-    ];
-
-    let currentTrackIndex = -1; // -1 para indicar que nenhuma música foi selecionada ainda
-    const backgroundAudio = new Audio(); // Crie um objeto de áudio sem src inicial
-    backgroundAudio.volume = 0.7; // AJUSTE ESTE VALOR
-    backgroundAudio.preload = 'auto'; // Carrega o áudio mais rápido
-
-    // Função para tocar a próxima música aleatoriamente
-    function playNextRandomTrack() {
-        if (playlist.length === 0) {
-            console.warn("Playlist vazia. Não há músicas para tocar.");
-            return;
-        }
-
-        let nextTrackIndex;
-        do {
-            nextTrackIndex = Math.floor(Math.random() * playlist.length);
-        } while (nextTrackIndex === currentTrackIndex && playlist.length > 1); // Evita tocar a mesma música duas vezes seguidas, se houver mais de uma
-
-        currentTrackIndex = nextTrackIndex;
-        backgroundAudio.src = playlist[currentTrackIndex];
-        
-        backgroundAudio.play().catch(e => {
-            console.warn("Reprodução do áudio de fundo bloqueada ou falhou:", e);
-            // Se a reprodução falhou (geralmente por autoplay policy), o botão permanecerá OFF
-            // E o estado 'isPlaying' não será atualizado para true imediatamente.
-        });
-    }
-
-    if (playAudioBtn) {
+    if (playAudioBtn && minecraftAudio) {
+        // Inicializa o botão com o estado 'off' (desligado)
+        // Isso garante que o ícone inicial seja o de 'mudo'
         playAudioBtn.classList.add('play-audio-btn-off');
-        playAudioBtn.classList.add('animating'); // Adiciona a classe de animação inicialmente
+
+        // Variável para controlar o estado da reprodução (true = tocando, false = parado)
         let isPlaying = false; 
 
         playAudioBtn.addEventListener('click', function() {
             if (isPlaying) {
-                backgroundAudio.pause();
-                backgroundAudio.currentTime = 0; // Opcional: Reinicia a música ao pausar
+                // Se estiver tocando, pause o áudio e reinicie-o
+                minecraftAudio.pause();
+                minecraftAudio.currentTime = 0; // Volta para o início
                 isPlaying = false;
+                // Altera a classe para o estado 'off' (ícone de mudo)
                 playAudioBtn.classList.remove('play-audio-btn-on');
                 playAudioBtn.classList.add('play-audio-btn-off');
-                playAudioBtn.classList.add('animating'); // Começa a animar quando pausado
             } else {
-                // Ao clicar para tocar, toca a próxima música aleatória
-                playNextRandomTrack();
-                isPlaying = true; // Assume que vai tocar, mas o catch() pode ajustar
+                // Se não estiver tocando, inicie a reprodução
+                minecraftAudio.play();
+                isPlaying = true;
+                // Altera a classe para o estado 'on' (ícone de música)
                 playAudioBtn.classList.remove('play-audio-btn-off');
                 playAudioBtn.classList.add('play-audio-btn-on');
-                playAudioBtn.classList.remove('animating'); // Para a animação quando tocando
             }
         });
 
-        // Evento quando uma música termina: toca a próxima aleatoriamente
-        backgroundAudio.addEventListener('ended', function() {
-            playNextRandomTrack();
+        // Opcional: Adicione um ouvinte para quando o áudio terminar (para loop)
+        minecraftAudio.addEventListener('ended', function() {
+            // Se você quer que ele loope automaticamente, descomente as linhas abaixo:
+            // minecraftAudio.currentTime = 0;
+            // minecraftAudio.play();
+            // isPlaying = true; // Mantém o estado como tocando
+            
+            // Se você quer que ele pare e o botão volte ao estado inicial ao terminar:
+            isPlaying = false;
+            // Altera a classe para o estado 'off' quando a música termina
+            playAudioBtn.classList.remove('play-audio-btn-on');
+            playAudioBtn.classList.add('play-audio-btn-off');
         });
 
-        // Eventos para gerenciar o estado visual do botão
-        backgroundAudio.addEventListener('pause', function() {
-            if (isPlaying && backgroundAudio.paused) { // Verifica se estava tocando e foi pausado
+        // Opcional: Adicione um ouvinte para quando o áudio for pausado por fora (ex: usuário muda de aba)
+        minecraftAudio.addEventListener('pause', function() {
+            if (isPlaying) { // Só reage se o áudio estava sendo controlado pelo botão
                 isPlaying = false;
+                // Altera a classe para o estado 'off' se o áudio for pausado por fora
                 playAudioBtn.classList.remove('play-audio-btn-on');
                 playAudioBtn.classList.add('play-audio-btn-off');
-                playAudioBtn.classList.add('animating');
             }
         });
 
-        backgroundAudio.addEventListener('play', function() {
+        // Adicione um ouvinte para quando o áudio começar a tocar (pode ser útil para autoplay ou outras interações)
+        minecraftAudio.addEventListener('play', function() {
             isPlaying = true;
             playAudioBtn.classList.remove('play-audio-btn-off');
             playAudioBtn.classList.add('play-audio-btn-on');
-            playAudioBtn.classList.remove('animating');
         });
 
     } else {
-        console.error("Erro: Elemento 'playAudioBtn' não encontrado no DOM. Verifique seu ID no HTML.");
+        console.error("Erro: Botão ou elemento de áudio não encontrados no DOM.");
     }
-
-    // --- Lógica para o som de clique em interações GERAIS (incluindo botões e links) ---
-    const clickAudio = new Audio('audios/click.mp3');
-    clickAudio.preload = 'auto'; 
-    clickAudio.volume = 0.4;
-
-    document.addEventListener('click', function(event) {
-        const clickedElement = event.target;
-        // Check if the clicked element itself is clickable or is within a clickable element
-        const isClickable = clickedElement.tagName === 'A' ||
-                            clickedElement.tagName === 'BUTTON' ||
-                            clickedElement.closest('.btn-primary') || // Check if it's primary button or inside one
-                            clickedElement.closest('.btn-secondary') || // Check if it's secondary button or inside one
-                            clickedElement.closest('.btn-link') || // Check if it's link button or inside one
-                            clickedElement.closest('.service-card') || // Any service card
-                            clickedElement.closest('.role-category-card') || // Any role category card
-                            clickedElement.closest('.event-card') || // Any event card
-                            clickedElement.closest('.community-card') || // Any community card
-                            clickedElement.closest('.partnership-card') || // Any partnership card
-                            clickedElement.closest('.security-grid-item') || // Any security grid item
-                            clickedElement.closest('.pixel-card'); // Any pixel card
-        
-        const isMainAudioButton = clickedElement.id === 'playAudioBtn';
-
-        if (isClickable && !isMainAudioButton) {
-            clickAudio.currentTime = 0;
-            clickAudio.play().catch(e => {
-                console.warn("Erro ao reproduzir som de clique:", e);
-            });
-        }
-    });
-
-    // --- Lógica para reproduzir select.mp3 nos cards (diferente para PC e Mobile) ---
-    // Agrupando todos os elementos interativos que devem tocar select.mp3 no mouseenter/tap
-    const interactiveElementsForSelectSound = document.querySelectorAll(
-        '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card, .security-grid-item, .pixel-card'
-    );
-
-    const selectAudioGeneral = new Audio('audios/select.mp3');
-    selectAudioGeneral.preload = 'auto';
-    selectAudioGeneral.volume = 0.3;
-
-    function playSelectSoundGeneral() {
-        selectAudioGeneral.currentTime = 0;
-        selectAudioGeneral.play().catch(e => {
-            console.warn("Reprodução de áudio 'select.mp3' (geral) bloqueada ou falhou:", e);
-        });
-    }
-
-    interactiveElementsForSelectSound.forEach(element => {
-        if (!isMobile) {
-            // Se for PC, usa mouseenter (passar o cursor)
-            element.addEventListener('mouseenter', playSelectSoundGeneral);
-        } else {
-            // Lógica para mobile: tocar no elemento sem deslizar
-            let startX, startY;
-            let touchMoved = false;
-            const DRAG_THRESHOLD_PX = 10; // 10 pixels de movimento para considerar deslize
-
-            element.addEventListener('touchstart', function(event) {
-                startX = event.touches[0].clientX;
-                startY = event.touches[0].clientY;
-                touchMoved = false; // Reseta a flag de movimento
-            });
-
-            element.addEventListener('touchmove', function(event) {
-                const currentX = event.touches[0].clientX;
-                const currentY = event.touches[0].clientY;
-                const deltaX = Math.abs(currentX - startX);
-                const deltaY = Math.abs(currentY - startY);
-
-                if (deltaX > DRAG_THRESHOLD_PX || deltaY > DRAG_THRESHOLD_PX) {
-                    touchMoved = true; // Se moveu além do limite, marca como deslize
-                }
-            });
-
-            element.addEventListener('touchend', function(event) {
-                // Se o toque terminou e NÃO houve deslize significativo
-                if (!touchMoved) {
-                    // Evita tocar o som de select se o clique for em um link/botão interno
-                    // A lógica do clickAudio já lida com cliques em botões/links,
-                    // então só tocamos o som de 'select' se não for um desses.
-                    const isInternalLinkOrButton = event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link');
-                    if (!isInternalLinkOrButton) {
-                        playSelectSoundGeneral();
-                    }
-                }
-            });
-
-            // Adiciona um listener 'touchcancel' para garantir que o estado seja resetado
-            element.addEventListener('touchcancel', function() {
-                touchMoved = false;
-            });
-        }
-    });
-
-    // --- Lógica para mostrar o botão de áudio após a primeira interação ---
-    let userInteracted = false; 
-
-    function handleUserInteraction() {
-        if (!userInteracted) {
-            if (playAudioBtn) {
-                playAudioBtn.style.display = 'block';
-            }
-            
-            // Toca a música aleatória de fundo na primeira interação do usuário
-            // Isso também é importante para contornar políticas de autoplay de navegadores.
-            playNextRandomTrack(); // Chama a função para tocar a primeira música aleatória
-            
-            userInteracted = true;
-            document.removeEventListener('scroll', handleUserInteraction);
-            document.removeEventListener('mousemove', handleUserInteraction);
-            document.removeEventListener('click', handleUserInteraction);
-            document.removeEventListener('touchstart', handleUserInteraction);
-        }
-    }
-
-    document.addEventListener('scroll', handleUserInteraction);
-    document.addEventListener('mousemove', handleUserInteraction);
-    document.addEventListener('click', handleUserInteraction);
-    document.addEventListener('touchstart', handleUserInteraction);
-
-    // --- Animação ao rolar a página ---
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    const observerOptions = {
-        root: null, // viewport
-        rootMargin: '0px',
-        threshold: 0.1 // 10% do elemento visível
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Para de observar depois de animar
-            }
-        });
-    }, observerOptions);
-
-    animateElements.forEach(element => {
-        observer.observe(element);
-    });
-
-    // Adiciona a classe 'animate-on-scroll' aos elementos que você quer animar
-    // Os cards de "Canais & Cargos" já estão dentro do `.role-category-card`.
-    // Então, adicionamos `animate-on-scroll` diretamente a eles.
-    document.querySelectorAll('.role-category-card').forEach(card => {
-        card.classList.add('animate-on-scroll');
-    });
-
-    // Adiciona as classes de animação aos cards da seção Pixel Legends
-    document.querySelectorAll('#pixel-legends .pixel-card').forEach((card, index) => {
-        // As classes slide-in-left e slide-in-right já foram adicionadas diretamente no HTML.
-        // Se preferir controlar via JS, você pode remover do HTML e adicionar aqui:
-        // if (index % 2 === 0) {
-        //     card.classList.add('slide-in-left');
-        // } else {
-        //     card.classList.add('slide-in-right');
-        // }
-        card.classList.add('animate-on-scroll'); // Adiciona também para que o IntersectionObserver ative
-    });
 });

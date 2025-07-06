@@ -7,20 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="images/site/icone.webp" type="image/x-icon">
-
-    <meta property="og:title" content="Mundo Zera's Craft - Website" />
-    <meta property="og:description" content="Entre para a nossa comunidade vibrante de Minecraft! Servidor com eventos épicos, sistema de guildas, cargos personalizados e muita criatividade. Junte-se à aventura!" />
-    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/imagens/site/icone.webp" /> 
-    <meta property="og:url" content="https://matheuzera.github.io/ZerasCraft/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Mundo Zera's Craft" />
-    <meta property="og:locale" content="pt_BR" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Mundo Zera's Craft - Website" />
-    <meta name="twitter:description" content="Entre para a nossa comunidade vibrante de Minecraft! Servidor com eventos épicos, sistema de guildas, cargos personalizados e muita criatividade. Junte-se à aventura!" />
-    <meta name="twitter:image" content="https://matheuzera.github.io/ZerasCraft/images/site/banner_og_discord.jpg" /> 
-    <meta name="twitter:creator" content="@SeuHandleDoTwitter" /> 
 </head>
 <body>
     <header class="main-header">
@@ -28,12 +14,12 @@
             <a href="#" class="header-logo">Mundo Zera's Craft</a>
         </div>
     </header>
-<main> 
+<main>
         <section id="inicio" class="hero-section">
             <div class="hero-image-overlay"></div>
             <div class="container hero-content">
                 <div class="server-branding">
-                    <img src="images/site/mini-banner.gif" alt="Mini Banner do Mundo Zera's Craft" class="server-banner">
+                    <img src="images/site/mini-banner-principal.gif" alt="Mini Banner do Mundo Zera's Craft" class="server-banner">
                     <img src="images/site/icone.webp" alt="Ícone do Servidor Mundo Zera's Craft" class="server-icon">
                 </div>
                 <h1 class="hero-title">Sua Próxima Grande Aventura em Minecraft Começa Aqui!</h1>
@@ -50,7 +36,7 @@
                     <a href="link" class="btn-secondary">Saiba Mais</a>
                 </div>
                 <div class="image-content">
-                    <img src="images/site/sobre-o-mundo.gif" class="responsive-image bordered-image" alt="Imagem Ilustrativa sobre o Mundo Zera's Craft">
+                    <img src="images/site/sobre-o-mundo.jpg" class="responsive-image bordered-image" alt="Imagem Ilustrativa sobre o Mundo Zera's Craft">
                 </div>
             </div>
         </section>
@@ -160,179 +146,92 @@
                     </div>
             </div>
         </section>
-
-        <section id="pixel-legends" class="section-padded section-alt-bg">
-            <div class="container content-two-columns">
-                <div class="text-content">
-                    <h2 class="section-title">🎨 Pixel Legends: Arte Digital em Blocos!</h2>
-                    <p>Mergulhe no mundo da pixel art com nosso mais novo projeto! "Pixel Legends" é uma coleção exclusiva de arte digital, criada com paixão e precisão, transformando seus personagens e temas favoritos do Minecraft em obras de arte pixelizadas.</p>
-                    <p>Cada peça é cuidadosamente desenhada, capturando a essência do universo Minecraft com um toque artístico único. De paisagens icônicas a personagens lendários, nossa galeria oferece uma nova perspectiva sobre o mundo que você ama.</p>
-                    <p>Além de apreciar, você pode se inspirar e até mesmo contribuir! Compartilhe suas próprias criações de pixel art e faça parte da nossa comunidade de artistas. Juntos, vamos construir um legado de arte digital no universo Minecraft.</p>
-                    <a href="https://www.youtube.com/channel/UCG0W02R9yB-7FfC6hF6d8qA" class="btn-primary" target="_blank">Ver Galeria Completa</a>
-                </div>
-                <div class="image-content pixel-legends-gallery">
-                    <div class="pixel-card slide-in-left">
-                        <img src="images/pixel-legends/image_ae28a6.png" alt="Pixel Art 1" class="responsive-image bordered-image">
-                    </div>
-                    <div class="pixel-card slide-in-right">
-                        <img src="images/pixel-legends/image_ae2487.png" alt="Pixel Art 2" class="responsive-image bordered-image">
-                    </div>
-                    <div class="pixel-card slide-in-left">
-                        <img src="images/pixel-legends/image_adb082.png" alt="Pixel Art 3" class="responsive-image bordered-image">
-                    </div>
-                    <div class="pixel-card slide-in-right">
-                        <img src="images/pixel-legends/image_a3c6bc.png" alt="Pixel Art 4" class="responsive-image bordered-image">
-                    </div>
-                    <div class="pixel-card slide-in-left">
-                        <img src="images/pixel-legends/image_a2cbf4.jpg" alt="Pixel Art 5" class="responsive-image bordered-image">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="eventos" class="section-padded">
+<section id="eventos" class="section-padded section-alt-bg">
             <div class="container">
                 <h2 class="section-title">🏆 Eventos Épicos: Competição e Criatividade</h2>
                 <p class="section-description">Participe de nossos torneios e mostre suas habilidades!</p>
-                <div class="events-sub-grid"> <div class="event-card">
-                        <img src="images/eventos/staff.jpg" class="event-image" alt="Imagem do Evento MCTU">
+
+                <div class="events-grid-wrapper">
+                    <div class="event-card-main"> <img src="images/eventos/staff.webp" class="event-image" alt="Imagem do Evento CraftJam">
                         <div class="card-content">
                             <h3 class="card-title">🔔 SEJA STAFF/ADM: Formulário para Cargos!</h3>
-                            <p class="card-description">Participe e concorra a Cargos Admin no servidor, podendo subir de cargos de acordo com sua interação e colaborações</p>
+                            <p class="card-description">Participe e concorra a Cargos Admin no servidor, podendo subir de cargos de acordo com sua interação e colaborações.</p>
                             <p class="event-details"><strong>Detalhes:</strong> Dependendo de como os Administradores checam seu Formulário, você pode ser Aceito(a) ou Recusado(a)!</p>
-                            <a href="https://discord.com/channels/1390120239588577482/1390696511255347241" class="btn-link" target="_blank">Saiba Mais</a>
+                            <a href="https://discord.com/channels/1390120239588577482/1390125311655546940" class="btn-link" target="_blank">Saiba Mais</a>
                         </div>
                     </div>
-                    <div class="event-card">
-                        <img src="images/eventos/mctu.jpg" class="event-image" alt="Imagem do Evento MCTU">
-                        <div class="card-content">
-                            <h3 class="card-title">⚔️ MCTU (Minecraft Team Ultimate)</h3>
-                            <p class="card-description">Um campeonato exclusivo para guildas, testando habilidades de PvP, construção, redstone e muito mais. Forme sua equipe, treine e lute pela glória em um servidor dedicado ao torneio!</p>
-                            <p class="event-details"><strong>Detalhes:</strong> Competição de Guildas, Desafios Variados, Servidor Exclusivo, Cargos de Campeão.</p>
-                            <a href="https://discord.com/channels/1390120239588577482/1390696511255347241" class="btn-link" target="_blank">Saiba Mais</a>
+
+                    <div class="events-sub-grid"> <div class="event-card">
+                            <img src="images/eventos/mctu.png" class="event-image" alt="Imagem do Evento MCTU">
+                            <div class="card-content">
+                                <h3 class="card-title">⚔️ MCTU (Minecraft Team Ultimate)</h3>
+                                <p class="card-description">Um campeonato exclusivo para guildas, testando habilidades de PvP, construção, redstone e muito mais. Forme sua equipe, treine e lute pela glória em um servidor dedicado ao torneio!</p>
+                                <p class="event-details"><strong>Detalhes:</strong> Competição de Guildas, Desafios Variados, Servidor Exclusivo, Cargos de Campeão.</p>
+                                <a href="https://discord.com/channels/1390120239588577482/1390696511255347241" class="btn-link" target="_blank">Saiba Mais</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="event-card">
-                        <img src="images/eventos/craftjam.png" class="event-image" alt="Imagem do Evento CraftJam">
-                        <div class="card-content">
-                            <h3 class="card-title">🎨 CRAFTJAM: Torneio de Criação</h3>
-                            <p class="card-description">Libere seu artista interior! Desafie-se a criar algo único dentro de um tema específico (construções, addons, texturas, fanarts, animações e mapas). Sua arte pode te render reconhecimento e prêmios!</p>
-                            <p class="event-details"><strong>Detalhes:</strong> Tema Secreto, Múltiplas Categorias, Votação Comunitária (baseada nas publicações mais recentes e únicas em canal específico), Cargos de Criador.</p>
-                            <a href="https://discord.com/channels/1390120239588577482/1390696565198557276" class="btn-link" target="_blank">Saiba Mais</a>
+                        <div class="event-card">
+                            <img src="images/eventos/craftjam.webp" class="event-image" alt="Imagem do Evento CraftJam">
+                            <div class="card-content">
+                                <h3 class="card-title">🎨 CRAFTJAM: Torneio de Criação</h3>
+                                <p class="card-description">Libere seu artista interior! Desafie-se a criar algo único dentro de um tema específico (construções, addons, texturas, fanarts, animações e mapas). Sua arte pode te render reconhecimento e prêmios!</p>
+                                <p class="event-details"><strong>Detalhes:</strong> Tema Secreto, Múltiplas Categorias, Votação Comunitária (baseada nas publicações mais recentes e únicas em canal específico), Cargos de Criador.</p>
+                                <a href="https://discord.com/channels/1390120239588577482/1390696565198557276" class="btn-link" target="_blank">Saiba Mais</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="event-card">
-                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Imagem do Evento MCTU">
-                        <div class="card-content">
-                            <h3 class="card-title">Evento Vazio</h3>
-                            <p class="card-description">.</p>
-                            <p class="event-details"><strong>Detalhes:</strong> .</p>
-                            <a href="" class="btn-link" target="_blank">Saiba Mais</a>
                         </div>
-                    </div>
-                    <div class="event-card">
-                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Imagem do Evento MCTU">
-                        <div class="card-content">
-                            <h3 class="card-title">Evento Vazio</h3>
-                            <p class="card-description">.</p>
-                            <p class="event-details"><strong>Detalhes:</strong> .</p>
-                            <a href="" class="btn-link" target="_blank">Saiba Mais</a>
-                        </div>
-                    </div>
-                    <div class="event-card">
-                        <img src="images/eventos/vazio.jpg" class="event-image" alt="Imagem do Evento MCTU">
-                        <div class="card-content">
-                            <h3 class="card-title">Evento Vazio</h3>
-                            <p class="card-description">.</p>
-                            <p class="event-details"><strong>Detalhes:</strong> .</p>
-                            <a href="" class="btn-link" target="_blank">Saiba Mais</a>
-                        </div>
-                    </div>
                 </div>
+            </div>
         </section>
-<section class="admin-security-section">
-    <div class="container">
-        <h2 class="section-title">
-            <img src="images/seguranca/seguranca.webp" alt="Ícone de Segurança"> Administração & Segurança
-        </h2>
-
-        <div class="service-card security-card">
-            <div class="card-content">
-                <h3>SEGURANÇA</h3>
-                <p>Sua segurança e uma experiência fluida são nossas prioridades. Nossa equipe de administração e moderação garante um ambiente justo e respeitoso.</p>
-                
-                <div class="security-grid-item">
-                    <h4>Bots de Segurança</h4>
-                    <p>Contamos com ferramentas avançadas, como nosso bot exclusivo, Pixel Craft, que é responsável por moderar o servidor e gerenciar comandos utilitários para que nossos eventos funcionem conforme o planejado. Ele foi criado por @MatheuZera e o Mundo Zera's Craft.</p>
+<section id="seguranca" class="section-padded">
+            <div class="container content-two-columns reverse-columns">
+                <div class="image-content">
+                    <img src="images/seguranca/seguranca.webp" class="responsive-image bordered-image">
                 </div>
-
-                <div class="security-grid-item">
-                    <h4>Sistemas de Recuperação</h4>
-                    <p>Além disso, utilizamos sistemas de prevenção e recuperação avançados (como o Xeom Bot para backups e o Shine Bot para bloquear bots maliciosos) para garantir que sua experiência no Mundo Zera's Craft seja sempre segura e protegida contra raids e outros imprevistos.</p>
-                </div>
-
-                <div class="security-grid-item">
-                    <h4>Sugestões e Melhorias</h4>
+                <div class="text-content">
+                    <h2 class="section-title">🛡️ Administração & Segurança</h2>
+                    <p>Sua segurança e uma experiência fluida são nossas prioridades. Nossa equipe de administração e moderação garante um ambiente justo e respeitoso.</p>
+                    <p>Contamos com ferramentas avançadas, como nosso bot exclusivo <strong>Pixel Craft</strong>, que é responsável por moderar o servidor e gerenciar comandos utilitários para que nossos eventos funcionem conforme o planejado. Ele foi criado por @MatheuZera e o Mundo Zera's Craft.</p>
+                    <p>Além disso, utilizamos sistemas de prevenção e recuperação avançados (como o <strong>Xeon Bot</strong> para backups e o <strong>Shine Bot</strong> para bloquear bots maliciosos) para garantir que sua experiência no Mundo Zera's Craft seja sempre segura e protegida contra raids e outros imprevistos.</p>
                     <p>Você tem sugestões? Participe do nosso Fórum de Sugestões para nos ajudar a melhorar!</p>
-                    <a href="#" class="btn-link">Fórum de Sugestões</a>
+                    <a href="LINK_DO_FORUM_SUGESTOES" class="btn-secondary" target="_blank">Fórum de Sugestões</a>
                 </div>
-
-                <div class="security-grid-item">
-                    <h3>TESTE 1</h3>
-                    <p>Este é um item de teste abaixo da seção de segurança principal.</p>
-                </div>
-
             </div>
-        </div>
-        </div>
-</section>
-<section id="parcerias" class="section-padded section-alt-bg">
-    <div class="container">
-        <h2 class="section-title">Nossos Membros & Parceiros</h2>
-        <p class="section-description">
-            Valorizamos a nossa comunidade e as parcerias estratégicas que enriquecem a experiência de todos no Mundo Zera's Craft. Conheça aqueles que fazem parte da nossa jornada.
-        </p>
-
-        <div class="community-grid">
-            <div class="community-card">
-                <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="member-avatar">
-                <h3>Esperando Colaborador(a)</h3>
-                <p>Nossa parceria com a [Nome do Parceiro 1] traz benefícios exclusivos e conteúdo adicional para nossos jogadores.</p>
-                <a href="#" class="btn-secondary">Ver Perfil</a>
+        </section>
+<section id="comunidade" class="section-padded section-alt-bg">
+            <div class="container">
+                <h2 class="section-title">🤝 Comunidade & Parcerias</h2>
+                <p class="section-description">Nossa comunidade é vibrante e ativa! Conecte-se com outros criadores, compartilhe seus projetos, e acesse conteúdos exclusivos. Temos canais para marketplace de criações, wiki da comunidade e muito mais.</p>
+                <p class="section-description">Também valorizamos parcerias que enriquecem a experiência de todos. Estamos sempre buscando novas conexões para expandir o universo do Mundo Zera's Craft e trazer mais benefícios para nossos membros.</p>
+                <div class="community-grid">
+                    <div class="community-card">
+                        <h3>Membro da Comunidade 1</h3>
+                        <p>Breve descrição sobre este membro.</p>
+                        <a href="https://discord.com" class="btn-secondary">Ver Perfil</a>
+                    </div>
+                    <div class="community-card">
+                        <h3>Membro da Comunidade 2</h3>
+                        <p>Breve descrição sobre este membro.</p>
+                        <a href="https://discord.com" class="btn-secondary">Ver Perfil</a>
+                    </div>
+                    <div class="community-card">
+                        <h3>Membro da Comunidade 3</h3>
+                        <p>Breve descrição sobre este membro.</p>
+                        <a href="https://discord.com" class="btn-secondary">Ver Perfil</a>
+                    </div>
+                    <div class="partnership-card">
+                        <h3>Parceria 1</h3>
+                        <p>Saiba mais sobre nossa parceria com...</p>
+                        <a href="https://discord.com" class="btn-secondary">Saiba Mais</a>
+                    </div>
+                    <div class="partnership-card">
+                        <h3>Parceria 2</h3>
+                        <p>Conheça os benefícios desta parceria.</p>
+                        <a href="https://discord.com" class="btn-secondary">Saiba Mais</a>
+                    </div>
+                    </div>
             </div>
-            <div class="community-card">
-                <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="member-avatar">
-                <h3>Esperando Colaborador(a)</h3>
-                <p>Nossa parceria com a [Nome do Parceiro 1] traz benefícios exclusivos e conteúdo adicional para nossos jogadores.</p>
-                <a href="#" class="btn-secondary">Ver Perfil</a>
-            </div>
-            <div class="community-card">
-                <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="member-avatar">
-                <h3>Esperando Colaborador(a)</h3>
-                <p>Nossa parceria com a [Nome do Parceiro 1] traz benefícios exclusivos e conteúdo adicional para nossos jogadores.</p>
-                <a href="#" class="btn-secondary">Ver Perfil</a>
-            </div>
-
-            <div class="partnership-card">
-                <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
-                <h3>Esperando Parceria</h3>
-                <p>Breve descrição sobre este membro e sua contribuição para a comunidade.</p>
-                <a href="#" class="btn-secondary">Saiba Mais</a>
-            </div>
-            <div class="partnership-card">
-                <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
-                    <h3>Esperando Parceria</h3>
-                <p>Breve descrição sobre este membro e sua contribuição para a comunidade.</p>
-                <a href="#" class="btn-secondary">Saiba Mais</a>
-            </div>
-            <div class="partnership-card">
-                <img src="images/parceiros/icone.webp" alt="Esperando Parceria" class="partnership-logo">
-                <h3>Esperando Parceria</h3>
-                <p>Breve descrição sobre este membro e sua contribuição para a comunidade.</p>
-                <a href="#" class="btn-secondary">Saiba Mais</a>
-            </div>
-            </div>
-    </div>
-</section>
+        </section>
 <section id="junte-se" class="section-padded call-to-action">
             <div class="container">
                 <h2 class="section-title">🚀 Não Fique de Fora!</h2>
@@ -343,14 +242,14 @@
     </main>
 <footer class="main-footer">
         <div class="container">
-            <p>&copy; Mundo Zera's Craft. Todos os direitos reservados. :D [v1.0.3]</p>
+            <p>&copy; Mundo Zera's Craft. Todos os direitos reservados. :D</p>
         </div>
     </footer>
 
     <button id="playAudioBtn" class="btn-primary">Tocar Som do Minecraft</button>
 
-    <audio id="minecraftAudio" src="audios/minecraft-audio.mp3" preload="auto"></audio>
-    <audio id="selectAudio" src="audios/select.mp3" preload="auto"></audio> 
+    <audio id="minecraftAudio" src="audio/minecraft-audio.mp3" preload="auto"></audio>
+
     <script src="script.js"></script>
 </body>
 </html>
