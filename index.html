@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zera’s Craft – Início</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/icones/logo.png" type="image/png" />
+</head>
+<body>
+
+  <!-- BANNER INICIAL -->
+  <section class="section-hero text-center" style="background: url('images/banner/banner-bg.jpg') center/cover no-repeat;">
+    <img src="images/icones/logo.png" alt="Zera Logo" class="banner-icon">
+
+    <h1 class="banner-title">Zera’s Craft</h1>
+
+    <p class="banner-description">
+      Bem-vindo ao universo da <strong>Zera’s Craft</strong>, onde cada bloco conta uma história e cada jogador é parte de algo maior.  
+      Aqui você encontrará ferramentas, eventos e sistemas feitos por e para a comunidade — prontos para inspirar, conectar e transformar a maneira como você joga e cria.
+    </p>
+
+    <div class="banner-buttons">
+      <a href="https://discord.gg/GYGVBqGEwP" target="_blank" class="btn-primary">
+        <img src="images/icones/discord.png" class="icon-left"> Entrar no Discord
+      </a>
+      <a href="#topicos" class="btn-secondary">
+        <img src="images/icones/down.png" class="icon-left"> Ver Estrutura
+      </a>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="section-padded section-footer text-center">
+    <p>&copy; 2025 Zera’s Craft – Todos os direitos reservados. Criado com ♥ por jogadores.</p>
+  </footer>
+<script>
+  const secoes = [
+    { id: "estrutura-content", arquivo: "estrutura.html" },
+    { id: "painel-content", arquivo: "painel.html" },
+    { id: "categorias-content", arquivo: "categorias.html" },
+    { id: "sugestoes-content", arquivo: "sugestoes.html" },
+    { id: "eventos-content", arquivo: "eventos.html" },
+    { id: "seguranca-content", arquivo: "seguranca.html" },
+    { id: "bots-content", arquivo: "bots.html" },
+    { id: "parcerias-content", arquivo: "parcerias.html" },
+    { id: "marketplace-content", arquivo: "marketplace.html" },
+    { id: "wiki-content", arquivo: "wiki.html" },
+    { id: "wikipedias-content", arquivo: "wikipedias.html" },
+    { id: "servidor-content", arquivo: "servidor.html" }
+  ];
+
+
+
+
+
+  async function carregarSecoes() {
+    for (const secao of secoes) {
+      try {
+        const resposta = await fetch(secao.arquivo);
+        const conteudo = await resposta.text();
+
+        // Extrai apenas o conteúdo entre <section>
+        const match = conteudo.match(/<section[^>]*>([\s\S]*?)<\/section>/);
+        const htmlExtraido = match ? match[0] : "<p>Erro ao carregar conteúdo.</p>";
+
+        document.getElementById(secao.id).innerHTML = htmlExtraido;
+      } catch (erro) {
+        document.getElementById(secao.id).innerHTML = "<p>Falha ao carregar: " + secao.arquivo + "</p>";
+      }
+    }
+  }
+
+  carregarSecoes();
+</script>
+</body>
+</html>
