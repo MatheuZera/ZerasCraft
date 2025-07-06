@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Lista de músicas para a playlist aleatória
     const playlist = [
-        'audios/musics/music1.mp3', // ALtere para os nomes reais dos seus arquivos
-        'audios/musics/music2.mp3',
-        'audios/musics/music3.mp3',
-        'audios/musics/music4.mp3'
+        'audios/musics/minecraft-music-1.mp3', // ALtere para os nomes reais dos seus arquivos
+        'audios/musics/minecraft-music-2.mp3',
+        'audios/musics/minecraft-music-3.mp3',
+        'audios/musics/minecraft-music-4.mp3'
         // Adicione mais músicas aqui se tiver
     ];
 
