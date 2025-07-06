@@ -467,28 +467,148 @@
         </div>
     </footer>
 
-<audio id="backgroundMusic" loop preload="auto">
-    <source src="audios/music/Aria-Math-Lofi-Remake.mp3" type="audio/mpeg" data-title="Aria Math Lofi Remake">
-    <source src="audios/music/Aria-Math.mp3" type="audio/mpeg" data-title="Aria Math">
-    <source src="audios/music/Beginning 2.mp3" type="audio/mpeg" data-title="Beginning 2">
-    <source src="audios/music/Biome-Fest.mp3" type="audio/mpeg" data-title="Biome Fest">
-    <source src="audios/music/Blind-Spots.mp3" type="audio/mpeg" data-title="Blind Spots">
-    <source src="audios/music/Clark.mp3" type="audio/mpeg" data-title="Clark">
-    <source src="audios/music/Danny.mp3" type="audio/mpeg" data-title="Danny">
-    <source src="audios/music/Dreiton.mp3" type="audio/mpeg" data-title="Dreiton">
-    <source src="audios/music/Dry-Hands.mp3" type="audio/mpeg" data-title="Dry Hands">
-    <source src="audios/music/Floating-Trees.mp3" type="audio/mpeg" data-title="Floating Trees">
-    <source src="audios/music/Haggstrom.mp3" type="audio/mpeg" data-title="Haggstrom">
-    <source src="audios/music/Haunt-Muskie.mp3" type="audio/mpeg" data-title="Haunt Muskie">
-    <source src="audios/music/Key.mp3" type="audio/mpeg" data-title="Key">
-    <source src="audios/music/Living-Mice.mp3" type="audio/mpeg" data-title="Living Mice">
-    <source src="audios/music/Mice-On-Venus.mp3" type="audio/mpeg" data-title="Mice On Venus">
-    <source src="audios/music/Minecraft.mp3" type="audio/mpeg" data-title="Minecraft">
-    <source src="audios/music/Moog-City 2.mp3" type="audio/mpeg" data-title="Moog City 2">
-    <source src="audios/music/Mutation.mp3" type="audio/mpeg" data-title="Mutation">
-    <source src="audios/music/Oxygène.mp3" type="audio/mpeg" data-title="Oxygène">
-    <source src="audios/music/Subwoofer-Lullaby.mp3" type="audio/mpeg" data-title="Subwoofer Lullaby">
-    <source src="audios/music/Sweden.mp3" type="audio/mpeg" data-title="Sweden">
-    <source src="audios/music/Taswell.mp3" type="audio/mpeg" data-title="Taswell">
-    <source src="audios/music/Wet-Hands.mp3" type="audio/mpeg" data-title="Wet Hands">
-</audio>
+    <audio id="clickSound" src="audios/click.mp3" preload="auto"></audio>
+
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="audios/music/Aria-Math-Lofi-Remake.mp3" type="audio/mpeg" data-title="Aria Math Lofi Remake">
+        <source src="audios/music/Aria-Math.mp3" type="audio/mpeg" data-title="Aria Math">
+        <source src="audios/music/Beginning 2.mp3" type="audio/mpeg" data-title="Beginning 2">
+        <source src="audios/music/Biome-Fest.mp3" type="audio/mpeg" data-title="Biome Fest">
+        <source src="audios/music/Blind-Spots.mp3" type="audio/mpeg" data-title="Blind Spots">
+        <source src="audios/music/Clark.mp3" type="audio/mpeg" data-title="Clark">
+        <source src="audios/music/Danny.mp3" type="audio/mpeg" data-title="Danny">
+        <source src="audios/music/Dreiton.mp3" type="audio/mpeg" data-title="Dreiton">
+        <source src="audios/music/Dry-Hands.mp3" type="audio/mpeg" data-title="Dry Hands">
+        <source src="audios/music/Floating-Trees.mp3" type="audio/mpeg" data-title="Floating Trees">
+        <source src="audios/music/Haggstrom.mp3" type="audio/mpeg" data-title="Haggstrom">
+        <source src="audios/music/Haunt-Muskie.mp3" type="audio/mpeg" data-title="Haunt Muskie">
+        <source src="audios/music/Key.mp3" type="audio/mpeg" data-title="Key">
+        <source src="audios/music/Living-Mice.mp3" type="audio/mpeg" data-title="Living Mice">
+        <source src="audios/music/Mice-On-Venus.mp3" type="audio/mpeg" data-title="Mice On Venus">
+        <source src="audios/music/Minecraft.mp3" type="audio/mpeg" data-title="Minecraft">
+        <source src="audios/music/Moog-City 2.mp3" type="audio/mpeg" data-title="Moog City 2">
+        <source src="audios/music/Mutation.mp3" type="audio/mpeg" data-title="Mutation">
+        <source src="audios/music/Oxygène.mp3" type="audio/mpeg" data-title="Oxygène">
+        <source src="audios/music/Subwoofer-Lullaby.mp3" type="audio/mpeg" data-title="Subwoofer Lullaby">
+        <source src="audios/music/Sweden.mp3" type="audio/mpeg" data-title="Sweden">
+        <source src="audios/music/Taswell.mp3" type="audio/mpeg" data-title="Taswell">
+        <source src="audios/music/Wet-Hands.mp3" type="audio/mpeg" data-title="Wet Hands">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verifica se o som de clique existe
+            const clickSound = document.getElementById('clickSound');
+            if (!clickSound) {
+                console.warn('Elemento de áudio com ID "clickSound" não encontrado. O som de clique não funcionará.');
+                return; // Sai da função se o elemento não for encontrado
+            }
+
+            // Seleciona todos os elementos <a> e <button> que têm o atributo data-sound-effect="select"
+            const clickableElements = document.querySelectorAll('a[data-sound-effect="select"], button[data-sound-effect="select"], i[data-sound-effect="select"]');
+
+            clickableElements.forEach(element => {
+                element.addEventListener('click', function(event) {
+                    // Evita a ação padrão do link/botão para dar tempo ao som
+                    // Isso é importante especialmente para links (<a>)
+                    if (this.tagName === 'A') {
+                        event.preventDefault();
+                    }
+
+                    clickSound.currentTime = 0; // Reinicia o áudio para que possa ser tocado novamente
+                    clickSound.play()
+                        .then(() => {
+                            // Se for um link e tiver um href, navega após o som ter começado a tocar
+                            if (this.tagName === 'A' && this.href) {
+                                // Pequeno atraso para o som começar. Ajuste conforme a duração do seu 'click.mp3'
+                                setTimeout(() => {
+                                    window.location.href = this.href;
+                                }, 150); // 150ms é um bom ponto de partida
+                            }
+                            // Se for um botão, a ação padrão já não é navegar, então ele apenas tocará o som.
+                            // Para ícones, a ação dependerá de outros scripts que você possa ter.
+                        })
+                        .catch(error => {
+                            console.error('Erro ao tentar reproduzir o som de clique:', error);
+                            // Em caso de erro (ex: autoplay policy), ainda tenta navegar/executar a ação
+                            if (this.tagName === 'A' && this.href) {
+                                window.location.href = this.href;
+                            }
+                        });
+                });
+            });
+
+            // --- Gerenciamento da Música de Fundo (se você tiver um script para isso) ---
+            // Se você já tem um script separado (ex: script.js) que lida com backgroundMusic,
+            // pode integrar o som de clique nele ou mantê-lo separado como acima.
+            // O código abaixo é apenas um exemplo de como o botão de música funcionaria.
+
+            const audioControlButton = document.getElementById('audioControlButton');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const currentMusicTitleSpan = document.getElementById('currentMusicTitle');
+            let currentTrackIndex = 0;
+            let tracks = [];
+
+            // Função para carregar as faixas do elemento <audio>
+            function loadTracks() {
+                tracks = Array.from(backgroundMusic.querySelectorAll('source')).map(source => ({
+                    src: source.src,
+                    title: source.dataset.title || 'Música Desconhecida'
+                }));
+                if (tracks.length > 0) {
+                    backgroundMusic.src = tracks[currentTrackIndex].src;
+                    currentMusicTitleSpan.textContent = tracks[currentTrackIndex].title;
+                }
+            }
+
+            // Função para alternar a reprodução/pausa
+            function togglePlayPause() {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play()
+                        .then(() => {
+                            audioControlButton.classList.remove('off');
+                            audioControlButton.classList.add('on');
+                            currentMusicTitleSpan.textContent = tracks[currentTrackIndex].title;
+                        })
+                        .catch(error => {
+                            console.error('Erro ao tentar reproduzir música de fundo:', error);
+                            alert('Erro ao tentar iniciar a música. O navegador pode ter bloqueado a reprodução automática. Por favor, interaja com a página para ativá-la.');
+                            audioControlButton.classList.add('off'); // Mantém o botão como "off" se falhar
+                            currentMusicTitleSpan.textContent = 'Erro ao tocar música';
+                        });
+                } else {
+                    backgroundMusic.pause();
+                    audioControlButton.classList.remove('on');
+                    audioControlButton.classList.add('off');
+                    currentMusicTitleSpan.textContent = 'Música Desligada';
+                }
+            }
+
+            // Event listener para o botão de controle de áudio
+            if (audioControlButton) {
+                audioControlButton.addEventListener('click', togglePlayPause);
+            }
+
+            // Event listener para quando a música termina, para tocar a próxima
+            backgroundMusic.addEventListener('ended', () => {
+                currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+                backgroundMusic.src = tracks[currentTrackIndex].src;
+                currentMusicTitleSpan.textContent = tracks[currentTrackIndex].title;
+                backgroundMusic.play().catch(error => {
+                    console.error('Erro ao tocar a próxima música:', error);
+                    currentMusicTitleSpan.textContent = 'Erro ao tocar próxima';
+                });
+            });
+
+            // Carrega as faixas assim que o DOM estiver pronto
+            loadTracks();
+
+            // Apenas para demonstração: se você quiser iniciar a música automaticamente,
+            // a maioria dos navegadores modernos bloqueará isso se não houver interação do usuário.
+            // O botão de controle de áudio já é a melhor forma de iniciar.
+            // Se você quiser tentar iniciar no carregamento (mas será bloqueado):
+            // togglePlayPause(); // Descomente para tentar iniciar no carregamento
+        });
+    </script>
+</body>
+</html>

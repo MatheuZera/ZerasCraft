@@ -258,7 +258,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        const clickSound = document.getElementById('clickSound');
+        const links = document.querySelectorAll('a'); // Seleciona todos os elementos <a> (links)
 
+        links.forEach(link => {
+            link.addEventListener('click', function(event) {
+                // Previne a navegação imediata do link para que o som possa tocar primeiro
+                event.preventDefault(); 
+
+                // Reinicia o áudio para que ele possa ser tocado repetidamente se clicado rápido
+                clickSound.currentTime = 0; 
+                clickSound.play();
+
+                // Após o som tocar (ou quase tocar), navega para o link
+                // Você pode ajustar o tempo (200ms) dependendo da duração do seu som de clique
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 200); 
+            });
+        });
+    });
     const copyNewAccessBtn = document.getElementById('copyNewAccessBtn');
     if (copyNewAccessBtn) {
         copyNewAccessBtn.addEventListener('click', () => {
