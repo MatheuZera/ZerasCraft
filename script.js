@@ -12,9 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const offIcon = audioControlButton ? audioControlButton.querySelector('.off-icon') : null; // Ícone sem X (para volume normal)
 
     // Coleta todas as fontes de música do HTML
-    // Use `decodeURIComponent` para lidar com espaços e caracteres especiais nos nomes de arquivos
     const musicSources = Array.from(audio ? audio.querySelectorAll('source') : []).map(source => ({
-        src: decodeURIComponent(source.src), // Decodifica o URI para usar no console/depuração
+        src: source.src, // O navegador já resolve o src para o caminho completo
         title: source.dataset.title || 'Música Desconhecida'
     }));
 
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             audioControlButton.setAttribute('aria-label', 'Música pausada. Clique para tocar.');
             audioProgressArc.style.transform = `rotate(-45deg)`; // Reseta a barra de progresso
             // Se o áudio estiver pausado e não houver interação do usuário, exibe a mensagem inicial.
-            if (!userInteracted && currentMusicTitle.textContent !== 'Nenhuma música disponível.') {
+            if (!userInteracted && currentMusicTitle.textContent !== 'Nenhuma música disponível.' && currentMusicTitle.textContent !== 'Erro de áudio!') {
                 currentMusicTitle.textContent = 'Clique para tocar.';
             }
         }
@@ -98,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error(`[playRandomMusic] Falha ao reproduzir '${selectedMusic.title}' de '${selectedMusic.src}':`, error);
-                if (currentMusicTitle) currentMusicTitle.textContent = 'Erro ao tocar música.'; // Mensagem mais clara
+                if (currentMusicTitle) currentMusicTitle.textContent = 'Erro ao tocar música.';
                 audio.pause();
                 updateAudioButtonState();
                 // Se o autoplay foi bloqueado, a mensagem "Clique para tocar" é mais útil
@@ -107,6 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.warn("[playRandomMusic] Autoplay bloqueado. Aguardando interação do usuário.");
                 } else if (error.name === 'NotSupportedError' || error.name === 'AbortError') {
                     console.error("[playRandomMusic] Erro de formato de áudio ou carregamento:", error);
+                    // Se for um erro de arquivo, e houver mais músicas, tente a próxima
+                    if (musicSources.length > 1) {
+                        console.log("[playRandomMusic] Tentando a próxima música devido a erro de arquivo...");
+                        setTimeout(playRandomMusic, 1500); // Tenta a próxima após um pequeno atraso
+                    }
                 }
             });
     }
@@ -126,25 +130,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (audioControlButton) {
         audioControlButton.addEventListener('click', () => {
             console.log("[audioControlButton] Clicado. Estado atual audio.paused:", audio.paused);
-            if (!audio.paused) {
+            if (!userInteracted) {
+                // Primeira interação do usuário, tentar tocar a música aleatória
+                userInteracted = true; // Marca que o usuário interagiu
+                playRandomMusic();
+            } else if (!audio.paused) {
                 console.log("[audioControlButton] Música está tocando, pausando.");
                 pauseMusic();
             } else {
                 console.log("[audioControlButton] Música está pausada, tentando tocar.");
-                // Se o usuário interagiu pela primeira vez e não há música carregada ou tocando
-                if (musicSources.length > 0 && (!audio.src || audio.paused)) {
-                    playRandomMusic();
-                } else {
-                    // Se o áudio está carregado mas pausado (e talvez tenha sido bloqueado), tente tocar
-                    audio.play().then(() => {
-                        userInteracted = true;
-                        console.log("[audioControlButton] Retomando reprodução após clique.");
-                    }).catch(error => {
-                        console.error("[audioControlButton] Erro ao retomar reprodução:", error);
-                        if (currentMusicTitle) currentMusicTitle.textContent = 'Erro ao tocar música.';
-                        updateAudioButtonState();
-                    });
-                }
+                // Se o áudio está carregado mas pausado (e talvez tenha sido bloqueado), tente tocar
+                audio.play().then(() => {
+                    console.log("[audioControlButton] Retomando reprodução após clique.");
+                }).catch(error => {
+                    console.error("[audioControlButton] Erro ao retomar reprodução:", error);
+                    if (currentMusicTitle) currentMusicTitle.textContent = 'Erro ao tocar música.';
+                    updateAudioButtonState();
+                });
             }
         });
     }
@@ -173,11 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
             updateAudioButtonState();
         });
 
-        // Este evento é crucial para saber quando o áudio está pronto para ser reproduzido
         audio.addEventListener('canplaythrough', () => {
             console.log("[audio] canplaythrough event fired. Audio is ready.");
-            // Não iniciamos o play aqui, esperamos o clique do usuário
-            // Apenas atualizamos o estado do botão para indicar que está pronto
+            // Atualiza o estado para "Clique para tocar" apenas se o usuário ainda não interagiu
             if (!userInteracted && currentMusicTitle.textContent === 'Carregando...') {
                  currentMusicTitle.textContent = 'Clique para tocar.';
             }
@@ -230,28 +230,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // (Mantidos e integrados aqui)
     // =====================================
 
-    // Click Sound Effects (mantido como está, para links e botões específicos)
-    const clickSoundEffect = new Audio('audios/click.mp3');
+    // Click Sound Effects
+    const clickSoundEffect = new Audio('audios/effects/click.mp3');
     document.querySelectorAll('a, button[data-sound-effect="select"]').forEach(element => {
-        if (element.id !== 'audioControlButton') {
+        if (element.id !== 'audioControlButton') { // Evita conflito com o controle de áudio principal
             element.addEventListener('click', (event) => {
                 clickSoundEffect.currentTime = 0;
                 clickSoundEffect.play().catch(e => console.error("Error playing click sound effect:", e.message));
 
                 if (element.tagName === 'A' && element.href && element.getAttribute('target') !== '_blank' && element.href.startsWith(window.location.origin)) {
-                    event.preventDefault();
+                    event.preventDefault(); // Previne navegação imediata para permitir o som
                     setTimeout(() => {
                         window.location.href = element.href;
-                    }, 200);
+                    }, 200); // Pequeno atraso para o som tocar
                 }
             });
         }
     });
 
     // HOVER/INTERACTION Sound Effects for CARDS
-    const selectSound = new Audio('audios/select.mp3');
-    const animationEndSound = new Audio('audios/effects/hover-complete.mp3');
+    const selectSound = new Audio('audios/effects/select.mp3');
+    const animationEndSound = new Audio('audios/effects/hover-complete.mp3'); // Certifique-se de ter este arquivo!
 
+    // Conjunto para rastrear quais cards já tocaram o som de final de animação para evitar repetição
     const playedAnimationEndSound = new WeakSet();
 
     const cardSelectors = [
@@ -262,9 +263,9 @@ document.addEventListener('DOMContentLoaded', () => {
         '.community-card',
         '.partnership-card',
         '.partnership-proposal-card',
-        // Adicione seletores para os novos cards baseados nas imagens, se eles não estiverem incluídos nas classes acima
-        // Ex: '.card-plataformas', '.card-xp', '.card-guildas', '.card-status'
-        // Se eles usarem as classes existentes como 'service-card', não precisa adicionar mais seletores.
+        // Adicione seletores para os cards das imagens, se não estiverem já cobertos por essas classes.
+        // Pela imagem, parece que "Plataformas de Jogo", "Experiência & Nível (XP)", "Guildas & Competições", "Status & Benefícios"
+        // e outros, provavelmente já usam uma das classes base como `service-card` ou `access-card`.
     ].join(', ');
 
     document.querySelectorAll(cardSelectors).forEach(cardElement => {
@@ -272,23 +273,25 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Select sound: Mouse entered a card. Playing initial sound.");
             selectSound.currentTime = 0;
             selectSound.play().catch(e => console.error("Error playing initial hover sound:", e.message));
-            playedAnimationEndSound.delete(cardElement);
+            playedAnimationEndSound.delete(cardElement); // Permite que o som de final de animação toque novamente
         });
 
         cardElement.addEventListener('transitionend', (event) => {
+            // Monitora a transição da propriedade 'transform' e verifica se o mouse ainda está sobre o card
             if (event.propertyName === 'transform' && cardElement.matches(':hover') && !playedAnimationEndSound.has(cardElement)) {
                 console.log("Animation end sound: Transform transition ended on hovered card. Playing final sound.");
                 animationEndSound.currentTime = 0;
                 animationEndSound.play().catch(e => console.error("Error playing animation end sound:", e.message));
-                playedAnimationEndSound.add(cardElement);
+                playedAnimationEndSound.add(cardElement); // Marca que o som já tocou para este card
             }
         });
 
         cardElement.addEventListener('mouseleave', () => {
             console.log("Mouse left card. Resetting sound state.");
-            playedAnimationEndSound.delete(cardElement);
+            playedAnimationEndSound.delete(cardElement); // Reseta o estado para a próxima interação
         });
 
+        // Opcional: Evento de foco (para navegação por teclado)
         cardElement.addEventListener('focus', () => {
             console.log("Select sound: Card focused. Playing initial sound.");
             selectSound.currentTime = 0;
@@ -296,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playedAnimationEndSound.delete(cardElement);
         });
 
+        // Opcional: Evento de blur (quando o card perde o foco)
         cardElement.addEventListener('blur', () => {
             console.log("Card blurred. Resetting sound state.");
             playedAnimationEndSound.delete(cardElement);
