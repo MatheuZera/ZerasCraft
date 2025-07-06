@@ -6,10 +6,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Lista de músicas, ajuste os caminhos conforme sua estrutura
     const musicTracks = [
-        'musics/minecraft-music-1.mp3',
-        'musics/minecraft-music-2.mp3',
-        'musics/minecraft-music-3.mp3',
-        'musics/minecraft-music-4.mp3'
+        'audios/musics/Aria-Math-Lofi-Remake.mp3',
+        'audios/musics/Aria-Math.mp3',
+        'audios/musics/Begining.mp3',
+        'audios/musics/Biome-Fest.mp3',
+        'audios/musics/Blind-Spots.mp3',
+        'audios/musics/Clark.mp3',
+        'audios/musics/Danny.mp3',
+        'audios/musics/Dreiton.mp3',
+        'audios/musics/Dry-Hands.mp3',
+        'audios/musics/Floating.mp3',
+        'audios/musics/Haggstrom.mp3',
+        'audios/musics/haunt-Muskie.mp3',
+        'audios/musics/Key.mp3',
+        'audios/musics/Living-Mice.mp3',
+        'audios/musics/Minecraft.mp3',
+        'audios/musics/Moong-City.mp3',
+        'audios/musics/Mutation.mp3',
+        'audios/musics/Oxygène.mp3',
+        'audios/musics/Subwoofer-Lullaby.mp3',
+        'audios/musics/Sweden.mp3',
+        'audios/musics/Taswell.mp3',
+        'audios/musics/Wet-Hands.mp3',
     ];
 
     // Função para carregar e tocar a próxima música
