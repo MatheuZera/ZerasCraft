@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log("[playRandomMusic] Autoplay blocked. Waiting for user interaction.");
                 } else if (error.name === 'NotSupportedError' || error.name === 'AbortError') {
                     // Problem with the file itself (not supported, loading aborted)
-                    currentMusicTitle.textContent = 'Erro ao carregar música.';
+                    currentMusicTitle.textContent = 'Desligado.';
                     audio.pause(); // Ensure audio is paused
                     updateAudioButtonState(); // Update UI to OFF state
                     console.error("[playRandomMusic] Audio format or loading error:", error);

@@ -662,29 +662,32 @@ h2 .fas, h3 .fas {
 }
 
 /* Controle de visibilidade dos ícones */
+
+/* Quando o áudio NÃO ESTÁ TOCANDO (botão sem a classe .on) */
 .audio-control-button .on-icon { /* Ícone com X (mute) */
-    display: none; /* Escondido por padrão */
+    display: inline-block; /* Visível: "Desligado" ou pausado, então mostre o X */
 }
 
 .audio-control-button .off-icon { /* Ícone sem X (volume up) */
-    display: inline-block; /* Visível por padrão (estado OFF) */
+    display: none; /* Escondido: não tocando, então esconda o sem X */
 }
 
-/* Estado ON: Fundo verde primário + efeito neon + ícone X */
+/* Estado ON: Fundo verde primário + efeito neon + ícone SEM X */
 .audio-control-button.on {
     background-color: var(--audio-btn-on-color-base); /* Fundo verde claro para ser base do neon */
     box-shadow: 0 0 15px rgba(var(--neon-flame-color1), 0.7), /* Pequeno brilho base */
                 0 0 30px rgba(var(--neon-flame-color2), 0.5); /* Brilho mais difuso */
-    /* Removido o box-shadow da aura amarela */
 }
 
-.audio-control-button.on .on-icon {
-    display: inline-block; /* Ícone com X visível */
+.audio-control-button.on .on-icon { /* Ícone com X (mute) */
+    display: none; /* Escondido: tocando, então esconda o X */
 }
 
-.audio-control-button.on .off-icon {
-    display: none; /* Ícone sem X escondido */
+.audio-control-button.on .off-icon { /* Ícone sem X (volume up) */
+    display: inline-block; /* Visível: tocando, então mostre o sem X */
 }
+
+/* O restante do código do botão de áudio permanece o mesmo */
 
 /* Efeito de Chamas Neon */
 .audio-control-button .neon-effect {
@@ -693,22 +696,61 @@ h2 .fas, h3 .fas {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Gradiente para as "chamas" - cores neon */
     background: linear-gradient(
-        45deg, /* Ângulo para o movimento das chamas */
+        45deg,
         var(--neon-flame-color1) 0%,
         var(--neon-flame-color2) 25%,
         var(--neon-flame-color1) 50%,
         var(--neon-flame-color2) 75%,
         var(--neon-flame-color1) 100%
     );
-    background-size: 200% 100%; /* Permite a animação do gradiente */
-    filter: blur(5px); /* Efeito de borrão para as chamas */
-    opacity: 0; /* Invisível por padrão */
-    transition: opacity 0.4s ease; /* Transição para aparecer */
-    border-radius: inherit; /* Herda o border-radius do botão */
-    z-index: 0; /* Fica entre o background e o conteúdo do botão */
-    pointer-events: none; /* Não interfere com cliques */
+    background-size: 200% 100%;
+    filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.audio-control-button.on .neon-effect {
+    opacity: 0.7;
+    animation: neon-flame-animation 2s linear infinite;
+}
+
+@keyframes neon-flame-animation {
+    0% { background-position: 0% 0; }
+    100% { background-position: 100% 0; }
+}
+
+#currentMusicTitle {
+    white-space: nowrap;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.audio-progress-arc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    transform: rotate(-45deg);
+    box-sizing: border-box;
+    transition: transform 0.1s linear, opacity 0.3s ease;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.audio-control-button.on .audio-progress-arc {
+    opacity: 1;
 }
 
 /* Animação das chamas neon quando o botão está ON */
