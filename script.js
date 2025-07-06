@@ -75,8 +75,19 @@ document.addEventListener('DOMContentLoaded', function() {
     /* BACKGROUND AUDIO (MINECRAFT-STYLE)        */
     /* ========================================= */
 
+   document.addEventListener('DOMContentLoaded', () => {
     const playAudioBtn = document.getElementById('playAudioBtn');
-    const playlist = [
+    const audioPlayer = new Audio();
+    audioPlayer.loop = false; // Queremos que toque uma vez e vá para a próxima
+    audioPlayer.volume = 0.5; // Começa com volume médio
+    let currentMusicIndex = 0;
+    let isPlaying = false;
+
+    // Elementos do toast e do arco de progresso
+    const audioInfoToast = document.getElementById('audioInfoToast');
+    const progressBarArc = playAudioBtn.querySelector('span');
+
+    const musicList = [
         'audios/musics/Aria-Math-Lofi-Remake.mp3',
         'audios/musics/Aria-Math.mp3',
         'audios/musics/Begining.mp3',
@@ -102,72 +113,137 @@ document.addEventListener('DOMContentLoaded', function() {
         'audios/musics/Wet-Hands.mp3',
     ];
 
-    let currentTrackIndex = -1; // -1 to indicate no song has been selected yet
-    const backgroundAudio = new Audio();
-    backgroundAudio.volume = 0.7; // ADJUST THIS VALUE
-    backgroundAudio.preload = 'auto';
+    // Shuffle music list
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
-    /**
-     * Plays the next random song from the playlist.
-     */
-    function playNextRandomTrack() {
-        if (playlist.length === 0) {
-            console.warn("Empty playlist. No songs to play.");
+    shuffleArray(musicList); // Embaralha a lista de músicas ao carregar
+
+    // Função para extrair o nome da música do caminho
+    function getMusicName(path) {
+        const parts = path.split('/');
+        const fileName = parts[parts.length - 1]; // Obtém "NomeDaMusica.mp3"
+        return fileName.replace('.mp3', '').replace(/-/g, ' '); // Remove .mp3 e substitui hífens por espaços
+    }
+
+    // Função para mostrar o toast
+    function showAudioInfoToast(message) {
+        audioInfoToast.textContent = message;
+        audioInfoToast.classList.remove('animate-out'); // Reseta a animação se já estiver rodando
+        audioInfoToast.classList.add('show');
+
+        // Garante que a animação rode do início
+        void audioInfoToast.offsetWidth; // Trigger reflow to restart animation
+        audioInfoToast.classList.add('animate-out');
+
+        // Esconde o toast após a animação
+        setTimeout(() => {
+            audioInfoToast.classList.remove('show', 'animate-out');
+        }, 4000); // Duração total da animação (4s)
+    }
+
+    // Função para tocar a próxima música na playlist
+    function playNextMusic() {
+        if (musicList.length === 0) {
+            console.warn("Nenhuma música na lista.");
             return;
         }
 
-        let nextTrackIndex;
-        do {
-            nextTrackIndex = Math.floor(Math.random() * playlist.length);
-        } while (nextTrackIndex === currentTrackIndex && playlist.length > 1);
-
-        currentTrackIndex = nextTrackIndex;
-        backgroundAudio.src = playlist[currentTrackIndex];
-
-        backgroundAudio.play().catch(e => {
-            console.warn("Background audio playback blocked or failed:", e);
-        });
-    }
-
-    if (playAudioBtn) {
-        playAudioBtn.classList.add('play-audio-btn-off');
-        playAudioBtn.classList.add('animating'); // Adds the animation class initially
-        let isPlaying = false; // Internal state to control if audio is playing
-
-        playAudioBtn.addEventListener('click', function() {
-            if (isPlaying) {
-                backgroundAudio.pause();
-                backgroundAudio.currentTime = 0; // Optional: Resets the song when paused
-            } else {
-                playNextRandomTrack();
-            }
-        });
-
-        // Event when a song ends: plays the next randomly
-        backgroundAudio.addEventListener('ended', function() {
-            playNextRandomTrack();
-        });
-
-        // Events to manage the visual state of the button based on the audio player
-        backgroundAudio.addEventListener('pause', function() {
-            if (backgroundAudio.paused) {
+        audioPlayer.src = musicList[currentMusicIndex];
+        audioPlayer.play()
+            .then(() => {
+                isPlaying = true;
+                playAudioBtn.classList.add('play-audio-btn-on');
+                playAudioBtn.classList.remove('play-audio-btn-off', 'animating');
+                const musicName = getMusicName(musicList[currentMusicIndex]);
+                showAudioInfoToast(`Tocando: ${musicName}`);
+            })
+            .catch(error => {
+                console.error("Erro ao tocar música:", error);
                 isPlaying = false;
                 playAudioBtn.classList.remove('play-audio-btn-on');
                 playAudioBtn.classList.add('play-audio-btn-off');
-                playAudioBtn.classList.add('animating'); // Starts animating when paused
-            }
-        });
+            });
 
-        backgroundAudio.addEventListener('play', function() {
-            isPlaying = true;
-            playAudioBtn.classList.remove('play-audio-btn-off');
-            playAudioBtn.classList.add('play-audio-btn-on');
-            playAudioBtn.classList.remove('animating'); // Stops animation when playing
-        });
-
-    } else {
-        console.error("Error: Element 'playAudioBtn' not found in DOM. Check its ID in HTML.");
+        currentMusicIndex = (currentMusicIndex + 1) % musicList.length; // Avança para a próxima música (loop)
     }
+
+    // Event Listener para o botão de áudio
+    playAudioBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            audioPlayer.pause();
+            isPlaying = false;
+            playAudioBtn.classList.remove('play-audio-btn-on');
+            playAudioBtn.classList.add('play-audio-btn-off');
+            playAudioBtn.classList.remove('animating'); // Remove a animação se a música for pausada manualmente
+            progressBarArc.style.transform = 'rotate(0deg)'; // Reseta o arco
+            progressBarArc.style.transition = 'none'; // Remove transição para o reset
+        } else {
+            // Tenta tocar a música atual ou a próxima se for a primeira vez
+            if (!audioPlayer.src || audioPlayer.paused) {
+                playNextMusic();
+            } else {
+                audioPlayer.play()
+                    .then(() => {
+                        isPlaying = true;
+                        playAudioBtn.classList.add('play-audio-btn-on');
+                        playAudioBtn.classList.remove('play-audio-btn-off', 'animating');
+                        // Mostra o toast novamente se a música estava pausada
+                        const musicName = getMusicName(musicList[currentMusicIndex > 0 ? currentMusicIndex - 1 : musicList.length - 1]); // Pega o nome da música atual
+                        showAudioInfoToast(`Retomando: ${musicName}`);
+                        progressBarArc.style.transition = 'transform linear'; // Volta a transição para o arco
+                    })
+                    .catch(error => {
+                        console.error("Erro ao retomar música:", error);
+                        playAudioBtn.classList.remove('play-audio-btn-on');
+                        playAudioBtn.classList.add('play-audio-btn-off');
+                    });
+            }
+        }
+    });
+
+    // Atualiza o progresso do arco
+    audioPlayer.addEventListener('timeupdate', () => {
+        if (isPlaying) {
+            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 360; // 0 a 360 graus
+            progressBarArc.style.transform = `rotate(${progress}deg)`;
+        }
+    });
+
+    // Quando a música termina, toca a próxima
+    audioPlayer.addEventListener('ended', () => {
+        playNextMusic();
+    });
+
+    // Início: Tenta tocar a primeira música automaticamente (pode ser bloqueado pelos navegadores)
+    // Uma boa prática é iniciar a reprodução após uma interação do usuário.
+    // audioPlayer.src = musicList[currentMusicIndex];
+    // playAudioBtn.classList.add('animating'); // Adiciona animação de "chamar"
+});
+
+// Implementação da função showToast, caso ainda não exista no seu script.js
+function showToast(message, duration = 3000) {
+    const toast = document.createElement('div');
+    toast.classList.add('toast-notification');
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Force reflow to enable transition
+    void toast.offsetWidth;
+
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.addEventListener('transitionend', () => {
+            toast.remove();
+        }, { once: true });
+    }, duration);
+}
 
     /* ========================================= */
     /* CLICK SOUNDS FOR INTERACTIVE ELEMENTS     */

@@ -934,7 +934,9 @@
             opacity: 1;
         }
 
-        /* Audio Button */
+        /* Dentro da sua tag <style> ou no seu style.css */
+
+        /* --- Audio Button --- */
         #playAudioBtn {
             position: fixed;
             bottom: 20px;
@@ -942,18 +944,138 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background-color: var(--primary-color);
+            background-color: #2c3e50; /* Azul escuro */
             color: white;
             font-size: 0; /* Hide text, use icon */
             display: flex;
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            border: 2px solid var(--primary-color);
+            border: 2px solid #34495e; /* Borda azul mais escura */
             cursor: pointer;
             z-index: 1001;
             transition: all 0.3s ease;
-            overflow: hidden; /* Hide anything outside */
+            overflow: hidden; /* Important for the progress arc */
+            position: relative; /* Para posicionar o arco */
+        }
+
+        #playAudioBtn::before {
+            content: '🎵'; /* Unicode for musical note */
+            font-size: 24px;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 2; /* Garante que o ícone fique acima do arco */
+        }
+
+        #playAudioBtn.play-audio-btn-on {
+            background-color: #3498db; /* Azul mais claro quando tocando */
+            border-color: #2980b9;
+        }
+
+        #playAudioBtn.play-audio-btn-on::before {
+            content: '🔊'; /* Unicode for speaker with sound waves */
+            transform: scale(1.1);
+        }
+
+        #playAudioBtn.play-audio-btn-off {
+            background-color: #7f8c8d; /* Cinza quando desligado */
+            border-color: #6a7475;
+        }
+
+        #playAudioBtn.play-audio-btn-off::before {
+            content: '🔇'; /* Unicode for muted speaker */
+        }
+
+        /* Progress Arc */
+        #playAudioBtn span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top: 4px solid #f39c12; /* Cor do arco (laranja/amarelo) */
+            border-right: 4px solid #f39c12;
+            transform: rotate(0deg); /* Start at 0 */
+            transition: transform linear; /* Smooth rotation */
+            box-sizing: border-box; /* Inclui padding e border no width/height */
+            z-index: 1;
+        }
+
+        /* Animation for the button when off/animating */
+        #playAudioBtn.animating {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px #3498db; /* Altera a cor do brilho */
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        /* Toast Notification Styling */
+        #audioInfoToast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px 15px;
+            position: fixed;
+            z-index: 10000;
+            bottom: 30px; /* Alinha um pouco acima do botão */
+            left: calc(50% - 125px); /* Posição inicial, ajustaremos com JS */
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s, visibility 0.5s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            white-space: nowrap; /* Evita que o texto quebre */
+            transform: translateX(0); /* Posição inicial */
+        }
+
+        #audioInfoToast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-100px); /* Move para a esquerda */
+        }
+
+        /* Keyframes para a animação do toast */
+        @keyframes slide-out-left-then-fade {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            20% { /* Momento em que atinge a posição mais à esquerda */
+                transform: translateX(-100px);
+                opacity: 1;
+                visibility: visible;
+            }
+            80% { /* Permanece visível por um tempo */
+                transform: translateX(-100px);
+                opacity: 1;
+                visibility: visible;
+            }
+            100% {
+                transform: translateX(0); /* Volta para a direita (origem ou um pouco além) */
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Aplica a animação ao toast quando ele aparece */
+        #audioInfoToast.animate-out {
+            animation: slide-out-left-then-fade 4s forwards; /* 4 segundos de duração */
         }
 
         #playAudioBtn::before {
