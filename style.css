@@ -378,7 +378,8 @@ h2 .fas, h3 .fas {
     padding: var(--padding-card);
     text-align: center;
     box-shadow: var(--sombra-leve);
-    transition: var(--transicao-padrao);
+    /* TRANSITION: Adicionado para incluir transform e box-shadow para o hover */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.05); /* Borda sutil */
     display: flex; /* Para flexibilizar conteúdo interno */
     flex-direction: column;
@@ -392,28 +393,60 @@ h2 .fas, h3 .fas {
 .community-card:hover,
 .partnership-card:hover,
 .event-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--sombra-card);
-    background-color: var(--cor-card-hover);
+    transform: translateY(-8px); /* Card sobe */
+    box-shadow: var(--sombra-card); /* Sombra mais intensa */
+    background-color: var(--cor-card-hover); /* Fundo do card muda */
 }
 
-.card-icon,
-.role-category-icon,
-.member-avatar,
-.partnership-logo {
+/* Estilos para os ícones dentro dos cards */
+/* Este seletor tenta cobrir a maioria dos ícones/imagens que você possa ter */
+/* É crucial que este seletor corresponda ao seu HTML! */
+.service-card .card-icon,
+.role-category-card .role-category-icon,
+.community-card .member-avatar,
+.partnership-card .partnership-logo,
+.access-card .card-icon { /* Adicionado .access-card .card-icon */
     width: 80px; /* Tamanho padrão para ícones de card */
     height: 80px;
     object-fit: cover;
     border-radius: var(--border-radius);
     margin: 0 auto 20px auto; /* Centraliza e adiciona espaço abaixo */
     border: 2px solid var(--cor-primaria);
+    display: block; /* Garante que a transformação funcione corretamente */
+    transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
 }
 
-.member-avatar, .partnership-logo {
+/* Exceção para avatares e logos que são circulares */
+.member-avatar,
+.partnership-logo {
     border-radius: 50%; /* Avatares circulares */
     width: 100px;
     height: 100px;
 }
+
+/* Tratamento específico para as imagens de evento se forem <img> ou divs */
+.event-card .event-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    margin-bottom: 0;
+    border-bottom: 2px solid var(--cor-primaria);
+    display: block; /* Garante que a transformação funcione */
+    transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
+}
+
+/* Animação de rotação e escala no hover do card */
+.service-card:hover .card-icon,
+.role-category-card:hover .role-category-icon,
+.community-card:hover .member-avatar,
+.partnership-card:hover .partnership-logo,
+.access-card:hover .card-icon, /* Adicionado para os cards de acesso */
+.event-card:hover .event-card-image {
+    transform: rotate(10deg) scale(1.1); /* Rotaciona 10 graus e escala 10% */
+}
+
 
 .card-title {
     color: var(--cor-destaque);
@@ -502,16 +535,7 @@ h2 .fas, h3 .fas {
     overflow: hidden; /* Esconde partes da imagem que podem vazar */
 }
 
-.event-card-image {
-    width: 100%;
-    height: 200px; /* Altura fixa para as imagens dos eventos */
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
-    margin-bottom: 0; /* Remove margem padrão */
-    border-bottom: 2px solid var(--cor-primaria);
-}
-
+/* NOTA: event-card-image já está definida acima para a transição */
 .event-card-inner {
     padding: var(--padding-card);
     text-align: left; /* Alinhamento de texto para o conteúdo do card */
@@ -725,7 +749,7 @@ h2 .fas, h3 .fas {
     opacity: 0;
     pointer-events: none;
     /* Se você quiser que o arco de progresso tenha uma cor (não a aura),
-       pode descomentar e ajustar as cores aqui para o estado ON: */
+        pode descomentar e ajustar as cores aqui para o estado ON: */
     /* border-top-color: rgba(255, 255, 255, 0.5); */
     /* border-right-color: rgba(255, 255, 255, 0.5); */
 }
@@ -854,16 +878,22 @@ h2 .fas, h3 .fas {
     .card-title {
         font-size: 1.3em;
     }
-/* No seu arquivo style.css */
+    /* A parte do CSS para animação de ícones não deve estar aqui dentro
+       de uma media query, a menos que seja um ajuste específico para
+       telas pequenas. Removi a duplicação daqui. */
+}
 
-/* Estilo para os cards que contêm os ícones que serão animados */
-.service-card,
+/* === INÍCIO DAS ANIMAÇÕES DOS ÍCONES DOS CARDS === */
+/* Movido para fora da media query para ser global e ajustado */
+
+/* As transições de hover dos cards já incluem transform e box-shadow */
+/* .service-card,
 .role-category-card,
 .community-card,
 .partnership-card,
 .event-card,
 .access-card {
-    transition: box-shadow 0.2s ease-in-out; /* Transição suave para a sombra */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
 }
 
 .service-card:hover,
@@ -872,35 +902,54 @@ h2 .fas, h3 .fas {
 .partnership-card:hover,
 .event-card:hover,
 .access-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada ao passar o mouse */
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-card);
+    background-color: var(--cor-card-hover);
+} */
+
+/* Estilo para os ícones dentro dos cards */
+/* Seletores mais específicos para garantir que as transformações sejam aplicadas aos ícones corretos.
+   Adicione 'i' se estiver usando Font Awesome diretamente, ou 'img' para imagens.
+   Se o ícone estiver dentro de um div com uma classe específica, use essa classe. */
+.service-card .card-icon,
+.role-category-card .role-category-icon,
+.community-card .member-avatar,
+.partnership-card .partnership-logo,
+.access-card .card-icon, /* Incluindo cards de acesso, se eles tiverem um ícone com essa classe */
+/* Adicione outros seletores se seus ícones forem diferentes (e.g., .event-card .event-icon) */
+.service-card .fas, .role-category-card .fas, .community-card .fas, .partnership-card .fas, .access-card .fas /* Para Font Awesome */
+{
+    /* Garanta que o elemento seja um bloco ou inline-block para que a transformação funcione */
+    display: block; /* ou inline-block */
+    margin: 0 auto 20px auto; /* Centraliza e adiciona espaço abaixo */
+    transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
 }
 
-/* Estilo para os containers dos ícones dentro dos cards (<img> ou outros wrappers) */
-.service-card > *, /* Aplica a todos os filhos diretos (onde a imagem provavelmente está) */
-.role-category-card > *,
-.community-card > *,
-.partnership-card > *,
-.event-card > *,
-.access-card > * {
-    transition: transform 0.3s ease-in-out; /* Transição suave para a escala */
+/* Tratamento específico para as imagens de evento se forem <img> ou divs com background */
+.event-card .event-card-image { /* Se for uma <img> */
+    display: block;
+    width: 100%;
+    height: 200px; /* Altura fixa para as imagens dos eventos */
+    object-fit: cover;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    margin-bottom: 0;
+    border-bottom: 2px solid var(--cor-primaria);
+    transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
 }
 
-/* Animação de escala no hover do card */
-.service-card:hover > *,
-.role-category-card:hover > *,
-.community-card:hover > *,
-.partnership-card:hover > *,
-.event-card:hover > *,
-.access-card:hover > * {
-    transform: scale(1.1); /* Aumenta o conteúdo em 10% ao passar o mouse no card */
+
+/* Animação de rotação e escala no hover do card */
+/* Aplica-se ao ÍCONE quando o MOUSE está sobre o CARD pai */
+.service-card:hover .card-icon,
+.role-category-card:hover .role-category-icon,
+.community-card:hover .member-avatar,
+.partnership-card:hover .partnership-logo,
+.access-card:hover .card-icon, /* Efeito de hover nos ícones dos cards de acesso */
+.event-card:hover .event-card-image, /* Efeito de hover nas imagens de evento */
+.service-card:hover .fas, .role-category-card:hover .fas, .community-card:hover .fas, .partnership-card:hover .fas, .access-card:hover .fas /* Para Font Awesome */
+{
+    transform: rotate(10deg) scale(1.1); /* Rotaciona 10 graus e escala 10% */
 }
 
-/* Caso específico para event-card-inner, se a imagem estiver dentro */
-.event-card .event-card-inner > img {
-    transition: transform 0.3s ease-in-out;
-}
-
-.event-card:hover .event-card-inner > img {
-    transform: scale(1.1);
-}
-}
+/* === FIM DAS ANIMAÇÕES DOS ÍCONES DOS CARDS === */
