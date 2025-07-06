@@ -3,11 +3,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioControlButton = document.getElementById('audioControlButton');
     const currentMusicTitle = document.getElementById('currentMusicTitle');
     const progressArc = audioControlButton.querySelector('.arc-progress'); // O caminho do arco de progresso SVG
+    const cardHoverSound = document.getElementById('cardHoverSound');
+    const cards = document.querySelectorAll('.card'); // Exemplo: se seus cards têm a classe 'card'
     const audioIcons = {
         on: audioControlButton.querySelector('.on-icon'), // Ícone para quando está tocando/mutado
         off: audioControlButton.querySelector('.off-icon') // Ícone para quando está parado/desligado
     };
 
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            if (cardHoverSound) {
+                cardHoverSound.currentTime = 0; // Reinicia o áudio para que ele toque sempre do início
+                cardHoverSound.play().catch(e => {
+                    // console.warn("Erro ao tocar o som de hover do card:", e);
+                    // Erros de reprodução automática sem interação explícita do usuário são comuns em navegadores.
+                });
+            }
+        });
+    });
+    
     // Playlist de exemplo. Adicione os nomes dos arquivos MP3 aqui.
     // Certifique-se de que os caminhos em <audio> <source> correspondam a estes.
     const playlist = [
