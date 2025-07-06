@@ -617,41 +617,7 @@ h2 .fas, h3 .fas {
 /* 12. Controle de Áudio                 */
 /* ===================================== */
 
-.audio-control-button-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1001;
-}
-
-.audio-control-button {
-    background-color: var(--audio-btn-off-color); /* Fundo verde escuro para estado OFF */
-    color: var(--cor-btn-text);
-    border: none;
-    border-radius: 50px;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    box-shadow: var(--sombra-card); /* Sombra padrão do card */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-    font-size: 1em;
-    overflow: hidden; /* Importante para conter o efeito neon */
-    position: relative;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    min-width: 150px; /* Garante largura mínima para o texto "Desligado" */
-    justify-content: center; /* Centraliza o conteúdo dentro do botão */
-}
-
-.audio-control-button:hover {
-    transform: translateY(-3px);
-    /* Mantém a sombra padrão ou adiciona um leve realce, sem a aura */
-    box-shadow: var(--sombra-card);
-}
+/* ... (código anterior do .audio-control-button-container e .audio-control-button) ... */
 
 /* Estilo para os ícones */
 .audio-control-button .audio-icon {
@@ -686,6 +652,8 @@ h2 .fas, h3 .fas {
 .audio-control-button.on .off-icon { /* Ícone sem X (volume up) */
     display: inline-block; /* Visível: tocando, então mostre o sem X */
 }
+
+/* ... (o restante do código do botão de áudio, incluindo neon-effect, currentMusicTitle, audio-progress-arc) ... */
 
 /* O restante do código do botão de áudio permanece o mesmo */
 
