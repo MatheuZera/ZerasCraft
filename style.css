@@ -947,7 +947,72 @@ h2 .fas, h3 .fas {
     border-bottom: 2px solid var(--cor-primaria);
     transition: transform 0.4s ease-in-out; /* Transição para a rotação e escala */
 }
+/* ... (seu código CSS anterior) ... */
 
+@media (max-width: 768px) {
+    .main-header {
+        text-align: center; /* Garante que o conteúdo dentro do cabeçalho seja centralizado */
+    }
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center; /* Mantém os itens flexíveis centralizados */
+        justify-content: center; /* Adicionado para garantir centralização horizontal se houver espaço */
+    }
+    .main-nav ul {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center; /* Centraliza os itens da lista de navegação */
+        padding: 0; /* Garante que não há padding extra empurrando a lista */
+        width: 100%; /* Permite que a lista ocupe toda a largura disponível para centralização */
+    }
+    .main-nav ul li {
+        width: 100%; /* Garante que cada item da lista ocupe a largura total para centralizar seu texto */
+        text-align: center; /* Centraliza o texto de cada item da lista */
+    }
+
+
+    .hero-section {
+        height: auto;
+        padding: 80px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1em;
+    }
+
+    .section-padded {
+        padding: 60px 0;
+    }
+
+    .services-grid,
+    .roles-grid,
+    .access-cards-grid,
+    .community-grid,
+    .events-sub-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    }
+
+    .pixel-legends-embed {
+        padding: 20px;
+    }
+
+    .audio-control-button-container {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .audio-control-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* ... (o restante do seu código CSS) ... */
 
 /* Animação de rotação e escala no hover do card */
 /* Aplica-se ao ÍCONE quando o MOUSE está sobre o CARD pai */
