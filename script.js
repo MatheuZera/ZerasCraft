@@ -109,17 +109,45 @@ document.addEventListener('DOMContentLoaded', function() {
             // Se for PC, usa mouseenter (passar o cursor)
             card.addEventListener('mouseenter', playSelectSoundGeneral);
         } else {
-            // Se for Mobile, usa click (tocar)
-            card.addEventListener('click', function(event) {
-                // Previne que o click do card acione o som de clique padrão de links/botões,
-                // se o card contiver um link ou botão e você quiser apenas o som de select.
-                // Se o card NÃO tiver um link/botão interno direto, pode remover esta linha.
-                if (!event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link')) {
-                    playSelectSoundGeneral();
-                } else if (event.target.tagName !== 'A' && event.target.tagName !== 'BUTTON') {
-                    // Se clicou no card mas não diretamente em um link/botão dentro dele
-                     playSelectSoundGeneral();
+            // Lógica para mobile: tocar no card sem deslizar
+            let startX, startY;
+            let touchMoved = false;
+            const DRAG_THRESHOLD_PX = 10; // 10 pixels de movimento para considerar deslize
+
+            card.addEventListener('touchstart', function(event) {
+                startX = event.touches[0].clientX;
+                startY = event.touches[0].clientY;
+                touchMoved = false; // Reseta a flag de movimento
+            });
+
+            card.addEventListener('touchmove', function(event) {
+                const currentX = event.touches[0].clientX;
+                const currentY = event.touches[0].clientY;
+                const deltaX = Math.abs(currentX - startX);
+                const deltaY = Math.abs(currentY - startY);
+
+                if (deltaX > DRAG_THRESHOLD_PX || deltaY > DRAG_THRESHOLD_PX) {
+                    touchMoved = true; // Se moveu além do limite, marca como deslize
                 }
+            });
+
+            card.addEventListener('touchend', function(event) {
+                // Se o toque terminou e NÃO houve deslize significativo
+                if (!touchMoved) {
+                    // Evita tocar o som de select se o clique for em um link/botão interno
+                    // e você quiser que apenas o som de clique padrão seja reproduzido para esses elementos.
+                    if (!event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link')) {
+                        playSelectSoundGeneral();
+                    } else if (event.target.tagName !== 'A' && event.target.tagName !== 'BUTTON') {
+                        // Se clicou no card mas não diretamente em um link/botão dentro dele
+                        playSelectSoundGeneral();
+                    }
+                }
+            });
+
+            // Adiciona um listener 'touchcancel' para garantir que o estado seja resetado
+            card.addEventListener('touchcancel', function() {
+                touchMoved = false;
             });
         }
     });
@@ -141,12 +169,39 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         } else {
-            // Se for Mobile, usa click
-            item.addEventListener('click', function() {
-                itemSelectAudio.currentTime = 0;
-                itemSelectAudio.play().catch(e => {
-                    console.warn("Reprodução de áudio 'select.mp3' para item da grade (touch) bloqueada ou falhou:", e);
-                });
+            // Lógica para mobile: tocar no item sem deslizar
+            let startX, startY;
+            let touchMoved = false;
+            const DRAG_THRESHOLD_PX = 10; // 10 pixels de movimento para considerar deslize
+
+            item.addEventListener('touchstart', function(event) {
+                startX = event.touches[0].clientX;
+                startY = event.touches[0].clientY;
+                touchMoved = false;
+            });
+
+            item.addEventListener('touchmove', function(event) {
+                const currentX = event.touches[0].clientX;
+                const currentY = event.touches[0].clientY;
+                const deltaX = Math.abs(currentX - startX);
+                const deltaY = Math.abs(currentY - startY);
+
+                if (deltaX > DRAG_THRESHOLD_PX || deltaY > DRAG_THRESHOLD_PX) {
+                    touchMoved = true;
+                }
+            });
+
+            item.addEventListener('touchend', function(event) {
+                if (!touchMoved) {
+                    itemSelectAudio.currentTime = 0;
+                    itemSelectAudio.play().catch(e => {
+                        console.warn("Reprodução de áudio 'select.mp3' para item da grade (toque) bloqueada ou falhou:", e);
+                    });
+                }
+            });
+
+            item.addEventListener('touchcancel', function() {
+                touchMoved = false;
             });
         }
     });
@@ -160,24 +215,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 playAudioBtn.style.display = 'block';
             }
             
-            // Tenta reproduzir o som de select inicial
             selectAudioGeneral.currentTime = 0;
             selectAudioGeneral.play().catch(e => {
                 console.warn("Reprodução inicial de 'select.mp3' após interação falhou:", e);
             });
 
             userInteracted = true;
-            // Remove os listeners de primeira interação
             document.removeEventListener('scroll', handleUserInteraction);
             document.removeEventListener('mousemove', handleUserInteraction);
             document.removeEventListener('click', handleUserInteraction);
-            document.removeEventListener('touchstart', handleUserInteraction); // Mantém para primeira interação via touch
+            document.removeEventListener('touchstart', handleUserInteraction);
         }
     }
 
-    // Adiciona listeners para a primeira interação (que pode vir de qualquer fonte, incluindo touch)
     document.addEventListener('scroll', handleUserInteraction);
     document.addEventListener('mousemove', handleUserInteraction);
     document.addEventListener('click', handleUserInteraction);
-    document.addEventListener('touchstart', handleUserInteraction); // Essencial para habilitar áudio em mobile
+    document.addEventListener('touchstart', handleUserInteraction);
 });
