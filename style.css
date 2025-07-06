@@ -854,4 +854,53 @@ h2 .fas, h3 .fas {
     .card-title {
         font-size: 1.3em;
     }
+/* No seu arquivo style.css */
+
+/* Estilo para os cards que contêm os ícones que serão animados */
+.service-card,
+.role-category-card,
+.community-card,
+.partnership-card,
+.event-card,
+.access-card {
+    transition: box-shadow 0.2s ease-in-out; /* Transição suave para a sombra */
+}
+
+.service-card:hover,
+.role-category-card:hover,
+.community-card:hover,
+.partnership-card:hover,
+.event-card:hover,
+.access-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada ao passar o mouse */
+}
+
+/* Estilo para os containers dos ícones dentro dos cards (<img> ou outros wrappers) */
+.service-card > *, /* Aplica a todos os filhos diretos (onde a imagem provavelmente está) */
+.role-category-card > *,
+.community-card > *,
+.partnership-card > *,
+.event-card > *,
+.access-card > * {
+    transition: transform 0.3s ease-in-out; /* Transição suave para a escala */
+}
+
+/* Animação de escala no hover do card */
+.service-card:hover > *,
+.role-category-card:hover > *,
+.community-card:hover > *,
+.partnership-card:hover > *,
+.event-card:hover > *,
+.access-card:hover > * {
+    transform: scale(1.1); /* Aumenta o conteúdo em 10% ao passar o mouse no card */
+}
+
+/* Caso específico para event-card-inner, se a imagem estiver dentro */
+.event-card .event-card-inner > img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.event-card:hover .event-card-inner > img {
+    transform: scale(1.1);
+}
 }
