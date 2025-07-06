@@ -184,7 +184,7 @@ a:hover {
     align-items: center;
     text-align: center;
     color: var(--text-color-light);
-    background: url('images/site/banner-fundo-hero.gif') no-repeat center center/cover;
+    background: url('images/site/banner-fundo-hero.gif') no-repeat center center contain;
     background-attachment: fixed;
     padding-top: 80px;
     padding-bottom: 60px;
