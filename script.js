@@ -7,62 +7,91 @@ document.addEventListener('DOMContentLoaded', function() {
     const isMobile = isTouchDevice(); // Detecta uma vez na inicialização
 
     // --- Lógica para o botão de áudio de fundo (Minecraft Audio) ---
-    const minecraftAudio = document.getElementById('minecraftAudio');
     const playAudioBtn = document.getElementById('playAudioBtn');
 
-    if (minecraftAudio) {
-        minecraftAudio.volume = 0.7; // AJUSTE ESTE VALOR
+    // Lista de músicas para a playlist aleatória
+    const playlist = [
+        'audios/musics/music1.mp3', // ALtere para os nomes reais dos seus arquivos
+        'audios/musics/music2.mp3',
+        'audios/musics/music3.mp3',
+        'audios/musics/music4.mp3'
+        // Adicione mais músicas aqui se tiver
+    ];
+
+    let currentTrackIndex = -1; // -1 para indicar que nenhuma música foi selecionada ainda
+    const backgroundAudio = new Audio(); // Crie um objeto de áudio sem src inicial
+    backgroundAudio.volume = 0.7; // AJUSTE ESTE VALOR
+    backgroundAudio.preload = 'auto'; // Carrega o áudio mais rápido
+
+    // Função para tocar a próxima música aleatoriamente
+    function playNextRandomTrack() {
+        if (playlist.length === 0) {
+            console.warn("Playlist vazia. Não há músicas para tocar.");
+            return;
+        }
+
+        let nextTrackIndex;
+        do {
+            nextTrackIndex = Math.floor(Math.random() * playlist.length);
+        } while (nextTrackIndex === currentTrackIndex && playlist.length > 1); // Evita tocar a mesma música duas vezes seguidas, se houver mais de uma
+
+        currentTrackIndex = nextTrackIndex;
+        backgroundAudio.src = playlist[currentTrackIndex];
+        
+        backgroundAudio.play().catch(e => {
+            console.warn("Reprodução do áudio de fundo bloqueada ou falhou:", e);
+            // Se a reprodução falhou (geralmente por autoplay policy), o botão permanecerá OFF
+            // E o estado 'isPlaying' não será atualizado para true imediatamente.
+        });
     }
 
-    if (playAudioBtn && minecraftAudio) {
+    if (playAudioBtn) {
         playAudioBtn.classList.add('play-audio-btn-off');
         playAudioBtn.classList.add('animating'); // Adiciona a classe de animação inicialmente
         let isPlaying = false; 
 
         playAudioBtn.addEventListener('click', function() {
             if (isPlaying) {
-                minecraftAudio.pause();
-                minecraftAudio.currentTime = 0;
+                backgroundAudio.pause();
+                backgroundAudio.currentTime = 0; // Opcional: Reinicia a música ao pausar
                 isPlaying = false;
                 playAudioBtn.classList.remove('play-audio-btn-on');
                 playAudioBtn.classList.add('play-audio-btn-off');
                 playAudioBtn.classList.add('animating'); // Começa a animar quando pausado
             } else {
-                minecraftAudio.play().catch(e => {
-                    console.warn("Reprodução do áudio do Minecraft bloqueada ou falhou:", e);
-                });
-                isPlaying = true;
+                // Ao clicar para tocar, toca a próxima música aleatória
+                playNextRandomTrack();
+                isPlaying = true; // Assume que vai tocar, mas o catch() pode ajustar
                 playAudioBtn.classList.remove('play-audio-btn-off');
                 playAudioBtn.classList.add('play-audio-btn-on');
                 playAudioBtn.classList.remove('animating'); // Para a animação quando tocando
             }
         });
 
-        minecraftAudio.addEventListener('ended', function() {
-            isPlaying = false;
-            playAudioBtn.classList.remove('play-audio-btn-on');
-            playAudioBtn.classList.add('play-audio-btn-off');
-            playAudioBtn.classList.add('animating'); // Começa a animar quando termina
+        // Evento quando uma música termina: toca a próxima aleatoriamente
+        backgroundAudio.addEventListener('ended', function() {
+            playNextRandomTrack();
         });
 
-        minecraftAudio.addEventListener('pause', function() {
-            if (isPlaying && minecraftAudio.paused) {
+        // Eventos para gerenciar o estado visual do botão
+        backgroundAudio.addEventListener('pause', function() {
+            if (isPlaying && backgroundAudio.paused) { // Verifica se estava tocando e foi pausado
                 isPlaying = false;
                 playAudioBtn.classList.remove('play-audio-btn-on');
                 playAudioBtn.classList.add('play-audio-btn-off');
-                playAudioBtn.classList.add('animating'); // Começa a animar quando pausado
+                playAudioBtn.classList.add('animating');
             }
         });
 
-        minecraftAudio.addEventListener('play', function() {
+        backgroundAudio.addEventListener('play', function() {
             isPlaying = true;
             playAudioBtn.classList.remove('play-audio-btn-off');
             playAudioBtn.classList.add('play-audio-btn-on');
-            playAudioBtn.classList.remove('animating'); // Para a animação quando tocando
+            playAudioBtn.classList.remove('animating');
         });
 
     } else {
-        console.error("Erro: Elementos 'playAudioBtn' ou 'minecraftAudio' não encontrados no DOM. Verifique seus IDs no HTML.");
+        console.error("Erro: Elemento 'playAudioBtn' não encontrado no DOM. Verifique seu ID no HTML.");
     }
 
     // --- Lógica para o som de clique em interações GERAIS (incluindo botões e links) ---
@@ -135,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Se o toque terminou e NÃO houve deslize significativo
                 if (!touchMoved) {
                     // Evita tocar o som de select se o clique for em um link/botão interno
-                    // e você quiser que apenas o som de clique padrão seja reproduzido para esses elementos.
                     if (!event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link')) {
                         playSelectSoundGeneral();
                     } else if (event.target.tagName !== 'A' && event.target.tagName !== 'BUTTON') {
@@ -215,11 +243,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 playAudioBtn.style.display = 'block';
             }
             
-            selectAudioGeneral.currentTime = 0;
-            selectAudioGeneral.play().catch(e => {
-                console.warn("Reprodução inicial de 'select.mp3' após interação falhou:", e);
-            });
-
+            // Toca a música aleatória de fundo na primeira interação do usuário
+            // Isso também é importante para contornar políticas de autoplay de navegadores.
+            playNextRandomTrack(); // Chama a função para tocar a primeira música aleatória
+            
             userInteracted = true;
             document.removeEventListener('scroll', handleUserInteraction);
             document.removeEventListener('mousemove', handleUserInteraction);
