@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioControlButton = document.getElementById('audioControlButton');
     const currentMusicTitle = document.getElementById('currentMusicTitle');
     const audioProgressArc = document.getElementById('audioProgressArc');
-    const onIcon = audioControlButton.querySelector('.on-icon');   // Ícone com X (para mute)
-    const offIcon = audioControlButton.querySelector('.off-icon'); // Ícone sem X (para volume normal)
+    const onIcon = audioControlButton ? audioControlButton.querySelector('.on-icon') : null; // Ícone com X (para mute)
+    const offIcon = audioControlButton ? audioControlButton.querySelector('.off-icon') : null; // Ícone sem X (para volume normal)
 
     // Coleta todas as fontes de música do HTML
-    const musicSources = Array.from(audio.querySelectorAll('source')).map(source => ({
+    const musicSources = Array.from(audio ? audio.querySelectorAll('source') : []).map(source => ({
         src: source.src,
         title: source.dataset.title || 'Música Desconhecida' // Usa data-title ou um fallback
     }));
@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
      * Esta função agora se baseia no estado real do elemento <audio>.
      */
     function updateAudioButtonState() {
+        if (!audioControlButton || !onIcon || !offIcon) {
+            console.warn("[updateAudioButtonState] Audio control elements not found.");
+            return;
+        }
+
         console.log(`[updateAudioButtonState] Called. audio.paused = ${audio.paused}, audio.src = ${audio.src ? 'Defined' : 'Undefined'}`);
 
         // The music is "playing" if it's not paused AND has a source defined (i.e., not initial empty state)
@@ -45,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
             onIcon.style.display = 'none';
             offIcon.style.display = 'inline-block';
             audioControlButton.setAttribute('aria-label', 'Música pausada. Clique para tocar.');
-            audioProgressArc.style.transform = `rotate(-45deg)`; // Reset progress bar
+            if (audioProgressArc) {
+                audioProgressArc.style.transform = `rotate(-45deg)`; // Reset progress bar
+            }
             // The text 'Desligado' or 'Erro' should be set by pauseMusic() or the catch block of playRandomMusic()
         }
         console.log(`[updateAudioButtonState] UI updated. Button classList: ${audioControlButton.classList}`);
@@ -59,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("[playRandomMusic] Attempting to start playback...");
 
         if (musicSources.length === 0) {
-            currentMusicTitle.textContent = 'Nenhuma música encontrada.';
-            audioControlButton.disabled = true;
+            if (currentMusicTitle) currentMusicTitle.textContent = 'Nenhuma música encontrada.';
+            if (audioControlButton) audioControlButton.disabled = true;
             updateAudioButtonState(); // Ensure button is off
             console.warn("[playRandomMusic] No music sources configured in HTML.");
             return;
@@ -81,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.src = selectedMusic.src;
         audio.load(); // Load the new source (essential for some browsers/scenarios)
 
-        currentMusicTitle.textContent = selectedMusic.title; // Update title immediately
+        if (currentMusicTitle) currentMusicTitle.textContent = selectedMusic.title; // Update title immediately
 
         console.log(`[playRandomMusic] Loading '${selectedMusic.title}' from '${selectedMusic.src}'`);
 
@@ -97,24 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (error.name === 'NotAllowedError') {
                     // Autoplay blocked. UI should reflect that music is not playing.
-                    currentMusicTitle.textContent = 'Clique para tocar.'; // Indicate user interaction is needed
+                    if (currentMusicTitle) currentMusicTitle.textContent = 'Clique para tocar.'; // Indicate user interaction is needed
                     audio.pause(); // Ensure audio element is actually paused
                     updateAudioButtonState(); // Update UI to OFF state
                     console.log("[playRandomMusic] Autoplay blocked. Waiting for user interaction.");
                 } else if (error.name === 'NotSupportedError' || error.name === 'AbortError') {
                     // Problem with the file itself (not supported, loading aborted)
-                    currentMusicTitle.textContent = 'Desligado.';
+                    if (currentMusicTitle) currentMusicTitle.textContent = 'Desligado.';
                     audio.pause(); // Ensure audio is paused
                     updateAudioButtonState(); // Update UI to OFF state
                     console.error("[playRandomMusic] Audio format or loading error:", error);
                     // Optional: Try next song if multiple exist and this is a file error
                     if (musicSources.length > 1) {
-                         console.log("[playRandomMusic] Trying next song due to file error...");
-                         setTimeout(playRandomMusic, 1500); // Try next after a short delay
+                        console.log("[playRandomMusic] Trying next song due to file error...");
+                        setTimeout(playRandomMusic, 1500); // Try next after a short delay
                     }
                 } else {
                     // Other generic errors (e.g., DOMException if play() is interrupted very quickly)
-                    currentMusicTitle.textContent = 'Erro de reprodução.';
+                    if (currentMusicTitle) currentMusicTitle.textContent = 'Erro de reprodução.';
                     audio.pause(); // Ensure audio is paused
                     updateAudioButtonState(); // Update UI to OFF state
                     console.error("[playRandomMusic] Unexpected error during playback:", error);
@@ -128,53 +135,61 @@ document.addEventListener('DOMContentLoaded', () => {
     function pauseMusic() {
         console.log("[pauseMusic] Pausing playback.");
         audio.pause(); // This will trigger the 'pause' event listener
-        currentMusicTitle.textContent = 'Desligado'; // Revert text to "Desligado"
+        if (currentMusicTitle) currentMusicTitle.textContent = 'Desligado'; // Revert text to "Desligado"
         // updateAudioButtonState() will be called by the 'pause' event listener
     }
 
     // Event Listener for the audio control button click
-    audioControlButton.addEventListener('click', () => {
-        console.log("[audioControlButton] Clicked. Current audio.paused state:", audio.paused);
-        // Logic now directly based on the 'paused' state of the audio element
-        if (!audio.paused) { // If not paused, it's playing (or attempting to play)
-            console.log("[audioControlButton] Music is playing, pausing.");
-            pauseMusic();
-        } else {
-            console.log("[audioControlButton] Music is paused, attempting to play.");
-            playRandomMusic();
-        }
-    });
+    if (audioControlButton) {
+        audioControlButton.addEventListener('click', () => {
+            console.log("[audioControlButton] Clicked. Current audio.paused state:", audio.paused);
+            // Logic now directly based on the 'paused' state of the audio element
+            if (!audio.paused) { // If not paused, it's playing (or attempting to play)
+                console.log("[audioControlButton] Music is playing, pausing.");
+                pauseMusic();
+            } else {
+                console.log("[audioControlButton] Music is paused, attempting to play.");
+                playRandomMusic();
+            }
+        });
+    }
+
 
     // Event when music ends (for autoplaying next track)
-    audio.addEventListener('ended', () => {
-        console.log("[audio] 'ended' event fired. Playing next random music.");
-        playRandomMusic();
-    });
+    if (audio) {
+        audio.addEventListener('ended', () => {
+            console.log("[audio] 'ended' event fired. Playing next random music.");
+            playRandomMusic();
+        });
 
-    // Event when audio is officially paused (by code or UI)
-    audio.addEventListener('pause', () => {
-        console.log("[audio] 'pause' event fired. Updating UI.");
-        // Ensure the UI is updated to the paused state
-        updateAudioButtonState();
-    });
+        // Event when audio is officially paused (by code or UI)
+        audio.addEventListener('pause', () => {
+            console.log("[audio] 'pause' event fired. Updating UI.");
+            // Ensure the UI is updated to the paused state
+            updateAudioButtonState();
+        });
 
-    // Event when audio officially starts playing (by code or UI)
-    audio.addEventListener('play', () => {
-        console.log("[audio] 'play' event fired. Updating UI.");
-        // Ensure the UI is updated to the playing state
-        updateAudioButtonState();
-    });
+        // Event when audio officially starts playing (by code or UI)
+        audio.addEventListener('play', () => {
+            console.log("[audio] 'play' event fired. Updating UI.");
+            // Ensure the UI is updated to the playing state
+            updateAudioButtonState();
+        });
 
-    // Event for general audio element errors (for debugging)
-    audio.addEventListener('error', (e) => {
-        console.error("[audio] Error on <audio> element:", e.message, e);
-        currentMusicTitle.textContent = 'Erro de áudio!';
-        audio.pause(); // Ensure audio stops trying to play
-        updateAudioButtonState(); // Update UI to OFF state
-    });
+        // Event for general audio element errors (for debugging)
+        audio.addEventListener('error', (e) => {
+            console.error("[audio] Error on <audio> element:", e.message, e);
+            if (currentMusicTitle) currentMusicTitle.textContent = 'Erro de áudio!';
+            audio.pause(); // Ensure audio stops trying to play
+            updateAudioButtonState(); // Update UI to OFF state
+        });
+    }
+
 
     // Function to update the circular progress bar
     function updateProgressBar() {
+        if (!audioProgressArc || !audio) return; // Ensure elements exist
+
         // Only update if audio is actually playing and has valid duration
         if (!audio.paused && !isNaN(audio.duration) && audio.duration > 0) {
             const progress = (audio.currentTime / audio.duration); // Progress from 0 to 1
@@ -187,33 +202,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialization of audio button state when page loads
-    if (musicSources.length > 0) {
-        audioControlButton.disabled = false;
-        currentMusicTitle.textContent = 'Clique para tocar.'; // Clear initial message
-        updateAudioButtonState(); // Set initial visual state to "off"
-        console.log("Audio button initialized to 'Clique para tocar'.");
+    if (audioControlButton) { // Check if audioControlButton exists before trying to access its properties
+        if (musicSources.length > 0) {
+            audioControlButton.disabled = false;
+            if (currentMusicTitle) currentMusicTitle.textContent = 'Clique para tocar.'; // Clear initial message
+            updateAudioButtonState(); // Set initial visual state to "off"
+            console.log("Audio button initialized to 'Clique para tocar'.");
+        } else {
+            audioControlButton.disabled = true; // Disable button if no music
+            if (currentMusicTitle) currentMusicTitle.textContent = 'Nenhuma música disponível.';
+            updateAudioButtonState(); // Set initial visual state to "off" and disabled
+            console.warn("No music configured. Audio button disabled.");
+        }
     } else {
-        audioControlButton.disabled = true; // Disable button if no music
-        currentMusicTitle.textContent = 'Nenhuma música disponível.';
-        updateAudioButtonState(); // Set initial visual state to "off" and disabled
-        console.warn("No music configured. Audio button disabled.");
+        console.warn("Audio control button not found. Background music functionality might be impaired.");
     }
 
 
     // =====================================
     // 2. Seus Outros Scripts Existentes
-    // (Mantidos e integrados aqui)
+    // (Consolidados e integrados aqui)
     // =====================================
 
     // Click Sound Effects
-    const clickSound = new Audio('audios/effects/click.mp3');
+    const clickSoundEffect = new Audio('audios/effects/click.mp3'); // Renamed to avoid conflict
     document.querySelectorAll('a, button[data-sound-effect="select"]').forEach(element => {
         // Avoid conflict with the main audio control button and its children
-        if (!element.closest('#audioControlButton')) {
-             element.addEventListener('click', () => {
+        if (audioControlButton && !element.closest('#audioControlButton')) {
+            element.addEventListener('click', (event) => {
                 // console.log("Click sound: Attempting to play.");
-                clickSound.currentTime = 0; // Reset audio to play multiple times
-                clickSound.play().catch(e => console.error("Error playing click sound:", e.message));
+                clickSoundEffect.currentTime = 0; // Reset audio to play multiple times
+                clickSoundEffect.play().catch(e => console.error("Error playing click sound effect:", e.message));
+
+                // If it's a link, prevent default and navigate after sound
+                if (element.tagName === 'A' && element.href) {
+                    event.preventDefault();
+                    setTimeout(() => {
+                        window.location.href = element.href;
+                    }, 200); // Adjust time as needed
+                }
+            });
+        } else if (!audioControlButton) { // If audioControlButton doesn't exist, apply to all buttons/links
+             element.addEventListener('click', (event) => {
+                clickSoundEffect.currentTime = 0;
+                clickSoundEffect.play().catch(e => console.error("Error playing click sound effect:", e.message));
+                if (element.tagName === 'A' && element.href) {
+                    event.preventDefault();
+                    setTimeout(() => {
+                        window.location.href = element.href;
+                    }, 200);
+                }
             });
         }
     });
@@ -234,61 +272,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyIpPortBtn = document.getElementById('copyIpPortBtn');
     if (copyIpPortBtn) {
         copyIpPortBtn.addEventListener('click', () => {
-            const ip = document.getElementById('serverIp').textContent;
-            const port = document.getElementById('serverPort').textContent;
-            const textToCopy = `${ip}:${port}`;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                alert('IP e Porta copiados: ' + textToCopy);
-                console.log("IP e Porta copiados:", textToCopy);
-            }).catch(err => {
-                console.error('Erro ao copiar IP e Porta: ', err);
-            });
+            const ip = document.getElementById('serverIp');
+            const port = document.getElementById('serverPort');
+            if (ip && port) {
+                const textToCopy = `${ip.textContent}:${port.textContent}`;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    alert('IP e Porta copiados: ' + textToCopy);
+                    console.log("IP e Porta copiados:", textToCopy);
+                }).catch(err => {
+                    console.error('Erro ao copiar IP e Porta: ', err);
+                });
+            } else {
+                console.error("Elements for IP or Port not found.");
+            }
         });
     }
 
     const copyAddressBtn = document.getElementById('copyAddressBtn');
     if (copyAddressBtn) {
         copyAddressBtn.addEventListener('click', () => {
-            const address = document.getElementById('serverAddress').textContent;
-            navigator.clipboard.writeText(address).then(() => {
-                alert('Endereço copiado: ' + address);
-                console.log("Endereço copiado:", address);
-            }).catch(err => {
-                console.error('Erro ao copiar Endereço: ', err);
-            });
+            const address = document.getElementById('serverAddress');
+            if (address) {
+                navigator.clipboard.writeText(address.textContent).then(() => {
+                    alert('Endereço copiado: ' + address.textContent);
+                    console.log("Endereço copiado:", address.textContent);
+                }).catch(err => {
+                    console.error('Erro ao copiar Endereço: ', err);
+                });
+            } else {
+                console.error("Element for server address not found.");
+            }
         });
     }
-    document.addEventListener('DOMContentLoaded', function() {
-        const clickSound = document.getElementById('clickSound');
-        const links = document.querySelectorAll('a'); // Seleciona todos os elementos <a> (links)
 
-        links.forEach(link => {
-            link.addEventListener('click', function(event) {
-                // Previne a navegação imediata do link para que o som possa tocar primeiro
-                event.preventDefault(); 
+    // Removed the duplicated DOMContentLoaded listener for clickSound and links
+    // The link click sound logic is now integrated into the single click sound effect section above.
 
-                // Reinicia o áudio para que ele possa ser tocado repetidamente se clicado rápido
-                clickSound.currentTime = 0; 
-                clickSound.play();
-
-                // Após o som tocar (ou quase tocar), navega para o link
-                // Você pode ajustar o tempo (200ms) dependendo da duração do seu som de clique
-                setTimeout(() => {
-                    window.location.href = this.href;
-                }, 200); 
-            });
-        });
-    });
     const copyNewAccessBtn = document.getElementById('copyNewAccessBtn');
     if (copyNewAccessBtn) {
         copyNewAccessBtn.addEventListener('click', () => {
-            const newAccessAddress = document.getElementById('newAccessAddress').textContent;
-            navigator.clipboard.writeText(newAccessAddress).then(() => {
-                alert('Endereço do Novo Acesso copiado: ' + newAccessAddress);
-                console.log("Endereço do Novo Acesso copiado:", newAccessAddress);
-            }).catch(err => {
-                console.error('Erro ao copiar Endereço Adicional: ', err);
-            });
+            const newAccessAddress = document.getElementById('newAccessAddress');
+            if (newAccessAddress) {
+                navigator.clipboard.writeText(newAccessAddress.textContent).then(() => {
+                    alert('Endereço do Novo Acesso copiado: ' + newAccessAddress.textContent);
+                    console.log("Endereço do Novo Acesso copiado:", newAccessAddress.textContent);
+                }).catch(err => {
+                    console.error('Erro ao copiar Endereço Adicional: ', err);
+                });
+            } else {
+                console.error("Element for new access address not found.");
+            }
         });
     }
 });
