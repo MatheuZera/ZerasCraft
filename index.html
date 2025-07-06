@@ -4,7 +4,1027 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundo Zera's Craft - Sua Aventura Minecraft!</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Variáveis CSS para fácil customização */
+        :root {
+            --primary-color: #4CAF50; /* Verde vibrante */
+            --primary-color-dark: #388E3C; /* Verde mais escuro */
+            --secondary-color: #FFC107; /* Amarelo Minecraft */
+            --accent-color: #2196F3; /* Azul para links/botões secundários */
+            --text-color: #ECEFF1; /* Texto claro */
+            --dark-text-color: #263238; /* Texto escuro */
+            --bg-dark: #2C3E50; /* Fundo escuro principal (Azul Petróleo) */
+            --bg-light: #34495E; /* Fundo mais claro para seções alternativas */
+            --card-bg: #34495E; /* Fundo para cards */
+            --border-color: #555;
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --shadow-dark: rgba(0, 0, 0, 0.4);
+            --font-main: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+
+        /* Reset Básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            color: var(--text-color);
+            background-color: var(--bg-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color-dark);
+        }
+
+        /* Botões */
+        .btn-primary, .btn-secondary {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            white-space: nowrap; /* Impede quebra de linha */
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 10px var(--shadow-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 2px 5px var(--shadow-light);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-link {
+            color: var(--accent-color);
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .btn-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Títulos de Seção */
+        .section-title {
+            font-family: var(--font-main);
+            font-size: 2.8em;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            text-align: center;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Seções Gerais */
+        .section-padded {
+            padding: 80px 0;
+            position: relative; /* Para hero-image-overlay */
+        }
+
+        .section-alt-bg {
+            background-color: var(--bg-light);
+        }
+
+        .section-light-bg {
+            background-color: var(--bg-light);
+        }
+
+        /* Cabeçalho */
+        .main-header {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 15px 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-family: var(--font-main);
+            font-size: 1.8em;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px var(--shadow-dark);
+        }
+
+        /* Seção Hero */
+        .hero-section {
+            background: url('images/site/background-site.webp') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+            min-height: 700px; /* Ajuste a altura conforme necessário */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden; /* Garante que o overlay não vaze */
+        }
+
+        .hero-image-overlay {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .server-branding {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .server-banner {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px var(--shadow-dark);
+            margin-bottom: 20px;
+            border: 3px solid var(--primary-color); /* Adicione uma borda */
+        }
+
+        .server-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid var(--secondary-color);
+            box-shadow: 0 5px 15px var(--shadow-dark);
+            background-color: var(--card-bg); /* Fundo caso a imagem seja transparente */
+            object-fit: cover; /* Garante que a imagem preencha o círculo */
+        }
+
+        .hero-title {
+            font-family: var(--font-main);
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 3px 3px 6px var(--shadow-dark);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Seção Sobre */
+        .content-two-columns {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .content-two-columns .text-content {
+            flex: 1;
+            min-width: 300px;
+            color: var(--text-color);
+        }
+
+        .content-two-columns .text-content p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .content-two-columns .image-content {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .responsive-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .responsive-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px var(--shadow-dark);
+        }
+
+        .bordered-image {
+            border: 3px solid var(--primary-color);
+        }
+
+        /* Cards de Serviços/Recursos */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 6px 15px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Alinha o conteúdo ao topo */
+            min-height: 250px; /* Garante altura mínima para uniformidade */
+        }
+
+        .service-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            background-color: var(--primary-color-dark); /* Fundo para os ícones */
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 3px 8px var(--shadow-dark);
+        }
+
+        .card-title {
+            font-family: var(--font-main);
+            font-size: 1.8em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .card-description {
+            font-size: 1.05em;
+            color: var(--text-color);
+            flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
+            text-align: center;
+        }
+
+        /* Canais e Cargos */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .role-category-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 15px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .role-category-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .role-category-icon {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .role-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .role-list li {
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 0.95em;
+            color: var(--text-color);
+        }
+
+        .role-list li::before {
+            content: '⛏️'; /* Ícone de picareta para lista */
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Pixel Legends (Expandable Card) */
+        .pixel-legends-interactive-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px var(--shadow-dark);
+            margin-top: 50px;
+            overflow: hidden; /* Para o efeito de expansão */
+        }
+
+        .pixel-legends-interactive-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 35px;
+            background-color: var(--primary-color-dark);
+            cursor: pointer;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .pixel-legends-interactive-card .card-main-title {
+            font-family: var(--font-main);
+            font-size: 2em;
+            color: var(--secondary-color);
+            margin: 0;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            font-size: 2.5em;
+            color: white;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-btn[aria-expanded="true"] .icon-plus {
+            display: none;
+        }
+        .expand-btn[aria-expanded="true"] .icon-minus {
+            display: inline;
+        }
+        .expand-btn[aria-expanded="false"] .icon-plus {
+            display: inline;
+        }
+        .expand-btn[aria-expanded="false"] .icon-minus {
+            display: none;
+        }
+
+
+        .card-content-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-out, padding 0.7s ease-out;
+        }
+
+        .card-content-wrapper.expanded {
+            max-height: 2000px; /* Valor grande o suficiente para a maioria dos conteúdos */
+            padding: 30px 35px;
+        }
+
+        .pixel-legends-interactive-card .card-content {
+            padding-top: 0;
+            padding-bottom: 0;
+            color: var(--text-color);
+        }
+
+        .pixel-legends-interactive-card .card-content h4 {
+            font-family: var(--font-main);
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .pixel-legends-interactive-card .card-content p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .discord-channel-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .role-list-compact {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .role-list-compact li {
+            margin-bottom: 10px;
+            font-size: 1em;
+            color: var(--text-color);
+        }
+        .role-list-compact li strong {
+            color: var(--secondary-color);
+        }
+
+        .features-list {
+            list-style: none;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        .features-list li {
+            margin-bottom: 10px;
+            font-size: 1em;
+            color: var(--text-color);
+        }
+        .features-list li::before {
+            content: '✔️'; /* Checkmark */
+            margin-left: -20px;
+            margin-right: 10px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .features-list ul { /* Para as listas aninhadas de plugins */
+            list-style: disc; /* Bolinhas padrão para sub-listas */
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        .features-list ul li::before {
+            content: none; /* Remove o checkmark das sub-listas */
+        }
+
+        .access-server-section {
+            background-color: var(--bg-dark); /* Fundo para a área de acesso ao servidor */
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .access-server-section h3 {
+            font-family: var(--font-main);
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .access-server-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .access-cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .access-card {
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-dark);
+            min-width: 280px;
+            flex: 1;
+            max-width: 400px; /* Limita a largura do card */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .access-card h3 {
+            font-family: var(--font-main);
+            color: var(--primary-color);
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            position: static; /* Remove o posicionamento absoluto do h3 geral */
+            padding-bottom: 0;
+        }
+        .access-card h3::after {
+            content: none; /* Remove o underline extra */
+        }
+
+        .access-card p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .access-card code {
+            display: block;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: var(--secondary-color);
+            overflow-wrap: break-word; /* Garante que o IP quebre a linha se for muito longo */
+        }
+
+        .access-card .btn-primary {
+            width: 100%;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1em;
+        }
+
+        /* Eventos */
+        .events-sub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .event-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px var(--shadow-dark);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .event-card .card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .event-card .card-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            text-align: left;
+        }
+
+        .event-card .card-description {
+            font-size: 0.95em;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            flex-grow: 1; /* Permite que ocupe espaço para uniformidade */
+            text-align: left;
+        }
+
+        .event-details {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Administração e Segurança */
+        .security-card {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .security-card h3 {
+            font-family: var(--font-main);
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .security-card p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .security-grid-item {
+            background-color: rgba(0, 0, 0, 0.2); /* Fundo sutil para cada item */
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary-color);
+            text-align: left;
+        }
+
+        .security-grid-item h4 {
+            font-family: var(--font-main);
+            color: var(--accent-color);
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .security-grid-item p {
+            font-size: 1em;
+            margin-bottom: 0; /* Remove margem inferior extra aqui */
+        }
+
+        /* Parceiros */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .community-card, .partnership-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 6px 15px var(--shadow-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .community-card:hover, .partnership-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-dark);
+        }
+
+        .member-avatar, .partnership-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 3px 8px var(--shadow-dark);
+        }
+
+        .partnership-logo {
+            border-radius: 10px; /* Para logos que não são círculos */
+        }
+
+        .community-card h3, .partnership-card h3 {
+            font-family: var(--font-main);
+            font-size: 1.6em;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .community-card p, .partnership-card p {
+            font-size: 0.95em;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            flex-grow: 1; /* Garante que o texto ocupe espaço para uniformidade */
+        }
+
+        /* Call to Action */
+        .call-to-action {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            color: white;
+            padding: 80px 0;
+            border-radius: 15px;
+            margin: 50px auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px var(--shadow-dark);
+            transition: transform 0.3s ease;
+        }
+
+        .call-to-action:hover {
+            transform: translateY(-5px);
+        }
+
+        .call-to-action .section-title {
+            color: white; /* Sobrescreve a cor amarela padrão */
+            margin-bottom: 20px;
+        }
+
+        .call-to-action .section-title::after {
+            background-color: var(--secondary-color); /* Underline amarelo */
+        }
+
+        .call-to-action .section-description {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        /* Rodapé */
+        .main-footer {
+            background-color: #1a1a1a;
+            color: #bbb;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9em;
+            border-top: 3px solid var(--primary-color-dark);
+        }
+
+        /* Botão de Áudio Flutuante */
+        #playAudioBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            border-radius: 50px; /* Torna o botão redondo */
+            width: 60px; /* Largura e altura para um círculo */
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em; /* Ajusta o tamanho da fonte */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            text-indent: -9999px; /* Esconde o texto, mantendo-o para leitores de tela */
+            overflow: hidden; /* Garante que o texto escondido não seja visível */
+            background-image: url('images/icons/music-play.png'); /* Ícone de play */
+            background-size: 60%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-color: var(--primary-color); /* Cor de fundo padrão */
+            border: 2px solid var(--secondary-color);
+        }
+
+        #playAudioBtn.playing {
+            background-image: url('images/icons/music-pause.png'); /* Ícone de pause quando tocando */
+            background-color: var(--primary-color-dark);
+        }
+
+        #playAudioBtn:hover {
+            transform: translateY(-3px) scale(1.05);
+            background-color: var(--primary-color-dark);
+        }
+
+        /* Ícones de Seção (para títulos) */
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8em;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2em;
+            }
+
+            .content-two-columns {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content-two-columns .text-content,
+            .content-two-columns .image-content {
+                width: 100%;
+            }
+
+            .responsive-image {
+                margin-top: 30px;
+            }
+
+            .section-title {
+                font-size: 2.2em;
+                margin-bottom: 30px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .section-title .section-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .services-grid,
+            .roles-grid,
+            .events-sub-grid,
+            .community-grid,
+            .access-cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 120px 0 80px;
+                min-height: 600px;
+            }
+
+            .hero-title {
+                font-size: 2.2em;
+            }
+
+            .hero-subtitle {
+                font-size: 1em;
+            }
+
+            .server-banner {
+                max-width: 90%;
+            }
+
+            .server-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .section-padded {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+                margin-bottom: 25px;
+            }
+
+            .section-description {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+
+            .pixel-legends-interactive-card .card-main-title {
+                font-size: 1.6em;
+            }
+
+            .pixel-legends-interactive-card .card-header {
+                padding: 20px;
+            }
+
+            .expand-btn {
+                font-size: 2em;
+            }
+
+            .access-card {
+                min-width: unset;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-logo {
+                font-size: 1.5em;
+            }
+
+            .hero-section {
+                padding: 100px 0 60px;
+            }
+
+            .hero-title {
+                font-size: 1.8em;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9em;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .server-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+                gap: 5px;
+            }
+
+            .section-title .section-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .card-title {
+                font-size: 1.5em;
+            }
+
+            .card-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .role-category-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .pixel-legends-interactive-card .card-main-title {
+                font-size: 1.4em;
+            }
+
+            .pixel-legends-interactive-card .card-content h4 {
+                font-size: 1.2em;
+            }
+
+            .security-card h3 {
+                font-size: 1.6em;
+            }
+
+            #playAudioBtn {
+                width: 50px;
+                height: 50px;
+                font-size: 0.7em;
+            }
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="images/site/icone.webp" type="image/x-icon">
 
@@ -388,6 +1408,67 @@
 
     <button id="playAudioBtn" class="btn-primary" aria-label="Tocar ou Pausar Música de Fundo">Tocar Som do Minecraft</button>
 
-    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+    <script>
+        // Script para a funcionalidade do botão de expandir/contrair da seção Pixel Legends
+        document.addEventListener('DOMContentLoaded', () => {
+            const pixelLegendsCard = document.getElementById('pixelLegendsCard');
+            const expandBtn = pixelLegendsCard.querySelector('.expand-btn');
+            const cardContentWrapper = pixelLegendsCard.querySelector('.card-content-wrapper');
+
+            expandBtn.addEventListener('click', () => {
+                const isExpanded = expandBtn.getAttribute('aria-expanded') === 'true';
+                expandBtn.setAttribute('aria-expanded', !isExpanded);
+                cardContentWrapper.classList.toggle('expanded');
+            });
+
+            // Script para copiar IP e Porta
+            const copyIpButtons = document.querySelectorAll('.copy-ip-btn');
+            copyIpButtons.forEach(button => {
+                button.addEventListener('click', async () => {
+                    const ip = button.dataset.ip;
+                    const port = button.dataset.port;
+                    let textToCopy = ip;
+
+                    if (port) {
+                        textToCopy = `${ip}:${port}`;
+                    }
+
+                    try {
+                        await navigator.clipboard.writeText(textToCopy);
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Falha ao copiar: ', err);
+                        alert('Erro ao copiar. Por favor, tente manualmente: ' + textToCopy);
+                    }
+                });
+            });
+
+            // Script para tocar/pausar áudio
+            const playAudioBtn = document.getElementById('playAudioBtn');
+            let audio = new Audio('audio/minecraft-music.mp3'); // Certifique-se de ter este arquivo de áudio
+            audio.loop = true; // Faz o áudio repetir
+
+            playAudioBtn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        playAudioBtn.classList.add('playing');
+                        playAudioBtn.setAttribute('aria-label', 'Pausar Música de Fundo');
+                    }).catch(error => {
+                        console.error("Erro ao tentar tocar o áudio:", error);
+                        alert("Não foi possível tocar a música automaticamente. Verifique as permissões ou tente novamente.");
+                    });
+                } else {
+                    audio.pause();
+                    playAudioBtn.classList.remove('playing');
+                    playAudioBtn.setAttribute('aria-label', 'Tocar Música de Fundo');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
