@@ -921,65 +921,55 @@ a:hover {
 /* --- SECURITY CARDS & ITEMS --- */
 /* ========================================= */
 
-.admin-security-section .section-title img {
-    height: 1.8em;
-    /* Adjusts icon size next to title */
+.admin-security-section .section-title img { /* Você pode mudar para .section-title-icon se preferir */
+    height: 1.8em; /* Adjusts icon size next to title */
     vertical-align: middle;
     margin-right: 10px;
 }
 
 .security-card {
-    background-color: var(--light-bg);
-    /* A slightly lighter background than dark-bg */
+    background-color: var(--light-bg); /* A slightly lighter background than dark-bg */
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 20px;
+    padding: 20px; /* Ajustei de 30px para 20px para a "embed" principal, mas pode ser 30px se quiser mais espaço */
     margin-bottom: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: var(--text-color-light);
-    /* Ensures text is light inside the card */
+    color: var(--text-color-light); /* Ensures text is light inside the card */
 }
 
-.security-card h3 {
+.security-card h3 { /* Este H3 não será usado na nova estrutura, pois os sub-títulos são H4 */
     color: var(--primary-color);
-    /* "SECURITY" title in blue */
     margin-bottom: 15px;
 }
 
 .security-card p {
-    color: var(--secondary-color);
-    /* Light gray text */
+    color: var(--secondary-color); /* Light gray text */
 }
 
 /* Base styles for "grid" items within the security card */
 .security-grid-item {
-    background-color: var(--dark-bg);
-    /* Dark background for each individual item */
-    border-left: 4px solid var(--primary-color);
-    /* Blue vertical line */
+    background-color: var(--dark-bg); /* Dark background for each individual item */
+    border-left: 4px solid var(--primary-color); /* Blue vertical line */
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: pointer; /* Indica que é clicável/interativo */
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-    color: var(--text-color-light);
-    /* Ensures text inside the item is light */
+    color: var(--text-color-light); /* Ensures text inside the item is light */
 }
 
 .security-grid-item:last-child {
     margin-bottom: 0;
 }
 
-.security-grid-item h4 {
-    color: var(--accent-color);
-    /* Grid item titles in yellow */
+.security-grid-item h4 { /* Os títulos dos itens individuais serão H4 */
+    color: var(--accent-color); /* Grid item titles in yellow */
     margin-top: 0;
     margin-bottom: 10px;
 }
 
 .security-grid-item p {
-    color: var(--secondary-color);
-    /* Grid item text in light gray */
+    color: var(--secondary-color); /* Grid item text in light gray */
     line-height: 1.6;
 }
 
@@ -987,76 +977,22 @@ a:hover {
 .security-grid-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    background-color: #3a3d42;
-    /* Slightly darkens background on hover */
+    background-color: #3a3d42; /* Slightly darkens background on hover */
 }
 
-
-/* ========================================= */
-/* --- PIXEL LEGENDS SECTION --- */
-/* ========================================= */
-
-#pixel-legends {
-    padding: 80px 0;
-    background-color: var(--alt-bg-color);
-    color: var(--text-color);
-}
-
-#pixel-legends .content-two-columns {
-    display: flex;
-    flex-wrap: wrap;
-    /* Allows breaking into smaller screens */
-    align-items: center;
-    gap: 40px;
-    /* Spacing between columns */
-}
-
-#pixel-legends .text-content {
-    flex: 1;
-    min-width: 300px;
-    /* Ensures text doesn't get too small */
-}
-
-#pixel-legends .pixel-legends-gallery {
-    flex: 1;
-    min-width: 300px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    /* Responsive grid for images */
-    gap: 20px;
-    justify-items: center;
-    align-items: center;
-}
-
-#pixel-legends .pixel-card {
-    background-color: var(--card-bg-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    /* Ensures image fits the card */
-    width: 100%;
-    /* Occupies full width of grid column */
-    max-width: 250px;
-    /* Limits max size of each pixel art card */
+/* Adicionar para centralizar o botão no final */
+.text-center {
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0;
-    /* Initial state for animation */
 }
 
-#pixel-legends .pixel-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+/* Para garantir que as animações entrem em cena */
+.security-card.animate-on-scroll.is-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
-#pixel-legends .pixel-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-bottom: 2px solid var(--primary-color);
-    /* Small color detail */
+.security-grid-item.animate-on-scroll.is-visible {
+    animation: fadeInUp 0.8s ease-out forwards; /* Ou outra animação se preferir */
 }
-
 
 /* ========================================= */
 /* --- ANIMATIONS --- */
