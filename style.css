@@ -14,7 +14,7 @@
     --card-bg: #36393f; /* Cor de fundo para cards */
 
     /* NOVAS VARIÁVEIS PARA FUNDO DE SEÇÃO CLARA E TEXTO NO FUNDO CLARO */
-    --light-section-bg: #f9f9f9; /* Um cinza muito claro, quase branco, para seções claras */
+    --light-section-bg: #c4c4c4; /* Um cinza muito claro, quase branco, para seções claras */
     --text-color-on-light-bg: #333333; /* Cor do texto em seções de fundo claro */
 
     /* Variáveis para consistência de bordas e sombras */
