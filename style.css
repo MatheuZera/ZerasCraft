@@ -935,3 +935,14 @@ a:hover {
         font-size: 1.3rem;
     }
 }
+
+/* Esconde o botão de áudio por padrão */
+#playAudioBtn {
+    display: none; /* Ou visibility: hidden; opacity: 0; para uma transição mais suave */
+    /* Adicione quaisquer outros estilos de posicionamento (fixed, bottom, right, etc.) aqui */
+    position: fixed; /* Exemplo: para que ele fique sempre visível ao rolar */
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Garante que ele fique acima de outros elementos */
+}
+}

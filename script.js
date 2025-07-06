@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Lógica para o botão de áudio de fundo (Minecraft Audio) ---
     const minecraftAudio = document.getElementById('minecraftAudio');
-    const playAudioBtn = document.getElementById('playAudioBtn');
+    const playAudioBtn = document.getElementById('playAudioBtn'); // O botão que vamos mostrar
 
-    // Define o volume para o áudio do Minecraft
+    // --- Configuração de volume (permanece igual) ---
     if (minecraftAudio) {
         minecraftAudio.volume = 0.7; // AJUSTE ESTE VALOR
     }
 
+    // --- Lógica de reprodução do áudio do Minecraft (permanece igual) ---
     if (playAudioBtn && minecraftAudio) {
         playAudioBtn.classList.add('play-audio-btn-off');
         let isPlaying = false; 
@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     } else {
-        console.error("Erro: Botão 'playAudioBtn' ou elemento de áudio 'minecraftAudio' não encontrados no DOM. Verifique seus IDs no HTML.");
+        console.error("Erro: Elementos 'playAudioBtn' ou 'minecraftAudio' não encontrados no DOM. Verifique seus IDs no HTML.");
     }
 
-    // --- Lógica para o som de clique em interações ---
+    // --- Lógica para o som de clique em interações (permanece igual) ---
     const clickAudio = new Audio('audios/click.mp3');
     clickAudio.preload = 'auto'; 
     clickAudio.volume = 0.4; // AJUSTE ESTE VALOR
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Lógica para reproduzir select.mp3 ao passar o mouse/toque nas abas/cards ---
+    // --- Lógica para reproduzir select.mp3 ao passar o mouse/toque nas abas/cards (permanece igual) ---
     const selectAudio = new Audio('audios/select.mp3');
     selectAudio.preload = 'auto'; 
     selectAudio.volume = 0.3; // AJUSTE ESTE VALOR
@@ -96,11 +96,36 @@ document.addEventListener('DOMContentLoaded', function() {
         card.addEventListener('mouseenter', playSelectSound);
     });
 
-    // --- NOVO: Tenta reproduzir select.mp3 assim que o DOM é carregado ---
-    // ATENÇÃO: Isso pode ser bloqueado por políticas de autoplay do navegador.
-    // O som só tocará se o navegador permitir (geralmente após uma interação do usuário).
-    selectAudio.play().catch(e => {
-        console.warn("Tentativa de reprodução automática de 'select.mp3' bloqueada pelo navegador:", e);
-        console.warn("Para que o áudio toque, o usuário precisará interagir com a página (ex: clicar em qualquer lugar).");
-    });
+    // --- NOVO: Lógica para mostrar o botão de áudio após a primeira interação ---
+    let userInteracted = false; // Flag para controlar se o usuário já interagiu
+
+    function handleUserInteraction() {
+        if (!userInteracted) {
+            // Mostra o botão de áudio
+            if (playAudioBtn) {
+                playAudioBtn.style.display = 'block'; // Ou playAudioBtn.classList.add('show-audio-btn'); se usar transições CSS
+            }
+            
+            // Opcional: Tentar tocar o select.mp3 uma vez aqui, após a interação
+            // Isso garante que o som 'select' (que é um som de UI) possa ser ouvido
+            // logo após a primeira interação do usuário, mesmo antes de passar o mouse.
+            selectAudio.currentTime = 0;
+            selectAudio.play().catch(e => {
+                console.warn("Reprodução inicial de 'select.mp3' após interação falhou:", e);
+            });
+
+            userInteracted = true; // Define a flag como verdadeira
+            // Remove os event listeners para que a função não seja executada múltiplas vezes
+            document.removeEventListener('scroll', handleUserInteraction);
+            document.removeEventListener('mousemove', handleUserInteraction);
+            document.removeEventListener('touchstart', handleUserInteraction);
+            document.removeEventListener('click', handleUserInteraction); // Importante para cliques gerais
+        }
+    }
+
+    // Adiciona event listeners para detectar a primeira interação
+    document.addEventListener('scroll', handleUserInteraction); // Rolagem do mouse/scroll mobile
+    document.addEventListener('mousemove', handleUserInteraction); // Movimento do mouse
+    document.addEventListener('touchstart', handleUserInteraction); // Toque na tela (mobile)
+    document.addEventListener('click', handleUserInteraction); // Qualquer clique
 });
