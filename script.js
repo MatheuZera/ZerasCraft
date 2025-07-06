@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Lógica para reproduzir select.mp3 ao passar o mouse/toque nos cards GERAIS ---
+    // --- Lógica para reproduzir select.mp3 ao passar o mouse (mouseenter) nos cards GERAIS ---
     const interactiveCardsGeneral = document.querySelectorAll(
         '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card'
     );
@@ -98,11 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     interactiveCardsGeneral.forEach(card => {
-        card.addEventListener('mouseenter', playSelectSoundGeneral);
-        card.addEventListener('touchstart', playSelectSoundGeneral); // <--- Adicionado para touch
+        card.addEventListener('mouseenter', playSelectSoundGeneral); // Mantido para desktop
+        // REMOVIDO: card.addEventListener('touchstart', playSelectSoundGeneral);
     });
 
-    // --- NOVO: Lógica para reproduzir select.mp3 para CADA ITEM DA GRADE DE SEGURANÇA ---
+    // --- Lógica para reproduzir select.mp3 ao passar o mouse (mouseenter) para CADA ITEM DA GRADE DE SEGURANÇA ---
     const securityGridItems = document.querySelectorAll('.security-grid-item');
 
     securityGridItems.forEach(item => {
@@ -110,18 +110,13 @@ document.addEventListener('DOMContentLoaded', function() {
         itemSelectAudio.preload = 'auto';
         itemSelectAudio.volume = 0.2;
 
-        item.addEventListener('mouseenter', function() {
+        item.addEventListener('mouseenter', function() { // Mantido para desktop
             itemSelectAudio.currentTime = 0;
             itemSelectAudio.play().catch(e => {
                 console.warn("Reprodução de áudio 'select.mp3' para item da grade bloqueada ou falhou:", e);
             });
         });
-        item.addEventListener('touchstart', function() { // <--- Adicionado para touch
-            itemSelectAudio.currentTime = 0;
-            itemSelectAudio.play().catch(e => {
-                console.warn("Reprodução de áudio 'select.mp3' para item da grade (touch) bloqueada ou falhou:", e);
-            });
-        });
+        // REMOVIDO: item.addEventListener('touchstart', function() { ... });
     });
 
 
@@ -142,14 +137,14 @@ document.addEventListener('DOMContentLoaded', function() {
             userInteracted = true;
             document.removeEventListener('scroll', handleUserInteraction);
             document.removeEventListener('mousemove', handleUserInteraction);
-            document.removeEventListener('touchstart', handleUserInteraction); // Importante remover aqui também
             document.removeEventListener('click', handleUserInteraction);
+            // REMOVIDO: document.removeEventListener('touchstart', handleUserInteraction);
         }
     }
 
-    // Adiciona o listener de touchstart para a primeira interação também
+    // Adiciona o listener para a primeira interação (ainda inclui touchstart para permitir a permissão de áudio inicial)
     document.addEventListener('scroll', handleUserInteraction);
     document.addEventListener('mousemove', handleUserInteraction);
-    document.addEventListener('touchstart', handleUserInteraction); // Adicionado para mobile
     document.addEventListener('click', handleUserInteraction);
+    document.addEventListener('touchstart', handleUserInteraction); // MANTIDO para que a permissão de áudio possa ser acionada por um toque
 });
