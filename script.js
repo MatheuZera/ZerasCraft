@@ -4,9 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // 1. Controle de Áudio de Fundo - REVISADO
     // =====================================
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => { // <--- ESTE É O DUPLICADO
     const audio = document.getElementById('backgroundMusic');
-    const audioControlButton = document.getElementById('audioControlButton');
     const currentMusicTitle = document.getElementById('currentMusicTitle');
     const progressArc = audioControlButton.querySelector('.arc-progress');
     const audioIcons = {
