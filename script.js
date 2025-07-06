@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================
     // 1. Controle de Áudio de Fundo
+    // (Este bloco permanece inalterado em relação à última versão)
     // =====================================
     const audio = document.getElementById('backgroundMusic');
     const audioControlButton = document.getElementById('audioControlButton');
@@ -169,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Evento quando o áudio oficialmente começa a tocar (por código ou UI)
         audio.addEventListener('play', () => {
             console.log("[audio] 'play' event fired. Updating UI.");
-            // Garante que a UI seja atualizada para o estado tocando
             updateAudioButtonState();
         });
 
@@ -185,30 +185,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para atualizar a barra de progresso circular
     function updateProgressBar() {
-        if (!audioProgressArc || !audio) return; // Garante que os elementos existam
+        if (!audioProgressArc || !audio) return;
 
-        // Somente atualiza se o áudio estiver realmente tocando e tiver duração válida
         if (!audio.paused && !isNaN(audio.duration) && audio.duration > 0) {
-            const progress = (audio.currentTime / audio.duration); // Progresso de 0 a 1
-            const rotation = progress * 360; // Rotação total em graus
-            audioProgressArc.style.transform = `rotate(${rotation - 45}deg)`; // -45deg para alinhar o início no topo
-            requestAnimationFrame(updateProgressBar); // Solicita o próximo frame
+            const progress = (audio.currentTime / audio.duration);
+            const rotation = progress * 360;
+            audioProgressArc.style.transform = `rotate(${rotation - 45}deg)`;
+            requestAnimationFrame(updateProgressBar);
         } else {
-            audioProgressArc.style.transform = `rotate(-45deg)`; // Reseta a barra
+            audioProgressArc.style.transform = `rotate(-45deg)`;
         }
     }
 
     // Inicialização do estado do botão de áudio quando a página carrega
-    if (audioControlButton) { // Verifica se audioControlButton existe antes de tentar acessar suas propriedades
+    if (audioControlButton) {
         if (musicSources.length > 0) {
             audioControlButton.disabled = false;
-            if (currentMusicTitle) currentMusicTitle.textContent = 'Clique para tocar.'; // Limpa a mensagem inicial
-            updateAudioButtonState(); // Define o estado visual inicial para "off"
+            if (currentMusicTitle) currentMusicTitle.textContent = 'Clique para tocar.';
+            updateAudioButtonState();
             console.log("Audio button initialized to 'Clique para tocar'.");
         } else {
-            audioControlButton.disabled = true; // Desabilita o botão se não houver música
+            audioControlButton.disabled = true;
             if (currentMusicTitle) currentMusicTitle.textContent = 'Nenhuma música disponível.';
-            updateAudioButtonState(); // Define o estado visual inicial para "off" e desabilitado
+            updateAudioButtonState();
             console.warn("No music configured. Audio button disabled.");
         }
     } else {
@@ -231,8 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 clickSoundEffect.play().catch(e => console.error("Error playing click sound effect:", e.message));
 
                 if (element.tagName === 'A' && element.href && element.getAttribute('target') !== '_blank' && element.href.startsWith(window.location.origin)) {
-                    // Previne o padrão apenas se for um link interno para uma âncora ou mesma página
-                    // e permite que links externos ou _blank funcionem normalmente.
                     event.preventDefault();
                     setTimeout(() => {
                         window.location.href = element.href;
@@ -242,8 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // HOVER/INTERACTION Sound Effects for CARDS
-    const selectSound = new Audio('audios/effects/select.mp3');
+    // HOVER/INTERACTION Sound Effects for CARDS - REVISADO PARA SOM AO FIM DA ANIMAÇÃO
+    const selectSound = new Audio('audios/effects/select.mp3'); // Som para o início da interação
+    const animationEndSound = new Audio('audios/effects/hover-complete.mp3'); // NOVO SOM para o fim da animação
+
+    // Conjunto para rastrear quais cards já tocaram o som de final de animação para evitar repetição
+    const playedAnimationEndSound = new WeakSet();
 
     const cardSelectors = [
         '.service-card',
@@ -255,36 +256,53 @@ document.addEventListener('DOMContentLoaded', () => {
         '.partnership-proposal-card',
     ].join(', ');
 
-    document.querySelectorAll(cardSelectors).forEach(element => {
+    document.querySelectorAll(cardSelectors).forEach(cardElement => {
         // Evento de mouse enter (quando o mouse entra no card)
-        element.addEventListener('mouseenter', () => {
-            console.log("Select sound: Mouse entered a card.");
-            selectSound.currentTime = 0; // Reset audio to play from start
-            selectSound.play().catch(e => console.error("Error playing hover sound on mouseenter:", e.message));
+        cardElement.addEventListener('mouseenter', () => {
+            console.log("Select sound: Mouse entered a card. Playing initial sound.");
+            selectSound.currentTime = 0; // Reinicia o áudio para tocar do início
+            selectSound.play().catch(e => console.error("Error playing initial hover sound:", e.message));
+            // Remove o card do conjunto de "sons já tocados" para permitir que toque novamente
+            playedAnimationEndSound.delete(cardElement);
         });
 
-        // Opcional: Evento de click (se você quiser que o som toque também ao clicar)
-        // CUIDADO: Isso pode gerar muitos sons se o card for também um link/botão que já tem clickSoundEffect.
-        // Pense se quer ter AMBOS os sons tocando no clique, ou apenas um.
-        element.addEventListener('click', (event) => {
-            console.log("Select sound: Card clicked.");
-            // Só toca se o elemento não for um link ou botão já coberto pelo clickSoundEffect global
-            // ou se você quiser que o som do card prevaleça/adicione ao som do clique.
-            // Para evitar duplicação, você pode remover esta parte se o elemento já tiver data-sound-effect="select"
-            // ou se for um 'a' ou 'button' que o clickSoundEffect já pega.
-            if (!element.matches('a, button[data-sound-effect="select"]')) {
-                selectSound.currentTime = 0;
-                selectSound.play().catch(e => console.error("Error playing hover sound on click:", e.message));
+        // Evento de transição CSS finalizada
+        // Vamos monitorar a transição da propriedade 'transform'
+        cardElement.addEventListener('transitionend', (event) => {
+            // Verifica se a transição que terminou é a da propriedade 'transform'
+            // e se o mouse ainda está sobre o elemento (para garantir que a animação está completa no hover)
+            // E se o som de final de animação ainda não foi tocado para este card
+            if (event.propertyName === 'transform' && cardElement.matches(':hover') && !playedAnimationEndSound.has(cardElement)) {
+                console.log("Animation end sound: Transform transition ended on hovered card. Playing final sound.");
+                animationEndSound.currentTime = 0; // Reinicia o áudio
+                animationEndSound.play().catch(e => console.error("Error playing animation end sound:", e.message));
+                playedAnimationEndSound.add(cardElement); // Adiciona ao conjunto para evitar repetição
             }
         });
 
-        // Opcional: Evento de foco (para navegação por teclado)
-        element.addEventListener('focus', () => {
-            console.log("Select sound: Card focused.");
-            selectSound.currentTime = 0;
-            selectSound.play().catch(e => console.error("Error playing hover sound on focus:", e.message));
+        // Evento de mouse leave (quando o mouse sai do card)
+        // Isso é útil para resetar o estado e permitir que o som toque novamente na próxima vez que o hover ocorrer
+        cardElement.addEventListener('mouseleave', () => {
+            console.log("Mouse left card. Resetting sound state.");
+            playedAnimationEndSound.delete(cardElement);
         });
+
+        // Opcional: Evento de foco (para navegação por teclado)
+        cardElement.addEventListener('focus', () => {
+            console.log("Select sound: Card focused. Playing initial sound.");
+            selectSound.currentTime = 0;
+            selectSound.play().catch(e => console.error("Error playing initial hover sound on focus:", e.message));
+            playedAnimationEndSound.delete(cardElement);
+        });
+
+        // Opcional: Evento de blur (quando o card perde o foco)
+        cardElement.addEventListener('blur', () => {
+            console.log("Card blurred. Resetting sound state.");
+            playedAnimationEndSound.delete(cardElement);
+        });
+
     });
+
 
     // Copy IP and Port Logic
     const copyIpPortBtn = document.getElementById('copyIpPortBtn');
