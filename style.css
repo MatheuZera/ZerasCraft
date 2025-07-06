@@ -1099,3 +1099,174 @@ a:hover {
         font-size: 0.9rem;
     }
 }
+
+/* --- NOVA SEÇÃO: PIXEL LEGENDS --- */
+#pixel-legends {
+    padding: 60px 0; /* Espaçamento padrão */
+}
+
+#pixel-legends .content-two-columns {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar em linhas menores telas */
+    gap: 40px; /* Espaço entre as colunas */
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#pixel-legends .content-two-columns.reverse-columns {
+    flex-direction: row-reverse; /* Inverte a ordem das colunas */
+}
+
+#pixel-legends .text-content,
+#pixel-legends .image-content {
+    flex: 1; /* Faz com que as colunas ocupem espaço igual */
+    min-width: 300px; /* Garante que não fiquem muito pequenas em telas menores */
+}
+
+#pixel-legends .text-content h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    color: var(--color-primary-dark); /* Ou outra cor de sua paleta */
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--color-accent); /* Linha de destaque, opcional */
+    padding-bottom: 5px;
+}
+
+#pixel-legends .text-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+#pixel-legends .text-content a {
+    color: var(--color-link); /* Cor para links, talvez um verde claro */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#pixel-legends .text-content a:hover {
+    text-decoration: underline;
+}
+
+#pixel-legends .guild-roles-list,
+#pixel-legends .plugin-list {
+    list-style: none; /* Remove marcadores de lista padrão */
+    padding: 0;
+    margin-top: 20px;
+}
+
+#pixel-legends .guild-roles-list li,
+#pixel-legends .plugin-list li {
+    background-color: var(--color-background-light); /* Cor de fundo para itens de lista */
+    border-left: 5px solid var(--color-accent); /* Linha vertical de destaque */
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+#pixel-legends .guild-roles-list li strong,
+#pixel-legends .plugin-list li strong {
+    color: var(--color-primary-dark);
+}
+
+.pixel-legends-features,
+.server-access-info {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+}
+
+.pixel-legends-features .section-subtitle,
+.server-access-info .section-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: var(--color-secondary); /* Ou outra cor que se destaque */
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.feature-category {
+    margin-bottom: 30px;
+}
+
+.feature-category h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.access-details-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.access-card {
+    background-color: var(--color-card-bg); /* Fundo dos cards de acesso */
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    flex: 1;
+    min-width: 280px; /* Garante que os cards não fiquem muito pequenos */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.access-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.access-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em;
+    color: var(--color-primary-dark);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.access-card p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: var(--color-text-light);
+}
+
+.access-card .ip-address,
+.access-card .port-number {
+    font-family: 'Open Sans', monospace; /* Fonte monoespaçada para IP/Porta */
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    color: var(--color-highlight); /* Uma cor que se destaque para os IPs */
+    font-weight: 600;
+}
+
+.access-card .btn-copy-ip {
+    background-color: var(--color-primary); /* Use sua cor de botão primária */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.access-card .btn-copy-ip:hover {
+    background-color: var(--color-primary-hover); /* Cor mais escura ao passar o mouse */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    #pixel-legends .content-two-columns {
+        flex-direction: column; /* Colunas empilhadas em telas menores */
+    }
+    #pixel-legends .content-two-columns.reverse-columns {
+        flex-direction: column; /* Manter empilhadas mesmo com reverse */
+    }
+}

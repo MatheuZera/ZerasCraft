@@ -122,7 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             clickedElement.tagName === 'BUTTON' ||
                             clickedElement.classList.contains('btn-primary') ||
                             clickedElement.classList.contains('btn-secondary') ||
-                            clickedElement.classList.contains('btn-link');
+                            clickedElement.classList.contains('btn-link') ||
+                            clickedElement.classList.contains('btn-copy-ip'); // Adicionado o novo botão de copiar
         
         const isMainAudioButton = clickedElement.id === 'playAudioBtn';
 
@@ -136,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Lógica para reproduzir select.mp3 nos cards (diferente para PC e Mobile) ---
     const interactiveCardsGeneral = document.querySelectorAll(
-        '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card'
+        '.service-card:not(.security-card), .role-category-card, .event-card, .community-card, .partnership-card, .access-card' // Adicionado .access-card
     );
 
     const selectAudioGeneral = new Audio('audios/select.mp3');
@@ -181,9 +182,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Se o toque terminou e NÃO houve deslize significativo
                 if (!touchMoved) {
                     // Evita tocar o som de select se o clique for em um link/botão interno
-                    if (!event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link')) {
+                    if (!event.target.closest('a, button, .btn-primary, .btn-secondary, .btn-link, .btn-copy-ip')) { // Atualizado para incluir o novo botão
                         playSelectSoundGeneral();
-                    } else if (event.target.tagName !== 'A' && event.target.tagName !== 'BUTTON') {
+                    } else if (event.target.tagName !== 'A' && event.target.tagName !== 'BUTTON' && !event.target.classList.contains('btn-copy-ip')) { // Atualizado
                         // Se clicou no card mas não diretamente em um link/botão dentro dele
                         playSelectSoundGeneral();
                     }
@@ -249,6 +250,39 @@ document.addEventListener('DOMContentLoaded', function() {
                 touchMoved = false;
             });
         }
+    });
+
+    // --- Nova Lógica: Copiar IP do Servidor ---
+    const copyButtons = document.querySelectorAll('.btn-copy-ip');
+    const notificationSound = new Audio('audios/notification.mp3'); // Assumindo que você tem um som de notificação
+    notificationSound.preload = 'auto';
+    notificationSound.volume = 0.5;
+
+    copyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            let textToCopy = this.dataset.ip;
+            const port = this.dataset.port;
+            if (port) {
+                textToCopy += `:${port}`; // Adiciona a porta se existir
+            }
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = this.textContent;
+                this.textContent = 'Copiado!';
+                this.disabled = true; // Desabilita temporariamente
+
+                notificationSound.currentTime = 0;
+                notificationSound.play().catch(e => console.warn("Erro ao reproduzir som de notificação:", e));
+
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.disabled = false; // Reabilita o botão
+                }, 1500); // Volta ao texto original após 1.5 segundos
+            }).catch(err => {
+                console.error('Falha ao copiar:', err);
+                alert('Erro ao copiar o IP. Tente manualmente: ' + textToCopy);
+            });
+        });
     });
 
     // --- Lógica para mostrar o botão de áudio após a primeira interação ---
