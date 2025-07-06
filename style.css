@@ -955,3 +955,132 @@ a:hover {
         padding: 1px;
     }
 }
+
+/* --- ESTILOS PARA CARDS DE MEMBROS E PARCERIAS --- */
+
+/* Estilos gerais para a grid que contém membros e parceiros */
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado para 3 colunas em telas grandes */
+    gap: 25px; /* Espaçamento entre os cards */
+    justify-content: center; /* Centraliza a grid */
+    max-width: 1200px; /* Limita a largura máxima da grid */
+    margin: 0 auto; /* Centraliza a grid na página */
+}
+
+/* Estilo base para ambos os tipos de card (comunidade e parceria) */
+.community-card,
+.partnership-card {
+    background-color: var(--card-bg); /* Fundo dos cards */
+    color: var(--text-color-light); /* Cor do texto principal nos cards */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra mais visível */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições suaves para interatividade */
+    
+    display: flex; /* Usamos flexbox para alinhar conteúdo */
+    flex-direction: column; /* Conteúdo em coluna */
+    align-items: center; /* Centraliza itens horizontalmente */
+    text-align: center; /* Centraliza o texto */
+
+    padding-top: 35px; /* Mais espaço no topo para as imagens/logos */
+    padding-bottom: 25px; /* Ajusta o padding inferior */
+}
+
+/* Efeito hover para ambos os tipos de card */
+.community-card:hover,
+.partnership-card:hover {
+    transform: translateY(-8px) scale(1.02); /* Eleva e aumenta ligeiramente */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+}
+
+/* Estilos para os avatares dos membros da comunidade */
+.member-avatar {
+    width: 90px; /* Tamanho maior para os avatares */
+    height: 90px;
+    border-radius: 50%; /* Torna-o circular */
+    object-fit: cover; /* Garante que a imagem preencha o espaço */
+    margin-bottom: 18px; /* Espaço abaixo do avatar */
+    border: 3px solid var(--primary-color); /* Borda primária */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil para o avatar */
+    transition: transform 0.3s ease; /* Transição para o hover do avatar */
+}
+
+/* Efeito hover no avatar quando o card é hover */
+.community-card:hover .member-avatar {
+    transform: rotate(5deg) scale(1.05); /* Leve rotação e zoom */
+    border-color: var(--accent-color); /* Borda muda para accent color */
+}
+
+/* Estilos para os logos das parcerias */
+.partnership-logo {
+    max-width: 120px; /* Largura máxima para o logo (ajuste conforme necessário) */
+    height: auto; /* Mantém a proporção */
+    margin-bottom: 20px; /* Espaço abaixo do logo */
+    border-radius: 8px; /* Cantos levemente arredondados */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil para o logo */
+    transition: transform 0.3s ease; /* Transição para o hover do logo */
+}
+
+/* Efeito hover no logo quando o card é hover */
+.partnership-card:hover .partnership-logo {
+    transform: scale(1.08); /* Aumenta o tamanho do logo */
+}
+
+/* Estilos de título e descrição dentro dos cards (ambos os tipos) */
+.community-card h3,
+.partnership-card h3 {
+    color: var(--accent-color); /* Títulos em cor de destaque */
+    font-size: 1.5rem; /* Tamanho maior para o título */
+    margin-bottom: 12px; /* Espaço abaixo do título */
+    line-height: 1.2;
+}
+
+.community-card p,
+.partnership-card p {
+    font-size: 1rem; /* Tamanho do texto */
+    color: var(--secondary-color); /* Cor secundária para o texto */
+    margin-bottom: 25px; /* Espaço antes do botão */
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
+}
+
+/* Botões nos cards */
+.community-card .btn-secondary,
+.partnership-card .btn-secondary {
+    margin-top: auto; /* Empurra o botão para o final do card */
+    font-size: 0.95rem; /* Tamanho da fonte do botão */
+    padding: 10px 20px;
+}
+
+/* --- RESPONSIVIDADE ESPECÍFICA PARA OS CARDS --- */
+@media (max-width: 768px) {
+    .community-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+        max-width: none; /* Permite que a grid ocupe toda a largura */
+        padding: 0 15px; /* Padding nas laterais */
+    }
+
+    .community-card,
+    .partnership-card {
+        padding: 25px 20px; /* Ajusta padding para telas menores */
+    }
+
+    .member-avatar {
+        width: 70px;
+        height: 70px;
+    }
+
+    .partnership-logo {
+        max-width: 100px;
+    }
+
+    .community-card h3,
+    .partnership-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .community-card p,
+    .partnership-card p {
+        font-size: 0.9rem;
+    }
+}
