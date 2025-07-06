@@ -629,7 +629,7 @@ h2 .fas, h3 .fas {
 }
 
 /* ===================================== */
-/* 12. Controle de Áudio - NOVO SISTEMA  */
+/* 12. Controle de Áudio - NOVO SISTEMA  */
 /* ===================================== */
 
 /* Container para posicionamento fixo do botão de áudio */
@@ -658,7 +658,7 @@ h2 .fas, h3 .fas {
     border: 2px solid transparent; /* Borda transparente inicial */
     box-shadow: none; /* Sem sombra padrão */
     overflow: hidden; /* Importante para o SVG e o efeito neon */
-    transition: transform 0.2s ease; /* Transição para o hover */
+    transition: transform 0.2s ease, box-shadow 0.3s ease; /* Adicione box-shadow para transição suave */
     padding: 0; /* Remover padding para centralizar melhor o ícone */
 }
 
@@ -678,25 +678,59 @@ h2 .fas, h3 .fas {
 /* Estilo para o ícone de música dentro do botão */
 .audio-control-button .audio-icon {
     font-size: 2.2em; /* Tamanho do ícone */
-    position: relative;
+    position: absolute; /* Use absolute para sobrepô-los no mesmo lugar */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o ícone perfeitamente */
     z-index: 3; /* Acima do neon e do progresso */
-    transition: transform 0.3s ease; /* Transição para a rotação */
-    display: flex; /* Para centralizar o ícone Font Awesome */
-    justify-content: center;
-    align-items: center;
-    width: 100%; /* Ocupa a largura total do botão para centralização */
-    height: 100%; /* Ocupa a altura total do botão para centralização */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transição para fade e rotação */
 }
 
-/* Ícone girando quando a música está tocando */
-#audioControlButton.is-playing .audio-icon {
+/* Definindo a visibilidade inicial dos ícones */
+/* Por padrão, o ícone "on-icon" (volume-up) estará visível se o botão não tiver a classe 'is-playing' (ou 'off' como no seu HTML inicial) */
+/* E o ícone "off-icon" (volume-mute) estará invisível */
+
+.audio-control-button .on-icon {
+    display: none; /* Começa escondido, mostra quando 'is-playing' */
+    opacity: 0;
+}
+
+.audio-control-button .off-icon {
+    display: inline-block; /* Começa visível, mostra quando não 'is-playing' */
+    opacity: 1;
+}
+
+/* Ícone girando e visível quando a música está tocando */
+#audioControlButton.is-playing .on-icon {
+    display: inline-block; /* Torna visível */
+    opacity: 1;
     animation: icon-spin 2s linear infinite; /* Animação de rotação contínua */
+}
+
+/* Esconde o ícone de 'mute' quando a música está tocando */
+#audioControlButton.is-playing .off-icon {
+    display: none;
+    opacity: 0;
+    animation: none; /* Garante que não gire se estava girando */
+}
+
+/* Quando a música está pausada/desligada, o 'on-icon' deve estar invisível */
+#audioControlButton:not(.is-playing) .on-icon {
+    display: none;
+    opacity: 0;
+    animation: none;
+}
+
+/* Quando a música está pausada/desligada, o 'off-icon' deve estar visível */
+#audioControlButton:not(.is-playing) .off-icon {
+    display: inline-block;
+    opacity: 1;
 }
 
 /* Keyframes para a animação de rotação do ícone */
 @keyframes icon-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% { transform: translate(-50%, -50%) rotate(0deg); } /* Ajuste para manter centralizado ao girar */
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Estilo do botão quando a música está tocando (classe 'is-playing' adicionada via JS) */

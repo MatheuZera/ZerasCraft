@@ -4,14 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioControlButton = document.getElementById('audioControlButton');
     const centralMessage = document.getElementById('centralMessage');
     const progressArc = audioControlButton.querySelector('.arc-progress');
-    const audioIcon = audioControlButton.querySelector('.audio-icon i'); // O ícone de música Font Awesome
 
-    // --- Referência para o som de hover dos cards ---
+    // Referências aos ícones específicos
+    const onIcon = audioControlButton.querySelector('.on-icon'); // Ícone de "volume-up"
+    const offIcon = audioControlButton.querySelector('.off-icon'); // Ícone de "volume-mute"
+
+    // --- Referência para os sons de efeito ---
     const cardHoverSound = document.getElementById('cardHoverSound');
+    const clickSound = document.getElementById('clickSound'); // Referência para o click.mp3
+    const selectSound = document.getElementById('selectSound'); // Referência para o select.mp3
 
     // --- Seleciona todos os cards ---
-    // IMPORTANTE: Substitua '.card' pela CLASSE REAL dos seus cards.
-    const cards = document.querySelectorAll('.card'); //
+    const cards = document.querySelectorAll('.card');
 
     // --- Playlist de Músicas ---
     const playlist = [
@@ -39,15 +43,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const circumference = 100; // Valor para o SVG do progresso
     let messageTimeout; // Para controlar o timeout da mensagem central
 
+    // --- Funções Auxiliares de Áudio ---
+
+    // Função genérica para tocar efeitos sonoros
+    function playSoundEffect(audioElement) {
+        if (audioElement) {
+            audioElement.currentTime = 0; // Reinicia o áudio
+            audioElement.play().catch(e => {
+                // console.warn("Erro ao tocar efeito sonoro:", e);
+                // Captura erros de reprodução automática sem interação do usuário
+            });
+        }
+    }
+
     // --- Funções do Player de Música ---
 
     function updateProgressBar() {
-        if (!backgroundMusic.paused && !backgroundMusic.ended) {
+        if (!backgroundMusic.paused && !backgroundMusic.ended && backgroundMusic.duration > 0) {
             const percentage = (backgroundMusic.currentTime / backgroundMusic.duration) * 100;
             const offset = circumference - (percentage / 100) * circumference;
-            progressArc.style.strokeDasharray = `${percentage}, ${circumference}`;
-            progressArc.style.strokeDashoffset = offset;
+            progressArc.style.strokeDasharray = `${circumference}, ${circumference}`; // Define o tamanho total do círculo
+            progressArc.style.strokeDashoffset = offset; // Define o quanto do círculo deve ser preenchido
         } else {
+            // Reinicia a barra de progresso quando a música está pausada ou não iniciada
             progressArc.style.strokeDasharray = `0, ${circumference}`;
             progressArc.style.strokeDashoffset = circumference;
         }
@@ -58,15 +76,16 @@ document.addEventListener('DOMContentLoaded', () => {
         loadAndPlayCurrentTrack(); // Carrega e toca a próxima música
     }
 
-    // Atualiza o estado visual do botão (classe 'is-playing' e rotação do ícone)
+    // Atualiza o estado visual do botão (classe 'is-playing' e troca de ícones)
     function updateButtonState(isPlaying) {
         if (isPlaying) {
             audioControlButton.classList.add('is-playing');
-            // O ícone de música já está fixo, então não precisa alternar classes de ícone
+            onIcon.style.display = 'inline-block'; // Mostra o ícone de volume-up
+            offIcon.style.display = 'none'; // Esconde o ícone de volume-mute
         } else {
             audioControlButton.classList.remove('is-playing');
-            // Garante que o ícone de música esteja sempre visível e sem rotação quando pausado
-            audioIcon.style.transform = 'rotate(0deg)';
+            onIcon.style.display = 'none'; // Esconde o ícone de volume-up
+            offIcon.style.display = 'inline-block'; // Mostra o ícone de volume-mute
         }
     }
 
@@ -110,19 +129,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Inicialização ao Carregar a Página ---
     const userPrefersMusic = localStorage.getItem('musicEnabled');
 
+    // Define o estado inicial do botão e da música
     if (userPrefersMusic === 'true') {
         // Tenta tocar a música se a preferência for 'true'
         loadAndPlayCurrentTrack();
     } else {
         // Garante que o estado inicial seja "desligado"
         backgroundMusic.pause();
-        updateButtonState(false);
+        updateButtonState(false); // Define o ícone inicial como volume-mute
     }
 
     // --- Event Listeners ---
 
     // Listener para o clique no botão de controle de áudio
     audioControlButton.addEventListener('click', () => {
+        // Toca o som de clique ao interagir com o botão principal
+        playSoundEffect(clickSound);
+
         if (backgroundMusic.paused) {
             loadAndPlayCurrentTrack();
             localStorage.setItem('musicEnabled', 'true');
@@ -144,28 +167,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Listener para o som de hover dos cards ---
     cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
-            if (cardHoverSound) {
-                cardHoverSound.currentTime = 0; // Reinicia o áudio para que ele toque sempre do início
-                cardHoverSound.play().catch(e => {
-                    // console.warn("Erro ao tocar o som de hover do card:", e);
-                    // Erros de reprodução automática sem interação explícita do usuário são comuns em navegadores.
-                    // Manter em warn ou comentar para evitar poluir o console em produção.
-                });
-            }
+            playSoundEffect(cardHoverSound); // Usa a função auxiliar
         });
     });
 
-    // --- Verificação para cliques em links (se eles não estiverem funcionando) ---
-    // Se seus links não estão funcionando, pode ser que algum script esteja impedindo o comportamento padrão.
-    // Este código é um exemplo e deve ser adaptado.
-    // const allLinks = document.querySelectorAll('a');
-    // allLinks.forEach(link => {
-    //     link.addEventListener('click', (event) => {
-    //         // Se você tem algum código que impede o comportamento padrão do link, como:
-    //         // event.preventDefault();
-    //         // Remova-o ou adicione uma lógica condicional para permitir a navegação.
-    //         console.log("Link clicado:", link.href);
-    //         // Se o link deve navegar, não adicione event.preventDefault() aqui.
-    //     });
-    // });
+    // Adicione um listener de clique a todos os cards para tocar o som de "select"
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            playSoundEffect(selectSound); // Toca o som de select ao clicar no card
+        });
+    });
 });
