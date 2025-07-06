@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const minecraftAudio = document.getElementById('minecraftAudio');
     const playAudioBtn = document.getElementById('playAudioBtn');
 
-    // Define o volume para o áudio do Minecraft (por exemplo, 0.7 = 70% do volume máximo)
+    // Define o volume para o áudio do Minecraft
     if (minecraftAudio) {
-        minecraftAudio.volume = 0.7; // AJUSTE ESTE VALOR PARA O VOLUME DESEJADO DO ÁUDIO DE FUNDO
+        minecraftAudio.volume = 0.7; // AJUSTE ESTE VALOR
     }
 
     if (playAudioBtn && minecraftAudio) {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Lógica para o som de clique em interações ---
     const clickAudio = new Audio('audios/click.mp3');
     clickAudio.preload = 'auto'; 
-    clickAudio.volume = 0.4; // AJUSTE ESTE VALOR PARA O VOLUME DESEJADO DO SOM DE CLIQUE (ex: 0.4 = 40%)
+    clickAudio.volume = 0.4; // AJUSTE ESTE VALOR
 
     document.addEventListener('click', function(event) {
         const clickedElement = event.target;
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Lógica para reproduzir select.mp3 ao passar o mouse/toque nas abas/cards ---
     const selectAudio = new Audio('audios/select.mp3');
     selectAudio.preload = 'auto'; 
-    selectAudio.volume = 0.1; // AJUSTE ESTE VALOR PARA O VOLUME DESEJADO DO SOM DE SELEÇÃO (ex: 0.3 = 30%)
+    selectAudio.volume = 0.3; // AJUSTE ESTE VALOR
 
     const interactiveCards = document.querySelectorAll(
         '.service-card, .role-category-card, .event-card, .community-card, .partnership-card'
@@ -94,5 +94,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     interactiveCards.forEach(card => {
         card.addEventListener('mouseenter', playSelectSound);
+    });
+
+    // --- NOVO: Tenta reproduzir select.mp3 assim que o DOM é carregado ---
+    // ATENÇÃO: Isso pode ser bloqueado por políticas de autoplay do navegador.
+    // O som só tocará se o navegador permitir (geralmente após uma interação do usuário).
+    selectAudio.play().catch(e => {
+        console.warn("Tentativa de reprodução automática de 'select.mp3' bloqueada pelo navegador:", e);
+        console.warn("Para que o áudio toque, o usuário precisará interagir com a página (ex: clicar em qualquer lugar).");
     });
 });
