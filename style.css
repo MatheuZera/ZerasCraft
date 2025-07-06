@@ -1,4 +1,4 @@
-/* Variáveis CSS para cores e fontes (verifique se já existem no seu CSS e ajuste se necessário) */
+/* Variáveis CSS para cores e fontes */
 :root {
     --color-primary: #528c50; /* Um verde Minecraft mais vibrante */
     --color-primary-dark: #3a6b39; /* Verde mais escuro para hover/destaque */
@@ -12,10 +12,6 @@
     --color-border: #4a4d52; /* Cor de borda para cards e elementos */
     --color-link: #7289da; /* Cor de link padrão (azul Discord) */
     --color-link-hover: #99aab5; /* Cor de link hover */
-    --color-red: #da4f4f; /* Cor para erros/alertas */
-
-    --font-primary: 'Montserrat', sans-serif;
-    --font-secondary: 'Open Sans', sans-serif;
 }
 
 body {
@@ -25,7 +21,7 @@ body {
     background-color: var(--color-background-dark);
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Evita rolagem horizontal */
+    overflow-x: hidden;
 }
 
 .container {
@@ -34,7 +30,7 @@ body {
     padding: 0 20px;
 }
 
-/* --- Header --- */
+/* Header */
 .main-header {
     background-color: var(--color-background-dark);
     padding: 20px 0;
@@ -43,7 +39,7 @@ body {
 
 .header-content {
     display: flex;
-    justify-content: center; /* Centraliza o logo */
+    justify-content: center;
     align-items: center;
 }
 
@@ -56,13 +52,13 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* --- Seções Gerais --- */
+/* Seções Gerais */
 .section-padded {
     padding: 80px 0;
 }
 
 .section-alt-bg {
-    background-color: var(--color-background-light); /* Cor de fundo para seções alternadas (clara) */
+    background-color: var(--color-background-light);
 }
 
 .section-title {
@@ -87,7 +83,7 @@ body {
 }
 
 .section-title img {
-    height: 40px; /* Ajuste o tamanho do ícone ao lado do título */
+    height: 40px;
     vertical-align: middle;
     margin-right: 10px;
 }
@@ -101,8 +97,8 @@ body {
     opacity: 0.9;
 }
 
-/* --- Botões --- */
-.btn-primary, .btn-secondary, .btn-link, .btn-pixel-legends {
+/* Botões */
+.btn-primary, .btn-secondary, .btn-link, .btn-pixel-legends, .btn-copy-ip {
     display: inline-block;
     padding: 15px 30px;
     border-radius: 8px;
@@ -142,7 +138,6 @@ body {
 
 .btn-link {
     background: none;
-    border: none;
     color: var(--color-link);
     padding: 0;
     font-size: 1em;
@@ -154,16 +149,16 @@ body {
     text-decoration: none;
 }
 
-/* --- Hero Section --- */
+/* Hero Section */
 .hero-section {
     position: relative;
-    height: 100vh; /* Ocupa a altura total da viewport */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: #fff;
-    background-image: url('images/site/background-hero.gif'); /* Seu gif de fundo */
+    background-image: url('images/site/background-hero.gif');
     background-size: cover;
     background-position: center;
     animation: fadeIn 1s ease-in;
@@ -175,14 +170,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Escurece o fundo */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    padding-top: 80px; /* Espaço para o header */
+    padding-top: 80px;
 }
 
 .server-branding {
@@ -204,7 +199,7 @@ body {
     border-radius: 50%;
     border: 4px solid var(--color-secondary);
     object-fit: cover;
-    margin-top: -60px; /* Sobrepõe o banner */
+    margin-top: -60px;
     position: relative;
     z-index: 3;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
@@ -222,12 +217,11 @@ body {
     font-size: 1.5em;
     margin-bottom: 40px;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto; /* Shorthand for margin-left/right: auto */
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* --- Sobre o Mundo Zera's Craft --- */
+/* Conteúdo de duas colunas (usado em "Sobre" e "Pixel Legends") */
 .content-two-columns {
     display: flex;
     align-items: center;
@@ -240,14 +234,14 @@ body {
 
 .content-two-columns .image-content {
     flex: 1;
-    text-align: center; /* Centraliza a imagem se ela for menor */
+    text-align: center;
 }
 
 .responsive-image {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto; /* Centraliza a imagem */
+    margin: 0 auto;
 }
 
 .bordered-image {
@@ -256,83 +250,65 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* --- Nossos Recursos & Apoio (Serviços) --- */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.service-card {
+/* Cards (uso geral: Serviços, Canais & Cargos, Eventos, Membros, Parceiros) */
+.service-card, .role-category-card, .event-card, .community-card, .partnership-card, .feature-card, .access-card {
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-border);
     border-radius: 10px;
-    padding: 30px;
-    text-align: center;
+    padding: 30px; /* Base padding */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* Default alignment */
 }
 
-.service-card:hover {
+.service-card:hover, .role-category-card:hover, .event-card:hover, .community-card:hover, .partnership-card:hover, .feature-card:hover, .access-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.service-card .card-icon {
+.card-icon {
     width: 80px;
     height: 80px;
     margin-bottom: 20px;
 }
 
-.service-card .card-title {
+.card-title {
     font-family: var(--font-primary);
     font-size: 1.6em;
     color: var(--color-primary);
     margin-bottom: 10px;
 }
 
-.service-card .card-description {
+.card-description {
     font-size: 1em;
     color: var(--color-text-light);
     opacity: 0.8;
 }
 
-/* --- Canais & Cargos --- */
+/* Grid de Serviços */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Canais & Cargos */
 .roles-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
 
-.role-category-card {
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.role-category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
 .role-category-card .role-category-icon {
     width: 60px;
     height: 60px;
-    margin-bottom: 15px;
-    display: block; /* Garante que o ícone esteja em sua própria linha */
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 15px; /* Centraliza e adiciona margem inferior */
+    display: block;
 }
 
 .role-category-card .card-title {
-    font-family: var(--font-primary);
     font-size: 1.4em;
     color: var(--color-secondary);
-    text-align: center;
-    margin-bottom: 15px;
 }
 
 .role-list {
@@ -351,7 +327,7 @@ body {
     border-bottom: none;
 }
 
-/* --- Eventos --- */
+/* Eventos */
 .events-sub-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -359,47 +335,33 @@ body {
 }
 
 .event-card {
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 0; /* Override default card padding */
     display: flex;
-    flex-direction: column; /* Organiza conteúdo verticalmente */
-}
-
-.event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .event-card .event-image {
     width: 100%;
-    height: 200px; /* Altura fixa para a imagem do evento */
-    object-fit: cover; /* Garante que a imagem cubra o espaço */
+    height: 200px;
+    object-fit: cover;
     border-bottom: 1px solid var(--color-border);
 }
 
 .event-card .card-content {
     padding: 20px;
-    flex-grow: 1; /* Permite que o conteúdo expanda */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .event-card .card-title {
-    font-family: var(--font-primary);
     font-size: 1.4em;
-    color: var(--color-primary);
-    margin-bottom: 10px;
 }
 
 .event-card .card-description {
-    font-size: 0.95em;
-    color: var(--color-text-light);
+    flex-grow: 1;
     margin-bottom: 15px;
-    flex-grow: 1; /* Permite que a descrição ocupe o espaço disponível */
 }
 
 .event-card .event-details strong {
@@ -407,21 +369,14 @@ body {
 }
 
 .event-card .btn-link {
-    margin-top: 15px; /* Espaçamento acima do botão */
-    align-self: flex-start; /* Alinha o botão à esquerda */
+    margin-top: 15px;
+    align-self: flex-start;
 }
 
-/* --- NOVA SEÇÃO: PIXEL LEGENDS (Estilos Específicos) --- */
-#pixel-legends {
-    padding: 80px 0;
-    /* Remover background-color aqui para que use o background-dark do body */
-}
-
+/* Pixel Legends */
 #pixel-legends .content-two-columns {
-    display: flex;
     flex-wrap: wrap;
     gap: 40px;
-    align-items: center;
     margin-bottom: 50px;
 }
 
@@ -438,14 +393,14 @@ body {
 #pixel-legends .text-content h3 {
     font-family: var(--font-primary);
     font-size: 1.8em;
-    color: var(--color-secondary); /* Destaque com cor secundária */
-    margin-top: 30px; /* Espaçamento entre os tópicos */
+    color: var(--color-secondary);
+    margin-top: 30px;
     margin-bottom: 15px;
     padding-bottom: 5px;
 }
 
 #pixel-legends .text-content h3:first-of-type {
-    margin-top: 0; /* Primeiro h3 não precisa de margin-top extra */
+    margin-top: 0;
 }
 
 #pixel-legends .text-content p {
@@ -464,16 +419,14 @@ body {
     text-decoration: underline;
 }
 
-#pixel-legends .guild-roles-list,
-#pixel-legends .plugin-list {
+.guild-roles-list, .plugin-list {
     list-style: none;
     padding: 0;
     margin-top: 20px;
 }
 
-#pixel-legends .guild-roles-list li,
-#pixel-legends .plugin-list li {
-    background-color: var(--color-background-dark); /* Fundo mais escuro para itens de lista */
+.guild-roles-list li, .plugin-list li {
+    background-color: var(--color-background-dark);
     border-left: 5px solid var(--color-accent);
     padding: 10px 15px;
     margin-bottom: 10px;
@@ -482,25 +435,22 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-#pixel-legends .guild-roles-list li strong,
-#pixel-legends .plugin-list li strong {
-    color: var(--color-primary); /* Destaque em verde para nomes */
+.guild-roles-list li strong, .plugin-list li strong {
+    color: var(--color-primary);
 }
 
-/* Novo estilo para os botões de link em Pixel Legends */
 .btn-pixel-legends {
-    background-color: var(--color-card-bg); /* Fundo similar ao de cards */
+    background-color: var(--color-card-bg);
     color: var(--color-secondary);
     border: 1px solid var(--color-border);
     padding: 12px 25px;
     margin-top: 10px;
-    margin-bottom: 25px; /* Espaço após o botão */
+    margin-bottom: 25px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95em;
-    transition: all 0.3s ease;
-    display: inline-block; /* Permite margens e paddings */
+    display: inline-block;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -512,7 +462,7 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Grid para funcionalidades do servidor (Software/Plugins) */
+/* Pixel Legends Features Grid (Software/Plugins) */
 .pixel-legends-features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -523,24 +473,14 @@ body {
 }
 
 .pixel-legends-features-grid .section-subtitle {
-    grid-column: 1 / -1; /* Ocupa todas as colunas */
+    grid-column: 1 / -1;
     text-align: center;
     margin-bottom: 30px;
     color: var(--color-primary);
 }
 
 .feature-card {
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    padding: 25px; /* Overrides general card padding */
 }
 
 .feature-card h4 {
@@ -551,7 +491,7 @@ body {
     text-align: center;
 }
 
-/* Estilos para cards de Acesso ao Servidor (Java/Bedrock) */
+/* Acesso ao Servidor (Java/Bedrock) */
 .server-access-info {
     margin-top: 60px;
     padding-top: 30px;
@@ -571,20 +511,9 @@ body {
 }
 
 .access-card {
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 25px;
-    text-align: center;
+    padding: 25px; /* Overrides general card padding */
     flex: 1;
     min-width: 280px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.access-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .access-card h4 {
@@ -608,81 +537,59 @@ body {
     padding: 5px 10px;
     border-radius: 5px;
     display: inline-block;
-    color: var(--color-highlight, #7289da); /* Cor de destaque, se definida */
+    color: var(--color-link); /* Reutilizando color-link para destaque */
     font-weight: 600;
 }
 
-/* Novo estilo para os botões de Copiar IP com imagem de fundo */
+/* Botões de Copiar IP */
 .btn-copy-ip {
-    display: flex; /* Permite alinhar conteúdo e imagem */
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--color-primary);
     color: #fff;
-    border: none;
     padding: 10px 20px;
-    border-radius: 8px; /* Mais arredondado */
+    padding-left: 45px; /* Espaço para o ícone */
+    border-radius: 8px;
     font-size: 1em;
-    cursor: pointer;
     margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: var(--font-primary);
-    font-weight: 600;
-    position: relative; /* Para posicionar o pseudo-elemento da imagem */
-    overflow: hidden; /* Garante que a imagem de fundo não "vaze" */
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-copy-ip::before {
     content: '';
     position: absolute;
     top: 50%;
-    left: 10px; /* Distância da borda esquerda */
+    left: 10px;
     transform: translateY(-50%);
-    width: 24px; /* Tamanho do ícone */
+    width: 24px;
     height: 24px;
     background-size: contain;
     background-repeat: no-repeat;
-    opacity: 0.8; /* Levemente transparente */
+    opacity: 0.8;
     transition: opacity 0.3s ease;
 }
 
-.btn-copy-ip:hover {
-    background-color: var(--color-primary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
 .btn-copy-ip:hover::before {
-    opacity: 1; /* Ícone fica totalmente visível no hover */
+    opacity: 1;
 }
 
-/* Imagens de fundo específicas para cada botão de copiar */
 .bedrock-copy-btn::before {
-    background-image: url('images/buttons/bedrock-icon.webp'); /* Caminho para o ícone Bedrock */
+    background-image: url('images/buttons/bedrock-icon.webp');
 }
 
 .java-copy-btn::before {
-    background-image: url('images/buttons/java-icon.webp'); /* Caminho para o ícone Java */
+    background-image: url('images/buttons/java-icon.webp');
 }
 
-/* Ajuste do padding para o texto não ficar em cima do ícone */
-.btn-copy-ip {
-    padding-left: 45px; /* Aumenta o padding esquerdo para acomodar o ícone */
-}
-
-/* --- Administração & Segurança --- */
+/* Administração & Segurança */
 .admin-security-section {
-    padding: 80px 0;
-    background-color: var(--color-background-dark); /* Garante fundo escuro */
+    background-color: var(--color-background-dark);
 }
 
 .security-card {
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    margin-top: 40px; /* Espaço abaixo do título da seção */
+    margin-top: 40px;
 }
 
 .security-card .card-content h3 {
@@ -695,11 +602,11 @@ body {
 }
 
 .security-grid-item {
-    background-color: var(--color-background-dark); /* Fundo mais escuro para itens da grid */
+    background-color: var(--color-background-dark);
     border: 1px solid var(--color-border);
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 20px; /* Espaço entre os itens da grid */
+    margin-bottom: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -722,27 +629,12 @@ body {
     margin-bottom: 15px;
 }
 
-/* --- Membros & Parceiros --- */
-.community-grid, .partnership-grid { /* Unificar ou separar conforme necessidade */
+/* Membros & Parceiros */
+.community-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 40px;
-}
-
-.community-card, .partnership-card {
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.community-card:hover, .partnership-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .member-avatar, .partnership-logo {
@@ -761,9 +653,9 @@ body {
     margin-bottom: 10px;
 }
 
-/* --- Call to Action --- */
+/* Call to Action */
 .call-to-action {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/site/call-to-action-bg.jpg'); /* Adicione uma imagem de fundo para o CTA */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/site/call-to-action-bg.jpg');
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -772,12 +664,11 @@ body {
 
 .call-to-action .section-title,
 .call-to-action .section-description {
-    color: #fff; /* Garante que o texto seja branco sobre a imagem */
+    color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-
-/* --- Footer --- */
+/* Footer */
 .main-footer {
     background-color: var(--color-background-dark);
     color: var(--color-text-light);
@@ -788,32 +679,32 @@ body {
     opacity: 0.8;
 }
 
-/* --- Botão de Áudio Flutuante --- */
+/* Botão de Áudio Flutuante */
 #playAudioBtn {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 1000;
-    width: 60px; /* Tamanho do botão */
+    width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: var(--color-secondary); /* Cor inicial desligado */
+    background-color: var(--color-secondary);
     color: var(--color-text-dark);
-    font-size: 0; /* Oculta o texto para usar apenas ícone/animação */
+    font-size: 0;
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     transition: background-color 0.3s ease, transform 0.3s ease;
-    display: none; /* Inicia oculto */
-    background-image: url('images/icons/speaker-off.png'); /* Ícone de desligado */
+    display: none;
+    background-image: url('images/icons/speaker-off.png');
     background-size: 60%;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 #playAudioBtn.play-audio-btn-on {
-    background-color: var(--color-primary); /* Cor quando ligado */
-    background-image: url('images/icons/speaker-on.png'); /* Ícone de ligado */
+    background-color: var(--color-primary);
+    background-image: url('images/icons/speaker-on.png');
 }
 
 #playAudioBtn:hover {
@@ -856,11 +747,12 @@ body {
     }
     .content-two-columns {
         flex-direction: column;
+        gap: 30px; /* Ajuste o gap para mobile */
     }
     .content-two-columns.reverse-columns {
-        flex-direction: column; /* Garante que empilhe em mobile, mesmo invertido */
+        flex-direction: column;
     }
-    .services-grid, .roles-grid, .events-sub-grid, .community-grid, .partnership-grid, .access-details-grid, .pixel-legends-features-grid {
+    .services-grid, .roles-grid, .events-sub-grid, .community-grid, .access-details-grid, .pixel-legends-features-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
@@ -878,7 +770,7 @@ body {
     .section-padded {
         padding: 50px 0;
     }
-    .btn-primary, .btn-secondary {
+    .btn-primary, .btn-secondary, .btn-pixel-legends, .btn-copy-ip { /* Agrupado */
         padding: 12px 25px;
         font-size: 1em;
     }
@@ -911,7 +803,7 @@ body {
     .header-logo {
         font-size: 1.5em;
     }
-    .btn-primary, .btn-secondary {
+    .btn-primary, .btn-secondary, .btn-pixel-legends, .btn-copy-ip { /* Agrupado */
         padding: 10px 20px;
         font-size: 0.9em;
     }
