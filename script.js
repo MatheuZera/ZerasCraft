@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Array de músicas para o player (ajuste os caminhos conforme necessário)
     const musicPlaylist = [
+        "audios/musics/Aria-Math-Lofi-Remake.mp3",
         "audios/musics/Aria-Math.mp3",
         "audios/musics/Biome-Fest.mp3",
         "audios/musics/Blind-Spots.mp3",
