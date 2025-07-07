@@ -512,26 +512,35 @@
         </section>
     </main>
 
-<div class="audio-control-button-container">
-    <span id="currentMusicTitle" class="music-title-display">Música Desligada</span>
+    <audio id="backgroundMusic" loop preload="auto">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
 
-    <button id="audioControlButton" class="audio-control-button">
-        <i class="fas fa-volume-up audio-icon icon-on"></i>
-        <i class="fas fa-volume-mute audio-icon icon-off"></i>
-        <div class="neon-effect"></div>
-        <svg class="audio-progress-arc" viewBox="0 0 40 40">
-            <circle class="arc-background" cx="20" cy="20" r="16"></circle>
-            <circle class="arc-progress" cx="20" cy="20" r="16"></circle>
-        </svg>
-    </button>
-</div>
+    <audio id="cardHoverSound" src="audios/effects/hover.mp3" preload="auto"></audio>
+    <audio id="clickSound" src="audios/effects/click.mp3" preload="auto"></audio>
+    <audio id="selectSound" src="audios/effects/select.mp3" preload="auto"></audio>
 
-<audio id="background-music" loop>
-<source src="music/minecraft-theme.mp3" type="audio/mpeg">
-    Seu navegador não suporta o elemento de áudio.
-</audio>
+    <div class="audio-control-button-container">
+        <span id="currentMusicTitle" class="music-title-display">Música Desligada</span>
+        
+        <button id="audioControlButton" class="audio-control-button" aria-label="Controlar Música de Fundo">
+            <svg class="audio-progress-arc" viewBox="0 0 40 40">
+                <circle class="arc-background" cx="20" cy="20" r="16"></circle>
+                <circle class="arc-progress" cx="20" cy="20" r="16"></circle>
+            </svg>
+            <div class="neon-effect"></div>
+            <i class="fas fa-volume-up audio-icon icon-on"></i>   <i class="fas fa-volume-mute audio-icon icon-off"></i> </button>
+    </div>
 
-    <script src="script.js" defer></script>
+    <div id="centralMessage" class="central-message"></div>
 
+    <footer class="main-footer">
+        <div class="container">
+            <span class="footer-logo">Zera's Craft</span>
+            <p>&copy; 2025 Mundo Zera's Craft. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
