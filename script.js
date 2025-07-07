@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Playlist de Músicas ---
     const playlist = [
+        { title: "Aria-Math-Lofi", src: "audios/musics/Aria-Math-Lofi-Remake.mp3" },
         { title: "Aria-Math", src: "audios/musics/Aria-Math.mp3" },
         { title: "Beginning 2", src: "audios/musics/Beginning-2.mp3" },
         { title: "Biome-Fest", src: "audios/musics/Biome-Fest.mp3" },
