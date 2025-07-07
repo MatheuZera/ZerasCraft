@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // =====================================
+    // 1. Menu Responsivo
+    // =====================================
     const menuToggle = document.querySelector('.menu-toggle');
-    const mainNavList = document.getElementById('main-nav-list'); // Agora usa o ID
+    const mainNavList = document.getElementById('main-nav-list');
 
     if (menuToggle && mainNavList) {
         menuToggle.addEventListener('click', function() {
@@ -8,128 +11,186 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Código existente para os efeitos sonoros dos botões e cards
-    const buttonsWithSound = document.querySelectorAll('[data-sound-effect="select"]');
-    const clickSound = document.getElementById('clickSoundEffect');
+    // =====================================
+    // 2. Efeitos Sonoros Gerais (Click e Hover/Select)
+    // =====================================
+    const clickSoundEffect = new Audio('audios/effects/click.mp3'); // Som de clique para botões/links
+    const selectSoundEffect = new Audio('audios/effects/select.mp3'); // Som de hover/seleção para cards
+    const animationEndSound = new Audio('audios/effects/hover-complete.mp3'); // Som de final de animação do card
 
-    buttonsWithSound.forEach(button => {
-        button.addEventListener('click', () => {
-            if (clickSound) {
-                clickSound.currentTime = 0; // Reinicia o áudio se já estiver tocando
-                clickSound.play();
+    // Função auxiliar para tocar som, lidando com erros de autoplay
+    function playSound(audioElement) {
+        audioElement.currentTime = 0; // Reinicia o áudio
+        audioElement.play().catch(e => console.warn("Erro ao tocar efeito sonoro:", e.message));
+    }
+
+    // Clique em Botões e Links
+    document.querySelectorAll('a, button[data-sound-effect="select"]').forEach(element => {
+        // Exclui o botão de controle de áudio principal para evitar dois sons de clique
+        if (element.id !== 'audioControlButton') {
+            element.addEventListener('click', (event) => {
+                playSound(clickSoundEffect);
+
+                // Previne navegação imediata para links internos para permitir o som
+                if (element.tagName === 'A' && element.href && element.getAttribute('target') !== '_blank' && element.href.startsWith(window.location.origin)) {
+                    event.preventDefault();
+                    setTimeout(() => {
+                        window.location.href = element.href;
+                    }, 200); // Pequeno atraso para o som tocar
+                }
+            });
+        }
+    });
+
+    // Hover/Interação em Cards
+    const playedAnimationEndSound = new WeakSet(); // Rastreia cards para som de final de animação
+
+    const cardSelectors = [
+        '.service-card',
+        '.role-category-card',
+        '.access-card',
+        '.event-card',
+        '.community-card',
+        '.partnership-card',
+        '.partnership-proposal-card',
+        '.security-card', // Adicionado, se aplicável
+        '.card' // Adicionado para cobrir cards genéricos, se houver
+    ].join(', ');
+
+    document.querySelectorAll(cardSelectors).forEach(cardElement => {
+        cardElement.addEventListener('mouseenter', () => {
+            playSound(selectSoundEffect);
+            playedAnimationEndSound.delete(cardElement); // Reseta para que o som de animação toque novamente
+        });
+
+        cardElement.addEventListener('transitionend', (event) => {
+            // Monitora a transição da propriedade 'transform' (ou outra que defina a animação do hover)
+            // e verifica se o mouse ainda está sobre o card e se o som já não tocou.
+            if (event.propertyName === 'transform' && cardElement.matches(':hover') && !playedAnimationEndSound.has(cardElement)) {
+                playSound(animationEndSound);
+                playedAnimationEndSound.add(cardElement); // Marca que o som já tocou
             }
+        });
+
+        cardElement.addEventListener('mouseleave', () => {
+            playedAnimationEndSound.delete(cardElement); // Reseta o estado
+        });
+
+        // Opcional: Efeitos sonoros em foco (para acessibilidade com teclado)
+        cardElement.addEventListener('focus', () => {
+            playSound(selectSoundEffect);
+        });
+        cardElement.addEventListener('blur', () => {
+            playedAnimationEndSound.delete(cardElement); // Reseta o estado
         });
     });
 
-    const cardsWithSound = document.querySelectorAll('[data-sound-id]');
-    cardsWithSound.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            if (clickSound) { // Usando o mesmo som para hover em cards
-                clickSound.currentTime = 0;
-                clickSound.play();
-            }
-        });
-    });
 
-
-    // Lógica para controle de áudio de fundo
+    // =====================================
+    // 3. Lógica para Controle de Áudio de Fundo (Música Aleatória)
+    // =====================================
     const audioControlButton = document.getElementById('audioControlButton');
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const currentMusicTitle = document.getElementById('currentMusicTitle');
+    const backgroundMusic = document.getElementById('backgroundMusic'); // Certifique-se que o ID é backgroundMusic
+    const currentMusicTitleDisplay = document.getElementById('currentMusicTitle'); // Certifique-se que o ID é currentMusicTitle
+    const centralMessageDisplay = document.getElementById('centralMessage'); // Elemento para mensagens de feedback
 
-    const audioProgressArc = document.querySelector('.audio-progress-arc'); // Seleciona o SVG do arco
-    const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null; // Seleciona o círculo de progresso
+    const audioProgressArc = document.querySelector('.audio-progress-arc');
+    const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
 
     // Array de músicas para o player (ajuste os caminhos conforme necessário)
+    // Títulos foram adicionados para melhor exibição
     const musicPlaylist = [
-        "audios/musics/Aria-Math.mp3",
-        "audios/musics/Aria-Math.mp3",
-        "audios/musics/Biome-Fest.mp3",
-        "audios/musics/Blind-Spots.mp3",
-        "audios/musics/Clark.mp3",
-        "audios/musics/Danny.mp3",
-        "audios/musics/Dreiton.mp3",
-        "audios/musics/Dry-Hands.mp3",
-        "audios/musics/Floating-Trees.mp3",
-        "audios/musics/Haggstrom.mp3",
-        "audios/musics/Haunt-Muskie.mp3",
-        "audios/musics/Key.mp3",
-        "audios/musics/Living-Mice.mp3",
-        "audios/musics/Minecraft.mp3",
-        "audios/musics/Moog-City 2.mp3",
-        "audios/musics/Mutation.mp3",
-        "audios/musics/Oxygène.mp3",
-        "audios/musics/Subwoofer-Lullaby.mp3",
-        "audios/musics/Sweden.mp3",
-        "audios/musics/Taswell.mp3",
-        "audios/musics/Wet-Hands.mp3"
+        { title: "Aria Math", src: "audios/musics/Aria-Math.mp3" },
+        { title: "Biome Fest", src: "audios/musics/Biome-Fest.mp3" },
+        { title: "Blind Spots", src: "audios/musics/Blind-Spots.mp3" },
+        { title: "Clark", src: "audios/musics/Clark.mp3" },
+        { title: "Danny", src: "audios/musics/Danny.mp3" },
+        { title: "Dreiton", src: "audios/musics/Dreiton.mp3" },
+        { title: "Dry Hands", src: "audios/musics/Dry-Hands.mp3" },
+        { title: "Floating Trees", src: "audios/musics/Floating-Trees.mp3" },
+        { title: "Haggstrom", src: "audios/musics/Haggstrom.mp3" },
+        { title: "Haunt Muskie", src: "audios/musics/Haunt-Muskie.mp3" },
+        { title: "Key", src: "audios/musics/Key.mp3" },
+        { title: "Living Mice", src: "audios/musics/Living-Mice.mp3" },
+        { title: "Minecraft", src: "audios/musics/Minecraft.mp3" },
+        { title: "Moog City 2", src: "audios/musics/Moog-City 2.mp3" },
+        { title: "Mutation", src: "audios/musics/Mutation.mp3" },
+        { title: "Oxygène", src: "audios/musics/Oxygène.mp3" },
+        { title: "Subwoofer Lullaby", src: "audios/musics/Subwoofer-Lullaby.mp3" },
+        { title: "Sweden", src: "audios/musics/Sweden.mp3" },
+        { title: "Taswell", src: "audios/musics/Taswell.mp3" },
+        { title: "Wet Hands", src: "audios/musics/Wet-Hands.mp3" }
     ];
 
-    // MODIFICAÇÃO AQUI: Inicializa com uma música aleatória
-    let currentMusicIndex = Math.floor(Math.random() * musicPlaylist.length);
-    let isPlaying = false;
-    let userInteracted = false; // Flag para controlar se o usuário já interagiu
+    let currentMusicIndex = -1; // -1 para indicar que nenhuma música foi selecionada ainda
+    let userInteractedWithAudio = false; // Flag para controlar a interação do usuário com o controle de áudio
 
-    function updateMusicInfo() {
-        if (backgroundMusic.src) {
-            const fileName = backgroundMusic.src.split('/').pop().replace(/\.mp3$/, '');
-            currentMusicTitle.textContent = fileName.replace(/-/g, ' '); // Formata o nome para exibição
-        } else {
-            currentMusicTitle.textContent = 'Música Desligada';
+    // Função para exibir mensagem central
+    function showCentralMessage(message, duration = 2000) {
+        if (centralMessageDisplay) {
+            centralMessageDisplay.textContent = message;
+            centralMessageDisplay.classList.add('show');
+            setTimeout(() => {
+                centralMessageDisplay.classList.remove('show');
+            }, duration);
         }
     }
 
-    function toggleAudio() {
-        if (backgroundMusic.paused) {
-            if (!backgroundMusic.src) {
-                // Se não há música carregada, carrega a música atual (que já pode ser aleatória)
-                backgroundMusic.src = musicPlaylist[currentMusicIndex];
-            }
-            backgroundMusic.play().then(() => {
-                isPlaying = true;
-                audioControlButton.classList.add('is-playing'); // Adiciona a classe para o CSS agir
-                updateMusicInfo();
-            }).catch(error => {
-                console.error("Erro ao reproduzir áudio:", error);
-                // Pode exibir uma mensagem ao usuário se a reprodução automática falhar
+    // Função para selecionar uma música aleatória
+    function selectRandomMusic() {
+        let newIndex;
+        // Garante que a próxima música não seja a mesma, a menos que só haja uma música na lista
+        if (musicPlaylist.length === 1) {
+            newIndex = 0;
+        } else {
+            do {
+                newIndex = Math.floor(Math.random() * musicPlaylist.length);
+            } while (newIndex === currentMusicIndex);
+        }
+        currentMusicIndex = newIndex;
+        return musicPlaylist[currentMusicIndex];
+    }
+
+    // Função para tocar uma música específica
+    function playMusic(musicObject) {
+        backgroundMusic.src = musicObject.src;
+        currentMusicTitleDisplay.textContent = musicObject.title;
+        backgroundMusic.play()
+            .then(() => {
+                audioControlButton.classList.add('is-playing');
+                showCentralMessage(`Tocando: ${musicObject.title}`);
+            })
+            .catch(error => {
+                console.error("Erro ao reproduzir a música:", error);
+                audioControlButton.classList.remove('is-playing');
+                showCentralMessage("Erro ao tocar música. Clique novamente.");
             });
+    }
+
+    // Função para alternar o áudio (pausar/tocar a próxima aleatória)
+    function toggleAudioPlayback() {
+        if (backgroundMusic.paused) {
+            const nextMusic = selectRandomMusic(); // Seleciona uma nova música aleatória
+            playMusic(nextMusic);
         } else {
             backgroundMusic.pause();
-            isPlaying = false;
-            audioControlButton.classList.remove('is-playing'); // Remove a classe para o CSS agir
-            currentMusicTitle.textContent = 'Música Desligada';
+            audioControlButton.classList.remove('is-playing');
+            currentMusicTitleDisplay.textContent = 'Música Pausada';
+            showCentralMessage("Música Pausada");
         }
     }
 
+    // Evento de clique no botão de áudio
     if (audioControlButton) {
         audioControlButton.addEventListener('click', () => {
-            userInteracted = true;
-            toggleAudio();
+            userInteractedWithAudio = true; // Marca que houve interação com o controle de áudio
+            toggleAudioPlayback(); // Alterna a reprodução (toca próxima aleatória ou pausa)
         });
     }
 
-    // Inicia a música automaticamente após a interação do usuário (se ainda não interagiu)
-    document.body.addEventListener('click', () => {
-        if (!userInteracted && !isPlaying && backgroundMusic) {
-            userInteracted = true;
-            if (musicPlaylist.length > 0) {
-                backgroundMusic.src = musicPlaylist[currentMusicIndex]; // Usa o índice aleatório inicial
-                toggleAudio(); // Tenta iniciar a reprodução
-            }
-        }
-    }, { once: true }); // Executa apenas uma vez
-
-    // MODIFICAÇÃO AQUI: Escolhe uma PRÓXIMA música aleatória quando a atual termina
+    // Quando a música termina, toca a próxima aleatória
     backgroundMusic.addEventListener('ended', () => {
-        let newIndex;
-        do {
-            newIndex = Math.floor(Math.random() * musicPlaylist.length);
-        } while (newIndex === currentMusicIndex && musicPlaylist.length > 1); // Evita repetir a mesma música se houver mais de uma
-        
-        currentMusicIndex = newIndex;
-        backgroundMusic.src = musicPlaylist[currentMusicIndex];
-        backgroundMusic.play();
-        updateMusicInfo();
+        toggleAudioPlayback(); // Usa a mesma função para selecionar e tocar a próxima
     });
 
     // Event listener para atualizar o progresso do arco
@@ -145,52 +206,105 @@ document.addEventListener('DOMContentLoaded', function() {
                 arcProgress.style.strokeDashoffset = dashoffset;
             }
         });
+
+        // Reseta o arco de progresso quando a música é carregada/iniciada
+        backgroundMusic.addEventListener('play', () => {
+            if (arcProgress) {
+                const circumference = 2 * Math.PI * 16;
+                arcProgress.style.strokeDashoffset = circumference; // Começa o arco do início
+            }
+        });
     }
 
-    // Define o estado inicial do botão e do texto
-    // Garante que ao carregar a página, o ícone "mudo" esteja visível e o texto "Música Desligada"
-    backgroundMusic.pause(); // Garante que a música esteja pausada inicialmente
-    isPlaying = false;
-    audioControlButton.classList.remove('is-playing'); // Remove a classe is-playing inicialmente
-    currentMusicTitle.textContent = 'Música Desligada';
+    // Inicialização do player de áudio na carga da página
+    // Seleciona uma música aleatória para ser a "primeira", mas não a toca automaticamente
+    if (musicPlaylist.length > 0) {
+        selectRandomMusic(); // Define currentMusicIndex e preenche o backgroundMusic.src
+        backgroundMusic.src = musicPlaylist[currentMusicIndex].src;
+        currentMusicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
+    } else {
+        currentMusicTitleDisplay.textContent = 'Nenhuma música disponível';
+        if (audioControlButton) audioControlButton.disabled = true; // Desabilita o botão se não houver música
+    }
+    backgroundMusic.pause(); // Garante que esteja pausado no início
+    audioControlButton.classList.remove('is-playing'); // Estado visual de pausado
+
+    // Lida com a política de autoplay: tenta tocar a música APÓS a primeira interação GERAL do usuário na página
+    // Isso é crucial para navegadores modernos
+    document.body.addEventListener('click', function initialInteractionHandler() {
+        if (!userInteractedWithAudio && backgroundMusic.paused && musicPlaylist.length > 0) {
+            // Se o usuário ainda não clicou no botão de áudio e a música está pausada,
+            // tenta tocar a música que já foi pré-selecionada.
+            backgroundMusic.play()
+                .then(() => {
+                    userInteractedWithAudio = true; // Marca como interagido para evitar futuras tentativas de autoplay
+                    audioControlButton.classList.add('is-playing');
+                    showCentralMessage(`Tocando: ${musicPlaylist[currentMusicIndex].title}`);
+                })
+                .catch(error => {
+                    console.warn("Autoplay impedido ou erro na primeira reprodução:", error);
+                    // O botão ainda mostrará o estado de 'pausado', e o usuário precisará clicar.
+                });
+        }
+        // Remove este listener uma vez que a primeira interação ocorreu (se a reprodução foi bem-sucedida ou não)
+        document.body.removeEventListener('click', initialInteractionHandler);
+    }, { once: true }); // Garante que este listener só seja executado uma vez
 
 
-    // Função para copiar para a área de transferência
-    function copyToClipboard(elementId, feedbackElementId) {
+    // =====================================
+    // 4. Lógica de Copiar para Área de Transferência
+    // =====================================
+
+    // Função auxiliar para copiar texto e dar feedback
+    function copyToClipboard(elementId, feedbackElementId, textToCopyOverride = null) {
         const element = document.getElementById(elementId);
         const feedback = document.getElementById(feedbackElementId);
-        if (element && feedback) {
-            const textToCopy = element.textContent || element.innerText;
-            navigator.clipboard.writeText(textToCopy).then(() => {
+        let textToCopy;
+
+        if (textToCopyOverride) {
+            textToCopy = textToCopyOverride;
+        } else if (element) {
+            textToCopy = element.textContent || element.innerText;
+        } else {
+            console.error(`Elemento com ID ${elementId} não encontrado para cópia.`);
+            if (feedback) {
+                feedback.textContent = 'Erro!';
+                feedback.style.opacity = '1';
+                setTimeout(() => feedback.style.opacity = '0', 2000);
+            }
+            return;
+        }
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            if (feedback) {
                 feedback.textContent = 'Copiado!';
                 feedback.style.opacity = '1';
-                setTimeout(() => {
-                    feedback.style.opacity = '0';
-                    feedback.textContent = '';
-                }, 2000);
-            }).catch(err => {
-                console.error('Erro ao copiar: ', err);
+                setTimeout(() => feedback.style.opacity = '0', 2000);
+            }
+            showCentralMessage(`"${textToCopy}" copiado!`, 1500); // Feedback global
+            playSound(clickSoundEffect); // Toca o som de clique ao copiar
+        }).catch(err => {
+            console.error('Erro ao copiar: ', err);
+            if (feedback) {
                 feedback.textContent = 'Erro ao copiar!';
                 feedback.style.opacity = '1';
-                setTimeout(() => {
-                    feedback.style.opacity = '0';
-                    feedback.textContent = '';
-                }, 2000);
-            });
-        }
+                setTimeout(() => feedback.style.opacity = '0', 2000);
+            }
+            showCentralMessage("Erro ao copiar!", 1500);
+        });
     }
 
     const copyIpPortBtn = document.getElementById('copyIpPortBtn');
     if (copyIpPortBtn) {
         copyIpPortBtn.addEventListener('click', function() {
-            copyToClipboard('serverIp', 'copyIpPortFeedback');
-            // Nota: Se você quer copiar IP e Porta em uma única ação, o ideal é concatenar o texto
-            // antes de chamar copyToClipboard. Se for para copiar apenas um dos dois,
-            // remova a linha de cópia secundária.
-            // Exemplo de como concatenar:
-            // const ip = document.getElementById('serverIp').textContent;
-            // const port = document.getElementById('serverPort').textContent;
-            // navigator.clipboard.writeText(`${ip}:${port}`);
+            const ip = document.getElementById('serverIp');
+            const port = document.getElementById('serverPort');
+            if (ip && port) {
+                const fullAddress = `${ip.textContent}:${port.textContent}`;
+                copyToClipboard(null, 'copyIpPortFeedback', fullAddress); // Passa o texto completo
+            } else {
+                console.error("Elementos para IP ou Porta não encontrados.");
+            }
         });
     }
 
@@ -208,139 +322,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-// =====================================
-    // 2. Seus Outros Scripts Existentes
-    // (Mantidos e integrados aqui)
-    // =====================================
-
-    // Click Sound Effects
-    const clickSoundEffect = new Audio('audios/effects/click.mp3'); //
-    document.querySelectorAll('a, button[data-sound-effect="select"]').forEach(element => { //
-        if (element.id !== 'audioControlButton') { // Evita conflito com o controle de áudio principal
-            element.addEventListener('click', (event) => { //
-                clickSoundEffect.currentTime = 0; //
-                clickSoundEffect.play().catch(e => console.error("Error playing click sound effect:", e.message)); //
-
-                if (element.tagName === 'A' && element.href && element.getAttribute('target') !== '_blank' && element.href.startsWith(window.location.origin)) { //
-                    event.preventDefault(); // Previne navegação imediata para permitir o som
-                    setTimeout(() => { //
-                        window.location.href = element.href; //
-                    }, 200); // Pequeno atraso para o som tocar
-                }
-            });
-        }
-    });
-
-    // HOVER/INTERACTION Sound Effects for CARDS
-    const selectSound = new Audio('audios/effects/select.mp3'); //
-    const animationEndSound = new Audio('audios/effects/hover-complete.mp3'); // Certifique-se de ter este arquivo!
-
-    // Conjunto para rastrear quais cards já tocaram o som de final de animação para evitar repetição
-    const playedAnimationEndSound = new WeakSet(); //
-
-    const cardSelectors = [ //
-        '.service-card',
-        '.role-category-card',
-        '.access-card',
-        '.event-card',
-        '.community-card',
-        '.partnership-card',
-        '.partnership-proposal-card',
-        // Adicione seletores para os cards das imagens, se não estiverem já cobertos por essas classes.
-        // Pela imagem, parece que "Plataformas de Jogo", "Experiência & Nível (XP)", "Guildas & Competições", "Status & Benefícios"
-        // e outros, provavelmente já usam uma das classes base como `service-card` ou `access-card`.
-    ].join(', '); //
-
-    document.querySelectorAll(cardSelectors).forEach(cardElement => { //
-        cardElement.addEventListener('mouseenter', () => { //
-            console.log("Select sound: Mouse entered a card. Playing initial sound."); //
-            selectSound.currentTime = 0; //
-            selectSound.play().catch(e => console.error("Error playing initial hover sound:", e.message)); //
-            playedAnimationEndSound.delete(cardElement); // Permite que o som de final de animação toque novamente
-        });
-
-        cardElement.addEventListener('transitionend', (event) => { //
-            // Monitora a transição da propriedade 'transform' e verifica se o mouse ainda está sobre o card
-            if (event.propertyName === 'transform' && cardElement.matches(':hover') && !playedAnimationEndSound.has(cardElement)) { //
-                console.log("Animation end sound: Transform transition ended on hovered card. Playing final sound."); //
-                animationEndSound.currentTime = 0; //
-                animationEndSound.play().catch(e => console.error("Error playing animation end sound:", e.message)); //
-                playedAnimationEndSound.add(cardElement); // Marca que o som já tocou para este card
-            }
-        });
-
-        cardElement.addEventListener('mouseleave', () => { //
-            console.log("Mouse left card. Resetting sound state."); //
-            playedAnimationEndSound.delete(cardElement); // Reseta o estado para a próxima interação
-        });
-
-        // Opcional: Evento de foco (para navegação por teclado)
-        cardElement.addEventListener('focus', () => { //
-            console.log("Select sound: Card focused. Playing initial sound."); //
-            selectSound.currentTime = 0; //
-            selectSound.play().catch(e => console.error("Error playing initial hover sound on focus:", e.message)); //
-            playedAnimationEndSound.delete(cardElement); //
-        });
-
-        // Opcional: Evento de blur (quando o card perde o foco)
-        cardElement.addEventListener('blur', () => { //
-            console.log("Card blurred. Resetting sound state."); //
-            playedAnimationEndSound.delete(cardElement); //
-        });
-    });
-
-
-    // Copy IP and Port Logic
-    const copyIpPortBtn = document.getElementById('copyIpPortBtn'); //
-    if (copyIpPortBtn) { //
-        copyIpPortBtn.addEventListener('click', () => { //
-            const ip = document.getElementById('serverIp'); //
-            const port = document.getElementById('serverPort'); //
-            if (ip && port) { //
-                const textToCopy = `${ip.textContent}:${port.textContent}`; //
-                navigator.clipboard.writeText(textToCopy).then(() => { //
-                    alert('IP e Porta copiados: ' + textToCopy); //
-                    console.log("IP e Porta copiados:", textToCopy); //
-                }).catch(err => { //
-                    console.error('Erro ao copiar IP e Porta: ', err); //
-                });
-            } else { //
-                console.error("Elements for IP or Port not found."); //
-            }
-        });
-    }
-
-    const copyAddressBtn = document.getElementById('copyAddressBtn'); //
-    if (copyAddressBtn) { //
-        copyAddressBtn.addEventListener('click', () => { //
-            const address = document.getElementById('serverAddress'); //
-            if (address) { //
-                navigator.clipboard.writeText(address.textContent).then(() => { //
-                    alert('Endereço copiado: ' + address.textContent); //
-                    console.log("Endereço copiado:", address.textContent); //
-                }).catch(err => { //
-                    console.error('Erro ao copiar Endereço: ', err); //
-                });
-            } else { //
-                console.error("Element for server address not found."); //
-            }
-        });
-    }
-
-    const copyNewAccessBtn = document.getElementById('copyNewAccessBtn'); //
-    if (copyNewAccessBtn) { //
-        copyNewAccessBtn.addEventListener('click', () => { //
-            const newAccessAddress = document.getElementById('newAccessAddress'); //
-            if (newAccessAddress) { //
-                navigator.clipboard.writeText(newAccessAddress.textContent).then(() => { //
-                    alert('Endereço do Novo Acesso copiado: ' + newAccessAddress.textContent); //
-                    console.log("Endereço do Novo Acesso copiado:", newAccessAddress.textContent); //
-                }).catch(err => { //
-                    console.error('Erro ao copiar Endereço Adicional: ', err); //
-                });
-            } else { //
-                console.error("Element for new access address not found."); //
-            }
-        });
-    }
