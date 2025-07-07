@@ -520,27 +520,23 @@
     <audio id="clickSound" src="audios/effects/click.mp3" preload="auto"></audio>
     <audio id="selectSound" src="audios/effects/select.mp3" preload="auto"></audio>
 
-    <div class="audio-control-button-container">
-        <span id="currentMusicTitle" class="music-title-display">Música Desligada</span>
-        
-        <button id="audioControlButton" class="audio-control-button" aria-label="Controlar Música de Fundo">
-            <svg class="audio-progress-arc" viewBox="0 0 40 40">
-                <circle class="arc-background" cx="20" cy="20" r="16"></circle>
-                <circle class="arc-progress" cx="20" cy="20" r="16"></circle>
-            </svg>
-            <div class="neon-effect"></div>
-            <i class="fas fa-volume-up audio-icon icon-on"></i>   <i class="fas fa-volume-mute audio-icon icon-off"></i> </button>
-    </div>
+<div class="audio-control-button-container">
+    <span id="currentMusicTitle" class="music-title-display">Música Desligada</span>
+    
+    <button id="audioControlButton" class="audio-control-button" aria-label="Controlar Música de Fundo">
+        <svg class="audio-progress-arc" viewBox="0 0 40 40">
+            <circle class="arc-background" cx="20" cy="20" r="16"></circle>
+            <circle class="arc-progress" cx="20" cy="20" r="16"></circle>
+        </svg>
+        <div class="neon-effect"></div>
+        <i class="fas fa-volume-up audio-icon icon-on"></i>
+        <i class="fas fa-volume-mute audio-icon icon-off"></i>
+    </button>
+</div>
 
-    <div id="centralMessage" class="central-message"></div>
+<div id="centralMessage" class="central-message"></div>
 
-    <footer class="main-footer">
-        <div class="container">
-            <span class="footer-logo">Zera's Craft</span>
-            <p>&copy; 2025 Mundo Zera's Craft. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+    <script src="script.js" defer></script>
 
-    <script src="script.js"></script>
 </body>
 </html>
