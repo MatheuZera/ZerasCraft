@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Array de músicas para o player (ajuste os caminhos conforme necessário)
     // Títulos foram adicionados para melhor exibição
     const musicPlaylist = [
+        { title: "Aria Math lofi", src: "audios/musics/Aria-Math-Lofi-Remake.mp3" },
         { title: "Aria Math", src: "audios/musics/Aria-Math.mp3" },
         { title: "Biome Fest", src: "audios/musics/Biome-Fest.mp3" },
         { title: "Blind Spots", src: "audios/musics/Blind-Spots.mp3" },
