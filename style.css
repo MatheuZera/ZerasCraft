@@ -866,7 +866,7 @@ h2 .fas, h3 .fas {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 0;
-    margin-right: 0;
+    margin-right: 70px;
 }
 
 .audio-control-button-container:hover .music-title-display {
