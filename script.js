@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }).catch(e => {
             console.error("Erro ao iniciar a reprodução da música de fundo:", e);
             updateButtonState(false); // Música pausada ou não iniciada
-            showCentralMessage("Clique para iniciar a música");
+            showCentralMessage("Clique e Aguarde iniciar a Música");
             if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Música Pausada"; // Atualiza o texto
             // Isso geralmente acontece devido às políticas de autoplay do navegador
             console.log("A reprodução automática pode ter sido bloqueada. O usuário precisa interagir.");
