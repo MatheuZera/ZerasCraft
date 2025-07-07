@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM totalmente carregado. Iniciando script principal.");
 
     // =====================================
-    // 1. Menu Responsivo
+    // 1. Menu Responsivo (mantido)
     // =====================================
     const menuToggle = document.querySelector('.menu-toggle');
-    const mainNavList = document.getElementById('main-nav-list'); // Certifique-se que seu elemento nav tem o id="main-nav-list"
+    const mainNavList = document.getElementById('main-nav-list');
 
     if (menuToggle && mainNavList) {
         menuToggle.addEventListener('click', function() {
@@ -17,52 +17,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =====================================
-    // 2. Efeitos Sonoros Gerais (Click e Hover/Select)
+    // 2. Efeitos Sonoros Gerais (Click e Hover/Select) (mantido, com ajuste para os botões de copiar)
     // =====================================
-    // Usando new Audio() para ter controle separado de cada som.
-    // Garanta que esses caminhos estejam corretos!
     const clickSoundEffect = new Audio('audios/effects/click.mp3');
     const selectSoundEffect = new Audio('audios/effects/select.mp3');
     const animationEndSound = new Audio('audios/effects/hover-complete.mp3');
 
-    // Função auxiliar para tocar som, lidando com erros de autoplay e ausência de elemento
     function playGeneralSound(audioElement) {
         if (!audioElement || !audioElement.src) {
             console.warn("Elemento de áudio ou src não fornecido/inválido para playGeneralSound.");
             return;
         }
-        audioElement.currentTime = 0; // Reinicia o áudio para tocar do início
+        audioElement.currentTime = 0;
         audioElement.play().catch(e => {
-            // Este catch é importante para erros de autoplay sem interação do usuário
             console.warn(`Erro ao tocar efeito sonoro geral (${audioElement.src.split('/').pop()}):`, e.message);
         });
     }
 
     // Listener para Click em Botões e Links
-    // Alvo: todos os <a> e <button> que NÃO são o 'audioControlButton'
+    // Alvo: todos os <a> e <button> que NÃO são o 'audioControlButton' E NÃO SÃO BOTÕES DE COPIAR
     document.querySelectorAll('a, button').forEach(element => {
-        if (element.id !== 'audioControlButton') { // Exclui o botão de música principal
+        // Excluímos os botões de áudio e os botões de copiar que terão listeners específicos
+        if (element.id !== 'audioControlButton' && !element.classList.contains('copy-button-specific-listener')) {
             element.addEventListener('click', (event) => {
                 playGeneralSound(clickSoundEffect);
 
-                // Pequeno atraso para links internos para permitir o som antes da navegação
-                // Aplica-se apenas a <a> que não abrem em nova aba e são do mesmo domínio
                 if (element.tagName === 'A' && element.href && element.getAttribute('target') !== '_blank' && element.href.startsWith(window.location.origin)) {
-                    event.preventDefault(); // Impede a navegação imediata
+                    event.preventDefault();
                     setTimeout(() => {
-                        window.location.href = element.href; // Navega após um pequeno atraso
+                        window.location.href = element.href;
                     }, 200);
                 }
             });
         }
     });
 
-    // Hover/Interação em Cards (para sons de select e animationEnd)
-    const playedAnimationEndSound = new WeakSet(); // Rastreia cards para som de final de animação
+    // Hover/Interação em Cards (mantido)
+    const playedAnimationEndSound = new WeakSet();
 
-    // Combine todos os seletores de cards em uma única string
     const cardSelectors = [
-        '.card', // Classe geral para qualquer card
+        '.card',
         '.service-card',
         '.role-category-card',
         '.access-card',
@@ -76,55 +70,39 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll(cardSelectors).forEach(cardElement => {
         cardElement.addEventListener('mouseenter', () => {
             playGeneralSound(selectSoundEffect);
-            // Remove do WeakSet para permitir que o som de animação toque novamente se o mouse sair e voltar
             playedAnimationEndSound.delete(cardElement);
         });
 
         cardElement.addEventListener('transitionend', (event) => {
-            // Verifica se a transição foi na propriedade 'transform' (comum para hover effects)
-            // e se o mouse ainda está sobre o card (':hover')
-            // e se o som de animação ainda não tocou para este card durante o hover atual
             if (event.propertyName === 'transform' && cardElement.matches(':hover') && !playedAnimationEndSound.has(cardElement)) {
                 playGeneralSound(animationEndSound);
-                // Adiciona ao WeakSet para evitar que o som toque múltiplas vezes durante o mesmo hover
                 playedAnimationEndSound.add(cardElement);
             }
         });
 
         cardElement.addEventListener('mouseleave', () => {
-            // Ao sair do card, remove-o do WeakSet para resetar o estado
-            playedAnimationEndSound.delete(cardElement); // Correção de digitação aqui: 'playedAnimationEndEndSound' para 'playedAnimationEndSound'
+            playedAnimationEndSound.delete(cardElement);
         });
 
-        // Adiciona suporte para navegação via teclado (tab) para acessibilidade
         cardElement.addEventListener('focus', () => {
             playGeneralSound(selectSoundEffect);
         });
         cardElement.addEventListener('blur', () => {
-            // Reseta o estado quando o card perde o foco
             playedAnimationEndSound.delete(cardElement);
         });
     });
 
     // =====================================
-    // 3. Sistema de Música de Fundo
+    // 3. Sistema de Música de Fundo (mantido)
     // =====================================
-
-    // --- Referências aos Elementos DOM da Música ---
     const backgroundMusic = document.getElementById('backgroundMusic');
     const audioControlButton = document.getElementById('audioControlButton');
     const centralMessage = document.getElementById('centralMessage');
-    // Verifica se audioControlButton existe antes de tentar selecionar .arc-progress
     const progressArc = audioControlButton ? audioControlButton.querySelector('.arc-progress') : null;
-
-    // Referência para o display do título da música (ID do HTML: currentMusicTitle)
     const currentMusicTitleDisplay = document.getElementById('currentMusicTitle');
-
-    // Referências aos ícones específicos (Classes no HTML: icon-on, icon-off)
     const onIcon = audioControlButton ? audioControlButton.querySelector('.icon-on') : null;
     const offIcon = audioControlButton ? audioControlButton.querySelector('.icon-off') : null;
 
-    // --- Playlist de Músicas ---
     const playlist = [
         { title: "Aria-Math-Lofi", src: "audios/musics/Aria-Math-Lofi-Remake.mp3" },
         { title: "Aria-Math", src: "audios/musics/Aria-Math.mp3" },
@@ -148,20 +126,16 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Wet-Hands", src: "audios/musics/Wet-Hands.mp3" }
     ];
     let currentTrackIndex = 0;
-    const circumference = 100; // Valor para o SVG do progresso
-    let messageTimeout; // Para controlar o timeout da mensagem central
-
-    // --- Funções do Player de Música ---
+    const circumference = 100;
+    let messageTimeout;
 
     function updateProgressBar() {
-        // Verifica se backgroundMusic e progressArc existem antes de usar
         if (backgroundMusic && progressArc && !backgroundMusic.paused && !backgroundMusic.ended && backgroundMusic.duration > 0) {
             const percentage = (backgroundMusic.currentTime / backgroundMusic.duration) * 100;
             const offset = circumference - (percentage / 100) * circumference;
             progressArc.style.strokeDasharray = `${circumference}, ${circumference}`;
             progressArc.style.strokeDashoffset = offset;
         } else if (progressArc) {
-            // Reinicia a barra de progresso quando a música está pausada ou não iniciada
             progressArc.style.strokeDasharray = `0, ${circumference}`;
             progressArc.style.strokeDashoffset = circumference;
         }
@@ -169,22 +143,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function playNextTrack() {
         console.log("Música atual terminou, tocando a próxima na playlist.");
-        // Não precisamos mudar para aleatório aqui, pois queremos que a próxima música toque em sequência.
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
         loadAndPlayCurrentTrack();
     }
 
-    // Função para selecionar uma música aleatória da playlist
     function selectRandomTrack() {
         let newIndex;
         do {
             newIndex = Math.floor(Math.random() * playlist.length);
-        } while (newIndex === currentTrackIndex && playlist.length > 1); // Garante que a próxima não seja a mesma se houver mais de uma música
+        } while (newIndex === currentTrackIndex && playlist.length > 1);
         currentTrackIndex = newIndex;
         console.log(`Selecionada música aleatória: Índice ${currentTrackIndex}, Título: ${playlist[currentTrackIndex].title}`);
     }
 
-    // Atualiza o estado visual do botão (classe 'is-playing' e troca de ícones)
     function updateButtonState(isPlaying) {
         if (!audioControlButton || !onIcon || !offIcon) {
             console.warn("Elementos do botão de áudio ou ícones não encontrados para updateButtonState.");
@@ -203,7 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`Estado do botão de áudio atualizado: ${isPlaying ? 'Play' : 'Pause'}`);
     }
 
-    // Exibe a mensagem central na tela
     function showCentralMessage(message) {
         if (!centralMessage) {
             console.warn("Elemento 'centralMessage' não encontrado no DOM.");
@@ -220,7 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`Mensagem central: "${message}"`);
     }
 
-    // Carrega e tenta tocar a música atual da playlist
     function loadAndPlayCurrentTrack() {
         const currentTrack = playlist[currentTrackIndex];
         if (!currentTrack) {
@@ -240,64 +209,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log(`Tentando carregar e tocar: "${currentTrack.title}" de "${currentTrack.src}"`);
         backgroundMusic.src = currentTrack.src;
-        backgroundMusic.load(); // Recarrega a nova fonte para ter certeza
+        backgroundMusic.load();
 
         backgroundMusic.play().then(() => {
-            updateButtonState(true); // Música tocando
+            updateButtonState(true);
             showCentralMessage(`Tocando: ${currentTrack.title}`);
-            if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = currentTrack.title; // Atualiza o texto
+            if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = currentTrack.title;
             console.log(`Música "${currentTrack.title}" iniciada com sucesso.`);
         }).catch(e => {
             console.error("Erro ao iniciar a reprodução da música de fundo:", e);
-            updateButtonState(false); // Música pausada ou não iniciada
+            updateButtonState(false);
             showCentralMessage("Clique e Aguarde iniciar a Música");
-            if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Música Pausada"; // Atualiza o texto
-            // Isso geralmente acontece devido às políticas de autoplay do navegador
+            if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Música Pausada";
             console.log("A reprodução automática pode ter sido bloqueada. O usuário precisa interagir.");
         });
     }
 
-    // --- Inicialização ao Carregar a Página ---
-    // Verifica a preferência do usuário no localStorage
     const userPrefersMusic = localStorage.getItem('musicEnabled');
     console.log(`Preferência de música do usuário (localStorage): ${userPrefersMusic}`);
 
-    if (backgroundMusic && currentMusicTitleDisplay) { // Verifica se os elementos existem antes de iniciar
-        // Inicializa currentTrackIndex para uma música aleatória se for a primeira vez ou se a música estava desligada
+    if (backgroundMusic && currentMusicTitleDisplay) {
         if (!userPrefersMusic || userPrefersMusic === 'false') {
-            selectRandomTrack(); // Seleciona uma música aleatória no carregamento se a música estiver desativada ou não definida
-        } else {
-            // Se a música estava 'true', carregamos a música que estava tocando (se aplicável, ou a primeira da playlist)
-            // Se você quer que SEMPRE comece aleatoriamente, mova selectRandomTrack() para fora deste if/else
-            // e remova o `if (userPrefersMusic === 'true')` abaixo.
+            selectRandomTrack();
         }
 
         if (userPrefersMusic === 'true') {
-            loadAndPlayCurrentTrack(); // Tenta tocar a música se a preferência for 'true'
+            loadAndPlayCurrentTrack();
         } else {
             backgroundMusic.pause();
-            updateButtonState(false); // Garante que o estado inicial seja "desligado"
-            currentMusicTitleDisplay.textContent = "Música Desligada"; // Define o texto inicial
+            updateButtonState(false);
+            currentMusicTitleDisplay.textContent = "Música Desligada";
             console.log("Música iniciada como desligada (preferência do usuário ou padrão).");
         }
     } else {
         console.error("Elementos essenciais do sistema de música (backgroundMusic ou currentMusicTitleDisplay) não encontrados no DOM. O sistema de música não será inicializado.");
-        // Opcional: desabilitar o botão de áudio se os elementos não forem encontrados
         if (audioControlButton) audioControlButton.style.display = 'none';
     }
 
-
-    // --- Event Listeners para o Sistema de Música ---
-
-    // Listener para o clique no botão de controle de áudio
     if (audioControlButton) {
         audioControlButton.addEventListener('click', () => {
             console.log("Botão de controle de áudio clicado.");
-            // playGeneralSound(clickSoundEffect); // Opcional: som de clique para este botão
-
             if (backgroundMusic.paused) {
                 console.log("Música estava pausada, selecionando uma música aleatória e tentando tocar agora.");
-                selectRandomTrack(); // Seleciona uma música aleatória ao iniciar
+                selectRandomTrack();
                 loadAndPlayCurrentTrack();
                 localStorage.setItem('musicEnabled', 'true');
             } else {
@@ -313,7 +267,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("Elemento 'audioControlButton' não encontrado no DOM! O controle de música não funcionará.");
     }
 
-    // Listeners de estado do backgroundMusic
     if (backgroundMusic) {
         backgroundMusic.addEventListener('ended', playNextTrack);
         backgroundMusic.addEventListener('timeupdate', updateProgressBar);
@@ -325,6 +278,111 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Erro de Áudio";
         });
     }
+
+    // =====================================
+    // 4. Funcionalidade de Copiar IP/Endereço
+    // =====================================
+
+    const copyIpPortBtn = document.getElementById('copyIpPortBtn');
+    const serverIp = document.getElementById('serverIp');
+    const serverPort = document.getElementById('serverPort');
+    const copyIpPortFeedback = document.getElementById('copyIpPortFeedback');
+
+    if (copyIpPortBtn && serverIp && serverPort && copyIpPortFeedback) {
+        // Adiciona uma classe para que o listener geral de clique não o manipule também
+        copyIpPortBtn.classList.add('copy-button-specific-listener');
+        copyIpPortBtn.addEventListener('click', async () => {
+            playGeneralSound(clickSoundEffect); // Toca o som de clique
+
+            const ip = serverIp.textContent;
+            const port = serverPort.textContent;
+            const textToCopy = `${ip}:${port}`;
+
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                copyIpPortFeedback.textContent = 'Copiado!';
+                copyIpPortFeedback.style.color = 'lightgreen';
+                setTimeout(() => {
+                    copyIpPortFeedback.textContent = '';
+                }, 2000);
+                console.log(`IP e Porta copiados: ${textToCopy}`);
+            } catch (err) {
+                console.error('Erro ao copiar IP e Porta:', err);
+                copyIpPortFeedback.textContent = 'Erro ao copiar!';
+                copyIpPortFeedback.style.color = 'red';
+                setTimeout(() => {
+                    copyIpPortFeedback.textContent = '';
+                }, 2000);
+            }
+        });
+    } else {
+        console.warn("Elementos do botão Copiar IP & Porta não encontrados. A funcionalidade pode não funcionar.");
+    }
+
+    const copyAddressBtn = document.getElementById('copyAddressBtn');
+    const serverAddress = document.getElementById('serverAddress');
+    const copyAddressFeedback = document.getElementById('copyAddressFeedback');
+
+    if (copyAddressBtn && serverAddress && copyAddressFeedback) {
+        copyAddressBtn.classList.add('copy-button-specific-listener');
+        copyAddressBtn.addEventListener('click', async () => {
+            playGeneralSound(clickSoundEffect); // Toca o som de clique
+
+            const textToCopy = serverAddress.textContent;
+
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                copyAddressFeedback.textContent = 'Copiado!';
+                copyAddressFeedback.style.color = 'lightgreen';
+                setTimeout(() => {
+                    copyAddressFeedback.textContent = '';
+                }, 2000);
+                console.log(`Endereço Java copiado: ${textToCopy}`);
+            } catch (err) {
+                console.error('Erro ao copiar Endereço Java:', err);
+                copyAddressFeedback.textContent = 'Erro ao copiar!';
+                copyAddressFeedback.style.color = 'red';
+                setTimeout(() => {
+                    copyAddressFeedback.textContent = '';
+                }, 2000);
+            }
+        });
+    } else {
+        console.warn("Elementos do botão Copiar Endereço Java não encontrados. A funcionalidade pode não funcionar.");
+    }
+
+    const copyNewAccessBtn = document.getElementById('copyNewAccessBtn');
+    const newAccessAddress = document.getElementById('newAccessAddress');
+    const copyNewAccessFeedback = document.getElementById('copyNewAccessFeedback');
+
+    if (copyNewAccessBtn && newAccessAddress && copyNewAccessFeedback) {
+        copyNewAccessBtn.classList.add('copy-button-specific-listener');
+        copyNewAccessBtn.addEventListener('click', async () => {
+            playGeneralSound(clickSoundEffect); // Toca o som de clique
+
+            const textToCopy = newAccessAddress.textContent;
+
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                copyNewAccessFeedback.textContent = 'Copiado!';
+                copyNewAccessFeedback.style.color = 'lightgreen';
+                setTimeout(() => {
+                    copyNewAccessFeedback.textContent = '';
+                }, 2000);
+                console.log(`Novo Endereço de Acesso copiado: ${textToCopy}`);
+            } catch (err) {
+                console.error('Erro ao copiar Novo Endereço de Acesso:', err);
+                copyNewAccessFeedback.textContent = 'Erro ao copiar!';
+                copyNewAccessFeedback.style.color = 'red';
+                setTimeout(() => {
+                    copyNewAccessFeedback.textContent = '';
+                }, 2000);
+            }
+        });
+    } else {
+        console.warn("Elementos do botão Copiar Novo Tipo de Acesso não encontrados. A funcionalidade pode não funcionar.");
+    }
+
 
     console.log("Todos os Event Listeners configurados.");
 });
