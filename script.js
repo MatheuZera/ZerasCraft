@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // =====================================
     // Usando new Audio() para ter controle separado de cada som.
     // Garanta que esses caminhos estejam corretos!
-    const clickSoundEffect = new Audio('audios/effects/click.mp3'); 
-    const selectSoundEffect = new Audio('audios/effects/select.mp3'); 
-    const animationEndSound = new Audio('audios/effects/hover-complete.mp3'); 
+    const clickSoundEffect = new Audio('audios/effects/click.mp3');
+    const selectSoundEffect = new Audio('audios/effects/select.mp3');
+    const animationEndSound = new Audio('audios/effects/hover-complete.mp3');
 
     // Função auxiliar para tocar som, lidando com erros de autoplay e ausência de elemento
     function playGeneralSound(audioElement) {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     event.preventDefault(); // Impede a navegação imediata
                     setTimeout(() => {
                         window.location.href = element.href; // Navega após um pequeno atraso
-                    }, 200); 
+                    }, 200);
                 }
             });
         }
@@ -71,13 +71,13 @@ document.addEventListener('DOMContentLoaded', function() {
         '.partnership-card',
         '.partnership-proposal-card',
         '.security-card'
-    ].join(', '); 
+    ].join(', ');
 
     document.querySelectorAll(cardSelectors).forEach(cardElement => {
         cardElement.addEventListener('mouseenter', () => {
             playGeneralSound(selectSoundEffect);
             // Remove do WeakSet para permitir que o som de animação toque novamente se o mouse sair e voltar
-            playedAnimationEndSound.delete(cardElement); 
+            playedAnimationEndSound.delete(cardElement);
         });
 
         cardElement.addEventListener('transitionend', (event) => {
@@ -87,13 +87,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (event.propertyName === 'transform' && cardElement.matches(':hover') && !playedAnimationEndSound.has(cardElement)) {
                 playGeneralSound(animationEndSound);
                 // Adiciona ao WeakSet para evitar que o som toque múltiplas vezes durante o mesmo hover
-                playedAnimationEndSound.add(cardElement); 
+                playedAnimationEndSound.add(cardElement);
             }
         });
 
         cardElement.addEventListener('mouseleave', () => {
             // Ao sair do card, remove-o do WeakSet para resetar o estado
-            playedAnimationEndEndSound.delete(cardElement); 
+            playedAnimationEndSound.delete(cardElement); // Correção de digitação aqui: 'playedAnimationEndEndSound' para 'playedAnimationEndSound'
         });
 
         // Adiciona suporte para navegação via teclado (tab) para acessibilidade
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         cardElement.addEventListener('blur', () => {
             // Reseta o estado quando o card perde o foco
-            playedAnimationEndSound.delete(cardElement); 
+            playedAnimationEndSound.delete(cardElement);
         });
     });
 
@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentMusicTitleDisplay = document.getElementById('currentMusicTitle');
 
     // Referências aos ícones específicos (Classes no HTML: icon-on, icon-off)
-    const onIcon = audioControlButton ? audioControlButton.querySelector('.icon-on') : null; 
-    const offIcon = audioControlButton ? audioControlButton.querySelector('.icon-off') : null; 
+    const onIcon = audioControlButton ? audioControlButton.querySelector('.icon-on') : null;
+    const offIcon = audioControlButton ? audioControlButton.querySelector('.icon-off') : null;
 
     // --- Playlist de Músicas ---
     const playlist = [
@@ -157,8 +157,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (backgroundMusic && progressArc && !backgroundMusic.paused && !backgroundMusic.ended && backgroundMusic.duration > 0) {
             const percentage = (backgroundMusic.currentTime / backgroundMusic.duration) * 100;
             const offset = circumference - (percentage / 100) * circumference;
-            progressArc.style.strokeDasharray = `${circumference}, ${circumference}`; 
-            progressArc.style.strokeDashoffset = offset; 
+            progressArc.style.strokeDasharray = `${circumference}, ${circumference}`;
+            progressArc.style.strokeDashoffset = offset;
         } else if (progressArc) {
             // Reinicia a barra de progresso quando a música está pausada ou não iniciada
             progressArc.style.strokeDasharray = `0, ${circumference}`;
@@ -168,8 +168,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function playNextTrack() {
         console.log("Música atual terminou, tocando a próxima na playlist.");
+        // Não precisamos mudar para aleatório aqui, pois queremos que a próxima música toque em sequência.
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-        loadAndPlayCurrentTrack(); 
+        loadAndPlayCurrentTrack();
+    }
+
+    // Função para selecionar uma música aleatória da playlist
+    function selectRandomTrack() {
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * playlist.length);
+        } while (newIndex === currentTrackIndex && playlist.length > 1); // Garante que a próxima não seja a mesma se houver mais de uma música
+        currentTrackIndex = newIndex;
+        console.log(`Selecionada música aleatória: Índice ${currentTrackIndex}, Título: ${playlist[currentTrackIndex].title}`);
     }
 
     // Atualiza o estado visual do botão (classe 'is-playing' e troca de ícones)
@@ -181,12 +192,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (isPlaying) {
             audioControlButton.classList.add('is-playing');
-            onIcon.style.display = 'inline-block'; 
-            offIcon.style.display = 'none';      
+            onIcon.style.display = 'inline-block';
+            offIcon.style.display = 'none';
         } else {
             audioControlButton.classList.remove('is-playing');
-            onIcon.style.display = 'none';       
-            offIcon.style.display = 'inline-block'; 
+            onIcon.style.display = 'none';
+            offIcon.style.display = 'inline-block';
         }
         console.log(`Estado do botão de áudio atualizado: ${isPlaying ? 'Play' : 'Pause'}`);
     }
@@ -200,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         centralMessage.textContent = message;
         centralMessage.classList.add('show');
 
-        clearTimeout(messageTimeout); 
+        clearTimeout(messageTimeout);
 
         messageTimeout = setTimeout(() => {
             centralMessage.classList.remove('show');
@@ -251,6 +262,15 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(`Preferência de música do usuário (localStorage): ${userPrefersMusic}`);
 
     if (backgroundMusic && currentMusicTitleDisplay) { // Verifica se os elementos existem antes de iniciar
+        // Inicializa currentTrackIndex para uma música aleatória se for a primeira vez ou se a música estava desligada
+        if (!userPrefersMusic || userPrefersMusic === 'false') {
+            selectRandomTrack(); // Seleciona uma música aleatória no carregamento se a música estiver desativada ou não definida
+        } else {
+            // Se a música estava 'true', carregamos a música que estava tocando (se aplicável, ou a primeira da playlist)
+            // Se você quer que SEMPRE comece aleatoriamente, mova selectRandomTrack() para fora deste if/else
+            // e remova o `if (userPrefersMusic === 'true')` abaixo.
+        }
+
         if (userPrefersMusic === 'true') {
             loadAndPlayCurrentTrack(); // Tenta tocar a música se a preferência for 'true'
         } else {
@@ -272,11 +292,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (audioControlButton) {
         audioControlButton.addEventListener('click', () => {
             console.log("Botão de controle de áudio clicado.");
-            // Toca o som de clique ao interagir com o botão principal (opcional, já tratado pelos sons gerais)
-            // playGeneralSound(clickSoundEffect); 
+            // playGeneralSound(clickSoundEffect); // Opcional: som de clique para este botão
 
             if (backgroundMusic.paused) {
-                console.log("Música estava pausada, tentando tocar agora.");
+                console.log("Música estava pausada, selecionando uma música aleatória e tentando tocar agora.");
+                selectRandomTrack(); // Seleciona uma música aleatória ao iniciar
                 loadAndPlayCurrentTrack();
                 localStorage.setItem('musicEnabled', 'true');
             } else {
@@ -303,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateButtonState(false);
             if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Erro de Áudio";
         });
-    } // Se backgroundMusic não existe, o console.error já foi exibido na inicialização.
+    }
 
     console.log("Todos os Event Listeners configurados.");
 });
