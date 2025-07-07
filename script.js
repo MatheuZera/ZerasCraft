@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }).catch(e => {
             console.error("Erro ao iniciar a reprodução da música de fundo:", e);
             updateButtonState(false);
-            showCentralMessage("Clique e Aguarde iniciar a Música");
+            showCentralMessage(`Carregando Música: ${currentTrack.title}`);
             if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Música Pausada";
             console.log("A reprodução automática pode ter sido bloqueada. O usuário precisa interagir.");
         });
