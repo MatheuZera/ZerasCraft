@@ -356,17 +356,31 @@ ul {
 
 .btn-link {
     display: inline-block;
-    color: var(--cor-link);
-    font-weight: 700;
-    text-decoration: underline;
-    margin-top: 15px;
-    transition: var(--transicao-padrao);
+    padding: 8px 15px;
+    background-color: transparent; /* Mantenha o fundo transparente, se desejar */
+    color: #007bff; /* Mantenha a cor do texto padrão, se desejar */
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #007bff; /* Borda da cor do texto */
+    
+    /* PROPRIEDADE DE TRANSIÇÃO AQUI */
+    /* Agora, apenas para transform (subir/descer) */
+    transition: transform 0.3s ease-in-out; /* Adicionado transição para 'transform' */
 }
 
 .btn-link:hover {
-    color: var(--cor-destaque); /* Destaque dourado no hover */
-    text-decoration: none;
-    transform: translateX(5px);
+    /* Mantenha estas se quiser, ou remova se só quer a animação de subir/descer */
+    /* background-color: #007bff; */ 
+    /* color: white; */
+    /* border-color: #007bff; */
+
+    /* Animação de subir/descer */
+    transform: translateY(-5px); /* Move o botão 5px para cima ao passar o mouse */
+}
+
+.btn-link:active {
+    /* Opcional: Efeito ao clicar no botão, para que ele "volte" ou "afunde" */
+    transform: translateY(0px); /* Volta à posição original ou afunda um pouco */
 }
 
 .discord-channel-link {
