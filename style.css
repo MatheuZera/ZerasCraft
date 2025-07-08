@@ -163,6 +163,41 @@ ul {
 /* 2. Cabeçalho (Header)                 */
 /* ===================================== */
 
+/* Estilos para o contêiner do banner de imagem */
+.image-banner {
+    background-color: #1a1a1a; /* Garante que a cor de fundo seja preta enquanto a imagem carrega ou se for transparente */
+    width: 100%; /* Preenche a largura do contêiner pai */
+    overflow: hidden; /* Recorta a imagem se ela ultrapassar as dimensões */
+}
+
+/* Estilos para a imagem dentro do banner */
+.image-banner img {
+    display: block; /* Remove qualquer espaço extra abaixo da imagem */
+    width: 100%; /* Faz a imagem tentar preencher a largura */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Opcional: Defina uma altura máxima para o banner, se desejar */
+/* .image-banner {
+    max-height: 200px;
+} */
+
+/* Opcional: Para cobrir completamente a área, mesmo que a proporção da imagem não seja ideal */
+/* .image-banner {
+    padding-bottom: 20%; /* Ajuste a porcentagem para controlar a altura (relação altura/largura) */
+/*    position: relative;
+    overflow: hidden;
+}*/
+
+.image-banner img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche o contêiner, cortando se necessário */
+}
+
 .main-header {
     background-color: var(--cor-fundo-escuro);
     padding: 20px 0;
