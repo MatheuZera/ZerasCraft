@@ -515,10 +515,10 @@ h2 .fas, h3 .fas {
 
 /* Efeito hover para avatares e logos (só borda) */
 /* REMOVA OU COMENTE TODO ESTE BLOCO SE NÃO QUISER NENHUMA BORDA NO HOVER TAMBÉM */
-.community-card:hover .member-avatar,
+/*(.community-card:hover .member-avatar,
 .partnership-card:hover .partnership-logo {
     /* border-color: var(--cor-destaque); */ /* Comentar esta linha também se o bloco acima for removido */
-}
+/*}*/
 
 
 /* Container do Grid para Eventos */
