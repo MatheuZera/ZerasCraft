@@ -13,18 +13,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // Flag para controlar se já estamos preparando a próxima música, evitando chamadas múltiplas
     let preparingNextMusic = false;
 
-    try {
-        hoverSound = new Audio('audios/effects/select.mp3');
-        hoverSound.preload = 'auto';
-        console.log("[Efeitos Sonoros] Carregando: audios/effects/select.mp3");
+    // --- Melhoria: Centralizar a criação e tratamento de áudios de efeito ---
+    // Usaremos um mapa para gerenciar instâncias de áudio para cada efeito.
+    // Isso ajuda a evitar recarregar o mesmo arquivo e permite mais controle.
+    const audioEffects = {};
 
-        clickSound = new Audio('audios/effects/click.mp3');
-        clickSound.preload = 'auto';
-        console.log("[Efeitos Sonoros] Carregando: audios/effects/click.mp3");
+    const initializeAudioEffect = (name, path) => {
+        if (audioEffects[name]) {
+            return audioEffects[name]; // Já inicializado
+        }
+        try {
+            const audio = new Audio(path);
+            audio.preload = 'auto'; // Tenta carregar o áudio o mais cedo possível
+            // Opcional: Adicionar um listener para verificar se o áudio foi carregado.
+            audio.addEventListener('canplaythrough', () => {
+                console.log(`[Efeitos Sonoros] Áudio "${name}" (${path}) está pronto para tocar.`);
+            }, { once: true }); // Executa uma única vez
+            audio.addEventListener('error', (e) => {
+                console.error(`[Efeitos Sonoros] Erro ao carregar o áudio "${name}" (${path}):`, e);
+                console.error(`Causa provável: Caminho incorreto ou arquivo corrompido. Verifique: ${path}`);
+            });
+            audioEffects[name] = audio;
+            console.log(`[Efeitos Sonoros] Tentando carregar: ${name} de ${path}`);
+            return audio;
+        } catch (e) {
+            console.error(`[Efeitos Sonoros] Erro ao criar objeto Audio para "${name}" (${path}):`, e);
+            return null;
+        }
+    };
 
-    } catch (e) {
-        console.error("[Efeitos Sonoros] Erro ao inicializar objetos Audio:", e);
-    }
+    // Inicializa os sons principais logo de cara
+    hoverSound = initializeAudioEffect('select', 'audios/effects/select.mp3');
+    clickSound = initializeAudioEffect('click', 'audios/effects/click.mp3');
+
 
     const playEffectSound = (audioElement) => {
         if (!audioElement) {
@@ -32,28 +53,46 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (audioElement.readyState < 1) { // checking if readyState is less than HAVE_METADATA
-            console.warn(`[Efeitos Sonoros] Áudio "${audioElement.src}" não está pronto (${audioElement.readyState}). Tentando carregar novamente.`);
+        // Verifica o estado de carregamento do áudio antes de tentar tocar
+        if (audioElement.readyState === 0) { // HAVE_NOTHING
+            console.warn(`[Efeitos Sonoros] Áudio "${audioElement.src}" não carregou ou tem erro. Tentando carregar novamente.`);
             audioElement.load();
+            // Adiciona um listener para tocar assim que estiver pronto para evitar chamadas de play antes do carregamento
+            audioElement.addEventListener('canplaythrough', () => {
+                playEffectSoundInternal(audioElement);
+            }, { once: true }); // Toca uma única vez assim que estiver pronto
             return;
         }
 
+        // Se já está carregado, toca imediatamente
+        playEffectSoundInternal(audioElement);
+    };
+
+    // Função interna para tocar o áudio, separada para ser chamada após carregamento ou diretamente
+    const playEffectSoundInternal = (audioElement) => {
+        // Pausa e reinicia para permitir que o som toque novamente mesmo que já esteja tocando
+        audioElement.pause();
+        audioElement.currentTime = 0;
+
         if (backgroundAudio && !backgroundAudio.paused) {
-            audioElement.volume = 0.4;
+            audioElement.volume = 0.4; // Volume menor se a música de fundo estiver tocando
         } else {
-            audioElement.volume = 0.8;
+            audioElement.volume = 0.8; // Volume normal se a música de fundo estiver pausada
         }
 
-        audioElement.currentTime = 0; // Reinicia o áudio para poder tocar múltiplas vezes seguidas
         audioElement.play().then(() => {
             // console.log(`[Efeitos Sonoros] Sucesso ao tocar: ${audioElement.src}`);
         }).catch(e => {
             console.error(`[Efeitos Sonoros] Erro ao tocar som "${audioElement.src}":`, e);
             if (e.name === "NotAllowedError" || e.name === "AbortError") {
                 console.warn("[Efeitos Sonoros] Reprodução de som bloqueada pelo navegador. Necessita interação do usuário.");
+                // Opcional: Se a reprodução automática de efeitos for crucial, você pode tentar
+                // exibir uma mensagem ao usuário para que ele clique em algum lugar da página
+                // ou apenas logar o aviso.
             }
         });
     };
+
 
     function showCentralMessage(message) {
         let messageBox = document.getElementById('centralMessageBox');
@@ -94,14 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             menuToggle.classList.toggle('active');
-            playEffectSound(clickSound);
+            playEffectSound(clickSound); // Clicar no menu hambúrguer
         });
 
         document.querySelectorAll('.nav-menu a').forEach(item => {
             item.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 menuToggle.classList.remove('active');
-                playEffectSound(clickSound);
+                playEffectSound(clickSound); // Clicar em um item do menu
             });
         });
     } else {
@@ -172,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             button.classList.remove('copied');
                         }, 2000);
 
-                        playEffectSound(clickSound);
+                        playEffectSound(clickSound); // Som de clique ao copiar
 
                     } catch (err) {
                         console.error('Erro ao copiar: ', err);
@@ -357,6 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         audioControlButton.addEventListener('click', () => {
+            // Toca o som de clique imediatamente antes de processar a lógica do áudio de fundo
+            playEffectSound(clickSound); // <-- Adicionado aqui
+
             if (backgroundAudio.paused) {
                 preparingNextMusic = false; // Reseta a flag ao iniciar pelo botão
                 loadRandomMusic(true); // Ensures a new song is loaded if it was stopped and none was playing
@@ -415,6 +457,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // 4. Sistema de Sons para Interações
     // =====================================
+    // Certifique-se de que esses seletores correspondem aos seus elementos HTML.
+    // Se você tiver cards com classes diferentes, adicione-as aqui.
     document.querySelectorAll('.access-card, .info-card, .service-card, .community-card, .event-card, .partnership-card, .security-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             console.log("[Efeitos Sonoros] Mouse entrou no card. Tentando tocar hover sound.");
@@ -422,14 +466,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.querySelectorAll('a').forEach(link => {
+    // Melhora: Usa um seletor mais específico para links que não são botões de menu (já tratados)
+    document.querySelectorAll('a:not(.menu-toggle):not(.nav-menu a)').forEach(link => {
         link.addEventListener('click', (event) => {
             console.log("[Efeitos Sonoros] Link clicado. Tentando tocar click sound.");
             playEffectSound(clickSound);
         });
     });
 
-    document.querySelectorAll('button:not(.copy-button), input[type="button"], input[type="submit"]').forEach(button => {
+    // Melhora: O seletor original já é bom, mas vamos garantir que o botão de áudio de fundo
+    // também toque o click sound se ele não tiver sido coberto por outra lógica.
+    // Note: O audioControlButton já tem um playEffectSound(clickSound); no seu listener.
+    // Então, talvez você queira EXCLUIR ele aqui para evitar duplicidade.
+    document.querySelectorAll('button:not(.copy-button):not(#audioControlButton), input[type="button"], input[type="submit"]').forEach(button => {
         button.addEventListener('click', (event) => {
             console.log("[Efeitos Sonoros] Botão clicado. Tentando tocar click sound.");
             playEffectSound(clickSound);
@@ -455,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 top: 0,
                 behavior: 'smooth'
             });
-            playEffectSound(clickSound);
+            playEffectSound(clickSound); // Clique no botão voltar ao topo
         });
     } else {
         console.warn("Botão 'Voltar ao Topo' não encontrado. Verifique o ID 'scrollTopButton'.");
