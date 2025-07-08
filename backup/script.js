@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM totalmente carregado e pronto!");
 
-    // ... (Mantenha todas as suas variáveis globais e inicialização de áudio como estão, incluindo hoverSound e clickSound) ...
     let hoverSound;
     let clickSound;
     const backgroundAudio = document.getElementById('backgroundAudio');
@@ -55,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =====================================
-    // 1. Menu Hambúrguer para Responsividade (Seu código existente)
+    // 1. Menu Hambúrguer para Responsividade
     // =====================================
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -79,23 +78,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // Nova Função para Lidar com a Animação de Botões Pós-Execução (Seu código existente)
+    // Nova Função para Lidar com a Animação de Botões Pós-Execução
+    // REVISADO: Removido 'display: none' para evitar que o botão suma permanentemente para links âncora.
+    // Agora ele apenas esmaece, se for para navegar, a página irá carregar outra coisa,
+    // se for âncora, o botão vai esmaecer e voltar ao normal.
     // =====================================
     const handleButtonClickAnimation = (buttonElement, delayBeforeAnimate = 0) => {
-        setTimeout(() => {
-            buttonElement.classList.add('btn-animating-out');
-            const animationDuration = 500;
+        // Verifica se o botão é um link âncora para a mesma página
+        const isAnchorLink = buttonElement.tagName === 'A' && buttonElement.href.startsWith('#');
 
-            setTimeout(() => {
-                buttonElement.style.display = 'none';
-                console.log("Botão animado e escondido/removido.");
-            }, animationDuration);
+        setTimeout(() => {
+            // Adiciona a classe para iniciar a animação (opacity: 0, transform, pointer-events: none)
+            buttonElement.classList.add('btn-animating-out');
+
+            // Tempo da animação CSS (deve corresponder ao transition no CSS)
+            const animationDuration = 500; // 0.5s
+
+            // Para links âncora, remove a classe após a animação para que o botão reapareça
+            if (isAnchorLink) {
+                setTimeout(() => {
+                    buttonElement.classList.remove('btn-animating-out');
+                    // Opcional: Se quiser que ele volte 100% visível sem delay, pode redefinir o estilo direto
+                    // buttonElement.style.opacity = '1';
+                    // buttonElement.style.transform = 'translateY(0)';
+                    console.log("Botão âncora animado e classe de saída removida.");
+                }, animationDuration);
+            } else {
+                // Para links que levam a outras páginas, não precisamos remover a classe,
+                // pois a página será recarregada.
+                // Contudo, se por algum motivo a navegação falhar, o botão permaneceria escondido.
+                // Uma solução robusta seria gerenciar isso via evento 'transitionend' no link externo.
+                // Por simplicidade aqui, para links externos, o setTimeout para window.location.href
+                // já garante que a navegação ocorra após a animação de "esmaecer".
+                console.log("Botão de navegação animado para saída.");
+            }
         }, delayBeforeAnimate);
     };
 
 
     // =====================================
-    // 2. Funcionalidade de Copiar Texto (Seu código existente)
+    // 2. Funcionalidade de Copiar Texto
     // =====================================
     const copyButtons = document.querySelectorAll('.copy-button');
 
@@ -183,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
 
     const musicPlaylist = [
-        { title: 'Aria-Math-Lofi-Remastered', src: 'audios/musics/Aria-Math-Lofi-Remake.mp3' },
+        { title: 'Aria-Math-Lofi-Remastered', src: 'audios/musics/Aria-Math-Lofi-Remastered.mp3' },
         { title: 'Aria-Math', src: 'audios/musics/Aria-Math.mp3' },
         { title: 'Beginning 2', src: 'audios/musics/Beginning 2.mp3' },
         { title: 'Biome-Fest', src: 'audios/musics/Biome-Fest.mp3' },
@@ -245,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
         preparingNextMusic = true;
         currentMusicIndex = getRandomMusicIndex();
         const music = musicPlaylist[currentMusicIndex];
-        
+
         console.log(`[Áudio] Carregando: ${music.title} de ${music.src}`);
         backgroundAudio.src = music.src;
         backgroundAudio.load(); // Inicia o carregamento da nova música
@@ -287,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Remover o handler após a execução
             backgroundAudio.removeEventListener('error', onAudioErrorHandler);
             // Tente carregar a próxima música automaticamente em caso de erro, para não ficar travado
-            setTimeout(() => loadRandomMusic(playImmediately), 500); 
+            setTimeout(() => loadRandomMusic(playImmediately), 500);
         };
 
         // Adicionar os novos handlers
@@ -309,13 +331,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (backgroundAudio && audioControlButton && musicTitleDisplay && arcProgress) { // Verifique se todos os elementos existem
         // Carrega a primeira música na inicialização, mas não tenta tocar imediatamente (autoplay bloqueado)
-        loadRandomMusic(false); 
+        loadRandomMusic(false);
 
         backgroundAudio.addEventListener('loadedmetadata', () => {
             console.log("Metadados da música carregados (para o progresso do arco).");
             updateProgressArc(); // Garante que o arco é atualizado quando a duração é conhecida
         });
         backgroundAudio.addEventListener('timeupdate', updateProgressArc); // Atualiza o arco conforme a música avança
+        // A MÚSICA DEVE IR PARA A PRÓXIMA ALEATORIAMENTE QUANDO:
+        // 1. O ARCO DE PRODUÇÃO REINICIA DO 0, EXECUTANDO O EVENTO
         backgroundAudio.addEventListener('ended', () => {
             console.log("Música atual terminou. Carregando e tocando a próxima...");
             loadRandomMusic(true); // Carrega e tenta tocar a próxima música automaticamente
@@ -324,10 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
         audioControlButton.addEventListener('click', () => {
             playEffectSound(clickSound);
 
+            // 2. QUANDO CLICO SOBRE O BOTÃO (se já estiver tocando, troca; se estiver pausado, tenta tocar ou carregar uma nova)
             if (backgroundAudio.paused) {
-                // Se a música estiver pausada e não houver src ou estiver preparando a próxima,
-                // ou se for a primeira vez que o usuário clica e ainda não há música
-                if (preparingNextMusic || currentMusicIndex === -1 || !backgroundAudio.src) { // Simplificado e mais robusto
+                if (preparingNextMusic || currentMusicIndex === -1 || !backgroundAudio.src) {
                     console.log("Botão clicado: Carregando nova música e tentando tocar.");
                     loadRandomMusic(true); // Carrega uma nova música e tenta tocar
                 } else {
@@ -340,38 +363,38 @@ document.addEventListener('DOMContentLoaded', () => {
                         showCentralMessage('Autoplay bloqueado. Clique novamente para tocar.');
                     });
                 }
-                localStorage.setItem('userInteractedWithAudio', 'true'); // Marca que o usuário interagiu
+                localStorage.setItem('userInteractedWithAudio', 'true');
             } else {
-                console.log("Botão clicado: Pausando música.");
-                backgroundAudio.pause();
+                console.log("Botão clicado: Pausando música OU pulando para a próxima.");
+                backgroundAudio.pause(); // Pausa a música atual
                 audioControlButton.classList.remove('is-playing');
-                showCentralMessage('Música pausada.');
+                showCentralMessage('Música pausada. Clicou novamente para pular.');
+                
+                // NOVIDADE: Adiciona lógica para pular para a próxima música ao clicar novamente
+                // se a música estiver tocando
+                loadRandomMusic(true); // Carrega e tenta tocar a próxima música
             }
-            updateAudioButtonTitle(); // Atualiza o texto do botão
+            updateAudioButtonTitle();
         });
 
         // =================================================================
         // Lógica de Autoplay na inicialização e após primeira interação
         // =================================================================
-        let hasInitialInteraction = false; // Nova flag para controlar a primeira interação
+        let hasInitialInteraction = false;
         const handleInitialAudioPlay = () => {
-            if (hasInitialInteraction) return; // Evita execução múltipla
+            if (hasInitialInteraction) return;
             hasInitialInteraction = true;
 
             console.log("Primeira interação na página detectada.");
-            localStorage.setItem('userInteractedWithAudio', 'true'); // Registra a interação
+            localStorage.setItem('userInteractedWithAudio', 'true');
 
-            // Remove os event listeners para que essa lógica seja executada apenas uma vez
             document.removeEventListener('click', handleInitialAudioPlay, { once: true, capture: true });
             document.removeEventListener('keydown', handleInitialAudioPlay, { once: true, capture: true });
-            
-            // Tenta tocar apenas se estiver pausado. Se já estiver tocando, não interfere.
-            // Se não houver src (primeira vez), carrega e toca
+
             if (backgroundAudio.paused || !backgroundAudio.src) {
-                if (currentMusicIndex === -1) { // Se nenhuma música foi carregada ainda
-                    loadRandomMusic(true); // Carrega e tenta tocar
+                if (currentMusicIndex === -1) {
+                    loadRandomMusic(true);
                 } else {
-                    // Já tem uma música carregada, tenta tocar
                     backgroundAudio.play().then(() => {
                         audioControlButton.classList.add('is-playing');
                         showCentralMessage(`Tocando: ${musicPlaylist[currentMusicIndex].title}`);
@@ -386,17 +409,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Adiciona listeners para a primeira interação geral do usuário
-        // Usar passive: true para melhor performance e evitar warnings
         document.addEventListener('click', handleInitialAudioPlay, { once: true, capture: true, passive: true });
         document.addEventListener('keydown', handleInitialAudioPlay, { once: true, capture: true, passive: true });
-        
-        // Tenta o autoplay assim que possível (se o usuário já interagiu em sessão anterior)
-        // Isso é importante para visitas subsequentes
+
         const tryAutoPlayOnLoad = () => {
             if (localStorage.getItem('userInteractedWithAudio') === 'true') {
                 console.log("Usuário já interagiu anteriormente. Tentando autoplay na carga da página.");
-                // Se já há uma música carregada e não está tocando, tente tocar
                 if (currentMusicIndex !== -1 && backgroundAudio.paused) {
                     backgroundAudio.play().then(() => {
                         audioControlButton.classList.add('is-playing');
@@ -409,28 +427,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         updateAudioButtonTitle();
                     });
                 } else if (currentMusicIndex === -1) {
-                    // Se nenhuma música foi carregada, carregue e tente tocar
                     loadRandomMusic(true);
                 }
             } else {
                 console.log("Primeira visita ou interação não registrada. Autoplay não permitido. Aguardando interação.");
-                updateAudioButtonTitle(); // Garante que o título esteja correto
+                updateAudioButtonTitle();
             }
         };
 
-        // Chama a tentativa de autoplay quando o DOM estiver pronto
         tryAutoPlayOnLoad();
-        
-        // Atualiza o progresso do arco na inicialização
+
         setTimeout(updateProgressArc, 100);
         updateAudioButtonTitle();
-        
+
     } else {
         console.warn("Elementos de áudio de fundo não encontrados. Verifique os IDs 'backgroundAudio', 'audioControlButton', 'musicTitleDisplay' e 'audioProgressArc'.");
     }
 
     // =====================================
-    // 4. Sistema de Sons para Interações (Seu código existente)
+    // 4. Sistema de Sons para Interações
     // =====================================
     document.querySelectorAll('.access-card, .info-card, .service-card, .community-card, .event-card, .partnership-card, .security-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
@@ -439,35 +454,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ATENÇÃO A ESTE BLOCO PARA A CORREÇÃO DO BUG DO BOTÃO
     document.querySelectorAll('a:not(.menu-toggle):not(.nav-menu a), .btn-primary, .btn-link').forEach(element => {
         element.addEventListener('click', (event) => {
             console.log("[Efeitos Sonoros] Link/Botão clicado. Tentando tocar click sound.");
             playEffectSound(clickSound);
 
-            if (element.tagName === 'A' && element.href && element.href !== '#' && !element.classList.contains('no-animation')) {
-                event.preventDefault();
-                handleButtonClickAnimation(element);
+            // Verifica se o link é para uma URL externa ou para outra página (não um link âncora interno)
+            const isExternalOrFullPageLink = element.tagName === 'A' && element.href &&
+                                             (element.href.startsWith('http') || element.href.startsWith('https') || !element.href.includes('#'));
+
+            // Se for um link externo ou um botão que deve "desaparecer" (ex: "Nada para ver aqui!")
+            if (isExternalOrFullPageLink && !element.classList.contains('no-animation')) {
+                event.preventDefault(); // Impede a navegação imediata
+                handleButtonClickAnimation(element); // Anima o botão para fora
+
+                // Navega para a URL após a animação de saída
                 setTimeout(() => {
                     window.location.href = element.href;
-                }, 500);
+                }, 500); // 500ms deve corresponder à duração da sua animação CSS
             }
-            else if (element.tagName === 'BUTTON' || element.classList.contains('btn-primary') || element.classList.contains('btn-link')) {
+            // Lógica para links âncora internos
+            else if (element.tagName === 'A' && element.href && element.href.startsWith('#')) {
+                // Para links âncora, apenas execute a animação *se ela não esconder o botão permanentemente*.
+                // Sua função handleButtonClickAnimation já foi modificada para lidar com isso.
+                // Não precisa de preventDefault ou setTimeout para window.location.href aqui,
+                // pois o comportamento padrão do navegador já fará o scroll.
+                handleButtonClickAnimation(element); // Fará o esmaecimento e o reset se for âncora
+            }
+            // Lógica para botões que não são links, mas que você quer animar (ex: "Nada para ver aqui!")
+            else if (element.tagName === 'BUTTON' || (element.classList.contains('btn-primary') && !element.href) || (element.classList.contains('btn-link') && !element.href)) {
                 if (!element.classList.contains('copy-button')) {
                     if (element.textContent.includes('Nada para ver aqui!')) {
                         handleButtonClickAnimation(element);
                     }
                 }
             }
+            // Caso contrário, é um link ou botão normal que não precisa de animação complexa ou já foi tratado (ex: copy-button)
         });
     });
 
     // =====================================
-    // 5. Botão "Voltar ao Topo" (Seu código existente)
+    // 5. Botão "Voltar ao Topo"
     // =====================================
     const scrollTopButton = document.getElementById('scrollTopButton');
 
     if (scrollTopButton) {
-        window.addEventListener('scroll', () => { /* ... seu código ... */ });
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopButton.classList.add('show');
+            } else {
+                scrollTopButton.classList.remove('show');
+            }
+        });
         scrollTopButton.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             playEffectSound(clickSound);
@@ -477,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 6. Atualizar Ano Atual no Rodapé (Seu código existente)
+    // 6. Atualizar Ano Atual no Rodapé
     // =====================================
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
@@ -487,11 +526,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 7. Efeitos de Rolagem para Elementos (Seu código existente)
+    // 7. Efeitos de Rolagem para Elementos
     // =====================================
     const sections = document.querySelectorAll('.fade-in-section');
-    const observerOptions = { /* ... seu código ... */ };
-    const sectionObserver = new IntersectionObserver((entries, observer) => { /* ... seu código ... */ }, observerOptions);
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.1 // 10% da seção visível para acionar
+    };
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Deixa de observar depois de visível
+            }
+        });
+    }, observerOptions);
     sections.forEach(section => {
         sectionObserver.observe(section);
     });
