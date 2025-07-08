@@ -268,15 +268,11 @@ ul {
 /* ===================================== */
 
 .hero-section {
-    position: relative;
-    height: 650px; /* Altura fixa para o hero */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--cor-texto-claro);
-    overflow: hidden; /* Garante que a imagem de fundo não vaze */
-    background: url('https://matheuzera.github.io/ZerasCraft/images/site/banner-fundo.gif') no-repeat center center/cover; /* Imagem de fundo do hero */
+    position: relative; /* Necessário para posicionar o overlay e o background image */
+    background-color: #181818; /* Cor de fundo base, caso a imagem não carregue */
+    color: #ffffff;
+    padding: 120px 0; /* Ajuste o padding vertical conforme necessário */
+    overflow: hidden; /* Para conter elementos posicionados absolutamente */
 }
 
 .hero-image-overlay {
@@ -285,81 +281,83 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Escurece a imagem de fundo */
+    /* Aqui definimos a imagem de fundo (o seu banner) */
+    background-image: url('images/1.site/banner-fundo.gif'); /* Ajuste o caminho da imagem se necessário */
+    background-size: cover; /* Cobrir todo o espaço da seção */
+    background-position: center; /* Centralizar a imagem */
+    opacity: 0.8; /* Ajuste a opacidade do banner conforme desejado */
+    z-index: -1; /* Coloca a imagem de fundo atrás do conteúdo */
+}
+
+.hero-section .container {
+    position: relative; /* Garante que o conteúdo fique acima do overlay */
     z-index: 1;
+    text-align: center;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 20px;
-    max-width: 900px;
+.hero-section .server-branding {
+    margin-bottom: 30px;
 }
 
-.server-branding {
-    display: flex;
-    flex-direction: column; /* Coluna para empilhar ícone e banner */
-    align-items: center;
-    justify-content: center;
-    gap: 15px; /* Espaço entre ícone e banner */
-    margin-bottom: 30px; /* Espaço abaixo do bloco de branding */
+.hero-section .server-icon {
+    width: 80px; /* Ajuste o tamanho do ícone conforme necessário */
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-.server-banner {
-    max-width: 350px; /* Aumentei um pouco o tamanho do banner para destaque */
-    border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card); /* Sombra mais intensa para destaque */
-    border: 2px solid var(--cor-primaria); /* Borda sutil */
+.hero-section h1 {
+    font-size: 3.5em; /* Ajuste o tamanho da fonte do título */
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto para melhor contraste */
 }
 
-.server-icon {
-    width: 120px; /* Aumentei o tamanho do ícone */
-    height: 120px;
-    border-radius: 50%; /* Torna o ícone circular */
-    border: 5px solid var(--cor-destaque); /* Borda mais grossa e dourada */
-    box-shadow: 0 0 15px rgba(var(--neon-flame-color1-rgb), 0.7),
-                0 0 25px rgba(var(--neon-flame-color2-rgb), 0.5); /* Efeito neon sutil */
-    transition: transform 0.3s ease-out; /* Transição para o hover */
+.hero-section .hero-subtitle {
+    font-size: 1.2em; /* Ajuste o tamanho da fonte do subtítulo */
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: #ddd;
 }
 
-.server-icon:hover {
-    transform: scale(1.1) rotate(5deg); /* Aumenta e rotaciona um pouco no hover */
-}
-
-
-.hero-content h1 {
-    font-size: 3.8em;
-    margin-bottom: 0.5em;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    color: var(--cor-destaque); /* Título principal em dourado */
-}
-
-.hero-subtitle {
-    font-size: 1.3em;
-    max-width: 700px;
-    margin: 0 auto 30px auto;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.hero-social-links {
+.hero-section .hero-social-links {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap; /* Quebra linha em telas menores */
+    gap: 20px;
 }
 
-.hero-social-links .btn-link {
-    font-size: 1.1em;
-    color: var(--cor-link);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.hero-social-links .btn-link:hover {
-    color: var(--cor-link-hover);
-    transform: translateY(-2px);
+.hero-section .btn-primary {
+    display: inline-block;
+    background-color: #2ecc71; /* Cor primária do botão */
+    color: #ffffff;
+    padding: 15px 30px;
+    border-radius: 5px;
     text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.hero-section .btn-primary:hover {
+    background-color: #27ae60;
+}
+
+/* =========================================
+   Responsividade da Hero Section (Opcional)
+   ========================================= */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 100px 0;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-section .hero-social-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
 }
 
 /* ===================================== */
