@@ -213,13 +213,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         backgroundMusic.play().then(() => {
             updateButtonState(true);
-            showCentralMessage(`Tocando: ${currentTrack.title}`);
+            showCentralMessage(`🎵 > ${currentTrack.title}`);
             if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = currentTrack.title;
             console.log(`Música "${currentTrack.title}" iniciada com sucesso.`);
         }).catch(e => {
             console.error("Erro ao iniciar a reprodução da música de fundo:", e);
             updateButtonState(false);
-            showCentralMessage(`Carregando Música: ${currentTrack.title}`);
+            showCentralMessage(`Carregando: ${currentTrack.title}`);
             if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Música Pausada";
             console.log("A reprodução automática pode ter sido bloqueada. O usuário precisa interagir.");
         });
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             backgroundMusic.pause();
             updateButtonState(false);
-            currentMusicTitleDisplay.textContent = "Música Desligada";
+            currentMusicTitleDisplay.textContent = "Desligada";
             console.log("Música iniciada como desligada (preferência do usuário ou padrão).");
         }
     } else {
@@ -258,8 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Música estava tocando, pausando agora.");
                 backgroundMusic.pause();
                 updateButtonState(false);
-                showCentralMessage("Música Pausada");
-                if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Música Pausada";
+                if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Desligaada";
                 localStorage.setItem('musicEnabled', 'false');
             }
         });
@@ -273,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backgroundMusic.addEventListener('loadedmetadata', updateProgressBar);
         backgroundMusic.addEventListener('error', (e) => {
             console.error("Erro no elemento de áudio backgroundMusic:", e);
-            showCentralMessage("Erro ao carregar música!");
+            showCentralMessage("Erro!");
             updateButtonState(false);
             if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Erro de Áudio";
         });
