@@ -267,96 +267,170 @@ ul {
 /* 3. Seção Hero (Destaque Principal)    */
 /* ===================================== */
 
+/* =====================================
+   Seção do Banner Principal (Hero Section)
+   ===================================== */
 .hero-section {
-    position: relative; /* Necessário para posicionar o overlay e o background image */
-    background-color: #181818; /* Cor de fundo base, caso a imagem não carregue */
-    color: #ffffff;
-    padding: 120px 0; /* Ajuste o padding vertical conforme necessário */
-    overflow: hidden; /* Para conter elementos posicionados absolutamente */
+    position: relative; /* Essencial para que o overlay e o conteúdo sejam posicionados corretamente dentro dele */
+    width: 100%; /* Ocupa a largura total da tela */
+    height: 600px; /* Altura do seu banner. Ajuste este valor conforme desejar. */
+    display: flex; /* Permite o alinhamento flexível dos itens internos (conteúdo) */
+    flex-direction: column; /* Alinha os itens verticalmente */
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    text-align: center; /* Centraliza o texto */
+    color: #ffffff; /* Cor do texto no banner (branco) */
+    padding: 20px; /* Preenchimento interno para garantir que o conteúdo não encoste nas bordas */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
+    overflow: hidden; /* Oculta qualquer conteúdo que transborde (útil para imagens grandes) */
+
+    /* PROPRIEDADES DO FUNDO DO BANNER */
+    /* Caminho para a sua imagem de banner.
+       Assumindo que 'style.css' está na raiz e 'banner.gif' está em 'audios/' */
+    background-image: url('banner.gif');
+    background-size: cover; /* Faz a imagem cobrir toda a área do elemento, cortando se necessário */
+    background-position: center center; /* Centraliza a imagem no elemento */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    /* background-attachment: fixed; */ /* Opcional: Descomente para um efeito de paralaxe (imagem fixa na rolagem) */
 }
 
+/* Camada de sobreposição escura para melhorar a legibilidade do texto no banner */
 .hero-image-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Aqui definimos a imagem de fundo (o seu banner) */
-    background-image: url('images/1.site/banner-fundo.gif'); /* Ajuste o caminho da imagem se necessário */
-    background-size: cover; /* Cobrir todo o espaço da seção */
-    background-position: center; /* Centralizar a imagem */
-    opacity: 0.8; /* Ajuste a opacidade do banner conforme desejado */
-    z-index: -1; /* Coloca a imagem de fundo atrás do conteúdo */
+    background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
+    z-index: 1; /* Coloca o overlay acima da imagem de fundo, mas abaixo do conteúdo */
 }
 
-.hero-section .container {
+/* Estilos para o conteúdo dentro do banner (título, subtítulo, botões, ícone) */
+.hero-content {
     position: relative; /* Garante que o conteúdo fique acima do overlay */
-    z-index: 1;
-    text-align: center;
+    z-index: 2; /* Coloca o conteúdo acima do overlay */
+    max-width: 900px; /* Limita a largura do conteúdo para melhor leitura */
+    margin: 0 auto; /* Centraliza o bloco de conteúdo */
+    padding: 20px; /* Espaçamento interno para o conteúdo */
 }
 
-.hero-section .server-branding {
-    margin-bottom: 30px;
+/* Estilos para o branding do servidor (o ícone da raposa) */
+.server-branding {
+    margin-bottom: 20px; /* Espaçamento abaixo do ícone */
 }
 
-.hero-section .server-icon {
-    width: 80px; /* Ajuste o tamanho do ícone conforme necessário */
-    height: auto;
-    display: block;
-    margin: 0 auto;
+.server-branding .server-icon {
+    width: 150px; /* Tamanho do ícone no banner */
+    height: 150px;
+    object-fit: contain; /* Garante que a imagem seja contida dentro das dimensões, sem cortar */
+    /* border-radius: 50%; */ /* Descomente se quiser o ícone circular */
+    /* border: 5px solid #ffcc00; */ /* Opcional: Adiciona uma borda ao ícone */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); /* Opcional: Brilho ao redor do ícone */
 }
 
+/* Estilos para o título principal no banner */
 .hero-section h1 {
-    font-size: 3.5em; /* Ajuste o tamanho da fonte do título */
+    font-size: 4em; /* Tamanho da fonte do título principal. Ajuste conforme necessário. */
+    margin-bottom: 15px; /* Espaçamento abaixo do título */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9); /* Sombra para o texto para melhor legibilidade */
+    line-height: 1.2; /* Altura da linha */
     font-weight: bold;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto para melhor contraste */
 }
 
+/* Estilos para o subtítulo no banner */
 .hero-section .hero-subtitle {
-    font-size: 1.2em; /* Ajuste o tamanho da fonte do subtítulo */
-    line-height: 1.8;
-    margin-bottom: 40px;
-    color: #ddd;
+    font-size: 1.6em; /* Tamanho da fonte do subtítulo. Ajuste conforme necessário. */
+    margin-bottom: 40px; /* Espaçamento abaixo do subtítulo */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra para o texto */
+    line-height: 1.5;
 }
 
-.hero-section .hero-social-links {
+/* Estilos para os links sociais/botões no banner */
+.hero-social-links {
     display: flex;
+    gap: 20px; /* Espaço entre os botões */
     justify-content: center;
-    gap: 20px;
+    flex-wrap: wrap; /* Quebra os botões para a próxima linha em telas menores */
 }
 
-.hero-section .btn-primary {
+/* Estilos dos botões (btn-primary - presumo que já existam no seu CSS) */
+.btn-primary {
     display: inline-block;
-    background-color: #2ecc71; /* Cor primária do botão */
-    color: #ffffff;
     padding: 15px 30px;
-    border-radius: 5px;
+    background-color: #4CAF50; /* Verde Minecraft */
+    color: white;
     text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
 }
 
-.hero-section .btn-primary:hover {
-    background-color: #27ae60;
+.btn-primary:hover {
+    background-color: #45a049; /* Verde mais escuro no hover */
+    transform: translateY(-2px); /* Pequeno efeito de elevação */
 }
 
-/* =========================================
-   Responsividade da Hero Section (Opcional)
-   ========================================= */
+
+/* =====================================
+   Responsividade para o Banner
+   ===================================== */
+@media (max-width: 992px) {
+    .hero-section h1 {
+        font-size: 3.2em;
+    }
+    .hero-section .hero-subtitle {
+        font-size: 1.4em;
+    }
+    .server-branding .server-icon {
+        width: 130px;
+        height: 130px;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-section {
-        padding: 100px 0;
+        height: 500px; /* Reduz a altura do banner em telas menores */
+        padding: 15px;
     }
-
     .hero-section h1 {
-        font-size: 2.5em;
+        font-size: 2.8em;
     }
-
-    .hero-section .hero-social-links {
-        flex-direction: column;
-        align-items: center;
+    .hero-section .hero-subtitle {
+        font-size: 1.3em;
+    }
+    .server-branding .server-icon {
+        width: 100px;
+        height: 100px;
+    }
+    .hero-social-links {
+        flex-direction: column; /* Empilha os botões verticalmente em telas muito pequenas */
         gap: 15px;
+    }
+    .btn-primary {
+        padding: 12px 25px;
+        font-size: 1em;
+        width: 80%; /* Botões ocupam mais largura */
+        max-width: 300px; /* Limite a largura */
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        height: 400px; /* Reduz ainda mais a altura em celulares */
+        padding: 10px;
+    }
+    .hero-section h1 {
+        font-size: 2em;
+    }
+    .hero-section .hero-subtitle {
+        font-size: 1em;
+    }
+    .server-branding .server-icon {
+        width: 80px;
+        height: 80px;
     }
 }
 
