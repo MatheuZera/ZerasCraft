@@ -579,33 +579,138 @@ h2 .fas, h3 .fas {
     font-size: 1em;
 }
 
-/* Estilo para a proposta de parceria */
-.partnership-proposal-card {
-    background-color: var(--cor-terciaria);
-    border-radius: var(--border-radius);
-    padding: var(--padding-card);
-    text-align: center;
-    margin-top: var(--gap-grid);
-    box-shadow: var(--sombra-card);
-    border: 1px solid var(--cor-primaria);
-    transition: var(--transicao-card-hover); /* Para um hover sutil */
+/* Container principal dos cards de parceria */
+.partnership-grid {
+    display: grid; /* Ativa o display de grade */
+    /* Cria colunas que se ajustam automaticamente:
+       - 'auto-fit' garante que o máximo de colunas possível caiba no espaço disponível.
+       - 'minmax(280px, 1fr)' significa que cada coluna terá no mínimo 280px de largura.
+         Se houver espaço extra no contêiner, ele será distribuído igualmente entre as colunas (1fr).
+         Ajuste '280px' se os cards forem maiores ou menores em outras seções. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; /* Espaçamento de 20px entre os cards (linhas e colunas) */
+    justify-content: center; /* Centraliza o grid horizontalmente dentro do seu contêiner pai */
+    padding: 0 15px; /* Adiciona um pequeno padding interno nas laterais para telas pequenas */
 }
 
-.partnership-proposal-card:hover {
-    background-color: var(--cor-primaria); /* Muda para verde primário no hover */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
-    transform: translateY(-5px);
+/* Estilos individuais dos cards de parceria */
+.partnership-card {
+    background-color: #1a1a1a; /* Cor de fundo similar aos outros cards */
+    border: 1px solid #333; /* Borda sutil */
+    border-radius: 8px; /* Cantos arredondados */
+    padding: 20px; /* Preenchimento interno */
+    text-align: center; /* Centraliza o texto e os elementos internos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para um efeito de profundidade */
+    color: #f0f0f0; /* Cor do texto */
+    display: flex; /* Usa flexbox para o conteúdo interno do card */
+    flex-direction: column; /* Organiza o conteúdo em coluna */
+    justify-content: space-between; /* Distribui o espaço verticalmente */
+    align-items: center; /* Centraliza itens horizontalmente */
+    height: 100%; /* Garante que todos os cards tenham a mesma altura em uma linha */
+}
+
+/* Estilos para o ícone/logo dentro do card de parceria */
+.partnership-logo {
+    width: 60px; /* Tamanho do ícone */
+    height: 60px;
+    margin-bottom: 15px;
+    border-radius: 50%; /* Opcional: para ícones redondos */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+}
+
+/* Estilos para o título do card */
+.card-title {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+/* Estilos para a descrição do card */
+.card-description {
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #b0b0b0;
+    flex-grow: 1; /* Permite que a descrição ocupe o espaço disponível */
+}
+
+/* Estilos para o botão/link dentro do card */
+.btn-link {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff; /* Cor do botão (ajuste para o estilo do seu site) */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-link:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para o card de proposta de parceria (seção separada) */
+.partnership-proposal-card {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 50px; /* Espaçamento em relação ao grid de cards */
+    text-align: center;
+    color: #f0f0f0;
 }
 
 .partnership-proposal-card h3 {
-    color: var(--cor-destaque);
+    font-size: 1.5em;
     margin-bottom: 15px;
+    color: #e0e0e0;
 }
 
 .partnership-proposal-card p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.05em;
-    margin-bottom: 30px;
+    font-size: 1em;
+    margin-bottom: 25px;
+    color: #b0b0b0;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #28a745; /* Cor do botão primário (ajuste) */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 992px) { /* Por exemplo, para tablets */
+    .partnership-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) { /* Para dispositivos menores */
+    .partnership-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    .partnership-card {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) { /* Para celulares */
+    .partnership-grid {
+        grid-template-columns: 1fr; /* Uma única coluna em telas muito pequenas */
+        gap: 15px;
+    }
+    .partnership-card {
+        padding: 15px;
+    }
 }
 
 /* ===================================== */
