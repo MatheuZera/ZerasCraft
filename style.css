@@ -858,70 +858,55 @@ h2 .fas, h3 .fas {
 /* ===================================== */
 
 .main-footer {
-    background-color: var(--cor-fundo-secundaria); /* Ou a cor que você usa para o rodapé */
+    background-color: var(--cor-fundo-secundaria);
     color: var(--cor-texto-claro);
-    padding: 40px 0; /* Espaçamento interno */
-    border-top: 2px solid var(--cor-borda-clara); /* Uma linha sutil no topo */
+    padding: 40px 0;
+    border-top: 2px solid var(--cor-borda-clara);
 }
 
 .main-footer .container {
-    max-width: 1200px; /* Garante que o conteúdo não se espalhe muito */
-    margin: 0 auto; /* Centraliza o container */
-    padding: 0 20px; /* Padding nas laterais para telas menores */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .footer-grid-container {
     display: grid;
-    /* Define 3 colunas de largura igual, com um pequeno espaço entre elas */
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px; /* Espaço entre as colunas */
-    margin-bottom: 30px; /* Espaço entre o grid e o footer-bottom */
-    justify-content: space-between; /* Distribui o espaço extra se as colunas forem menores que o total */
-    align-items: flex-start; /* Alinha o conteúdo de cada coluna ao topo */
-
-    /* Adiciona padding interno para as colunas, se necessário, ou nos próprios itens */
-    /* padding: 20px 0; */
+    gap: 30px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    align-items: flex-start;
 }
-
-/* Estilos para as colunas individuais */
-/*.footer-about,
-.footer-contact-nav-group,
-.footer-legal {
-    /* Opcional: Adicione um fundo ou borda para visualização durante o desenvolvimento */
-    /* background-color: rgba(255,255,255,0.05); */
-    /* padding: 15px; */
-    /* border-radius: 8px; */
-/*}*/
 
 /* Estilo para o texto "Obrigado por visitar..." */
 .footer-contact-nav-group .thanks-message {
     text-align: center;
     font-weight: bold;
     margin-bottom: 15px;
-    color: var(--cor-primaria); /* Ou outra cor de destaque */
+    color: var(--cor-primaria);
     font-size: 1.1em;
 }
 
 /* Estilo para as linhas <hr> dentro do rodapé */
 .footer-contact-nav-group .separator-line {
     border: none;
-    border-top: 1px solid var(--cor-borda-escura); /* Cor para o separador */
-    margin: 20px 0; /* Espaço acima e abaixo da linha */
-    opacity: 0.5; /* Suaviza a linha */
+    border-top: 1px solid var(--cor-borda-escura);
+    margin: 20px 0;
+    opacity: 0.5;
 }
-
 
 /* Estilos para os cabeçalhos de coluna no rodapé */
 .main-footer h3,
 .main-footer h4 {
-    color: var(--cor-destaque); /* Use uma cor que se destaque, talvez um verde mais claro */
+    color: var(--cor-destaque);
     margin-bottom: 15px;
     font-size: 1.3em;
 }
 
-/* Estilos para ícones de contato */
+/* Estilos para ícones de contato (já existentes, para e-mail/telefone) */
 .footer-contact .contact-icon {
-    width: 20px; /* Tamanho dos ícones */
+    width: 20px;
     height: 20px;
     vertical-align: middle;
     margin-right: 8px;
@@ -950,16 +935,16 @@ h2 .fas, h3 .fas {
 
 .footer-links a:hover,
 .footer-legal a:hover {
-    color: var(--cor-primaria); /* Muda para verde no hover */
+    color: var(--cor-primaria);
     text-decoration: underline;
 }
 
 /* Estilos para o botão de Discord no rodapé */
 .btn-footer-discord {
-    display: inline-flex; /* Para alinhar o ícone e o texto */
+    display: inline-flex;
     align-items: center;
-    gap: 8px; /* Espaço entre o ícone e o texto */
-    background-color: #7289DA; /* Cor padrão do Discord, ou var(--cor-discord) se tiver */
+    gap: 8px;
+    background-color: #7289DA;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
@@ -970,8 +955,8 @@ h2 .fas, h3 .fas {
 }
 
 .btn-footer-discord:hover {
-    background-color: #677BC4; /* Escurece um pouco no hover */
-    transform: translateY(-2px); /* Pequeno efeito de elevação */
+    background-color: #677BC4;
+    transform: translateY(-2px);
 }
 
 .btn-footer-discord .button-icon {
@@ -979,20 +964,41 @@ h2 .fas, h3 .fas {
     height: 24px;
 }
 
+/* >>>>> NOVO CSS PARA OS ÍCONES SOCIAIS GRANDES <<<<< */
+/* Supondo que eles estejam dentro de um contêiner na coluna "footer-about" */
+.footer-about .footer-social-logos {
+    display: flex; /* Para alinhar os ícones lado a lado */
+    gap: 15px; /* Espaçamento entre os ícones */
+    margin-top: 20px; /* Margem para separar do texto acima */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: flex-start; /* Alinha à esquerda na coluna */
+}
+
+.footer-about .footer-social-logos img {
+    width: 48px; /* Ajuste este valor para o tamanho desejado (ex: 32px, 40px, 50px) */
+    height: auto; /* Mantém a proporção */
+    transition: transform 0.3s ease;
+}
+
+.footer-about .footer-social-logos img:hover {
+    transform: scale(1.1); /* Efeito de zoom no hover */
+}
+/* >>>>> FIM DO NOVO CSS <<<<< */
+
 
 /* Estilos para a seção de direitos autorais */
 .footer-bottom {
     text-align: center;
-    margin-top: 40px; /* Espaço entre as colunas e o rodapé inferior */
-    padding-top: 20px; /* Padding interno */
-    border-top: 1px solid var(--cor-borda-escura); /* Separador visual */
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--cor-borda-escura);
     font-size: 0.9em;
     color: var(--cor-texto-claro);
-    opacity: 0.7; /* Suaviza um pouco */
+    opacity: 0.7;
 }
 
 .footer-bottom .inline-icon {
-    width: 18px; /* Tamanho dos pequenos ícones inline */
+    width: 18px;
     height: 18px;
     vertical-align: middle;
     margin: 0 5px;
@@ -1002,31 +1008,36 @@ h2 .fas, h3 .fas {
 /* Responsividade para o Rodapé */
 @media (max-width: 768px) {
     .footer-grid-container {
-        /* Muda para 1 coluna em telas menores, empilhando o conteúdo */
         grid-template-columns: 1fr;
-        gap: 40px; /* Aumenta o espaço entre as seções quando empilhadas */
+        gap: 40px;
     }
 
     .footer-about,
     .footer-contact-nav-group,
     .footer-legal {
-        text-align: center; /* Centraliza o texto nas colunas em telas menores */
+        text-align: center;
     }
 
-    .social-icons,
+    /* Ajustes para alinhar itens em telas menores */
+    .footer-about .footer-social-logos, /* Adicione este seletor */
+    .social-icons, /* Se você tiver outros social-icons em outros lugares */
     .footer-contact p,
     .footer-links ul,
     .footer-legal ul {
-        display: flex; /* Transforma em flexbox para centralizar itens */
-        flex-direction: column; /* Empilha itens verticalmente */
-        align-items: center; /* Centraliza os itens */
-        margin-bottom: 20px; /* Espaço entre grupos de itens */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
     }
 
-    /* Ajuste para icons de contato se ficarem estranhos */
+    /* Ajuste específico para os ícones sociais grandes em mobile */
+    .footer-about .footer-social-logos img {
+        width: 38px; /* Reduza um pouco o tamanho para mobile, se desejar */
+    }
+
     .footer-contact p {
-        flex-direction: row; /* Volta para linha para ícone + texto */
-        justify-content: center; /* Centraliza a linha */
+        flex-direction: row;
+        justify-content: center;
     }
 }
 
