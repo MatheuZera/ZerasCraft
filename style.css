@@ -43,7 +43,7 @@
 
     /* Espaçamentos e Tamanhos */
     --padding-section: 80px 0; /* Preenchimento padrão para seções (interno) */
-    --spacing-section: 60px; /* NOVO: Espaçamento entre as seções (externo) */
+    --spacing-section: 70px; /* NOVO: Espaçamento entre as seções (externo) */
     --padding-card: 20px; /* Preenchimento interno dos cards */
     --gap-grid: 20px; /* Espaço entre itens de grid - Aumentado para melhor espaçamento */
     --border-radius: 8px; /* Borda arredondada padrão */
@@ -1225,7 +1225,7 @@ h2 .fas, h3 .fas {
 }
 
 /* Small devices (landscape phones, 576px and up) */
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
     h1 { font-size: 2.5em; }
     h2 { font-size: 2em; }
     h3 { font-size: 1.6em; }
@@ -1236,7 +1236,7 @@ h2 .fas, h3 .fas {
 
     /* Ajusta o espaçamento ENTRE seções para telas pequenas */
     .section-padded:not(:last-of-type) {
-        margin-bottom: 30px; /* Reduz ainda mais o espaçamento */
+        margin-bottom:60px; /* Reduz ainda mais o espaçamento */
     }
 
     .hero-section {
