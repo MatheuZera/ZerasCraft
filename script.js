@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return audio;
     };
 
+    // Verifique o nome do arquivo aqui, você tinha 'mpac' antes
     hoverSound = initializeAudioEffect('select', 'audios/effects/select.mp3', 0.3);
-    clickSound = initializeAudioEffect('click', 'audios/effects/click.mpac', 0.7); // Ajuste aqui para 'mp3' se estiver errado no original
+    clickSound = initializeAudioEffect('click', 'audios/effects/click.mp3', 0.7); // Certifique-se que o caminho está correto
 
     const playEffectSoundInternal = (audioElement) => {
         if (audioElement) {
@@ -79,16 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================
     // REMOVIDA OU SIMPLIFICADA: Nova Função para Lidar com a Animação de Botões Pós-Execução
-    // Se não for usada em mais nenhum lugar, esta função pode ser removida completamente.
-    // Se precisar mantê-la por algum motivo, mas sem a animação de opacidade, simplifique-a.
-    // Por enquanto, vamos deixá-la aqui, mas ela não será mais chamada para os links/botões principais.
     const handleButtonClickAnimation = (buttonElement, delayBeforeAnimate = 0) => {
         console.log("handleButtonClickAnimation foi chamada, mas as animações de opacidade foram desativadas.");
-        // Remova a linha abaixo se quiser que a animação não ocorra de forma alguma
-        // buttonElement.classList.add('btn-animating-out');
-        // Ou, se precisar que ela ainda faça algo, mas não a opacidade/display: none:
-        // buttonElement.classList.add('alguma-outra-classe-de-animacao');
-        // console.log("Botão animado (sem opacidade) e escondido/removido.");
+        // Removido ou comentado: buttonElement.classList.add('btn-animating-out');
     };
 
 
@@ -233,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadRandomMusic = (playImmediately = false) => {
         if (musicPlaylist.length === 0) {
             console.warn("Playlist vazia, não é possível carregar música.");
+            preparingNextMusic = false; // Libera a flag se a playlist estiver vazia
             return;
         }
         if (preparingNextMusic) {
@@ -270,6 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     audioControlButton.classList.remove('is-playing');
                     showCentralMessage('Autoplay bloqueado. Clique para tocar.');
                     updateAudioButtonTitle(); // Atualiza o título mesmo se não tocar
+                    // Garante que a flag seja resetada mesmo com erro de autoplay
+                    preparingNextMusic = false;
                 });
             } else {
                 updateAudioButtonTitle();
@@ -281,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
         onAudioErrorHandler = (e) => {
             console.error(`Erro ao carregar ou reproduzir áudio: ${music.src}`, e);
             showCentralMessage('Erro ao carregar música.');
-            preparingNextMusic = false; // Libera a flag
+            preparingNextMusic = false; // Libera a flag mesmo em caso de erro
             // Remover o handler após a execução
             backgroundAudio.removeEventListener('error', onAudioErrorHandler);
             // Tente carregar a próxima música automaticamente em caso de erro, para não ficar travado
@@ -314,10 +311,13 @@ document.addEventListener('DOMContentLoaded', () => {
             updateProgressArc(); // Garante que o arco é atualizado quando a duração é conhecida
         });
         backgroundAudio.addEventListener('timeupdate', updateProgressArc); // Atualiza o arco conforme a música avança
+        
         // A MÚSICA DEVE IR PARA A PRÓXIMA ALEATORIAMENTE QUANDO:
-        // 1. O ARCO DE PRODUÇÃO REINICIA DO 0, EXECUTANDO O EVENTO
+        // 1. O ARCO DE PRODUÇÃO REINICIA DO 0, EXECUTANDO O EVENTO 'ended'
         backgroundAudio.addEventListener('ended', () => {
-            console.log("Música atual terminou. Carregando e tocando a próxima...");
+            console.log("Música atual terminou (evento 'ended'). Carregando e tocando a próxima...");
+            // VERIFICAÇÃO EXTRA: Resetar 'preparingNextMusic' antes de carregar uma nova, caso esteja presa
+            preparingNextMusic = false; 
             loadRandomMusic(true); // Carrega e tenta tocar a próxima música automaticamente
         });
 
@@ -346,6 +346,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 backgroundAudio.pause(); // Opcional: pausar antes de carregar a próxima para uma transição mais limpa
                 audioControlButton.classList.remove('is-playing'); // Remove o estado de "tocando" enquanto carrega
                 showCentralMessage('Pulando para a próxima música...');
+                
+                // VERIFICAÇÃO EXTRA: Resetar 'preparingNextMusic' antes de carregar uma nova, caso esteja presa
+                preparingNextMusic = false; 
                 loadRandomMusic(true); // Carrega e tenta tocar a próxima música
             }
             updateAudioButtonTitle();
@@ -428,22 +431,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // BLOC QUE TINHA A LÓGICA DE TRANSIÇÃO DE OPACIDADE REMOVIDA
     document.querySelectorAll('a:not(.menu-toggle):not(.nav-menu a), .btn-primary, .btn-link').forEach(element => {
         element.addEventListener('click', (event) => {
             console.log("[Efeitos Sonoros] Link/Botão clicado. Tentando tocar click sound.");
             playEffectSound(clickSound);
 
-            // REMOVIDA A LÓGICA QUE CHAMAVA handleButtonClickAnimation
-            // Se você quiser que os links externos ou botões apenas naveguem sem animação,
-            // não é preciso fazer nada aqui além do playEffectSound.
-            // O comportamento padrão do navegador (navegar para o href) já ocorrerá.
-            // Caso você queira que "Nada para ver aqui!" tenha alguma outra ação, adicione-a aqui.
             if (element.textContent.includes('Nada para ver aqui!')) {
-                // Exemplo: mostrar uma mensagem central
                 showCentralMessage('Realmente, nada para ver aqui!');
-                // Se o botão não for um link, talvez você queira prevenir o comportamento padrão (se houver um formulário, por exemplo)
-                event.preventDefault();
+                event.preventDefault(); // Previne o comportamento padrão para este botão específico
             }
         });
     });
