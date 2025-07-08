@@ -1,0 +1,1562 @@
+/*
+ * style.css - Estilos para o site Mundo Zera's Craft
+ * Gerado com base na estrutura HTML fornecida e aprimorado.
+ */
+
+/* ===================================== */
+/* 0. Variáveis e Reset Básico           */
+/* ===================================== */
+
+:root {
+    /* Cores */
+    --cor-primaria: #4CAF50; /* Verde vibrante para botões e destaques */
+    --cor-secundaria: #388E3C; /* Um verde um pouco mais escuro, para hover, por exemplo */
+    --cor-terciaria: #2E7D32; /* Verde mais escuro para fundos alternativos */
+    --cor-texto-claro: #ECF0F1; /* Cinza claro para textos em fundos escuros */
+    --cor-texto-escuro: #2C3E50; /* Azul escuro para textos em fundos claros */
+    --cor-fundo-claro: #F8F9FA; /* Branco quase puro para seções claras */
+    --cor-fundo-escuro: #1A1A1A; /* Preto quase puro para fundos escuros */
+    --cor-destaque: #FFD700; /* Dourado para ícones de destaque ou títulos */
+    --cor-bordas: rgba(255, 255, 255, 0.1); /* Bordas sutis */
+    --cor-card-bg: #2C3E50; /* Fundo dos cards (azul escuro) */
+    --cor-card-text: #ECF0F1; /* Texto dos cards (cinza claro) */
+    --cor-card-hover: #34495E; /* Fundo dos cards ao passar o mouse */
+    --cor-link: #8bc34a; /* Cor de link padrão */
+    --cor-link-hover: #aed581; /* Cor de link ao passar o mouse */
+    --cor-btn-text: #FFFFFF; /* Texto dos botões */
+
+    /* Cores do neon (ajuste para o seu verde/ciano neon) */
+    --neon-flame-color1: #00FF00; /* Verde Neon */
+    --neon-flame-color2: #00FFFF; /* Ciano Neon */
+    --neon-flame-color1-rgb: 0, 255, 0; /* RGB para sombras */
+    --neon-flame-color2-rgb: 0, 255, 255; /* RGB para sombras */
+
+    /* Fontes */
+    --fonte-titulo: 'Montserrat', sans-serif; /* Usando Montserrat, que é mais robusta para títulos */
+    --fonte-corpo: 'Roboto', sans-serif; /* Roboto para o corpo do texto, legível */
+
+    /* Espaçamentos e Tamanhos */
+    --padding-section: 80px 0; /* Preenchimento padrão para seções, ajustado para 80px */
+    --padding-card: 25px; /* Preenchimento interno dos cards */
+    --gap-grid: 30px; /* Espaço entre itens de grid */
+    --border-radius: 8px; /* Borda arredondada padrão */
+    --max-width-content: 1200px; /* Largura máxima do conteúdo */
+
+    /* Sombras */
+    --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --sombra-card: 0 8px 16px rgba(0, 0, 0, 0.4);
+
+    /* Transições */
+    --transicao-padrao: all 0.3s ease; /* Aumentei para 0.3s para suavidade */
+    --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
+    --transicao-icon-rotate: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva mais interessante para a rotação do ícone */
+}
+
+/* Importar fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap');
+
+
+/* Reset Básico para consistência entre navegadores */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fonte-corpo);
+    line-height: 1.6;
+    color: var(--cor-texto-claro);
+    background-color: var(--cor-fundo-escuro);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Evita barra de rolagem horizontal */
+}
+
+/* Base para links */
+a {
+    color: var(--cor-link);
+    text-decoration: none;
+    transition: var(--transicao-padrao);
+}
+
+a:hover {
+    color: var(--cor-link-hover);
+    text-decoration: underline;
+}
+
+/* Base para títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-texto-claro);
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+h1 { font-size: 3.5em; }
+h2 { font-size: 2.8em; }
+h3 { font-size: 2.2em; }
+h4 { font-size: 1.8em; }
+
+p {
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Classes de utilidade para espaçamento e alinhamento */
+.margin-bottom-30 { margin-bottom: 30px !important; }
+.margin-bottom-40 { margin-bottom: 40px !important; }
+.margin-top-30 { margin-top: 30px !important; }
+.margin-top-40 { margin-top: 40px !important; }
+.margin-top-50 { margin-top: 50px !important; }
+.text-center { text-align: center; }
+
+/* ===================================== */
+/* 1. Layout Geral e Contêineres         */
+/* ===================================== */
+
+.container {
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padded {
+    padding: var(--padding-section);
+}
+
+.section-alt-bg {
+    background-color: var(--cor-terciaria); /* Fundo verde mais escuro */
+}
+
+/* Flexbox para duas colunas */
+.content-two-columns {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+    gap: var(--gap-grid);
+    align-items: center;
+    justify-content: center; /* Centraliza as colunas em telas maiores */
+}
+
+.content-two-columns .text-content,
+.content-two-columns .image-content {
+    flex: 1; /* Permite que ambos os itens cresçam igualmente */
+    min-width: 300px; /* Garante que os itens não fiquem muito estreitos */
+}
+
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove espaçamento extra abaixo da imagem */
+    border-radius: var(--border-radius);
+}
+
+.bordered-image {
+    border: 3px solid var(--cor-primaria); /* Borda primária para imagens de destaque */
+    box-shadow: var(--sombra-card);
+}
+
+/* ===================================== */
+/* 2. Cabeçalho (Header)                 */
+/* ===================================== */
+
+.main-header {
+    background-color: var(--cor-fundo-escuro);
+    padding: 20px 0;
+    box-shadow: var(--sombra-leve);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--cor-bordas);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Para navegação em telas menores */
+}
+
+.header-logo {
+    font-family: var(--fonte-titulo);
+    font-size: 1.8em;
+    color: var(--cor-primaria);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 25px;
+}
+
+.main-nav ul li a {
+    color: var(--cor-texto-claro);
+    font-weight: 700;
+    padding: 5px 0;
+    position: relative;
+}
+
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--cor-destaque);
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Botão de Hambúrguer para Mobile */
+.menu-toggle {
+    display: none; /* Escondido por padrão em desktop */
+    font-size: 2em;
+    color: var(--cor-texto-claro);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001; /* Acima do nav quando aberto */
+}
+
+/* ===================================== */
+/* 3. Seção Hero (Destaque Principal)    */
+/* ===================================== */
+
+.hero-section {
+    position: relative;
+    height: 650px; /* Altura fixa para o hero */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cor-texto-claro);
+    overflow: hidden; /* Garante que a imagem de fundo não vaze */
+    background: url('https://matheuzera.github.io/ZerasCraft/images/site/banner-fundo.gif') no-repeat center center/cover; /* Imagem de fundo do hero */
+}
+
+.hero-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Escurece a imagem de fundo */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    max-width: 900px;
+}
+
+.server-branding {
+    display: flex;
+    flex-direction: column; /* Coluna para empilhar ícone e banner */
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Espaço entre ícone e banner */
+    margin-bottom: 30px; /* Espaço abaixo do bloco de branding */
+}
+
+.server-banner {
+    max-width: 350px; /* Aumentei um pouco o tamanho do banner para destaque */
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card); /* Sombra mais intensa para destaque */
+    border: 2px solid var(--cor-primaria); /* Borda sutil */
+}
+
+.server-icon {
+    width: 120px; /* Aumentei o tamanho do ícone */
+    height: 120px;
+    border-radius: 50%; /* Torna o ícone circular */
+    border: 5px solid var(--cor-destaque); /* Borda mais grossa e dourada */
+    box-shadow: 0 0 15px rgba(var(--neon-flame-color1-rgb), 0.7),
+                0 0 25px rgba(var(--neon-flame-color2-rgb), 0.5); /* Efeito neon sutil */
+    transition: transform 0.3s ease-out; /* Transição para o hover */
+}
+
+.server-icon:hover {
+    transform: scale(1.1) rotate(5deg); /* Aumenta e rotaciona um pouco no hover */
+}
+
+
+.hero-content h1 {
+    font-size: 3.8em;
+    margin-bottom: 0.5em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    color: var(--cor-destaque); /* Título principal em dourado */
+}
+
+.hero-subtitle {
+    font-size: 1.3em;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Quebra linha em telas menores */
+}
+
+.hero-social-links .btn-link {
+    font-size: 1.1em;
+    color: var(--cor-link);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero-social-links .btn-link:hover {
+    color: var(--cor-link-hover);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* ===================================== */
+/* 4. Botões e Elementos Interativos     */
+/* ===================================== */
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    padding: 15px 30px;
+    border-radius: var(--border-radius);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: var(--transicao-padrao);
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    box-shadow: var(--sombra-leve);
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-secundaria);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra mais forte no hover */
+    text-decoration: none;
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: transparent; /* Mantenha o fundo transparente, se desejar */
+    color: #59c04c; /* Mantenha a cor do texto padrão, se desejar */
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #83dac0; /* Borda da cor do texto */
+    
+    /* PROPRIEDADE DE TRANSIÇÃO AQUI */
+    /* Agora, apenas para transform (subir/descer) */
+    transition: transform 0.3s ease-in-out; /* Adicionado transição para 'transform' */
+}
+
+.btn-link:hover {
+    /* Mantenha estas se quiser, ou remova se só quer a animação de subir/descer */
+    /* background-color: #007bff; */ 
+    /* color: white; */
+    /* border-color: #007bff; */
+
+    /* Animação de subir/descer */
+    transform: translateY(-5px); /* Move o botão 5px para cima ao passar o mouse */
+}
+
+.btn-link:active {
+    /* Opcional: Efeito ao clicar no botão, para que ele "volte" ou "afunde" */
+    transform: translateY(0px); /* Volta à posição original ou afunda um pouco */
+}
+
+.discord-channel-link {
+    color: var(--cor-link);
+    font-weight: bold;
+    transition: var(--transicao-padrao);
+}
+
+.discord-channel-link:hover {
+    color: var(--cor-link-hover);
+    text-decoration: underline;
+}
+
+/* Estilo para ícones em títulos */
+h2 .fas, h3 .fas {
+    color: var(--cor-primaria); /* Ícones de título com cor primária */
+    margin-right: 10px;
+}
+
+/* ===================================== */
+/* 5. Seções com Grids                   */
+/* ===================================== */
+
+.section-description {
+    text-align: center;
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Estilo base para todos os grids */
+.services-grid,
+.roles-grid,
+.access-cards-grid,
+.community-grid,
+.events-sub-grid,
+.partnership-grid,
+.security-features-grid { /* Adicionado security-features-grid */
+    display: grid;
+    gap: var(--gap-grid);
+    margin-top: 50px;
+}
+
+.max-2-columns {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.max-3-columns {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.max-4-columns {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* Estilo base para todos os cards - AGORA INCLUI TRANSFORMAÇÕES DE HOVER AQUI */
+.service-card,
+.role-category-card,
+.access-card,
+.community-card,
+.partnership-card,
+.event-card,
+.security-card { /* Adicionado security-card */
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    padding: var(--padding-card);
+    text-align: center;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-card-hover); /* Usando a variável de transição para cards */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borda sutil */
+    display: flex; /* Para flexibilizar conteúdo interno */
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o botão/link para baixo */
+    cursor: pointer; /* Indica que o card é interativo */
+}
+
+/* Efeito hover para cards - APLICADO AO PRÓPRIO CARD */
+.service-card:hover,
+.role-category-card:hover,
+.access-card:hover,
+.community-card:hover,
+.partnership-card:hover,
+.event-card:hover,
+.security-card:hover { /* Adicionado security-card:hover */
+    transform: translateY(-5px) rotate(0.8deg); /* Card sobe um pouco e rotaciona 0.8 graus */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Sombra mais intensa e um pouco maior */
+    background-color: var(--cor-card-hover); /* Fundo do card muda */
+    border-color: var(--cor-primaria); /* Borda primária no hover */
+}
+
+/* Estilos para os ícones e imagens dentro dos cards */
+.service-card .card-icon,
+.role-category-card .role-category-icon,
+.access-card .card-icon,
+.security-card .card-icon { /* Adicionado security-card .card-icon */
+    width: 80px; /* Tamanho padrão para ícones de card */
+    height: 80px;
+    line-height: 80px; /* Centraliza ícone Font Awesome verticalmente */
+    font-size: 3.5em; /* Tamanho do ícone */
+    color: var(--cor-primaria); /* Cor primária para os ícones */
+    margin: 0 auto 20px auto; /* Centraliza e adiciona espaço abaixo */
+    display: block; /* Garante que a transformação funcione corretamente */
+    transition: var(--transicao-icon-rotate); /* Transição para a rotação do ícone */
+}
+
+/* Rotação do ícone QUANDO O CARD PAI ESTÁ EM HOVER */
+.service-card:hover .card-icon,
+.role-category-card:hover .role-category-icon,
+.access-card:hover .card-icon,
+.security-card:hover .card-icon {
+    transform: rotate(10deg); /* Rotação de 10 graus no hover do card */
+    color: var(--cor-destaque); /* Ícone muda para dourado no hover */
+}
+
+
+/* Estilos para os ícones e imagens dentro dos cards */
+/* ... (código existente) ... */
+
+/* Exceção para avatares e logos que são circulares e não rotacionam */
+.community-card .member-avatar,
+.partnership-card .partnership-logo {
+    border-radius: 50%; /* Mantém a forma circular da imagem, mas removemos a borda colorida */
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: 0 auto 20px auto;
+    /* REMOVA OU COMENTE A LINHA ABAIXO: */
+    /* border: 3px solid var(--cor-primaria); */ /* Esta é a linha que cria a faixa circular verde */
+    transition: var(--transicao-padrao);
+}
+
+/* Efeito hover para avatares e logos (só borda) */
+/* REMOVA OU COMENTE TODO ESTE BLOCO SE NÃO QUISER NENHUMA BORDA NO HOVER TAMBÉM */
+/*(.community-card:hover .member-avatar,
+.partnership-card:hover .partnership-logo {
+    /* border-color: var(--cor-destaque); */ /* Comentar esta linha também se o bloco acima for removido */
+/*}*/
+
+
+/* Container do Grid para Eventos */
+.events-sub-grid {
+    display: grid; /* Ativa o display de grade */
+    /* Define colunas responsivas:
+       - 'auto-fit' para que o máximo de colunas caiba.
+       - 'minmax(320px, 1fr)' significa que cada coluna terá no mínimo 320px de largura.
+         Ajustei um pouco a largura mínima aqui para cards que talvez tenham mais conteúdo (data, etc.).
+         Você pode ajustar esse '320px' conforme o tamanho ideal que você quer para os cards de evento. */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px; /* Espaçamento entre os cards (pode ser maior para eventos) */
+    justify-content: center; /* Centraliza o grid horizontalmente */
+    padding: 0 15px; /* Adiciona padding nas laterais para responsividade */
+    margin-top: 40px; /* Espaçamento do parágrafo da seção */
+}
+
+/* Estilos para cada Card de Evento */
+.event-card {
+    background-color: #1a1a1a; /* Fundo escuro */
+    border: 1px solid #333; /* Borda sutil */
+    border-radius: 8px; /* Cantos arredondados */
+    overflow: hidden; /* Garante que a imagem respeite o border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
+    color: #f0f0f0; /* Cor do texto */
+    display: flex; /* Usa flexbox para o conteúdo interno do card */
+    flex-direction: column; /* Organiza o conteúdo em coluna (imagem, texto, botão) */
+    height: 100%; /* Garante que todos os cards em uma linha tenham a mesma altura */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição ao passar o mouse */
+}
+
+.event-card:hover {
+    transform: translateY(-5px); /* Leve levantamento */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra mais forte */
+}
+
+/* Estilo para a imagem do card de evento */
+.event-card-image {
+    width: 100%; /* A imagem ocupa toda a largura do card */
+    height: 200px; /* Altura fixa para a imagem. Ajuste conforme sua necessidade. */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer, cortando se necessário */
+    display: block; /* Remove espaços extras abaixo da imagem */
+}
+
+/* Estilo para o conteúdo textual dentro do card */
+.event-card .card-content {
+    padding: 20px; /* Preenchimento interno para o texto */
+    flex-grow: 1; /* Permite que o conteúdo se expanda para preencher o espaço vertical */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribui o espaço entre título, descrição e data */
+}
+
+/* Estilos para título, descrição e data dentro do card de evento */
+.event-card .card-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+.event-card .card-description {
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 15px; /* Espaço entre descrição e data */
+    color: #b0b0b0;
+}
+
+.event-card p strong { /* Estilo para a data */
+    color: #a0a0a0;
+    font-size: 0.9em;
+    margin-bottom: 15px; /* Espaço antes do botão */
+    display: block; /* Garante que o strong seja um bloco para margin-bottom */
+}
+
+/* Estilos para botões dentro do card de evento */
+.event-card .btn-primary,
+.event-card .btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: auto; /* Empurra o botão para a parte inferior do card */
+    font-size: 0.95em;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.event-card .btn-primary {
+    background-color: #28a745; /* Cor para o botão principal (Mais Detalhes) */
+    color: white;
+}
+
+.event-card .btn-primary:hover {
+    background-color: #218838;
+}
+
+.event-card .btn-link {
+    background-color: transparent; /* Fundo transparente para links secundários */
+    color: #007bff; /* Cor do texto azul */
+    border: 1px solid #007bff;
+}
+
+.event-card .btn-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+
+/* Media Queries para Responsividade da seção de Eventos */
+@media (max-width: 992px) {
+    .events-sub-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .event-card-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .events-sub-grid {
+        grid-template-columns: 1fr; /* Uma única coluna em telas menores */
+        gap: 20px;
+        padding: 0 10px;
+    }
+    .event-card-image {
+        height: 160px;
+    }
+    .event-card .card-content {
+        padding: 15px;
+    }
+    .event-card .card-title {
+        font-size: 1.3em;
+    }
+    .event-card .card-description {
+        font-size: 0.9em;
+    }
+}
+
+.card-content {
+    padding: var(--padding-card); /* Preenchimento para o conteúdo do card de evento */
+    padding-top: 20px; /* Ajuste o padding superior */
+    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço disponível */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o botão para baixo */
+}
+
+.card-title {
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95em;
+    flex-grow: 1; /* Permite que o texto ocupe o espaço disponível */
+    margin-bottom: 20px;
+}
+
+/* Estilos específicos para a seção de Acesso (IP/Porta) */
+.access-info {
+    background-color: var(--cor-card-bg); /* Fundo similar a um card */
+    padding: 25px;
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+    box-shadow: var(--sombra-leve);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+.access-info p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: var(--cor-texto-claro);
+}
+
+.access-info p strong {
+    color: var(--cor-primaria);
+}
+
+.access-info span {
+    font-weight: bold;
+    color: var(--cor-destaque);
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.access-info .btn-primary {
+    margin: 10px;
+    padding: 12px 25px;
+    font-size: 1em;
+}
+
+/* Container principal dos cards de parceria */
+.partnership-grid {
+    display: grid; /* Ativa o display de grade */
+    /* Cria colunas que se ajustam automaticamente:
+       - 'auto-fit' garante que o máximo de colunas possível caiba no espaço disponível.
+       - 'minmax(280px, 1fr)' significa que cada coluna terá no mínimo 280px de largura.
+         Se houver espaço extra no contêiner, ele será distribuído igualmente entre as colunas (1fr).
+         Ajuste '280px' se os cards forem maiores ou menores em outras seções. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; /* Espaçamento de 20px entre os cards (linhas e colunas) */
+    justify-content: center; /* Centraliza o grid horizontalmente dentro do seu contêiner pai */
+    padding: 0 15px; /* Adiciona um pequeno padding interno nas laterais para telas pequenas */
+}
+
+/* Estilos individuais dos cards de parceria */
+.partnership-card {
+    background-color: #1a1a1a; /* Cor de fundo similar aos outros cards */
+    border: 1px solid #333; /* Borda sutil */
+    border-radius: 8px; /* Cantos arredondados */
+    padding: 20px; /* Preenchimento interno */
+    text-align: center; /* Centraliza o texto e os elementos internos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para um efeito de profundidade */
+    color: #f0f0f0; /* Cor do texto */
+    display: flex; /* Usa flexbox para o conteúdo interno do card */
+    flex-direction: column; /* Organiza o conteúdo em coluna */
+    justify-content: space-between; /* Distribui o espaço verticalmente */
+    align-items: center; /* Centraliza itens horizontalmente */
+    height: 100%; /* Garante que todos os cards tenham a mesma altura em uma linha */
+}
+
+/* Estilos para o ícone/logo dentro do card de parceria */
+.partnership-logo {
+    width: 60px; /* Tamanho do ícone */
+    height: 60px;
+    margin-bottom: 15px;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+}
+
+/* Estilos para o título do card */
+.card-title {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+/* Estilos para a descrição do card */
+.card-description {
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #b0b0b0;
+    flex-grow: 1; /* Permite que a descrição ocupe o espaço disponível */
+}
+
+/* Estilos para o botão/link dentro do card */
+.btn-link {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff; /* Cor do botão (ajuste para o estilo do seu site) */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-link:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para o card de proposta de parceria (seção separada) */
+.partnership-proposal-card {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 50px; /* Espaçamento em relação ao grid de cards */
+    text-align: center;
+    color: #f0f0f0;
+}
+
+.partnership-proposal-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+.partnership-proposal-card p {
+    font-size: 1em;
+    margin-bottom: 25px;
+    color: #b0b0b0;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #28a745; /* Cor do botão primário (ajuste) */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 992px) { /* Por exemplo, para tablets */
+    .partnership-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) { /* Para dispositivos menores */
+    .partnership-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    .partnership-card {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) { /* Para celulares */
+    .partnership-grid {
+        grid-template-columns: 1fr; /* Uma única coluna em telas muito pequenas */
+        gap: 15px;
+    }
+    .partnership-card {
+        padding: 15px;
+    }
+}
+
+/* ===================================== */
+/* 11. Rodapé (Footer) - APRIMORADO      */
+/* ===================================== */
+
+/* Estilos Gerais do Rodapé */
+.main-footer {
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    padding: 60px 0 30px;
+    font-family: 'Arial', sans-serif;
+    border-top: 1px solid #222;
+}
+
+.main-footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Nova Seção Topo do Rodapé (para a organização em 3 colunas grandes) */
+.footer-top-section {
+    display: grid; /* Usa Grid para layout de 3 colunas */
+    grid-template-columns: 1.5fr 2fr 1fr; /* Zera's Craft, Contato/Nav, Legal */
+    gap: 40px; /* Espaçamento entre as colunas principais */
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+/* Media Queries para a Seção Topo (responsividade) */
+@media (max-width: 992px) {
+    .footer-top-section {
+        grid-template-columns: 1fr 1fr; /* Em tablets, 2 colunas */
+    }
+    .footer-top-section .footer-legal { /* Legal irá para a segunda linha em tablets */
+        grid-column: span 2; /* Ocupa as duas colunas */
+        text-align: center;
+        margin-top: 30px;
+    }
+    .footer-top-section .footer-about {
+        grid-column: span 1; /* Ocupa 1 coluna */
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-top-section {
+        grid-template-columns: 1fr; /* Em celulares, uma coluna por vez */
+        text-align: center; /* Centraliza tudo */
+    }
+    .footer-top-section > div { /* Espaçamento entre os blocos em mobile */
+        margin-bottom: 30px;
+    }
+    .footer-top-section .footer-legal {
+        margin-top: 0; /* Remove margem extra */
+    }
+}
+
+
+/* Estilos da Coluna "Sobre Zera's Craft" (Título e Social) */
+.footer-about h3 {
+    font-size: 1.8em;
+    color: #4CAF50;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-about p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #b0b0b0;
+    margin-bottom: 25px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px; /* Ícones pequenos, então gap menor */
+    margin-top: 20px;
+    justify-content: flex-start; /* Alinha os ícones à esquerda */
+}
+
+@media (max-width: 768px) {
+    .social-icons {
+        justify-content: center; /* Centraliza os ícones em telas menores */
+    }
+}
+
+.social-icons img {
+    width: 32px; /* Ícones sociais menores */
+    height: 32px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.1);
+}
+
+/* Novo Contêiner para "Contato" e "Navegação" lado a lado */
+.footer-middle-columns {
+    display: flex; /* Usa Flexbox para colocar Contato e Navegação lado a lado */
+    justify-content: space-around; /* Distribui espaço entre eles */
+    gap: 30px; /* Espaçamento entre Contato e Navegação */
+}
+
+@media (max-width: 768px) {
+    .footer-middle-columns {
+        flex-direction: column; /* Em telas menores, Contato e Navegação ficam um abaixo do outro */
+        align-items: center; /* Centraliza os blocos */
+        gap: 30px;
+    }
+    .footer-middle-columns .footer-contact,
+    .footer-middle-columns .footer-links {
+        width: 100%; /* Ocupa a largura total em mobile */
+    }
+}
+
+
+/* Estilos para Títulos das Colunas (Navegação, Contato, Legal) */
+.footer-main h4 { /* Aplica-se aos h4 dentro de footer-main */
+    font-size: 1.2em;
+    color: #FFC107;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #FFC107;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .footer-main h4 {
+        margin-bottom: 15px; /* Ajuste para mobile */
+    }
+}
+
+
+/* Estilos para Listas de Links (Navegação, Legal) */
+.footer-links ul,
+.footer-legal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li,
+.footer-legal ul li {
+    margin-bottom: 8px; /* Espaçamento menor entre os itens de lista */
+}
+
+.footer-links ul li a,
+.footer-legal ul li a {
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 0.9em; /* Tamanho da fonte menor */
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover,
+.footer-legal ul li a:hover {
+    color: #f0f0f0;
+    text-decoration: underline;
+}
+
+/* Estilos para a Coluna de Contato */
+.footer-contact p {
+    font-size: 0.9em; /* Tamanho da fonte menor */
+    line-height: 1.5;
+    color: #b0b0b0;
+    margin-bottom: 8px; /* Espaçamento menor */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaçamento menor entre ícone e texto */
+}
+
+.footer-contact .contact-icon {
+    width: 18px; /* Ícones de contato ainda menores */
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Estilo do Botão do Discord no Rodapé */
+.btn-footer-discord {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espaçamento menor no botão Discord */
+    background-color: #7289DA;
+    color: white;
+    padding: 10px 18px; /* Padding menor */
+    border-radius: 6px; /* Borda levemente menor */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em; /* Fonte um pouco menor */
+    margin-top: 15px; /* Espaçamento do conteúdo acima */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-footer-discord:hover {
+    background-color: #677BC4;
+    transform: translateY(-3px);
+}
+
+.btn-footer-discord .button-icon {
+    width: 20px; /* Ícone do Discord um pouco menor */
+    height: 20px;
+}
+
+/* Seção Inferior do Rodapé (Copyright) */
+.footer-bottom {
+    border-top: 1px solid #222;
+    padding-top: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.8em; /* Fonte ainda menor para o copyright */
+    color: #909090;
+}
+
+.footer-bottom p {
+    margin-bottom: 6px; /* Espaçamento menor */
+}
+
+.footer-bottom .inline-icon {
+    width: 14px; /* Ícone do coração menor */
+    height: 14px;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+/* ===================================== */
+/* 12. Controle de Áudio - NOVO SISTEMA  */
+/* ===================================== */
+
+/* Contêiner para o botão e o título da música */
+.audio-control-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex; /* Para alinhar o botão e o texto */
+    align-items: center;
+    gap: 10px; /* Espaço entre o botão e o texto */
+}
+
+/* ------------------------------------ */
+/* Estilos para o Botão de Controle de Áudio */
+/* ------------------------------------ */
+#audioControlButton {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative; /* Para posicionar ícones e SVG */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    flex-shrink: 0; /* Impede que o botão encolha */
+}
+
+#audioControlButton:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    transform: scale(1.05);
+}
+
+/* ------------------------------------ */
+/* Estilos para os Ícones (On/Off) */
+/* ------------------------------------ */
+#audioControlButton .icon-on,
+#audioControlButton .icon-off {
+    font-size: 28px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Estado inicial: o ícone 'play' (música pausada) estará visível por padrão */
+#audioControlButton .icon-on {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Estado inicial: o ícone 'pause' (música tocando) estará oculto por padrão */
+#audioControlButton .icon-off {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ------------------------------------ */
+/* Estilos para o Botão quando a Música está Tocando */
+/* (Controlado pela classe 'is-playing' no JavaScript) */
+/* ------------------------------------ */
+#audioControlButton.is-playing .icon-on {
+    opacity: 1;
+    visibility: visible;
+    animation: icon-spin 2s linear infinite; /* Animação de rotação contínua */
+}
+
+#audioControlButton.is-playing .icon-off {
+    opacity: 0;
+    visibility: hidden;
+    animation: none;
+}
+
+#audioControlButton.is-playing {
+    background-color: rgba(40, 167, 69, 0.7); /* Exemplo: um tom de verde para indicar que está tocando */
+    box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8),
+                0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6),
+                0 0 30px rgba(var(--neon-flame-color1-rgb), 0.4);
+    animation: pulse-border 1.5s infinite alternate;
+}
+
+/* Keyframes para a animação de rotação do ícone */
+@keyframes icon-spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Keyframes para a animação de pulsação da borda */
+@keyframes pulse-border {
+    0% { box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8), 0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6); }
+    100% { box-shadow: 0 0 15px rgba(var(--neon-flame-color2-rgb), 1), 0 0 25px rgba(var(--neon-flame-color1-rgb), 0.8); }
+}
+
+/* Estilo para o elemento SVG que cria o arco de progresso circular */
+.audio-progress-arc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg); /* Começa do topo */
+    z-index: 1;
+    pointer-events: none; /* Não interfere com cliques no botão */
+    opacity: 0; /* Escondido por padrão */
+    transition: opacity 0.3s ease;
+}
+
+/* Torna o arco de progresso visível quando a música está tocando */
+#audioControlButton.is-playing .audio-progress-arc {
+    opacity: 1;
+}
+
+/* Estilo do fundo do arco de progresso (a parte não preenchida) */
+.audio-progress-arc .arc-background {
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 3.5;
+    fill: none;
+}
+
+/* Estilo do progresso do arco (a parte preenchida) */
+.audio-progress-arc .arc-progress {
+    stroke: var(--cor-destaque);
+    stroke-width: 3.5;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.1s linear; /* Transição suave para o progresso */
+}
+
+/* Elemento para o efeito de "chama" neon que se move */
+#audioControlButton .neon-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        var(--neon-flame-color1) 0%,
+        var(--neon-flame-color2) 25%,
+        var(--neon-flame-color1) 50%,
+        var(--neon-flame-color2) 75%,
+        var(--neon-flame-color1) 100%
+    );
+    background-size: 200% 100%;
+    filter: blur(8px);
+    opacity: 0; /* Escondido por padrão */
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+    z-index: 0; /* Atrás dos ícones */
+    pointer-events: none;
+    animation: neon-gradient-spin 10s linear infinite;
+}
+
+/* Ativa o efeito neon quando a música está tocando */
+#audioControlButton.is-playing .neon-effect {
+    opacity: 0.7;
+}
+
+/* Keyframes para a animação de rotação do gradiente neon */
+@keyframes neon-gradient-spin {
+    0% { transform: rotate(0deg) scale(1.1); } /* Pequeno scale para preencher */
+    100% { transform: rotate(360deg) scale(1.1); }
+}
+
+/* Estilos para o novo elemento de exibição de texto da música */
+.music-title-display {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    white-space: nowrap; /* Impede quebra de linha */
+    pointer-events: none; /* Não impede cliques */
+    opacity: 0; /* Inicialmente invisível, só aparece no hover do container ou JS */
+    transition: opacity 0.3s ease;
+    transform-origin: right; /* Para aparecer da direita para esquerda */
+    transform: translateX(10px); /* Começa um pouco à direita */
+}
+
+.audio-control-button-container:hover .music-title-display {
+    opacity: 1; /* Torna visível no hover do container */
+    transform: translateX(0); /* Volta para a posição original */
+}
+
+/* ===================================== */
+/* 13. Mensagem Central na Tela          */
+/* ===================================== */
+.central-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semitransparente escuro */
+    color: var(--cor-btn-text);
+    padding: 20px 30px;
+    border-radius: var(--border-radius);
+    font-family: var(--fonte-titulo);
+    font-size: 1.8em; /* Tamanho maior para destaque */
+    font-weight: bold;
+    text-align: center;
+    opacity: 0; /* Inicialmente invisível */
+    visibility: hidden; /* Esconde completamente quando não está visível */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transição suave */
+    z-index: 1060; /* Acima de tudo */
+    pointer-events: none; /* Não deve interferir com cliques */
+    white-space: nowrap; /* Impede quebra de linha */
+    box-shadow: 0 0 15px rgba(var(--neon-flame-color2-rgb), 0.5); /* Sombra sutil neon */
+}
+
+/* Classe para mostrar a mensagem */
+.central-message.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ===================================== */
+/* 16. Media Queries (Responsividade)    */
+/* ===================================== */
+
+@media (max-width: 992px) {
+    /* Ajustes Gerais */
+    h1 { font-size: 3em; }
+    h2 { font-size: 2.2em; }
+    h3 { font-size: 1.8em; }
+
+    .section-padded {
+        padding: 60px 0; /* Reduz padding em telas menores */
+    }
+
+    .container {
+        padding: 0 15px; /* Ajusta padding lateral */
+    }
+
+    /* Header e Navegação */
+    .header-content {
+        flex-wrap: nowrap; /* Impede quebra de linha do header em 992px */
+    }
+
+    .main-nav {
+        /* Esconde a navegação por padrão */
+        display: none;
+        flex-direction: column;
+        width: 100%; /* Ocupa a largura total */
+        position: absolute;
+        top: 80px; /* Abaixo do header */
+        left: 0;
+        background-color: var(--cor-fundo-escuro);
+        box-shadow: var(--sombra-leve);
+        padding: 20px;
+        border-top: 1px solid var(--cor-bordas);
+        z-index: 999; /* Acima do conteúdo, abaixo do menu-toggle */
+    }
+
+    .main-nav.active {
+        display: flex; /* Mostra a navegação quando a classe 'active' está presente */
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        align-items: center; /* Centraliza itens no menu mobile */
+    }
+
+    .main-nav ul li a {
+        padding: 10px 0;
+        width: fit-content; /* Ajusta a largura ao conteúdo */
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block; /* Mostra o botão de hambúrguer */
+    }
+
+    /* Hero Section */
+    .hero-section {
+        height: auto; /* Altura flexível para mobile */
+        padding: 100px 20px 60px; /* Mais padding superior e inferior */
+    }
+
+    .server-branding {
+        flex-direction: column; /* Garante que fiquem empilhados */
+    }
+
+    .server-banner {
+        max-width: 280px; /* Reduz um pouco o tamanho do banner em telas menores */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em; /* Reduz o tamanho do título do hero */
+    }
+
+    .hero-subtitle {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+    }
+
+    .hero-social-links {
+        flex-direction: column; /* Links em coluna */
+        gap: 15px;
+    }
+
+    /* Ajustes para layout de duas colunas em telas menores */
+    .content-two-columns .text-content,
+    .content-two-columns .image-content {
+        min-width: unset; /* Remove o min-width */
+        flex: none; /* Desativa o flex grow para eles ocuparem 100% da largura */
+        width: 100%;
+    }
+
+    .content-two-columns .image-content {
+        order: -1; /* Coloca a imagem antes do texto em mobile */
+        margin-bottom: 30px;
+    }
+
+    /* Ajuste de grids para colunas únicas ou duas no máximo */
+    .max-2-columns,
+    .max-3-columns,
+    .max-4-columns,
+    .roles-grid,
+    .access-cards-grid,
+    .security-features-grid,
+    .partnership-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 1 ou 2 colunas */
+    }
+
+    .events-sub-grid {
+        grid-template-columns: 1fr; /* Uma coluna para eventos */
+    }
+
+    /* Ajustes específicos para cards */
+    .service-card,
+    .role-category-card,
+    .access-card,
+    .community-card,
+    .partnership-card,
+    .event-card,
+    .security-card {
+        padding: 20px;
+    }
+
+    .card-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 3em;
+        line-height: 70px;
+    }
+
+    .community-card .member-avatar,
+    .partnership-card .partnership-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* Botão de áudio e display de música */
+    .audio-control-button-container {
+        flex-direction: column-reverse; /* Título acima do botão */
+        align-items: flex-end; /* Alinha tudo à direita */
+        gap: 5px; /* Reduz o espaço */
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .music-title-display {
+        font-size: 0.8em;
+        padding: 6px 10px;
+        transform: translateX(0); /* Remove a translação inicial para mobile */
+        opacity: 1; /* Sempre visível em mobile para não sumir */
+    }
+
+    .audio-control-button-container:hover .music-title-display {
+        opacity: 1; /* Garante que fique visível mesmo no hover */
+    }
+
+    #audioControlButton {
+        width: 50px;
+        height: 50px;
+    }
+
+    #audioControlButton .icon-on,
+    #audioControlButton .icon-off {
+        font-size: 24px;
+    }
+
+    /* Mensagem central */
+    .central-message {
+        font-size: 1.3em;
+        padding: 15px 25px;
+    }
+
+    /* Ajustes para o Rodapé */
+    .footer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* 2 colunas em tablets */
+        text-align: center; /* Centraliza o texto nas colunas menores */
+        justify-items: center; /* Centraliza os itens no grid */
+    }
+
+    .footer-grid h4::after {
+        left: 50%; /* Centraliza o underline */
+        transform: translateX(-50%);
+    }
+
+    .footer-social-links {
+        justify-content: center; /* Centraliza os ícones sociais */
+    }
+
+    .footer-contact p {
+        justify-content: center; /* Centraliza ícones e texto de contato */
+    }
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2.5em; }
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.6em; }
+
+    .hero-section {
+        padding: 80px 15px 40px;
+    }
+
+    .server-banner {
+        max-width: 250px;
+    }
+
+    .btn-primary {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    .access-info span {
+        display: block; /* Quebra linha para IP/Porta em telas muito pequenas */
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .access-info .btn-primary {
+        margin: 5px;
+    }
+
+    /* Footer */
+    .main-footer {
+        padding: 20px 0;
+    }
+}
+
+/* Pequeno ajuste para telas muito pequenas */
+@media (max-width: 480px) {
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.8em; }
+    h3 { font-size: 1.4em; }
+
+    .hero-section {
+        padding: 60px 10px 30px;
+    }
+
+    .server-banner {
+        max-width: 200px;
+    }
+
+    .server-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .section-description {
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
+
+    .card-description {
+        font-size: 0.9em;
+    }
+
+    /* Ajustes para o Rodapé */
+    .footer-grid {
+        grid-template-columns: 1fr; /* Uma única coluna em celulares */
+    }
+}
