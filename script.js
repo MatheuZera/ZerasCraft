@@ -3,52 +3,43 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM totalmente carregado e pronto!");
 
-    // =====================================
-    // Variáveis Globais e Inicialização de Áudio (Completadas)
-    // =====================================
+    // ... (Mantenha todas as suas variáveis globais e inicialização de áudio como estão, incluindo hoverSound e clickSound) ...
     let hoverSound;
     let clickSound;
     const backgroundAudio = document.getElementById('backgroundAudio');
     let preparingNextMusic = false;
-    const audioEffects = {}; // Objeto para armazenar as instâncias de áudio de efeitos
+    const audioEffects = {};
 
-    // Função para inicializar um novo objeto Audio para efeitos sonoros
     const initializeAudioEffect = (name, path, volume = 0.5) => {
         const audio = new Audio(path);
-        audio.preload = 'auto'; // Carrega o áudio assim que possível
-        audio.volume = volume; // Define o volume padrão
-        audioEffects[name] = audio; // Armazena a instância no objeto audioEffects
+        audio.preload = 'auto';
+        audio.volume = volume;
+        audioEffects[name] = audio;
         console.log(`[Áudio] Efeito '${name}' carregado de: ${path}`);
         return audio;
     };
 
-    // Inicializa os sons de hover e clique
-    hoverSound = initializeAudioEffect('select', 'audios/effects/select.mp3', 0.3); // Ajuste o volume se necessário
-    clickSound = initializeAudioEffect('click', 'audios/effects/click.mp3', 0.7); // Ajuste o volume se necessário
+    hoverSound = initializeAudioEffect('select', 'audios/effects/select.mp3', 0.3);
+    clickSound = initializeAudioEffect('click', 'audios/effects/click.mp3', 0.7);
 
-    // Função interna para tocar um elemento de áudio, clonando-o para evitar atrasos
     const playEffectSoundInternal = (audioElement) => {
         if (audioElement) {
-            const clonedAudio = audioElement.cloneNode(); // Clona o áudio para permitir reproduções rápidas
-            clonedAudio.volume = audioElement.volume; // Mantém o volume original
+            const clonedAudio = audioElement.cloneNode();
+            clonedAudio.volume = audioElement.volume;
             clonedAudio.play().catch(e => console.warn("Erro ao tentar tocar som:", e.message));
         } else {
             console.warn("[Áudio] Tentativa de tocar efeito sonoro nulo ou indefinido.");
         }
     };
 
-    // Função pública para tocar um efeito sonoro
     const playEffectSound = (audioElement) => {
-        // Pequeno atraso para garantir que o navegador processe o clique/hover
-        // e não bloqueie a reprodução. Pode ser ajustado ou removido se não houver problemas.
         setTimeout(() => {
             playEffectSoundInternal(audioElement);
         }, 10);
     };
 
-    // Função para exibir mensagens centrais (se você tiver um elemento para isso)
     function showCentralMessage(message) {
-        const centralMessageElement = document.getElementById('centralMessage'); // Assumindo um ID para a mensagem
+        const centralMessageElement = document.getElementById('centralMessage');
         if (centralMessageElement) {
             centralMessageElement.textContent = message;
             centralMessageElement.style.opacity = '1';
@@ -56,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 centralMessageElement.style.opacity = '0';
                 centralMessageElement.style.transform = 'translateY(-20px)';
-            }, 3000); // Mensagem some após 3 segundos
+            }, 3000);
         } else {
-            console.log(`[Mensagem Central] ${message}`); // Apenas loga se o elemento não existir
+            console.log(`[Mensagem Central] ${message}`);
         }
     }
 
@@ -184,22 +175,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 3. Sistema de Áudio de Fundo - Com Reprodução Aleatória (Completado)
+    // 3. Sistema de Áudio de Fundo - Com Reprodução Aleatória (Completado e Atualizado)
     // =====================================
     const audioControlButton = document.getElementById('audioControlButton');
     const musicTitleDisplay = document.getElementById('musicTitleDisplay');
     const audioProgressArc = document.getElementById('audioProgressArc');
     const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
 
-    // A playlist agora precisa ter o caminho completo para o áudio
+    // A playlist agora com os nomes dos arquivos da sua pasta 'musics'
     const musicPlaylist = [
-        { title: 'Bensound - Sunny', src: 'audios/music/bensound-sunny.mp3' },
-        { title: 'Música 2', src: 'audios/music/music2.mp3' }, // Adicione suas músicas aqui
-        { title: 'Música 3', src: 'audios/music/music3.mp3' },
+        { title: 'Aria-Math-Lofi-Remastered', src: 'audios/musics/Aria-Math-Lofi-Remastered.mp3' },
+        { title: 'Aria-Math', src: 'audios/musics/Aria-Math.mp3' },
+        { title: 'Beginning 2', src: 'audios/musics/Beginning 2.mp3' },
+        { title: 'Biome-Fest', src: 'audios/musics/Biome-Fest.mp3' },
+        { title: 'Blind-Spots', src: 'audios/musics/Blind-Spots.mp3' },
+        { title: 'Clark', src: 'audios/musics/Clark.mp3' },
+        { title: 'Danny', src: 'audios/musics/Danny.mp3' },
+        { title: 'Draiton', src: 'audios/musics/Dreiton.mp3' },
+        { title: 'Dry-Hands', src: 'audios/musics/Dry-Hands.mp3' },
+        { title: 'Floating-Trees', src: 'audios/musics/Floating-Trees.mp3' },
+        { title: 'Haggstrom', src: 'audios/musics/Haggstrom.mp3' },
+        { title: 'Key', src: 'audios/musics/Key.mp3' },
+        { title: 'Living-Mice', src: 'audios/musics/Living-Mice.mp3' },
+        { title: 'Mice-On-Venus', src: 'audios/musics/Mice-On-Venus.mp3' },
+        { title: 'Minecraft', src: 'audios/musics/Minecraft.mp3' },
+        { title: 'Moog-City 2', src: 'audios/musics/Moog-City 2.mp3' },
+        { title: 'Mutation', src: 'audios/musics/Mutation.mp3' },
+        { title: 'Sweden', src: 'audios/musics/Sweden.mp3' },
+        { title: 'Taswell', src: 'audios/musics/Taswell.mp3' },
+        { title: 'Wet-Hands', src: 'audios/musics/Wet-Hands.mp3' },
+        // Certifique-se de que cada nome de arquivo e caminho estão EXATOS
     ];
-    let currentMusicIndex = -1; // -1 significa nenhuma música carregada inicialmente
+    let currentMusicIndex = -1;
 
-    // Atualiza o título da música no botão de controle
     const updateAudioButtonTitle = () => {
         if (musicTitleDisplay && currentMusicIndex !== -1) {
             if (!backgroundAudio.paused) {
@@ -212,26 +220,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Obtém um índice de música aleatório diferente do atual
     const getRandomMusicIndex = () => {
         let newIndex;
         do {
             newIndex = Math.floor(Math.random() * musicPlaylist.length);
-        } while (newIndex === currentMusicIndex && musicPlaylist.length > 1); // Garante que não repete a mesma música se houver mais de uma
+        } while (newIndex === currentMusicIndex && musicPlaylist.length > 1);
         return newIndex;
     };
 
-    // Carrega uma música aleatória e opcionalmente a toca
     const loadRandomMusic = (playImmediately = false) => {
         if (musicPlaylist.length === 0) {
             console.warn("Playlist vazia, não é possível carregar música.");
             return;
         }
-        preparingNextMusic = true; // Sinaliza que estamos preparando uma nova música
+        preparingNextMusic = true;
         currentMusicIndex = getRandomMusicIndex();
         const music = musicPlaylist[currentMusicIndex];
         backgroundAudio.src = music.src;
-        backgroundAudio.load(); // Carrega a nova fonte
+        backgroundAudio.load();
 
         backgroundAudio.oncanplaythrough = () => {
             if (playImmediately) {
@@ -250,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 preparingNextMusic = false;
                 updateAudioButtonTitle();
             }
-            backgroundAudio.oncanplaythrough = null; // Remove o listener para evitar múltiplas execuções
+            backgroundAudio.oncanplaythrough = null;
         };
 
         backgroundAudio.onerror = (e) => {
@@ -260,41 +266,38 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
-    // Atualiza o arco de progresso da música
     const updateProgressArc = () => {
         if (backgroundAudio.duration > 0 && arcProgress) {
             const progress = (backgroundAudio.currentTime / backgroundAudio.duration);
-            const circumference = 2 * Math.PI * 27; // 27 é o raio do círculo
+            const circumference = 2 * Math.PI * 27;
             const offset = circumference * (1 - progress);
             arcProgress.style.strokeDasharray = `${circumference} ${circumference}`;
             arcProgress.style.strokeDashoffset = offset;
         } else if (arcProgress) {
-            arcProgress.style.strokeDashoffset = '0'; // Reseta quando não há música
+            arcProgress.style.strokeDashoffset = '0';
         }
     };
 
     if (backgroundAudio && audioControlButton && musicTitleDisplay) {
-        loadRandomMusic(); // Carrega a primeira música (não toca automaticamente)
+        loadRandomMusic();
 
         backgroundAudio.addEventListener('loadedmetadata', () => {
             console.log("Metadados da música carregados.");
-            updateProgressArc(); // Atualiza o arco assim que os metadados estiverem disponíveis
+            updateProgressArc();
         });
         backgroundAudio.addEventListener('timeupdate', updateProgressArc);
         backgroundAudio.addEventListener('ended', () => {
             console.log("Música atual terminou. Carregando próxima...");
-            loadRandomMusic(true); // Toca a próxima música imediatamente
+            loadRandomMusic(true);
         });
 
         audioControlButton.addEventListener('click', () => {
-            playEffectSound(clickSound); // Clicar no botão de áudio
+            playEffectSound(clickSound);
 
             if (backgroundAudio.paused) {
                 if (!backgroundAudio.src || preparingNextMusic) {
-                     // Se não há src ou estamos preparando a próxima, force o carregamento e play
                     loadRandomMusic(true);
                 } else {
-                    // Já tem src, apenas tente tocar
                     backgroundAudio.play().then(() => {
                         audioControlButton.classList.add('is-playing');
                         showCentralMessage(`Tocando: ${musicPlaylist[currentMusicIndex].title}`);
@@ -303,19 +306,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         showCentralMessage('Autoplay bloqueado. Clique novamente para tocar.');
                     });
                 }
-                localStorage.setItem('userInteractedWithAudio', 'true'); // Marca que o usuário interagiu
+                localStorage.setItem('userInteractedWithAudio', 'true');
             } else {
                 backgroundAudio.pause();
                 audioControlButton.classList.remove('is-playing');
                 showCentralMessage('Música pausada.');
             }
-            updateAudioButtonTitle(); // Atualiza o título após a ação
+            updateAudioButtonTitle();
         });
 
         const tryAutoPlay = () => {
-            // Se o usuário já interagiu antes (salvo no localStorage), tentamos tocar automaticamente
             if (localStorage.getItem('userInteractedWithAudio') === 'true') {
-                if (backgroundAudio.src) { // Só tenta se já houver uma src definida
+                if (backgroundAudio.src) {
                     backgroundAudio.play().then(() => {
                         audioControlButton.classList.add('is-playing');
                         showCentralMessage(`Tocando: ${musicPlaylist[currentMusicIndex].title}`);
@@ -324,19 +326,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.warn("Autoplay bloqueado pelo navegador na inicialização. Usuário precisará clicar.");
                         showCentralMessage('Clique no botão de música para iniciar.');
                         audioControlButton.classList.remove('is-playing');
-                        updateAudioButtonTitle(); // Garante que o título esteja correto
+                        updateAudioButtonTitle();
                     });
                 }
             } else {
-                // Se nunca interagiu, não tenta autoplay, apenas mostra o status inicial
                 updateAudioButtonTitle();
             }
         };
 
-        // Função para lidar com a primeira interação do usuário, permitindo o áudio
         const handleInitialAudioPlay = () => {
             if (backgroundAudio.paused && localStorage.getItem('userInteractedWithAudio') === 'true') {
-                // Se estava pausado e o usuário já interagiu, tenta tocar (para casos de recarregamento)
                 backgroundAudio.play().then(() => {
                     audioControlButton.classList.add('is-playing');
                     showCentralMessage(`Tocando: ${musicPlaylist[currentMusicIndex].title}`);
@@ -348,20 +347,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateAudioButtonTitle();
                 });
             } else if (backgroundAudio.paused) {
-                updateAudioButtonTitle(); // Apenas atualiza o título para "Pausado" ou "Nenhuma Música"
+                updateAudioButtonTitle();
             }
-            document.removeEventListener('click', handleInitialAudioPlay); // Remove o listener após a primeira execução
+            document.removeEventListener('click', handleInitialAudioPlay);
             document.removeEventListener('keydown', handleInitialAudioPlay);
         };
 
-        // Adiciona listeners para a primeira interação do usuário (necessário para autoplay em alguns navegadores)
         document.addEventListener('click', handleInitialAudioPlay, { once: true });
         document.addEventListener('keydown', handleInitialAudioPlay, { once: true });
 
-        // Chama tryAutoPlay após a inicialização completa do DOM
         tryAutoPlay();
         setTimeout(updateProgressArc, 100);
-        updateAudioButtonTitle(); // Garante que o título inicial seja exibido
+        updateAudioButtonTitle();
     } else {
         console.warn("Elementos de áudio de fundo não encontrados. Verifique os IDs 'backgroundAudio', 'audioControlButton', 'musicTitleDisplay' e 'audioProgressArc'.");
     }
