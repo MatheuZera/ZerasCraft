@@ -341,36 +341,33 @@
                 <p>Zera's Craft é o seu destino premium para uma<br>qualidade visual no Minecraft. Conecte-se, crie e explore conosco!</p>
                 <div class="social-icons">
                     <a href="https://discord.gg/GYGVBqGEwP" target="_blank" aria-label="Discord"><img src="images/10.rodape/discord.gif" alt="Discord Icon"></a>
-                    <a href="http://youtube.com/16" target="_blank" aria-label="YouTube"><img src="images/10.rodape/youtube.png" alt="YouTube Icon"></a>
-                    <a href="http://spotify.com/18" target="_blank" aria-label="Spotify"><img src="images/10.rodape/spotfy.png" alt="Spotify Icon"></a>
+                    <a href="" target="_blank" aria-label="YouTube"><img src="images/10.rodape/youtube.png" alt="YouTube Icon"></a>
+                    <a href="https://open.spotify.com/user/31pujg2qsv33mkmfq6nk27nvguuy?si=bcecb7272fb24b62" target="_blank" aria-label="Spotify"><img src="images/10.rodape/spotfy.png" alt="Spotify Icon"></a>
                 </div>
             </div>
 
-            <div class="footer-contact-nav-group">
-                <p class="thanks-message">OBRIGADO POR VISITAR NOSSO WEBSITE!</p> 
-                <hr class="separator-line"> <div class="footer-contact">
-                    <h4>Contato & Suporte</h4>
-                    <p><img src="images/10.rodape/contato.png" alt="Envelope Icon" class="contact-icon"> contato@zerascraft.com.br</p>
-                    <p><img src="images/10.rodape/suporte.png" alt="Headset Icon" class="contact-icon"> Suporte: Crie um Ticket no nosso Discord.</p>
-                    <p><img src="images/10.rodape/regiao.png" alt="Map Marker Icon" class="contact-icon"> Brasil</p>
-                    <a href="https://discord.gg/seucanaldiscord" target="_blank" class="btn-footer-discord">
-                        <img src="images/1.site/discord.gif" alt="Discord Icon" class="button-icon"> Junte-se ao nosso Discord!
-                    </a>
-                </div>
+            <div class="footer-contact">
+                <h4>Contato & Suporte</h4>
+                <p><img src="images/10.rodape/contato.png" alt="Envelope Icon" class="contact-icon"> contato@zerascraft.com.br</p>
+                <p><img src="images/10.rodape/suporte.png" alt="Headset Icon" class="contact-icon"> Suporte: Crie um Ticket no nosso Discord.</p>
+                <p><img src="images/10.rodape/regiao.png" alt="Map Marker Icon" class="contact-icon"> Brasil</p>
+                <a href="https://discord.gg/seucanaldiscord" target="_blank" class="btn-footer-discord">
+                    <img src="images/1.site/discord.gif" alt="Discord Icon" class="button-icon"> Junte-se ao nosso Discord!
+                </a>
+            </div>
 
-                <hr class="separator-line"> <div class="footer-links">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="#">Início</a></li>
-                        <li><a href="#">Sobre Nós</a></li>
-                        <li><a href="#">Serviços</a></li>
-                        <li><a href="#">Como Acessar</a></li>
-                        <li><a href="#">Comunidade</a></li>
-                        <li><a href="#">Eventos</a></li>
-                        <li><a href="#">Parcerias</a></li>
-                        <li><a href="#">Segurança</a></li>
-                    </ul>
-                </div>
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Serviços</a></li>
+                    <li><a href="#">Como Acessar</a></li>
+                    <li><a href="#">Comunidade</a></li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Parcerias</a></li>
+                    <li><a href="#">Segurança</a></li>
+                </ul>
             </div>
 
             <div class="footer-legal">
@@ -382,7 +379,7 @@
                 </ul>
             </div>
 
-        </div>
+            </div>
 
         <div class="footer-bottom">
             <p>© <span id="currentYear"></span><img src="images/3.servicos/guildas.png" alt="Heart Icon" class="inline-icon"> Mundo Zera's Craft. Todos os direitos reservados. Criado por @MatheuZera e toda a nossa Comunidade! :D <img src="images/3.servicos/suporte.png" alt="Heart Icon" class="inline-icon"></p>
@@ -390,3 +387,20 @@
         </div>
     </div>
 </footer>
+
+<div class="audio-control-button-container">
+    <div class="music-title-display" id="musicTitleDisplay"></div>
+    <button id="audioControlButton" aria-label="Controle de Áudio">
+        <img src="images/1.site/audio-off.png" alt="Play Icon" class="icon-off">
+        <img src="images/1.site/audio-on.png" alt="Pause Icon" class="icon-on">
+        <div class="neon-effect"></div>
+        <svg class="audio-progress-arc" id="audioProgressArc" viewBox="0 0 60 60">
+            <circle class="arc-background" cx="30" cy="30" r="27"></circle>
+            <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
+        </svg>
+    </button>
+</div>
+
+<audio id="backgroundAudio" loop preload="auto">
+    <source src="audios/music/bensound-sunny.mp3" type="audio/mpeg">
+    </audio>
