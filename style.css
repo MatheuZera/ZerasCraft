@@ -357,22 +357,22 @@ ul {
 .btn-link {
     display: inline-block;
     padding: 8px 15px;
-    background-color: transparent;
-    color: var(--cor-link); /* Usar a variável de cor de link (já é verde) */
+    background-color: var(--cor-primaria); /* Fundo na cor primária por padrão */
+    color: var(--cor-btn-text); /* Texto branco por padrão */
     text-decoration: none;
     border-radius: 5px;
-    border: 1px solid var(--cor-link); /* Borda na cor do link */
+    border: 1px solid var(--cor-primaria); /* Borda na cor primária por padrão */
 
     /* Transição para suavizar todas as mudanças */
-    transition: all 0.3s ease-in-out; /* Alterado para 'all' para transição completa */
+    transition: all 0.3s ease-in-out;
 }
 
 .btn-link:hover {
-    background-color: var(--cor-primaria); /* Fundo verde vibrante no hover */
+    background-color: var(--cor-secundaria); /* Fundo secundário (mais escuro) no hover */
     color: var(--cor-btn-text); /* Texto branco no hover */
-    border-color: var(--cor-primaria); /* Borda verde vibrante no hover */
+    border-color: var(--cor-secundaria); /* Borda secundária no hover */
     transform: translateY(-5px);
-    text-decoration: none; /* Opcional: remover sublinhado no hover */
+    text-decoration: none;
 }
 
 .btn-link:active {
