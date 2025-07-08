@@ -47,7 +47,7 @@
     --sombra-card: 0 8px 16px rgba(0, 0, 0, 0.4);
 
     /* Transições */
-    --transicao-padrao: all 0.3s ease; /* Aumentei para 0.3s para suavidade */
+    --transicao-padrao: all 0.3s ease-in-out; /* Aumentei para 0.3s para suavidade */
     --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
     --transicao-icon-rotate: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva mais interessante para a rotação do ícone */
 }
@@ -605,26 +605,27 @@ h2 .fas, h3 .fas {
     transition: background-color 0.3s ease;
 }
 
+/* Estilos para botões dentro do card de evento */
 .event-card .btn-primary {
-    background-color: #28a745; /* Cor para o botão principal (Mais Detalhes) */
-    color: white;
+    background-color: var(--cor-primaria); /* Usa a cor primária definida no :root */
+    color: var(--cor-btn-text);
 }
 
 .event-card .btn-primary:hover {
-    background-color: #218838;
+    background-color: var(--cor-secundaria); /* Usa a cor secundária (mais escura) para hover */
 }
 
 .event-card .btn-link {
-    background-color: transparent; /* Fundo transparente para links secundários */
-    color: #007bff; /* Cor do texto azul */
-    border: 1px solid #007bff;
+    background-color: transparent;
+    color: var(--cor-primaria); /* Texto na cor primária */
+    border: 1px solid var(--cor-primaria); /* Borda na cor primária */
 }
 
 .event-card .btn-link:hover {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--cor-primaria); /* Fundo na cor primária */
+    color: var(--cor-btn-text); /* Texto branco */
+    border-color: var(--cor-primaria); /* Borda na cor primária */
 }
-
 
 /* Media Queries para Responsividade da seção de Eventos */
 @media (max-width: 992px) {
@@ -1072,7 +1073,6 @@ h2 .fas, h3 .fas {
     vertical-align: middle;
     margin: 0 4px;
 }
-
 /* ===================================== */
 /* 12. Controle de Áudio - NOVO SISTEMA  */
 /* ===================================== */
