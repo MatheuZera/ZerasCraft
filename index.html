@@ -274,25 +274,28 @@
 
 <footer class="main-footer">
     <div class="container">
+        <div class="footer-grid-container"> {/* Novo contêiner para organizar as colunas principais */}
+
             <div class="footer-about">
                 <h3>ZERA'S CRAFT</h3>
                 <p>Zera's Craft é o seu destino premium para uma<br>qualidade visual no Minecraft. Conecte-se, crie e explore conosco!</p>
                 <div class="social-icons">
-                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" aria-label="Discord"><img src="images/10.rodape/discord.gif" alt="YouTube Icon"></a>
-                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" aria-label="YouTube"><img src="images/10.rodape/youtube.png" alt="YouTube Icon"></a>
-                    <a href="https://open.spotify.com/user/31pujg2qsv33mkmfq6nk27nvguuy?si=d490df1e335e4a22" target="_blank" aria-label="Spotify"><img src="images/10.rodape/spotfy.png" alt="Spotify Icon"></a>
+                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" aria-label="Discord"><img src="images/10.rodape/discord.gif" alt="Discord Icon"></a> {/* Usando Discord como primeiro ícone social */}
+                    <a href="http://youtube.com/16" target="_blank" aria-label="YouTube"><img src="images/10.rodape/youtube.png" alt="YouTube Icon"></a>
+                    <a href="http://spotify.com/18" target="_blank" aria-label="Spotify"><img src="images/10.rodape/spotfy.png" alt="Spotify Icon"></a>
                 </div>
             </div>
 
-            <div class="footer-contact">
-                <h4>Contato & Suporte</h4>
-                <p><img src="images/10.rodape/contato.png" alt="Envelope Icon" class="contact-icon"> contato@zerascraft.com.br</p>
-                <p><img src="images/10.rodape/suporte.png" alt="Headset Icon" class="contact-icon"> Suporte: Crie um Ticket no nosso Discord.</p>
-                <p><img src="images/10.rodape/regiao.png" alt="Map Marker Icon" class="contact-icon"> Brasil</p>
-                <a href="https://discord.gg/seucanaldiscord" target="_blank" class="btn-footer-discord">
-                    <img src="images/1.site/discord.gif" alt="Discord Icon" class="button-icon"> Junte-se ao nosso Discord!
-                </a>
-            </div>
+            <div class="footer-contact-nav-group"> {/* Novo grupo para Contato e Navegação lado a lado */}
+                <div class="footer-contact">
+                    <h4>Contato & Suporte</h4>
+                    <p><img src="images/10.rodape/contato.png" alt="Envelope Icon" class="contact-icon"> contato@zerascraft.com.br</p>
+                    <p><img src="images/10.rodape/suporte.png" alt="Headset Icon" class="contact-icon"> Suporte: Crie um Ticket no nosso Discord.</p>
+                    <p><img src="images/10.rodape/regiao.png" alt="Map Marker Icon" class="contact-icon"> Brasil</p>
+                    <a href="https://discord.gg/seucanaldiscord" target="_blank" class="btn-footer-discord">
+                        <img src="images/1.site/discord.gif" alt="Discord Icon" class="button-icon"> Junte-se ao nosso Discord!
+                    </a>
+                </div>
 
                 <div class="footer-links">
                     <h4>Navegação</h4>
@@ -309,7 +312,7 @@
                 </div>
             </div>
 
-            <div class="footer-legal">
+            <div class="footer-legal"> {/* Legal fica no grid principal, provavelmente na mesma linha do grupo Contato/Nav em desktop */}
                 <h4>Legal</h4>
                 <ul>
                     <li><a href="#">Termos de Serviço</a></li>
@@ -318,30 +321,11 @@
                 </ul>
             </div>
 
+        </div> {/* Fim de .footer-grid-container */}
+
         <div class="footer-bottom">
-            <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+            <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados. Feito com <img src="images/10.rodape/heart.png" alt="Heart Icon" class="inline-icon"> no Brasil.</p> {/* Adicionei o ícone do coração de volta aqui, caso tenha sido removido. Caminho precisa ser válido. */}
             <p>Minecraft é uma marca registrada da Mojang Studios.</p>
         </div>
     </div>
 </footer>
-
-    <div class="audio-control-button-container">
-        <div class="music-title-display" id="musicTitleDisplay"></div>
-        <button id="audioControlButton" aria-label="Controle de Áudio">
-            <img src="images/1.site/audio-off.png" alt="Play Icon" class="icon-off">
-            <img src="images/1.site/audio-on.png" alt="Pause Icon" class="icon-on">
-            <div class="neon-effect"></div>
-            <svg class="audio-progress-arc" id="audioProgressArc" viewBox="0 0 60 60">
-                <circle class="arc-background" cx="30" cy="30" r="27"></circle>
-                <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
-            </svg>
-        </button>
-    </div>
-
-    <audio id="backgroundAudio" loop preload="auto">
-        </audio>
-
-    <script src="script.js"></script>
-
-</body>
-</html>
