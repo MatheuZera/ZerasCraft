@@ -529,26 +529,31 @@ h2 .fas, h3 .fas {
 /* Estilos para os ícones e imagens dentro dos cards */
 /* ... (código existente) ... */
 
+/* Estilos para os ícones e imagens dentro dos cards */
+/* ... (código existente) ... */
+
 /* Exceção para avatares e logos que são circulares e não rotacionam */
 .community-card .member-avatar,
 .partnership-card .partnership-logo {
-    border-radius: 50%; /* Mantém a forma circular da imagem, mas removemos a borda colorida */
+    /* Altere este para 0, 8px, ou remova se quiser cantos totalmente retos */
+    border-radius: 8px; /* Era 50%. Mudei para um valor de exemplo */
     width: 100px;
     height: 100px;
     object-fit: cover;
     margin: 0 auto 20px auto;
-    /* REMOVA OU COMENTE A LINHA ABAIXO: */
-    /* border: 3px solid var(--cor-primaria); */ /* Esta é a linha que cria a faixa circular verde */
+    /* REMOVA OU COMENTE A LINHA ABAIXO PARA TIRAR A BORDA COLORIDA */
+    /* border: 3px solid var(--cor-primaria); */
     transition: var(--transicao-padrao);
 }
 
 /* Efeito hover para avatares e logos (só borda) */
 /* REMOVA OU COMENTE TODO ESTE BLOCO SE NÃO QUISER NENHUMA BORDA NO HOVER TAMBÉM */
-/*(.community-card:hover .member-avatar,
+/*
+.community-card:hover .member-avatar,
 .partnership-card:hover .partnership-logo {
-    /* border-color: var(--cor-destaque); */ /* Comentar esta linha também se o bloco acima for removido */
-/*}*/
-
+    /* border-color: var(--cor-destaque);
+}
+*/
 
 /* Container do Grid para Eventos */
 .events-sub-grid {
