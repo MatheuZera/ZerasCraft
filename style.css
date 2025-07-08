@@ -851,47 +851,64 @@ h2 .fas, h3 .fas {
 
 /* Estilos Gerais do Rodapé */
 .main-footer {
-    background-color: #0d0d0d; /* Fundo bem escuro para o rodapé */
-    color: #f0f0f0; /* Cor do texto padrão mais clara */
-    padding: 60px 0 30px; /* Preenchimento superior, inferior e lateral */
-    font-family: 'Arial', sans-serif; /* Fonte mais legível, ajuste se tiver uma fonte específica */
-    border-top: 1px solid #222; /* Linha sutil no topo para separar do conteúdo */
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    padding: 60px 0 30px;
+    font-family: 'Arial', sans-serif;
+    border-top: 1px solid #222;
 }
 
 .main-footer .container {
-    max-width: 1200px; /* Largura máxima do conteúdo central */
-    margin: 0 auto; /* Centraliza o contêiner */
-    padding: 0 20px; /* Padding interno para telas menores */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* Seção Principal do Rodapé (acima do copyright) */
-.footer-main {
-    display: grid; /* Usa grid para as colunas */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Colunas responsivas */
-    gap: 40px; /* Espaçamento entre as colunas */
-    margin-bottom: 40px; /* Espaçamento entre a seção principal e a de copyright */
-    text-align: left; /* Alinha o texto à esquerda dentro das colunas */
+/* Nova Seção Topo do Rodapé (para a organização em 3 colunas grandes) */
+.footer-top-section {
+    display: grid; /* Usa Grid para layout de 3 colunas */
+    grid-template-columns: 1.5fr 2fr 1fr; /* Zera's Craft, Contato/Nav, Legal */
+    gap: 40px; /* Espaçamento entre as colunas principais */
+    margin-bottom: 40px;
+    text-align: left;
 }
 
-/* Ajustes para telas menores (para o grid do footer-main) */
+/* Media Queries para a Seção Topo (responsividade) */
+@media (max-width: 992px) {
+    .footer-top-section {
+        grid-template-columns: 1fr 1fr; /* Em tablets, 2 colunas */
+    }
+    .footer-top-section .footer-legal { /* Legal irá para a segunda linha em tablets */
+        grid-column: span 2; /* Ocupa as duas colunas */
+        text-align: center;
+        margin-top: 30px;
+    }
+    .footer-top-section .footer-about {
+        grid-column: span 1; /* Ocupa 1 coluna */
+    }
+}
+
 @media (max-width: 768px) {
-    .footer-main {
-        grid-template-columns: 1fr; /* Em telas menores, uma coluna */
-        text-align: center; /* Centraliza o texto */
+    .footer-top-section {
+        grid-template-columns: 1fr; /* Em celulares, uma coluna por vez */
+        text-align: center; /* Centraliza tudo */
     }
-    .footer-main .footer-about {
-        margin-bottom: 30px; /* Espaçamento para o bloco "sobre" */
+    .footer-top-section > div { /* Espaçamento entre os blocos em mobile */
+        margin-bottom: 30px;
+    }
+    .footer-top-section .footer-legal {
+        margin-top: 0; /* Remove margem extra */
     }
 }
 
 
-/* Estilos da Coluna "Sobre Zera's Craft" */
+/* Estilos da Coluna "Sobre Zera's Craft" (Título e Social) */
 .footer-about h3 {
-    font-size: 1.8em; /* Tamanho do título "ZERA'S CRAFT" */
-    color: #4CAF50; /* Cor verde para o título */
+    font-size: 1.8em;
+    color: #4CAF50;
     margin-bottom: 15px;
-    letter-spacing: 1px; /* Espaçamento entre letras */
-    text-transform: uppercase; /* Maiúsculas */
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .footer-about p {
@@ -903,7 +920,7 @@ h2 .fas, h3 .fas {
 
 .social-icons {
     display: flex;
-    gap: 15px; /* Espaçamento entre os ícones */
+    gap: 10px; /* Ícones pequenos, então gap menor */
     margin-top: 20px;
     justify-content: flex-start; /* Alinha os ícones à esquerda */
 }
@@ -915,114 +932,141 @@ h2 .fas, h3 .fas {
 }
 
 .social-icons img {
-    width: 40px; /* Tamanho dos ícones de redes sociais */
-    height: 40px;
-    transition: transform 0.3s ease; /* Animação ao passar o mouse */
+    width: 32px; /* Ícones sociais menores */
+    height: 32px;
+    transition: transform 0.3s ease;
 }
 
 .social-icons img:hover {
-    transform: scale(1.1); /* Ícone cresce um pouco */
+    transform: scale(1.1);
 }
 
-/* Estilos para Títulos das Colunas (Navegação, Contato, Legal) */
-.footer-main h4 {
-    font-size: 1.2em;
-    color: #FFC107; /* Cor amarela para os títulos das seções */
-    margin-bottom: 20px;
-    border-bottom: 2px solid #FFC107; /* Linha de destaque abaixo do título */
-    padding-bottom: 5px;
-    display: inline-block; /* Para a linha ter a largura do texto */
+/* Novo Contêiner para "Contato" e "Navegação" lado a lado */
+.footer-middle-columns {
+    display: flex; /* Usa Flexbox para colocar Contato e Navegação lado a lado */
+    justify-content: space-around; /* Distribui espaço entre eles */
+    gap: 30px; /* Espaçamento entre Contato e Navegação */
 }
+
+@media (max-width: 768px) {
+    .footer-middle-columns {
+        flex-direction: column; /* Em telas menores, Contato e Navegação ficam um abaixo do outro */
+        align-items: center; /* Centraliza os blocos */
+        gap: 30px;
+    }
+    .footer-middle-columns .footer-contact,
+    .footer-middle-columns .footer-links {
+        width: 100%; /* Ocupa a largura total em mobile */
+    }
+}
+
+
+/* Estilos para Títulos das Colunas (Navegação, Contato, Legal) */
+.footer-main h4 { /* Aplica-se aos h4 dentro de footer-main */
+    font-size: 1.2em;
+    color: #FFC107;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #FFC107;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .footer-main h4 {
+        margin-bottom: 15px; /* Ajuste para mobile */
+    }
+}
+
 
 /* Estilos para Listas de Links (Navegação, Legal) */
 .footer-links ul,
 .footer-legal ul {
-    list-style: none; /* Remove marcadores de lista */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .footer-links ul li,
 .footer-legal ul li {
-    margin-bottom: 10px; /* Espaçamento entre os itens da lista */
+    margin-bottom: 8px; /* Espaçamento menor entre os itens de lista */
 }
 
 .footer-links ul li a,
 .footer-legal ul li a {
-    color: #b0b0b0; /* Cor dos links */
+    color: #b0b0b0;
     text-decoration: none;
-    font-size: 0.95em;
-    transition: color 0.3s ease; /* Animação de cor ao passar o mouse */
+    font-size: 0.9em; /* Tamanho da fonte menor */
+    transition: color 0.3s ease;
 }
 
 .footer-links ul li a:hover,
 .footer-legal ul li a:hover {
-    color: #f0f0f0; /* Cor mais clara no hover */
-    text-decoration: underline; /* Sublinha no hover */
+    color: #f0f0f0;
+    text-decoration: underline;
 }
 
 /* Estilos para a Coluna de Contato */
 .footer-contact p {
-    font-size: 0.95em;
-    line-height: 1.6;
+    font-size: 0.9em; /* Tamanho da fonte menor */
+    line-height: 1.5;
     color: #b0b0b0;
-    margin-bottom: 10px;
-    display: flex; /* Para alinhar ícone e texto */
+    margin-bottom: 8px; /* Espaçamento menor */
+    display: flex;
     align-items: center;
-    gap: 10px; /* Espaçamento entre ícone e texto */
+    gap: 8px; /* Espaçamento menor entre ícone e texto */
 }
 
 .footer-contact .contact-icon {
-    width: 20px; /* Tamanho dos ícones de contato */
-    height: 20px;
+    width: 18px; /* Ícones de contato ainda menores */
+    height: 18px;
     object-fit: contain;
 }
 
 /* Estilo do Botão do Discord no Rodapé */
 .btn-footer-discord {
-    display: inline-flex; /* Usa flex para alinhar ícone e texto */
+    display: inline-flex;
     align-items: center;
-    gap: 10px; /* Espaçamento entre ícone e texto */
-    background-color: #7289DA; /* Cor padrão do Discord */
+    gap: 8px; /* Espaçamento menor no botão Discord */
+    background-color: #7289DA;
     color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
+    padding: 10px 18px; /* Padding menor */
+    border-radius: 6px; /* Borda levemente menor */
     text-decoration: none;
     font-weight: bold;
-    font-size: 1em;
-    margin-top: 20px; /* Espaçamento do conteúdo acima */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Animação */
+    font-size: 0.9em; /* Fonte um pouco menor */
+    margin-top: 15px; /* Espaçamento do conteúdo acima */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-footer-discord:hover {
-    background-color: #677BC4; /* Cor mais escura no hover */
-    transform: translateY(-3px); /* Leve levantamento */
+    background-color: #677BC4;
+    transform: translateY(-3px);
 }
 
 .btn-footer-discord .button-icon {
-    width: 24px; /* Tamanho do ícone do Discord */
-    height: 24px;
+    width: 20px; /* Ícone do Discord um pouco menor */
+    height: 20px;
 }
 
 /* Seção Inferior do Rodapé (Copyright) */
 .footer-bottom {
-    border-top: 1px solid #222; /* Linha divisória */
+    border-top: 1px solid #222;
     padding-top: 20px;
     margin-top: 20px;
     text-align: center;
-    font-size: 0.85em;
+    font-size: 0.8em; /* Fonte ainda menor para o copyright */
     color: #909090;
 }
 
 .footer-bottom p {
-    margin-bottom: 8px;
+    margin-bottom: 6px; /* Espaçamento menor */
 }
 
 .footer-bottom .inline-icon {
-    width: 16px; /* Tamanho do ícone do coração */
-    height: 16px;
-    vertical-align: middle; /* Alinha o ícone com o texto */
-    margin: 0 5px;
+    width: 14px; /* Ícone do coração menor */
+    height: 14px;
+    vertical-align: middle;
+    margin: 0 4px;
 }
 
 /* ===================================== */

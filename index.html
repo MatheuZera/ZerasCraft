@@ -272,8 +272,9 @@
     </div>
 </section>
 
-<footer class="main-footer"> <div class="container">
-        <div class="footer-main">
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-top-section"> {/* Novo contêiner para a seção superior */}
             <div class="footer-about">
                 <h3>ZERA'S CRAFT</h3>
                 <p>Zera's Craft é o seu destino premium para uma<br>qualidade visual no Minecraft. Conecte-se, crie e explore conosco!</p>
@@ -283,27 +284,30 @@
                 </div>
             </div>
 
-            <div class="footer-links">
-                <h4>Navegação</h4>
-                <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Sobre Nós</a></li>
-                    <li><a href="#">Serviços</a></li>
-                    <li><a href="#">Como Acessar</a></li>
-                    <li><a href="#">Comunidade</a></li>
-                    <li><a href="#">Eventos</a></li>
-                    <li><a href="#">Parcerias</a></li>
-                    <li><a href="#">Segurança</a></li>
-                </ul>
-            </div>
+            <div class="footer-middle-columns"> {/* Novo contêiner para Contato e Navegação */}
+                <div class="footer-contact">
+                    <h4>Contato & Suporte</h4>
+                    <p><img src="images/10.rodape/envelope.png" alt="Envelope Icon" class="contact-icon"> contato@zerascraft.com.br</p>
+                    <p><img src="images/10.rodape/suporte.png" alt="Headset Icon" class="contact-icon"> Suporte: Via Discord</p>
+                    <p><img src="images/10.rodape/regiao.png" alt="Map Marker Icon" class="contact-icon"> Brasil</p>
+                    <a href="https://discord.gg/seucanaldiscord" target="_blank" class="btn-footer-discord">
+                        <img src="images/10.rodape/discord.png" alt="Discord Icon" class="button-icon"> Junte-se ao nosso Discord!
+                    </a>
+                </div>
 
-            <div class="footer-contact">
-                <h4>Contato & Suporte</h4>
-                <p><img src="images/10.rodape/envelope.png" alt="Envelope Icon" class="contact-icon"> contato@zerascraft.com.br</p> <p><img src="images/10.rodape/suporte.png" alt="Headset Icon" class="contact-icon"> Suporte: Via Discord</p>
-                <p><img src="images/10.rodape/regiao.png" alt="Map Marker Icon" class="contact-icon"> Brasil</p>
-                <a href="https://discord.gg/seucanaldiscord" target="_blank" class="btn-footer-discord">
-                    <img src="images/10.rodape/discord.png" alt="Discord Icon" class="button-icon"> Junte-se ao nosso Discord!
-                </a>
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Serviços</a></li>
+                        <li><a href="#">Como Acessar</a></li>
+                        <li><a href="#">Comunidade</a></li>
+                        <li><a href="#">Eventos</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Segurança</a></li>
+                    </ul>
+                </div>
             </div>
 
             <div class="footer-legal">
@@ -314,10 +318,11 @@
                     <li><a href="#">Regras do Servidor</a></li>
                 </ul>
             </div>
-        </div>
+        </div> {/* Fim de .footer-top-section */}
 
         <div class="footer-bottom">
-            <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados. Feito com <img src="images/10.rodape/heart.png" alt="Heart Icon" class="inline-icon"> no Brasil.</p> <p>Minecraft é uma marca registrada da Mojang Studios.</p>
+            <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados. Feito com <img src="images/10.rodape/heart.png" alt="Heart Icon" class="inline-icon"> no Brasil.</p>
+            <p>Minecraft é uma marca registrada da Mojang Studios.</p>
         </div>
     </div>
 </footer>
