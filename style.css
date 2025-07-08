@@ -42,11 +42,12 @@
     --fonte-corpo: 'Roboto', sans-serif;
 
     /* Espaçamentos e Tamanhos */
-    --padding-section: 30px 0; /* Preenchimento padrão para seções */
+    --padding-section: 80px 0; /* Preenchimento padrão para seções (interno) */
+    --spacing-section: 60px; /* NOVO: Espaçamento entre as seções (externo) */
     --padding-card: 20px; /* Preenchimento interno dos cards */
-    --gap-grid: 10px; /* Espaço entre itens de grid */
+    --gap-grid: 20px; /* Espaço entre itens de grid - Aumentado para melhor espaçamento */
     --border-radius: 8px; /* Borda arredondada padrão */
-    --max-width-content: 1000px; /* Largura máxima do conteúdo */
+    --max-width-content: 1200px; /* Largura máxima do conteúdo - Aumentado para telas maiores */
 
     /* Sombras */
     --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -54,8 +55,16 @@
 
     /* Transições */
     --transicao-padrao: all 0.2s ease;
-    --transicao-card-hover: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease; /* Transição específica para hover de card */
+    --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease; /* Transição específica para hover de card */
+
+    /* Variáveis de cor para o controle de áudio (certifique-se de que correspondem às do site) */
+    --primary-color: var(--cor-primaria);
+    --primary-color-light: var(--cor-secundaria); /* Usando uma cor existente para light */
+    --dark-bg: var(--cor-fundo-escuro);
+    --light-text: var(--cor-texto-claro);
+    --card-bg: var(--cor-card-bg);
 }
+
 /* Estilos gerais para o corpo da página (apenas para contexto) */
 body {
     font-family: Arial, sans-serif;
@@ -80,6 +89,7 @@ body {
     background-color: var(--cor-fundo-escuro);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Previne rolagem horizontal indesejada */
 }
 
 /* Base para links */
@@ -127,40 +137,48 @@ ul {
 .container {
     max-width: var(--max-width-content);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px; /* Padding padrão para evitar conteúdo colado nas bordas */
 }
 
+/* Aplica o padding interno da seção */
 .section-padded {
-    padding: var(--padding-section); /* Onde --padding-section é 80px 0; */
+    padding: var(--padding-section);
+}
+
+/* ADICIONADO: Espaçamento entre as seções */
+/* Aplica um margin-bottom a todas as seções `.section-padded`, exceto a última */
+.section-padded:not(:last-of-type) {
+    margin-bottom: var(--spacing-section);
 }
 
 .section-alt-bg {
-    background-color: var(--cor-terciaria); /* Fundo verde mais escuro */
+    background-color: var(--cor-terciaria);
 }
 
-/* Flexbox para duas colunas */
+/* Flexbox para duas colunas - Mais robusto para responsividade */
 .content-two-columns {
     display: flex;
     flex-wrap: wrap; /* Permite quebrar linha em telas menores */
     gap: var(--gap-grid);
     align-items: center;
+    justify-content: center; /* Centraliza itens quando quebram */
 }
 
 .content-two-columns .text-content,
 .content-two-columns .image-content {
-    flex: 1; /* Permite que ambos os itens cresçam igualmente */
-    min-width: 300px; /* Garante que os itens não fiquem muito estreitos */
+    flex: 1 1 48%; /* Permite que cresçam e encolham, tentando manter duas colunas */
+    min-width: 300px; /* Garante que os itens não fiquem muito estreitos antes de quebrar */
 }
 
 .responsive-image {
     max-width: 100%;
     height: auto;
-    display: block; /* Remove espaçamento extra abaixo da imagem */
+    display: block;
     border-radius: var(--border-radius);
 }
 
 .bordered-image {
-    border: 3px solid var(--cor-primaria); /* Borda primária para imagens de destaque */
+    border: 3px solid var(--cor-primaria);
     box-shadow: var(--sombra-card);
 }
 
@@ -182,7 +200,7 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Para navegação em telas menores */
+    flex-wrap: nowrap; /* Impede quebra do header principal */
 }
 
 .header-logo {
@@ -192,6 +210,7 @@ ul {
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 1px;
+    flex-shrink: 0; /* Impede que o logo encolha */
 }
 
 .main-nav ul {
@@ -204,6 +223,7 @@ ul {
     font-weight: 700;
     padding: 5px 0;
     position: relative;
+    white-space: nowrap; /* Evita quebra de linha em itens de navegação */
 }
 
 .main-nav ul li a::after {
@@ -221,7 +241,7 @@ ul {
     width: 100%;
 }
 
-/* NOVO: Botão de Hambúrguer para Mobile */
+/* Botão de Hambúrguer para Mobile */
 .menu-toggle {
     display: none; /* Escondido por padrão em desktop */
     font-size: 2em;
@@ -239,14 +259,14 @@ ul {
 
 .hero-section {
     position: relative;
-    height: 650px; /* Altura fixa para o hero */
+    height: 650px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--cor-texto-claro);
-    overflow: hidden; /* Garante que a imagem de fundo não vaze */
-    background: url('https://matheuzera.github.io/ZerasCraft/images/site/banner-fundo.gif') no-repeat center center/cover; /* Imagem de fundo do hero */
+    overflow: hidden;
+    background: url('https://matheuzera.github.io/ZerasCraft/images/site/banner-fundo.gif') no-repeat center center/cover;
 }
 
 .hero-image-overlay {
@@ -255,7 +275,7 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Escurece a imagem de fundo */
+    background: rgba(0, 0, 0, 0.7);
     z-index: 1;
 }
 
@@ -264,6 +284,7 @@ ul {
     z-index: 2;
     padding: 20px;
     max-width: 900px;
+    width: 100%; /* Garante que ocupe a largura disponível */
 }
 
 .server-branding {
@@ -272,26 +293,30 @@ ul {
     justify-content: center;
     gap: 20px;
     margin-bottom: 20px;
+    flex-wrap: wrap; /* Permite quebrar em telas menores */
 }
 
 .server-banner {
     max-width: 250px;
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-leve);
+    flex-shrink: 0; /* Impede que o banner encolha muito */
 }
 
 .server-icon {
     width: 100px;
     height: 100px;
-    border-radius: 50%; /* Torna o ícone circular */
+    border-radius: 50%;
     border: 4px solid var(--cor-primaria);
     box-shadow: var(--sombra-card);
+    flex-shrink: 0; /* Impede que o ícone encolha */
 }
 
 .hero-content h1 {
     font-size: 3.8em;
     margin-bottom: 0.5em;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    word-break: break-word; /* Permite quebrar palavras longas */
 }
 
 .hero-subtitle {
@@ -318,6 +343,7 @@ ul {
     border: none;
     cursor: pointer;
     font-size: 1.1em;
+    white-space: nowrap; /* Evita que o texto do botão quebre */
 }
 
 .btn-primary:hover {
@@ -376,10 +402,14 @@ h2 .fas, h3 .fas {
 .access-cards-grid,
 .community-grid,
 .events-sub-grid,
-.partnership-grid { /* Adicionado partnership-grid */
+.partnership-grid,
+.security-features-grid,
+.card-grid {
     display: grid;
     gap: var(--gap-grid);
     margin-top: 50px;
+    /* Padrão para grids, será ajustado nas media queries */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .max-2-columns {
@@ -394,64 +424,70 @@ h2 .fas, h3 .fas {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-/* Estilo base para todos os cards - AGORA INCLUI TRANSFORMAÇÕES DE HOVER AQUI */
+/* Estilo base para todos os cards */
 .service-card,
 .role-category-card,
 .access-card,
 .community-card,
 .partnership-card,
 .event-card,
-.security-card { /* Adicionado security-card */
+.security-card,
+.card { /* Incluindo o .card genérico */
     background-color: var(--cor-card-bg);
     border-radius: var(--border-radius);
     padding: var(--padding-card);
     text-align: center;
     box-shadow: var(--sombra-leve);
-    transition: var(--transicao-card-hover); /* Usando a variável de transição para cards */
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Borda sutil */
-    display: flex; /* Para flexibilizar conteúdo interno */
+    transition: var(--transicao-card-hover);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Empurra o botão para baixo */
+    justify-content: space-between;
+    height: 100%; /* Garante que todos os cards na mesma linha tenham a mesma altura */
+    cursor: default; /* Padrão, mude para pointer se for clicável */
 }
 
-/* Efeito hover para cards - APLICADO AO PRÓPRIO CARD */
+/* Efeito hover para cards */
 .service-card:hover,
 .role-category-card:hover,
 .access-card:hover,
 .community-card:hover,
 .partnership-card:hover,
 .event-card:hover,
-.security-card:hover { /* Adicionado security-card:hover */
-    transform: translateY(-5px) rotate(0.8deg); /* Card sobe um pouco e rotaciona 2 graus */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Sombra mais intensa e um pouco maior */
-    background-color: var(--cor-card-hover); /* Fundo do card muda */
+.security-card:hover,
+.card:hover { /* Incluindo o .card genérico */
+    transform: translateY(-5px) rotate(0.8deg);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+    background-color: var(--cor-card-hover);
+    border-color: var(--cor-borda-card-hover); /* Para cards com borda visível no hover */
 }
 
-/* Estilos para os ícones e imagens dentro dos cards (estáticos no hover do card) */
+/* Estilos para os ícones e imagens dentro dos cards */
 .service-card .card-icon,
 .role-category-card .role-category-icon,
 .community-card .member-avatar,
 .partnership-card .partnership-logo,
 .access-card .card-icon,
-.security-card .card-icon { /* Adicionado security-card .card-icon */
-    width: 80px; /* Tamanho padrão para ícones de card */
+.security-card .card-icon,
+.card .card-icon { /* Incluindo .card .card-icon */
+    width: 80px;
     height: 80px;
     object-fit: cover;
     border-radius: var(--border-radius);
-    margin: 0 auto 20px auto; /* Centraliza e adiciona espaço abaixo */
-    display: block; /* Garante que a transformação funcione corretamente */
-    transition: none; /* REMOVE A TRANSIÇÃO NO HOVER DO ÍCONE, ELE FICARÁ ESTÁTICO */
+    margin: 0 auto 20px auto;
+    display: block;
+    transition: none; /* Ícones não animam sozinhos */
 }
 
 /* Exceção para avatares e logos que são circulares */
 .member-avatar,
 .partnership-logo {
-    border-radius: 50%; /* Avatares circulares */
+    border-radius: 50%;
     width: 100px;
     height: 100px;
 }
 
-/* Tratamento específico para as imagens de evento (estáticas no hover do card) */
+/* Tratamento específico para as imagens de evento */
 .event-card .event-card-image {
     width: 100%;
     height: 200px;
@@ -460,21 +496,27 @@ h2 .fas, h3 .fas {
     border-top-right-radius: var(--border-radius);
     margin-bottom: 0;
     border-bottom: 2px solid var(--cor-primaria);
-    display: block; /* Garante que ocupe o espaço */
-    transition: none; /* REMOVE A TRANSIÇÃO NO HOVER DA IMAGEM, ELA FICARÁ ESTÁTICA */
+    display: block;
+    transition: none; /* Imagem não anima sozinha */
 }
 
 .card-title {
     color: var(--cor-destaque);
     font-size: 1.5em;
     margin-bottom: 10px;
+    word-break: break-word; /* Permite quebrar palavras longas */
 }
 
 .card-description {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.95em;
-    flex-grow: 1; /* Permite que o texto ocupe o espaço disponível */
+    flex-grow: 1;
     margin-bottom: 20px;
+    overflow: hidden; /* Garante que o texto não vaze */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Limita o texto a 4 linhas, ajuste conforme necessário */
+    -webkit-box-orient: vertical;
 }
 
 /* ===================================== */
@@ -485,7 +527,7 @@ h2 .fas, h3 .fas {
     text-align: left;
     margin-top: 15px;
     padding-left: 20px;
-    list-style: disc; /* Adiciona marcadores de lista */
+    list-style: disc;
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9em;
 }
@@ -507,12 +549,8 @@ h2 .fas, h3 .fas {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* No seu CSS */
-
 #pixel-legends {
-    /* Mantém o padding interno da seção conforme definido em .section-padded ou em ajuste anterior */
-    /* Exemplo: padding: 40px 0; */
-    margin-bottom: 10px; /* Altere este valor para controlar a distância entre Pixel Legends e a próxima seção */
+    margin-bottom: 40px; /* Espaço inferior consistente */
 }
 
 .pixel-legends-embed h4 {
@@ -544,7 +582,20 @@ h2 .fas, h3 .fas {
     font-family: 'Consolas', 'Monaco', monospace;
     color: var(--cor-destaque);
     font-size: 1.1em;
-    word-break: break-all; /* Garante que o texto quebre se for muito longo */
+    word-break: break-all;
+    white-space: pre-wrap; /* Permite quebra de linha dentro do código */
+    overflow-x: auto; /* Adiciona barra de rolagem horizontal se o código for muito longo */
+    -webkit-overflow-scrolling: touch; /* Melhora o scroll em iOS */
+}
+
+/* Specific styles for IP/PORT display to make sure they are readable */
+.access-card .ip-address,
+.access-card .port-number {
+    font-size: 1.2em; /* Ensure good readability */
+    color: var(--cor-destaque);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
 
 /* ===================================== */
@@ -556,12 +607,12 @@ h2 .fas, h3 .fas {
 }
 
 .event-card {
-    overflow: hidden; /* Esconde partes da imagem que podem vazar */
+    overflow: hidden;
 }
 
 .event-card-inner {
     padding: var(--padding-card);
-    text-align: left; /* Alinhamento de texto para o conteúdo do card */
+    text-align: left;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -573,6 +624,7 @@ h2 .fas, h3 .fas {
     font-size: 1.6em;
     margin-bottom: 15px;
     min-height: 2.5em; /* Garante altura mínima para títulos de duas linhas */
+    word-break: break-word;
 }
 
 .event-card-inner p {
@@ -640,48 +692,60 @@ h2 .fas, h3 .fas {
 /* 12. Controle de Áudio - NOVO SISTEMA  */
 /* ===================================== */
 
-/* Estilos para o contêiner do botão e texto */
 .audio-control-button-container {
-    position: fixed; /* ou absolute, dependendo de onde você quer que ele fique */
+    position: fixed;
     bottom: 20px;
     right: 20px;
-    display: flex; /* Para alinhar o botão e o texto */
-    flex-direction: column; /* Para empilhar texto e botão */
-    align-items: center; /* Centraliza horizontalmente */
-    z-index: 1000; /* Garante que fique acima de outros elementos */
+    display: flex;
+    flex-direction: row; /* Coloca os itens em linha (texto e botão) */
+    align-items: center; /* Alinha os itens verticalmente no centro do contêiner */
+    gap: 10px; /* Espaçamento entre o texto e o botão */
+
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
 }
 
-/* Estilos para o display do título da música */
 .music-title-display {
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;
-    margin-bottom: 5px; /* Espaço entre o texto e o botão */
     font-size: 0.9em;
-    white-space: nowrap; /* Evita que o texto quebre linha */
-    opacity: 1; /* Deve estar visível por padrão, ou animar com o JS */
-    transition: opacity 0.3s ease; /* Transição para sumir/aparecer */
+    white-space: nowrap; /* Impede quebra de linha do texto */
+    opacity: 1; /* Sempre visível */
+    transition: opacity 0.3s ease;
+    /* max-width: 150px; /* Removido para permitir que o texto se estenda naturalmente */
+    overflow: hidden; /* Oculta o conteúdo que excede a largura */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+    pointer-events: none; /* Não deve interferir com cliques */
+    text-align: left; /* Alinha o texto à esquerda dentro do seu próprio container */
+    right: 10px;
+    top: 50px;
 }
 
-/* Estilos para o botão de controle de áudio */
+/* Se o título for muito longo, ele ainda pode ser cortado com reticências */
+/* mas evitamos que a linha quebre. Se quiser quebrar, remova white-space: nowrap */
+
+
 .audio-control-button {
-    position: relative; /* Importante para posicionar os ícones e SVG */
-    width: 60px; /* Ajuste o tamanho conforme necessário */
+    position: relative;
+    width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: var(--primary-color); /* Use sua cor primária */
+    background-color: var(--primary-color);
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Garante que o neon não vaze */
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Sombra para o efeito base */
-    transition: all 0.3s ease; /* Transição para o botão */
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Impede que o botão encolha */
 }
 
-/* Efeito Neon */
 .audio-control-button .neon-effect {
     position: absolute;
     top: 0;
@@ -690,15 +754,14 @@ h2 .fas, h3 .fas {
     height: 100%;
     border-radius: 50%;
     background: radial-gradient(circle at center, rgba(0, 255, 0, 0.6) 0%, rgba(0, 255, 0, 0.3) 50%, transparent 70%);
-    opacity: 0; /* Começa invisível */
+    opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    filter: blur(5px); /* Suaviza o brilho */
+    filter: blur(5px);
 }
 
-/* Estado 'is-playing' para o botão (quando a música está tocando) */
 .audio-control-button.is-playing .neon-effect {
-    opacity: 1; /* Ativa o neon quando a música toca */
-    animation: pulse-neon 1.5s infinite alternate; /* Adiciona uma animação de pulso */
+    opacity: 1;
+    animation: pulse-neon 1.5s infinite alternate;
 }
 
 @keyframes pulse-neon {
@@ -710,47 +773,40 @@ h2 .fas, h3 .fas {
     }
 }
 
-
-/* Estilos para os ícones dentro do botão de controle de áudio */
 .audio-icon {
-    position: absolute; /* Essencial para posicionar sobre o botão */
-    top: 50%; /* Alinha o topo do ícone ao centro vertical do botão */
-    left: 50%; /* Alinha a esquerda do ícone ao centro horizontal do botão */
-    transform: translate(-50%, -50%); /* Ajusta o ícone para que seu PRÓPRIO centro fique no centro do botão */
-    font-size: 28px; /* Defina o tamanho que desejar para seus ícones */
-    color: #fff; /* Cor branca para os ícones */
-    transition: opacity 0.3s ease; /* Transição suave para a opacidade ao alternar */
-    /* Garante que o ícone fique acima de outros elementos visuais se houver */
-    z-index: 2; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    color: #fff;
+    transition: opacity 0.3s ease;
+    z-index: 2;
 }
 
-/* O ícone de volume-up (ON) começa escondido */
 .audio-control-button .icon-on {
-    display: none; 
+    display: none;
 }
 
-/* O ícone de volume-mute (OFF) começa visível */
 .audio-control-button .icon-off {
-    display: inline-block; 
+    display: inline-block;
 }
 
-/* Quando o botão de áudio tem a classe 'is-playing' (definida pelo JavaScript) */
 .audio-control-button.is-playing .icon-on {
-    display: inline-block; /* Mostra o ícone de volume-up */
+    display: inline-block;
 }
 
 .audio-control-button.is-playing .icon-off {
-    display: none; /* Esconde o ícone de volume-mute */
+    display: none;
 }
 
-/* SVG do Progresso */
 .audio-progress-arc {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    transform: rotate(-90deg); /* Começa o arco na parte superior */
+    transform: rotate(-90deg);
 }
 
 .arc-background {
@@ -761,43 +817,101 @@ h2 .fas, h3 .fas {
 
 .arc-progress {
     fill: none;
-    stroke: yellow; /* Cor do progresso */
+    stroke: yellow;
     stroke-width: 4;
-    stroke-linecap: round; /* Pontas arredondadas para o progresso */
-    transition: stroke-dashoffset 0.5s linear; /* Animação suave para o progresso */
-    /* stroke-dasharray será definido pelo JS */
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s linear;
 }
 
-/* Estilos para a mensagem central */
-.central-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 8px;
-    font-size: 1.2em;
-    z-index: 1001;
+/* Keyframes para a animação de rotação do ícone */
+@keyframes icon-spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Estilo do botão quando a música está tocando (classe 'is-playing' adicionada via JS) */
+#audioControlButton.is-playing {
+    box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8),
+                0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6),
+                0 0 30px rgba(var(--neon-flame-color1-rgb), 0.4);
+    animation: pulse-border 1.5s infinite alternate;
+}
+
+/* Keyframes para a animação de pulsação da borda */
+@keyframes pulse-border {
+    0% { box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8), 0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6); }
+    100% { box-shadow: 0 0 15px rgba(var(--neon-flame-color2-rgb), 1), 0 0 25px rgba(var(--neon-flame-color1-rgb), 0.8); }
+}
+
+/* Estilo para o elemento SVG que cria o arco de progresso circular */
+.audio-progress-arc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    z-index: 1;
+    pointer-events: none;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-    white-space: nowrap; /* Impede que o texto quebre linha */
+    transition: opacity 0.3s ease;
 }
 
-.central-message.show {
+/* Torna o arco de progresso visível quando a música está tocando */
+#audioControlButton.is-playing .audio-progress-arc {
     opacity: 1;
-    visibility: visible;
 }
 
-/* Variáveis de cor (se você as estiver usando) */
-:root {
-    --primary-color: #28a745; /* Um verde exemplo */
-    --primary-color-light: #4caf50;
-    --dark-bg: #1c1c1c;
-    --light-text: #f0f0f0;
-    --card-bg: #2a2a3a;
+/* Estilo do fundo do arco de progresso (a parte não preenchida) */
+.audio-progress-arc .arc-background {
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 3.5;
+    fill: none;
+}
+
+/* Estilo do progresso do arco (a parte preenchida) */
+.audio-progress-arc .arc-progress {
+    stroke: var(--cor-destaque);
+    stroke-width: 3.5;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.1s linear;
+}
+
+/* Elemento para o efeito de "chama" neon que se move */
+.audio-control-button .neon-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        var(--neon-flame-color1) 0%,
+        var(--neon-flame-color2) 25%,
+        var(--neon-flame-color1) 50%,
+        var(--neon-flame-color2) 75%,
+        var(--neon-flame-color1) 100%
+    );
+    background-size: 200% 100%;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+    z-index: 0;
+    pointer-events: none;
+    animation: neon-gradient-spin 10s linear infinite;
+}
+
+/* Ativa o efeito neon quando a música está tocando */
+#audioControlButton.is-playing .neon-effect {
+    opacity: 0.7;
+}
+
+/* Keyframes para a animação de rotação do gradiente neon */
+@keyframes neon-gradient-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* ===================================== */
@@ -805,15 +919,15 @@ h2 .fas, h3 .fas {
 /* ===================================== */
 .central-message {
     position: fixed;
-    top: 50%;
+    top: 95%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.8); /* Fundo semitransparente escuro */
     color: var(--cor-btn-text);
-    padding: 20px 30px;
+    padding: 10px 20px;
     border-radius: var(--border-radius);
     font-family: var(--fonte-titulo);
-    font-size: 1.8em; /* Tamanho maior para destaque */
+    font-size: 1.2em; /* Tamanho maior para destaque */
     font-weight: bold;
     text-align: center;
     opacity: 0; /* Inicialmente invisível */
@@ -923,4 +1037,500 @@ h2 .fas, h3 .fas {
     color: var(--cor-primaria); /* Cor verde vibrante para o ícone */
     font-size: 3.5em; /* Tamanho grande para o ícone */
     line-height: 1; /* Ajuste para alinhamento vertical */
+}
+
+/* ===================================== */
+/* 16. Media Queries (Responsividade)    */
+/* ===================================== */
+
+/* Extra Large devices (desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        padding: 0 30px; /* Mais padding em telas maiores */
+    }
+    .hero-section {
+        height: 700px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    /* Ensure main-nav is flex when not on mobile */
+    .main-nav {
+        display: block !important; /* Override mobile display: none */
+    }
+    .main-nav ul {
+        flex-direction: row; /* Ensure row direction */
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 991.98px) { /* Changed to max-width for clear breakpoints */
+    /* Ajustes Gerais */
+    h1 { font-size: 3em; }
+    h2 { font-size: 2.2em; }
+    h3 { font-size: 1.8em; }
+
+    .section-padded {
+        padding: var(--padding-section); /* Mantém o padding interno padrão */
+    }
+
+    /* Ajusta o espaçamento ENTRE seções para telas médias */
+    .section-padded:not(:last-of-type) {
+        margin-bottom: 40px; /* Reduz um pouco o espaçamento entre as seções */
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Header e Navegação */
+    .header-content {
+        flex-wrap: wrap; /* Allow wrapping for logo and toggle */
+    }
+
+    .main-nav {
+        display: none; /* Hidden by default for mobile */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 80px; /* Adjust based on header height */
+        left: 0;
+        background-color: var(--cor-fundo-escuro);
+        box-shadow: var(--sombra-leve);
+        padding: 20px;
+        border-top: 1px solid var(--cor-bordas);
+        z-index: 999;
+    }
+
+    .main-nav.active {
+        display: flex; /* Shown when active via JS */
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .main-nav ul li a {
+        padding: 10px 0;
+        width: fit-content;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger menu */
+    }
+
+    /* Seção Hero */
+    .hero-section {
+        height: 550px;
+    }
+
+    .hero-content h1 {
+        font-size: 3em;
+    }
+
+    .server-branding {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .server-banner {
+        max-width: 200px;
+    }
+
+    .server-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1em;
+    }
+
+    /* Layout de Duas Colunas */
+    .content-two-columns {
+        flex-direction: column; /* Stack columns on smaller tablets */
+        text-align: center; /* Center text when stacked */
+    }
+
+    .content-two-columns .text-content,
+    .content-two-columns .image-content {
+        flex: 1 1 100%; /* Take full width when stacked */
+        min-width: unset; /* Remove min-width when stacking */
+    }
+
+    .responsive-image {
+        margin: 20px auto; /* Center image when stacked */
+    }
+
+    .section-description {
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
+
+    /* Cards e Grids: Padrão de 2 colunas */
+    .services-grid,
+    .roles-grid,
+    .access-cards-grid,
+    .community-grid,
+    .events-sub-grid,
+    .partnership-grid,
+    .security-features-grid,
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Maintain 2 columns generally */
+    }
+
+    .card-title {
+        font-size: 1.4em;
+    }
+
+    .card-description {
+        font-size: 0.9em;
+    }
+
+    .event-card-inner h3 {
+        font-size: 1.4em;
+        min-height: unset;
+    }
+
+    /* Controle de Áudio - APENAS TAMANHO DO BOTÃO E SEU ÍCONE */
+    .audio-control-button {
+        width: 50px; /* Slightly smaller button */
+        height: 50px;
+    }
+    .audio-icon {
+        font-size: 24px;
+    }
+
+    /* O CONTÊINER DO ÁUDIO continua como ROW em tablets */
+    .audio-control-button-container {
+        flex-direction: row; /* Mantém lado a lado */
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .music-title-display {
+        white-space: nowrap; /* Mantém o texto em uma linha */
+        /* max-width: unset; Removido para permitir que se ajuste */
+    }
+
+    /* Espaçamento adicional antes do footer para o botão de áudio */
+    .main-footer {
+        padding-bottom: 70px; /* Garante que o rodapé não cubra o botão */
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 767.98px) {
+    h1 { font-size: 2.5em; }
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.6em; }
+
+    .section-padded {
+        padding: 40px 0; /* Mais reduzido para telas menores */
+    }
+
+    /* Ajusta o espaçamento ENTRE seções para telas pequenas */
+    .section-padded:not(:last-of-type) {
+        margin-bottom: 30px; /* Reduz ainda mais o espaçamento */
+    }
+
+    .hero-section {
+        height: 450px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-subtitle {
+        font-size: 1em;
+    }
+
+    .btn-primary {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    /* Cards e Grids: Padrão de 1 coluna */
+    .services-grid,
+    .roles-grid,
+    .access-cards-grid,
+    .community-grid,
+    .events-sub-grid,
+    .partnership-grid,
+    .security-features-grid,
+    .card-grid {
+        grid-template-columns: 1fr; /* Force single column on smaller phones */
+    }
+
+    .card-title {
+        font-size: 1.3em;
+    }
+
+    .card-description {
+        font-size: 0.85em;
+        -webkit-line-clamp: 3; /* More aggressive line clamping for very small screens */
+    }
+
+    .event-card .event-card-image {
+        height: 150px;
+    }
+
+    .event-card-inner h3 {
+        font-size: 1.4em;
+        min-height: unset;
+    }
+
+    /* Audio control adjustments for very small screens */
+    .audio-control-button {
+        width: 45px;
+        height: 45px;
+    }
+    .audio-icon {
+        font-size: 22px;
+    }
+
+    /* O CONTÊINER DO ÁUDIO pode quebrar para COLUMN aqui, se preferir empilhar */
+    .audio-control-button-container {
+        flex-direction: column; /* Empilha o texto acima do botão em telas pequenas */
+        bottom: 15px; /* Ajusta um pouco mais para cima */
+        right: 15px;
+        align-items: flex-end; /* Alinha o conteúdo à direita (botão à direita, texto à direita) */
+    }
+
+    .music-title-display {
+        white-space: normal; /* Permite que o texto quebre linha em telas muito pequenas */
+        max-width: 120px; /* Limita a largura para o texto não ser muito grande */
+        text-align: right; /* Alinha o texto à direita (acima do botão) */
+        padding: 4px 8px; /* Ajusta o padding */
+        font-size: 0.8em; /* Diminui um pouco o tamanho da fonte */
+        margin-bottom: 5px; /* Espaço entre o texto e o botão */
+    }
+
+    /* Espaçamento adicional antes do footer para o botão de áudio */
+    .main-footer {
+        padding-bottom: 80px; /* Garante que o rodapé não cubra o botão */
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
+    h3 { font-size: 1.4em; }
+    h4 { font-size: 1.2em; }
+
+    .section-padded {
+        padding: 30px 0;
+    }
+
+    /* Ajusta o espaçamento ENTRE seções para telas extra pequenas */
+    .section-padded:not(:last-of-type) {
+        margin-bottom: 20px; /* Reduz ainda mais o espaçamento */
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    .header-logo {
+        font-size: 1.5em;
+    }
+
+    .menu-toggle {
+        font-size: 1.8em;
+    }
+
+    .hero-section {
+        height: 350px; /* Even shorter hero section */
+        padding-top: 50px; /* Ensure content is not hidden by sticky header */
+        padding-bottom: 50px;
+    }
+    .hero-image-overlay {
+        background: rgba(0, 0, 0, 0.8); /* Darker overlay for contrast */
+    }
+
+    .hero-content {
+        padding: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 2em;
+        line-height: 1.1; /* Tighter line height */
+    }
+
+    .server-branding {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .server-banner {
+        max-width: 120px; /* Smaller banner */
+    }
+
+    .server-icon {
+        width: 50px; /* Smaller icon */
+        height: 50px;
+        border-width: 2px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.85em; /* Smaller subtitle font */
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        padding: 8px 15px; /* Smaller button padding */
+        font-size: 0.85em;
+    }
+
+    .section-description {
+        font-size: 0.9em; /* Smaller description font */
+        margin-bottom: 25px;
+    }
+
+    /* Cards and Grids for XS screens (single column is a must) */
+    .services-grid,
+    .roles-grid,
+    .access-cards-grid,
+    .community-grid,
+    .events-sub-grid,
+    .partnership-grid,
+    .security-features-grid,
+    .card-grid {
+        grid-template-columns: 1fr; /* Absolutely force single column */
+        gap: 15px; /* Reduce gap slightly */
+        margin-top: 30px;
+    }
+
+    .service-card,
+    .role-category-card,
+    .access-card,
+    .community-card,
+    .partnership-card,
+    .event-card,
+    .security-card,
+    .card {
+        padding: 15px; /* Reduce card padding */
+    }
+
+    .card-icon, .security-card .card-icon {
+        width: 60px; /* Smaller card icons */
+        height: 60px;
+        font-size: 3em; /* Adjust font awesome icon size */
+        margin-bottom: 15px;
+    }
+
+    .card-title {
+        font-size: 1.1em; /* Smaller card title font */
+    }
+
+    .card-description {
+        font-size: 0.78em; /* Even smaller description font */
+        -webkit-line-clamp: 4; /* Keep a reasonable line clamp */
+    }
+
+    .role-category-card .role-list {
+        padding-left: 15px; /* Reduce padding for list */
+        font-size: 0.8em;
+    }
+
+    .access-card code {
+        font-size: 0.8em; /* Smaller code font */
+        padding: 6px;
+    }
+
+    .pixel-legends-embed {
+        padding: 15px; /* Smaller padding */
+    }
+    .pixel-legends-embed h4 {
+        font-size: 1.3em;
+    }
+    .pixel-legends-embed ul {
+        font-size: 0.85em;
+    }
+
+    .event-card .event-card-image {
+        height: 120px; /* Smaller event image */
+    }
+    .event-card-inner {
+        padding: 15px;
+    }
+    .event-card-inner h3 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        min-height: unset; /* Allow height to be natural */
+    }
+    .event-card-inner p {
+        font-size: 0.8em;
+    }
+    .event-details {
+        font-size: 0.75em;
+    }
+
+    .partnership-proposal-card {
+        padding: 15px;
+    }
+    .partnership-proposal-card h3 {
+        font-size: 1.4em;
+    }
+    .partnership-proposal-card p {
+        font-size: 0.9em;
+        margin-bottom: 20px;
+    }
+
+    .main-footer {
+        padding: 20px 0;
+        font-size: 0.8em;
+    }
+    .footer-logo {
+        font-size: 1.2em;
+    }
+
+    /* Audio control adjustments for extreme small screens */
+    .audio-control-button {
+        width: 35px; /* Even smaller button */
+        height: 35px;
+    }
+    .audio-icon {
+        font-size: 18px; /* Smaller icon inside button */
+    }
+    .arc-background, .arc-progress {
+        stroke-width: 3; /* Thinner progress bar */
+    }
+
+    .audio-control-button-container {
+        flex-direction: column; /* Mantém empilhado */
+        bottom: 10px;
+        right: 10px;
+        align-items: flex-end; /* Mantém alinhado à direita */
+    }
+
+    .music-title-display {
+        white-space: normal; /* Permite quebra de linha */
+        max-width: 100px; /* Ainda mais restritivo */
+        text-align: right;
+        padding: 3px 6px;
+        font-size: 0.75em;
+        margin-bottom: 3px;
+    }
+
+    .central-message {
+        font-size: 1em; /* Smallest font for central message */
+        padding: 10px 15px;
+        border-radius: 5px;
+        white-space: normal; /* Allow message to wrap on very small screens */
+        max-width: 90%; /* Limit width to prevent overflow */
+    }
+
+    /* Espaçamento adicional antes do footer para o botão de áudio */
+    .main-footer {
+        padding-bottom: 80px; /* Garante que o rodapé não cubra o botão */
+    }
 }

@@ -258,7 +258,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Música estava tocando, pausando agora.");
                 backgroundMusic.pause();
                 updateButtonState(false);
-                if (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Desligaada";
+                if 
+                (currentMusicTitleDisplay) currentMusicTitleDisplay.textContent = "Desligada";
                 localStorage.setItem('musicEnabled', 'false');
             }
         });
