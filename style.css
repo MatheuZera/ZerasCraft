@@ -357,30 +357,26 @@ ul {
 .btn-link {
     display: inline-block;
     padding: 8px 15px;
-    background-color: transparent; /* Mantenha o fundo transparente, se desejar */
-    color: #59c04c; /* Mantenha a cor do texto padrão, se desejar */
+    background-color: transparent;
+    color: var(--cor-link); /* Usar a variável de cor de link (já é verde) */
     text-decoration: none;
     border-radius: 5px;
-    border: 1px solid #83dac0; /* Borda da cor do texto */
-    
-    /* PROPRIEDADE DE TRANSIÇÃO AQUI */
-    /* Agora, apenas para transform (subir/descer) */
-    transition: transform 0.3s ease-in-out; /* Adicionado transição para 'transform' */
+    border: 1px solid var(--cor-link); /* Borda na cor do link */
+
+    /* Transição para suavizar todas as mudanças */
+    transition: all 0.3s ease-in-out; /* Alterado para 'all' para transição completa */
 }
 
 .btn-link:hover {
-    /* Mantenha estas se quiser, ou remova se só quer a animação de subir/descer */
-    /* background-color: #007bff; */ 
-    /* color: white; */
-    /* border-color: #007bff; */
-
-    /* Animação de subir/descer */
-    transform: translateY(-5px); /* Move o botão 5px para cima ao passar o mouse */
+    background-color: var(--cor-primaria); /* Fundo verde vibrante no hover */
+    color: var(--cor-btn-text); /* Texto branco no hover */
+    border-color: var(--cor-primaria); /* Borda verde vibrante no hover */
+    transform: translateY(-5px);
+    text-decoration: none; /* Opcional: remover sublinhado no hover */
 }
 
 .btn-link:active {
-    /* Opcional: Efeito ao clicar no botão, para que ele "volte" ou "afunde" */
-    transform: translateY(0px); /* Volta à posição original ou afunda um pouco */
+    transform: translateY(0px);
 }
 
 .discord-channel-link {
