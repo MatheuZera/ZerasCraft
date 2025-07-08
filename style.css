@@ -361,7 +361,7 @@ ul {
     color: #007bff; /* Mantenha a cor do texto padrão, se desejar */
     text-decoration: none;
     border-radius: 5px;
-    border: 1px solid #007bff; /* Borda da cor do texto */
+    border: 1px solid #61f344; /* Borda da cor do texto */
     
     /* PROPRIEDADE DE TRANSIÇÃO AQUI */
     /* Agora, apenas para transform (subir/descer) */
