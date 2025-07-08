@@ -358,10 +358,10 @@ ul {
     display: inline-block;
     padding: 8px 15px;
     background-color: transparent; /* Mantenha o fundo transparente, se desejar */
-    color: #007bff; /* Mantenha a cor do texto padrão, se desejar */
+    color: #59c04c; /* Mantenha a cor do texto padrão, se desejar */
     text-decoration: none;
     border-radius: 5px;
-    border: 1px solid #61f344; /* Borda da cor do texto */
+    border: 1px solid #83dac0; /* Borda da cor do texto */
     
     /* PROPRIEDADE DE TRANSIÇÃO AQUI */
     /* Agora, apenas para transform (subir/descer) */
