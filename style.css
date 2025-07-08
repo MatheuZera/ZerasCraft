@@ -579,33 +579,112 @@ h2 .fas, h3 .fas {
     font-size: 1em;
 }
 
-/* Estilo para a proposta de parceria */
-.partnership-proposal-card {
-    background-color: var(--cor-terciaria);
-    border-radius: var(--border-radius);
-    padding: var(--padding-card);
-    text-align: center;
-    margin-top: var(--gap-grid);
-    box-shadow: var(--sombra-card);
-    border: 1px solid var(--cor-primaria);
-    transition: var(--transicao-card-hover); /* Para um hover sutil */
+.partnership-grid {
+    display: grid;
+    /* Define colunas responsivas: no mínimo 280px por card, e eles se expandem para preencher o espaço disponível */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Espaçamento entre os cards */
+    gap: 20px;
+    /* Centraliza o grid horizontalmente */
+    justify-content: center;
+    /* Adiciona um padding para que os cards não fiquem colados nas bordas do contêiner */
+    padding: 0 15px; /* Ajuste conforme necessário */
 }
 
-.partnership-proposal-card:hover {
-    background-color: var(--cor-primaria); /* Muda para verde primário no hover */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
-    transform: translateY(-5px);
+.partnership-card {
+    /* Estilos existentes para o seu card (background, bordas, etc.) */
+    background-color: #1a1a1a; /* Exemplo de cor de fundo escura */
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #f0f0f0;
+}
+
+.partnership-logo {
+    width: 60px; /* Ajuste o tamanho do ícone */
+    height: 60px;
+    margin-bottom: 15px;
+    border-radius: 50%; /* Se quiser que o ícone seja redondo */
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+.card-description {
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #b0b0b0;
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff; /* Cor de botão exemplo */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-link:hover {
+    background-color: #0056b3;
+}
+
+/* Para o card de proposta de parceria */
+.partnership-proposal-card {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 50px; /* Espaçamento do grid de cards */
+    text-align: center;
+    color: #f0f0f0;
 }
 
 .partnership-proposal-card h3 {
-    color: var(--cor-destaque);
+    font-size: 1.5em;
     margin-bottom: 15px;
+    color: #e0e0e0;
 }
 
 .partnership-proposal-card p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.05em;
-    margin-bottom: 30px;
+    font-size: 1em;
+    margin-bottom: 25px;
+    color: #b0b0b0;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #28a745; /* Cor de botão de ação */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+}
+
+/* Medias Queries para responsividade (ajuste o breakpoint conforme necessário) */
+@media (max-width: 768px) {
+    .partnership-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .partnership-grid {
+        grid-template-columns: 1fr; /* Em telas muito pequenas, uma única coluna */
+    }
 }
 
 /* ===================================== */
