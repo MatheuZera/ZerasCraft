@@ -778,6 +778,13 @@ h2 .fas, h3 .fas {
     transition: background-color 0.3s ease;
 }
 
+.btn-animating-out {
+    opacity: 0; /* Começa transparente */
+    transform: translateY(-50px); /* Move 50px para cima */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transição suave para opacidade e posição */
+    pointer-events: none; /* Desabilita cliques enquanto está animando */
+}
+
 .btn-link:hover {
     background-color: #0056b3;
 }
