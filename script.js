@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // A playlist agora com os nomes dos arquivos da sua pasta 'musics'
     const musicPlaylist = [
-        { title: 'Aria-Math-Lofi-Remastered', src: 'audios/musics/Aria-Math-Lofi-Remastered.mp3' },
+        { title: 'Aria-Math-Lofi-Remastered', src: 'audios/musics/Aria-Math-Lofi-Remake.mp3' },
         { title: 'Aria-Math', src: 'audios/musics/Aria-Math.mp3' },
         { title: 'Beginning 2', src: 'audios/musics/Beginning 2.mp3' },
         { title: 'Biome-Fest', src: 'audios/musics/Biome-Fest.mp3' },
