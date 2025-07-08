@@ -497,22 +497,27 @@ h2 .fas, h3 .fas {
 }
 
 
+/* Estilos para os ícones e imagens dentro dos cards */
+/* ... (código existente) ... */
+
 /* Exceção para avatares e logos que são circulares e não rotacionam */
 .community-card .member-avatar,
 .partnership-card .partnership-logo {
-    border-radius: 50%; /* Avatares circulares */
+    border-radius: 50%; /* Mantém a forma circular da imagem, mas removemos a borda colorida */
     width: 100px;
     height: 100px;
-    object-fit: cover; /* Garante que a imagem preencha o círculo */
+    object-fit: cover;
     margin: 0 auto 20px auto;
-    border: 3px solid var(--cor-primaria);
-    transition: var(--transicao-padrao); /* Transição para a borda */
+    /* REMOVA OU COMENTE A LINHA ABAIXO: */
+    /* border: 3px solid var(--cor-primaria); */ /* Esta é a linha que cria a faixa circular verde */
+    transition: var(--transicao-padrao);
 }
 
 /* Efeito hover para avatares e logos (só borda) */
+/* REMOVA OU COMENTE TODO ESTE BLOCO SE NÃO QUISER NENHUMA BORDA NO HOVER TAMBÉM */
 .community-card:hover .member-avatar,
 .partnership-card:hover .partnership-logo {
-    border-color: var(--cor-destaque); /* Borda dourada no hover */
+    /* border-color: var(--cor-destaque); */ /* Comentar esta linha também se o bloco acima for removido */
 }
 
 
@@ -746,7 +751,6 @@ h2 .fas, h3 .fas {
     width: 60px; /* Tamanho do ícone */
     height: 60px;
     margin-bottom: 15px;
-    border-radius: 50%; /* Opcional: para ícones redondos */
     object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
 }
 
