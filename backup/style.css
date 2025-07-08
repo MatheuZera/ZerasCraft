@@ -47,7 +47,7 @@
     --sombra-card: 0 8px 16px rgba(0, 0, 0, 0.4);
 
     /* Transições */
-    --transicao-padrao: all 0.3s ease; /* Aumentei para 0.3s para suavidade */
+    --transicao-padrao: all 0.3s ease-in-out; /* Aumentei para 0.3s para suavidade */
     --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
     --transicao-icon-rotate: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva mais interessante para a rotação do ícone */
 }
@@ -357,30 +357,26 @@ ul {
 .btn-link {
     display: inline-block;
     padding: 8px 15px;
-    background-color: transparent; /* Mantenha o fundo transparente, se desejar */
-    color: #59c04c; /* Mantenha a cor do texto padrão, se desejar */
+    background-color: var(--cor-primaria); /* Fundo na cor primária por padrão */
+    color: var(--cor-btn-text); /* Texto branco por padrão */
     text-decoration: none;
     border-radius: 5px;
-    border: 1px solid #83dac0; /* Borda da cor do texto */
-    
-    /* PROPRIEDADE DE TRANSIÇÃO AQUI */
-    /* Agora, apenas para transform (subir/descer) */
-    transition: transform 0.3s ease-in-out; /* Adicionado transição para 'transform' */
+    border: 1px solid var(--cor-primaria); /* Borda na cor primária por padrão */
+
+    /* Transição para suavizar todas as mudanças */
+    transition: all 0.3s ease-in-out;
 }
 
 .btn-link:hover {
-    /* Mantenha estas se quiser, ou remova se só quer a animação de subir/descer */
-    /* background-color: #007bff; */ 
-    /* color: white; */
-    /* border-color: #007bff; */
-
-    /* Animação de subir/descer */
-    transform: translateY(-5px); /* Move o botão 5px para cima ao passar o mouse */
+    background-color: var(--cor-secundaria); /* Fundo secundário (mais escuro) no hover */
+    color: var(--cor-btn-text); /* Texto branco no hover */
+    border-color: var(--cor-secundaria); /* Borda secundária no hover */
+    transform: translateY(-5px);
+    text-decoration: none;
 }
 
 .btn-link:active {
-    /* Opcional: Efeito ao clicar no botão, para que ele "volte" ou "afunde" */
-    transform: translateY(0px); /* Volta à posição original ou afunda um pouco */
+    transform: translateY(0px);
 }
 
 .discord-channel-link {
@@ -605,26 +601,27 @@ h2 .fas, h3 .fas {
     transition: background-color 0.3s ease;
 }
 
+/* Estilos para botões dentro do card de evento */
 .event-card .btn-primary {
-    background-color: #28a745; /* Cor para o botão principal (Mais Detalhes) */
-    color: white;
+    background-color: var(--cor-primaria); /* Usa a cor primária definida no :root */
+    color: var(--cor-btn-text);
 }
 
 .event-card .btn-primary:hover {
-    background-color: #218838;
+    background-color: var(--cor-secundaria); /* Usa a cor secundária (mais escura) para hover */
 }
 
 .event-card .btn-link {
-    background-color: transparent; /* Fundo transparente para links secundários */
-    color: #007bff; /* Cor do texto azul */
-    border: 1px solid #007bff;
+    background-color: transparent;
+    color: var(--cor-primaria); /* Texto na cor primária */
+    border: 1px solid var(--cor-primaria); /* Borda na cor primária */
 }
 
 .event-card .btn-link:hover {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--cor-primaria); /* Fundo na cor primária */
+    color: var(--cor-btn-text); /* Texto branco */
+    border-color: var(--cor-primaria); /* Borda na cor primária */
 }
-
 
 /* Media Queries para Responsividade da seção de Eventos */
 @media (max-width: 992px) {
@@ -779,6 +776,13 @@ h2 .fas, h3 .fas {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+}
+
+.btn-animating-out {
+    opacity: 0; /* Começa transparente */
+    transform: translateY(-50px); /* Move 50px para cima */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transição suave para opacidade e posição */
+    pointer-events: none; /* Desabilita cliques enquanto está animando */
 }
 
 .btn-link:hover {
@@ -1072,7 +1076,6 @@ h2 .fas, h3 .fas {
     vertical-align: middle;
     margin: 0 4px;
 }
-
 /* ===================================== */
 /* 12. Controle de Áudio - NOVO SISTEMA  */
 /* ===================================== */
@@ -1108,7 +1111,7 @@ h2 .fas, h3 .fas {
 }
 
 #audioControlButton:hover {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgb(0, 0, 0);
     transform: scale(1.05);
 }
 
@@ -1155,7 +1158,7 @@ h2 .fas, h3 .fas {
 }
 
 #audioControlButton.is-playing {
-    background-color: rgba(40, 167, 69, 0.7); /* Exemplo: um tom de verde para indicar que está tocando */
+    background-color: rgba(69, 218, 103, 0.534); /* Exemplo: um tom de verde para indicar que está tocando */
     box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8),
                 0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6),
                 0 0 30px rgba(var(--neon-flame-color1-rgb), 0.4);
