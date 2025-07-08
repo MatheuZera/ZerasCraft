@@ -502,22 +502,140 @@ h2 .fas, h3 .fas {
 }
 
 
-/* Tratamento específico para as imagens de evento */
-.event-card .event-card-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
-    margin-bottom: 0;
-    border-bottom: 2px solid var(--cor-primaria);
-    display: block;
-    transition: border-color 0.3s ease; /* Transição para a borda */
+/* Container do Grid para Eventos */
+.events-sub-grid {
+    display: grid; /* Ativa o display de grade */
+    /* Define colunas responsivas:
+       - 'auto-fit' para que o máximo de colunas caiba.
+       - 'minmax(320px, 1fr)' significa que cada coluna terá no mínimo 320px de largura.
+         Ajustei um pouco a largura mínima aqui para cards que talvez tenham mais conteúdo (data, etc.).
+         Você pode ajustar esse '320px' conforme o tamanho ideal que você quer para os cards de evento. */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px; /* Espaçamento entre os cards (pode ser maior para eventos) */
+    justify-content: center; /* Centraliza o grid horizontalmente */
+    padding: 0 15px; /* Adiciona padding nas laterais para responsividade */
+    margin-top: 40px; /* Espaçamento do parágrafo da seção */
 }
 
-/* Borda da imagem do evento muda no hover do card */
-.event-card:hover .event-card-image {
-    border-color: var(--cor-destaque);
+/* Estilos para cada Card de Evento */
+.event-card {
+    background-color: #1a1a1a; /* Fundo escuro */
+    border: 1px solid #333; /* Borda sutil */
+    border-radius: 8px; /* Cantos arredondados */
+    overflow: hidden; /* Garante que a imagem respeite o border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
+    color: #f0f0f0; /* Cor do texto */
+    display: flex; /* Usa flexbox para o conteúdo interno do card */
+    flex-direction: column; /* Organiza o conteúdo em coluna (imagem, texto, botão) */
+    height: 100%; /* Garante que todos os cards em uma linha tenham a mesma altura */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição ao passar o mouse */
+}
+
+.event-card:hover {
+    transform: translateY(-5px); /* Leve levantamento */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra mais forte */
+}
+
+/* Estilo para a imagem do card de evento */
+.event-card-image {
+    width: 100%; /* A imagem ocupa toda a largura do card */
+    height: 200px; /* Altura fixa para a imagem. Ajuste conforme sua necessidade. */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer, cortando se necessário */
+    display: block; /* Remove espaços extras abaixo da imagem */
+}
+
+/* Estilo para o conteúdo textual dentro do card */
+.event-card .card-content {
+    padding: 20px; /* Preenchimento interno para o texto */
+    flex-grow: 1; /* Permite que o conteúdo se expanda para preencher o espaço vertical */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribui o espaço entre título, descrição e data */
+}
+
+/* Estilos para título, descrição e data dentro do card de evento */
+.event-card .card-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+.event-card .card-description {
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 15px; /* Espaço entre descrição e data */
+    color: #b0b0b0;
+}
+
+.event-card p strong { /* Estilo para a data */
+    color: #a0a0a0;
+    font-size: 0.9em;
+    margin-bottom: 15px; /* Espaço antes do botão */
+    display: block; /* Garante que o strong seja um bloco para margin-bottom */
+}
+
+/* Estilos para botões dentro do card de evento */
+.event-card .btn-primary,
+.event-card .btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: auto; /* Empurra o botão para a parte inferior do card */
+    font-size: 0.95em;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.event-card .btn-primary {
+    background-color: #28a745; /* Cor para o botão principal (Mais Detalhes) */
+    color: white;
+}
+
+.event-card .btn-primary:hover {
+    background-color: #218838;
+}
+
+.event-card .btn-link {
+    background-color: transparent; /* Fundo transparente para links secundários */
+    color: #007bff; /* Cor do texto azul */
+    border: 1px solid #007bff;
+}
+
+.event-card .btn-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+
+/* Media Queries para Responsividade da seção de Eventos */
+@media (max-width: 992px) {
+    .events-sub-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .event-card-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .events-sub-grid {
+        grid-template-columns: 1fr; /* Uma única coluna em telas menores */
+        gap: 20px;
+        padding: 0 10px;
+    }
+    .event-card-image {
+        height: 160px;
+    }
+    .event-card .card-content {
+        padding: 15px;
+    }
+    .event-card .card-title {
+        font-size: 1.3em;
+    }
+    .event-card .card-description {
+        font-size: 0.9em;
+    }
 }
 
 .card-content {
