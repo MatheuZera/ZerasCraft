@@ -884,14 +884,14 @@ h2 .fas, h3 .fas {
 }
 
 /* Estilos para as colunas individuais */
-.footer-about,
+/*.footer-about,
 .footer-contact-nav-group,
 .footer-legal {
     /* Opcional: Adicione um fundo ou borda para visualização durante o desenvolvimento */
     /* background-color: rgba(255,255,255,0.05); */
     /* padding: 15px; */
     /* border-radius: 8px; */
-}
+/*}*/
 
 /* Estilo para o texto "Obrigado por visitar..." */
 .footer-contact-nav-group .thanks-message {
