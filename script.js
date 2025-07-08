@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     hoverSound = initializeAudioEffect('select', 'audios/effects/select.mp3', 0.3);
-    clickSound = initializeAudioEffect('click', 'audios/effects/click.mp3', 0.7);
+    clickSound = initializeAudioEffect('click', 'audios/effects/click.mpac', 0.7); // Ajuste aqui para 'mp3' se estiver errado no original
 
     const playEffectSoundInternal = (audioElement) => {
         if (audioElement) {
@@ -78,41 +78,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // Nova Função para Lidar com a Animação de Botões Pós-Execução
-    // REVISADO: Removido 'display: none' para evitar que o botão suma permanentemente para links âncora.
-    // Agora ele apenas esmaece, se for para navegar, a página irá carregar outra coisa,
-    // se for âncora, o botão vai esmaecer e voltar ao normal.
-    // =====================================
+    // REMOVIDA OU SIMPLIFICADA: Nova Função para Lidar com a Animação de Botões Pós-Execução
+    // Se não for usada em mais nenhum lugar, esta função pode ser removida completamente.
+    // Se precisar mantê-la por algum motivo, mas sem a animação de opacidade, simplifique-a.
+    // Por enquanto, vamos deixá-la aqui, mas ela não será mais chamada para os links/botões principais.
     const handleButtonClickAnimation = (buttonElement, delayBeforeAnimate = 0) => {
-        // Verifica se o botão é um link âncora para a mesma página
-        const isAnchorLink = buttonElement.tagName === 'A' && buttonElement.href.startsWith('#');
-
-        setTimeout(() => {
-            // Adiciona a classe para iniciar a animação (opacity: 0, transform, pointer-events: none)
-            buttonElement.classList.add('btn-animating-out');
-
-            // Tempo da animação CSS (deve corresponder ao transition no CSS)
-            const animationDuration = 500; // 0.5s
-
-            // Para links âncora, remove a classe após a animação para que o botão reapareça
-            if (isAnchorLink) {
-                setTimeout(() => {
-                    buttonElement.classList.remove('btn-animating-out');
-                    // Opcional: Se quiser que ele volte 100% visível sem delay, pode redefinir o estilo direto
-                    // buttonElement.style.opacity = '1';
-                    // buttonElement.style.transform = 'translateY(0)';
-                    console.log("Botão âncora animado e classe de saída removida.");
-                }, animationDuration);
-            } else {
-                // Para links que levam a outras páginas, não precisamos remover a classe,
-                // pois a página será recarregada.
-                // Contudo, se por algum motivo a navegação falhar, o botão permaneceria escondido.
-                // Uma solução robusta seria gerenciar isso via evento 'transitionend' no link externo.
-                // Por simplicidade aqui, para links externos, o setTimeout para window.location.href
-                // já garante que a navegação ocorra após a animação de "esmaecer".
-                console.log("Botão de navegação animado para saída.");
-            }
-        }, delayBeforeAnimate);
+        console.log("handleButtonClickAnimation foi chamada, mas as animações de opacidade foram desativadas.");
+        // Remova a linha abaixo se quiser que a animação não ocorra de forma alguma
+        // buttonElement.classList.add('btn-animating-out');
+        // Ou, se precisar que ela ainda faça algo, mas não a opacidade/display: none:
+        // buttonElement.classList.add('alguma-outra-classe-de-animacao');
+        // console.log("Botão animado (sem opacidade) e escondido/removido.");
     };
 
 
@@ -205,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
 
     const musicPlaylist = [
-        { title: 'Aria-Math-Lofi-Remastered', src: 'audios/musics/Aria-Math-Lofi-Remastered.mp3' },
+        { title: 'Aria-Math-Lofi-Remastered', src: 'audios/musics/Aria-Math-Lofi-Remake.mp3' },
         { title: 'Aria-Math', src: 'audios/musics/Aria-Math.mp3' },
         { title: 'Beginning 2', src: 'audios/musics/Beginning 2.mp3' },
         { title: 'Biome-Fest', src: 'audios/musics/Biome-Fest.mp3' },
@@ -365,13 +341,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 localStorage.setItem('userInteractedWithAudio', 'true');
             } else {
-                console.log("Botão clicado: Pausando música OU pulando para a próxima.");
-                backgroundAudio.pause(); // Pausa a música atual
-                audioControlButton.classList.remove('is-playing');
-                showCentralMessage('Música pausada. Clicou novamente para pular.');
-                
-                // NOVIDADE: Adiciona lógica para pular para a próxima música ao clicar novamente
-                // se a música estiver tocando
+                // MÚSICA ESTÁ TOCANDO. AO CLICAR, PAUSA OU PULA.
+                console.log("Botão clicado: Música tocando. Pulando para a próxima.");
+                backgroundAudio.pause(); // Opcional: pausar antes de carregar a próxima para uma transição mais limpa
+                audioControlButton.classList.remove('is-playing'); // Remove o estado de "tocando" enquanto carrega
+                showCentralMessage('Pulando para a próxima música...');
                 loadRandomMusic(true); // Carrega e tenta tocar a próxima música
             }
             updateAudioButtonTitle();
@@ -454,43 +428,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ATENÇÃO A ESTE BLOCO PARA A CORREÇÃO DO BUG DO BOTÃO
+    // BLOC QUE TINHA A LÓGICA DE TRANSIÇÃO DE OPACIDADE REMOVIDA
     document.querySelectorAll('a:not(.menu-toggle):not(.nav-menu a), .btn-primary, .btn-link').forEach(element => {
         element.addEventListener('click', (event) => {
             console.log("[Efeitos Sonoros] Link/Botão clicado. Tentando tocar click sound.");
             playEffectSound(clickSound);
 
-            // Verifica se o link é para uma URL externa ou para outra página (não um link âncora interno)
-            const isExternalOrFullPageLink = element.tagName === 'A' && element.href &&
-                                             (element.href.startsWith('http') || element.href.startsWith('https') || !element.href.includes('#'));
-
-            // Se for um link externo ou um botão que deve "desaparecer" (ex: "Nada para ver aqui!")
-            if (isExternalOrFullPageLink && !element.classList.contains('no-animation')) {
-                event.preventDefault(); // Impede a navegação imediata
-                handleButtonClickAnimation(element); // Anima o botão para fora
-
-                // Navega para a URL após a animação de saída
-                setTimeout(() => {
-                    window.location.href = element.href;
-                }, 500); // 500ms deve corresponder à duração da sua animação CSS
+            // REMOVIDA A LÓGICA QUE CHAMAVA handleButtonClickAnimation
+            // Se você quiser que os links externos ou botões apenas naveguem sem animação,
+            // não é preciso fazer nada aqui além do playEffectSound.
+            // O comportamento padrão do navegador (navegar para o href) já ocorrerá.
+            // Caso você queira que "Nada para ver aqui!" tenha alguma outra ação, adicione-a aqui.
+            if (element.textContent.includes('Nada para ver aqui!')) {
+                // Exemplo: mostrar uma mensagem central
+                showCentralMessage('Realmente, nada para ver aqui!');
+                // Se o botão não for um link, talvez você queira prevenir o comportamento padrão (se houver um formulário, por exemplo)
+                event.preventDefault();
             }
-            // Lógica para links âncora internos
-            else if (element.tagName === 'A' && element.href && element.href.startsWith('#')) {
-                // Para links âncora, apenas execute a animação *se ela não esconder o botão permanentemente*.
-                // Sua função handleButtonClickAnimation já foi modificada para lidar com isso.
-                // Não precisa de preventDefault ou setTimeout para window.location.href aqui,
-                // pois o comportamento padrão do navegador já fará o scroll.
-                handleButtonClickAnimation(element); // Fará o esmaecimento e o reset se for âncora
-            }
-            // Lógica para botões que não são links, mas que você quer animar (ex: "Nada para ver aqui!")
-            else if (element.tagName === 'BUTTON' || (element.classList.contains('btn-primary') && !element.href) || (element.classList.contains('btn-link') && !element.href)) {
-                if (!element.classList.contains('copy-button')) {
-                    if (element.textContent.includes('Nada para ver aqui!')) {
-                        handleButtonClickAnimation(element);
-                    }
-                }
-            }
-            // Caso contrário, é um link ou botão normal que não precisa de animação complexa ou já foi tratado (ex: copy-button)
         });
     });
 
