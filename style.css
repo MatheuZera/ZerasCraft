@@ -42,7 +42,7 @@
     --fonte-corpo: 'Roboto', sans-serif;
 
     /* Espaçamentos e Tamanhos */
-    --padding-section: 80px 0; /* Preenchimento padrão para seções */
+    --padding-section: 30px 0; /* Preenchimento padrão para seções */
     --padding-card: 25px; /* Preenchimento interno dos cards */
     --gap-grid: 30px; /* Espaço entre itens de grid */
     --border-radius: 8px; /* Borda arredondada padrão */
