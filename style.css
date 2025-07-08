@@ -1108,7 +1108,7 @@ h2 .fas, h3 .fas {
 }
 
 #audioControlButton:hover {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgb(0, 0, 0);
     transform: scale(1.05);
 }
 
@@ -1155,7 +1155,7 @@ h2 .fas, h3 .fas {
 }
 
 #audioControlButton.is-playing {
-    background-color: rgba(40, 167, 69, 0.7); /* Exemplo: um tom de verde para indicar que está tocando */
+    background-color: rgba(69, 218, 103, 0.534); /* Exemplo: um tom de verde para indicar que está tocando */
     box-shadow: 0 0 10px rgba(var(--neon-flame-color1-rgb), 0.8),
                 0 0 20px rgba(var(--neon-flame-color2-rgb), 0.6),
                 0 0 30px rgba(var(--neon-flame-color1-rgb), 0.4);
