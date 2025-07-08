@@ -33,6 +33,15 @@
         </div>
     </header>
 
+    <div class="image-banner">
+        <img src="caminho/para/sua-imagem.jpg" alt="Banner do Site">
+    </div>
+    <main>
+        <section class="hero-section"> <h1>Mundo Zera's Craft</h1>
+            <p>Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis.</p>
+            </section>
+    </main>
+
     <section id="inicio" class="hero-section">
         <div class="hero-image-overlay"></div>
         <div class="container hero-content">
@@ -340,9 +349,9 @@
                 <h3>ZERA'S CRAFT</h3>
                 <p>Zera's Craft é o seu destino premium para uma<br>qualidade visual no Minecraft. Conecte-se, crie e explore conosco!</p>
                 <div class="social-icons">
-                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" aria-label="Discord"><img src="images/10.rodape/discord.gif" alt="Discord Icon"></a>
-                    <a href="" target="_blank" aria-label="YouTube"><img src="images/10.rodape/youtube.png" alt="YouTube Icon"></a>
-                    <a href="https://open.spotify.com/user/31pujg2qsv33mkmfq6nk27nvguuy?si=bcecb7272fb24b62" target="_blank" aria-label="Spotify"><img src="images/10.rodape/spotfy.png" alt="Spotify Icon"></a>
+                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" aria-label="Discord"><span><img src="images/10.rodape/discord.gif" alt="Discord Icon"></span></a>
+                    <a href="#" target="_blank" aria-label="YouTube"><span><img src="images/10.rodape/youtube.png" alt="YouTube Icon"></span></a>
+                    <a href="https://open.spotify.com/user/31pujg2qsv33mkmfq6nk27nvguuy?si=bcecb7272fb24b62" target="_blank" aria-label="Spotify"><span><img src="images/10.rodape/spotfy.png" alt="Spotify Icon"></span></a>
                 </div>
             </div>
 
@@ -379,7 +388,7 @@
                 </ul>
             </div>
 
-            </div>
+        </div>
 
         <div class="footer-bottom">
             <p>© <span id="currentYear"></span><img src="images/3.servicos/guildas.png" alt="Heart Icon" class="inline-icon"> Mundo Zera's Craft. Todos os direitos reservados. Criado por @MatheuZera e toda a nossa Comunidade! :D <img src="images/3.servicos/suporte.png" alt="Heart Icon" class="inline-icon"></p>
@@ -388,19 +397,25 @@
     </div>
 </footer>
 
-<div class="audio-control-button-container">
-    <div class="music-title-display" id="musicTitleDisplay"></div>
-    <button id="audioControlButton" aria-label="Controle de Áudio">
-        <img src="images/1.site/audio-off.png" alt="Play Icon" class="icon-off">
-        <img src="images/1.site/audio-on.png" alt="Pause Icon" class="icon-on">
-        <div class="neon-effect"></div>
-        <svg class="audio-progress-arc" id="audioProgressArc" viewBox="0 0 60 60">
-            <circle class="arc-background" cx="30" cy="30" r="27"></circle>
-            <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
-        </svg>
-    </button>
-</div>
+    <div class="audio-control-button-container">
+        <div class="music-title-display" id="musicTitleDisplay"></div>
+        <button id="audioControlButton" aria-label="Controle de Áudio">
+            <img src="images/1.site/audio-off.png" alt="Play Icon" class="icon-off">
+            <img src="images/1.site/audio-on.png" alt="Pause Icon" class="icon-on">
+            <div class="neon-effect"></div>
+            <svg class="audio-progress-arc" id="audioProgressArc" viewBox="0 0 60 60">
+                <circle class="arc-background" cx="30" cy="30" r="27"></circle>
+                <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
+            </svg>
+        </button>
+    </div>
 
-<audio id="backgroundAudio" loop preload="auto">
-    <source src="audios/music/bensound-sunny.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="backgroundAudio" loop preload="auto">
+        <source src="audios/musics/Aria-Math-Lofi-Remake.mp3" type="audio/mpeg">
+        </audio>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
