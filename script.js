@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!backgroundAudio.paused) {
                 musicTitleDisplay.textContent = `${musicPlaylist[currentMusicIndex].title}`;
             } else {
-                musicTitleDisplay.textContent = 'Carregando Música..';
+                musicTitleDisplay.textContent = 'Clique para Tocar..';
             }
         } else if (musicTitleDisplay) {
             musicTitleDisplay.textContent = 'Nenhuma Música';
