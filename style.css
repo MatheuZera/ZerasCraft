@@ -287,7 +287,7 @@ ul {
     /* PROPRIEDADES DO FUNDO DO BANNER */
     /* Caminho para a sua imagem de banner.
        Assumindo que 'style.css' está na raiz e 'banner.gif' está em 'audios/' */
-    background-image: url('images/1.site/banner-fundo.gif');
+    background-image: url('banner.gif');
     background-size: cover; /* Faz a imagem cobrir toda a área do elemento, cortando se necessário */
     background-position: center center; /* Centraliza a imagem no elemento */
     background-repeat: no-repeat; /* Evita que a imagem se repita */
@@ -540,94 +540,110 @@ h2 .fas, h3 .fas {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-/* Estilo base para todos os cards - AGORA INCLUI TRANSFORMAÇÕES DE HOVER AQUI */
+/* ... SEU CÓDIGO CSS EXISTENTE ANTES DESTAS REGRAS ... */
+
+/* ... SEU CÓDIGO CSS EXISTENTE ANTES DESTAS REGRAS ... */
+
+/* ... SEU CÓDIGO CSS EXISTENTE ANTES DESTAS REGRAS ... */
+
+/* Estilo base para todos os cards - AGORA SEM BORDAS */
 .service-card,
 .role-category-card,
 .access-card,
 .community-card,
 .partnership-card,
 .event-card,
-.security-card { /* Adicionado security-card */
+.security-card { 
     background-color: var(--cor-card-bg);
     border-radius: var(--border-radius);
     padding: var(--padding-card);
     text-align: center;
     box-shadow: var(--sombra-leve);
-    transition: var(--transicao-card-hover); /* Usando a variável de transição para cards */
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Borda sutil */
-    display: flex; /* Para flexibilizar conteúdo interno */
+    transition: var(--transicao-card-hover); /* Transição para o hover do próprio CARD */
+    /* REMOVIDO: border: 1px solid rgba(255, 255, 255, 0.05); */ /* Esta é a borda sutil que será removida */
+    display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Empurra o botão/link para baixo */
-    cursor: pointer; /* Indica que o card é interativo */
+    justify-content: space-between;
+    cursor: pointer;
 }
 
-/* Efeito hover para cards - APLICADO AO PRÓPRIO CARD */
+/* Efeito hover para o PRÓPRIO CARD (sobe e muda a sombra/fundo) */
 .service-card:hover,
 .role-category-card:hover,
 .access-card:hover,
 .community-card:hover,
 .partnership-card:hover,
 .event-card:hover,
-.security-card:hover { /* Adicionado security-card:hover */
+.security-card:hover {
     transform: translateY(-5px) rotate(0.8deg); /* Card sobe um pouco e rotaciona 0.8 graus */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Sombra mais intensa e um pouco maior */
     background-color: var(--cor-card-hover); /* Fundo do card muda */
-    border-color: var(--cor-primaria); /* Borda primária no hover */
+    /* REMOVIDO: border-color: var(--cor-primaria); */ /* Esta é a borda que aparece no hover */
 }
 
-/* Estilos para os ícones e imagens dentro dos cards */
+/* Estilos base para os ícones e imagens dentro dos cards (todos os .card-icon) */
 .service-card .card-icon,
 .role-category-card .role-category-icon,
 .access-card .card-icon,
-.security-card .card-icon { /* Adicionado security-card .card-icon */
-    width: 80px; /* Tamanho padrão para ícones de card */
+.security-card .card-icon { 
+    width: 80px; 
     height: 80px;
-    line-height: 80px; /* Centraliza ícone Font Awesome verticalmente */
-    font-size: 3.5em; /* Tamanho do ícone */
-    color: var(--cor-primaria); /* Cor primária para os ícones */
-    margin: 0 auto 20px auto; /* Centraliza e adiciona espaço abaixo */
-    display: block; /* Garante que a transformação funcione corretamente */
-    transition: var(--transicao-icon-rotate); /* Transição para a rotação do ícone */
+    line-height: 80px;
+    font-size: 3.5em;
+    color: var(--cor-primaria); 
+    margin: 0 auto 20px auto;
+    display: block;
+    transition: transform 0.3s ease, color 0.3s ease; 
+    /* Garante que não haja bordas fixas aqui nos ícones/logos */
+    border: none; 
 }
 
-/* Rotação do ícone QUANDO O CARD PAI ESTÁ EM HOVER */
+/* Rotação e mudança de cor do ícone QUANDO O CARD PAI ESTÁ EM HOVER */
 .service-card:hover .card-icon,
 .role-category-card:hover .role-category-icon,
 .access-card:hover .card-icon,
 .security-card:hover .card-icon {
-    transform: rotate(10deg); /* Rotação de 10 graus no hover do card */
-    color: var(--cor-destaque); /* Ícone muda para dourado no hover */
+    transform: rotate(10deg);
+    color: var(--cor-destaque);
+    /* Garante que não haja bordas no hover dos ícones */
+    border: none; 
 }
 
 
-/* Estilos para os ícones e imagens dentro dos cards */
-/* ... (código existente) ... */
-
-/* Estilos para os ícones e imagens dentro dos cards */
-/* ... (código existente) ... */
-
-/* Exceção para avatares e logos que são circulares e não rotacionam */
+/* Estilos base para AVATARES DA COMUNIDADE (.member-avatar) e LOGOS DE PARCERIA (.partnership-logo) */
 .community-card .member-avatar,
 .partnership-card .partnership-logo {
-    /* Altere este para 0, 8px, ou remova se quiser cantos totalmente retos */
-    border-radius: 8px; /* Era 50%. Mudei para um valor de exemplo */
     width: 100px;
     height: 100px;
     object-fit: cover;
     margin: 0 auto 20px auto;
-    /* REMOVA OU COMENTE A LINHA ABAIXO PARA TIRAR A BORDA COLORIDA */
-    /* border: 3px solid var(--cor-primaria); */
-    transition: var(--transicao-padrao);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease; 
+    /* Garante que não haja bordas fixas aqui nos avatares/logos */
+    border: none; 
 }
 
-/* Efeito hover para avatares e logos (só borda) */
-/* REMOVA OU COMENTE TODO ESTE BLOCO SE NÃO QUISER NENHUMA BORDA NO HOVER TAMBÉM */
-/*
+/* Efeito de escala e rotação para AVATARES DA COMUNIDADE e LOGOS DE PARCERIA 
+   QUANDO O CARD PAI ESTÁ EM HOVER */
 .community-card:hover .member-avatar,
 .partnership-card:hover .partnership-logo {
-    /* border-color: var(--cor-destaque);
+    transform: scale(1.1) rotate(10deg);
+    /* Garante que não haja bordas no hover dos avatares/logos */
+    border: none; 
 }
-*/
+
+
+/* ... SEU CÓDIGO CSS EXISTENTE ABAIXO DESTAS REGRAS ... */
+
+/* EFEITO HOVER PARA AVATARES DA COMUNIDADE e LOGOS DE PARCERIA */
+.community-card .member-avatar:hover,
+.partnership-card .partnership-logo:hover {
+    transform: scale(1.1) rotate(10deg); /* Aumenta um pouco e gira 10 graus no hover */
+    /* Se você tem uma borda que muda de cor no hover, adicione aqui (ex: border-color: var(--cor-destaque);) */
+}
+
+
+/* ... SEU CÓDIGO CSS EXISTENTE ABAIXO DESTAS REGRAS ... */
 
 /* Container do Grid para Eventos */
 .events-sub-grid {
