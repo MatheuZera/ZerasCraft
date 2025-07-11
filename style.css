@@ -546,28 +546,32 @@ h2 .fas, h3 .fas {
 
 /* ... SEU CÓDIGO CSS EXISTENTE ANTES DESTAS REGRAS ... */
 
-/* Estilo base para todos os cards - AGORA SEM BORDAS */
+/* Seu style.css */
+
+/* Estilos base para todos os cards */
+/* Mantenha este bloco principal de estilos do card, mas garanta que não haja grid ou flex concorrente aqui */
 .service-card,
 .role-category-card,
 .access-card,
 .community-card,
 .partnership-card,
-.event-card,
+.event-card, /* Inclua event-card aqui para as propriedades básicas */
 .security-card { 
     background-color: var(--cor-card-bg);
     border-radius: var(--border-radius);
-    padding: var(--padding-card);
-    text-align: center;
+    padding: var(--padding-card); /* Ajustaremos o padding para event-card abaixo, se necessário */
+    text-align: center; /* Padrão, mas event-card.card-content pode sobrescrever */
     box-shadow: var(--sombra-leve);
-    transition: var(--transicao-card-hover); /* Transição para o hover do próprio CARD */
-    /* REMOVIDO: border: 1px solid rgba(255, 255, 255, 0.05); */ /* Esta é a borda sutil que será removida */
-    display: flex;
-    flex-direction: column;
+    transition: var(--transicao-card-hover);
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Bordas que removemos anteriormente, se desejar sem, remova esta linha */
+    display: flex; /* Pode ser flex, block, ou o que for padrão para outros cards */
+    flex-direction: column; /* Padrão para cards que empilham conteúdo */
     justify-content: space-between;
     cursor: pointer;
 }
 
 /* Efeito hover para o PRÓPRIO CARD (sobe e muda a sombra/fundo) */
+/* Mantenha este bloco de hover */
 .service-card:hover,
 .role-category-card:hover,
 .access-card:hover,
@@ -575,10 +579,10 @@ h2 .fas, h3 .fas {
 .partnership-card:hover,
 .event-card:hover,
 .security-card:hover {
-    transform: translateY(-5px) rotate(0.8deg); /* Card sobe um pouco e rotaciona 0.8 graus */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Sombra mais intensa e um pouco maior */
-    background-color: var(--cor-card-hover); /* Fundo do card muda */
-    /* REMOVIDO: border-color: var(--cor-primaria); */ /* Esta é a borda que aparece no hover */
+    transform: translateY(-5px) rotate(0.8deg);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+    background-color: var(--cor-card-hover);
+    border-color: var(--cor-primaria); /* Se você removeu as bordas, pode remover esta linha */
 }
 
 /* Estilos base para os ícones e imagens dentro dos cards (todos os .card-icon) */
@@ -632,8 +636,6 @@ h2 .fas, h3 .fas {
     border: none; 
 }
 
-
-/* ... SEU CÓDIGO CSS EXISTENTE ABAIXO DESTAS REGRAS ... */
 
 /* EFEITO HOVER PARA AVATARES DA COMUNIDADE e LOGOS DE PARCERIA */
 .community-card .member-avatar:hover,
@@ -750,6 +752,91 @@ h2 .fas, h3 .fas {
     color: var(--cor-btn-text); /* Texto branco */
     border-color: var(--cor-primaria); /* Borda na cor primária */
 }
+
+/* --- REGRAS ESPECÍFICAS PARA OS CARDS DE EVENTO --- */
+.event-card {
+    padding: 0; /* Remova o padding do card principal para que imagem e texto possam preencher as bordas */
+    display: flex; /* Define o card como um flex container */
+    flex-direction: row; /* Organiza os itens (imagem e conteúdo) em uma linha */
+    align-items: stretch; /* Garante que os itens internos (imagem e conteúdo) ocupem toda a altura */
+    text-align: left; /* Alinha o texto à esquerda por padrão dentro do card de evento */
+    min-height: 200px; /* Adicione uma altura mínima se o conteúdo for muito pequeno */
+}
+
+.event-card-image {
+    width: 120px; /* Largura fixa para a imagem no canto esquerdo */
+    height: 100%; /* A imagem preenche a altura total da coluna do card */
+    object-fit: cover; /* Recorta a imagem para preencher o espaço sem distorcer */
+    border-radius: var(--border-radius) 0 0 var(--border-radius); /* Borda arredondada apenas no canto esquerdo superior e inferior */
+    /* Se a imagem for um canto distinto, você pode adicionar uma borda ou sombra aqui */
+    /* box-shadow: inset -5px 0 10px rgba(0,0,0,0.3); */ /* Exemplo de sombra interna para dar profundidade */
+}
+
+.event-card .card-content {
+    flex-grow: 1; /* Ocupa todo o espaço restante disponível */
+    padding: var(--padding-card); /* Adiciona padding ao redor do conteúdo de texto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente o conteúdo de texto */
+    gap: 5px; /* Espaço entre os elementos de texto */
+}
+
+.event-card .card-title {
+    color: var(--cor-texto-principal);
+    margin-top: 0; /* Garante que não haja margem superior extra */
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+.event-card .card-description {
+    color: var(--cor-texto-secundario);
+    font-size: 0.95em;
+    margin-bottom: 10px;
+}
+
+.event-card strong {
+    color: var(--cor-destaque);
+}
+
+.event-card .btn-primary,
+.event-card .btn-link {
+    margin-top: auto; /* Empurra o botão para a parte inferior do card-content */
+    align-self: flex-start; /* Alinha o botão à esquerda dentro do flex container */
+}
+
+
+/* Media query para telas menores: Imagem e texto empilhados */
+@media (max-width: 768px) { /* Ajuste o breakpoint se necessário */
+    .event-card {
+        flex-direction: column; /* Em telas menores, a imagem fica em cima e o texto embaixo */
+        min-height: auto; /* Remove altura mínima */
+    }
+
+    .event-card-image {
+        width: 100%; /* Imagem ocupa 100% da largura do card */
+        height: 150px; /* Altura fixa para a imagem empilhada */
+        border-radius: var(--border-radius) var(--border-radius) 0 0; /* Bordas arredondadas no topo */
+    }
+
+    .event-card .card-content {
+        text-align: center; /* Centraliza o texto quando empilhado */
+        padding: var(--padding-card); /* Garante o padding */
+    }
+
+    .event-card .btn-primary,
+    .event-card .btn-link {
+        align-self: center; /* Centraliza o botão quando empilhado */
+    }
+}
+
+/* Mantenha o seu .events-sub-grid conforme estava antes, se for grid */
+.events-sub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
 
 /* Media Queries para Responsividade da seção de Eventos */
 @media (max-width: 992px) {
@@ -1679,5 +1766,75 @@ h2 .fas, h3 .fas {
     /* Ajustes para o Rodapé */
     .footer-grid {
         grid-template-columns: 1fr; /* Uma única coluna em celulares */
+    }
+    
+    /* Seu style.css */
+
+    .event-card {
+        background-color: var(--cor-card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--sombra-leve);
+        overflow: hidden; /* Importante para bordas arredondadas e para a imagem não vazar */
+        display: grid; /* Transforma o card em um grid container */
+        grid-template-columns: 120px 1fr; /* <<== AQUI ESTÁ A MÁGICA!
+                                                A primeira coluna (imagem) tem largura fixa de 120px.
+                                                A segunda coluna (conteúdo) ocupa o restante do espaço disponível (1fr). */
+        align-items: stretch; /* Garante que as duas colunas se estendam para preencher a altura do card */
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: var(--transicao-card-hover);
+        cursor: pointer;
+    }
+
+    .event-card-image {
+        width: 100%; /* Garante que a imagem preencha a largura da sua coluna (120px) */
+        height: 100%; /* Garante que a imagem preencha a altura da sua coluna */
+        object-fit: cover; /* Faz a imagem cobrir a área sem distorcer, cortando se necessário */
+        display: block; /* Remove qualquer espaço extra que navegadores possam adicionar à imagem */
+    }
+
+    .event-card .card-content {
+        padding: var(--padding-card); /* Adiciona espaçamento ao redor do texto, afastando-o da borda */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centraliza o conteúdo verticalmente dentro da coluna de texto */
+        text-align: left; /* Garante que o texto se alinhe à esquerda na coluna da direita */
+    }
+
+    /* Os demais estilos do texto, botões e hover que já tínhamos */
+    .event-card .card-title {
+        color: var(--cor-texto-principal);
+        margin-bottom: 5px;
+        font-size: 1.3em;
+    }
+
+    .event-card .card-description {
+        color: var(--cor-texto-secundario);
+        font-size: 0.95em;
+        margin-bottom: 10px;
+    }
+
+    .event-card strong {
+        color: var(--cor-destaque);
+    }
+
+    .event-card .btn-primary,
+    .event-card .btn-link {
+        margin-top: auto; /* Empurra o botão para a parte inferior do card-content */
+    }
+
+    /* Media query para responsividade: em telas pequenas, empilha a imagem e o texto */
+    @media (max-width: 600px) {
+        .event-card {
+            grid-template-columns: 1fr; /* Uma única coluna: imagem acima, texto abaixo */
+        }
+
+        .event-card-image {
+            height: 150px; /* Altura fixa para a imagem quando ela está em uma única coluna */
+            /* width: 100%; (já está 100% por padrão na coluna única) */
+        }
+
+        .event-card .card-content {
+            text-align: center; /* Centraliza o texto quando a imagem está acima */
+        }
     }
 }
