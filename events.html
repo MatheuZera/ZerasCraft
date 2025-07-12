@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Zera's Craft - Eventos</title>
+    <link rel="icon" href="assets/images/1.site/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div id="centralMessage" class="central-message"></div>
+    <audio id="backgroundAudio" loop></audio>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="header-logo">Zera's Craft</a>
+            <button class="menu-toggle" aria-label="Abrir menu de navegação">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
+                    <li><a href="community.html" class="nav-link" data-page="community">Comunidade</a></li>
+                    <li><a href="events.html" class="nav-link" data-page="events">Eventos</a></li>
+                    <li><a href="about.html" class="nav-link" data-page="about">Sobre Nós</a></li>
+                    <li><a href="#contact" class="nav-link">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section small-hero" style="background-image: url('assets/images/1.site/events-banner.jpg');">
+            <div class="hero-image-overlay"></div>
+            <div class="hero-content">
+                <h1>Eventos do Zera's Craft</h1>
+                <p class="hero-subtitle">Mantenha-se atualizado sobre as competições, celebrações e atividades que preparamos para você!</p>
+            </div>
+        </section>
+
+        <section id="upcoming-events" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-clock"></i> Próximos Eventos</h2>
+                <p class="section-description">Não perca os próximos eventos! Marque na sua agenda e participe para ganhar prêmios incríveis.</p>
+                <div class="events-sub-grid max-2-columns">
+                    <div class="event-card">
+                        <img src="assets/images/cards/event1.jpg" alt="Caça ao Tesouro" class="event-card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Caça ao Tesouro da Páscoa</h3>
+                            <p class="card-description">Uma emocionante caçada por ovos escondidos em todo o mapa do servidor. Grandes prêmios esperam por você!</p>
+                            <p><strong>Data:</strong> 25 de Março de 2025</p>
+                            <p><strong>Hora:</strong> 18:00 BRT</p>
+                            <p><strong>Local:</strong> Ponto de Encontro Central</p>
+                            <a href="#" class="btn-primary">Inscreva-se Agora!</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="assets/images/cards/event2.jpg" alt="Concurso de Construção Criativa" class="event-card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Concurso de Construção Criativa</h3>
+                            <p class="card-description">Liberte sua criatividade e construa sua obra-prima no tema 'Mundo Fantástico'.</p>
+                            <p><strong>Data:</strong> 10 de Abril de 2025</p>
+                            <p><strong>Hora:</strong> A ser definido</p>
+                            <p><strong>Local:</strong> Área de Construção Dedicada</p>
+                            <a href="#" class="btn-primary">Ver Regras</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="assets/images/gallery/screenshot1.jpg" alt="PvP Arena Madness" class="event-card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">PvP Arena Madness</h3>
+                            <p class="card-description">Prepare-se para batalhas intensas na nossa arena de PvP. Mostre suas habilidades de combate!</p>
+                            <p><strong>Data:</strong> 05 de Maio de 2025</p>
+                            <p><strong>Hora:</strong> 20:00 BRT</p>
+                            <p><strong>Local:</strong> Arena PvP</p>
+                            <a href="#" class="btn-primary">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="past-events" class="section-padded section-alt-bg fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-history"></i> Eventos Anteriores</h2>
+                <p class="section-description">Relembre os momentos épicos de nossos eventos passados e veja os vencedores!</p>
+                <div class="events-sub-grid max-2-columns">
+                    <div class="event-card">
+                        <img src="assets/images/cards/event1.jpg" alt="Guerra de Facções" class="event-card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Guerra de Facções: Supremacia</h3>
+                            <p class="card-description">As facções lutaram pela dominação em uma batalha épica. Vencedores: Os Guardiões da Pedra!</p>
+                            <p><strong>Data:</strong> Janeiro de 2025</p>
+                            <a href="#" class="btn-link">Ver Destaques</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="assets/images/cards/event2.jpg" alt="Corrida de Elytras" class="event-card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Corrida de Elytras Desafio</h3>
+                            <p class="card-description">Uma corrida aérea insana com obstáculos. Vencedor: VoadorVeloz!</p>
+                            <p><strong>Data:</strong> Dezembro de 2024</p>
+                            <a href="#" class="btn-link">Ver Destaques</a>
+                        </div>
+                    </div>
+                    </div>
+                <div class="text-center margin-top-50">
+                    <a href="#" class="btn-primary"><i class="fas fa-images"></i> Galeria de Eventos</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="suggest-event" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-lightbulb"></i> Sugira um Evento!</h2>
+                <p class="section-description">Tem uma ideia incrível para um evento? Queremos ouvi-la! Sua sugestão pode ser a próxima atração do Zera's Craft.</p>
+                <form class="newsletter-form" style="max-width: 600px; margin: 0 auto;">
+                    <input type="text" placeholder="Nome do Evento" required>
+                    <textarea placeholder="Descreva sua ideia para o evento aqui..." rows="5" required></textarea>
+                    <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Enviar Sugestão</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
+                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa comunidade vibrante.</p>
+                    <div class="footer-social-links">
+                        <a href="https://discord.gg/yourdiscordlink" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://youtube.com/yourchannel" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://instagram.com/yourinstagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column footer-nav-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="community.html">Comunidade</a></li>
+                        <li><a href="events.html">Eventos</a></li>
+                        <li><a href="about.html">Sobre Nós</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-contact">
+                    <h4>Contato & Suporte</h4>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a></p>
+                    <p><i class="fas fa-headset"></i> Suporte via Discord</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
+                </div>
+                <div class="footer-column footer-newsletter">
+                    <h4>Fique por Dentro</h4>
+                    <p>Assine nossa newsletter para receber as últimas notícias e atualizações!</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit" class="btn-primary">Assinar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados. Design por Você.</p>
+            </div>
+        </div>
+        <div class="audio-control-bar">
+            <div class="container audio-control-content">
+                <button id="audioControlButton" aria-label="Controlar áudio">
+                    <i class="fas fa-music"></i>
+                    <span id="musicTitleDisplay">Clique para Tocar</span>
+                </button>
+                <div class="audio-progress-indicator" id="audioProgressArc">
+                     <svg viewBox="0 0 60 60" class="audio-progress-svg">
+                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
+                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
+                    </svg>
+                </div>
+                <button id="audioNextButton" aria-label="Próxima música">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
