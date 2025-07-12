@@ -685,7 +685,6 @@ h2 .fas, h3 .fas {
     box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.2); /* Brilho interno sutil */
     font-family: var(--fonte-pixel); /* Usando fonte pixel para IP/Porta */
     font-size: 1.1em;
-    text-shadow: 0 0 5px var(--neon-flame-color2);
 }
 
 .access-info .copy-button { /* Ajuste do botão de cópia dentro do access-info */
