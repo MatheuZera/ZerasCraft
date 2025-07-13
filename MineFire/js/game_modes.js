@@ -74,7 +74,7 @@ function initGame(mode) {
     // Inicializar jogadores
     gameState.players.push(new Player(
         GAME_WIDTH / 4, GAME_HEIGHT / 2, 1, 'blue',
-        { up: 'w', down: 's', left: 'a', right: 'd', attack: 'Alt', dash: 'Shift', reload: 'r', weaponNext: 'e', weaponPrev: 'q', special: 'x' }
+        { up: 'w', down: 's', left: 'a', right: 'd', attack: 'c', dash: 'v', reload: 'r', weaponNext: 'e', weaponPrev: 'q', special: 'x' }
     ));
     if (mode === 'pvp') {
         gameState.players.push(new Player(
