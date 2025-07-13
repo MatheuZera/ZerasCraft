@@ -161,7 +161,7 @@ function backToMainMenu() {
 // GERENCIAMENTO DE EVENTOS DE INPUT
 // ===============================================
 window.addEventListener('keydown', (e) => {
-    if ([' ', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Shift', 'Control', 'Alt'].includes(e.key)) {
+    if ([' ', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Shift'].includes(e.key)) {
         e.preventDefault();
     }
     gameState.keys[e.key.toLowerCase()] = true;
