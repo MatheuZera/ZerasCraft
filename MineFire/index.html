@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Shooter Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas" width="1280" height="960"></canvas>
+
+        <div id="hud-p1" class="hud hidden">
+            <div class="hud-player-info">
+                <span>P1</span>
+                <span id="p1-health" class="health-bar-text">HP: 100</span>
+                <span id="p1-energy" class="energy-bar-text">EN: 100</span>
+            </div>
+            <div class="hud-xp-info">
+                <span>LVL: <span id="p1-level">1</span></span>
+                <span>XP: <span id="p1-xp">0</span>/<span id="p1-xp-next">100</span></span>
+            </div>
+            <div class="hud-weapon-info">
+                <span>Arma: <span id="p1-weapon-name">Pistola</span></span>
+                <span>Munição: <span id="p1-ammo">10/10</span></span>
+                <div class="reload-indicator" id="p1-reload-indicator"></div>
+            </div>
+            <div class="hud-ability-info">
+                <span>Habilidade: <span id="p1-ability-cooldown">Pronto</span></span>
+            </div>
+            <div class="hud-controls">
+                <span>Mover: WASD</span>
+                <span>Atirar: ALT</span>
+                <span>Recarregar: R</span>
+                <span>Dash: SHIFT</span>
+                <span>Habilidade: X</span>
+                <span>Trocar Arma: Q/E</span>
+            </div>
+        </div>
+
+        <div id="hud-p2" class="hud hidden">
+            <div class="hud-player-info">
+                <span>P2</span>
+                <span id="p2-health" class="health-bar-text">HP: 100</span>
+                <span id="p2-energy" class="energy-bar-text">EN: 100</span>
+            </div>
+            <div class="hud-xp-info">
+                <span>LVL: <span id="p2-level">1</span></span>
+                <span>XP: <span id="p2-xp">0</span>/<span id="p2-xp-next">100</span></span>
+            </div>
+            <div class="hud-weapon-info">
+                <span>Arma: <span id="p2-weapon-name">Pistola</span></span>
+                <span>Munição: <span id="p2-ammo">10/10</span></span>
+                <div class="reload-indicator" id="p2-reload-indicator"></div>
+            </div>
+            <div class="hud-ability-info">
+                <span>Habilidade: <span id="p2-ability-cooldown">Pronto</span></span>
+            </div>
+            <div class="hud-controls">
+                <span>Mover: Setas</span>
+                <span>Atirar: SHIFT</span>
+                <span>Recarregar: K</span>
+                <span>Dash: L</span>
+                <span>Habilidade: M</span>
+                <span>Trocar Arma: O/P</span>
+            </div>
+        </div>
+
+        <div id="message-overlay" class="hidden"></div>
+
+        <div id="main-menu" class="menu">
+            <h1>Game Title</h1>
+            <button id="start-solo-btn">Modo Solo</button>
+            <button id="start-pvp-btn">Modo PvP</button>
+        </div>
+
+        <div id="pause-menu" class="menu hidden">
+            <h1>PAUSADO</h1>
+            <button id="resume-btn">Continuar</button>
+            <button id="main-menu-btn">Menu Principal</button>
+        </div>
+
+        <div id="game-over-screen" class="menu hidden">
+            <h1 id="game-over-title">GAME OVER!</h1>
+            <p id="game-over-message"></p>
+            <button id="restart-btn">Reiniciar</button>
+            <button id="back-to-menu-btn">Menu Principal</button>
+        </div>
+
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/classes.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game_modes.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
