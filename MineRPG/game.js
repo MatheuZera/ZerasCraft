@@ -21,9 +21,6 @@ const MAX_PICKUPS = 3;
 // Obtenção dos elementos do DOM
 const gameCanvas = document.getElementById('gameCanvas');
 const ctx = gameCanvas.getContext('2d');
-// Removido o set de width/height aqui, será feito via JS e CSS
-// gameCanvas.width = CANVAS_WIDTH;
-// gameCanvas.height = CANVAS_HEIGHT;
 
 const messagesContainer = document.getElementById('messages');
 const gamepad1Info = document.getElementById('gamepad1Info');
@@ -46,11 +43,8 @@ let lastFrameTime = 0;
 let lastPickupSpawnTime = 0;
 
 // Variáveis da câmera
-// Simplificaremos estas variáveis, pois a câmera será fixa
 let cameraShakeIntensity = 0;
 let cameraShakeTimer = 0;
-
-// Removemos CAMERA_ZOOM_FACTOR, pois a câmera exibirá o mapa inteiro.
 
 
 // --- Mapeamento de Controles para Gamepad e Teclado ---
@@ -122,12 +116,16 @@ const CONTROLS = {
 // --- Configurações e Estado dos Gamepads ---
 const GAMEPAD_BUTTON_ATTACK_COOLDOWN = 200;
 
+// connectedGamepads agora armazenará qual *Gamepad API Index* está atribuído a qual slot de jogador (P3/P4)
+// connectedGamepads[0] -> gamepad index para P3, connectedGamepads[1] -> gamepad index para P4
 let connectedGamepads = [null, null]; // [gamepad_para_p3, gamepad_para_p4]
+let player3GamepadIndex = null; // Índice do gamepad conectado que controla P3
+let player4GamepadIndex = null; // Índice do gamepad conectado que controla P4
 
 // --- Sistema de Input Centralizado ---
 const input = {
     keys: {},
-    lastGamepadAttackTime: [0, 0],
+    lastGamepadAttackTime: [0, 0], // Índices 0 e 1 correspondem a playerGamepadSlot (P3 e P4)
 
     isKeyDown(key) {
         return this.keys[key.toLowerCase()] || false;
@@ -176,7 +174,7 @@ function getGamepadControls(playerControls, gamepadType) {
     if (gamepadType === 'xbox' && playerControls.xboxButtons) {
         return playerControls.xboxButtons;
     }
-    return playerControls.psButtons || playerControls.xboxButtons;
+    return playerControls.psButtons || playerControls.xboxButtons; // Fallback
 }
 
 
@@ -191,81 +189,132 @@ window.addEventListener('keyup', (e) => {
     input.keys[e.key.toLowerCase()] = false;
 });
 
-// --- Event Listeners para Gamepad ---
-window.addEventListener("gamepadconnected", (e) => {
-    console.log(`Gamepad conectado: ${e.gamepad.id} (index: ${e.gamepad.index})`);
-
-    const gamepadType = getGamepadType(e.gamepad.id);
-    let playerAssigned = false;
-
-    if (connectedGamepads[0] === null) {
-        connectedGamepads[0] = { gamepad: e.gamepad, type: gamepadType };
-        if (!players.some(p => p.id === 3)) {
-            // Ajusta a posição inicial para o mapa fixo
-            players.push(new Player(3, CANVAS_WIDTH / 2 - PLAYER_SIZE / 2, CANVAS_HEIGHT / 4 - PLAYER_SIZE / 2, 'Player 3', '#2ecc71'));
-            players.sort((a, b) => a.id - b.id);
-        }
-        const p3 = players.find(p => p.id === 3);
-        if (p3) {
-            p3.gamepadSlotIndex = 0;
-            showMessage(`Player 3: Gamepad ${e.gamepad.index} (${e.gamepad.id.substring(0, 20)}...) conectado como ${gamepadType.toUpperCase()}!`);
-            playerAssigned = true;
-            updateControlsDisplay(p3.id, gamepadType);
+// --- Nova Lógica de Atribuição de Gamepads ---
+function assignGamepads() {
+    const gamepads = navigator.getGamepads();
+    let availableGamepadIndices = [];
+    for (let i = 0; i < gamepads.length; i++) {
+        if (gamepads[i] && gamepads[i].connected) {
+            availableGamepadIndices.push(gamepads[i].index);
         }
     }
-    else if (connectedGamepads[1] === null && (!connectedGamepads[0] || e.gamepad.index !== connectedGamepads[0].gamepad.index)) {
-        connectedGamepads[1] = { gamepad: e.gamepad, type: gamepadType };
+
+    // Limpa atribuições antigas para reavaliar
+    player3GamepadIndex = null;
+    player4GamepadIndex = null;
+    
+    // Desvincula players de gamepads removidos
+    const p3 = players.find(p => p.id === 3);
+    if (p3 && !availableGamepadIndices.includes(p3.gamepadSlotIndex)) {
+        p3.headGuiElement.remove();
+        players = players.filter(p => p.id !== 3);
+        showMessage(`Player 3: Gamepad desconectado! Player 3 removido.`);
+        clearPlayerControlsDisplay(3);
+    }
+
+    const p4 = players.find(p => p.id === 4);
+    if (p4 && !availableGamepadIndices.includes(p4.gamepadSlotIndex)) {
+        p4.headGuiElement.remove();
+        players = players.filter(p => p.id !== 4);
+        showMessage(`Player 4: Gamepad desconectado! Player 4 removido.`);
+        clearPlayerControlsDisplay(4);
+    }
+
+
+    // Lógica principal de atribuição
+    if (availableGamepadIndices.length === 1) {
+        // Apenas um gamepad (index 0) conectado. Ele controla P4.
+        player4GamepadIndex = availableGamepadIndices[0];
+        
+        // Garante que P4 existe
         if (!players.some(p => p.id === 4)) {
-            // Ajusta a posição inicial para o mapa fixo
             players.push(new Player(4, CANVAS_WIDTH / 2 - PLAYER_SIZE / 2, CANVAS_HEIGHT * 3 / 4 - PLAYER_SIZE / 2, 'Player 4', '#f1c40f'));
             players.sort((a, b) => a.id - b.id);
         }
-        const p4 = players.find(p => p.id === 4);
-        if (p4) {
-             p4.gamepadSlotIndex = 1;
-             showMessage(`Player 4: Gamepad ${e.gamepad.index} (${e.gamepad.id.substring(0, 20)}...) conectado como ${gamepadType.toUpperCase()}!`);
-             playerAssigned = true;
-             updateControlsDisplay(p4.id, gamepadType);
+        const assignedP4 = players.find(p => p.id === 4);
+        if (assignedP4) {
+            assignedP4.gamepadSlotIndex = player4GamepadIndex;
+            const gpType = getGamepadType(gamepads[player4GamepadIndex].id);
+            showMessage(`Player 4: Gamepad ${player4GamepadIndex} (${gamepads[player4GamepadIndex].id.substring(0, 20)}...) conectado como ${gpType.toUpperCase()}!`);
+            updateControlsDisplay(assignedP4.id, gpType);
+        }
+        // Se P3 existia e estava com gamepad, ele é removido
+        if (players.some(p => p.id === 3)) {
+            const p3ToRemove = players.find(p => p.id === 3);
+            if (p3ToRemove) {
+                 p3ToRemove.headGuiElement.remove();
+                 players = players.filter(p => p.id !== 3);
+                 showMessage(`Player 3 removido (controle único para P4).`);
+                 clearPlayerControlsDisplay(3);
+            }
+        }
+
+    } else if (availableGamepadIndices.length >= 2) {
+        // Dois ou mais gamepads. Gamepad 0 para P3, Gamepad 1 para P4.
+        player3GamepadIndex = availableGamepadIndices[0];
+        player4GamepadIndex = availableGamepadIndices[1]; // Assume que o segundo conectado é o index 1
+
+        // Garante que P3 existe
+        if (!players.some(p => p.id === 3)) {
+            players.push(new Player(3, CANVAS_WIDTH / 2 - PLAYER_SIZE / 2 - 100, CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2 - 100, 'Player 3', '#2ecc71'));
+            players.sort((a, b) => a.id - b.id);
+        }
+        const assignedP3 = players.find(p => p.id === 3);
+        if (assignedP3) {
+            assignedP3.gamepadSlotIndex = player3GamepadIndex;
+            const gpType = getGamepadType(gamepads[player3GamepadIndex].id);
+            showMessage(`Player 3: Gamepad ${player3GamepadIndex} (${gamepads[player3GamepadIndex].id.substring(0, 20)}...) conectado como ${gpType.toUpperCase()}!`);
+            updateControlsDisplay(assignedP3.id, gpType);
+        }
+
+        // Garante que P4 existe
+        if (!players.some(p => p.id === 4)) {
+            players.push(new Player(4, CANVAS_WIDTH / 2 - PLAYER_SIZE / 2 + 100, CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2 + 100, 'Player 4', '#f1c40f'));
+            players.sort((a, b) => a.id - b.id);
+        }
+        const assignedP4 = players.find(p => p.id === 4);
+        if (assignedP4) {
+            assignedP4.gamepadSlotIndex = player4GamepadIndex;
+            const gpType = getGamepadType(gamepads[player4GamepadIndex].id);
+            showMessage(`Player 4: Gamepad ${player4GamepadIndex} (${gamepads[player4GamepadIndex].id.substring(0, 20)}...) conectado como ${gpType.toUpperCase()}!`);
+            updateControlsDisplay(assignedP4.id, gpType);
+        }
+
+    } else {
+        // Nenhum gamepad conectado ou menos de 2 gamepads e P3/P4 ainda estão lá.
+        // Remove P3 e P4 se não houver gamepads conectados a eles.
+        if (players.some(p => p.id === 3)) {
+            const p3ToRemove = players.find(p => p.id === 3);
+            if (p3ToRemove && p3ToRemove.gamepadSlotIndex === null) { // Apenas remove se não tiver um gamepad atribuído
+                p3ToRemove.headGuiElement.remove();
+                players = players.filter(p => p.id !== 3);
+                showMessage(`Player 3 removido (Gamepad desconectado).`);
+                clearPlayerControlsDisplay(3);
+            }
+        }
+        if (players.some(p => p.id === 4)) {
+            const p4ToRemove = players.find(p => p.id === 4);
+            if (p4ToRemove && p4ToRemove.gamepadSlotIndex === null) { // Apenas remove se não tiver um gamepad atribuído
+                p4ToRemove.headGuiElement.remove();
+                players = players.filter(p => p.id !== 4);
+                showMessage(`Player 4 removido (Gamepad desconectado).`);
+                clearPlayerControlsDisplay(4);
+            }
         }
     }
-
-    if (!playerAssigned) {
-        console.log("Todos os slots de gamepads para jogadores estão ocupados. Este gamepad extra não será usado para controle dedicado.");
-        showMessage(`Gamepad ${e.gamepad.index} (${e.gamepad.id.substring(0, 20)}...) conectado, mas não atribuído a um jogador.`);
-    }
+    players.sort((a, b) => a.id - b.id); // Reordena os players
     updateInputStatus();
+}
+
+window.addEventListener("gamepadconnected", (e) => {
+    console.log(`Gamepad conectado: ${e.gamepad.id} (index: ${e.gamepad.index})`);
+    assignGamepads(); // Chama a nova função de atribuição
 });
 
 window.addEventListener("gamepaddisconnected", (e) => {
     console.log(`Gamepad desconectado: ${e.gamepad.id} (index: ${e.gamepad.index})`);
-
-    let removedPlayerId = null;
-    let playerSlotIndex = -1;
-
-    if (connectedGamepads[0] && connectedGamepads[0].gamepad.index === e.gamepad.index) {
-        connectedGamepads[0] = null;
-        removedPlayerId = 3;
-        playerSlotIndex = 0;
-    } else if (connectedGamepads[1] && connectedGamepads[1].gamepad.index === e.gamepad.index) {
-        connectedGamepads[1] = null;
-        removedPlayerId = 4;
-        playerSlotIndex = 1;
-    }
-
-    if (removedPlayerId !== null) {
-        const playerToRemove = players.find(p => p.id === removedPlayerId);
-        if (playerToRemove) {
-            playerToRemove.headGuiElement.remove();
-            players = players.filter(p => p.id !== removedPlayerId);
-            showMessage(`Player ${removedPlayerId}: Gamepad desconectado! Player ${removedPlayerId} removido.`);
-            // Limpa e esconde o display de controle
-            const displayElement = CONTROLS[`PLAYER${removedPlayerId}`].displayElement;
-            displayElement.querySelector('.controls-grid').innerHTML = ''; // Limpa o conteúdo
-            displayElement.style.display = 'none'; // Esconde
-        }
-    }
-    updateInputStatus();
-    endGame();
+    assignGamepads(); // Chama a nova função de atribuição
+    // Não encerra o jogo aqui diretamente, a lógica de endGame já faz isso quando players.length <= 1
 });
 
 
@@ -495,7 +544,7 @@ class Player extends GameObject {
         this.arrows = STARTING_ARROWS;
 
         this.lastAttackTime = 0;
-        this.gamepadSlotIndex = null; 
+        this.gamepadSlotIndex = null; // Agora este é o índice do gamepad API (0, 1, 2...)
 
         this.headGuiElement = this.createHeadGuiElement();
     }
@@ -538,7 +587,6 @@ class Player extends GameObject {
         const canvasRect = gameCanvas.getBoundingClientRect();
         
         // As coordenadas do jogador no canvas do navegador
-        // Não é mais afetado pela câmera, pois a câmera é fixa
         const playerScreenX = this.x * (canvasRect.width / CANVAS_WIDTH);
         const playerScreenY = this.y * (canvasRect.height / CANVAS_HEIGHT);
 
@@ -557,8 +605,9 @@ class Player extends GameObject {
 
         const playerControlsDefinition = CONTROLS[`PLAYER${this.id}`];
 
-        let activeGamepadData = null;
+        let activeGamepadData = null; // Este será o objeto gamepad real do navigator
         let playerGamepadControls = null;
+        let playerSlotForGamepadInput = null; // 0 para P3, 1 para P4 para o array lastGamepadAttackTime
 
         if (playerControlsDefinition.type === 'keyboard') {
             if (input.isKeyDown(playerControlsDefinition.moveUp.keyboard)) dy = -1;
@@ -573,38 +622,50 @@ class Player extends GameObject {
             }
 
         } else if (playerControlsDefinition.type === 'gamepad' && this.gamepadSlotIndex !== null) {
-            activeGamepadData = connectedGamepads[this.gamepadSlotIndex];
+            activeGamepadData = navigator.getGamepads()[this.gamepadSlotIndex];
 
-            if (!activeGamepadData || !activeGamepadData.gamepad || !activeGamepadData.gamepad.connected) {
+            // Determina qual índice no array lastGamepadAttackTime usar
+            if (this.id === 3) playerSlotForGamepadInput = 0;
+            else if (this.id === 4) playerSlotForGamepadInput = 1;
+
+
+            if (!activeGamepadData || !activeGamepadData.connected) {
+                // Gamepad desconectado, a lógica de assignGamepads irá remover o player
                 return;
             }
 
-            const liveGamepad = navigator.getGamepads()[activeGamepadData.gamepad.index];
-            if (!liveGamepad) return;
-
-            playerGamepadControls = getGamepadControls(playerControlsDefinition, activeGamepadData.type);
+            playerGamepadControls = getGamepadControls(playerControlsDefinition, getGamepadType(activeGamepadData.id));
 
             if (!playerGamepadControls) {
                 return;
             }
 
             // PRIORIDADE: Botões de D-Pad/Ação mapeados
-            if (input.isGamepadButtonDown(liveGamepad, this.gamepadSlotIndex, 'moveUp', playerGamepadControls.moveUp.gamepadButton)) dy = -1;
-            if (input.isGamepadButtonDown(liveGamepad, this.gamepadSlotIndex, 'moveDown', playerGamepadControls.moveDown.gamepadButton)) dy = 1;
-            if (input.isGamepadButtonDown(liveGamepad, this.gamepadSlotIndex, 'moveLeft', playerGamepadControls.moveLeft.gamepadButton)) dx = -1;
-            if (input.isGamepadButtonDown(liveGamepad, this.gamepadSlotIndex, 'moveRight', playerGamepadControls.moveRight.gamepadButton)) dx = 1;
+            if (input.isGamepadButtonDown(activeGamepadData, playerSlotForGamepadInput, 'moveUp', playerGamepadControls.moveUp.gamepadButton)) dy = -1;
+            if (input.isGamepadButtonDown(activeGamepadData, playerSlotForGamepadInput, 'moveDown', playerGamepadControls.moveDown.gamepadButton)) dy = 1;
+            if (input.isGamepadButtonDown(activeGamepadData, playerSlotForGamepadInput, 'moveLeft', playerGamepadControls.moveLeft.gamepadButton)) dx = -1;
+            if (input.isGamepadButtonDown(activeGamepadData, playerSlotForGamepadInput, 'moveRight', playerGamepadControls.moveRight.gamepadButton)) dx = 1;
             
-            // Movimento com Eixos Analógicos (Stick Esquerdo para P3, Stick Direito para P4)
+            // Movimento com Eixos Analógicos
             const stickThreshold = 0.5;
             let analogX = 0;
             let analogY = 0;
 
-            if (this.id === 3 && liveGamepad.axes && liveGamepad.axes.length >= 2) {
-                analogX = liveGamepad.axes[0];
-                analogY = liveGamepad.axes[1];
-            } else if (this.id === 4 && liveGamepad.axes && liveGamepad.axes.length >= 4) {
-                analogX = liveGamepad.axes[2];
-                analogY = liveGamepad.axes[3];
+            // Se o jogador é P3 (Gamepad Slot 0), usa o stick esquerdo (eixos 0 e 1)
+            // Se o jogador é P4 (Gamepad Slot 1), usa o stick direito (eixos 2 e 3)
+            // Esta lógica foi invertida para acomodar a prioridade de P4 no gamepad 0
+            if (this.id === 3 && activeGamepadData.axes && activeGamepadData.axes.length >= 2) { // P3 usa o primeiro stick
+                analogX = activeGamepadData.axes[0];
+                analogY = activeGamepadData.axes[1];
+            } else if (this.id === 4 && activeGamepadData.axes && activeGamepadData.axes.length >= 4) { // P4 usa o segundo stick (se disponível)
+                 // Se P4 está no gamepad 0 (único gamepad), ele usa os eixos 0 e 1
+                if (this.gamepadSlotIndex === 0) {
+                     analogX = activeGamepadData.axes[0];
+                     analogY = activeGamepadData.axes[1];
+                } else { // Se P4 está no gamepad 1, ele usa os eixos 2 e 3
+                     analogX = activeGamepadData.axes[2];
+                     analogY = activeGamepadData.axes[3];
+                }
             }
             
             if (dx === 0 && dy === 0) {
@@ -613,9 +674,9 @@ class Player extends GameObject {
             }
 
 
-            this.isSprinting = input.isGamepadButtonDown(liveGamepad, this.gamepadSlotIndex, 'sprint', playerGamepadControls.sprint.gamepadButton);
+            this.isSprinting = input.isGamepadButtonDown(activeGamepadData, playerSlotForGamepadInput, 'sprint', playerGamepadControls.sprint.gamepadButton);
 
-            if (input.isGamepadButtonDown(liveGamepad, this.gamepadSlotIndex, 'attack', playerGamepadControls.attack.gamepadButton)) {
+            if (input.isGamepadButtonDown(activeGamepadData, playerSlotForGamepadInput, 'attack', playerGamepadControls.attack.gamepadButton)) {
                 this.attack();
             }
         }
@@ -857,12 +918,36 @@ function showMessage(msg) {
 }
 
 function updateInputStatus() {
-    gamepad1Info.innerHTML = `<span class="status-icon"></span>Slot Gamepad 1 (P3): ${connectedGamepads[0] ? `Conectado (${connectedGamepads[0].gamepad.id.substring(0, Math.min(20, connectedGamepads[0].gamepad.id.length))}...)` : 'Desconectado'}`;
-    gamepad1Info.className = connectedGamepads[0] ? 'connected' : 'disconnected';
+    // Busca os gamepads atuais para pegar seus IDs e estado de conexão
+    const gamepads = navigator.getGamepads();
+    let gp0Info = 'Desconectado';
+    let gp1Info = 'Desconectado';
 
-    gamepad2Info.innerHTML = `<span class="status-icon"></span>Slot Gamepad 2 (P4): ${connectedGamepads[1] ? `Conectado (${connectedGamepads[1].gamepad.id.substring(0, Math.min(20, connectedGamepads[1].gamepad.id.length))}...)` : 'Desconectado'}`;
-    gamepad2Info.className = connectedGamepads[1] ? 'connected' : 'disconnected';
+    let gp0Connected = false;
+    let gp1Connected = false;
+
+    if (gamepads[0] && gamepads[0].connected) {
+        gp0Info = `Conectado (${gamepads[0].id.substring(0, Math.min(20, gamepads[0].id.length))}...)`;
+        gp0Connected = true;
+    }
+    if (gamepads[1] && gamepads[1].connected) {
+        gp1Info = `Conectado (${gamepads[1].id.substring(0, Math.min(20, gamepads[1].id.length))}...)`;
+        gp1Connected = true;
+    }
+
+    // Exibe o status para P3
+    const p3 = players.find(p => p.id === 3);
+    const p3ConnectedStatus = p3 ? `Player 3: ${gp0Info}` : `Slot Gamepad 1 (P3): ${gp0Info}`;
+    gamepad1Info.innerHTML = `<span class="status-icon"></span>${p3ConnectedStatus}`;
+    gamepad1Info.className = gp0Connected ? 'connected' : 'disconnected';
+
+    // Exibe o status para P4
+    const p4 = players.find(p => p.id === 4);
+    const p4ConnectedStatus = p4 ? `Player 4: ${gp1Info}` : `Slot Gamepad 2 (P4): ${gp1Info}`;
+    gamepad2Info.innerHTML = `<span class="status-icon"></span>${p4ConnectedStatus}`;
+    gamepad2Info.className = gp1Connected ? 'connected' : 'disconnected';
 }
+
 
 /**
  * Atualiza o display de controle para gamepads (P3/P4) com os botões corretos.
@@ -874,7 +959,7 @@ function updateControlsDisplay(playerId, gamepadType) {
     const displayElement = playerControls.displayElement;
     
     // Assegura que o elemento está visível
-    displayElement.style.display = 'block'; // Pode ser 'flex' ou 'block' dependendo do CSS externo
+    displayElement.style.display = 'block';
 
     const controlsGrid = displayElement.querySelector('.controls-grid');
     if (!controlsGrid) {
@@ -889,7 +974,16 @@ function updateControlsDisplay(playerId, gamepadType) {
         // Movimento (Stick e D-Pad agrupados)
         let moveKeysHtml = '';
         const stickLabel = (playerId === 3) ? 'Left Stick' : 'Right Stick';
-        moveKeysHtml += `<kbd class="stick">${stickLabel}</kbd>`;
+        // Ajuste aqui para P4 usando Left Stick se for o único gamepad
+        const currentGamepadAssignedToPlayer = players.find(p => p.id === playerId);
+        if (playerId === 4 && currentGamepadAssignedToPlayer && currentGamepadAssignedToPlayer.gamepadSlotIndex === 0) {
+            moveKeysHtml += `<kbd class="stick">Left Stick</kbd>`;
+        } else if (playerId === 3) {
+            moveKeysHtml += `<kbd class="stick">Left Stick</kbd>`;
+        } else if (playerId === 4) { // P4 no segundo gamepad
+             moveKeysHtml += `<kbd class="stick">Right Stick</kbd>`;
+        }
+        
         moveKeysHtml += `<kbd>D-Pad</kbd>`; // Um único botão para representar o D-Pad
 
         controlsGrid.innerHTML += `
@@ -917,16 +1011,17 @@ function updateControlsDisplay(playerId, gamepadType) {
     }
 }
 
-/**
- * **MODIFICAÇÃO AQUI: CÂMERA FIXA**
- * A função updateCamera agora é removida ou simplificada drasticamente.
- * Não precisamos mais de cameraX, cameraY, ou CAMERA_ZOOM_FACTOR.
- * O canvas agora representará o mundo do jogo diretamente.
- */
+function clearPlayerControlsDisplay(playerId) {
+    const playerControls = CONTROLS[`PLAYER${playerId}`];
+    if (playerControls && playerControls.displayElement) {
+        playerControls.displayElement.querySelector('.controls-grid').innerHTML = '';
+        playerControls.displayElement.style.display = 'none';
+    }
+}
+
+
 function updateCamera() {
     // Não faz nada, a câmera está fixa e mostra o mapa inteiro
-    // cameraX = 0;
-    // cameraY = 0;
 }
 
 /**
@@ -999,14 +1094,10 @@ function draw() {
     ctx.save();
 
     // Aplica a transformação de tremor da câmera
-    // Como a câmera não segue, apenas aplicamos o tremor se houver
     ctx.translate(
         (cameraShakeTimer > 0 ? (Math.random() - 0.5) * cameraShakeIntensity : 0),
         (cameraShakeTimer > 0 ? (Math.random() - 0.5) * cameraShakeIntensity : 0)
     );
-
-    // Agora, todos os elementos são desenhados diretamente em suas coordenadas do mundo.
-    // Não há necessidade de subtrair cameraX ou cameraY, pois a câmera está fixa no (0,0) do mundo.
 
     obstacles.forEach(obstacle => obstacle.draw(ctx));
     pickups.forEach(pickup => pickup.draw(ctx));
@@ -1044,7 +1135,7 @@ function gameLoop(currentTime = 0) {
     if (cameraShakeTimer > 0) {
         cameraShakeTimer = Math.max(0, cameraShakeTimer - deltaTime);
         if (cameraShakeTimer === 0) {
-            cameraShakeIntensity = 0; // Reseta a intensidade quando o timer zera
+            cameraShakeIntensity = 0;
         }
     }
 
@@ -1053,42 +1144,19 @@ function gameLoop(currentTime = 0) {
         lastPickupSpawnTime = currentTime;
     }
 
-    const browserGamepads = navigator.getGamepads();
-    
-    for(let i = 0; i < connectedGamepads.length; i++) {
-        if (connectedGamepads[i]) {
-            const liveGamepad = browserGamepads[connectedGamepads[i].gamepad.index];
-            if (!liveGamepad || !liveGamepad.connected) {
-                console.log(`Gamepad ${connectedGamepads[i].gamepad.id} (index: ${connectedGamepads[i].gamepad.index}) desconectado durante o update.`);
-                const removedPlayerId = (i === 0) ? 3 : 4;
-                const playerToRemove = players.find(p => p.id === removedPlayerId);
-                if (playerToRemove) {
-                    playerToRemove.headGuiElement.remove();
-                    players = players.filter(p => p.id !== removedPlayerId);
-                    showMessage(`Player ${removedPlayerId}: Gamepad desconectado! Player ${removedPlayerId} removido.`);
-                    const displayElement = CONTROLS[`PLAYER${removedPlayerId}`].displayElement;
-                    displayElement.querySelector('.controls-grid').innerHTML = '';
-                    displayElement.style.display = 'none';
-                }
-                connectedGamepads[i] = null;
-            } else {
-                connectedGamepads[i].gamepad = liveGamepad;
-            }
-        }
-    }
-
-    updateInputStatus();
+    // Chame assignGamepads para reavaliar as conexões a cada frame
+    // Isso garante que desconexões e reconexões sejam tratadas dinamicamente
+    assignGamepads(); 
 
     players.forEach(player => {
         player.handleInput();
         player.updateHeadGui();
     });
     
-    // Chama updateCamera, mas agora ela é uma função vazia
     updateCamera();
 
     players.forEach(player => {
-        player.updateHeadGuiPosition(); // A posição da GUI ainda precisa ser atualizada
+        player.updateHeadGuiPosition();
     });
 
 
@@ -1127,7 +1195,6 @@ function gameLoop(currentTime = 0) {
         }
         
         // Mantém o projétil se não colidiu com nada e ainda está dentro dos limites do mapa
-        // A visibilidade é o limite do próprio CANVAS_WIDTH/HEIGHT
         if (!hitSomething && 
             p.x + p.width > 0 && 
             p.x < CANVAS_WIDTH &&
@@ -1150,21 +1217,10 @@ function resizeCanvas() {
     const containerWidth = gameContainer.offsetWidth;
     const containerHeight = gameContainer.offsetHeight;
 
-    // Define a resolução interna do canvas para o tamanho do mundo do jogo
     gameCanvas.width = CANVAS_WIDTH; 
     gameCanvas.height = CANVAS_HEIGHT;
 
-    // Ajusta o estilo do elemento canvas no DOM para preencher o container,
-    // mantendo a proporção. Isso é feito pelo CSS com `width: 100%; height: 100%;`
-    // no #gameCanvas e as dimensões fixas no .game-container.
-    // Não precisamos de gameCanvas.style.width/height aqui.
-
-    // As GUIs dos jogadores precisam ser atualizadas quando o canvas muda de tamanho
-    // porque suas posições são relativas à tela, não ao mundo do jogo.
     players.forEach(player => player.updateHeadGuiPosition());
-
-    // A câmera não precisa ser recalculada, pois está fixa.
-    // updateCamera(); // Esta linha pode ser removida ou a função ser vazia.
 }
 
 // Adiciona listener para redimensionar o canvas quando a janela mudar
@@ -1180,71 +1236,35 @@ function initGame() {
     projectiles = [];
     pickups = [];
     obstacles = [];
-    connectedGamepads = [null, null];
+    
+    // Zera os índices de gamepad e limpa os gamepads conectados
+    player3GamepadIndex = null;
+    player4GamepadIndex = null;
+    
     lastPickupSpawnTime = performance.now();
 
-    // Reseta a câmera (variáveis de tremor)
-    // cameraX = 0; // Removido
-    // cameraY = 0; // Removido
     cameraShakeIntensity = 0;
     cameraShakeTimer = 0;
-
 
     document.querySelectorAll('.player-head-gui').forEach(el => el.remove());
     messagesContainer.innerHTML = '';
 
-    // Limpa e esconde os displays de controle de gamepad
-    player3ControlsDisplay.querySelector('.controls-grid').innerHTML = '';
-    player3ControlsDisplay.style.display = 'none';
-    player4ControlsDisplay.querySelector('.controls-grid').innerHTML = '';
-    player4ControlsDisplay.style.display = 'none';
+    clearPlayerControlsDisplay(3);
+    clearPlayerControlsDisplay(4);
 
     // Posições iniciais dos jogadores
     players.push(new Player(1, 100, CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2, 'Player 1', '#e74c3c'));
     players.push(new Player(2, CANVAS_WIDTH - 100 - PLAYER_SIZE, CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2, 'Player 2', '#3498db'));
 
     // Geração de obstáculos aleatórios
-    generateRandomObstacles(5); // Gera 5 obstáculos aleatórios (ajuste este número)
+    generateRandomObstacles(5); // Gera 5 obstáculos aleatórios
 
-    const browserGamepads = navigator.getGamepads();
+    // Chama a nova lógica de atribuição para lidar com gamepads já conectados ao carregar
+    assignGamepads(); 
     
-    for (let i = 0; i < browserGamepads.length; i++) {
-        const gp = browserGamepads[i];
-        if (gp && gp.connected && connectedGamepads[0] === null) {
-            const gamepadType = getGamepadType(gp.id);
-            connectedGamepads[0] = { gamepad: gp, type: gamepadType };
-            // Posição inicial para P3 (gamepad 1)
-            players.push(new Player(3, CANVAS_WIDTH / 2 - PLAYER_SIZE / 2 - 100, CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2 - 100, 'Player 3', '#2ecc71'));
-            const p3 = players.find(p => p.id === 3);
-            if(p3) {
-                p3.gamepadSlotIndex = 0;
-                updateControlsDisplay(p3.id, gamepadType);
-            }
-            showMessage(`Player 3: Gamepad ${gp.index} (${gp.id.substring(0, Math.min(20, gp.id.length))}...) reconectado!`);
-            break;
-        }
-    }
+    players.sort((a, b) => a.id - b.id); // Garante que a ordem dos players seja consistente
 
-    for (let i = 0; i < browserGamepads.length; i++) {
-        const gp = browserGamepads[i];
-        if (gp && gp.connected && connectedGamepads[1] === null && (!connectedGamepads[0] || gp.index !== connectedGamepads[0].gamepad.index)) {
-            const gamepadType = getGamepadType(gp.id);
-            connectedGamepads[1] = { gamepad: gp, type: gamepadType };
-            // Posição inicial para P4 (gamepad 2)
-            players.push(new Player(4, CANVAS_WIDTH / 2 - PLAYER_SIZE / 2 + 100, CANVAS_HEIGHT / 2 - PLAYER_SIZE / 2 + 100, 'Player 4', '#f1c40f'));
-            const p4 = players.find(p => p.id === 4);
-            if(p4) {
-                p4.gamepadSlotIndex = 1;
-                updateControlsDisplay(p4.id, gamepadType);
-            }
-            showMessage(`Player 4: Gamepad ${gp.index} (${gp.id.substring(0, Math.min(20, gp.id.length))}...) reconectado!`);
-            break;
-        }
-    }
-    
-    players.sort((a, b) => a.id - b.id);
-
-    resizeCanvas(); // Chama o redimensionamento na inicialização
+    resizeCanvas();
     updateInputStatus();
     gameLoop();
 }
