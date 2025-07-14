@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addons - Meu Super Site</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/addons.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <a href="index.html">MEU SITE</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">INÍCIO</a></li>
+                <li><a href="addons.html">ADDONS</a></li>
+                <li><a href="game.html">JOGO</a></li>
+                <li><a href="#">SOBRE</a></li>
+                <li><a href="#">CONTATO</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="addons-content-area">
+        <section class="addons-hero">
+            <h1>EXPLORE NOSSOS ADDONS</h1>
+            <p>Personalize sua experiência com os melhores conteúdos!</p>
+        </section>
+
+        <section class="search-section">
+            <div class="search-bar-container">
+                <input type="text" id="addon-search" placeholder="Pesquisar addons..." aria-label="Pesquisar addons">
+                <button id="search-button">BUSCAR</button>
+            </div>
+        </section>
+
+        <section class="addon-list" id="addon-list-container">
+            </section>
+
+        <div id="addon-detail-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <span class="close-button" id="close-modal-button">&times;</span>
+                <h2 id="detail-title"></h2>
+                <div class="detail-carousel" id="detail-carousel-images">
+                    </div>
+                <div class="carousel-nav">
+                    <button class="carousel-prev">&lt;</button>
+                    <button class="carousel-next">&gt;</button>
+                </div>
+                <div class="detail-info">
+                    <h3>DESCRIÇÃO:</h3>
+                    <p id="detail-description"></p>
+                    <h3>VERSÕES SUPORTADAS:</h3>
+                    <ul id="detail-versions"></ul>
+                </div>
+                <div class="detail-footer">
+                    <a id="detail-download-button" href="#" class="btn btn-download" target="_blank">DOWNLOAD</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2024 Meu Super Site. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="assets/js/addons.js"></script>
+</body>
+</html>
