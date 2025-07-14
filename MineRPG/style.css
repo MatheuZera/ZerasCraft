@@ -1,0 +1,430 @@
+/* style.css */
+
+body {
+    display: flex;
+    flex-direction: column; /* Coloca os elementos em coluna */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1a202c; /* Fundo mais escuro */
+    margin: 0;
+    overflow: hidden; /* Evita barras de rolagem indesejadas no body */
+    font-family: 'Press Start 2P', cursive;
+    color: #e2e8f0; /* Cor de texto mais clara */
+    position: relative;
+    font-size: 14px; /* Tamanho de fonte base */
+}
+
+/* Container para centralizar e gerenciar o tamanho do canvas */
+.game-container {
+    /* REVERSÃO: Dimensoes mais contidas, como no estado original */
+    width: 800px; /* Largura fixa do container, ajusta conforme o CANVAS_WIDTH no JS */
+    height: 600px; /* Altura fixa do container, ajusta conforme o CANVAS_HEIGHT no JS */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto; /* Centraliza o container */
+    border: 5px solid #f39c12; /* Borda amarela chamativa */
+    box-shadow: 0 0 30px rgba(243, 156, 18, 0.9); /* Efeito de brilho mais forte */
+    background-color: #34495e; /* Cor de fundo do canvas */
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total */
+    flex-shrink: 0; /* Não permite que o container encolha */
+    /* Removemos max-width/max-height de 98vw/vh para voltar ao tamanho fixo */
+}
+
+#gameCanvas {
+    display: block; /* Remove o espaço extra abaixo do canvas */
+    width: 100%; /* Faz o canvas preencher o container */
+    height: 100%; /* Faz o canvas preencher o container */
+    image-rendering: pixelated; /* Garante que os pixels permaneçam nítidos em zoom */
+}
+
+
+/* --- GUI dos Jogadores na Cabeça --- */
+.player-head-gui {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo um pouco mais escuro */
+    padding: 6px 10px; /* Um pouco mais de padding */
+    border-radius: 6px;
+    color: white;
+    font-size: 0.75em; /* Ligeiramente maior */
+    min-width: 110px; /* Um pouco mais largo */
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); /* Sombra mais suave */
+    pointer-events: none;
+    z-index: 50;
+    white-space: nowrap; /* Impede que o conteúdo interno quebre linha */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.player-head-gui h3 {
+    margin: 0 0 4px 0; /* Ajuste de margem */
+    font-size: 1.1em; /* Título um pouco maior */
+    letter-spacing: 0.5px; /* Espaçamento entre letras */
+}
+
+.bar-container {
+    background-color: #444; /* Fundo das barras */
+    height: 9px; /* Um pouco mais alto */
+    border-radius: 4px;
+    margin-bottom: 4px;
+    overflow: hidden;
+    border: 1px solid #333; /* Borda sutil */
+}
+
+.health-bar, .energy-bar {
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    transition: width 0.1s ease-out, background-color 0.3s ease;
+}
+
+.health-bar {
+    background-color: #e74c3c;
+}
+
+.health-bar.critical {
+    animation: pulseRed 0.5s infinite alternate;
+}
+
+@keyframes pulseRed {
+    from { background-color: #e74c3c; }
+    to { background-color: #c0392b; }
+}
+
+
+.energy-bar {
+    background-color: #3498db;
+}
+
+.ammo-display, .weapon-display {
+    margin-top: 6px; /* Mais espaço acima */
+    font-size: 0.8em; /* Um pouco menor para caber */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex; /* Para alinhar ícone e texto */
+    align-items: center;
+    justify-content: center;
+}
+
+.ammo-display strong {
+    margin-left: 4px;
+    color: #f39c12; /* Cor destacada para quantidade */
+}
+
+
+/* --- Mensagens de Jogo --- */
+#messages {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 280px; /* Ligeiramente mais largo */
+    background-color: rgba(0, 0, 0, 0.75); /* Mais opaco */
+    border-radius: 10px; /* Bordas mais suaves */
+    padding: 12px; /* Mais padding */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); /* Sombra mais proeminente */
+    max-height: 85%; /* Ocupa mais altura */
+    overflow-y: auto;
+    z-index: 100;
+    font-size: 0.8em;
+}
+
+.message {
+    background-color: #2d3748; /* Cor de fundo mais discreta */
+    color: #e2e8f0;
+    padding: 10px;
+    margin-bottom: 8px; /* Mais espaço entre mensagens */
+    border-radius: 6px;
+    font-size: 0.9em; /* Mensagem um pouco maior */
+    animation: fadeInOut 2.5s forwards;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* --- Status do Gamepad --- */
+#gamepad-status {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    font-size: 0.85em;
+    min-width: 200px;
+}
+
+#gamepad-status p {
+    margin: 6px 0; /* Mais espaço */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre o ícone e o texto */
+}
+
+#gamepad-status .connected {
+    color: #2ecc71;
+}
+
+#gamepad-status .disconnected {
+    color: #e74c3c;
+}
+
+/* Icones de status (exemplo, você pode usar um SVG ou Font Awesome aqui) */
+#gamepad-status .status-icon::before {
+    content: '●'; /* Bolinha para indicar status */
+    font-size: 1.2em;
+    line-height: 1;
+}
+#gamepad-status .connected .status-icon::before {
+    color: #2ecc71;
+}
+#gamepad-status .disconnected .status-icon::before {
+    color: #e74c3c;
+}
+
+
+/* --- Controles dos Jogadores (Container Principal) --- */
+#controls-container {
+    position: fixed; /* Mudar para fixed para que fique "colado" na parte inferior */
+    bottom: 0; /* Alinha na parte inferior */
+    left: 0; /* Alinha na esquerda */
+    width: 100%; /* Ocupa toda a largura */
+    transform: none; /* Remove a transformação de centralização horizontal */
+    
+    display: flex; /* Garante que os cards fiquem em linha */
+    flex-direction: row; /* Coloca os cards lado a lado */
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    align-items: flex-end; /* Alinha os itens ao final (inferior) */
+
+    gap: 8px; /* Reduz o espaçamento entre os cards ainda mais */
+    padding: 8px 15px; /* Reduz o padding geral, mas mantém um pouco nas laterais */
+    background-color: rgba(0, 0, 0, 0.9); /* Fundo mais opaco para a barra */
+    border-top: 2px solid #f39c12; /* Borda superior para destacar a barra */
+    border-radius: 0; /* Remove bordas arredondadas para parecer uma barra */
+    box-shadow: 0 -5px 20px rgba(243, 156, 18, 0.7); /* Sombra para cima */
+    z-index: 100;
+    
+    /* Permite rolagem horizontal se muitos controles se conectarem */
+    overflow-x: auto; 
+    white-space: nowrap; /* Impede que os cartões quebrem linha */
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total */
+}
+
+/* Estilo base para cada display de controle */
+.player-controls-display {
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+    border-radius: 6px; /* Bordas um pouco menos arredondadas */
+    padding: 8px; /* Reduz o padding interno dos cards */
+    min-width: 150px; /* Largura mínima ajustada para ser mais compacto */
+    max-width: 200px; /* Largura máxima para não esticar muito */
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Sombra mais suave */
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+    flex-shrink: 0; /* Impede que os cards encolham desproporcionalmente */
+}
+
+.player-controls-display:hover {
+    transform: translateY(-3px); /* Efeito de hover mais sutil */
+    background-color: #3a475a;
+}
+
+.player-controls-display h4 {
+    margin-top: 0;
+    margin-bottom: 6px; /* Reduz o espaço abaixo do título */
+    font-size: 0.85em; /* Título um pouco menor */
+    text-align: center;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed rgba(255,255,255,0.15); /* Linha divisória mais sutil */
+}
+
+/* Cores específicas para os títulos dos players */
+#player1-controls h4 { color: #e74c3c; } /* Vermelho */
+#player2-controls h4 { color: #3498db; } /* Azul */
+#player3-controls h4 { color: #2ecc71; } /* Verde */
+#player4-controls h4 { color: #f1c40f; } /* Amarelo */
+
+/* Esconde players de gamepad se não estiverem conectados */
+#player3-controls:empty .controls-grid,
+#player4-controls:empty .controls-grid {
+    display: none;
+}
+
+/* Grid para os itens de controle */
+.controls-grid {
+    display: flex; /* Mudar para flex para alinhar os itens em linha */
+    flex-direction: column; /* Itens dentro do grid em coluna */
+    gap: 4px; /* Reduz o espaço entre os itens de controle (linhas) */
+}
+
+.control-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #232931;
+    padding: 3px 6px; /* Reduz o padding de cada linha de controle */
+    border-radius: 3px; /* Bordas mais sutis */
+    border: 1px solid #3a404d;
+}
+
+.control-item .label {
+    font-size: 0.75em; /* Rótulos ainda menores */
+    color: #cbd5e0;
+    margin-right: 5px;
+    flex-shrink: 0; /* Não permite que o label encolha */
+}
+
+.keys {
+    display: flex;
+    gap: 2px; /* Reduz o espaço entre as teclas/botões ainda mais */
+    flex-wrap: nowrap; /* Tenta manter as teclas na mesma linha */
+    justify-content: flex-end;
+    font-size: 0.65em; /* Reduz o tamanho da fonte das teclas */
+    overflow: hidden; /* Esconde se o texto for muito longo */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for cortado */
+    min-width: 40px; /* Garante que o container de keys tenha um mínimo */
+}
+
+kbd {
+    background-color: #4a5568;
+    border: 1px solid #718096;
+    padding: 2px 4px; /* Reduz o padding das teclas para maior compactação */
+    border-radius: 3px;
+    white-space: nowrap;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.2); /* Sombra mais suave */
+    color: #e2e8f0;
+    min-width: unset; /* Remove min-width para kbd, deixa o conteúdo definir */
+    text-align: center;
+    line-height: 1.2; /* Ajusta a altura da linha */
+    height: 1.6em; /* Altura fixa para todos os kbd */
+    display: flex; /* Para centralizar o texto dentro do kbd */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para agrupar botões do D-Pad/Stick */
+.keys.compact-movement kbd {
+    min-width: unset;
+    padding: 2px 4px; /* Padding menor */
+}
+.keys.compact-movement kbd:not(:last-child) {
+    margin-right: 0;
+}
+
+
+/* Botão de reiniciar */
+button {
+    font-family: 'Press Start 2P', cursive;
+    /* Estilos já existentes do JS, apenas para garantir fallback */
+}
+
+
+/* --- Media Queries para Responsividade --- */
+/* Ajuste de media queries para a barra inferior */
+@media (max-width: 1000px) {
+    #controls-container {
+        gap: 6px; /* Espaçamento ainda menor */
+        padding: 6px 10px;
+    }
+    .player-controls-display {
+        min-width: 130px; /* Largura mínima menor */
+        padding: 6px;
+    }
+    .player-controls-display h4 {
+        font-size: 0.8em;
+    }
+    .control-item .label {
+        font-size: 0.7em;
+    }
+    .keys {
+        font-size: 0.6em;
+    }
+    kbd {
+        padding: 1px 3px; /* Padding das teclas ainda menor */
+        height: 1.5em;
+    }
+    .player-head-gui {
+        font-size: 0.65em;
+        min-width: 80px;
+        padding: 3px 5px;
+    }
+    .player-head-gui h3 {
+        font-size: 0.9em;
+    }
+    .ammo-display, .weapon-display {
+        font-size: 0.7em;
+    }
+}
+
+@media (max-width: 768px) {
+    /* O container de controle já é 'fixed' e 'width: 100%', mas agora reduzimos o padding
+       e ajustamos o tamanho dos elementos internos */
+    #controls-container {
+        padding: 4px 8px; /* Padding bem reduzido */
+        gap: 4px; /* Espaçamento mínimo */
+    }
+
+    .player-controls-display {
+        min-width: 110px; /* Largura mínima bem pequena para telas móveis */
+        padding: 5px;
+        border-radius: 4px;
+    }
+    .player-controls-display h4 {
+        font-size: 0.75em;
+        margin-bottom: 4px;
+    }
+    .control-item .label {
+        font-size: 0.65em;
+    }
+    .keys {
+        font-size: 0.55em;
+        gap: 1px; /* Espaçamento mínimo entre as teclas */
+    }
+    kbd {
+        padding: 1px 2px;
+        height: 1.4em;
+        min-width: unset; /* Permite que o texto determine a largura */
+    }
+    .player-head-gui {
+        font-size: 0.6em;
+        min-width: 70px;
+        padding: 3px 5px;
+    }
+    .player-head-gui h3 {
+        font-size: 0.85em;
+    }
+    .bar-container {
+        height: 7px;
+    }
+    .ammo-display, .weapon-display {
+        font-size: 0.65em;
+        margin-top: 4px;
+    }
+
+    /* Ajustes para mensagens e status do gamepad em telas pequenas */
+    #messages, #gamepad-status {
+        position: static; /* Volta a ser estático para fluir com o conteúdo */
+        width: calc(100% - 20px); /* Ocupa quase toda a largura */
+        max-height: 100px; /* Limita a altura para não ocupar muito espaço vertical */
+        margin: 5px auto; /* Centraliza horizontalmente e adiciona margem vertical */
+        font-size: 0.7em;
+        padding: 6px;
+        border-radius: 8px;
+    }
+    #gamepad-status p {
+        margin: 3px 0;
+        gap: 5px;
+    }
+
+    .game-container {
+        width: 98vw; /* Ocupa mais largura em telas pequenas */
+        height: calc(98vw * 0.75); /* Mantém a proporção 4:3 */
+        margin-top: 10px; /* Margem superior para separar do status/mensagens */
+    }
+}
+
+
+/* Icones de status (exemplo, você pode usar um SVG ou Font Awesome aqui) */
+.keys .stick::before { content: '🕹️ '; } /* Ícone de joystick */
+/* Removendo ícone D-Pad específico, apenas o texto */

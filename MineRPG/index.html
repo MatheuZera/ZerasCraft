@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Shooter Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <div id="messages"></div>
+
+    <div id="gamepad-status">
+        <p id="gamepad1Info" class="disconnected"><span class="status-icon"></span>Slot Gamepad 1 (P3): Desconectado</p>
+        <p id="gamepad2Info" class="disconnected"><span class="status-icon"></span>Slot Gamepad 2 (P4): Desconectado</p>
+    </div>
+
+    <div id="controls-container">
+        <div id="player1-controls" class="player-controls-display">
+            <h4>P1 (Teclado)</h4>
+            <div class="controls-grid">
+                <div class="control-item">
+                    <span class="label">Mover</span>
+                    <div class="keys">
+                        <kbd>W</kbd>
+                        <kbd>A</kbd>
+                        <kbd>S</kbd>
+                        <kbd>D</kbd>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="label">Atacar</span>
+                    <div class="keys"><kbd>C</kbd></div>
+                </div>
+                <div class="control-item">
+                    <span class="label">Correr</span>
+                    <div class="keys"><kbd>F</kbd></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="player2-controls" class="player-controls-display">
+            <h4>P2 (Teclado)</h4>
+            <div class="controls-grid">
+                <div class="control-item">
+                    <span class="label">Mover</span>
+                    <div class="keys">
+                        <kbd>↑</kbd>
+                        <kbd>↓</kbd>
+                        <kbd>←</kbd>
+                        <kbd>→</kbd>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="label">Atacar</span>
+                    <div class="keys"><kbd>E</kbd></div>
+                </div>
+                <div class="control-item">
+                    <span class="label">Correr</span>
+                    <div class="keys"><kbd>P</kbd></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="player3-controls" class="player-controls-display" style="display: none;">
+            <h4>P3 (Gamepad 1)</h4>
+            <div class="controls-grid">
+                </div>
+        </div>
+
+        <div id="player4-controls" class="player-controls-display" style="display: none;">
+            <h4>P4 (Gamepad 2)</h4>
+            <div class="controls-grid">
+                </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
