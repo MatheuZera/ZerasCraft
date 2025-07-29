@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // A playlist com seus títulos e caminhos.
     const musicPlaylist = [
-        { title: 'Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi-Remake.mp3' },
+        { title: 'Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
         { title: 'Aria Math', src: 'assets/audios/musics/Aria-Math.mp3' },
-        { title: 'Beginning', src: 'assets/audios/musics/Beginning 2.mp3' },
+        { title: 'Beginning', src: 'assets/audios/musics/Beginning.mp3' },
         { title: 'Biome Fest', src: 'assets/audios/musics/Biome-Fest.mp3' },
         { title: 'Blind Spots', src: 'assets/audios/musics/Blind-Spots.mp3' },
         { title: 'Clark', src: 'assets/audios/musics/Clark.mp3' },
