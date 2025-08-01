@@ -335,7 +335,7 @@ ul {
     box-sizing: border-box;
     overflow: hidden;
 
-    background-image: url('../images/1.site/banner-fundo.gif'); /* Caminho ajustado */
+    background-image: url('assets/images/1.site/banner-fundo.gif'); /* Caminho ajustado */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
