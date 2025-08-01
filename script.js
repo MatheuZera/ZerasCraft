@@ -476,14 +476,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Adiciona som de HOVER para LINKS e BOTÕES
-    document.querySelectorAll('a:not(.menu-toggle):not(.main-nav a), .btn-primary, .btn-link, button:not(#audioControlButton):not(#audioNextButton):not(.copy-button)').forEach(element => {
-        // Excluído: menu-toggle (já tem som ao clicar), links do main-nav (já tem som ao clicar), botões de áudio, botões de cópia (já tem som)
-        element.addEventListener('mouseenter', () => {
-            playEffectSound(hoverSound);
-        });
-    });
-
     // Adiciona som de CLICK para LINKS e BOTÕES (gerais, exceto os com lógica de áudio/cópia própria)
     document.querySelectorAll('a:not(.menu-toggle):not(.main-nav a), .btn-primary, .btn-link, button:not(#audioControlButton):not(#audioNextButton):not(.copy-button)').forEach(element => {
         element.addEventListener('click', (event) => {
