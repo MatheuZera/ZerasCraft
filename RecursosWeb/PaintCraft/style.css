@@ -1,0 +1,465 @@
+/* Variáveis CSS para facilitar a manutenção */
+:root {
+    --minecraft-green: #50b038;
+    --minecraft-dark-green: #367d26;
+    --minecraft-brown: #7a5c32;
+    --minecraft-light-gray: #c0c0c0;
+    --minecraft-dark-gray: #404040;
+    --minecraft-font-color: #ffffff;
+    --border-color: #1a1a1a;
+    --background-color: #303030;
+    --panel-background: #4a4a4a;
+    --button-background: #606060;
+    --button-hover-background: #757575;
+    --spacing-unit: 8px; /* Unidade de espaçamento base para desktop */
+}
+
+/* Reset Básico para todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura total */
+}
+
+/* ------------------------------------------------------------------------- */
+/* ESTILOS PADRÃO (DESKTOP FIRST) - Aplicados por padrão a telas maiores ou como base */
+/* ------------------------------------------------------------------------- */
+
+html, body {
+    height: 100%; /* Ocupa a altura total do viewport */
+    font-family: sans-serif; /* Fonte padrão */
+    background-color: var(--background-color);
+    color: var(--minecraft-font-color);
+    display: flex;
+    flex-direction: column; /* Organiza os elementos verticalmente */
+    overflow: hidden; /* Evita barras de rolagem globais indesejadas */
+    font-size: 16px; /* Tamanho de fonte padrão para desktop */
+    line-height: 1.5;
+    padding: var(--spacing-unit); /* Padding geral para o body */
+}
+
+/* Cabeçalho */
+header, footer {
+    background-color: var(--minecraft-dark-green);
+    color: var(--minecraft-font-color);
+    text-align: center;
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+    border-bottom: 2px solid var(--border-color);
+    border-top: 2px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+header h1 {
+    font-size: 1.8em;
+    text-shadow: 2px 2px var(--border-color);
+}
+
+footer p {
+    font-size: 0.8em;
+}
+
+/* Container Principal (Main) da Aplicação */
+.paint-container {
+    display: flex; /* Layout flexível para toolbar, canvas e paleta */
+    flex: 1; /* Ocupa o espaço restante verticalmente */
+    flex-direction: row; /* Layout padrão em linha para desktop */
+    gap: calc(var(--spacing-unit) * 2); /* Espaçamento maior entre os componentes */
+    padding: calc(var(--spacing-unit) * 2);
+    background-color: var(--panel-background);
+    border: 2px solid var(--border-color);
+    margin: var(--spacing-unit);
+    overflow: hidden; /* Importante para o layout flexível interno */
+}
+
+/* Barra de Ferramentas (Toolbar) */
+.toolbar {
+    display: flex;
+    flex-direction: column; /* Coluna para desktop */
+    gap: var(--spacing-unit);
+    padding: var(--spacing-unit);
+    background-color: var(--minecraft-dark-gray);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    flex-shrink: 0; /* Impede que a toolbar encolha */
+    width: 90px; /* Largura fixa para a toolbar em desktop */
+    overflow-y: auto; /* Adiciona scroll se houver muitas ferramentas */
+    max-height: 100%; /* Garante que a toolbar não transborde seu pai flexível */
+}
+
+.tool-group {
+    display: flex;
+    flex-direction: column; /* Botões do grupo em coluna */
+    gap: var(--spacing-unit);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-unit);
+    margin-bottom: var(--spacing-unit);
+}
+
+.tool-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.tool-button {
+    width: 64px; /* Botões maiores para desktop */
+    height: 64px;
+    background-color: var(--button-background);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    padding: 0;
+}
+
+.tool-button img {
+    width: 50px; /* Ícones maiores para desktop */
+    height: 50px;
+    image-rendering: pixelated; /* Mantém a estética de pixel art */
+}
+
+.tool-button:hover:not(.active) {
+    background-color: var(--button-hover-background);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.tool-button.active {
+    background-color: var(--minecraft-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5), inset 0 0 5px rgba(0,0,0,0.5);
+    border-color: var(--minecraft-light-gray);
+}
+
+/* Controles de Tamanho do Pincel */
+.brush-size-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: var(--spacing-unit);
+}
+
+.brush-size-control label {
+    font-size: 0.9em;
+    margin-bottom: calc(var(--spacing-unit) / 2);
+}
+
+.brush-size-control input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: var(--border-color);
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+
+.brush-size-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--minecraft-green);
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+}
+
+/* Área do Canvas - CONTÉM O GRID E CONTROLA O OVERFLOW */
+.canvas-area {
+    flex-grow: 1; /* Permite que ocupe o máximo de espaço horizontal */
+    display: flex;
+    justify-content: center; /* Centraliza o grid horizontalmente */
+    align-items: center; /* Centraliza o grid verticalmente */
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden; /* Esconde qualquer parte do grid que saia da área após rotação */
+    position: relative;
+}
+
+/* O Grid de Pixels */
+#canvasGrid {
+    display: grid;
+    /* grid-template-columns e grid-template-rows serão definidos via JS */
+    border: 1px solid var(--border-color);
+    background-color: #202020; /* Cor de fundo para células vazias */
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.pixel {
+    width: var(--pixel-size); /* Tamanho definido por JS via variável CSS */
+    height: var(--pixel-size);
+    border: none;
+    image-rendering: pixelated; /* Mantém as imagens pixeladas */
+    background-size: cover; /* Garante que a imagem preencha o pixel */
+    background-repeat: no-repeat; /* Evita repetição da imagem dentro do pixel */
+    transition: transform 0.1s ease-out;
+    transform-origin: center center;
+}
+
+/* Classes de rotação do CANVAS - Aplicadas APENAS a #canvasGrid */
+.rotated-0 { transform: rotate(0deg); }
+.rotated-90 { transform: rotate(90deg); }
+.rotated-180 { transform: rotate(180deg); }
+.rotated-270 { transform: rotate(270deg); }
+
+/* NOVAS CLASSES DE ROTAÇÃO DO BLOCO - Aplicadas aos .pixel */
+.block-rotated-0 { transform: rotate(0deg); }
+.block-rotated-90 { transform: rotate(90deg); }
+.block-rotated-180 { transform: rotate(180deg); }
+.block-rotated-270 { transform: rotate(270deg); }
+
+/* Paleta de Blocos */
+.block-palette {
+    display: grid; /* Grid para desktop */
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    gap: var(--spacing-unit);
+    padding: var(--spacing-unit);
+    background-color: var(--minecraft-dark-gray);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    flex-shrink: 0;
+    width: 180px; /* Largura fixa para desktop */
+    overflow-y: auto; /* Rolagem vertical se muitos blocos */
+    max-height: 100%; /* Ocupa altura total disponível */
+    padding-right: calc(var(--spacing-unit) * 3); /* Para afastar a barra de rolagem */
+}
+
+.palette-block {
+    width: auto; /* Deixa o grid controlar a largura */
+    height: 90px; /* Altura padrão para desktop */
+    background-color: var(--button-background);
+    border: 2px solid var(--border-color);
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    padding: 2px;
+    text-align: center;
+    font-size: 0.7em;
+    color: var(--minecraft-font-color);
+    text-shadow: 1px 1px var(--border-color);
+    position: relative;
+}
+
+/* Estilo para a imagem dentro do bloco da paleta */
+.palette-block .palette-block-image {
+    width: 48px; /* Ícones maiores para desktop */
+    height: 48px;
+    image-rendering: pixelated;
+    object-fit: contain;
+    transition: transform 0.2s ease-out;
+    transform-origin: center center;
+}
+
+.palette-block.selected {
+    background-color: var(--minecraft-green);
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.5), inset 0 0 3px rgba(0,0,0,0.5);
+    border-color: var(--minecraft-light-gray);
+}
+
+/* Controles Inferiores (Limpar, Baixar) */
+.controls {
+    display: flex;
+    justify-content: center; /* Centraliza os botões */
+    gap: calc(var(--spacing-unit) * 2);
+    padding: calc(var(--spacing-unit) * 1.5);
+    background-color: var(--minecraft-dark-green);
+    border-top: 2px solid var(--border-color);
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+}
+
+.control-button {
+    background-color: var(--button-background);
+    color: var(--minecraft-font-color);
+    border: 2px solid var(--border-color);
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em; /* Tamanho padrão para desktop */
+    font-family: sans-serif;
+    transition: background-color 0.2s, transform 0.1s;
+    text-shadow: 1px 1px var(--border-color);
+    white-space: nowrap; /* Evita quebra de texto nos botões */
+}
+
+.control-button:hover {
+    background-color: var(--button-hover-background);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.control-button:active {
+    background-color: var(--minecraft-green);
+    transform: translateY(0);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* Estilos para a barra de rolagem (WebKit - Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 8px; /* Mais largo para desktop */
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--panel-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--minecraft-dark-gray);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--button-hover-background);
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* ESTILOS PARA TELAS MENORES (MOBILE) - Aplicados APENAS quando a largura da tela for <= 768px */
+/* ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    html, body {
+        font-size: 14px; /* Fonte base menor para mobile */
+        padding: calc(var(--spacing-unit) / 2); /* Padding menor para mobile */
+    }
+
+    header h1 {
+        font-size: 1.5em; /* Fonte menor */
+    }
+
+    footer p {
+        font-size: 0.7em; /* Fonte menor */
+    }
+
+    .paint-container {
+        flex-direction: column; /* Coluna para mobile */
+        align-items: stretch; /* Estica os filhos para ocupar a largura total */
+        gap: calc(var(--spacing-unit) / 2); /* Espaçamento menor */
+        padding: calc(var(--spacing-unit) / 2);
+        margin: calc(var(--spacing-unit) / 2);
+        min-height: auto;
+    }
+
+    .toolbar {
+        order: 1; /* Toolbar primeiro em mobile */
+        flex-direction: row; /* Linha para mobile */
+        flex-wrap: wrap; /* Quebra em várias linhas */
+        width: 100%; /* Ocupa toda a largura */
+        justify-content: center; /* Centraliza os botões */
+        overflow-y: visible; /* Não rola a toolbar em mobile */
+        padding: calc(var(--spacing-unit) / 2);
+        max-height: none; /* Não tem altura máxima fixa */
+        gap: calc(var(--spacing-unit) / 4); /* Espaçamento menor entre os botões */
+    }
+
+    .tool-group {
+        border-bottom: none; /* Remove borda inferior em mobile */
+        padding-bottom: 0;
+        margin-bottom: 0;
+        flex-direction: row; /* Botões do grupo em linha */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: calc(var(--spacing-unit) / 4);
+    }
+
+    .tool-button {
+        width: 60px; /* Botões um pouco maiores para mobile */
+        height: 60px;
+    }
+
+    .tool-button img {
+        width: 40px; /* Ícones um pouco maiores para mobile */
+        height: 40px;
+    }
+
+    .brush-size-control {
+        width: 100%; /* Ocupa toda a largura */
+        margin-top: calc(var(--spacing-unit) / 2);
+    }
+
+    .brush-size-control label {
+        font-size: 0.9em; /* Mantém um tamanho legível */
+    }
+
+    .brush-size-control input[type="range"] {
+        height: 8px; /* Slider de tamanho decente */
+    }
+
+    .brush-size-control input[type="range"]::-webkit-slider-thumb {
+        width: 20px; /* Thumb de tamanho decente */
+        height: 20px;
+        border: 2px solid var(--border-color);
+    }
+
+    .canvas-area {
+        order: 2; /* Canvas após a toolbar em mobile */
+        min-height: 250px; /* Altura mínima razoável para o canvas em mobile */
+    }
+
+    .block-palette {
+        order: 3; /* Paleta após o canvas em mobile */
+        display: flex; /* Flexbox para mobile */
+        flex-direction: row; /* Blocos em linha */
+        flex-wrap: wrap; /* Quebra em várias linhas */
+        justify-content: flex-start; /* Alinha os blocos à esquerda */
+        max-height: 150px; /* Altura fixa maior para a paleta em mobile */
+        overflow-y: auto; /* Rolagem vertical */
+        width: 100%; /* Ocupa toda a largura */
+        padding: calc(var(--spacing-unit) / 2);
+        gap: calc(var(--spacing-unit) / 4); /* Espaçamento menor */
+        padding-right: calc(var(--spacing-unit) / 2); /* Volta padding normal */
+    }
+
+    .palette-block {
+        width: calc(33.33% - calc(var(--spacing-unit) / 4 * 2)); /* Tenta 3 blocos por linha */
+        min-width: 80px; /* Garante que não fique muito pequeno */
+        height: 85px; /* Altura maior para mobile */
+        font-size: 0.65em; /* Fonte um pouco maior */
+        padding: 2px; /* Padding maior */
+    }
+
+    .palette-block .palette-block-image {
+        width: 48px; /* Ícones maiores para mobile */
+        height: 48px;
+    }
+
+    .controls {
+        order: 4; /* Controles por último em mobile */
+        flex-direction: row; /* Botões em linha */
+        justify-content: space-around;
+        gap: calc(var(--spacing-unit) / 4);
+        padding: calc(var(--spacing-unit) / 2);
+    }
+
+    .control-button {
+        font-size: 0.9em; /* Fonte um pouco maior para mobile */
+        padding: calc(var(--spacing-unit) / 2) var(--spacing-unit); /* Padding ajustado */
+    }
+
+    .control-button:hover {
+        transform: translateY(-1px); /* Menor deslocamento */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px; /* Mais fino para mobile */
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+    }
+}

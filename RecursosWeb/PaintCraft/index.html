@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Pixel Art Maker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/blocks/grass_block.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>Minecraft Pixel Art Maker</h1>
+    </header>
+
+    <main class="paint-container">
+        <div class="toolbar">
+            <div class="tool-group">
+                <button class="tool-button active" id="blockTool" data-tool="block" title="Bloco">
+                    <img src="assets/tools/block_icon.png" alt="Bloco"> </button>
+                <button class="tool-button" id="eraserTool" data-tool="eraser" title="Borracha">
+                    <img src="assets/tools/eraser.png" alt="Borracha">
+                </button>
+                <button class="tool-button" id="fillTool" data-tool="fill" title="Preencher">
+                    <img src="assets/tools/fill.png" alt="Preencher">
+                </button>
+                <button class="tool-button" id="eyedropperTool" data-tool="eyedropper" title="Conta-gotas">
+                    <img src="assets/tools/eyedropper.png" alt="Conta-gotas">
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <button class="tool-button" id="squareOutlineTool" data-tool="square-outline" title="Contorno Quadrado">
+                    <img src="assets/tools/square_outline.png" alt="Contorno Quadrado">
+                </button>
+                <button class="tool-button" id="circleTool" data-tool="circle" title="Círculo">
+                    <img src="assets/tools/circle.png" alt="Círculo">
+                </button>
+                <button class="tool-button" id="randomTool" data-tool="random" title="Bloco Aleatório">
+                    <img src="assets/tools/random.png" alt="Aleatório">
+                </button>
+                <button class="tool-button" id="megaBlockTool" data-tool="mega-block" title="Mega Bloco">
+                    <img src="assets/tools/mega_block.png" alt="Mega Bloco">
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <button class="tool-button" id="rotateLeftButton" title="Girar Canvas Esquerda">
+                    <img src="assets/tools/rotate_left.png" alt="Girar Canvas Esquerda">
+                </button>
+                <button class="tool-button" id="rotateRightButton" title="Girar Canvas Direita">
+                    <img src="assets/tools/rotate_right.png" alt="Girar Canvas Direita">
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <button class="tool-button" id="rotateBlockButton" title="Girar Bloco Selecionado">
+                    <img src="assets/tools/rotate_block.png" alt="Girar Bloco"> </button>
+            </div>
+
+            <div class="tool-group history-controls">
+                <button class="tool-button" id="undoButton" title="Desfazer">
+                    <img src="assets/tools/undo.png" alt="Desfazer">
+                </button>
+                <button class="tool-button" id="redoButton" title="Refazer">
+                    <img src="assets/tools/redo.png" alt="Refazer">
+                </button>
+            </div>
+
+            <div class="brush-size-control">
+                <label for="brushSizeSlider">Tamanho do Pincel: <span id="brushSizeValue">1</span></label>
+                <input type="range" id="brushSizeSlider" min="1" max="10" value="1">
+            </div>
+        </div>
+
+        <div class="canvas-area">
+            <div id="canvasGrid" class="rotated-0"></div>
+        </div>
+
+        <div class="block-palette" id="blockPalette">
+            </div>
+    </main>
+
+    <div class="controls">
+        <button id="clearButton" class="control-button">Limpar Tudo</button>
+        <button id="downloadButton" class="control-button">Baixar Imagem</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Minecraft Pixel Art Maker. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
