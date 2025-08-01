@@ -1,0 +1,11 @@
+                    <div class="community-card">
+                        <i class="fab fa-instagram card-icon"></i>
+                        <h3 class="card-title">Instagram</h3>
+                        <p class="card-description">Momentos do dia a dia do servidor, fotos, stories e interação com a comunidade.</p>
+                        <a href="https://instagram.com/yourinstagram" target="_blank" rel="noopener noreferrer" class="btn-primary">Seguir</a>
+                    </div>
+                    <div class="community-card">
+                        <i class="fab fa-twitter card-icon"></i>
+                        <h3 class="card-title">Twitter/X</h3>
+                        <p class="card-description">Receba as últimas notícias, atualizações rápidas e interaja conosco em tempo real.</p>
+                        <a href="https://twitter.com/yourtwitter" target="_blank" rel="noopener noreferrer" class="btn-primary">Seguir</a>
