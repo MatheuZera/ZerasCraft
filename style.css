@@ -616,7 +616,7 @@ h2 .fas, h3 .fas {
     object-fit: cover;
     margin: 0 auto 20px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, filter 0.3s ease; /* Adicionado filter para brilho */d
+    transition: transform 0.3s ease, filter 0.3s ease; /* Adicionado filter para brilho */
     border: 3px solid var(--cor-primaria); /* Borda para avatares */
 }
 
