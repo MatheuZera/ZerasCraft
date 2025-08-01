@@ -1274,6 +1274,10 @@ h2 .fas, h3 .fas {
     .access-info p {
         font-size: 1em;
     }
+    .footer-social-links {
+        justify-content: center; /* Centraliza ícones sociais */
+        display: flex;
+    }
     .access-info span {
         font-size: 0.9em;
         padding: 6px 10px;
