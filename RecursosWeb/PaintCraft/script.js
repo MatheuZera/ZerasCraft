@@ -1,951 +1,566 @@
-// --- Configurações Iniciais ---
-const GRID_RESOLUTION_WIDTH = 120; // Largura do grid em células (pixels Minecraft)
-const GRID_RESOLUTION_HEIGHT = 50; // Altura do grid em células (pixels Minecraft)
+document.addEventListener('DOMContentLoaded', () => {
+    const canvasGrid = document.getElementById('canvasGrid');
+    const blockPalette = document.getElementById('blockPalette');
+    const pencilToolBtn = document.getElementById('pencilTool');
+    const eraserToolBtn = document.getElementById('eraserTool');
+    const fillToolBtn = document.getElementById('fillTool');
+    const moveToolBtn = document.getElementById('moveTool');
+    const rotateToolBtn = document.getElementById('rotateTool');
+    const brushSizeInput = document.getElementById('brushSize');
+    const brushSizeValueSpan = document.getElementById('brushSizeValue');
+    const clearCanvasBtn = document.getElementById('clearCanvas');
+    const downloadImageBtn = document.getElementById('downloadImage');
 
-// --- Seleção de Elementos HTML ---
-const canvasGrid = document.getElementById('canvasGrid');
-const blockPaletteContainer = document.getElementById('blockPalette');
-const clearButton = document.getElementById('clearButton');
-const downloadButton = document.getElementById('downloadButton');
-const brushSizeSlider = document.getElementById('brushSizeSlider');
-const brushSizeValueSpan = document.getElementById('brushSizeValue');
-const mainContainer = document.querySelector('.paint-container');
-const header = document.querySelector('header');
-const footer = document.querySelector('footer');
-const toolbar = document.querySelector('.toolbar');
-const canvasArea = document.querySelector('.canvas-area');
-const rotateLeftButton = document.getElementById('rotateLeftButton');
-const rotateRightButton = document.getElementById('rotateRightButton');
-const rotateBlockButton = document.getElementById('rotateBlockButton');
-const undoButton = document.getElementById('undoButton');
-const redoButton = document.getElementById('redoButton');
+    const gridSize = 32; // Define o tamanho do grid (32x32 pixels)
+    let pixelSize = 16; // Tamanho inicial de cada "pixel" no grid em px (será ajustado pelo CSS)
+    let selectedBlock = 'grass_block'; // Bloco selecionado inicialmente
+    let activeTool = 'pencil'; // Ferramenta ativa inicialmente
+    let currentBrushSize = parseInt(brushSizeInput.value); // Tamanho do pincel
+    let rotationAngle = 0; // Ângulo de rotação do canvas (0, 90, 180, 270)
+    let isMouseDown = false;
+    let originalColors = {}; // Armazena as cores originais dos pixels para o pincel/borracha
+    let blockRotationState = {}; // Armazena o estado de rotação de cada bloco individual (para o pixel)
 
-// --- Variáveis de Estado ---
-let currentTool = 'block';
-let currentBlockId = ''; // Será definido como 'grass_block' na inicialização
-let isDrawing = false;
-let brushSize = 1;
-let actualPixelSize = 1;
-let currentCanvasRotation = 0; // 0, 90, 180, 270 (em graus) para o CANVAS
-let currentBlockRotations = {}; // { 'blockId': degree, ... } Armazena a rotação de cada bloco
 
-// --- Histórico para Desfazer/Refazer ---
-let historyStack = []; // Armazena estados do grid (array de objetos { blockId, blockRotation })
-let historyIndex = -1;
-const MAX_HISTORY_STATES = 50;
+    // --- Configuração e Geração do Grid ---
+    function setGridCSSVariables() {
+        const root = document.documentElement;
+        // Ajusta o tamanho do pixel para preencher o canvas-area no mobile, se o grid for menor.
+        // Em desktop, ele se ajusta ao tamanho fixo do pixel.
+        if (window.innerWidth <= 768) {
+             // Calcula um tamanho de pixel que caiba no viewport
+            const maxDimension = Math.min(canvasGrid.offsetWidth, canvasGrid.offsetHeight);
+            pixelSize = Math.floor(maxDimension / gridSize);
+        } else {
+            pixelSize = 16; // Mantém 16px para desktop ou um valor que você ache ideal
+        }
+        root.style.setProperty('--pixel-size', `${pixelSize}px`);
+        canvasGrid.style.gridTemplateColumns = `repeat(${gridSize}, var(--pixel-size))`;
+        canvasGrid.style.gridTemplateRows = `repeat(${gridSize}, var(--pixel-size))`;
+    }
 
-// --- DADOS DOS BLOCOS (NOMES DE ARQUIVO EXATOS e NOMES AMIGÁVEIS) ---
-const blockIds = [
-    'grass_block',
-    'dirt',
-    'cobblestone',
-    'stone',
-    'sand',
-    'oak_planks',
-    'water',
-    'lava',
-    'diamond_ore',
-    'glass',
-    'coral_block',
-    // --- NOVOS BLOCOS ADICIONADOS AQUI ---
-    'bedrock',
-    'bricks',
-    'coal_ore',
-    'crafting_table',
-    'furnace',
-    'gold_block',
-    'iron_block',
-    'log_oak',
-    'obsidian',
-    'redstone_ore',
-    'emerald_ore',
-    'spawner',
-    'tnt',
-    'wool_red',
-    'wool_blue',
-    'cactus',
-    'pumpkin',
-    'mushroom_stem',
-    'netherrack',
-    'end_stone',
-    'ice',
-    'snow_block',
-    'mycelium',
-    'soul_sand',
-    'glowstone',
-    'nether_brick',
-    'quartz_ore',
-    'magma_block',
-    'lapis_ore',
-    'bone_block_side',
-    'bookshelf',
-    'melon',
-    'cake',
-    'jukebox',
-    'note_block',
-    'command_block',
-    'barrier',
-    'structure_block',
-    'slime_block',
-    'honey_block',
-    'sculk_sensor',
-    'amethyst_block'
-];
+    function createGrid() {
+        canvasGrid.innerHTML = ''; // Limpa o grid existente
+        for (let i = 0; i < gridSize * gridSize; i++) {
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+            pixel.dataset.index = i; // Armazena o índice para fácil referência
+            pixel.style.backgroundImage = `url(assets/blocks/air.png)`; // Cor de fundo inicial (vazio/ar)
+            pixel.dataset.blockType = 'air'; // Tipo de bloco
+            pixel.dataset.rotation = 0; // Rotação inicial de cada bloco
+            pixel.classList.add('block-rotated-0'); // Aplica a classe de rotação inicial
+            canvasGrid.appendChild(pixel);
+        }
+        setGridCSSVariables(); // Define as variáveis CSS após criar o grid
+    }
 
-const blockNames = {
-    'grass_block': 'Grama',
-    'dirt': 'Terra',
-    'cobblestone': 'Pedregulho',
-    'stone': 'Pedra',
-    'sand': 'Areia',
-    'oak_planks': 'Tábuas Carvalho',
-    'water': 'Água',
-    'lava': 'Lava',
-    'diamond_ore': 'Min. Diamante',
-    'glass': 'Vidro',
-    'coral_block': 'Coral',
-    // --- NOMES DOS NOVOS BLOCOS ---
-    'bedrock': 'Rocha Matriz',
-    'bricks': 'Tijolos',
-    'coal_ore': 'Min. Carvão',
-    'crafting_table': 'Bancada',
-    'furnace': 'Fornalha',
-    'gold_block': 'Bloco Ouro',
-    'iron_block': 'Bloco Ferro',
-    'log_oak': 'Tronco Carvalho',
-    'obsidian': 'Obsidiana',
-    'redstone_ore': 'Min. Redstone',
-    'emerald_ore': 'Min. Esmeralda',
-    'spawner': 'Gerador',
-    'tnt': 'TNT',
-    'wool_red': 'Lã Vermelha',
-    'wool_blue': 'Lã Azul',
-    'cactus': 'Cacto',
-    'pumpkin': 'Abóbora',
-    'mushroom_stem': 'Caule Cog.',
-    'netherrack': 'Netherrack',
-    'end_stone': 'Pedra Fim',
-    'ice': 'Gelo',
-    'snow_block': 'Bloco Neve',
-    'mycelium': 'Micélio',
-    'soul_sand': 'Areia Almas',
-    'glowstone': 'Pedra Luminosa',
-    'nether_brick': 'Tijolo Nether',
-    'quartz_ore': 'Min. Quartzo',
-    'magma_block': 'Magma',
-    'lapis_ore': 'Min. Lapis',
-    'bone_block_side': 'Bloco Osso',
-    'bookshelf': 'Estante',
-    'melon': 'Melancia',
-    'cake': 'Bolo',
-    'jukebox': 'Jukebox',
-    'note_block': 'Bloco Notas',
-    'command_block': 'Bloco Comando',
-    'barrier': 'Barreira',
-    'structure_block': 'Estrutura',
-    'slime_block': 'Slime',
-    'honey_block': 'Mel',
-    'sculk_sensor': 'Sensor Sculk',
-    'amethyst_block': 'Ametista'
-};
+    // Ajusta o tamanho do grid e pixels quando a janela é redimensionada
+    window.addEventListener('resize', setGridCSSVariables);
 
-// --- Mapeamento de IDs para URLs de Imagem Base ---
-const blockImageUrls = {};
-blockIds.forEach(id => {
-    blockImageUrls[id] = `assets/blocks/${id}.png`;
-});
 
-// --- Funções Principais ---
-
-/**
- * Inicializa as rotações de todos os blocos para 0 graus.
- */
-function initializeBlockRotations() {
-    blockIds.forEach(id => {
-        currentBlockRotations[id] = 0;
-    });
-}
-
-/**
- * Pré-carrega todas as imagens de blocos e ferramentas para evitar atrasos visuais.
- */
-async function preloadImages() {
-    const promises = [];
-    const allImageSources = [
-        ...blockIds.map(id => blockImageUrls[id]), // Inclui todos os novos IDs de blocos
-        'assets/tools/eraser.png', 'assets/tools/fill.png', 'assets/tools/eyedropper.png',
-        'assets/tools/square_outline.png', 'assets/tools/circle.png', 'assets/tools/random.png',
-        'assets/tools/mega_block.png', 'assets/tools/rotate_left.png', 'assets/tools/rotate_right.png',
-        'assets/tools/rotate_block.png',
-        'assets/tools/undo.png', 'assets/tools/redo.png',
-        'assets/tools/block_icon.png'
+    // --- Paleta de Blocos ---
+    const blocks = [
+        { id: 'air', name: 'Ar', path: 'air.png' },
+        { id: 'grass_block', name: 'Grama', path: 'grass_block.png' },
+        { id: 'dirt', name: 'Terra', path: 'dirt.png' },
+        { id: 'stone', name: 'Pedra', path: 'stone.png' },
+        { id: 'cobblestone', name: 'Pedregulho', path: 'cobblestone.png' },
+        { id: 'oak_planks', name: 'Tábuas de Carvalho', path: 'oak_planks.png' },
+        { id: 'bricks', name: 'Tijolos', path: 'bricks.png' },
+        { id: 'sand', name: 'Areia', path: 'sand.png' },
+        { id: 'gravel', name: 'Cascalho', path: 'gravel.png' },
+        { id: 'water_still', name: 'Água', path: 'water_still.png' },
+        { id: 'lava_still', name: 'Lava', path: 'lava_still.png' },
+        { id: 'coal_ore', name: 'Minério de Carvão', path: 'coal_ore.png' },
+        { id: 'iron_ore', name: 'Minério de Ferro', path: 'iron_ore.png' },
+        { id: 'gold_ore', name: 'Minério de Ouro', path: 'gold_ore.png' },
+        { id: 'diamond_ore', name: 'Minério de Diamante', path: 'diamond_ore.png' },
+        { id: 'glass', name: 'Vidro', path: 'glass.png' },
+        { id: 'log_oak', name: 'Tronco de Carvalho', path: 'log_oak.png' },
+        { id: 'leaves_oak', name: 'Folhas de Carvalho', path: 'leaves_oak.png' },
+        { id: 'bedrock', name: 'Rocha Matriz', path: 'bedrock.png' },
+        { id: 'crafting_table', name: 'Bancada', path: 'crafting_table.png' },
+        { id: 'furnace', name: 'Fornalha', path: 'furnace.png' },
+        { id: 'chest', name: 'Baú', path: 'chest.png' },
+        { id: 'torch', name: 'Tocha', path: 'torch.png' },
+        { id: 'redstone_ore', name: 'Minério de Redstone', path: 'redstone_ore.png' },
+        { id: 'emerald_ore', name: 'Minério de Esmeralda', path: 'emerald_ore.png' },
+        { id: 'obsidian', name: 'Obsidiana', path: 'obsidian.png' },
+        { id: 'netherrack', name: 'Netherrack', path: 'netherrack.png' },
+        { id: 'glowstone', name: 'Pedra Luminosa', path: 'glowstone.png' },
+        { id: 'soul_sand', name: 'Areia de Almas', path: 'soul_sand.png' },
+        { id: 'end_stone', name: 'Pedra do Fim', path: 'end_stone.png' },
+        { id: 'quartz_ore', name: 'Minério de Quartzo', path: 'quartz_ore.png' },
+        { id: 'sponge', name: 'Esponja', path: 'sponge.png' },
+        { id: 'ice', name: 'Gelo', path: 'ice.png' },
+        { id: 'snow', name: 'Neve', path: 'snow.png' },
+        { id: 'clay', name: 'Argila', path: 'clay.png' },
+        { id: 'pumpkin', name: 'Abóbora', path: 'pumpkin.png' },
+        { id: 'melon_block', name: 'Melancia', path: 'melon_block.png' },
+        { id: 'cactus_side', name: 'Cacto', path: 'cactus_side.png' },
+        { id: 'sugar_cane', name: 'Cana-de-Açúcar', path: 'sugar_cane.png' },
+        { id: 'mushroom_red', name: 'Cogumelo Vermelho', path: 'mushroom_red.png' },
+        { id: 'mushroom_brown', name: 'Cogumelo Marrom', path: 'mushroom_brown.png' },
+        { id: 'mycelium_side', name: 'Micélio', path: 'mycelium_side.png' },
+        { id: 'nether_brick', name: 'Tijolo do Nether', path: 'nether_brick.png' },
+        { id: 'end_portal_frame_top', name: 'Moldura do Portal do Fim', path: 'end_portal_frame_top.png' },
+        { id: 'dragon_egg', name: 'Ovo de Dragão', path: 'dragon_egg.png' },
+        { id: 'command_block', name: 'Bloco de Comando', path: 'command_block.png' },
+        { id: 'barrier', name: 'Barreira', path: 'barrier.png' },
+        { id: 'structure_block', name: 'Bloco de Estrutura', path: 'structure_block.png' },
+        { id: 'note_block', name: 'Bloco Musical', path: 'note_block.png' },
+        { id: 'jukebox', name: 'Jukebox', path: 'jukebox.png' },
+        { id: 'dispenser', name: 'Ejetor', path: 'dispenser.png' },
+        { id: 'dropper', name: 'Liberador', path: 'dropper.png' },
+        { id: 'hopper_outside', name: 'Funil', path: 'hopper_outside.png' },
+        { id: 'piston_top_sticky', name: 'Pistão Grudento', path: 'piston_top_sticky.png' },
+        { id: 'piston_top', name: 'Pistão', path: 'piston_top.png' },
+        { id: 'daylight_detector_top', name: 'Detector de Luz', path: 'daylight_detector_top.png' },
+        { id: 'redstone_block', name: 'Bloco de Redstone', path: 'redstone_block.png' },
+        { id: 'emerald_block', name: 'Bloco de Esmeralda', path: 'emerald_block.png' },
+        { id: 'gold_block', name: 'Bloco de Ouro', path: 'gold_block.png' },
+        { id: 'iron_block', name: 'Bloco de Ferro', path: 'iron_block.png' },
+        { id: 'diamond_block', name: 'Bloco de Diamante', path: 'diamond_block.png' },
+        { id: 'lapis_block', name: 'Bloco de Lápis-Lazúli', path: 'lapis_block.png' },
+        { id: 'redstone_lamp_off', name: 'Lâmpada de Redstone Desligada', path: 'redstone_lamp_off.png' },
+        { id: 'redstone_lamp_on', name: 'Lâmpada de Redstone Ligada', path: 'redstone_lamp_on.png' },
+        { id: 'tripwire_hook', name: 'Gancho de Armadilha', path: 'tripwire_hook.png' },
+        { id: 'repeater_off', name: 'Repetidor Desligado', path: 'repeater_off.png' },
+        { id: 'comparator_off', name: 'Comparador Desligado', path: 'comparator_off.png' },
+        { id: 'tnt_side', name: 'TNT', path: 'tnt_side.png' },
+        { id: 'slime_block', name: 'Bloco de Slime', path: 'slime_block.png' },
+        { id: 'hay_block_side', name: 'Fardo de Feno', path: 'hay_block_side.png' },
+        { id: 'end_rod', name: 'Vara do Fim', path: 'end_rod.png' },
+        { id: 'purpur_block', name: 'Bloco de Purpur', path: 'purpur_block.png' },
+        { id: 'chorus_flower', name: 'Flor do Coro', path: 'chorus_flower.png' },
+        { id: 'chorus_plant', name: 'Planta do Coro', path: 'chorus_plant.png' },
+        { id: 'magma_block', name: 'Bloco de Magma', path: 'magma_block.png' },
+        { id: 'nether_wart_block', name: 'Bloco de Fungo do Nether', path: 'nether_wart_block.png' },
+        { id: 'red_nether_brick', name: 'Tijolo do Nether Vermelho', path: 'red_nether_brick.png' },
+        { id: 'bone_block_side', name: 'Bloco de Osso', path: 'bone_block_side.png' },
+        { id: 'concrete_black', name: 'Concreto Preto', path: 'concrete_black.png' },
+        { id: 'concrete_blue', name: 'Concreto Azul', path: 'concrete_blue.png' },
+        { id: 'concrete_brown', name: 'Concreto Marrom', path: 'concrete_brown.png' },
+        { id: 'concrete_cyan', name: 'Concreto Ciano', path: 'concrete_cyan.png' },
+        { id: 'concrete_gray', name: 'Concreto Cinza', path: 'concrete_gray.png' },
+        { id: 'concrete_green', name: 'Concreto Verde', path: 'concrete_green.png' },
+        { id: 'concrete_light_blue', name: 'Concreto Azul Claro', path: 'concrete_light_blue.png' },
+        { id: 'concrete_lime', name: 'Concreto Verde Limão', path: 'concrete_lime.png' },
+        { id: 'concrete_magenta', name: 'Concreto Magenta', path: 'concrete_magenta.png' },
+        { id: 'concrete_orange', name: 'Concreto Laranja', path: 'concrete_orange.png' },
+        { id: 'concrete_pink', name: 'Concreto Rosa', path: 'concrete_pink.png' },
+        { id: 'concrete_purple', name: 'Concreto Roxo', path: 'concrete_purple.png' },
+        { id: 'concrete_red', name: 'Concreto Vermelho', path: 'concrete_red.png' },
+        { id: 'concrete_silver', name: 'Concreto Cinza Claro', path: 'concrete_silver.png' },
+        { id: 'concrete_white', name: 'Concreto Branco', path: 'concrete_white.png' },
+        { id: 'concrete_yellow', name: 'Concreto Amarelo', path: 'concrete_yellow.png' },
+        { id: 'terracotta', name: 'Terracota', path: 'terracotta.png' },
+        { id: 'glazed_terracotta_black', name: 'Terracota Vidrada Preta', path: 'glazed_terracotta_black.png' },
+        { id: 'glazed_terracotta_blue', name: 'Terracota Vidrada Azul', path: 'glazed_terracotta_blue.png' },
+        { id: 'glazed_terracotta_brown', name: 'Terracota Vidrada Marrom', path: 'glazed_terracotta_brown.png' },
+        { id: 'glazed_terracotta_cyan', name: 'Terracota Vidrada Ciano', path: 'glazed_terracotta_cyan.png' },
+        { id: 'glazed_terracotta_gray', name: 'Terracota Vidrada Cinza', path: 'glazed_terracotta_gray.png' },
+        { id: 'glazed_terracotta_green', name: 'Terracota Vidrada Verde', path: 'glazed_terracotta_green.png' },
+        { id: 'glazed_terracotta_light_blue', name: 'Terracota Vidrada Azul Claro', path: 'glazed_terracotta_light_blue.png' },
+        { id: 'glazed_terracotta_lime', name: 'Terracota Vidrada Verde Limão', path: 'glazed_terracotta_lime.png' },
+        { id: 'glazed_terracotta_magenta', name: 'Terracota Vidrada Magenta', path: 'glazed_terracotta_magenta.png' },
+        { id: 'glazed_terracotta_orange', name: 'Terracota Vidrada Laranja', path: 'glazed_terracotta_orange.png' },
+        { id: 'glazed_terracotta_pink', name: 'Terracota Vidrada Rosa', path: 'glazed_terracotta_pink.png' },
+        { id: 'glazed_terracotta_purple', name: 'Terracota Vidrada Roxa', path: 'glazed_terracotta_purple.png' },
+        { id: 'glazed_terracotta_red', name: 'Terracota Vidrada Vermelha', path: 'glazed_terracotta_red.png' },
+        { id: 'glazed_terracotta_silver', name: 'Terracota Vidrada Cinza Claro', path: 'glazed_terracotta_silver.png' },
+        { id: 'glazed_terracotta_white', name: 'Terracota Vidrada Branca', path: 'glazed_terracotta_white.png' },
+        { id: 'glazed_terracotta_yellow', name: 'Terracota Vidrada Amarela', path: 'glazed_terracotta_yellow.png' },
+        { id: 'shulker_box', name: 'Caixa de Shulker', path: 'shulker_box.png' },
+        { id: 'structure_void', name: 'Vazio de Estrutura', path: 'structure_void.png' },
+        { id: 'conduit', name: 'Conduíte', path: 'conduit.png' },
+        { id: 'sea_lantern', name: 'Lanterna do Mar', path: 'sea_lantern.png' },
+        { id: 'prismarine', name: 'Prismarinho', path: 'prismarine.png' },
+        { id: 'dark_prismarine', name: 'Prismarinho Escuro', path: 'dark_prismarine.png' },
+        { id: 'prismarine_bricks', name: 'Tijolos de Prismarinho', path: 'prismarine_bricks.png' },
+        { id: 'dried_kelp_block', name: 'Bloco de Alga Seca', path: 'dried_kelp_block.png' },
+        { id: 'coral_block_brain', name: 'Bloco de Coral Cérebro', path: 'coral_block_brain.png' },
+        { id: 'coral_block_bubble', name: 'Bloco de Coral Bolha', path: 'coral_block_bubble.png' },
+        { id: 'coral_block_fire', name: 'Bloco de Coral Fogo', path: 'coral_block_fire.png' },
+        { id: 'coral_block_horn', name: 'Bloco de Coral Chifre', path: 'coral_block_horn.png' },
+        { id: 'coral_block_tube', name: 'Bloco de Coral Tubo', path: 'coral_block_tube.png' },
+        { id: 'lectern_top', name: 'Púlpito', path: 'lectern_top.png' },
+        { id: 'campfire_top', name: 'Fogueira', path: 'campfire_top.png' },
+        { id: 'lantern', name: 'Lanterna', path: 'lantern.png' },
+        { id: 'barrel_top', name: 'Barril', path: 'barrel_top.png' },
+        { id: 'smithing_table_top', name: 'Mesa de Ferraria', path: 'smithing_table_top.png' },
+        { id: 'fletching_table_top', name: 'Mesa de Arquearia', path: 'fletching_table_top.png' },
+        { id: 'grindstone_top', name: 'Pedra de Amolar', path: 'grindstone_top.png' },
+        { id: 'loom_top', name: 'Tear', path: 'loom_top.png' },
+        { id: 'cartography_table_top', name: 'Mesa de Cartografia', path: 'cartography_table_top.png' },
+        { id: 'composter_top', name: 'Composteira', path: 'composter_top.png' },
+        { id: 'blast_furnace_top', name: 'Fornalha de Explosão', path: 'blast_furnace_top.png' },
+        { id: 'smoker_top', name: 'Defumador', path: 'smoker_top.png' },
+        { id: 'bell_top', name: 'Sino', path: 'bell_top.png' },
+        { id: 'scaffolding_top', name: 'Andaime', path: 'scaffolding_top.png' },
+        { id: 'jigsaw', name: 'Bloco de Quebra-Cabeça', path: 'jigsaw.png' },
+        { id: 'observer_top', name: 'Observador', path: 'observer_top.png' },
+        { id: 'target_side', name: 'Alvo', path: 'target_side.png' },
+        { id: 'honey_block_top', name: 'Bloco de Mel', path: 'honey_block_top.png' },
+        { id: 'honeycomb_block', name: 'Bloco de Favo de Mel', path: 'honeycomb_block.png' },
+        { id: 'crying_obsidian', name: 'Obsidiana Chorosa', path: 'crying_obsidian.png' },
+        { id: 'respawn_anchor_top', name: 'Âncora de Reaparecimento', path: 'respawn_anchor_top.png' },
+        { id: 'basalt_top', name: 'Basalto', path: 'basalt_top.png' },
+        { id: 'polished_basalt_top', name: 'Basalto Polido', path: 'polished_basalt_top.png' },
+        { id: 'blackstone', name: 'Pedra Negra', path: 'blackstone.png' },
+        { id: 'polished_blackstone', name: 'Pedra Negra Polida', path: 'polished_blackstone.png' },
+        { id: 'gilded_blackstone', name: 'Pedra Negra Dourada', path: 'gilded_blackstone.png' },
+        { id: 'chiseled_polished_blackstone', name: 'Pedra Negra Polida Ciselada', path: 'chiseled_polished_blackstone.png' },
+        { id: 'cracked_polished_blackstone_bricks', name: 'Tijolos de Pedra Negra Rachados', path: 'cracked_polished_blackstone_bricks.png' },
+        { id: 'polished_blackstone_bricks', name: 'Tijolos de Pedra Negra Polidos', path: 'polished_blackstone_bricks.png' },
+        { id: 'chain', name: 'Corrente', path: 'chain.png' },
+        { id: 'warped_stem', name: 'Caule Distorcido', path: 'warped_stem.png' },
+        { id: 'crimson_stem', name: 'Caule Carmesim', path: 'crimson_stem.png' },
+        { id: 'warped_nylium_side', name: 'Nylium Distorcido', path: 'warped_nylium_side.png' },
+        { id: 'crimson_nylium_side', name: 'Nylium Carmesim', path: 'crimson_nylium_side.png' },
+        { id: 'warped_wart_block', name: 'Bloco de Fungo Distorcido', path: 'warped_wart_block.png' },
+        { id: 'crimson_roots', name: 'Raízes Carmesim', path: 'crimson_roots.png' },
+        { id: 'shroomlight', name: 'Coguluz', path: 'shroomlight.png' },
+        { id: 'weeping_vines', name: 'Vinhas Choronas', path: 'weeping_vines.png' },
+        { id: 'twisting_vines', name: 'Vinhas Retorcidas', path: 'twisting_vines.png' },
+        { id: 'soul_soil', name: 'Terra de Almas', path: 'soul_soil.png' },
+        { id: 'ancient_debris', name: 'Escombros Antigos', path: 'ancient_debris.png' },
+        { id: 'netherite_block', name: 'Bloco de Netherite', path: 'netherite_block.png' },
+        { id: 'lodestone', name: 'Pedra de Ímã', path: 'lodestone.png' },
+        { id: 'glowing_lichen', name: 'Líquen Luminoso', path: 'glowing_lichen.png' },
+        { id: 'deepslate', name: 'Ardósia Escura', path: 'deepslate.png' },
+        { id: 'cobbled_deepslate', name: 'Ardósia Escura Rachada', path: 'cobbled_deepslate.png' },
+        { id: 'polished_deepslate', name: 'Ardósia Escura Polida', path: 'polished_deepslate.png' },
+        { id: 'deepslate_bricks', name: 'Tijolos de Ardósia Escura', path: 'deepslate_bricks.png' },
+        { id: 'cracked_deepslate_bricks', name: 'Tijolos de Ardósia Escura Rachados', path: 'cracked_deepslate_bricks.png' },
+        { id: 'chiseled_deepslate', name: 'Ardósia Escura Ciselada', path: 'chiseled_deepslate.png' },
+        { id: 'tuff', name: 'Tufo', path: 'tuff.png' },
+        { id: 'dripstone_block', name: 'Bloco de Pedra Gotejante', path: 'dripstone_block.png' },
+        { id: 'pointed_dripstone', name: 'Pedra Gotejante Pontuda', path: 'pointed_dripstone.png' },
+        { id: 'moss_block', name: 'Bloco de Musgo', path: 'moss_block.png' },
+        { id: 'cave_vines', name: 'Vinhas da Caverna', path: 'cave_vines.png' },
+        { id: 'glow_item_frame', name: 'Moldura Brilhante', path: 'glow_item_frame.png' },
+        { id: 'azalea', name: 'Azaleia', path: 'azalea.png' },
+        { id: 'flowering_azalea', name: 'Azaleia Florescendo', path: 'flowering_azalea.png' },
+        { id: 'moss_carpet', name: 'Tapete de Musgo', path: 'moss_carpet.png' },
+        { id: 'big_dripleaf_top', name: 'Grande Folha Gotejante', path: 'big_dripleaf_top.png' },
+        { id: 'small_dripleaf', name: 'Pequena Folha Gotejante', path: 'small_dripleaf.png' },
+        { id: 'spore_blossom', name: 'Flor de Esporos', path: 'spore_blossom.png' },
+        { id: 'calcite', name: 'Calcita', path: 'calcite.png' },
+        { id: 'smooth_basalt', name: 'Basalto Liso', path: 'smooth_basalt.png' },
+        { id: 'amethyst_block', name: 'Bloco de Ametista', path: 'amethyst_block.png' },
+        { id: 'budding_amethyst', name: 'Ametista Broto', path: 'budding_amethyst.png' },
+        { id: 'lightning_rod', name: 'Para-raios', path: 'lightning_rod.png' },
+        { id: 'copper_block', name: 'Bloco de Cobre', path: 'copper_block.png' },
+        { id: 'cut_copper', name: 'Cobre Cortado', path: 'cut_copper.png' },
+        { id: 'waxed_copper_block', name: 'Bloco de Cobre Encerado', path: 'waxed_copper_block.png' },
+        { id: 'waxed_cut_copper', name: 'Cobre Cortado Encerado', path: 'waxed_cut_copper.png' },
+        { id: 'oxidized_copper', name: 'Cobre Oxidado', path: 'oxidized_copper.png' },
+        { id: 'weathered_copper', name: 'Cobre Envelhecido', path: 'weathered_copper.png' },
+        { id: 'exposed_copper', name: 'Cobre Exposto', path: 'exposed_copper.png' },
+        { id: 'raw_iron_block', name: 'Bloco de Ferro Bruto', path: 'raw_iron_block.png' },
+        { id: 'raw_gold_block', name: 'Bloco de Ouro Bruto', path: 'raw_gold_block.png' },
+        { id: 'raw_copper_block', name: 'Bloco de Cobre Bruto', path: 'raw_copper_block.png' }
     ];
 
-    for (const src of allImageSources) {
-        const img = new Image();
-        img.src = src;
-        promises.push(new Promise((resolve) => {
-            img.onload = () => resolve();
-            img.onerror = () => {
-                console.warn(`AVISO: Falha ao carregar imagem: ${src}. Verifique o caminho e o nome do arquivo.`);
-                resolve();
-            };
-        }));
-    }
-    await Promise.all(promises);
-    console.log('Tentativa de pré-carregamento de todas as imagens concluída.');
-}
+    function createPalette() {
+        blocks.forEach(block => {
+            const paletteBlock = document.createElement('div');
+            paletteBlock.classList.add('palette-block');
+            paletteBlock.dataset.blockId = block.id;
 
-/**
- * Desativa o modo de desenho (quando o mouse é solto ou sai da área).
- * Salva o estado do grid no histórico para desfazer/refazer.
- */
-function stopDrawing() {
-    if (isDrawing) {
-        isDrawing = false;
-        saveState();
-    }
-}
+            const img = document.createElement('img');
+            img.classList.add('palette-block-image');
+            img.src = `assets/blocks/${block.path}`;
+            img.alt = block.name;
+            img.draggable = false; // Impede arrastar a imagem
 
-/**
- * Calcula o tamanho ideal de cada pixel do grid com base no espaço disponível.
- * Isso garante que o grid se ajuste dinamicamente à tela, incluindo rotação do canvas.
- */
-function calculatePixelSize() {
-    const headerHeight = header.offsetHeight;
-    const footerHeight = footer.offsetHeight;
-    const controlsHeight = document.querySelector('.controls').offsetHeight;
-    const toolbarWidth = toolbar.offsetWidth;
-    const blockPaletteWidth = blockPaletteContainer.offsetWidth;
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = block.name;
 
-    const bodyStyle = getComputedStyle(document.body);
-    const bodyPaddingVertical = parseFloat(bodyStyle.paddingTop) + parseFloat(bodyStyle.paddingBottom);
-    const bodyPaddingHorizontal = parseFloat(bodyStyle.paddingLeft) + parseFloat(bodyStyle.paddingRight);
-
-    const mainStyle = getComputedStyle(mainContainer);
-    const mainPaddingVertical = parseFloat(mainStyle.paddingTop) + parseFloat(mainStyle.paddingBottom);
-    const mainPaddingHorizontal = parseFloat(mainStyle.paddingLeft) + parseFloat(mainStyle.paddingRight);
-
-    const spacingUnit = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--spacing-unit'));
-
-    let availableContentWidth;
-    let availableContentHeight;
-
-    if (window.innerWidth > 900) { // Layout desktop
-        availableContentWidth = window.innerWidth
-            - bodyPaddingHorizontal
-            - mainPaddingHorizontal
-            - toolbarWidth
-            - blockPaletteWidth
-            - (spacingUnit * 2) * 2; // gaps entre toolbar, canvas e paleta
-
-        availableContentHeight = window.innerHeight
-            - headerHeight
-            - footerHeight
-            - controlsHeight
-            - bodyPaddingVertical
-            - mainPaddingVertical;
-
-    } else { // Layout mobile (flex-direction: column)
-        availableContentWidth = window.innerWidth
-            - bodyPaddingHorizontal
-            - mainPaddingHorizontal
-            - (spacingUnit * 2);
-
-        availableContentHeight = window.innerHeight
-            - headerHeight
-            - footerHeight
-            - controlsHeight
-            - toolbar.offsetHeight
-            - blockPaletteContainer.offsetHeight
-            - bodyPaddingVertical
-            - mainPaddingVertical
-            - (spacingUnit * 2);
-    }
-
-    availableContentWidth = Math.max(1, availableContentWidth);
-    availableContentHeight = Math.max(1, availableContentHeight);
-
-    // Determinar a dimensão do grid a ser considerada para o cálculo do pixel size
-    // Se o canvas estiver rotacionado em 90 ou 270 graus, as dimensões efetivas do grid se invertem
-    const effectiveGridWidth = (currentCanvasRotation === 90 || currentCanvasRotation === 270) ? GRID_RESOLUTION_HEIGHT : GRID_RESOLUTION_WIDTH;
-    const effectiveGridHeight = (currentCanvasRotation === 90 || currentCanvasRotation === 270) ? GRID_RESOLUTION_WIDTH : GRID_RESOLUTION_HEIGHT;
-
-    const pixelSizeBasedOnWidth = Math.floor(availableContentWidth / effectiveGridWidth);
-    const pixelSizeBasedOnHeight = Math.floor(availableContentHeight / effectiveGridHeight);
-
-    actualPixelSize = Math.min(pixelSizeBasedOnWidth, pixelSizeBasedOnHeight);
-    actualPixelSize = Math.max(actualPixelSize, 1); // Garante que o pixel size seja pelo menos 1
-
-    // Aplica o tamanho do grid visível no DOM
-    canvasGrid.style.width = `${actualPixelSize * GRID_RESOLUTION_WIDTH}px`;
-    canvasGrid.style.height = `${actualPixelSize * GRID_RESOLUTION_HEIGHT}px`;
-
-    document.documentElement.style.setProperty('--pixel-size', `${actualPixelSize}px`);
-}
-
-
-/**
- * Cria o grid de divs que representam os pixels do canvas.
- */
-function createGrid() {
-    canvasGrid.innerHTML = '';
-    canvasGrid.style.gridTemplateColumns = `repeat(${GRID_RESOLUTION_WIDTH}, var(--pixel-size))`;
-    canvasGrid.style.gridTemplateRows = `repeat(${GRID_RESOLUTION_HEIGHT}, var(--pixel-size))`;
-
-    for (let i = 0; i < GRID_RESOLUTION_WIDTH * GRID_RESOLUTION_HEIGHT; i++) {
-        const pixel = document.createElement('div');
-        pixel.classList.add('pixel');
-        pixel.dataset.row = Math.floor(i / GRID_RESOLUTION_WIDTH);
-        pixel.dataset.col = i % GRID_RESOLUTION_WIDTH;
-        pixel.dataset.blockId = ''; // Estado inicial: pixel vazio
-        pixel.dataset.blockRotation = 0; // Estado inicial: 0 graus
-
-        canvasGrid.appendChild(pixel);
-
-        pixel.addEventListener('mousedown', (e) => {
-            isDrawing = true;
-            if (e.button === 0) { // Botão esquerdo do mouse
-                applyTool(pixel, currentTool, currentBlockId, brushSize);
-            }
+            paletteBlock.appendChild(img);
+            paletteBlock.appendChild(nameSpan);
+            blockPalette.appendChild(paletteBlock);
         });
-        pixel.addEventListener('mouseover', (e) => {
-            if (isDrawing && e.buttons === 1) { // Apenas se o botão esquerdo estiver pressionado
-                applyTool(pixel, currentTool, currentBlockId, brushSize);
-            }
+
+        // Seleciona o primeiro bloco por padrão (grama)
+        const initialBlock = document.querySelector(`.palette-block[data-block-id="${selectedBlock}"]`);
+        if (initialBlock) {
+            initialBlock.classList.add('selected');
+        }
+    }
+
+
+    // --- Funções de Ferramentas ---
+    function selectTool(tool) {
+        // Remove a classe 'active' de todos os botões de ferramenta
+        document.querySelectorAll('.tool-button').forEach(btn => {
+            btn.classList.remove('active');
         });
-    }
-}
-
-/**
- * Popula a paleta de blocos com os blocos definidos.
- */
-function populateBlockPalette() {
-    blockPaletteContainer.innerHTML = '';
-
-    blockIds.forEach(id => {
-        const blockDiv = document.createElement('div');
-        blockDiv.classList.add('palette-block');
-        blockDiv.dataset.blockId = id;
-        blockDiv.title = blockNames[id] || id;
-
-        const blockImage = document.createElement('img');
-        blockImage.src = blockImageUrls[id];
-        blockImage.alt = blockNames[id] || id;
-        blockImage.classList.add('palette-block-image');
-        blockImage.style.imageRendering = 'pixelated';
-        blockImage.style.width = '48px';
-        blockImage.style.height = '48px';
-
-        const blockNameSpan = document.createElement('span');
-        blockNameSpan.textContent = blockNames[id];
-
-        blockDiv.appendChild(blockImage);
-        blockDiv.appendChild(blockNameSpan);
-
-        // APLICA A ROTAÇÃO DA IMAGEM, NÃO DO CONTÊINER DO BLOCO
-        blockImage.style.transform = `rotate(${currentBlockRotations[id] || 0}deg)`;
-
-
-        blockDiv.addEventListener('click', () => {
-            currentBlockId = id;
-            currentTool = 'block';
-            updateSelectedBlockInPalette(id);
-            updateActiveToolButton('blockTool');
-            // Atualiza a imagem da ferramenta de bloco com o bloco selecionado e sua rotação
-            const blockToolButtonImg = document.getElementById('blockTool').querySelector('img');
-            if (blockToolButtonImg) {
-                blockToolButtonImg.src = blockImageUrls[currentBlockId];
-                blockToolButtonImg.style.transform = `rotate(${currentBlockRotations[currentBlockId]}deg)`;
-            }
-        });
-        blockPaletteContainer.appendChild(blockDiv);
-    });
-
-    // Seleciona o primeiro bloco por padrão (grass_block)
-    currentBlockId = blockIds[0];
-    updateSelectedBlockInPalette(currentBlockId);
-
-    // Atualiza a imagem inicial da ferramenta de bloco
-    const blockToolButtonImg = document.getElementById('blockTool').querySelector('img');
-    if (blockToolButtonImg) {
-        blockToolButtonImg.src = blockImageUrls[currentBlockId];
-        blockToolButtonImg.style.transform = `rotate(${currentBlockRotations[currentBlockId]}deg)`;
-    }
-}
-
-
-/**
- * Atualiza visualmente qual bloco está selecionado na paleta.
- * @param {string} selectedId - O ID do bloco selecionado.
- */
-function updateSelectedBlockInPalette(selectedId) {
-    document.querySelectorAll('.palette-block').forEach(block => {
-        block.classList.remove('selected');
-        if (block.dataset.blockId === selectedId) {
-            block.classList.add('selected');
+        // Adiciona a classe 'active' ao botão da ferramenta selecionada
+        const selectedToolBtn = document.getElementById(`${tool}Tool`);
+        if (selectedToolBtn) {
+            selectedToolBtn.classList.add('active');
         }
-    });
-}
-
-/**
- * Atualiza visualmente qual botão de ferramenta está ativo.
- * @param {string} activeButtonId - O ID do botão da ferramenta ativa.
- */
-function updateActiveToolButton(activeButtonId) {
-    document.querySelectorAll('.tool-button').forEach(button => {
-        button.classList.remove('active');
-    });
-    const activeButton = document.getElementById(activeButtonId);
-    if (activeButton) {
-        activeButton.classList.add('active');
+        activeTool = tool;
+        console.log(`Ferramenta selecionada: ${activeTool}`);
     }
-}
 
-/**
- * Aplica a ferramenta selecionada a um pixel.
- * @param {HTMLElement} pixel - O elemento pixel HTML.
- * @param {string} tool - O tipo de ferramenta ('block', 'eraser', 'fill', etc.).
- * @param {string} blockId - O ID do bloco a ser aplicado (se a ferramenta for 'block').
- * @param {number} size - O tamanho do pincel.
- */
-function applyTool(pixel, tool, blockId, size) {
-    const row = parseInt(pixel.dataset.row);
-    const col = parseInt(pixel.dataset.col);
+    function paintPixel(pixelElement, blockIdToPaint = selectedBlock) {
+        if (!pixelElement) return;
 
-    switch (tool) {
-        case 'block':
-            drawPixel(row, col, blockId, size, currentBlockRotations[blockId]);
-            break;
-        case 'eraser':
-            drawPixel(row, col, '', size, 0); // Apaga, sem rotação
-            break;
-        case 'fill':
-            fillBucket(row, col, blockId, currentBlockRotations[blockId]);
-            break;
-        case 'eyedropper':
-            const pickedBlockId = pixel.dataset.blockId || blockIds[0];
-            currentBlockId = pickedBlockId;
-            currentBlockRotations[currentBlockId] = parseInt(pixel.dataset.blockRotation || 0);
-            updateSelectedBlockInPalette(currentBlockId);
-            updateActiveToolButton('blockTool');
-            currentTool = 'block'; // Volta para a ferramenta de bloco
-            // Atualiza a imagem da ferramenta de bloco para refletir o bloco pego
-            const blockToolButtonImg = document.getElementById('blockTool').querySelector('img');
-            if (blockToolButtonImg) {
-                blockToolButtonImg.src = blockImageUrls[currentBlockId];
-                blockToolButtonImg.style.transform = `rotate(${currentBlockRotations[currentBlockId]}deg)`;
-            }
-            break;
-        case 'square-outline':
-            drawShape(row, col, 'square-outline', blockId, size, currentBlockRotations[blockId]);
-            break;
-        case 'circle':
-            drawShape(row, col, 'circle', blockId, size, currentBlockRotations[blockId]);
-            break;
-        case 'random':
-            const randomId = getRandomBlockId();
-            drawPixel(row, col, randomId, size, 0); // Blocos aleatórios sem rotação inicial para simplicidade
-            break;
-        case 'mega-block':
-            drawMegaBlock(row, col, blockId, size, currentBlockRotations[blockId]);
-            break;
-    }
-}
+        const blockData = blocks.find(b => b.id === blockIdToPaint);
+        if (!blockData) return;
 
-/**
- * Desenha um ou mais pixels com o bloco e rotação especificados.
- * @param {number} startRow - Linha do pixel central.
- * @param {number} startCol - Coluna do pixel central.
- * @param {string} blockIdToApply - ID do bloco a ser aplicado.
- * @param {number} size - Tamanho do pincel (raio da área a ser pintada).
- * @param {number} blockRotation - Rotação em graus para o bloco.
- */
-function drawPixel(startRow, startCol, blockIdToApply, size, blockRotation) {
-    const halfSize = Math.floor(size / 2);
+        pixelElement.style.backgroundImage = `url(assets/blocks/${blockData.path})`;
+        pixelElement.dataset.blockType = blockIdToPaint;
 
-    for (let r = startRow - halfSize; r <= startRow + halfSize; r++) {
-        for (let c = startCol - halfSize; c <= startCol + halfSize; c++) {
-            if (r >= 0 && r < GRID_RESOLUTION_HEIGHT && c >= 0 && c < GRID_RESOLUTION_WIDTH) {
-                const index = r * GRID_RESOLUTION_WIDTH + c;
-                const targetPixel = canvasGrid.children[index];
-                if (targetPixel) {
-                    targetPixel.dataset.blockId = blockIdToApply;
-                    targetPixel.dataset.blockRotation = blockRotation;
-
-                    targetPixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
-
-                    if (blockIdToApply) {
-                        targetPixel.style.backgroundImage = `url(${blockImageUrls[blockIdToApply]})`;
-                        targetPixel.classList.add(`block-rotated-${blockRotation}`);
-                    } else {
-                        targetPixel.style.backgroundImage = 'none';
-                    }
-                }
-            }
+        // Se a ferramenta não for "move" ou "rotate", resetar a rotação do bloco
+        if (activeTool !== 'move' && activeTool !== 'rotate') {
+            pixelElement.dataset.rotation = 0;
+            // Remove todas as classes de rotação do bloco e adiciona a padrão
+            pixelElement.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
+            pixelElement.classList.add('block-rotated-0');
         }
     }
-}
 
-/**
- * Preenche uma área contígua com um novo bloco (Flood Fill algorithm).
- * @param {number} startRow - Linha de início.
- * @param {number} startCol - Coluna de início.
- * @param {string} newBlockId - ID do bloco para preencher.
- * @param {number} newBlockRotation - Rotação do bloco para preencher.
- */
-function fillBucket(startRow, startCol, newBlockId, newBlockRotation) {
-    const initialPixel = canvasGrid.children[startRow * GRID_RESOLUTION_WIDTH + startCol];
-    if (!initialPixel) return;
+    function applyBrush(targetPixel, paintFunction) {
+        const targetIndex = parseInt(targetPixel.dataset.index);
+        const row = Math.floor(targetIndex / gridSize);
+        const col = targetIndex % gridSize;
 
-    const targetBlockId = initialPixel.dataset.blockId;
-    const targetBlockRotation = parseInt(initialPixel.dataset.blockRotation || 0);
+        const halfBrush = Math.floor(currentBrushSize / 2);
 
-    // Se o targetBlockId e a rotação já forem os mesmos, não há o que preencher
-    if (targetBlockId === newBlockId && targetBlockRotation === newBlockRotation) return;
+        for (let i = -halfBrush; i < currentBrushSize - halfBrush; i++) {
+            for (let j = -halfBrush; j < currentBrushSize - halfBrush; j++) {
+                const newRow = row + i;
+                const newCol = col + j;
 
-    const queue = [{ r: startRow, c: startCol }];
-    const visited = new Set();
-
-    while (queue.length > 0) {
-        const { r, c } = queue.shift();
-        const key = `${r},${c}`;
-
-        if (r < 0 || r >= GRID_RESOLUTION_HEIGHT || c < 0 || c >= GRID_RESOLUTION_WIDTH || visited.has(key)) {
-            continue;
-        }
-
-        const currentPixel = canvasGrid.children[r * GRID_RESOLUTION_WIDTH + c];
-        // Verifica se o pixel atual corresponde ao bloco e rotação alvo
-        if (currentPixel && currentPixel.dataset.blockId === targetBlockId &&
-            parseInt(currentPixel.dataset.blockRotation || 0) === targetBlockRotation) {
-
-            currentPixel.dataset.blockId = newBlockId;
-            currentPixel.dataset.blockRotation = newBlockRotation;
-
-            currentPixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
-
-            if (newBlockId) {
-                currentPixel.style.backgroundImage = `url(${blockImageUrls[newBlockId]})`;
-                currentPixel.classList.add(`block-rotated-${newBlockRotation}`);
-            } else {
-                currentPixel.style.backgroundImage = 'none';
-            }
-            visited.add(key);
-
-            queue.push({ r: r + 1, c: c });
-            queue.push({ r: r - 1, c: c });
-            queue.push({ r: r, c: c + 1 });
-            queue.push({ r: r, c: c - 1 });
-        }
-    }
-    saveState();
-}
-
-/**
- * Desenha formas geométricas (contorno quadrado, círculo).
- * @param {number} startRow - Linha do centro da forma.
- * @param {number} startCol - Coluna do centro da forma.
- * @param {string} shapeType - Tipo da forma ('square-outline', 'circle').
- * @param {string} blockIdToApply - ID do bloco para a forma.
- * @param {number} size - Tamanho da forma (raio/dimensão).
- * @param {number} blockRotation - Rotação do bloco.
- */
-function drawShape(startRow, startCol, shapeType, blockIdToApply, size, blockRotation) {
-    const halfSize = Math.floor(size / 2);
-
-    const pixelsToDraw = [];
-
-    if (shapeType === 'square-outline') {
-        for (let r = startRow - halfSize; r <= startRow + halfSize; r++) {
-            for (let c = startCol - halfSize; c <= startCol + halfSize; c++) {
-                if (r >= 0 && r < GRID_RESOLUTION_HEIGHT && c >= 0 && c < GRID_RESOLUTION_WIDTH) {
-                    if (r === startRow - halfSize || r === startRow + halfSize ||
-                        c === startCol - halfSize || c === startCol + halfSize) {
-                        pixelsToDraw.push({ r, c });
-                    }
-                }
-            }
-        }
-    } else if (shapeType === 'circle') {
-        const centerX = startCol;
-        const centerY = startRow;
-        const radius = halfSize;
-
-        for (let r = centerY - radius; r <= centerY + radius; r++) {
-            for (let c = centerX - radius; c <= centerX + radius; c++) {
-                if (r >= 0 && r < GRID_RESOLUTION_HEIGHT && c >= 0 && c < GRID_RESOLUTION_WIDTH) {
-                    const dist = Math.sqrt(Math.pow(c - centerX, 2) + Math.pow(r - centerY, 2));
-                    if (dist >= radius - 1 && dist <= radius + 1) { // Desenha o contorno do círculo
-                        pixelsToDraw.push({ r, c });
+                if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
+                    const index = newRow * gridSize + newCol;
+                    const pixelToPaint = canvasGrid.children[index];
+                    if (pixelToPaint) {
+                        paintFunction(pixelToPaint);
                     }
                 }
             }
         }
     }
 
-    pixelsToDraw.forEach(({ r, c }) => {
-        const index = r * GRID_RESOLUTION_WIDTH + c;
-        const targetPixel = canvasGrid.children[index];
+    // --- Event Listeners do Canvas ---
+    canvasGrid.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        const targetPixel = e.target.closest('.pixel');
         if (targetPixel) {
-            targetPixel.dataset.blockId = blockIdToApply;
-            targetPixel.dataset.blockRotation = blockRotation;
-            targetPixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
-            if (blockIdToApply) {
-                targetPixel.style.backgroundImage = `url(${blockImageUrls[blockIdToApply]})`;
-                targetPixel.classList.add(`block-rotated-${blockRotation}`);
+            if (activeTool === 'pencil') {
+                applyBrush(targetPixel, (pixel) => paintPixel(pixel, selectedBlock));
+            } else if (activeTool === 'eraser') {
+                applyBrush(targetPixel, (pixel) => paintPixel(pixel, 'air'));
+            } else if (activeTool === 'fill') {
+                // Implementar lógica de "balde de tinta" (flood fill)
+                // Por simplicidade, este exemplo não tem flood fill. Apenas pinta o pixel clicado.
+                paintPixel(targetPixel, selectedBlock);
+            }
+        }
+    });
+
+    canvasGrid.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        const targetPixel = e.target.closest('.pixel');
+        if (targetPixel) {
+            if (activeTool === 'pencil') {
+                applyBrush(targetPixel, (pixel) => paintPixel(pixel, selectedBlock));
+            } else if (activeTool === 'eraser') {
+                applyBrush(targetPixel, (pixel) => paintPixel(pixel, 'air'));
+            }
+        }
+    });
+
+    canvasGrid.addEventListener('mouseup', () => {
+        isMouseDown = false;
+    });
+
+    canvasGrid.addEventListener('mouseleave', () => {
+        isMouseDown = false;
+    });
+
+
+    // --- Event Listeners da Paleta ---
+    blockPalette.addEventListener('click', (e) => {
+        const selectedPaletteBlock = e.target.closest('.palette-block');
+        if (selectedPaletteBlock) {
+            // Remove a classe 'selected' de todos os blocos da paleta
+            document.querySelectorAll('.palette-block').forEach(block => {
+                block.classList.remove('selected');
+            });
+            // Adiciona a classe 'selected' ao bloco clicado
+            selectedPaletteBlock.classList.add('selected');
+            selectedBlock = selectedPaletteBlock.dataset.blockId;
+            console.log(`Bloco selecionado: ${selectedBlock}`);
+        }
+    });
+
+
+    // --- Event Listeners da Toolbar ---
+    pencilToolBtn.addEventListener('click', () => selectTool('pencil'));
+    eraserToolBtn.addEventListener('click', () => selectTool('eraser'));
+    fillToolBtn.addEventListener('click', () => selectTool('fill'));
+    moveToolBtn.addEventListener('click', () => selectTool('move'));
+    rotateToolBtn.addEventListener('click', () => selectTool('rotate'));
+
+    brushSizeInput.addEventListener('input', () => {
+        currentBrushSize = parseInt(brushSizeInput.value);
+        brushSizeValueSpan.textContent = currentBrushSize;
+    });
+
+    // --- Funcionalidade da Ferramenta de Mover ---
+    let isDragging = false;
+    let startX, startY;
+    let initialTranslateX = 0;
+    let initialTranslateY = 0;
+
+    canvasGrid.addEventListener('mousedown', (e) => {
+        if (activeTool === 'move') {
+            isDragging = true;
+            canvasGrid.style.cursor = 'grabbing';
+            startX = e.clientX;
+            startY = e.clientY;
+            const transformMatrix = window.getComputedStyle(canvasGrid).transform;
+            if (transformMatrix !== 'none') {
+                const matrix = new DOMMatrixReadOnly(transformMatrix);
+                initialTranslateX = matrix.m41;
+                initialTranslateY = matrix.m42;
             } else {
-                targetPixel.style.backgroundImage = 'none';
+                initialTranslateX = 0;
+                initialTranslateY = 0;
             }
         }
     });
-    saveState();
-}
 
-/**
- * Retorna um ID de bloco aleatório da lista de blocos disponíveis.
- * @returns {string} ID de um bloco aleatório.
- */
-function getRandomBlockId() {
-    const randomIndex = Math.floor(Math.random() * blockIds.length);
-    return blockIds[randomIndex];
-}
-
-/**
- * Desenha um "mega bloco" (bloco maior que 1x1, conforme o brushSize).
- * @param {number} startRow - Linha de início do bloco.
- * @param {number} startCol - Coluna de início do bloco.
- * @param {string} blockIdToApply - ID do bloco a ser aplicado.
- * @param {number} size - Dimensão do mega bloco (ex: 2 para 2x2, 3 para 3x3).
- * @param {number} blockRotation - Rotação do bloco.
- */
-function drawMegaBlock(startRow, startCol, blockIdToApply, size, blockRotation) {
-    for (let r = startRow; r < startRow + size; r++) {
-        for (let c = startCol; c < startCol + size; c++) {
-            if (r >= 0 && r < GRID_RESOLUTION_HEIGHT && c >= 0 && c < GRID_RESOLUTION_WIDTH) {
-                const index = r * GRID_RESOLUTION_WIDTH + c;
-                const targetPixel = canvasGrid.children[index];
-                if (targetPixel) {
-                    targetPixel.dataset.blockId = blockIdToApply;
-                    targetPixel.dataset.blockRotation = blockRotation;
-                    targetPixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
-                    if (blockIdToApply) {
-                        targetPixel.style.backgroundImage = `url(${blockImageUrls[blockIdToApply]})`;
-                        targetPixel.classList.add(`block-rotated-${blockRotation}`);
-                    } else {
-                        targetPixel.style.backgroundImage = 'none';
-                    }
-                }
-            }
-        }
-    }
-    saveState();
-}
-
-/**
- * Limpa todo o grid, removendo todos os blocos.
- */
-function clearGrid() {
-    if (confirm('Tem certeza que deseja limpar todo o desenho?')) {
-        Array.from(canvasGrid.children).forEach(pixel => {
-            pixel.dataset.blockId = '';
-            pixel.dataset.blockRotation = 0;
-            pixel.style.backgroundImage = 'none';
-            pixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
-        });
-        saveState();
-    }
-}
-
-/**
- * Baixa o conteúdo do grid como uma imagem PNG.
- * As rotações individuais dos blocos e a rotação do canvas são consideradas.
- */
-function downloadImage() {
-    const tempCanvas = document.createElement('canvas');
-    const exportPixelSize = 16;
-    const tempCanvasWidth = GRID_RESOLUTION_WIDTH * exportPixelSize;
-    const tempCanvasHeight = GRID_RESOLUTION_HEIGHT * exportPixelSize;
-
-    tempCanvas.width = tempCanvasWidth;
-    tempCanvas.height = tempCanvasHeight;
-    const ctx = tempCanvas.getContext('2d');
-
-    ctx.fillStyle = '#202020';
-    ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-
-    const loadImage = (src) => {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve(img);
-            img.onerror = () => reject(`Falha ao carregar imagem para download: ${src}`);
-            img.src = src;
-        });
-    };
-
-    const drawPromises = [];
-    Array.from(canvasGrid.children).forEach(pixel => {
-        const blockId = pixel.dataset.blockId;
-        const blockRotation = parseInt(pixel.dataset.blockRotation || 0);
-        if (blockId) {
-            const row = parseInt(pixel.dataset.row);
-            const col = parseInt(pixel.dataset.col);
-            const imageUrl = blockImageUrls[blockId];
-
-            drawPromises.push(
-                loadImage(imageUrl).then(img => {
-                    ctx.save();
-                    ctx.translate(col * exportPixelSize + exportPixelSize / 2, row * exportPixelSize + exportPixelSize / 2);
-                    ctx.rotate(blockRotation * Math.PI / 180);
-                    ctx.drawImage(img, -exportPixelSize / 2, -exportPixelSize / 2, exportPixelSize, exportPixelSize);
-                    ctx.restore();
-                }).catch(error => {
-                    console.error(error);
-                })
-            );
+    canvasGrid.addEventListener('mousemove', (e) => {
+        if (activeTool === 'move' && isDragging) {
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            canvasGrid.style.transform = `translate(${initialTranslateX + dx}px, ${initialTranslateY + dy}px) rotate(${rotationAngle}deg)`;
         }
     });
 
-    Promise.all(drawPromises).then(() => {
-        const finalCanvas = document.createElement('canvas');
-        let rotatedWidth = tempCanvasWidth;
-        let rotatedHeight = tempCanvasHeight;
-
-        if (currentCanvasRotation === 90 || currentCanvasRotation === 270) {
-            rotatedWidth = tempCanvasHeight;
-            rotatedHeight = tempCanvasWidth;
+    canvasGrid.addEventListener('mouseup', () => {
+        if (activeTool === 'move') {
+            isDragging = false;
+            canvasGrid.style.cursor = 'grab';
         }
-
-        finalCanvas.width = rotatedWidth;
-        finalCanvas.height = rotatedHeight;
-        const finalCtx = finalCanvas.getContext('2d');
-
-        finalCtx.save();
-        finalCtx.translate(finalCanvas.width / 2, finalCanvas.height / 2);
-        finalCtx.rotate(currentCanvasRotation * Math.PI / 180);
-        finalCtx.drawImage(tempCanvas, -tempCanvasWidth / 2, -tempCanvasHeight / 2);
-        finalCtx.restore();
-
-        const dataURL = finalCanvas.toDataURL('image/png');
-        const a = document.createElement('a');
-        a.href = dataURL;
-        a.download = 'minecraft_pixel_art.png';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }).catch(error => {
-        console.error('Erro geral ao gerar imagem para download:', error);
     });
-}
 
-/**
- * Salva o estado atual do grid no histórico. Cada pixel armazena seu blockId e blockRotation.
- */
-function saveState() {
-    if (historyIndex < historyStack.length - 1) {
-        historyStack = historyStack.slice(0, historyIndex + 1);
-    }
+    canvasGrid.addEventListener('mouseleave', () => {
+        if (activeTool === 'move') {
+            isDragging = false;
+            canvasGrid.style.cursor = 'grab';
+        }
+    });
 
-    const currentState = Array.from(canvasGrid.children).map(pixel => ({
-        blockId: pixel.dataset.blockId,
-        blockRotation: parseInt(pixel.dataset.blockRotation || 0)
-    }));
-
-    if (historyStack.length > 0 && JSON.stringify(currentState) === JSON.stringify(historyStack[historyIndex])) {
-        return;
-    }
-
-    historyStack.push(currentState);
-    historyIndex = historyStack.length - 1;
-
-    if (historyStack.length > MAX_HISTORY_STATES) {
-        historyStack.shift();
-        historyIndex--;
-    }
-    updateHistoryButtons();
-}
-
-/**
- * Desfaz a última ação.
- */
-function undo() {
-    if (historyIndex > 0) {
-        historyIndex--;
-        restoreState(historyStack[historyIndex]);
-    }
-    updateHistoryButtons();
-}
-
-/**
- * Refaz a última ação desfeita.
- */
-function redo() {
-    if (historyIndex < historyStack.length - 1) {
-        historyIndex++;
-        restoreState(historyStack[historyIndex]);
-    }
-    updateHistoryButtons();
-}
-
-/**
- * Restaura o grid para um estado salvo específico, aplicando blockId e blockRotation.
- * @param {Array<object>} state - Um array de objetos { blockId, blockRotation } representando o estado.
- */
-function restoreState(state) {
-    Array.from(canvasGrid.children).forEach((pixel, index) => {
-        const { blockId, blockRotation } = state[index];
-        pixel.dataset.blockId = blockId;
-        pixel.dataset.blockRotation = blockRotation;
-
-        pixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
-
-        if (blockId) {
-            pixel.style.backgroundImage = `url(${blockImageUrls[blockId]})`;
-            pixel.classList.add(`block-rotated-${blockRotation}`);
+    // --- Funcionalidade da Ferramenta de Rotacionar ---
+    rotateToolBtn.addEventListener('click', () => {
+        selectTool('rotate'); // Ativa a ferramenta de rotação
+        rotationAngle = (rotationAngle + 90) % 360; // Rotaciona em incrementos de 90 graus
+        canvasGrid.style.transform = `rotate(${rotationAngle}deg)`; // Aplica rotação ao grid
+        canvasGrid.classList.remove('rotated-0', 'rotated-90', 'rotated-180', 'rotated-270');
+        canvasGrid.classList.add(`rotated-${rotationAngle}`);
+    
+        // Se a ferramenta de rotação estiver ativa e o usuário clicar em um pixel, rotacionar o bloco individualmente
+        if (activeTool === 'rotate') {
+            canvasGrid.addEventListener('click', handlePixelRotation);
         } else {
-            pixel.style.backgroundImage = 'none';
+            canvasGrid.removeEventListener('click', handlePixelRotation);
         }
     });
-}
 
-/**
- * Rotaciona o canvas (o grid inteiro).
- * @param {string} direction - 'left' para girar 90 graus para a esquerda, 'right' para 90 graus para a direita.
- */
-function rotateCanvas(direction) {
-    if (direction === 'left') {
-        currentCanvasRotation = (currentCanvasRotation - 90 + 360) % 360;
-    } else if (direction === 'right') {
-        currentCanvasRotation = (currentCanvasRotation + 90) % 360;
-    }
-    canvasGrid.className = `rotated-${currentCanvasRotation}`;
-
-    calculatePixelSize();
-    restoreState(historyStack[historyIndex]);
-}
-
-/**
- * Rotaciona o bloco atualmente selecionado.
- */
-function rotateCurrentBlock() {
-    if (!currentBlockId) {
-        alert('Selecione um bloco na paleta primeiro para rotacioná-lo.');
-        return;
-    }
-
-    currentBlockRotations[currentBlockId] = (currentBlockRotations[currentBlockId] + 90) % 360;
-
-    // Atualiza a visualização do bloco na paleta
-    const paletteBlock = document.querySelector(`.palette-block[data-block-id="${currentBlockId}"]`);
-    if (paletteBlock) {
-        const paletteBlockImage = paletteBlock.querySelector('.palette-block-image');
-        if (paletteBlockImage) {
-            // APLICA A ROTAÇÃO APENAS NA IMAGEM, NÃO NO BLOCO INTEIRO
-            paletteBlockImage.style.transform = `rotate(${currentBlockRotations[currentBlockId]}deg)`;
+    // Função para rotacionar um pixel individualmente (quando a ferramenta 'rotate' está ativa)
+    function handlePixelRotation(e) {
+        const pixel = e.target.closest('.pixel');
+        if (pixel && activeTool === 'rotate') {
+            let currentBlockRotation = parseInt(pixel.dataset.rotation || 0);
+            currentBlockRotation = (currentBlockRotation + 90) % 360;
+            pixel.dataset.rotation = currentBlockRotation;
+            
+            // Remove todas as classes de rotação antigas e adiciona a nova
+            pixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
+            pixel.classList.add(`block-rotated-${currentBlockRotation}`);
         }
     }
 
-    const blockToolButtonImg = document.getElementById('blockTool').querySelector('img');
-    if (currentTool === 'block' && blockToolButtonImg) {
-        blockToolButtonImg.style.transform = `rotate(${currentBlockRotations[currentBlockId]}deg)`;
-    }
-    console.log(`Bloco ${currentBlockId} rotacionado para ${currentBlockRotations[currentBlockId]} graus.`);
-}
 
-/**
- * Atualiza o estado habilitado/desabilitado dos botões Desfazer/Refazer.
- */
-function updateHistoryButtons() {
-    undoButton.disabled = historyIndex <= 0;
-    redoButton.disabled = historyIndex >= historyStack.length - 1;
-}
+    // --- Controles Inferiores ---
+    clearCanvasBtn.addEventListener('click', () => {
+        if (confirm('Tem certeza que deseja limpar toda a tela?')) {
+            createGrid(); // Recria o grid, limpando todos os pixels
+            rotationAngle = 0; // Reseta a rotação do canvas
+            canvasGrid.style.transform = 'rotate(0deg)';
+            canvasGrid.classList.remove('rotated-0', 'rotated-90', 'rotated-180', 'rotated-270');
+            canvasGrid.classList.add('rotated-0'); // Garante que a classe de 0deg esteja presente
 
+            // Limpa o estado de rotação de todos os blocos individuais
+            blockRotationState = {};
+            document.querySelectorAll('.pixel').forEach(pixel => {
+                pixel.dataset.rotation = 0;
+                pixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
+                pixel.classList.add('block-rotated-0');
+            });
+        }
+    });
 
-// --- Event Listeners ---
+    downloadImageBtn.addEventListener('click', () => {
+        // Temporariamente remove a rotação do canvas para o download
+        const originalCanvasTransform = canvasGrid.style.transform;
+        canvasGrid.style.transform = ''; // Remove a rotação do grid principal para o HTML2Canvas
 
-document.addEventListener('mouseup', stopDrawing);
+        // Temporariamente remove as classes de rotação dos pixels para o download
+        const originalPixelRotations = [];
+        document.querySelectorAll('.pixel').forEach(pixel => {
+            const currentRotation = pixel.dataset.rotation || 0;
+            originalPixelRotations.push({ pixel, rotation: currentRotation });
+            pixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
+            pixel.classList.add(`block-rotated-0`); // Define todos para 0deg para o screenshot
+        });
 
-// Event Listeners para botões da Toolbar
-document.getElementById('blockTool').addEventListener('click', () => {
-    currentTool = 'block';
-    updateActiveToolButton('blockTool');
-    updateSelectedBlockInPalette(currentBlockId);
-    const blockToolButtonImg = document.getElementById('blockTool').querySelector('img');
-    if (blockToolButtonImg) {
-        blockToolButtonImg.src = blockImageUrls[currentBlockId];
-        blockToolButtonImg.style.transform = `rotate(${currentBlockRotations[currentBlockId]}deg)`;
-    }
-});
-document.getElementById('eraserTool').addEventListener('click', () => {
-    currentTool = 'eraser';
-    updateActiveToolButton('eraserTool');
-    updateSelectedBlockInPalette('');
-    const blockToolButtonImg = document.getElementById('blockTool').querySelector('img');
-    if (blockToolButtonImg) {
-        blockToolButtonImg.src = 'assets/tools/block_icon.png';
-        blockToolButtonImg.style.transform = 'rotate(0deg)';
-    }
-});
-document.getElementById('fillTool').addEventListener('click', () => {
-    currentTool = 'fill';
-    updateActiveToolButton('fillTool');
-});
-document.getElementById('eyedropperTool').addEventListener('click', () => {
-    currentTool = 'eyedropper';
-    updateActiveToolButton('eyedropperTool');
-});
-document.getElementById('squareOutlineTool').addEventListener('click', () => {
-    currentTool = 'square-outline';
-    updateActiveToolButton('squareOutlineTool');
-});
-document.getElementById('circleTool').addEventListener('click', () => {
-    currentTool = 'circle';
-    updateActiveToolButton('circleTool');
-});
-document.getElementById('randomTool').addEventListener('click', () => {
-    currentTool = 'random';
-    updateActiveToolButton('randomTool');
-});
-document.getElementById('megaBlockTool').addEventListener('click', () => {
-    currentTool = 'mega-block';
-    updateActiveToolButton('megaBlockTool');
-});
+        // Use setTimeout para garantir que as alterações de estilo sejam aplicadas antes do screenshot
+        setTimeout(() => {
+            // Reajusta a escala para o HTML2Canvas, se necessário (pode ser ajustado)
+            const scale = 2; // Aumenta a resolução do download
+            html2canvas(canvasGrid, {
+                scale: scale,
+                backgroundColor: null, // Deixa o fundo transparente se o grid não tiver fundo
+                useCORS: true // Importante para carregar imagens de outros domínios ou caminhos relativos
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'minecraft_pixel_art.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
 
-// Event Listeners para botões de Rotação de CANVAS
-rotateLeftButton.addEventListener('click', () => rotateCanvas('left'));
-rotateRightButton.addEventListener('click', () => rotateCanvas('right'));
+                // Restaura a rotação original do canvas
+                canvasGrid.style.transform = originalCanvasTransform;
 
-// Event Listener para o botão de Rotação de BLOCO
-rotateBlockButton.addEventListener('click', rotateCurrentBlock);
-
-// Event Listener para o Slider de Tamanho do Pincel
-brushSizeSlider.addEventListener('input', (e) => {
-    brushSize = parseInt(e.target.value);
-    brushSizeValueSpan.textContent = brushSize;
-});
-
-// Event Listeners para botões de Controle Inferiores
-clearButton.addEventListener('click', clearGrid);
-downloadButton.addEventListener('click', downloadImage);
-
-// Event Listeners para botões de Desfazer/Refazer
-undoButton.addEventListener('click', undo);
-redoButton.addEventListener('click', redo);
-
-// Event Listener para redimensionamento da janela
-window.addEventListener('resize', () => {
-    calculatePixelSize();
-    restoreState(historyStack[historyIndex]);
-});
+                // Restaura as rotações originais dos pixels
+                originalPixelRotations.forEach(({ pixel, rotation }) => {
+                    pixel.classList.remove('block-rotated-0', 'block-rotated-90', 'block-rotated-180', 'block-rotated-270');
+                    pixel.classList.add(`block-rotated-${rotation}`);
+                    pixel.dataset.rotation = rotation;
+                });
+            });
+        }, 50); // Pequeno atraso para o navegador aplicar as mudanças de estilo
+    });
 
 
-// --- Inicialização do Aplicativo ---
-document.addEventListener('DOMContentLoaded', async () => {
-    initializeBlockRotations();
-    await preloadImages();
-    populateBlockPalette();
-    calculatePixelSize();
+    // --- Inicialização ---
     createGrid();
-    saveState();
-    updateHistoryButtons();
+    createPalette();
+
+    // Adiciona o script html2canvas dinamicamente
+    const script = document.createElement('script');
+    script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+    script.onload = () => {
+        console.log('html2canvas carregado!');
+        // Opcional: Se precisar de alguma lógica que dependa do html2canvas estar carregado, coloque aqui.
+    };
+    document.head.appendChild(script);
 });
