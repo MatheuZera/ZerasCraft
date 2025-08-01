@@ -860,8 +860,6 @@ h2 .fas, h3 .fas {
 .partnership-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Talvez um pouco menores */
 }
-
-
 /* ===================================== */
 /* 6. Rodapé (Footer) - APRIMORADO       */
 /* ===================================== */
