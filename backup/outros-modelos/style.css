@@ -490,20 +490,36 @@
     margin-bottom: 10px;
 }
 
-/* Barra de Progresso Animada ---------------------------- */
-.progress-bar-container {
-    max-width: 600px;
+/* ========================================= */
+/* Estilos da Barra de Status (Melhorado) PROGRESSO   */
+/* ========================================= */
+
+.status-bar-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr 50px; /* 1 parte para o texto, 2 para a barra, 50px para a porcentagem */
+    align-items: center;
+    gap: 15px;
     margin: 20px auto;
+    max-width: 600px;
 }
 
-.progress-bar-container p {
-    margin-bottom: 5px;
+.status-label {
+    margin: 0;
+    font-weight: 600;
     color: var(--cor-texto-claro);
 }
 
+.status-percentage {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--cor-destaque);
+    text-align: right;
+}
+
+/* O restante do seu CSS para .progress-bar-bg e .progress-bar-fill pode ser o mesmo */
 .progress-bar-bg {
     width: 100%;
-    height: 20px;
+    height: 15px;
     background-color: var(--cor-fundo-claro);
     border-radius: 10px;
     overflow: hidden;

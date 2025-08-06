@@ -95,50 +95,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Indicador de Progresso da Rolagem
+/** BARRA DE PROGRESSO */
 document.addEventListener('DOMContentLoaded', () => {
-    const progressBar = document.querySelector('.scroll-progress');
 
-    window.addEventListener('scroll', () => {
-        const totalHeight = document.body.scrollHeight - window.innerHeight;
-        const scrollPosition = window.scrollY;
-        const progress = (scrollPosition / totalHeight) * 100;
-        progressBar.style.width = progress + '%';
-    });
-});
+    /**
+     * Atualiza as barras de status de forma proporcional.
+     * A barra com o valor mais alto terá 100% da largura.
+     * As outras serão calculadas em relação a ela.
+     */
+    function updateServerStatus() {
+        // Seleciona todos os itens da barra de status
+        const statusBars = document.querySelectorAll('.status-bar-item');
+        if (statusBars.length === 0) {
+            return;
+        }
 
-// Contador de Estatísticas Animado
-document.addEventListener('DOMContentLoaded', () => {
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200;
-
-    const startCounter = (counter) => {
-        const updateCount = () => {
-            const target = +counter.getAttribute('data-target');
-            const count = +counter.innerText;
-            const increment = target / speed;
-
-            if (count < target) {
-                counter.innerText = Math.ceil(count + increment);
-                setTimeout(updateCount, 1);
-            } else {
-                counter.innerText = target;
-            }
-        };
-        updateCount();
-    };
-
-    const counterSection = document.querySelector('.stats-grid');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                counters.forEach(counter => startCounter(counter));
-                observer.unobserve(counterSection); // Para a observação depois de animar
+        // 1. Encontra o valor mais alto entre todos os itens
+        let maxStatusValue = 0;
+        statusBars.forEach(item => {
+            const value = parseInt(item.getAttribute('data-value'), 10);
+            if (value > maxStatusValue) {
+                maxStatusValue = value;
             }
         });
-    }, { threshold: 0.5 }); // Inicia a animação quando 50% da seção está visível
 
-    if (counterSection) {
-        observer.observe(counterSection);
+        // 2. Calcula e aplica a nova largura e o texto para cada item
+        statusBars.forEach(item => {
+            const value = parseInt(item.getAttribute('data-value'), 10);
+            
+            // Calcula a largura proporcional. Se o max for 0, evita divisão por zero.
+            const proportionalWidth = maxStatusValue > 0 ? (value / maxStatusValue) * 100 : 0;
+            
+            // Seleciona os elementos internos
+            const fillBar = item.querySelector('.progress-bar-fill');
+            const percentageSpan = item.querySelector('.status-percentage');
+
+            // Aplica a nova largura (que será animada pelo CSS)
+            fillBar.style.width = `${proportionalWidth}%`;
+
+            // Atualiza o texto da porcentagem
+            percentageSpan.textContent = `${value}%`;
+        });
     }
+
+    // Chama a função de atualização quando a página carregar
+    updateServerStatus();
 });
