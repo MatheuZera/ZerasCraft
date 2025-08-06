@@ -119,7 +119,6 @@ function playRandomMusic() {
 
     currentMusicIndex = newIndex;
     loadAndPlayMusic(musicPlaylist[currentMusicIndex]);
-    console.log(`[Player] Música aleatória selecionada: ${musicPlaylist[currentMusicIndex].title}`);
 }
 
 /**
@@ -128,7 +127,6 @@ function playRandomMusic() {
 function playNextMusic() {
     currentMusicIndex = (currentMusicIndex + 1) % musicPlaylist.length;
     loadAndPlayMusic(musicPlaylist[currentMusicIndex]);
-    console.log(`[Player] Próxima música na sequência: ${musicPlaylist[currentMusicIndex].title}`);
 }
 
 /**
@@ -136,30 +134,30 @@ function playNextMusic() {
  * @param {object} music O objeto de música com src e title.
  */
 function loadAndPlayMusic(music) {
-    // Para evitar possíveis problemas de cache, altere o src e pause o áudio
-    backgroundAudio.pause(); // Garante que a música anterior pare
     backgroundAudio.src = music.src;
     backgroundAudio.title = music.title;
     
     // Atualiza a interface
     if (musicTitleDisplay) {
         musicTitleDisplay.textContent = music.title;
-        showCentralMessage(`Tocando agora: ${music.title}`);
     }
-    
-    // Toca a música assim que o navegador estiver pronto
-    // Usamos um timeout de 100ms para dar tempo ao navegador de carregar
-    setTimeout(() => {
+
+    // Tenta tocar a música assim que ela for carregada
+    backgroundAudio.addEventListener('canplaythrough', () => {
         backgroundAudio.play().catch(e => {
-            console.error(`[Player] Erro ao tentar tocar "${music.title}":`, e);
+            // Este catch é importante para lidar com bloqueios de autoplay
+            console.warn(`Erro ao tentar tocar "${music.title}":`, e);
             if (e.name === "NotAllowedError") {
                 showCentralMessage("Clique no play para iniciar a música!");
             } else {
                 showCentralMessage(`Erro ao carregar a música: ${music.title}. Tentando a próxima...`);
-                setTimeout(playNextMusic, 2000); // Tenta a próxima música
+                // Tenta a próxima música automaticamente em caso de erro de carregamento
+                setTimeout(playNextMusic, 2000);
             }
         });
-    }, 100);
+    }, { once: true }); // O evento só será executado uma vez
+
+    // Loga no console para ajudar no debug
     console.log(`[Player] Tentando carregar e tocar: ${music.title}`);
 }
 
@@ -168,6 +166,7 @@ function loadAndPlayMusic(music) {
  */
 function togglePlayPause() {
     if (backgroundAudio.paused) {
+        // Se estiver pausado, e for a primeira vez, toca uma música aleatória
         if (currentMusicIndex === -1) {
             playRandomMusic();
         } else {
@@ -175,12 +174,10 @@ function togglePlayPause() {
         }
         audioControlButton.innerHTML = '<i class="fas fa-pause"></i>';
         showCentralMessage(`Música retomada!`);
-        console.log('[Player] Música retomada.');
     } else {
         backgroundAudio.pause();
         audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
         showCentralMessage(`Música pausada.`);
-        console.log('[Player] Música pausada.');
     }
 }
 
@@ -190,17 +187,18 @@ function togglePlayPause() {
 // =====================================
 
 // Listener para tocar a próxima música aleatória quando a atual terminar
-backgroundAudio.addEventListener('ended', () => {
-    console.log('[Player] Evento "ended" disparado. Tocando a próxima música aleatória.');
-    playRandomMusic();
-});
+// Este é o coração da funcionalidade de reprodução automática.
+backgroundAudio.addEventListener('ended', playRandomMusic);
 
+// Garante que o loop está desativado no elemento de áudio
 backgroundAudio.loop = false;
 
+// Adiciona o listener para o botão de play/pause
 if (audioControlButton) {
     audioControlButton.addEventListener('click', togglePlayPause);
 }
 
+// Adiciona o listener para o novo botão de próxima música
 if (audioNextButton) {
     audioNextButton.addEventListener('click', () => {
         playEffectSound(clickSound);
@@ -208,16 +206,19 @@ if (audioNextButton) {
     });
 }
 
+// Inicializa o player no carregamento da página
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicialmente, define o título da primeira música, mas não a toca
     if (musicPlaylist.length > 0) {
-        currentMusicIndex = Math.floor(Math.random() * musicPlaylist.length);
+        currentMusicIndex = 0;
         backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
         if (musicTitleDisplay) {
             musicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
         }
-        console.log(`[Player] Inicializado com a música: ${musicPlaylist[currentMusicIndex].title}`);
     }
 
+    // A reprodução só iniciará após a primeira interação do usuário,
+    // seja clicando no botão de play ou em qualquer outra parte da página.
     audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
     showCentralMessage("Clique em 'Play' para iniciar a música!");
 });
