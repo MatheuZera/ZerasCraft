@@ -99,9 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
 
     /**
-     * Atualiza as barras de status de forma proporcional.
-     * A barra com o valor mais alto terá 100% da largura.
-     * As outras serão calculadas em relação a ela.
+     * Atualiza as barras de status usando o valor absoluto
+     * de 0 a 100% de cada item.
      */
     function updateServerStatus() {
         // Seleciona todos os itens da barra de status
@@ -110,28 +109,17 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 1. Encontra o valor mais alto entre todos os itens
-        let maxStatusValue = 0;
+        // Percorre cada item e aplica sua porcentagem diretamente
         statusBars.forEach(item => {
             const value = parseInt(item.getAttribute('data-value'), 10);
-            if (value > maxStatusValue) {
-                maxStatusValue = value;
-            }
-        });
-
-        // 2. Calcula e aplica a nova largura e o texto para cada item
-        statusBars.forEach(item => {
-            const value = parseInt(item.getAttribute('data-value'), 10);
-            
-            // Calcula a largura proporcional. Se o max for 0, evita divisão por zero.
-            const proportionalWidth = maxStatusValue > 0 ? (value / maxStatusValue) * 100 : 0;
             
             // Seleciona os elementos internos
             const fillBar = item.querySelector('.progress-bar-fill');
             const percentageSpan = item.querySelector('.status-percentage');
 
-            // Aplica a nova largura (que será animada pelo CSS)
-            fillBar.style.width = `${proportionalWidth}%`;
+            // Aplica a largura com base no valor.
+            // A largura de 50% será exatamente metade da barra.
+            fillBar.style.width = `${value}%`;
 
             // Atualiza o texto da porcentagem
             percentageSpan.textContent = `${value}%`;
