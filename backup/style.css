@@ -859,6 +859,7 @@ h2 .fas, h3 .fas {
 .partnership-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Talvez um pouco menores */
 }
+
 /* ===================================== */
 /* 6. Rodapé (Footer) - APRIMORADO       */
 /* ===================================== */
@@ -1286,4 +1287,1129 @@ h2 .fas, h3 .fas {
     #musicTitleDisplay {
         max-width: 120px; /* Ainda menor em mobile */
     }
+}
+
+/* ====================================================================================== */
+
+/* ========================================= */
+/* 9. Estilos para o Acordeão (Recolhimento)    */
+/* ========================================= */
+
+/* Container que envolve todos os itens do acordeão */
+.accordion-container {
+    width: 90%; /* Ajuste esta porcentagem conforme necessário */
+    max-width: 600px; /* Ajuste este valor em pixels conforme necessário */
+    margin: 30px auto; /* Mantém o acordeão centralizado */
+}
+
+/* Cada item individual do acordeão */
+.accordion-item {
+    background-color: var(--cor-card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius);
+    margin-bottom: 8px; /* Reduzi um pouco a margem inferior */
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.accordion-item:hover {
+    box-shadow: var(--sombra-card);
+}
+
+/* O cabeçalho clicável de cada item */
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px; /* Reduzi um pouco o padding vertical */
+    cursor: pointer;
+    background-color: var(--cor-card-bg);
+    color: var(--cor-texto-claro);
+    font-family: var(--fonte-titulo);
+    font-size: 1em; /* Reduzi um pouco o tamanho da fonte */
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: var(--cor-card-hover);
+}
+
+/* O ícone de seta que gira */
+.accordion-header .accordion-icon {
+    font-size: 1.2em; /* Reduzi um pouco o tamanho do ícone */
+    color: var(--cor-primaria);
+    transition: transform 0.3s ease;
+}
+
+/* Estilos quando o item do acordeão está "aberto" */
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+    color: var(--cor-destaque);
+}
+
+/* O conteúdo que é expandido/recolhido */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    background-color: #2e4459;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+/* Estilos do conteúdo quando o item está "aberto" */
+.accordion-item.active .accordion-content {
+    max-height: 500px; /* Valor grande o suficiente para o conteúdo */
+    padding: 10px 15px; /* Reduzi um pouco o padding vertical */
+    font-size: 0.9em; /* Reduzi um pouco o tamanho da fonte do conteúdo */
+}
+
+/* ========================================= */
+/* 10. Estilos para o Modal (Popup) */
+/* ========================================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--cor-fundo-escuro);
+    border: 2px solid var(--cor-primaria);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: var(--sombra-card-hover);
+    transform: scale(0.9);
+    transition: transform 0.3s ease-out;
+}
+
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-title {
+    color: var(--cor-destaque);
+    font-family: var(--fonte-titulo);
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--cor-bordas);
+    padding-bottom: 10px;
+}
+
+.modal-content p, .modal-content ul {
+    color: var(--cor-texto-claro);
+    line-height: 1.6;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--cor-texto-claro);
+    font-size: 2em;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    color: var(--cor-destaque);
+    transform: rotate(90deg);
+}
+
+/* ========================================= */
+/* 11. Estilos para a Galeria de Imagens */
+/* ========================================= */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--gap-grid);
+    margin-top: 40px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--cor-destaque);
+    font-size: 3em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: var(--sombra-card-hover);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.6);
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* Lightbox (Menu do modal para imagem) */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1003;
+}
+
+.lightbox-overlay.show {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.lightbox-content img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card-hover);
+    animation: fadeInScale 0.4s ease-out;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ========================================= */
+/* 12. Estilos para a Timeline */
+/* ========================================= */
+
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: var(--cor-bordas);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    background-color: var(--cor-primaria);
+    border: 3px solid var(--cor-fundo-escuro);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+.timeline-item.right::after {
+    left: -10px;
+}
+
+.timeline-item:hover::after {
+    background-color: var(--cor-destaque);
+}
+
+.timeline-item .timeline-card {
+    padding: var(--padding-card);
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+@media screen and (max-width: 600px) {
+    .timeline-container::after {
+        left: 31px;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item.left::after, .timeline-item.right::after {
+        left: 15px;
+    }
+    .timeline-item.right {
+        left: 0;
+    }
+}
+
+/* ========================================= */
+/* 13. Estilos para as Tabs de Conteúdo */
+/* ========================================= */
+
+.tabs-container {
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    border-bottom: 2px solid var(--cor-bordas);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    font-family: var(--fonte-titulo);
+    font-size: 1.1em;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.tab-button.active,
+.tab-button:hover {
+    color: var(--cor-destaque);
+    transform: translateY(-5px);
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--cor-primaria);
+    border-radius: 2px 2px 0 0;
+}
+
+.tab-content {
+    display: none;
+    background-color: var(--cor-card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--sombra-card);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Cards com efeito de flip*/
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 350px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--sombra-card);
+    border: 1px solid var(--cor-bordas);
+}
+
+.flip-card-front {
+    background-color: var(--cor-card-bg);
+    color: var(--cor-texto-claro);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-front img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--cor-primaria);
+}
+
+.flip-card-back {
+    background-color: var(--cor-card-hover);
+    color: var(--cor-texto-claro);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-back ul {
+    margin: 20px 0;
+}
+
+.flip-card-back li {
+    font-size: 1.1em;
+    padding: 5px 0;
+}
+
+
+/* Seção com efeito Parallax -------------------------*/
+.parallax-section {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+.parallax-content {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    border-radius: var(--border-radius);
+}
+
+.parallax-content h2 {
+    color: var(--cor-destaque);
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+/* ========================================= */
+/* 14. Estilos da Barra de Status (Melhorado) PROGRESSO   */
+/* ========================================= */
+
+.status-bar-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr 50px; /* 1 parte para o texto, 2 para a barra, 50px para a porcentagem */
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.status-label {
+    margin: 0;
+    font-weight: 600;
+    color: var(--cor-texto-claro);
+}
+
+.status-percentage {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--cor-destaque);
+    text-align: right;
+}
+
+/* O restante do seu CSS para .progress-bar-bg e .progress-bar-fill pode ser o mesmo */
+.progress-bar-bg {
+    width: 100%;
+    height: 15px;
+    background-color: var(--cor-fundo-claro);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--cor-primaria);
+    transition: width 0.8s ease-in-out;
+    border-radius: 10px;
+    animation: fill-progress 2s ease-out forwards;
+}
+
+@keyframes fill-progress {
+    from { width: 0; }
+}
+
+/* Botões com efeito de brilho */
+.btn-shine {
+    display: inline-block;
+    padding: 15px 35px;
+    margin-top: 20px;
+    position: relative;
+    border: 2px solid var(--cor-destaque);
+    overflow: hidden;
+    border-radius: 5px;
+    background: none;
+    color: var(--cor-destaque);
+    font-size: 1.1em;
+    font-weight: 600;
+    z-index: 1;
+    transition: var(--transicao-padrao);
+}
+
+.btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    z-index: -1;
+}
+
+.btn-shine:hover {
+    color: var(--cor-fundo-escuro);
+    background-color: var(--cor-destaque);
+    box-shadow: 0 0 20px var(--cor-destaque);
+}
+
+.btn-shine:hover::before {
+    transform: translateX(100%);
+}
+
+/* Carrossel de Testemunhos */
+.testimonial-carousel {
+    display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    max-width: 800px;
+    margin: 30px auto;
+    position: relative;
+}
+
+.testimonial-item {
+    min-width: 100%;
+    flex-shrink: 0;
+    padding: 20px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--cor-bordas);
+    box-shadow: var(--sombra-card);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-item p {
+    font-size: 1.2em;
+    font-style: italic;
+    color: var(--cor-texto-claro);
+    margin-bottom: 20px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--cor-primaria);
+}
+
+.testimonial-author h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--cor-destaque);
+}
+
+.testimonial-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.testimonial-nav button {
+    background-color: var(--cor-card-bg);
+    border: 1px solid var(--cor-primaria);
+    color: var(--cor-primaria);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+}
+
+.testimonial-nav button:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-escuro);
+}
+
+/* Cards com efeito Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--padding-card);
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+.glass-card h3 {
+    color: var(--cor-destaque);
+}
+
+.glass-card p {
+    color: var(--cor-texto-claro);
+}
+
+/* Indicador de Rolagem */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background-color: var(--cor-primaria);
+    z-index: 1004;
+    transition: width 0.1s linear;
+}
+
+/* Tooltips -------------------------- */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 10px;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--cor-card-hover);
+    color: var(--cor-texto-claro);
+    text-align: center;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.9em;
+    border: 1px solid var(--cor-primaria);
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Seta do tooltip ------------------ */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--cor-primaria) transparent transparent transparent;
+}
+
+/* Contador de Estatísticas -------------------------- */
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.stat-item .stat-icon {
+    font-size: 3em;
+    color: var(--cor-primaria);
+    margin-bottom: 10px;
+}
+
+.stat-item .counter {
+    font-family: var(--fonte-titulo);
+    font-size: 4em;
+    font-weight: 700;
+    color: var(--cor-destaque);
+    margin-bottom: 5px;
+}
+
+/* Botões de Opção Personalizados ------------------ */
+.custom-radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.custom-radio-btn {
+    display: block;
+    cursor: pointer;
+}
+
+.custom-radio-btn input {
+    display: none;
+}
+
+.custom-radio-text {
+    padding: 15px 30px;
+    background-color: var(--cor-card-bg);
+    border: 2px solid var(--cor-bordas);
+    border-radius: var(--border-radius);
+    color: var(--cor-texto-claro);
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: var(--transicao-padrao);
+}
+
+/* Estado de hover */
+.custom-radio-btn:hover .custom-radio-text {
+    background-color: var(--cor-card-hover);
+    border-color: var(--cor-primaria);
+}
+
+/* Estado selecionado */
+.custom-radio-btn input:checked + .custom-radio-text {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-escuro);
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+    transform: translateY(-5px);
+}
+
+
+/* ========================================= */
+/* 15. CAIXA DE TEXTO COM EFEITO VIDRO TRANSPARENTE
+/* ========================================= */
+.glass-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* ========================================= */
+/* 16. BLOCO DE CITAÇÃO COM BORDA ANIMADA */
+/* ========================================= */
+
+.animated-quote {
+    background-color: var(--cor-fundo-escuro);
+    padding: 30px;
+    border-left: 5px solid var(--cor-primaria);
+    border-radius: 8px;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-quote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--cor-primaria), var(--cor-secundaria));
+    animation: quote-border-flow 3s linear infinite;
+}
+
+@keyframes quote-border-flow {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.animated-quote p {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--cor-texto-claro);
+    margin-bottom: 10px;
+}
+
+.animated-quote cite {
+    display: block;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--cor-texto-claro);
+}
+
+/* ========================================= */
+/* 17. TEXTO COM EFEITO "GLITCH" */
+/* ========================================= */
+
+.glitch-text {
+    position: relative;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0.05em 0 0 #00f, -0.05em 0 0 #f00;
+    animation: glitch 1.5s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cor-fundo);
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+}
+
+.glitch-text::before {
+    left: -2px;
+    text-shadow: 0.05em 0 0 #f00;
+    animation: glitch-before 2s infinite;
+}
+
+.glitch-text::after {
+    left: 2px;
+    text-shadow: -0.05em 0 0 #00f;
+    animation: glitch-after 2.5s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(-5px, -5px); }
+    60% { transform: translate(5px, 5px); }
+    80% { transform: translate(5px, -5px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitch-before {
+    0% { clip: rect(0, 900px, 0, 0); }
+    10% { clip: rect(10px, 900px, 10px, 0); }
+    20% { clip: rect(20px, 900px, 20px, 0); }
+    /* ...outros keyframes para simular a falha... */
+}
+
+@keyframes glitch-after {
+    0% { clip: rect(0, 900px, 0, 0); }
+    15% { clip: rect(5px, 900px, 5px, 0); }
+    30% { clip: rect(25px, 900px, 25px, 0); }
+    /* ...outros keyframes... */
+}
+
+/* ========================================= */
+/* 18. BLOCO DE SPOILER DE TEXTO EXPANSÍVEL */
+/* ========================================= */
+
+.spoiler-block {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.spoiler-toggle {
+    width: 100%;
+    background-color: var(--cor-fundo-claro);
+    color: var(--cor-texto-claro);
+    border: none;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.spoiler-toggle:hover {
+    background-color: var(--cor-fundo-escuro);
+}
+
+.spoiler-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    background-color: var(--cor-fundo-claro);
+    padding: 0 20px;
+    border-radius: 0 0 8px 8px;
+}
+
+.spoiler-block.active .spoiler-content {
+    max-height: 500px; /* Valor grande para permitir expansão */
+    padding: 20px;
+}
+
+/* ========================================= */
+/* 19. TÍTULO COM SUBLINHADO ANIMADO */
+/* ========================================= */
+
+.animated-underline-title {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+    color: var(--cor-texto-claro);
+    cursor: pointer;
+}
+
+.animated-underline-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--cor-primaria);
+    transition: width 0.3s ease;
+}
+
+.animated-underline-title:hover::after {
+    width: 100%;
+}
+
+/* ========================================= */
+/* 20. LISTA DE RECURSOS COM ANIMAÇÃO DE MARCADOR */
+/* ========================================= */
+.animated-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+.animated-list li {
+    padding: 10px 0;
+    font-size: 1.1rem;
+    color: var(--cor-texto-claro);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animated-list li:nth-child(1) { transition-delay: 0.1s; }
+.animated-list li:nth-child(2) { transition-delay: 0.2s; }
+.animated-list li:nth-child(3) { transition-delay: 0.3s; }
+/* Adicione mais seções conforme a necessidade */
+
+.animated-list.in-view li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.list-icon {
+    color: var(--cor-primaria);
+    margin-right: 10px;
+}
+
+/* ========================================= */
+/* 21. TÍTULO COM ANIMAÇÃO DE "CORTINA" */
+/* ========================================= */
+.curtain-title-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 4rem; /* Ajuste conforme o tamanho do seu texto */
+}
+
+.curtain-title {
+    color: var(--cor-texto-claro);
+    font-size: 3rem;
+    transform: translateY(100%);
+    animation: reveal-title 1.2s ease-out forwards;
+    animation-delay: 0.5s; /* Começa a animação depois de um pequeno atraso */
+}
+
+@keyframes reveal-title {
+    to { transform: translateY(0); }
+}
+
+/* ========================================= */
+/* 22. TEXTO COM EFEITO HOVER INTERATIVO */
+/* ========================================= */
+.hover-text-reveal {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--cor-texto-claro);
+}
+
+.hover-text {
+    position: relative;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    cursor: pointer;
+}
+
+.hover-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 200px;
+    background-color: var(--cor-fundo-claro);
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.hover-text:hover + .hover-image {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ========================================= */
+/* 23. BLOCO DE TETO COM EFEITO DE "CONSOLE" */
+/* ========================================= */
+.console-box {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff00;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.console-header {
+    display: flex;
+    gap: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.console-text {
+    white-space: pre-wrap;
+    padding-top: 10px;
 }
