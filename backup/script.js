@@ -3,112 +3,224 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM totalmente carregado e pronto!");
 
-    // =====================================
-    // Variáveis de Áudio e Elementos
-    // =====================================
-    let hoverSound;
-    let clickSound;
-    const backgroundAudio = document.getElementById('backgroundAudio');
-    let preparingNextMusic = false; // Flag para evitar múltiplas chamadas de load/play simultâneas
-    const audioEffects = {};
+// =====================================
+// Variáveis de Áudio e Elementos
+// =====================================
+let hoverSound;
+let clickSound;
+const backgroundAudio = document.getElementById('backgroundAudio');
+let preparingNextMusic = false;
+const audioEffects = {};
 
-    const audioControlButton = document.getElementById('audioControlButton');
-    const audioNextButton = document.getElementById('audioNextButton'); // Novo botão
-    const musicTitleDisplay = document.getElementById('musicTitleDisplay');
-    const audioProgressArc = document.getElementById('audioProgressArc');
-    const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
+const audioControlButton = document.getElementById('audioControlButton');
+const audioNextButton = document.getElementById('audioNextButton');
+const musicTitleDisplay = document.getElementById('musicTitleDisplay');
+const audioProgressArc = document.getElementById('audioProgressArc');
+const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
 
-    // Garante que o raio e a circunferência são definidos corretamente para o SVG
-    // CONFIRME SE O RAIO NO SEU SVG (<circle r="XX">) É REALMENTE 27!
-    const arcRadius = 27;
-    const arcCircumference = 2 * Math.PI * arcRadius;
+const arcRadius = 27;
+const arcCircumference = 2 * Math.PI * arcRadius;
 
-    // A playlist com seus títulos e caminhos.
-    const musicPlaylist = [
-        { title: '✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
-        { title: '✨ Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
-        { title: '✨ Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
-        { title: '✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
-        { title: '✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
-        { title: '✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
-        { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
-        { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp3' },
-        { title: '⛏️ Beginning', src: 'assets/audios/musics/Beginning.mp3' },
-        { title: '⛏️ Biome Fest', src: 'assets/audios/musics/Biome-Fest.mp3' },
-        { title: '⛏️ Blind Spots', src: 'assets/audios/musics/Blind-Spots.mp3' },
-        { title: '⛏️ Clark', src: 'assets/audios/musics/Clark.mp3' },
-        { title: '⛏️ Danny', src: 'assets/audios/musics/Danny.mp3' },
-        { title: '⛏️ Dreiton', src: 'assets/audios/musics/Dreiton.mp3' },
-        { title: '⛏️ Dry Hands', src: 'assets/audios/musics/Dry-Hands.mp3' },
-        { title: '⛏️ Floating Trees', src: 'assets/audios/musics/Floating-Trees.mp3' },
-        { title: '⛏️ Haggstrom', src: 'assets/audios/musics/Haggstrom.mp3' },
-        { title: '⛏️ Key', src: 'assets/audios/musics/Key.mp3' },
-        { title: '⛏️ Living Mice', src: 'assets/audios/musics/Living-Mice.mp3' },
-        { title: '⛏️ Mice On Venus', src: 'assets/audios/musics/Mice-On-Venus.mp3' },
-        { title: '⛏️ Minecraft', src: 'assets/audios/musics/Minecraft.mp3' },
-        { title: '⛏️ Moog City', src: 'assets/audios/musics/Moog-City.mp3' },
-        { title: '⛏️ Mutation', src: 'assets/audios/musics/Mutation.mp3' },
-        { title: '⛏️ Sweden', src: 'assets/audios/musics/Sweden.mp3' },
-        { title: '⛏️ Taswell', src: 'assets/audios/musics/Taswell.mp3' },
-        { title: '⛏️ Wet Hands', src: 'assets/audios/musics/Wet-Hands.mp3' },
-        { title: '💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
-        { title: '💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
-        { title: '💿 Far', src: 'assets/audios/musics/records/Far.mp3' },
-        { title: '💿 Mall', src: 'assets/audios/musics/records/Mall.mp3' },
-        { title: '💿 Mellohi', src: 'assets/audios/musics/records/Mellohi.mp3' },
-        { title: '💿 Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
-        { title: '💿 Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
-        { title: '💿 Relic', src: 'assets/audios/musics/records/Relic.mp3' },
-        { title: '💿 Stal', src: 'assets/audios/musics/records/Stal.mp3' },
-        { title: '💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
-        { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
-        { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
-    ];
-    let currentMusicIndex = -1;
+const musicPlaylist = [
+    { title: '✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
+    { title: '✨ Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
+    { title: '✨ Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
+    { title: '✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
+    { title: '✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
+    { title: '✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
+    { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
+    { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp' },
+    { title: '⛏️ Beginning', src: 'assets/audios/musics/Beginning.mp3' },
+    { title: '⛏️ Biome Fest', src: 'assets/audios/musics/Biome-Fest.mp3' },
+    { title: '⛏️ Blind Spots', src: 'assets/audios/musics/Blind-Spots.mp3' },
+    { title: '⛏️ Clark', src: 'assets/audios/musics/Clark.mp3' },
+    { title: '⛏️ Danny', src: 'assets/audios/musics/Danny.mp3' },
+    { title: '⛏️ Dreiton', src: 'assets/audios/musics/Dreiton.mp3' },
+    { title: '⛏️ Dry Hands', src: 'assets/audios/musics/Dry-Hands.mp3' },
+    { title: '⛏️ Floating Trees', src: 'assets/audios/musics/Floating-Trees.mp3' },
+    { title: '⛏️ Haggstrom', src: 'assets/audios/musics/Haggstrom.mp3' },
+    { title: '⛏️ Key', src: 'assets/audios/musics/Key.mp3' },
+    { title: '⛏️ Living Mice', src: 'assets/audios/musics/Living-Mice.mp3' },
+    { title: '⛏️ Mice On Venus', src: 'assets/audios/musics/Mice-On-Venus.mp3' },
+    { title: '⛏️ Minecraft', src: 'assets/audios/musics/Minecraft.mp3' },
+    { title: '⛏️ Moog City', src: 'assets/audios/musics/Moog-City.mp3' },
+    { title: '⛏️ Mutation', src: 'assets/audios/musics/Mutation.mp3' },
+    { title: '⛏️ Sweden', src: 'assets/audios/musics/Sweden.mp3' },
+    { title: '⛏️ Taswell', src: 'assets/audios/musics/Taswell.mp3' },
+    { title: '⛏️ Wet Hands', src: 'assets/audios/musics/Wet-Hands.mp3' },
+    { title: '💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
+    { title: '💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
+    { title: '💿 Far', src: 'assets/audios/musics/records/Far.mp3' },
+    { title: '💿 Mall', src: 'assets/audios/musics/records/Mall.mp3' },
+    { title: '💿 Mellohi', src: 'assets/audios/musics/records/Mellohi.mp3' },
+    { title: '💿 Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
+    { title: '💿 Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
+    { title: '💿 Relic', src: 'assets/audios/musics/records/Relic.mp3' },
+    { title: '💿 Stal', src: 'assets/audios/musics/records/Stal.mp3' },
+    { title: '💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
+    { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
+    { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
+];
+let currentMusicIndex = -1;
 
-    // =====================================
-    // Funções Auxiliares de Áudio
-    // =====================================
+// =====================================
+// Funções Auxiliares de Áudio
+// =====================================
 
-    const initializeAudioEffect = (name, path, volume = 0.5) => {
-        const audio = new Audio(path);
-        audio.preload = 'auto'; // Preload para um carregamento mais rápido
-        audio.volume = volume;
-        audioEffects[name] = audio;
-        return audio;
-    };
+const initializeAudioEffect = (name, path, volume = 0.5) => {
+    const audio = new Audio(path);
+    audio.preload = 'auto';
+    audio.volume = volume;
+    audioEffects[name] = audio;
+    return audio;
+};
 
-    hoverSound = initializeAudioEffect('select', 'assets/audios/effects/select.mp3', 0.3); // Ajuste o volume se desejar
-    clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7); // Ajuste o volume se desejar
+hoverSound = initializeAudioEffect('select', 'assets/audios/effects/select.mp3', 0.3);
+clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7);
 
-    const playEffectSoundInternal = (audioElement) => {
-        if (audioElement) {
-            // Clonar o elemento para permitir múltiplos sons rápidos sem cortar o anterior
-            const clonedAudio = audioElement.cloneNode();
-            clonedAudio.volume = audioElement.volume;
-            clonedAudio.play().catch(e => console.warn("Erro ao tentar tocar som de efeito:", e.message));
-        }
-    };
-
-    const playEffectSound = (audioElement) => {
-        // Pequeno atraso para evitar conflitos de reprodução rápida ou no carregamento inicial
-        setTimeout(() => {
-            playEffectSoundInternal(audioElement);
-        }, 10);
-    };
-
-    function showCentralMessage(message) {
-        const centralMessageElement = document.getElementById('centralMessage');
-        if (centralMessageElement) {
-            centralMessageElement.textContent = message;
-            centralMessageElement.classList.add('show'); // Adiciona classe 'show' para animação
-            setTimeout(() => {
-                centralMessageElement.classList.remove('show'); // Remove a classe para esconder
-            }, 3000); // Mensagem visível por 3 segundos
-        } else {
-            console.log(`[Mensagem Central] ${message}`); // Fallback para console se o elemento não existir
-        }
+const playEffectSoundInternal = (audioElement) => {
+    if (audioElement) {
+        const clonedAudio = audioElement.cloneNode();
+        clonedAudio.volume = audioElement.volume;
+        clonedAudio.play().catch(e => console.warn("Erro ao tentar tocar som de efeito:", e.message));
     }
+};
+
+const playEffectSound = (audioElement) => {
+    setTimeout(() => {
+        playEffectSoundInternal(audioElement);
+    }, 10);
+};
+
+function showCentralMessage(message) {
+    const centralMessageElement = document.getElementById('centralMessage');
+    if (centralMessageElement) {
+        centralMessageElement.textContent = message;
+        centralMessageElement.classList.add('show');
+        setTimeout(() => {
+            centralMessageElement.classList.remove('show');
+        }, 3000);
+    } else {
+        console.log(`[Mensagem Central] ${message}`);
+    }
+}
+
+// =====================================
+// Lógica de Controle da Música de Fundo
+// =====================================
+
+/**
+ * Toca uma música aleatória da playlist, evitando a repetição da última música.
+ */
+function playRandomMusic() {
+    let newIndex;
+    do {
+        newIndex = Math.floor(Math.random() * musicPlaylist.length);
+    } while (newIndex === currentMusicIndex); // Garante que a mesma música não toque duas vezes seguidas
+
+    currentMusicIndex = newIndex;
+    const newMusic = musicPlaylist[currentMusicIndex];
+
+    backgroundAudio.src = newMusic.src;
+    backgroundAudio.title = newMusic.title;
+    
+    // Atualiza a interface
+    if (musicTitleDisplay) {
+        musicTitleDisplay.textContent = newMusic.title;
+        showCentralMessage(`Tocando agora: ${newMusic.title}`);
+    }
+
+    backgroundAudio.play().catch(e => {
+        console.error("Erro ao tentar tocar a música:", e.message);
+        showCentralMessage("Erro ao carregar a música. Tentando a próxima...");
+        setTimeout(playRandomMusic, 2000); // Tenta a próxima música após 2 segundos
+    });
+}
+
+/**
+ * Toca a próxima música na sequência da playlist.
+ */
+function playNextMusic() {
+    currentMusicIndex = (currentMusicIndex + 1) % musicPlaylist.length;
+    const nextMusic = musicPlaylist[currentMusicIndex];
+
+    backgroundAudio.src = nextMusic.src;
+    backgroundAudio.title = nextMusic.title;
+    
+    if (musicTitleDisplay) {
+        musicTitleDisplay.textContent = nextMusic.title;
+        showCentralMessage(`Tocando agora: ${nextMusic.title}`);
+    }
+
+    backgroundAudio.play().catch(e => {
+        console.error("Erro ao tentar tocar a próxima música:", e.message);
+        showCentralMessage("Erro ao carregar a música. Tentando a próxima...");
+        setTimeout(playNextMusic, 2000); // Tenta a próxima música após 2 segundos
+    });
+}
+
+/**
+ * Lida com o controle de play/pause da música.
+ */
+function togglePlayPause() {
+    if (backgroundAudio.paused) {
+        // Se estiver pausado, e for a primeira vez, toca uma música aleatória
+        if (currentMusicIndex === -1) {
+            playRandomMusic();
+        } else {
+            backgroundAudio.play();
+        }
+        audioControlButton.innerHTML = '<i class="fas fa-pause"></i>';
+        showCentralMessage(`Música retomada!`);
+    } else {
+        backgroundAudio.pause();
+        audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
+        showCentralMessage(`Música pausada.`);
+    }
+}
+
+
+// =====================================
+// Event Listeners e Inicialização
+// =====================================
+
+// ATENÇÃO: Adicione este listener. Ele é o mais importante para a sua solicitação.
+backgroundAudio.addEventListener('ended', playRandomMusic);
+
+// Garante que o loop está desativado no elemento de áudio
+backgroundAudio.loop = false;
+
+// Adiciona o listener para o botão de play/pause
+if (audioControlButton) {
+    audioControlButton.addEventListener('click', togglePlayPause);
+}
+
+// Adiciona o listener para o novo botão de próxima música
+if (audioNextButton) {
+    audioNextButton.addEventListener('click', () => {
+        playEffectSound(clickSound);
+        playNextMusic();
+    });
+}
+
+// Adiciona um listener para a interação inicial do usuário para começar a música
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicialmente, define a primeira música
+    currentMusicIndex = 0;
+    backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
+    backgroundAudio.title = musicPlaylist[currentMusicIndex].title;
+    if (musicTitleDisplay) {
+        musicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
+    }
+
+    // Toca a música automaticamente se o navegador permitir (interação do usuário)
+    // Se o play falhar, é porque o navegador bloqueou a reprodução automática.
+    backgroundAudio.play().catch(e => {
+        console.log("Reprodução automática bloqueada. O usuário precisa interagir com a página.");
+        audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
+        showCentralMessage("Clique em 'Play' para iniciar a música!");
+    });
+});
 
     // =====================================
     // 1. Menu Hambúrguer para Responsividade
