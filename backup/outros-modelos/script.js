@@ -98,34 +98,64 @@ document.addEventListener('DOMContentLoaded', () => {
 /** BARRA DE PROGRESSO */
 document.addEventListener('DOMContentLoaded', () => {
 
-    /**
-     * Atualiza as barras de status usando o valor absoluto
-     * de 0 a 100% de cada item.
-     */
-    function updateServerStatus() {
-        // Seleciona todos os itens da barra de status
-        const statusBars = document.querySelectorAll('.status-bar-item');
-        if (statusBars.length === 0) {
-            return;
-        }
+    // Seleciona todos os elementos que têm a classe 'counter'
+    const counters = document.querySelectorAll('.counter');
+    
+    // Configura as opções do IntersectionObserver
+    const observerOptions = {
+        root: null, // O viewport
+        threshold: 0.5, // A animação começa quando 50% do elemento está visível
+    };
 
-        // Percorre cada item e aplica sua porcentagem diretamente
-        statusBars.forEach(item => {
-            const value = parseInt(item.getAttribute('data-value'), 10);
+    // Função para iniciar a animação do contador
+    const animateCounter = (counter) => {
+        const target = +counter.getAttribute('data-target');
+        const duration = 2000; // Duração da animação em milissegundos (2 segundos)
+        let startTime = null;
+
+        const easeOutQuad = t => t * (2 - t); // Função de easing para uma transição mais suave
+
+        const updateCounter = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const elapsedTime = timestamp - startTime;
             
-            // Seleciona os elementos internos
-            const fillBar = item.querySelector('.progress-bar-fill');
-            const percentageSpan = item.querySelector('.status-percentage');
+            // Calcula o progresso da animação (0 a 1)
+            const progress = Math.min(elapsedTime / duration, 1);
+            
+            // Calcula o valor atual a ser exibido
+            const value = Math.floor(easeOutQuad(progress) * target);
+            
+            counter.textContent = value;
 
-            // Aplica a largura com base no valor.
-            // A largura de 50% será exatamente metade da barra.
-            fillBar.style.width = `${value}%`;
+            // Se o progresso não terminou, continua a animação
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        };
 
-            // Atualiza o texto da porcentagem
-            percentageSpan.textContent = `${value}%`;
+        // Inicia a animação
+        requestAnimationFrame(updateCounter);
+    };
+
+    // Cria uma nova instância do IntersectionObserver
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            // Verifica se o elemento está visível
+            if (entry.isIntersecting) {
+                // Inicia a animação
+                animateCounter(entry.target);
+                
+                // Desconecta o observador para que a animação não se repita
+                observer.unobserve(entry.target);
+            }
         });
-    }
+    }, observerOptions);
 
-    // Chama a função de atualização quando a página carregar
-    updateServerStatus();
+    // Observa cada elemento counter
+    counters.forEach(counter => {
+        // Inicializa o valor com 0 para que a animação seja visível
+        counter.textContent = '0';
+        observer.observe(counter);
+    });
+
 });
