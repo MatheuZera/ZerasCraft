@@ -56,7 +56,7 @@
 }
 
 /* Importar fontes do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 
 /* Reset Básico para consistência entre navegadores */
@@ -335,7 +335,7 @@ ul {
     box-sizing: border-box;
     overflow: hidden;
 
-    background-image: url('../images/1.site/banner-fundo.gif'); /* Caminho ajustado */
+    background-image: url('assets/images/1.site/banner-fundo.gif'); /* Caminho ajustado */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -617,7 +617,6 @@ h2 .fas, h3 .fas {
     margin: 0 auto 20px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, filter 0.3s ease; /* Adicionado filter para brilho */
-    border-radius: 50%; /* Faz avatares circulares */
     border: 3px solid var(--cor-primaria); /* Borda para avatares */
 }
 
@@ -860,8 +859,6 @@ h2 .fas, h3 .fas {
 .partnership-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Talvez um pouco menores */
 }
-
-
 /* ===================================== */
 /* 6. Rodapé (Footer) - APRIMORADO       */
 /* ===================================== */
@@ -1273,6 +1270,10 @@ h2 .fas, h3 .fas {
     .server-branding .server-icon { width: 80px; height: 80px; }
     .access-info p {
         font-size: 1em;
+    }
+    .footer-social-links {
+        justify-content: center; /* Centraliza ícones sociais */
+        display: flex;
     }
     .access-info span {
         font-size: 0.9em;
