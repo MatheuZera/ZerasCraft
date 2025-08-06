@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 let hoverSound;
 let clickSound;
 const backgroundAudio = document.getElementById('backgroundAudio');
-let preparingNextMusic = false;
 const audioEffects = {};
 
 const audioControlButton = document.getElementById('audioControlButton');
@@ -29,7 +28,7 @@ const musicPlaylist = [
     { title: '✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
     { title: '✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
     { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
-    { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp' },
+    { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp3' },
     { title: '⛏️ Beginning', src: 'assets/audios/musics/Beginning.mp3' },
     { title: '⛏️ Biome Fest', src: 'assets/audios/musics/Biome-Fest.mp3' },
     { title: '⛏️ Blind Spots', src: 'assets/audios/musics/Blind-Spots.mp3' },
@@ -116,25 +115,11 @@ function playRandomMusic() {
     let newIndex;
     do {
         newIndex = Math.floor(Math.random() * musicPlaylist.length);
-    } while (newIndex === currentMusicIndex); // Garante que a mesma música não toque duas vezes seguidas
+    } while (newIndex === currentMusicIndex);
 
     currentMusicIndex = newIndex;
-    const newMusic = musicPlaylist[currentMusicIndex];
-
-    backgroundAudio.src = newMusic.src;
-    backgroundAudio.title = newMusic.title;
-    
-    // Atualiza a interface
-    if (musicTitleDisplay) {
-        musicTitleDisplay.textContent = newMusic.title;
-        showCentralMessage(`Tocando agora: ${newMusic.title}`);
-    }
-
-    backgroundAudio.play().catch(e => {
-        console.error("Erro ao tentar tocar a música:", e.message);
-        showCentralMessage("Erro ao carregar a música. Tentando a próxima...");
-        setTimeout(playRandomMusic, 2000); // Tenta a próxima música após 2 segundos
-    });
+    loadAndPlayMusic(musicPlaylist[currentMusicIndex]);
+    console.log(`[Player] Música aleatória selecionada: ${musicPlaylist[currentMusicIndex].title}`);
 }
 
 /**
@@ -142,21 +127,40 @@ function playRandomMusic() {
  */
 function playNextMusic() {
     currentMusicIndex = (currentMusicIndex + 1) % musicPlaylist.length;
-    const nextMusic = musicPlaylist[currentMusicIndex];
+    loadAndPlayMusic(musicPlaylist[currentMusicIndex]);
+    console.log(`[Player] Próxima música na sequência: ${musicPlaylist[currentMusicIndex].title}`);
+}
 
-    backgroundAudio.src = nextMusic.src;
-    backgroundAudio.title = nextMusic.title;
+/**
+ * Carrega e tenta tocar uma música específica.
+ * @param {object} music O objeto de música com src e title.
+ */
+function loadAndPlayMusic(music) {
+    // Para evitar possíveis problemas de cache, altere o src e pause o áudio
+    backgroundAudio.pause(); // Garante que a música anterior pare
+    backgroundAudio.src = music.src;
+    backgroundAudio.title = music.title;
     
+    // Atualiza a interface
     if (musicTitleDisplay) {
-        musicTitleDisplay.textContent = nextMusic.title;
-        showCentralMessage(`Tocando agora: ${nextMusic.title}`);
+        musicTitleDisplay.textContent = music.title;
+        showCentralMessage(`Tocando agora: ${music.title}`);
     }
-
-    backgroundAudio.play().catch(e => {
-        console.error("Erro ao tentar tocar a próxima música:", e.message);
-        showCentralMessage("Erro ao carregar a música. Tentando a próxima...");
-        setTimeout(playNextMusic, 2000); // Tenta a próxima música após 2 segundos
-    });
+    
+    // Toca a música assim que o navegador estiver pronto
+    // Usamos um timeout de 100ms para dar tempo ao navegador de carregar
+    setTimeout(() => {
+        backgroundAudio.play().catch(e => {
+            console.error(`[Player] Erro ao tentar tocar "${music.title}":`, e);
+            if (e.name === "NotAllowedError") {
+                showCentralMessage("Clique no play para iniciar a música!");
+            } else {
+                showCentralMessage(`Erro ao carregar a música: ${music.title}. Tentando a próxima...`);
+                setTimeout(playNextMusic, 2000); // Tenta a próxima música
+            }
+        });
+    }, 100);
+    console.log(`[Player] Tentando carregar e tocar: ${music.title}`);
 }
 
 /**
@@ -164,7 +168,6 @@ function playNextMusic() {
  */
 function togglePlayPause() {
     if (backgroundAudio.paused) {
-        // Se estiver pausado, e for a primeira vez, toca uma música aleatória
         if (currentMusicIndex === -1) {
             playRandomMusic();
         } else {
@@ -172,10 +175,12 @@ function togglePlayPause() {
         }
         audioControlButton.innerHTML = '<i class="fas fa-pause"></i>';
         showCentralMessage(`Música retomada!`);
+        console.log('[Player] Música retomada.');
     } else {
         backgroundAudio.pause();
         audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
         showCentralMessage(`Música pausada.`);
+        console.log('[Player] Música pausada.');
     }
 }
 
@@ -184,18 +189,18 @@ function togglePlayPause() {
 // Event Listeners e Inicialização
 // =====================================
 
-// ATENÇÃO: Adicione este listener. Ele é o mais importante para a sua solicitação.
-backgroundAudio.addEventListener('ended', playRandomMusic);
+// Listener para tocar a próxima música aleatória quando a atual terminar
+backgroundAudio.addEventListener('ended', () => {
+    console.log('[Player] Evento "ended" disparado. Tocando a próxima música aleatória.');
+    playRandomMusic();
+});
 
-// Garante que o loop está desativado no elemento de áudio
 backgroundAudio.loop = false;
 
-// Adiciona o listener para o botão de play/pause
 if (audioControlButton) {
     audioControlButton.addEventListener('click', togglePlayPause);
 }
 
-// Adiciona o listener para o novo botão de próxima música
 if (audioNextButton) {
     audioNextButton.addEventListener('click', () => {
         playEffectSound(clickSound);
@@ -203,23 +208,18 @@ if (audioNextButton) {
     });
 }
 
-// Adiciona um listener para a interação inicial do usuário para começar a música
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicialmente, define a primeira música
-    currentMusicIndex = 0;
-    backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
-    backgroundAudio.title = musicPlaylist[currentMusicIndex].title;
-    if (musicTitleDisplay) {
-        musicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
+    if (musicPlaylist.length > 0) {
+        currentMusicIndex = Math.floor(Math.random() * musicPlaylist.length);
+        backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
+        if (musicTitleDisplay) {
+            musicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
+        }
+        console.log(`[Player] Inicializado com a música: ${musicPlaylist[currentMusicIndex].title}`);
     }
 
-    // Toca a música automaticamente se o navegador permitir (interação do usuário)
-    // Se o play falhar, é porque o navegador bloqueou a reprodução automática.
-    backgroundAudio.play().catch(e => {
-        console.log("Reprodução automática bloqueada. O usuário precisa interagir com a página.");
-        audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
-        showCentralMessage("Clique em 'Play' para iniciar a música!");
-    });
+    audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
+    showCentralMessage("Clique em 'Play' para iniciar a música!");
 });
 
     // =====================================
