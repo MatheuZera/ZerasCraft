@@ -733,3 +733,163 @@ document.addEventListener('DOMContentLoaded', () => {
     // Chama a função de atualização quando a página carregar
     updateServerStatus();
 });
+
+    // =====================================
+    // 20. Aba de Pesquisa de Arquivos Gerais (Recursos)
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Exemplo de dados dos cards
+    const cardData = [
+        {
+            id: '1',
+            thumbnail: 'assets/images/addon1.jpg',
+            title: 'Addon de Teleporte',
+            description: 'Adiciona novos comandos de teletransporte para o servidor.',
+            rating: 5,
+            tags: ['Addon', 'Arquivos Gerais'],
+            downloadLink: 'https://site-externo-1.com/download'
+        },
+        {
+            id: '2',
+            thumbnail: 'assets/images/mod1.jpg',
+            title: 'Mod de Ferramentas Mágicas',
+            description: 'Um mod que adiciona um conjunto de ferramentas com habilidades mágicas.',
+            rating: 4,
+            tags: ['Mod'],
+            downloadLink: 'https://site-externo-2.com/download'
+        },
+        {
+            id: '3',
+            thumbnail: 'assets/images/skin1.png',
+            title: 'Skin de Cavaleiro',
+            description: 'Uma skin épica de cavaleiro para personalizar seu personagem.',
+            rating: 5,
+            tags: ['Skin'],
+            downloadLink: 'https://site-externo-3.com/download'
+        },
+        {
+            id: '4',
+            thumbnail: 'assets/images/texturepack1.jpg',
+            title: 'Pacote de Texturas RPG',
+            description: 'Pacote de texturas que transforma o jogo em uma aventura de RPG.',
+            rating: 4,
+            tags: ['Arquivos Gerais'],
+            downloadLink: 'https://site-externo-4.com/download'
+        },
+        {
+            id: '5',
+            thumbnail: 'assets/images/mod2.jpg',
+            title: 'Mod de Decoração',
+            description: 'Um mod com centenas de novos blocos e itens de decoração.',
+            rating: 5,
+            tags: ['Mod'],
+            downloadLink: 'https://site-externo-5.com/download'
+        },
+    ];
+
+    const cardGrid = document.getElementById('card-grid');
+    const searchInput = document.getElementById('search-input');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const modal = document.getElementById('download-modal');
+    const modalCloseBtn = document.querySelector('.modal-close-btn');
+
+    // Função para renderizar as estrelas de avaliação
+    const getStarRating = (rating) => {
+        let stars = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < rating) {
+                stars += '★';
+            } else {
+                stars += '☆';
+            }
+        }
+        return stars;
+    };
+
+    // Função para renderizar todos os cards no HTML
+    const renderCards = (cards) => {
+        cardGrid.innerHTML = ''; // Limpa a grade antes de renderizar
+        if (cards.length === 0) {
+            cardGrid.innerHTML = '<p class="text-center">Nenhum resultado encontrado.</p>';
+            return;
+        }
+
+        cards.forEach(card => {
+            const cardItem = document.createElement('div');
+            cardItem.classList.add('card-item');
+
+            cardItem.innerHTML = `
+                <img src="${card.thumbnail}" alt="${card.title}" class="card-thumbnail">
+                <div>
+                    <h3>${card.title}</h3>
+                    <p class="card-description">${card.description}</p>
+                </div>
+                <div class="card-rating">${getStarRating(card.rating)}</div>
+                <button class="card-download-btn" data-id="${card.id}">Baixar</button>
+            `;
+            cardGrid.appendChild(cardItem);
+        });
+    };
+
+    // Função de filtro
+    const filterCards = (filter) => {
+        searchInput.value = ''; // Limpa a busca ao filtrar
+        let filteredCards = cardData;
+
+        if (filter !== 'all') {
+            filteredCards = cardData.filter(card => card.tags.includes(filter));
+        }
+        renderCards(filteredCards);
+    };
+
+    // Evento de clique para os botões de filtro
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            filterCards(button.getAttribute('data-filter'));
+        });
+    });
+
+    // Evento de busca no input
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        const filteredCards = cardData.filter(card => 
+            card.title.toLowerCase().includes(query) ||
+            card.tags.some(tag => tag.toLowerCase().includes(query))
+        );
+        renderCards(filteredCards);
+    });
+
+    // Evento de clique para abrir o modal
+    cardGrid.addEventListener('click', (e) => {
+        if (e.target.classList.contains('card-download-btn')) {
+            const cardId = e.target.getAttribute('data-id');
+            const card = cardData.find(c => c.id === cardId);
+
+            if (card) {
+                document.getElementById('modal-image').src = card.thumbnail;
+                document.getElementById('modal-title').textContent = card.title;
+                document.getElementById('modal-description').textContent = card.description;
+                document.getElementById('modal-download-link').href = card.downloadLink;
+
+                modal.classList.add('active');
+            }
+        }
+    });
+
+    // Evento para fechar o modal
+    modalCloseBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+
+    // Inicializa a grade com todos os cards
+    renderCards(cardData);
+});

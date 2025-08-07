@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Zera's Craft - Comunidade</title>
+    <title>Mundo Zera's Craft - Arquivos</title>
     <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -32,99 +32,83 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="addons.html" class="nav-link" data-page="about">Arquivos</a></li>
-                    <li><a href="eventos.html" class="nav-link" data-page="events">Eventos</a></li>
-                    <li><a href="sobre.html" class="nav-link" data-page="about">Sobre Nós</a></li>
-                    <li><a href="suporte.html" class="nav-link">Suporte</a></li>
-                    <li><a href="recursos.html" class="nav-link" data-page="about">Recursos</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero-section small-hero" style="background-image: url('assets/images/1.site/community-banner.jpg');">
+        <section class="hero-section">
             <div class="hero-image-overlay"></div>
             <div class="hero-content">
-                <h1>Comunidade Zera's Craft</h1>
-                <p class="hero-subtitle">Conecte-se com outros jogadores, faça amigos e explore juntos!</p>
+                <div class="server-branding">
+                    <img src="assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft" class="server-icon">
+                </div>
+                <h1>Arquivos do Canal</h1>
+                <p class="hero-subtitle">É aqui onde ficará todos os Addons, Mods, e Arquivos/Pastas Gerais do Canal!</p>
+                <div class="hero-social-links">
+                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <i class="fab fa-discord"></i> Pixel Legends
+                    </a>
+                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <i class="fab fa-discord"></i> Entrar no Discord
+                    </a>
+                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <i class="fab fa-youtube"></i> Canal YouTube
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section id="official-channels" class="section-padded fade-in-section">
+<!--PESQUISA GERAL DE ARQUIVOS-->
+    <section class="section-padded container">
+    <div class="search-and-filter-container">
+        <input type="text" id="search-input" class="search-bar" placeholder="Pesquisar por título...">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="Addon">Addon</button>
+            <button class="filter-btn" data-filter="Mod">Mod</button>
+            <button class="filter-btn" data-filter="Skin">Skin</button>
+            <button class="filter-btn" data-filter="Arquivos Gerais">Arquivos Gerais</button>
+        </div>
+    </div>
+<!--Sub Recurso-->
+    <div id="card-grid" class="card-grid">
+        </div>
+
+    <div id="download-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <img id="modal-image" src="" alt="Thumbnail" class="modal-image">
+            <h3 id="modal-title"></h3>
+            <p id="modal-description"></p>
+            <a id="modal-download-link" href="#" target="_blank" class="modal-download-btn">Baixar Agora</a>
+        </div>
+    </div>
+</section>
+
+        <section id="social-channels" class="section-padded section-alt-bg fade-in-section">
             <div class="container text-center">
-                <h2><i class="fas fa-comments"></i> Nossos Canais Oficiais</h2>
-                <p class="section-description">Onde a magia da comunidade acontece! Junte-se a nós e participe das conversas.</p>
+                <h2><i class="fas fa-users-line"></i> Nossos Canais de Comunidade</h2>
+                <p class="section-description">Conecte-se conosco em nossas redes sociais e não perca nenhuma novidade!</p>
+
                 <div class="community-grid max-3-columns">
                     <div class="community-card">
                         <i class="fab fa-discord card-icon"></i>
-                        <h3 class="card-title">Servidor Discord</h3>
-                        <p class="card-description">O coração da nossa comunidade! Converse, receba suporte e participe de eventos exclusivos.</p>
+                        <h3 class="card-title">Discord Oficial</h3>
+                        <p class="card-description">Junte-se ao nosso servidor Discord para interagir com a comunidade, receber suporte e ficar por dentro dos anúncios!</p>
                         <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" class="btn-primary">Entrar no Discord</a>
                     </div>
-                    <div class="community-card youtube-card">
+                    <div class="community-card">
                         <i class="fab fa-youtube card-icon"></i>
                         <h3 class="card-title">Canal do YouTube</h3>
-                        <p class="card-description">Vídeos de gameplay, tutoriais, destaques e trailers de nossos eventos. Inscreva-se!</p>
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-bottom: 15px;">
-                            <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-                        </div>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" class="btn-primary">Ver Canal</a>
+                        <p class="card-description">Assista nossos vídeos de gameplay, tutoriais, destaques da comunidade e trailers de eventos!</p>
+                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" class="btn-primary">Inscreva-se</a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="community-spotlight" class="section-padded section-alt-bg fade-in-section">
-            <div class="container text-center">
-                <h2><i class="fas fa-star"></i> Destaques da Comunidade</h2>
-                <p class="section-description">Conheça alguns dos nossos membros mais ativos e talentosos!</p>
-                <div class="community-grid max-4-columns">
-                    <div class="community-card">
-                        <img src="assets/images/8.parceria/colaboradores/icone.gif" alt="Avatar do Jogador A" class="member-avatar">
-                        <h3 class="card-title">Ninguém</h3>
-                        <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a> </div>
-                    <div class="community-card">
-                        <img src="assets/images/cards/member2.png" alt="Avatar da Jogadora B" class="member-avatar">
-                        <h3 class="card-title">Ninguém</h3>
-                        <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a>
-                    </div>
-                    <div class="community-card">
-                        <img src="assets/images/cards/member3.png" alt="Avatar do Jogador C" class="member-avatar">
-                        <h3 class="card-title">Ninguém</h3>
-                        <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a>
-                    </div>
-                    <div class="community-card">
-                        <img src="assets/images/cards/member1.png" alt="Avatar do Jogador D" class="member-avatar">
-                        <h3 class="card-title">Ninguém</h3>
-                        <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a>
-                    </div>
+                 <div class="text-center margin-top-50">
+                    <a href="comunidade.html" class="btn-primary"><i class="fas fa-users"></i> Ver Mais da Comunidade</a>
                 </div>
-            </div>
-        </section>
-
-        <section id="partnerships" class="section-padded fade-in-section">
-            <div class="container text-center">
-                <h2><i class="fas fa-handshake"></i> Nossas Parcerias</h2>
-                <p class="section-description">Apoie os projetos que nos apoiam! Conheça nossos parceiros.</p>
-                <div class="partnership-grid max-4-columns">
-                    <div class="partnership-card community-card">
-                        <img src="assets/images/cards/partner1.png" alt="Logo do Parceiro 1" class="partnership-logo">
-                        <h3 class="card-title">Sem Colaboradores</h3>
-                        <p class="card-description">Servidores de alta performance para a melhor experiência de jogo.</p>
-                        <a href="" target="_blank" rel="noopener noreferrer" class="btn-primary">Visitar Site</a>
-                    </div>
-                    <div class="partnership-card community-card">
-                        <img src="assets/images/cards/partner1.png" alt="Logo do Parceiro 2" class="partnership-logo">
-                        <h3 class="card-title">Sem Parceiros</h3>
-                        <p class="card-description">Os melhores plugins e ferramentas para otimizar seu servidor.</p>
-                        <a href="" target="_blank" rel="noopener noreferrer" class="btn-primary">Visitar Site</a>
-                    </div>
-                    </div>
             </div>
         </section>
     </main>
@@ -144,10 +128,6 @@
                     <h4>Navegação</h4>
                     <ul>
                         <li><a href="index.html">Início</a></li>
-                        <li><a href="comunidade.html">Comunidade</a></li>
-                        <li><a href="eventos.html">Eventos</a></li>
-                        <li><a href="sobre.html">Sobre Nós</a></li>
-                        <li><a href="suporte.html">Suporte</a></li>
                     </ul>
                 </div>
                 <div class="footer-column footer-contact">
