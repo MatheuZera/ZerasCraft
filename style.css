@@ -995,25 +995,25 @@ h2 .fas, h3 .fas {
 }
 
 /* ------------------------------------- */
-/* Estilos para o Audio Control Bar      */
+/* Estilos para o Audio Control Bar      */
 /* ------------------------------------- */
 .audio-control-bar {
-    position: sticky; /* Sticky para se manter visível na parte inferior */
+    position: sticky;
     bottom: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro semi-transparente */
+    background-color: rgba(0, 0, 0, 0.9);
     padding: 10px 0;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
-    z-index: 1001; /* Acima de outros elementos */
+    z-index: 1001;
     border-top: 1px solid var(--cor-bordas);
 }
 
 .audio-control-content {
     display: flex;
-    justify-content: center; /* Centraliza os itens */
+    justify-content: center;
     align-items: center;
-    gap: 20px; /* Espaçamento entre os controles */
-    flex-wrap: wrap; /* Permite quebrar linha em mobile */
+    gap: 15px; /* Espaçamento ajustado para otimização */
+    flex-wrap: wrap;
 }
 
 #audioControlButton, #audioNextButton {
@@ -1040,7 +1040,9 @@ h2 .fas, h3 .fas {
 #audioControlButton:hover, #audioNextButton:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--cor-destaque);
+    transform: scale(1.05); /* Efeito de escala ao passar o mouse */
 }
+
 #audioControlButton:hover i, #audioNextButton:hover i {
     color: var(--cor-destaque);
     transform: scale(1.1);
@@ -1058,18 +1060,19 @@ h2 .fas, h3 .fas {
 }
 
 #musicTitleDisplay {
-    white-space: nowrap; /* Evita quebra de linha */
-    overflow: hidden; /* Esconde o excesso */
-    text-overflow: ellipsis; /* Adiciona '...' se o texto for muito longo */
-    max-width: 180px; /* Limita a largura para caber */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px; /* Aumentado para dar mais espaço ao texto */
     font-family: var(--fonte-pixel);
     color: var(--cor-destaque);
+    transition: max-width 0.3s ease; /* Adicionada transição para suavidade */
 }
 
 /* Progress Arc para o áudio */
 .audio-progress-indicator {
-    width: 60px; /* Tamanho do SVG */
-    height: 60px;
+    width: 50px; /* Reduzido para um visual mais compacto */
+    height: 50px;
     position: relative;
     display: flex;
     align-items: center;
@@ -1080,24 +1083,37 @@ h2 .fas, h3 .fas {
 }
 
 .audio-progress-svg {
-    transform: rotate(-90deg); /* Inicia o círculo de cima */
+    transform: rotate(-90deg);
     position: absolute;
     top: 0;
     left: 0;
 }
 
 .arc-background {
-    stroke: rgba(255, 255, 255, 0.15); /* Fundo da barra de progresso */
+    stroke: rgba(255, 255, 255, 0.15);
     stroke-width: 4;
     fill: none;
 }
 
 .arc-progress {
-    stroke: var(--cor-primaria); /* Progresso da música */
+    stroke: var(--cor-primaria);
     stroke-width: 4;
     fill: none;
-    stroke-linecap: round; /* Pontas arredondadas para o progresso */
-    transition: stroke-dashoffset 1s linear; /* Transição suave para o progresso */
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear;
+}
+
+/* Media Query para telas pequenas */
+@media (max-width: 768px) {
+    .audio-control-content {
+        flex-direction: column;
+        gap: 10px; /* Espaçamento menor em mobile */
+    }
+
+    #musicTitleDisplay {
+        max-width: 100%; /* Ocupa a largura total em telas menores */
+        text-align: center;
+    }
 }
 
 /* ===================================== */
