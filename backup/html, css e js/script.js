@@ -579,7 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
             carousel.scrollBy({ left: -scrollWidth, behavior: 'smooth' });
         });
     }
-
+});
     // =====================================
     // 14. Contador Animado
     // =====================================
@@ -618,8 +618,6 @@ document.addEventListener('DOMContentLoaded', () => {
         counter.textContent = '0';
         counterObserver.observe(counter);
     });
-
-});
 
     // =====================================
     // 15. Bloco de Spoiler de Texto Expansível
@@ -685,4 +683,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     typeConsole();
+});
+
+    // =====================================
+    // 19. Status de Estatísticas - Porcentagens
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    /**
+     * Atualiza as barras de status de forma proporcional.
+     * A barra com o valor mais alto terá 100% da largura.
+     * As outras serão calculadas em relação a ela.
+     */
+    function updateServerStatus() {
+        // Seleciona todos os itens da barra de status
+        const statusBars = document.querySelectorAll('.status-bar-item');
+        if (statusBars.length === 0) {
+            return;
+        }
+
+        // 1. Encontra o valor mais alto entre todos os itens
+        let maxStatusValue = 0;
+        statusBars.forEach(item => {
+            const value = parseInt(item.getAttribute('data-value'), 10);
+            if (value > maxStatusValue) {
+                maxStatusValue = value;
+            }
+        });
+
+        // 2. Calcula e aplica a nova largura e o texto para cada item
+        statusBars.forEach(item => {
+            const value = parseInt(item.getAttribute('data-value'), 10);
+            
+            // Calcula a largura proporcional. Se o max for 0, evita divisão por zero.
+            const proportionalWidth = maxStatusValue > 0 ? (value / maxStatusValue) * 100 : 0;
+            
+            // Seleciona os elementos internos
+            const fillBar = item.querySelector('.progress-bar-fill');
+            const percentageSpan = item.querySelector('.status-percentage');
+
+            // Aplica a nova largura (que será animada pelo CSS)
+            fillBar.style.width = `${proportionalWidth}%`;
+
+            // Atualiza o texto da porcentagem
+            percentageSpan.textContent = `${value}%`;
+        });
+    }
+
+    // Chama a função de atualização quando a página carregar
+    updateServerStatus();
 });
