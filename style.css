@@ -203,119 +203,175 @@ ul {
     transform: translateY(0);
 }
 
+/* =====================================
+   2. Cabeçalho e Navegação (Mobile-First)
+   ===================================== */
 
-/* ===================================== */
-/* 2. Cabeçalho (Header)                 */
-/* ===================================== */
-
-/* Estilos para o contêiner do banner de imagem */
-.image-banner {
-    background-color: #1a1a1a; /* Garante que a cor de fundo seja preta enquanto a imagem carrega ou se for transparente */
-    width: 100%; /* Preenche a largura do contêiner pai */
-    overflow: hidden; /* Recorta a imagem se ela ultrapassar as dimensões */
-}
-
-/* Estilos para a imagem dentro do banner */
-.image-banner img {
-    display: block; /* Remove qualquer espaço extra abaixo da imagem */
-    width: 100%; /* Faz a imagem tentar preencher a largura */
-    height: auto; /* Mantém a proporção da imagem */
-}
-
-/* Para cobrir completamente a área, mesmo que a proporção da imagem não seja ideal */
-.image-banner.cover {
-    position: relative;
-    padding-bottom: 20%; /* Ajuste a porcentagem para controlar a altura (relação altura/largura) */
-    overflow: hidden;
-}
-
-.image-banner.cover img {
-    position: absolute;
+/* Estilos de Cabeçalho Comuns a Todos os Dispositivos */
+.main-header {
+    width: 100%;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Preenche o contêiner, cortando se necessário */
-}
-
-
-.main-header {
-    background-color: var(--cor-fundo-escuro);
-    padding: 20px 0;
-    box-shadow: var(--sombra-leve);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid var(--cor-bordas);
-}
-
-.header-content {
+    z-index: 1001;
+    background-color: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Para navegação em telas menores */
+    padding: 10px 20px;
 }
 
 .header-logo {
-    font-family: var(--fonte-titulo);
-    font-size: 1.8em;
-    color: var(--cor-primaria);
+    font-family: 'Minecraft', sans-serif;
+    font-size: 1.5em;
+    color: #c4d96a;
     text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra para o logo */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-.main-nav ul {
-    display: flex;
-    gap: 25px;
+/* Oculta o menu de navegação por padrão (estilo Mobile-First) */
+.main-nav {
+    display: none;
 }
 
-.main-nav ul li a {
-    color: var(--cor-texto-claro);
-    font-weight: 700;
-    padding: 5px 0;
-    position: relative;
+/* =====================================
+   Menu de Navegação para Mobile (Até 768px)
+   ===================================== */
+@media (max-width: 768px) {
+    /* Exibe o botão de hambúrguer apenas em mobile */
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 15px; /* Mudei para a direita para evitar conflito com o logo */
+        font-size: 2em;
+        color: #f0f0f0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1002;
+        transition: transform 0.3s ease, color 0.3s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .menu-toggle.active {
+        transform: rotate(90deg);
+        color: #72ef85;
+    }
+
+    /* O menu lateral desliza para a direita */
+    .main-nav {
+        display: flex; /* Oculto por padrão no desktop, mas flexível em mobile */
+        position: fixed;
+        top: 0;
+        left: -100%; /* Começa oculto */
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: left 0.5s ease-in-out;
+        z-index: 999;
+    }
+
+    .main-nav.active {
+        left: 0;
+    }
+
+    .main-nav ul {
+        width: 100%;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .main-nav a {
+        display: block;
+        padding: 20px;
+        font-size: 1.5em;
+        color: #f0f0f0;
+        text-decoration: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+        background-color: rgba(114, 239, 133, 0.1);
+        color: #72ef85;
+    }
 }
 
-/* Indicador de página ativa */
-.main-nav ul li a.active {
-    color: var(--cor-destaque);
-}
 
-.main-nav ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--cor-destaque);
-    transition: width 0.3s ease;
-}
+/* =====================================
+   Menu de Navegação para Desktop (A partir de 769px)
+   ===================================== */
+@media (min-width: 769px) {
+    /* Garante que o botão de hambúrguer não apareça */
+    .menu-toggle {
+        display: none;
+    }
 
-.main-nav ul li a:hover::after,
-.main-nav ul li a.active::after { /* O active também tem a linha completa */
-    width: 100%;
-}
+    /* Exibe o menu de navegação horizontal */
+    .main-nav {
+        display: block;
+        position: static;
+        width: auto;
+        height: auto;
+        background: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    
+    .main-nav ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: 20px;
+        align-items: center;
+    }
 
-/* Botão de Hambúrguer para Mobile */
-.menu-toggle {
-    display: none; /* Escondido por padrão em desktop */
-    font-size: 2em;
-    color: var(--cor-texto-claro);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1001; /* Acima do nav quando aberto */
-    transition: transform 0.3s ease;
-}
+    .main-nav a {
+        color: #f0f0f0;
+        font-weight: 200;
+        text-decoration: none;
+        padding: 5px 0;
+        position: relative;
+        transition: color 0.3s ease;
+    }
 
-.menu-toggle.active {
-    transform: rotate(90deg); /* Gira o ícone quando ativo */
-}
+    .main-nav a:hover {
+        color: #72ef85;
+    }
 
+    .main-nav a.active {
+        color: #72ef85;
+    }
+
+    .main-nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #72ef85;
+        transition: width 0.3s ease;
+    }
+
+    .main-nav a:hover::after,
+    .main-nav a.active::after {
+        width: 100%;
+    }
+}
 
 /* ===================================== */
 /* 3. Seção Hero (Destaque Principal)    */
@@ -396,7 +452,7 @@ ul {
 /* Estilos para o subtítulo no banner */
 .hero-section .hero-subtitle {
     font-size: 1.6em;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     line-height: 1.5;
 }
@@ -1154,156 +1210,53 @@ h2 .fas, h3 .fas {
 }
 
 /* ===================================== */
-/* 8. Responsividade Geral               */
+/* 8. Estilos de Layout Fixo (Desktop-First) */
 /* ===================================== */
 
-@media (max-width: 992px) {
-    h1 { font-size: 3em; }
-    h2 { font-size: 2.4em; }
-    h3 { font-size: 1.8em; }
-
-    .main-nav ul {
-        gap: 15px;
-    }
-    .footer-content {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-    }
+/* Define a largura fixa para o contêiner principal e habilita a rolagem horizontal */
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
 }
 
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .main-nav {
-        display: none; /* Esconde o menu por padrão em mobile */
-        width: 100%;
-        text-align: center;
-        background-color: var(--cor-card-bg); /* Fundo do menu mobile */
-        box-shadow: var(--sombra-leve);
-        padding: 20px 0;
-        margin-top: 15px;
-        border-radius: var(--border-radius);
-    }
-    .main-nav.active {
-        display: block; /* Mostra o menu quando ativo */
-    }
-    .main-nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .main-nav ul li a {
-        display: block;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .main-nav ul li:last-child a {
-        border-bottom: none;
-    }
-    .menu-toggle {
-        display: block; /* Mostra o botão de hambúrguer */
-        position: absolute; /* Posiciona no canto superior direito */
-        top: 20px;
-        right: 20px;
-    }
-
-    h1 { font-size: 2.5em; }
-    h2 { font-size: 2em; }
-    h3 { font-size: 1.6em; }
-
-    .hero-section {
-        height: 500px;
-    }
-    .hero-section.small-hero {
-        height: 300px;
-    }
-    .hero-section h1 { font-size: 2.8em; }
-    .hero-section .hero-subtitle { font-size: 1.3em; }
-    .server-branding .server-icon { width: 100px; height: 100px; }
-    .hero-social-links {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .btn-primary {
-        width: 90%;
-        max-width: 300px;
-    }
-
-    .content-two-columns .text-content,
-    .content-two-columns .image-content {
-        min-width: unset; /* Remove min-width para telas pequenas */
-        flex: 1 1 100%; /* Ocupa toda a largura */
-    }
-    .content-two-columns .image-content {
-        order: -1; /* Coloca a imagem antes do texto em mobile */
-        margin-bottom: 30px;
-    }
-    .footer-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        grid-template-columns: 1fr; /* Uma única coluna no rodapé */
-    }
-    .footer-column {
-        width: 100%;
-        padding: 0 10px;
-    }
-    .footer-column h4::after {
-        left: 50%;
-        transform: translateX(-50%); /* Centraliza a linha */
-    }
-    .footer-social-links {
-        justify-content: center; /* Centraliza ícones sociais */
-        display: flex;
-    }
-    .footer-nav-links ul {
-        padding: 0;
-    }
-    .footer-contact p {
-        text-align: center;
-    }
-    .audio-control-content {
-        flex-direction: column;
-        gap: 10px;
-    }
+.main-container {
+    width: 1200px;
+    margin: 0 auto;
 }
 
-@media (max-width: 576px) {
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.8em; }
-    h3 { font-size: 1.4em; }
-    .section-padded {
-        padding: 50px 0;
-    }
-    .hero-section {
-        height: 450px;
-    }
-    .hero-section.small-hero {
-        height: 250px;
-    }
-    .hero-section h1 { font-size: 2.2em; }
-    .hero-section .hero-subtitle { font-size: 1em; }
-    .server-branding .server-icon { width: 80px; height: 80px; }
-    .access-info p {
-        font-size: 1em;
-    }
-    .footer-social-links {
-        justify-content: center; /* Centraliza ícones sociais */
-        display: flex;
-    }
-    .access-info span {
-        font-size: 0.9em;
-        padding: 6px 10px;
-    }
-    .btn-primary {
-        padding: 12px 20px;
-        font-size: 1em;
-    }
-    #musicTitleDisplay {
-        max-width: 120px; /* Ainda menor em mobile */
-    }
+/* ===================================== */
+/* Outros Estilos de Layout (Sem Responsividade) */
+/* ===================================== */
+
+h1 { font-size: em; }
+h2 { font-size: 2.4em; }
+h3 { font-size: 1.8em; }
+
+.content-two-columns .text-content,
+.content-two-columns .image-content {
+    min-width: unset;
+    flex: 1 1 50%;
 }
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-column h4::after {
+    left: 0;
+    transform: none;
+}
+
+.footer-social-links {
+    justify-content: flex-start;
+}AAAA
+
 /* ========================================= */
 /* Estilos para a Seção de Pesquisa e Cards  */
 /* ========================================= */
