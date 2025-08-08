@@ -1210,52 +1210,143 @@ h2 .fas, h3 .fas {
 }
 
 /* ===================================== */
-/* 8. Estilos de Layout Fixo (Desktop-First) */
+/* 8. Responsividade Otimizada e Enxuta */
 /* ===================================== */
 
-/* Define a largura fixa para o contêiner principal e habilita a rolagem horizontal */
+/* Estilos Padrão (Mobile-First) - Aplicados por padrão a todas as telas,
+   mas são a base para o layout em dispositivos móveis. */
+
+/* Configurações básicas do corpo do documento */
 html, body {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: auto;
+    overflow-x: hidden; /* Evita rolagem horizontal em mobile */
 }
 
+/* Tamanhos de fonte fluidos que se ajustam automaticamente */
+h1 { font-size: clamp(2.5em, 8vw, 3.5em); }
+h2 { font-size: clamp(2em, 6vw, 2.4em); }
+h3 { font-size: clamp(1.6em, 5vw, 1.8em); }
+p { font-size: clamp(1em, 2.5vw, 1.125em); }
+
+/* Contêiner principal para garantir espaçamento interno */
 .main-container {
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* ===================================== */
-/* Outros Estilos de Layout (Sem Responsividade) */
-/* ===================================== */
+/* Estilos de layout para o menu mobile */
+.main-nav {
+    display: none; /* Esconde o menu de desktop em mobile */
+}
 
-h1 { font-size: em; }
-h2 { font-size: 2.4em; }
-h3 { font-size: 1.8em; }
+.main-nav.active {
+    display: block; /* Mostra o menu quando ativado via JavaScript */
+}
+
+.main-nav ul {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.main-nav ul li a {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.main-nav ul li:last-child a {
+    border-bottom: none;
+}
+
+.menu-toggle {
+    display: block; /* Mostra o botão de hambúrguer em mobile */
+}
+
+/* Layout de colunas para mobile: empilhamento vertical */
+.content-two-columns {
+    display: flex;
+    flex-direction: column; /* Colunas empilhadas */
+}
 
 .content-two-columns .text-content,
 .content-two-columns .image-content {
-    min-width: unset;
-    flex: 1 1 50%;
+    flex: 1 1 100%; /* Cada item ocupa a largura total */
 }
 
+.content-two-columns .image-content {
+    order: -1; /* Coloca a imagem acima do texto em mobile */
+    margin-bottom: 30px;
+}
+
+/* Layout do rodapé para mobile: uma única coluna */
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    grid-template-columns: 1fr;
     gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+    text-align: center;
 }
 
 .footer-column h4::after {
-    left: 0;
-    transform: none;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .footer-social-links {
-    justify-content: flex-start;
-}AAAA
+    justify-content: center;
+}
+
+/* ===================================== */
+/* Media Query para Layout de Desktop */
+/* ===================================== */
+
+/* Esta media query reverte todos os estilos mobile para o layout de desktop. */
+@media (min-width: 769px) {
+    /* Menu de desktop ativo */
+    .menu-toggle {
+        display: none; /* Esconde o botão de hambúrguer */
+    }
+
+    .main-nav {
+        display: block; /* Mostra o menu de desktop */
+    }
+
+    .main-nav ul {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    /* Layout de colunas para desktop: lado a lado */
+    .content-two-columns {
+        flex-direction: row;
+    }
+
+    .content-two-columns .text-content,
+    .content-two-columns .image-content {
+        flex: 1 1 50%;
+    }
+
+    .content-two-columns .image-content {
+        order: unset;
+        margin-bottom: 0;
+    }
+
+    /* Layout do rodapé para desktop: em 4 colunas */
+    .footer-content {
+        grid-template-columns: repeat(4, minmax(200px, 1fr));
+        text-align: left;
+    }
+
+    .footer-column h4::after {
+        left: 0;
+        transform: none;
+    }
+
+    .footer-social-links {
+        justify-content: flex-start;
+    }
+}
 
 /* ========================================= */
 /* Estilos para a Seção de Pesquisa e Cards  */
