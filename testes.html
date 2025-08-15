@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Zera's Craft - Eventos</title>
+    <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <meta name="description" content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <meta name="keywords" content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
+    <meta name="robots" content="index, follow"> <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
+    <meta property="og:description" content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg"> <meta property="og:url" content="https://seusite.com.br/index.html"> <meta property="og:type" content="website"> <meta property="og:site_name" content="Mundo Zera's Craft">
+    <meta property="og:locale" content="pt_BR"> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:site" content="@SeuTwitterHandle"> <meta name="twitter:creator" content="@SeuTwitterHandle"> <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
+    <meta name="twitter:description" content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
+    <meta name="twitter:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg"> <meta name="theme-color" content="#347C2F">
+</head>
+<body>
+
+    <div id="centralMessage" class="central-message"></div>
+    <audio id="backgroundAudio" loop></audio>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="header-logo">Zera's Craft</a>
+            <button class="menu-toggle" aria-label="Abrir menu de navegação">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
+                    <li><a href="arquivos.html" class="nav-link" data-page="home">Arquivos</a></li>
+                    <li><a href="comunidade.html" class="nav-link" data-page="home">Comunidade</a></li>
+                    <li><a href="eventos.html" class="nav-link" data-page="home">Eventos</a></li>
+                    <li><a href="marketplacecraft.html" class="nav-link" data-page="home">Marketplace</a></li>
+                    <li><a href="wikipedia.html" class="nav-link" data-page="home">Wikipédia</a></li>
+                    <li><a href="sobre.html" class="nav-link" data-page="home">Sobre Nós</a></li>
+                    <li><a href="suporte.html" class="nav-link" data-page="home">Suporte</a></li>
+                    <li><a href="youtube.html" class="nav-link" data-page="home">Youtube</a></li>
+                    <li><a href="recursos.html" class="nav-link" data-page="home">Recursos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+        <section id="suggest-event" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-lightbulb"></i> Sugira um Evento!</h2>
+                <p class="section-description">Tem uma ideia incrível para um evento? Queremos ouvi-la! Sua sugestão pode ser a próxima atração do Zera's Craft.</p>
+                <form class="newsletter-form" style="max-width: 600px; margin: 0 auto;">
+                    <a href="https://discord.com/channels/1390120239588577482/1390125374695931994" class="btn-primary"><i class="fas fa-paper-plane"></i> Enviar Sugestão</a>
+                </form>
+            </div>
+        </section>
+<!---------------------------------------------------->
+<button id="openModalBtn" class="btn-shine">Abrir Modal</button>
+
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal-content">
+        <button id="modalCloseBtn" class="modal-close-btn">&times;</button>
+        <h3 class="modal-title">Título do Modal</h3>
+        <p>Este é o conteúdo informativo do modal. Pode conter texto, imagens, ou outros elementos HTML.</p>
+        <p>Ajuste o código para o seu caso de uso específico.</p>
+    </div>
+</div>
+
+<div class="accordion-container">
+    <div class="accordion-item">
+        <div class="accordion-header">
+            Título do Item 1
+            <span class="accordion-icon">&#9660;</span>
+        </div>
+        <div class="accordion-content">
+            <p>Conteúdo do item 1. Este conteúdo será expandido ou recolhido ao clicar no título.</p>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <div class="accordion-header">
+            Título do Item 2
+            <span class="accordion-icon">&#9660;</span>
+        </div>
+        <div class="accordion-content">
+            <p>Conteúdo do item 2.</p>
+        </div>
+    </div>
+</div>
+
+<div class="tabs-container">
+    <div class="tab-nav">
+        <button class="tab-button active" data-tab="tab1">Aba 1</button>
+        <button class="tab-button" data-tab="tab2">Aba 2</button>
+    </div>
+    <div class="tab-content-container">
+        <div id="tab1" class="tab-content active">
+            <p>Conteúdo da primeira aba. O Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </div>
+        <div id="tab2" class="tab-content">
+            <p>Conteúdo da segunda aba. O Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
+        </div>
+    </div>
+</div>
+
+<div class="carousel-container">
+    <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://picsum.photos/800/400?random=1" alt="Imagem 1"></div>
+        <div class="carousel-slide"><img src="https://picsum.photos/800/400?random=2" alt="Imagem 2"></div>
+        <div class="carousel-slide"><img src="https://picsum.photos/800/400?random=3" alt="Imagem 3"></div>
+    </div>
+    <button class="carousel-control prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="carousel-control next"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<div class="gallery-grid">
+    <div class="gallery-item" data-src="https://picsum.photos/1200/800?random=1">
+        <img src="https://picsum.photos/300/200?random=1" alt="Galeria Imagem 1">
+    </div>
+    <div class="gallery-item" data-src="https://picsum.photos/1200/800?random=2">
+        <img src="https://picsum.photos/300/200?random=2" alt="Galeria Imagem 2">
+    </div>
+    <div class="gallery-item" data-src="https://picsum.photos/1200/800?random=3">
+        <img src="https://picsum.photos/300/200?random=3" alt="Galeria Imagem 3">
+    </div>
+</div>
+
+<div id="lightboxOverlay" class="lightbox-overlay">
+    <div class="lightbox-content">
+        <button id="lightboxCloseBtn" class="lightbox-close-btn">&times;</button>
+        <img id="lightboxImage" src="" alt="Imagem Ampliada">
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-item">
+        <div class="counter" data-target="1500">0</div>
+        <p class="stat-label">Jogadores Ativos</p>
+    </div>
+    <div class="stat-item">
+        <div class="counter" data-target="50000">0</div>
+        <p class="stat-label">Downloads</p>
+    </div>
+</div>
+
+<div class="code-block">
+    <pre id="ip-address">play.zeracraft.com</pre>
+    <button class="copy-btn" data-target="ip-address"><i class="fas fa-copy"></i> Copiar IP</button>
+</div>
+
+
+
+
+<div class="central-message" id="centralMessage"></div>
+
+
+
+
+
+
+
+<h2 class="animated-underline-title">Título com Sublinhado</h2>
+
+
+
+
+<section class="section-padded fade-in-section">
+    <div class="container">
+        <h2>Seção Animada</h2>
+        <p>Este conteúdo irá aparecer suavemente ao rolar a página.</p>
+    </div>
+</section>
+
+
+
+
+
+<div class="animated-quote">
+    <p>"Um texto de citação animada, com uma borda que se move."</p>
+    <cite>Autor Desconhecido</cite>
+</div>
+
+
+
+
+
+<div class="social-share-bar">
+    <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+</div>
+
+
+<div class="theme-toggle">
+    <input type="checkbox" id="theme-switcher" class="theme-switcher">
+    <label for="theme-switcher" class="theme-switcher-label">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+        <span class="ball"></span>
+    </label>
+</div>
+
+
+<button id="showToastBtn">Mostrar Notificação</button>
+<div id="toastContainer" class="toast-container"></div>
+
+
+<nav>
+    <a href="#section1" class="smooth-scroll-btn">Seção 1</a>
+    <a href="#section2" class="smooth-scroll-btn">Seção 2</a>
+</nav>
+
+<div style="height: 1000px;" id="section1">
+    <h2>Primeira Seção</h2>
+    <p>Conteúdo da primeira seção.</p>
+</div>
+<div style="height: 1000px;" id="section2">
+    <h2>Segunda Seção</h2>
+    <p>Conteúdo da segunda seção.</p>
+</div>
+
+
+<button id="hamburger-btn" class="hamburger-btn">
+    <span class="line line1"></span>
+    <span class="line line2"></span>
+    <span class="line line3"></span>
+</button>
+<nav id="mobile-menu" class="mobile-menu">
+    <ul>
+        <li><a href="#">Início</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li><a href="#">Contato</a></li>
+    </ul>
+</nav>
+
+
+<div id="reading-progress-bar"></div>
+<article style="height: 2000px; padding: 20px;">
+    <h2>Título do Artigo</h2>
+    <p>Aqui está o conteúdo do seu artigo...</p>
+    <p>Role para baixo para ver a barra de progresso funcionar.</p>
+</article>
+
+
+<div class="parallax-container">
+    <div class="parallax-bg" style="background-image: url('https://picsum.photos/1920/1080?random=1');"></div>
+    <div class="parallax-content">
+        <h3>Efeito Parallax</h3>
+        <p>Role a página para ver o fundo se mover a uma velocidade diferente.</p>
+    </div>
+</div>
+
+
+
+<span class="tooltip-trigger" data-tooltip-text="Esta é uma dica de ferramenta informativa.">
+    Passe o mouse aqui
+</span>
+
+
+<div class="viewer-360-container" id="image-viewer-360">
+    <img src="https://picsum.photos/800/600?random=1" alt="Visualizador 360" class="viewer-360-image">
+</div>
+
+
+<div class="timeline-container">
+    <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+            <h3>Título do Evento 1</h3>
+            <p>Descrição do evento, com detalhes sobre o que aconteceu neste período. Pode ser um marco de projeto ou um evento histórico.</p>
+            <span class="timeline-date">2023</span>
+        </div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+            <h3>Título do Evento 2</h3>
+            <p>Outro evento importante. A linha do tempo é uma ótima forma de visualizar uma sequência de acontecimentos.</p>
+            <span class="timeline-date">2024</span>
+        </div>
+    </div>
+</div>
+
+
+<form id="contact-form">
+    <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" required>
+        <span class="error-message" id="email-error"></span>
+    </div>
+    <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" required>
+        <span class="error-message" id="password-error"></span>
+    </div>
+    <button type="submit">Enviar</button>
+</form>
+
+
+
+<div class="price-slider-container">
+    <div class="slider-track"></div>
+    <input type="range" min="0" max="1000" value="0" step="10" class="slider-min" id="price-min">
+    <input type="range" min="0" max="1000" value="1000" step="10" class="slider-max" id="price-max">
+    <div class="slider-values">
+        <span id="min-value">0</span> - <span id="max-value">1000</span>
+    </div>
+</div>
+
+
+<div class="date-picker-container">
+    <input type="text" id="date-input" placeholder="Selecione uma data">
+    <div id="date-picker" class="date-picker"></div>
+</div>
+
+
+<div class="autocomplete-container">
+    <input type="text" id="search-input" placeholder="Pesquisar...">
+    <ul id="suggestions" class="suggestions-list"></ul>
+</div>
+
+
+
+<div id="particles-js"></div>
+<div class="content">
+    <h1>Efeito de Partículas</h1>
+    <p>O fundo desta seção possui partículas animadas em movimento.</p>
+</div>
+
+
+
+<button class="btn-hover-effect">Efeito Brilho</button>
+<a href="#" class="link-hover-effect">Efeito Sublinhado</a>
+
+
+
+<h1 class="typing-animation">
+    <span class="type-text"></span>
+    <span class="cursor">|</span>
+</h1>
+
+
+
+<div class="animated-gradient-bg">
+    <h2>Fundo com Gradiente Animado</h2>
+</div>
+
+
+
+<div class="filter-buttons">
+    <button data-filter="all" class="active">Todos</button>
+    <button data-filter="categoria1">Categoria 1</button>
+    <button data-filter="categoria2">Categoria 2</button>
+</div>
+
+<div id="grid-container" class="grid-container">
+    <div class="grid-item" data-category="categoria1"><span>Item 1 (Cat. 1)</span></div>
+    <div class="grid-item" data-category="categoria2"><span>Item 2 (Cat. 2)</span></div>
+    <div class="grid-item" data-category="categoria1"><span>Item 3 (Cat. 1)</span></div>
+    <div class="grid-item" data-category="categoria2"><span>Item 4 (Cat. 2)</span></div>
+</div>
+
+
+
+<header id="main-header" class="main-header">
+    <nav>
+        <a href="#">Logo</a>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Serviços</a></li>
+        </ul>
+    </nav>
+</header>
+<div style="height: 1000px; padding-top: 80px;">
+    <h2>Role a página para ver o cabeçalho fixo.</h2>
+</div>
+<!---------------------------------------------------->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
+                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa comunidade vibrante.</p>
+                    <div class="footer-social-links">
+                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column footer-nav-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="comunidade.html">Comunidade</a></li>
+                        <li><a href="eventos.html">Eventos</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="suporte.html">Suporte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-contact">
+                    <h4>Contato & Suporte</h4>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a></p>
+                    <p><i class="fas fa-headset"></i> <a href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via Discord</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
+                </div>
+                <div class="footer-column footer-newsletter">
+                    <h4>Fique por Dentro</h4>
+                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
+                    <form class="newsletter-form">
+                        <div class="text-center margin-top-50">
+                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501" class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+            </div>
+        </div>
+        <div class="audio-control-bar">
+            <div class="container audio-control-content">
+                <button id="audioControlButton" aria-label="Controlar áudio">
+                    <i class="fas fa-music"></i>
+                    <span id="musicTitleDisplay">Clique para Tocar</span>
+                </button>
+                <div class="audio-progress-indicator" id="audioProgressArc">
+                     <svg viewBox="0 0 60 60" class="audio-progress-svg">
+                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
+                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
+                    </svg>
+                </div>
+                <button id="audioNextButton" aria-label="Próxima música">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
