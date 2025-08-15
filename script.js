@@ -564,21 +564,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // 13. Funcionalidade do Carrossel de Testemunhos
     // =====================================
-    const carousel = document.querySelector('.testimonial-carousel');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.carousel-track');
+    if (!track) return;
 
-    if (carousel && prevBtn && nextBtn) {
-        const scrollWidth = carousel.scrollWidth / carousel.childElementCount;
+    const slides = Array.from(track.children);
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const indicatorsContainer = document.querySelector('.carousel-indicators');
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    let currentSlide = 0;
 
-        nextBtn.addEventListener('click', () => {
-            carousel.scrollBy({ left: scrollWidth, behavior: 'smooth' });
+    // Cria os indicadores
+    slides.forEach((slide, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('carousel-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel();
         });
+        indicatorsContainer.appendChild(dot);
+    });
 
-        prevBtn.addEventListener('click', () => {
-            carousel.scrollBy({ left: -scrollWidth, behavior: 'smooth' });
-        });
-    }
+    const dots = Array.from(indicatorsContainer.children);
+
+    const updateCarousel = () => {
+        track.style.transform = `translateX(-${slideWidth * currentSlide}px)`;
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentSlide].classList.add('active');
+    };
+
+    nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateCarousel();
+    });
 });
     // =====================================
     // 14. Contador Animado
