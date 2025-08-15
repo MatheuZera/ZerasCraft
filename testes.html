@@ -3,230 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Zera's Craft - Eventos</title>
-    <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
+    <title>Exemplos de Componentes CSS & JS</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <meta name="description" content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
-    <meta name="keywords" content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
-    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
-    <meta name="robots" content="index, follow"> <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
-    <meta property="og:description" content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
-    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg"> <meta property="og:url" content="https://seusite.com.br/index.html"> <meta property="og:type" content="website"> <meta property="og:site_name" content="Mundo Zera's Craft">
-    <meta property="og:locale" content="pt_BR"> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:site" content="@SeuTwitterHandle"> <meta name="twitter:creator" content="@SeuTwitterHandle"> <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
-    <meta name="twitter:description" content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
-    <meta name="twitter:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg"> <meta name="theme-color" content="#347C2F">
 </head>
 <body>
 
-    <div id="centralMessage" class="central-message"></div>
-    <audio id="backgroundAudio" loop></audio>
-
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="index.html" class="header-logo">Zera's Craft</a>
-            <button class="menu-toggle" aria-label="Abrir menu de navegação">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="addons/addons.html" class="nav-link" data-page="about">Arquivos</a></li>
-                    <li><a href="comunidade.html" class="nav-link" data-page="community">Comunidade</a></li>
-                    <li><a href="sobre.html" class="nav-link" data-page="about">Sobre Nós</a></li>
-                    <li><a href="suporte.html" class="nav-link">Suporte</a></li>
-                    <li><a href="recursos.html" class="nav-link" data-page="about">Recursos</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header>
+        <h1 data-text="Componentes Interativos" class="glitch-text">Componentes Interativos</h1>
     </header>
 
     <main>
-        <section class="hero-section small-hero" style="background-image: url('assets/images/1.site/events-banner.jpg');">
-            <div class="hero-image-overlay"></div>
-            <div class="hero-content">
-                <h1>Eventos do Zera's Craft</h1>
-                <p class="hero-subtitle">Mantenha-se atualizado sobre as competições, celebrações e atividades que preparamos para você!</p>
+        <section class="section">
+            <h2 class="animated-underline-title">Acordeão (Accordion)</h2>
+            <div class="accordion-container">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>O que é um Acordeão?</span>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>O acordeão é um componente de interface que permite exibir e ocultar seções de conteúdo, economizando espaço na tela. É ideal para perguntas e respostas (FAQ) ou para mostrar detalhes de um produto.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Como usar este Acordeão?</span>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Você pode adicionar quantos "accordion-item" precisar. O JavaScript cuida da lógica de abrir e fechar, adicionando e removendo a classe "active" quando o cabeçalho é clicado.</p>
+                    </div>
+                </div>
             </div>
         </section>
-    
-    <section class="section-padded">
-        <div class="container text-center">
-            <h2>Nossa Comunidade em Números</h2>
-            <div class="counter-grid max-4-columns">
-                <div class="counter-item">
-                    <h3 class="counter-number" data-count="15000">0</h3>
-                    <p class="counter-label"><i class="fas fa-users"></i> Jogadores Registrados</p>
-                </div>
-                <div class="counter-item">
-                    <h3 class="counter-number" data-count="500">0</h3>
-                    <p class="counter-label"><i class="fas fa-server"></i> Membros Online</p>
-                </div>
-                <div class="counter-item">
-                    <h3 class="counter-number" data-count="25000">0</h3>
-                    <p class="counter-label"><i class="fas fa-building"></i> Construções Épicas</p>
-                </div>
-                <div class="counter-item">
-                    <h3 class="counter-number" data-count="1500">50</h3>
-                    <p class="counter-label"><i class="fas fa-star"></i> Avaliações Positivas</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="section-padded section-alt-bg">
-        <div class="container">
-            <h2 class="text-center">Progressos do Servidor</h2>
-            <div class="progress-bar-container">
-                <p>Níveis de Aventura</p>
-                <div class="progress-bar-track">
-                    <div class="progress-bar-fill" data-progress="75"></div>
-                    <span class="progress-bar-text">75%</span>
-                </div>
-            </div>
-            <div class="progress-bar-container">
-                <p>Missões Semanais</p>
-                <div class="progress-bar-track">
-                    <div class="progress-bar-fill" data-progress="90"></div>
-                    <span class="progress-bar-text">90%</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        
+        <section class="section">
+            <h2 class="animated-underline-title">Modal (Popup)</h2>
+            <button class="btn-shine" id="openModalBtn">Abrir Modal</button>
+        </section>
 
-    <section class="section-padded">
-        <div class="container">
-            <h2 class="text-center">Nossa História em Destaque</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Lançamento Oficial (2020)</h3>
-                        <p>O Mundo Zera's Craft abriu suas portas, com foco em uma experiência de sobrevivência de alta qualidade.</p>
-                        <span class="timeline-date">15 de Janeiro de 2020</span>
+        <div class="modal-overlay" id="myModal">
+            <div class="modal-content">
+                <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+                <h3 class="modal-title">Título do Modal</h3>
+                <p>Este é o conteúdo do seu modal. Ele aparece sobre o resto do conteúdo da página e pode ser usado para exibir mensagens importantes, formulários ou informações adicionais.</p>
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Galeria de Imagens</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/400/200" alt="Imagem 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/401/201" alt="Imagem 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/402/202" alt="Imagem 3">
+                </div>
+            </div>
+        </section>
+
+        <div class="lightbox-overlay" id="myLightbox">
+            <div class="lightbox-content">
+                <img src="" alt="" id="lightbox-image">
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Timeline</h2>
+            <div class="timeline-container">
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>Evento A</h3>
+                        <p>Descrição do Evento A.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Atualização de Minigames (2021)</h3>
-                        <p>Introdução de vários minigames para diversão e competição, incluindo Skywars e Bedwars.</p>
-                        <span class="timeline-date">22 de Junho de 2021</span>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>Evento B</h3>
+                        <p>Descrição do Evento B.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Evento de Halloween (2022)</h3>
-                        <p>Nosso maior evento temático, com prêmios especiais e um mapa exclusivo de aventura.</p>
-                        <span class="timeline-date">31 de Outubro de 2022</span>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>Evento C</h3>
+                        <p>Descrição do Evento C.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section-padded section-alt-bg">
-        <div class="container">
-            <h2 class="text-center">Apoie o Servidor</h2>
-            <p class="section-description">Escolha um de nossos ranks para apoiar o servidor e receber vantagens exclusivas no jogo!</p>
-            <div class="pricing-grid max-3-columns">
-                <div class="pricing-card">
-                    <h3 class="pricing-title">Rank Bronze</h3>
-                    <p class="pricing-price">R$ 20,00</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check-circle"></i> Kit diário exclusivo</li>
-                        <li><i class="fas fa-check-circle"></i> Tag no chat</li>
-                        <li><i class="fas fa-check-circle"></i> Acesso à loja vip</li>
-                    </ul>
-                    <a href="#" class="btn-primary">Adquirir Agora</a>
+        <section class="section">
+            <h2 class="animated-underline-title">Tabs de Conteúdo</h2>
+            <div class="tabs-container">
+                <div class="tab-nav">
+                    <button class="tab-button active" data-tab-target="#tab1">Tab 1</button>
+                    <button class="tab-button" data-tab-target="#tab2">Tab 2</button>
+                    <button class="tab-button" data-tab-target="#tab3">Tab 3</button>
                 </div>
-                <div class="pricing-card highlighted">
-                    <div class="ribbon">Mais Popular!</div>
-                    <h3 class="pricing-title">Rank Prata</h3>
-                    <p class="pricing-price">R$ 50,00</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check-circle"></i> Tudo do Bronze</li>
-                        <li><i class="fas fa-check-circle"></i> Comandos de teletransporte</li>
-                        <li><i class="fas fa-check-circle"></i> Itens cosméticos</li>
-                    </ul>
-                    <a href="#" class="btn-primary">Adquirir Agora</a>
+                <div class="tab-content active" id="tab1">
+                    <h3>Conteúdo da Tab 1</h3>
+                    <p>Este é o conteúdo correspondente à primeira aba.</p>
                 </div>
-                <div class="pricing-card">
-                    <h3 class="pricing-title">Rank Ouro</h3>
-                    <p class="pricing-price">R$ 100,00</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check-circle"></i> Tudo do Prata</li>
-                        <li><i class="fas fa-check-circle"></i> Pets exclusivos</li>
-                        <li><i class="fas fa-check-circle"></i> Acesso antecipado a eventos</li>
-                    </ul>
-                    <a href="#" class="btn-primary">Adquirir Agora</a>
+                <div class="tab-content" id="tab2">
+                    <h3>Conteúdo da Tab 2</h3>
+                    <p>Este é o conteúdo correspondente à segunda aba.</p>
+                </div>
+                <div class="tab-content" id="tab3">
+                    <h3>Conteúdo da Tab 3</h3>
+                    <p>Este é o conteúdo correspondente à terceira aba.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa comunidade vibrante.</p>
-                    <div class="footer-social-links">
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column footer-nav-links">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="comunidade.html">Comunidade</a></li>
-                        <li><a href="eventos.html">Eventos</a></li>
-                        <li><a href="sobre.html">Sobre Nós</a></li>
-                        <li><a href="suporte.html">Suporte</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-contact">
-                    <h4>Contato & Suporte</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a></p>
-                    <p><i class="fas fa-headset"></i> <a href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via Discord</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
-                </div>
-                <div class="footer-column footer-newsletter">
-                    <h4>Fique por Dentro</h4>
-                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
-                    <form class="newsletter-form">
-                        <div class="text-center margin-top-50">
-                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501" class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
+        <section class="section">
+            <h2 class="animated-underline-title">Flip Cards</h2>
+            <div class="card-grid">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://picsum.photos/120/120" alt="Avatar">
+                            <h3>Nome Completo</h3>
+                            <p>Cargo / Posição</p>
                         </div>
-                    </form>
+                        <div class="flip-card-back">
+                            <h4>Habilidades:</h4>
+                            <ul>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
-            </div>
-        </div>
-        <div class="audio-control-bar">
-            <div class="container audio-control-content">
-                <button id="audioControlButton" aria-label="Controlar áudio">
-                    <i class="fas fa-music"></i>
-                    <span id="musicTitleDisplay">Clique para Tocar</span>
-                </button>
-                <div class="audio-progress-indicator" id="audioProgressArc">
-                     <svg viewBox="0 0 60 60" class="audio-progress-svg">
-                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
-                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
-                    </svg>
                 </div>
-                <button id="audioNextButton" aria-label="Próxima música">
-                    <i class="fas fa-forward"></i>
-                </button>
-            </div>
-        </div>
-    </footer>
+        </section>
 
-    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+        <section class="parallax-section" style="background-image: url('https://picsum.photos/1600/900')">
+            <div class="parallax-content">
+                <h2>Efeito Parallax</h2>
+                <p>Uma experiência de rolagem com profundidade.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Barras de Progresso</h2>
+            <div class="status-bar-item">
+                <p class="status-label">HTML</p>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" data-progress="90"></div>
+                </div>
+                <span class="status-percentage">90%</span>
+            </div>
+            <div class="status-bar-item">
+                <p class="status-label">CSS</p>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" data-progress="75"></div>
+                </div>
+                <span class="status-percentage">75%</span>
+            </div>
+            <div class="status-bar-item">
+                <p class="status-label">JavaScript</p>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" data-progress="60"></div>
+                </div>
+                <span class="status-percentage">60%</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Botão com Efeito de Brilho</h2>
+            <a href="#" class="btn-shine">Clique aqui</a>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Carrossel de Testemunhos</h2>
+            <div class="testimonial-carousel-container">
+                <div class="testimonial-carousel">
+                    <div class="testimonial-item">
+                        <p>"Ótimo serviço! Recomendo a todos."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/60/60" alt="Autor 1">
+                            <h4>Autor Teste 1</h4>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"Uma experiência fantástica e profissional."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/61/61" alt="Autor 2">
+                            <h4>Autor Teste 2</h4>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"Resultados que superaram minhas expectativas."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/62/62" alt="Autor 3">
+                            <h4>Autor Teste 3</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-nav">
+                    <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="animated-underline-title">Cards Glassmorphism</h2>
+            <div class="card-grid">
+                <div class="glass-card">
+                    <h3>Card 1</h3>
+                    <p>Este é um exemplo de card com efeito de vidro transparente.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Card 2</h3>
+                    <p>Ele utiliza o CSS `backdrop-filter` para criar o efeito.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Card 3</h3>
+                    <p>Funciona melhor em fundos com imagens ou gradientes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Tooltips</h2>
+            <div class="tooltip-container">
+                <i class="fas fa-info-circle"></i>
+                <span class="tooltip-text">Este é um tooltip com informações extras.</span>
+            </div>
+            <div class="tooltip-container">
+                <i class="fas fa-question-circle"></i>
+                <span class="tooltip-text">Passe o mouse para ver o texto.</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Contador de Estatísticas</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="counter" data-target="1500">0</div>
+                    <p>Usuários Ativos</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-server"></i></div>
+                    <div class="counter" data-target="25000">0</div>
+                    <p>Mensagens Enviadas</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Botões de Opção Personalizados</h2>
+            <div class="custom-radio-group">
+                <label class="custom-radio-btn">
+                    <input type="radio" name="option" value="op1">
+                    <span class="custom-radio-text">Opção 1</span>
+                </label>
+                <label class="custom-radio-btn">
+                    <input type="radio" name="option" value="op2" checked>
+                    <span class="custom-radio-text">Opção 2</span>
+                </label>
+                <label class="custom-radio-btn">
+                    <input type="radio" name="option" value="op3">
+                    <span class="custom-radio-text">Opção 3</span>
+                </label>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="animated-underline-title">Caixa de Texto Glassmorphism</h2>
+            <div class="glass-container">
+                <p>Este é um contêiner de exemplo com o efeito Glassmorphism. Ele pode ser usado para envolver qualquer tipo de conteúdo, como formulários, texto ou cards.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="animated-underline-title">Citação Animada</h2>
+            <div class="animated-quote">
+                <p>O sucesso é a soma de pequenos esforços repetidos dia após dia.</p>
+                <cite>- Robert Collier</cite>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Bloco de Spoiler</h2>
+            <div class="spoiler-block">
+                <button class="spoiler-toggle">Clique para revelar o spoiler!</button>
+                <div class="spoiler-content">
+                    <p>Este é o conteúdo do spoiler. Ele estava escondido e agora foi revelado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Lista Animada</h2>
+            <ul class="animated-list">
+                <li><i class="list-icon fas fa-check"></i> Recurso A</li>
+                <li><i class="list-icon fas fa-check"></i> Recurso B</li>
+                <li><i class="list-icon fas fa-check"></i> Recurso C</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <div class="curtain-title-wrapper">
+                <h2 class="curtain-title">Animação de Cortina</h2>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Texto com Hover Interativo</h2>
+            <p class="hover-text-reveal">
+                Passe o mouse sobre <span class="hover-text">esta palavra</span> para ver uma imagem.
+                <div class="hover-image" style="background-image: url('https://picsum.photos/300/200');"></div>
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Caixa de Console</h2>
+            <div class="console-box">
+                <div class="console-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <pre class="console-text">
+> Iniciando sistema...
+> Carregando dados...
+> Sucesso! Pronto para uso.
+                </pre>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="scroll-progress"></div>
 
     <script src="script.js"></script>
 </body>

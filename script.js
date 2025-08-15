@@ -463,7 +463,171 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //======================================================================================//
 
+document.addEventListener('DOMContentLoaded', () => {
 
+    // 9. Acordeão (Accordion)
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+        });
+    });
+
+    // 10. Modal (Popup)
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modal = document.getElementById('myModal');
+
+    if (openModalBtn) {
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.add('show');
+        });
+    }
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+    }
+
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+    }
+
+    // 11. Galeria de Imagens & Lightbox
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightboxOverlay = document.getElementById('myLightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const imageUrl = item.querySelector('img').src;
+            lightboxImage.src = imageUrl;
+            lightboxOverlay.classList.add('show');
+        });
+    });
+
+    if (lightboxOverlay) {
+        lightboxOverlay.addEventListener('click', (e) => {
+            if (e.target === lightboxOverlay) {
+                lightboxOverlay.classList.remove('show');
+            }
+        });
+    }
+
+    // 13. Tabs de Conteúdo
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove a classe 'active' de todos os botões e conteúdos
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Adiciona a classe 'active' no botão e conteúdo corretos
+            const targetId = button.getAttribute('data-tab-target');
+            const targetContent = document.querySelector(targetId);
+            button.classList.add('active');
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
+
+    // 14. Progress Bar
+    const progressBars = document.querySelectorAll('.progress-bar-fill');
+    progressBars.forEach(bar => {
+        const progress = bar.getAttribute('data-progress');
+        bar.style.width = progress + '%';
+    });
+
+    // 10. Carrossel de Testemunhos
+    const carousel = document.querySelector('.testimonial-carousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const scrollAmount = carousel ? carousel.offsetWidth + 20 : 0; // Largura do item + gap
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // 12. Indicador de Rolagem
+    const scrollProgress = document.querySelector('.scroll-progress');
+    const updateScrollProgress = () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (scrollTop / scrollHeight) * 100;
+        if (scrollProgress) {
+            scrollProgress.style.width = scrolled + '%';
+        }
+    };
+    window.addEventListener('scroll', updateScrollProgress);
+
+    // 14. Contador de Estatísticas
+    const counters = document.querySelectorAll('.counter');
+    const animateCounters = () => {
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const speed = 200; // Ajuste a velocidade da animação
+            let currentCount = 0;
+
+            const updateCount = () => {
+                const increment = target / speed;
+                if (currentCount < target) {
+                    currentCount += increment;
+                    counter.textContent = Math.ceil(currentCount);
+                    requestAnimationFrame(updateCount);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            updateCount();
+        });
+    };
+    animateCounters(); // Chamada inicial para iniciar a animação
+
+    // 18. Bloco de Spoiler
+    const spoilerToggles = document.querySelectorAll('.spoiler-toggle');
+    spoilerToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            toggle.parentElement.classList.toggle('active');
+        });
+    });
+
+    // 20. Lista de recursos com animação de marcador
+    const animatedList = document.querySelector('.animated-list');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, { threshold: 0.5 }); // A animação dispara quando 50% do elemento está visível
+
+    if (animatedList) {
+        observer.observe(animatedList);
+    }
+});
 
 //======================================================================================//
     // =====================================
