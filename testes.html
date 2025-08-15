@@ -32,85 +32,355 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="arquivos.html" class="nav-link" data-page="home">Arquivos</a></li>
-                    <li><a href="comunidade.html" class="nav-link" data-page="home">Comunidade</a></li>
-                    <li><a href="eventos.html" class="nav-link" data-page="home">Eventos</a></li>
-                    <li><a href="marketplacecraft.html" class="nav-link" data-page="home">Marketplace</a></li>
-                    <li><a href="wikipedia.html" class="nav-link" data-page="home">Wikipédia</a></li>
-                    <li><a href="sobre.html" class="nav-link" data-page="home">Sobre Nós</a></li>
-                    <li><a href="suporte.html" class="nav-link" data-page="home">Suporte</a></li>
-                    <li><a href="youtube.html" class="nav-link" data-page="home">Youtube</a></li>
-                    <li><a href="recursos.html" class="nav-link" data-page="home">Recursos</a></li>
+                    <li><a href="addons/addons.html" class="nav-link" data-page="about">Arquivos</a></li>
+                    <li><a href="comunidade.html" class="nav-link" data-page="community">Comunidade</a></li>
+                    <li><a href="sobre.html" class="nav-link" data-page="about">Sobre Nós</a></li>
+                    <li><a href="suporte.html" class="nav-link">Suporte</a></li>
+                    <li><a href="recursos.html" class="nav-link" data-page="about">Recursos</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-        <section id="suggest-event" class="section-padded fade-in-section">
-            <div class="container text-center">
-                <h2><i class="fas fa-lightbulb"></i> Sugira um Evento!</h2>
-                <p class="section-description">Tem uma ideia incrível para um evento? Queremos ouvi-la! Sua sugestão pode ser a próxima atração do Zera's Craft.</p>
-                <form class="newsletter-form" style="max-width: 600px; margin: 0 auto;">
-                    <a href="https://discord.com/channels/1390120239588577482/1390125374695931994" class="btn-primary"><i class="fas fa-paper-plane"></i> Enviar Sugestão</a>
-                </form>
+    <main>
+        <section class="hero-section small-hero" style="background-image: url('assets/images/1.site/events-banner.jpg');">
+            <div class="hero-image-overlay"></div>
+            <div class="hero-content">
+                <h1>Eventos do Zera's Craft</h1>
+                <p class="hero-subtitle">Mantenha-se atualizado sobre as competições, celebrações e atividades que preparamos para você!</p>
             </div>
         </section>
-<!---------------------------------------------------->
-<section class="section-padded">
-    <div class="container">
-        <h2 class="text-center">Fale Conosco</h2>
-        <form id="contactForm" class="contact-form">
-            <div class="form-group">
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" required>
+
+    <section class="section-padded">
+        <div class="container">
+            <h2 class="text-center">Sistemas do Servidor</h2>
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-button active" data-tab="tab-sobrevivencia">Sobrevivência</button>
+                    <button class="tab-button" data-tab="tab-minigames">Minigames</button>
+                    <button class="tab-button" data-tab="tab-eventos">Eventos</button>
+                </div>
+                <div class="tabs-content">
+                    <div class="tab-pane active" id="tab-sobrevivencia">
+                        <h3><i class="fas fa-gem"></i> Sobreviência Aprimorada</h3>
+                        <p>Explore um mundo vasto com sistemas de economia, clãs, e chefões para enfrentar. A aventura te espera!</p>
+                        <a href="#" class="btn-primary">Ver Regras</a>
+                    </div>
+                    <div class="tab-pane" id="tab-minigames">
+                        <h3><i class="fas fa-compact-disc"></i> Diversão em Minigames</h3>
+                        <p>Participe de jogos rápidos e divertidos para competir com seus amigos e ganhar prêmios exclusivos. Skywars, Bedwars e mais!</p>
+                        <a href="#" class="btn-primary">Jogar Agora</a>
+                    </div>
+                    <div class="tab-pane" id="tab-eventos">
+                        <h3><i class="fas fa-calendar-alt"></i> Participe de Eventos</h3>
+                        <p>Nossa equipe organiza eventos semanais com prêmios incríveis, de construções a batalhas épicas. Fique de olho na nossa agenda!</p>
+                        <a href="#" class="btn-primary">Conferir Agenda</a>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+        </div>
+    </section>
+
+    <section class="section-padded section-alt-bg">
+        <div class="container">
+            <h2 class="text-center">Galeria de Screenshots</h2>
+            <div class="image-carousel-container">
+                <div class="image-carousel-track">
+                    <img src="https://via.placeholder.com/800x450/4CAF50/FFFFFF?text=Screenshot+1" alt="Screenshot do Jogo 1">
+                    <img src="https://via.placeholder.com/800x450/2E7D32/FFFFFF?text=Screenshot+2" alt="Screenshot do Jogo 2">
+                    <img src="https://via.placeholder.com/800x450/4CAF50/FFFFFF?text=Screenshot+3" alt="Screenshot do Jogo 3">
+                    <img src="https://via.placeholder.com/800x450/2E7D32/FFFFFF?text=Screenshot+4" alt="Screenshot do Jogo 4">
+                </div>
+                <button class="carousel-btn carousel-btn-prev">&lt;</button>
+                <button class="carousel-btn carousel-btn-next">&gt;</button>
             </div>
-            <div class="form-group">
-                <label for="subject">Assunto:</label>
-                <input type="text" id="subject" name="subject" required>
+        </div>
+    </section>
+
+    <section class="section-padded">
+        <div class="container">
+            <h2 class="text-center">Perguntas Frequentes</h2>
+            <div class="accordion-container">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h3>Como posso entrar no servidor? <i class="fas fa-chevron-down accordion-icon"></i></h3>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Você pode entrar no servidor com o endereço IP e a porta que estão na nossa página principal. Basta adicionar o servidor ao seu jogo!</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h3>O servidor é gratuito? <i class="fas fa-chevron-down accordion-icon"></i></h3>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Sim, o nosso servidor é totalmente gratuito para jogar. Contamos com doações e compras na loja para manter a estrutura e melhorar a experiência.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h3>Posso criar um clã ou guilda? <i class="fas fa-chevron-down accordion-icon"></i></h3>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Sim! Nosso servidor possui um sistema de clãs completo, onde você pode convidar amigos, construir sua base e competir com outros clãs.</p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="message">Mensagem:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-            <div id="formMessage" class="form-message"></div>
-        </form>
+        </div>
+    </section>
+
+    <section class="section-padded section-alt-bg text-center">
+        <div class="container">
+            <h2 class="text-center">Abertura de Baús (Exemplo)</h2>
+            <p class="section-description">Clique no botão para ver a janela modal em ação.</p>
+            <button id="openModalBtn" class="btn-primary"><i class="fas fa-box"></i> Abrir Modal</button>
+        </div>
+    </section>
+
+    <div id="myModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="closeModalBtn" class="modal-close-btn">&times;</button>
+            <h3><i class="fas fa-box-open"></i> Parabéns!</h3>
+            <img src="https://via.placeholder.com/200/FFD700/000000?text=Item+Raro" alt="Baú Raro" class="modal-image">
+            <p>Você encontrou um item raro! Continue explorando para mais recompensas.</p>
+            <a href="#" class="btn-primary">Resgatar Item</a>
+        </div>
     </div>
-</section>
+    
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Nossa Comunidade em Números</h2>
+            <div class="counter-grid max-4-columns">
+                <div class="counter-item">
+                    <h3 class="counter-number" data-count="15000">0</h3>
+                    <p class="counter-label"><i class="fas fa-users"></i> Jogadores Registrados</p>
+                </div>
+                <div class="counter-item">
+                    <h3 class="counter-number" data-count="500">0</h3>
+                    <p class="counter-label"><i class="fas fa-server"></i> Membros Online</p>
+                </div>
+                <div class="counter-item">
+                    <h3 class="counter-number" data-count="25000">0</h3>
+                    <p class="counter-label"><i class="fas fa-building"></i> Construções Épicas</p>
+                </div>
+                <div class="counter-item">
+                    <h3 class="counter-number" data-count="1500">0</h3>
+                    <p class="counter-label"><i class="fas fa-star"></i> Avaliações Positivas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section-padded section-alt-bg">
+        <div class="container">
+            <h2 class="text-center">Progressos do Servidor</h2>
+            <div class="progress-bar-container">
+                <p>Níveis de Aventura</p>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" data-progress="75"></div>
+                    <span class="progress-bar-text">75%</span>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <p>Missões Semanais</p>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" data-progress="90"></div>
+                    <span class="progress-bar-text">90%</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<li class="dropdown">
-    <a href="#" class="dropdown-toggle" aria-expanded="false">
-        Recursos <i class="fas fa-caret-down"></i>
-    </a>
-    <ul class="dropdown-menu">
-        <li><a href="#">Comandos</a></li>
-        <li><a href="#">Regras</a></li>
-        <li><a href="#">Plugins</a></li>
-    </ul>
-</li>
+    <section class="section-padded">
+        <div class="container">
+            <h2 class="text-center">Galeria de Eventos</h2>
+            <p class="section-description">Confira as imagens dos nossos eventos mais recentes.</p>
+            
+            <div class="gallery-controls text-center">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="construcao">Construção</button>
+                <button class="filter-btn" data-filter="pvp">PVP</button>
+                <button class="filter-btn" data-filter="festas">Festas</button>
+                <input type="text" id="gallery-search" placeholder="Buscar na galeria...">
+            </div>
 
-<div class="text-center margin-top-40">
-    <button class="btn btn-glow copy-ip-btn" data-ip="mc.zerascraft.com.br">
-        <i class="fas fa-copy"></i> Copiar IP do Servidor
-    </button>
-</div>
+            <div class="gallery-grid max-3-columns" id="gallery-container">
+                </div>
+        </div>
+    </section>
 
-<div id="dynamicModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn dynamic-close-btn">&times;</span>
-        <img id="dynamicModalImage" class="modal-image" src="" alt="Imagem do Card">
-        <h2 id="dynamicModalTitle"></h2>
-        <p id="dynamicModalDescription"></p>
-        <a id="dynamicModalLink" href="#" class="btn btn-primary" target="_blank">
-            <i class="fas fa-link"></i> Ver Mais
-        </a>
+    <section class="section-padded section-alt-bg">
+        <div class="container">
+            <h2 class="text-center">Conheça Nossos Biomas</h2>
+            <div class="image-hover-card">
+                <img src="https://via.placeholder.com/600x400/2C3E50/ECF0F1?text=Bioma+Misterioso" alt="Bioma Misterioso" class="image-hover-effect">
+                <div class="image-hover-overlay">
+                    <div class="overlay-content">
+                        <h3>Bioma da Floresta Negra</h3>
+                        <p>Explore as profundezas de um bioma raro e perigoso, cheio de recursos valiosos.</p>
+                        <a href="#" class="btn-link">Explorar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padded">
+        <div class="container">
+            <h2 class="text-center">Nossa História em Destaque</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Lançamento Oficial (2020)</h3>
+                        <p>O Mundo Zera's Craft abriu suas portas, com foco em uma experiência de sobrevivência de alta qualidade.</p>
+                        <span class="timeline-date">15 de Janeiro de 2020</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Atualização de Minigames (2021)</h3>
+                        <p>Introdução de vários minigames para diversão e competição, incluindo Skywars e Bedwars.</p>
+                        <span class="timeline-date">22 de Junho de 2021</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Evento de Halloween (2022)</h3>
+                        <p>Nosso maior evento temático, com prêmios especiais e um mapa exclusivo de aventura.</p>
+                        <span class="timeline-date">31 de Outubro de 2022</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padded section-alt-bg">
+        <div class="container">
+            <h2 class="text-center">Apoie o Servidor</h2>
+            <p class="section-description">Escolha um de nossos ranks para apoiar o servidor e receber vantagens exclusivas no jogo!</p>
+            <div class="pricing-grid max-3-columns">
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Rank Bronze</h3>
+                    <p class="pricing-price">R$ 20,00</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Kit diário exclusivo</li>
+                        <li><i class="fas fa-check-circle"></i> Tag no chat</li>
+                        <li><i class="fas fa-check-circle"></i> Acesso à loja vip</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Adquirir Agora</a>
+                </div>
+                <div class="pricing-card highlighted">
+                    <div class="ribbon">Mais Popular!</div>
+                    <h3 class="pricing-title">Rank Prata</h3>
+                    <p class="pricing-price">R$ 50,00</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Tudo do Bronze</li>
+                        <li><i class="fas fa-check-circle"></i> Comandos de teletransporte</li>
+                        <li><i class="fas fa-check-circle"></i> Itens cosméticos</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Adquirir Agora</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Rank Ouro</h3>
+                    <p class="pricing-price">R$ 100,00</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Tudo do Prata</li>
+                        <li><i class="fas fa-check-circle"></i> Pets exclusivos</li>
+                        <li><i class="fas fa-check-circle"></i> Acesso antecipado a eventos</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Adquirir Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padded">
+        <div class="container">
+            <h2 class="text-center">Entre em Contato</h2>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Enviar Mensagem</button>
+                <div id="form-status" class="form-status"></div>
+            </form>
+        </div>
+    </section>
+
+    <section class="section-padded section-alt-bg text-center">
+        <div class="container">
+            <h2 class="text-center">Sistema de Notificação</h2>
+            <p class="section-description">Clique para testar o sistema de notificação por toast.</p>
+            <button id="showToastBtn" class="btn-primary"><i class="fas fa-bell"></i> Mostrar Notificação</button>
+        </div>
+    </section>
+
+    <div id="toastNotification" class="toast-notification">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <div class="toast-content">
+            <h4 class="toast-title">Sucesso!</h4>
+            <p class="toast-message">Seu formulário foi enviado com sucesso.</p>
+        </div>
     </div>
-</div>
-<!---------------------------------------------------->
+    
+    <section class="section-padded">
+        <div class="container">
+            <h2 class="text-center">O que nossos jogadores dizem?</h2>
+            <div class="testimonials-slider-container">
+                <div class="testimonials-track">
+                    <div class="testimonial-card">
+                        <img src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=J1" alt="Jogador 1" class="testimonial-avatar">
+                        <p class="testimonial-quote">"O melhor servidor de sobrevivência que já joguei! A comunidade é incrível e os eventos são muito divertidos."</p>
+                        <p class="testimonial-author">- MatheusZera, Jogador</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="https://via.placeholder.com/80/2C3E50/ECF0F1?text=J2" alt="Jogador 2" class="testimonial-avatar">
+                        <p class="testimonial-quote">"A equipe é super atenciosa e sempre traz novidades. Sinto que o servidor está sempre evoluindo."</p>
+                        <p class="testimonial-author">- PlayerPro, Jogador</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="https://via.placeholder.com/80/FFD700/000000?text=J3" alt="Jogador 3" class="testimonial-avatar">
+                        <p class="testimonial-quote">"Adoro os minigames! É o lugar perfeito para relaxar e competir com os amigos depois da escola."</p>
+                        <p class="testimonial-author">- GamerGirl, Jogadora</p>
+                    </div>
+                </div>
+                <div class="testimonials-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padded section-alt-bg text-center">
+        <div class="container">
+            <h2 class="text-center">Compartilhe sua Experiência</h2>
+            <p class="section-description">Ajude-nos a crescer compartilhando nosso site com seus amigos.</p>
+            <div class="share-buttons-container">
+                <button class="share-btn" data-platform="twitter"><i class="fab fa-twitter"></i> Twitter</button>
+                <button class="share-btn" data-platform="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+                <button class="share-btn" data-platform="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>IP do Servidor</h2>
+            <p class="section-description">Clique no campo abaixo para copiar o endereço do servidor para sua área de transferência.</p>
+            <div class="copy-container">
+                <span id="ipAddress" class="copy-target">play.mundozerascraft.net</span>
+                <button class="copy-button" data-copy-target="#ipAddress"><i class="fas fa-copy"></i> Copiar</button>
+            </div>
+        </div>
+    </section>
+
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
