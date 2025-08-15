@@ -1552,8 +1552,85 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     font-size: 1.1rem;
     transition: background-color 0.3s ease;
 }
-/* ============================================ */
-/* Estilos para o Modal (Popup) */
+/* ====================================================================================== */
+
+/* ========================================= */
+/* 9. Estilos para o Acordeão (Recolhimento)    */
+/* ========================================= */
+
+/* Container que envolve todos os itens do acordeão */
+.accordion-container {
+    width: 90%; /* Ajuste esta porcentagem conforme necessário */
+    max-width: 600px; /* Ajuste este valor em pixels conforme necessário */
+    margin: 30px auto; /* Mantém o acordeão centralizado */
+}
+
+/* Cada item individual do acordeão */
+.accordion-item {
+    background-color: var(--cor-card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius);
+    margin-bottom: 8px; /* Reduzi um pouco a margem inferior */
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.accordion-item:hover {
+    box-shadow: var(--sombra-card);
+}
+
+/* O cabeçalho clicável de cada item */
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px; /* Reduzi um pouco o padding vertical */
+    cursor: pointer;
+    background-color: var(--cor-card-bg);
+    color: var(--cor-texto-claro);
+    font-family: var(--fonte-titulo);
+    font-size: 1em; /* Reduzi um pouco o tamanho da fonte */
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: var(--cor-card-hover);
+}
+
+/* O ícone de seta que gira */
+.accordion-header .accordion-icon {
+    font-size: 1.2em; /* Reduzi um pouco o tamanho do ícone */
+    color: var(--cor-primaria);
+    transition: transform 0.3s ease;
+}
+
+/* Estilos quando o item do acordeão está "aberto" */
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+    color: var(--cor-destaque);
+}
+
+/* O conteúdo que é expandido/recolhido */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    background-color: #2e4459;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+/* Estilos do conteúdo quando o item está "aberto" */
+.accordion-item.active .accordion-content {
+    max-height: 500px; /* Valor grande o suficiente para o conteúdo */
+    padding: 10px 15px; /* Reduzi um pouco o padding vertical */
+    font-size: 0.9em; /* Reduzi um pouco o tamanho da fonte do conteúdo */
+}
+
+/* ========================================= */
+/* 10. Estilos para o Modal (Popup) */
+/* ========================================= */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -1624,199 +1701,10 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     transform: rotate(90deg);
 }
 
-.btn-shine {
-    display: inline-block;
-    padding: 15px 35px;
-    margin-top: 20px;
-    position: relative;
-    border: 2px solid var(--cor-destaque);
-    overflow: hidden;
-    border-radius: 5px;
-    background: none;
-    color: var(--cor-destaque);
-    font-size: 1.1em;
-    font-weight: 600;
-    z-index: 1;
-    transition: var(--transicao-padrao);
-}
-.btn-shine:hover {
-    color: var(--cor-fundo-escuro);
-    background-color: var(--cor-destaque);
-    box-shadow: 0 0 20px var(--cor-destaque);
-}
+/* ========================================= */
+/* 11. Estilos para a Galeria de Imagens */
+/* ========================================= */
 
-
-
-/* Estilos para o Acordeão */
-.accordion-container {
-    width: 90%;
-    max-width: 600px;
-    margin: 30px auto;
-}
-
-.accordion-item {
-    background-color: var(--cor-card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--border-radius);
-    margin-bottom: 8px;
-    overflow: hidden;
-    transition: box-shadow 0.3s ease;
-}
-
-.accordion-item:hover {
-    box-shadow: var(--sombra-card);
-}
-
-.accordion-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 15px;
-    cursor: pointer;
-    background-color: var(--cor-card-bg);
-    color: var(--cor-texto-claro);
-    font-family: var(--fonte-titulo);
-    font-size: 1em;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.accordion-header:hover {
-    background-color: var(--cor-card-hover);
-}
-
-.accordion-header .accordion-icon {
-    font-size: 1.2em;
-    color: var(--cor-primaria);
-    transition: transform 0.3s ease;
-}
-
-.accordion-item.active .accordion-icon {
-    transform: rotate(180deg);
-    color: var(--cor-destaque);
-}
-
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 15px;
-    background-color: #2e4459;
-    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-}
-
-.accordion-item.active .accordion-content {
-    max-height: 500px;
-    padding: 10px 15px;
-    font-size: 0.9em;
-}
-
-
-
-
-/* Estilos para as Abas (Tabs) */
-.tabs-container {
-    width: 90%;
-    max-width: 800px;
-    margin: 50px auto;
-}
-
-.tab-nav {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--cor-bordas);
-}
-
-.tab-button {
-    background-color: transparent;
-    color: var(--cor-texto-claro);
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: color 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    font-weight: 500;
-}
-
-.tab-button.active {
-    color: var(--cor-destaque);
-    border-bottom: 3px solid var(--cor-destaque);
-}
-
-.tab-button:not(.active):hover {
-    color: var(--cor-primaria);
-}
-
-.tab-content {
-    display: none;
-    padding: 20px 0;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-
-
-/* Estilos para o Carrossel (Slideshow) */
-.carousel-container {
-    width: 90%;
-    max-width: 900px;
-    margin: 50px auto;
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card);
-}
-
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-}
-
-.carousel-slide img {
-    width: 100%;
-    display: block;
-}
-
-.carousel-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 15px;
-    cursor: pointer;
-    font-size: 1.5em;
-    transition: background-color 0.3s ease;
-}
-
-.carousel-control:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.carousel-control.prev {
-    left: 0;
-    border-top-right-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-}
-
-.carousel-control.next {
-    right: 0;
-    border-top-left-radius: var(--border-radius);
-    border-bottom-left-radius: var(--border-radius);
-}
-
-
-
-/* Estilos para a Galeria e Lightbox */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1841,6 +1729,21 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     transition: transform 0.4s ease;
 }
 
+.gallery-item::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--cor-destaque);
+    font-size: 3em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
 .gallery-item:hover {
     transform: scale(1.05);
     box-shadow: var(--sombra-card-hover);
@@ -1851,6 +1754,11 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     filter: brightness(0.6);
 }
 
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* Lightbox (Menu do modal para imagem) */
 .lightbox-overlay {
     position: fixed;
     top: 0;
@@ -1858,31 +1766,20 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.95);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 1003;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
 }
 
-.lightbox-overlay.active {
-    opacity: 1;
-    visibility: visible;
+.lightbox-overlay.show {
+    display: flex;
 }
 
 .lightbox-content {
-    position: relative;
     max-width: 90%;
-    max-height: 90vh;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
-}
-
-.lightbox-overlay.active .lightbox-content {
-    transform: scale(1);
+    max-height: 90%;
+    position: relative;
 }
 
 .lightbox-content img {
@@ -1890,35 +1787,512 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     max-width: 100%;
     max-height: 100%;
     border-radius: var(--border-radius);
-    border: 3px solid var(--cor-destaque);
+    box-shadow: var(--sombra-card-hover);
+    animation: fadeInScale 0.4s ease-out;
 }
 
-.lightbox-close-btn {
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ========================================= */
+/* 12. Estilos para a Timeline */
+/* ========================================= */
+
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.timeline-container::after {
+    content: '';
     position: absolute;
-    top: -40px;
-    right: -40px;
+    width: 2px;
+    background-color: var(--cor-bordas);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    background-color: var(--cor-primaria);
+    border: 3px solid var(--cor-fundo-escuro);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+.timeline-item.right::after {
+    left: -10px;
+}
+
+.timeline-item:hover::after {
+    background-color: var(--cor-destaque);
+}
+
+.timeline-item .timeline-card {
+    padding: var(--padding-card);
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+@media screen and (max-width: 600px) {
+    .timeline-container::after {
+        left: 31px;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item.left::after, .timeline-item.right::after {
+        left: 15px;
+    }
+    .timeline-item.right {
+        left: 0;
+    }
+}
+
+/* ========================================= */
+/* 13. Estilos para as Tabs de Conteúdo */
+/* ========================================= */
+
+.tabs-container {
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    border-bottom: 2px solid var(--cor-bordas);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
     background: none;
     border: none;
-    color: #fff;
-    font-size: 2.5em;
+    padding: 15px 25px;
     cursor: pointer;
+    font-family: var(--fonte-titulo);
+    font-size: 1.1em;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    position: relative;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.lightbox-close-btn:hover {
-    color: var(--cor-primaria);
-    transform: rotate(90deg);
-}
-
-
-/* Estilos para o Contador Animado */
-.counter {
-    font-size: 4em;
-    font-weight: bold;
+.tab-button.active,
+.tab-button:hover {
     color: var(--cor-destaque);
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    transform: translateY(-5px);
 }
 
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--cor-primaria);
+    border-radius: 2px 2px 0 0;
+}
+
+.tab-content {
+    display: none;
+    background-color: var(--cor-card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--sombra-card);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Cards com efeito de flip*/
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 350px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--sombra-card);
+    border: 1px solid var(--cor-bordas);
+}
+
+.flip-card-front {
+    background-color: var(--cor-card-bg);
+    color: var(--cor-texto-claro);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-front img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--cor-primaria);
+}
+
+.flip-card-back {
+    background-color: var(--cor-card-hover);
+    color: var(--cor-texto-claro);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-back ul {
+    margin: 20px 0;
+}
+
+.flip-card-back li {
+    font-size: 1.1em;
+    padding: 5px 0;
+}
+
+
+/* Seção com efeito Parallax -------------------------*/
+.parallax-section {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+.parallax-content {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    border-radius: var(--border-radius);
+}
+
+.parallax-content h2 {
+    color: var(--cor-destaque);
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+/* ========================================= */
+/* 14. Estilos da Barra de Status (Melhorado) PROGRESSO   */
+/* ========================================= */
+
+.status-bar-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr 50px; /* 1 parte para o texto, 2 para a barra, 50px para a porcentagem */
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.status-label {
+    margin: 0;
+    font-weight: 600;
+    color: var(--cor-texto-claro);
+}
+
+.status-percentage {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--cor-destaque);
+    text-align: right;
+}
+
+/* O restante do seu CSS para .progress-bar-bg e .progress-bar-fill pode ser o mesmo */
+.progress-bar-bg {
+    width: 100%;
+    height: 15px;
+    background-color: var(--cor-fundo-claro);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--cor-primaria);
+    transition: width 0.8s ease-in-out;
+    border-radius: 10px;
+    animation: fill-progress 2s ease-out forwards;
+}
+
+@keyframes fill-progress {
+    from { width: 0; }
+}
+
+/* Botões com efeito de brilho */
+.btn-shine {
+    display: inline-block;
+    padding: 15px 35px;
+    margin-top: 20px;
+    position: relative;
+    border: 2px solid var(--cor-destaque);
+    overflow: hidden;
+    border-radius: 5px;
+    background: none;
+    color: var(--cor-destaque);
+    font-size: 1.1em;
+    font-weight: 600;
+    z-index: 1;
+    transition: var(--transicao-padrao);
+}
+
+.btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    z-index: -1;
+}
+
+.btn-shine:hover {
+    color: var(--cor-fundo-escuro);
+    background-color: var(--cor-destaque);
+    box-shadow: 0 0 20px var(--cor-destaque);
+}
+
+.btn-shine:hover::before {
+    transform: translateX(100%);
+}
+
+/* Carrossel de Testemunhos */
+.testimonial-carousel {
+    display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    max-width: 800px;
+    margin: 30px auto;
+    position: relative;
+}
+
+.testimonial-item {
+    min-width: 100%;
+    flex-shrink: 0;
+    padding: 20px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--cor-bordas);
+    box-shadow: var(--sombra-card);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-item p {
+    font-size: 1.2em;
+    font-style: italic;
+    color: var(--cor-texto-claro);
+    margin-bottom: 20px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--cor-primaria);
+}
+
+.testimonial-author h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--cor-destaque);
+}
+
+.testimonial-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.testimonial-nav button {
+    background-color: var(--cor-card-bg);
+    border: 1px solid var(--cor-primaria);
+    color: var(--cor-primaria);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+}
+
+.testimonial-nav button:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-escuro);
+}
+
+/* Cards com efeito Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--padding-card);
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+.glass-card h3 {
+    color: var(--cor-destaque);
+}
+
+.glass-card p {
+    color: var(--cor-texto-claro);
+}
+
+/* Indicador de Rolagem */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background-color: var(--cor-primaria);
+    z-index: 1004;
+    transition: width 0.1s linear;
+}
+
+/* Tooltips -------------------------- */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 10px;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--cor-card-hover);
+    color: var(--cor-texto-claro);
+    text-align: center;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.9em;
+    border: 1px solid var(--cor-primaria);
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Seta do tooltip ------------------ */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--cor-primaria) transparent transparent transparent;
+}
+
+/* Contador de Estatísticas -------------------------- */
 .stats-grid {
     display: flex;
     justify-content: space-around;
@@ -1926,88 +2300,233 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     margin-top: 40px;
 }
 
-.stat-item {
-    text-align: center;
+.stat-item .stat-icon {
+    font-size: 3em;
+    color: var(--cor-primaria);
+    margin-bottom: 10px;
 }
 
-.stat-item .stat-label {
-    margin-top: -10px;
-    color: var(--cor-texto-claro);
+.stat-item .counter {
     font-family: var(--fonte-titulo);
-    font-size: 1.2em;
-}
-
-
-/* Estilos para o Copiar para a Área de Transferência e Notificação */
-.code-block {
-    background-color: #2b2b2b;
-    border: 1px solid #444;
-    padding: 15px;
-    border-radius: var(--border-radius);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px auto;
-    max-width: 500px;
-}
-
-.code-block pre {
-    margin: 0;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.copy-btn {
-    background-color: var(--cor-terciaria);
-    color: var(--cor-texto-claro);
-    padding: 8px 15px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: var(--transicao-padrao);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9em;
-}
-
-.copy-btn:hover {
-    background-color: var(--cor-secundaria);
-    transform: translateY(-2px);
-    box-shadow: var(--sombra-leve);
-}
-
-.central-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(26, 26, 26, 0.9);
+    font-size: 4em;
+    font-weight: 700;
     color: var(--cor-destaque);
+    margin-bottom: 5px;
+}
+
+/* Botões de Opção Personalizados ------------------ */
+.custom-radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.custom-radio-btn {
+    display: block;
+    cursor: pointer;
+}
+
+.custom-radio-btn input {
+    display: none;
+}
+
+.custom-radio-text {
     padding: 15px 30px;
+    background-color: var(--cor-card-bg);
+    border: 2px solid var(--cor-bordas);
     border-radius: var(--border-radius);
-    border: 1px solid var(--cor-primaria);
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    color: var(--cor-texto-claro);
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: var(--transicao-padrao);
 }
 
-.central-message.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1.1);
+/* Estado de hover */
+.custom-radio-btn:hover .custom-radio-text {
+    background-color: var(--cor-card-hover);
+    border-color: var(--cor-primaria);
+}
+
+/* Estado selecionado */
+.custom-radio-btn input:checked + .custom-radio-text {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-escuro);
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+    transform: translateY(-5px);
 }
 
 
+/* ========================================= */
+/* 15. CAIXA DE TEXTO COM EFEITO VIDRO TRANSPARENTE
+/* ========================================= */
+.glass-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
 
-/* Estilos para Título com Sublinhado Animado */
+/* ========================================= */
+/* 16. BLOCO DE CITAÇÃO COM BORDA ANIMADA */
+/* ========================================= */
+
+.animated-quote {
+    background-color: var(--cor-fundo-escuro);
+    padding: 30px;
+    border-left: 5px solid var(--cor-primaria);
+    border-radius: 8px;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-quote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--cor-primaria), var(--cor-secundaria));
+    animation: quote-border-flow 3s linear infinite;
+}
+
+@keyframes quote-border-flow {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.animated-quote p {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--cor-texto-claro);
+    margin-bottom: 10px;
+}
+
+.animated-quote cite {
+    display: block;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--cor-texto-claro);
+}
+
+/* ========================================= */
+/* 17. TEXTO COM EFEITO "GLITCH" */
+/* ========================================= */
+
+.glitch-text {
+    position: relative;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0.05em 0 0 #00f, -0.05em 0 0 #f00;
+    animation: glitch 1.5s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cor-fundo);
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+}
+
+.glitch-text::before {
+    left: -2px;
+    text-shadow: 0.05em 0 0 #f00;
+    animation: glitch-before 2s infinite;
+}
+
+.glitch-text::after {
+    left: 2px;
+    text-shadow: -0.05em 0 0 #00f;
+    animation: glitch-after 2.5s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(-5px, -5px); }
+    60% { transform: translate(5px, 5px); }
+    80% { transform: translate(5px, -5px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitch-before {
+    0% { clip: rect(0, 900px, 0, 0); }
+    10% { clip: rect(10px, 900px, 10px, 0); }
+    20% { clip: rect(20px, 900px, 20px, 0); }
+    /* ...outros keyframes para simular a falha... */
+}
+
+@keyframes glitch-after {
+    0% { clip: rect(0, 900px, 0, 0); }
+    15% { clip: rect(5px, 900px, 5px, 0); }
+    30% { clip: rect(25px, 900px, 25px, 0); }
+    /* ...outros keyframes... */
+}
+
+/* ========================================= */
+/* 18. BLOCO DE SPOILER DE TEXTO EXPANSÍVEL */
+/* ========================================= */
+
+.spoiler-block {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.spoiler-toggle {
+    width: 100%;
+    background-color: var(--cor-fundo-claro);
+    color: var(--cor-texto-claro);
+    border: none;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.spoiler-toggle:hover {
+    background-color: var(--cor-fundo-escuro);
+}
+
+.spoiler-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    background-color: var(--cor-fundo-claro);
+    padding: 0 20px;
+    border-radius: 0 0 8px 8px;
+}
+
+.spoiler-block.active .spoiler-content {
+    max-height: 500px; /* Valor grande para permitir expansão */
+    padding: 20px;
+}
+
+/* ========================================= */
+/* 19. TÍTULO COM SUBLINHADO ANIMADO */
+/* ========================================= */
+
 .animated-underline-title {
     position: relative;
     display: inline-block;
     padding-bottom: 5px;
-    color: var(--cor-destaque);
-    font-size: 2em;
+    color: var(--cor-texto-claro);
     cursor: pointer;
 }
 
@@ -2026,773 +2545,137 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     width: 100%;
 }
 
-
-
-
-/* Estilos para Animações de Rolagem (Fade-in) */
-.fade-in-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-
-
-/* Estilos para o Botão de Compartilhamento Social Flutuante */
-.social-share-bar {
-    position: fixed;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-    background-color: rgba(26, 26, 26, 0.7);
-    border-radius: 10px 0 0 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-    z-index: 999;
-}
-
-.social-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--cor-texto-claro);
-    border-radius: 50%;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    font-size: 1.2em;
-}
-
-.social-icon:hover {
-    transform: scale(1.2);
-}
-
-.social-icon.facebook:hover { background-color: #1877F2; }
-.social-icon.twitter:hover { background-color: #1DA1F2; }
-.social-icon.linkedin:hover { background-color: #0A66C2; }
-.social-icon.whatsapp:hover { background-color: #25D366; }
-
-
-
-/* Estilos para o Toggle de Tema (Modo Claro/Escuro) */
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-.theme-switcher {
-    opacity: 0;
-    position: absolute;
-}
-
-.theme-switcher-label {
-    background-color: #111;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 50px;
-    position: relative;
-    padding: 5px;
-    height: 26px;
-    width: 50px;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.theme-switcher-label .fas {
-    color: #f1c40f;
-    transition: transform 0.3s ease;
-}
-
-.theme-switcher-label .fa-sun {
-    color: #f39c12;
-}
-
-.theme-switcher-label .ball {
-    background-color: #fff;
-    width: 22px;
-    height: 22px;
-    position: absolute;
-    left: 2px;
-    top: 2px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-}
-
-.theme-switcher:checked + .theme-switcher-label .ball {
-    transform: translateX(24px);
-}
-
-/* Exemplo de cores para o tema claro */
-body.light-theme {
-    background-color: #f4f4f4;
-    color: #333;
-    /* Outras variáveis de cor para o tema claro */
-}
-
-
-
-/* Estilos para o Sistema de Notificações Toast */
-.toast-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.toast {
-    background-color: var(--cor-card-bg);
-    color: var(--cor-texto-claro);
-    padding: 15px;
-    border-left: 5px solid var(--cor-primaria);
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    animation: fade-in 0.5s ease-out, slide-up 0.5s ease-out;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.toast.show {
-    animation: fade-in 0.5s ease-out forwards;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes fade-in {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.toast.hide {
-    animation: fade-out 0.5s ease-in forwards;
-}
-
-@keyframes fade-out {
-    from { opacity: 1; transform: translateY(0); }
-    to { opacity: 0; transform: translateY(20px); }
-}
-
-
-/* Estilos para o Menu "Hamburger" Animado */
-.hamburger-btn {
-    width: 30px;
-    height: 30px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    position: relative;
-    z-index: 1001;
-}
-
-.hamburger-btn .line {
-    width: 100%;
-    height: 3px;
-    background-color: var(--cor-texto-claro);
-    border-radius: 5px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.hamburger-btn.is-active .line1 {
-    transform: translateY(9px) rotate(45deg);
-}
-
-.hamburger-btn.is-active .line2 {
-    opacity: 0;
-}
-
-.hamburger-btn.is-active .line3 {
-    transform: translateY(-9px) rotate(-45deg);
-}
-
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100%;
-    background-color: var(--cor-card-bg);
-    padding-top: 80px;
-    transition: right 0.4s ease-out;
-    z-index: 1000;
-}
-
-.mobile-menu.is-active {
-    right: 0;
-}
-
-.mobile-menu ul {
+/* ========================================= */
+/* 20. LISTA DE RECURSOS COM ANIMAÇÃO DE MARCADOR */
+/* ========================================= */
+.animated-list {
     list-style: none;
     padding: 0;
-    margin: 0;
-}
-
-.mobile-menu ul li a {
-    display: block;
-    padding: 15px 20px;
-    color: var(--cor-texto-claro);
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.mobile-menu ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-
-/* Estilos para a Barra de Progresso de Leitura */
-#reading-progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 5px;
-    background-color: var(--cor-primaria);
-    z-index: 1000;
-    transition: width 0.1s linear;
-}
-
-/* Estilos para Cartões de Conteúdo com Efeito Parallax */
-.parallax-container {
-    height: 500px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-}
-
-.parallax-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 1;
-    transition: transform 0.1s linear;
-}
-
-.parallax-content {
-    position: relative;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-}
-
-
-/* Estilos para a Dica de Ferramenta (Tooltip) */
-.tooltip-trigger {
-    position: relative;
-    cursor: pointer;
-    text-decoration: underline;
-    text-decoration-style: dashed;
-}
-
-.tooltip-trigger::before,
-.tooltip-trigger::after {
-    --scale: 0;
-    --tooltip-color: #333;
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-100%) scale(var(--scale));
-    transform-origin: bottom center;
-    transition: transform 0.2s cubic-bezier(0.5, 0.5, 0.5, 1.2);
-    z-index: 999;
-}
-
-.tooltip-trigger::before {
-    content: attr(data-tooltip-text);
-    background-color: var(--tooltip-color);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    white-space: nowrap;
-    font-size: 0.9em;
-}
-
-.tooltip-trigger:hover::before,
-.tooltip-trigger:hover::after {
-    --scale: 1;
-}
-
-.tooltip-trigger::after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid var(--tooltip-color);
-    top: -5px;
-}
-
-
-/* Estilos para o Visualizador de Imagens 360 Graus */
-.viewer-360-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 40px auto;
-    position: relative;
-    overflow: hidden;
-    cursor: grab;
-    border: 2px solid var(--cor-bordas);
-    border-radius: var(--border-radius);
-    user-select: none;
-}
-
-.viewer-360-image {
-    width: 100%;
-    display: block;
-    pointer-events: none;
-    user-select: none;
-}
-
-
-/* Estilos para a Linha do Tempo (Timeline) Vertical */
-.timeline-container {
-    position: relative;
-    max-width: 800px;
+    max-width: 600px;
     margin: 50px auto;
 }
 
-.timeline-container::after {
-    content: '';
-    position: absolute;
-    width: 3px;
-    background-color: var(--cor-texto-claro);
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -1.5px;
-}
-
-.timeline-item {
-    padding: 10px 40px;
-    position: relative;
-    background-color: inherit;
-    width: 50%;
-}
-
-.timeline-item:nth-child(odd) {
-    left: 0;
-}
-
-.timeline-item:nth-child(even) {
-    left: 50%;
-}
-
-.timeline-dot {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background-color: var(--cor-primaria);
-    border: 2px solid white;
-    top: 15px;
-    border-radius: 50%;
-    z-index: 1;
-}
-
-.timeline-item:nth-child(odd) .timeline-dot {
-    right: -7.5px;
-}
-
-.timeline-item:nth-child(even) .timeline-dot {
-    left: -7.5px;
-}
-
-.timeline-content {
-    padding: 20px 30px;
-    background-color: var(--cor-card-bg);
-    position: relative;
-    border-radius: 6px;
-    box-shadow: var(--sombra-card);
-}
-
-.timeline-item:nth-child(even) .timeline-content::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    left: -15px;
-    border: medium solid var(--cor-card-bg);
-    border-width: 10px 10px 10px 0;
-    border-color: transparent var(--cor-card-bg) transparent transparent;
-}
-
-
-/* Estilos para Validação de Formulário */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.form-group input.invalid {
-    border-color: #e74c3c;
-}
-
-.error-message {
-    color: #e74c3c;
-    font-size: 0.8em;
-    display: block;
-    margin-top: 5px;
-}
-
-
-/* Estilos para o Slider de Faixa de Preço */
-.price-slider-container {
-    position: relative;
-    width: 300px;
-    margin: 50px auto;
-}
-
-.slider-track {
-    position: absolute;
-    height: 5px;
-    background-color: #ccc;
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 5px;
-}
-
-.price-slider-container input[type="range"] {
-    position: absolute;
-    -webkit-appearance: none;
-    width: 100%;
-    background: transparent;
-    pointer-events: none;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.price-slider-container input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    background: var(--cor-primaria);
-    cursor: pointer;
-    pointer-events: all;
-    margin-top: -5px;
-}
-
-.slider-values {
-    text-align: center;
-    margin-top: 25px;
-}
-
-
-/* Estilos para o Seletor de Data Personalizado */
-.date-picker-container {
-    position: relative;
-    width: 280px;
-}
-
-#date-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.date-picker {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 10;
-    background-color: var(--cor-fundo-escuro);
-    border: 1px solid var(--cor-bordas);
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-}
-
-.date-picker-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.date-picker-header button {
-    background: none;
-    border: none;
+.animated-list li {
+    padding: 10px 0;
+    font-size: 1.1rem;
     color: var(--cor-texto-claro);
-    font-size: 1.2em;
-    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.date-picker-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    gap: 5px;
+.animated-list li:nth-child(1) { transition-delay: 0.1s; }
+.animated-list li:nth-child(2) { transition-delay: 0.2s; }
+.animated-list li:nth-child(3) { transition-delay: 0.3s; }
+/* Adicione mais seções conforme a necessidade */
+
+.animated-list.in-view li {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.date-picker-grid div {
-    padding: 5px;
-    border-radius: 3px;
-    cursor: pointer;
+.list-icon {
+    color: var(--cor-primaria);
+    margin-right: 10px;
 }
 
-.date-picker-grid div.day-of-week {
+/* ========================================= */
+/* 21. TÍTULO COM ANIMAÇÃO DE "CORTINA" */
+/* ========================================= */
+.curtain-title-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 4rem; /* Ajuste conforme o tamanho do seu texto */
+}
+
+.curtain-title {
+    color: var(--cor-texto-claro);
+    font-size: 3rem;
+    transform: translateY(100%);
+    animation: reveal-title 1.2s ease-out forwards;
+    animation-delay: 0.5s; /* Começa a animação depois de um pequeno atraso */
+}
+
+@keyframes reveal-title {
+    to { transform: translateY(0); }
+}
+
+/* ========================================= */
+/* 22. TEXTO COM EFEITO HOVER INTERATIVO */
+/* ========================================= */
+.hover-text-reveal {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--cor-texto-claro);
+}
+
+.hover-text {
+    position: relative;
     font-weight: bold;
     color: var(--cor-primaria);
-}
-
-.date-picker-grid div.selected {
-    background-color: var(--cor-primaria);
-    color: var(--cor-btn-text);
-}
-
-
-
-/* Estilos para a Barra de Pesquisa com Autocompletar */
-.autocomplete-container {
-    position: relative;
-    max-width: 400px;
-    margin: 50px auto;
-}
-
-#search-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-.suggestions-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: var(--cor-card-bg);
-    border: 1px solid var(--cor-bordas);
-    border-top: none;
-    border-radius: 0 0 5px 5px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    z-index: 998;
-}
-
-.suggestions-list li {
-    padding: 10px;
     cursor: pointer;
 }
 
-.suggestions-list li:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-
-
-/* Estilos para o Fundo com Partículas Animadas */
-#particles-js {
+.hover-image {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: var(--cor-fundo-escuro);
-    background-image: url('');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
-    z-index: 1;
-}
-
-.content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 100px 20px;
-    color: white;
-}
-
-
-
-/* Estilos para Efeitos de Hover em Botões e Links */
-.btn-hover-effect {
-    background-color: var(--cor-primaria);
-    color: var(--cor-btn-text);
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: color 0.4s ease;
-}
-
-.btn-hover-effect::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--cor-secundaria);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-    z-index: -1;
-}
-
-.btn-hover-effect:hover::after {
-    transform: scaleX(1);
-}
-
-.link-hover-effect {
-    color: var(--cor-texto-claro);
-    text-decoration: none;
-    position: relative;
-}
-
-.link-hover-effect::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--cor-destaque);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-}
-
-.link-hover-effect:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-
-
-/* Estilos para a Animação de Digitação de Texto */
-.typing-animation {
-    font-family: monospace;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 0.15em solid orange;
-    letter-spacing: 0.15em;
-    animation: 
-        typing 4s steps(40, end),
-        blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: orange; }
-}
-
-
-
-/* Estilos para o Gradiente Animado no Fundo */
-.animated-gradient-bg {
-    width: 100%;
-    height: 500px;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient-flow 15s ease infinite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-}
-
-@keyframes gradient-flow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-
-
-/* Estilos para o Layout de Grade com Efeito de Filtro */
-.filter-buttons {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.filter-buttons button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: 1px solid var(--cor-primaria);
-    background-color: transparent;
-    color: var(--cor-primaria);
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.filter-buttons button.active,
-.filter-buttons button:hover {
-    background-color: var(--cor-primaria);
-    color: var(--cor-btn-text);
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.grid-item {
-    background-color: var(--cor-card-bg);
-    padding: 20px;
-    text-align: center;
-    border-radius: var(--border-radius);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.grid-item.hidden {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 200px;
+    background-color: var(--cor-fundo-claro);
+    border-radius: 8px;
     opacity: 0;
-    transform: scale(0);
-    height: 0;
-    padding: 0;
-    margin: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
-/* ============================================ */
+
+.hover-text:hover + .hover-image {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ========================================= */
+/* 23. BLOCO DE TETO COM EFEITO DE "CONSOLE" */
+/* ========================================= */
+.console-box {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff00;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.console-header {
+    display: flex;
+    gap: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.console-text {
+    white-space: pre-wrap;
+    padding-top: 10px;
+}
 
 /* ========================================= */
 /* 24. ESTILO GERAL PARA A ABA DE ARQUIVOS, PESQUISA, FILTROS E ETC.. */

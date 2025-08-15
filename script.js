@@ -460,668 +460,280 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     highlightActiveNavLink();
-//-----------------------------------------------------
-// JS para o Modal Pop-up
-document.addEventListener('DOMContentLoaded', () => {
-    const openModalBtn = document.getElementById('openModalBtn');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-    if (!openModalBtn || !modalOverlay || !modalCloseBtn) return;
-    openModalBtn.addEventListener('click', () => {
-        modalOverlay.classList.add('show');
-    });
-    modalCloseBtn.addEventListener('click', () => {
-        modalOverlay.classList.remove('show');
-    });
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) {
-            modalOverlay.classList.remove('show');
+
+    // =====================================
+    // 9. Funcionalidade do Acordeão
+    // =====================================
+    function setupAccordion() {
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    }
+    setupAccordion();
+
+    // =====================================
+    // 10. Funcionalidade do Modal
+    // =====================================
+    function setupModal() {
+        const modal = document.getElementById('myModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = modal ? modal.querySelector('.modal-close-btn') : null;
+        
+        if (openBtn && modal) {
+            openBtn.addEventListener('click', () => {
+                modal.classList.add('show');
+            });
         }
-    });
-});
-
-
-
-// JS para o Acordeão
-document.addEventListener('DOMContentLoaded', () => {
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    accordionItems.forEach(item => {
-        const header = item.querySelector('.accordion-header');
-        header.addEventListener('click', () => {
-            accordionItems.forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
+        if (closeBtn && modal) {
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('show');
+            });
+        }
+        if (modal) {
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove('show');
                 }
             });
-            item.classList.toggle('active');
-        });
-    });
-});
-
-
-// JS para as Abas (Tabs)
-document.addEventListener('DOMContentLoaded', () => {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            const target = button.getAttribute('data-tab');
-            button.classList.add('active');
-            document.getElementById(target).classList.add('active');
-        });
-    });
-});
-
-
-// JS para o Carrossel
-document.addEventListener('DOMContentLoaded', () => {
-    const carousels = document.querySelectorAll('.carousel-container');
-    carousels.forEach(carousel => {
-        const track = carousel.querySelector('.carousel-track');
-        const slides = Array.from(track.children);
-        const nextButton = carousel.querySelector('.carousel-control.next');
-        const prevButton = carousel.querySelector('.carousel-control.prev');
-        let slideWidth = slides[0].getBoundingClientRect().width;
-        let slideIndex = 0;
-        
-        const moveSlides = () => {
-            track.style.transform = 'translateX(-' + (slideWidth * slideIndex) + 'px)';
-        };
-
-        nextButton.addEventListener('click', () => {
-            slideIndex = (slideIndex + 1) % slides.length;
-            moveSlides();
-        });
-
-        prevButton.addEventListener('click', () => {
-            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-            moveSlides();
-        });
-
-        window.addEventListener('resize', () => {
-            slideWidth = slides[0].getBoundingClientRect().width;
-            moveSlides();
-        });
-    });
-});
-
-
-// JS para o Lightbox (Galeria de Imagens)
-document.addEventListener('DOMContentLoaded', () => {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const lightboxOverlay = document.getElementById('lightboxOverlay');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
-    if (!lightboxOverlay || !lightboxImage || !lightboxCloseBtn) return;
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const imageUrl = item.getAttribute('data-src');
-            lightboxImage.src = imageUrl;
-            lightboxOverlay.classList.add('active');
-        });
-    });
-    lightboxCloseBtn.addEventListener('click', () => {
-        lightboxOverlay.classList.remove('active');
-    });
-    lightboxOverlay.addEventListener('click', (e) => {
-        if (e.target === lightboxOverlay) {
-            lightboxOverlay.classList.remove('active');
         }
-    });
+    }
+    setupModal();
+
+    // =====================================
+    // 11. Funcionalidade da Galeria e Lightbox
+    // =====================================
+    function setupLightbox() {
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+
+        if (galleryItems.length > 0 && lightbox) {
+            galleryItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const imgSrc = e.target.getAttribute('data-src');
+                    lightboxImage.src = imgSrc;
+                    lightbox.classList.add('show');
+                });
+            });
+
+            if(lightboxClose) {
+                lightboxClose.addEventListener('click', () => {
+                    lightbox.classList.remove('show');
+                });
+            }
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target.id === 'lightbox') {
+                    lightbox.classList.remove('show');
+                }
+            });
+        }
+    }
+    setupLightbox();
+
+    // =====================================
+    // 12. Funcionalidade das Tabs
+    // =====================================
+    function setupTabs() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        if (tabButtons.length > 0) {
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    const activeTabContent = document.getElementById(tabId);
+                    if (activeTabContent) {
+                        activeTabContent.classList.add('active');
+                    }
+                });
+            });
+        }
+    }
+    setupTabs();
+
+    // =====================================
+    // 13. Funcionalidade do Carrossel de Testemunhos
+    // =====================================
+    const carousel = document.querySelector('.testimonial-carousel');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    if (carousel && prevBtn && nextBtn) {
+        const scrollWidth = carousel.scrollWidth / carousel.childElementCount;
+
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: scrollWidth, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -scrollWidth, behavior: 'smooth' });
+        });
+    }
 });
-
-
-// JS para o Contador Animado
-document.addEventListener('DOMContentLoaded', () => {
+    // =====================================
+    // 14. Contador Animado
+    // =====================================
     const counters = document.querySelectorAll('.counter');
-    const updateCounter = counter => {
+    const observerOptionsCounters = { root: null, threshold: 0.5 };
+    
+    const animateCounter = (counter) => {
         const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const increment = target / 200;
-        if (count < target) {
-            counter.innerText = Math.ceil(count + increment);
-            setTimeout(() => updateCounter(counter), 1);
-        } else {
-            counter.innerText = target;
-        }
+        const duration = 2000;
+        let startTime = null;
+        const easeOutQuad = t => t * (2 - t);
+        
+        const updateCounter = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const elapsedTime = timestamp - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const value = Math.floor(easeOutQuad(progress) * target);
+            counter.textContent = value;
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        };
+        requestAnimationFrame(updateCounter);
     };
+
     const counterObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                updateCounter(entry.target);
+                animateCounter(entry.target);
                 observer.unobserve(entry.target);
             }
         });
-    });
+    }, observerOptionsCounters);
+    
     counters.forEach(counter => {
+        counter.textContent = '0';
         counterObserver.observe(counter);
     });
+
+    // =====================================
+    // 15. Bloco de Spoiler de Texto Expansível
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+    const spoilerButton = document.querySelector('.spoiler-toggle');
+    spoilerButton.addEventListener('click', () => {
+        spoilerButton.parentElement.classList.toggle('active');
+    });
 });
 
-
-
-// JS para o Copiar para a Área de Transferência
+    // =====================================
+    // 16. Lista de Recursos com Animação de Marcador
+    // =====================================
 document.addEventListener('DOMContentLoaded', () => {
-    const centralMessage = document.getElementById('centralMessage');
-    const showCentralMessage = (text) => {
-        if (!centralMessage) return;
-        centralMessage.textContent = text;
-        centralMessage.classList.add('show');
-        setTimeout(() => {
-            centralMessage.classList.remove('show');
-        }, 3000);
-    };
+    const animatedList = document.querySelector('.animated-list');
 
-    const setupCopyToClipboard = () => {
-        const copyButtons = document.querySelectorAll('.copy-btn');
-        copyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.getAttribute('data-target');
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    navigator.clipboard.writeText(targetElement.textContent.trim())
-                        .then(() => {
-                            showCentralMessage("Copiado com sucesso!");
-                        })
-                        .catch(err => {
-                            console.error('Falha ao copiar:', err);
-                        });
-                }
-            });
-        });
-    };
-
-    setupCopyToClipboard();
-});
-
-
-
-// JS para Animação de Rolagem (Fade-in)
-document.addEventListener('DOMContentLoaded', () => {
-    const fadeInSections = document.querySelectorAll('.fade-in-section');
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
+                entry.target.classList.add('in-view');
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
-    fadeInSections.forEach(section => {
-        observer.observe(section);
-    });
-});
+    }, { threshold: 0.5 });
 
-
-
-
-// JS para o Botão de Compartilhamento Social Flutuante
-document.addEventListener('DOMContentLoaded', () => {
-    const socialIcons = document.querySelectorAll('.social-icon');
-    const pageUrl = encodeURIComponent(window.location.href);
-    const pageTitle = encodeURIComponent(document.title);
-
-    socialIcons.forEach(icon => {
-        let shareUrl = '';
-        if (icon.classList.contains('facebook')) {
-            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-        } else if (icon.classList.contains('twitter')) {
-            shareUrl = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
-        } else if (icon.classList.contains('linkedin')) {
-            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
-        } else if (icon.classList.contains('whatsapp')) {
-            shareUrl = `whatsapp://send?text=${pageTitle}%20${pageUrl}`;
-        }
-
-        icon.setAttribute('href', shareUrl);
-        icon.setAttribute('target', '_blank');
-        icon.setAttribute('rel', 'noopener noreferrer');
-    });
-});
-
-
-
-
-// JS para o Toggle de Tema
-document.addEventListener('DOMContentLoaded', () => {
-    const themeSwitcher = document.getElementById('theme-switcher');
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme) {
-        document.body.classList.add(savedTheme);
-        themeSwitcher.checked = savedTheme === 'light-theme';
+    if (animatedList) {
+        observer.observe(animatedList);
     }
+});
 
-    themeSwitcher.addEventListener('change', () => {
-        if (themeSwitcher.checked) {
-            document.body.classList.add('light-theme');
-            localStorage.setItem('theme', 'light-theme');
+    // =====================================
+    // 17. Texto com Efeito Hover Interativo
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+    const hoverText = document.querySelector('.hover-text');
+    const hoverImage = document.querySelector('.hover-image');
+
+    if (hoverText && hoverImage) {
+        hoverText.addEventListener('mouseenter', () => {
+            const imageUrl = hoverText.getAttribute('data-image');
+            hoverImage.style.backgroundImage = `url(${imageUrl})`;
+        });
+    }
+});
+
+    // =====================================
+    // 18. Bloco de Texto com Efeito de "Console"
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+    const consoleTextElement = document.querySelector('.console-text');
+    const textToType = 'minecraft@server:~$ /join zeracraft.com';
+    let charIndex = 0;
+
+    function typeConsole() {
+        if (charIndex < textToType.length) {
+            consoleTextElement.textContent += textToType.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeConsole, 70); // Velocidade da digitação
         } else {
-            document.body.classList.remove('light-theme');
-            localStorage.setItem('theme', 'dark-theme');
+            // Reinicia a animação ou para
         }
-    });
-});
-
-
-// JS para o Sistema de Notificações Toast
-document.addEventListener('DOMContentLoaded', () => {
-    const toastContainer = document.getElementById('toastContainer');
-    const showToastBtn = document.getElementById('showToastBtn');
-
-    const showToast = (message, duration = 3000) => {
-        const toast = document.createElement('div');
-        toast.classList.add('toast');
-        toast.textContent = message;
-        toastContainer.appendChild(toast);
-        
-        // Use requestAnimationFrame para garantir que a animação comece após o elemento ser adicionado
-        requestAnimationFrame(() => {
-            toast.classList.add('show');
-        });
-
-        setTimeout(() => {
-            toast.classList.add('hide');
-            toast.addEventListener('animationend', () => {
-                toast.remove();
-            }, { once: true });
-        }, duration);
-    };
-
-    if (showToastBtn) {
-        showToastBtn.addEventListener('click', () => {
-            showToast('Item adicionado ao carrinho!', 3000);
-        });
     }
+
+    typeConsole();
 });
 
-
-// JS para o Botão de Ancoragem com Rolagem Suave
+    // =====================================
+    // 19. Status de Estatísticas - Porcentagens
+    // =====================================
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-});
 
-
-// JS para o Menu "Hamburger" Animado
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', () => {
-            hamburgerBtn.classList.toggle('is-active');
-            mobileMenu.classList.toggle('is-active');
-        });
-    }
-});
-
-
-// JS para a Barra de Progresso de Leitura
-document.addEventListener('DOMContentLoaded', () => {
-    const progressBar = document.getElementById('reading-progress-bar');
-    if (progressBar) {
-        window.addEventListener('scroll', () => {
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = window.scrollY;
-            const progress = (scrolled / docHeight) * 100;
-            progressBar.style.width = `${progress}%`;
-        });
-    }
-});
-
-
-// JS para Cartões de Conteúdo com Efeito Parallax
-document.addEventListener('DOMContentLoaded', () => {
-    const parallaxContainers = document.querySelectorAll('.parallax-container');
-    parallaxContainers.forEach(container => {
-        const bg = container.querySelector('.parallax-bg');
-        if (bg) {
-            window.addEventListener('scroll', () => {
-                const scrollPosition = window.scrollY;
-                const offset = scrollPosition - container.offsetTop;
-                bg.style.transform = `translateY(${offset * 0.4}px)`;
-            });
-        }
-    });
-});
-
-
-// JS para o Visualizador de Imagens 360 Graus
-document.addEventListener('DOMContentLoaded', () => {
-    const viewer = document.getElementById('image-viewer-360');
-    if (!viewer) return;
-    const image = viewer.querySelector('.viewer-360-image');
-    let isDragging = false;
-    let startX = 0;
-    let rotation = 0;
-
-    const images = [
-        'https://picsum.photos/800/600?random=1',
-        'https://picsum.photos/800/600?random=2',
-        'https://picsum.photos/800/600?random=3',
-        'https://picsum.photos/800/600?random=4',
-        'https://picsum.photos/800/600?random=5',
-        'https://picsum.photos/800/600?random=6',
-        'https://picsum.photos/800/600?random=7',
-        'https://picsum.photos/800/600?random=8'
-    ];
-    const imageCount = images.length;
-
-    viewer.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.pageX;
-        viewer.style.cursor = 'grabbing';
-    });
-
-    viewer.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        const dragDistance = e.pageX - startX;
-        const indexChange = Math.floor(dragDistance / 20); // Ajuste a sensibilidade aqui
-        if (indexChange !== 0) {
-            rotation = (rotation - indexChange) % imageCount;
-            if (rotation < 0) rotation += imageCount;
-            image.src = images[rotation];
-            startX = e.pageX;
-        }
-    });
-
-    viewer.addEventListener('mouseup', () => {
-        isDragging = false;
-        viewer.style.cursor = 'grab';
-    });
-
-    viewer.addEventListener('mouseleave', () => {
-        isDragging = false;
-        viewer.style.cursor = 'grab';
-    });
-});
-
-
-// JS para Validação de Formulário em Tempo Real
-document.addEventListener('DOMContentLoaded', () => {
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const emailError = document.getElementById('email-error');
-    const passwordError = document.getElementById('password-error');
-
-    const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(String(email).toLowerCase());
-    };
-
-    const validatePassword = (password) => {
-        return password.length >= 8;
-    };
-
-    emailInput.addEventListener('input', () => {
-        if (!validateEmail(emailInput.value)) {
-            emailInput.classList.add('invalid');
-            emailError.textContent = 'Por favor, insira um e-mail válido.';
-        } else {
-            emailInput.classList.remove('invalid');
-            emailError.textContent = '';
-        }
-    });
-
-    passwordInput.addEventListener('input', () => {
-        if (!validatePassword(passwordInput.value)) {
-            passwordInput.classList.add('invalid');
-            passwordError.textContent = 'A senha deve ter pelo menos 8 caracteres.';
-        } else {
-            passwordInput.classList.remove('invalid');
-            passwordError.textContent = '';
-        }
-    });
-});
-
-
-// JS para o Slider de Faixa de Preço
-document.addEventListener('DOMContentLoaded', () => {
-    const priceMin = document.getElementById('price-min');
-    const priceMax = document.getElementById('price-max');
-    const minValueSpan = document.getElementById('min-value');
-    const maxValueSpan = document.getElementById('max-value');
-
-    const updateSlider = () => {
-        const minVal = parseInt(priceMin.value);
-        const maxVal = parseInt(priceMax.value);
-
-        if (minVal > maxVal) {
-            [priceMin.value, priceMax.value] = [priceMax.value, priceMin.value];
-        }
-
-        minValueSpan.textContent = priceMin.value;
-        maxValueSpan.textContent = priceMax.value;
-    };
-
-    priceMin.addEventListener('input', updateSlider);
-    priceMax.addEventListener('input', updateSlider);
-});
-
-
-
-// JS para o Seletor de Data Personalizado
-document.addEventListener('DOMContentLoaded', () => {
-    const dateInput = document.getElementById('date-input');
-    const datePicker = document.getElementById('date-picker');
-    const now = new Date();
-    let currentMonth = now.getMonth();
-    let currentYear = now.getFullYear();
-
-    const generateCalendar = (month, year) => {
-        const firstDay = (new Date(year, month)).getDay();
-        const daysInMonth = 32 - new Date(year, month, 32).getDate();
-        
-        datePicker.innerHTML = `
-            <div class="date-picker-header">
-                <button id="prev-month">&laquo;</button>
-                <span>${new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' })}</span>
-                <button id="next-month">&raquo;</button>
-            </div>
-            <div class="date-picker-grid">
-                <div class="day-of-week">Dom</div>
-                <div class="day-of-week">Seg</div>
-                <div class="day-of-week">Ter</div>
-                <div class="day-of-week">Qua</div>
-                <div class="day-of-week">Qui</div>
-                <div class="day-of-week">Sex</div>
-                <div class="day-of-week">Sáb</div>
-            </div>
-        `;
-        const dateGrid = datePicker.querySelector('.date-picker-grid');
-        for (let i = 0; i < firstDay; i++) {
-            dateGrid.innerHTML += '<div></div>';
-        }
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dayDiv = document.createElement('div');
-            dayDiv.textContent = day;
-            dayDiv.addEventListener('click', () => {
-                const selectedDate = new Date(year, month, day);
-                dateInput.value = selectedDate.toLocaleDateString();
-                datePicker.style.display = 'none';
-            });
-            dateGrid.appendChild(dayDiv);
-        }
-    };
-
-    dateInput.addEventListener('click', () => {
-        datePicker.style.display = 'block';
-        generateCalendar(currentMonth, currentYear);
-    });
-
-    datePicker.addEventListener('click', (e) => {
-        if (e.target.id === 'prev-month') {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            generateCalendar(currentMonth, currentYear);
-        } else if (e.target.id === 'next-month') {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            generateCalendar(currentMonth, currentYear);
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!datePicker.contains(e.target) && e.target !== dateInput) {
-            datePicker.style.display = 'none';
-        }
-    });
-});
-
-
-
-// JS para a Barra de Pesquisa com Autocompletar
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('search-input');
-    const suggestionsList = document.getElementById('suggestions');
-    const data = ['Minecraft', 'Servidores de Minecraft', 'Mods', 'Plugins', 'Recursos', 'Texturas', 'Skins', 'Comandos', 'Tutorial'];
-
-    const filterSuggestions = (query) => {
-        return data.filter(item => item.toLowerCase().includes(query.toLowerCase()));
-    };
-
-    const renderSuggestions = (suggestions) => {
-        suggestionsList.innerHTML = '';
-        if (suggestions.length === 0) {
-            suggestionsList.style.display = 'none';
+    /**
+     * Atualiza as barras de status de forma proporcional.
+     * A barra com o valor mais alto terá 100% da largura.
+     * As outras serão calculadas em relação a ela.
+     */
+    function updateServerStatus() {
+        // Seleciona todos os itens da barra de status
+        const statusBars = document.querySelectorAll('.status-bar-item');
+        if (statusBars.length === 0) {
             return;
         }
-        suggestions.forEach(suggestion => {
-            const li = document.createElement('li');
-            li.textContent = suggestion;
-            li.addEventListener('click', () => {
-                searchInput.value = suggestion;
-                suggestionsList.style.display = 'none';
-            });
-            suggestionsList.appendChild(li);
-        });
-        suggestionsList.style.display = 'block';
-    };
 
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value;
-        if (query.length > 0) {
-            const filtered = filterSuggestions(query);
-            renderSuggestions(filtered);
-        } else {
-            suggestionsList.style.display = 'none';
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!suggestionsList.contains(e.target) && e.target !== searchInput) {
-            suggestionsList.style.display = 'none';
-        }
-    });
-});
-
-
-
-// JS para o Efeito de Fundo com Partículas Animadas (usando a biblioteca particles.js)
-// Você precisará incluir a biblioteca no seu projeto.
-// Exemplo: <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.particlesJS) {
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": { "enable": true, "value_area": 800 }
-                },
-                "color": { "value": "#ffffff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": false },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 6, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "repulse" } }
+        // 1. Encontra o valor mais alto entre todos os itens
+        let maxStatusValue = 0;
+        statusBars.forEach(item => {
+            const value = parseInt(item.getAttribute('data-value'), 10);
+            if (value > maxStatusValue) {
+                maxStatusValue = value;
             }
         });
-    }
-});
 
+        // 2. Calcula e aplica a nova largura e o texto para cada item
+        statusBars.forEach(item => {
+            const value = parseInt(item.getAttribute('data-value'), 10);
+            
+            // Calcula a largura proporcional. Se o max for 0, evita divisão por zero.
+            const proportionalWidth = maxStatusValue > 0 ? (value / maxStatusValue) * 100 : 0;
+            
+            // Seleciona os elementos internos
+            const fillBar = item.querySelector('.progress-bar-fill');
+            const percentageSpan = item.querySelector('.status-percentage');
 
+            // Aplica a nova largura (que será animada pelo CSS)
+            fillBar.style.width = `${proportionalWidth}%`;
 
-// JS para a Animação de Digitação de Texto
-document.addEventListener('DOMContentLoaded', () => {
-    const textElement = document.querySelector('.type-text');
-    const textToType = "Olá! Bem-vindo ao Mundo Zera's Craft.";
-    let i = 0;
-    let speed = 100; // velocidade da digitação em ms
-
-    function typeWriter() {
-        if (i < textToType.length) {
-            textElement.textContent += textToType.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-        }
-    }
-
-    if (textElement) {
-        typeWriter();
-    }
-});
-
-
-
-// JS para o Layout de Grade com Efeito de Filtro
-document.addEventListener('DOMContentLoaded', () => {
-    const filterButtons = document.querySelectorAll('.filter-buttons button');
-    const gridItems = document.querySelectorAll('.grid-item');
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.getAttribute('data-filter');
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            gridItems.forEach(item => {
-                const category = item.getAttribute('data-category');
-                if (filter === 'all' || category === filter) {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.classList.remove('hidden');
-                    }, 10);
-                } else {
-                    item.classList.add('hidden');
-                    item.addEventListener('transitionend', () => {
-                        if (item.classList.contains('hidden')) {
-                            item.style.display = 'none';
-                        }
-                    }, { once: true });
-                }
-            });
+            // Atualiza o texto da porcentagem
+            percentageSpan.textContent = `${value}%`;
         });
-    });
+    }
+
+    // Chama a função de atualização quando a página carregar
+    updateServerStatus();
 });
-//-----------------------------------------------------
+
     // =====================================
     // 20. Aba de Pesquisa de Arquivos Gerais (Recursos)
     // =====================================
