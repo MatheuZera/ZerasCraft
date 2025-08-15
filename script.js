@@ -460,59 +460,280 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     highlightActiveNavLink();
-//-----------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
+
     // =====================================
-    // 5. Contador Animado (Counter Up)
+    // 9. Funcionalidade do Acordeão
     // =====================================
-    const counters = document.querySelectorAll('.counter-number');
+    function setupAccordion() {
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    }
+    setupAccordion();
+
+    // =====================================
+    // 10. Funcionalidade do Modal
+    // =====================================
+    function setupModal() {
+        const modal = document.getElementById('myModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = modal ? modal.querySelector('.modal-close-btn') : null;
+        
+        if (openBtn && modal) {
+            openBtn.addEventListener('click', () => {
+                modal.classList.add('show');
+            });
+        }
+        if (closeBtn && modal) {
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('show');
+            });
+        }
+        if (modal) {
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
+        }
+    }
+    setupModal();
+
+    // =====================================
+    // 11. Funcionalidade da Galeria e Lightbox
+    // =====================================
+    function setupLightbox() {
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+
+        if (galleryItems.length > 0 && lightbox) {
+            galleryItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const imgSrc = e.target.getAttribute('data-src');
+                    lightboxImage.src = imgSrc;
+                    lightbox.classList.add('show');
+                });
+            });
+
+            if(lightboxClose) {
+                lightboxClose.addEventListener('click', () => {
+                    lightbox.classList.remove('show');
+                });
+            }
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target.id === 'lightbox') {
+                    lightbox.classList.remove('show');
+                }
+            });
+        }
+    }
+    setupLightbox();
+
+    // =====================================
+    // 12. Funcionalidade das Tabs
+    // =====================================
+    function setupTabs() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        if (tabButtons.length > 0) {
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    const activeTabContent = document.getElementById(tabId);
+                    if (activeTabContent) {
+                        activeTabContent.classList.add('active');
+                    }
+                });
+            });
+        }
+    }
+    setupTabs();
+
+    // =====================================
+    // 13. Funcionalidade do Carrossel de Testemunhos
+    // =====================================
+    const carousel = document.querySelector('.testimonial-carousel');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    if (carousel && prevBtn && nextBtn) {
+        const scrollWidth = carousel.scrollWidth / carousel.childElementCount;
+
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: scrollWidth, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -scrollWidth, behavior: 'smooth' });
+        });
+    }
+});
+    // =====================================
+    // 14. Contador Animado
+    // =====================================
+    const counters = document.querySelectorAll('.counter');
+    const observerOptionsCounters = { root: null, threshold: 0.5 };
+    
+    const animateCounter = (counter) => {
+        const target = +counter.getAttribute('data-target');
+        const duration = 2000;
+        let startTime = null;
+        const easeOutQuad = t => t * (2 - t);
+        
+        const updateCounter = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const elapsedTime = timestamp - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const value = Math.floor(easeOutQuad(progress) * target);
+            counter.textContent = value;
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        };
+        requestAnimationFrame(updateCounter);
+    };
+
     const counterObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = parseInt(counter.getAttribute('data-count'), 10);
-                let currentCount = 0;
-                const duration = 2000;
-                const increment = target / (duration / 16);
-
-                const updateCounter = () => {
-                    currentCount += increment;
-                    if (currentCount < target) {
-                        counter.textContent = Math.ceil(currentCount);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target;
-                    }
-                };
-                updateCounter();
-                observer.unobserve(counter);
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
-
+    }, observerOptionsCounters);
+    
     counters.forEach(counter => {
+        counter.textContent = '0';
         counterObserver.observe(counter);
     });
 
     // =====================================
-    // 6. Barra de Progresso Animada
+    // 15. Bloco de Spoiler de Texto Expansível
     // =====================================
-    const progressBars = document.querySelectorAll('.progress-bar-fill');
-    const progressBarObserver = new IntersectionObserver((entries, observer) => {
+document.addEventListener('DOMContentLoaded', () => {
+    const spoilerButton = document.querySelector('.spoiler-toggle');
+    spoilerButton.addEventListener('click', () => {
+        spoilerButton.parentElement.classList.toggle('active');
+    });
+});
+
+    // =====================================
+    // 16. Lista de Recursos com Animação de Marcador
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedList = document.querySelector('.animated-list');
+
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const bar = entry.target;
-                const progress = bar.getAttribute('data-progress');
-                bar.style.width = `${progress}%`;
-                observer.unobserve(bar);
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.5 });
 
-    progressBars.forEach(bar => {
-        progressBarObserver.observe(bar);
-    });
-//-----------------------------------------------------
+    if (animatedList) {
+        observer.observe(animatedList);
+    }
+});
+
+    // =====================================
+    // 17. Texto com Efeito Hover Interativo
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+    const hoverText = document.querySelector('.hover-text');
+    const hoverImage = document.querySelector('.hover-image');
+
+    if (hoverText && hoverImage) {
+        hoverText.addEventListener('mouseenter', () => {
+            const imageUrl = hoverText.getAttribute('data-image');
+            hoverImage.style.backgroundImage = `url(${imageUrl})`;
+        });
+    }
+});
+
+    // =====================================
+    // 18. Bloco de Texto com Efeito de "Console"
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+    const consoleTextElement = document.querySelector('.console-text');
+    const textToType = 'minecraft@server:~$ /join zeracraft.com';
+    let charIndex = 0;
+
+    function typeConsole() {
+        if (charIndex < textToType.length) {
+            consoleTextElement.textContent += textToType.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeConsole, 70); // Velocidade da digitação
+        } else {
+            // Reinicia a animação ou para
+        }
+    }
+
+    typeConsole();
+});
+
+    // =====================================
+    // 19. Status de Estatísticas - Porcentagens
+    // =====================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    /**
+     * Atualiza as barras de status de forma proporcional.
+     * A barra com o valor mais alto terá 100% da largura.
+     * As outras serão calculadas em relação a ela.
+     */
+    function updateServerStatus() {
+        // Seleciona todos os itens da barra de status
+        const statusBars = document.querySelectorAll('.status-bar-item');
+        if (statusBars.length === 0) {
+            return;
+        }
+
+        // 1. Encontra o valor mais alto entre todos os itens
+        let maxStatusValue = 0;
+        statusBars.forEach(item => {
+            const value = parseInt(item.getAttribute('data-value'), 10);
+            if (value > maxStatusValue) {
+                maxStatusValue = value;
+            }
+        });
+
+        // 2. Calcula e aplica a nova largura e o texto para cada item
+        statusBars.forEach(item => {
+            const value = parseInt(item.getAttribute('data-value'), 10);
+            
+            // Calcula a largura proporcional. Se o max for 0, evita divisão por zero.
+            const proportionalWidth = maxStatusValue > 0 ? (value / maxStatusValue) * 100 : 0;
+            
+            // Seleciona os elementos internos
+            const fillBar = item.querySelector('.progress-bar-fill');
+            const percentageSpan = item.querySelector('.status-percentage');
+
+            // Aplica a nova largura (que será animada pelo CSS)
+            fillBar.style.width = `${proportionalWidth}%`;
+
+            // Atualiza o texto da porcentagem
+            percentageSpan.textContent = `${value}%`;
+        });
+    }
+
+    // Chama a função de atualização quando a página carregar
+    updateServerStatus();
+});
+
     // =====================================
     // 20. Aba de Pesquisa de Arquivos Gerais (Recursos)
     // =====================================
