@@ -461,303 +461,103 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     highlightActiveNavLink();
 
-    // =====================================
-    // 9. Funcionalidade do Acordeão
-    // =====================================
-    function setupAccordion() {
-        const accordionItems = document.querySelectorAll('.accordion-item');
-        accordionItems.forEach(item => {
-            const header = item.querySelector('.accordion-header');
-            header.addEventListener('click', () => {
-                item.classList.toggle('active');
-            });
-        });
-    }
-    setupAccordion();
+//-----------------------------------------------------------------------------------------------------------
 
-    // =====================================
-    // 10. Funcionalidade do Modal
-    // =====================================
-    function setupModal() {
-        const modal = document.getElementById('myModal');
-        const openBtn = document.getElementById('openModalBtn');
-        const closeBtn = modal ? modal.querySelector('.modal-close-btn') : null;
+// =====================================
+// Lógica para os novos elementos
+// =====================================
+
+// Botão de Copiar IP do Servidor
+const copyIpBtn = document.querySelector('.copy-ip-btn');
+if (copyIpBtn) {
+    copyIpBtn.addEventListener('click', () => {
+        const ip = copyIpBtn.getAttribute('data-ip');
+        window.copyToClipboard(ip, 'IP copiado!');
+    });
+}
+
+// Formulário de Contato
+const contactForm = document.getElementById('contactForm');
+const formMessage = document.getElementById('formMessage');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Simulação de envio de formulário
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
         
-        if (openBtn && modal) {
-            openBtn.addEventListener('click', () => {
-                modal.classList.add('show');
-            });
-        }
-        if (closeBtn && modal) {
-            closeBtn.addEventListener('click', () => {
-                modal.classList.remove('show');
-            });
-        }
-        if (modal) {
-            window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.classList.remove('show');
-                }
-            });
-        }
-    }
-    setupModal();
-
-    // =====================================
-    // 11. Funcionalidade da Galeria e Lightbox
-    // =====================================
-    function setupLightbox() {
-        const galleryItems = document.querySelectorAll('.gallery-item img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImage = document.getElementById('lightbox-image');
-        const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
-
-        if (galleryItems.length > 0 && lightbox) {
-            galleryItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    const imgSrc = e.target.getAttribute('data-src');
-                    lightboxImage.src = imgSrc;
-                    lightbox.classList.add('show');
-                });
-            });
-
-            if(lightboxClose) {
-                lightboxClose.addEventListener('click', () => {
-                    lightbox.classList.remove('show');
-                });
-            }
-
-            lightbox.addEventListener('click', (e) => {
-                if (e.target.id === 'lightbox') {
-                    lightbox.classList.remove('show');
-                }
-            });
-        }
-    }
-    setupLightbox();
-
-    // =====================================
-    // 12. Funcionalidade das Tabs
-    // =====================================
-    function setupTabs() {
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        if (tabButtons.length > 0) {
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    
-                    button.classList.add('active');
-                    const tabId = button.getAttribute('data-tab');
-                    const activeTabContent = document.getElementById(tabId);
-                    if (activeTabContent) {
-                        activeTabContent.classList.add('active');
-                    }
-                });
-            });
-        }
-    }
-    setupTabs();
-
-    // =====================================
-    // 13. Funcionalidade do Carrossel de Testemunhos
-    // =====================================
-document.addEventListener('DOMContentLoaded', () => {
-    const track = document.querySelector('.carousel-track');
-    if (!track) return;
-
-    const slides = Array.from(track.children);
-    const nextBtn = document.querySelector('.carousel-btn.next');
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const indicatorsContainer = document.querySelector('.carousel-indicators');
-    const slideWidth = slides[0].getBoundingClientRect().width;
-    let currentSlide = 0;
-
-    // Cria os indicadores
-    slides.forEach((slide, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('carousel-dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-            currentSlide = index;
-            updateCarousel();
-        });
-        indicatorsContainer.appendChild(dot);
-    });
-
-    const dots = Array.from(indicatorsContainer.children);
-
-    const updateCarousel = () => {
-        track.style.transform = `translateX(-${slideWidth * currentSlide}px)`;
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[currentSlide].classList.add('active');
-    };
-
-    nextBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        updateCarousel();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        updateCarousel();
-    });
-});
-    // =====================================
-    // 14. Contador Animado
-    // =====================================
-    const counters = document.querySelectorAll('.counter');
-    const observerOptionsCounters = { root: null, threshold: 0.5 };
-    
-    const animateCounter = (counter) => {
-        const target = +counter.getAttribute('data-target');
-        const duration = 2000;
-        let startTime = null;
-        const easeOutQuad = t => t * (2 - t);
-        
-        const updateCounter = (timestamp) => {
-            if (!startTime) startTime = timestamp;
-            const elapsedTime = timestamp - startTime;
-            const progress = Math.min(elapsedTime / duration, 1);
-            const value = Math.floor(easeOutQuad(progress) * target);
-            counter.textContent = value;
-            if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-            }
-        };
-        requestAnimationFrame(updateCounter);
-    };
-
-    const counterObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptionsCounters);
-    
-    counters.forEach(counter => {
-        counter.textContent = '0';
-        counterObserver.observe(counter);
-    });
-
-    // =====================================
-    // 15. Bloco de Spoiler de Texto Expansível
-    // =====================================
-document.addEventListener('DOMContentLoaded', () => {
-    const spoilerButton = document.querySelector('.spoiler-toggle');
-    spoilerButton.addEventListener('click', () => {
-        spoilerButton.parentElement.classList.toggle('active');
-    });
-});
-
-    // =====================================
-    // 16. Lista de Recursos com Animação de Marcador
-    // =====================================
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedList = document.querySelector('.animated-list');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    if (animatedList) {
-        observer.observe(animatedList);
-    }
-});
-
-    // =====================================
-    // 17. Texto com Efeito Hover Interativo
-    // =====================================
-document.addEventListener('DOMContentLoaded', () => {
-    const hoverText = document.querySelector('.hover-text');
-    const hoverImage = document.querySelector('.hover-image');
-
-    if (hoverText && hoverImage) {
-        hoverText.addEventListener('mouseenter', () => {
-            const imageUrl = hoverText.getAttribute('data-image');
-            hoverImage.style.backgroundImage = `url(${imageUrl})`;
-        });
-    }
-});
-
-    // =====================================
-    // 18. Bloco de Texto com Efeito de "Console"
-    // =====================================
-document.addEventListener('DOMContentLoaded', () => {
-    const consoleTextElement = document.querySelector('.console-text');
-    const textToType = 'minecraft@server:~$ /join zeracraft.com';
-    let charIndex = 0;
-
-    function typeConsole() {
-        if (charIndex < textToType.length) {
-            consoleTextElement.textContent += textToType.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeConsole, 70); // Velocidade da digitação
-        } else {
-            // Reinicia a animação ou para
-        }
-    }
-
-    typeConsole();
-});
-
-    // =====================================
-    // 19. Status de Estatísticas - Porcentagens
-    // =====================================
-document.addEventListener('DOMContentLoaded', () => {
-
-    /**
-     * Atualiza as barras de status de forma proporcional.
-     * A barra com o valor mais alto terá 100% da largura.
-     * As outras serão calculadas em relação a ela.
-     */
-    function updateServerStatus() {
-        // Seleciona todos os itens da barra de status
-        const statusBars = document.querySelectorAll('.status-bar-item');
-        if (statusBars.length === 0) {
+        // Simples validação
+        if (name.length < 2) {
+            formMessage.textContent = 'Por favor, insira um nome válido.';
+            formMessage.classList.remove('success');
+            formMessage.classList.add('error');
+            formMessage.style.display = 'block';
             return;
         }
 
-        // 1. Encontra o valor mais alto entre todos os itens
-        let maxStatusValue = 0;
-        statusBars.forEach(item => {
-            const value = parseInt(item.getAttribute('data-value'), 10);
-            if (value > maxStatusValue) {
-                maxStatusValue = value;
+        // Simula o sucesso
+        formMessage.textContent = 'Mensagem enviada com sucesso! Obrigado, ' + name + '!';
+        formMessage.classList.remove('error');
+        formMessage.classList.add('success');
+        formMessage.style.display = 'block';
+        contactForm.reset();
+        
+        // Esconde a mensagem depois de um tempo
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
+    });
+}
+
+// Lógica para o Modal Dinâmico (substituindo o antigo)
+const dynamicModal = document.getElementById('dynamicModal');
+const dynamicCloseBtn = document.querySelector('.dynamic-close-btn');
+const dynamicModalImage = document.getElementById('dynamicModalImage');
+const dynamicModalTitle = document.getElementById('dynamicModalTitle');
+const dynamicModalDescription = document.getElementById('dynamicModalDescription');
+const dynamicModalLink = document.getElementById('dynamicModalLink');
+const cardGrid = document.querySelector('.news-grid');
+
+// Dados de exemplo para os cards (você pode carregar isso de um JSON ou API)
+const cardData = [
+    { id: 'event1', title: 'Torneio de PvP', description: 'O grande torneio de PvP está chegando! Prepare suas armas e armaduras.', image: 'https://picsum.photos/400/250?random=1', link: '#' },
+    { id: 'event2', title: 'Competição de Construção', description: 'O tema da competição deste mês é "Cidades Flutuantes". Participe!', image: 'https://picsum.photos/400/250?random=2', link: '#' },
+    { id: 'event3', title: 'Invasão Zumbi', description: 'Sobreviva à noite mais longa no servidor. Prêmios para os mais resistentes.', image: 'https://picsum.photos/400/250?random=3', link: '#' },
+];
+
+if (cardGrid && dynamicModal) {
+    cardGrid.addEventListener('click', (e) => {
+        const cardLink = e.target.closest('.card-link.open-modal');
+        if (cardLink) {
+            e.preventDefault();
+            const cardId = cardLink.getAttribute('data-id');
+            const card = cardData.find(c => c.id === cardId);
+
+            if (card) {
+                dynamicModalImage.src = card.image;
+                dynamicModalTitle.textContent = card.title;
+                dynamicModalDescription.textContent = card.description;
+                dynamicModalLink.href = card.link;
+                
+                dynamicModal.style.display = "block";
             }
-        });
+        }
+    });
+    
+    dynamicCloseBtn.addEventListener('click', () => {
+        dynamicModal.style.display = "none";
+    });
+    
+    window.addEventListener('click', (event) => {
+        if (event.target == dynamicModal) {
+            dynamicModal.style.display = "none";
+        }
+    });
+}
 
-        // 2. Calcula e aplica a nova largura e o texto para cada item
-        statusBars.forEach(item => {
-            const value = parseInt(item.getAttribute('data-value'), 10);
-            
-            // Calcula a largura proporcional. Se o max for 0, evita divisão por zero.
-            const proportionalWidth = maxStatusValue > 0 ? (value / maxStatusValue) * 100 : 0;
-            
-            // Seleciona os elementos internos
-            const fillBar = item.querySelector('.progress-bar-fill');
-            const percentageSpan = item.querySelector('.status-percentage');
-
-            // Aplica a nova largura (que será animada pelo CSS)
-            fillBar.style.width = `${proportionalWidth}%`;
-
-            // Atualiza o texto da porcentagem
-            percentageSpan.textContent = `${value}%`;
-        });
-    }
-
-    // Chama a função de atualização quando a página carregar
-    updateServerStatus();
-});
+//-----------------------------------------------------------------------------------------------------------
 
     // =====================================
     // 20. Aba de Pesquisa de Arquivos Gerais (Recursos)

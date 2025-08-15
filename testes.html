@@ -56,192 +56,59 @@
             </div>
         </section>
 <!---------------------------------------------------->
-<button id="openModalBtn" class="btn-shine">Abrir Modal</button>
+<section class="section-padded">
+    <div class="container">
+        <h2 class="text-center">Fale Conosco</h2>
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Assunto:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensagem:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+            <div id="formMessage" class="form-message"></div>
+        </form>
+    </div>
+</section>
 
-<div id="modalOverlay" class="modal-overlay">
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" aria-expanded="false">
+        Recursos <i class="fas fa-caret-down"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><a href="#">Comandos</a></li>
+        <li><a href="#">Regras</a></li>
+        <li><a href="#">Plugins</a></li>
+    </ul>
+</li>
+
+<div class="text-center margin-top-40">
+    <button class="btn btn-glow copy-ip-btn" data-ip="mc.zerascraft.com.br">
+        <i class="fas fa-copy"></i> Copiar IP do Servidor
+    </button>
+</div>
+
+<div id="dynamicModal" class="modal">
     <div class="modal-content">
-        <button id="modalCloseBtn" class="modal-close-btn">&times;</button>
-        <h3 class="modal-title">Título do Modal</h3>
-        <p>Este é o conteúdo informativo do modal. Pode conter texto, imagens, ou outros elementos HTML.</p>
-        <p>Ajuste o código para o seu caso de uso específico.</p>
+        <span class="close-btn dynamic-close-btn">&times;</span>
+        <img id="dynamicModalImage" class="modal-image" src="" alt="Imagem do Card">
+        <h2 id="dynamicModalTitle"></h2>
+        <p id="dynamicModalDescription"></p>
+        <a id="dynamicModalLink" href="#" class="btn btn-primary" target="_blank">
+            <i class="fas fa-link"></i> Ver Mais
+        </a>
     </div>
-</div>
-
-<div class="accordion-container">
-    <div class="accordion-item">
-        <div class="accordion-header">
-            Título do Item 1
-            <span class="accordion-icon">&#9660;</span>
-        </div>
-        <div class="accordion-content">
-            <p>Conteúdo do item 1. Este conteúdo será expandido ou recolhido ao clicar no título.</p>
-        </div>
-    </div>
-    <div class="accordion-item">
-        <div class="accordion-header">
-            Título do Item 2
-            <span class="accordion-icon">&#9660;</span>
-        </div>
-        <div class="accordion-content">
-            <p>Conteúdo do item 2.</p>
-        </div>
-    </div>
-</div>
-
-<div class="tabs-container">
-    <div class="tab-nav">
-        <button class="tab-button active" data-tab="tab1">Aba 1</button>
-        <button class="tab-button" data-tab="tab2">Aba 2</button>
-    </div>
-    <div class="tab-content-container">
-        <div id="tab1" class="tab-content active">
-            <p>Conteúdo da primeira aba. O Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-        </div>
-        <div id="tab2" class="tab-content">
-            <p>Conteúdo da segunda aba. O Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-        </div>
-    </div>
-</div>
-
-
-<div class="gallery-grid">
-    <div class="gallery-item" data-src="https://picsum.photos/1200/800?random=1">
-        <img src="https://picsum.photos/300/200?random=1" alt="Galeria Imagem 1">
-    </div>
-    <div class="gallery-item" data-src="https://picsum.photos/1200/800?random=2">
-        <img src="https://picsum.photos/300/200?random=2" alt="Galeria Imagem 2">
-    </div>
-    <div class="gallery-item" data-src="https://picsum.photos/1200/800?random=3">
-        <img src="https://picsum.photos/300/200?random=3" alt="Galeria Imagem 3">
-    </div>
-</div>
-
-
-<div class="stats-grid">
-    <div class="stat-item">
-        <div class="counter" data-target="1500">0</div>
-        <p class="stat-label">Jogadores Ativos</p>
-    </div>
-    <div class="stat-item">
-        <div class="counter" data-target="50000">0</div>
-        <p class="stat-label">Downloads</p>
-    </div>
-</div>
-
-<div class="code-block">
-    <pre id="ip-address">play.zeracraft.com</pre>
-    <button class="copy-btn" data-target="ip-address"><i class="fas fa-copy"></i> Copiar IP</button>
-</div>
-
-
-
-<h2 class="animated-underline-title">Título com Sublinhado</h2>
-
-
-
-
-
-<div class="animated-quote">
-    <p>"Um texto de citação animada, com uma borda que se move."</p>
-    <cite>Autor Desconhecido</cite>
-</div>
-
-
-
-
-
-<div class="social-share-bar">
-    <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
-    <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
-    <a href="#" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
-</div>
-
-
-
-
-<nav>
-    <a href="#section1" class="smooth-scroll-btn">Seção 1</a>
-    <a href="#section2" class="smooth-scroll-btn">Seção 2</a>
-</nav>
-<div style="height: 1000px;" id="section1">
-    <h2>Primeira Seção</h2>
-    <p>Conteúdo da primeira seção.</p>
-</div>
-<div style="height: 1000px;" id="section2">
-    <h2>Segunda Seção</h2>
-    <p>Conteúdo da segunda seção.</p>
-</div>
-
-
-<div id="reading-progress-bar"></div>
-<article style="height: 2000px; padding: 20px;">
-    <h2>Título do Artigo</h2>
-    <p>Aqui está o conteúdo do seu artigo...</p>
-    <p>Role para baixo para ver a barra de progresso funcionar.</p>
-</article>
-
-
-<div class="parallax-container">
-    <div class="parallax-bg" style="background-image: url('https://picsum.photos/1920/1080?random=1');"></div>
-    <div class="parallax-content">
-        <h3>Efeito Parallax</h3>
-        <p>Role a página para ver o fundo se mover a uma velocidade diferente.</p>
-    </div>
-</div>
-
-
-
-<span class="tooltip-trigger" data-tooltip-text="Esta é uma dica de ferramenta informativa.">
-    Passe o mouse aqui
-</span>
-
-
-
-<div class="timeline-container">
-    <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-            <h3>Título do Evento 1</h3>
-            <p>Descrição do evento, com detalhes sobre o que aconteceu neste período. Pode ser um marco de projeto ou um evento histórico.</p>
-            <span class="timeline-date">2023</span>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-            <h3>Título do Evento 2</h3>
-            <p>Outro evento importante. A linha do tempo é uma ótima forma de visualizar uma sequência de acontecimentos.</p>
-            <span class="timeline-date">2024</span>
-        </div>
-    </div>
-</div>
-
-
-<div id="particles-js"></div>
-<div class="content">
-    <h1>Efeito de Partículas</h1>
-    <p>O fundo desta seção possui partículas animadas em movimento.</p>
-</div>
-
-
-
-<button class="btn-hover-effect">Efeito Brilho</button>
-<a href="#" class="link-hover-effect">Efeito Sublinhado</a>
-
-
-
-<h1 class="typing-animation">
-    <span class="type-text"></span>
-    <span class="cursor">|</span>
-</h1>
-
-
-<div id="grid-container" class="grid-container">
-    <div class="grid-item" data-category="categoria1"><span>Item 1 (Cat. 1)</span></div>
-    <div class="grid-item" data-category="categoria2"><span>Item 2 (Cat. 2)</span></div>
-    <div class="grid-item" data-category="categoria1"><span>Item 3 (Cat. 1)</span></div>
-    <div class="grid-item" data-category="categoria2"><span>Item 4 (Cat. 2)</span></div>
 </div>
 <!---------------------------------------------------->
     <footer class="main-footer">
