@@ -1553,287 +1553,497 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
     transition: background-color 0.3s ease;
 }
 /* ====================================================================================== */
+/* ========================================= */
+/* 11. Estilos para a Galeria de Imagens */
+/* ========================================= */
+
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--gap-grid);
+    margin-top: 40px;
 }
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    cursor: pointer;
+    transition: transform var(--transicao-padrao), box-shadow var(--transicao-padrao);
+}
+
 .gallery-item img {
     width: 100%;
-    height: auto;
+    height: 220px;
+    object-fit: cover;
     display: block;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform var(--transicao-padrao);
-}
-.gallery-item img:hover {
-    transform: scale(1.05);
-}
-.lightbox-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-.lightbox-content {
-    max-width: 90%;
-    max-height: 90%;
-}
-.lightbox-content img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
+    transition: transform 0.4s ease;
 }
 
-
-
-
-
-
-
-
-.tab-container {
-    background-color: var(--cor-card-bg);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: var(--sombra-leve);
-}
-.tab-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.tab-btn {
-    background-color: transparent;
-    border: 2px solid var(--cor-primaria);
-    color: var(--cor-primaria);
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all var(--transicao-padrao);
-}
-.tab-btn:hover {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-texto-claro);
-}
-.tab-btn.active {
-    background-color: var(--cor-primaria);
-    color: white;
-}
-.tab-content {
-    display: none;
-}
-.tab-content.active {
-    display: block;
-}
-
-
-
-
-.accordion-item {
-    border-bottom: 1px solid var(--cor-bordas);
-}
-.accordion-header {
-    background-color: var(--cor-card-bg);
-    color: var(--cor-texto-claro);
-    padding: 15px;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color var(--transicao-padrao);
-}
-.accordion-header:hover {
-    background-color: var(--cor-terciaria);
-}
-.accordion-content {
-    background-color: var(--cor-fundo-escuro);
-    padding: 15px;
-    display: none;
-    overflow: hidden;
-    transition: max-height var(--transicao-padrao) ease-out;
-}
-
-
-
-
-
-.carousel-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    max-width: 800px;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: var(--sombra-forte);
-}
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-.carousel-slide {
-    min-width: 100%;
-    position: relative;
-}
-.carousel-slide img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px;
-}
-.carousel-slide p {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-.carousel-btn {
+.gallery-item::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 10;
-}
-.carousel-btn.prev {
-    left: 10px;
-}
-.carousel-btn.next {
-    right: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--cor-destaque);
+    font-size: 3em;
+    opacity: 0;
+    transition: opacity var(--transicao-padrao);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
-
-
-
-
-.copy-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: var(--cor-card-bg);
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: var(--sombra-leve);
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: var(--sombra-card-hover);
 }
-.copy-container input {
-    flex-grow: 1;
-    background: transparent;
-    border: none;
-    color: var(--cor-texto-claro);
-    font-family: var(--fonte-pixel);
-    outline: none;
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.6);
 }
-.copy-btn {
-    background-color: var(--cor-secundaria);
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* ========================================= */
+/* 12. Estilos para a Timeline */
+/* ========================================= */
+
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: var(--cor-bordas);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    background-color: var(--cor-primaria);
+    border: 3px solid var(--cor-fundo-escuro);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
     transition: background-color var(--transicao-padrao);
 }
-.copy-btn:hover {
-    background-color: var(--cor-primaria);
+
+.timeline-item.left {
+    left: 0;
 }
 
+.timeline-item.right {
+    left: 50%;
+}
 
+.timeline-item.right::after {
+    left: -10px;
+}
 
+.timeline-item:hover::after {
+    background-color: var(--cor-destaque);
+}
 
+.timeline-item .timeline-card {
+    padding: var(--padding-card);
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    position: relative;
+    border: 1px solid var(--cor-bordas);
+}
+@media screen and (max-width: 600px) {
+    .timeline-container::after {
+        left: 31px;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item.left::after, .timeline-item.right::after {
+        left: 15px;
+    }
+    .timeline-item.right {
+        left: 0;
+    }
+}
+
+/* Seção com efeito Parallax -------------------------*/
+.parallax-section {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+.parallax-content {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    border-radius: var(--border-radius);
+}
+
+.parallax-content h2 {
+    color: var(--cor-destaque);
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+/* Carrossel de Testemunhos */
+.testimonial-carousel-container {
+    max-width: 800px;
+    margin: 30px auto;
+    position: relative;
+}
+
+.testimonial-carousel {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: var(--gap-grid);
+}
+
+.testimonial-item {
+    min-width: calc(100% - var(--gap-grid));
+    flex-shrink: 0;
+    padding: 30px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--cor-bordas);
+    box-shadow: var(--sombra-card);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-item p {
+    font-size: 1.2em;
+    font-style: italic;
+    color: var(--cor-texto-claro);
+    margin-bottom: 20px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--cor-primaria);
+}
+
+.testimonial-author h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--cor-destaque);
+}
+
+.testimonial-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.testimonial-nav button {
+    background-color: var(--cor-card-bg);
+    border: 1px solid var(--cor-primaria);
+    color: var(--cor-primaria);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+}
+
+.testimonial-nav button:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-escuro);
+}
+
+/* Cards com efeito Glassmorphism */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--gap-grid);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--padding-card);
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: transform var(--transicao-padrao), box-shadow var(--transicao-padrao);
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+.glass-card h3 {
+    color: var(--cor-destaque);
+}
+
+.glass-card p {
+    color: var(--cor-texto-claro);
+}
+
+/* Tooltips -------------------------- */
 .tooltip-container {
     position: relative;
     display: inline-block;
     cursor: pointer;
+    font-size: 1.2em;
+    margin: 10px;
 }
+
 .tooltip-text {
     visibility: hidden;
-    background-color: var(--cor-card-bg);
+    width: 200px;
+    background-color: var(--cor-card-hover);
     color: var(--cor-texto-claro);
     text-align: center;
-    border-radius: 6px;
-    padding: 5px;
+    border-radius: var(--border-radius);
+    padding: 10px;
     position: absolute;
     z-index: 1;
     bottom: 125%;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -100px;
     opacity: 0;
     transition: opacity var(--transicao-padrao);
-    width: 120px;
+    font-size: 0.9em;
+    border: 1px solid var(--cor-primaria);
 }
+
 .tooltip-container:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
 }
 
+/* Seta do tooltip ------------------ */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--cor-primaria) transparent transparent transparent;
+}
 
 
+/* ========================================= */
+/* 15. CAIXA DE TEXTO COM EFEITO VIDRO TRANSPARENTE
+/* ========================================= */
 .glass-container {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ========================================= */
+/* 16. BLOCO DE CITAÇÃO COM BORDA ANIMADA */
+/* ========================================= */
+
+.animated-quote {
+    background-color: var(--cor-card-bg);
+    padding: 30px;
+    border-left: 5px solid var(--cor-primaria);
+    border-radius: 8px;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+}
+
+.animated-quote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--cor-primaria), var(--cor-secundaria));
+    animation: quote-border-flow 3s linear infinite;
+}
+
+@keyframes quote-border-flow {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.animated-quote p {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--cor-texto-claro);
+    margin-bottom: 10px;
+}
+
+.animated-quote cite {
+    display: block;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
     color: var(--cor-texto-claro);
 }
 
+/* ========================================= */
+/* 19. TÍTULO COM SUBLINHADO ANIMADO */
+/* ========================================= */
 
-.animated-quote {
-    font-style: italic;
-    border-left: 5px solid var(--cor-primaria);
-    padding-left: 15px;
+.animated-underline-title {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+    color: var(--cor-texto-claro);
+    cursor: pointer;
+    font-family: var(--fonte-titulo);
+}
+
+.animated-underline-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--cor-primaria);
+    transition: width 0.3s ease;
+}
+
+.animated-underline-title:hover::after {
+    width: 100%;
+}
+
+/* ========================================= */
+/* 22. TEXTO COM EFEITO HOVER INTERATIVO */
+/* ========================================= */
+.hover-text-reveal {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--cor-texto-claro);
+    text-align: center;
+}
+
+.hover-text {
+    position: relative;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    cursor: pointer;
+}
+
+.hover-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 200px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
     opacity: 0;
-    transform: translateX(-20px);
-    transition: all 1s ease-out;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    box-shadow: var(--sombra-card-hover);
+    z-index: 10;
 }
-.animated-quote.visible {
+
+.hover-text:hover + .hover-image {
     opacity: 1;
-    transform: translateX(0);
+    visibility: visible;
 }
 
-
+/* ========================================= */
+/* 23. BLOCO DE TEXTO COM EFEITO DE "CONSOLE" */
+/* ========================================= */
 .console-box {
     background-color: #1a1a1a;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--sombra-forte);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff00;
+    max-width: 600px;
+    margin: 0 auto;
 }
+
 .console-header {
-    background-color: #2c2c2c;
-    padding: 10px;
     display: flex;
     gap: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
 }
+
 .dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
 }
-.dot.red { background-color: #ff5f56; }
-.dot.yellow { background-color: #ffbd2e; }
-.dot.green { background-color: #27c93f; }
+
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
 .console-text {
-    padding: 20px;
     white-space: pre-wrap;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9em;
-    color: #00ff00;
+    padding-top: 10px;
 }
+
 /* ====================================================================================== */
 
 /* ========================================= */
