@@ -1968,47 +1968,6 @@ p { font-size: clamp(1em, 2.5vw, 1.125em); }
 }
 
 /* ========================================= */
-/* 22. TEXTO COM EFEITO HOVER INTERATIVO */
-/* ========================================= */
-.hover-text-reveal {
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto;
-    color: var(--cor-texto-claro);
-    text-align: center;
-}
-
-.hover-text {
-    position: relative;
-    font-weight: bold;
-    color: var(--cor-primaria);
-    cursor: pointer;
-}
-
-.hover-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    height: 200px;
-    background-color: var(--cor-card-bg);
-    border-radius: var(--border-radius);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    background-size: cover;
-    background-position: center;
-    box-shadow: var(--sombra-card-hover);
-    z-index: 10;
-}
-
-.hover-text:hover + .hover-image {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ========================================= */
 /* 23. BLOCO DE TEXTO COM EFEITO DE "CONSOLE" */
 /* ========================================= */
 .console-box {
