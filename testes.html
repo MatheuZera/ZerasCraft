@@ -10,151 +10,57 @@
 <body>
 
     <main>
-        <section class="section">
-            <h2 class="animated-underline-title">Galeria de Imagens</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://picsum.photos/400/200" alt="Imagem 1">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://picsum.photos/401/201" alt="Imagem 2">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://picsum.photos/402/202" alt="Imagem 3">
-                </div>
-            </div>
-        </section>
 
-        <div class="lightbox-overlay" id="myLightbox">
-            <div class="lightbox-content">
-                <img src="" alt="" id="lightbox-image">
-            </div>
+<button class="glitch-button">Glitch Effect</button>
+
+<section class="section">
+    <h2 class="animated-underline-title">Efeito de Digitação</h2>
+    <div class="typing-container">
+        <span id="typed-text"></span>
+        <span class="cursor">|</span>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="animated-underline-title">Card com Efeito 3D</h2>
+    <div class="tilt-card-container">
+        <div class="tilt-card">
+            <h3>Card de Exemplo</h3>
+            <p>Passe o mouse para ver a animação 3D.</p>
         </div>
+    </div>
+</section>
 
-        <section class="section">
-            <h2 class="animated-underline-title">Timeline</h2>
-            <div class="timeline-container">
-                <div class="timeline-item left">
-                    <div class="timeline-card">
-                        <h3>Evento A</h3>
-                        <p>Descrição do Evento A.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-card">
-                        <h3>Evento B</h3>
-                        <p>Descrição do Evento B.</p>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-card">
-                        <h3>Evento C</h3>
-                        <p>Descrição do Evento C.</p>
-                    </div>
-                </div>
+<section class="section">
+    <h2 class="animated-underline-title">Modal de Notificação</h2>
+    <button id="openModalBtn" class="btn-primary">Abrir Modal</button>
+    <div id="notificationModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close-btn">&times;</span>
+            <div class="modal-body">
+                <h3>Bem-vindo à nossa comunidade!</h3>
+                <p>Obrigado por se juntar a nós. Fique por dentro de todas as novidades e eventos.</p>
             </div>
-        </section>
+            <button class="btn-secondary modal-close-btn">Entendido</button>
+        </div>
+    </div>
+</section>
 
-        <section class="parallax-section" style="background-image: url('https://picsum.photos/1600/900')">
-            <div class="parallax-content">
-                <h2>Efeito Parallax</h2>
-                <p>Uma experiência de rolagem com profundidade.</p>
-            </div>
-        </section>
+<section class="section">
+    <h2 class="animated-underline-title">Botão de Compartilhar</h2>
+    <div class="share-button-container">
+        <button id="shareButton" class="share-button">
+            <i class="fas fa-share-alt"></i> Compartilhar
+        </button>
+        <div class="social-menu hidden">
+            <a href="#" class="social-icon" aria-label="Compartilhar no Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon" aria-label="Compartilhar no Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon" aria-label="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+</section>
 
-        <section class="section">
-            <h2 class="animated-underline-title">Carrossel de Testemunhos</h2>
-            <div class="testimonial-carousel-container">
-                <div class="testimonial-carousel">
-                    <div class="testimonial-item">
-                        <p>"Ótimo serviço! Recomendo a todos."</p>
-                        <div class="testimonial-author">
-                            <img src="https://picsum.photos/60/60" alt="Autor 1">
-                            <h4>Autor Teste 1</h4>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <p>"Uma experiência fantástica e profissional."</p>
-                        <div class="testimonial-author">
-                            <img src="https://picsum.photos/61/61" alt="Autor 2">
-                            <h4>Autor Teste 2</h4>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <p>"Resultados que superaram minhas expectativas."</p>
-                        <div class="testimonial-author">
-                            <img src="https://picsum.photos/62/62" alt="Autor 3">
-                            <h4>Autor Teste 3</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-nav">
-                    <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-                    <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
-        </section>
-        
-        <section class="section">
-            <h2 class="animated-underline-title">Cards Glassmorphism</h2>
-            <div class="card-grid">
-                <div class="glass-card">
-                    <h3>Card 1</h3>
-                    <p>Este é um exemplo de card com efeito de vidro transparente.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Card 2</h3>
-                    <p>Ele utiliza o CSS `backdrop-filter` para criar o efeito.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Card 3</h3>
-                    <p>Funciona melhor em fundos com imagens ou gradientes.</p>
-                </div>
-            </div>
-        </section>
 
-        <section class="section">
-            <h2 class="animated-underline-title">Tooltips</h2>
-            <div class="tooltip-container">
-                <i class="fas fa-info-circle"></i>
-                <span class="tooltip-text">Este é um tooltip com informações extras.</span>
-            </div>
-            <div class="tooltip-container">
-                <i class="fas fa-question-circle"></i>
-                <span class="tooltip-text">Passe o mouse para ver o texto.</span>
-            </div>
-        </section>
-        
-        <section class="section">
-            <h2 class="animated-underline-title">Caixa de Texto Glassmorphism</h2>
-            <div class="glass-container">
-                <p>Este é um contêiner de exemplo com o efeito Glassmorphism. Ele pode ser usado para envolver qualquer tipo de conteúdo, como formulários, texto ou cards.</p>
-            </div>
-        </section>
-        
-        <section class="section">
-            <h2 class="animated-underline-title">Citação Animada</h2>
-            <div class="animated-quote">
-                <p>O sucesso é a soma de pequenos esforços repetidos dia após dia.</p>
-                <cite>- Robert Collier</cite>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2 class="animated-underline-title">Caixa de Console</h2>
-            <div class="console-box">
-                <div class="console-header">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
-                </div>
-                <pre class="console-text">
-> Iniciando sistema...
-> Carregando dados...
-> Sucesso! Pronto para uso.
-                </pre>
-            </div>
-        </section>
 
     </main>
 
