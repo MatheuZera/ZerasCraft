@@ -453,13 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 7. Funcionalidades Dinâmicas
-    // =====================================
-
-
-
-    // =====================================
-    // 8. Usabilidade e Ajustes Finais
+    // 7. Usabilidade e Ajustes Finais
     // =====================================
 
     // Botão Voltar ao Topo
@@ -566,4 +560,10 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCards(filteredCards);
         });
     }
+
+    // =====================================
+    // 7. Funcionalidades Dinâmicas
+    // =====================================
+
+
 });
