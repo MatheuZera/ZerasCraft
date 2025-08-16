@@ -381,9 +381,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // 4. Sistema de Sons para Interações
     // =====================================
-    document.querySelectorAll('.btn-primary, .menu-item a, .music-button').forEach(element => {
-        element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
-    });
+    let hoverSound;
+    let clickSound;
+
+    hoverSound = new Audio('assets/audios/effects/hover.wav');
+    clickSound = new Audio('assets/audios/effects/click.wav');
+
+    document.querySelectorAll('a, button, .interactive').forEach(element => {
+        element.addEventListener('mouseenter', () => hoverSound.play());
+        element.addEventListener('click', () => clickSound.play());
+    });
 
     // =====================================
     // 5. Animações de Rolagem com ScrollReveal
@@ -565,5 +572,157 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Funcionalidades Dinâmicas
     // =====================================
 
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const lightbox = document.getElementById('myLightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            lightbox.style.display = 'flex';
+            lightboxImage.src = item.src;
+        });
+    });
+
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+    }
+
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTabId = button.dataset.tab;
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            button.classList.add('active');
+            document.getElementById(targetTabId).classList.add('active');
+        });
+    });
+
+
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.toggle('active');
+
+            if (isActive) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.display = 'block';
+            } else {
+                content.style.maxHeight = '0';
+                setTimeout(() => content.style.display = 'none', 300); // tempo da transição
+            }
+        });
+    });
+
+
+
+
+    const counters = document.querySelectorAll('.counter-number');
+    const speed = 200;
+
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const increment = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(updateCount, 1);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        // Usa Intersection Observer para iniciar a animação quando visível
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCount();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5 // Aciona quando 50% do elemento está visível
+        });
+
+        observer.observe(counter);
+    });
+
+
+
+    const carousels = document.querySelectorAll('.carousel-container');
+
+    carousels.forEach(carousel => {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = carousel.querySelector('.next');
+        const prevButton = carousel.querySelector('.prev');
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        let currentSlide = 0;
+
+        const setSlidePosition = (slide, index) => {
+            slide.style.left = slideWidth * index + 'px';
+        };
+        slides.forEach(setSlidePosition);
+
+        nextButton.addEventListener('click', () => {
+            currentSlide++;
+            if (currentSlide > slides.length - 1) {
+                currentSlide = 0;
+            }
+            track.style.transform = `translateX(-${slideWidth * currentSlide}px)`;
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentSlide--;
+            if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
+            track.style.transform = `translateX(-${slideWidth * currentSlide}px)`;
+        });
+    });
+
+
+    const copyBtns = document.querySelectorAll('.copy-btn');
+    copyBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-clipboard-target');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.select();
+                targetElement.setSelectionRange(0, 99999); // Para mobile
+                document.execCommand('copy');
+                alert("Texto copiado para a área de transferência!");
+            }
+        });
+    });
+
+
+    const animatedQuotes = document.querySelectorAll('.animated-quote');
+    const checkVisibility = () => {
+        // ... (restante da função)
+        animatedQuotes.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 50 && rect.bottom >= 0) {
+                el.classList.add('visible');
+            }
+        });
+    };
+    window.addEventListener('scroll', () => {
+        checkVisibility();
+    });
+    checkVisibility(); // Executa no carregamento
 
 });

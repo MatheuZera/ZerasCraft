@@ -11,8 +11,173 @@
 
     <main>
 
+        <section class="section">
+            <h2 class="animated-underline-title">Galeria de Imagens</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/400/200" alt="Imagem 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/401/201" alt="Imagem 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/402/202" alt="Imagem 3">
+                </div>
+            </div>
+        </section>
+        <div class="lightbox-overlay" id="myLightbox">
+            <div class="lightbox-content">
+                <img src="" alt="" id="lightbox-image">
+            </div>
+        </div>
+
+        <section class="section">
+    <h2 class="animated-underline-title">Abas Interativas</h2>
+    <div class="tab-container">
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="tab1">Aba 1</button>
+            <button class="tab-btn" data-tab="tab2">Aba 2</button>
+            <button class="tab-btn" data-tab="tab3">Aba 3</button>
+        </div>
+        <div class="tab-content-container">
+            <div class="tab-content active" id="tab1">
+                <h3>Conteúdo da Aba 1</h3>
+                <p>Este é o conteúdo da primeira aba. Adicione seu texto e elementos HTML aqui.</p>
+            </div>
+            <div class="tab-content" id="tab2">
+                <h3>Conteúdo da Aba 2</h3>
+                <p>Este é o conteúdo da segunda aba. Você pode adicionar diferentes tipos de conteúdo, como imagens ou listas.</p>
+            </div>
+            <div class="tab-content" id="tab3">
+                <h3>Conteúdo da Aba 3</h3>
+                <p>Este é o conteúdo da terceira aba. A interatividade é controlada pelo JavaScript.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 
+        <section class="section">
+            <h2 class="animated-underline-title">Acordeão (Accordion)</h2>
+            <div class="accordion-container">
+                <div class="accordion-item">
+                    <div class="accordion-header">Título do Item 1</div>
+                    <div class="accordion-content">
+                        <p>Conteúdo do item de acordeão 1. Este painel se expande e recolhe ao clicar no título.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">Título do Item 2</div>
+                    <div class="accordion-content">
+                        <p>Conteúdo do item de acordeão 2. Use-o para exibir informações adicionais de forma compacta.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">Título do Item 3</div>
+                    <div class="accordion-content">
+                        <p>Conteúdo do item de acordeão 3. Funcionalidade ideal para FAQs (Perguntas Frequentes).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="section">
+            <h2 class="animated-underline-title">Contador Animado</h2>
+            <div class="counter-grid">
+                <div class="counter-box">
+                    <i class="fas fa-users"></i>
+                    <span class="counter-number" data-target="15000">0</span>
+                    <p>Membros Ativos</p>
+                </div>
+                <div class="counter-box">
+                    <i class="fas fa-server"></i>
+                    <span class="counter-number" data-target="250">0</span>
+                    <p>Servidores Online</p>
+                </div>
+                <div class="counter-box">
+                    <i class="fas fa-globe"></i>
+                    <span class="counter-number" data-target="12">0</span>
+                    <p>Países Atendidos</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="section">
+            <h2 class="animated-underline-title">Carrossel de Itens</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="https://picsum.photos/600/300?random=1" alt="Slide 1">
+                        <p>Slide 1</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://picsum.photos/600/300?random=2" alt="Slide 2">
+                        <p>Slide 2</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://picsum.photos/600/300?random=3" alt="Slide 3">
+                        <p>Slide 3</p>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" aria-label="Anterior">&#10094;</button>
+                <button class="carousel-btn next" aria-label="Próximo">&#10095;</button>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Botão de Copiar Texto</h2>
+            <div class="copy-container">
+                <input type="text" id="textToCopy" value="Texto para copiar" readonly>
+                <button class="copy-btn" data-clipboard-target="#textToCopy">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Tooltips</h2>
+            <div class="tooltip-container">
+                Passe o mouse sobre mim!
+                <span class="tooltip-text">Passe o mouse para ver o texto.</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Caixa de Texto Glassmorphism</h2>
+            <div class="glass-container">
+                <p>Este é um contêiner de exemplo com o efeito Glassmorphism. Ele pode ser usado para envolver qualquer tipo de conteúdo, como formulários, texto ou cards.</p>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <h2 class="animated-underline-title">Citação Animada</h2>
+            <div class="animated-quote">
+                <p>O sucesso é a soma de pequenos esforços repetidos dia após dia.</p>
+                <cite>- Robert Collier</cite>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <h2 class="animated-underline-title">Caixa de Console</h2>
+            <div class="console-box">
+                <div class="console-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <pre class="console-text">
+        > Iniciando sistema...
+        > Carregando dados...
+        > Sucesso! Pronto para uso.
+                </pre>
+            </div>
+        </section>
     </main>
 
     <div class="scroll-progress"></div>
