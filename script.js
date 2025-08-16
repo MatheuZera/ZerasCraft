@@ -1,406 +1,573 @@
 // script.js - Lógica de interatividade para o site Mundo Zera's Craft
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM totalmente carregado e pronto!");
+    console.log("DOM totalmente carregado e pronto!");
 
-    // =====================================
-    // Variáveis Globais de Áudio e Elementos
-    // =====================================
-    let hoverSound;
-    let clickSound;
-    let selectSound; // Adicionado
-    const backgroundAudio = document.getElementById('backgroundAudio');
-    const audioEffects = {};
+    // =====================================
+    // Variáveis Globais de Áudio e Elementos
+    // =====================================
+    let hoverSound;
+    let clickSound;
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    const audioEffects = {};
 
-    const audioControlButton = document.getElementById('audioControlButton');
-    const audioNextButton = document.getElementById('audioNextButton');
-    const musicTitleDisplay = document.getElementById('musicTitleDisplay');
-    const audioProgressArc = document.getElementById('audioProgressArc');
-    const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
+    const audioControlButton = document.getElementById('audioControlButton');
+    const audioNextButton = document.getElementById('audioNextButton');
+    const musicTitleDisplay = document.getElementById('musicTitleDisplay');
+    const audioProgressArc = document.getElementById('audioProgressArc');
+    const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
 
-    const arcRadius = 27;
-    const arcCircumference = 2 * Math.PI * arcRadius;
+    const arcRadius = 27;
+    const arcCircumference = 2 * Math.PI * arcRadius;
 
-    let preparingNextMusic = false;
+    let preparingNextMusic = false;
 
-    const musicPlaylist = [
-        { title: '✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
-        { title: '✨ Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
-        { title: '✨ Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
-        { title: '✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
-        { title: '✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
-        { title: '✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
-        { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
-        { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp3' },
-        { title: '⛏️ Beginning', src: 'assets/audios/musics/Beginning.mp3' },
-        { title: '⛏️ Biome Fest', src: 'assets/audios/musics/Biome-Fest.mp3' },
-        { title: '⛏️ Blind Spots', src: 'assets/audios/musics/Blind-Spots.mp3' },
-        { title: '⛏️ Clark', src: 'assets/audios/musics/Clark.mp3' },
-        { title: '⛏️ Danny', src: 'assets/audios/musics/Danny.mp3' },
-        { title: '⛏️ Dreiton', src: 'assets/audios/musics/Dreiton.mp3' },
-        { title: '⛏️ Dry Hands', src: 'assets/audios/musics/Dry-Hands.mp3' },
-        { title: '⛏️ Floating Trees', src: 'assets/audios/musics/Floating-Trees.mp3' },
-        { title: '⛏️ Haggstrom', src: 'assets/audios/musics/Haggstrom.mp3' },
-        { title: '⛏️ Key', src: 'assets/audios/musics/Key.mp3' },
-        { title: '⛏️ Living Mice', src: 'assets/audios/musics/Living-Mice.mp3' },
-        { title: '⛏️ Mice On Venus', src: 'assets/audios/musics/Mice-On-Venus.mp3' },
-        { title: '⛏️ Moog City 2', src: 'assets/audios/musics/Moog-City-2.mp3' },
-        { title: '⛏️ Sweden', src: 'assets/audios/musics/Sweden.mp3' },
-        { title: '⛏️ Wet Hands', src: 'assets/audios/musics/Wet-Hands.mp3' },
-        { title: '⛏️ Subwoofer Lullaby', src: 'assets/audios/musics/Subwoofer-Lullaby.mp3' },
-        { title: '⛏️ Chris', src: 'assets/audios/musics/Chris.mp3' },
-        { title: '⛏️ Dead Voxel', src: 'assets/audios/musics/Dead-Voxel.mp3' },
-        { title: '⛏️ Haggstrom', src: 'assets/audios/musics/Haggstrom.mp3' },
-    ];
+    const musicPlaylist = [
+        { title: '✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
+        { title: '✨ Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
+        { title: '✨ Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
+        { title: '✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
+        { title: '✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
+        { title: '✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
+        { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
+        { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp3' },
+        { title: '⛏️ Beginning', src: 'assets/audios/musics/Beginning.mp3' },
+        { title: '⛏️ Biome Fest', src: 'assets/audios/musics/Biome-Fest.mp3' },
+        { title: '⛏️ Blind Spots', src: 'assets/audios/musics/Blind-Spots.mp3' },
+        { title: '⛏️ Clark', src: 'assets/audios/musics/Clark.mp3' },
+        { title: '⛏️ Danny', src: 'assets/audios/musics/Danny.mp3' },
+        { title: '⛏️ Dreiton', src: 'assets/audios/musics/Dreiton.mp3' },
+        { title: '⛏️ Dry Hands', src: 'assets/audios/musics/Dry-Hands.mp3' },
+        { title: '⛏️ Floating Trees', src: 'assets/audios/musics/Floating-Trees.mp3' },
+        { title: '⛏️ Haggstrom', src: 'assets/audios/musics/Haggstrom.mp3' },
+        { title: '⛏️ Key', src: 'assets/audios/musics/Key.mp3' },
+        { title: '⛏️ Living Mice', src: 'assets/audios/musics/Living-Mice.mp3' },
+        { title: '⛏️ Mice On Venus', src: 'assets/audios/musics/Mice-On-Venus.mp3' },
+        { title: '⛏️ Minecraft', src: 'assets/audios/musics/Minecraft.mp3' },
+        { title: '⛏️ Moog City', src: 'assets/audios/musics/Moog-City.mp3' },
+        { title: '⛏️ Mutation', src: 'assets/audios/musics/Mutation.mp3' },
+        { title: '⛏️ Sweden', src: 'assets/audios/musics/Sweden.mp3' },
+        { title: '⛏️ Taswell', src: 'assets/audios/musics/Taswell.mp3' },
+        { title: '⛏️ Wet Hands', src: 'assets/audios/musics/Wet-Hands.mp3' },
+        { title: '💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
+        { title: '💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
+        { title: '💿 Far', src: 'assets/audios/musics/records/Far.mp3' },
+        { title: '💿 Mall', src: 'assets/audios/musics/records/Mall.mp3' },
+        { title: '💿 Mellohi', src: 'assets/audios/musics/records/Mellohi.mp3' },
+        { title: '💿 Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
+        { title: '💿 Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
+        { title: '💿 Relic', src: 'assets/audios/musics/records/Relic.mp3' },
+        { title: '💿 Stal', src: 'assets/audios/musics/records/Stal.mp3' },
+        { title: '💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
+        { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
+        { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
+    ];
+    let currentMusicIndex = -1;
 
-    let currentMusicIndex = 0;
-    let isPlaying = false;
-    let musicStorageKey = 'minecraft-music-index';
-    let volumeStorageKey = 'minecraft-music-volume';
+    // =====================================
+    // Funções Auxiliares de Áudio
+    // =====================================
+    const initializeAudioEffect = (name, path, volume = 0.5) => {
+        const audio = new Audio(path);
+        audio.preload = 'auto';
+        audio.volume = volume;
+        audioEffects[name] = audio;
+        return audio;
+    };
+    hoverSound = initializeAudioEffect('select', 'assets/audios/effects/select.mp3', 0.3);
+    clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7);
 
-    // =====================================
-    // Funções de Utilitários
-    // =====================================
+    const playEffectSoundInternal = (audioElement) => {
+        if (audioElement) {
+            const clonedAudio = audioElement.cloneNode();
+            clonedAudio.volume = audioElement.volume;
+            clonedAudio.play().catch(e => console.warn("Erro ao tentar tocar som de efeito:", e.message));
+        }
+    };
 
-    /**
-     * Exibe uma mensagem flutuante no centro da tela.
-     * @param {string} message - A mensagem a ser exibida.
-     * @param {number} duration - Duração em milissegundos para a mensagem permanecer.
-     */
-    const showCentralMessage = (message, duration = 2000) => {
-        const messageDiv = document.querySelector('.central-message');
-        if (!messageDiv) {
-            const newDiv = document.createElement('div');
-            newDiv.classList.add('central-message');
-            document.body.appendChild(newDiv);
-        }
-        document.querySelector('.central-message').textContent = message;
-        document.querySelector('.central-message').classList.add('show');
-        setTimeout(() => {
-            document.querySelector('.central-message').classList.remove('show');
-        }, duration);
-    };
+    const playEffectSound = (audioElement) => {
+        setTimeout(() => {
+            playEffectSoundInternal(audioElement);
+        }, 10);
+    };
 
-    /**
-     * Salva o estado atual da música no LocalStorage.
-     */
-    const saveMusicState = () => {
-        if (backgroundAudio) {
-            localStorage.setItem(musicStorageKey, currentMusicIndex);
-            localStorage.setItem(volumeStorageKey, backgroundAudio.volume);
-        }
-    };
+    function showCentralMessage(message) {
+        const centralMessageElement = document.getElementById('centralMessage');
+        if (centralMessageElement) {
+            centralMessageElement.textContent = message;
+            centralMessageElement.classList.add('show');
+            setTimeout(() => {
+                centralMessageElement.classList.remove('show');
+            }, 3000);
+        } else {
+            console.log(`[Mensagem Central] ${message}`);
+        }
+    }
 
-    /**
-     * Carrega o estado da música do LocalStorage.
-     */
-    const loadMusicState = () => {
-        const savedIndex = localStorage.getItem(musicStorageKey);
-        if (savedIndex !== null) {
-            currentMusicIndex = parseInt(savedIndex, 10);
-        }
-        const savedVolume = localStorage.getItem(volumeStorageKey);
-        if (savedVolume !== null) {
-            backgroundAudio.volume = parseFloat(savedVolume);
-        }
-    };
+    // =====================================
+    // Lógica de Controle da Música de Fundo
+    // =====================================
+    const updateAudioButtonTitle = () => {
+        if (musicTitleDisplay && currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
+            if (!backgroundAudio.paused) {
+                musicTitleDisplay.textContent = `${musicPlaylist[currentMusicIndex].title}`;
+                audioControlButton.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                musicTitleDisplay.textContent = 'Clique para Tocar';
+                audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        } else if (musicTitleDisplay) {
+            musicTitleDisplay.textContent = 'Nenhuma Música';
+            audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    };
 
-    // =====================================
-    // Lógica do Player de Áudio de Fundo
-    // =====================================
+    const getRandomMusicIndex = () => {
+        if (musicPlaylist.length === 0) return -1;
+        let newIndex;
+        if (musicPlaylist.length > 1) {
+            do {
+                newIndex = Math.floor(Math.random() * musicPlaylist.length);
+            } while (newIndex === currentMusicIndex);
+        } else {
+            newIndex = 0;
+        }
+        return newIndex;
+    };
 
-    /**
-     * Toca a música atual da playlist.
-     */
-    const playCurrentMusic = () => {
-        if (!backgroundAudio || preparingNextMusic) return;
+    const playMusic = () => {
+        if (!backgroundAudio || !backgroundAudio.src) {
+            console.warn("Áudio não pronto para tocar.");
+            return;
+        }
+        backgroundAudio.play().then(() => {
+            if (audioControlButton) audioControlButton.classList.add('is-playing');
+            showCentralMessage(`Tocando: ${musicPlaylist[currentMusicIndex].title}`);
+            updateAudioButtonTitle();
+            saveAudioState();
+        }).catch(e => {
+            console.error("Erro ao tentar tocar áudio (provavelmente autoplay bloqueado):", e.message);
+            if (audioControlButton) audioControlButton.classList.remove('is-playing');
+            showCentralMessage('Autoplay bloqueado. Clique para tocar.');
+            updateAudioButtonTitle();
+            saveAudioState();
+        });
+    };
 
-        preparingNextMusic = true;
-        
-        backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
-        backgroundAudio.title = musicPlaylist[currentMusicIndex].title;
-        musicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
+    const loadNewMusic = (playAfterLoad = false, specificIndex = -1) => {
+        if (musicPlaylist.length === 0) {
+            console.warn("Playlist vazia, não é possível carregar música.");
+            preparingNextMusic = false;
+            return;
+        }
+        if (preparingNextMusic) {
+            console.log("Já está preparando a próxima música, abortando nova carga.");
+            return;
+        }
 
-        backgroundAudio.load();
-        
-        // Espera o evento 'canplaythrough' para garantir que o áudio possa ser reproduzido
-        backgroundAudio.addEventListener('canplaythrough', () => {
-            backgroundAudio.play().then(() => {
-                isPlaying = true;
-                audioControlButton.querySelector('i').classList.remove('fa-play');
-                audioControlButton.querySelector('i').classList.add('fa-pause');
-                console.log(`Reproduzindo: ${musicPlaylist[currentMusicIndex].title}`);
-                preparingNextMusic = false;
-            }).catch(error => {
-                console.error("Erro ao tentar reproduzir áudio:", error);
-                preparingNextMusic = false;
-            });
-        }, { once: true });
-    };
+        preparingNextMusic = true;
+        currentMusicIndex = (specificIndex !== -1) ? specificIndex : getRandomMusicIndex();
+        const music = musicPlaylist[currentMusicIndex];
+        if (currentMusicIndex === -1) {
+            console.warn("Não foi possível obter um índice de música válido. Playlist vazia ou erro.");
+            preparingNextMusic = false;
+            return;
+        }
 
-    const nextMusic = () => {
-        if (preparingNextMusic) return;
-        currentMusicIndex = (currentMusicIndex + 1) % musicPlaylist.length;
-        playCurrentMusic();
-        showCentralMessage(`Próxima: ${musicPlaylist[currentMusicIndex].title}`);
-    };
+        backgroundAudio.src = music.src;
+        backgroundAudio.load();
+        backgroundAudio.oncanplaythrough = () => {
+            preparingNextMusic = false;
+            if (playAfterLoad) {
+                playMusic();
+            } else {
+                updateAudioButtonTitle();
+            }
+            backgroundAudio.oncanplaythrough = null;
+            saveAudioState();
+        };
 
-    const togglePlayPause = () => {
-        if (backgroundAudio.paused) {
-            playCurrentMusic();
-        } else {
-            backgroundAudio.pause();
-            isPlaying = false;
-            audioControlButton.querySelector('i').classList.remove('fa-pause');
-            audioControlButton.querySelector('i').classList.add('fa-play');
-        }
-    };
+        backgroundAudio.onerror = (e) => {
+            console.error(`Erro ao carregar áudio: ${music.src}`, e);
+            showCentralMessage('Erro ao carregar música. Pulando...');
+            preparingNextMusic = false;
+            backgroundAudio.onerror = null;
+            setTimeout(() => loadNewMusic(playAfterLoad), 500);
+        };
+    };
+    const updateProgressArc = () => {
+        if (!arcProgress) return;
+        if (backgroundAudio.duration > 0 && !isNaN(backgroundAudio.duration)) {
+            const progress = (backgroundAudio.currentTime / backgroundAudio.duration);
+            const offset = arcCircumference * (1 - progress);
+            arcProgress.style.strokeDashoffset = offset;
+        } else {
+            arcProgress.style.strokeDashoffset = arcCircumference;
+        }
+    };
 
-    // Atualiza o progresso do arco
-    const updateAudioProgress = () => {
-        if (!arcProgress) return;
-        const progress = backgroundAudio.currentTime / backgroundAudio.duration;
-        const offset = arcCircumference * (1 - progress);
-        arcProgress.style.strokeDashoffset = offset;
-    };
+    const saveAudioState = () => {
+        if (backgroundAudio) {
+            const audioState = {
+                currentTime: backgroundAudio.currentTime,
+                currentMusicIndex: currentMusicIndex,
+                paused: backgroundAudio.paused,
+                volume: backgroundAudio.volume,
+                userInteracted: localStorage.getItem('userInteractedWithAudio') === 'true'
+            };
+            localStorage.setItem('audioState', JSON.stringify(audioState));
+        }
+    };
 
-    // Event Listeners para os controles de áudio
-    if (audioControlButton) {
-        audioControlButton.addEventListener('click', togglePlayPause);
-        audioNextButton.addEventListener('click', nextMusic);
-    }
-    
-    if (backgroundAudio) {
-        backgroundAudio.addEventListener('timeupdate', updateAudioProgress);
-        backgroundAudio.addEventListener('ended', nextMusic);
-    }
-    
-    // Configura o arco de progresso SVG
-    if (arcProgress) {
-        arcProgress.style.strokeDasharray = `${arcCircumference} ${arcCircumference}`;
-        arcProgress.style.strokeDashoffset = arcCircumference;
-    }
+    const restoreAudioState = () => {
+        const savedState = localStorage.getItem('audioState');
+        if (savedState) {
+            const audioState = JSON.parse(savedState);
+            currentMusicIndex = audioState.currentMusicIndex;
+            backgroundAudio.volume = audioState.volume;
 
-    // Carrega o estado da última sessão e inicia a música
-    loadMusicState();
-    if (backgroundAudio) {
-        // Salva o estado ao sair da página
-        window.addEventListener('beforeunload', saveMusicState);
-        // Tenta tocar o áudio se não for o primeiro acesso
-        if (localStorage.getItem('minecraft-music-state') === 'playing') {
-             // Opcional: tentar auto-reproduzir se o usuário já interagiu
-             // backgroundAudio.play().catch(e => console.log('Autoplay blocked.'));
-        }
-    }
-    
-    // =====================================
-    // Lógica do Scroll e Animações
-    // =====================================
+            if (currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
+                backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
+                backgroundAudio.load();
+                
+                backgroundAudio.onloadedmetadata = () => {
+                    if (backgroundAudio.duration > 0 && audioState.currentTime < backgroundAudio.duration) {
+                        backgroundAudio.currentTime = audioState.currentTime;
+                    }
+                    updateProgressArc();
+                    // Tentar tocar a música, ignorando o estado de interação anterior [cite: 1]
+                    if (!audioState.paused) {
+                        playMusic();
+                    } else {
+                        updateAudioButtonTitle();
+                        if (audioControlButton) audioControlButton.classList.remove('is-playing');
+                    }
+                    backgroundAudio.onloadedmetadata = null;
+                };
+                backgroundAudio.onerror = (e) => {
+                    console.error("Erro ao carregar música restaurada:", e);
+                    showCentralMessage('Erro ao restaurar música. Pulando...');
+                    loadNewMusic(true);
+                };
+            } else {
+                loadNewMusic(true);
+            }
+        } else {
+            loadNewMusic(true);
+        }
+    };
+    // =====================================
+    // 1. Menu Hambúrguer
+    // =====================================
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.main-nav');
 
-    const scrollTopButton = document.getElementById('scrollTopButton');
-    const scrollProgress = document.querySelector('.scroll-progress');
-    const sections = document.querySelectorAll('.fade-in-section');
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            playEffectSound(clickSound);
+        });
+        document.querySelectorAll('.main-nav a').forEach(item => {
+            item.addEventListener('click', () => {
+                setTimeout(() => {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }, 300);
+                playEffectSound(clickSound);
+            });
+        });
+    }
 
-    const checkScroll = () => {
-        // Botão Voltar ao Topo
-        if (scrollTopButton) {
-            if (window.scrollY > 300) {
-                scrollTopButton.classList.add('show');
-            } else {
-                scrollTopButton.classList.remove('show');
-            }
-        }
-        
-        // Barra de Progresso de Rolagem
-        if (scrollProgress) {
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (window.scrollY / totalHeight) * 100;
-            scrollProgress.style.width = `${progress}%`;
-        }
+    // =====================================
+    // 2. Funcionalidade de Copiar Texto
+    // =====================================
+    const copyButtons = document.querySelectorAll('.copy-button');
+    if (copyButtons.length > 0) {
+        copyButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                playEffectSound(clickSound);
+                let textToCopy = '';
+                let targetElementSelector = button.dataset.copyTarget;
+                let originalButtonText = button.textContent;
+                if (targetElementSelector) {
+                    const parentContext = button.closest('.access-info') || document;
+                    const selectors = targetElementSelector.split(',').map(s => s.trim());
+                    let partsToCopy = [];
+                    for (const selector of selectors) {
+                        const targetElement = parentContext.querySelector(selector);
+                        if (targetElement) {
+                            partsToCopy.push(targetElement.textContent.trim());
+                        }
+                    }
+                    if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
+                        textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
+                    } else {
+                        textToCopy = partsToCopy.join('');
+                    }
+                } else if (button.dataset.copyText) {
+                    textToCopy = button.dataset.copyText;
+                }
+                if (textToCopy) {
+                    try {
+                        await navigator.clipboard.writeText(textToCopy);
+                        showCentralMessage(`'${textToCopy}' copiado!`);
+                        button.textContent = 'Copiado!';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalButtonText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Erro ao copiar: ', err);
+                        showCentralMessage('Falha ao copiar.');
+                    }
+                } else {
+                    showCentralMessage('Nada para copiar.');
+                }
+            });
+        });
+    }
 
-        // Animação de Fade-in das seções
-        sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top;
-            if (sectionTop < window.innerHeight - 100) {
-                section.classList.add('is-visible');
-            }
-        });
-    };
+    // =====================================
+    // 3. Sistema de Áudio de Fundo
+    // =====================================
+    if (backgroundAudio) {
+        if (arcProgress) {
+            arcProgress.style.strokeDasharray = `${arcCircumference} ${arcCircumference}`;
+            arcProgress.style.strokeDashoffset = arcCircumference;
+            arcProgress.style.transition = 'stroke-dashoffset 1s linear';
+        }
+        restoreAudioState();
+        backgroundAudio.addEventListener('timeupdate', updateProgressArc);
+        backgroundAudio.addEventListener('ended', () => {
+            if (audioControlButton) audioControlButton.classList.remove('is-playing');
+            updateProgressArc();
+            preparingNextMusic = false;
+            loadNewMusic(true);
+        });
 
-    window.addEventListener('scroll', checkScroll);
-    window.addEventListener('load', checkScroll); // Executa no carregamento da página
+        if (audioControlButton) {
+            audioControlButton.addEventListener('click', () => {
+                playEffectSound(clickSound);
+                localStorage.setItem('userInteractedWithAudio', 'true');
+                if (backgroundAudio.paused) {
+                    if (currentMusicIndex === -1 || !backgroundAudio.src) {
+                        loadNewMusic(true);
+                    } else {
+                        playMusic();
+                    }
+                } else {
+                    backgroundAudio.pause();
+                    if (audioControlButton) audioControlButton.classList.remove('is-playing');
+                    updateAudioButtonTitle();
+                }
+            });
+        }
+        if (audioNextButton) {
+            audioNextButton.addEventListener('click', () => {
+                playEffectSound(clickSound);
+                backgroundAudio.pause();
+                if (audioControlButton) audioControlButton.classList.remove('is-playing');
+                showCentralMessage('Próxima música...');
+                preparingNextMusic = false;
+                loadNewMusic(true);
+            });
+        }
+        window.addEventListener('beforeunload', saveAudioState);
+        window.addEventListener('pagehide', saveAudioState);
+    }
 
-    if (scrollTopButton) {
-        scrollTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
+    // =====================================
+    // 4. Sistema de Sons para Interações
+    // =====================================
+    document.querySelectorAll('.btn-primary, .menu-item a, .music-button').forEach(element => {
+        element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
+    });
 
-    // =====================================
-    // Efeito de Hover e Click (Opcional)
-    // =====================================
-    
-    const elementsWithHoverEffects = document.querySelectorAll('a, button');
-    
-    // Carrega os sons, se existirem
-    const loadAudioEffects = () => {
-        try {
-            hoverSound = new Audio('assets/audios/effects/hover.mp3');
-            clickSound = new Audio('assets/audios/effects/click.mp3');
-            selectSound = new Audio('assets/audios/effects/select.mp3'); // Adicionado
-            hoverSound.volume = 0.5;
-            clickSound.volume = 0.5;
-            selectSound.volume = 0.5; // Adicionado
-        } catch (e) {
-            console.error("Erro ao carregar arquivos de áudio de efeitos:", e);
-        }
-    };
-    
-    // Ativa os efeitos de áudio, se estiverem carregados
-    if (hoverSound) {
-        elementsWithHoverEffects.forEach(el => {
-            el.addEventListener('mouseenter', () => hoverSound.play());
-            el.addEventListener('click', () => {
-                clickSound.play();
-                showCentralMessage("Clique! :)", 1000);
-            });
-        });
-    }
+    // =====================================
+    // 5. Animações de Rolagem com ScrollReveal
+    // =====================================
+    if (typeof ScrollReveal !== 'undefined') {
+        ScrollReveal().reveal('.reveal', {
+            delay: 200,
+            distance: '50px',
+            origin: 'bottom',
+            interval: 100,
+            mobile: false
+        });
+        ScrollReveal().reveal('.reveal-left', {
+            delay: 200,
+            distance: '50px',
+            origin: 'left',
+            mobile: false
+        });
+        ScrollReveal().reveal('.reveal-right', {
+            delay: 200,
+            distance: '50px',
+            origin: 'right',
+            mobile: false
+        });
+        ScrollReveal().reveal('.reveal-up', {
+            delay: 200,
+            distance: '50px',
+            origin: 'top',
+            mobile: false
+        });
+    } else {
+        console.warn("ScrollReveal não está definido. Verifique se o script foi incluído corretamente.");
+    }
 
-    // Lógica para copiar texto para a área de transferência
-    const copyToClipboard = (text) => {
-        navigator.clipboard.writeText(text).then(() => {
-            showCentralMessage("Código Copiado!", 1500);
-        }).catch(err => {
-            console.error('Falha ao copiar:', err);
-        });
-    };
 
-    const copyButtons = document.querySelectorAll('.copy-icon');
-    copyButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetId = button.getAttribute('data-target');
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                copyToClipboard(targetElement.textContent.trim());
-            }
-        });
-    });
+    // =====================================
+    // 6. Contador Animado (CountUp.js)
+    // =====================================
+    const countUpElements = document.querySelectorAll('.countup');
+    if (countUpElements.length > 0 && typeof CountUp !== 'undefined') {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    const startVal = parseInt(entry.target.getAttribute('data-start'));
+                    const endVal = parseInt(entry.target.getAttribute('data-end'));
+                    const options = {
+                        startVal: startVal,
+                        duration: 3
+                    };
+                    const countUp = new CountUp(id, endVal, options);
+                    if (!countUp.error) {
+                        countUp.start();
+                    } else {
+                        console.error(countUp.error);
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
 
-    // =====================================
-    // Galeria Lightbox
-    // =====================================
-    const galleryItems = document.querySelectorAll('.gallery-item img');
-    const lightboxOverlay = document.getElementById('myLightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
+        countUpElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
 
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => {
-            lightboxImage.src = item.src;
-            lightboxOverlay.classList.add('active');
-        });
-    });
+    // =====================================
+    // 7. Funcionalidades Dinâmicas
+    // =====================================
 
-    if (lightboxOverlay) {
-        lightboxOverlay.addEventListener('click', (e) => {
-            if (e.target === lightboxOverlay) {
-                lightboxOverlay.classList.remove('active');
-            }
-        });
-    }
 
-    // =====================================
-    // Modais
-    // =====================================
-    const modal = document.getElementById('modal-example');
-    const modalCloseBtn = document.querySelector('.modal-close-btn');
 
-    if (modal && modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
+    // =====================================
+    // 8. Usabilidade e Ajustes Finais
+    // =====================================
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-    }
+    // Botão Voltar ao Topo
+    const scrollTopButton = document.getElementById('scrollTopButton');
+    if (scrollTopButton) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollTopButton.classList.add('show');
+            } else {
+                scrollTopButton.classList.remove('show');
+            }
+        });
 
-    // Seção de Cards
-    const cardGrid = document.querySelector('.card-grid'); // Adicionado para a lógica do som
-    const filterButtons = document.querySelectorAll('.card-filter-btn');
-    const searchInput = document.getElementById('cardSearch');
-    const cardData = []; // Substitua com seus dados reais
+        scrollTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 
-    const renderCards = (cards) => {
-        // Implemente a lógica de renderização
-    };
+    // Atualização do Ano no Rodapé
+    const currentYearSpan = document.getElementById('currentYear');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
 
-    if (filterButtons.length > 0) {
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                const filter = button.dataset.filter;
-                if (filter === 'all') {
-                    renderCards(cardData);
-                } else {
-                    const filtered = cardData.filter(card => card.tags.includes(filter));
-                    renderCards(filtered);
-                }
-            });
-        });
-    }
+    // Modal
+    const modal = document.getElementById('modal');
+    const modalCloseBtn = document.querySelector('.modal-close-btn');
+    const cardGrid = document.querySelector('.card-grid');
 
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            const filteredCards = cardData.filter(card =>
-                card.title.toLowerCase().includes(query) ||
-                card.tags.some(tag => tag.toLowerCase().includes(query))
-            );
-            renderCards(filteredCards);
-        });
-    }
+    if (modal && modalCloseBtn && cardGrid) {
+        const cardData = [{
+            id: 'card1',
+            title: 'Mapa da Cidade',
+            description: 'Explore a cidade de Zera!',
+            thumbnail: 'assets/images/placeholder.png',
+            downloadLink: '#'
+        }];
 
-    // Evento de clique para abrir o modal
-    cardGrid.addEventListener('click', (e) => {
-        // Toca o som de seleção quando a parte do card é clicada
-        if (selectSound && e.target.closest('.card')) {
-            selectSound.play();
-        }
+        // Evento de clique para abrir o modal
+        cardGrid.addEventListener('click', (e) => {
+            if (e.target.classList.contains('card-download-btn')) {
+                const cardId = e.target.getAttribute('data-id');
+                const card = cardData.find(c => c.id === cardId);
 
-        if (e.target.classList.contains('card-download-btn')) {
-            const cardId = e.target.getAttribute('data-id');
-            const card = cardData.find(c => c.id === cardId);
+                if (card) {
+                    document.getElementById('modal-image').src = card.thumbnail;
+                    document.getElementById('modal-title').textContent = card.title;
+                    document.getElementById('modal-description').textContent = card.description;
+                    document.getElementById('modal-download-link').href = card.downloadLink;
 
-            if (card) {
-                document.getElementById('modal-image').src = card.thumbnail;
-                document.getElementById('modal-title').textContent = card.title;
-                document.getElementById('modal-description').textContent = card.description;
-                document.getElementById('modal-download-link').href = card.downloadLink;
+                    modal.classList.add('active');
+                }
+            }
+        });
 
-                modal.classList.add('active');
-            }
-        }
-    });
+        // Evento para fechar o modal
+        modalCloseBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
 
-    // Evento para fechar o modal
-    modalCloseBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    }
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
-    });
-    
+    // Seção de Cards
+    const filterButtons = document.querySelectorAll('.card-filter-btn');
+    const searchInput = document.getElementById('cardSearch');
+    const cardData = []; // Substitua com seus dados reais
+
+    const renderCards = (cards) => {
+        // Implemente a lógica de renderização
+    };
+
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.dataset.filter;
+                if (filter === 'all') {
+                    renderCards(cardData);
+                } else {
+                    const filtered = cardData.filter(card => card.tags.includes(filter));
+                    renderCards(filtered);
+                }
+            });
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            const filteredCards = cardData.filter(card =>
+                card.title.toLowerCase().includes(query) ||
+                card.tags.some(tag => tag.toLowerCase().includes(query))
+            );
+            renderCards(filteredCards);
+        });
+    }
+});
+
     // =====================================
     // Lógica dos Novos Elementos
     // =====================================
