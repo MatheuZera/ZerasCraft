@@ -30,97 +30,75 @@
                 <img src="" alt="" id="lightbox-image">
             </div>
         </div>
-
-        <section class="section">
-            <h2 class="animated-underline-title">Timeline</h2>
-            <div class="timeline-container">
-                <div class="timeline-item left">
-                    <div class="timeline-card">
-                        <h3>Evento A</h3>
-                        <p>Descrição do Evento A.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-card">
-                        <h3>Evento B</h3>
-                        <p>Descrição do Evento B.</p>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-card">
-                        <h3>Evento C</h3>
-                        <p>Descrição do Evento C.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="parallax-section" style="background-image: url('https://picsum.photos/1600/900')">
-            <div class="parallax-content">
-                <h2>Efeito Parallax</h2>
-                <p>Uma experiência de rolagem com profundidade.</p>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2 class="animated-underline-title">Carrossel de Testemunhos</h2>
-            <div class="testimonial-carousel-container">
-                <div class="testimonial-carousel">
-                    <div class="testimonial-item">
-                        <p>"Ótimo serviço! Recomendo a todos."</p>
-                        <div class="testimonial-author">
-                            <img src="https://picsum.photos/60/60" alt="Autor 1">
-                            <h4>Autor Teste 1</h4>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <p>"Uma experiência fantástica e profissional."</p>
-                        <div class="testimonial-author">
-                            <img src="https://picsum.photos/61/61" alt="Autor 2">
-                            <h4>Autor Teste 2</h4>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <p>"Resultados que superaram minhas expectativas."</p>
-                        <div class="testimonial-author">
-                            <img src="https://picsum.photos/62/62" alt="Autor 3">
-                            <h4>Autor Teste 3</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-nav">
-                    <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-                    <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
-        </section>
         
         <section class="section">
-            <h2 class="animated-underline-title">Cards Glassmorphism</h2>
-            <div class="card-grid">
-                <div class="glass-card">
-                    <h3>Card 1</h3>
-                    <p>Este é um exemplo de card com efeito de vidro transparente.</p>
+            <h2 class="animated-underline-title">Card de Item</h2>
+            <div class="card-item">
+                <div class="card-image-container">
+                    <img src="https://picsum.photos/300/150" alt="Item">
+                    <div class="card-badge">Novo!</div>
                 </div>
-                <div class="glass-card">
-                    <h3>Card 2</h3>
-                    <p>Ele utiliza o CSS `backdrop-filter` para criar o efeito.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Card 3</h3>
-                    <p>Funciona melhor em fundos com imagens ou gradientes.</p>
+                <div class="card-content">
+                    <h3>Super Item Lendário</h3>
+                    <p>Descrição curta do item. Um item super raro e poderoso para o seu mundo!</p>
+                    <div class="card-actions">
+                        <span class="card-price">1200 Moedas</span>
+                        <a href="#" class="btn-secondary">Comprar</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="animated-underline-title">Tooltips</h2>
-            <div class="tooltip-container">
-                <i class="fas fa-info-circle"></i>
-                <span class="tooltip-text">Este é um tooltip com informações extras.</span>
+            <h2 class="animated-underline-title">Barra de Progresso Animada</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 75%;"></div>
             </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Botão com Efeito de Onda</h2>
+            <button class="btn-ripple">Clique Aqui</button>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Menu de Abas</h2>
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="tab1">Aba 1</button>
+                    <button class="tab-btn" data-tab="tab2">Aba 2</button>
+                    <button class="tab-btn" data-tab="tab3">Aba 3</button>
+                </div>
+                <div class="tab-content-container">
+                    <div id="tab1" class="tab-content active">
+                        <p>Conteúdo da Aba 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <div id="tab2" class="tab-content">
+                        <p>Conteúdo da Aba 2. Nulla vitae elit libero, a pharetra augue.</p>
+                    </div>
+                    <div id="tab3" class="tab-content">
+                        <p>Conteúdo da Aba 3. Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Carrossel de Itens</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-item">Item 1</div>
+                    <div class="carousel-item">Item 2</div>
+                    <div class="carousel-item">Item 3</div>
+                    <div class="carousel-item">Item 4</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="animated-underline-title">Tooltip</h2>
             <div class="tooltip-container">
-                <i class="fas fa-question-circle"></i>
+                Passe o mouse
                 <span class="tooltip-text">Passe o mouse para ver o texto.</span>
             </div>
         </section>
@@ -160,6 +138,290 @@
 
     <div class="scroll-progress"></div>
 
+    <div class="modal-overlay" id="myModal">
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <h3>Novo Modal Funcional</h3>
+            <p>Este é um exemplo de um novo modal. Ele pode conter qualquer tipo de conteúdo, como formulários, imagens ou avisos.</p>
+            <button class="btn-primary" onclick="window.location.href='#'">Ir para a página</button>
+        </div>
+    </div>
+    
+    <section class="section section-padded" id="new-elements">
+        <div class="container">
+            <h2 class="animated-underline-title text-center">Novos Elementos Adicionados</h2>
+
+            <div class="accordion-container">
+                <div class="accordion-item">
+                    <button class="accordion-button">
+                        <span class="accordion-title">O que é este site?</span>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Este é um site de exemplo para mostrar vários componentes interativos e visuais feitos com HTML, CSS e JavaScript puros. Ele é um template para desenvolvedores.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-button">
+                        <span class="accordion-title">Como usar os códigos?</span>
+                        <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Você pode copiar e colar as seções de código nos seus próprios projetos e adaptá-las conforme sua necessidade. Os estilos e lógicas estão separados nos arquivos CSS e JS.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-gradient">Botão com Gradiente</button>
+
+            <div class="profile-card">
+                <img src="https://picsum.photos/100" alt="Avatar" class="profile-avatar">
+                <div class="profile-info">
+                    <h4>Alex O.</h4>
+                    <p class="profile-title">Desenvolvedor Front-end</p>
+                    <div class="profile-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Enviar Mensagem</button>
+                <div class="form-status"></div>
+            </form>
+
+            <div class="gallery-filter-buttons">
+                <button class="btn-filter" data-filter="all">Todos</button>
+                <button class="btn-filter" data-filter="nature">Natureza</button>
+                <button class="btn-filter" data-filter="tech">Tecnologia</button>
+            </div>
+            <div class="gallery-with-filters">
+                <img src="https://picsum.photos/250/150?random=1" data-tag="nature" alt="Natureza" class="gallery-img">
+                <img src="https://picsum.photos/250/150?random=2" data-tag="tech" alt="Tecnologia" class="gallery-img">
+                <img src="https://picsum.photos/250/150?random=3" data-tag="nature" alt="Natureza" class="gallery-img">
+            </div>
+
+            <div class="highlight-box">
+                <div class="highlight-icon">
+                    <i class="fas fa-star fa-spin"></i>
+                </div>
+                <div class="highlight-content">
+                    <h4>Destaque do Dia!</h4>
+                    <p>Confira a nova funcionalidade incrível que acabamos de lançar.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="1500">0</span>
+                    <p class="stat-label">Usuários Ativos</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span>
+                    <p class="stat-label">Projetos Concluídos</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="200">0</span>
+                    <p class="stat-label">Avaliações Positivas</p>
+                </div>
+            </div>
+
+            <div class="dropdown-container">
+                <button class="dropdown-btn">Opções <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Opção 1</a>
+                    <a href="#">Opção 2</a>
+                    <a href="#">Opção 3</a>
+                </div>
+            </div>
+
+            <button class="btn-primary" id="showToastBtn">Mostrar Alerta</button>
+            <div class="toast-message" id="myToast">
+                <p>Ação realizada com sucesso!</p>
+            </div>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Status</th>
+                        <th>Pontuação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jogador A</td>
+                        <td>Online</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td>Jogador B</td>
+                        <td>Offline</td>
+                        <td>1200</td>
+                    </tr>
+                    <tr>
+                        <td>Jogador C</td>
+                        <td>Online</td>
+                        <td>1800</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="btn-share">
+                <i class="fas fa-share-alt"></i> Compartilhar
+            </button>
+
+            <div class="switch-container">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <span>Modo Escuro</span>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Fase 1</h3>
+                        <p>Início do projeto e planejamento.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Fase 2</h3>
+                        <p>Desenvolvimento dos componentes principais.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading-spinner"></div>
+
+            <div class="typing-text-container">
+                <span class="typing-text"></span>
+            </div>
+            
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h4 class="pricing-plan">Básico</h4>
+                    <p class="pricing-price">$10<span>/mês</span></p>
+                    <ul class="pricing-features">
+                        <li>10 GB de Espaço</li>
+                        <li>5 Projetos</li>
+                        <li>Suporte Básico</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Assinar</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h4 class="pricing-plan">Pro</h4>
+                    <p class="pricing-price">$25<span>/mês</span></p>
+                    <ul class="pricing-features">
+                        <li>50 GB de Espaço</li>
+                        <li>Projetos Ilimitados</li>
+                        <li>Suporte Prioritário</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Assinar</a>
+                </div>
+            </div>
+
+            <div class="notification-banner success">
+                <i class="fas fa-check-circle"></i>
+                <p>Sua conta foi atualizada com sucesso!</p>
+            </div>
+            <div class="notification-banner info">
+                <i class="fas fa-info-circle"></i>
+                <p>Nova funcionalidade disponível, clique para saber mais.</p>
+            </div>
+
+            <button class="btn-loading" id="loadingBtn">
+                <span class="btn-text">Carregar</span>
+                <span class="spinner"></span>
+            </button>
+
+            <div class="scrollspy-nav">
+                <a href="#section1">Seção 1</a>
+                <a href="#section2">Seção 2</a>
+                <a href="#section3">Seção 3</a>
+            </div>
+
+            <section id="section1" class="section"><h3>Seção 1</h3></section>
+            <section id="section2" class="section"><h3>Seção 2</h3></section>
+            <section id="section3" class="section"><h3>Seção 3</h3></section>
+
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-section footer-contact">
+                <h3>Mundo Zera's Craft</h3>
+                <p>Um universo Minecraft para criar, aventurar e construir memórias inesquecíveis.</p>
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/@matheuzera_oficial" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://discord.gg/98577482862308577482" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://twitter.com/matheuzera" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section footer-links">
+                <h3>Links Úteis</h3>
+                <ul>
+                    <li><a href="https://youtube.com/playlist?list=PLD_0Fv-2-c9hM-yX5m1_Y-5m1_Y-5m1" target="_blank">Tutorials</a></li>
+                    <li><a href="https://youtube.com/playlist?list=PLD_0Fv-2-c9hM-yX5m1_Y-5m1_Y-5m1" target="_blank">Regras</a></li>
+                    <li><a href="https://youtube.com/playlist?list=PLD_0Fv-2-c9hM-yX5m1_Y-5m1_Y-5m1" target="_blank">Eventos</a></li>
+                    <li><a href="https://youtube.com/playlist?list=PLD_0Fv-2-c9hM-yX5m1_Y-5m1_Y-5m1" target="_blank">Loja</a></li>
+                </ul>
+            </div>
+            <div class="footer-section footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Receba as últimas novidades diretamente no seu e-mail.</p>
+                <form action="#" method="post">
+                    <input type="email" placeholder="Seu e-mail" required>
+                    <div class="newsletter-btn-wrapper">
+                        <a href="https://discord.gg/98577482862308577482/1390125369306255501" class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
+                    </div>
+                </form>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+            </div>
+        </div>
+        <div class="audio-control-bar">
+            <div class="container audio-control-content">
+                <button id="audioControlButton" aria-label="Controlar áudio">
+                    <i class="fas fa-music"></i>
+                    <span id="musicTitleDisplay">Clique para Tocar</span>
+                </button>
+                <div class="audio-progress-indicator" id="audioProgressArc">
+                     <svg viewBox="0 0 60 60" class="audio-progress-svg">
+                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
+                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
+                    </svg>
+                </div>
+                <button id="audioNextButton" aria-label="Próxima música">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <script src="script.js"></script>
 </body>
 </html>
