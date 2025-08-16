@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     let hoverSound;
     let clickSound;
+    let selectSound; // Adicionado
     const backgroundAudio = document.getElementById('backgroundAudio');
     const audioEffects = {};
 
@@ -249,8 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             hoverSound = new Audio('assets/audios/effects/hover.mp3');
             clickSound = new Audio('assets/audios/effects/click.mp3');
+            selectSound = new Audio('assets/audios/effects/select.mp3'); // Adicionado
             hoverSound.volume = 0.5;
             clickSound.volume = 0.5;
+            selectSound.volume = 0.5; // Adicionado
         } catch (e) {
             console.error("Erro ao carregar arquivos de áudio de efeitos:", e);
         }
@@ -258,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Ativa os efeitos de áudio, se estiverem carregados
     if (hoverSound) {
-         elementsWithHoverEffects.forEach(el => {
+        elementsWithHoverEffects.forEach(el => {
             el.addEventListener('mouseenter', () => hoverSound.play());
             el.addEventListener('click', () => {
                 clickSound.play();
@@ -328,6 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Seção de Cards
+    const cardGrid = document.querySelector('.card-grid'); // Adicionado para a lógica do som
     const filterButtons = document.querySelectorAll('.card-filter-btn');
     const searchInput = document.getElementById('cardSearch');
     const cardData = []; // Substitua com seus dados reais
@@ -356,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            const filteredCards = cardData.filter(card => 
+            const filteredCards = cardData.filter(card =>
                 card.title.toLowerCase().includes(query) ||
                 card.tags.some(tag => tag.toLowerCase().includes(query))
             );
@@ -366,6 +370,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Evento de clique para abrir o modal
     cardGrid.addEventListener('click', (e) => {
+        // Toca o som de seleção quando a parte do card é clicada
+        if (selectSound && e.target.closest('.card')) {
+            selectSound.play();
+        }
+
         if (e.target.classList.contains('card-download-btn')) {
             const cardId = e.target.getAttribute('data-id');
             const card = cardData.find(c => c.id === cardId);
