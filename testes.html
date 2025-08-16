@@ -183,18 +183,5 @@
     <div class="scroll-progress"></div>
 
     <script src="script.js"></script>
-    <script>
-        // Função para carregar o áudio de fundo de forma persistente
-        document.addEventListener('DOMContentLoaded', function() {
-            const backgroundAudio = document.getElementById('backgroundAudio');
-            if (backgroundAudio) {
-                backgroundAudio.play().then(() => {
-                    console.log('Reprodução de áudio iniciada com sucesso.');
-                }).catch(error => {
-                    console.log('Reprodução de áudio falhou:', error);
-                });
-            }
-        });
-    </script>
 </body>
 </html>
