@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM totalmente carregado e pronto!");
 
     // =====================================
-    // Variáveis de Áudio e Elementos
+    // Variáveis Globais de Áudio e Elementos
     // =====================================
     let hoverSound;
     let clickSound;
@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // Funções Auxiliares de Áudio
     // =====================================
-
     const initializeAudioEffect = (name, path, volume = 0.5) => {
         const audio = new Audio(path);
         audio.preload = 'auto';
@@ -75,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audioEffects[name] = audio;
         return audio;
     };
-
     hoverSound = initializeAudioEffect('select', 'assets/audios/effects/select.mp3', 0.3);
     clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7);
 
@@ -105,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`[Mensagem Central] ${message}`);
         }
     }
-    
+
     // =====================================
     // Lógica de Controle da Música de Fundo
     // =====================================
@@ -136,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return newIndex;
     };
-    
+
     const playMusic = () => {
         if (!backgroundAudio || !backgroundAudio.src) {
             console.warn("Áudio não pronto para tocar.");
@@ -152,9 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (audioControlButton) audioControlButton.classList.remove('is-playing');
             showCentralMessage('Autoplay bloqueado. Clique para tocar.');
             updateAudioButtonTitle();
+            saveAudioState(); // Adicionado para salvar o estado mesmo com erro
         });
     };
-    
+
     const loadNewMusic = (playAfterLoad = false, specificIndex = -1) => {
         if (musicPlaylist.length === 0) {
             console.warn("Playlist vazia, não é possível carregar música.");
@@ -165,20 +164,18 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Já está preparando a próxima música, abortando nova carga.");
             return;
         }
-    
+
         preparingNextMusic = true;
         currentMusicIndex = (specificIndex !== -1) ? specificIndex : getRandomMusicIndex();
         const music = musicPlaylist[currentMusicIndex];
-    
         if (currentMusicIndex === -1) {
             console.warn("Não foi possível obter um índice de música válido. Playlist vazia ou erro.");
             preparingNextMusic = false;
             return;
         }
-    
+
         backgroundAudio.src = music.src;
         backgroundAudio.load();
-    
         backgroundAudio.oncanplaythrough = () => {
             preparingNextMusic = false;
             if (playAfterLoad) {
@@ -189,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             backgroundAudio.oncanplaythrough = null;
             saveAudioState();
         };
-    
+
         backgroundAudio.onerror = (e) => {
             console.error(`Erro ao carregar áudio: ${music.src}`, e);
             showCentralMessage('Erro ao carregar música. Pulando...');
@@ -198,10 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => loadNewMusic(playAfterLoad), 500);
         };
     };
-    
     const updateProgressArc = () => {
         if (!arcProgress) return;
-    
         if (backgroundAudio.duration > 0 && !isNaN(backgroundAudio.duration)) {
             const progress = (backgroundAudio.currentTime / backgroundAudio.duration);
             const offset = arcCircumference * (1 - progress);
@@ -210,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             arcProgress.style.strokeDashoffset = arcCircumference;
         }
     };
-    
+
     const saveAudioState = () => {
         if (backgroundAudio) {
             const audioState = {
@@ -223,20 +218,23 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('audioState', JSON.stringify(audioState));
         }
     };
-    
+
     const restoreAudioState = () => {
         const savedState = localStorage.getItem('audioState');
         if (savedState) {
             const audioState = JSON.parse(savedState);
             currentMusicIndex = audioState.currentMusicIndex;
             backgroundAudio.volume = audioState.volume;
-    
+
             if (currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
                 backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
                 backgroundAudio.load();
-    
+                
                 backgroundAudio.onloadedmetadata = () => {
-                    backgroundAudio.currentTime = audioState.currentTime;
+                    // Adicionado: Verifica se a duração do áudio é válida
+                    if (backgroundAudio.duration > 0 && audioState.currentTime < backgroundAudio.duration) {
+                        backgroundAudio.currentTime = audioState.currentTime;
+                    }
                     updateProgressArc();
                     if (!audioState.paused && audioState.userInteracted) {
                         playMusic();
@@ -258,7 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
             loadNewMusic(false);
         }
     };
-    
     // =====================================
     // 1. Menu Hambúrguer
     // =====================================
@@ -271,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
             menuToggle.classList.toggle('active');
             playEffectSound(clickSound);
         });
-
         document.querySelectorAll('.main-nav a').forEach(item => {
             item.addEventListener('click', () => {
                 setTimeout(() => {
@@ -287,7 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Funcionalidade de Copiar Texto
     // =====================================
     const copyButtons = document.querySelectorAll('.copy-button');
-
     if (copyButtons.length > 0) {
         copyButtons.forEach(button => {
             button.addEventListener('click', async () => {
@@ -295,29 +290,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 let textToCopy = '';
                 let targetElementSelector = button.dataset.copyTarget;
                 let originalButtonText = button.textContent;
-
                 if (targetElementSelector) {
                     const parentContext = button.closest('.access-info') || document;
                     const selectors = targetElementSelector.split(',').map(s => s.trim());
                     let partsToCopy = [];
-
                     for (const selector of selectors) {
                         const targetElement = parentContext.querySelector(selector);
                         if (targetElement) {
                             partsToCopy.push(targetElement.textContent.trim());
                         }
                     }
-
                     if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
                         textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
                     } else {
                         textToCopy = partsToCopy.join('');
                     }
-
                 } else if (button.dataset.copyText) {
                     textToCopy = button.dataset.copyText;
                 }
-
                 if (textToCopy) {
                     try {
                         await navigator.clipboard.writeText(textToCopy);
@@ -328,7 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             button.textContent = originalButtonText;
                             button.classList.remove('copied');
                         }, 2000);
-
                     } catch (err) {
                         console.error('Erro ao copiar: ', err);
                         showCentralMessage('Falha ao copiar.');
@@ -349,9 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
             arcProgress.style.strokeDashoffset = arcCircumference;
             arcProgress.style.transition = 'stroke-dashoffset 1s linear';
         }
-
         restoreAudioState();
-
         backgroundAudio.addEventListener('timeupdate', updateProgressArc);
         backgroundAudio.addEventListener('ended', () => {
             if (audioControlButton) audioControlButton.classList.remove('is-playing');
@@ -364,7 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
             audioControlButton.addEventListener('click', () => {
                 playEffectSound(clickSound);
                 localStorage.setItem('userInteractedWithAudio', 'true');
-
                 if (backgroundAudio.paused) {
                     if (currentMusicIndex === -1 || !backgroundAudio.src) {
                         loadNewMusic(true);
@@ -378,7 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
-
         if (audioNextButton) {
             audioNextButton.addEventListener('click', () => {
                 playEffectSound(clickSound);
@@ -389,239 +374,277 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadNewMusic(true);
             });
         }
-
         window.addEventListener('beforeunload', saveAudioState);
         window.addEventListener('pagehide', saveAudioState);
     }
-    
+
     // =====================================
-    // 4. Sistema de Sons para Interações (Hover e Click)
+    // 4. Sistema de Sons para Interações
     // =====================================
-    document.querySelectorAll('a, button, .custom-radio-btn').forEach(element => {
+    document.querySelectorAll('.btn-primary, .menu-item a, .music-button').forEach(element => {
         element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
-        element.addEventListener('click', () => playEffectSound(clickSound));
-    });
-    
-    document.querySelectorAll('.service-card, .role-category-card, .access-card, .community-card, .event-card, .partnership-card, .security-card, .faq-item, .info-card').forEach(card => {
-        card.addEventListener('mouseenter', () => playEffectSound(hoverSound));
     });
 
     // =====================================
-    // 5. Botão "Voltar ao Topo"
+    // 5. Animações de Rolagem com ScrollReveal
     // =====================================
+    if (typeof ScrollReveal !== 'undefined') {
+        ScrollReveal().reveal('.reveal', {
+            delay: 200,
+            distance: '50px',
+            origin: 'bottom',
+            interval: 100,
+            mobile: false
+        });
+        ScrollReveal().reveal('.reveal-left', {
+            delay: 200,
+            distance: '50px',
+            origin: 'left',
+            mobile: false
+        });
+        ScrollReveal().reveal('.reveal-right', {
+            delay: 200,
+            distance: '50px',
+            origin: 'right',
+            mobile: false
+        });
+        ScrollReveal().reveal('.reveal-up', {
+            delay: 200,
+            distance: '50px',
+            origin: 'top',
+            mobile: false
+        });
+    } else {
+        console.warn("ScrollReveal não está definido. Verifique se o script foi incluído corretamente.");
+    }
+
+
+    // =====================================
+    // 6. Contador Animado (CountUp.js)
+    // =====================================
+    const countUpElements = document.querySelectorAll('.countup');
+    if (countUpElements.length > 0 && typeof CountUp !== 'undefined') {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    const startVal = parseInt(entry.target.getAttribute('data-start'));
+                    const endVal = parseInt(entry.target.getAttribute('data-end'));
+                    const options = {
+                        startVal: startVal,
+                        duration: 3
+                    };
+                    const countUp = new CountUp(id, endVal, options);
+                    if (!countUp.error) {
+                        countUp.start();
+                    } else {
+                        console.error(countUp.error);
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        countUpElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+
+    // =====================================
+    // 7. Funcionalidades Dinâmicas (Acordeão, Tabs, Carrossel, Lightbox, Modal)
+    // =====================================
+
+    // Acordeão
+    document.querySelectorAll('.accordion-title').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('active');
+            const content = item.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        });
+    });
+
+    // Abas
+    document.querySelectorAll('.tab-links button').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.tab-links button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            button.classList.add('active');
+            document.getElementById(button.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Lightbox para Galeria
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    if (lightbox && galleryItems.length > 0) {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightbox.style.display = 'block';
+                lightboxImage.src = item.querySelector('img').src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+            }, 300);
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                setTimeout(() => {
+                    lightbox.style.display = 'none';
+                }, 300);
+            }
+        });
+    }
+
+    // Carrossel
+    const carousels = document.querySelectorAll('.carousel-container');
+    carousels.forEach(carousel => {
+        const prevBtn = carousel.querySelector('.carousel-prev');
+        const nextBtn = carousel.querySelector('.carousel-next');
+        const carouselItems = carousel.querySelector('.carousel-items');
+        const items = carouselItems.querySelectorAll('.carousel-item');
+        let currentIndex = 0;
+        const totalItems = items.length;
+
+        const updateCarousel = () => {
+            carouselItems.style.transform = `translateX(-${currentIndex * 100}%)`;
+        };
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalItems - 1;
+                updateCarousel();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex < totalItems - 1) ? currentIndex + 1 : 0;
+                updateCarousel();
+            });
+        }
+    });
+
+    // =====================================
+    // 8. Usabilidade e Ajustes Finais
+    // =====================================
+
+    // Botão Voltar ao Topo
     const scrollTopButton = document.getElementById('scrollTopButton');
     if (scrollTopButton) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            if (window.scrollY > 200) {
                 scrollTopButton.classList.add('show');
             } else {
                 scrollTopButton.classList.remove('show');
             }
         });
+
         scrollTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            playEffectSound(clickSound);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     }
 
-    // =====================================
-    // 6. Atualizar Ano Atual no Rodapé
-    // =====================================
+    // Atualização do Ano no Rodapé
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // =====================================
-    // 7. Animações de Rolagem
-    // =====================================
-    const sections = document.querySelectorAll('.fade-in-section');
-    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    sections.forEach(section => sectionObserver.observe(section));
-
-    // =====================================
-    // 8. Ativar Link da Navegação da Página Atual
-    // =====================================
-    const highlightActiveNavLink = () => {
-        const currentPath = window.location.pathname.split('/').pop();
-        document.querySelectorAll('.main-nav a').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === currentPath || (currentPath === '' && link.getAttribute('href') === 'index.html')) {
-                link.classList.add('active');
-            }
-        });
-    };
-    highlightActiveNavLink();
-
-//======================================================================================//
-
-
-
-//======================================================================================//
-    // =====================================
-    // 20. Aba de Pesquisa de Arquivos Gerais (Recursos)
-    // =====================================
-document.addEventListener('DOMContentLoaded', () => {
-    // Exemplo de dados dos cards
-    const cardData = [
-        {
-            id: '1',
-            thumbnail: 'assets/images/addon1.jpg',
-            title: 'Addon de Teleporte',
-            description: 'Adiciona novos comandos de teletransporte para o servidor.',
-            rating: 5,
-            tags: ['Addon', 'Arquivos Gerais'],
-            downloadLink: 'https://site-externo-1.com/download'
-        },
-        {
-            id: '2',
-            thumbnail: 'assets/images/mod1.jpg',
-            title: 'Mod de Ferramentas Mágicas',
-            description: 'Um mod que adiciona um conjunto de ferramentas com habilidades mágicas.',
-            rating: 4,
-            tags: ['Mod'],
-            downloadLink: 'https://site-externo-2.com/download'
-        },
-        {
-            id: '3',
-            thumbnail: 'assets/images/skin1.png',
-            title: 'Skin de Cavaleiro',
-            description: 'Uma skin épica de cavaleiro para personalizar seu personagem.',
-            rating: 5,
-            tags: ['Skin'],
-            downloadLink: 'https://site-externo-3.com/download'
-        },
-        {
-            id: '4',
-            thumbnail: 'assets/images/texturepack1.jpg',
-            title: 'Pacote de Texturas RPG',
-            description: 'Pacote de texturas que transforma o jogo em uma aventura de RPG.',
-            rating: 4,
-            tags: ['Arquivos Gerais'],
-            downloadLink: 'https://site-externo-4.com/download'
-        },
-        {
-            id: '5',
-            thumbnail: 'assets/images/mod2.jpg',
-            title: 'Mod de Decoração',
-            description: 'Um mod com centenas de novos blocos e itens de decoração.',
-            rating: 5,
-            tags: ['Mod'],
-            downloadLink: 'https://site-externo-5.com/download'
-        },
-    ];
-
-    const cardGrid = document.getElementById('card-grid');
-    const searchInput = document.getElementById('search-input');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const modal = document.getElementById('download-modal');
+    // Modal
+    const modal = document.getElementById('modal');
     const modalCloseBtn = document.querySelector('.modal-close-btn');
+    const cardGrid = document.querySelector('.card-grid');
 
-    // Função para renderizar as estrelas de avaliação
-    const getStarRating = (rating) => {
-        let stars = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < rating) {
-                stars += '★';
-            } else {
-                stars += '☆';
+    if (modal && modalCloseBtn && cardGrid) {
+        const cardData = [{
+            id: 'card1',
+            title: 'Mapa da Cidade',
+            description: 'Explore a cidade de Zera!',
+            thumbnail: 'assets/images/placeholder.png',
+            downloadLink: '#'
+        }];
+
+        // Evento de clique para abrir o modal
+        cardGrid.addEventListener('click', (e) => {
+            if (e.target.classList.contains('card-download-btn')) {
+                const cardId = e.target.getAttribute('data-id');
+                const card = cardData.find(c => c.id === cardId);
+
+                if (card) {
+                    document.getElementById('modal-image').src = card.thumbnail;
+                    document.getElementById('modal-title').textContent = card.title;
+                    document.getElementById('modal-description').textContent = card.description;
+                    document.getElementById('modal-download-link').href = card.downloadLink;
+
+                    modal.classList.add('active');
+                }
             }
-        }
-        return stars;
-    };
-
-    // Função para renderizar todos os cards no HTML
-    const renderCards = (cards) => {
-        cardGrid.innerHTML = ''; // Limpa a grade antes de renderizar
-        if (cards.length === 0) {
-            cardGrid.innerHTML = '<p class="text-center">Nenhum resultado encontrado.</p>';
-            return;
-        }
-
-        cards.forEach(card => {
-            const cardItem = document.createElement('div');
-            cardItem.classList.add('card-item');
-
-            cardItem.innerHTML = `
-                <img src="${card.thumbnail}" alt="${card.title}" class="card-thumbnail">
-                <div>
-                    <h3>${card.title}</h3>
-                    <p class="card-description">${card.description}</p>
-                </div>
-                <div class="card-rating">${getStarRating(card.rating)}</div>
-                <button class="card-download-btn" data-id="${card.id}">Baixar</button>
-            `;
-            cardGrid.appendChild(cardItem);
         });
-    };
 
-    // Função de filtro
-    const filterCards = (filter) => {
-        searchInput.value = ''; // Limpa a busca ao filtrar
-        let filteredCards = cardData;
-
-        if (filter !== 'all') {
-            filteredCards = cardData.filter(card => card.tags.includes(filter));
-        }
-        renderCards(filteredCards);
-    };
-
-    // Evento de clique para os botões de filtro
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            filterCards(button.getAttribute('data-filter'));
-        });
-    });
-
-    // Evento de busca no input
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        const filteredCards = cardData.filter(card => 
-            card.title.toLowerCase().includes(query) ||
-            card.tags.some(tag => tag.toLowerCase().includes(query))
-        );
-        renderCards(filteredCards);
-    });
-
-    // Evento de clique para abrir o modal
-    cardGrid.addEventListener('click', (e) => {
-        if (e.target.classList.contains('card-download-btn')) {
-            const cardId = e.target.getAttribute('data-id');
-            const card = cardData.find(c => c.id === cardId);
-
-            if (card) {
-                document.getElementById('modal-image').src = card.thumbnail;
-                document.getElementById('modal-title').textContent = card.title;
-                document.getElementById('modal-description').textContent = card.description;
-                document.getElementById('modal-download-link').href = card.downloadLink;
-
-                modal.classList.add('active');
-            }
-        }
-    });
-
-    // Evento para fechar o modal
-    modalCloseBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
+        // Evento para fechar o modal
+        modalCloseBtn.addEventListener('click', () => {
             modal.classList.remove('active');
-        }
-    });
+        });
 
-    // Inicializa a grade com todos os cards
-    renderCards(cardData);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    }
+
+    // Seção de Cards
+    const filterButtons = document.querySelectorAll('.card-filter-btn');
+    const searchInput = document.getElementById('cardSearch');
+    const cardData = []; // Substitua com seus dados reais
+
+    const renderCards = (cards) => {
+        // Implemente a lógica de renderização
+    };
+
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.dataset.filter;
+                if (filter === 'all') {
+                    renderCards(cardData);
+                } else {
+                    const filtered = cardData.filter(card => card.tags.includes(filter));
+                    renderCards(filtered);
+                }
+            });
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            const filteredCards = cardData.filter(card =>
+                card.title.toLowerCase().includes(query) ||
+                card.tags.some(tag => tag.toLowerCase().includes(query))
+            );
+            renderCards(filteredCards);
+        });
+    }
 });
