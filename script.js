@@ -452,6 +452,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const lightbox = document.getElementById('myLightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    if (galleryItems.length > 0) {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightbox.classList.add('active');
+                lightboxImage.src = item.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+    }
     // =====================================
     // 7. Funcionalidades Dinâmicas
     // =====================================
