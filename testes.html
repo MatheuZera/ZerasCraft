@@ -32,118 +32,95 @@
         </div>
 
         <section class="section">
-            <h2 class="animated-underline-title">Abas Interativas</h2>
-            <div class="tab-container">
-                <div class="tab-buttons">
-                    <button class="tab-btn active" data-tab="tab1">Aba 1</button>
-                    <button class="tab-btn" data-tab="tab2">Aba 2</button>
-                    <button class="tab-btn" data-tab="tab3">Aba 3</button>
-                </div>
-                <div class="tab-content-container">
-                    <div class="tab-content active" id="tab1">
-                        <h3>Conteúdo da Aba 1</h3>
-                        <p>Este é o conteúdo da primeira aba. Adicione seu texto e elementos HTML aqui.</p>
-                    </div>
-                    <div class="tab-content" id="tab2">
-                        <h3>Conteúdo da Aba 2</h3>
-                        <p>Este é o conteúdo da segunda aba. Você pode adicionar diferentes tipos de conteúdo, como imagens ou listas.</p>
-                    </div>
-                    <div class="tab-content" id="tab3">
-                        <h3>Conteúdo da Aba 3</h3>
-                        <p>Este é o conteúdo da terceira aba. A interatividade é controlada pelo JavaScript.</p>
+            <h2 class="animated-underline-title">Timeline</h2>
+            <div class="timeline-container">
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>Evento A</h3>
+                        <p>Descrição do Evento A.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2 class="animated-underline-title">Acordeão (Accordion)</h2>
-            <div class="accordion-container">
-                <div class="accordion-item">
-                    <div class="accordion-header">Título do Item 1</div>
-                    <div class="accordion-content">
-                        <p>Conteúdo do item de acordeão 1. Este painel se expande e recolhe ao clicar no título.</p>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>Evento B</h3>
+                        <p>Descrição do Evento B.</p>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">Título do Item 2</div>
-                    <div class="accordion-content">
-                        <p>Conteúdo do item de acordeão 2. Use-o para exibir informações adicionais de forma compacta.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">Título do Item 3</div>
-                    <div class="accordion-content">
-                        <p>Conteúdo do item de acordeão 3. Funcionalidade ideal para FAQs (Perguntas Frequentes).</p>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>Evento C</h3>
+                        <p>Descrição do Evento C.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="animated-underline-title">Contador Animado</h2>
-            <div class="counter-grid">
-                <div class="counter-box">
-                    <i class="fas fa-users"></i>
-                    <span class="counter-number" data-target="15000">0</span>
-                    <p>Membros Ativos</p>
-                </div>
-                <div class="counter-box">
-                    <i class="fas fa-server"></i>
-                    <span class="counter-number" data-target="250">0</span>
-                    <p>Servidores Online</p>
-                </div>
-                <div class="counter-box">
-                    <i class="fas fa-globe"></i>
-                    <span class="counter-number" data-target="12">0</span>
-                    <p>Países Atendidos</p>
-                </div>
+        <section class="parallax-section" style="background-image: url('https://picsum.photos/1600/900')">
+            <div class="parallax-content">
+                <h2>Efeito Parallax</h2>
+                <p>Uma experiência de rolagem com profundidade.</p>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="animated-underline-title">Carrossel de Itens</h2>
-            <div class="carousel-container">
-                <div class="carousel-track">
-                    <div class="carousel-slide">
-                        <img src="https://picsum.photos/600/300?random=1" alt="Slide 1">
-                        <p>Slide 1</p>
+            <h2 class="animated-underline-title">Carrossel de Testemunhos</h2>
+            <div class="testimonial-carousel-container">
+                <div class="testimonial-carousel">
+                    <div class="testimonial-item">
+                        <p>"Ótimo serviço! Recomendo a todos."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/60/60" alt="Autor 1">
+                            <h4>Autor Teste 1</h4>
+                        </div>
                     </div>
-                    <div class="carousel-slide">
-                        <img src="https://picsum.photos/600/300?random=2" alt="Slide 2">
-                        <p>Slide 2</p>
+                    <div class="testimonial-item">
+                        <p>"Uma experiência fantástica e profissional."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/61/61" alt="Autor 2">
+                            <h4>Autor Teste 2</h4>
+                        </div>
                     </div>
-                    <div class="carousel-slide">
-                        <img src="https://picsum.photos/600/300?random=3" alt="Slide 3">
-                        <p>Slide 3</p>
+                    <div class="testimonial-item">
+                        <p>"Resultados que superaram minhas expectativas."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/62/62" alt="Autor 3">
+                            <h4>Autor Teste 3</h4>
+                        </div>
                     </div>
                 </div>
-                <button class="carousel-btn prev" aria-label="Anterior">&#10094;</button>
-                <button class="carousel-btn next" aria-label="Próximo">&#10095;</button>
+                <div class="testimonial-nav">
+                    <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
         </section>
-
+        
         <section class="section">
-            <h2 class="animated-underline-title">Componente de Hover Animado</h2>
-            <div class="animated-hover-box">
-                <p>Passe o mouse aqui para o efeito.</p>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2 class="animated-underline-title">Botão de Copiar Texto</h2>
-            <div class="copy-container">
-                <input type="text" id="textToCopy" value="Texto para copiar" readonly>
-                <button class="copy-btn" data-clipboard-target="#textToCopy">
-                    <i class="fas fa-copy"></i>
-                </button>
+            <h2 class="animated-underline-title">Cards Glassmorphism</h2>
+            <div class="card-grid">
+                <div class="glass-card">
+                    <h3>Card 1</h3>
+                    <p>Este é um exemplo de card com efeito de vidro transparente.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Card 2</h3>
+                    <p>Ele utiliza o CSS `backdrop-filter` para criar o efeito.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Card 3</h3>
+                    <p>Funciona melhor em fundos com imagens ou gradientes.</p>
+                </div>
             </div>
         </section>
 
         <section class="section">
             <h2 class="animated-underline-title">Tooltips</h2>
             <div class="tooltip-container">
-                Passe o mouse sobre mim!
+                <i class="fas fa-info-circle"></i>
+                <span class="tooltip-text">Este é um tooltip com informações extras.</span>
+            </div>
+            <div class="tooltip-container">
+                <i class="fas fa-question-circle"></i>
                 <span class="tooltip-text">Passe o mouse para ver o texto.</span>
             </div>
         </section>
@@ -184,18 +161,5 @@
     <div class="scroll-progress"></div>
 
     <script src="script.js"></script>
-    <script>
-        // Função para carregar o áudio de fundo de forma persistente
-        document.addEventListener('DOMContentLoaded', function() {
-            const backgroundAudio = document.getElementById('backgroundAudio');
-            if (backgroundAudio) {
-                backgroundAudio.play().then(() => {
-                    console.log('Reprodução de áudio iniciada com sucesso.');
-                }).catch(error => {
-                    console.log('Reprodução de áudio falhou:', error);
-                });
-            }
-        });
-    </script>
 </body>
 </html>
