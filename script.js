@@ -453,91 +453,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 7. Funcionalidades Dinâmicas (Acordeão, Tabs, Carrossel, Lightbox, Modal)
+    // 7. Funcionalidades Dinâmicas
     // =====================================
 
-    // Acordeão
-    document.querySelectorAll('.accordion-title').forEach(item => {
-        item.addEventListener('click', () => {
-            item.classList.toggle('active');
-            const content = item.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + 'px';
-            }
-        });
-    });
 
-    // Abas
-    document.querySelectorAll('.tab-links button').forEach(button => {
-        button.addEventListener('click', () => {
-            document.querySelectorAll('.tab-links button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-            button.classList.add('active');
-            document.getElementById(button.dataset.tab).classList.add('active');
-        });
-    });
-
-    // Lightbox para Galeria
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const closeBtn = document.querySelector('.lightbox-close');
-
-    if (lightbox && galleryItems.length > 0) {
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                lightbox.style.display = 'block';
-                lightboxImage.src = item.querySelector('img').src;
-                lightbox.classList.add('active');
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-            setTimeout(() => {
-                lightbox.style.display = 'none';
-            }, 300);
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-                setTimeout(() => {
-                    lightbox.style.display = 'none';
-                }, 300);
-            }
-        });
-    }
-
-    // Carrossel
-    const carousels = document.querySelectorAll('.carousel-container');
-    carousels.forEach(carousel => {
-        const prevBtn = carousel.querySelector('.carousel-prev');
-        const nextBtn = carousel.querySelector('.carousel-next');
-        const carouselItems = carousel.querySelector('.carousel-items');
-        const items = carouselItems.querySelectorAll('.carousel-item');
-        let currentIndex = 0;
-        const totalItems = items.length;
-
-        const updateCarousel = () => {
-            carouselItems.style.transform = `translateX(-${currentIndex * 100}%)`;
-        };
-
-        if (prevBtn && nextBtn) {
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalItems - 1;
-                updateCarousel();
-            });
-
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex < totalItems - 1) ? currentIndex + 1 : 0;
-                updateCarousel();
-            });
-        }
-    });
 
     // =====================================
     // 8. Usabilidade e Ajustes Finais
