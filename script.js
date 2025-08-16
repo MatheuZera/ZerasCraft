@@ -456,7 +456,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Funcionalidades Dinâmicas
     // =====================================
 
+    const progressBar = document.querySelector('.progress-bar');
+    const progressText = document.querySelector('.progress-text');
+    const progress = 75; // Valor de progresso (0-100)
 
+    const circumference = 2 * Math.PI * 45; // 45 é o raio
+
+    const offset = circumference - (progress / 100) * circumference;
+
+    if (progressBar) {
+        progressBar.style.strokeDashoffset = offset;
+        progressText.textContent = `${progress}%`;
+    }
 
     // =====================================
     // 8. Usabilidade e Ajustes Finais
