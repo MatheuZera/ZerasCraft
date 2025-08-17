@@ -279,55 +279,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =====================================
-    // 2. Funcionalidade de Copiar Texto
-    // =====================================
-    const copyButtons = document.querySelectorAll('.copy-button');
-    if (copyButtons.length > 0) {
-        copyButtons.forEach(button => {
-            button.addEventListener('click', async () => {
-                playEffectSound(clickSound);
-                let textToCopy = '';
-                let targetElementSelector = button.dataset.copyTarget;
-                let originalButtonText = button.textContent;
-                if (targetElementSelector) {
-                    const parentContext = button.closest('.access-info') || document;
-                    const selectors = targetElementSelector.split(',').map(s => s.trim());
-                    let partsToCopy = [];
-                    for (const selector of selectors) {
-                        const targetElement = parentContext.querySelector(selector);
-                        if (targetElement) {
-                            partsToCopy.push(targetElement.textContent.trim());
-                        }
-                    }
-                    if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
-                        textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
-                    } else {
-                        textToCopy = partsToCopy.join('');
-                    }
-                } else if (button.dataset.copyText) {
-                    textToCopy = button.dataset.copyText;
-                }
-                if (textToCopy) {
-                    try {
-                        await navigator.clipboard.writeText(textToCopy);
-                        showCentralMessage(`'${textToCopy}' copiado!`);
-                        button.textContent = 'Copiado!';
-                        button.classList.add('copied');
-                        setTimeout(() => {
-                            button.textContent = originalButtonText;
-                            button.classList.remove('copied');
-                        }, 2000);
-                    } catch (err) {
-                        console.error('Erro ao copiar: ', err);
-                        showCentralMessage('Falha ao copiar.');
-                    }
-                } else {
-                    showCentralMessage('Nada para copiar.');
-                }
-            });
-        });
-    }
+// =====================================
+// 2. Funcionalidade de Copiar Texto
+// =====================================
+const copyButtons = document.querySelectorAll('.copy-button');
+if (copyButtons.length > 0) {
+    copyButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            // A LINHA ABAIXO FOI REMOVIDA PARA EVITAR O SOM DUPLO
+            // playEffectSound(clickSound);
+            let textToCopy = '';
+            let targetElementSelector = button.dataset.copyTarget;
+            let originalButtonText = button.textContent;
+            if (targetElementSelector) {
+                const parentContext = button.closest('.access-info') || document;
+                const selectors = targetElementSelector.split(',').map(s => s.trim());
+                let partsToCopy = [];
+                for (const selector of selectors) {
+                    const targetElement = parentContext.querySelector(selector);
+                    if (targetElement) {
+                        partsToCopy.push(targetElement.textContent.trim());
+                    }
+                }
+                if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
+                    textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
+                } else {
+                    textToCopy = partsToCopy.join('');
+                }
+            } else if (button.dataset.copyText) {
+                textToCopy = button.dataset.copyText;
+            }
+            if (textToCopy) {
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    showCentralMessage(`'${textToCopy}' copiado!`);
+                    button.textContent = 'Copiado!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = originalButtonText;
+                        button.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Erro ao copiar: ', err);
+                    showCentralMessage('Falha ao copiar.');
+                }
+            } else {
+                showCentralMessage('Nada para copiar.');
+            }
+        });
+    });
+}
 
     // =====================================
     // 3. Sistema de Áudio de Fundo
@@ -379,11 +380,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 4. Sistema de Sons para Interações
+    // 4.1 Sistema de Sons para Interações
     // =====================================
     document.querySelectorAll('.btn-primary, .menu-item a, .music-button').forEach(element => {
         element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
     });
+
+    // =====================================
+    // 4.2 Sistema de Sons para Interações
+    // =====================================
+
+    // Sons de HOVER (ao passar o mouse)
+    document.querySelectorAll(
+        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button, copy, grid-item, .gallery-item img, .lightbox-close, .modal-close-btn, .card-filter-btn, #scrollTopButton'
+    ).forEach(element => {
+        element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
+    });
+
+    // Sons de CLIQUE (ao clicar)
+    document.querySelectorAll(
+        'a, .btn-primary, .music-button, .card, .card-download-btn, .copy-button'
+    ).forEach(element => {
+        element.addEventListener('click', (event) => {
+            // Toca o som de clique
+            playEffectSound(clickSound);
+
+            // Se o elemento for um link (<a>) e o href não for uma âncora interna (#)
+            if (element.tagName === 'A' && element.getAttribute('href') && element.getAttribute('href').charAt(0) !== '#') {
+                // Impede a navegação imediata do link
+                event.preventDefault();
+                
+                // Redireciona o usuário após um pequeno atraso para dar tempo de o som tocar
+                setTimeout(() => {
+                    window.location.href = element.href;
+                }, 200); // Atraso de 200 milissegundos
+            }
+        });
+    });
 
     // =====================================
     // 5. Animações de Rolagem com ScrollReveal
