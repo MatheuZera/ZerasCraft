@@ -279,55 +279,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =====================================
-    // 2. Funcionalidade de Copiar Texto
-    // =====================================
-    const copyButtons = document.querySelectorAll('.copy-button');
-    if (copyButtons.length > 0) {
-        copyButtons.forEach(button => {
-            button.addEventListener('click', async () => {
-                playEffectSound(clickSound);
-                let textToCopy = '';
-                let targetElementSelector = button.dataset.copyTarget;
-                let originalButtonText = button.textContent;
-                if (targetElementSelector) {
-                    const parentContext = button.closest('.access-info') || document;
-                    const selectors = targetElementSelector.split(',').map(s => s.trim());
-                    let partsToCopy = [];
-                    for (const selector of selectors) {
-                        const targetElement = parentContext.querySelector(selector);
-                        if (targetElement) {
-                            partsToCopy.push(targetElement.textContent.trim());
-                        }
-                    }
-                    if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
-                        textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
-                    } else {
-                        textToCopy = partsToCopy.join('');
-                    }
-                } else if (button.dataset.copyText) {
-                    textToCopy = button.dataset.copyText;
-                }
-                if (textToCopy) {
-                    try {
-                        await navigator.clipboard.writeText(textToCopy);
-                        showCentralMessage(`'${textToCopy}' copiado!`);
-                        button.textContent = 'Copiado!';
-                        button.classList.add('copied');
-                        setTimeout(() => {
-                            button.textContent = originalButtonText;
-                            button.classList.remove('copied');
-                        }, 2000);
-                    } catch (err) {
-                        console.error('Erro ao copiar: ', err);
-                        showCentralMessage('Falha ao copiar.');
-                    }
-                } else {
-                    showCentralMessage('Nada para copiar.');
-                }
-            });
-        });
-    }
+// =====================================
+// 2. Funcionalidade de Copiar Texto
+// =====================================
+const copyButtons = document.querySelectorAll('.copy-button');
+if (copyButtons.length > 0) {
+    copyButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            // A LINHA ABAIXO FOI REMOVIDA PARA EVITAR O SOM DUPLO
+            // playEffectSound(clickSound);
+            let textToCopy = '';
+            let targetElementSelector = button.dataset.copyTarget;
+            let originalButtonText = button.textContent;
+            if (targetElementSelector) {
+                const parentContext = button.closest('.access-info') || document;
+                const selectors = targetElementSelector.split(',').map(s => s.trim());
+                let partsToCopy = [];
+                for (const selector of selectors) {
+                    const targetElement = parentContext.querySelector(selector);
+                    if (targetElement) {
+                        partsToCopy.push(targetElement.textContent.trim());
+                    }
+                }
+                if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
+                    textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
+                } else {
+                    textToCopy = partsToCopy.join('');
+                }
+            } else if (button.dataset.copyText) {
+                textToCopy = button.dataset.copyText;
+            }
+            if (textToCopy) {
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    showCentralMessage(`'${textToCopy}' copiado!`);
+                    button.textContent = 'Copiado!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = originalButtonText;
+                        button.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Erro ao copiar: ', err);
+                    showCentralMessage('Falha ao copiar.');
+                }
+            } else {
+                showCentralMessage('Nada para copiar.');
+            }
+        });
+    });
+}
 
     // =====================================
     // 3. Sistema de Áudio de Fundo
