@@ -255,6 +255,27 @@ document.addEventListener('DOMContentLoaded', () => {
             loadNewMusic(true);
         }
     };
+
+        // =====================================
+        // Listener para Interação com a Página
+        // =====================================
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // A aba ficou inativa, salva o estado atual
+                saveAudioState();
+            } else {
+                // A aba voltou a ficar ativa
+                // O navegador pode ter pausado a música, então atualizamos a UI
+                if (!backgroundAudio.paused) {
+                    console.log("Aba ativa novamente, tentando tocar a música...");
+                    playMusic();
+                } else {
+                    // A música já estava pausada ou foi pausada pelo navegador
+                    updateAudioButtonTitle();
+                }
+            }
+        });
+
     // =====================================
     // 1. Menu Hambúrguer
     // =====================================
