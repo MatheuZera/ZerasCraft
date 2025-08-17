@@ -379,11 +379,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 4. Sistema de Sons para Interações
+    // 4.1 Sistema de Sons para Interações
     // =====================================
     document.querySelectorAll('.btn-primary, .menu-item a, .music-button').forEach(element => {
         element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
     });
+
+    // =====================================
+    // 4.2 Sistema de Sons para Interações
+    // =====================================
+
+    // Sons de HOVER (ao passar o mouse)
+    document.querySelectorAll(
+        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button'
+    ).forEach(element => {
+        element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
+    });
+
+    // Sons de CLIQUE (ao clicar)
+    document.querySelectorAll(
+        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button'
+    ).forEach(element => {
+        element.addEventListener('click', (event) => {
+            // Toca o som de clique
+            playEffectSound(clickSound);
+
+            // Se o elemento for um link (<a>) e o href não for uma âncora interna (#)
+            if (element.tagName === 'A' && element.getAttribute('href').charAt(0) !== '#') {
+                // Impede a navegação imediata do link
+                event.preventDefault();
+                
+                // Redireciona o usuário após um pequeno atraso para dar tempo de o som tocar
+                setTimeout(() => {
+                    window.location.href = element.href;
+                }, 200); // Atraso de 200 milissegundos
+            }
+        });
+    });
 
     // =====================================
     // 5. Animações de Rolagem com ScrollReveal

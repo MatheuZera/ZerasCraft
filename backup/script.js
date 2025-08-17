@@ -452,11 +452,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const lightbox = document.getElementById('myLightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    if (galleryItems.length > 0) {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightbox.classList.add('active');
+                lightboxImage.src = item.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+    }
     // =====================================
     // 7. Funcionalidades Dinâmicas
     // =====================================
 
+    const progressBar = document.querySelector('.progress-bar');
+    const progressText = document.querySelector('.progress-text');
+    const progress = 75; // Valor de progresso (0-100)
 
+    const circumference = 2 * Math.PI * 45; // 45 é o raio
+
+    const offset = circumference - (progress / 100) * circumference;
+
+    if (progressBar) {
+        progressBar.style.strokeDashoffset = offset;
+        progressText.textContent = `${progress}%`;
+    }
 
     // =====================================
     // 8. Usabilidade e Ajustes Finais
