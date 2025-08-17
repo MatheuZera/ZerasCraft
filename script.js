@@ -392,7 +392,7 @@ if (copyButtons.length > 0) {
 
     // Sons de HOVER (ao passar o mouse)
     document.querySelectorAll(
-        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button'
+        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button, copy, grid-item, .gallery-item img, .lightbox-close, .modal-close-btn, .card-filter-btn, #scrollTopButton'
     ).forEach(element => {
         element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
     });
