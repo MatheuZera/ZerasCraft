@@ -191,14 +191,17 @@ ul {
     box-shadow: var(--sombra-card);
 }
 
-/* Seções com efeito de fade-in na rolagem */
+/* FORÇA AS SEÇÕES A FICAREM SEMPRE VISÍVEIS, SOBRESCREVENDO A ANIMAÇÃO */
 .fade-in-section {
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 .fade-in-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 /* =====================================
