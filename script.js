@@ -398,14 +398,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sons de CLIQUE (ao clicar)
     document.querySelectorAll(
-        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button'
+        'a, .btn-primary, .music-button, .card, .card-download-btn, .copy-button'
     ).forEach(element => {
         element.addEventListener('click', (event) => {
             // Toca o som de clique
             playEffectSound(clickSound);
 
             // Se o elemento for um link (<a>) e o href não for uma âncora interna (#)
-            if (element.tagName === 'A' && element.getAttribute('href').charAt(0) !== '#') {
+            if (element.tagName === 'A' && element.getAttribute('href') && element.getAttribute('href').charAt(0) !== '#') {
                 // Impede a navegação imediata do link
                 event.preventDefault();
                 
