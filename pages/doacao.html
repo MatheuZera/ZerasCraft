@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Zera's Craft - Apoie-nos</title>
+    <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <meta name="description" content="Apoie o Mundo Zera's Craft para nos ajudar a crescer e oferecer ainda mais conteúdo e diversão.">
+    <meta name="keywords" content="Minecraft, Servidor Minecraft, Zera's Craft, doações, apoio, premium, VIP, pacotes">
+    <meta name="author" content="Equipe Zera's Craft">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Mundo Zera's Craft - Apoie-nos">
+    <meta property="og:description" content="Apoie o Mundo Zera's Craft para nos ajudar a crescer e oferecer ainda mais conteúdo e diversão.">
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
+    <meta property="og:url" content="https://seusite.com.br/doar.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mundo Zera's Craft">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@SeuTwitterHandle">
+    <meta name="twitter:creator" content="@SeuTwitterHandle">
+    <meta name="twitter:title" content="Mundo Zera's Craft - Apoie-nos">
+    <meta name="twitter:description" content="Apoie o Mundo Zera's Craft para nos ajudar a crescer e oferecer ainda mais conteúdo e diversão.">
+    <meta name="twitter:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
+    <meta name="theme-color" content="#347C2F">
+</head>
+<body>
+
+    <div id="centralMessage" class="central-message"></div>
+    <audio id="backgroundAudio"></audio>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="header-logo">Zera's Craft</a>
+            <button class="menu-toggle" aria-label="Abrir menu de navegação">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="arquivos.html" class="nav-link">Arquivos</a></li>
+                    <li><a href="comunidade.html" class="nav-link">Comunidade</a></li>
+                    <li><a href="eventos.html" class="nav-link">Eventos</a></li>
+                    <li><a href="marketplace.html" class="nav-link">Marketplace</a></li>
+                    <li><a href="wikipedia.html" class="nav-link">Wikipédia</a></li>
+                    <li><a href="sobre.html" class="nav-link">Sobre Nós</a></li>
+                    <li><a href="suporte.html" class="nav-link">Suporte</a></li>
+                    <li><a href="youtube.html" class="nav-link">Youtube</a></li>
+                    <li><a href="recursos.html" class="nav-link">Recursos</a></li>
+                    <li><a href="testes.html" class="nav-link">Testes</a></li>
+                    <li><a href="doar.html" class="nav-link active">Doar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section small-hero" style="background-image: url('assets/images/1.site/donate-banner.jpg');">
+            <div class="hero-image-overlay"></div>
+            <div class="hero-content">
+                <h1>Apoie o Mundo Zera's Craft</h1>
+                <p class="hero-subtitle">Sua contribuição nos ajuda a manter e melhorar o servidor, trazendo mais diversão para todos!</p>
+            </div>
+        </section>
+
+        <section id="donation-benefits" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-heart"></i> Por Que Doar?</h2>
+                <p class="section-description">Seu apoio é fundamental para cobrir custos de manutenção, atualizações e novos recursos.</p>
+                <div class="community-grid max-3-columns">
+                    <div class="info-card card">
+                        <i class="fas fa-server card-icon"></i>
+                        <h3 class="card-title">Manutenção do Servidor</h3>
+                        <p class="card-description">Ajuda a manter nossos servidores online e com desempenho otimizado 24/7.</p>
+                    </div>
+                    <div class="info-card card">
+                        <i class="fas fa-wrench card-icon"></i>
+                        <h3 class="card-title">Novos Recursos</h3>
+                        <p class="card-description">Permite o desenvolvimento e implementação de addons, mods e funcionalidades exclusivas.</p>
+                    </div>
+                    <div class="info-card card">
+                        <i class="fas fa-gift card-icon"></i>
+                        <h3 class="card-title">Eventos & Prêmios</h3>
+                        <p class="card-description">Contribui para a realização de eventos épicos com prêmios ainda melhores para a comunidade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="donation-packages" class="section-padded section-alt-bg fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-hand-holding-usd"></i> Pacotes de Doação</h2>
+                <p class="section-description">Escolha o pacote que melhor se adapta à sua vontade de apoiar e receba recompensas!</p>
+                <div class="card-grid max-3-columns">
+                    <div class="donation-tier-card card">
+                        <h3 class="card-title">Aventureiro</h3>
+                        <p class="tier-price">R$ 10,00</p>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check-circle"></i> Acesso prioritário</li>
+                            <li><i class="fas fa-check-circle"></i> 5.000 Moedas do jogo</li>
+                            <li><i class="fas fa-check-circle"></i> Tag exclusiva no Discord</li>
+                        </ul>
+                        <button class="btn-primary">Doar Agora</button>
+                    </div>
+                    <div class="donation-tier-card card featured-tier">
+                        <h3 class="card-title">Explorador</h3>
+                        <p class="tier-price">R$ 25,00</p>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check-circle"></i> Todos os benefícios de Aventureiro</li>
+                            <li><i class="fas fa-check-circle"></i> 15.000 Moedas do jogo</li>
+                            <li><i class="fas fa-check-circle"></i> Kit inicial exclusivo no jogo</li>
+                            <li><i class="fas fa-check-circle"></i> Chat colorido no jogo</li>
+                        </ul>
+                        <button class="btn-primary">Doar Agora</button>
+                    </div>
+                    <div class="donation-tier-card card">
+                        <h3 class="card-title">Lendário</h3>
+                        <p class="tier-price">R$ 50,00</p>
+                        <ul class="tier-benefits">
+                            <li><i class="fas fa-check-circle"></i> Todos os benefícios de Explorador</li>
+                            <li><i class="fas fa-check-circle"></i> 50.000 Moedas do jogo</li>
+                            <li><i class="fas fa-check-circle"></i> Pet exclusivo no jogo</li>
+                            <li><i class="fas fa-check-circle"></i> Acesso a área VIP</li>
+                            <li><i class="fas fa-check-circle"></i> Voz prioritária no Discord</li>
+                        </ul>
+                        <button class="btn-primary">Doar Agora</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="payment-methods" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-credit-card"></i> Métodos de Pagamento</h2>
+                <p class="section-description">Aceitamos diversas formas de pagamento para facilitar sua doação.</p>
+                <div class="payment-methods-grid">
+                    <img src="assets/images/payment/paypal.png" alt="PayPal" class="payment-icon">
+                    <img src="assets/images/payment/pagseguro.png" alt="PagSeguro" class="payment-icon">
+                    <img src="assets/images/payment/pix.png" alt="PIX" class="payment-icon">
+                    <img src="assets/images/payment/visa.png" alt="Visa" class="payment-icon">
+                    <img src="assets/images/payment/mastercard.png" alt="Mastercard" class="payment-icon">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
+                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa comunidade vibrante.</p>
+                    <div class="footer-social-links">
+                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column footer-nav-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="comunidade.html">Comunidade</a></li>
+                        <li><a href="eventos.html">Eventos</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="suporte.html">Suporte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-contact">
+                    <h4>Contato & Suporte</h4>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a></p>
+                    <p><i class="fas fa-headset"></i> <a href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via Discord</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
+                </div>
+                <div class="footer-column footer-newsletter">
+                    <h4>Fique por Dentro</h4>
+                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
+                    <form class="newsletter-form">
+                        <div class="text-center margin-top-50">
+                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501" class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+            </div>
+        </div>
+        <div class="audio-control-bar">
+            <div class="container audio-control-content">
+                <button id="audioControlButton" aria-label="Controlar áudio">
+                    <i class="fas fa-music"></i>
+                    <span id="musicTitleDisplay">Clique para Tocar</span>
+                </button>
+                <div class="audio-progress-indicator" id="audioProgressArc">
+                    <svg viewBox="0 0 60 60" class="audio-progress-svg">
+                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
+                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
+                    </svg>
+                </div>
+                <button id="audioNextButton" aria-label="Próxima música">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

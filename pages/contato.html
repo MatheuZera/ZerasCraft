@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Zera's Craft - Contato</title>
+    <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <meta name="description" content="Entre em contato com a equipe do Mundo Zera's Craft para dúvidas, sugestões e suporte.">
+    <meta name="keywords" content="Minecraft, Servidor Minecraft, Zera's Craft, contato, formulário, email, suporte">
+    <meta name="author" content="Equipe Zera's Craft">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Mundo Zera's Craft - Contato">
+    <meta property="og:description" content="Entre em contato com a equipe do Mundo Zera's Craft para dúvidas, sugestões e suporte.">
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
+    <meta property="og:url" content="https://seusite.com.br/contato.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mundo Zera's Craft">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@SeuTwitterHandle">
+    <meta name="twitter:creator" content="@SeuTwitterHandle">
+    <meta name="twitter:title" content="Mundo Zera's Craft - Contato">
+    <meta name="twitter:description" content="Entre em contato com a equipe do Mundo Zera's Craft para dúvidas, sugestões e suporte.">
+    <meta name="twitter:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
+    <meta name="theme-color" content="#347C2F">
+</head>
+<body>
+
+    <div id="centralMessage" class="central-message"></div>
+    <audio id="backgroundAudio"></audio>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="header-logo">Zera's Craft</a>
+            <button class="menu-toggle" aria-label="Abrir menu de navegação">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="arquivos.html" class="nav-link">Arquivos</a></li>
+                    <li><a href="comunidade.html" class="nav-link">Comunidade</a></li>
+                    <li><a href="eventos.html" class="nav-link">Eventos</a></li>
+                    <li><a href="marketplace.html" class="nav-link">Marketplace</a></li>
+                    <li><a href="wikipedia.html" class="nav-link">Wikipédia</a></li>
+                    <li><a href="sobre.html" class="nav-link">Sobre Nós</a></li>
+                    <li><a href="suporte.html" class="nav-link">Suporte</a></li>
+                    <li><a href="youtube.html" class="nav-link">Youtube</a></li>
+                    <li><a href="recursos.html" class="nav-link">Recursos</a></li>
+                    <li><a href="testes.html" class="nav-link">Testes</a></li>
+                    <li><a href="contato.html" class="nav-link active">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section small-hero" style="background-image: url('assets/images/1.site/contact-banner.jpg');">
+            <div class="hero-image-overlay"></div>
+            <div class="hero-content">
+                <h1>Fale Conosco</h1>
+                <p class="hero-subtitle">Sua opinião é importante! Envie-nos uma mensagem e teremos prazer em ajudar.</p>
+            </div>
+        </section>
+
+        <section id="contact-form-section" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-envelope-open-text"></i> Envie Sua Mensagem</h2>
+                <p class="section-description">Preencha o formulário abaixo e entraremos em contato o mais breve possível.</p>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Seu Nome:</label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Seu Email:</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto:</label>
+                        <input type="text" id="subject" name="subject" placeholder="Assunto da mensagem" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem:</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="other-contact-methods" class="section-padded section-alt-bg fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-headset"></i> Outras Formas de Contato</h2>
+                <p class="section-description">Você também pode nos encontrar em outras plataformas e canais.</p>
+                <div class="community-grid max-3-columns">
+                    <div class="info-card card">
+                        <i class="fab fa-discord card-icon"></i>
+                        <h3 class="card-title">Discord Oficial</h3>
+                        <p class="card-description">O canal mais rápido para suporte e interação direta com a equipe e comunidade.</p>
+                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" class="btn-primary">Entrar no Discord</a>
+                    </div>
+                    <div class="info-card card">
+                        <i class="fas fa-envelope card-icon"></i>
+                        <h3 class="card-title">Email Direto</h3>
+                        <p class="card-description">Para questões mais formais, parcerias ou dúvidas específicas.</p>
+                        <a href="mailto:contato@zeracraft.com" class="btn-primary">contato@zeracraft.com</a>
+                    </div>
+                    <div class="info-card card">
+                        <i class="fas fa-map-marker-alt card-icon"></i>
+                        <h3 class="card-title">Localização do Servidor</h3>
+                        <p class="card-description">Mundo Zera's Craft é um servidor online, acessível de qualquer lugar do mundo!</p>
+                        <p>Endereço Fictício: Nuvem Minecraft, Universo Online</p>
+                        <a href="#" class="btn-primary">Ver IP do Servidor</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="map-section" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-map-marked-alt"></i> Onde Estamos</h2>
+                <p class="section-description">Nosso servidor é digital, mas a comunidade está conectada globalmente!</p>
+                <div class="map-container">
+                    <!-- Substitua o src pelo embed de um mapa real se desejar, ou mantenha como placeholder -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15049964.63668856!2d-55.7483088188151!3d-18.172935275815598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x940b7b5171701389%3A0xcc19142f9e42e4d0!2sBrazil!5e0!3m2!1sen!2sbr!4v1678891234567!5m2!1sen!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
+                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa comunidade vibrante.</p>
+                    <div class="footer-social-links">
+                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column footer-nav-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="comunidade.html">Comunidade</a></li>
+                        <li><a href="eventos.html">Eventos</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="suporte.html">Suporte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-contact">
+                    <h4>Contato & Suporte</h4>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a></p>
+                    <p><i class="fas fa-headset"></i> <a href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via Discord</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
+                </div>
+                <div class="footer-column footer-newsletter">
+                    <h4>Fique por Dentro</h4>
+                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
+                    <form class="newsletter-form">
+                        <div class="text-center margin-top-50">
+                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501" class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+            </div>
+        </div>
+        <div class="audio-control-bar">
+            <div class="container audio-control-content">
+                <button id="audioControlButton" aria-label="Controlar áudio">
+                    <i class="fas fa-music"></i>
+                    <span id="musicTitleDisplay">Clique para Tocar</span>
+                </button>
+                <div class="audio-progress-indicator" id="audioProgressArc">
+                    <svg viewBox="0 0 60 60" class="audio-progress-svg">
+                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
+                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
+                    </svg>
+                </div>
+                <button id="audioNextButton" aria-label="Próxima música">
+                    <i class="fas fa-forward"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
