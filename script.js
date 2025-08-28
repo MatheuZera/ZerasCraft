@@ -424,143 +424,98 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =====================================
-    // 3. Sistema de Áudio de Fundo (Event Listeners Principais)
-    // =====================================
-    if (backgroundAudio) {
-        restoreAudioState();
-        backgroundAudio.addEventListener('timeupdate', updateProgressAndTimers);
-        backgroundAudio.addEventListener('ended', () => {
-            updateProgressAndTimers();
-            preparingNextMusic = false;
-            loadNewMusic(true); // Carrega a próxima música e a toca
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("DOM totalmente carregado e pronto!");
+
+        // =====================================
+        // 3.1 Variáveis Globais de Áudio e Elementos (Mantidas)
+        // =====================================
+        let hoverSound; // Será definido depois de carregar o som para cards
+        let clickSound; // Será definido depois de carregar o som para botões
+        let linkSound; // Será definido depois de carregar o som para links
+
+        const backgroundAudio = document.getElementById('backgroundAudio');
+        const audioEffects = {}; // Adicione aqui qualquer outro efeito que você carregar
+
+        // Carregamento dos arquivos de áudio
+        // Certifique-se de que estes caminhos estão corretos!
+        hoverSound = new Audio('audios/effects/select.mp3');
+        clickSound = new Audio('audios/effects/click.mp3');
+        linkSound = new Audio('audios/effects/link.mp3');
+        // Adicione outros efeitos aqui se necessário, ex: audioEffects.success = new Audio('path/to/success.mp3');
+
+        // Função centralizada para tocar os efeitos sonoros
+        function playEffectSound(sound) {
+            if (sound) {
+                sound.currentTime = 0; // Reinicia o áudio para que ele possa ser tocado rapidamente
+                sound.play().catch(e => console.error("Erro ao tocar áudio:", e));
+            }
+        }
+
+        // =====================================
+        // 3.2 Sistema de Sons para Interações (Aprimorado e Corrigido)
+        // =====================================
+
+        // --- SONS DE HOVER (select.mp3) para Cards e Imagens Interativas ---
+        // Inclui cards (ex: .card, .file-card, .event-card) e imagens de galeria que podem ter animação
+        document.querySelectorAll(
+            '.card, .file-card, .event-card, .gallery-item img, .review-card, .testimonial-card'
+        ).forEach(element => {
+            element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
         });
-        backgroundAudio.addEventListener('loadedmetadata', updateProgressAndTimers);
 
-        if (audioControlButton) {
-            audioControlButton.addEventListener('click', () => {
-                playEffectSound(clickSound);
-                userInteractedWithAudio = true; // Marca que o usuário interagiu
-                localStorage.setItem('userInteractedWithAudio', 'true');
+        // --- SONS DE CLIQUE (select.mp3) para Cards e Imagens Interativas (se apropriado) ---
+        // Usamos o mesmo som de select para clique em cards/imagens que podem abrir lightboxes, etc.
+        document.querySelectorAll(
+            '.card, .file-card, .event-card, .gallery-item img, .review-card, .testimonial-card'
+        ).forEach(element => {
+            element.addEventListener('click', () => playEffectSound(clickSound)); // Usando clickSound para cards
+        });
 
-                if (backgroundAudio.paused) {
-                    if (currentMusicIndex === -1 || !backgroundAudio.src) {
-                        loadNewMusic(true); // Carrega uma música e toca
-                    } else {
-                        playMusic(); // Apenas toca a música atual
-                    }
-                } else {
-                    backgroundAudio.pause();
-                    updateAudioButtonTitle();
+
+        // --- SONS DE CLIQUE (link.mp3) para LINKS ---
+        // Seleciona todas as tags <a> que não são âncoras internas (#) e não são "javascript:void(0)"
+        // Isso inclui links estilizados como botões (ex: <a class="btn-primary">)
+        document.querySelectorAll(
+            'a:not([href^="#"]):not([href="javascript:void(0)"]), .main-nav a, .hero-social-links a.btn-primary, .pagination-link'
+        ).forEach(element => {
+            element.addEventListener('click', (event) => {
+                playEffectSound(linkSound);
+
+                // Para links externos, introduz um pequeno atraso para o som tocar antes de navegar
+                if (element.tagName === 'A' && element.getAttribute('href') && !element.getAttribute('href').startsWith('#') && !element.getAttribute('href').startsWith('javascript:')) {
+                    event.preventDefault();
+                    setTimeout(() => {
+                        window.location.href = element.href;
+                    }, 200); // Atraso de 200ms
                 }
             });
+        });
+
+        // --- SONS DE CLIQUE (click.mp3) para BOTÕES e Controles de UI ---
+        // Seleciona elementos <button> e outras divs/labels que funcionam como botões,
+        // garantindo que não sejam confundidos com links.
+        document.querySelectorAll(
+            'button:not(.main-nav a):not(.hero-social-links a), .menu-toggle, .music-button, .copy-button, .accordion-header, .tab-button, .modal-close-btn, .lightbox-close, .carousel-button, #showSpinnerBtn, #toggleSkeletonBtn, #floatingActionButton, .custom-radio-btn, .close-alert, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn, #scrollTopButton, #update-progress-btn, .toggle-switch-container label, #notification-bell, .collapsible-header, #custom-select-trigger, .custom-select-option, #play-pause-btn, #mute-unmute-btn, #fullscreen-btn, #toggle-password-visibility, .copy-code-btn, #openNewsletterModalBtn, .fab-main-btn, .fab-sub-item, #audio-play-pause-btn, #audio-mute-unmute-btn, #back-to-top-btn'
+        ).forEach(element => {
+            element.addEventListener('click', () => playEffectSound(clickSound));
+        });
+
+        // =====================================
+        // O restante do seu script.js deve continuar aqui
+        // Ex: Sistema de Áudio de Fundo, Menu Mobile, etc.
+        // ...
+    });
+
+    // A função playEffectSound precisa estar acessível globalmente se for chamada fora do DOMContentLoaded
+    // ou certifique-se de que todas as chamadas estejam dentro do DOMContentLoaded.
+    // Mantenho-a aqui para demonstrar o carregamento dos áudios.
+    function playEffectSound(sound) {
+        if (sound) {
+            sound.currentTime = 0; // Reinicia o áudio para que ele possa ser tocado rapidamente
+            sound.play().catch(e => console.error("Erro ao tocar áudio:", e));
         }
-
-        if (audioNextButton) {
-            audioNextButton.addEventListener('click', () => {
-                playEffectSound(clickSound);
-                backgroundAudio.pause(); // Pausa a música atual imediatamente
-                showCentralMessage('Próxima música...');
-                preparingNextMusic = false;
-                loadNewMusic(true); // Carrega a próxima música e a toca
-            });
-        }
-
-        if (audioPrevButton) {
-            audioPrevButton.addEventListener('click', () => {
-                playEffectSound(clickSound);
-                backgroundAudio.pause(); // Pausa a música atual imediatamente
-                showCentralMessage('Música anterior...');
-                preparingNextMusic = false;
-                let prevIndex = currentMusicIndex - 1;
-                if (prevIndex < 0) {
-                    prevIndex = musicPlaylist.length - 1; // Volta para a última música se estiver na primeira
-                }
-                loadNewMusic(true, prevIndex); // Carrega e toca a música anterior
-            });
-        }
-
-        if (audioProgressBar) {
-            let isDragging = false;
-            // Flag para controlar se o usuário está arrastando
-
-            audioProgressBar.addEventListener('input', () => {
-                // Atualiza o tempo exibido instantaneamente enquanto arrasta
-                const tempTime = (audioProgressBar.value / 100) * backgroundAudio.duration;
-                currentTimeDisplay.textContent = formatTime(tempTime);
-            });
-            audioProgressBar.addEventListener('mousedown', () => {
-                isDragging = true;
-                audioProgressBar.dataset.isDragging = 'true'; // Define a flag no dataset
-                backgroundAudio.pause();
-            });
-            audioProgressBar.addEventListener('mouseup', () => {
-                isDragging = false;
-                audioProgressBar.dataset.isDragging = 'false'; // Limpa a flag
-                const seekTime = (audioProgressBar.value / 100) * backgroundAudio.duration;
-                if (!isNaN(seekTime) && isFinite(seekTime)) {
-                    backgroundAudio.currentTime = seekTime;
-                    if (userInteractedWithAudio && backgroundAudio.src) { // Verifica a interação
-                        playMusic(); // Retoma a reprodução após soltar
-                    }
-                } else {
-                    console.warn("Tempo de busca inválido.");
-                }
-            });
-            // Adiciona evento para touch devices
-            audioProgressBar.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                audioProgressBar.dataset.isDragging = 'true';
-                backgroundAudio.pause();
-                // Previne a rolagem da página ao arrastar o slider
-                e.preventDefault();
-            });
-            audioProgressBar.addEventListener('touchend', () => {
-                isDragging = false;
-                audioProgressBar.dataset.isDragging = 'false';
-                const seekTime = (audioProgressBar.value / 100) * backgroundAudio.duration;
-                if (!isNaN(seekTime) && isFinite(seekTime)) {
-                    backgroundAudio.currentTime = seekTime;
-                    if (userInteractedWithAudio && backgroundAudio.src) {
-                        playMusic();
-                    }
-                } else {
-                    console.warn("Tempo de busca inválido.");
-                }
-            });
-            audioProgressBar.addEventListener('touchmove', (e) => {
-                if (isDragging) {
-                    // Calcula a posição do toque para atualizar o slider
-                    const rect = audioProgressBar.getBoundingClientRect();
-                    const x = e.touches[0].clientX - rect.left;
-                    const width = rect.width;
-                    let value = (x / width) * 100;
-                    value = Math.max(0, Math.min(100, value)); // Garante que o valor esteja entre 0 e 100
-
-                    audioProgressBar.value = value;
-                    const tempTime = (value / 100) * backgroundAudio.duration;
-                    currentTimeDisplay.textContent = formatTime(tempTime);
-                    e.preventDefault(); // Previne a rolagem da página
-                }
-            });
-        }
-
-        if (playbackSpeedSelect) {
-            playbackSpeedSelect.addEventListener('change', (event) => {
-                const newSpeed = parseFloat(event.target.value);
-                if (!isNaN(newSpeed) && newSpeed > 0) {
-                    backgroundAudio.playbackRate = newSpeed;
-                    saveAudioState();
-                    showCentralMessage(`Velocidade: ${newSpeed}x`);
-                }
-            });
-        }
-
-        window.addEventListener('beforeunload', saveAudioState);
-        window.addEventListener('pagehide', saveAudioState);
     }
-
-
     
     // =====================================
     // 5. Animações de Rolagem com ScrollReveal
