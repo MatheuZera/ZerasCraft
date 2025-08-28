@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,801 +11,785 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
 </head>
+
 <body>
 
-    <!-- Header Fixo -->
-    <header class="main-header">
-        <div class="container header-content-wrapper">
-            <h1 class="header-logo" data-text="ZERA'S CRAFT">ZERA'S CRAFT</h1>
-            <button class="menu-toggle" aria-label="Abrir Menu de Navegação">
-                <i class="fas fa-bars"></i>
-            </button>
-            <!-- Menu de Navegação para Desktop e Mobile (com categorias) -->
-            <nav class="main-nav">
-                <ul class="desktop-nav">
-                    <li><a href="#hero-section" data-page="home">Início</a></li>
-                    <li><a href="#componentes-basicos" data-page="basics">Componentes Básicos</a></li>
-                    <li><a href="#elementos-ux" data-page="ux-elements">Elementos UX</a></li>
-                    <li><a href="#galeria-section" data-page="gallery">Galeria</a></li>
-                    <li><a href="#dados-info" data-page="data-info">Dados & Info</a></li>
-                    <li><a href="#interacoes-avancadas" data-page="advanced-interactions">Interações Avançadas</a></li>
-                    <li><a href="#formularios" data-page="forms">Formulários</a></li>
-                    <li><a href="#outros-componentes" data-page="others">Outros</a></li>
-                </ul>
-                <ul class="mobile-nav">
-                    <!-- Conteúdo será preenchido dinamicamente pelo JS -->
-                </ul>
-            </nav>
+    <section class="section-padded section-alt-bg">
+        <div class="container text-center">
+            <h2>Escolha o seu Plano <span style="color:var(--cor-destaque);">&#x2694;</span></h2>
+            <p class="section-description">
+                Planos personalizados para atender às suas necessidades no servidor.
+            </p>
+            <div class="pricing-grid max-3-columns">
+                <div class="pricing-card card">
+                    <h3 class="card-title">Aventureiro</h3>
+                    <p class="pricing-price"><span class="price-value">R$15</span><span class="price-period">/mês</span>
+                    </p>
+                    <ul class="pricing-features">
+                        <li>Acesso a áreas exclusivas</li>
+                        <li>Kit diário de recursos</li>
+                        <li>Suporte prioritário</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Adquirir Plano</a>
+                </div>
+
+                <div class="pricing-card card highlighted">
+                    <span class="highlight-badge">Mais Popular</span>
+                    <h3 class="card-title">Mestre do Servidor</h3>
+                    <p class="pricing-price"><span class="price-value">R$30</span><span class="price-period">/mês</span>
+                    </p>
+                    <ul class="pricing-features">
+                        <li>Todas as vantagens do Aventureiro</li>
+                        <li>Comandos exclusivos</li>
+                        <li>Símbolo de Destaque no chat</li>
+                        <li>Acesso antecipado a atualizações</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Adquirir Agora</a>
+                </div>
+
+                <div class="pricing-card card">
+                    <h3 class="card-title">Imperador</h3>
+                    <p class="pricing-price"><span class="price-value">R$50</span><span class="price-period">/mês</span>
+                    </p>
+                    <ul class="pricing-features">
+                        <li>Todas as vantagens anteriores</li>
+                        <li>Kit semanal de diamantes</li>
+                        <li>Terreno exclusivo</li>
+                        <li>Ícone personalizado no game</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Adquirir Plano</a>
+                </div>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <!-- Seção Hero - Exemplo de Banner -->
-        <section id="hero-section" class="hero-section current-page" style="background-image: url('https://placehold.co/1920x1080/2E7D32/FFFFFF?text=Seu+Banner+Aqui');">
-            <div class="hero-image-overlay"></div>
-            <div class="hero-content reveal-up">
-                <div class="server-branding">
-                    <img src="https://placehold.co/150x150/4CAF50/FFFFFF?text=Logo" alt="Logo do Servidor" class="server-icon">
+
+    <section class="section-padded">
+        <div class="container">
+            <div class="stats-grid max-4-columns">
+                <div class="stat-item card">
+                    <i class="fas fa-users stat-icon"></i>
+                    <h3 class="stat-number" data-target="25000">0</h3>
+                    <p class="stat-label">Jogadores ativos</p>
                 </div>
-                <h1>Bem-vindo ao Mundo Zera's Craft!</h1>
-                <p class="hero-subtitle">Sua aventura começa aqui. Explore, crie e divirta-se em nossa comunidade vibrante.</p>
-                <div class="hero-social-links">
-                    <a href="#" class="btn-primary" aria-label="Entrar no Discord"><i class="fab fa-discord"></i> Entrar no Discord</a>
-                    <a href="#" class="btn-primary" aria-label="Começar a Jogar"><i class="fas fa-play"></i> Começar a Jogar</a>
+                <div class="stat-item card">
+                    <i class="fas fa-cubes stat-icon"></i>
+                    <h3 class="stat-number" data-target="1500000">0</h3>
+                    <p class="stat-label">Blocos construídos</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Seção de Componentes Básicos Interativos -->
-        <section id="componentes-basicos" class="section section-padded reveal">
-            <h2 class="animated-underline-title">Componentes Básicos Interativos</h2>
-            <div class="container">
-                <!-- Acordeão (Accordion) -->
-                <h3 class="margin-top-40">Acordeão (Accordion)</h3>
-                <div class="accordion-container">
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <span>O que é um Acordeão?</span>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content">
-                            <p>O acordeão é um componente de interface que permite exibir e ocultar seções de conteúdo, economizando espaço na tela. É ideal para perguntas e respostas (FAQ) ou para mostrar detalhes de um produto.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <span>Como usar este Acordeão?</span>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Você pode adicionar quantos "accordion-item" precisar. O JavaScript cuida da lógica de abrir e fechar, adicionando e removendo a classe "active" quando o cabeçalho é clicado.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <span>Benefícios do Acordeão</span>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Ajuda a manter a página limpa e organizada, melhorando a experiência do usuário ao focar apenas no conteúdo que ele deseja visualizar.</p>
-                        </div>
-                    </div>
+                <div class="stat-item card">
+                    <i class="fas fa-trophy stat-icon"></i>
+                    <h3 class="stat-number" data-target="450">0</h3>
+                    <p class="stat-label">Eventos concluídos</p>
                 </div>
-
-                <!-- Modal (Popup) -->
-                <h3 class="margin-top-40">Modal (Popup)</h3>
-                <button class="btn-primary btn-shine" id="openModalBtn">Abrir Modal</button>
-
-                <!-- Tooltips (Novo Elemento) -->
-                <h3 class="margin-top-40">Tooltips Informativos</h3>
-                <div class="tooltip-wrapper">
-                    <div class="tooltip-container">
-                        Passe o mouse sobre <span class="tooltip-trigger">esta palavra</span>
-                        <span class="tooltip-text">Este é um tooltip com informações extras.</span>
-                    </div>
-                    <div class="tooltip-container">
-                        <i class="fas fa-info-circle tooltip-trigger-icon"></i>
-                        <span class="tooltip-text">Dicas úteis aparecem aqui!</span>
-                    </div>
-                    <div class="tooltip-container">
-                        <button class="btn-primary tooltip-trigger">Botão com Dica</button>
-                        <span class="tooltip-text">Clique ou passe o mouse para mais detalhes!</span>
-                    </div>
-                </div>
-
-                 <!-- Botões de Opção Personalizados (Radio Buttons) -->
-                <h3 class="margin-top-40">Botões de Opção Personalizados</h3>
-                <div class="custom-radio-group">
-                    <label class="custom-radio-btn">
-                        <input type="radio" name="option" value="op1">
-                        <span class="custom-radio-text">Modo Aventura</span>
-                    </label>
-                    <label class="custom-radio-btn">
-                        <input type="radio" name="option" value="op2" checked>
-                        <span class="custom-radio-text">Modo Criativo</span>
-                    </label>
-                    <label class="custom-radio-btn">
-                        <input type="radio" name="option" value="op3">
-                        <span class="custom-radio-text">Modo Sobrevivência</span>
-                    </label>
+                <div class="stat-item card">
+                    <i class="fas fa-comment-dots stat-icon"></i>
+                    <h3 class="stat-number" data-target="10000">0</h3>
+                    <p class="stat-label">Mensagens no Discord</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção de Elementos UX Avançados -->
-        <section id="elementos-ux" class="section section-alt-bg section-padded reveal-left">
-            <h2 class="animated-underline-title">Elementos de Experiência do Usuário (UX)</h2>
-            <div class="container">
-                <!-- Alertas e Banners de Notificação (Novo Elemento) -->
-                <h3 class="margin-top-40">Alertas e Notificações</h3>
-                <div class="alert-container">
-                    <div class="alert success-alert">
-                        <i class="fas fa-check-circle"></i> Item adicionado ao carrinho com sucesso!
-                        <button class="close-alert">&times;</button>
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Nossos Serviços</h2>
+            <p class="section-description">A melhor experiência em servidores Minecraft, criada para você.</p>
+            <div class="service-grid max-4-columns">
+                <div class="service-card card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-hammer service-icon"></i>
                     </div>
-                    <div class="alert info-alert">
-                        <i class="fas fa-info-circle"></i> Uma nova atualização está disponível.
-                        <button class="close-alert">&times;</button>
-                    </div>
-                    <div class="alert warning-alert">
-                        <i class="fas fa-exclamation-triangle"></i> Sua sessão expirará em breve.
-                        <button class="close-alert">&times;</button>
-                    </div>
-                    <div class="alert error-alert">
-                        <i class="fas fa-times-circle"></i> Erro ao processar sua solicitação.
-                        <button class="close-alert">&times;</button>
-                    </div>
+                    <h4>Construções Incríveis</h4>
+                    <p>Equipes de arquitetos dedicados a criar cidades e paisagens épicas para o seu mundo.</p>
                 </div>
-
-                <!-- Badges e Tags (Novo Elemento) -->
-                <h3 class="margin-top-40">Badges e Tags</h3>
-                <div class="badges-container">
-                    <span class="badge primary-badge">Novo</span>
-                    <span class="badge success-badge">Ativo</span>
-                    <span class="badge info-badge">Beta</span>
-                    <span class="badge warning-badge">Desconto</span>
-                    <span class="badge error-badge">Offline</span>
-                    <span class="badge secondary-badge">Premium</span>
+                <div class="service-card card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-diamond service-icon"></i>
+                    </div>
+                    <h4>Recursos Exclusivos</h4>
+                    <p>Kits semanais e recompensas especiais para jogadores que se destacam e participam de eventos.</p>
                 </div>
-
-                <!-- Breadcrumbs (Novo Elemento) -->
-                <h3 class="margin-top-40">Navegação Breadcrumbs</h3>
-                <nav class="breadcrumbs" aria-label="Caminho de Navegação">
-                    <ol>
-                        <li><a href="#">Início</a></li>
-                        <li><a href="#">Recursos</a></li>
-                        <li><a href="#">Downloads</a></li>
-                        <li aria-current="page">Adicionais</li>
-                    </ol>
-                </nav>
-
-                <!-- Loading Spinner (Novo Elemento) -->
-                <h3 class="margin-top-40">Indicador de Carregamento</h3>
-                <div class="loading-spinner" id="loadingSpinner"></div>
-                <button class="btn-primary margin-top-30" id="showSpinnerBtn">Mostrar/Esconder Spinner</button>
-
-                <!-- Toggle Switch (Novo Elemento) -->
-                <h3 class="margin-top-40">Configurações (Toggle Switch)</h3>
-                <div class="toggle-switch-container">
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="darkModeToggle">
-                        <span class="slider round"></span>
-                    </label>
-                    <label for="darkModeToggle" class="toggle-label">Modo Escuro</label>
+                <div class="service-card card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-shield-alt service-icon"></i>
+                    </div>
+                    <h4>Proteção Total</h4>
+                    <p>Sistemas avançados anti-griefing e anti-hack, garantindo uma jogabilidade justa para todos.</p>
                 </div>
-                 <div class="toggle-switch-container">
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="notificationsToggle" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    <label for="notificationsToggle" class="toggle-label">Receber Notificações</label>
-                </div>
-
-                <!-- Progress Circles (Novo Elemento) -->
-                <h3 class="margin-top-40">Círculos de Progresso</h3>
-                <div class="progress-circle-grid">
-                    <div class="progress-circle-container">
-                        <div class="progress-circle" data-progress="75" id="progressCircle1">
-                            <svg class="progress-svg" viewBox="0 0 100 100">
-                                <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="progress-bar-circle" cx="50" cy="50" r="45"></circle>
-                            </svg>
-                            <span class="progress-text">75%</span>
-                        </div>
-                        <p>Completo</p>
+                <div class="service-card card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-headset service-icon"></i>
                     </div>
-                     <div class="progress-circle-container">
-                        <div class="progress-circle" data-progress="90" id="progressCircle2">
-                            <svg class="progress-svg" viewBox="0 0 100 100">
-                                <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="progress-bar-circle" cx="50" cy="50" r="45"></circle>
-                            </svg>
-                            <span class="progress-text">90%</span>
-                        </div>
-                        <p>Progresso</p>
-                    </div>
-                </div>
-
-                <!-- Skeleton Loader (Novo Elemento) -->
-                <h3 class="margin-top-40">Carregamento (Skeleton Loader)</h3>
-                <div class="skeleton-container" id="skeletonContent">
-                    <div class="skeleton-header">
-                        <div class="skeleton-avatar"></div>
-                        <div class="skeleton-line-long"></div>
-                    </div>
-                    <div class="skeleton-content-lines">
-                        <div class="skeleton-line-short"></div>
-                        <div class="skeleton-line-medium"></div>
-                        <div class="skeleton-line-long"></div>
-                    </div>
-                     <div class="actual-content hidden" id="actualContent">
-                        <h4>Conteúdo Carregado!</h4>
-                        <p>Este é o conteúdo real que foi carregado após o esqueleto. Incrível, não é?</p>
-                        <p>Você pode colocar qualquer conteúdo dinâmico aqui.</p>
-                    </div>
-                </div>
-                 <button class="btn-primary margin-top-30" id="toggleSkeletonBtn">Carregar Conteúdo</button>
-            </div>
-        </section>
-
-        <!-- Seção Galeria de Imagens -->
-        <section id="galeria-section" class="section section-padded reveal-right">
-            <h2 class="animated-underline-title">Galeria de Imagens</h2>
-            <div class="container">
-                <div class="gallery-grid">
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/400x200/4CAF50/FFFFFF?text=Construção+1" alt="Imagem Galeria 1" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/4CAF50/FFFFFF?text=Construção+1+Grande" data-image-alt="Construção 1">
-                    </div>
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/401x201/388E3C/FFFFFF?text=Cenário+2" alt="Imagem Galeria 2" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/388E3C/FFFFFF?text=Cenário+2+Grande" data-image-alt="Cenário 2">
-                    </div>
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/402x202/2E7D32/FFFFFF?text=Aventura+3" alt="Imagem Galeria 3" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/2E7D32/FFFFFF?text=Aventura+3+Grande" data-image-alt="Aventura 3">
-                    </div>
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/403x203/4CAF50/FFFFFF?text=Monumento+4" alt="Imagem Galeria 4" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/4CAF50/FFFFFF?text=Monumento+4+Grande" data-image-alt="Monumento 4">
-                    </div>
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/404x204/388E3C/FFFFFF?text=Exploração+5" alt="Imagem Galeria 5" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/388E3C/FFFFFF?text=Exploração+5+Grande" data-image-alt="Exploração 5">
-                    </div>
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/405x205/2E7D32/FFFFFF?text=Base+6" alt="Imagem Galeria 6" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/2E7D32/FFFFFF?text=Base+6+Grande" data-image-alt="Base 6">
-                    </div>
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/406x206/4CAF50/FFFFFF?text=Mina+7" alt="Imagem Galeria 7" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/4CAF50/FFFFFF?text=Mina+7+Grande" data-image-alt="Mina 7">
-                    </div>
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/407x207/388E3C/FFFFFF?text=Fazenda+8" alt="Imagem Galeria 8" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/388E3C/FFFFFF?text=Fazenda+8+Grande" data-image-alt="Fazenda 8">
-                    </div>
-                    <div class="gallery-item card">
-                        <img src="https://placehold.co/408x208/2E7D32/FFFFFF?text=Vila+9" alt="Imagem Galeria 9" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/2E7D32/FFFFFF?text=Vila+9+Grande" data-image-alt="Vila 9">
-                    </div>
-                </div>
-
-                <!-- Carrossel de Imagens Simples -->
-                <h3 class="margin-top-40">Carrossel de Imagens</h3>
-                <div class="image-carousel-container">
-                    <div class="image-carousel-track" id="imageCarouselTrack">
-                        <img src="https://placehold.co/800x450/2E7D32/FFFFFF?text=Exploração+A" alt="Imagem Carrossel 1" class="carousel-image">
-                        <img src="https://placehold.co/800x450/4CAF50/FFFFFF?text=Criação+B" alt="Imagem Carrossel 2" class="carousel-image">
-                        <img src="https://placehold.co/800x450/388E3C/FFFFFF?text=Comunidade+C" alt="Imagem Carrossel 3" class="carousel-image">
-                    </div>
-                    <button class="carousel-button carousel-prev" id="carouselPrevBtn">&lt;</button>
-                    <button class="carousel-button carousel-next" id="carouselNextBtn">&gt;</button>
-                    <div class="carousel-dots" id="carouselDots"></div>
-                </div>
-
-                <!-- Image Compare Slider (Novo Elemento) -->
-                <h3 class="margin-top-40">Slider Comparativo de Imagens</h3>
-                <div class="image-compare-container">
-                    <div class="image-compare-img-wrapper">
-                        <img class="image-before" src="https://placehold.co/600x400/8B4513/FFFFFF?text=Antes" alt="Imagem Antes">
-                        <img class="image-after" src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Depois" alt="Imagem Depois">
-                    </div>
-                    <input type="range" min="0" max="100" value="50" class="image-compare-slider" id="imageCompareSlider">
-                    <div class="image-compare-handle" id="imageCompareHandle"></div>
+                    <h4>Suporte 24/7</h4>
+                    <p>Nossa equipe de suporte está sempre pronta para ajudar a resolver qualquer problema ou dúvida.
+                    </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção Parallax -->
-        <section id="parallax-section" class="parallax-section" style="background-image: url('https://placehold.co/1600x900/1A1A1A/FFFFFF?text=Fundo+Parallax+Hero');">
-            <div class="parallax-content reveal">
-                <h2>Efeito Parallax Incrível</h2>
-                <p>Uma experiência de rolagem com profundidade que dá vida ao seu site.</p>
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Nossas Criações</h2>
+            <p class="section-description">Confira algumas das construções épicas do nosso servidor.</p>
+            <div class="gallery-grid max-4-columns">
+                <a href="#" class="gallery-item" data-image="assets/img/build1.jpg">
+                    <img src="assets/img/build1-thumb.jpg" alt="Construção 1">
+                </a>
+                <a href="#" class="gallery-item" data-image="assets/img/build2.jpg">
+                    <img src="assets/img/build2-thumb.jpg" alt="Construção 2">
+                </a>
+                <a href="#" class="gallery-item" data-image="assets/img/build3.jpg">
+                    <img src="assets/img/build3-thumb.jpg" alt="Construção 3">
+                </a>
+                <a href="#" class="gallery-item" data-image="assets/img/build4.jpg">
+                    <img src="assets/img/build4-thumb.jpg" alt="Construção 4">
+                </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção de Dados e Informações -->
-        <section id="dados-info" class="section section-padded reveal-left">
-            <h2 class="animated-underline-title">Dados e Informações Importantes</h2>
-            <div class="container">
-                <!-- Nossas Estatísticas (com CountUp.js) -->
-                <h3 class="margin-top-40">Nossas Estatísticas</h3>
-                <div class="stats-grid max-2-columns">
-                    <div class="stat-item card">
-                        <div class="stat-icon"><i class="fas fa-users"></i></div>
-                        <div class="counter" data-target="1500" id="users-counter">0</div>
-                        <p>Jogadores Ativos</p>
-                    </div>
-                    <div class="stat-item card">
-                        <div class="stat-icon"><i class="fas fa-server"></i></div>
-                        <div class="counter" data-target="25000" id="blocks-counter">0</div>
-                        <p>Blocos Construídos</p>
-                    </div>
-                    <div class="stat-item card">
-                        <div class="stat-icon"><i class="fas fa-gamepad"></i></div>
-                        <div class="counter" data-target="50" id="events-counter">0</div>
-                        <p>Eventos Realizados</p>
-                    </div>
-                    <div class="stat-item card">
-                        <div class="stat-icon"><i class="fas fa-globe"></i></div>
-                        <div class="counter" data-target="100" id="worlds-counter">0</div>
-                        <p>Mundos Explorados</p>
+    <div id="lightbox-modal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-image">
+    </div>
+
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Nossa Equipe</h2>
+            <p class="section-description">Conheça os admins e moderadores que fazem o servidor acontecer.</p>
+            <div class="team-grid max-4-columns">
+                <div class="team-member card">
+                    <img src="assets/img/player1.png" alt="Foto do Jogador 1">
+                    <h4>Steve "O Construidor"</h4>
+                    <p class="role">Admin & Arquiteto</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
-
-                <!-- Tabela Responsiva com Estilização Aprimorada -->
-                <h3 class="margin-top-40">Tabela de Classificação</h3>
-                <div class="responsive-table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Posição</th>
-                                <th>Jogador</th>
-                                <th>Pontuação</th>
-                                <th>Kills</th>
-                                <th>Mortes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>1</td><td>PlayerMaster</td><td>15000</td><td>1200</td><td>50</td></tr>
-                            <tr><td>2</td><td>NoobSlayer</td><td>14500</td><td>1150</td><td>60</td></tr>
-                            <tr><td>3</td><td>GamerGirl</td><td>13000</td><td>1000</td><td>40</td></tr>
-                            <tr><td>4</td><td>PixelPioneer</td><td>11000</td><td>900</td><td>75</td></tr>
-                            <tr><td>5</td><td>CraftyBuilder</td><td>9500</td><td>700</td><td>30</td></tr>
-                            <tr><td>6</td><td>RedstoneGuru</td><td>8800</td><td>650</td><td>25</td></tr>
-                            <tr><td>7</td><td>VillagerFriend</td><td>7900</td><td>580</td><td>15</td></tr>
-                            <tr><td>8</td><td>DiamondDigger</td><td>7200</td><td>500</td><td>20</td></tr>
-                            <tr><td>9</td><td>NetherExplorer</td><td>6500</td><td>450</td><td>35</td></tr>
-                            <tr><td>10</td><td>Survivalist</td><td>6000</td><td>400</td><td>10</td></tr>
-                            <tr><td>11</td><td>EnchantKing</td><td>5500</td><td>380</td><td>12</td></tr>
-                            <tr><td>12</td><td>ExplorerPro</td><td>5000</td><td>350</td><td>18</td></tr>
-                            <tr><td>13</td><td>PvPMaster</td><td>4800</td><td>300</td><td>45</td></tr>
-                            <tr><td>14</td><td>FarmLord</td><td>4500</td><td>280</td><td>5</td></tr>
-                            <tr><td>15</td><td>BuildWizard</td><td>4200</td><td>250</td><td>8</td></tr>
-                        </tbody>
-                    </table>
+                <div class="team-member card">
+                    <img src="assets/img/player2.png" alt="Foto do Jogador 2">
+                    <h4>Alex "A Exploradora"</h4>
+                    <p class="role">Moderadora & Guia</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Slider de Reviews/Testemunhos -->
-                <h3 class="margin-top-40">O que dizem os nossos usuários</h3>
-                <div class="review-slider-container">
-                    <div class="review-slider-track" id="reviewSliderTrack">
-                        <div class="review-card">
-                            <p>"Melhor experiência de jogo que já tive! Servidor incrível e comunidade acolhedora."</p>
-                            <div class="review-author-info">
-                                <img src="https://placehold.co/60x60/34495E/ECF0F1?text=U1" alt="Usuário 1" class="review-author-avatar">
-                                <span>Herobrine_Fan</span>
-                            </div>
-                        </div>
-                        <div class="review-card">
-                            <p>"Gráficos impecáveis e eventos semanais que me mantêm sempre engajado. Adoro!"</p>
-                            <div class="review-author-info">
-                                <img src="https://placehold.co/60x60/34495E/ECF0F1?text=U2" alt="Usuário 2" class="review-author-avatar">
-                                <span>Builder_Pro</span>
-                            </div>
-                        </div>
-                        <div class="review-card">
-                            <p>"Sempre encontro algo novo para explorar aqui. A equipe é muito atenciosa."</p>
-                            <div class="review-author-info">
-                                <img src="https://placehold.co/60x60/34495E/ECF0F1?text=U3" alt="Usuário 3" class="review-author-avatar">
-                                <span>Explorer_Steve</span>
-                            </div>
-                        </div>
-                        <div class="review-card">
-                            <p>"Ambiente amigável e muitas oportunidades para construir e interagir!"</p>
-                            <div class="review-author-info">
-                                <img src="https://placehold.co/60x60/34495E/ECF0F1?text=U4" alt="Usuário 4" class="review-author-avatar">
-                                <span>MineCrafterXD</span>
-                            </div>
-                        </div>
-                         <div class="review-card">
-                            <p>"O sistema de eventos é fantástico! Sempre tem algo novo para fazer."</p>
-                            <div class="review-author-info">
-                                <img src="https://placehold.co/60x60/34495E/ECF0F1?text=U5" alt="Usuário 5" class="review-author-avatar">
-                                <span>RedstoneGenius</span>
-                            </div>
-                        </div>
-                        <div class="review-card">
-                            <p>"Recomendo a todos os fãs de Minecraft que buscam uma experiência de alto nível."</p>
-                            <div class="review-author-info">
-                                <img src="https://placehold.co/60x60/34495E/ECF0F1?text=U6" alt="Usuário 6" class="review-author-avatar">
-                                <span>CreeperHunter</span>
+
+    <section class="section-padded section-alt-bg">
+        <div class="container text-center">
+            <h2>O que Nossos Jogadores Dizem</h2>
+            <p class="section-description">A prova de que a nossa comunidade é a melhor!</p>
+            <div class="testimonials-carousel-container">
+                <div class="testimonials-track">
+                    <div class="testimonial-card card">
+                        <p class="quote">"O melhor servidor que já joguei! A comunidade é super receptiva e os eventos são muito divertidos."</p>
+                        <div class="author">
+                            <img src="assets/img/avatar1.png" alt="Avatar do Jogador 1">
+                            <div>
+                                <h4>João "PlayerPro"</h4>
+                                <p class="player-name">@joao_gamer</p>
                             </div>
                         </div>
                     </div>
-                    <button class="review-button review-prev-btn" id="reviewPrevBtn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="review-button review-next-btn" id="reviewNextBtn"><i class="fas fa-chevron-right"></i></button>
+                    <div class="testimonial-card card">
+                        <p class="quote">"Sempre encontro algo novo para fazer. A equipe se dedica muito e está sempre atenta às sugestões."</p>
+                        <div class="author">
+                            <img src="assets/img/avatar2.png" alt="Avatar do Jogador 2">
+                            <div>
+                                <h4>Maria "Mineira"</h4>
+                                <p class="player-name">@maria_mineira</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card card">
+                        <p class="quote">"O servidor é bem otimizado e nunca tive problemas de lag. Recomendo para todos os fãs de Minecraft!"</p>
+                        <div class="author">
+                            <img src="assets/img/avatar3.png" alt="Avatar do Jogador 3">
+                            <div>
+                                <h4>Pedro "ConstrutorX"</h4>
+                                <p class="player-name">@pedro_builder</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Sticky Element (Novo Elemento) -->
-                <h3 class="margin-top-40">Elemento Fixo (Sticky)</h3>
-                <div class="sticky-promo-card card">
-                    <h4>🎁 Oferta Especial!</h4>
-                    <p>Use o código **ZERACRAFT20** para 20% de desconto na loja!</p>
-                    <a href="#" class="btn-primary">Aproveitar!</a>
-                </div>
-
+                <button class="carousel-nav-btn prev">&#10094;</button>
+                <button class="carousel-nav-btn next">&#10095;</button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção Linha do Tempo -->
-        <section id="timeline-section" class="section section-alt-bg section-padded reveal">
-            <h2 class="animated-underline-title">Nossa Jornada no Tempo</h2>
-            <div class="container">
-                <div class="changelog-timeline">
-                    <div class="timeline-entry">
-                        <span class="timeline-date">Maio 2020</span>
-                        <div class="changelog-item card">
-                            <h3 class="changelog-title">Fundação do Mundo Zera's Craft</h3>
-                            <ul class="changelog-features">
-                                <li><i class="fas fa-check-circle"></i> Lançamento da primeira versão do servidor.</li>
-                                <li><i class="fas fa-users"></i> Comunidade inicial de 50 jogadores.</li>
-                                <li><i class="fas fa-coins"></i> Introdução do sistema de economia básico.</li>
-                            </ul>
-                            <p class="changelog-description">Nosso sonho começou com uma pequena comunidade, focada em construir e explorar em conjunto, plantando as sementes do que viria a ser um grande projeto.</p>
-                        </div>
+    <section class="section-padded cta-section text-center">
+        <div class="cta-overlay"></div>
+        <div class="cta-content">
+            <h2 class="pixel-text">Pronto para Aventura?</h2>
+            <p class="cta-subtitle">Junte-se a nós e comece a sua jornada hoje mesmo!</p>
+            <a href="#" class="btn-primary btn-large">Entrar no Servidor</a>
+        </div>
+    </section>
+
+
+    <div class="advanced-tabs-container card">
+        <div class="tabs-header">
+            <button class="tab-btn-advanced active" data-tab="tab-servidor"><i class="fas fa-server"></i> Servidor</button>
+            <button class="tab-btn-advanced" data-tab="tab-comunidade"><i class="fas fa-users"></i> Comunidade</button>
+            <button class="tab-btn-advanced" data-tab="tab-eventos"><i class="fas fa-calendar-alt"></i> Eventos</button>
+        </div>
+        <div class="tabs-content">
+            <div id="tab-servidor" class="tab-content-advanced active">
+                <h4>Informações do Servidor</h4>
+                <p>Conecte-se e jogue em nosso servidor 1.18.2 com plugins exclusivos e sem lag!</p>
+            </div>
+            <div id="tab-comunidade" class="tab-content-advanced">
+                <h4>Nossa Comunidade</h4>
+                <p>Junte-se ao nosso Discord e conheça outros jogadores, participe de sorteios e muito mais!</p>
+            </div>
+            <div id="tab-eventos" class="tab-content-advanced">
+                <h4>Próximos Eventos</h4>
+                <p>Fique de olho em nosso calendário de eventos. Haverá uma batalha de construção na próxima semana!</p>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Nossas Estatísticas</h2>
+            <div class="skill-bar-container">
+                <div class="skill-bar-item">
+                    <p>Otimização do Servidor <span class="skill-percentage" data-percent="95">95%</span></p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="95"></div>
                     </div>
-                    <div class="timeline-entry">
-                        <span class="timeline-date">Setembro 2021</span>
-                        <div class="changelog-item card">
-                            <h3 class="changelog-title">Expansão de Conteúdo</h3>
-                            <ul class="changelog-features">
-                                <li><i class="fas fa-map-marked-alt"></i> Adição de novos biomas e dungeons personalizadas.</li>
-                                <li><i class="fas fa-shield-alt"></i> Implementação de sistema de clãs para jogadores.</li>
-                                <li><i class="fas fa-calendar-alt"></i> Evento de Halloween com recompensas exclusivas.</li>
-                            </ul>
-                            <p class="changelog-description">Expandimos as fronteiras do servidor, oferecendo novos desafios e formas de interação, solidificando nossa comunidade e atraindo novos aventureiros.</p>
-                        </div>
+                </div>
+                <div class="skill-bar-item">
+                    <p>Conteúdo Exclusivo <span class="skill-percentage" data-percent="80">80%</span></p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="80"></div>
                     </div>
-                    <div class="timeline-entry">
-                        <span class="timeline-date">Abril 2023</span>
-                        <div class="changelog-item card">
-                            <h3 class="changelog-title">Atualização de Desempenho e Segurança</h3>
-                            <ul class="changelog-features">
-                                <li><i class="fas fa-tachometer-alt"></i> Otimização de servidores para maior fluidez.</li>
-                                <li><i class="fas fa-user-shield"></i> Novos sistemas anti-cheat e anti-griefing.</li>
-                                <li><i class="fas fa-headset"></i> Introdução de sistema de tickets de suporte.</li>
-                            </ul>
-                            <p class="changelog-description">Investimos pesado em infraestrutura para garantir uma experiência de jogo sem lag e mais segura, focando na satisfação e proteção de todos os nossos jogadores.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-entry">
-                        <span class="timeline-date">Julho 2024</span>
-                        <div class="changelog-item card">
-                            <h3 class="changelog-title">Grandes Eventos de Verão</h3>
-                            <ul class="changelog-features">
-                                <li><i class="fas fa-trophy"></i> Torneio de Construção com prêmios reais.</li>
-                                <li><i class="fas fa-fist-raised"></i> Batalhas PvP ranqueadas com leaderboard.</li>
-                                <li><i class="fas fa-handshake"></i> Colaboração com influenciadores do Minecraft.</li>
-                            </ul>
-                            <p class="changelog-description">O verão foi marcado por eventos épicos, que trouxeram ainda mais vida ao servidor e fortaleceram os laços com a comunidade e parceiros.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-entry">
-                        <span class="timeline-date">Presente</span>
-                        <div class="changelog-item card">
-                            <h3 class="changelog-title">O Futuro é Agora!</h3>
-                            <ul class="changelog-features">
-                                <li><i class="fas fa-infinity"></i> Novos projetos e ideias infinitas.</li>
-                                <li><i class="fas fa-cogs"></i> Melhorias contínuas na infraestrutura.</li>
-                                <li><i class="fas fa-heart"></i> Uma comunidade sempre em crescimento!</li>
-                            </ul>
-                            <p class="changelog-description">Continuamos a inovar e a construir, ouvindo sempre a nossa comunidade para oferecer a melhor experiência possível. O futuro está em nossas mãos!</p>
-                        </div>
+                </div>
+                <div class="skill-bar-item">
+                    <p>Suporte da Comunidade <span class="skill-percentage" data-percent="90">90%</span></p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="90"></div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção de Interações Avançadas -->
-        <section id="interacoes-avancadas" class="section section-padded reveal-right">
-            <h2 class="animated-underline-title">Interações e Efeitos Visuais</h2>
-            <div class="container">
-                <!-- Botões com Efeitos Divertidos -->
-                <h3 class="margin-top-40">Botões com Efeitos Divertidos</h3>
-                <div class="button-effects-container">
-                    <button class="btn-primary btn-ripple">Botão Ripple</button>
-                    <button class="btn-primary btn-hover-fill">Botão Fill</button>
-                    <button class="btn-primary btn-border-anim"><span>Botão Borda</span></button>
-                    <button class="btn-primary btn-gradient-anim">Botão Gradiente</button>
-                    <button class="btn-primary btn-pulse">Botão Pulsante</button>
-                </div>
 
-                <!-- Cards com Efeito Parallax no Fundo -->
-                <h3 class="margin-top-40">Cards com Fundo Flutuante</h3>
-                <div class="card-grid max-3-columns">
-                    <div class="parallax-card">
-                        <h3>Card Flutuante 1</h3>
-                        <p>Este card tem um efeito visual interessante com o fundo da seção.</p>
+    <button class="btn-primary glow-btn">
+        Comece a Jogar Agora!
+    </button>
+
+
+    <button id="show-toast">Mostrar Notificação</button>
+    <div id="toast-notification" class="toast-notification">
+        <div class="toast-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="toast-content">
+            <p class="toast-title">Sucesso!</p>
+            <p class="toast-message">Você se conectou ao servidor com sucesso.</p>
+        </div>
+    </div>
+
+    <button id="theme-toggle" aria-label="Alternar Tema">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-container card">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Como posso me conectar ao servidor?</h4>
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="parallax-card">
-                        <h3>Card Flutuante 2</h3>
-                        <p>O fundo se move mais devagar que o conteúdo, criando profundidade.</p>
-                    </div>
-                    <div class="parallax-card">
-                        <h3>Card Flutuante 3</h3>
-                        <p>Ideal para destacar informações ou serviços em seu site.</p>
-                    </div>
-                </div>
-
-                <!-- Seção de "Leia Mais" (Read More/Read Less) -->
-                <h3 class="margin-top-40">Seção "Leia Mais"</h3>
-                <div class="read-more-container card">
-                    <p class="read-more-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p class="read-more-text hidden-content" id="moreText">Aqui está o conteúdo adicional que aparece quando você clica em "Leia Mais". É uma ótima maneira de economizar espaço e apresentar informações detalhadas apenas quando o usuário deseja vê-las. Você pode adicionar quantos parágrafos ou outros elementos precisar aqui dentro desta segunda tag 'p'.</p>
-                    <button class="read-more-toggle btn-link" id="readMoreToggle">Leia Mais</button>
-                </div>
-
-                <!-- Typewriter Effect (Novo Elemento) -->
-                <h3 class="margin-top-40">Efeito Máquina de Escrever</h3>
-                <div class="typewriter-container">
-                    <span class="typewriter-text" id="typewriterText" data-text='["Bem-vindo ao Zera\'s Craft!", "Explore mundos infinitos...", "Construa sua própria aventura!", "Junte-se à nossa comunidade!"]'></span>
-                </div>
-
-                <!-- Video Player Customizado (Novo Elemento) -->
-                <h3 class="margin-top-40">Vídeo com Controles Personalizados</h3>
-                <div class="custom-video-player-container">
-                    <video id="myVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" preload="auto"></video>
-                    <div class="video-controls">
-                        <button id="playPauseVideoBtn" class="video-control-btn"><i class="fas fa-play"></i></button>
-                        <input type="range" id="videoProgressBar" class="video-progress-bar" value="0" min="0" max="100">
-                        <span id="videoCurrentTime">0:00</span> / <span id="videoDuration">0:00</span>
-                        <input type="range" id="videoVolume" class="video-volume-slider" value="100" min="0" max="100">
-                        <button id="fullScreenVideoBtn" class="video-control-btn"><i class="fas fa-expand"></i></button>
+                    <div class="faq-answer">
+                        <p>Você pode se conectar usando o IP: <code>jogarnome.com</code>.</p>
                     </div>
                 </div>
-
-                <!-- Sticky Floating Button (Novo Elemento) -->
-                <h3 class="margin-top-40">Botão Flutuante</h3>
-                <button id="floatingActionButton" class="floating-action-button" aria-label="Ação Rápida">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <div class="floating-button-description">Role a página para ver o botão flutuante no canto inferior direito.</div>
-
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Quais são as regras?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>As regras estão disponíveis em nossa página de regras. Respeite todos os jogadores e não use hacks.</p>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção de Formulários e Entradas -->
-        <section id="formularios" class="section section-alt-bg section-padded reveal-left">
-            <h2 class="animated-underline-title">Formulários e Entradas</h2>
-            <div class="container">
-                <!-- Formulário de Contato Moderno -->
-                <h3 class="margin-top-40">Envie-nos uma Mensagem</h3>
-                <form class="modern-contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="contact-name">Seu Nome:</label>
-                        <input type="text" id="contact-name" name="name" required placeholder="Digite seu nome completo">
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Nosso Roteiro</h2>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="timeline-content card">
+                        <h4>Junho 2024</h4>
+                        <p class="timeline-date">Lançamento do Servidor 1.0</p>
+                        <p>Inauguração do servidor com o mapa inicial e eventos de boas-vindas.</p>
                     </div>
-                    <div class="form-group">
-                        <label for="contact-email">Seu Email:</label>
-                        <input type="email" id="contact-email" name="email" required placeholder="seu.email@exemplo.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-subject">Assunto:</label>
-                        <select id="contact-subject" name="subject" required>
-                            <option value="">Selecione um assunto</option>
-                            <option value="suporte">Suporte Técnico</option>
-                            <option value="parceria">Proposta de Parceria</option>
-                            <option value="sugestao">Sugestão</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-message">Sua Mensagem:</label>
-                        <textarea id="contact-message" name="message" rows="5" required placeholder="Descreva sua mensagem aqui..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary">Enviar Mensagem</button>
-                </form>
-
-                 <!-- Range Slider Personalizado (Novo Elemento) -->
-                <h3 class="margin-top-40">Seletor de Faixa (Customizado)</h3>
-                <div class="range-slider-container">
-                    <input type="range" min="0" max="100" value="50" class="custom-range-slider" id="volumeRange">
-                    <div class="slider-value" id="volumeValue">50</div>
-                    <p>Volume</p>
                 </div>
-                 <div class="range-slider-container">
-                    <input type="range" min="0" max="1000" value="250" class="custom-range-slider" id="distanceRange">
-                    <div class="slider-value" id="distanceValue">250</div>
-                    <p>Distância de Renderização (blocos)</p>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-code-branch"></i></div>
+                    <div class="timeline-content card">
+                        <h4>Julho 2024</h4>
+                        <p class="timeline-date">Atualização "Novas Minas"</p>
+                        <p>Adição de biomas, minérios e uma nova dimensão para explorar.</p>
+                    </div>
                 </div>
-
-                <!-- Rating Stars (Novo Elemento) -->
-                <h3 class="margin-top-40">Avaliação com Estrelas</h3>
-                <div class="rating-stars" data-rating="3.5" id="ratingStars">
-                    <i class="far fa-star" data-value="1"></i>
-                    <i class="far fa-star" data-value="2"></i>
-                    <i class="far fa-star" data-value="3"></i>
-                    <i class="far fa-star" data-value="4"></i>
-                    <i class="far fa-star" data-value="5"></i>
-                    <span class="rating-value" id="currentRating">(3.5/5)</span>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-users-cog"></i></div>
+                    <div class="timeline-content card">
+                        <h4>Agosto 2024</h4>
+                        <p class="timeline-date">Sistema de Clãs</p>
+                        <p>Implementação de um sistema de clãs para que os jogadores possam formar equipes.</p>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Inline Form Validation Feedback (Novo Elemento) -->
-                <h3 class="margin-top-40">Validação de Formulário (Inline)</h3>
-                <form class="inline-validation-form" id="inlineValidationForm">
-                    <div class="form-group">
-                        <label for="username">Nome de Usuário:</label>
-                        <input type="text" id="username" placeholder="Mínimo 3 caracteres">
-                        <div class="validation-feedback" id="usernameFeedback"></div>
+
+    <button id="open-video-modal" class="btn-primary">Ver Trailer</button>
+
+    <div id="video-modal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="video-modal-close">&times;</span>
+            <iframe id="video-iframe" width="100%" height="auto" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Planos de Acesso</h2>
+            <div class="pricing-3d-grid max-3-columns">
+                <div class="pricing-3d-card card">
+                    <h4>Acesso Bronze</h4>
+                    <p>O acesso básico ao nosso servidor.</p>
+                    <div class="price-value">R$10</div>
+                </div>
+                <div class="pricing-3d-card card">
+                    <h4>Acesso Prata</h4>
+                    <p>Vantagens exclusivas e mais recursos.</p>
+                    <div class="price-value">R$25</div>
+                </div>
+                <div class="pricing-3d-card card">
+                    <h4>Acesso Ouro</h4>
+                    <p>O pacote completo com tudo que você precisa.</p>
+                    <div class="price-value">R$50</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="alert-banner success-alert">
+        <i class="fas fa-check-circle alert-icon"></i>
+        <p class="alert-message">Atenção! A atualização 1.18.3 já está disponível!</p>
+        <button class="close-alert-btn">&times;</button>
+    </div>
+    <div class="alert-banner warning-alert">
+        <i class="fas fa-exclamation-triangle alert-icon"></i>
+        <p class="alert-message">Manutenção do servidor agendada para sexta-feira, 22h.</p>
+        <button class="close-alert-btn">&times;</button>
+    </div>
+
+    <section class="section-padded section-alt-bg">
+        <div class="container">
+            <h2 class="text-center">Chat da Comunidade</h2>
+            <div class="chat-container card">
+                <div class="chat-box" id="chat-box">
                     </div>
-                    <div class="form-group">
-                        <label for="email-validate">Email:</label>
-                        <input type="email" id="email-validate" placeholder="email@exemplo.com">
-                        <div class="validation-feedback" id="emailFeedback"></div>
-                    </div>
-                     <div class="form-group">
-                        <label for="password-validate">Senha:</label>
-                        <input type="password" id="password-validate" placeholder="Mínimo 6 caracteres">
-                        <div class="validation-feedback" id="passwordFeedback"></div>
-                    </div>
-                    <button type="submit" class="btn-primary">Registrar</button>
+                <form id="chat-form">
+                    <input type="text" id="chat-input" placeholder="Digite sua mensagem..." autocomplete="off">
+                    <button type="submit" class="btn-primary">Enviar</button>
                 </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção Outros Componentes -->
-        <section id="outros-componentes" class="section section-padded reveal">
-            <h2 class="animated-underline-title">Diversos Outros Componentes</h2>
-            <div class="container">
 
-                <!-- Caixa de Texto Glassmorphism -->
-                <h3 class="margin-top-40">Caixa de Texto Glassmorphism</h3>
-                <div class="glass-container card">
-                    <p>Este é um contêiner de exemplo com o efeito Glassmorphism. Ele pode ser usado para envolver qualquer tipo de conteúdo, como formulários, texto ou cards.</p>
-                </div>
-
-                <!-- Citação Animada -->
-                <h3 class="margin-top-40">Citação Animada</h3>
-                <div class="animated-quote">
-                    <p>"A persistência é o caminho do êxito."</p>
-                    <cite>- Charlie Chaplin</cite>
-                </div>
-
-                <!-- Bloco de Spoiler -->
-                <h3 class="margin-top-40">Bloco de Spoiler</h3>
-                <div class="spoiler-block">
-                    <button class="spoiler-toggle btn-link" id="spoilerToggle">Clique para revelar o spoiler!</button>
-                    <div class="spoiler-content hidden-content" id="spoilerContent">
-                        <p>Este é o conteúdo do spoiler. Ele estava escondido e agora foi revelado. Ideal para informações sensíveis ou para desafiar o usuário!</p>
-                    </div>
-                </div>
-
-                <!-- Lista Animada -->
-                <h3 class="margin-top-40">Lista Animada</h3>
-                <ul class="animated-list card">
-                    <li class="list-item"><i class="list-icon fas fa-check"></i> Criação de mundos personalizados.</li>
-                    <li class="list-item"><i class="list-icon fas fa-check"></i> Eventos diários e semanais.</li>
-                    <li class="list-item"><i class="list-icon fas fa-check"></i> Suporte à comunidade 24/7.</li>
-                    <li class="list-item"><i class="list-icon fas fa-check"></i> Servidores otimizados e sem lag.</li>
-                    <li class="list-item"><i class="list-icon fas fa-check"></i> Novos biomas exclusivos.</li>
-                    <li class="list-item"><i class="list-icon fas fa-check"></i> Sistema de recompensas inovador.</li>
-                </ul>
-
-                <!-- Título com Animação de Cortina -->
-                <h3 class="margin-top-40">Título com Animação de Cortina</h3>
-                <div class="curtain-title-wrapper">
-                    <h2 class="curtain-title">A PRÓXIMA GRANDE ATUALIZAÇÃO</h2>
-                </div>
-
-                <!-- Texto com Hover Interativo (Revela Imagem) -->
-                <h3 class="margin-top-40">Texto com Hover Interativo</h3>
-                <p class="hover-text-reveal">
-                    Passe o mouse sobre <span class="hover-text" id="hoverTextTrigger">esta palavra</span> para ver uma imagem.
-                    <div class="hover-image" id="hoverImage" style="background-image: url('https://placehold.co/300x200/4CAF50/FFFFFF?text=SURPRESA!');"></div>
-                </p>
-
-                <!-- Caixa de Console -->
-                <h3 class="margin-top-40">Caixa de Console</h3>
-                <div class="console-box">
-                    <div class="console-header">
-                        <div class="dot red"></div>
-                        <div class="dot yellow"></div>
-                        <div class="dot green"></div>
-                    </div>
-                    <pre class="console-text">
-> Iniciando sistema do Mundo Zera's Craft...
-> Carregando recursos do servidor...
-> Verificando conexão de jogadores...
-> Servidor online! Bem-vindo(a) à aventura.
-                    </pre>
-                </div>
-
-                <!-- Cookie Consent Banner (Novo Elemento) -->
-                <h3 class="margin-top-40">Banner de Consentimento de Cookies</h3>
-                <div class="cookie-consent-banner" id="cookieBanner">
-                    <p>Este site utiliza cookies para garantir a melhor experiência. Ao continuar, você concorda com nossa <a href="#" class="cookie-policy-link">política de cookies</a>.</p>
-                    <button class="btn-primary" id="acceptCookiesBtn">Aceitar</button>
-                    <button class="btn-link" id="declineCookiesBtn">Recusar</button>
-                </div>
-
-                <!-- Preço/Plano Cards (Novo Elemento) -->
-                <h3 class="margin-top-40">Nossos Planos Premium</h3>
-                <div class="card-grid max-3-columns">
-                    <div class="price-card card">
-                        <h4>Plano Básico</h4>
-                        <p class="price">$10<span>/mês</span></p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Acesso limitado</li>
-                            <li><i class="fas fa-check-circle"></i> Suporte padrão</li>
-                            <li><i class="fas fa-times-circle"></i> Sem vantagens VIP</li>
-                        </ul>
-                        <button class="btn-primary">Assinar Básico</button>
-                    </div>
-                    <div class="price-card card featured-price-card">
-                        <h4>Plano Premium</h4>
-                        <p class="price">$25<span>/mês</span></p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Acesso completo</li>
-                            <li><i class="fas fa-check-circle"></i> Suporte prioritário</li>
-                            <li><i class="fas fa-check-circle"></i> Vantagens VIP</li>
-                            <li><i class="fas fa-check-circle"></i> Eventos exclusivos</li>
-                        </ul>
-                        <button class="btn-primary">Assinar Premium</button>
-                    </div>
-                    <div class="price-card card">
-                        <h4>Plano Deluxe</h4>
-                        <p class="price">$50<span>/mês</span></p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Tudo do Premium</li>
-                            <li><i class="fas fa-check-circle"></i> Mentoria exclusiva</li>
-                            <li><i class="fas fa-check-circle"></i> Conteúdo antecipado</li>
-                        </ul>
-                        <button class="btn-primary">Assinar Deluxe</button>
-                    </div>
-                </div>
-
-                <!-- Step Indicator / Wizard (Novo Elemento) -->
-                <h3 class="margin-top-40">Processo de Cadastro</h3>
-                <div class="step-indicator-container card">
-                    <div class="step-indicator multi-step-indicator">
-                        <div class="step-item active" data-step="1">
-                            <div class="step-circle">1</div>
-                            <div class="step-label">Dados Pessoais</div>
-                        </div>
-                        <div class="step-line"></div>
-                        <div class="step-item" data-step="2">
-                            <div class="step-circle">2</div>
-                            <div class="step-label">Preferências</div>
-                        </div>
-                        <div class="step-line"></div>
-                        <div class="step-item" data-step="3">
-                            <div class="step-circle">3</div>
-                            <div class="step-label">Confirmação</div>
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Últimas Notícias</h2>
+            <div class="news-carousel-container">
+                <div class="news-track">
+                    <div class="news-card card">
+                        <img src="assets/img/news1.jpg" alt="Notícia 1">
+                        <div class="news-content">
+                            <h4>Nova Temporada Começa em Breve!</h4>
+                            <p>Prepare-se para uma nova temporada cheia de desafios e recompensas.</p>
+                            <a href="#" class="read-more">Leia mais &rarr;</a>
                         </div>
                     </div>
-                    <div class="step-content">
-                        <p id="stepContentText">Preencha seus dados básicos para começar.</p>
+                    <div class="news-card card">
+                        <img src="assets/img/news2.jpg" alt="Notícia 2">
+                        <div class="news-content">
+                            <h4>Eventos de Natal Anunciados!</h4>
+                            <p>Participe dos eventos especiais de fim de ano e ganhe itens exclusivos.</p>
+                            <a href="#" class="read-more">Leia mais &rarr;</a>
+                        </div>
                     </div>
-                    <div class="step-navigation">
-                        <button class="btn-primary" id="prevStepBtn" disabled>Anterior</button>
-                        <button class="btn-primary" id="nextStepBtn">Próximo</button>
+                    <div class="news-card card">
+                        <img src="assets/img/news3.jpg" alt="Notícia 3">
+                        <div class="news-content">
+                            <h4>Requisitos de Sistema Atualizados</h4>
+                            <p>Verifique os novos requisitos para uma melhor experiência de jogo.</p>
+                            <a href="#" class="read-more">Leia mais &rarr;</a>
+                        </div>
                     </div>
                 </div>
-
+                <button class="news-nav prev">&lsaquo;</button>
+                <button class="news-nav next">&rsaquo;</button>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+    <section class="section-padded text-center">
+        <div class="container">
+            <h3>Receba Nossas Novidades</h3>
+            <p>Inscreva-se na nossa newsletter e não perca nenhuma atualização!</p>
+            <form id="newsletter-form">
+                <input type="email" id="newsletter-email" placeholder="Seu e-mail..." required>
+                <button type="submit" class="btn-primary">Inscrever</button>
+            </form>
+            <p id="newsletter-message" class="form-message"></p>
+        </div>
+    </section>
 
+
+    <div class="star-rating-container text-center">
+        <p>Avalie nosso Servidor:</p>
+        <div class="stars">
+            <i class="fas fa-star" data-rating="1"></i>
+            <i class="fas fa-star" data-rating="2"></i>
+            <i class="fas fa-star" data-rating="3"></i>
+            <i class="fas fa-star" data-rating="4"></i>
+            <i class="fas fa-star" data-rating="5"></i>
+        </div>
+        <p id="rating-text">Clique nas estrelas para avaliar!</p>
+    </div>
+
+    <section class="section-padded text-center">
+        <div class="container">
+            <h2>Próximo Evento: Batalha de Clãs</h2>
+            <p class="section-description">O maior evento do ano está chegando!</p>
+            <div id="countdown" class="countdown-container">
+                <div class="countdown-box">
+                    <span class="countdown-value" id="days">1</span>
+                    <span class="countdown-label">Dias</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-search-container">
+                <input type="text" id="faq-search" placeholder="Pesquisar perguntas...">
+            </div>
+            <div id="faq-list" class="faq-container card">
+                <div class="faq-item" data-tags="conexão, ip, servidor">
+                    <div class="faq-question">
+                        <h4>Como faço para me conectar ao servidor?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Você pode se conectar usando o IP <code>jogarnome.com</code>.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-tags="regras, conduta">
+                    <div class="faq-question">
+                        <h4>Quais são as regras de conduta?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>As regras estão na nossa página de regras. Respeite os outros jogadores e evite o uso de hacks ou trapaças.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-tags="doação, loja, vip, planos">
+                    <div class="faq-question">
+                        <h4>Posso doar para o servidor?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, você pode doar em nossa loja virtual. Todas as doações ajudam a manter o servidor online e a desenvolver novos conteúdos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Estatísticas do Servidor</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Estatística</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jogadores Online</td>
+                        <td id="players-online">125</td>
+                    </tr>
+                    <tr>
+                        <td>Versão do Servidor</td>
+                        <td id="server-version">1.20.1</td>
+                    </tr>
+                    <tr>
+                        <td>Tempo de Atividade</td>
+                        <td id="uptime">99.9%</td>
+                    </tr>
+                    <tr>
+                        <td>Última Atualização</td>
+                        <td id="last-update">01/08/2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <button class="btn-heart">
+        <i class="far fa-heart"></i>
+        <span>50 Curtidas</span>
+    </button>
+
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Galeria Interativa</h2>
+            <div class="interactive-grid max-3-columns">
+                <div class="interactive-card card">
+                    <div class="card-front">
+                        <img src="assets/img/card1.jpg" alt="Carta 1">
+                    </div>
+                    <div class="card-back">
+                        <h4>Mundo de Aventuras</h4>
+                        <p>Explore um vasto mundo com biomas e dungeons exclusivos.</p>
+                    </div>
+                </div>
+                <div class="interactive-card card">
+                    <div class="card-front">
+                        <img src="assets/img/card2.jpg" alt="Carta 2">
+                    </div>
+                    <div class="card-back">
+                        <h4>Sistema de Magia</h4>
+                        <p>Aprenda feitiços poderosos e crie suas próprias poções.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div id="member-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="member-details-content">
+                </div>
+        </div>
+    </div>
+
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Conheça Nossos Admins</h2>
+            <div class="team-grid max-3-columns">
+                <div class="team-member-modal card" data-member-id="steve">
+                    <img src="assets/img/player1.png" alt="Steve">
+                    <h4>Steve O Construtor</h4>
+                    <p class="role">Admin Chefe</p>
+                </div>
+                <div class="team-member-modal card" data-member-id="alex">
+                    <img src="assets/img/player2.png" alt="Alex">
+                    <h4>Alex A Exploradora</h4>
+                    <p class="role">Moderadora Sênior</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="member-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="member-details-content">
+                </div>
+        </div>
+    </div>
+
+    <section class="section-padded text-center">
+        <div class="container">
+            <h2>Pesquisar no Site</h2>
+            <div class="search-container-dynamic">
+                <input type="text" id="dynamic-search" placeholder="Pesquisar..." autocomplete="off">
+                <div id="search-results-box">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Música para sua Aventura</h2>
+            <div class="music-player card">
+                <div class="album-cover">
+                    <img id="album-cover-img" src="assets/img/album-cover.jpg" alt="Capa do Álbum">
+                </div>
+                <div class="track-info">
+                    <h4 id="track-title">Música Título</h4>
+                    <p id="track-artist">Artista</p>
+                </div>
+                <audio id="audio-player" src=""></audio>
+                <div class="controls">
+                    <button id="prev-btn"><i class="fas fa-backward"></i></button>
+                    <button id="play-pause-btn"><i class="fas fa-play"></i></button>
+                    <button id="next-btn"><i class="fas fa-forward"></i></button>
+                </div>
+                <div class="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section-padded section-alt-bg">
+        <div class="container text-center">
+            <h2>Opinião de Quem Joga</h2>
+            <div class="testimonial-typing-container card">
+                <p id="testimonial-text"></p>
+                <div class="testimonial-author">
+                    <img src="assets/img/avatar1.png" alt="Avatar">
+                    <p id="testimonial-author-name">Nome do Jogador</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section-padded text-center">
+        <div class="container">
+            <h2 class="glitch-text"><span>Bem-vindo ao</span><br>Servidor Glitched!</h2>
+        </div>
+    </section>
+
+
+    <section class="section-padded">
+        <div class="container text-center">
+            <h2>Como Funciona</h2>
+            <div class="stepper-container">
+                <div class="stepper-item active">
+                    <div class="stepper-icon"><i class="fas fa-download"></i></div>
+                    <div class="stepper-content">
+                        <h4>Passo 1: Baixe o Jogo</h4>
+                        <p>Comece baixando a versão mais recente do Minecraft.</p>
+                    </div>
+                </div>
+                <div class="stepper-item">
+                    <div class="stepper-icon"><i class="fas fa-server"></i></div>
+                    <div class="stepper-content">
+                        <h4>Passo 2: Conecte-se ao Servidor</h4>
+                        <p>Use nosso IP para entrar no servidor e explorar.</p>
+                    </div>
+                </div>
+                <div class="stepper-item">
+                    <div class="stepper-icon"><i class="fas fa-gamepad"></i></div>
+                    <div class="stepper-content">
+                        <h4>Passo 3: Jogue e Divirta-se</h4>
+                        <p>Crie, explore, e faça amizades em nossa comunidade.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!---------------------------------------------------------------->
     <!-- Main Footer with Audio Control -->
     <footer class="main-footer">
         <div class="container footer-content">
             <div class="footer-column">
                 <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                <p>Seu destino para aventura, criatividade e comunidade no Minecraft. Junte-se a nós para explorar mundos ilimitados!</p>
+                <p>Seu destino para aventura, criatividade e comunidade no Minecraft. Junte-se a nós para explorar
+                    mundos ilimitados!</p>
                 <div class="footer-social-links">
                     <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
                     <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -846,7 +831,8 @@
                     <div id="musicTitleDisplay" class="music-title-display">Clique para Tocar</div>
                     <div class="progress-bar-and-times">
                         <span id="currentTimeDisplay" class="time-display">0:00</span>
-                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0" min="0" max="100">
+                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0" min="0"
+                            max="100">
                         <span id="durationDisplay" class="time-display">0:00</span>
                     </div>
                 </div>
@@ -856,14 +842,15 @@
                     <button id="audioPrevButton" class="music-button" aria-label="Música Anterior">
                         <i class="fas fa-backward"></i>
                     </button>
-                    <button id="audioControlButton" class="music-button main-play-pause-button" aria-label="Tocar/Pausar Música">
+                    <button id="audioControlButton" class="music-button main-play-pause-button"
+                        aria-label="Tocar/Pausar Música">
                         <i class="fas fa-play"></i>
                     </button>
                     <button id="audioNextButton" class="music-button" aria-label="Próxima Música">
                         <i class="fas fa-forward"></i>
                     </button>
                 </div>
-                
+
                 <!-- Controle de Velocidade -->
                 <div class="playback-speed-control">
                     <label for="playbackSpeed" class="sr-only">Velocidade de Reprodução</label>
@@ -879,39 +866,7 @@
         </div>
     </footer>
 
-    <!-- Botão Voltar ao Topo -->
-    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao Topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Mensagem Centralizada (para feedback do usuário) -->
-    <div id="centralMessage" class="central-message"></div>
-
-    <!-- Audio element (hidden) -->
-    <audio id="backgroundAudio" preload="auto"></audio>
-
-    <!-- Lightbox overlay (para galeria de imagens) -->
-    <div class="lightbox-overlay" id="myLightbox">
-        <div class="lightbox-content">
-            <img src="" alt="" id="lightbox-image">
-            <button class="lightbox-close">&times;</button>
-        </div>
-    </div>
-
-    <!-- Modal overlay (para exemplos de modal) -->
-    <div class="modal-overlay" id="myModal">
-        <div class="modal-content">
-            <button class="modal-close-btn" id="closeModalBtn">&times;</button>
-            <h3 class="modal-title">Título do Modal</h3>
-            <p>Este é o conteúdo do seu modal. Ele aparece sobre o resto do conteúdo da página e pode ser usado para exibir mensagens importantes, formulários ou informações adicionais.</p>
-            <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-            </ul>
-        </div>
-    </div>
-
     <script src="script.js"></script>
 </body>
+
 </html>
