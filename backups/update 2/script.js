@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    
+
     // =====================================
     // 5. Animações de Rolagem com ScrollReveal
     // =====================================
@@ -603,650 +603,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Componentes Interativos Específicos
     // =====================================
 
-    // Contador Animado (CountUp.js)
-    const counterElements = document.querySelectorAll('.counter');
-    if (typeof CountUp !== 'undefined' && counterElements.length > 0) {
-        const options = {
-            duration: 2.5,
-            separator: '.',
-            startVal: 0,
-        };
-        const observers = [];
-
-        counterElements.forEach(el => {
-            const endValue = parseInt(el.dataset.target); // Alterado para data-target
-            const countUp = new CountUp(el, endValue, options);
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (!el.classList.contains('counted')) {
-                            countUp.start();
-                            el.classList.add('counted');
-                        }
-                    } else {
-                        // Opcional: reiniciar o contador ao sair da tela
-                        // el.classList.remove('counted');
-                        // el.textContent = '0';
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
-            observers.push(observer);
-            observer.observe(el);
-        });
-    }
-
-    // Acordeão
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const item = header.parentElement;
-            const content = header.nextElementSibling;
-
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-                header.classList.remove('active');
-                content.classList.remove('open');
-                content.style.maxHeight = null; // Reseta max-height
-            } else {
-                // Fecha outros itens antes de abrir o atual (comportamento de acordeão)
-                accordionHeaders.forEach(otherHeader => {
-                    const otherItem = otherHeader.parentElement;
-                    const otherContent = otherHeader.nextElementSibling;
-                    otherItem.classList.remove('active');
-                    otherHeader.classList.remove('active');
-                    otherContent.classList.remove('open');
-                    otherContent.style.maxHeight = null;
-                });
-
-                item.classList.add('active');
-                header.classList.add('active');
-                content.classList.add('open');
-                content.style.maxHeight = content.scrollHeight + "px"; // Ajusta max-height para a altura do conteúdo
-            }
-            playEffectSound(clickSound);
-        });
-    });
-
-    // Abas (não presente no HTML atual, mas mantido para referência futura)
-    const tabButtons = document.querySelectorAll('.tab-button');
-    if (tabButtons.length > 0) {
-        // Ativar a primeira aba por padrão, se houver
-        const firstTabButton = tabButtons[0];
-        const firstTabPane = document.getElementById(firstTabButton.dataset.tabId);
-        if (firstTabButton) firstTabButton.classList.add('active');
-        if (firstTabPane) firstTabPane.classList.add('active');
-
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.dataset.tabId;
-
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-
-                button.classList.add('active');
-                document.getElementById(targetId).classList.add('active');
-
-                playEffectSound(clickSound);
-            });
-        });
-    }
-
-
-    // Modal (Aberto via botão no HTML)
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn'); // Atualizado para o ID no HTML
-    const modalOverlay = document.getElementById('myModal'); // Atualizado para o ID no HTML
-
-    if (openModalBtn && modalOverlay) {
-        openModalBtn.addEventListener('click', () => {
-            modalOverlay.classList.add('active');
-            playEffectSound(clickSound);
-        });
-    }
-
-    if (closeModalBtn && modalOverlay) {
-        closeModalBtn.addEventListener('click', () => {
-            modalOverlay.classList.remove('active');
-            playEffectSound(clickSound);
-        });
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                modalOverlay.classList.remove('active');
-            }
-        });
-    }
-
-    // Lightbox para Galeria de Imagens
-    const openLightboxBtns = document.querySelectorAll('.open-lightbox-btn');
-    const closeLightboxBtn = document.querySelector('.lightbox-close');
-    const lightboxOverlay = document.getElementById('myLightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-
-    openLightboxBtns.forEach(button => {
-        button.addEventListener('click', () => {
-            const imageUrl = button.dataset.imageUrl;
-            const imageAlt = button.dataset.imageAlt;
-            lightboxImage.src = imageUrl;
-            lightboxImage.alt = imageAlt;
-            lightboxOverlay.classList.add('show'); // Usa 'show' conforme o CSS
-            playEffectSound(clickSound);
-        });
-    });
-
-    if (closeLightboxBtn && lightboxOverlay) {
-        closeLightboxBtn.addEventListener('click', () => {
-            lightboxOverlay.classList.remove('show');
-            playEffectSound(clickSound);
-        });
-        lightboxOverlay.addEventListener('click', (e) => {
-            if (e.target === lightboxOverlay) {
-                lightboxOverlay.classList.remove('show');
-            }
-        });
-    }
-
-
-    // Carrossel de Imagens
-    const carouselContainer = document.querySelector('.carousel-container');
-    if (carouselContainer) {
-        const carouselTrack = document.getElementById('imageCarouselTrack'); // ID do HTML
-        const carouselSlides = Array.from(carouselTrack.children);
-        const carouselNextBtn = document.getElementById('carouselNextBtn'); // ID do HTML
-        const carouselPrevBtn = document.getElementById('carouselPrevBtn'); // ID do HTML
-        const carouselDotsContainer = document.getElementById('carouselDots'); // ID do HTML
-
-        let currentSlideIndex = 0;
-        let slideInterval; // Para o autoplay
-
-        // Cria os pontos de navegação
-        carouselSlides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('carousel-dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => {
-                moveToSlide(index);
-                resetAutoplay();
-            });
-            carouselDotsContainer.appendChild(dot);
-        });
-        const carouselDots = Array.from(carouselDotsContainer.children);
-
-        const updateSlidePosition = () => {
-            if (carouselSlides.length === 0) return;
-            const slideWidth = carouselSlides[0].getBoundingClientRect().width;
-            carouselTrack.style.transform = `translateX(-${slideWidth * currentSlideIndex}px)`;
-        };
-
-        const updateDots = () => {
-            carouselDots.forEach((dot, index) => {
-                if (index === currentSlideIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        };
-
-        const moveToSlide = (targetIndex) => {
-            currentSlideIndex = targetIndex;
-            updateSlidePosition();
-            updateDots();
-            playEffectSound(clickSound);
-        };
-
-        carouselNextBtn.addEventListener('click', () => {
-            const nextIndex = (currentSlideIndex + 1) % carouselSlides.length;
-            moveToSlide(nextIndex);
-            resetAutoplay();
-        });
-
-        carouselPrevBtn.addEventListener('click', () => {
-            const prevIndex = (currentSlideIndex - 1 + carouselSlides.length) % carouselSlides.length;
-            moveToSlide(prevIndex);
-            resetAutoplay();
-        });
-
-        // Autoplay
-        const startAutoplay = () => {
-            slideInterval = setInterval(() => {
-                const nextIndex = (currentSlideIndex + 1) % carouselSlides.length;
-                moveToSlide(nextIndex);
-            }, 5000); // Muda a cada 5 segundos
-        };
-
-        const resetAutoplay = () => {
-            clearInterval(slideInterval);
-            startAutoplay();
-        };
-
-        // Redimensionamento
-        window.addEventListener('resize', () => {
-            updateSlidePosition();
-        });
-
-        startAutoplay(); // Inicia o autoplay ao carregar a página
-    }
-
-    // Image Compare Slider
-    const imageCompareSlider = document.getElementById('imageCompareSlider');
-    const imageAfter = document.querySelector('.image-compare-img-wrapper .image-after');
-    const imageCompareHandle = document.getElementById('imageCompareHandle');
-
-    if (imageCompareSlider && imageAfter && imageCompareHandle) {
-        const updateSlider = () => {
-            const sliderValue = imageCompareSlider.value;
-            imageAfter.style.width = `${sliderValue}%`;
-            imageCompareHandle.style.left = `${sliderValue}%`;
-        };
-
-        imageCompareSlider.addEventListener('input', updateSlider);
-        updateSlider(); // Define a posição inicial
-    }
-
-    // Toggle Spinner
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    const showSpinnerBtn = document.getElementById('showSpinnerBtn');
-
-    if (loadingSpinner && showSpinnerBtn) {
-        showSpinnerBtn.addEventListener('click', () => {
-            loadingSpinner.classList.toggle('hidden');
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Toggle Switches
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const notificationsToggle = document.getElementById('notificationsToggle');
-
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('change', () => {
-            console.log('Modo Escuro:', darkModeToggle.checked);
-            playEffectSound(clickSound);
-            // Implementar lógica de tema escuro aqui
-        });
-    }
-    if (notificationsToggle) {
-        notificationsToggle.addEventListener('change', () => {
-            console.log('Notificações:', notificationsToggle.checked);
-            playEffectSound(clickSound);
-            // Implementar lógica de notificações aqui
-        });
-    }
-
-    // Progress Circles
-    const progressCircles = document.querySelectorAll('.progress-circle');
-    progressCircles.forEach(circle => {
-        const progress = parseInt(circle.dataset.progress);
-        const circleBar = circle.querySelector('.progress-bar-circle');
-        const radius = circleBar.r.baseVal.value;
-        const circumference = 2 * Math.PI * radius;
-        const offset = circumference - (progress / 100) * circumference;
-
-        circleBar.style.strokeDasharray = circumference;
-        circleBar.style.strokeDashoffset = circumference; // Começa escondido
-
-        // Animação ao entrar na viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    circleBar.style.strokeDashoffset = offset;
-                    observer.unobserve(entry.target); // Para de observar após a animação
-                }
-            });
-        }, { threshold: 0.75 }); // Trigger quando 75% visível
-        observer.observe(circle);
-    });
-
-    // Skeleton Loader
-    const toggleSkeletonBtn = document.getElementById('toggleSkeletonBtn');
-    const skeletonContainer = document.getElementById('skeletonContent');
-    const actualContent = document.getElementById('actualContent');
-
-    if (toggleSkeletonBtn && skeletonContainer && actualContent) {
-        toggleSkeletonBtn.addEventListener('click', () => {
-            if (skeletonContainer.classList.contains('loaded')) {
-                // Se o conteúdo real está visível, volta para o esqueleto
-                skeletonContainer.classList.remove('loaded');
-                actualContent.classList.add('hidden');
-                showCentralMessage('Carregando conteúdo...');
-            } else {
-                // Simula um carregamento de 2 segundos antes de mostrar o conteúdo real
-                showCentralMessage('Carregando...');
-                setTimeout(() => {
-                    skeletonContainer.classList.add('loaded');
-                    actualContent.classList.remove('hidden');
-                    showCentralMessage('Conteúdo carregado!');
-                }, 2000);
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Review Slider (Testemunhos)
-    const reviewSliderContainer = document.querySelector('.review-slider-container');
-    if (reviewSliderContainer) {
-        const reviewSliderTrack = document.querySelector('.review-slider-track'); // Seleciona o track
-        const reviewSlides = Array.from(reviewSliderTrack.children);
-        const reviewNextBtn = document.querySelector('.review-button.review-next-btn'); // Seleciona os botões
-        const reviewPrevBtn = document.querySelector('.review-button.review-prev-btn');
-
-        let currentReviewIndex = 0;
-
-        const updateReviewSlidePosition = () => {
-            if (reviewSlides.length === 0) return;
-            const slideWidth = reviewSlides[0].getBoundingClientRect().width;
-            reviewSliderTrack.style.transform = `translateX(-${slideWidth * currentReviewIndex}px)`;
-        };
-
-        const moveReviewToSlide = (targetIndex) => {
-            currentReviewIndex = targetIndex;
-            updateReviewSlidePosition();
-            playEffectSound(clickSound);
-        };
-
-        if (reviewNextBtn) {
-            reviewNextBtn.addEventListener('click', () => {
-                const nextIndex = (currentReviewIndex + 1) % reviewSlides.length;
-                moveReviewToSlide(nextIndex);
-            });
-        }
-
-        if (reviewPrevBtn) {
-            reviewPrevBtn.addEventListener('click', () => {
-                const prevIndex = (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
-                moveReviewToSlide(prevIndex);
-            });
-        }
-
-
-        // Atualiza a posição inicial e ao redimensionar
-        window.addEventListener('resize', updateReviewSlidePosition);
-        updateReviewSlidePosition();
-    }
-
-    // Read More / Read Less (não presente no HTML atual, mas mantido para referência futura)
-    const readMoreToggle = document.getElementById('readMoreToggle');
-    const moreText = document.getElementById('moreText');
-
-    if (readMoreToggle && moreText) {
-        readMoreToggle.addEventListener('click', () => {
-            if (moreText.classList.contains('hidden-content')) {
-                moreText.classList.remove('hidden-content');
-                readMoreToggle.textContent = 'Leia Menos';
-            } else {
-                moreText.classList.add('hidden-content');
-                readMoreToggle.textContent = 'Leia Mais';
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Typewriter Effect (não presente no HTML atual, mas mantido para referência futura)
-    const typewriterTextElement = document.getElementById('typewriterText');
-    if (typewriterTextElement) {
-        const dataText = JSON.parse(typewriterTextElement.dataset.text);
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 150;
-
-        function typeWriter() {
-            const currentText = dataText[textIndex];
-            if (isDeleting) {
-                typewriterTextElement.textContent = currentText.substring(0, charIndex--);
-            } else {
-                typewriterTextElement.textContent = currentText.substring(0, charIndex++);
-            }
-
-            if (!isDeleting && charIndex > currentText.length) {
-                typingSpeed = 2000; // Pausa no final da frase
-                isDeleting = true;
-            } else if (isDeleting && charIndex < 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % dataText.length;
-                typingSpeed = 150; // Velocidade de digitação
-            }
-
-            setTimeout(typeWriter, typingSpeed);
-        }
-        typeWriter();
-    }
-
-    // Custom Video Player (não presente no HTML atual, mas mantido para referência futura)
-    const myVideo = document.getElementById('myVideo');
-    const playPauseVideoBtn = document.getElementById('playPauseVideoBtn');
-    const videoProgressBar = document.getElementById('videoProgressBar');
-    const videoCurrentTime = document.getElementById('videoCurrentTime');
-    const videoDuration = document.getElementById('videoDuration');
-    const videoVolume = document.getElementById('videoVolume');
-    const fullScreenVideoBtn = document.getElementById('fullScreenVideoBtn');
-
-    if (myVideo && playPauseVideoBtn && videoProgressBar && videoCurrentTime && videoDuration && videoVolume && fullScreenVideoBtn) {
-        // Play/Pause
-        playPauseVideoBtn.addEventListener('click', () => {
-            if (myVideo.paused) {
-                myVideo.play();
-                playPauseVideoBtn.querySelector('i').classList.remove('fa-play');
-                playPauseVideoBtn.querySelector('i').classList.add('fa-pause');
-            } else {
-                myVideo.pause();
-                playPauseVideoBtn.querySelector('i').classList.remove('fa-pause');
-                playPauseVideoBtn.querySelector('i').classList.add('fa-play');
-            }
-            playEffectSound(clickSound);
-        });
-
-        // Update progress bar
-        myVideo.addEventListener('timeupdate', () => {
-            const progress = (myVideo.currentTime / myVideo.duration) * 100;
-            videoProgressBar.value = progress;
-            videoCurrentTime.textContent = formatTime(myVideo.currentTime);
-        });
-
-        myVideo.addEventListener('loadedmetadata', () => {
-            videoDuration.textContent = formatTime(myVideo.duration);
-        });
-
-        // Seek video
-        videoProgressBar.addEventListener('input', () => {
-            const seekTime = (videoProgressBar.value / 100) * myVideo.duration;
-            myVideo.currentTime = seekTime;
-        });
-
-        // Volume control
-        videoVolume.addEventListener('input', () => {
-            myVideo.volume = videoVolume.value / 100;
-        });
-
-        // Fullscreen
-        fullScreenVideoBtn.addEventListener('click', () => {
-            if (myVideo.requestFullscreen) {
-                myVideo.requestFullscreen();
-            } else if (myVideo.mozRequestFullScreen) { /* Firefox */
-                myVideo.mozRequestFullScreen();
-            } else if (myVideo.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-                myVideo.webkitRequestFullscreen();
-            } else if (myVideo.msRequestFullscreen) { /* IE/Edge */
-                myVideo.msRequestFullscreen();
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Floating Action Button (não presente no HTML atual, mas mantido para referência futura)
-    const floatingActionButton = document.getElementById('floatingActionButton');
-    if (floatingActionButton) {
-        floatingActionButton.addEventListener('click', () => {
-            showCentralMessage('Ação Rápida Acionada!');
-            playEffectSound(clickSound);
-            // Implementar ações adicionais aqui, como abrir um sub-menu
-        });
-    }
-
-    // Modern Contact Form (apenas feedback de submissão simulado)
-    const contactForm = document.getElementById('contactForm'); // Mantido ID genérico
-    if (contactForm) {
-        contactForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            showCentralMessage('Mensagem enviada com sucesso!');
-            contactForm.reset(); // Limpa o formulário
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Range Slider Personalizado (não presente no HTML atual, mas mantido para referência futura)
-    const volumeRange = document.getElementById('volumeRange');
-    const volumeValue = document.getElementById('volumeValue');
-    const distanceRange = document.getElementById('distanceRange');
-    const distanceValue = document.getElementById('distanceValue');
-
-    if (volumeRange && volumeValue) {
-        volumeRange.addEventListener('input', () => {
-            volumeValue.textContent = volumeRange.value;
-        });
-    }
-    if (distanceRange && distanceValue) {
-        distanceRange.addEventListener('input', () => {
-            distanceValue.textContent = distanceRange.value;
-        });
-    }
-
-    // Rating Stars (não presente no HTML atual, mas mantido para referência futura)
-    const ratingStarsContainer = document.getElementById('ratingStars');
-    if (ratingStarsContainer) {
-        const stars = ratingStarsContainer.querySelectorAll('i');
-        const currentRatingSpan = document.getElementById('currentRating');
-        let currentRating = parseFloat(ratingStarsContainer.dataset.rating) || 0;
-
-        const updateStars = (rating) => {
-            stars.forEach(star => {
-                const starValue = parseInt(star.dataset.value);
-                if (starValue <= rating) {
-                    star.classList.remove('far');
-                    star.classList.add('fas');
-                } else {
-                    star.classList.remove('fas');
-                    star.classList.add('far');
-                }
-            });
-            currentRatingSpan.textContent = `(${rating}/5)`;
-        };
-
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                currentRating = parseInt(star.dataset.value);
-                updateStars(currentRating);
-                showCentralMessage(`Avaliação: ${currentRating} estrelas!`);
-                playEffectSound(clickSound);
-            });
-            star.addEventListener('mouseenter', () => {
-                const hoverValue = parseInt(star.dataset.value);
-                stars.forEach(s => {
-                    const sValue = parseInt(s.dataset.value);
-                    if (sValue <= hoverValue) {
-                        s.classList.remove('far');
-                        s.classList.add('fas');
-                    } else {
-                        s.classList.remove('fas');
-                        s.classList.add('far');
-                    }
-                });
-            });
-            star.addEventListener('mouseleave', () => {
-                updateStars(currentRating); // Volta para a avaliação atual
-            });
-        });
-
-        updateStars(currentRating); // Define o estado inicial das estrelas
-    }
-
-    // Inline Form Validation Feedback (não presente no HTML atual, mas mantido para referência futura)
-    const inlineValidationForm = document.getElementById('inlineValidationForm');
-    const usernameInput = document.getElementById('username');
-    const emailInput = document.getElementById('email-validate');
-    const passwordInput = document.getElementById('password-validate');
-
-    const usernameFeedback = document.getElementById('usernameFeedback');
-    const emailFeedback = document.getElementById('emailFeedback');
-    const passwordFeedback = document.getElementById('passwordFeedback');
-
-    const validateField = (input, feedbackElement, validationFn, errorMessage) => {
-        if (validationFn(input.value)) {
-            feedbackElement.textContent = '';
-            input.classList.remove('is-invalid');
-            input.classList.add('is-valid');
-            return true;
-        } else {
-            feedbackElement.textContent = errorMessage;
-            input.classList.remove('is-valid');
-            input.classList.add('is-invalid');
-            return false;
-        }
-    };
-
-    const isUsernameValid = (username) => username.length >= 3;
-    const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const isPasswordValid = (password) => password.length >= 6;
-
-    if (inlineValidationForm) {
-        usernameInput.addEventListener('input', () => validateField(usernameInput, usernameFeedback, isUsernameValid, 'Mínimo de 3 caracteres.'));
-        emailInput.addEventListener('input', () => validateField(emailInput, emailFeedback, isEmailValid, 'Email inválido.'));
-        passwordInput.addEventListener('input', () => validateField(passwordInput, passwordFeedback, isPasswordValid, 'Mínimo de 6 caracteres.'));
-
-        inlineValidationForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const isFormValid =
-                validateField(usernameInput, usernameFeedback, isUsernameValid, 'Mínimo de 3 caracteres.') &&
-                validateField(emailInput, emailFeedback, isEmailValid, 'Email inválido.') &&
-                validateField(passwordInput, passwordFeedback, isPasswordValid, 'Mínimo de 6 caracteres.');
-
-            if (isFormValid) {
-                showCentralMessage('Formulário registrado com sucesso!');
-                inlineValidationForm.reset();
-                usernameInput.classList.remove('is-valid');
-                emailInput.classList.remove('is-valid');
-                passwordInput.classList.remove('is-valid');
-            } else {
-                showCentralMessage('Por favor, corrija os erros do formulário.');
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Spoiler Block (não presente no HTML atual, mas mantido para referência futura)
-    const spoilerToggle = document.getElementById('spoilerToggle');
-    const spoilerContent = document.getElementById('spoilerContent');
-
-    if (spoilerToggle && spoilerContent) {
-        spoilerToggle.addEventListener('click', () => {
-            spoilerContent.classList.toggle('hidden-content');
-            if (spoilerContent.classList.contains('hidden-content')) {
-                spoilerToggle.textContent = 'Clique para revelar o spoiler!';
-            } else {
-                spoilerToggle.textContent = 'Esconder spoiler';
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Hover Text Reveal (não presente no HTML atual, mas mantido para referência futura)
-    const hoverTextTrigger = document.getElementById('hoverTextTrigger');
-    const hoverImage = document.getElementById('hoverImage');
-
-    if (hoverTextTrigger && hoverImage) {
-        hoverTextTrigger.addEventListener('mouseenter', () => {
-            hoverImage.style.opacity = '1';
-            hoverImage.style.visibility = 'visible';
-        });
-        hoverTextTrigger.addEventListener('mouseleave', () => {
-            hoverImage.style.opacity = '0';
-            hoverImage.style.visibility = 'hidden';
-        });
-    }
 
     // Cookie Consent Banner (não presente no HTML atual, mas mantido para referência futura)
     const cookieBanner = document.getElementById('cookieBanner');
@@ -1386,7 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
             size: '7.0 MB',
             downloadLink: '#'
         },
-         {
+        {
             title: 'Mod de Decoração Moderna',
             category: 'Mod',
             description: 'Adicione móveis, blocos e elementos decorativos para casas modernas.',
@@ -1539,7 +895,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             // Re-bind click handlers for dynamically added cards
-             document.querySelectorAll('.card-download-btn').forEach(button => {
+            document.querySelectorAll('.card-download-btn').forEach(button => {
                 button.addEventListener('click', () => {
                     const modal = document.getElementById('download-modal');
                     const modalImage = document.getElementById('modal-image');
@@ -1606,5 +962,676 @@ document.addEventListener('DOMContentLoaded', () => {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    
+    // =====================================
+    // 7. ELEMENTOS
+    // =====================================
+
+    // Aguarda o documento estar completamente carregado
+    document.addEventListener('DOMContentLoaded', () => {
+        // Seleciona todos os elementos com a classe .stat-number
+        const counters = document.querySelectorAll('.stat-number');
+        const options = {
+            threshold: 0.5 // Aciona a animação quando 50% do elemento está visível
+        };
+
+        // Callback para o IntersectionObserver
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Inicia o contador
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let count = 0;
+                    const speed = 200; // Ajuste a velocidade da animação
+
+                    const updateCount = () => {
+                        const increment = target / speed;
+                        if (count < target) {
+                            count += increment;
+                            counter.innerText = Math.ceil(count);
+                            setTimeout(updateCount, 1);
+                        } else {
+                            counter.innerText = target.toLocaleString('pt-BR'); // Formata o número final
+                        }
+                    };
+
+                    updateCount();
+                    observer.unobserve(counter); // Para de observar após a animação
+                }
+            });
+        }, options);
+
+        // Começa a observar cada contador
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-image');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const imageUrl = item.getAttribute('data-image');
+                lightboxImg.src = imageUrl;
+                lightbox.classList.add('active');
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.querySelector('.testimonials-track');
+        const cards = Array.from(track.children);
+        const nextBtn = document.querySelector('.testimonials-carousel-container .next');
+        const prevBtn = document.querySelector('.testimonials-carousel-container .prev');
+        let cardWidth = cards[0].offsetWidth + 20; // width + margin
+
+        let currentIndex = 0;
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            track.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            track.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.tab-btn-advanced');
+        const contents = document.querySelectorAll('.tab-content-advanced');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressBars = document.querySelectorAll('.skill-progress');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const percent = entry.target.dataset.percent;
+                    entry.target.style.width = percent + '%';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        progressBars.forEach(bar => {
+            observer.observe(bar);
+        });
+    });
+
+
+
+
+    function showToast(title, message, type = 'success', duration = 5000) {
+        const toast = document.getElementById('toast-notification');
+        const toastTitle = toast.querySelector('.toast-title');
+        const toastMessage = toast.querySelector('.toast-message');
+        const toastIcon = toast.querySelector('.toast-icon i');
+
+        toastTitle.textContent = title;
+        toastMessage.textContent = message;
+
+        toast.classList.remove('error', 'success');
+        toastIcon.classList.remove('fa-check-circle', 'fa-times-circle');
+
+        if (type === 'error') {
+            toast.classList.add('error');
+            toastIcon.classList.add('fa-times-circle');
+        } else {
+            toast.classList.add('success');
+            toastIcon.classList.add('fa-check-circle');
+        }
+
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
+
+    document.getElementById('show-toast').addEventListener('click', () => {
+        showToast('Sucesso!', 'Você se conectou ao servidor com sucesso.');
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Checa o tema preferido do usuário ou o salvo no localStorage
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+        if (savedTheme === 'light') {
+            body.classList.add('light-theme');
+            themeToggleBtn.querySelector('i').className = 'fas fa-sun';
+        } else {
+            themeToggleBtn.querySelector('i').className = 'fas fa-moon';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                themeToggleBtn.querySelector('i').className = 'fas fa-moon';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.add('light-theme');
+                themeToggleBtn.querySelector('i').className = 'fas fa-sun';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const parentItem = question.parentElement;
+                parentItem.classList.toggle('active');
+            });
+        });
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const videoModal = document.getElementById('video-modal');
+        const openVideoModalBtn = document.getElementById('open-video-modal');
+        const closeVideoModalBtn = document.querySelector('.video-modal-close');
+        const videoIframe = document.getElementById('video-iframe');
+
+        // Substitua o ID do vídeo do YouTube aqui
+        const youtubeVideoId = 'dQw4w9WgXcQ'; 
+
+        openVideoModalBtn.addEventListener('click', () => {
+            videoIframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`;
+            videoModal.style.display = 'flex';
+        });
+
+        closeVideoModalBtn.addEventListener('click', () => {
+            videoIframe.src = ''; // Para parar o vídeo
+            videoModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === videoModal) {
+                videoIframe.src = '';
+                videoModal.style.display = 'none';
+            }
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const closeBtns = document.querySelectorAll('.close-alert-btn');
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.style.display = 'none';
+            });
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatBox = document.getElementById('chat-box');
+
+        // Função para adicionar uma mensagem
+        function addMessage(user, message, type = 'other') {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', `message-${type}`);
+            messageElement.innerHTML = `<strong>${user}:</strong> ${message}`;
+            chatBox.prepend(messageElement); // Adiciona no início para o "flex-direction: column-reverse"
+        }
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = chatInput.value.trim();
+            if (message) {
+                // Simula uma mensagem do usuário
+                addMessage('Você', message, 'user');
+                chatInput.value = '';
+
+                // Simula uma resposta
+                setTimeout(() => {
+                    const botResponse = "Obrigado pela sua mensagem!";
+                    addMessage('Admin', botResponse, 'other');
+                }, 1000);
+            }
+        });
+
+        // Mensagens iniciais para demonstração
+        addMessage('Admin', 'Bem-vindo ao chat da comunidade!');
+        addMessage('Player1', 'Alguém online para jogar?');
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const newsTrack = document.querySelector('.news-track');
+        const newsCards = Array.from(newsTrack.children);
+        const newsNextBtn = document.querySelector('.news-nav.next');
+        const newsPrevBtn = document.querySelector('.news-nav.prev');
+        let cardWidth = newsCards[0].offsetWidth + 20;
+
+        let currentIndex = 0;
+
+        newsNextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % newsCards.length;
+            newsTrack.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+        });
+
+        newsPrevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + newsCards.length) % newsCards.length;
+            newsTrack.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const newsletterForm = document.getElementById('newsletter-form');
+        const newsletterEmail = document.getElementById('newsletter-email');
+        const newsletterMessage = document.getElementById('newsletter-message');
+
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterEmail.value.trim();
+
+            if (email === "") {
+                newsletterMessage.textContent = 'Por favor, digite um e-mail válido.';
+                newsletterMessage.classList.add('error');
+                newsletterMessage.classList.remove('success');
+                return;
+            }
+
+            // Simula o envio
+            setTimeout(() => {
+                newsletterMessage.textContent = 'E-mail cadastrado com sucesso!';
+                newsletterMessage.classList.add('success');
+                newsletterMessage.classList.remove('error');
+                newsletterEmail.value = '';
+            }, 1000);
+        });
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const stars = document.querySelectorAll('.stars i');
+        const ratingText = document.getElementById('rating-text');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = star.dataset.rating;
+                ratingText.textContent = `Você avaliou com ${rating} estrelas!`;
+
+                stars.forEach(s => {
+                    if (s.dataset.rating <= rating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Defina a data do evento (Ano, Mês-1, Dia, Hora, Minuto, Segundo)
+        const eventDate = new Date('2025-12-25T00:00:00').getTime();
+
+        const countdown = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days < 10 ? `0${days}` : days;
+            document.getElementById('hours').textContent = hours < 10 ? `0${hours}` : hours;
+            document.getElementById('minutes').textContent = minutes < 10 ? `0${minutes}` : minutes;
+            document.getElementById('seconds').textContent = seconds < 10 ? `0${seconds}` : seconds;
+
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById('countdown').innerHTML = "O evento já começou!";
+            }
+        }, 1000);
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const faqSearch = document.getElementById('faq-search');
+        const faqItems = document.querySelectorAll('.faq-item');
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqSearch.addEventListener('keyup', () => {
+            const searchTerm = faqSearch.value.toLowerCase();
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('h4').textContent.toLowerCase();
+                const tags = item.dataset.tags.toLowerCase();
+
+                if (question.includes(searchTerm) || tags.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const parentItem = question.parentElement;
+                parentItem.classList.toggle('active');
+            });
+        });
+    });
+
+    // O JavaScript pode ser usado aqui para buscar dados de uma API
+    // TABELA DE ESTATÍSTICAS DO SERVIDOR <-------------------
+    // e atualizar a tabela dinamicamente. Exemplo:
+    // function fetchServerStats() {
+    //    fetch('/api/server-stats')
+    //        .then(response => response.json())
+    //        .then(data => {
+    //            document.getElementById('players-online').textContent = data.playersOnline;
+    //            document.getElementById('server-version').textContent = data.serverVersion;
+    //            document.getElementById('uptime').textContent = data.uptime;
+    //            document.getElementById('last-update').textContent = data.lastUpdate;
+    //        });
+    // }
+    // fetchServerStats();
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const heartBtn = document.querySelector('.btn-heart');
+        const heartIcon = heartBtn.querySelector('i');
+        const heartSpan = heartBtn.querySelector('span');
+        let isLiked = false;
+        let likes = 50;
+
+        heartBtn.addEventListener('click', () => {
+            isLiked = !isLiked;
+            if (isLiked) {
+                likes++;
+                heartIcon.classList.remove('far');
+                heartIcon.classList.add('fas');
+                heartBtn.classList.add('active');
+            } else {
+                likes--;
+                heartIcon.classList.remove('fas');
+                heartIcon.classList.add('far');
+                heartBtn.classList.remove('active');
+            }
+            heartSpan.textContent = `${likes} Curtidas`;
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const memberCards = document.querySelectorAll('.team-member-modal');
+        const memberModal = document.getElementById('member-modal');
+        const memberDetailsContent = document.getElementById('member-details-content');
+        const closeBtn = document.querySelector('#member-modal .close-btn');
+
+        const membersData = {
+            steve: {
+                name: 'Steve O Construtor',
+                role: 'Admin Chefe',
+                image: 'assets/img/player1.png',
+                bio: 'Steve é o cérebro por trás de todas as nossas construções épicas. Com mais de 10 anos de experiência, ele garante que nosso servidor seja o mais belo e funcional de todos.',
+                discord: '@steve_builder'
+            },
+            alex: {
+                name: 'Alex A Exploradora',
+                role: 'Moderadora Sênior',
+                image: 'assets/img/player2.png',
+                bio: 'Alex é a responsável por guiar os novos jogadores e manter a paz na comunidade. Sua dedicação e paciência a tornam um pilar essencial para o nosso servidor.',
+                discord: '@alex_explorer'
+            }
+        };
+
+        memberCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const memberId = card.dataset.memberId;
+                const member = membersData[memberId];
+
+                memberDetailsContent.innerHTML = `
+                    <img src="${member.image}" alt="${member.name}">
+                    <h4>${member.name}</h4>
+                    <p class="role">${member.role}</p>
+                    <p class="bio">${member.bio}</p>
+                    <p class="discord"><strong>Discord:</strong> ${member.discord}</p>
+                `;
+
+                memberModal.style.display = 'flex';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            memberModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === memberModal) {
+                memberModal.style.display = 'none';
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('dynamic-search');
+        const resultsBox = document.getElementById('search-results-box');
+
+        const availableResults = [
+            { title: "Planos de Acesso", url: "#pricing" },
+            { title: "Nossa Equipe", url: "#team" },
+            { title: "Últimas Notícias", url: "#news" },
+            { title: "Perguntas Frequentes", url: "#faq" },
+            { title: "Conecte-se ao Servidor", url: "#connect" },
+            { title: "Trailer do Servidor", url: "#video" }
+        ];
+
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            resultsBox.innerHTML = '';
+
+            if (searchTerm.length > 1) {
+                const filteredResults = availableResults.filter(item => item.title.toLowerCase().includes(searchTerm));
+
+                if (filteredResults.length > 0) {
+                    filteredResults.forEach(item => {
+                        const resultItem = document.createElement('a');
+                        resultItem.classList.add('search-result-item');
+                        resultItem.textContent = item.title;
+                        resultItem.href = item.url;
+                        resultsBox.appendChild(resultItem);
+                    });
+                    resultsBox.style.display = 'block';
+                } else {
+                    resultsBox.style.display = 'none';
+                }
+            } else {
+                resultsBox.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container-dynamic')) {
+                resultsBox.style.display = 'none';
+            }
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const audioPlayer = document.getElementById('audio-player');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const trackTitle = document.getElementById('track-title');
+        const trackArtist = document.getElementById('track-artist');
+        const albumCoverImg = document.getElementById('album-cover-img');
+
+        const playlist = [
+            {
+                title: 'Música da Floresta',
+                artist: 'Compositor A',
+                src: 'assets/audio/song1.mp3',
+                cover: 'assets/img/album1.jpg'
+            },
+            {
+                title: 'Tema do Castelo',
+                artist: 'Compositor B',
+                src: 'assets/audio/song2.mp3',
+                cover: 'assets/img/album2.jpg'
+            },
+            {
+                title: 'Mina Profunda',
+                artist: 'Compositor C',
+                src: 'assets/audio/song3.mp3',
+                cover: 'assets/img/album3.jpg'
+            }
+        ];
+
+        let currentTrackIndex = 0;
+
+        function loadTrack(index) {
+            const track = playlist[index];
+            audioPlayer.src = track.src;
+            trackTitle.textContent = track.title;
+            trackArtist.textContent = track.artist;
+            albumCoverImg.src = track.cover;
+            audioPlayer.load();
+        }
+
+        function togglePlayPause() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseBtn.querySelector('i').className = 'fas fa-pause';
+            } else {
+                audioPlayer.pause();
+                playPauseBtn.querySelector('i').className = 'fas fa-play';
+            }
+        }
+
+        function playNext() {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            loadTrack(currentTrackIndex);
+            audioPlayer.play();
+        }
+
+        function playPrev() {
+            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            loadTrack(currentTrackIndex);
+            audioPlayer.play();
+        }
+
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        nextBtn.addEventListener('click', playNext);
+        prevBtn.addEventListener('click', playPrev);
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+        });
+
+        audioPlayer.addEventListener('ended', playNext);
+
+        loadTrack(currentTrackIndex);
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const testimonialText = document.getElementById('testimonial-text');
+        const testimonialAuthorName = document.getElementById('testimonial-author-name');
+        const testimonials = [
+            {
+                text: "O melhor servidor que já joguei! A comunidade é super receptiva e os eventos são muito divertidos.",
+                author: "João 'PlayerPro'",
+                avatar: "assets/img/avatar1.png"
+            },
+            {
+                text: "Sempre encontro algo novo para fazer. A equipe se dedica muito e está sempre atenta às sugestões.",
+                author: "Maria 'Mineira'",
+                avatar: "assets/img/avatar2.png"
+            },
+            {
+                text: "O servidor é bem otimizado e nunca tive problemas de lag. Recomendo para todos os fãs de Minecraft!",
+                author: "Pedro 'ConstrutorX'",
+                avatar: "assets/img/avatar3.png"
+            }
+        ];
+
+        let currentTestimonialIndex = 0;
+        let charIndex = 0;
+        const typingSpeed = 50;
+
+        function typeWriterEffect() {
+            const currentTestimonial = testimonials[currentTestimonialIndex];
+            if (charIndex < currentTestimonial.text.length) {
+                testimonialText.textContent += currentTestimonial.text.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriterEffect, typingSpeed);
+            } else {
+                testimonialAuthorName.textContent = currentTestimonial.author;
+                testimonialText.style.borderColor = 'transparent';
+                setTimeout(nextTestimonial, 3000); // 3 segundos antes do próximo
+            }
+        }
+
+        function nextTestimonial() {
+            currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+            charIndex = 0;
+            testimonialText.textContent = '';
+            typeWriterEffect();
+        }
+
+        typeWriterEffect();
+    });
+  
 });
