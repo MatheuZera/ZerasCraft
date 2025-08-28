@@ -1,66 +1,65 @@
 /*
- * style.css - Estilos para o site Mundo Zera's Craft
- * Gerado com base na estrutura HTML fornecida e aprimorado para multi-páginas.
+ * style.css - Dagiti estilo para iti site ti Mundo Zera's Craft
+ * Nabukel manipud iti naited a HTML structure ken napasayaat para iti multi-pahina.
  */
 
 /* ===================================== */
-/* 0. Variáveis e Reset Básico           */
+/* 0. Dagiti Variables ken Basic Reset           */
 /* ===================================== */
 
 :root {
-    /* Cores */
-    --cor-primaria: #4CAF50; /* Verde vibrante para botões e destaques (Minecraft Green) */
-    --cor-secundaria: #388E3C; /* Um verde um pouco mais escuro, para hover, por exemplo */
-    --cor-terciaria: #2E7D32; /* Verde mais escuro para fundos alternativos */
-    --cor-texto-claro: #ECF0F1; /* Cinza claro para textos em fundos escuros */
-    --cor-texto-escuro: #2C3E50; /* Azul escuro para textos em fundos claros */
-    --cor-fundo-claro: #F8F9FA; /* Branco quase puro para seções claras */
-    --cor-fundo-escuro: #1A1A1A; /* Preto quase puro para fundos escuros */
-    --cor-destaque: #FFD700; /* Dourado para ícones de destaque ou títulos (Gold ingot) */
-    --cor-bordas: rgba(255, 255, 255, 0.1); /* Bordas sutis */
-    --cor-card-bg: #2C3E50; /* Fundo dos cards (azul escuro Minecraft-like) */
-    --cor-card-text: #ECF0F1; /* Texto dos cards (cinza claro) */
-    --cor-card-hover: #34495E; /* Fundo dos cards ao passar o mouse */
-    --cor-link: #8bc34a; /* Cor de link padrão (light green) */
-    --cor-link-hover: #aed581; /* Cor de link ao passar o mouse */
-    --cor-btn-text: #FFFFFF; /* Texto dos botões */
+    /* Dagiti Kolor */
+    --cor-primaria: #4CAF50; /* Berde a kolor para kadagiti buton ken highlights (Minecraft Green) */
+    --cor-secundaria: #388E3C; /* Narigat a berde, para iti hover, kas pagarigan */
+    --cor-terciaria: #2E7D32; /* Narigat a berde para iti alternate backgrounds */
+    --cor-texto-claro: #ECF0F1; /* Narigat a gray para kadagiti text iti nasisinit a background */
+    --cor-texto-escuro: #2C3E50; /* Nasinit a asul para kadagiti text iti nalaaw a background */
+    --cor-fundo-claro: #F8F9FA; /* Nagalis a puraw para kadagiti nalaaw a section */
+    --cor-fundo-escuro: #1A1A1A; /* Nagalis a nangisit para kadagiti nasisinit a background */
+    --cor-destaque: #FFD700; /* Balitok para kadagiti highlight icons wenno titles (Gold ingot) */
+    --cor-bordas: rgba(255, 255, 255, 0.1); /* Subtle borders */
+    --cor-card-bg: #2C3E50; /* Background ti cards (nasisinit a asul a kasla Minecraft) */
+    --cor-card-text: #ECF0F1; /* Text ti cards (narigat a gray) */
+    --cor-card-hover: #34495E; /* Background ti cards no i-hover ti mouse */
+    --cor-link: #8bc34a; /* Default link color (light green) */
+    --cor-link-hover: #aed581; /* Link color no i-hover ti mouse */
+    --cor-btn-text: #FFFFFF; /* Text ti buton */
 
-    /* Cores do neon (ajuste para o seu verde/ciano neon) */
-    --neon-flame-color1: #00FF00; /* Verde Neon */
-    --neon-flame-color2: #00FFFF; /* Ciano Neon */
-    --neon-flame-color1-rgb: 0, 255, 0; /* RGB para sombras */
-    --neon-flame-color2-rgb: 0, 255, 255; /* RGB para sombras */
+    /* Dagiti kolor ti neon (adjust para iti berde/ciano a neon) */
+    --neon-flame-color1: #00FF00; /* Berde a Neon */
+    --neon-flame-color2: #00FFFF; /* Ciano a Neon */
+    --neon-flame-color1-rgb: 0, 255, 0; /* RGB para iti shadows */
+    --neon-flame-color2-rgb: 0, 255, 255; /* RGB para iti shadows */
 
-    /* Fontes */
-    --fonte-titulo: 'Montserrat', sans-serif; /* Usando Montserrat, que é mais robusta para títulos */
-    --fonte-corpo: 'Roboto', sans-serif; /* Roboto para o corpo do texto, legível */
-    --fonte-pixel: 'Press Start 2P', cursive; /* Nova fonte para um toque pixelado, se desejar */
+    /* Dagiti Font */
+    --fonte-titulo: 'Montserrat', sans-serif; /* Usar ti Montserrat, a nabileg para iti titles */
+    --fonte-corpo: 'Roboto', sans-serif; /* Roboto para iti body text, nalaka a basaen */
+    --fonte-pixel: 'Pixelify Sans', sans-serif; /* Usar ti Pixelify Sans para iti pixelated look */
 
 
-    /* Espaçamentos e Tamanhos */
-    --padding-section: 80px 0; /* Preenchimento padrão para seções, ajustado para 80px */
-    --padding-card: 25px; /* Preenchimento interno dos cards */
-    --gap-grid: 30px; /* Espaço entre itens de grid */
-    --border-radius: 8px; /* Borda arredondada padrão */
-    --max-width-content: 1200px; /* Largura máxima do conteúdo */
+    /* Spacing ken Sizes */
+    --padding-section: 80px 0; /* Default padding para iti section, naadjust iti 80px */
+    --padding-card: 25px; /* Internal padding ti cards */
+    --gap-grid: 30px; /* Space between grid items */
+    --border-radius: 8px; /* Default rounded border */
+    --max-width-content: 1200px; /* Maximum content width */
 
-    /* Sombras */
+    /* Shadows */
     --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
     --sombra-card: 0 8px 16px rgba(0, 0, 0, 0.4);
-    --sombra-card-hover: 0 12px 24px rgba(0, 0, 0, 0.6); /* Mais forte para hover */
+    --sombra-card-hover: 0 12px 24px rgba(0, 0, 0, 0.6); /* Napigpigsa para iti hover */
 
-    /* Transições */
-    --transicao-padrao: all 0.3s ease-in-out; /* Aumentei para 0.3s para suavidade */
+    /* Transitions */
+    --transicao-padrao: all 0.3s ease-in-out; /* Inadduan iti 0.3s para iti kinanalamuyot */
     --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
-    --transicao-icon-rotate: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva mais interessante para a rotação do ícone */
+    --transicao-icon-rotate: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Ad-adu a nakapimpintas a kurba para iti icon rotation */
 }
 
-/* Importar fontes do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&family=Press+Start+2P&display=swap');
+/* Import fonts manipud iti Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap');
 
 
-/* Reset Básico para consistência entre navegadores */
+/* Basic Reset para iti consistency kadagiti browser */
 *,
 *::before,
 *::after {
@@ -75,17 +74,17 @@ body {
     color: var(--cor-texto-claro);
     background-color: var(--cor-fundo-escuro);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden; /* Evita barra de rolagem horizontal */
-    padding-bottom: 80px; /* Adiciona preenchimento para a barra de áudio fixa */
+    -moz-osx-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Ilisan ti horizontal scrollbar */
+    padding-bottom: 80px; /* Inadduan ti padding-bottom para iti fixed audio bar (desktop) */
 }
 
-/* Adicionado para controlar a rolagem quando o menu mobile está aberto */
+/* Inadduan tapno makontrol ti scroll no nakalukat ti mobile menu */
 body.no-scroll {
     overflow: hidden;
 }
 
-/* Base para links */
+/* Base para iti links */
 a {
     color: var(--cor-link);
     text-decoration: none;
@@ -97,7 +96,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Base para títulos */
+/* Base para iti titles */
 h1,
 h2,
 h3,
@@ -108,7 +107,7 @@ h6 {
     color: var(--cor-texto-claro);
     margin-bottom: 0.8em;
     line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra suave para todos os títulos */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Soft shadow para iti amin a titles */
 }
 
 h1 {
@@ -135,7 +134,7 @@ ul {
     list-style: none;
 }
 
-/* Classes de utilidade para espaçamento e alinhamento */
+/* Utility classes para iti spacing ken alignment */
 .margin-bottom-30 {
     margin-bottom: 30px !important;
 }
@@ -164,12 +163,12 @@ ul {
 }
 
 
-/* Mensagem Centralizada (para notificações de cópia/áudio) */
+/* Centralized Message (para iti user feedback) */
 .central-message {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -20px); /* Inicialmente um pouco acima do centro */
+    transform: translate(-50%, -20px); /* Agpang iti ngato ti sentro */
     background-color: rgba(0, 0, 0, 0.8);
     color: var(--cor-destaque);
     padding: 15px 30px;
@@ -181,18 +180,18 @@ ul {
     font-size: 1.1em;
     font-weight: bold;
     text-align: center;
-    pointer-events: none; /* Permite clicar através dele */
+    pointer-events: none; /* Mangpalubos a mang-klik iti daytoy */
     box-shadow: var(--sombra-card);
 }
 
 .central-message.show {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, 0); /* Desliza para o centro */
+    transform: translate(-50%, 0); /* Agtengngel iti sentro */
 }
 
 /* ===================================== */
-/* 1. Layout Geral e Contêineres */
+/* 1. General Layout ken Containers */
 /* ===================================== */
 .container {
     max-width: var(--max-width-content);
@@ -205,38 +204,38 @@ ul {
 }
 
 .section-alt-bg {
-    background-color: var(--cor-terciaria); /* Fundo verde mais escuro */
+    background-color: var(--cor-terciaria); /* Nasisinit a berde a background */
 }
 
-/* Flexbox para duas colunas */
+/* Flexbox para iti two columns */
 .content-two-columns {
     display: flex;
-    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+    flex-wrap: wrap; /* Mangpalubos a mabuong ti linya kadagiti bassit a screen */
     gap: var(--gap-grid);
     align-items: center;
-    justify-content: center; /* Centraliza as colunas em telas maiores */
+    justify-content: center; /* Mangisentro kadagiti columns kadagiti dakkel a screen */
 }
 
 .content-two-columns .text-content,
 .content-two-columns .image-content {
-    flex: 1; /* Permite que ambos os itens cresçam igualmente */
-    min-width: 300px; /* Garante que os itens não fiquem muito estreitos */
+    flex: 1; /* Mangpalubos a bumato nga agpada dagiti dua nga item */
+    min-width: 300px; /* Mangsigurado a saan a nakakaladkad dagiti item */
 }
 
 .responsive-image {
     max-width: 100%;
     height: auto;
-    display: block; /* Remove espaçamento extra abaixo da imagem */
+    display: block; /* Ilisan ti extra spacing iti baba ti ladawan */
     border-radius: var(--border-radius);
 }
 
 .bordered-image {
-    border: 3px solid var(--cor-primaria); /* Borda primária para imagens de destaque */
+    border: 3px solid var(--cor-primaria); /* Primary border para iti featured images */
     box-shadow: var(--sombra-card);
 }
 
-/* Seções com efeito de fade-in na rolagem */
-/* FORÇA AS SEÇÕES A FICAREM SEMPRE VISÍVEIS, SOBRESCREVENDO A ANIMAÇÃO */
+/* Sections nga adda fade-in effect iti scroll */
+/* FORCE SECTIONS TO ALWAYS BE VISIBLE, OVERRIDING ANIMATION */
 .fade-in-section {
     opacity: 1 !important;
     transform: none !important;
@@ -249,47 +248,47 @@ ul {
     transition: none !important;
 }
 
-/* =====================================
-2. Cabeçalho e Navegação (Mobile-First)
-===================================== */
-/* Estilos de Cabeçalho Comuns a Todos os Dispositivos */
+/* ===================================== */
+/* 2. Header ken Navigation (Narebisa) */
+/* ===================================== */
 .main-header {
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1001;
-    background-color: rgba(26, 26, 26, 0.7);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: rgba(26, 26, 26, 0.85); /* Ad-adu a opacity ken nasisinit a background */
+    backdrop-filter: blur(8px); /* Napigpigsa a blur effect */
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4); /* Ad-adu a pronunsia a shadow */
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Mangisentro ti content iti horizontal */
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 0; /* Vertical padding naadjust, horizontal nakontrol iti container */
+    height: 70px; /* Fixed height para iti header */
 }
-.header-content-wrapper { /* Novo wrapper para o conteúdo do header na página de componentes */
+
+.header-content-wrapper { /* Wrapper ti header content */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Agpalpalawlaw ti espasyo ti logo ken nav */
     align-items: center;
     width: 100%;
+    max-width: var(--max-width-content); /* Limitan ti content width */
+    padding: 0 20px; /* Inadduan ti internal padding */
 }
 
 .header-logo {
-    font-family: 'Pixelify Sans', sans-serif; /* Usando Pixelify Sans */
-    font-size: 1.5em;
-    color: #c4d96a;
+    font-family: var(--fonte-pixel); /* Usar ti Pixelify Sans */
+    font-size: 1.8em; /* Dakdakkel a size para iti logo iti desktop */
+    color: #c4d96a; /* Kolor ti logo */
     text-transform: uppercase;
     font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    margin-right: auto; /* Empurra o logo para a esquerda */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Napigpigsa a shadow */
+    margin-right: 20px; /* Espasyo iti kanawan ti logo */
+    flex-shrink: 0; /* Manglapped ti logo a bumaba */
 }
 
-/* Oculta o menu de navegação por padrão (estilo Mobile-First) */
-.main-nav {
-    display: none;
-}
-/* Estilo para a animação do título do header */
+/* Style para iti animation ti header title */
 .header-logo[data-text]:hover {
     animation: neonGlow 1.5s infinite alternate;
 }
@@ -314,17 +313,24 @@ ul {
 
 
 /* =====================================
-Menu de Navegação para Mobile (Até 768px)
+Navigation Menu para iti Mobile (Agtultuloy iti 768px)
 ===================================== */
 @media (max-width: 768px) {
+    .main-header {
+        height: 60px; /* Bassit a height para iti mobile header */
+        padding: 5px 0;
+    }
+    .header-content-wrapper {
+        padding: 0 35px; /* Bassit a padding iti mobile */
+    }
 
-    /* Exibe o botão de hambúrguer apenas em mobile */
+    /* Ipakita ti hamburger button laeng iti mobile */
     .menu-toggle {
         display: block;
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        font-size: 2em;
+        position: fixed; /* Fixed para iti nasaysayaat a access */
+        top: 10px; /* Naadjust a ngato */
+        right: 10px; /* Naadjust iti kanawan */
+        font-size: 1.8em; /* Bassit a font size */
         color: #f0f0f0;
         background: none;
         border: none;
@@ -339,24 +345,26 @@ Menu de Navegação para Mobile (Até 768px)
         color: #72ef85;
     }
 
-    /* O menu lateral desliza para a direita e otimizado para rolar */
+    /* Off-canvas mobile menu */
     .main-nav {
         display: flex;
         position: fixed;
         top: 0;
-        left: -100%; /* Começa oculto */
+        left: -100%; /* Agpang a nakalimed */
         width: 100%;
-        height: 100vh; /* Ocupa a altura total da viewport */
-        background-color: rgba(26, 26, 26, 0.95);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
+        max-width: 280px; /* Limitan ti width ti mobile menu */
+        height: 100vh; /* Mangsakup ti intero a viewport height */
+        background-color: rgba(26, 26, 26, 0.98); /* Nasisinit a background */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         flex-direction: column;
-        justify-content: flex-start; /* Alinha o conteúdo ao topo */
+        justify-content: flex-start; /* Ag-align ti content iti ngato */
         align-items: center;
         transition: left 0.5s ease-in-out;
         z-index: 999;
-        overflow-y: auto; /* Permite rolagem se o conteúdo for muito longo */
-        padding-top: 80px; /* Espaço para o cabeçalho fixo */
+        overflow-y: auto; /* Mangpalubos ti scroll no dakkel ti content */
+        padding-top: 70px; /* Espasyo para iti fixed header (60px header + 10px spacing) */
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); /* Side shadow */
     }
 
     .main-nav.active {
@@ -373,11 +381,15 @@ Menu de Navegação para Mobile (Até 768px)
 
     .main-nav a {
         display: block;
-        padding: 20px;
-        font-size: 1.5em;
+        padding: 15px; /* Bassit a padding para iti mobile */
+        font-size: 1.2em; /* Bassit a font size para iti mobile */
         color: #f0f0f0;
         text-decoration: none;
         transition: background-color 0.3s ease, color 0.3s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separator */
+    }
+    .main-nav ul li:last-child a {
+        border-bottom: none; /* Ilisan ti border iti last item */
     }
 
     .main-nav a:hover,
@@ -385,19 +397,24 @@ Menu de Navegação para Mobile (Até 768px)
         background-color: rgba(114, 239, 133, 0.1);
         color: #72ef85;
     }
+
+    .header-logo {
+        font-size: 1.2em; /* Bassit a logo iti mobile */
+        margin-right: 10px; /* Bassit a kanawan a margin */
+    }
 }
 
 /* =====================================
-Menu de Navegação para Desktop (A partir de 769px)
+Navigation Menu para iti Desktop (Manipud iti 769px)
 ===================================== */
 @media (min-width: 769px) {
 
-    /* Garante que o botão de hambúrguer não apareça */
+    /* Siguradoen a saan nga aggapu ti hamburger button */
     .menu-toggle {
         display: none;
     }
 
-    /* Exibe o menu de navegação horizontal */
+    /* Ipakita ti horizontal navigation menu */
     .main-nav {
         display: block;
         position: static;
@@ -406,6 +423,8 @@ Menu de Navegação para Desktop (A partir de 769px)
         background: none;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
+        box-shadow: none;
+        flex-grow: 1; /* PERMITIR QUE A NAVEGAÇÃO OCUPE O ESPAÇO RESTANTE */
     }
 
     .main-nav ul {
@@ -413,25 +432,29 @@ Menu de Navegação para Desktop (A partir de 769px)
         list-style: none;
         padding: 0;
         margin: 0;
-        gap: 20px;
+        gap: 20px; /* Naurnos a spacing kadagiti links */
         align-items: center;
+        justify-content: flex-end; /* ALINHAR OS ITENS À DIREITA DA NAVEGAÇÃO */
+        flex-wrap: nowrap; /* Impeduan ti panagsina ti linya */
+        width: 100%; /* Garante que a UL ocupe o espaço disponível dentro do main-nav */
     }
 
     .main-nav a {
         color: #f0f0f0;
-        font-weight: 200;
+        font-weight: 400; /* Nanam-ay a thickness */
         text-decoration: none;
         padding: 5px 0;
         position: relative;
         transition: color 0.3s ease;
+        white-space: nowrap; /* Impeduan ti panagsina ti linya kadagiti desktop links */
     }
 
     .main-nav a:hover {
-        color: #72ef85;
+        color: var(--cor-primaria); /* Usar ti primary color iti hover */
     }
 
     .main-nav a.active {
-        color: #72ef85;
+        color: var(--cor-primaria);
     }
 
     .main-nav a::after {
@@ -441,7 +464,7 @@ Menu de Navegação para Desktop (A partir de 769px)
         left: 0;
         width: 0;
         height: 2px;
-        background-color: #72ef85;
+        background-color: var(--cor-primaria); /* Berde a highlight line */
         transition: width 0.3s ease;
     }
 
@@ -451,13 +474,14 @@ Menu de Navegação para Desktop (A partir de 769px)
     }
 }
 
+
 /* ===================================== */
-/* 3. Seção Hero (Destaque Principal) */
+/* 3. Hero Section (Main Highlight) - Naurnos */
 /* ===================================== */
 .hero-section {
     position: relative;
     width: 100%;
-    height: 600px; /* Altura do seu banner. Ajuste este valor conforme desejar. */
+    height: 600px; /* Height ti banner. Adjust daytoy a value kas iti kayatmo. */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -467,51 +491,55 @@ Menu de Navegação para Desktop (A partir de 769px)
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    background-image: url('assets/images/1.site/banner-fundo.gif'); /* Caminho ajustado */
+    background-image: url('assets/images/1.site/banner-fundo.gif'); /* Naadjust a dalan */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     /* background-attachment: fixed; */
 }
 
-/* Para Hero Sections menores em outras páginas */
+/* Para kadagiti bassit a Hero Sections kadagiti dadduma a pahina */
 .hero-section.small-hero {
-    height: 350px; /* Altura reduzida para páginas internas */
+    height: 350px; /* Bassit a height para iti internal pages */
 }
 
-/* Camada de sobreposição escura para melhorar a legibilidade do texto no banner */
+/* Dark overlay layer tapno mapasayaat ti readability ti text iti banner */
 .hero-image-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
+    background-color: rgba(0, 0, 0, 0.5); /* Nangisit a kolor nga addaan 50% opacity */
     z-index: 1;
 }
 
-/* Estilos para o conteúdo dentro do banner (título, subtítulo, botões, ícone) */
+/* Styles para iti content iti uneg ti banner (logo, titulo, subtitulo, buton) */
 .hero-content {
     position: relative;
     z-index: 2;
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    /* Adicionado para empurrar o conteúdo para baixo da barra de navegação */
-    padding-top: 100px; /* Ajuste este valor conforme a altura da sua barra de navegação */
+    padding-top: 100px; /* Naadjust tapno mangted iti espasyo iti fixed header */
+    display: flex; /* Mangaramid iti flexbox */
+    flex-direction: column; /* Mangurnos kadagiti annak iti column */
+    align-items: center; /* Mangisentro iti horizontal */
+    justify-content: center; /* Mangisentro iti vertical */
+    gap: 20px; /* Spacing kadagiti elemento ti hero-content */
 }
 
-/* Estilos para o branding do servidor (o ícone da raposa) */
+/* Styles para iti server branding (ti fox icon) */
 .server-branding {
-    margin-bottom: 20px;
+    margin-bottom: 0; /* Naala ti negative margin, ti gap ti parent ket mangkontrol ti spacing */
 }
 
 .server-branding .server-icon {
     width: 150px;
     height: 150px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px var(--cor-primaria)); /* Brilho primário ao redor do ícone */
-    animation: pulseGlow 2s infinite alternate; /* Animação de brilho pulsante */
+    filter: drop-shadow(0 0 10px var(--cor-primaria)); /* Primary glow around the icon */
+    animation: pulseGlow 2s infinite alternate; /* Pulsing glow animation */
 }
 
 @keyframes pulseGlow {
@@ -523,29 +551,112 @@ Menu de Navegação para Desktop (A partir de 769px)
     }
 }
 
-/* Estilos para o título principal no banner */
+/* Styles para iti main title iti banner */
 .hero-section h1 {
     font-size: 4em;
-    margin-bottom: 15px;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9), 0 0 15px rgba(var(--neon-flame-color1-rgb), 0.7); /* Brilho neon no título */
+    margin-bottom: 0; /* Naala ti negative margin, ti gap ti parent ket mangkontrol ti spacing */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9), 0 0 15px rgba(var(--neon-flame-color1-rgb), 0.7); /* Neon glow iti title */
     line-height: 1.2;
     font-weight: bold;
+    white-space: nowrap; /* Manglapped ti panagsina ti linya iti desktop */
 }
 
-/* Estilos para o subtítulo no banner */
+/* Styles para iti subtitle iti banner */
 .hero-section .hero-subtitle {
     font-size: 1.6em;
-    margin-bottom: 20px;
+    margin-bottom: 0; /* Naala ti margin, ti gap ti parent ket mangkontrol ti spacing */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     line-height: 1.5;
 }
 
-/* Estilos para os links sociais/botões no banner */
+/* Styles para iti social links/buttons iti banner */
 .hero-social-links {
-    display: flex;
+    display: flex; /* Naurnos iti flex */
     gap: 20px;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Mangpalubos ti panagsina ti linya kadagiti bassit a screen */
+    margin-top: 20px; /* Manginayon ti extra space iti baet ti subtitulo ken dagiti buton */
+}
+
+/* Media Query para kadagiti bassit a screen */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 380px; /* Naadjust a height para iti mobile, ad-adu a compact */
+        padding: 10px; /* Bassit a padding iti hero section */
+    }
+
+    .hero-content {
+        padding-top: 70px; /* Naadjust a padding-top para iti mobile nav-bar height (60px header + 10px spacing) */
+        gap: 10px; /* Bassit a gap para iti mobile, tapno ad-adu a compact */
+    }
+
+    .server-branding .server-icon {
+        width: 70px; /* Bassit a icon iti mobile */
+        height: 70px;
+    }
+
+    .hero-section h1 {
+        font-size: 7vw; /* Responsive font iti based ti viewport width tapno mailisan ti panagsina ti linya */
+        white-space: normal; /* Mangpalubos ti panagsina ti linya no nasken unay */
+        line-height: 1.1; /* Nasiit a line-height para iti title */
+        padding: 0 8px; /* Manginayon ti padding tapno saan a dumket kadagiti igid */
+    }
+
+    .hero-section .hero-subtitle {
+        font-size: 0.85em; /* Bassit a font para iti subtitulo iti mobile */
+        padding: 0 8px; /* Manginayon ti bassit a horizontal padding tapno saan a dumket kadagiti igid */
+    }
+
+    .hero-social-links {
+        flex-direction: column; /* Mangurnos kadagiti buton iti column iti mobile */
+        gap: 8px; /* Bassit a gap kadagiti buton iti mobile */
+        margin-top: 10px; /* Naadjust a margin para iti mobile */
+        width: 90%; /* Mangsakup ti 90% ti container width para kadagiti buton */
+        max-width: 280px; /* Limitan ti maximum width dagiti buton */
+    }
+
+    .hero-social-links .btn-primary {
+        width: 100%; /* Ti buton ket sakupenna ti 100% ti parent container width (`hero-social-links`) */
+        padding: 8px 15px; /* Bassit a padding para kadagiti buton iti mobile */
+        font-size: 0.85em; /* Bassit a font para kadagiti buton iti mobile */
+    }
+}
+
+/* Media Query para kadagiti bassit a screen (e.g. ~320px - 400px) */
+@media (max-width: 480px) {
+    .hero-section {
+        height: 320px; /* Ad-adu a compact height para kadagiti bassit unay a screen */
+    }
+
+    .hero-content {
+        padding-top: 60px; /* Naadjust a padding-top */
+        gap: 8px; /* Bassit a gap */
+    }
+
+    .server-branding .server-icon {
+        width: 50px; /* Ad-adu a bassit a icon */
+        height: 50px;
+    }
+
+    .hero-section h1 {
+        font-size: 8vw; /* Adjust para kadagiti bassit unay a screen, mabalin a nasken a matesting */
+        line-height: 1;
+    }
+
+    .hero-section .hero-subtitle {
+        font-size: 0.7em; /* Ad-adu a bassit a font */
+    }
+
+    .hero-social-links {
+        width: 95%; /* Mangsakup ad-adu a width kadagiti bassit unay a screen */
+        max-width: 220px; /* Limitan ti maximum width dagiti buton */
+        gap: 6px; /* Bassit a gap */
+    }
+
+    .hero-social-links .btn-primary {
+        padding: 6px 12px; /* Minimum padding */
+        font-size: 0.75em; /* Minimum font */
+    }
 }
 
 
