@@ -1633,6 +1633,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60px; /* Definindo uma altura fixa para a barra de áudio */
 }
 
 .audio-control-content {
@@ -1641,7 +1642,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; /* Mantém os elementos na mesma linha */
     max-width: 900px;
     width: 100%;
     padding: 0 25px;
@@ -1650,11 +1651,11 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* Informações da Música e Barra de Progresso */
 .music-player-details {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Continua empilhado: título e barra */
     flex-grow: 1;
     flex-shrink: 1;
     align-items: flex-start;
-    min-width: 0;
+    min-width: 0; /* Permite que o texto seja cortado com ellipsis */
 }
 
 #musicTitleDisplay {
@@ -1803,40 +1804,90 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* Ajustes para Mobile (max-width: 768px) */
 /* ------------------------------------- */
 @media (max-width: 768px) {
+    body {
+        padding-bottom: 60px; /* Ajusta o padding-bottom para a altura da barra de áudio */
+    }
+
     .audio-control-bar {
-        /* AQUI ESTÁ A MUDANÇA: o player não é mais fixo e rola com a página */
-        /* position: static; <-- REMOVIDO para herdar a posição fixa do desktop */
-        z-index: 1; 
-        box-shadow: none; /* Remove a sombra para um visual mais limpo */
-        padding: 8px 0;
+        position: fixed; /* Garante que o player permaneça fixo na parte inferior */
+        bottom: 0;
+        left: 0;
+        z-index: 1001; 
+        box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.5); /* Mantém a sombra inferior */
+        padding: 8px 0; /* Padding mais compacto para mobile */
+        height: 50px; /* Reduz a altura da barra de áudio para mobile */
     }
 
     .audio-control-content {
-        /* Garante que os elementos permaneçam lado a lado (horizontal) */
-        flex-direction: row;
-        flex-wrap: nowrap; /* ALTERADO para evitar quebra de linha */
+        flex-direction: row; /* Mantém em linha */
+        flex-wrap: nowrap; /* Impede quebra de linha */
         justify-content: space-between;
-        gap: 10px;
-        padding: 0 10px;
+        align-items: center;
+        gap: 8px; /* Reduz o gap para mobile */
+        padding: 0 10px; /* Padding horizontal mais compacto para mobile */
+        max-width: none; /* Remove a largura máxima para se adaptar à tela */
+        width: 100%; /* Ocupa 100% da largura disponível */
     }
 
-    /* Ajustes para manter o layout em uma única linha */
-    .music-player-details,
-    .music-playback-controls,
-    .playback-speed-control {
-        flex: 1 1 auto; /* ALTERADO para distribuir o espaço de forma mais fluida */
+    .music-player-details {
+        flex-grow: 1; /* Permite que o título e a barra de progresso se expandam */
+        flex-shrink: 1; /* Permite que encolham */
+        min-width: 0; /* Permite que o texto seja cortado com ellipsis */
+        max-width: calc(100% - 150px); /* Garante espaço para os botões e select */
+    }
+    
+    #musicTitleDisplay {
+        font-size: 0.8em; /* Título um pouco menor */
+        margin-bottom: 2px; /* Margem menor */
     }
 
     .progress-bar-and-times {
         width: 100%;
-        justify-content: center;
+        justify-content: center; /* Centraliza a barra de progresso */
+        gap: 4px; /* Reduz o gap */
     }
 
-    .music-player-details {
-        align-items: center;
+    .time-display {
+        font-size: 0.65em; /* Reduz o tamanho da fonte do tempo */
+    }
+
+    .music-playback-controls {
+        flex-shrink: 0; /* Impede que os botões encolham */
+        gap: 6px; /* Reduz o gap entre os botões */
+    }
+
+    .music-button {
+        width: 35px; /* Botões menores */
+        height: 35px;
+        font-size: 0.9em;
+    }
+
+    .music-button.main-play-pause-button {
+        width: 45px; /* Botão principal ligeiramente maior */
+        height: 45px;
+        font-size: 1.3em;
+    }
+
+    .playback-speed-control {
+        flex-shrink: 0; /* Impede que o select encolha */
+    }
+
+    .playback-speed-select {
+        padding: 5px 8px; /* Padding menor */
+        font-size: 0.8em; /* Fonte menor */
+        background-position: right 4px top 50%; /* Ajusta a posição do ícone da seta */
+        background-size: 7px auto; /* Ajusta o tamanho do ícone da seta */
+    }
+
+    /* O botão voltar ao topo precisa ser ajustado para ficar acima da barra de áudio no mobile */
+    .scroll-top-button {
+        bottom: 60px; /* Ajusta para ficar acima da barra de áudio, considerando a nova altura */
+        right: 15px; /* Move um pouco para a esquerda para não ficar tão na ponta */
+        width: 40px; /* Botão menor */
+        height: 40px;
+        font-size: 1.2em;
     }
 }
-
 
 /* ===================================== */
 /* 8. Botão Voltar ao Topo */

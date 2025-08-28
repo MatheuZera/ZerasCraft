@@ -560,33 +560,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('pagehide', saveAudioState);
     }
 
-    // =====================================
-    // 4. Sistema de Sons para Interações (Aprimorado)
-    // =====================================
-    // Adiciona som de hover em elementos interativos
-    document.querySelectorAll(
-        '.btn-primary, .menu-toggle, .music-button, .card, .card-download-btn, .copy-button, .accordion-header, .tab-button, .tooltip-trigger, .tooltip-trigger-icon, .custom-radio-btn, .close-alert, #showSpinnerBtn, #toggleSkeletonBtn, #floatingActionButton, .custom-range-slider, .rating-stars i, .spoiler-toggle, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn'
-    ).forEach(element => {
-        element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
-    });
 
-    // Adiciona som de clique em elementos interativos
-    document.querySelectorAll(
-        'a:not([href^="#"]), .btn-primary, .menu-toggle, .music-button, .card, .card-download-btn, .copy-button, .accordion-header, .tab-button, #openModalBtn, #closeModalBtn, .lightbox-close, .open-lightbox-btn, .carousel-btn, #showSpinnerBtn, #toggleSkeletonBtn, #darkModeToggle, #notificationsToggle, #floatingActionButton, .rating-stars i, .spoiler-toggle, #playPauseVideoBtn, #fullScreenVideoBtn, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn'
-    ).forEach(element => {
-        element.addEventListener('click', (event) => {
-            playEffectSound(clickSound);
-            // Para links externos, introduz um pequeno atraso para o som tocar antes de navegar
-            if (element.tagName === 'A' && element.getAttribute('href') && !element.getAttribute('href').startsWith('#') && !element.getAttribute('href').startsWith('javascript:')) {
-                event.preventDefault();
-                setTimeout(() => {
-                    window.location.href = element.href;
-                }, 200); // Atraso de 200ms
-            }
-        });
-    });
-
-
+    
     // =====================================
     // 5. Animações de Rolagem com ScrollReveal
     // =====================================
