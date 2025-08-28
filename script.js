@@ -10,15 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioEffects = {};
 
     const audioControlButton = document.getElementById('audioControlButton');
+    const audioPrevButton = document.getElementById('audioPrevButton');
     const audioNextButton = document.getElementById('audioNextButton');
     const musicTitleDisplay = document.getElementById('musicTitleDisplay');
-    const audioProgressArc = document.getElementById('audioProgressArc');
-    const arcProgress = audioProgressArc ? audioProgressArc.querySelector('.arc-progress') : null;
-
-    const arcRadius = 27;
-    const arcCircumference = 2 * Math.PI * arcRadius;
+    const audioProgressBar = document.getElementById('audioProgressBar');
+    const currentTimeDisplay = document.getElementById('currentTimeDisplay');
+    const durationDisplay = document.getElementById('durationDisplay');
+    const playbackSpeedSelect = document.getElementById('playbackSpeed');
 
     let preparingNextMusic = false;
+    let userInteractedWithAudio = localStorage.getItem('userInteractedWithAudio') === 'true'; // Inicializa do localStorage
 
     const musicPlaylist = [
         { title: '✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
@@ -82,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
             clonedAudio.play().catch(e => console.warn("Erro ao tentar tocar som de efeito:", e.message));
         }
     };
-
     const playEffectSound = (audioElement) => {
         setTimeout(() => {
             playEffectSoundInternal(audioElement);
@@ -102,24 +102,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Função para formatar o tempo (0:00)
+    function formatTime(seconds) {
+        if (isNaN(seconds) || seconds < 0) return "0:00";
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
     // =====================================
     // Lógica de Controle da Música de Fundo
     // =====================================
+
     const updateAudioButtonTitle = () => {
-        if (musicTitleDisplay && currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
-            if (!backgroundAudio.paused) {
-                musicTitleDisplay.textContent = `${musicPlaylist[currentMusicIndex].title}`;
-                audioControlButton.innerHTML = '<i class="fas fa-pause"></i>';
+        const iconElement = audioControlButton ? audioControlButton.querySelector('i') : null;
+
+        if (musicTitleDisplay && iconElement) {
+            if (!backgroundAudio.paused && currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
+                musicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
+                iconElement.classList.remove('fa-play');
+                iconElement.classList.add('fa-pause');
+                if (audioControlButton) audioControlButton.classList.add('is-playing');
             } else {
                 musicTitleDisplay.textContent = 'Clique para Tocar';
-                audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
+                iconElement.classList.remove('fa-pause');
+                iconElement.classList.add('fa-play');
+                if (audioControlButton) audioControlButton.classList.remove('is-playing');
             }
-        } else if (musicTitleDisplay) {
-            musicTitleDisplay.textContent = 'Nenhuma Música';
-            audioControlButton.innerHTML = '<i class="fas fa-play"></i>';
         }
     };
-
     const getRandomMusicIndex = () => {
         if (musicPlaylist.length === 0) return -1;
         let newIndex;
@@ -129,23 +140,22 @@ document.addEventListener('DOMContentLoaded', () => {
             } while (newIndex === currentMusicIndex);
         } else {
             newIndex = 0;
+            // Se só tiver uma música, toca ela
         }
         return newIndex;
     };
 
     const playMusic = () => {
         if (!backgroundAudio || !backgroundAudio.src) {
-            console.warn("Áudio não pronto para tocar.");
+            console.warn("Áudio não pronto para tocar ou sem fonte.");
             return;
         }
         backgroundAudio.play().then(() => {
-            if (audioControlButton) audioControlButton.classList.add('is-playing');
             showCentralMessage(`Tocando: ${musicPlaylist[currentMusicIndex].title}`);
             updateAudioButtonTitle();
             saveAudioState();
         }).catch(e => {
             console.error("Erro ao tentar tocar áudio (provavelmente autoplay bloqueado):", e.message);
-            if (audioControlButton) audioControlButton.classList.remove('is-playing');
             showCentralMessage('Autoplay bloqueado. Clique para tocar.');
             updateAudioButtonTitle();
             saveAudioState();
@@ -156,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (musicPlaylist.length === 0) {
             console.warn("Playlist vazia, não é possível carregar música.");
             preparingNextMusic = false;
+            updateAudioButtonTitle();
             return;
         }
         if (preparingNextMusic) {
@@ -164,9 +175,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         preparingNextMusic = true;
-        currentMusicIndex = (specificIndex !== -1) ? specificIndex : getRandomMusicIndex();
+        
+        // Define o próximo índice. Se specificIndex for -1, pega um aleatório.
+        // Se for o botão 'anterior', o specificIndex já vem correto.
+        // Se for o botão 'próximo' ou 'ended', usa o next logic normal.
+        if (specificIndex !== -1) {
+             currentMusicIndex = specificIndex;
+        } else {
+            // Se não é um índice específico, pega o próximo ou aleatório
+            if (currentMusicIndex === -1) { // Primeira vez que vai tocar
+                currentMusicIndex = getRandomMusicIndex();
+            } else { // Pega a próxima na sequência ou aleatório se já estava tocando
+                currentMusicIndex = (currentMusicIndex + 1) % musicPlaylist.length;
+            }
+        }
+        
         const music = musicPlaylist[currentMusicIndex];
-        if (currentMusicIndex === -1) {
+        if (!music) {
             console.warn("Não foi possível obter um índice de música válido. Playlist vazia ou erro.");
             preparingNextMusic = false;
             return;
@@ -181,29 +206,37 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 updateAudioButtonTitle();
             }
+            updateProgressAndTimers();
+            // Garante que 0:00 / 0:00 ou duração real apareça
             backgroundAudio.oncanplaythrough = null;
+            // Limpa para evitar execuções múltiplas
             saveAudioState();
         };
-
         backgroundAudio.onerror = (e) => {
             console.error(`Erro ao carregar áudio: ${music.src}`, e);
             showCentralMessage('Erro ao carregar música. Pulando...');
             preparingNextMusic = false;
             backgroundAudio.onerror = null;
+            // Tenta carregar a próxima música para evitar um loop de erro com a mesma música
             setTimeout(() => loadNewMusic(playAfterLoad), 500);
         };
     };
-    const updateProgressArc = () => {
-        if (!arcProgress) return;
-        if (backgroundAudio.duration > 0 && !isNaN(backgroundAudio.duration)) {
+
+    // FUNÇÃO ATUALIZADA: progress bar e tempo
+    const updateProgressAndTimers = () => {
+        if (!audioProgressBar || !currentTimeDisplay || !durationDisplay) return;
+        if (backgroundAudio.duration > 0 && !isNaN(backgroundAudio.duration) && isFinite(backgroundAudio.duration)) {
             const progress = (backgroundAudio.currentTime / backgroundAudio.duration);
-            const offset = arcCircumference * (1 - progress);
-            arcProgress.style.strokeDashoffset = offset;
+            audioProgressBar.value = progress * 100;
+            currentTimeDisplay.textContent = formatTime(backgroundAudio.currentTime);
+            durationDisplay.textContent = formatTime(backgroundAudio.duration);
         } else {
-            arcProgress.style.strokeDashoffset = arcCircumference;
+            // Garante que mostre 0:00 / 0:00 antes da metadata ser carregada
+            audioProgressBar.value = 0;
+            currentTimeDisplay.textContent = "0:00";
+            durationDisplay.textContent = "0:00";
         }
     };
-
     const saveAudioState = () => {
         if (backgroundAudio) {
             const audioState = {
@@ -211,7 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentMusicIndex: currentMusicIndex,
                 paused: backgroundAudio.paused,
                 volume: backgroundAudio.volume,
-                userInteracted: localStorage.getItem('userInteractedWithAudio') === 'true'
+                playbackRate: backgroundAudio.playbackRate,
+                userInteracted: userInteractedWithAudio
             };
             localStorage.setItem('audioState', JSON.stringify(audioState));
         }
@@ -223,24 +257,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const audioState = JSON.parse(savedState);
             currentMusicIndex = audioState.currentMusicIndex;
             backgroundAudio.volume = audioState.volume;
+            backgroundAudio.playbackRate = audioState.playbackRate || 1;
+            userInteractedWithAudio = audioState.userInteracted;
+            if (playbackSpeedSelect) {
+                playbackSpeedSelect.value = backgroundAudio.playbackRate;
+            }
 
             if (currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
                 backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
                 backgroundAudio.load();
-                
+
+                // Lógica para quando o áudio restaurado está pronto
                 backgroundAudio.onloadedmetadata = () => {
                     if (backgroundAudio.duration > 0 && audioState.currentTime < backgroundAudio.duration) {
                         backgroundAudio.currentTime = audioState.currentTime;
                     }
-                    updateProgressArc();
-                    // Tentar tocar a música, ignorando o estado de interação anterior
-                    if (!audioState.paused) {
+                    updateProgressAndTimers();
+                    // Atualiza a barra de progresso e timers
+                    if (!audioState.paused && userInteractedWithAudio) {
                         playMusic();
                     } else {
                         updateAudioButtonTitle();
-                        if (audioControlButton) audioControlButton.classList.remove('is-playing');
                     }
                     backgroundAudio.onloadedmetadata = null;
+                    // Limpa para evitar execuções múltiplas
                     saveAudioState();
                 };
                 backgroundAudio.onerror = (e) => {
@@ -249,35 +289,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     loadNewMusic(true);
                 };
             } else {
-                loadNewMusic(true);
+                loadNewMusic(false);
             }
         } else {
-            loadNewMusic(true);
+            loadNewMusic(false);
         }
     };
-
-        // =====================================
-        // Listener para Interação com a Página
-        // =====================================
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                // A aba ficou inativa, salva o estado atual
-                saveAudioState();
-            } else {
-                // A aba voltou a ficar ativa
-                // O navegador pode ter pausado a música, então atualizamos a UI
-                if (!backgroundAudio.paused) {
-                    console.log("Aba ativa novamente, tentando tocar a música...");
-                    playMusic();
-                } else {
-                    // A música já estava pausada ou foi pausada pelo navegador
-                    updateAudioButtonTitle();
-                }
-            }
-        });
-
     // =====================================
-    // 1. Menu Hambúrguer
+    // Listener para Interação com a Página
+    // =====================================
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            saveAudioState();
+        } else {
+            if (!backgroundAudio.paused && userInteractedWithAudio) {
+                console.log("Aba ativa novamente, tentando tocar a música...");
+                // Apenas toca se a música não estava pausada e o usuário interagiu antes
+                playMusic();
+            } else {
+                updateAudioButtonTitle();
+            }
+        }
+    });
+    // =====================================
+    // 1. Menu Hambúrguer (Otimizado para mais páginas)
     // =====================================
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.main-nav');
@@ -287,12 +322,25 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('active');
             menuToggle.classList.toggle('active');
             playEffectSound(clickSound);
+            document.body.classList.toggle('no-scroll', navMenu.classList.contains('active'));
         });
         document.querySelectorAll('.main-nav a').forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', (event) => {
+                // Manipula a navegação suave para IDs de seção
+                const href = item.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault(); // Previne o comportamento padrão do link
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+
                 setTimeout(() => {
                     navMenu.classList.remove('active');
                     menuToggle.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
                 }, 300);
                 playEffectSound(clickSound);
             });
@@ -309,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let textToCopy = '';
                 let targetElementSelector = button.dataset.copyTarget;
                 let originalButtonText = button.textContent;
+
                 if (targetElementSelector) {
                     const parentContext = button.closest('.access-info') || document;
                     const selectors = targetElementSelector.split(',').map(s => s.trim());
@@ -327,9 +376,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (button.dataset.copyText) {
                     textToCopy = button.dataset.copyText;
                 }
+
                 if (textToCopy) {
                     try {
-                        await navigator.clipboard.writeText(textToCopy);
+                        const textArea = document.createElement("textarea");
+                        textArea.value = textToCopy;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+
                         showCentralMessage(`'${textToCopy}' copiado!`);
                         button.textContent = 'Copiado!';
                         button.classList.add('copied');
@@ -349,50 +405,137 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 3. Sistema de Áudio de Fundo
+    // 3. Sistema de Áudio de Fundo (Event Listeners Principais)
     // =====================================
     if (backgroundAudio) {
-        if (arcProgress) {
-            arcProgress.style.strokeDasharray = `${arcCircumference} ${arcCircumference}`;
-            arcProgress.style.strokeDashoffset = arcCircumference;
-            arcProgress.style.transition = 'stroke-dashoffset 1s linear';
-        }
         restoreAudioState();
-        backgroundAudio.addEventListener('timeupdate', updateProgressArc);
+        backgroundAudio.addEventListener('timeupdate', updateProgressAndTimers);
         backgroundAudio.addEventListener('ended', () => {
-            if (audioControlButton) audioControlButton.classList.remove('is-playing');
-            updateProgressArc();
+            updateProgressAndTimers();
             preparingNextMusic = false;
-            loadNewMusic(true);
+            loadNewMusic(true); // Carrega a próxima música e a toca
         });
+        backgroundAudio.addEventListener('loadedmetadata', updateProgressAndTimers);
 
         if (audioControlButton) {
             audioControlButton.addEventListener('click', () => {
                 playEffectSound(clickSound);
+                userInteractedWithAudio = true; // Marca que o usuário interagiu
                 localStorage.setItem('userInteractedWithAudio', 'true');
+
                 if (backgroundAudio.paused) {
                     if (currentMusicIndex === -1 || !backgroundAudio.src) {
-                        loadNewMusic(true);
+                        loadNewMusic(true); // Carrega uma música e toca
                     } else {
-                        playMusic();
+                        playMusic(); // Apenas toca a música atual
                     }
                 } else {
                     backgroundAudio.pause();
-                    if (audioControlButton) audioControlButton.classList.remove('is-playing');
                     updateAudioButtonTitle();
                 }
             });
         }
+
         if (audioNextButton) {
             audioNextButton.addEventListener('click', () => {
                 playEffectSound(clickSound);
-                backgroundAudio.pause();
-                if (audioControlButton) audioControlButton.classList.remove('is-playing');
+                backgroundAudio.pause(); // Pausa a música atual imediatamente
                 showCentralMessage('Próxima música...');
                 preparingNextMusic = false;
-                loadNewMusic(true);
+                loadNewMusic(true); // Carrega a próxima música e a toca
             });
         }
+
+        if (audioPrevButton) {
+            audioPrevButton.addEventListener('click', () => {
+                playEffectSound(clickSound);
+                backgroundAudio.pause(); // Pausa a música atual imediatamente
+                showCentralMessage('Música anterior...');
+                preparingNextMusic = false;
+                let prevIndex = currentMusicIndex - 1;
+                if (prevIndex < 0) {
+                    prevIndex = musicPlaylist.length - 1; // Volta para a última música se estiver na primeira
+                }
+                loadNewMusic(true, prevIndex); // Carrega e toca a música anterior
+            });
+        }
+
+        if (audioProgressBar) {
+            let isDragging = false;
+            // Flag para controlar se o usuário está arrastando
+
+            audioProgressBar.addEventListener('input', () => {
+                // Atualiza o tempo exibido instantaneamente enquanto arrasta
+                const tempTime = (audioProgressBar.value / 100) * backgroundAudio.duration;
+                currentTimeDisplay.textContent = formatTime(tempTime);
+            });
+            audioProgressBar.addEventListener('mousedown', () => {
+                isDragging = true;
+                audioProgressBar.dataset.isDragging = 'true'; // Define a flag no dataset
+                backgroundAudio.pause();
+            });
+            audioProgressBar.addEventListener('mouseup', () => {
+                isDragging = false;
+                audioProgressBar.dataset.isDragging = 'false'; // Limpa a flag
+                const seekTime = (audioProgressBar.value / 100) * backgroundAudio.duration;
+                if (!isNaN(seekTime) && isFinite(seekTime)) {
+                    backgroundAudio.currentTime = seekTime;
+                    if (userInteractedWithAudio && backgroundAudio.src) { // Verifica a interação
+                        playMusic(); // Retoma a reprodução após soltar
+                    }
+                } else {
+                    console.warn("Tempo de busca inválido.");
+                }
+            });
+            // Adiciona evento para touch devices
+            audioProgressBar.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                audioProgressBar.dataset.isDragging = 'true';
+                backgroundAudio.pause();
+                // Previne a rolagem da página ao arrastar o slider
+                e.preventDefault();
+            });
+            audioProgressBar.addEventListener('touchend', () => {
+                isDragging = false;
+                audioProgressBar.dataset.isDragging = 'false';
+                const seekTime = (audioProgressBar.value / 100) * backgroundAudio.duration;
+                if (!isNaN(seekTime) && isFinite(seekTime)) {
+                    backgroundAudio.currentTime = seekTime;
+                    if (userInteractedWithAudio && backgroundAudio.src) {
+                        playMusic();
+                    }
+                } else {
+                    console.warn("Tempo de busca inválido.");
+                }
+            });
+            audioProgressBar.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    // Calcula a posição do toque para atualizar o slider
+                    const rect = audioProgressBar.getBoundingClientRect();
+                    const x = e.touches[0].clientX - rect.left;
+                    const width = rect.width;
+                    let value = (x / width) * 100;
+                    value = Math.max(0, Math.min(100, value)); // Garante que o valor esteja entre 0 e 100
+
+                    audioProgressBar.value = value;
+                    const tempTime = (value / 100) * backgroundAudio.duration;
+                    currentTimeDisplay.textContent = formatTime(tempTime);
+                    e.preventDefault(); // Previne a rolagem da página
+                }
+            });
+        }
+
+        if (playbackSpeedSelect) {
+            playbackSpeedSelect.addEventListener('change', (event) => {
+                const newSpeed = parseFloat(event.target.value);
+                if (!isNaN(newSpeed) && newSpeed > 0) {
+                    backgroundAudio.playbackRate = newSpeed;
+                    saveAudioState();
+                    showCentralMessage(`Velocidade: ${newSpeed}x`);
+                }
+            });
+        }
+
         window.addEventListener('beforeunload', saveAudioState);
         window.addEventListener('pagehide', saveAudioState);
     }
@@ -400,93 +543,85 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // 4. Sistema de Sons para Interações
     // =====================================
-    // Sons de HOVER (ao passar o mouse)
     document.querySelectorAll(
-        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button'
+        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button, .btn-ripple, .btn-hover-fill, .btn-border-anim, .btn-gradient-anim'
     ).forEach(element => {
         element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
     });
-
-    // Sons de CLIQUE (ao clicar)
     document.querySelectorAll(
-        'a, .btn-primary, .music-button, .card, .card-download-btn, .copy-button'
+        'a:not([href^="#"]), .btn-primary, .music-button, .card, .card-download-btn, .copy-button, .btn-ripple, .btn-hover-fill, .btn-border-anim, .btn-gradient-anim'
     ).forEach(element => {
         element.addEventListener('click', (event) => {
-            // Toca o som de clique
             playEffectSound(clickSound);
-            // Se o elemento for um link (<a>) e o href não for uma âncora interna (#)
+            // Previne a navegação imediata para reproduzir o som primeiro
             if (element.tagName === 'A' && element.getAttribute('href') && element.getAttribute('href').charAt(0) !== '#') {
-                // Impede a navegação imediata do link
                 event.preventDefault();
-                
-                // Redireciona o usuário após um pequeno atraso para dar tempo de o som tocar
                 setTimeout(() => {
                     window.location.href = element.href;
-                }, 200); // Atraso de 200 milissegundos
+                }, 200); // Pequeno atraso para o som tocar
             }
         });
     });
-
     // =====================================
     // 5. Animações de Rolagem com ScrollReveal
     // =====================================
-    if (typeof ScrollReveal !== 'undefined') {
-        ScrollReveal().reveal('.reveal', {
-            delay: 200,
-            distance: '50px',
-            origin: 'bottom',
-            interval: 100,
-            mobile: false
-        });
-        ScrollReveal().reveal('.reveal-left', {
-            delay: 200,
-            distance: '50px',
-            origin: 'left',
-            mobile: false
-        });
-        ScrollReveal().reveal('.reveal-right', {
-            delay: 200,
-            distance: '50px',
-            origin: 'right',
-            mobile: false
-        });
-        ScrollReveal().reveal('.reveal-up', {
-            delay: 200,
-            distance: '50px',
-            origin: 'top',
-            mobile: false
-        });
-    } else {
-        console.warn("ScrollReveal não está definido. Verifique se o script foi incluído corretamente.");
-    }
-
+    // Adicionado um pequeno atraso para o ScrollReveal carregar e evitar piscar
+    setTimeout(() => {
+        if (typeof ScrollReveal !== 'undefined') {
+            ScrollReveal().reveal('.reveal', {
+                delay: 200,
+                distance: '50px',
+                origin: 'bottom',
+                interval: 100,
+                mobile: true // Habilitado em mobile agora para melhor UX
+            });
+            ScrollReveal().reveal('.reveal-left', {
+                delay: 200,
+                distance: '50px',
+                origin: 'left',
+                mobile: true
+            });
+            ScrollReveal().reveal('.reveal-right', {
+                delay: 200,
+                distance: '50px',
+                origin: 'right',
+                mobile: true
+            });
+            ScrollReveal().reveal('.reveal-up', {
+                delay: 200,
+                distance: '50px',
+                origin: 'top',
+                mobile: true
+            });
+        } else {
+            console.warn("ScrollReveal não está definido. Verifique se o script foi incluído corretamente.");
+        }
+    }, 500); // Atraso de 500ms
 
     // =====================================
     // 6. Contador Animado (CountUp.js)
     // =====================================
-    const countUpElements = document.querySelectorAll('.countup');
+    const countUpElements = document.querySelectorAll('.counter');
     if (countUpElements.length > 0 && typeof CountUp !== 'undefined') {
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    const startVal = parseInt(entry.target.getAttribute('data-start'));
-                    const endVal = parseInt(entry.target.getAttribute('data-end'));
-                    const options = {
-                        startVal: startVal,
-                        duration: 3
-                    };
-                    const countUp = new CountUp(id, endVal, options);
-                    if (!countUp.error) {
-                        countUp.start();
+                    const targetElement = entry.target;
+                    const endVal = parseFloat(targetElement.getAttribute('data-target'));
+                    const instance = new CountUp(targetElement, endVal, {
+                        duration: 2.5,
+                        separator: '.' // Ajuste para formato brasileiro
+                    });
+                    if (!instance.error) {
+                        instance.start();
                     } else {
-                        console.error(countUp.error);
+                        console.error(instance.error);
                     }
-                    observer.unobserve(entry.target);
+                    observer.unobserve(targetElement); // Anima uma vez
                 }
             });
         }, {
-            threshold: 0.5
+            threshold: 0.8 // Quando 80% do elemento estiver visível
         });
 
         countUpElements.forEach(element => {
@@ -494,49 +629,428 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
+    // =====================================
+    // 7. Galeria de Imagens (Lightbox)
+    // =====================================
     const galleryItems = document.querySelectorAll('.gallery-item img');
     const lightbox = document.getElementById('myLightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const closeBtn = document.querySelector('.lightbox-close');
-
-    if (galleryItems.length > 0) {
+    if (galleryItems.length > 0 && lightbox && lightboxImage && closeBtn) {
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
                 lightbox.classList.add('active');
                 lightboxImage.src = item.src;
+                playEffectSound(clickSound);
             });
         });
 
         closeBtn.addEventListener('click', () => {
             lightbox.classList.remove('active');
+            playEffectSound(clickSound);
         });
-
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
+            if (e.target === lightbox) { // Fecha apenas se clicar no overlay
                 lightbox.classList.remove('active');
+                playEffectSound(clickSound);
             }
         });
-    }
-    // =====================================
-    // 7. Funcionalidades Dinâmicas
-    // =====================================
-
-    const progressBar = document.querySelector('.progress-bar');
-    const progressText = document.querySelector('.progress-text');
-    const progress = 75; // Valor de progresso (0-100)
-
-    const circumference = 2 * Math.PI * 45; // 45 é o raio
-
-    const offset = circumference - (progress / 100) * circumference;
-
-    if (progressBar) {
-        progressBar.style.strokeDashoffset = offset;
-        progressText.textContent = `${progress}%`;
+    } else {
+        console.warn("Elementos do Lightbox não encontrados. Verifique a estrutura HTML.");
     }
 
     // =====================================
-    // 8. Usabilidade e Ajustes Finais
+    // 8. Tabs de Conteúdo
+    // =====================================
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    if (tabButtons.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                button.classList.add('active');
+                const targetId = button.dataset.tabTarget;
+                const targetContent = document.querySelector(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+                playEffectSound(clickSound);
+            });
+        });
+    }
+
+    // =====================================
+    // 9. Flip Cards (Exemplo: Team Members)
+    // =====================================
+    const flipCards = document.querySelectorAll('.flip-card');
+    flipCards.forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('flipped');
+            playEffectSound(clickSound);
+        });
+    });
+    // =====================================
+    // 10. Accordion (Acordeão) - CORRIGIDO
+    // =====================================
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const accordionItem = header.closest('.accordion-item');
+            const isActive = accordionItem.classList.contains('active');
+
+            // Fecha todos os outros itens do acordeão
+            document.querySelectorAll('.accordion-item.active').forEach(item => {
+                if (item !== accordionItem) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Alterna o estado do item clicado
+            accordionItem.classList.toggle('active');
+            
+            playEffectSound(clickSound);
+        });
+    });
+
+    // =====================================
+    // 11. Modal (Popup) - Exemplo
+    // =====================================
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const myModal = document.getElementById('myModal');
+
+    if (openModalBtn && myModal && closeModalBtn) {
+        openModalBtn.addEventListener('click', () => {
+            myModal.classList.add('active');
+            playEffectSound(clickSound);
+        });
+        closeModalBtn.addEventListener('click', () => {
+            myModal.classList.remove('active');
+            playEffectSound(clickSound);
+        });
+        myModal.addEventListener('click', (e) => {
+            if (e.target === myModal) { // Fecha apenas se clicar no overlay
+                myModal.classList.remove('active');
+                playEffectSound(clickSound);
+            }
+        });
+    } else {
+        console.warn("Elementos do Modal não encontrados. Verifique a estrutura HTML.");
+    }
+
+    // =====================================
+    // 12. Spoiler Block
+    // =====================================
+    const spoilerToggles = document.querySelectorAll('.spoiler-toggle');
+    spoilerToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const spoilerBlock = toggle.closest('.spoiler-block');
+            spoilerBlock.classList.toggle('revealed');
+            playEffectSound(clickSound);
+        });
+    });
+    // =====================================
+    // 13. Ripple Button Effect
+    // =====================================
+    document.querySelectorAll('.btn-ripple').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const circle = document.createElement('span');
+            const diameter = Math.max(this.clientWidth, this.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${e.clientX - (this.getBoundingClientRect().left + radius)}px`;
+            circle.style.top = `${e.clientY - (this.getBoundingClientRect().top + radius)}px`;
+            circle.classList.add('ripple');
+
+            const ripple = this.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            this.appendChild(circle);
+        });
+    });
+    // =====================================
+    // 14. Image Carousel
+    // =====================================
+    const carouselContainers = document.querySelectorAll('.image-carousel-container');
+    carouselContainers.forEach(container => {
+        const track = container.querySelector('.image-carousel-track');
+        const images = Array.from(track.children);
+        const prevButton = container.querySelector('.carousel-prev');
+        const nextButton = container.querySelector('.carousel-next');
+        const dotsContainer = container.querySelector('.carousel-dots');
+
+        if (!track || images.length === 0 || !prevButton || !nextButton || !dotsContainer) {
+            console.warn("Elemento(s) do carrossel não encontrado(s). Verifique a estrutura HTML.");
+            return;
+        }
+
+        let slideIndex = 0;
+        let slideWidth = images[0].clientWidth; // Largura inicial da primeira imagem
+
+        // Criar dots
+        dotsContainer.innerHTML = ''; // Limpa dots existentes para recriação
+        images.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                moveToSlide(index);
+                playEffectSound(clickSound);
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsContainer.children);
+
+        const updateDots = () => {
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[slideIndex]) {
+                dots[slideIndex].classList.add('active');
+            }
+        };
+
+        const moveToSlide = (index) => {
+            if (index < 0) {
+                slideIndex = images.length - 1;
+            } else if (index >= images.length) {
+                slideIndex = 0;
+            } else {
+                slideIndex = index;
+            }
+            track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+            updateDots();
+        };
+        prevButton.addEventListener('click', () => {
+            moveToSlide(slideIndex - 1);
+            playEffectSound(clickSound);
+        });
+        nextButton.addEventListener('click', () => {
+            moveToSlide(slideIndex + 1);
+            playEffectSound(clickSound);
+        });
+        // Atualizar largura do slide em redimensionamento (importante para responsividade)
+        const updateSlideWidth = () => {
+            if (images.length > 0) {
+                slideWidth = container.clientWidth;
+                images.forEach(img => {
+                    img.style.width = `${slideWidth}px`;
+                });
+                moveToSlide(slideIndex); // Reposiciona o carrossel
+            }
+        };
+        window.addEventListener('resize', updateSlideWidth);
+        updateSlideWidth(); // Chamada inicial para garantir que as imagens tenham o tamanho correto
+    });
+    // =====================================
+    // 15. Review Slider
+    // =====================================
+    const reviewSliderContainers = document.querySelectorAll('.review-slider-container');
+    reviewSliderContainers.forEach(container => {
+        const track = container.querySelector('.review-slider-track');
+        const reviewCards = Array.from(track.children);
+        const prevButton = container.querySelector('.review-prev-btn');
+        const nextButton = container.querySelector('.review-next-btn');
+
+        if (!track || reviewCards.length === 0 || !prevButton || !nextButton) {
+            console.warn("Elemento(s) do slider de reviews não encontrado(s). Verifique a estrutura HTML.");
+            return;
+        }
+
+        let slideIndex = 0;
+        let cardsPerView = 3; // Padrão para desktop
+        let cardTotalWidth = 0; // Largura de um card + suas margens
+
+        const updateCardsPerView = () => {
+            if (window.innerWidth <= 768) {
+                cardsPerView = 1;
+            } else if (window.innerWidth <= 1024) {
+                cardsPerView = 2;
+            } else {
+                cardsPerView = 3;
+            }
+            if (reviewCards.length > 0) {
+                const cardStyle = getComputedStyle(reviewCards[0]);
+                const marginRight = parseFloat(cardStyle.marginRight);
+                const marginLeft = parseFloat(cardStyle.marginLeft);
+                cardTotalWidth = reviewCards[0].offsetWidth + marginRight + marginLeft;
+            }
+        };
+        const moveToSlide = (index) => {
+            updateCardsPerView();
+            // Recalcula antes de mover
+            let newIndex = index;
+            if (newIndex < 0) {
+                newIndex = reviewCards.length - cardsPerView;
+            } else if (newIndex > reviewCards.length - cardsPerView) {
+                newIndex = 0;
+            }
+            slideIndex = newIndex;
+            track.style.transform = `translateX(-${slideIndex * cardTotalWidth}px)`;
+        };
+
+        prevButton.addEventListener('click', () => {
+            moveToSlide(slideIndex - cardsPerView);
+            playEffectSound(clickSound);
+        });
+        nextButton.addEventListener('click', () => {
+            moveToSlide(slideIndex + cardsPerView);
+            playEffectSound(clickSound);
+        });
+        window.addEventListener('resize', () => {
+            updateCardsPerView();
+            moveToSlide(slideIndex); // Reposiciona o slider
+        });
+        updateCardsPerView(); // Chamada inicial
+        moveToSlide(0);
+        // Inicia na primeira "página"
+    });
+
+    // =====================================
+    // 16. Progress Bar Animation (Status Bars)
+    // =====================================
+    const progressBarFills = document.querySelectorAll('.progress-bar-fill');
+    const animateProgressBar = (progressBar) => {
+        const progress = progressBar.dataset.progress;
+        let currentWidth = 0;
+        const interval = setInterval(() => {
+            if (currentWidth >= progress) {
+                clearInterval(interval);
+            } else {
+                currentWidth++;
+                progressBar.style.width = `${currentWidth}%`;
+                // Atualiza a porcentagem no elemento irmão
+                const percentageSpan = progressBar.closest('.status-bar-item').querySelector('.status-percentage');
+                if (percentageSpan) {
+                    percentageSpan.textContent = `${currentWidth}%`;
+                }
+            }
+        }, 20); // Velocidade da animação
+    };
+    const progressBarObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+                animateProgressBar(entry.target);
+                entry.target.dataset.animated = 'true'; // Marca como animado
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.7 // Quando 70% da barra estiver visível
+    });
+    progressBarFills.forEach(bar => {
+        progressBarObserver.observe(bar);
+    });
+    // =====================================
+    // 17. Glitch Text (header logo)
+    // =====================================
+    const glitchTextElements = document.querySelectorAll('.glitch-text');
+    glitchTextElements.forEach(element => {
+        element.setAttribute('data-text', element.textContent);
+    });
+    // =====================================
+    // 18. Animated Underline Title
+    // =====================================
+    // Este é puramente CSS, sem JS necessário.
+    // =====================================
+    // 19. Curtain Title (Seção de Título com Cortina)
+    // =====================================
+    const curtainTitleWrappers = document.querySelectorAll('.curtain-title-wrapper');
+    const curtainObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.8 });
+    // Quando 80% do elemento estiver visível
+
+    curtainTitleWrappers.forEach(wrapper => {
+        curtainObserver.observe(wrapper);
+    });
+    // =====================================
+    // 20. Hover Text Reveal (com imagem)
+    // =====================================
+    // Este é puramente CSS, sem JS necessário.
+    // =====================================
+    // 21. Console Box
+    // =====================================
+    // Este é puramente CSS, sem JS necessário.
+    // =====================================
+    // 22. Custom Radio Buttons
+    // =====================================
+    // Este é puramente CSS, sem JS necessário.
+    // =====================================
+    // 23. Animated Quote
+    // =====================================
+    // Este é puramente CSS, sem JS necessário.
+    // =====================================
+    // 24. Animated List (usando IntersectionObserver para animar ao rolar)
+    // =====================================
+    const animatedLists = document.querySelectorAll('.animated-list');
+    const listObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                Array.from(entry.target.children).forEach((li, index) => {
+                    setTimeout(() => {
+                        li.classList.add('animated');
+                    }, index * 100); // Atraso sequencial
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    animatedLists.forEach(list => {
+        listObserver.observe(list);
+    });
+    // =====================================
+    // 25. Modern Contact Form (validação básica HTML5)
+    // =====================================
+    const modernContactForm = document.querySelector('.modern-contact-form');
+    if (modernContactForm) {
+        modernContactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            playEffectSound(clickSound);
+            showCentralMessage('Mensagem enviada com sucesso! (Funcionalidade real exige backend)');
+            modernContactForm.reset(); // Limpa o formulário após o "envio"
+        });
+    }
+
+    // =====================================
+    // 26. Read More / Read Less
+    // =====================================
+    const readMoreContainers = document.querySelectorAll('.read-more-container');
+    readMoreContainers.forEach(container => {
+        const toggleButton = container.querySelector('.read-more-toggle');
+        const hiddenText = container.querySelector('.read-more-text.hidden'); // Pega apenas o parágrafo escondido
+
+        if (toggleButton && hiddenText) {
+            // Inicializa: se o texto extra estiver oculto, o botão deve ser "Leia Mais"
+            if (hiddenText.classList.contains('hidden')) {
+                toggleButton.textContent = 'Leia Mais';
+            } else {
+                toggleButton.textContent = 'Leia Menos';
+            }
+
+            toggleButton.addEventListener('click', () => {
+                hiddenText.classList.toggle('hidden');
+                if (hiddenText.classList.contains('hidden')) {
+                    toggleButton.textContent = 'Leia Mais';
+                } else {
+                    toggleButton.textContent = 'Leia Menos';
+                }
+                playEffectSound(clickSound);
+            });
+        }
+    });
+    // =====================================
+    // 99. Usabilidade e Ajustes Finais
     // =====================================
 
     // Botão Voltar ao Topo
@@ -549,12 +1063,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollTopButton.classList.remove('show');
             }
         });
-
         scrollTopButton.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
+            playEffectSound(clickSound);
         });
     }
 
@@ -564,83 +1078,13 @@ document.addEventListener('DOMContentLoaded', () => {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // Modal
-    const modal = document.getElementById('modal');
-    const modalCloseBtn = document.querySelector('.modal-close-btn');
-    const cardGrid = document.querySelector('.card-grid');
-
-    if (modal && modalCloseBtn && cardGrid) {
-        const cardData = [{
-            id: 'card1',
-            title: 'Mapa da Cidade',
-            description: 'Explore a cidade de Zera!',
-            thumbnail: 'assets/images/placeholder.png',
-            downloadLink: '#'
-        }];
-
-        // Evento de clique para abrir o modal
-        cardGrid.addEventListener('click', (e) => {
-            if (e.target.classList.contains('card-download-btn')) {
-                const cardId = e.target.getAttribute('data-id');
-                const card = cardData.find(c => c.id === cardId);
-
-                if (card) {
-                    document.getElementById('modal-image').src = card.thumbnail;
-                    document.getElementById('modal-title').textContent = card.title;
-                    document.getElementById('modal-description').textContent = card.description;
-                    document.getElementById('modal-download-link').href = card.downloadLink;
-
-                    modal.classList.add('active');
-                }
-            }
-        });
-
-        // Evento para fechar o modal
-        modalCloseBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-    }
-
-    // Seção de Cards
-    const filterButtons = document.querySelectorAll('.card-filter-btn');
-    const searchInput = document.getElementById('cardSearch');
-    const cardData = []; // Substitua com seus dados reais
-
-    const renderCards = (cards) => {
-        // Implemente a lógica de renderização
-    };
-
-    if (filterButtons.length > 0) {
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                const filter = button.dataset.filter;
-                if (filter === 'all') {
-                    renderCards(cardData);
-                } else {
-                    const filtered = cardData.filter(card => card.tags.includes(filter));
-                    renderCards(filtered);
-                }
-            });
-        });
-    }
-
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            const filteredCards = cardData.filter(card =>
-                card.title.toLowerCase().includes(query) ||
-                card.tags.some(tag => tag.toLowerCase().includes(query))
-            );
-            renderCards(filteredCards);
+    // Scroll Progress Bar
+    const scrollProgress = document.querySelector('.scroll-progress');
+    if (scrollProgress) {
+        window.addEventListener('scroll', () => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / totalHeight) * 100;
+            scrollProgress.style.width = `${progress}%`;
         });
     }
 });

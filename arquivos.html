@@ -21,7 +21,7 @@
 <body>
 
     <div id="centralMessage" class="central-message"></div>
-    <audio id="backgroundAudio"></audio>
+    <audio id="backgroundAudio" loop></audio>
 
     <header class="main-header">
         <div class="container header-content">
@@ -32,15 +32,6 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="comunidade.html" class="nav-link" data-page="home">Comunidade</a></li>
-                    <li><a href="eventos.html" class="nav-link" data-page="home">Eventos</a></li>
-                    <li><a href="marketplacecraft.html" class="nav-link" data-page="home">Marketplace</a></li>
-                    <li><a href="wikipedia.html" class="nav-link" data-page="home">Wikipédia</a></li>
-                    <li><a href="sobre.html" class="nav-link" data-page="home">Sobre Nós</a></li>
-                    <li><a href="suporte.html" class="nav-link" data-page="home">Suporte</a></li>
-                    <li><a href="youtube.html" class="nav-link" data-page="home">Youtube</a></li>
-                    <li><a href="recursos.html" class="nav-link" data-page="home">Recursos</a></li>
-                    <li><a href="testes.html" class="nav-link" data-page="home">Testes</a></li>
                 </ul>
             </nav>
         </div>
@@ -161,19 +152,34 @@
         </div>
         <div class="audio-control-bar">
             <div class="container audio-control-content">
-                <button id="audioControlButton" aria-label="Controlar áudio">
-                    <i class="fas fa-music"></i>
+                <div class="music-player-details">
                     <span id="musicTitleDisplay">Clique para Tocar</span>
-                </button>
-                <div class="audio-progress-indicator" id="audioProgressArc">
-                     <svg viewBox="0 0 60 60" class="audio-progress-svg">
-                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
-                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
-                    </svg>
+                    <div class="progress-bar-and-times">
+                        <span id="currentTimeDisplay" class="time-display">0:00</span>
+                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
+                        <span id="durationDisplay" class="time-display">0:00</span>
+                    </div>
                 </div>
-                <button id="audioNextButton" aria-label="Próxima música">
-                    <i class="fas fa-forward"></i>
-                </button>
+                <div class="music-playback-controls">
+                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    <button id="audioControlButton" class="music-button main-play-pause-button" aria-label="Tocar/Pausar música">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                </div>
+                <div class="playback-speed-control">
+                    <select id="playbackSpeed" class="playback-speed-select">
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
             </div>
         </div>
     </footer>
