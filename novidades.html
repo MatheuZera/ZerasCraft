@@ -28,6 +28,7 @@
     <meta name="theme-color" content="#347C2F">
 </head>
 <body>
+
     <div id="centralMessage" class="central-message"></div>
     <audio id="backgroundAudio"></audio>
 
@@ -128,104 +129,6 @@
                 </div>
             </div>
         </section>
-        
-        <section id="console-info" class="section-padded fade-in-section">
-            <div class="container">
-                <div class="console-box">
-                    <div class="console-header">
-                        <div class="dot red"></div>
-                        <div class="dot yellow"></div>
-                        <div class="dot green"></div>
-                    </div>
-                    <div class="console-body">
-                        <p>Bem-vindo ao Mundo Zera's Craft!</p>
-                        <p>Carregando arquivos de notícias...</p>
-                        <p>Última notícia carregada: Grande Atualização de Verão.</p>
-                        <p>Status: <span style="color: #27c93f;">Online</span></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq-section" class="section-padded section-alt-bg fade-in-section">
-            <div class="container">
-                <h2 class="text-center"><i class="fas fa-question-circle"></i> Perguntas Frequentes sobre Notícias</h2>
-                <div class="accordion-container">
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <h3>Com que frequência as notícias são atualizadas?</h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Atualizamos a seção de notícias semanalmente, mas anúncios importantes podem ser publicados a qualquer momento!</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <h3>Posso sugerir um tópico para uma notícia?</h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Sim! Entre no nosso Discord e compartilhe suas ideias no canal de sugestões. Adoramos ouvir a comunidade.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <h3>Onde posso discutir as notícias?</h3>
-                            <i class="fas fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Cada notícia tem um link para o anúncio correspondente em nosso Discord, onde você pode discutir o tema com outros jogadores.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="news-gallery-section" class="section-padded fade-in-section">
-            <div class="container">
-                <h2 class="text-center"><i class="fas fa-images"></i> Galeria de Anúncios</h2>
-                <p class="section-description text-center">Clique nas imagens para expandir e ver mais detalhes dos nossos anúncios!</p>
-                <div class="gallery-grid max-3-columns">
-                    <a href="assets/images/news/featured.jpg" data-lightbox="news-gallery" class="lightbox-link">
-                        <img src="assets/images/news/featured.jpg" alt="Imagem da Grande Atualização" class="gallery-image">
-                    </a>
-                    <a href="assets/images/news/article1.jpg" data-lightbox="news-gallery" class="lightbox-link">
-                        <img src="assets/images/news/article1.jpg" alt="Imagem do Evento de Halloween" class="gallery-image">
-                    </a>
-                    <a href="assets/images/news/article2.jpg" data-lightbox="news-gallery" class="lightbox-link">
-                        <img src="assets/images/news/article2.jpg" alt="Imagem de Regras de Construção" class="gallery-image">
-                    </a>
-                </div>
-            </div>
-        </section>
-        
-        <section id="topics-section" class="section-padded section-alt-bg fade-in-section">
-            <div class="container">
-                <h2 class="text-center"><i class="fas fa-folder-open"></i> Tópicos de Notícias</h2>
-                <div class="tabs-container">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" data-tab="tab-eventos">Eventos</button>
-                        <button class="tab-button" data-tab="tab-atualizacoes">Atualizações</button>
-                        <button class="tab-button" data-tab="tab-comunidade">Comunidade</button>
-                    </div>
-                    <div class="tab-content-container">
-                        <div id="tab-eventos" class="tab-content active">
-                            <h3>Notícias sobre Eventos</h3>
-                            <p>Fique por dentro de todos os eventos especiais, concursos e atividades sazonais que acontecem no servidor.</p>
-                        </div>
-                        <div id="tab-atualizacoes" class="tab-content">
-                            <h3>Atualizações do Servidor</h3>
-                            <p>Anúncios de grandes atualizações, correções de bugs, novas funcionalidades e otimizações de desempenho.</p>
-                        </div>
-                        <div id="tab-comunidade" class="tab-content">
-                            <h3>Destaques da Comunidade</h3>
-                            <p>Conheça os jogadores da semana, as construções mais impressionantes e outras notícias importantes da nossa comunidade.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="main-footer">
@@ -269,37 +172,21 @@
                 <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
             </div>
         </div>
-        
         <div class="audio-control-bar">
             <div class="container audio-control-content">
-                <div class="music-player-details">
+                <button id="audioControlButton" aria-label="Controlar áudio">
+                    <i class="fas fa-music"></i>
                     <span id="musicTitleDisplay">Clique para Tocar</span>
-                    <div class="progress-bar-and-times">
-                        <span id="currentTimeDisplay" class="time-display">0:00</span>
-                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
-                        <span id="durationDisplay" class="time-display">0:00</span>
-                    </div>
+                </button>
+                <div class="audio-progress-indicator" id="audioProgressArc">
+                    <svg viewBox="0 0 60 60" class="audio-progress-svg">
+                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
+                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
+                    </svg>
                 </div>
-                <div class="music-playback-controls">
-                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
-                        <i class="fas fa-backward"></i>
-                    </button>
-                    <button id="audioControlButton" class="music-button main-play-pause-button" aria-label="Tocar/Pausar música">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
-                        <i class="fas fa-forward"></i>
-                    </button>
-                </div>
-                <div class="playback-speed-control">
-                    <select id="playbackSpeed" class="playback-speed-select">
-                        <option value="0.75">0.75x</option>
-                        <option value="1" selected>1x</option>
-                        <option value="1.25">1.25x</option>
-                        <option value="1.5">1.5x</option>
-                        <option value="2">2x</option>
-                    </select>
-                </div>
+                <button id="audioNextButton" aria-label="Próxima música">
+                    <i class="fas fa-forward"></i>
+                </button>
             </div>
         </div>
     </footer>
@@ -307,15 +194,6 @@
     <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
         <i class="fas fa-arrow-up"></i>
     </button>
-
-    <div id="welcomeModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="modal-close-btn">&times;</span>
-            <h2>Bem-vindo(a) à Página de Notícias!</h2>
-            <p>Fique por dentro das últimas notícias e anúncios do Mundo Zera's Craft.</p>
-            <button class="btn-primary modal-close-btn">Começar a Explorar</button>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
