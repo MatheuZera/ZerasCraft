@@ -1,65 +1,97 @@
 /*
  * style.css - Dagiti estilo para iti site ti Mundo Zera's Craft
  * Nabukel manipud iti naited a HTML structure ken napasayaat para iti multi-pahina.
- */
+*/
 
 /* ===================================== */
-/* 0. Dagiti Variables ken Basic Reset           */
+/* 0. Custom Fonts from assets/fonts     */
 /* ===================================== */
 
-:root {
-    /* Dagiti Kolor */
-    --cor-primaria: #4CAF50; /* Berde a kolor para kadagiti buton ken highlights (Minecraft Green) */
-    --cor-secundaria: #388E3C; /* Narigat a berde, para iti hover, kas pagarigan */
-    --cor-terciaria: #2E7D32; /* Narigat a berde para iti alternate backgrounds */
-    --cor-texto-claro: #ECF0F1; /* Narigat a gray para kadagiti text iti nasisinit a background */
-    --cor-texto-escuro: #2C3E50; /* Nasinit a asul para kadagiti text iti nalaaw a background */
-    --cor-fundo-claro: #F8F9FA; /* Nagalis a puraw para kadagiti nalaaw a section */
-    --cor-fundo-escuro: #1A1A1A; /* Nagalis a nangisit para kadagiti nasisinit a background */
-    --cor-destaque: #FFD700; /* Balitok para kadagiti highlight icons wenno titles (Gold ingot) */
-    --cor-bordas: rgba(255, 255, 255, 0.1); /* Subtle borders */
-    --cor-card-bg: #2C3E50; /* Background ti cards (nasisinit a asul a kasla Minecraft) */
-    --cor-card-text: #ECF0F1; /* Text ti cards (narigat a gray) */
-    --cor-card-hover: #34495E; /* Background ti cards no i-hover ti mouse */
-    --cor-link: #8bc34a; /* Default link color (light green) */
-    --cor-link-hover: #aed581; /* Link color no i-hover ti mouse */
-    --cor-btn-text: #FFFFFF; /* Text ti buton */
+@font-face {
+    font-family: 'TitleFont';
+    src: url('assets/fonts/title.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-    /* Dagiti kolor ti neon (adjust para iti berde/ciano a neon) */
-    --neon-flame-color1: #00FF00; /* Berde a Neon */
-    --neon-flame-color2: #00FFFF; /* Ciano a Neon */
-    --neon-flame-color1-rgb: 0, 255, 0; /* RGB para iti shadows */
-    --neon-flame-color2-rgb: 0, 255, 255; /* RGB para iti shadows */
+@font-face {
+    font-family: 'SubTitleFont';
+    src: url('assets/fonts/subtitle.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-    /* Dagiti Font */
-    --fonte-titulo: 'Montserrat', sans-serif; /* Usar ti Montserrat, a nabileg para iti titles */
-    --fonte-corpo: 'Roboto', sans-serif; /* Roboto para iti body text, nalaka a basaen */
-    --fonte-pixel: 'Pixelify Sans', sans-serif; /* Usar ti Pixelify Sans para iti pixelated look */
+@font-face {
+    font-family: 'TextFont';
+    src: url('assets/fonts/text.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-
-    /* Spacing ken Sizes */
-    --padding-section: 80px 0; /* Default padding para iti section, naadjust iti 80px */
-    --padding-card: 25px; /* Internal padding ti cards */
-    --gap-grid: 30px; /* Space between grid items */
-    --border-radius: 8px; /* Default rounded border */
-    --max-width-content: 1200px; /* Maximum content width */
-
-    /* Shadows */
-    --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
-    --sombra-card: 0 8px 16px rgba(0, 0, 0, 0.4);
-    --sombra-card-hover: 0 12px 24px rgba(0, 0, 0, 0.6); /* Napigpigsa para iti hover */
-
-    /* Transitions */
-    --transicao-padrao: all 0.3s ease-in-out; /* Inadduan iti 0.3s para iti kinanalamuyot */
-    --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
-    --transicao-icon-rotate: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Ad-adu a nakapimpintas a kurba para iti icon rotation */
+@font-face {
+    font-family: 'MiniTextFont';
+    src: url('assets/fonts/mini-text.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /* Import fonts manipud iti Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap');
 
+/* ===================================== */
+/* 1. Dagiti Variables ken Basic Reset   */
+/* ===================================== */
 
-/* Basic Reset para iti consistency kadagiti browser */
+:root {
+    /* Dagiti Kolor */
+    --cor-primaria: #4CAF50;
+    --cor-secundaria: #388E3C;
+    --cor-terciaria: #2E7D32;
+    --cor-texto-claro: #ECF0F1;
+    --cor-texto-escuro: #2C3E50;
+    --cor-fundo-claro: #F8F9FA;
+    --cor-fundo-escuro: #1A1A1A;
+    --cor-destaque: #FFD700;
+    --cor-bordas: rgba(255, 255, 255, 0.1);
+    --cor-card-bg: #2C3E50;
+    --cor-card-text: #ECF0F1;
+    --cor-card-hover: #34495E;
+    --cor-link: #8bc34a;
+    --cor-link-hover: #aed581;
+    --cor-btn-text: #FFFFFF;
+
+    /* Dagiti kolor ti neon */
+    --neon-flame-color1: #00FF00;
+    --neon-flame-color2: #00FFFF;
+    --neon-flame-color1-rgb: 0, 255, 0;
+    --neon-flame-color2-rgb: 0, 255, 255;
+
+    /* Dagiti Font */
+    --fonte-titulo: 'TitleFont', 'Montserrat', sans-serif;
+    --fonte-subtitulo: 'SubTitleFont', 'Montserrat', sans-serif;
+    --fonte-corpo: 'TextFont', 'Roboto', sans-serif;
+    --fonte-mini: 'MiniTextFont', 'Roboto', sans-serif;
+    --fonte-pixel: 'Pixelify Sans', sans-serif;
+
+    /* Spacing ken Sizes */
+    --padding-section: 80px 0;
+    --padding-card: 25px;
+    --gap-grid: 30px;
+    --border-radius: 8px;
+    --max-width-content: 1200px;
+
+    /* Shadows */
+    --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --sombra-card: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --sombra-card-hover: 0 12px 24px rgba(0, 0, 0, 0.6);
+
+    /* Transitions */
+    --transicao-padrao: all 0.3s ease-in-out;
+    --transicao-card-hover: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
+    --transicao-icon-rotate: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Basic Reset */
 *,
 *::before,
 *::after {
@@ -74,17 +106,15 @@ body {
     color: var(--cor-texto-claro);
     background-color: var(--cor-fundo-escuro);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-osx-font-smoothing: grayscale;
-    overflow-x: hidden; /* Ilisan ti horizontal scrollbar */
-    padding-bottom: 80px; /* Inadduan ti padding-bottom para iti fixed audio bar (desktop) */
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    padding-bottom: 80px;
 }
 
-/* Inadduan tapno makontrol ti scroll no nakalukat ti mobile menu */
 body.no-scroll {
     overflow: hidden;
 }
 
-/* Base para iti links */
 a {
     color: var(--cor-link);
     text-decoration: none;
@@ -96,7 +126,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Base para iti titles */
 h1,
 h2,
 h3,
@@ -107,7 +136,7 @@ h6 {
     color: var(--cor-texto-claro);
     margin-bottom: 0.8em;
     line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Soft shadow para iti amin a titles */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
@@ -120,10 +149,12 @@ h2 {
 
 h3 {
     font-size: 2.2em;
+    font-family: var(--fonte-subtitulo);
 }
 
 h4 {
     font-size: 1.8em;
+    font-family: var(--fonte-subtitulo);
 }
 
 p {
@@ -134,7 +165,6 @@ ul {
     list-style: none;
 }
 
-/* Utility classes para iti spacing ken alignment */
 .margin-bottom-30 {
     margin-bottom: 30px !important;
 }
@@ -158,17 +188,20 @@ ul {
 .text-center {
     text-align: center;
 }
+
 .text-left {
     text-align: left;
 }
 
+.small-text, .footer-note {
+    font-family: var(--fonte-mini);
+}
 
-/* Centralized Message (para iti user feedback) */
 .central-message {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -20px); /* Agpang iti ngato ti sentro */
+    transform: translate(-50%, -20px);
     background-color: rgba(0, 0, 0, 0.8);
     color: var(--cor-destaque);
     padding: 15px 30px;
@@ -180,14 +213,14 @@ ul {
     font-size: 1.1em;
     font-weight: bold;
     text-align: center;
-    pointer-events: none; /* Mangpalubos a mang-klik iti daytoy */
+    pointer-events: none;
     box-shadow: var(--sombra-card);
 }
 
 .central-message.show {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, 0); /* Agtengngel iti sentro */
+    transform: translate(-50%, 0);
 }
 
 /* ===================================== */
