@@ -175,12 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         preparingNextMusic = true;
-        
+
         // Define o próximo índice. Se specificIndex for -1, pega um aleatório.
         // Se for o botão 'anterior', o specificIndex já vem correto.
         // Se for o botão 'próximo' ou 'ended', usa o next logic normal.
         if (specificIndex !== -1) {
-             currentMusicIndex = specificIndex;
+            currentMusicIndex = specificIndex;
         } else {
             // Se não é um índice específico, pega o próximo ou aleatório
             if (currentMusicIndex === -1) { // Primeira vez que vai tocar
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentMusicIndex = (currentMusicIndex + 1) % musicPlaylist.length;
             }
         }
-        
+
         const music = musicPlaylist[currentMusicIndex];
         if (!music) {
             console.warn("Não foi possível obter um índice de música válido. Playlist vazia ou erro.");
@@ -350,20 +350,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // 2. Funcionalidade de Copiar Texto
     // =====================================
-    const copyButtons = document.querySelectorAll('.copy-button');
+    // Esta função foi atualizada para incluir a lógica para o IP/Porta do servidor
+    const copyButtons = document.querySelectorAll('.copy-button'); // Certifique-se de que seus botões de cópia têm esta classe
     if (copyButtons.length > 0) {
         copyButtons.forEach(button => {
             button.addEventListener('click', async () => {
                 let textToCopy = '';
-                let targetElementSelector = button.dataset.copyTarget;
+                let targetElementSelector = button.dataset.copyTarget; // Ex: '#serverIp, #serverPort'
                 let originalButtonText = button.textContent;
 
                 if (targetElementSelector) {
-                    const parentContext = button.closest('.access-info') || document;
                     const selectors = targetElementSelector.split(',').map(s => s.trim());
                     let partsToCopy = [];
                     for (const selector of selectors) {
-                        const targetElement = parentContext.querySelector(selector);
+                        const targetElement = document.querySelector(selector);
                         if (targetElement) {
                             partsToCopy.push(targetElement.textContent.trim());
                         }
@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
                         textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
                     } else {
-                        textToCopy = partsToCopy.join('');
+                        textToCopy = partsToCopy.join(' '); // Junta com espaço se for outro tipo de múltiplos elementos
                     }
                 } else if (button.dataset.copyText) {
                     textToCopy = button.dataset.copyText;
@@ -379,12 +379,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (textToCopy) {
                     try {
-                        const textArea = document.createElement("textarea");
-                        textArea.value = textToCopy;
-                        document.body.appendChild(textArea);
-                        textArea.select();
-                        document.execCommand('copy');
-                        document.body.removeChild(textArea);
+                        // Usa a API Clipboard mais moderna se disponível, com fallback para execCommand
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            await navigator.clipboard.writeText(textToCopy);
+                        } else {
+                            const textArea = document.createElement("textarea");
+                            textArea.value = textToCopy;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                        }
 
                         showCentralMessage(`'${textToCopy}' copiado!`);
                         button.textContent = 'Copiado!';
@@ -400,9 +405,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     showCentralMessage('Nada para copiar.');
                 }
+                playEffectSound(clickSound);
             });
         });
     }
+
 
     // =====================================
     // 3. Sistema de Áudio de Fundo (Event Listeners Principais)
@@ -541,27 +548,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================
-    // 4. Sistema de Sons para Interações
+    // 4. Sistema de Sons para Interações (Aprimorado)
     // =====================================
+    // Adiciona som de hover em elementos interativos
     document.querySelectorAll(
-        '.btn-primary, .menu-item a, .music-button, .card, .card-download-btn, .copy-button, .btn-ripple, .btn-hover-fill, .btn-border-anim, .btn-gradient-anim'
+        '.btn-primary, .menu-toggle, .music-button, .card, .card-download-btn, .copy-button, .accordion-header, .tab-button, .tooltip-trigger, .tooltip-trigger-icon, .custom-radio-btn, .close-alert, #showSpinnerBtn, #toggleSkeletonBtn, #floatingActionButton, .custom-range-slider, .rating-stars i, .spoiler-toggle, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn'
     ).forEach(element => {
         element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
     });
+
+    // Adiciona som de clique em elementos interativos
     document.querySelectorAll(
-        'a:not([href^="#"]), .btn-primary, .music-button, .card, .card-download-btn, .copy-button, .btn-ripple, .btn-hover-fill, .btn-border-anim, .btn-gradient-anim'
+        'a:not([href^="#"]), .btn-primary, .menu-toggle, .music-button, .card, .card-download-btn, .copy-button, .accordion-header, .tab-button, #openModalBtn, #closeModalBtn, .lightbox-close, .open-lightbox-btn, .carousel-button, #showSpinnerBtn, #toggleSkeletonBtn, #darkModeToggle, #notificationsToggle, #floatingActionButton, .rating-stars i, .spoiler-toggle, #playPauseVideoBtn, #fullScreenVideoBtn, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn'
     ).forEach(element => {
         element.addEventListener('click', (event) => {
             playEffectSound(clickSound);
-            // Previne a navegação imediata para reproduzir o som primeiro
-            if (element.tagName === 'A' && element.getAttribute('href') && element.getAttribute('href').charAt(0) !== '#') {
+            // Para links externos, introduz um pequeno atraso para o som tocar antes de navegar
+            if (element.tagName === 'A' && element.getAttribute('href') && !element.getAttribute('href').startsWith('#') && !element.getAttribute('href').startsWith('javascript:')) {
                 event.preventDefault();
                 setTimeout(() => {
                     window.location.href = element.href;
-                }, 200); // Pequeno atraso para o som tocar
+                }, 200); // Atraso de 200ms
             }
         });
     });
+
+
     // =====================================
     // 5. Animações de Rolagem com ScrollReveal
     // =====================================
@@ -598,457 +610,738 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 500); // Atraso de 500ms
 
+
     // =====================================
-    // 6. Contador Animado (CountUp.js)
+    // 6. Componentes Interativos Específicos
     // =====================================
-    const countUpElements = document.querySelectorAll('.counter');
-    if (countUpElements.length > 0 && typeof CountUp !== 'undefined') {
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const targetElement = entry.target;
-                    const endVal = parseFloat(targetElement.getAttribute('data-target'));
-                    const instance = new CountUp(targetElement, endVal, {
-                        duration: 2.5,
-                        separator: '.' // Ajuste para formato brasileiro
-                    });
-                    if (!instance.error) {
-                        instance.start();
+
+    // Contador Animado (CountUp.js)
+    const counterElements = document.querySelectorAll('.counter');
+    if (typeof CountUp !== 'undefined' && counterElements.length > 0) {
+        const options = {
+            duration: 2.5,
+            separator: '.',
+            startVal: 0,
+        };
+        const observers = [];
+
+        counterElements.forEach(el => {
+            const endValue = parseInt(el.dataset.target); // Alterado para data-target
+            const countUp = new CountUp(el, endValue, options);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!el.classList.contains('counted')) {
+                            countUp.start();
+                            el.classList.add('counted');
+                        }
                     } else {
-                        console.error(instance.error);
+                        // Opcional: reiniciar o contador ao sair da tela
+                        // el.classList.remove('counted');
+                        // el.textContent = '0';
                     }
-                    observer.unobserve(targetElement); // Anima uma vez
-                }
+                });
+            }, {
+                threshold: 0.5
             });
-        }, {
-            threshold: 0.8 // Quando 80% do elemento estiver visível
-        });
-
-        countUpElements.forEach(element => {
-            observer.observe(element);
+            observers.push(observer);
+            observer.observe(el);
         });
     }
 
-    // =====================================
-    // 7. Galeria de Imagens (Lightbox)
-    // =====================================
-    const galleryItems = document.querySelectorAll('.gallery-item img');
-    const lightbox = document.getElementById('myLightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const closeBtn = document.querySelector('.lightbox-close');
-    if (galleryItems.length > 0 && lightbox && lightboxImage && closeBtn) {
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                lightbox.classList.add('active');
-                lightboxImage.src = item.src;
-                playEffectSound(clickSound);
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-            playEffectSound(clickSound);
-        });
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) { // Fecha apenas se clicar no overlay
-                lightbox.classList.remove('active');
-                playEffectSound(clickSound);
-            }
-        });
-    } else {
-        console.warn("Elementos do Lightbox não encontrados. Verifique a estrutura HTML.");
-    }
-
-    // =====================================
-    // 8. Tabs de Conteúdo
-    // =====================================
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    if (tabButtons.length > 0) {
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                button.classList.add('active');
-                const targetId = button.dataset.tabTarget;
-                const targetContent = document.querySelector(targetId);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                }
-                playEffectSound(clickSound);
-            });
-        });
-    }
-
-    // =====================================
-    // 9. Flip Cards (Exemplo: Team Members)
-    // =====================================
-    const flipCards = document.querySelectorAll('.flip-card');
-    flipCards.forEach(card => {
-        card.addEventListener('click', () => {
-            card.classList.toggle('flipped');
-            playEffectSound(clickSound);
-        });
-    });
-    // =====================================
-    // 10. Accordion (Acordeão) - CORRIGIDO
-    // =====================================
+    // Acordeão
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     accordionHeaders.forEach(header => {
         header.addEventListener('click', () => {
-            const accordionItem = header.closest('.accordion-item');
-            const isActive = accordionItem.classList.contains('active');
+            const item = header.parentElement;
+            const content = header.nextElementSibling;
 
-            // Fecha todos os outros itens do acordeão
-            document.querySelectorAll('.accordion-item.active').forEach(item => {
-                if (item !== accordionItem) {
+            if (item.classList.contains('active')) {
+                item.classList.remove('active');
+                header.classList.remove('active');
+                content.classList.remove('open');
+                content.style.maxHeight = null; // Reseta max-height
+            } else {
+                // Fecha outros itens antes de abrir o atual (comportamento de acordeão)
+                accordionHeaders.forEach(otherHeader => {
+                    const otherItem = otherHeader.parentElement;
+                    const otherContent = otherHeader.nextElementSibling;
+                    otherItem.classList.remove('active');
+                    otherHeader.classList.remove('active');
+                    otherContent.classList.remove('open');
+                    otherContent.style.maxHeight = null;
+                });
+
+                item.classList.add('active');
+                header.classList.add('active');
+                content.classList.add('open');
+                content.style.maxHeight = content.scrollHeight + "px"; // Ajusta max-height para a altura do conteúdo
+            }
+            playEffectSound(clickSound);
+        });
+    });
+
+    // Abas
+    const tabButtons = document.querySelectorAll('.tab-button');
+    if (tabButtons.length > 0) {
+        // Ativar a primeira aba por padrão, se houver
+        const firstTabButton = tabButtons[0];
+        const firstTabPane = document.getElementById(firstTabButton.dataset.tabId);
+        if (firstTabButton) firstTabButton.classList.add('active');
+        if (firstTabPane) firstTabPane.classList.add('active');
+
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.tabId;
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+                button.classList.add('active');
+                document.getElementById(targetId).classList.add('active');
+
+                playEffectSound(clickSound);
+            });
+        });
+    }
+
+
+    // Modal
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalOverlay = document.getElementById('myModal');
+
+    if (openModalBtn && modalOverlay) {
+        openModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('active');
+            playEffectSound(clickSound);
+        });
+    }
+
+    if (closeModalBtn && modalOverlay) {
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            playEffectSound(clickSound);
+        });
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+    }
+
+    // Lightbox para Galeria de Imagens
+    const openLightboxBtns = document.querySelectorAll('.open-lightbox-btn');
+    const closeLightboxBtn = document.querySelector('.lightbox-close');
+    const lightboxOverlay = document.getElementById('myLightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+
+    openLightboxBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const imageUrl = button.dataset.imageUrl;
+            const imageAlt = button.dataset.imageAlt;
+            lightboxImage.src = imageUrl;
+            lightboxImage.alt = imageAlt;
+            lightboxOverlay.classList.add('show'); // Usa 'show' conforme o CSS
+            playEffectSound(clickSound);
+        });
+    });
+
+    if (closeLightboxBtn && lightboxOverlay) {
+        closeLightboxBtn.addEventListener('click', () => {
+            lightboxOverlay.classList.remove('show');
+            playEffectSound(clickSound);
+        });
+        lightboxOverlay.addEventListener('click', (e) => {
+            if (e.target === lightboxOverlay) {
+                lightboxOverlay.classList.remove('show');
+            }
+        });
+    }
+
+
+    // Carrossel de Imagens
+    const imageCarouselContainer = document.querySelector('.image-carousel-container');
+    if (imageCarouselContainer) {
+        const imageCarouselTrack = document.getElementById('imageCarouselTrack');
+        const carouselSlides = Array.from(imageCarouselTrack.children);
+        const carouselNextBtn = document.getElementById('carouselNextBtn');
+        const carouselPrevBtn = document.getElementById('carouselPrevBtn');
+        const carouselDotsContainer = document.getElementById('carouselDots');
+
+        let currentSlideIndex = 0;
+        let slideInterval; // Para o autoplay
+
+        // Cria os pontos de navegação
+        carouselSlides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                moveToSlide(index);
+                resetAutoplay();
+            });
+            carouselDotsContainer.appendChild(dot);
+        });
+        const carouselDots = Array.from(carouselDotsContainer.children);
+
+        const updateSlidePosition = () => {
+            const slideWidth = carouselSlides[0].getBoundingClientRect().width;
+            imageCarouselTrack.style.transform = `translateX(-${slideWidth * currentSlideIndex}px)`;
+        };
+
+        const updateDots = () => {
+            carouselDots.forEach((dot, index) => {
+                if (index === currentSlideIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        };
+
+        const moveToSlide = (targetIndex) => {
+            currentSlideIndex = targetIndex;
+            updateSlidePosition();
+            updateDots();
+            playEffectSound(clickSound);
+        };
+
+        carouselNextBtn.addEventListener('click', () => {
+            const nextIndex = (currentSlideIndex + 1) % carouselSlides.length;
+            moveToSlide(nextIndex);
+            resetAutoplay();
+        });
+
+        carouselPrevBtn.addEventListener('click', () => {
+            const prevIndex = (currentSlideIndex - 1 + carouselSlides.length) % carouselSlides.length;
+            moveToSlide(prevIndex);
+            resetAutoplay();
+        });
+
+        // Autoplay
+        const startAutoplay = () => {
+            slideInterval = setInterval(() => {
+                const nextIndex = (currentSlideIndex + 1) % carouselSlides.length;
+                moveToSlide(nextIndex);
+            }, 5000); // Muda a cada 5 segundos
+        };
+
+        const resetAutoplay = () => {
+            clearInterval(slideInterval);
+            startAutoplay();
+        };
+
+        // Redimensionamento
+        window.addEventListener('resize', () => {
+            updateSlidePosition();
+        });
+
+        startAutoplay(); // Inicia o autoplay ao carregar a página
+    }
+
+    // Image Compare Slider
+    const imageCompareSlider = document.getElementById('imageCompareSlider');
+    const imageAfter = document.querySelector('.image-compare-img-wrapper .image-after');
+    const imageCompareHandle = document.getElementById('imageCompareHandle');
+
+    if (imageCompareSlider && imageAfter && imageCompareHandle) {
+        const updateSlider = () => {
+            const sliderValue = imageCompareSlider.value;
+            imageAfter.style.width = `${sliderValue}%`;
+            imageCompareHandle.style.left = `${sliderValue}%`;
+        };
+
+        imageCompareSlider.addEventListener('input', updateSlider);
+        updateSlider(); // Define a posição inicial
+    }
+
+    // Toggle Spinner
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const showSpinnerBtn = document.getElementById('showSpinnerBtn');
+
+    if (loadingSpinner && showSpinnerBtn) {
+        showSpinnerBtn.addEventListener('click', () => {
+            loadingSpinner.classList.toggle('hidden');
+            playEffectSound(clickSound);
+        });
+    }
+
+    // Toggle Switches
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const notificationsToggle = document.getElementById('notificationsToggle');
+
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('change', () => {
+            console.log('Modo Escuro:', darkModeToggle.checked);
+            playEffectSound(clickSound);
+            // Implementar lógica de tema escuro aqui
+        });
+    }
+    if (notificationsToggle) {
+        notificationsToggle.addEventListener('change', () => {
+            console.log('Notificações:', notificationsToggle.checked);
+            playEffectSound(clickSound);
+            // Implementar lógica de notificações aqui
+        });
+    }
+
+    // Progress Circles
+    const progressCircles = document.querySelectorAll('.progress-circle');
+    progressCircles.forEach(circle => {
+        const progress = parseInt(circle.dataset.progress);
+        const circleBar = circle.querySelector('.progress-bar-circle');
+        const radius = circleBar.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (progress / 100) * circumference;
+
+        circleBar.style.strokeDasharray = circumference;
+        circleBar.style.strokeDashoffset = circumference; // Começa escondido
+
+        // Animação ao entrar na viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    circleBar.style.strokeDashoffset = offset;
+                    observer.unobserve(entry.target); // Para de observar após a animação
+                }
+            });
+        }, { threshold: 0.75 }); // Trigger quando 75% visível
+        observer.observe(circle);
+    });
+
+    // Skeleton Loader
+    const toggleSkeletonBtn = document.getElementById('toggleSkeletonBtn');
+    const skeletonContainer = document.getElementById('skeletonContent');
+    const actualContent = document.getElementById('actualContent');
+
+    if (toggleSkeletonBtn && skeletonContainer && actualContent) {
+        toggleSkeletonBtn.addEventListener('click', () => {
+            if (skeletonContainer.classList.contains('loaded')) {
+                // Se o conteúdo real está visível, volta para o esqueleto
+                skeletonContainer.classList.remove('loaded');
+                actualContent.classList.add('hidden');
+                showCentralMessage('Carregando conteúdo...');
+            } else {
+                // Simula um carregamento de 2 segundos antes de mostrar o conteúdo real
+                showCentralMessage('Carregando...');
+                setTimeout(() => {
+                    skeletonContainer.classList.add('loaded');
+                    actualContent.classList.remove('hidden');
+                    showCentralMessage('Conteúdo carregado!');
+                }, 2000);
+            }
+            playEffectSound(clickSound);
+        });
+    }
+
+    // Review Slider (Testemunhos)
+    const reviewSliderContainer = document.querySelector('.review-slider-container');
+    if (reviewSliderContainer) {
+        const reviewSliderTrack = document.getElementById('reviewSliderTrack');
+        const reviewSlides = Array.from(reviewSliderTrack.children);
+        const reviewNextBtn = document.getElementById('reviewNextBtn');
+        const reviewPrevBtn = document.getElementById('reviewPrevBtn');
+
+        let currentReviewIndex = 0;
+
+        const updateReviewSlidePosition = () => {
+            const slideWidth = reviewSlides[0].getBoundingClientRect().width;
+            reviewSliderTrack.style.transform = `translateX(-${slideWidth * currentReviewIndex}px)`;
+        };
+
+        const moveReviewToSlide = (targetIndex) => {
+            currentReviewIndex = targetIndex;
+            updateReviewSlidePosition();
+            playEffectSound(clickSound);
+        };
+
+        reviewNextBtn.addEventListener('click', () => {
+            const nextIndex = (currentReviewIndex + 1) % reviewSlides.length;
+            moveReviewToSlide(nextIndex);
+        });
+
+        reviewPrevBtn.addEventListener('click', () => {
+            const prevIndex = (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
+            moveReviewToSlide(prevIndex);
+        });
+
+        // Atualiza a posição inicial e ao redimensionar
+        window.addEventListener('resize', updateReviewSlidePosition);
+        updateReviewSlidePosition();
+    }
+
+    // Read More / Read Less
+    const readMoreToggle = document.getElementById('readMoreToggle');
+    const moreText = document.getElementById('moreText');
+
+    if (readMoreToggle && moreText) {
+        readMoreToggle.addEventListener('click', () => {
+            if (moreText.classList.contains('hidden-content')) {
+                moreText.classList.remove('hidden-content');
+                readMoreToggle.textContent = 'Leia Menos';
+            } else {
+                moreText.classList.add('hidden-content');
+                readMoreToggle.textContent = 'Leia Mais';
+            }
+            playEffectSound(clickSound);
+        });
+    }
+
+    // Typewriter Effect
+    const typewriterTextElement = document.getElementById('typewriterText');
+    if (typewriterTextElement) {
+        const dataText = JSON.parse(typewriterTextElement.dataset.text);
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 150;
+
+        function typeWriter() {
+            const currentText = dataText[textIndex];
+            if (isDeleting) {
+                typewriterTextElement.textContent = currentText.substring(0, charIndex--);
+            } else {
+                typewriterTextElement.textContent = currentText.substring(0, charIndex++);
+            }
+
+            if (!isDeleting && charIndex > currentText.length) {
+                typingSpeed = 2000; // Pausa no final da frase
+                isDeleting = true;
+            } else if (isDeleting && charIndex < 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % dataText.length;
+                typingSpeed = 150; // Velocidade de digitação
+            }
+
+            setTimeout(typeWriter, typingSpeed);
+        }
+        typeWriter();
+    }
+
+    // Custom Video Player
+    const myVideo = document.getElementById('myVideo');
+    const playPauseVideoBtn = document.getElementById('playPauseVideoBtn');
+    const videoProgressBar = document.getElementById('videoProgressBar');
+    const videoCurrentTime = document.getElementById('videoCurrentTime');
+    const videoDuration = document.getElementById('videoDuration');
+    const videoVolume = document.getElementById('videoVolume');
+    const fullScreenVideoBtn = document.getElementById('fullScreenVideoBtn');
+
+    if (myVideo && playPauseVideoBtn && videoProgressBar && videoCurrentTime && videoDuration && videoVolume && fullScreenVideoBtn) {
+        // Play/Pause
+        playPauseVideoBtn.addEventListener('click', () => {
+            if (myVideo.paused) {
+                myVideo.play();
+                playPauseVideoBtn.querySelector('i').classList.remove('fa-play');
+                playPauseVideoBtn.querySelector('i').classList.add('fa-pause');
+            } else {
+                myVideo.pause();
+                playPauseVideoBtn.querySelector('i').classList.remove('fa-pause');
+                playPauseVideoBtn.querySelector('i').classList.add('fa-play');
+            }
+            playEffectSound(clickSound);
+        });
+
+        // Update progress bar
+        myVideo.addEventListener('timeupdate', () => {
+            const progress = (myVideo.currentTime / myVideo.duration) * 100;
+            videoProgressBar.value = progress;
+            videoCurrentTime.textContent = formatTime(myVideo.currentTime);
+        });
+
+        myVideo.addEventListener('loadedmetadata', () => {
+            videoDuration.textContent = formatTime(myVideo.duration);
+        });
+
+        // Seek video
+        videoProgressBar.addEventListener('input', () => {
+            const seekTime = (videoProgressBar.value / 100) * myVideo.duration;
+            myVideo.currentTime = seekTime;
+        });
+
+        // Volume control
+        videoVolume.addEventListener('input', () => {
+            myVideo.volume = videoVolume.value / 100;
+        });
+
+        // Fullscreen
+        fullScreenVideoBtn.addEventListener('click', () => {
+            if (myVideo.requestFullscreen) {
+                myVideo.requestFullscreen();
+            } else if (myVideo.mozRequestFullScreen) { /* Firefox */
+                myVideo.mozRequestFullScreen();
+            } else if (myVideo.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                myVideo.webkitRequestFullscreen();
+            } else if (myVideo.msRequestFullscreen) { /* IE/Edge */
+                myVideo.msRequestFullscreen();
+            }
+            playEffectSound(clickSound);
+        });
+    }
+
+    // Floating Action Button
+    const floatingActionButton = document.getElementById('floatingActionButton');
+    if (floatingActionButton) {
+        floatingActionButton.addEventListener('click', () => {
+            showCentralMessage('Ação Rápida Acionada!');
+            playEffectSound(clickSound);
+            // Implementar ações adicionais aqui, como abrir um sub-menu
+        });
+    }
+
+    // Modern Contact Form (apenas feedback de submissão simulado)
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            showCentralMessage('Mensagem enviada com sucesso!');
+            contactForm.reset(); // Limpa o formulário
+            playEffectSound(clickSound);
+        });
+    }
+
+    // Range Slider Personalizado
+    const volumeRange = document.getElementById('volumeRange');
+    const volumeValue = document.getElementById('volumeValue');
+    const distanceRange = document.getElementById('distanceRange');
+    const distanceValue = document.getElementById('distanceValue');
+
+    if (volumeRange && volumeValue) {
+        volumeRange.addEventListener('input', () => {
+            volumeValue.textContent = volumeRange.value;
+        });
+    }
+    if (distanceRange && distanceValue) {
+        distanceRange.addEventListener('input', () => {
+            distanceValue.textContent = distanceRange.value;
+        });
+    }
+
+    // Rating Stars
+    const ratingStarsContainer = document.getElementById('ratingStars');
+    if (ratingStarsContainer) {
+        const stars = ratingStarsContainer.querySelectorAll('i');
+        const currentRatingSpan = document.getElementById('currentRating');
+        let currentRating = parseFloat(ratingStarsContainer.dataset.rating) || 0;
+
+        const updateStars = (rating) => {
+            stars.forEach(star => {
+                const starValue = parseInt(star.dataset.value);
+                if (starValue <= rating) {
+                    star.classList.remove('far');
+                    star.classList.add('fas');
+                } else {
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                }
+            });
+            currentRatingSpan.textContent = `(${rating}/5)`;
+        };
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                currentRating = parseInt(star.dataset.value);
+                updateStars(currentRating);
+                showCentralMessage(`Avaliação: ${currentRating} estrelas!`);
+                playEffectSound(clickSound);
+            });
+            star.addEventListener('mouseenter', () => {
+                const hoverValue = parseInt(star.dataset.value);
+                stars.forEach(s => {
+                    const sValue = parseInt(s.dataset.value);
+                    if (sValue <= hoverValue) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+            });
+            star.addEventListener('mouseleave', () => {
+                updateStars(currentRating); // Volta para a avaliação atual
+            });
+        });
+
+        updateStars(currentRating); // Define o estado inicial das estrelas
+    }
+
+    // Inline Form Validation Feedback
+    const inlineValidationForm = document.getElementById('inlineValidationForm');
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email-validate');
+    const passwordInput = document.getElementById('password-validate');
+
+    const usernameFeedback = document.getElementById('usernameFeedback');
+    const emailFeedback = document.getElementById('emailFeedback');
+    const passwordFeedback = document.getElementById('passwordFeedback');
+
+    const validateField = (input, feedbackElement, validationFn, errorMessage) => {
+        if (validationFn(input.value)) {
+            feedbackElement.textContent = '';
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+            return true;
+        } else {
+            feedbackElement.textContent = errorMessage;
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            return false;
+        }
+    };
+
+    const isUsernameValid = (username) => username.length >= 3;
+    const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const isPasswordValid = (password) => password.length >= 6;
+
+    if (inlineValidationForm) {
+        usernameInput.addEventListener('input', () => validateField(usernameInput, usernameFeedback, isUsernameValid, 'Mínimo de 3 caracteres.'));
+        emailInput.addEventListener('input', () => validateField(emailInput, emailFeedback, isEmailValid, 'Email inválido.'));
+        passwordInput.addEventListener('input', () => validateField(passwordInput, passwordFeedback, isPasswordValid, 'Mínimo de 6 caracteres.'));
+
+        inlineValidationForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const isFormValid =
+                validateField(usernameInput, usernameFeedback, isUsernameValid, 'Mínimo de 3 caracteres.') &&
+                validateField(emailInput, emailFeedback, isEmailValid, 'Email inválido.') &&
+                validateField(passwordInput, passwordFeedback, isPasswordValid, 'Mínimo de 6 caracteres.');
+
+            if (isFormValid) {
+                showCentralMessage('Formulário registrado com sucesso!');
+                inlineValidationForm.reset();
+                usernameInput.classList.remove('is-valid');
+                emailInput.classList.remove('is-valid');
+                passwordInput.classList.remove('is-valid');
+            } else {
+                showCentralMessage('Por favor, corrija os erros do formulário.');
+            }
+            playEffectSound(clickSound);
+        });
+    }
+
+    // Spoiler Block
+    const spoilerToggle = document.getElementById('spoilerToggle');
+    const spoilerContent = document.getElementById('spoilerContent');
+
+    if (spoilerToggle && spoilerContent) {
+        spoilerToggle.addEventListener('click', () => {
+            spoilerContent.classList.toggle('hidden-content');
+            if (spoilerContent.classList.contains('hidden-content')) {
+                spoilerToggle.textContent = 'Clique para revelar o spoiler!';
+            } else {
+                spoilerToggle.textContent = 'Esconder spoiler';
+            }
+            playEffectSound(clickSound);
+        });
+    }
+
+    // Hover Text Reveal
+    const hoverTextTrigger = document.getElementById('hoverTextTrigger');
+    const hoverImage = document.getElementById('hoverImage');
+
+    if (hoverTextTrigger && hoverImage) {
+        hoverTextTrigger.addEventListener('mouseenter', () => {
+            hoverImage.style.opacity = '1';
+            hoverImage.style.visibility = 'visible';
+        });
+        hoverTextTrigger.addEventListener('mouseleave', () => {
+            hoverImage.style.opacity = '0';
+            hoverImage.style.visibility = 'hidden';
+        });
+    }
+
+    // Cookie Consent Banner
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptCookiesBtn = document.getElementById('acceptCookiesBtn');
+    const declineCookiesBtn = document.getElementById('declineCookiesBtn');
+
+    if (cookieBanner && acceptCookiesBtn && declineCookiesBtn) {
+        const hasAcceptedCookies = localStorage.getItem('cookieConsent') === 'accepted';
+
+        if (!hasAcceptedCookies) {
+            cookieBanner.style.display = 'flex'; // Mostra o banner se não aceitou
+        }
+
+        acceptCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieBanner.style.display = 'none';
+            showCentralMessage('Cookies aceitos!');
+            playEffectSound(clickSound);
+        });
+
+        declineCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'declined'); // Ou simplesmente esconde sem aceitar
+            cookieBanner.style.display = 'none';
+            showCentralMessage('Cookies recusados. Algumas funcionalidades podem ser limitadas.');
+            playEffectSound(clickSound);
+        });
+    }
+
+    // Multi-Step Form Indicator
+    const stepIndicatorContainer = document.querySelector('.step-indicator-container');
+    if (stepIndicatorContainer) {
+        const stepItems = stepIndicatorContainer.querySelectorAll('.step-item');
+        const prevStepBtn = document.getElementById('prevStepBtn');
+        const nextStepBtn = document.getElementById('nextStepBtn');
+        const stepContentText = document.getElementById('stepContentText');
+
+        let currentStep = 1;
+
+        const updateStepUI = () => {
+            stepItems.forEach(item => {
+                const step = parseInt(item.dataset.step);
+                if (step === currentStep) {
+                    item.classList.add('active');
+                } else {
                     item.classList.remove('active');
                 }
             });
 
-            // Alterna o estado do item clicado
-            accordionItem.classList.toggle('active');
-            
-            playEffectSound(clickSound);
-        });
-    });
-
-    // =====================================
-    // 11. Modal (Popup) - Exemplo
-    // =====================================
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const myModal = document.getElementById('myModal');
-
-    if (openModalBtn && myModal && closeModalBtn) {
-        openModalBtn.addEventListener('click', () => {
-            myModal.classList.add('active');
-            playEffectSound(clickSound);
-        });
-        closeModalBtn.addEventListener('click', () => {
-            myModal.classList.remove('active');
-            playEffectSound(clickSound);
-        });
-        myModal.addEventListener('click', (e) => {
-            if (e.target === myModal) { // Fecha apenas se clicar no overlay
-                myModal.classList.remove('active');
-                playEffectSound(clickSound);
+            // Atualiza o texto do conteúdo
+            let contentMessage = '';
+            switch (currentStep) {
+                case 1:
+                    contentMessage = 'Preencha seus dados básicos para começar.';
+                    break;
+                case 2:
+                    contentMessage = 'Selecione suas preferências e opções.';
+                    break;
+                case 3:
+                    contentMessage = 'Revise suas informações e confirme o cadastro.';
+                    break;
+                default:
+                    contentMessage = 'Erro no passo.';
             }
+            stepContentText.textContent = contentMessage;
+
+            // Habilita/desabilita botões
+            prevStepBtn.disabled = currentStep === 1;
+            nextStepBtn.disabled = currentStep === stepItems.length;
+        };
+
+        nextStepBtn.addEventListener('click', () => {
+            if (currentStep < stepItems.length) {
+                currentStep++;
+                updateStepUI();
+            }
+            playEffectSound(clickSound);
         });
-    } else {
-        console.warn("Elementos do Modal não encontrados. Verifique a estrutura HTML.");
+
+        prevStepBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepUI();
+            }
+            playEffectSound(clickSound);
+        });
+
+        updateStepUI(); // Inicia a UI no primeiro passo
     }
 
-    // =====================================
-    // 12. Spoiler Block
-    // =====================================
-    const spoilerToggles = document.querySelectorAll('.spoiler-toggle');
-    spoilerToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const spoilerBlock = toggle.closest('.spoiler-block');
-            spoilerBlock.classList.toggle('revealed');
-            playEffectSound(clickSound);
-        });
-    });
-    // =====================================
-    // 13. Ripple Button Effect
-    // =====================================
-    document.querySelectorAll('.btn-ripple').forEach(button => {
-        button.addEventListener('click', function(e) {
-            const circle = document.createElement('span');
-            const diameter = Math.max(this.clientWidth, this.clientHeight);
-            const radius = diameter / 2;
 
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${e.clientX - (this.getBoundingClientRect().left + radius)}px`;
-            circle.style.top = `${e.clientY - (this.getBoundingClientRect().top + radius)}px`;
-            circle.classList.add('ripple');
-
-            const ripple = this.getElementsByClassName('ripple')[0];
-            if (ripple) {
-                ripple.remove();
-            }
-
-            this.appendChild(circle);
-        });
-    });
-    // =====================================
-    // 14. Image Carousel
-    // =====================================
-    const carouselContainers = document.querySelectorAll('.image-carousel-container');
-    carouselContainers.forEach(container => {
-        const track = container.querySelector('.image-carousel-track');
-        const images = Array.from(track.children);
-        const prevButton = container.querySelector('.carousel-prev');
-        const nextButton = container.querySelector('.carousel-next');
-        const dotsContainer = container.querySelector('.carousel-dots');
-
-        if (!track || images.length === 0 || !prevButton || !nextButton || !dotsContainer) {
-            console.warn("Elemento(s) do carrossel não encontrado(s). Verifique a estrutura HTML.");
-            return;
-        }
-
-        let slideIndex = 0;
-        let slideWidth = images[0].clientWidth; // Largura inicial da primeira imagem
-
-        // Criar dots
-        dotsContainer.innerHTML = ''; // Limpa dots existentes para recriação
-        images.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => {
-                moveToSlide(index);
-                playEffectSound(clickSound);
-            });
-            dotsContainer.appendChild(dot);
-        });
-
-        const dots = Array.from(dotsContainer.children);
-
-        const updateDots = () => {
-            dots.forEach(dot => dot.classList.remove('active'));
-            if (dots[slideIndex]) {
-                dots[slideIndex].classList.add('active');
-            }
-        };
-
-        const moveToSlide = (index) => {
-            if (index < 0) {
-                slideIndex = images.length - 1;
-            } else if (index >= images.length) {
-                slideIndex = 0;
-            } else {
-                slideIndex = index;
-            }
-            track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
-            updateDots();
-        };
-        prevButton.addEventListener('click', () => {
-            moveToSlide(slideIndex - 1);
-            playEffectSound(clickSound);
-        });
-        nextButton.addEventListener('click', () => {
-            moveToSlide(slideIndex + 1);
-            playEffectSound(clickSound);
-        });
-        // Atualizar largura do slide em redimensionamento (importante para responsividade)
-        const updateSlideWidth = () => {
-            if (images.length > 0) {
-                slideWidth = container.clientWidth;
-                images.forEach(img => {
-                    img.style.width = `${slideWidth}px`;
-                });
-                moveToSlide(slideIndex); // Reposiciona o carrossel
-            }
-        };
-        window.addEventListener('resize', updateSlideWidth);
-        updateSlideWidth(); // Chamada inicial para garantir que as imagens tenham o tamanho correto
-    });
-    // =====================================
-    // 15. Review Slider
-    // =====================================
-    const reviewSliderContainers = document.querySelectorAll('.review-slider-container');
-    reviewSliderContainers.forEach(container => {
-        const track = container.querySelector('.review-slider-track');
-        const reviewCards = Array.from(track.children);
-        const prevButton = container.querySelector('.review-prev-btn');
-        const nextButton = container.querySelector('.review-next-btn');
-
-        if (!track || reviewCards.length === 0 || !prevButton || !nextButton) {
-            console.warn("Elemento(s) do slider de reviews não encontrado(s). Verifique a estrutura HTML.");
-            return;
-        }
-
-        let slideIndex = 0;
-        let cardsPerView = 3; // Padrão para desktop
-        let cardTotalWidth = 0; // Largura de um card + suas margens
-
-        const updateCardsPerView = () => {
-            if (window.innerWidth <= 768) {
-                cardsPerView = 1;
-            } else if (window.innerWidth <= 1024) {
-                cardsPerView = 2;
-            } else {
-                cardsPerView = 3;
-            }
-            if (reviewCards.length > 0) {
-                const cardStyle = getComputedStyle(reviewCards[0]);
-                const marginRight = parseFloat(cardStyle.marginRight);
-                const marginLeft = parseFloat(cardStyle.marginLeft);
-                cardTotalWidth = reviewCards[0].offsetWidth + marginRight + marginLeft;
-            }
-        };
-        const moveToSlide = (index) => {
-            updateCardsPerView();
-            // Recalcula antes de mover
-            let newIndex = index;
-            if (newIndex < 0) {
-                newIndex = reviewCards.length - cardsPerView;
-            } else if (newIndex > reviewCards.length - cardsPerView) {
-                newIndex = 0;
-            }
-            slideIndex = newIndex;
-            track.style.transform = `translateX(-${slideIndex * cardTotalWidth}px)`;
-        };
-
-        prevButton.addEventListener('click', () => {
-            moveToSlide(slideIndex - cardsPerView);
-            playEffectSound(clickSound);
-        });
-        nextButton.addEventListener('click', () => {
-            moveToSlide(slideIndex + cardsPerView);
-            playEffectSound(clickSound);
-        });
-        window.addEventListener('resize', () => {
-            updateCardsPerView();
-            moveToSlide(slideIndex); // Reposiciona o slider
-        });
-        updateCardsPerView(); // Chamada inicial
-        moveToSlide(0);
-        // Inicia na primeira "página"
-    });
-
-    // =====================================
-    // 16. Progress Bar Animation (Status Bars)
-    // =====================================
-    const progressBarFills = document.querySelectorAll('.progress-bar-fill');
-    const animateProgressBar = (progressBar) => {
-        const progress = progressBar.dataset.progress;
-        let currentWidth = 0;
-        const interval = setInterval(() => {
-            if (currentWidth >= progress) {
-                clearInterval(interval);
-            } else {
-                currentWidth++;
-                progressBar.style.width = `${currentWidth}%`;
-                // Atualiza a porcentagem no elemento irmão
-                const percentageSpan = progressBar.closest('.status-bar-item').querySelector('.status-percentage');
-                if (percentageSpan) {
-                    percentageSpan.textContent = `${currentWidth}%`;
-                }
-            }
-        }, 20); // Velocidade da animação
-    };
-    const progressBarObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.dataset.animated) {
-                animateProgressBar(entry.target);
-                entry.target.dataset.animated = 'true'; // Marca como animado
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.7 // Quando 70% da barra estiver visível
-    });
-    progressBarFills.forEach(bar => {
-        progressBarObserver.observe(bar);
-    });
-    // =====================================
-    // 17. Glitch Text (header logo)
-    // =====================================
-    const glitchTextElements = document.querySelectorAll('.glitch-text');
-    glitchTextElements.forEach(element => {
-        element.setAttribute('data-text', element.textContent);
-    });
-    // =====================================
-    // 18. Animated Underline Title
-    // =====================================
-    // Este é puramente CSS, sem JS necessário.
-    // =====================================
-    // 19. Curtain Title (Seção de Título com Cortina)
-    // =====================================
-    const curtainTitleWrappers = document.querySelectorAll('.curtain-title-wrapper');
-    const curtainObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.8 });
-    // Quando 80% do elemento estiver visível
-
-    curtainTitleWrappers.forEach(wrapper => {
-        curtainObserver.observe(wrapper);
-    });
-    // =====================================
-    // 20. Hover Text Reveal (com imagem)
-    // =====================================
-    // Este é puramente CSS, sem JS necessário.
-    // =====================================
-    // 21. Console Box
-    // =====================================
-    // Este é puramente CSS, sem JS necessário.
-    // =====================================
-    // 22. Custom Radio Buttons
-    // =====================================
-    // Este é puramente CSS, sem JS necessário.
-    // =====================================
-    // 23. Animated Quote
-    // =====================================
-    // Este é puramente CSS, sem JS necessário.
-    // =====================================
-    // 24. Animated List (usando IntersectionObserver para animar ao rolar)
-    // =====================================
-    const animatedLists = document.querySelectorAll('.animated-list');
-    const listObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                Array.from(entry.target.children).forEach((li, index) => {
-                    setTimeout(() => {
-                        li.classList.add('animated');
-                    }, index * 100); // Atraso sequencial
-                });
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    animatedLists.forEach(list => {
-        listObserver.observe(list);
-    });
-    // =====================================
-    // 25. Modern Contact Form (validação básica HTML5)
-    // =====================================
-    const modernContactForm = document.querySelector('.modern-contact-form');
-    if (modernContactForm) {
-        modernContactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            playEffectSound(clickSound);
-            showCentralMessage('Mensagem enviada com sucesso! (Funcionalidade real exige backend)');
-            modernContactForm.reset(); // Limpa o formulário após o "envio"
-        });
-    }
-
-    // =====================================
-    // 26. Read More / Read Less
-    // =====================================
-    const readMoreContainers = document.querySelectorAll('.read-more-container');
-    readMoreContainers.forEach(container => {
-        const toggleButton = container.querySelector('.read-more-toggle');
-        const hiddenText = container.querySelector('.read-more-text.hidden'); // Pega apenas o parágrafo escondido
-
-        if (toggleButton && hiddenText) {
-            // Inicializa: se o texto extra estiver oculto, o botão deve ser "Leia Mais"
-            if (hiddenText.classList.contains('hidden')) {
-                toggleButton.textContent = 'Leia Mais';
-            } else {
-                toggleButton.textContent = 'Leia Menos';
-            }
-
-            toggleButton.addEventListener('click', () => {
-                hiddenText.classList.toggle('hidden');
-                if (hiddenText.classList.contains('hidden')) {
-                    toggleButton.textContent = 'Leia Mais';
-                } else {
-                    toggleButton.textContent = 'Leia Menos';
-                }
-                playEffectSound(clickSound);
-            });
-        }
-    });
     // =====================================
     // 99. Usabilidade e Ajustes Finais
     // =====================================
@@ -1063,6 +1356,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollTopButton.classList.remove('show');
             }
         });
+
         scrollTopButton.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -1076,15 +1370,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
-    }
-
-    // Scroll Progress Bar
-    const scrollProgress = document.querySelector('.scroll-progress');
-    if (scrollProgress) {
-        window.addEventListener('scroll', () => {
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (window.scrollY / totalHeight) * 100;
-            scrollProgress.style.width = `${progress}%`;
-        });
     }
 });
