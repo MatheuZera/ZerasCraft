@@ -2002,7 +2002,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 
     .scroll-top-button {
-        bottom: 160px; /* Ajusta para a barra de áudio em mobile */
+        bottom: 60px; /* Ajusta para a barra de áudio em mobile */
     }
 
     /* Ajustes para o slider de comparação de imagem em mobile */
