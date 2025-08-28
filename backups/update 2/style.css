@@ -1539,6 +1539,12 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     border-radius: 2px;
 }
 
+@media (max-width: 768px) {
+    .footer-column h4::after {
+        left: 42%;
+        width: 100px; /* Linha de destaque para os títulos */
+    }
+}
 .footer-column p {
     font-size: 0.95em;
     margin-bottom: 15px;
