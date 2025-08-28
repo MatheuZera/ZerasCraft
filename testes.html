@@ -180,7 +180,7 @@
 
                 <!-- Loading Spinner (Novo Elemento) -->
                 <h3 class="margin-top-40">Indicador de Carregamento</h3>
-                <div class="loading-spinner"></div>
+                <div class="loading-spinner" id="loadingSpinner"></div>
                 <button class="btn-primary margin-top-30" id="showSpinnerBtn">Mostrar/Esconder Spinner</button>
 
                 <!-- Toggle Switch (Novo Elemento) -->
@@ -204,7 +204,7 @@
                 <h3 class="margin-top-40">Círculos de Progresso</h3>
                 <div class="progress-circle-grid">
                     <div class="progress-circle-container">
-                        <div class="progress-circle" data-progress="75">
+                        <div class="progress-circle" data-progress="75" id="progressCircle1">
                             <svg class="progress-svg" viewBox="0 0 100 100">
                                 <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
                                 <circle class="progress-bar-circle" cx="50" cy="50" r="45"></circle>
@@ -214,7 +214,7 @@
                         <p>Completo</p>
                     </div>
                      <div class="progress-circle-container">
-                        <div class="progress-circle" data-progress="90">
+                        <div class="progress-circle" data-progress="90" id="progressCircle2">
                             <svg class="progress-svg" viewBox="0 0 100 100">
                                 <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
                                 <circle class="progress-bar-circle" cx="50" cy="50" r="45"></circle>
@@ -237,6 +237,11 @@
                         <div class="skeleton-line-medium"></div>
                         <div class="skeleton-line-long"></div>
                     </div>
+                     <div class="actual-content hidden" id="actualContent">
+                        <h4>Conteúdo Carregado!</h4>
+                        <p>Este é o conteúdo real que foi carregado após o esqueleto. Incrível, não é?</p>
+                        <p>Você pode colocar qualquer conteúdo dinâmico aqui.</p>
+                    </div>
                 </div>
                  <button class="btn-primary margin-top-30" id="toggleSkeletonBtn">Carregar Conteúdo</button>
             </div>
@@ -248,45 +253,45 @@
             <div class="container">
                 <div class="gallery-grid">
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/400x200/4CAF50/FFFFFF?text=Construção+1" alt="Imagem Galeria 1" class="responsive-image">
+                        <img src="https://placehold.co/400x200/4CAF50/FFFFFF?text=Construção+1" alt="Imagem Galeria 1" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/4CAF50/FFFFFF?text=Construção+1+Grande" data-image-alt="Construção 1">
                     </div>
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/401x201/388E3C/FFFFFF?text=Cenário+2" alt="Imagem Galeria 2" class="responsive-image">
+                        <img src="https://placehold.co/401x201/388E3C/FFFFFF?text=Cenário+2" alt="Imagem Galeria 2" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/388E3C/FFFFFF?text=Cenário+2+Grande" data-image-alt="Cenário 2">
                     </div>
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/402x202/2E7D32/FFFFFF?text=Aventura+3" alt="Imagem Galeria 3" class="responsive-image">
+                        <img src="https://placehold.co/402x202/2E7D32/FFFFFF?text=Aventura+3" alt="Imagem Galeria 3" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/2E7D32/FFFFFF?text=Aventura+3+Grande" data-image-alt="Aventura 3">
                     </div>
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/403x203/4CAF50/FFFFFF?text=Monumento+4" alt="Imagem Galeria 4" class="responsive-image">
+                        <img src="https://placehold.co/403x203/4CAF50/FFFFFF?text=Monumento+4" alt="Imagem Galeria 4" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/4CAF50/FFFFFF?text=Monumento+4+Grande" data-image-alt="Monumento 4">
                     </div>
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/404x204/388E3C/FFFFFF?text=Exploração+5" alt="Imagem Galeria 5" class="responsive-image">
+                        <img src="https://placehold.co/404x204/388E3C/FFFFFF?text=Exploração+5" alt="Imagem Galeria 5" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/388E3C/FFFFFF?text=Exploração+5+Grande" data-image-alt="Exploração 5">
                     </div>
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/405x205/2E7D32/FFFFFF?text=Base+6" alt="Imagem Galeria 6" class="responsive-image">
+                        <img src="https://placehold.co/405x205/2E7D32/FFFFFF?text=Base+6" alt="Imagem Galeria 6" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/2E7D32/FFFFFF?text=Base+6+Grande" data-image-alt="Base 6">
                     </div>
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/406x206/4CAF50/FFFFFF?text=Mina+7" alt="Imagem Galeria 7" class="responsive-image">
+                        <img src="https://placehold.co/406x206/4CAF50/FFFFFF?text=Mina+7" alt="Imagem Galeria 7" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/4CAF50/FFFFFF?text=Mina+7+Grande" data-image-alt="Mina 7">
                     </div>
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/407x207/388E3C/FFFFFF?text=Fazenda+8" alt="Imagem Galeria 8" class="responsive-image">
+                        <img src="https://placehold.co/407x207/388E3C/FFFFFF?text=Fazenda+8" alt="Imagem Galeria 8" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/388E3C/FFFFFF?text=Fazenda+8+Grande" data-image-alt="Fazenda 8">
                     </div>
                     <div class="gallery-item card">
-                        <img src="https://placehold.co/408x208/2E7D32/FFFFFF?text=Vila+9" alt="Imagem Galeria 9" class="responsive-image">
+                        <img src="https://placehold.co/408x208/2E7D32/FFFFFF?text=Vila+9" alt="Imagem Galeria 9" class="responsive-image open-lightbox-btn" data-image-url="https://placehold.co/800x600/2E7D32/FFFFFF?text=Vila+9+Grande" data-image-alt="Vila 9">
                     </div>
                 </div>
 
                 <!-- Carrossel de Imagens Simples -->
                 <h3 class="margin-top-40">Carrossel de Imagens</h3>
                 <div class="image-carousel-container">
-                    <div class="image-carousel-track">
+                    <div class="image-carousel-track" id="imageCarouselTrack">
                         <img src="https://placehold.co/800x450/2E7D32/FFFFFF?text=Exploração+A" alt="Imagem Carrossel 1" class="carousel-image">
                         <img src="https://placehold.co/800x450/4CAF50/FFFFFF?text=Criação+B" alt="Imagem Carrossel 2" class="carousel-image">
                         <img src="https://placehold.co/800x450/388E3C/FFFFFF?text=Comunidade+C" alt="Imagem Carrossel 3" class="carousel-image">
                     </div>
-                    <button class="carousel-button carousel-prev">&lt;</button>
-                    <button class="carousel-button carousel-next">&gt;</button>
-                    <div class="carousel-dots"></div>
+                    <button class="carousel-button carousel-prev" id="carouselPrevBtn">&lt;</button>
+                    <button class="carousel-button carousel-next" id="carouselNextBtn">&gt;</button>
+                    <div class="carousel-dots" id="carouselDots"></div>
                 </div>
 
                 <!-- Image Compare Slider (Novo Elemento) -->
@@ -296,8 +301,8 @@
                         <img class="image-before" src="https://placehold.co/600x400/8B4513/FFFFFF?text=Antes" alt="Imagem Antes">
                         <img class="image-after" src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Depois" alt="Imagem Depois">
                     </div>
-                    <input type="range" min="0" max="100" value="50" class="image-compare-slider">
-                    <div class="image-compare-handle"></div>
+                    <input type="range" min="0" max="100" value="50" class="image-compare-slider" id="imageCompareSlider">
+                    <div class="image-compare-handle" id="imageCompareHandle"></div>
                 </div>
             </div>
         </section>
@@ -375,7 +380,7 @@
                 <!-- Slider de Reviews/Testemunhos -->
                 <h3 class="margin-top-40">O que dizem os nossos usuários</h3>
                 <div class="review-slider-container">
-                    <div class="review-slider-track">
+                    <div class="review-slider-track" id="reviewSliderTrack">
                         <div class="review-card">
                             <p>"Melhor experiência de jogo que já tive! Servidor incrível e comunidade acolhedora."</p>
                             <div class="review-author-info">
@@ -419,8 +424,8 @@
                             </div>
                         </div>
                     </div>
-                    <button class="review-button review-prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="review-button review-next-btn"><i class="fas fa-chevron-right"></i></button>
+                    <button class="review-button review-prev-btn" id="reviewPrevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="review-button review-next-btn" id="reviewNextBtn"><i class="fas fa-chevron-right"></i></button>
                 </div>
 
                 <!-- Sticky Element (Novo Elemento) -->
@@ -538,25 +543,25 @@
                 <h3 class="margin-top-40">Seção "Leia Mais"</h3>
                 <div class="read-more-container card">
                     <p class="read-more-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p class="read-more-text hidden">Aqui está o conteúdo adicional que aparece quando você clica em "Leia Mais". É uma ótima maneira de economizar espaço e apresentar informações detalhadas apenas quando o usuário deseja vê-las. Você pode adicionar quantos parágrafos ou outros elementos precisar aqui dentro desta segunda tag 'p'.</p>
-                    <button class="read-more-toggle btn-link">Leia Mais</button>
+                    <p class="read-more-text hidden-content" id="moreText">Aqui está o conteúdo adicional que aparece quando você clica em "Leia Mais". É uma ótima maneira de economizar espaço e apresentar informações detalhadas apenas quando o usuário deseja vê-las. Você pode adicionar quantos parágrafos ou outros elementos precisar aqui dentro desta segunda tag 'p'.</p>
+                    <button class="read-more-toggle btn-link" id="readMoreToggle">Leia Mais</button>
                 </div>
 
                 <!-- Typewriter Effect (Novo Elemento) -->
                 <h3 class="margin-top-40">Efeito Máquina de Escrever</h3>
                 <div class="typewriter-container">
-                    <span class="typewriter-text" data-text='["Bem-vindo ao Zera\'s Craft!", "Explore mundos infinitos...", "Construa sua própria aventura!", "Junte-se à nossa comunidade!"]'></span>
+                    <span class="typewriter-text" id="typewriterText" data-text='["Bem-vindo ao Zera\'s Craft!", "Explore mundos infinitos...", "Construa sua própria aventura!", "Junte-se à nossa comunidade!"]'></span>
                 </div>
 
                 <!-- Video Player Customizado (Novo Elemento) -->
                 <h3 class="margin-top-40">Vídeo com Controles Personalizados</h3>
-                <div class="custom-video-player">
+                <div class="custom-video-player-container">
                     <video id="myVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" preload="auto"></video>
                     <div class="video-controls">
                         <button id="playPauseVideoBtn" class="video-control-btn"><i class="fas fa-play"></i></button>
-                        <input type="range" id="videoProgressBar" value="0" min="0" max="100">
+                        <input type="range" id="videoProgressBar" class="video-progress-bar" value="0" min="0" max="100">
                         <span id="videoCurrentTime">0:00</span> / <span id="videoDuration">0:00</span>
-                        <input type="range" id="videoVolume" value="100" min="0" max="100">
+                        <input type="range" id="videoVolume" class="video-volume-slider" value="100" min="0" max="100">
                         <button id="fullScreenVideoBtn" class="video-control-btn"><i class="fas fa-expand"></i></button>
                     </div>
                 </div>
@@ -577,7 +582,7 @@
             <div class="container">
                 <!-- Formulário de Contato Moderno -->
                 <h3 class="margin-top-40">Envie-nos uma Mensagem</h3>
-                <form class="modern-contact-form">
+                <form class="modern-contact-form" id="contactForm">
                     <div class="form-group">
                         <label for="contact-name">Seu Nome:</label>
                         <input type="text" id="contact-name" name="name" required placeholder="Digite seu nome completo">
@@ -618,18 +623,18 @@
 
                 <!-- Rating Stars (Novo Elemento) -->
                 <h3 class="margin-top-40">Avaliação com Estrelas</h3>
-                <div class="rating-stars" data-rating="3.5">
-                    <i class="fas fa-star" data-value="1"></i>
-                    <i class="fas fa-star" data-value="2"></i>
-                    <i class="fas fa-star" data-value="3"></i>
-                    <i class="fas fa-star" data-value="4"></i>
-                    <i class="fas fa-star" data-value="5"></i>
-                    <span class="rating-value">(3.5/5)</span>
+                <div class="rating-stars" data-rating="3.5" id="ratingStars">
+                    <i class="far fa-star" data-value="1"></i>
+                    <i class="far fa-star" data-value="2"></i>
+                    <i class="far fa-star" data-value="3"></i>
+                    <i class="far fa-star" data-value="4"></i>
+                    <i class="far fa-star" data-value="5"></i>
+                    <span class="rating-value" id="currentRating">(3.5/5)</span>
                 </div>
 
                 <!-- Inline Form Validation Feedback (Novo Elemento) -->
                 <h3 class="margin-top-40">Validação de Formulário (Inline)</h3>
-                <form class="inline-validation-form">
+                <form class="inline-validation-form" id="inlineValidationForm">
                     <div class="form-group">
                         <label for="username">Nome de Usuário:</label>
                         <input type="text" id="username" placeholder="Mínimo 3 caracteres">
@@ -657,7 +662,7 @@
 
                 <!-- Caixa de Texto Glassmorphism -->
                 <h3 class="margin-top-40">Caixa de Texto Glassmorphism</h3>
-                <div class="glass-container">
+                <div class="glass-container card">
                     <p>Este é um contêiner de exemplo com o efeito Glassmorphism. Ele pode ser usado para envolver qualquer tipo de conteúdo, como formulários, texto ou cards.</p>
                 </div>
 
@@ -671,8 +676,8 @@
                 <!-- Bloco de Spoiler -->
                 <h3 class="margin-top-40">Bloco de Spoiler</h3>
                 <div class="spoiler-block">
-                    <button class="spoiler-toggle btn-link">Clique para revelar o spoiler!</button>
-                    <div class="spoiler-content">
+                    <button class="spoiler-toggle btn-link" id="spoilerToggle">Clique para revelar o spoiler!</button>
+                    <div class="spoiler-content hidden-content" id="spoilerContent">
                         <p>Este é o conteúdo do spoiler. Ele estava escondido e agora foi revelado. Ideal para informações sensíveis ou para desafiar o usuário!</p>
                     </div>
                 </div>
@@ -680,12 +685,12 @@
                 <!-- Lista Animada -->
                 <h3 class="margin-top-40">Lista Animada</h3>
                 <ul class="animated-list card">
-                    <li><i class="list-icon fas fa-check"></i> Criação de mundos personalizados.</li>
-                    <li><i class="list-icon fas fa-check"></i> Eventos diários e semanais.</li>
-                    <li><i class="list-icon fas fa-check"></i> Suporte à comunidade 24/7.</li>
-                    <li><i class="list-icon fas fa-check"></i> Servidores otimizados e sem lag.</li>
-                    <li><i class="list-icon fas fa-check"></i> Novos biomas exclusivos.</li>
-                    <li><i class="list-icon fas fa-check"></i> Sistema de recompensas inovador.</li>
+                    <li class="list-item"><i class="list-icon fas fa-check"></i> Criação de mundos personalizados.</li>
+                    <li class="list-item"><i class="list-icon fas fa-check"></i> Eventos diários e semanais.</li>
+                    <li class="list-item"><i class="list-icon fas fa-check"></i> Suporte à comunidade 24/7.</li>
+                    <li class="list-item"><i class="list-icon fas fa-check"></i> Servidores otimizados e sem lag.</li>
+                    <li class="list-item"><i class="list-icon fas fa-check"></i> Novos biomas exclusivos.</li>
+                    <li class="list-item"><i class="list-icon fas fa-check"></i> Sistema de recompensas inovador.</li>
                 </ul>
 
                 <!-- Título com Animação de Cortina -->
@@ -697,8 +702,8 @@
                 <!-- Texto com Hover Interativo (Revela Imagem) -->
                 <h3 class="margin-top-40">Texto com Hover Interativo</h3>
                 <p class="hover-text-reveal">
-                    Passe o mouse sobre <span class="hover-text">esta palavra</span> para ver uma imagem.
-                    <div class="hover-image" style="background-image: url('https://placehold.co/300x200/4CAF50/FFFFFF?text=SURPRESA!');"></div>
+                    Passe o mouse sobre <span class="hover-text" id="hoverTextTrigger">esta palavra</span> para ver uma imagem.
+                    <div class="hover-image" id="hoverImage" style="background-image: url('https://placehold.co/300x200/4CAF50/FFFFFF?text=SURPRESA!');"></div>
                 </p>
 
                 <!-- Caixa de Console -->
@@ -764,12 +769,21 @@
                 <!-- Step Indicator / Wizard (Novo Elemento) -->
                 <h3 class="margin-top-40">Processo de Cadastro</h3>
                 <div class="step-indicator-container card">
-                    <div class="step-indicator">
-                        <div class="step active" data-step="1">1<div class="step-label">Dados Pessoais</div></div>
+                    <div class="step-indicator multi-step-indicator">
+                        <div class="step-item active" data-step="1">
+                            <div class="step-circle">1</div>
+                            <div class="step-label">Dados Pessoais</div>
+                        </div>
                         <div class="step-line"></div>
-                        <div class="step" data-step="2">2<div class="step-label">Preferências</div></div>
+                        <div class="step-item" data-step="2">
+                            <div class="step-circle">2</div>
+                            <div class="step-label">Preferências</div>
+                        </div>
                         <div class="step-line"></div>
-                        <div class="step" data-step="3">3<div class="step-label">Confirmação</div></div>
+                        <div class="step-item" data-step="3">
+                            <div class="step-circle">3</div>
+                            <div class="step-label">Confirmação</div>
+                        </div>
                     </div>
                     <div class="step-content">
                         <p id="stepContentText">Preencha seus dados básicos para começar.</p>

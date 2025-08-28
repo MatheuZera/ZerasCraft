@@ -316,6 +316,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.main-nav');
+    const desktopNav = document.querySelector('.desktop-nav'); // Adicionado para a navegação desktop
+    const mobileNav = document.querySelector('.mobile-nav');   // Adicionado para a navegação mobile
+
+    // Função para copiar links do desktop para o mobile
+    const populateMobileNav = () => {
+        if (desktopNav && mobileNav) {
+            mobileNav.innerHTML = desktopNav.innerHTML; // Copia os itens de navegação
+        }
+    };
+    populateMobileNav(); // Popula o menu mobile na carga inicial
 
     if (menuToggle && navMenu) {
         menuToggle.addEventListener('click', () => {
@@ -337,11 +347,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                setTimeout(() => {
-                    navMenu.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                }, 300);
+                // Fecha o menu mobile após a seleção
+                if (navMenu.classList.contains('active')) {
+                    setTimeout(() => {
+                        navMenu.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                        document.body.classList.remove('no-scroll');
+                    }, 300);
+                }
                 playEffectSound(clickSound);
             });
         });
@@ -559,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Adiciona som de clique em elementos interativos
     document.querySelectorAll(
-        'a:not([href^="#"]), .btn-primary, .menu-toggle, .music-button, .card, .card-download-btn, .copy-button, .accordion-header, .tab-button, #openModalBtn, #closeModalBtn, .lightbox-close, .open-lightbox-btn, .carousel-button, #showSpinnerBtn, #toggleSkeletonBtn, #darkModeToggle, #notificationsToggle, #floatingActionButton, .rating-stars i, .spoiler-toggle, #playPauseVideoBtn, #fullScreenVideoBtn, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn'
+        'a:not([href^="#"]), .btn-primary, .menu-toggle, .music-button, .card, .card-download-btn, .copy-button, .accordion-header, .tab-button, #openModalBtn, #closeModalBtn, .lightbox-close, .open-lightbox-btn, .carousel-btn, #showSpinnerBtn, #toggleSkeletonBtn, #darkModeToggle, #notificationsToggle, #floatingActionButton, .rating-stars i, .spoiler-toggle, #playPauseVideoBtn, #fullScreenVideoBtn, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn'
     ).forEach(element => {
         element.addEventListener('click', (event) => {
             playEffectSound(clickSound);
@@ -682,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Abas
+    // Abas (não presente no HTML atual, mas mantido para referência futura)
     const tabButtons = document.querySelectorAll('.tab-button');
     if (tabButtons.length > 0) {
         // Ativar a primeira aba por padrão, se houver
@@ -708,10 +721,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // Modal
+    // Modal (Aberto via botão no HTML)
     const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const modalOverlay = document.getElementById('myModal');
+    const closeModalBtn = document.getElementById('closeModalBtn'); // Atualizado para o ID no HTML
+    const modalOverlay = document.getElementById('myModal'); // Atualizado para o ID no HTML
 
     if (openModalBtn && modalOverlay) {
         openModalBtn.addEventListener('click', () => {
@@ -763,13 +776,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Carrossel de Imagens
-    const imageCarouselContainer = document.querySelector('.image-carousel-container');
-    if (imageCarouselContainer) {
-        const imageCarouselTrack = document.getElementById('imageCarouselTrack');
-        const carouselSlides = Array.from(imageCarouselTrack.children);
-        const carouselNextBtn = document.getElementById('carouselNextBtn');
-        const carouselPrevBtn = document.getElementById('carouselPrevBtn');
-        const carouselDotsContainer = document.getElementById('carouselDots');
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        const carouselTrack = document.getElementById('imageCarouselTrack'); // ID do HTML
+        const carouselSlides = Array.from(carouselTrack.children);
+        const carouselNextBtn = document.getElementById('carouselNextBtn'); // ID do HTML
+        const carouselPrevBtn = document.getElementById('carouselPrevBtn'); // ID do HTML
+        const carouselDotsContainer = document.getElementById('carouselDots'); // ID do HTML
 
         let currentSlideIndex = 0;
         let slideInterval; // Para o autoplay
@@ -788,8 +801,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const carouselDots = Array.from(carouselDotsContainer.children);
 
         const updateSlidePosition = () => {
+            if (carouselSlides.length === 0) return;
             const slideWidth = carouselSlides[0].getBoundingClientRect().width;
-            imageCarouselTrack.style.transform = `translateX(-${slideWidth * currentSlideIndex}px)`;
+            carouselTrack.style.transform = `translateX(-${slideWidth * currentSlideIndex}px)`;
         };
 
         const updateDots = () => {
@@ -940,14 +954,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Review Slider (Testemunhos)
     const reviewSliderContainer = document.querySelector('.review-slider-container');
     if (reviewSliderContainer) {
-        const reviewSliderTrack = document.getElementById('reviewSliderTrack');
+        const reviewSliderTrack = document.querySelector('.review-slider-track'); // Seleciona o track
         const reviewSlides = Array.from(reviewSliderTrack.children);
-        const reviewNextBtn = document.getElementById('reviewNextBtn');
-        const reviewPrevBtn = document.getElementById('reviewPrevBtn');
+        const reviewNextBtn = document.querySelector('.review-button.review-next-btn'); // Seleciona os botões
+        const reviewPrevBtn = document.querySelector('.review-button.review-prev-btn');
 
         let currentReviewIndex = 0;
 
         const updateReviewSlidePosition = () => {
+            if (reviewSlides.length === 0) return;
             const slideWidth = reviewSlides[0].getBoundingClientRect().width;
             reviewSliderTrack.style.transform = `translateX(-${slideWidth * currentReviewIndex}px)`;
         };
@@ -958,22 +973,27 @@ document.addEventListener('DOMContentLoaded', () => {
             playEffectSound(clickSound);
         };
 
-        reviewNextBtn.addEventListener('click', () => {
-            const nextIndex = (currentReviewIndex + 1) % reviewSlides.length;
-            moveReviewToSlide(nextIndex);
-        });
+        if (reviewNextBtn) {
+            reviewNextBtn.addEventListener('click', () => {
+                const nextIndex = (currentReviewIndex + 1) % reviewSlides.length;
+                moveReviewToSlide(nextIndex);
+            });
+        }
 
-        reviewPrevBtn.addEventListener('click', () => {
-            const prevIndex = (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
-            moveReviewToSlide(prevIndex);
-        });
+        if (reviewPrevBtn) {
+            reviewPrevBtn.addEventListener('click', () => {
+                const prevIndex = (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
+                moveReviewToSlide(prevIndex);
+            });
+        }
+
 
         // Atualiza a posição inicial e ao redimensionar
         window.addEventListener('resize', updateReviewSlidePosition);
         updateReviewSlidePosition();
     }
 
-    // Read More / Read Less
+    // Read More / Read Less (não presente no HTML atual, mas mantido para referência futura)
     const readMoreToggle = document.getElementById('readMoreToggle');
     const moreText = document.getElementById('moreText');
 
@@ -990,7 +1010,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Typewriter Effect
+    // Typewriter Effect (não presente no HTML atual, mas mantido para referência futura)
     const typewriterTextElement = document.getElementById('typewriterText');
     if (typewriterTextElement) {
         const dataText = JSON.parse(typewriterTextElement.dataset.text);
@@ -1021,7 +1041,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typeWriter();
     }
 
-    // Custom Video Player
+    // Custom Video Player (não presente no HTML atual, mas mantido para referência futura)
     const myVideo = document.getElementById('myVideo');
     const playPauseVideoBtn = document.getElementById('playPauseVideoBtn');
     const videoProgressBar = document.getElementById('videoProgressBar');
@@ -1082,7 +1102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Floating Action Button
+    // Floating Action Button (não presente no HTML atual, mas mantido para referência futura)
     const floatingActionButton = document.getElementById('floatingActionButton');
     if (floatingActionButton) {
         floatingActionButton.addEventListener('click', () => {
@@ -1093,7 +1113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Modern Contact Form (apenas feedback de submissão simulado)
-    const contactForm = document.getElementById('contactForm');
+    const contactForm = document.getElementById('contactForm'); // Mantido ID genérico
     if (contactForm) {
         contactForm.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -1103,7 +1123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Range Slider Personalizado
+    // Range Slider Personalizado (não presente no HTML atual, mas mantido para referência futura)
     const volumeRange = document.getElementById('volumeRange');
     const volumeValue = document.getElementById('volumeValue');
     const distanceRange = document.getElementById('distanceRange');
@@ -1120,7 +1140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Rating Stars
+    // Rating Stars (não presente no HTML atual, mas mantido para referência futura)
     const ratingStarsContainer = document.getElementById('ratingStars');
     if (ratingStarsContainer) {
         const stars = ratingStarsContainer.querySelectorAll('i');
@@ -1169,7 +1189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStars(currentRating); // Define o estado inicial das estrelas
     }
 
-    // Inline Form Validation Feedback
+    // Inline Form Validation Feedback (não presente no HTML atual, mas mantido para referência futura)
     const inlineValidationForm = document.getElementById('inlineValidationForm');
     const usernameInput = document.getElementById('username');
     const emailInput = document.getElementById('email-validate');
@@ -1222,7 +1242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Spoiler Block
+    // Spoiler Block (não presente no HTML atual, mas mantido para referência futura)
     const spoilerToggle = document.getElementById('spoilerToggle');
     const spoilerContent = document.getElementById('spoilerContent');
 
@@ -1238,7 +1258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Hover Text Reveal
+    // Hover Text Reveal (não presente no HTML atual, mas mantido para referência futura)
     const hoverTextTrigger = document.getElementById('hoverTextTrigger');
     const hoverImage = document.getElementById('hoverImage');
 
@@ -1253,7 +1273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Cookie Consent Banner
+    // Cookie Consent Banner (não presente no HTML atual, mas mantido para referência futura)
     const cookieBanner = document.getElementById('cookieBanner');
     const acceptCookiesBtn = document.getElementById('acceptCookiesBtn');
     const declineCookiesBtn = document.getElementById('declineCookiesBtn');
@@ -1280,7 +1300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Multi-Step Form Indicator
+    // Multi-Step Form Indicator (não presente no HTML atual, mas mantido para referência futura)
     const stepIndicatorContainer = document.querySelector('.step-indicator-container');
     if (stepIndicatorContainer) {
         const stepItems = stepIndicatorContainer.querySelectorAll('.step-item');
@@ -1339,6 +1359,245 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         updateStepUI(); // Inicia a UI no primeiro passo
+    }
+
+    // Filter Buttons for Arquivos (addons.html)
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const cardGrid = document.getElementById('card-grid');
+
+    const downloadItems = [
+        {
+            title: 'Addon de Magia Épica',
+            category: 'Addon',
+            description: 'Adiciona novos feitiços, varinhas e dimensões mágicas ao jogo.',
+            imageUrl: 'https://placehold.co/400x225/4CAF50/FFFFFF?text=Magia+Addon',
+            version: '1.2.0',
+            size: '5.3 MB',
+            downloadLink: '#'
+        },
+        {
+            title: 'Mod de Criaturas Lendárias',
+            category: 'Mod',
+            description: 'Enfrente bosses lendários e domestique novas criaturas para te acompanhar.',
+            imageUrl: 'https://placehold.co/400x225/388E3C/FFFFFF?text=Criaturas+Mod',
+            version: '2.1.0',
+            size: '12.8 MB',
+            downloadLink: '#'
+        },
+        {
+            title: 'Skin Pack: Heróis do Pixel',
+            category: 'Skin',
+            description: 'Pacote com 10 skins exclusivas de heróis em estilo pixel art.',
+            imageUrl: 'https://placehold.co/400x225/2E7D32/FFFFFF?text=Skins+Herois',
+            version: '1.0.0',
+            size: '2.1 MB',
+            downloadLink: '#'
+        },
+        {
+            title: 'Arquivos de Servidor - Config Básico',
+            category: 'Arquivos Gerais',
+            description: 'Configurações básicas para iniciar seu próprio servidor Zera\'s Craft.',
+            imageUrl: 'https://placehold.co/400x225/1A1A1A/FFFFFF?text=Server+Configs',
+            version: '1.0.0',
+            size: '1.5 MB',
+            downloadLink: '#'
+        },
+        {
+            title: 'Addon de Ferramentas Avançadas',
+            category: 'Addon',
+            description: 'Novas ferramentas e máquinas para automatizar suas construções e mineração.',
+            imageUrl: 'https://placehold.co/400x225/4CAF50/FFFFFF?text=Ferramentas+Addon',
+            version: '1.1.0',
+            size: '7.0 MB',
+            downloadLink: '#'
+        },
+         {
+            title: 'Mod de Decoração Moderna',
+            category: 'Mod',
+            description: 'Adicione móveis, blocos e elementos decorativos para casas modernas.',
+            imageUrl: 'https://placehold.co/400x225/388E3C/FFFFFF?text=Decoracao+Mod',
+            version: '1.5.0',
+            size: '8.1 MB',
+            downloadLink: '#'
+        },
+        {
+            title: 'Skin: Cavaleiro das Sombras',
+            category: 'Skin',
+            description: 'Uma skin sombria e imponente para os aventureiros mais corajosos.',
+            imageUrl: 'https://placehold.co/400x225/2C3E50/FFFFFF?text=Skin+Cavaleiro',
+            version: '1.0.0',
+            size: '0.8 MB',
+            downloadLink: '#'
+        },
+        {
+            title: 'Pastas Essenciais do Jogo',
+            category: 'Arquivos Gerais',
+            description: 'Coleção de pastas e arquivos indispensáveis para o bom funcionamento do Minecraft.',
+            imageUrl: 'https://placehold.co/400x225/1A1A1A/FFFFFF?text=Pastas+Jogo',
+            version: '1.0.0',
+            size: '3.2 MB',
+            downloadLink: '#'
+        }
+    ];
+
+    const generateDownloadCard = (item) => {
+        const card = document.createElement('div');
+        card.classList.add('card', 'download-card');
+        card.dataset.category = item.category;
+
+        card.innerHTML = `
+            <img src="${item.imageUrl}" alt="${item.title}" class="card-image responsive-image">
+            <div class="card-content">
+                <h3 class="card-title">${item.title}</h3>
+                <p class="card-description">${item.description}</p>
+                <div class="card-meta">
+                    <span class="card-version">Versão: ${item.version}</span>
+                    <span class="card-size">Tamanho: ${item.size}</span>
+                </div>
+                <button class="btn-primary card-download-btn"
+                        data-title="${item.title}"
+                        data-description="${item.description}"
+                        data-image="${item.imageUrl}"
+                        data-version="${item.version}"
+                        data-size="${item.size}"
+                        data-download-link="${item.downloadLink}">
+                    Detalhes & Baixar
+                </button>
+            </div>
+        `;
+        return card;
+    };
+
+    const renderDownloadItems = (filter = 'all') => {
+        if (!cardGrid) return;
+        cardGrid.innerHTML = ''; // Limpa o grid atual
+
+        const filteredItems = filter === 'all'
+            ? downloadItems
+            : downloadItems.filter(item => item.category === filter);
+
+        if (filteredItems.length === 0) {
+            cardGrid.innerHTML = '<p class="text-center">Nenhum item encontrado nesta categoria.</p>';
+            return;
+        }
+
+        filteredItems.forEach(item => {
+            cardGrid.appendChild(generateDownloadCard(item));
+        });
+
+        // Adiciona event listeners aos novos botões de download
+        document.querySelectorAll('.card-download-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = document.getElementById('download-modal');
+                const modalImage = document.getElementById('modal-image');
+                const modalTitle = document.getElementById('modal-title');
+                const modalDescription = document.getElementById('modal-description');
+                const modalVersion = document.getElementById('modal-version');
+                const modalSize = document.getElementById('modal-size');
+                const modalDownloadLink = document.getElementById('modal-download-link');
+
+                modalImage.src = button.dataset.image;
+                modalImage.alt = button.dataset.title;
+                modalTitle.textContent = button.dataset.title;
+                modalDescription.textContent = button.dataset.description;
+                if (modalVersion) modalVersion.textContent = button.dataset.version;
+                if (modalSize) modalSize.textContent = button.dataset.size;
+                modalDownloadLink.href = button.dataset.downloadLink;
+
+                modal.classList.add('active');
+                playEffectSound(clickSound);
+            });
+        });
+    };
+
+    if (filterButtons.length > 0 && cardGrid) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.dataset.filter;
+                renderDownloadItems(filter);
+                playEffectSound(clickSound);
+            });
+        });
+        renderDownloadItems('all'); // Renderiza todos os itens na carga inicial
+    }
+
+    // Modal de Download (do arquivos.html)
+    const downloadModal = document.getElementById('download-modal');
+    const downloadModalCloseBtn = downloadModal ? downloadModal.querySelector('.modal-close-btn') : null;
+
+    if (downloadModalCloseBtn && downloadModal) {
+        downloadModalCloseBtn.addEventListener('click', () => {
+            downloadModal.classList.remove('active');
+            playEffectSound(clickSound);
+        });
+        downloadModal.addEventListener('click', (e) => {
+            if (e.target === downloadModal) {
+                downloadModal.classList.remove('active');
+            }
+        });
+    }
+
+    // Search Input for Downloads/Arquivos
+    const searchInput = document.getElementById('search-input'); // Para arquivos.html
+    const downloadSearchInput = document.getElementById('download-search-input'); // Para downloads.html
+
+    const filterCardsBySearch = (searchTerm) => {
+        const currentFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+        const filteredByCat = currentFilter === 'all'
+            ? downloadItems
+            : downloadItems.filter(item => item.category === currentFilter);
+
+        const finalFilteredItems = filteredByCat.filter(item =>
+            item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.description.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        if (cardGrid) {
+            cardGrid.innerHTML = '';
+            if (finalFilteredItems.length === 0) {
+                cardGrid.innerHTML = '<p class="text-center">Nenhum item encontrado com este termo de pesquisa.</p>';
+            } else {
+                finalFilteredItems.forEach(item => {
+                    cardGrid.appendChild(generateDownloadCard(item));
+                });
+            }
+            // Re-bind click handlers for dynamically added cards
+             document.querySelectorAll('.card-download-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = document.getElementById('download-modal');
+                    const modalImage = document.getElementById('modal-image');
+                    const modalTitle = document.getElementById('modal-title');
+                    const modalDescription = document.getElementById('modal-description');
+                    const modalVersion = document.getElementById('modal-version');
+                    const modalSize = document.getElementById('modal-size');
+                    const modalDownloadLink = document.getElementById('modal-download-link');
+
+                    modalImage.src = button.dataset.image;
+                    modalImage.alt = button.dataset.title;
+                    modalTitle.textContent = button.dataset.title;
+                    modalDescription.textContent = button.dataset.description;
+                    if (modalVersion) modalVersion.textContent = button.dataset.version;
+                    if (modalSize) modalSize.textContent = button.dataset.size;
+                    modalDownloadLink.href = button.dataset.downloadLink;
+
+                    modal.classList.add('active');
+                    playEffectSound(clickSound);
+                });
+            });
+        }
+    };
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (event) => {
+            filterCardsBySearch(event.target.value);
+        });
+    }
+    if (downloadSearchInput) {
+        downloadSearchInput.addEventListener('input', (event) => {
+            filterCardsBySearch(event.target.value);
+        });
     }
 
 
