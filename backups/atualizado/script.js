@@ -1048,6 +1048,10 @@ textLinkElements.forEach(element => {
     // 7. ELEMENTOS
     // =====================================
 
+    // =======================================================
+    // A
+    // =======================================================
+
     const acordeaoBtns = document.querySelectorAll('.acordeao-btn');
     acordeaoBtns.forEach(btn => {
         btn.addEventListener('click', function () {
@@ -1076,7 +1080,9 @@ textLinkElements.forEach(element => {
         });
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     // Nenhuma JS funcional necessária para a animação CSS.
     // O JS abaixo é apenas um exemplo de interação.
@@ -1088,7 +1094,9 @@ textLinkElements.forEach(element => {
         tituloNeon.style.animationPlayState = 'running';
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('change', () => {
@@ -1101,6 +1109,9 @@ textLinkElements.forEach(element => {
         }
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const progressBar = document.querySelector('.progress-bar');
     const progressValue = progressBar.getAttribute('data-progress');
@@ -1125,6 +1136,9 @@ textLinkElements.forEach(element => {
         }
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const abasBtns = document.querySelectorAll('.aba-btn');
     const abasPaineis = document.querySelectorAll('.aba-painel');
@@ -1140,6 +1154,9 @@ textLinkElements.forEach(element => {
         });
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const carrosselSlider = document.querySelector('.carrossel-slider');
     const carrosselPrev = document.querySelector('.carrossel-prev');
@@ -1172,6 +1189,9 @@ textLinkElements.forEach(element => {
     });
 
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnScrollTop = document.querySelector('.btn-scroll-top');
     window.addEventListener('scroll', () => {
@@ -1188,6 +1208,9 @@ textLinkElements.forEach(element => {
         });
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const typingText = document.querySelector('.typing-text');
     const textToType = 'Desenvolvimento Web Moderno.';
@@ -1202,6 +1225,9 @@ textLinkElements.forEach(element => {
     }
     typeWriter();
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const galeriaItens = document.querySelectorAll('.galeria-item');
     const lightboxOverlay = document.querySelector('.lightbox-overlay');
@@ -1225,6 +1251,9 @@ textLinkElements.forEach(element => {
         }
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnShare = document.querySelector('.btn-share');
     const shareIcons = document.querySelector('.share-icons');
@@ -1233,8 +1262,9 @@ textLinkElements.forEach(element => {
         shareIcons.classList.toggle('show');
     });
 
-
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const contadores = document.querySelectorAll('.contador-numero');
 
@@ -1261,6 +1291,10 @@ textLinkElements.forEach(element => {
         threshold: 0.5 // Aciona quando 50% do elemento está visível
     };
 
+    // =======================================================
+    // A
+    // =======================================================
+
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -1274,6 +1308,9 @@ textLinkElements.forEach(element => {
         observer.observe(contador);
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     // Exemplo de lógica de clique
     const btnIcon = document.querySelector('.btn-icon');
@@ -1301,7 +1338,9 @@ textLinkElements.forEach(element => {
         document.body.classList.remove('no-scroll');
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const abasBotoesAnimadas = document.querySelectorAll('.aba-btn-animada');
     const abasPaineisAnimados = document.querySelectorAll('.aba-painel-animada');
@@ -1330,7 +1369,9 @@ textLinkElements.forEach(element => {
         updateIndicador(primeiraAba);
     }
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnAviso = document.querySelector('.btn-aviso-sucesso');
     const avisoToast = document.getElementById('aviso-toast');
@@ -1342,7 +1383,9 @@ textLinkElements.forEach(element => {
         }, 3000); // Esconde a mensagem após 3 segundos
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnCopy = document.querySelector('.btn-copy');
     const codigoBloco = document.querySelector('.codigo-bloco');
@@ -1364,6 +1407,9 @@ textLinkElements.forEach(element => {
         });
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnSidebarOpen = document.querySelector('.btn-sidebar-open');
     const btnSidebarClose = document.querySelector('.btn-sidebar-close');
@@ -1385,8 +1431,9 @@ textLinkElements.forEach(element => {
         sidebarOverlay.style.display = 'none';
     });
 
-
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const filtroBtns = document.querySelectorAll('.filtro-btn');
 
@@ -1406,7 +1453,9 @@ textLinkElements.forEach(element => {
         });
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const chatbotBtn = document.querySelector('.chatbot-btn');
     const chatbotBox = document.querySelector('.chatbot-box');
@@ -1420,7 +1469,9 @@ textLinkElements.forEach(element => {
         chatbotBox.classList.remove('show');
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnRipple = document.querySelector('.btn-ripple');
 
@@ -1441,7 +1492,9 @@ textLinkElements.forEach(element => {
         });
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const cardPerfil3D = document.querySelector('.card-perfil-3d');
 
@@ -1460,7 +1513,9 @@ textLinkElements.forEach(element => {
         cardPerfil3D.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnDownload = document.querySelector('.btn-download');
 
@@ -1473,8 +1528,9 @@ textLinkElements.forEach(element => {
         }, 2000);
     });
 
-
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const cookieConsent = document.getElementById('cookie-consent');
     const btnAceitarCookie = document.querySelector('.btn-aceitar-cookie');
@@ -1531,8 +1587,9 @@ textLinkElements.forEach(element => {
         scrollContainer.scrollLeft = scrollLeft - walk;
     });
 
-
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const testemunhoWrapper = document.querySelector('.testemunho-wrapper');
     const bolhas = document.querySelectorAll('.bolha-testemunho');
@@ -1556,7 +1613,9 @@ textLinkElements.forEach(element => {
         });
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const rollingNumbers = document.querySelectorAll('.numero-rolling');
 
@@ -1596,6 +1655,9 @@ textLinkElements.forEach(element => {
         observer.observe(element);
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const shareContainer = document.querySelector('.share-container');
     const btnShareToggle = document.querySelector('.btn-share-toggle');
@@ -1604,7 +1666,9 @@ textLinkElements.forEach(element => {
         shareContainer.classList.toggle('active');
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const galeriaColunas = document.querySelectorAll('.galeria-coluna');
 
@@ -1617,7 +1681,9 @@ textLinkElements.forEach(element => {
         });
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnNotificacao = document.querySelector('.btn-notificacao');
     const notificationDropdown = document.querySelector('.notification-dropdown');
@@ -1652,8 +1718,9 @@ textLinkElements.forEach(element => {
     addNotification('Nova mensagem de Maria.');
     addNotification('Seu pedido foi enviado.');
 
-
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const dropdownContainer = document.querySelector('.dropdown-menu-container');
     const dropdownBtn = document.querySelector('.dropdown-btn');
@@ -1668,6 +1735,9 @@ textLinkElements.forEach(element => {
         }
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const pageLoader = document.getElementById('page-loader');
 
@@ -1677,6 +1747,9 @@ textLinkElements.forEach(element => {
         }, 1000); // Esconde o loader após 1 segundo
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const tabela = document.getElementById('tabela-estatisticas');
     const headers = tabela.querySelectorAll('th');
@@ -1710,9 +1783,9 @@ textLinkElements.forEach(element => {
         });
     });
 
-
-
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const progressCircle = document.querySelector('.circulo-progresso');
     const porcentagem = parseFloat(progressCircle.dataset.porcentagem);
@@ -1729,8 +1802,9 @@ textLinkElements.forEach(element => {
     });
     observe.observe(progressCircle);
 
-
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const barras = document.querySelectorAll('.barra-item');
 
@@ -1751,8 +1825,9 @@ textLinkElements.forEach(element => {
     }, { threshold: 0.5 });
     observe2.observe(document.querySelector('.grafico-barras'));
 
-
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const searchEfeito = document.querySelector('.search-efeito');
     const inputEfeito = document.querySelector('.input-efeito');
@@ -1768,7 +1843,9 @@ textLinkElements.forEach(element => {
         }
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const acordeaoItems = document.querySelectorAll('.acordeao-item');
 
@@ -1789,6 +1866,9 @@ textLinkElements.forEach(element => {
         });
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnAbrirAviso = document.querySelector('.btn-abrir-aviso');
     const avisoOverlay = document.querySelector('.aviso-popup-overlay');
@@ -1816,7 +1896,9 @@ textLinkElements.forEach(element => {
         });
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnFade = document.querySelector('.btn-tooltip-fade');
     const overlayFade = document.querySelector('.tooltip-fade-overlay');
@@ -1827,6 +1909,9 @@ textLinkElements.forEach(element => {
         if (e.target === overlayFade) overlayFade.classList.remove('show');
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const toolboxRodape = document.querySelector('.toolbox-rodape');
     const toolboxFechar = document.querySelector('.toolbox-fechar');
@@ -1843,6 +1928,9 @@ textLinkElements.forEach(element => {
         });
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const carouselItems = document.querySelectorAll('.carousel-full-screen .carousel-item');
     const prevBtn = document.querySelector('.carousel-control.prev');
@@ -1862,7 +1950,9 @@ textLinkElements.forEach(element => {
         showSlide(currentSlide);
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const wrapper = document.querySelector('.carousel-cards-wrapper');
     const dots = document.querySelectorAll('.carousel-dots .dot');
@@ -1879,6 +1969,9 @@ textLinkElements.forEach(element => {
         });
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const tabsContainer = document.querySelector('.tabs-container');
     const tabButtons = tabsContainer.querySelectorAll('.tab-button');
@@ -1912,6 +2005,9 @@ textLinkElements.forEach(element => {
         updateIndicator(document.querySelector('.tab-button.active'));
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const formCard = document.getElementById('form-contato');
     const inputs = form.querySelectorAll('input, textarea');
@@ -1960,6 +2056,10 @@ textLinkElements.forEach(element => {
         }
     });
 
+    // =======================================================
+    // A
+    // =======================================================
+
     const swipeWrapper = document.querySelector('.liquid-swipe-wrapper');
     const prevBtn2 = document.querySelector('.liquid-btn.prev');
     const nextBtn2 = document.querySelector('.liquid-btn.next');
@@ -1980,6 +2080,9 @@ textLinkElements.forEach(element => {
         updateSwipe();
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const cardReflexo = document.querySelector('.card-reflexo');
 
@@ -1994,6 +2097,10 @@ textLinkElements.forEach(element => {
         // Atualiza a posição do reflexo em CSS
         cardReflexo.style.setProperty('--reflect-pos', `${x * 100 / rect.width}% ${y * 100 / rect.height}%`);
     });
+
+    // =======================================================
+    // A
+    // =======================================================
 
     const starsContainer = document.querySelector('.rating-stars');
     const stars = starsContainer.querySelectorAll('i');
@@ -2022,6 +2129,9 @@ textLinkElements.forEach(element => {
         }
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     const wrapper3d = document.querySelector('.carousel-3d-wrapper');
     const prev3d = document.querySelector('.prev-3d');
@@ -2044,6 +2154,10 @@ textLinkElements.forEach(element => {
     });
 
 
+    // =======================================================
+    // A
+    // =======================================================
+
     document.querySelectorAll('.btn-ler-mais').forEach(button => {
         button.addEventListener('click', () => {
             const parentCard = button.closest('.card-ler-mais');
@@ -2063,7 +2177,9 @@ textLinkElements.forEach(element => {
         });
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const tocLinks = document.querySelectorAll('.toc a');
     const sections = document.querySelectorAll('.conteudo-longo section');
@@ -2085,6 +2201,9 @@ textLinkElements.forEach(element => {
         });
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     document.querySelectorAll('.btn-copiar').forEach(button => {
         button.addEventListener('click', () => {
@@ -2103,6 +2222,9 @@ textLinkElements.forEach(element => {
         });
     });
 
+    // =======================================================
+    // A
+    // =======================================================
 
     document.querySelectorAll('.btn-share').forEach(button => {
         button.addEventListener('click', (e) => {
@@ -2129,6 +2251,10 @@ textLinkElements.forEach(element => {
             }
         });
     });
+
+    // =======================================================
+    // A
+    // =======================================================
 
     const modalOverlay = document.getElementById('modal-detalhes-plano');
     const closeModalBtn = modalOverlay.querySelector('.close-modal');
@@ -2230,7 +2356,9 @@ textLinkElements.forEach(element => {
         }
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const btnSubmitLoading = document.getElementById('btn-submit-loading');
 
@@ -2246,7 +2374,9 @@ textLinkElements.forEach(element => {
         }, 2000);
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const galleryImages = document.querySelectorAll('.gallery-grid img');
     const lightbox = document.getElementById('lightbox');
@@ -2270,7 +2400,9 @@ textLinkElements.forEach(element => {
         }
     });
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     const items = [
         { id: 1, title: 'Mod de Magia', description: 'Adiciona novas habilidades mágicas.', rating: 4.5, tags: ['mod'], thumbnail: 'https://via.placeholder.com/400x300/F44336/FFFFFF?text=Mod+Magia', details: 'Inclui 50 feitiços, 10 varinhas e novos inimigos. Requer a versão 1.18.' },
@@ -2366,7 +2498,9 @@ textLinkElements.forEach(element => {
     filterAndSearch();
 
 
-
+    // =======================================================
+    // A
+    // =======================================================
 
     // O array `items` é o mesmo do exemplo anterior.
 
@@ -2439,9 +2573,4 @@ textLinkElements.forEach(element => {
 
     // Inicialização
     switchTab('all');
-
-
-
-
-
 });
