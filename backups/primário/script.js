@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audioEffects[name] = audio;
         return audio;
     };
-    hoverSound = initializeAudioEffect('select', 'assets/audios/effects/select.mp3', 0.3);
     clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7);
 
     const playEffectSoundInternal = (audioElement) => {
@@ -109,6 +108,89 @@ document.addEventListener('DOMContentLoaded', () => {
         const secs = Math.floor(seconds % 60);
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
+
+// =====================================
+// Configuração de Áudio
+// =====================================
+
+// Define os caminhos e pre-carrega os sons
+const linkSound = new Audio('assets/audios/effects/link.mp3');
+const cardSound = new Audio('assets/audios/effects/card.mp3');
+const buttonSound = new Audio('assets/audios/effects/button.mp3');
+const selectSound = new Audio('assets/audios/effects/select.mp3');
+const buttonClickSound = new Audio('assets/audios/effects/button-click.mp3');
+
+linkSound.preload = 'auto';
+cardSound.preload = 'auto';
+buttonSound.preload = 'auto';
+selectSound.preload = 'auto';
+buttonClickSound.preload = 'auto';
+
+/**
+ * Toca um som de forma controlada, clonando o áudio para evitar interrupções.
+ * @param {HTMLAudioElement} sound - O objeto de áudio a ser tocado.
+ */
+function playSound(sound) {
+    const clonedSound = sound.cloneNode();
+    clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
+}
+
+// =====================================
+// Gerenciamento de Eventos de Clique
+// =====================================
+
+document.addEventListener('click', (event) => {
+    const target = event.target.closest('a, button');
+
+    if (!target) {
+        return;
+    }
+
+    const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
+    const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
+
+    if (isNavLink) {
+        // Toca o som de link para navegação
+        event.preventDefault();
+        playSound(linkSound);
+        setTimeout(() => {
+            window.location.href = target.href;
+        }, 300);
+    } else if (isSpecialButton) {
+        // Toca o som de clique para botões e links internos
+        playSound(buttonClickSound);
+    }
+});
+
+// =====================================
+// Gerenciamento de Eventos de Hover
+// =====================================
+
+// Seletores para os elementos
+const cardElements = document.querySelectorAll(
+    '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card'
+);
+
+const buttonElements = document.querySelectorAll(
+    'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top'
+);
+
+const textLinkElements = document.querySelectorAll(
+    'p a, span a, li a'
+);
+
+// Adiciona os event listeners
+cardElements.forEach(element => {
+    element.addEventListener('mouseenter', () => playSound(cardSound));
+});
+
+buttonElements.forEach(element => {
+    element.addEventListener('mouseenter', () => playSound(buttonSound));
+});
+
+textLinkElements.forEach(element => {
+    element.addEventListener('mouseenter', () => playSound(selectSound));
+});
 
     // =====================================
     // Lógica de Controle da Música de Fundo
@@ -560,31 +642,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('pagehide', saveAudioState);
     }
 
-    // =====================================
-    // 4. Sistema de Sons para Interações (Aprimorado)
-    // =====================================
-    // Adiciona som de hover em elementos interativos
-    document.querySelectorAll(
-        '.btn-primary, .menu-toggle, .music-button, .card, .card-download-btn, .copy-button, .accordion-header, .tab-button, .tooltip-trigger, .tooltip-trigger-icon, .custom-radio-btn, .close-alert, #showSpinnerBtn, #toggleSkeletonBtn, #floatingActionButton, .custom-range-slider, .rating-stars i, .spoiler-toggle, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn'
-    ).forEach(element => {
-        element.addEventListener('mouseenter', () => playEffectSound(hoverSound));
-    });
-
-    // Adiciona som de clique em elementos interativos
-    document.querySelectorAll(
-        'a:not([href^="#"]), .btn-primary, .menu-toggle, .music-button, .card, .card-download-btn, .copy-button, .accordion-header, .tab-button, #openModalBtn, #closeModalBtn, .lightbox-close, .open-lightbox-btn, .carousel-btn, #showSpinnerBtn, #toggleSkeletonBtn, #darkModeToggle, #notificationsToggle, #floatingActionButton, .rating-stars i, .spoiler-toggle, #playPauseVideoBtn, #fullScreenVideoBtn, #acceptCookiesBtn, #declineCookiesBtn, #prevStepBtn, #nextStepBtn'
-    ).forEach(element => {
-        element.addEventListener('click', (event) => {
-            playEffectSound(clickSound);
-            // Para links externos, introduz um pequeno atraso para o som tocar antes de navegar
-            if (element.tagName === 'A' && element.getAttribute('href') && !element.getAttribute('href').startsWith('#') && !element.getAttribute('href').startsWith('javascript:')) {
-                event.preventDefault();
-                setTimeout(() => {
-                    window.location.href = element.href;
-                }, 200); // Atraso de 200ms
-            }
-        });
-    });
 
 
     // =====================================
@@ -628,650 +685,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Componentes Interativos Específicos
     // =====================================
 
-    // Contador Animado (CountUp.js)
-    const counterElements = document.querySelectorAll('.counter');
-    if (typeof CountUp !== 'undefined' && counterElements.length > 0) {
-        const options = {
-            duration: 2.5,
-            separator: '.',
-            startVal: 0,
-        };
-        const observers = [];
-
-        counterElements.forEach(el => {
-            const endValue = parseInt(el.dataset.target); // Alterado para data-target
-            const countUp = new CountUp(el, endValue, options);
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (!el.classList.contains('counted')) {
-                            countUp.start();
-                            el.classList.add('counted');
-                        }
-                    } else {
-                        // Opcional: reiniciar o contador ao sair da tela
-                        // el.classList.remove('counted');
-                        // el.textContent = '0';
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
-            observers.push(observer);
-            observer.observe(el);
-        });
-    }
-
-    // Acordeão
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const item = header.parentElement;
-            const content = header.nextElementSibling;
-
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-                header.classList.remove('active');
-                content.classList.remove('open');
-                content.style.maxHeight = null; // Reseta max-height
-            } else {
-                // Fecha outros itens antes de abrir o atual (comportamento de acordeão)
-                accordionHeaders.forEach(otherHeader => {
-                    const otherItem = otherHeader.parentElement;
-                    const otherContent = otherHeader.nextElementSibling;
-                    otherItem.classList.remove('active');
-                    otherHeader.classList.remove('active');
-                    otherContent.classList.remove('open');
-                    otherContent.style.maxHeight = null;
-                });
-
-                item.classList.add('active');
-                header.classList.add('active');
-                content.classList.add('open');
-                content.style.maxHeight = content.scrollHeight + "px"; // Ajusta max-height para a altura do conteúdo
-            }
-            playEffectSound(clickSound);
-        });
-    });
-
-    // Abas (não presente no HTML atual, mas mantido para referência futura)
-    const tabButtons = document.querySelectorAll('.tab-button');
-    if (tabButtons.length > 0) {
-        // Ativar a primeira aba por padrão, se houver
-        const firstTabButton = tabButtons[0];
-        const firstTabPane = document.getElementById(firstTabButton.dataset.tabId);
-        if (firstTabButton) firstTabButton.classList.add('active');
-        if (firstTabPane) firstTabPane.classList.add('active');
-
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.dataset.tabId;
-
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-
-                button.classList.add('active');
-                document.getElementById(targetId).classList.add('active');
-
-                playEffectSound(clickSound);
-            });
-        });
-    }
-
-
-    // Modal (Aberto via botão no HTML)
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn'); // Atualizado para o ID no HTML
-    const modalOverlay = document.getElementById('myModal'); // Atualizado para o ID no HTML
-
-    if (openModalBtn && modalOverlay) {
-        openModalBtn.addEventListener('click', () => {
-            modalOverlay.classList.add('active');
-            playEffectSound(clickSound);
-        });
-    }
-
-    if (closeModalBtn && modalOverlay) {
-        closeModalBtn.addEventListener('click', () => {
-            modalOverlay.classList.remove('active');
-            playEffectSound(clickSound);
-        });
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                modalOverlay.classList.remove('active');
-            }
-        });
-    }
-
-    // Lightbox para Galeria de Imagens
-    const openLightboxBtns = document.querySelectorAll('.open-lightbox-btn');
-    const closeLightboxBtn = document.querySelector('.lightbox-close');
-    const lightboxOverlay = document.getElementById('myLightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-
-    openLightboxBtns.forEach(button => {
-        button.addEventListener('click', () => {
-            const imageUrl = button.dataset.imageUrl;
-            const imageAlt = button.dataset.imageAlt;
-            lightboxImage.src = imageUrl;
-            lightboxImage.alt = imageAlt;
-            lightboxOverlay.classList.add('show'); // Usa 'show' conforme o CSS
-            playEffectSound(clickSound);
-        });
-    });
-
-    if (closeLightboxBtn && lightboxOverlay) {
-        closeLightboxBtn.addEventListener('click', () => {
-            lightboxOverlay.classList.remove('show');
-            playEffectSound(clickSound);
-        });
-        lightboxOverlay.addEventListener('click', (e) => {
-            if (e.target === lightboxOverlay) {
-                lightboxOverlay.classList.remove('show');
-            }
-        });
-    }
-
-
-    // Carrossel de Imagens
-    const carouselContainer = document.querySelector('.carousel-container');
-    if (carouselContainer) {
-        const carouselTrack = document.getElementById('imageCarouselTrack'); // ID do HTML
-        const carouselSlides = Array.from(carouselTrack.children);
-        const carouselNextBtn = document.getElementById('carouselNextBtn'); // ID do HTML
-        const carouselPrevBtn = document.getElementById('carouselPrevBtn'); // ID do HTML
-        const carouselDotsContainer = document.getElementById('carouselDots'); // ID do HTML
-
-        let currentSlideIndex = 0;
-        let slideInterval; // Para o autoplay
-
-        // Cria os pontos de navegação
-        carouselSlides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('carousel-dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => {
-                moveToSlide(index);
-                resetAutoplay();
-            });
-            carouselDotsContainer.appendChild(dot);
-        });
-        const carouselDots = Array.from(carouselDotsContainer.children);
-
-        const updateSlidePosition = () => {
-            if (carouselSlides.length === 0) return;
-            const slideWidth = carouselSlides[0].getBoundingClientRect().width;
-            carouselTrack.style.transform = `translateX(-${slideWidth * currentSlideIndex}px)`;
-        };
-
-        const updateDots = () => {
-            carouselDots.forEach((dot, index) => {
-                if (index === currentSlideIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        };
-
-        const moveToSlide = (targetIndex) => {
-            currentSlideIndex = targetIndex;
-            updateSlidePosition();
-            updateDots();
-            playEffectSound(clickSound);
-        };
-
-        carouselNextBtn.addEventListener('click', () => {
-            const nextIndex = (currentSlideIndex + 1) % carouselSlides.length;
-            moveToSlide(nextIndex);
-            resetAutoplay();
-        });
-
-        carouselPrevBtn.addEventListener('click', () => {
-            const prevIndex = (currentSlideIndex - 1 + carouselSlides.length) % carouselSlides.length;
-            moveToSlide(prevIndex);
-            resetAutoplay();
-        });
-
-        // Autoplay
-        const startAutoplay = () => {
-            slideInterval = setInterval(() => {
-                const nextIndex = (currentSlideIndex + 1) % carouselSlides.length;
-                moveToSlide(nextIndex);
-            }, 5000); // Muda a cada 5 segundos
-        };
-
-        const resetAutoplay = () => {
-            clearInterval(slideInterval);
-            startAutoplay();
-        };
-
-        // Redimensionamento
-        window.addEventListener('resize', () => {
-            updateSlidePosition();
-        });
-
-        startAutoplay(); // Inicia o autoplay ao carregar a página
-    }
-
-    // Image Compare Slider
-    const imageCompareSlider = document.getElementById('imageCompareSlider');
-    const imageAfter = document.querySelector('.image-compare-img-wrapper .image-after');
-    const imageCompareHandle = document.getElementById('imageCompareHandle');
-
-    if (imageCompareSlider && imageAfter && imageCompareHandle) {
-        const updateSlider = () => {
-            const sliderValue = imageCompareSlider.value;
-            imageAfter.style.width = `${sliderValue}%`;
-            imageCompareHandle.style.left = `${sliderValue}%`;
-        };
-
-        imageCompareSlider.addEventListener('input', updateSlider);
-        updateSlider(); // Define a posição inicial
-    }
-
-    // Toggle Spinner
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    const showSpinnerBtn = document.getElementById('showSpinnerBtn');
-
-    if (loadingSpinner && showSpinnerBtn) {
-        showSpinnerBtn.addEventListener('click', () => {
-            loadingSpinner.classList.toggle('hidden');
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Toggle Switches
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const notificationsToggle = document.getElementById('notificationsToggle');
-
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('change', () => {
-            console.log('Modo Escuro:', darkModeToggle.checked);
-            playEffectSound(clickSound);
-            // Implementar lógica de tema escuro aqui
-        });
-    }
-    if (notificationsToggle) {
-        notificationsToggle.addEventListener('change', () => {
-            console.log('Notificações:', notificationsToggle.checked);
-            playEffectSound(clickSound);
-            // Implementar lógica de notificações aqui
-        });
-    }
-
-    // Progress Circles
-    const progressCircles = document.querySelectorAll('.progress-circle');
-    progressCircles.forEach(circle => {
-        const progress = parseInt(circle.dataset.progress);
-        const circleBar = circle.querySelector('.progress-bar-circle');
-        const radius = circleBar.r.baseVal.value;
-        const circumference = 2 * Math.PI * radius;
-        const offset = circumference - (progress / 100) * circumference;
-
-        circleBar.style.strokeDasharray = circumference;
-        circleBar.style.strokeDashoffset = circumference; // Começa escondido
-
-        // Animação ao entrar na viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    circleBar.style.strokeDashoffset = offset;
-                    observer.unobserve(entry.target); // Para de observar após a animação
-                }
-            });
-        }, { threshold: 0.75 }); // Trigger quando 75% visível
-        observer.observe(circle);
-    });
-
-    // Skeleton Loader
-    const toggleSkeletonBtn = document.getElementById('toggleSkeletonBtn');
-    const skeletonContainer = document.getElementById('skeletonContent');
-    const actualContent = document.getElementById('actualContent');
-
-    if (toggleSkeletonBtn && skeletonContainer && actualContent) {
-        toggleSkeletonBtn.addEventListener('click', () => {
-            if (skeletonContainer.classList.contains('loaded')) {
-                // Se o conteúdo real está visível, volta para o esqueleto
-                skeletonContainer.classList.remove('loaded');
-                actualContent.classList.add('hidden');
-                showCentralMessage('Carregando conteúdo...');
-            } else {
-                // Simula um carregamento de 2 segundos antes de mostrar o conteúdo real
-                showCentralMessage('Carregando...');
-                setTimeout(() => {
-                    skeletonContainer.classList.add('loaded');
-                    actualContent.classList.remove('hidden');
-                    showCentralMessage('Conteúdo carregado!');
-                }, 2000);
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Review Slider (Testemunhos)
-    const reviewSliderContainer = document.querySelector('.review-slider-container');
-    if (reviewSliderContainer) {
-        const reviewSliderTrack = document.querySelector('.review-slider-track'); // Seleciona o track
-        const reviewSlides = Array.from(reviewSliderTrack.children);
-        const reviewNextBtn = document.querySelector('.review-button.review-next-btn'); // Seleciona os botões
-        const reviewPrevBtn = document.querySelector('.review-button.review-prev-btn');
-
-        let currentReviewIndex = 0;
-
-        const updateReviewSlidePosition = () => {
-            if (reviewSlides.length === 0) return;
-            const slideWidth = reviewSlides[0].getBoundingClientRect().width;
-            reviewSliderTrack.style.transform = `translateX(-${slideWidth * currentReviewIndex}px)`;
-        };
-
-        const moveReviewToSlide = (targetIndex) => {
-            currentReviewIndex = targetIndex;
-            updateReviewSlidePosition();
-            playEffectSound(clickSound);
-        };
-
-        if (reviewNextBtn) {
-            reviewNextBtn.addEventListener('click', () => {
-                const nextIndex = (currentReviewIndex + 1) % reviewSlides.length;
-                moveReviewToSlide(nextIndex);
-            });
-        }
-
-        if (reviewPrevBtn) {
-            reviewPrevBtn.addEventListener('click', () => {
-                const prevIndex = (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
-                moveReviewToSlide(prevIndex);
-            });
-        }
-
-
-        // Atualiza a posição inicial e ao redimensionar
-        window.addEventListener('resize', updateReviewSlidePosition);
-        updateReviewSlidePosition();
-    }
-
-    // Read More / Read Less (não presente no HTML atual, mas mantido para referência futura)
-    const readMoreToggle = document.getElementById('readMoreToggle');
-    const moreText = document.getElementById('moreText');
-
-    if (readMoreToggle && moreText) {
-        readMoreToggle.addEventListener('click', () => {
-            if (moreText.classList.contains('hidden-content')) {
-                moreText.classList.remove('hidden-content');
-                readMoreToggle.textContent = 'Leia Menos';
-            } else {
-                moreText.classList.add('hidden-content');
-                readMoreToggle.textContent = 'Leia Mais';
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Typewriter Effect (não presente no HTML atual, mas mantido para referência futura)
-    const typewriterTextElement = document.getElementById('typewriterText');
-    if (typewriterTextElement) {
-        const dataText = JSON.parse(typewriterTextElement.dataset.text);
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 150;
-
-        function typeWriter() {
-            const currentText = dataText[textIndex];
-            if (isDeleting) {
-                typewriterTextElement.textContent = currentText.substring(0, charIndex--);
-            } else {
-                typewriterTextElement.textContent = currentText.substring(0, charIndex++);
-            }
-
-            if (!isDeleting && charIndex > currentText.length) {
-                typingSpeed = 2000; // Pausa no final da frase
-                isDeleting = true;
-            } else if (isDeleting && charIndex < 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % dataText.length;
-                typingSpeed = 150; // Velocidade de digitação
-            }
-
-            setTimeout(typeWriter, typingSpeed);
-        }
-        typeWriter();
-    }
-
-    // Custom Video Player (não presente no HTML atual, mas mantido para referência futura)
-    const myVideo = document.getElementById('myVideo');
-    const playPauseVideoBtn = document.getElementById('playPauseVideoBtn');
-    const videoProgressBar = document.getElementById('videoProgressBar');
-    const videoCurrentTime = document.getElementById('videoCurrentTime');
-    const videoDuration = document.getElementById('videoDuration');
-    const videoVolume = document.getElementById('videoVolume');
-    const fullScreenVideoBtn = document.getElementById('fullScreenVideoBtn');
-
-    if (myVideo && playPauseVideoBtn && videoProgressBar && videoCurrentTime && videoDuration && videoVolume && fullScreenVideoBtn) {
-        // Play/Pause
-        playPauseVideoBtn.addEventListener('click', () => {
-            if (myVideo.paused) {
-                myVideo.play();
-                playPauseVideoBtn.querySelector('i').classList.remove('fa-play');
-                playPauseVideoBtn.querySelector('i').classList.add('fa-pause');
-            } else {
-                myVideo.pause();
-                playPauseVideoBtn.querySelector('i').classList.remove('fa-pause');
-                playPauseVideoBtn.querySelector('i').classList.add('fa-play');
-            }
-            playEffectSound(clickSound);
-        });
-
-        // Update progress bar
-        myVideo.addEventListener('timeupdate', () => {
-            const progress = (myVideo.currentTime / myVideo.duration) * 100;
-            videoProgressBar.value = progress;
-            videoCurrentTime.textContent = formatTime(myVideo.currentTime);
-        });
-
-        myVideo.addEventListener('loadedmetadata', () => {
-            videoDuration.textContent = formatTime(myVideo.duration);
-        });
-
-        // Seek video
-        videoProgressBar.addEventListener('input', () => {
-            const seekTime = (videoProgressBar.value / 100) * myVideo.duration;
-            myVideo.currentTime = seekTime;
-        });
-
-        // Volume control
-        videoVolume.addEventListener('input', () => {
-            myVideo.volume = videoVolume.value / 100;
-        });
-
-        // Fullscreen
-        fullScreenVideoBtn.addEventListener('click', () => {
-            if (myVideo.requestFullscreen) {
-                myVideo.requestFullscreen();
-            } else if (myVideo.mozRequestFullScreen) { /* Firefox */
-                myVideo.mozRequestFullScreen();
-            } else if (myVideo.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-                myVideo.webkitRequestFullscreen();
-            } else if (myVideo.msRequestFullscreen) { /* IE/Edge */
-                myVideo.msRequestFullscreen();
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Floating Action Button (não presente no HTML atual, mas mantido para referência futura)
-    const floatingActionButton = document.getElementById('floatingActionButton');
-    if (floatingActionButton) {
-        floatingActionButton.addEventListener('click', () => {
-            showCentralMessage('Ação Rápida Acionada!');
-            playEffectSound(clickSound);
-            // Implementar ações adicionais aqui, como abrir um sub-menu
-        });
-    }
-
-    // Modern Contact Form (apenas feedback de submissão simulado)
-    const contactForm = document.getElementById('contactForm'); // Mantido ID genérico
-    if (contactForm) {
-        contactForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            showCentralMessage('Mensagem enviada com sucesso!');
-            contactForm.reset(); // Limpa o formulário
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Range Slider Personalizado (não presente no HTML atual, mas mantido para referência futura)
-    const volumeRange = document.getElementById('volumeRange');
-    const volumeValue = document.getElementById('volumeValue');
-    const distanceRange = document.getElementById('distanceRange');
-    const distanceValue = document.getElementById('distanceValue');
-
-    if (volumeRange && volumeValue) {
-        volumeRange.addEventListener('input', () => {
-            volumeValue.textContent = volumeRange.value;
-        });
-    }
-    if (distanceRange && distanceValue) {
-        distanceRange.addEventListener('input', () => {
-            distanceValue.textContent = distanceRange.value;
-        });
-    }
-
-    // Rating Stars (não presente no HTML atual, mas mantido para referência futura)
-    const ratingStarsContainer = document.getElementById('ratingStars');
-    if (ratingStarsContainer) {
-        const stars = ratingStarsContainer.querySelectorAll('i');
-        const currentRatingSpan = document.getElementById('currentRating');
-        let currentRating = parseFloat(ratingStarsContainer.dataset.rating) || 0;
-
-        const updateStars = (rating) => {
-            stars.forEach(star => {
-                const starValue = parseInt(star.dataset.value);
-                if (starValue <= rating) {
-                    star.classList.remove('far');
-                    star.classList.add('fas');
-                } else {
-                    star.classList.remove('fas');
-                    star.classList.add('far');
-                }
-            });
-            currentRatingSpan.textContent = `(${rating}/5)`;
-        };
-
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                currentRating = parseInt(star.dataset.value);
-                updateStars(currentRating);
-                showCentralMessage(`Avaliação: ${currentRating} estrelas!`);
-                playEffectSound(clickSound);
-            });
-            star.addEventListener('mouseenter', () => {
-                const hoverValue = parseInt(star.dataset.value);
-                stars.forEach(s => {
-                    const sValue = parseInt(s.dataset.value);
-                    if (sValue <= hoverValue) {
-                        s.classList.remove('far');
-                        s.classList.add('fas');
-                    } else {
-                        s.classList.remove('fas');
-                        s.classList.add('far');
-                    }
-                });
-            });
-            star.addEventListener('mouseleave', () => {
-                updateStars(currentRating); // Volta para a avaliação atual
-            });
-        });
-
-        updateStars(currentRating); // Define o estado inicial das estrelas
-    }
-
-    // Inline Form Validation Feedback (não presente no HTML atual, mas mantido para referência futura)
-    const inlineValidationForm = document.getElementById('inlineValidationForm');
-    const usernameInput = document.getElementById('username');
-    const emailInput = document.getElementById('email-validate');
-    const passwordInput = document.getElementById('password-validate');
-
-    const usernameFeedback = document.getElementById('usernameFeedback');
-    const emailFeedback = document.getElementById('emailFeedback');
-    const passwordFeedback = document.getElementById('passwordFeedback');
-
-    const validateField = (input, feedbackElement, validationFn, errorMessage) => {
-        if (validationFn(input.value)) {
-            feedbackElement.textContent = '';
-            input.classList.remove('is-invalid');
-            input.classList.add('is-valid');
-            return true;
-        } else {
-            feedbackElement.textContent = errorMessage;
-            input.classList.remove('is-valid');
-            input.classList.add('is-invalid');
-            return false;
-        }
-    };
-
-    const isUsernameValid = (username) => username.length >= 3;
-    const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const isPasswordValid = (password) => password.length >= 6;
-
-    if (inlineValidationForm) {
-        usernameInput.addEventListener('input', () => validateField(usernameInput, usernameFeedback, isUsernameValid, 'Mínimo de 3 caracteres.'));
-        emailInput.addEventListener('input', () => validateField(emailInput, emailFeedback, isEmailValid, 'Email inválido.'));
-        passwordInput.addEventListener('input', () => validateField(passwordInput, passwordFeedback, isPasswordValid, 'Mínimo de 6 caracteres.'));
-
-        inlineValidationForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const isFormValid =
-                validateField(usernameInput, usernameFeedback, isUsernameValid, 'Mínimo de 3 caracteres.') &&
-                validateField(emailInput, emailFeedback, isEmailValid, 'Email inválido.') &&
-                validateField(passwordInput, passwordFeedback, isPasswordValid, 'Mínimo de 6 caracteres.');
-
-            if (isFormValid) {
-                showCentralMessage('Formulário registrado com sucesso!');
-                inlineValidationForm.reset();
-                usernameInput.classList.remove('is-valid');
-                emailInput.classList.remove('is-valid');
-                passwordInput.classList.remove('is-valid');
-            } else {
-                showCentralMessage('Por favor, corrija os erros do formulário.');
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Spoiler Block (não presente no HTML atual, mas mantido para referência futura)
-    const spoilerToggle = document.getElementById('spoilerToggle');
-    const spoilerContent = document.getElementById('spoilerContent');
-
-    if (spoilerToggle && spoilerContent) {
-        spoilerToggle.addEventListener('click', () => {
-            spoilerContent.classList.toggle('hidden-content');
-            if (spoilerContent.classList.contains('hidden-content')) {
-                spoilerToggle.textContent = 'Clique para revelar o spoiler!';
-            } else {
-                spoilerToggle.textContent = 'Esconder spoiler';
-            }
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Hover Text Reveal (não presente no HTML atual, mas mantido para referência futura)
-    const hoverTextTrigger = document.getElementById('hoverTextTrigger');
-    const hoverImage = document.getElementById('hoverImage');
-
-    if (hoverTextTrigger && hoverImage) {
-        hoverTextTrigger.addEventListener('mouseenter', () => {
-            hoverImage.style.opacity = '1';
-            hoverImage.style.visibility = 'visible';
-        });
-        hoverTextTrigger.addEventListener('mouseleave', () => {
-            hoverImage.style.opacity = '0';
-            hoverImage.style.visibility = 'hidden';
-        });
-    }
 
     // Cookie Consent Banner (não presente no HTML atual, mas mantido para referência futura)
     const cookieBanner = document.getElementById('cookieBanner');
@@ -1411,7 +824,7 @@ document.addEventListener('DOMContentLoaded', () => {
             size: '7.0 MB',
             downloadLink: '#'
         },
-         {
+        {
             title: 'Mod de Decoração Moderna',
             category: 'Mod',
             description: 'Adicione móveis, blocos e elementos decorativos para casas modernas.',
@@ -1564,7 +977,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             // Re-bind click handlers for dynamically added cards
-             document.querySelectorAll('.card-download-btn').forEach(button => {
+            document.querySelectorAll('.card-download-btn').forEach(button => {
                 button.addEventListener('click', () => {
                     const modal = document.getElementById('download-modal');
                     const modalImage = document.getElementById('modal-image');
@@ -1631,5 +1044,1533 @@ document.addEventListener('DOMContentLoaded', () => {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    
+    // =====================================
+    // 7. ELEMENTOS
+    // =====================================
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const acordeaoBtns = document.querySelectorAll('.acordeao-btn');
+    acordeaoBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.classList.toggle('active');
+            const painel = this.nextElementSibling;
+            if (painel.style.maxHeight) {
+                painel.style.maxHeight = null;
+            } else {
+                painel.style.maxHeight = painel.scrollHeight + 'px';
+            }
+        });
+    });
+
+    // Exemplo JS: Interação simples
+    const btnDestaque = document.querySelector('.btn-destaque');
+    btnDestaque.addEventListener('click', () => {
+        console.log('Botão clicado!');
+    });
+
+
+    // Exemplo JS: Interação de clique
+    const cards = document.querySelectorAll('.card-conteudo');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            alert('Card clicado!');
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    // Nenhuma JS funcional necessária para a animação CSS.
+    // O JS abaixo é apenas um exemplo de interação.
+    const tituloNeon = document.querySelector('.titulo-neon');
+    tituloNeon.addEventListener('mouseover', () => {
+        tituloNeon.style.animationPlayState = 'paused';
+    });
+    tituloNeon.addEventListener('mouseout', () => {
+        tituloNeon.style.animationPlayState = 'running';
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('change', () => {
+        document.body.classList.toggle('dark-theme');
+        // Adicione a lógica para mudar o tema, por exemplo:
+        if (document.body.classList.contains('dark-theme')) {
+            console.log('Tema escuro ativado!');
+        } else {
+            console.log('Tema claro ativado!');
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const progressBar = document.querySelector('.progress-bar');
+    const progressValue = progressBar.getAttribute('data-progress');
+    progressBar.style.width = progressValue + '%';
+
+
+    const modalBtn = document.querySelector('.btn-modal-open');
+    const modalBg = document.querySelector('.modal-bg');
+    const modalClose = document.querySelector('.modal-close');
+
+    modalBtn.addEventListener('click', () => {
+        modalBg.style.display = 'block';
+    });
+
+    modalClose.addEventListener('click', () => {
+        modalBg.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target == modalBg) {
+            modalBg.style.display = 'none';
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const abasBtns = document.querySelectorAll('.aba-btn');
+    const abasPaineis = document.querySelectorAll('.aba-painel');
+
+    abasBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            abasBtns.forEach(b => b.classList.remove('active'));
+            abasPaineis.forEach(p => p.classList.remove('active'));
+
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const carrosselSlider = document.querySelector('.carrossel-slider');
+    const carrosselPrev = document.querySelector('.carrossel-prev');
+    const carrosselNext = document.querySelector('.carrossel-next');
+    let slideIndex = 0;
+
+    carrosselNext.addEventListener('click', () => {
+        slideIndex++;
+        if (slideIndex >= carrosselSlider.children.length) {
+            slideIndex = 0;
+        }
+        carrosselSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
+    });
+
+    carrosselPrev.addEventListener('click', () => {
+        slideIndex--;
+        if (slideIndex < 0) {
+            slideIndex = carrosselSlider.children.length - 1;
+        }
+        carrosselSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
+    });
+
+
+    // Exemplo JS: Validação de formulário
+    const form = document.querySelector('.form-contato');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('Formulário enviado!');
+        // Adicione a sua lógica de validação aqui
+    });
+
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnScrollTop = document.querySelector('.btn-scroll-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            btnScrollTop.classList.add('show');
+        } else {
+            btnScrollTop.classList.remove('show');
+        }
+    });
+    btnScrollTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const typingText = document.querySelector('.typing-text');
+    const textToType = 'Desenvolvimento Web Moderno.';
+    let i = 0;
+
+    function typeWriter() {
+        if (i < textToType.length) {
+            typingText.textContent += textToType.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
+    }
+    typeWriter();
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const galeriaItens = document.querySelectorAll('.galeria-item');
+    const lightboxOverlay = document.querySelector('.lightbox-overlay');
+    const lightboxImagem = document.querySelector('.lightbox-imagem');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    galeriaItens.forEach(item => {
+        item.addEventListener('click', () => {
+            lightboxOverlay.style.display = 'flex';
+            lightboxImagem.src = item.src;
+        });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+        lightboxOverlay.style.display = 'none';
+    });
+
+    lightboxOverlay.addEventListener('click', (e) => {
+        if (e.target !== lightboxImagem) {
+            lightboxOverlay.style.display = 'none';
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnShare = document.querySelector('.btn-share');
+    const shareIcons = document.querySelector('.share-icons');
+
+    btnShare.addEventListener('click', () => {
+        shareIcons.classList.toggle('show');
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const contadores = document.querySelectorAll('.contador-numero');
+
+    const startCounter = (element) => {
+        let count = 0;
+        const target = parseInt(element.getAttribute('data-target'));
+        const increment = target / 200; // Ajuste a velocidade da animação aqui
+
+        const updateCount = () => {
+            if (count < target) {
+                count += increment;
+                element.innerText = Math.ceil(count);
+                requestAnimationFrame(updateCount);
+            } else {
+                element.innerText = target;
+            }
+        };
+        updateCount();
+    };
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5 // Aciona quando 50% do elemento está visível
+    };
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    contadores.forEach(contador => {
+        observer.observe(contador);
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    // Exemplo de lógica de clique
+    const btnIcon = document.querySelector('.btn-icon');
+    btnIcon.addEventListener('click', () => {
+        alert('Reproduzindo vídeo...');
+    });
+
+    const btnModalBlur = document.querySelector('.btn-modal-blur');
+    const modalBlurBg = document.querySelector('.modal-blur-bg');
+    const modalBlurClose = document.querySelector('.modal-blur-close');
+    const btnEntendido = document.querySelector('.modal-blur-content .btn-destaque');
+
+    btnModalBlur.addEventListener('click', () => {
+        modalBlurBg.classList.add('show');
+        document.body.classList.add('no-scroll');
+    });
+
+    modalBlurClose.addEventListener('click', () => {
+        modalBlurBg.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+    });
+
+    btnEntendido.addEventListener('click', () => {
+        modalBlurBg.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const abasBotoesAnimadas = document.querySelectorAll('.aba-btn-animada');
+    const abasPaineisAnimados = document.querySelectorAll('.aba-painel-animada');
+    const abaIndicador = document.querySelector('.aba-indicador');
+
+    function updateIndicador(btn) {
+        abaIndicador.style.width = `${btn.offsetWidth}px`;
+        abaIndicador.style.left = `${btn.offsetLeft}px`;
+    }
+
+    abasBotoesAnimadas.forEach(btn => {
+        btn.addEventListener('click', function () {
+            abasBotoesAnimadas.forEach(b => b.classList.remove('active'));
+            abasPaineisAnimados.forEach(p => p.classList.remove('active'));
+
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab-animada');
+            document.getElementById(tabId).classList.add('active');
+            updateIndicador(this);
+        });
+    });
+
+    // Inicializa a posição do indicador na primeira aba
+    const primeiraAba = document.querySelector('.aba-btn-animada.active');
+    if (primeiraAba) {
+        updateIndicador(primeiraAba);
+    }
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnAviso = document.querySelector('.btn-aviso-sucesso');
+    const avisoToast = document.getElementById('aviso-toast');
+
+    btnAviso.addEventListener('click', () => {
+        avisoToast.classList.add('show');
+        setTimeout(() => {
+            avisoToast.classList.remove('show');
+        }, 3000); // Esconde a mensagem após 3 segundos
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnCopy = document.querySelector('.btn-copy');
+    const codigoBloco = document.querySelector('.codigo-bloco');
+
+    btnCopy.addEventListener('click', () => {
+        const texto = codigoBloco.textContent;
+        navigator.clipboard.writeText(texto).then(() => {
+            console.log('Código copiado para a área de transferência!');
+            // Opcional: mostrar uma mensagem de sucesso
+            const mensagemCopy = document.createElement('span');
+            mensagemCopy.textContent = 'Copiado!';
+            mensagemCopy.classList.add('aviso-copy');
+            btnCopy.appendChild(mensagemCopy);
+            setTimeout(() => {
+                mensagemCopy.remove();
+            }, 1500);
+        }).catch(err => {
+            console.error('Erro ao copiar: ', err);
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnSidebarOpen = document.querySelector('.btn-sidebar-open');
+    const btnSidebarClose = document.querySelector('.btn-sidebar-close');
+    const sidebarMenu = document.querySelector('.sidebar-menu');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
+
+    btnSidebarOpen.addEventListener('click', () => {
+        sidebarMenu.classList.add('open');
+        sidebarOverlay.style.display = 'block';
+    });
+
+    btnSidebarClose.addEventListener('click', () => {
+        sidebarMenu.classList.remove('open');
+        sidebarOverlay.style.display = 'none';
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+        sidebarMenu.classList.remove('open');
+        sidebarOverlay.style.display = 'none';
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const filtroBtns = document.querySelectorAll('.filtro-btn');
+
+    filtroBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filtroBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+
+            galeriaItens.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const chatbotBtn = document.querySelector('.chatbot-btn');
+    const chatbotBox = document.querySelector('.chatbot-box');
+    const chatbotClose = document.querySelector('.chatbot-close');
+
+    chatbotBtn.addEventListener('click', () => {
+        chatbotBox.classList.toggle('show');
+    });
+
+    chatbotClose.addEventListener('click', () => {
+        chatbotBox.classList.remove('show');
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnRipple = document.querySelector('.btn-ripple');
+
+    btnRipple.addEventListener('click', function (e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+
+        this.appendChild(ripple);
+
+        ripple.addEventListener('animationend', () => {
+            ripple.remove();
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const cardPerfil3D = document.querySelector('.card-perfil-3d');
+
+    cardPerfil3D.addEventListener('mousemove', (e) => {
+        const rect = cardPerfil3D.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+
+        const rotateX = (y - 0.5) * 20;
+        const rotateY = -(x - 0.5) * 20;
+
+        cardPerfil3D.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    });
+
+    cardPerfil3D.addEventListener('mouseleave', () => {
+        cardPerfil3D.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnDownload = document.querySelector('.btn-download');
+
+    btnDownload.addEventListener('click', () => {
+        btnDownload.classList.add('loading');
+        setTimeout(() => {
+            btnDownload.classList.remove('loading');
+            // Você pode adicionar a lógica de download aqui
+            alert('Download concluído!');
+        }, 2000);
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const cookieConsent = document.getElementById('cookie-consent');
+    const btnAceitarCookie = document.querySelector('.btn-aceitar-cookie');
+    const btnRejeitarCookie = document.querySelector('.btn-rejeitar-cookie');
+
+    if (!localStorage.getItem('cookie-accepted')) {
+        setTimeout(() => {
+            cookieConsent.classList.add('show');
+        }, 1000);
+    }
+
+    function hideCookieConsent() {
+        cookieConsent.style.transform = 'translateX(-50%) translateY(150%)';
+    }
+
+    btnAceitarCookie.addEventListener('click', () => {
+        localStorage.setItem('cookie-accepted', 'true');
+        hideCookieConsent();
+    });
+
+    btnRejeitarCookie.addEventListener('click', () => {
+        localStorage.setItem('cookie-accepted', 'false');
+        hideCookieConsent();
+    });
+
+
+    const scrollContainer = document.querySelector('.scroll-horizontal-container');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    scrollContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        scrollContainer.classList.add('active');
+        startX = e.pageX - scrollContainer.offsetLeft;
+        scrollLeft = scrollContainer.scrollLeft;
+    });
+
+    scrollContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        scrollContainer.classList.remove('active');
+    });
+
+    scrollContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        scrollContainer.classList.remove('active');
+    });
+
+    scrollContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scrollContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        scrollContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const testemunhoWrapper = document.querySelector('.testemunho-wrapper');
+    const bolhas = document.querySelectorAll('.bolha-testemunho');
+    let testemunhoIndex = 0;
+
+    function updateCarrossel() {
+        testemunhoWrapper.style.transform = `translateX(-${testemunhoIndex * 100}%)`;
+        bolhas.forEach((bolha, index) => {
+            if (index === testemunhoIndex) {
+                bolha.classList.add('active');
+            } else {
+                bolha.classList.remove('active');
+            }
+        });
+    }
+
+    bolhas.forEach((bolha, index) => {
+        bolha.addEventListener('click', () => {
+            testemunhoIndex = index;
+            updateCarrossel();
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const rollingNumbers = document.querySelectorAll('.numero-rolling');
+
+    rollingNumbers.forEach(element => {
+        const target = parseInt(element.getAttribute('data-target'));
+        const initialHeight = element.offsetHeight;
+        let count = 0;
+
+        // Adiciona os números para a animação
+        const numbersContainer = document.createElement('div');
+        numbersContainer.style.transition = 'transform 2s ease-out';
+        numbersContainer.style.transform = `translateY(-${target}px)`;
+
+        for (let i = 0; i <= target; i++) {
+            const numberSpan = document.createElement('span');
+            numberSpan.textContent = i;
+            numberSpan.style.height = initialHeight + 'px';
+            numberSpan.style.display = 'flex';
+            numberSpan.style.justifyContent = 'center';
+            numberSpan.style.alignItems = 'center';
+            numbersContainer.appendChild(numberSpan);
+        }
+
+        element.innerHTML = '';
+        element.appendChild(numbersContainer);
+
+        // Animação ao rolar
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    numbersContainer.style.transform = `translateY(-${target * initialHeight}px)`;
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(element);
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const shareContainer = document.querySelector('.share-container');
+    const btnShareToggle = document.querySelector('.btn-share-toggle');
+
+    btnShareToggle.addEventListener('click', () => {
+        shareContainer.classList.toggle('active');
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const galeriaColunas = document.querySelectorAll('.galeria-coluna');
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        galeriaColunas.forEach(coluna => {
+            const speed = parseFloat(coluna.getAttribute('data-speed'));
+            const yPos = -(scrollY * speed);
+            coluna.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnNotificacao = document.querySelector('.btn-notificacao');
+    const notificationDropdown = document.querySelector('.notification-dropdown');
+    const notificationCount = document.getElementById('notification-count');
+    const notificationList = document.getElementById('notification-list');
+    const btnLimpar = document.querySelector('.btn-limpar');
+    let count = 0;
+
+    btnNotificacao.addEventListener('click', () => {
+        notificationDropdown.classList.toggle('show');
+    });
+
+    function addNotification(message) {
+        count++;
+        notificationCount.textContent = count;
+        const newLi = document.createElement('li');
+        newLi.textContent = message;
+
+        if (notificationList.children[0].textContent === 'Nenhuma notificação nova.') {
+            notificationList.innerHTML = '';
+        }
+        notificationList.prepend(newLi);
+    }
+
+    btnLimpar.addEventListener('click', () => {
+        notificationList.innerHTML = '<li>Nenhuma notificação nova.</li>';
+        count = 0;
+        notificationCount.textContent = '0';
+    });
+
+    // Exemplo de como usar a função:
+    addNotification('Nova mensagem de Maria.');
+    addNotification('Seu pedido foi enviado.');
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const dropdownContainer = document.querySelector('.dropdown-menu-container');
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+
+    dropdownBtn.addEventListener('click', () => {
+        dropdownContainer.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown-menu-container')) {
+            dropdownContainer.classList.remove('open');
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const pageLoader = document.getElementById('page-loader');
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            pageLoader.classList.add('hidden');
+        }, 1000); // Esconde o loader após 1 segundo
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const tabela = document.getElementById('tabela-estatisticas');
+    const headers = tabela.querySelectorAll('th');
+    const tbody = tabela.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const column = header.dataset.column;
+            const order = header.dataset.order === 'asc' ? 'desc' : 'asc';
+            header.dataset.order = order;
+
+            const sortedRows = rows.sort((a, b) => {
+                const aText = a.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 1})`).textContent.trim();
+                const bText = b.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 1})`).textContent.trim();
+
+                const aValue = isNaN(aText) ? aText : parseFloat(aText.replace(/[^0-9.-]+/g, ""));
+                const bValue = isNaN(bText) ? bText : parseFloat(bText.replace(/[^0-9.-]+/g, ""));
+
+                if (aValue < bValue) {
+                    return order === 'asc' ? -1 : 1;
+                }
+                if (aValue > bValue) {
+                    return order === 'asc' ? 1 : -1;
+                }
+                return 0;
+            });
+
+            tbody.innerHTML = '';
+            sortedRows.forEach(row => tbody.appendChild(row));
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const progressCircle = document.querySelector('.circulo-progresso');
+    const porcentagem = parseFloat(progressCircle.dataset.porcentagem);
+    const offset = 283 - (porcentagem / 100) * 283;
+
+    // Animação ao entrar na tela
+    const observe = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                progressCircle.style.strokeDashoffset = offset;
+                observe.unobserve(entry.target);
+            }
+        });
+    });
+    observe.observe(progressCircle);
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const barras = document.querySelectorAll('.barra-item');
+
+    const observe2 = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                barras.forEach(barra => {
+                    const value = barra.dataset.value;
+                    barra.style.height = `${value}%`;
+                    const fillBar = barra.querySelector('::before');
+                    if (fillBar) {
+                        fillBar.style.transform = 'scaleY(1)';
+                    }
+                });
+                observe2.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    observe2.observe(document.querySelector('.grafico-barras'));
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const searchEfeito = document.querySelector('.search-efeito');
+    const inputEfeito = document.querySelector('.input-efeito');
+
+    searchEfeito.addEventListener('click', () => {
+        searchEfeito.classList.add('active');
+        inputEfeito.focus();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-efeito')) {
+            searchEfeito.classList.remove('active');
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const acordeaoItems = document.querySelectorAll('.acordeao-item');
+
+    acordeaoItems.forEach(item => {
+        const btn = item.querySelector('.acordeao-btn');
+        btn.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            acordeaoItems.forEach(i => i.classList.remove('active'));
+            if (!isActive) {
+                item.classList.add('active');
+                // Animação de altura
+                const painel = item.querySelector('.acordeao-painel');
+                painel.style.maxHeight = painel.scrollHeight + 'px';
+            } else {
+                const painel = item.querySelector('.acordeao-painel');
+                painel.style.maxHeight = null;
+            }
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnAbrirAviso = document.querySelector('.btn-abrir-aviso');
+    const avisoOverlay = document.querySelector('.aviso-popup-overlay');
+    const avisoClose = document.querySelector('.aviso-popup-close');
+
+    btnAbrirAviso.addEventListener('click', () => {
+        avisoOverlay.classList.add('show');
+    });
+
+    avisoClose.addEventListener('click', () => {
+        avisoOverlay.classList.remove('show');
+    });
+
+
+
+    document.querySelectorAll('.toolbox-trigger').forEach(trigger => {
+        trigger.addEventListener('click', function (event) {
+            event.stopPropagation();
+            this.classList.toggle('active');
+        });
+    });
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.toolbox-trigger.active').forEach(trigger => {
+            trigger.classList.remove('active');
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnFade = document.querySelector('.btn-tooltip-fade');
+    const overlayFade = document.querySelector('.tooltip-fade-overlay');
+    const btnFecharFade = document.querySelector('.btn-fechar-tooltip');
+    btnFade.addEventListener('click', () => overlayFade.classList.add('show'));
+    btnFecharFade.addEventListener('click', () => overlayFade.classList.remove('show'));
+    overlayFade.addEventListener('click', (e) => {
+        if (e.target === overlayFade) overlayFade.classList.remove('show');
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const toolboxRodape = document.querySelector('.toolbox-rodape');
+    const toolboxFechar = document.querySelector('.toolbox-fechar');
+    setTimeout(() => toolboxRodape.classList.add('show'), 1000);
+    toolboxFechar.addEventListener('click', () => toolboxRodape.classList.remove('show'));
+
+
+
+    // Incluir a funcionalidade de copiar código do item 25.
+    document.querySelectorAll('.toolbox-codigo-trigger').forEach(trigger => {
+        trigger.addEventListener('click', function (event) {
+            event.stopPropagation();
+            this.classList.toggle('active');
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const carouselItems = document.querySelectorAll('.carousel-full-screen .carousel-item');
+    const prevBtn = document.querySelector('.carousel-control.prev');
+    const nextBtn = document.querySelector('.carousel-control.next');
+    let currentSlide = 0;
+    function showSlide(index) {
+        carouselItems.forEach((item, i) => {
+            item.classList.toggle('active', i === index);
+        });
+    }
+    prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide > 0) ? currentSlide - 1 : carouselItems.length - 1;
+        showSlide(currentSlide);
+    });
+    nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide < carouselItems.length - 1) ? currentSlide + 1 : 0;
+        showSlide(currentSlide);
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const wrapper = document.querySelector('.carousel-cards-wrapper');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    let currentCard = 0;
+    const cardsPerView = 3;
+    function updateCarousel(index) {
+        wrapper.style.transform = `translateX(-${index * (100 / cardsPerView)}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentCard = index;
+            updateCarousel(currentCard);
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const tabsContainer = document.querySelector('.tabs-container');
+    const tabButtons = tabsContainer.querySelectorAll('.tab-button');
+    const tabPanes = tabsContainer.querySelectorAll('.tab-pane');
+    const tabIndicator = tabsContainer.querySelector('.tab-indicator');
+
+    function updateIndicator(button) {
+        const buttonRect = button.getBoundingClientRect();
+        const containerRect = tabsContainer.getBoundingClientRect();
+        tabIndicator.style.left = `${buttonRect.left - containerRect.left}px`;
+        tabIndicator.style.width = `${buttonRect.width}px`;
+    }
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.dataset.tab;
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+
+            button.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+
+            updateIndicator(button);
+        });
+    });
+
+    // Inicializa o indicador
+    updateIndicator(document.querySelector('.tab-button.active'));
+    window.addEventListener('resize', () => {
+        updateIndicator(document.querySelector('.tab-button.active'));
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const formCard = document.getElementById('form-contato');
+    const inputs = form.querySelectorAll('input, textarea');
+
+    const feedbackMessages = {
+        nome: 'O nome deve ter pelo menos 3 caracteres.',
+        email: 'Por favor, insira um e-mail válido.',
+        mensagem: 'A mensagem não pode estar vazia.'
+    };
+
+    function validateInput(input) {
+        const parent = input.parentElement;
+        const feedback = parent.querySelector('.feedback-validacao');
+
+        if (input.checkValidity()) {
+            parent.classList.remove('invalid');
+            parent.classList.add('valid');
+            feedback.textContent = '';
+        } else {
+            parent.classList.remove('valid');
+            parent.classList.add('invalid');
+            feedback.textContent = feedbackMessages[input.id] || 'Campo inválido.';
+        }
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener('input', () => validateInput(input));
+        input.addEventListener('blur', () => validateInput(input));
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let isFormValid = true;
+        inputs.forEach(input => {
+            validateInput(input);
+            if (!input.checkValidity()) {
+                isFormValid = false;
+            }
+        });
+
+        if (isFormValid) {
+            alert('Formulário enviado com sucesso!');
+            form.reset();
+        } else {
+            alert('Por favor, preencha todos os campos corretamente.');
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const swipeWrapper = document.querySelector('.liquid-swipe-wrapper');
+    const prevBtn2 = document.querySelector('.liquid-btn.prev');
+    const nextBtn2 = document.querySelector('.liquid-btn.next');
+    const cards2 = document.querySelectorAll('.liquid-card');
+    let currentIndex = 0;
+
+    function updateSwipe() {
+        swipeWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    prevBtn2.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : cards.length - 1;
+        updateSwipe();
+    });
+
+    nextBtn2.addEventListener('click', () => {
+        currentIndex = (currentIndex < cards2.length - 1) ? currentIndex + 1 : 0;
+        updateSwipe();
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const cardReflexo = document.querySelector('.card-reflexo');
+
+    cardReflexo.addEventListener('mousemove', (e) => {
+        const rect = cardReflexo.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        cardReflexo.style.setProperty('--x', `${x}px`);
+        cardReflexo.style.setProperty('--y', `${y}px`);
+
+        // Atualiza a posição do reflexo em CSS
+        cardReflexo.style.setProperty('--reflect-pos', `${x * 100 / rect.width}% ${y * 100 / rect.height}%`);
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const starsContainer = document.querySelector('.rating-stars');
+    const stars = starsContainer.querySelectorAll('i');
+
+    function setRating(ratingValue) {
+        stars.forEach(star => {
+            if (parseInt(star.dataset.value) <= ratingValue) {
+                star.classList.add('filled');
+            } else {
+                star.classList.remove('filled');
+            }
+        });
+    }
+
+    // Inicializa a avaliação com o valor do atributo 'data-rating'
+    setRating(parseInt(starsContainer.dataset.rating));
+
+    starsContainer.addEventListener('click', (e) => {
+        const clickedStar = e.target.closest('i');
+        if (clickedStar) {
+            const ratingValue = parseInt(clickedStar.dataset.value);
+            starsContainer.dataset.rating = ratingValue;
+            setRating(ratingValue);
+            console.log(`Nova avaliação: ${ratingValue} estrelas`);
+            // Aqui você pode enviar a avaliação para o servidor
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const wrapper3d = document.querySelector('.carousel-3d-wrapper');
+    const prev3d = document.querySelector('.prev-3d');
+    const next3d = document.querySelector('.next-3d');
+    const cards3d = document.querySelectorAll('.carousel-3d-card');
+    let currentIndex3d = 0;
+
+    function updateCarousel3d() {
+        wrapper3d.style.transform = `translateX(-${currentIndex3d * 100}%)`;
+    }
+
+    prev3d.addEventListener('click', () => {
+        currentIndex3d = (currentIndex3d > 0) ? currentIndex3d - 1 : cards3d.length - 1;
+        updateCarousel3d();
+    });
+
+    next3d.addEventListener('click', () => {
+        currentIndex3d = (currentIndex3d < cards3d.length - 1) ? currentIndex3d + 1 : 0;
+        updateCarousel3d();
+    });
+
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    document.querySelectorAll('.btn-ler-mais').forEach(button => {
+        button.addEventListener('click', () => {
+            const parentCard = button.closest('.card-ler-mais');
+            const shortText = parentCard.querySelector('.texto-curto');
+            const fullText = parentCard.querySelector('.texto-completo');
+            const dots = parentCard.querySelector('.ler-mais-ponto');
+
+            if (fullText.style.display === 'none') {
+                fullText.style.display = 'inline';
+                dots.style.display = 'none';
+                button.textContent = 'Ler Menos';
+            } else {
+                fullText.style.display = 'none';
+                dots.style.display = 'inline';
+                button.textContent = 'Ler Mais';
+            }
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const tocLinks = document.querySelectorAll('.toc a');
+    const sections = document.querySelectorAll('.conteudo-longo section');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 60) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.href.includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    document.querySelectorAll('.btn-copiar').forEach(button => {
+        button.addEventListener('click', () => {
+            const parent = button.closest('.campo-copia');
+            const input = parent.querySelector('input');
+            const feedback = parent.querySelector('.feedback-copia');
+
+            input.select();
+            input.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+
+            feedback.classList.add('show');
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 1500);
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    document.querySelectorAll('.btn-share').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const network = e.currentTarget.dataset.share;
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+
+            switch (network) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${title}%20${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank');
+            }
+        });
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const modalOverlay = document.getElementById('modal-detalhes-plano');
+    const closeModalBtn = modalOverlay.querySelector('.close-modal');
+    const modalPlanTitle = document.getElementById('modal-plan-title');
+    const modalPlanDescription = document.getElementById('modal-plan-description');
+    const modalMainThumbnail = document.getElementById('modal-main-thumbnail');
+    const modalThumbnailsContainer = document.getElementById('modal-thumbnails');
+    const modalPlanFeatures = document.getElementById('modal-plan-features');
+
+    const plansData = {
+        essencial: {
+            title: 'Plano Essencial',
+            description: 'Ideal para quem está começando, com os recursos básicos para sua presença online. Tenha acesso a funcionalidades essenciais e um bom desempenho.',
+            thumbnails: [
+                'https://via.placeholder.com/600x400/1A1A1A/FFFFFF?text=Essencial+1',
+                'https://via.placeholder.com/600x400/333333/FFFFFF?text=Essencial+2',
+                'https://via.placeholder.com/600x400/555555/FFFFFF?text=Essencial+3'
+            ],
+            features: [
+                '1 Usuário', '5 Projetos', '10GB Armazenamento', 'Suporte Básico', 'Relatórios Mensais'
+            ]
+        },
+        premium: {
+            title: 'Plano Premium',
+            description: 'Nosso plano mais popular, com todos os recursos avançados e suporte prioritário. Perfeito para equipes e projetos em crescimento que precisam de mais poder.',
+            thumbnails: [
+                'https://via.placeholder.com/600x400/007bff/FFFFFF?text=Premium+1',
+                'https://via.placeholder.com/600x400/0056b3/FFFFFF?text=Premium+2',
+                'https://via.placeholder.com/600x400/003c7a/FFFFFF?text=Premium+3'
+            ],
+            features: [
+                '5 Usuários', 'Projetos Ilimitados', '100GB Armazenamento', 'Suporte Prioritário', 'Relatórios Detalhados', 'Funcionalidades Exclusivas'
+            ]
+        },
+        ultimate: {
+            title: 'Plano Ultimate',
+            description: 'A solução completa para grandes empresas, com acesso exclusivo e gerenciamento dedicado. Obtenha desempenho máximo e atenção personalizada para suas necessidades.',
+            thumbnails: [
+                'https://via.placeholder.com/600x400/6200EE/FFFFFF?text=Ultimate+1',
+                'https://via.placeholder.com/600x400/3700B3/FFFFFF?text=Ultimate+2',
+                'https://via.placeholder.com/600x400/1A0066/FFFFFF?text=Ultimate+3'
+            ],
+            features: [
+                'Usuários Ilimitados', 'Projetos Ilimitados', 'Armazenamento Ilimitado', 'Gerente de Conta Dedicado', 'Análises Avançadas', 'Treinamento Personalizado'
+            ]
+        }
+    };
+
+    document.querySelectorAll('.comparison-card button[data-plan]').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const planKey = e.currentTarget.dataset.plan;
+            const plan = plansData[planKey];
+
+            modalPlanTitle.textContent = plan.title;
+            modalPlanDescription.textContent = plan.description;
+
+            // Carregar a primeira thumbnail como principal
+            modalMainThumbnail.src = plan.thumbnails[0];
+
+            // Limpar e carregar as thumbnails do carrossel
+            modalThumbnailsContainer.innerHTML = '';
+            plan.thumbnails.forEach(thumbSrc => {
+                const img = document.createElement('img');
+                img.src = thumbSrc;
+                img.alt = plan.title;
+                img.addEventListener('click', () => {
+                    modalMainThumbnail.src = thumbSrc;
+                    modalThumbnailsContainer.querySelectorAll('img').forEach(i => i.classList.remove('active'));
+                    img.classList.add('active');
+                });
+                modalThumbnailsContainer.appendChild(img);
+            });
+            // Ativar a primeira thumbnail
+            if (modalThumbnailsContainer.firstElementChild) {
+                modalThumbnailsContainer.firstElementChild.classList.add('active');
+            }
+
+
+            // Limpar e carregar os recursos
+            modalPlanFeatures.innerHTML = '<h4>Recursos Inclusos:</h4><ul></ul>';
+            const featuresList = modalPlanFeatures.querySelector('ul');
+            plan.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-check-circle"></i> ${feature}`;
+                featuresList.appendChild(li);
+            });
+
+            modalOverlay.classList.add('show');
+        });
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+        modalOverlay.classList.remove('show');
+    });
+
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.remove('show');
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnSubmitLoading = document.getElementById('btn-submit-loading');
+
+    btnSubmitLoading.addEventListener('click', () => {
+        btnSubmitLoading.classList.add('loading');
+        btnSubmitLoading.disabled = true; // Desabilita o botão para evitar múltiplos cliques
+
+        // Simula um carregamento de dados (ex: chamada de API)
+        setTimeout(() => {
+            btnSubmitLoading.classList.remove('loading');
+            btnSubmitLoading.disabled = false;
+            alert('Dados salvos com sucesso!');
+        }, 2000);
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const galleryImages = document.querySelectorAll('.gallery-grid img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxClose2 = lightbox.querySelector('.lightbox-close');
+
+    galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+            lightbox.classList.add('show');
+            lightboxImg.src = img.dataset.fullSrc;
+        });
+    });
+
+    lightboxClose2.addEventListener('click', () => {
+        lightbox.classList.remove('show');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('show');
+        }
+    });
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const items = [
+        { id: 1, title: 'Mod de Magia', description: 'Adiciona novas habilidades mágicas.', rating: 4.5, tags: ['mod'], thumbnail: 'https://via.placeholder.com/400x300/F44336/FFFFFF?text=Mod+Magia', details: 'Inclui 50 feitiços, 10 varinhas e novos inimigos. Requer a versão 1.18.' },
+        { id: 2, title: 'Skin Cyberpunk', description: 'Um visual futurista para seu personagem.', rating: 4.8, tags: ['skin'], thumbnail: 'https://via.placeholder.com/400x300/E91E63/FFFFFF?text=Skin+Cyberpunk', details: 'Design com luzes de neon e armadura cromada. Compatível com todas as plataformas.' },
+        { id: 3, title: 'Addon de Decoração', description: 'Mais de 100 blocos e itens decorativos.', rating: 4.2, tags: ['addon'], thumbnail: 'https://via.placeholder.com/400x300/9C27B0/FFFFFF?text=Addon+Decoracao', details: 'Perfeito para construção e criação de interiores. Funciona em servidores.' },
+        { id: 4, title: 'Arquivo de Cores Vibrantes', description: 'Um pacote de texturas com cores vivas.', rating: 4.7, tags: ['arquivos'], thumbnail: 'https://via.placeholder.com/400x300/673AB7/FFFFFF?text=Cores+Vibrantes', details: 'Melhora a experiência visual do jogo. Formato .zip.' },
+        { id: 5, title: 'Mod de Animais Exóticos', description: 'Adiciona novas criaturas e biomas.', rating: 4.6, tags: ['mod'], thumbnail: 'https://via.placeholder.com/400x300/3F51B5/FFFFFF?text=Mod+Animais', details: 'Descubra pandas, elefantes e leões. Os animais interagem entre si.' },
+        { id: 6, title: 'Addon de Armas', description: 'Novas armas de fogo e ferramentas de combate.', rating: 4.1, tags: ['addon'], thumbnail: 'https://via.placeholder.com/400x300/2196F3/FFFFFF?text=Addon+Armas', details: 'Aumente o arsenal de seu personagem com armas e munições.' },
+        { id: 7, title: 'Skin de Robô', description: 'Transforme-se em um robô superpoderoso.', rating: 4.4, tags: ['skin'], thumbnail: 'https://via.placeholder.com/400x300/03A9F4/FFFFFF?text=Skin+Robo', details: 'Inclui efeitos sonoros de metal. Disponível para download instantâneo.' }
+    ];
+
+    const searchInput2 = document.getElementById('searchInput');
+    const tagButtons = document.querySelectorAll('.tag-btn');
+    const searchResults = document.getElementById('searchResults');
+    const itemModal = document.getElementById('itemModal');
+    const closeModal = itemModal.querySelector('.close-modal');
+
+    function renderItems(filteredItems) {
+        searchResults.innerHTML = '';
+        filteredItems.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'result-card';
+            card.innerHTML = `
+            <img src="${item.thumbnail}" alt="${item.title}">
+            <div class="card-content">
+                <h4>${item.title}</h4>
+                <p>${item.description}</p>
+                <div class="card-rating">
+                    ${'★'.repeat(Math.floor(item.rating))}
+                    ${item.rating % 1 !== 0 ? '½' : ''}
+                    (${item.rating})
+                </div>
+                <button class="card-button" data-id="${item.id}">Detalhes</button>
+            </div>
+        `;
+            searchResults.appendChild(card);
+        });
+    }
+
+    function filterAndSearch() {
+        const searchTerm = searchInput2.value.toLowerCase();
+        const activeTag = document.querySelector('.tag-btn.active').dataset.tag;
+
+        const filteredItems = items.filter(item => {
+            const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
+            const matchesSearch = item.title.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+            return matchesTag && matchesSearch;
+        });
+
+        renderItems(filteredItems);
+    }
+
+    // Eventos de tags
+    tagButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            tagButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            filterAndSearch();
+        });
+    });
+
+    // Evento de pesquisa
+    searchInput2.addEventListener('input', filterAndSearch);
+
+    // Eventos de modal
+    searchResults.addEventListener('click', (e) => {
+        const button = e.target.closest('.card-button');
+        if (button) {
+            const itemId = parseInt(button.dataset.id);
+            const item = items.find(i => i.id === itemId);
+            if (item) {
+                document.getElementById('modalThumbnail').src = item.thumbnail;
+                document.getElementById('modalTitle').textContent = item.title;
+                document.getElementById('modalDescription').textContent = item.description;
+                document.getElementById('modalRating').innerHTML = `Nota: ${'★'.repeat(Math.floor(item.rating))} (${item.rating})`;
+                document.getElementById('modalDetails').innerHTML = `<p><strong>Detalhes Adicionais:</strong> ${item.details}</p>`;
+                itemModal.classList.add('show');
+            }
+        }
+    });
+
+    closeModal.addEventListener('click', () => {
+        itemModal.classList.remove('show');
+    });
+
+    itemModal.addEventListener('click', (e) => {
+        if (e.target === itemModal) {
+            itemModal.classList.remove('show');
+        }
+    });
+
+    // Inicialização
+    filterAndSearch();
+
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    // O array `items` é o mesmo do exemplo anterior.
+
+    const tabButton = document.querySelectorAll('.tab-search-btn');
+    const tabPane = document.querySelectorAll('.search-tab-pane');
+
+    function renderCardsToPane(paneId, itemsToRender) {
+        const pane = document.getElementById(paneId);
+        pane.innerHTML = '';
+        itemsToRender.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'result-card';
+            card.innerHTML = `
+            <img src="${item.thumbnail}" alt="${item.title}">
+            <div class="card-content">
+                <h4>${item.title}</h4>
+                <p>${item.description}</p>
+                <div class="card-rating">
+                    ${'★'.repeat(Math.floor(item.rating))}
+                    ${item.rating % 1 !== 0 ? '½' : ''}
+                    (${item.rating})
+                </div>
+                <button class="card-button" data-id="${item.id}">Detalhes</button>
+            </div>
+        `;
+            pane.appendChild(card);
+        });
+    }
+
+    function switchTab(tabId) {
+        tabPane.forEach(pane => {
+            pane.classList.remove('active');
+        });
+        document.getElementById(tabId).classList.add('active');
+
+        if (tabId === 'all') {
+            renderCardsToPane(tabId, items);
+        } else {
+            const filteredItems = items.filter(item => item.tags.includes(tabId));
+            renderCardsToPane(tabId, filteredItems);
+        }
+    }
+
+    // Eventos de abas
+    tabButton.forEach(button => {
+        button.addEventListener('click', () => {
+            tabButton.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            switchTab(button.dataset.tab);
+        });
+    });
+
+    // Eventos do modal (os mesmos do exemplo anterior)
+    document.addEventListener('click', (e) => {
+        const button = e.target.closest('.card-button');
+        if (button) {
+            const itemId = parseInt(button.dataset.id);
+            const item = items.find(i => i.id === itemId);
+            if (item) {
+                const modal = document.getElementById('itemModal'); // ou 'itemModal2' se for um modal diferente
+                document.getElementById('modalThumbnail').src = item.thumbnail;
+                document.getElementById('modalTitle').textContent = item.title;
+                document.getElementById('modalDescription').textContent = item.description;
+                document.getElementById('modalRating').innerHTML = `Nota: ${'★'.repeat(Math.floor(item.rating))} (${item.rating})`;
+                document.getElementById('modalDetails').innerHTML = `<p><strong>Detalhes Adicionais:</strong> ${item.details}</p>`;
+                modal.classList.add('show');
+            }
+        }
+    });
+
+    // Inicialização
+    switchTab('all');
 });
