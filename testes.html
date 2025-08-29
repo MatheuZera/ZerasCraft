@@ -1343,32 +1343,37 @@
 
     <!--------------------------------------->
 
-    <div class="tabs-container">
-        <div class="tabs-nav">
-            <button class="tab-button active" data-tab="tab1">
-                <i class="fas fa-home"></i> Home
+    <div class="modern-tabs-container">
+        <div class="tabs-header">
+            <button class="tab-button active" data-tab="dashboard">
+                <i class="fas fa-chart-line"></i> Dashboard
             </button>
-            <button class="tab-button" data-tab="tab2">
-                <i class="fas fa-info-circle"></i> Sobre
+            <button class="tab-button" data-tab="analytics">
+                <i class="fas fa-globe"></i> Análises
             </button>
-            <button class="tab-button" data-tab="tab3">
+            <button class="tab-button" data-tab="settings">
                 <i class="fas fa-cog"></i> Configurações
             </button>
-            <div class="tab-indicator"></div>
+            <div class="tab-active-indicator"></div>
         </div>
+
         <div class="tabs-content">
-            <div class="tab-pane active" id="tab1">
-                <h3>Página Principal</h3>
-                <p>Bem-vindo à nossa página principal. Aqui você encontra as últimas notícias e destaques.</p>
+            <div class="tab-pane active" id="dashboard">
+                <h2>Visão Geral do Dashboard</h2>
+                <p>Aqui você encontra um resumo rápido das suas principais métricas e informações importantes. Personalize este painel para ver o que mais importa para você.</p>
+                <p>Nesta seção, você pode acompanhar o desempenho em tempo real, verificar status de projetos e ter acesso rápido aos recursos mais utilizados.</p>
             </div>
-            <div class="tab-pane" id="tab2">
-                <h3>Sobre Nós</h3>
-                <p>Conheça nossa história e os valores que nos guiam. Somos uma equipe dedicada à inovação.</p>
+
+            <div class="tab-pane" id="analytics">
+                <h2>Relatórios de Análises Detalhadas</h2>
+                <p>Explore dados aprofundados sobre o tráfego, comportamento do usuário e tendências do mercado. Ferramentas interativas para visualizar seus dados.</p>
+                <p>Monitore suas campanhas, identifique padrões e tome decisões estratégicas baseadas em informações precisas.</p>
             </div>
-            <div class="tab-pane" id="tab3">
-                <h3>Ajustes do Sistema</h3>
-                <p>Ajuste as suas preferências e personalize a sua experiência no site.
-                </p>
+
+            <div class="tab-pane" id="settings">
+                <h2>Configurações do Sistema</h2>
+                <p>Gerencie suas preferências de usuário, privacidade e notificações. Tudo o que você precisa para personalizar sua experiência.</p>
+                <p>Altere temas, ajuste permissões e configure integrações com outros serviços de forma simples e rápida.</p>
             </div>
         </div>
     </div>
@@ -1601,7 +1606,7 @@
                 <li><i class="fas fa-check-circle"></i> 10GB de Armazenamento</li>
                 <li><i class="fas fa-times-circle"></i> Suporte Prioritário</li>
             </ul>
-            <button class="btn-primary-ghost" data-plan="essencial">Detalhes</button>
+            <button class="btn-primary-ghost"data-plan="essencial">Detalhes</button>
             <button class="btn-destaque">Assinar</button>
         </div>
 
@@ -1627,7 +1632,7 @@
                 <li><i class="fas fa-check-circle"></i> Armazenamento Ilimitado</li>
                 <li><i class="fas fa-check-circle"></i> Gerente de Conta Dedicado</li>
             </ul>
-            <button class="btn-primary-ghost" data-plan="ultimate">Detalhes</button>
+            <button class="btn-primary-ghost"data-plan="ultimate">Detalhes</button>
             <button class="btn-destaque">Assinar</button>
         </div>
     </div>
@@ -1783,9 +1788,9 @@
         </div>
     </div>
     <!--------------------------------------->
+
     <div id="itemModal2" class="modal-overlay">
     </div>
-
 
     <!---------------------------------------------------------------->
     <!-- Main Footer with Audio Control -->

@@ -581,7 +581,7 @@ Navigation Menu para iti Desktop (Manipud iti 769px)
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    background-image: url('assets/images/1.site/banner-fundo.gif');
+    background-image: url('assets/images/image.png');
     /* Naadjust a dalan */
     background-size: cover;
     background-position: center center;
@@ -4710,7 +4710,7 @@ input:checked+.slider:before {
 .chatbot-btn {
     position: fixed;
     bottom: 80px;
-    right: 1790px;
+    right: 1410px;
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
     border: none;
@@ -4733,7 +4733,7 @@ input:checked+.slider:before {
     display: none;
     position: fixed;
     bottom: 160px;
-    right: 1490px;
+    right: 1120px;
     width: 350px;
     height: 400px;
     background-color: var(--cor-card-bg);
@@ -5138,8 +5138,9 @@ input:checked+.slider:before {
 /* Estilos para telas grandes (Desktop) */
 .cookie-consent {
     position: fixed;
-    bottom: 100px;
+    bottom: 80px; /* Posição fixa no rodapé */
     left: 50%;
+    transform: translateX(-50%);
     width: 90%;
     max-width: 600px;
     background-color: var(--cor-card-bg);
@@ -5150,17 +5151,15 @@ input:checked+.slider:before {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    /* Transição para a entrada e saída */
-    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     z-index: 99;
     
-    /* Posição inicial (fora da tela, mais abaixo) */
-    transform: translateX(-50%) translateY(calc(100% + 100px)); /* Move para fora da tela, para baixo */
+    /* Posição inicial: sempre visível */
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.cookie-consent.show {
-    /* Posição final (visível na tela) */
-    transform: translateX(-50%) translateY(0);
+/* Estado de saída (quando for aceito ou recusado) */
+.cookie-consent.hide {
+    transform: translateX(-50%) translateY(calc(100% + 100px));
 }
 
 .cookie-consent a {
@@ -5206,30 +5205,26 @@ input:checked+.slider:before {
 /* Media Query para dispositivos móveis */
 @media (max-width: 768px) {
     .cookie-consent {
-        bottom: 0; /* Altera a posição para o fundo da tela */
+        bottom: 120px;
         width: 90%;
         max-width: none;
-        border-radius: var(--border-radius); /* Remove o border-radius para ocupar a largura total */
-        padding: 15px; /* Reduz o padding */
-        text-align: center; /* Centraliza o texto */
-
-        /* Posição inicial (fora da tela, para baixo) no mobile */
-        transform: translateX(-50%) translateY(100%); 
+        border-radius: var(--border-radius);
+        padding: 15px;
+        text-align: center;
     }
-
-    .cookie-consent.show {
-        /* Posição final (visível na tela) no mobile */
-        transform: translateX(-50%) translateY(0);
+    
+    .cookie-consent.hide {
+        transform: translateX(-50%) translateY(100%);
     }
 
     .cookie-btns {
-        flex-direction: column; /* Botões um em cima do outro */
+        flex-direction: column;
         justify-content: center;
-        align-items: center; /* Centraliza os botões */
+        align-items: center;
     }
 
     .btn-aceitar-cookie, .btn-rejeitar-cookie {
-        width: 100%; /* Botões com 100% da largura do container */
+        width: 100%;
         padding: 15px;
     }
 }
@@ -5884,7 +5879,9 @@ input:checked+.slider:before {
     padding: var(--padding-card);
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-card);
+    width: 100%;
     max-width: 400px;
+    margin: 20px auto; /* Centraliza o card */
 }
 
 .estatistica-conteudo {
@@ -5939,7 +5936,9 @@ input:checked+.slider:before {
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-card);
     overflow: hidden;
+    width: 100%;
     max-width: 400px;
+    margin: 20px auto; /* Centraliza o card */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -6012,6 +6011,7 @@ input:checked+.slider:before {
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-card);
     position: relative;
+    margin: 20px auto; /* Centraliza o card */
 }
 
 .barra-item {
@@ -6088,6 +6088,7 @@ input:checked+.slider:before {
     box-shadow: var(--sombra-card);
     transition: var(--transicao-card-hover);
     cursor: pointer;
+    margin: 20px auto; /* Centraliza o card */
 }
 
 .card-thumb img {
@@ -6142,6 +6143,7 @@ input:checked+.slider:before {
     overflow: hidden;
     display: flex;
     align-items: center;
+    margin: 20px auto; /* Centraliza o card */
 }
 
 .search-efeito .input-efeito {
@@ -6795,71 +6797,139 @@ input:checked+.slider:before {
 /* 1. A     */
 /* ============================================================= */
 
-.tabs-container {
-    max-width: 800px;
-    margin: 50px auto;
+.modern-tabs-container {
     background-color: var(--cor-card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-card);
-    padding: var(--padding-card);
+    width: 100%;
+    max-width: 900px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transicao-suave);
+    margin: 50px auto;
 }
 
-.tabs-nav {
+.tabs-header {
     display: flex;
     position: relative;
-    border-bottom: 2px solid var(--cor-bordas);
-    margin-bottom: 20px;
+    border-bottom: 1px solid var(--cor-bordas);
+    background-color: #3b4252;
+    padding: 0 10px;
 }
 
 .tab-button {
     flex: 1;
+    padding: 18px 25px;
     background-color: transparent;
     border: none;
-    padding: 15px 20px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: color 0.3s ease;
     color: var(--cor-texto-claro);
-    font-weight: bold;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicao-suave);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.tab-button:hover {
-    color: var(--cor-primaria);
+.tab-button:hover:not(.active) {
+    color: var(--cor-primaria-hover);
 }
 
 .tab-button.active {
     color: var(--cor-primaria);
 }
 
-.tab-indicator {
+.tab-active-indicator {
     position: absolute;
-    bottom: -2px;
-    height: 2px;
-    background-color: var(--cor-primaria);
-    transition: left 0.3s ease, width 0.3s ease;
+    bottom: -1px;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
+    transition: left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 0;
+    border-radius: 2px 2px 0 0;
 }
 
+
 .tabs-content {
+    padding: 40px;
+    flex-grow: 1;
     position: relative;
-    overflow: hidden;
+    min-height: 200px;
 }
 
 .tab-pane {
-    display: none;
-    animation: fadein 0.5s ease;
+    position: absolute;
+    top: var(--padding-geral);
+    left: var(--padding-geral);
+    right: var(--padding-geral);
+    bottom: var(--padding-geral);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .tab-pane.active {
-    display: block;
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
-@keyframes fadein {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* Redução de tamanho de fonte e margens */
+.tab-pane h2 {
+    color: var(--cor-primaria);
+    margin-top: 0;
+    margin-bottom: 10px; /* Margem reduzida */
+    font-size: 1.5em; /* Fonte do título reduzida */
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+/* Redução de tamanho de fonte e margens */
+.tab-pane p {
+    line-height: 1.5; /* Altura de linha ajustada */
+    margin-bottom: 8px; /* Margem reduzida */
+    font-size: 1em; /* Fonte do parágrafo reduzida */
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .modern-tabs-container {
+        border-radius: 0;
+        margin: 0;
+    }
+    .tabs-header {
+        padding: 0 5px;
+    }
+    .tab-button {
+        font-size: 0.85em;
+        padding: 10px 5px;
+        gap: 5px;
+    }
+    .tab-button i {
+        display: none;
+    }
+    .tab-pane {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+    }
+    .tab-pane h2 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+    .tab-pane p {
+        font-size: 0.9em;
+    }
 }
 
 /* ============================================================= */
@@ -7176,9 +7246,9 @@ input:checked+.slider:before {
 
 .toc {
     position: fixed;
-    top: 150px;
+    top: 50px; /* Alterado para 50px para deixá-lo mais alto na página */
     left: 20px;
-    width: 250px;
+    width: 210px; /* Alterado para 200px para um container menor */
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
     border-radius: var(--border-radius);

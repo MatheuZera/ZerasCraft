@@ -1975,36 +1975,61 @@ document.addEventListener('DOMContentLoaded', () => {
     // A
     // =======================================================
 
-    const tabsContainer = document.querySelector('.tabs-container');
+    const tabsContainer = document.querySelector('.modern-tabs-container');
+    if (!tabsContainer) {
+        console.error('O elemento .modern-tabs-container não foi encontrado.');
+        return;
+    }
+    
     const tabButtons = tabsContainer.querySelectorAll('.tab-button');
     const tabPanes = tabsContainer.querySelectorAll('.tab-pane');
-    const tabIndicator = tabsContainer.querySelector('.tab-indicator');
+    const tabActiveIndicator = tabsContainer.querySelector('.tab-active-indicator');
 
     function updateIndicator(button) {
+        if (!button || !tabActiveIndicator) {
+            return;
+        }
+
         const buttonRect = button.getBoundingClientRect();
-        const containerRect = tabsContainer.getBoundingClientRect();
-        tabIndicator.style.left = `${buttonRect.left - containerRect.left}px`;
-        tabIndicator.style.width = `${buttonRect.width}px`;
+        const containerRect = tabsContainer.querySelector('.tabs-header').getBoundingClientRect(); // Usa o header como referência
+        
+        tabActiveIndicator.style.left = `${buttonRect.left - containerRect.left}px`;
+        tabActiveIndicator.style.width = `${buttonRect.width}px`;
     }
 
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             const tabId = button.dataset.tab;
 
+            // Remove a classe 'active' de todos os botões e painéis
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabPanes.forEach(pane => pane.classList.remove('active'));
 
+            // Adiciona a classe 'active' ao botão e ao painel correspondente
             button.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+            const targetPane = document.getElementById(tabId);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
 
             updateIndicator(button);
         });
     });
 
-    // Inicializa o indicador
-    updateIndicator(document.querySelector('.tab-button.active'));
+    // Inicializa o indicador no botão ativo no carregamento da página
+    const activeButton = tabsContainer.querySelector('.tab-button.active');
+    if (activeButton) {
+        updateIndicator(activeButton);
+    }
+
+    // Otimiza a atualização do indicador para redimensionamento da janela (debounce)
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-        updateIndicator(document.querySelector('.tab-button.active'));
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const currentActiveButton = tabsContainer.querySelector('.tab-button.active');
+            updateIndicator(currentActiveButton);
+        }, 100); // Espera 100ms após o redimensionamento para recalcular
     });
 
     // =======================================================
