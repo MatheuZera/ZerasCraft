@@ -312,12 +312,10 @@
     <div class="alert-banner success-alert">
         <i class="fas fa-check-circle alert-icon"></i>
         <p class="alert-message">Atenção! A atualização 1.18.3 já está disponível!</p>
-        <button class="close-alert-btn">&times;</button>
     </div>
     <div class="alert-banner warning-alert">
         <i class="fas fa-exclamation-triangle alert-icon"></i>
         <p class="alert-message">Manutenção do servidor agendada para sexta-feira, 22h.</p>
-        <button class="close-alert-btn">&times;</button>
     </div>
 
     <!--------------------------------------->
@@ -407,16 +405,6 @@
 
     <!--------------------------------------->
     
-    <div id="member-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div id="member-details-content">
-            </div>
-        </div>
-    </div>
-
-    <!--------------------------------------->
-    
     <section class="section-padded">
         <div class="container text-center">
             <h2>Conheça Nossos Admins</h2>
@@ -439,8 +427,8 @@
     
     <div id="member-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
             <div id="member-details-content">
+                <p class="role">Moderadora Sênior</p>
             </div>
         </div>
     </div>
@@ -1179,7 +1167,7 @@
     <div class="acordeao-container">
         <div class="acordeao-item">
             <button class="acordeao-btn">
-                Título da Seção 1 <i class="fas fa-plus"></i>
+                Título da Seção 1</i>
             </button>
             <div class="acordeao-painel">
                 <p>Conteúdo da primeira seção. Mais detalhes aqui.</p>
@@ -1187,7 +1175,7 @@
         </div>
         <div class="acordeao-item">
             <button class="acordeao-btn">
-                Título da Seção 2 <i class="fas fa-plus"></i>
+                Título da Seção 2</i>
             </button>
             <div class="acordeao-painel">
                 <p>Conteúdo da segunda seção.</p>
@@ -1793,7 +1781,7 @@
     </div>
 
     <!--------------------------------------->
-    
+
         <section class="container-principal">
         <div class="content">
             <h1>Sistema de Notificação</h1>
@@ -1855,43 +1843,35 @@
             &copy; <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.
         </div>
         <div class="espaco-invisivel"></div>
-        <!-- Audio Control Bar (Player de Música Otimizado e Minimalista) -->
+
         <div class="audio-control-bar">
-            <div class="audio-control-content">
-                <!-- Informações da Música e Controles -->
+            <div class="container audio-control-content">
                 <div class="music-player-details">
-                    <div id="musicTitleDisplay" class="music-title-display">Clique para Tocar</div>
+                    <span id="musicTitleDisplay">Clique para Tocar</span>
                     <div class="progress-bar-and-times">
                         <span id="currentTimeDisplay" class="time-display">0:00</span>
-                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0" min="0"
-                            max="100">
+                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
                         <span id="durationDisplay" class="time-display">0:00</span>
                     </div>
                 </div>
-
-                <!-- Botões de Controle (Anterior, Play/Pause, Próximo) Juntos -->
                 <div class="music-playback-controls">
-                    <button id="audioPrevButton" class="music-button" aria-label="Música Anterior">
+                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
                         <i class="fas fa-backward"></i>
                     </button>
-                    <button id="audioControlButton" class="music-button main-play-pause-button"
-                        aria-label="Tocar/Pausar Música">
+                    <button id="audioControlButton" class="music-button main-play-pause-button" aria-label="Tocar/Pausar música">
                         <i class="fas fa-play"></i>
                     </button>
-                    <button id="audioNextButton" class="music-button" aria-label="Próxima Música">
+                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
                         <i class="fas fa-forward"></i>
                     </button>
                 </div>
-
-                <!-- Controle de Velocidade -->
                 <div class="playback-speed-control">
-                    <label for="playbackSpeed" class="sr-only">Velocidade de Reprodução</label>
-                    <select id="playbackSpeed" class="playback-speed-select" aria-label="Velocidade de Reprodução">
-                        <option value="0.5">0.5x</option>
+                    <select id="playbackSpeed" class="playback-speed-select">
                         <option value="0.75">0.75x</option>
                         <option value="1" selected>1x</option>
                         <option value="1.25">1.25x</option>
                         <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
                     </select>
                 </div>
             </div>

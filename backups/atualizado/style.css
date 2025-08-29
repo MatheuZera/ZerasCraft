@@ -4710,7 +4710,7 @@ input:checked+.slider:before {
 .chatbot-btn {
     position: fixed;
     bottom: 80px;
-    right: 1410px;
+    right: 1790px;
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
     border: none;
@@ -4733,7 +4733,7 @@ input:checked+.slider:before {
     display: none;
     position: fixed;
     bottom: 160px;
-    right: 1120px;
+    right: 1490px;
     width: 350px;
     height: 400px;
     background-color: var(--cor-card-bg);
