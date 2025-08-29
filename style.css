@@ -581,7 +581,7 @@ Navigation Menu para iti Desktop (Manipud iti 769px)
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    background-image: url('assets/images/1.site/banner-fundo.gif');
+    background-image: url('assets/images/image.png');
     /* Naadjust a dalan */
     background-size: cover;
     background-position: center center;
@@ -1860,6 +1860,13 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     /* Adiciona margem entre o conteúdo e o copyright */
 }
 
+.espaco-invisivel {
+    /* Define a altura do espaço */
+    height: 50px; 
+    
+    /* Opcional: Para debugar, você pode adicionar uma cor de fundo */
+    /* background-color: rgba(255, 0, 0, 0.1); */
+}
 
 /* ------------------------------------- */
 /* Estilos para o Audio Control Bar (Minimalista) */
@@ -3881,7 +3888,7 @@ input:checked+.slider:before {
 
 .btn-scroll-top {
     position: fixed;
-    bottom: 20px;
+    bottom: 80px;
     right: 20px;
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
@@ -4630,8 +4637,8 @@ input:checked+.slider:before {
 
 .chatbot-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 80px;
+    right: 1790px;
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
     border: none;
@@ -4653,8 +4660,8 @@ input:checked+.slider:before {
 .chatbot-box {
     display: none;
     position: fixed;
-    bottom: 90px;
-    right: 20px;
+    bottom: 160px;
+    right: 1490px;
     width: 350px;
     height: 400px;
     background-color: var(--cor-card-bg);
@@ -4694,6 +4701,34 @@ input:checked+.slider:before {
 @keyframes slide-in-up {
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .chatbot-btn {
+        bottom: 70px;
+        right:380px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .chatbot-box {
+        bottom: 80px;
+        right: 50%; /* Centraliza horizontalmente */
+        transform: translateX(50%);
+        width: 90%; /* Ocupa a maior parte da tela */
+        height: 80vh; /* Altura flexível */
+    }
+    
+    .chatbot-box.show {
+        /* Garante que a caixa fique no lugar certo no mobile */
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    @keyframes slide-in-up {
+        from { transform: translateX(50%) translateY(20px); opacity: 0; }
+        to { transform: translateX(50%) translateY(0); opacity: 1; }
+    }
 }
 
 /* ============================================================= */
@@ -5028,11 +5063,11 @@ input:checked+.slider:before {
 /* 1. A     */
 /* ============================================================= */
 
+/* Estilos para telas grandes (Desktop) */
 .cookie-consent {
     position: fixed;
-    bottom: 20px;
+    bottom: 100px;
     left: 50%;
-    transform: translateX(-50%) translateY(150%);
     width: 90%;
     max-width: 600px;
     background-color: var(--cor-card-bg);
@@ -5043,11 +5078,16 @@ input:checked+.slider:before {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    /* Transição para a entrada e saída */
     transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     z-index: 99;
+    
+    /* Posição inicial (fora da tela, mais abaixo) */
+    transform: translateX(-50%) translateY(calc(100% + 100px)); /* Move para fora da tela, para baixo */
 }
 
 .cookie-consent.show {
+    /* Posição final (visível na tela) */
     transform: translateX(-50%) translateY(0);
 }
 
@@ -5078,6 +5118,7 @@ input:checked+.slider:before {
     background-color: var(--cor-fundo-escuro);
     color: var(--cor-texto-claro);
     border: 1px solid var(--cor-bordas);
+    border-radius: var(--border-radius);
 }
 
 .btn-aceitar-cookie:hover {
@@ -5086,6 +5127,39 @@ input:checked+.slider:before {
 
 .btn-rejeitar-cookie:hover {
     background-color: var(--cor-card-hover);
+    border-radius: var(--border-radius);
+}
+
+
+/* Media Query para dispositivos móveis */
+@media (max-width: 768px) {
+    .cookie-consent {
+        bottom: 0; /* Altera a posição para o fundo da tela */
+        width: 90%;
+        max-width: none;
+        border-radius: var(--border-radius); /* Remove o border-radius para ocupar a largura total */
+        padding: 15px; /* Reduz o padding */
+        text-align: center; /* Centraliza o texto */
+
+        /* Posição inicial (fora da tela, para baixo) no mobile */
+        transform: translateX(-50%) translateY(100%); 
+    }
+
+    .cookie-consent.show {
+        /* Posição final (visível na tela) no mobile */
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .cookie-btns {
+        flex-direction: column; /* Botões um em cima do outro */
+        justify-content: center;
+        align-items: center; /* Centraliza os botões */
+    }
+
+    .btn-aceitar-cookie, .btn-rejeitar-cookie {
+        width: 100%; /* Botões com 100% da largura do container */
+        padding: 15px;
+    }
 }
 
 /* ============================================================= */
@@ -5119,7 +5193,7 @@ input:checked+.slider:before {
     flex-shrink: 0;
     cursor: grab;
 }
-
+.btn-scroll-top.show
 .scroll-item:active {
     cursor: grabbing;
 }
@@ -6313,23 +6387,44 @@ input:checked+.slider:before {
 /* 1. A     */
 /* ============================================================= */
 
+/* Estilo base para a toolbox no rodapé */
 .toolbox-rodape {
     position: fixed;
     bottom: -100px;
-    left: 0;
-    width: 100%;
+    left: 100px;
+    width: 20%;
+    height:8%;
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
-    padding: 15px 20px;
+    padding: 2px 10px;
     text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: bottom 0.5s ease-out;
     z-index: 100;
+    border-radius: var(--border-radius);
 }
+
+/* Estado visível da toolbox */
 .toolbox-rodape.show {
-    bottom: 0;
+    bottom: 70px; /* Eleva a toolbox 40px acima do rodapé */
+}
+
+/* Media Query para Dispositivos Móveis */
+@media (max-width: 768px) {
+    .toolbox-rodape {
+        /* Ajusta o posicionamento e tamanho para mobile */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        padding: 5px 15px;
+        bottom: -100px; /* Mantém a animação de entrada */
+    }
+
+    .toolbox-rodape.show {
+        bottom: 90px; /* Eleva a toolbox no mobile (valor um pouco menor para não atrapalhar) */
+    }
 }
 
 /* ============================================================= */
@@ -7645,7 +7740,12 @@ input:checked + .slider:before {
     position: relative;
     overflow: hidden;
     transition: background-color 0.3s ease;
-    min-width: 180px; /* Garante espaço para o spinner e texto */
+    min-width: 180px;
+    
+    /* Propriedades para centralizar o conteúdo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-loading:hover {
@@ -7653,6 +7753,7 @@ input:checked + .slider:before {
 }
 
 .btn-loading .btn-text {
+    /* O texto fica centralizado pelo flexbox */
     transition: opacity 0.3s ease;
 }
 
@@ -7661,7 +7762,7 @@ input:checked + .slider:before {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* Garante centralização perfeita */
     width: 24px;
     height: 24px;
     border: 3px solid rgba(255, 255, 255, 0.3);
@@ -7670,6 +7771,7 @@ input:checked + .slider:before {
     animation: spin 1s linear infinite;
 }
 
+/* Estado de carregamento */
 .btn-loading.loading .btn-text {
     opacity: 0;
 }
@@ -7678,6 +7780,7 @@ input:checked + .slider:before {
     display: block;
 }
 
+/* Animação */
 @keyframes spin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
