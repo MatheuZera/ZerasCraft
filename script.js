@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audioEffects[name] = audio;
         return audio;
     };
-    hoverSound = initializeAudioEffect('select', 'assets/audios/effects/select.mp3', 0.3);
     clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7);
 
     const playEffectSoundInternal = (audioElement) => {
@@ -109,6 +108,68 @@ document.addEventListener('DOMContentLoaded', () => {
         const secs = Math.floor(seconds % 60);
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
+    // =====================================
+
+    // A lógica para tocar o som de hover e clique em cards e botões.
+    // Garante que o som seja tocado imediatamente, mesmo se houver múltiplos hovers.
+    // ----------------------------------------------------------------------------------
+
+    const selectSound = new Audio('assets/audios/effects/select.mp3');
+    selectSound.preload = 'auto';
+
+    // Seleciona todos os elementos que devem ter o som de "seleção".
+    // Adapte essa lista de seletores de acordo com as classes dos seus cards e botões.
+    const interactiveElements = document.querySelectorAll(
+        '.result-card, button, .card-som, .btn-push-down, .liquid-btn, .btn-destaque, .btn-primary, .btn-primary-ghost, .tag-btn, .btn-loading, .btn-top'
+    );
+
+    interactiveElements.forEach(element => {
+        // Adiciona o evento para passar o mouse/tocar (mouseenter)
+        element.addEventListener('mouseenter', () => {
+            const playSound = selectSound.cloneNode();
+            playSound.play();
+        });
+
+        // Adiciona o evento para o clique (mousedown)
+        element.addEventListener('mousedown', () => {
+            const playSound = selectSound.cloneNode();
+            playSound.play();
+        });
+    });
+
+
+    // A lógica para tocar o som de link antes de navegar.
+    // Isso garante uma experiência de usuário consistente e responsiva.
+    // ----------------------------------------------------------------------------------
+
+    const linkSound = new Audio('assets/audios/effects/link.mp3');
+    linkSound.preload = 'auto';
+
+    document.addEventListener('click', (event) => {
+        // Encontra o link mais próximo do elemento clicado.
+        const targetLink = event.target.closest('a');
+
+        // Verifica se o elemento clicado é um link de navegação válido.
+        // Ignora links que são âncoras internas (#secao) e os que abrem modais.
+        if (
+            targetLink &&
+            targetLink.href &&
+            !targetLink.href.startsWith('#') &&
+            !targetLink.href.includes('javascript:')
+        ) {
+            // Previne a navegação padrão para tocar o som primeiro.
+            event.preventDefault();
+
+            // Toca o som do link.
+            linkSound.play();
+
+            // Aguarda um pequeno tempo para garantir que o som seja reproduzido
+            // antes de redirecionar para a nova página.
+            setTimeout(() => {
+                window.location.href = targetLink.href;
+            }, 300); // Atraso de 300 milissegundos
+        }
+    });
 
     // =====================================
     // Lógica de Controle da Música de Fundo
