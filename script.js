@@ -114,13 +114,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // Garante que o som seja tocado imediatamente, mesmo se houver múltiplos hovers.
     // ----------------------------------------------------------------------------------
 
+    // Altere o arquivo de áudio para card.mp3
+    const cardSound = new Audio('audios/effects/card.mp3');
+    cardSound.preload = 'auto';
+
+    // Seleciona todos os elementos que devem ter o som de "seleção".
+    // Adicione '.card-container' para incluir os containers do seu print.
+    const interactiveElement = document.querySelectorAll(
+        '.result-card, .card-container, button, .card-som, .btn-push-down, .liquid-btn, .btn-destaque, .btn-primary, .btn-primary-ghost, .tag-btn, .btn-loading, .btn-top, .card'
+    );
+
+    interactiveElement.forEach(element => {
+        // Adiciona o evento para passar o mouse/tocar (mouseenter)
+        element.addEventListener('mouseenter', () => {
+            const playSound = cardSound.cloneNode();
+            playSound.play();
+        });
+
+        // Adiciona o evento para o clique (mousedown)
+        element.addEventListener('mousedown', () => {
+            const playSound = cardSound.cloneNode();
+            playSound.play();
+        });
+    });
+
+    // A lógica para tocar o som de hover e clique em cards e botões.
+    // Garante que o som seja tocado imediatamente, mesmo se houver múltiplos hovers.
+    // ----------------------------------------------------------------------------------
+
     const selectSound = new Audio('assets/audios/effects/select.mp3');
     selectSound.preload = 'auto';
 
     // Seleciona todos os elementos que devem ter o som de "seleção".
     // Adapte essa lista de seletores de acordo com as classes dos seus cards e botões.
     const interactiveElements = document.querySelectorAll(
-        '.result-card, button, .card-som, .btn-push-down, .liquid-btn, .btn-destaque, .btn-primary, .btn-primary-ghost, .tag-btn, .btn-loading, .btn-top'
+        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, button, .tag-btn, .btn-push-down, .liquid-btn, .btn-destaque, .btn-primary, .btn-primary-ghost, .btn-loading, .btn-top, .card-container, .result-card'
     );
 
     interactiveElements.forEach(element => {
@@ -137,6 +165,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // A lógica para tocar o som de "preview" em links de texto.
+    // ----------------------------------------------------------------------------------
+
+    const previewSound = new Audio('assets/audios/effects/preview.mp3');
+    previewSound.preload = 'auto';
+
+    // Seleciona todos os links na página.
+    const allLinks = document.querySelectorAll('a');
+
+    allLinks.forEach(link => {
+        // Adiciona o evento de hover apenas em links que não são botões.
+        // Isso evita o conflito com o som de 'card.mp3' nos botões.
+        if (!link.closest('button')) {
+            link.addEventListener('mouseenter', () => {
+                const playSound = previewSound.cloneNode();
+                playSound.play();
+            });
+        }
+    });
 
     // A lógica para tocar o som de link antes de navegar.
     // Isso garante uma experiência de usuário consistente e responsiva.
