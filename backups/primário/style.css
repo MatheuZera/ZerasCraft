@@ -6309,19 +6309,21 @@ input:checked+.slider:before {
     position: fixed;
     z-index: 1000;
     left: 0;
-    top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     justify-content: center;
-    align-items: center;
+    /* Altera o alinhamento para o topo */
+    align-items: flex-start;
+    /* Adiciona um padding para a distância do topo */
+    padding-top: 50px;
 }
 
 .aviso-popup {
     background-color: var(--cor-card-bg);
-    padding: var(--padding-card);
+    padding: 30px 40px;
     border-radius: var(--border-radius);
     width: 90%;
     max-width: 500px;
@@ -8437,4 +8439,102 @@ input:checked + .slider:before {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
+}
+
+/* ============================================================= */
+/* 1. A     */
+/* ============================================================= */
+
+.container-principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.content {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #4CAF50; /* Verde para sucesso */
+}
+
+.botao-ativar {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.botao-ativar:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Estilo da Notificação */
+.notificacao-aviso {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    
+    /* Posição inicial para animação */
+    transform: translateY(-50px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out, visibility 0.5s;
+}
+
+/* Classe que ativa a notificação */
+.notificacao-aviso.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.notificacao-fechar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.notificacao-fechar:hover {
+    opacity: 1;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+    .notificacao-aviso {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        transform: translateY(-50px);
+        width: auto;
+    }
 }

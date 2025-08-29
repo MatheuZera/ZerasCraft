@@ -2600,4 +2600,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicialização
     switchTab('all');
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    const btnNotificacao2 = document.getElementById('btnNotificacao');
+    const notificacaoAviso = document.getElementById('notificacaoAviso');
+    const btnFechar = notificacaoAviso.querySelector('.notificacao-fechar');
+
+    // Função para mostrar a notificação
+    function mostrarNotificacao() {
+        // Adiciona a classe 'show' para ativar a animação
+        notificacaoAviso.classList.add('show');
+        
+        // Esconde a notificação automaticamente após 5 segundos
+        setTimeout(() => {
+            notificacaoAviso.classList.remove('show');
+        }, 5000);
+    }
+
+    // Função para fechar a notificação manualmente
+    function fecharNotificacao() {
+        notificacaoAviso.classList.remove('show');
+    }
+
+    // Adiciona o evento de clique ao botão principal
+    if (btnNotificacao2) {
+        btnNotificacao2.addEventListener('click', mostrarNotificacao);
+    }
+    
+    // Adiciona o evento de clique ao botão de fechar
+    if (btnFechar) {
+        btnFechar.addEventListener('click', fecharNotificacao);
+    }
 });
