@@ -109,80 +109,88 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
-    // =====================================
-    // Configuração de Áudio
-    // =====================================
+// =====================================
+// Configuração de Áudio
+// =====================================
 
-    // Define os caminhos e pre-carrega os sons
-    const linkSound = new Audio('assets/audios/effects/link.mp3');
-    const cardSound = new Audio('assets/audios/effects/card.mp3');
-    const buttonSound = new Audio('asset/saudios/effects/button.mp3');
-    const selectSound = new Audio('assets/audios/effects/select.mp3');
+// Define os caminhos e pre-carrega os sons
+const linkSound = new Audio('assets/audios/effects/link.mp3');
+const cardSound = new Audio('assets/audios/effects/card.mp3');
+const buttonSound = new Audio('assets/audios/effects/button.mp3');
+const selectSound = new Audio('assets/audios/effects/select.mp3');
+const buttonClickSound = new Audio('assets/audios/effects/button-click.mp3');
 
-    linkSound.preload = 'auto';
-    cardSound.preload = 'auto';
-    buttonSound.preload = 'auto';
-    selectSound.preload = 'auto';
+linkSound.preload = 'auto';
+cardSound.preload = 'auto';
+buttonSound.preload = 'auto';
+selectSound.preload = 'auto';
+buttonClickSound.preload = 'auto';
 
-    // =====================================
-    // Funções de Execução de Áudio
-    // =====================================
+/**
+ * Toca um som de forma controlada, clonando o áudio para evitar interrupções.
+ * @param {HTMLAudioElement} sound - O objeto de áudio a ser tocado.
+ */
+function playSound(sound) {
+    const clonedSound = sound.cloneNode();
+    clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
+}
 
-    /**
-     * Toca um som de forma controlada, clonando o áudio para evitar interrupções.
-     * @param {HTMLAudioElement} sound - O objeto de áudio a ser tocado.
-     */
-    function playSound(sound) {
-        const clonedSound = sound.cloneNode();
-        clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
+// =====================================
+// Gerenciamento de Eventos de Clique
+// =====================================
+
+document.addEventListener('click', (event) => {
+    const target = event.target.closest('a, button');
+
+    if (!target) {
+        return;
     }
 
-    // =====================================
-    // Gerenciamento de Eventos de Clique
-    // =====================================
+    const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
+    const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
 
-    document.addEventListener('click', (event) => {
-        // Toca o som de link para qualquer navegação
-        const targetLink = event.target.closest('a');
-        if (targetLink && targetLink.href && !targetLink.href.startsWith('#') && !targetLink.href.includes('javascript:')) {
-            event.preventDefault();
-            playSound(linkSound);
-            setTimeout(() => {
-                window.location.href = targetLink.href;
-            }, 300);
-        }
-    });
+    if (isNavLink) {
+        // Toca o som de link para navegação
+        event.preventDefault();
+        playSound(linkSound);
+        setTimeout(() => {
+            window.location.href = target.href;
+        }, 300);
+    } else if (isSpecialButton) {
+        // Toca o som de clique para botões e links internos
+        playSound(buttonClickSound);
+    }
+});
 
-    // =====================================
-    // Gerenciamento de Eventos de Hover
-    // =====================================
+// =====================================
+// Gerenciamento de Eventos de Hover
+// =====================================
 
-    // Seletores para os elementos
-    const cardElements = document.querySelectorAll(
-        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card'
-    );
+// Seletores para os elementos
+const cardElements = document.querySelectorAll(
+    '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card'
+);
 
-    const buttonElements = document.querySelectorAll(
-        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn'
-    );
+const buttonElements = document.querySelectorAll(
+    'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top'
+);
 
-    const textLinkElements = document.querySelectorAll(
-        'p a, span a, li a' // Adicione outros seletores de links de texto se necessário
-    );
+const textLinkElements = document.querySelectorAll(
+    'p a, span a, li a'
+);
 
-    // Adiciona os event listeners
-    cardElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(cardSound));
-    });
+// Adiciona os event listeners
+cardElements.forEach(element => {
+    element.addEventListener('mouseenter', () => playSound(cardSound));
+});
 
-    buttonElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(buttonSound));
-    });
+buttonElements.forEach(element => {
+    element.addEventListener('mouseenter', () => playSound(buttonSound));
+});
 
-    textLinkElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(selectSound));
-    });
-
+textLinkElements.forEach(element => {
+    element.addEventListener('mouseenter', () => playSound(selectSound));
+});
 
     // =====================================
     // Lógica de Controle da Música de Fundo
