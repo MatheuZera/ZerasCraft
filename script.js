@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadNewMusic(false);
         }
     };
-    
+
     // =====================================
     // Listener para Interação com a Página
     // =====================================
@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    
+
     // =====================================
     // 1. Menu Hambúrguer (Otimizado para mais páginas)
     // =====================================
