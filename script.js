@@ -966,672 +966,1400 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. ELEMENTOS
     // =====================================
 
-    // Aguarda o documento estar completamente carregado
-    document.addEventListener('DOMContentLoaded', () => {
-        // Seleciona todos os elementos com a classe .stat-number
-        const counters = document.querySelectorAll('.stat-number');
-        const options = {
-            threshold: 0.5 // Aciona a animação quando 50% do elemento está visível
-        };
-
-        // Callback para o IntersectionObserver
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Inicia o contador
-                    const counter = entry.target;
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    let count = 0;
-                    const speed = 200; // Ajuste a velocidade da animação
-
-                    const updateCount = () => {
-                        const increment = target / speed;
-                        if (count < target) {
-                            count += increment;
-                            counter.innerText = Math.ceil(count);
-                            setTimeout(updateCount, 1);
-                        } else {
-                            counter.innerText = target.toLocaleString('pt-BR'); // Formata o número final
-                        }
-                    };
-
-                    updateCount();
-                    observer.unobserve(counter); // Para de observar após a animação
-                }
-            });
-        }, options);
-
-        // Começa a observar cada contador
-        counters.forEach(counter => {
-            observer.observe(counter);
-        });
-    });
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const lightbox = document.getElementById('lightbox-modal');
-        const lightboxImg = document.getElementById('lightbox-image');
-        const closeBtn = document.querySelector('.lightbox-close');
-
-        galleryItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                const imageUrl = item.getAttribute('data-image');
-                lightboxImg.src = imageUrl;
-                lightbox.classList.add('active');
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
+    const acordeaoBtns = document.querySelectorAll('.acordeao-btn');
+    acordeaoBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.classList.toggle('active');
+            const painel = this.nextElementSibling;
+            if (painel.style.maxHeight) {
+                painel.style.maxHeight = null;
+            } else {
+                painel.style.maxHeight = painel.scrollHeight + 'px';
             }
         });
     });
 
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const track = document.querySelector('.testimonials-track');
-        const cards = Array.from(track.children);
-        const nextBtn = document.querySelector('.testimonials-carousel-container .next');
-        const prevBtn = document.querySelector('.testimonials-carousel-container .prev');
-        let cardWidth = cards[0].offsetWidth + 20; // width + margin
-
-        let currentIndex = 0;
-
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % cards.length;
-            track.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
-        });
-
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-            track.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
-        });
+    // Exemplo JS: Interação simples
+    const btnDestaque = document.querySelector('.btn-destaque');
+    btnDestaque.addEventListener('click', () => {
+        console.log('Botão clicado!');
     });
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const tabs = document.querySelectorAll('.tab-btn-advanced');
-        const contents = document.querySelectorAll('.tab-content-advanced');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.dataset.tab;
-
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-
-                tab.classList.add('active');
-                document.getElementById(target).classList.add('active');
-            });
+    // Exemplo JS: Interação de clique
+    const cards = document.querySelectorAll('.card-conteudo');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            alert('Card clicado!');
         });
     });
 
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const progressBars = document.querySelectorAll('.skill-progress');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const percent = entry.target.dataset.percent;
-                    entry.target.style.width = percent + '%';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.5
-        });
-
-        progressBars.forEach(bar => {
-            observer.observe(bar);
-        });
+    // Nenhuma JS funcional necessária para a animação CSS.
+    // O JS abaixo é apenas um exemplo de interação.
+    const tituloNeon = document.querySelector('.titulo-neon');
+    tituloNeon.addEventListener('mouseover', () => {
+        tituloNeon.style.animationPlayState = 'paused';
+    });
+    tituloNeon.addEventListener('mouseout', () => {
+        tituloNeon.style.animationPlayState = 'running';
     });
 
 
 
-
-    function showToast(title, message, type = 'success', duration = 5000) {
-        const toast = document.getElementById('toast-notification');
-        const toastTitle = toast.querySelector('.toast-title');
-        const toastMessage = toast.querySelector('.toast-message');
-        const toastIcon = toast.querySelector('.toast-icon i');
-
-        toastTitle.textContent = title;
-        toastMessage.textContent = message;
-
-        toast.classList.remove('error', 'success');
-        toastIcon.classList.remove('fa-check-circle', 'fa-times-circle');
-
-        if (type === 'error') {
-            toast.classList.add('error');
-            toastIcon.classList.add('fa-times-circle');
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('change', () => {
+        document.body.classList.toggle('dark-theme');
+        // Adicione a lógica para mudar o tema, por exemplo:
+        if (document.body.classList.contains('dark-theme')) {
+            console.log('Tema escuro ativado!');
         } else {
-            toast.classList.add('success');
-            toastIcon.classList.add('fa-check-circle');
+            console.log('Tema claro ativado!');
         }
+    });
 
-        toast.classList.add('show');
 
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, duration);
+    const progressBar = document.querySelector('.progress-bar');
+    const progressValue = progressBar.getAttribute('data-progress');
+    progressBar.style.width = progressValue + '%';
+
+
+    const modalBtn = document.querySelector('.btn-modal-open');
+    const modalBg = document.querySelector('.modal-bg');
+    const modalClose = document.querySelector('.modal-close');
+
+    modalBtn.addEventListener('click', () => {
+        modalBg.style.display = 'block';
+    });
+
+    modalClose.addEventListener('click', () => {
+        modalBg.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target == modalBg) {
+            modalBg.style.display = 'none';
+        }
+    });
+
+
+    const abasBtns = document.querySelectorAll('.aba-btn');
+    const abasPaineis = document.querySelectorAll('.aba-painel');
+
+    abasBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            abasBtns.forEach(b => b.classList.remove('active'));
+            abasPaineis.forEach(p => p.classList.remove('active'));
+
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+
+    const carrosselSlider = document.querySelector('.carrossel-slider');
+    const carrosselPrev = document.querySelector('.carrossel-prev');
+    const carrosselNext = document.querySelector('.carrossel-next');
+    let slideIndex = 0;
+
+    carrosselNext.addEventListener('click', () => {
+        slideIndex++;
+        if (slideIndex >= carrosselSlider.children.length) {
+            slideIndex = 0;
+        }
+        carrosselSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
+    });
+
+    carrosselPrev.addEventListener('click', () => {
+        slideIndex--;
+        if (slideIndex < 0) {
+            slideIndex = carrosselSlider.children.length - 1;
+        }
+        carrosselSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
+    });
+
+
+    // Exemplo JS: Validação de formulário
+    const form = document.querySelector('.form-contato');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('Formulário enviado!');
+        // Adicione a sua lógica de validação aqui
+    });
+
+
+
+    const btnScrollTop = document.querySelector('.btn-scroll-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            btnScrollTop.classList.add('show');
+        } else {
+            btnScrollTop.classList.remove('show');
+        }
+    });
+    btnScrollTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+
+    const typingText = document.querySelector('.typing-text');
+    const textToType = 'Desenvolvimento Web Moderno.';
+    let i = 0;
+
+    function typeWriter() {
+        if (i < textToType.length) {
+            typingText.textContent += textToType.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
+    }
+    typeWriter();
+
+
+    const galeriaItens = document.querySelectorAll('.galeria-item');
+    const lightboxOverlay = document.querySelector('.lightbox-overlay');
+    const lightboxImagem = document.querySelector('.lightbox-imagem');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    galeriaItens.forEach(item => {
+        item.addEventListener('click', () => {
+            lightboxOverlay.style.display = 'flex';
+            lightboxImagem.src = item.src;
+        });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+        lightboxOverlay.style.display = 'none';
+    });
+
+    lightboxOverlay.addEventListener('click', (e) => {
+        if (e.target !== lightboxImagem) {
+            lightboxOverlay.style.display = 'none';
+        }
+    });
+
+
+    const btnShare = document.querySelector('.btn-share');
+    const shareIcons = document.querySelector('.share-icons');
+
+    btnShare.addEventListener('click', () => {
+        shareIcons.classList.toggle('show');
+    });
+
+
+
+
+    const contadores = document.querySelectorAll('.contador-numero');
+
+    const startCounter = (element) => {
+        let count = 0;
+        const target = parseInt(element.getAttribute('data-target'));
+        const increment = target / 200; // Ajuste a velocidade da animação aqui
+
+        const updateCount = () => {
+            if (count < target) {
+                count += increment;
+                element.innerText = Math.ceil(count);
+                requestAnimationFrame(updateCount);
+            } else {
+                element.innerText = target;
+            }
+        };
+        updateCount();
+    };
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5 // Aciona quando 50% do elemento está visível
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    contadores.forEach(contador => {
+        observer.observe(contador);
+    });
+
+
+    // Exemplo de lógica de clique
+    const btnIcon = document.querySelector('.btn-icon');
+    btnIcon.addEventListener('click', () => {
+        alert('Reproduzindo vídeo...');
+    });
+
+    const btnModalBlur = document.querySelector('.btn-modal-blur');
+    const modalBlurBg = document.querySelector('.modal-blur-bg');
+    const modalBlurClose = document.querySelector('.modal-blur-close');
+    const btnEntendido = document.querySelector('.modal-blur-content .btn-destaque');
+
+    btnModalBlur.addEventListener('click', () => {
+        modalBlurBg.classList.add('show');
+        document.body.classList.add('no-scroll');
+    });
+
+    modalBlurClose.addEventListener('click', () => {
+        modalBlurBg.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+    });
+
+    btnEntendido.addEventListener('click', () => {
+        modalBlurBg.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+    });
+
+
+
+    const abasBotoesAnimadas = document.querySelectorAll('.aba-btn-animada');
+    const abasPaineisAnimados = document.querySelectorAll('.aba-painel-animada');
+    const abaIndicador = document.querySelector('.aba-indicador');
+
+    function updateIndicador(btn) {
+        abaIndicador.style.width = `${btn.offsetWidth}px`;
+        abaIndicador.style.left = `${btn.offsetLeft}px`;
     }
 
-    document.getElementById('show-toast').addEventListener('click', () => {
-        showToast('Sucesso!', 'Você se conectou ao servidor com sucesso.');
-    });
+    abasBotoesAnimadas.forEach(btn => {
+        btn.addEventListener('click', function () {
+            abasBotoesAnimadas.forEach(b => b.classList.remove('active'));
+            abasPaineisAnimados.forEach(p => p.classList.remove('active'));
 
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        // Checa o tema preferido do usuário ou o salvo no localStorage
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-
-        if (savedTheme === 'light') {
-            body.classList.add('light-theme');
-            themeToggleBtn.querySelector('i').className = 'fas fa-sun';
-        } else {
-            themeToggleBtn.querySelector('i').className = 'fas fa-moon';
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            if (body.classList.contains('light-theme')) {
-                body.classList.remove('light-theme');
-                themeToggleBtn.querySelector('i').className = 'fas fa-moon';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.classList.add('light-theme');
-                themeToggleBtn.querySelector('i').className = 'fas fa-sun';
-                localStorage.setItem('theme', 'light');
-            }
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab-animada');
+            document.getElementById(tabId).classList.add('active');
+            updateIndicador(this);
         });
     });
 
+    // Inicializa a posição do indicador na primeira aba
+    const primeiraAba = document.querySelector('.aba-btn-animada.active');
+    if (primeiraAba) {
+        updateIndicador(primeiraAba);
+    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const faqQuestions = document.querySelectorAll('.faq-question');
 
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const parentItem = question.parentElement;
-                parentItem.classList.toggle('active');
-            });
-        });
+
+    const btnAviso = document.querySelector('.btn-aviso-sucesso');
+    const avisoToast = document.getElementById('aviso-toast');
+
+    btnAviso.addEventListener('click', () => {
+        avisoToast.classList.add('show');
+        setTimeout(() => {
+            avisoToast.classList.remove('show');
+        }, 3000); // Esconde a mensagem após 3 segundos
     });
 
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const videoModal = document.getElementById('video-modal');
-        const openVideoModalBtn = document.getElementById('open-video-modal');
-        const closeVideoModalBtn = document.querySelector('.video-modal-close');
-        const videoIframe = document.getElementById('video-iframe');
+    const btnCopy = document.querySelector('.btn-copy');
+    const codigoBloco = document.querySelector('.codigo-bloco');
 
-        // Substitua o ID do vídeo do YouTube aqui
-        const youtubeVideoId = 'dQw4w9WgXcQ'; 
-
-        openVideoModalBtn.addEventListener('click', () => {
-            videoIframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`;
-            videoModal.style.display = 'flex';
-        });
-
-        closeVideoModalBtn.addEventListener('click', () => {
-            videoIframe.src = ''; // Para parar o vídeo
-            videoModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === videoModal) {
-                videoIframe.src = '';
-                videoModal.style.display = 'none';
-            }
-        });
-    });
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const closeBtns = document.querySelectorAll('.close-alert-btn');
-
-        closeBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.parentElement.style.display = 'none';
-            });
-        });
-    });
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const chatForm = document.getElementById('chat-form');
-        const chatInput = document.getElementById('chat-input');
-        const chatBox = document.getElementById('chat-box');
-
-        // Função para adicionar uma mensagem
-        function addMessage(user, message, type = 'other') {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('chat-message', `message-${type}`);
-            messageElement.innerHTML = `<strong>${user}:</strong> ${message}`;
-            chatBox.prepend(messageElement); // Adiciona no início para o "flex-direction: column-reverse"
-        }
-
-        chatForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const message = chatInput.value.trim();
-            if (message) {
-                // Simula uma mensagem do usuário
-                addMessage('Você', message, 'user');
-                chatInput.value = '';
-
-                // Simula uma resposta
-                setTimeout(() => {
-                    const botResponse = "Obrigado pela sua mensagem!";
-                    addMessage('Admin', botResponse, 'other');
-                }, 1000);
-            }
-        });
-
-        // Mensagens iniciais para demonstração
-        addMessage('Admin', 'Bem-vindo ao chat da comunidade!');
-        addMessage('Player1', 'Alguém online para jogar?');
-    });
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const newsTrack = document.querySelector('.news-track');
-        const newsCards = Array.from(newsTrack.children);
-        const newsNextBtn = document.querySelector('.news-nav.next');
-        const newsPrevBtn = document.querySelector('.news-nav.prev');
-        let cardWidth = newsCards[0].offsetWidth + 20;
-
-        let currentIndex = 0;
-
-        newsNextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % newsCards.length;
-            newsTrack.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
-        });
-
-        newsPrevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + newsCards.length) % newsCards.length;
-            newsTrack.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
-        });
-    });
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const newsletterForm = document.getElementById('newsletter-form');
-        const newsletterEmail = document.getElementById('newsletter-email');
-        const newsletterMessage = document.getElementById('newsletter-message');
-
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = newsletterEmail.value.trim();
-
-            if (email === "") {
-                newsletterMessage.textContent = 'Por favor, digite um e-mail válido.';
-                newsletterMessage.classList.add('error');
-                newsletterMessage.classList.remove('success');
-                return;
-            }
-
-            // Simula o envio
+    btnCopy.addEventListener('click', () => {
+        const texto = codigoBloco.textContent;
+        navigator.clipboard.writeText(texto).then(() => {
+            console.log('Código copiado para a área de transferência!');
+            // Opcional: mostrar uma mensagem de sucesso
+            const mensagemCopy = document.createElement('span');
+            mensagemCopy.textContent = 'Copiado!';
+            mensagemCopy.classList.add('aviso-copy');
+            btnCopy.appendChild(mensagemCopy);
             setTimeout(() => {
-                newsletterMessage.textContent = 'E-mail cadastrado com sucesso!';
-                newsletterMessage.classList.add('success');
-                newsletterMessage.classList.remove('error');
-                newsletterEmail.value = '';
-            }, 1000);
+                mensagemCopy.remove();
+            }, 1500);
+        }).catch(err => {
+            console.error('Erro ao copiar: ', err);
+        });
+    });
+
+
+    const btnSidebarOpen = document.querySelector('.btn-sidebar-open');
+    const btnSidebarClose = document.querySelector('.btn-sidebar-close');
+    const sidebarMenu = document.querySelector('.sidebar-menu');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
+
+    btnSidebarOpen.addEventListener('click', () => {
+        sidebarMenu.classList.add('open');
+        sidebarOverlay.style.display = 'block';
+    });
+
+    btnSidebarClose.addEventListener('click', () => {
+        sidebarMenu.classList.remove('open');
+        sidebarOverlay.style.display = 'none';
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+        sidebarMenu.classList.remove('open');
+        sidebarOverlay.style.display = 'none';
+    });
+
+
+
+
+    const filtroBtns = document.querySelectorAll('.filtro-btn');
+
+    filtroBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filtroBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+
+            galeriaItens.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
         });
     });
 
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const stars = document.querySelectorAll('.stars i');
-        const ratingText = document.getElementById('rating-text');
+    const chatbotBtn = document.querySelector('.chatbot-btn');
+    const chatbotBox = document.querySelector('.chatbot-box');
+    const chatbotClose = document.querySelector('.chatbot-close');
 
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                const rating = star.dataset.rating;
-                ratingText.textContent = `Você avaliou com ${rating} estrelas!`;
+    chatbotBtn.addEventListener('click', () => {
+        chatbotBox.classList.toggle('show');
+    });
 
-                stars.forEach(s => {
-                    if (s.dataset.rating <= rating) {
-                        s.classList.add('active');
-                    } else {
-                        s.classList.remove('active');
+    chatbotClose.addEventListener('click', () => {
+        chatbotBox.classList.remove('show');
+    });
+
+
+
+    const btnRipple = document.querySelector('.btn-ripple');
+
+    btnRipple.addEventListener('click', function (e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+
+        this.appendChild(ripple);
+
+        ripple.addEventListener('animationend', () => {
+            ripple.remove();
+        });
+    });
+
+
+
+    const cardPerfil3D = document.querySelector('.card-perfil-3d');
+
+    cardPerfil3D.addEventListener('mousemove', (e) => {
+        const rect = cardPerfil3D.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+
+        const rotateX = (y - 0.5) * 20;
+        const rotateY = -(x - 0.5) * 20;
+
+        cardPerfil3D.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    });
+
+    cardPerfil3D.addEventListener('mouseleave', () => {
+        cardPerfil3D.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
+    });
+
+
+
+    const btnDownload = document.querySelector('.btn-download');
+
+    btnDownload.addEventListener('click', () => {
+        btnDownload.classList.add('loading');
+        setTimeout(() => {
+            btnDownload.classList.remove('loading');
+            // Você pode adicionar a lógica de download aqui
+            alert('Download concluído!');
+        }, 2000);
+    });
+
+
+
+
+    const cookieConsent = document.getElementById('cookie-consent');
+    const btnAceitarCookie = document.querySelector('.btn-aceitar-cookie');
+    const btnRejeitarCookie = document.querySelector('.btn-rejeitar-cookie');
+
+    if (!localStorage.getItem('cookie-accepted')) {
+        setTimeout(() => {
+            cookieConsent.classList.add('show');
+        }, 1000);
+    }
+
+    function hideCookieConsent() {
+        cookieConsent.style.transform = 'translateX(-50%) translateY(150%)';
+    }
+
+    btnAceitarCookie.addEventListener('click', () => {
+        localStorage.setItem('cookie-accepted', 'true');
+        hideCookieConsent();
+    });
+
+    btnRejeitarCookie.addEventListener('click', () => {
+        localStorage.setItem('cookie-accepted', 'false');
+        hideCookieConsent();
+    });
+
+
+    const scrollContainer = document.querySelector('.scroll-horizontal-container');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    scrollContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        scrollContainer.classList.add('active');
+        startX = e.pageX - scrollContainer.offsetLeft;
+        scrollLeft = scrollContainer.scrollLeft;
+    });
+
+    scrollContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        scrollContainer.classList.remove('active');
+    });
+
+    scrollContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        scrollContainer.classList.remove('active');
+    });
+
+    scrollContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scrollContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        scrollContainer.scrollLeft = scrollLeft - walk;
+    });
+
+
+
+
+    const testemunhoWrapper = document.querySelector('.testemunho-wrapper');
+    const bolhas = document.querySelectorAll('.bolha-testemunho');
+    let testemunhoIndex = 0;
+
+    function updateCarrossel() {
+        testemunhoWrapper.style.transform = `translateX(-${testemunhoIndex * 100}%)`;
+        bolhas.forEach((bolha, index) => {
+            if (index === testemunhoIndex) {
+                bolha.classList.add('active');
+            } else {
+                bolha.classList.remove('active');
+            }
+        });
+    }
+
+    bolhas.forEach((bolha, index) => {
+        bolha.addEventListener('click', () => {
+            testemunhoIndex = index;
+            updateCarrossel();
+        });
+    });
+
+
+
+    const rollingNumbers = document.querySelectorAll('.numero-rolling');
+
+    rollingNumbers.forEach(element => {
+        const target = parseInt(element.getAttribute('data-target'));
+        const initialHeight = element.offsetHeight;
+        let count = 0;
+
+        // Adiciona os números para a animação
+        const numbersContainer = document.createElement('div');
+        numbersContainer.style.transition = 'transform 2s ease-out';
+        numbersContainer.style.transform = `translateY(-${target}px)`;
+
+        for (let i = 0; i <= target; i++) {
+            const numberSpan = document.createElement('span');
+            numberSpan.textContent = i;
+            numberSpan.style.height = initialHeight + 'px';
+            numberSpan.style.display = 'flex';
+            numberSpan.style.justifyContent = 'center';
+            numberSpan.style.alignItems = 'center';
+            numbersContainer.appendChild(numberSpan);
+        }
+
+        element.innerHTML = '';
+        element.appendChild(numbersContainer);
+
+        // Animação ao rolar
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    numbersContainer.style.transform = `translateY(-${target * initialHeight}px)`;
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(element);
+    });
+
+
+    const shareContainer = document.querySelector('.share-container');
+    const btnShareToggle = document.querySelector('.btn-share-toggle');
+
+    btnShareToggle.addEventListener('click', () => {
+        shareContainer.classList.toggle('active');
+    });
+
+
+
+    const galeriaColunas = document.querySelectorAll('.galeria-coluna');
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        galeriaColunas.forEach(coluna => {
+            const speed = parseFloat(coluna.getAttribute('data-speed'));
+            const yPos = -(scrollY * speed);
+            coluna.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+
+
+
+    const btnNotificacao = document.querySelector('.btn-notificacao');
+    const notificationDropdown = document.querySelector('.notification-dropdown');
+    const notificationCount = document.getElementById('notification-count');
+    const notificationList = document.getElementById('notification-list');
+    const btnLimpar = document.querySelector('.btn-limpar');
+    let count = 0;
+
+    btnNotificacao.addEventListener('click', () => {
+        notificationDropdown.classList.toggle('show');
+    });
+
+    function addNotification(message) {
+        count++;
+        notificationCount.textContent = count;
+        const newLi = document.createElement('li');
+        newLi.textContent = message;
+
+        if (notificationList.children[0].textContent === 'Nenhuma notificação nova.') {
+            notificationList.innerHTML = '';
+        }
+        notificationList.prepend(newLi);
+    }
+
+    btnLimpar.addEventListener('click', () => {
+        notificationList.innerHTML = '<li>Nenhuma notificação nova.</li>';
+        count = 0;
+        notificationCount.textContent = '0';
+    });
+
+    // Exemplo de como usar a função:
+    addNotification('Nova mensagem de Maria.');
+    addNotification('Seu pedido foi enviado.');
+
+
+
+
+    const dropdownContainer = document.querySelector('.dropdown-menu-container');
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+
+    dropdownBtn.addEventListener('click', () => {
+        dropdownContainer.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown-menu-container')) {
+            dropdownContainer.classList.remove('open');
+        }
+    });
+
+
+    const pageLoader = document.getElementById('page-loader');
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            pageLoader.classList.add('hidden');
+        }, 1000); // Esconde o loader após 1 segundo
+    });
+
+
+    const tabela = document.getElementById('tabela-estatisticas');
+    const headers = tabela.querySelectorAll('th');
+    const tbody = tabela.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const column = header.dataset.column;
+            const order = header.dataset.order === 'asc' ? 'desc' : 'asc';
+            header.dataset.order = order;
+
+            const sortedRows = rows.sort((a, b) => {
+                const aText = a.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 1})`).textContent.trim();
+                const bText = b.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 1})`).textContent.trim();
+
+                const aValue = isNaN(aText) ? aText : parseFloat(aText.replace(/[^0-9.-]+/g, ""));
+                const bValue = isNaN(bText) ? bText : parseFloat(bText.replace(/[^0-9.-]+/g, ""));
+
+                if (aValue < bValue) {
+                    return order === 'asc' ? -1 : 1;
+                }
+                if (aValue > bValue) {
+                    return order === 'asc' ? 1 : -1;
+                }
+                return 0;
+            });
+
+            tbody.innerHTML = '';
+            sortedRows.forEach(row => tbody.appendChild(row));
+        });
+    });
+
+
+
+
+
+    const progressCircle = document.querySelector('.circulo-progresso');
+    const porcentagem = parseFloat(progressCircle.dataset.porcentagem);
+    const offset = 283 - (porcentagem / 100) * 283;
+
+    // Animação ao entrar na tela
+    const observe = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                progressCircle.style.strokeDashoffset = offset;
+                observe.unobserve(entry.target);
+            }
+        });
+    });
+    observe.observe(progressCircle);
+
+
+
+
+    const barras = document.querySelectorAll('.barra-item');
+
+    const observe2 = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                barras.forEach(barra => {
+                    const value = barra.dataset.value;
+                    barra.style.height = `${value}%`;
+                    const fillBar = barra.querySelector('::before');
+                    if (fillBar) {
+                        fillBar.style.transform = 'scaleY(1)';
                     }
                 });
-            });
-        });
-    });
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        // Defina a data do evento (Ano, Mês-1, Dia, Hora, Minuto, Segundo)
-        const eventDate = new Date('2025-12-25T00:00:00').getTime();
-
-        const countdown = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = days < 10 ? `0${days}` : days;
-            document.getElementById('hours').textContent = hours < 10 ? `0${hours}` : hours;
-            document.getElementById('minutes').textContent = minutes < 10 ? `0${minutes}` : minutes;
-            document.getElementById('seconds').textContent = seconds < 10 ? `0${seconds}` : seconds;
-
-            if (distance < 0) {
-                clearInterval(countdown);
-                document.getElementById('countdown').innerHTML = "O evento já começou!";
+                observe2.unobserve(entry.target);
             }
-        }, 1000);
+        });
+    }, { threshold: 0.5 });
+    observe2.observe(document.querySelector('.grafico-barras'));
+
+
+
+
+    const searchEfeito = document.querySelector('.search-efeito');
+    const inputEfeito = document.querySelector('.input-efeito');
+
+    searchEfeito.addEventListener('click', () => {
+        searchEfeito.classList.add('active');
+        inputEfeito.focus();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-efeito')) {
+            searchEfeito.classList.remove('active');
+        }
     });
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const faqSearch = document.getElementById('faq-search');
-        const faqItems = document.querySelectorAll('.faq-item');
-        const faqQuestions = document.querySelectorAll('.faq-question');
 
-        faqSearch.addEventListener('keyup', () => {
-            const searchTerm = faqSearch.value.toLowerCase();
+    const acordeaoItems = document.querySelectorAll('.acordeao-item');
 
-            faqItems.forEach(item => {
-                const question = item.querySelector('h4').textContent.toLowerCase();
-                const tags = item.dataset.tags.toLowerCase();
-
-                if (question.includes(searchTerm) || tags.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const parentItem = question.parentElement;
-                parentItem.classList.toggle('active');
-            });
-        });
-    });
-
-    // O JavaScript pode ser usado aqui para buscar dados de uma API
-    // TABELA DE ESTATÍSTICAS DO SERVIDOR <-------------------
-    // e atualizar a tabela dinamicamente. Exemplo:
-    // function fetchServerStats() {
-    //    fetch('/api/server-stats')
-    //        .then(response => response.json())
-    //        .then(data => {
-    //            document.getElementById('players-online').textContent = data.playersOnline;
-    //            document.getElementById('server-version').textContent = data.serverVersion;
-    //            document.getElementById('uptime').textContent = data.uptime;
-    //            document.getElementById('last-update').textContent = data.lastUpdate;
-    //        });
-    // }
-    // fetchServerStats();
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const heartBtn = document.querySelector('.btn-heart');
-        const heartIcon = heartBtn.querySelector('i');
-        const heartSpan = heartBtn.querySelector('span');
-        let isLiked = false;
-        let likes = 50;
-
-        heartBtn.addEventListener('click', () => {
-            isLiked = !isLiked;
-            if (isLiked) {
-                likes++;
-                heartIcon.classList.remove('far');
-                heartIcon.classList.add('fas');
-                heartBtn.classList.add('active');
+    acordeaoItems.forEach(item => {
+        const btn = item.querySelector('.acordeao-btn');
+        btn.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            acordeaoItems.forEach(i => i.classList.remove('active'));
+            if (!isActive) {
+                item.classList.add('active');
+                // Animação de altura
+                const painel = item.querySelector('.acordeao-painel');
+                painel.style.maxHeight = painel.scrollHeight + 'px';
             } else {
-                likes--;
-                heartIcon.classList.remove('fas');
-                heartIcon.classList.add('far');
-                heartBtn.classList.remove('active');
+                const painel = item.querySelector('.acordeao-painel');
+                painel.style.maxHeight = null;
             }
-            heartSpan.textContent = `${likes} Curtidas`;
         });
     });
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const memberCards = document.querySelectorAll('.team-member-modal');
-        const memberModal = document.getElementById('member-modal');
-        const memberDetailsContent = document.getElementById('member-details-content');
-        const closeBtn = document.querySelector('#member-modal .close-btn');
+    const btnAbrirAviso = document.querySelector('.btn-abrir-aviso');
+    const avisoOverlay = document.querySelector('.aviso-popup-overlay');
+    const avisoClose = document.querySelector('.aviso-popup-close');
 
-        const membersData = {
-            steve: {
-                name: 'Steve O Construtor',
-                role: 'Admin Chefe',
-                image: 'assets/img/player1.png',
-                bio: 'Steve é o cérebro por trás de todas as nossas construções épicas. Com mais de 10 anos de experiência, ele garante que nosso servidor seja o mais belo e funcional de todos.',
-                discord: '@steve_builder'
-            },
-            alex: {
-                name: 'Alex A Exploradora',
-                role: 'Moderadora Sênior',
-                image: 'assets/img/player2.png',
-                bio: 'Alex é a responsável por guiar os novos jogadores e manter a paz na comunidade. Sua dedicação e paciência a tornam um pilar essencial para o nosso servidor.',
-                discord: '@alex_explorer'
+    btnAbrirAviso.addEventListener('click', () => {
+        avisoOverlay.classList.add('show');
+    });
+
+    avisoClose.addEventListener('click', () => {
+        avisoOverlay.classList.remove('show');
+    });
+
+
+
+    document.querySelectorAll('.toolbox-trigger').forEach(trigger => {
+        trigger.addEventListener('click', function (event) {
+            event.stopPropagation();
+            this.classList.toggle('active');
+        });
+    });
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.toolbox-trigger.active').forEach(trigger => {
+            trigger.classList.remove('active');
+        });
+    });
+
+
+
+    const btnFade = document.querySelector('.btn-tooltip-fade');
+    const overlayFade = document.querySelector('.tooltip-fade-overlay');
+    const btnFecharFade = document.querySelector('.btn-fechar-tooltip');
+    btnFade.addEventListener('click', () => overlayFade.classList.add('show'));
+    btnFecharFade.addEventListener('click', () => overlayFade.classList.remove('show'));
+    overlayFade.addEventListener('click', (e) => {
+        if (e.target === overlayFade) overlayFade.classList.remove('show');
+    });
+
+
+    const toolboxRodape = document.querySelector('.toolbox-rodape');
+    const toolboxFechar = document.querySelector('.toolbox-fechar');
+    setTimeout(() => toolboxRodape.classList.add('show'), 1000);
+    toolboxFechar.addEventListener('click', () => toolboxRodape.classList.remove('show'));
+
+
+
+    // Incluir a funcionalidade de copiar código do item 25.
+    document.querySelectorAll('.toolbox-codigo-trigger').forEach(trigger => {
+        trigger.addEventListener('click', function (event) {
+            event.stopPropagation();
+            this.classList.toggle('active');
+        });
+    });
+
+
+    const carouselItems = document.querySelectorAll('.carousel-full-screen .carousel-item');
+    const prevBtn = document.querySelector('.carousel-control.prev');
+    const nextBtn = document.querySelector('.carousel-control.next');
+    let currentSlide = 0;
+    function showSlide(index) {
+        carouselItems.forEach((item, i) => {
+            item.classList.toggle('active', i === index);
+        });
+    }
+    prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide > 0) ? currentSlide - 1 : carouselItems.length - 1;
+        showSlide(currentSlide);
+    });
+    nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide < carouselItems.length - 1) ? currentSlide + 1 : 0;
+        showSlide(currentSlide);
+    });
+
+
+
+    const wrapper = document.querySelector('.carousel-cards-wrapper');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    let currentCard = 0;
+    const cardsPerView = 3;
+    function updateCarousel(index) {
+        wrapper.style.transform = `translateX(-${index * (100 / cardsPerView)}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentCard = index;
+            updateCarousel(currentCard);
+        });
+    });
+
+
+    const tabsContainer = document.querySelector('.tabs-container');
+    const tabButtons = tabsContainer.querySelectorAll('.tab-button');
+    const tabPanes = tabsContainer.querySelectorAll('.tab-pane');
+    const tabIndicator = tabsContainer.querySelector('.tab-indicator');
+
+    function updateIndicator(button) {
+        const buttonRect = button.getBoundingClientRect();
+        const containerRect = tabsContainer.getBoundingClientRect();
+        tabIndicator.style.left = `${buttonRect.left - containerRect.left}px`;
+        tabIndicator.style.width = `${buttonRect.width}px`;
+    }
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.dataset.tab;
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+
+            button.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+
+            updateIndicator(button);
+        });
+    });
+
+    // Inicializa o indicador
+    updateIndicator(document.querySelector('.tab-button.active'));
+    window.addEventListener('resize', () => {
+        updateIndicator(document.querySelector('.tab-button.active'));
+    });
+
+
+    const formCard = document.getElementById('form-contato');
+    const inputs = form.querySelectorAll('input, textarea');
+
+    const feedbackMessages = {
+        nome: 'O nome deve ter pelo menos 3 caracteres.',
+        email: 'Por favor, insira um e-mail válido.',
+        mensagem: 'A mensagem não pode estar vazia.'
+    };
+
+    function validateInput(input) {
+        const parent = input.parentElement;
+        const feedback = parent.querySelector('.feedback-validacao');
+
+        if (input.checkValidity()) {
+            parent.classList.remove('invalid');
+            parent.classList.add('valid');
+            feedback.textContent = '';
+        } else {
+            parent.classList.remove('valid');
+            parent.classList.add('invalid');
+            feedback.textContent = feedbackMessages[input.id] || 'Campo inválido.';
+        }
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener('input', () => validateInput(input));
+        input.addEventListener('blur', () => validateInput(input));
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let isFormValid = true;
+        inputs.forEach(input => {
+            validateInput(input);
+            if (!input.checkValidity()) {
+                isFormValid = false;
             }
-        };
+        });
 
-        memberCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const memberId = card.dataset.memberId;
-                const member = membersData[memberId];
+        if (isFormValid) {
+            alert('Formulário enviado com sucesso!');
+            form.reset();
+        } else {
+            alert('Por favor, preencha todos os campos corretamente.');
+        }
+    });
 
-                memberDetailsContent.innerHTML = `
-                    <img src="${member.image}" alt="${member.name}">
-                    <h4>${member.name}</h4>
-                    <p class="role">${member.role}</p>
-                    <p class="bio">${member.bio}</p>
-                    <p class="discord"><strong>Discord:</strong> ${member.discord}</p>
-                `;
+    const swipeWrapper = document.querySelector('.liquid-swipe-wrapper');
+    const prevBtn2 = document.querySelector('.liquid-btn.prev');
+    const nextBtn2 = document.querySelector('.liquid-btn.next');
+    const cards2 = document.querySelectorAll('.liquid-card');
+    let currentIndex = 0;
 
-                memberModal.style.display = 'flex';
+    function updateSwipe() {
+        swipeWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    prevBtn2.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : cards.length - 1;
+        updateSwipe();
+    });
+
+    nextBtn2.addEventListener('click', () => {
+        currentIndex = (currentIndex < cards2.length - 1) ? currentIndex + 1 : 0;
+        updateSwipe();
+    });
+
+
+    const cardReflexo = document.querySelector('.card-reflexo');
+
+    cardReflexo.addEventListener('mousemove', (e) => {
+        const rect = cardReflexo.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        cardReflexo.style.setProperty('--x', `${x}px`);
+        cardReflexo.style.setProperty('--y', `${y}px`);
+
+        // Atualiza a posição do reflexo em CSS
+        cardReflexo.style.setProperty('--reflect-pos', `${x * 100 / rect.width}% ${y * 100 / rect.height}%`);
+    });
+
+    const starsContainer = document.querySelector('.rating-stars');
+    const stars = starsContainer.querySelectorAll('i');
+
+    function setRating(ratingValue) {
+        stars.forEach(star => {
+            if (parseInt(star.dataset.value) <= ratingValue) {
+                star.classList.add('filled');
+            } else {
+                star.classList.remove('filled');
+            }
+        });
+    }
+
+    // Inicializa a avaliação com o valor do atributo 'data-rating'
+    setRating(parseInt(starsContainer.dataset.rating));
+
+    starsContainer.addEventListener('click', (e) => {
+        const clickedStar = e.target.closest('i');
+        if (clickedStar) {
+            const ratingValue = parseInt(clickedStar.dataset.value);
+            starsContainer.dataset.rating = ratingValue;
+            setRating(ratingValue);
+            console.log(`Nova avaliação: ${ratingValue} estrelas`);
+            // Aqui você pode enviar a avaliação para o servidor
+        }
+    });
+
+
+    const wrapper3d = document.querySelector('.carousel-3d-wrapper');
+    const prev3d = document.querySelector('.prev-3d');
+    const next3d = document.querySelector('.next-3d');
+    const cards3d = document.querySelectorAll('.carousel-3d-card');
+    let currentIndex3d = 0;
+
+    function updateCarousel3d() {
+        wrapper3d.style.transform = `translateX(-${currentIndex3d * 100}%)`;
+    }
+
+    prev3d.addEventListener('click', () => {
+        currentIndex3d = (currentIndex3d > 0) ? currentIndex3d - 1 : cards3d.length - 1;
+        updateCarousel3d();
+    });
+
+    next3d.addEventListener('click', () => {
+        currentIndex3d = (currentIndex3d < cards3d.length - 1) ? currentIndex3d + 1 : 0;
+        updateCarousel3d();
+    });
+
+
+    document.querySelectorAll('.btn-ler-mais').forEach(button => {
+        button.addEventListener('click', () => {
+            const parentCard = button.closest('.card-ler-mais');
+            const shortText = parentCard.querySelector('.texto-curto');
+            const fullText = parentCard.querySelector('.texto-completo');
+            const dots = parentCard.querySelector('.ler-mais-ponto');
+
+            if (fullText.style.display === 'none') {
+                fullText.style.display = 'inline';
+                dots.style.display = 'none';
+                button.textContent = 'Ler Menos';
+            } else {
+                fullText.style.display = 'none';
+                dots.style.display = 'inline';
+                button.textContent = 'Ler Mais';
+            }
+        });
+    });
+
+
+
+    const tocLinks = document.querySelectorAll('.toc a');
+    const sections = document.querySelectorAll('.conteudo-longo section');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 60) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.href.includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+
+    document.querySelectorAll('.btn-copiar').forEach(button => {
+        button.addEventListener('click', () => {
+            const parent = button.closest('.campo-copia');
+            const input = parent.querySelector('input');
+            const feedback = parent.querySelector('.feedback-copia');
+
+            input.select();
+            input.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+
+            feedback.classList.add('show');
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 1500);
+        });
+    });
+
+
+    document.querySelectorAll('.btn-share').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const network = e.currentTarget.dataset.share;
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+
+            switch (network) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${title}%20${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank');
+            }
+        });
+    });
+
+    const modalOverlay = document.getElementById('modal-detalhes-plano');
+    const closeModalBtn = modalOverlay.querySelector('.close-modal');
+    const modalPlanTitle = document.getElementById('modal-plan-title');
+    const modalPlanDescription = document.getElementById('modal-plan-description');
+    const modalMainThumbnail = document.getElementById('modal-main-thumbnail');
+    const modalThumbnailsContainer = document.getElementById('modal-thumbnails');
+    const modalPlanFeatures = document.getElementById('modal-plan-features');
+
+    const plansData = {
+        essencial: {
+            title: 'Plano Essencial',
+            description: 'Ideal para quem está começando, com os recursos básicos para sua presença online. Tenha acesso a funcionalidades essenciais e um bom desempenho.',
+            thumbnails: [
+                'https://via.placeholder.com/600x400/1A1A1A/FFFFFF?text=Essencial+1',
+                'https://via.placeholder.com/600x400/333333/FFFFFF?text=Essencial+2',
+                'https://via.placeholder.com/600x400/555555/FFFFFF?text=Essencial+3'
+            ],
+            features: [
+                '1 Usuário', '5 Projetos', '10GB Armazenamento', 'Suporte Básico', 'Relatórios Mensais'
+            ]
+        },
+        premium: {
+            title: 'Plano Premium',
+            description: 'Nosso plano mais popular, com todos os recursos avançados e suporte prioritário. Perfeito para equipes e projetos em crescimento que precisam de mais poder.',
+            thumbnails: [
+                'https://via.placeholder.com/600x400/007bff/FFFFFF?text=Premium+1',
+                'https://via.placeholder.com/600x400/0056b3/FFFFFF?text=Premium+2',
+                'https://via.placeholder.com/600x400/003c7a/FFFFFF?text=Premium+3'
+            ],
+            features: [
+                '5 Usuários', 'Projetos Ilimitados', '100GB Armazenamento', 'Suporte Prioritário', 'Relatórios Detalhados', 'Funcionalidades Exclusivas'
+            ]
+        },
+        ultimate: {
+            title: 'Plano Ultimate',
+            description: 'A solução completa para grandes empresas, com acesso exclusivo e gerenciamento dedicado. Obtenha desempenho máximo e atenção personalizada para suas necessidades.',
+            thumbnails: [
+                'https://via.placeholder.com/600x400/6200EE/FFFFFF?text=Ultimate+1',
+                'https://via.placeholder.com/600x400/3700B3/FFFFFF?text=Ultimate+2',
+                'https://via.placeholder.com/600x400/1A0066/FFFFFF?text=Ultimate+3'
+            ],
+            features: [
+                'Usuários Ilimitados', 'Projetos Ilimitados', 'Armazenamento Ilimitado', 'Gerente de Conta Dedicado', 'Análises Avançadas', 'Treinamento Personalizado'
+            ]
+        }
+    };
+
+    document.querySelectorAll('.comparison-card button[data-plan]').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const planKey = e.currentTarget.dataset.plan;
+            const plan = plansData[planKey];
+
+            modalPlanTitle.textContent = plan.title;
+            modalPlanDescription.textContent = plan.description;
+
+            // Carregar a primeira thumbnail como principal
+            modalMainThumbnail.src = plan.thumbnails[0];
+
+            // Limpar e carregar as thumbnails do carrossel
+            modalThumbnailsContainer.innerHTML = '';
+            plan.thumbnails.forEach(thumbSrc => {
+                const img = document.createElement('img');
+                img.src = thumbSrc;
+                img.alt = plan.title;
+                img.addEventListener('click', () => {
+                    modalMainThumbnail.src = thumbSrc;
+                    modalThumbnailsContainer.querySelectorAll('img').forEach(i => i.classList.remove('active'));
+                    img.classList.add('active');
+                });
+                modalThumbnailsContainer.appendChild(img);
             });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            memberModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === memberModal) {
-                memberModal.style.display = 'none';
+            // Ativar a primeira thumbnail
+            if (modalThumbnailsContainer.firstElementChild) {
+                modalThumbnailsContainer.firstElementChild.classList.add('active');
             }
+
+
+            // Limpar e carregar os recursos
+            modalPlanFeatures.innerHTML = '<h4>Recursos Inclusos:</h4><ul></ul>';
+            const featuresList = modalPlanFeatures.querySelector('ul');
+            plan.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-check-circle"></i> ${feature}`;
+                featuresList.appendChild(li);
+            });
+
+            modalOverlay.classList.add('show');
         });
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const searchInput = document.getElementById('dynamic-search');
-        const resultsBox = document.getElementById('search-results-box');
-
-        const availableResults = [
-            { title: "Planos de Acesso", url: "#pricing" },
-            { title: "Nossa Equipe", url: "#team" },
-            { title: "Últimas Notícias", url: "#news" },
-            { title: "Perguntas Frequentes", url: "#faq" },
-            { title: "Conecte-se ao Servidor", url: "#connect" },
-            { title: "Trailer do Servidor", url: "#video" }
-        ];
-
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            resultsBox.innerHTML = '';
-
-            if (searchTerm.length > 1) {
-                const filteredResults = availableResults.filter(item => item.title.toLowerCase().includes(searchTerm));
-
-                if (filteredResults.length > 0) {
-                    filteredResults.forEach(item => {
-                        const resultItem = document.createElement('a');
-                        resultItem.classList.add('search-result-item');
-                        resultItem.textContent = item.title;
-                        resultItem.href = item.url;
-                        resultsBox.appendChild(resultItem);
-                    });
-                    resultsBox.style.display = 'block';
-                } else {
-                    resultsBox.style.display = 'none';
-                }
-            } else {
-                resultsBox.style.display = 'none';
-            }
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container-dynamic')) {
-                resultsBox.style.display = 'none';
-            }
-        });
+    closeModalBtn.addEventListener('click', () => {
+        modalOverlay.classList.remove('show');
     });
 
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const audioPlayer = document.getElementById('audio-player');
-        const playPauseBtn = document.getElementById('play-pause-btn');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const progressBar = document.getElementById('progress-bar');
-        const trackTitle = document.getElementById('track-title');
-        const trackArtist = document.getElementById('track-artist');
-        const albumCoverImg = document.getElementById('album-cover-img');
-
-        const playlist = [
-            {
-                title: 'Música da Floresta',
-                artist: 'Compositor A',
-                src: 'assets/audio/song1.mp3',
-                cover: 'assets/img/album1.jpg'
-            },
-            {
-                title: 'Tema do Castelo',
-                artist: 'Compositor B',
-                src: 'assets/audio/song2.mp3',
-                cover: 'assets/img/album2.jpg'
-            },
-            {
-                title: 'Mina Profunda',
-                artist: 'Compositor C',
-                src: 'assets/audio/song3.mp3',
-                cover: 'assets/img/album3.jpg'
-            }
-        ];
-
-        let currentTrackIndex = 0;
-
-        function loadTrack(index) {
-            const track = playlist[index];
-            audioPlayer.src = track.src;
-            trackTitle.textContent = track.title;
-            trackArtist.textContent = track.artist;
-            albumCoverImg.src = track.cover;
-            audioPlayer.load();
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.remove('show');
         }
-
-        function togglePlayPause() {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                playPauseBtn.querySelector('i').className = 'fas fa-pause';
-            } else {
-                audioPlayer.pause();
-                playPauseBtn.querySelector('i').className = 'fas fa-play';
-            }
-        }
-
-        function playNext() {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-            loadTrack(currentTrackIndex);
-            audioPlayer.play();
-        }
-
-        function playPrev() {
-            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-            loadTrack(currentTrackIndex);
-            audioPlayer.play();
-        }
-
-        playPauseBtn.addEventListener('click', togglePlayPause);
-        nextBtn.addEventListener('click', playNext);
-        prevBtn.addEventListener('click', playPrev);
-
-        audioPlayer.addEventListener('timeupdate', () => {
-            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-            progressBar.style.width = `${progress}%`;
-        });
-
-        audioPlayer.addEventListener('ended', playNext);
-
-        loadTrack(currentTrackIndex);
     });
 
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const testimonialText = document.getElementById('testimonial-text');
-        const testimonialAuthorName = document.getElementById('testimonial-author-name');
-        const testimonials = [
-            {
-                text: "O melhor servidor que já joguei! A comunidade é super receptiva e os eventos são muito divertidos.",
-                author: "João 'PlayerPro'",
-                avatar: "assets/img/avatar1.png"
-            },
-            {
-                text: "Sempre encontro algo novo para fazer. A equipe se dedica muito e está sempre atenta às sugestões.",
-                author: "Maria 'Mineira'",
-                avatar: "assets/img/avatar2.png"
-            },
-            {
-                text: "O servidor é bem otimizado e nunca tive problemas de lag. Recomendo para todos os fãs de Minecraft!",
-                author: "Pedro 'ConstrutorX'",
-                avatar: "assets/img/avatar3.png"
-            }
-        ];
+    const btnSubmitLoading = document.getElementById('btn-submit-loading');
 
-        let currentTestimonialIndex = 0;
-        let charIndex = 0;
-        const typingSpeed = 50;
+    btnSubmitLoading.addEventListener('click', () => {
+        btnSubmitLoading.classList.add('loading');
+        btnSubmitLoading.disabled = true; // Desabilita o botão para evitar múltiplos cliques
 
-        function typeWriterEffect() {
-            const currentTestimonial = testimonials[currentTestimonialIndex];
-            if (charIndex < currentTestimonial.text.length) {
-                testimonialText.textContent += currentTestimonial.text.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriterEffect, typingSpeed);
-            } else {
-                testimonialAuthorName.textContent = currentTestimonial.author;
-                testimonialText.style.borderColor = 'transparent';
-                setTimeout(nextTestimonial, 3000); // 3 segundos antes do próximo
-            }
-        }
-
-        function nextTestimonial() {
-            currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-            charIndex = 0;
-            testimonialText.textContent = '';
-            typeWriterEffect();
-        }
-
-        typeWriterEffect();
+        // Simula um carregamento de dados (ex: chamada de API)
+        setTimeout(() => {
+            btnSubmitLoading.classList.remove('loading');
+            btnSubmitLoading.disabled = false;
+            alert('Dados salvos com sucesso!');
+        }, 2000);
     });
-  
+
+
+
+    const galleryImages = document.querySelectorAll('.gallery-grid img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxClose2 = lightbox.querySelector('.lightbox-close');
+
+    galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+            lightbox.classList.add('show');
+            lightboxImg.src = img.dataset.fullSrc;
+        });
+    });
+
+    lightboxClose2.addEventListener('click', () => {
+        lightbox.classList.remove('show');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('show');
+        }
+    });
+
+
+
+    const items = [
+        { id: 1, title: 'Mod de Magia', description: 'Adiciona novas habilidades mágicas.', rating: 4.5, tags: ['mod'], thumbnail: 'https://via.placeholder.com/400x300/F44336/FFFFFF?text=Mod+Magia', details: 'Inclui 50 feitiços, 10 varinhas e novos inimigos. Requer a versão 1.18.' },
+        { id: 2, title: 'Skin Cyberpunk', description: 'Um visual futurista para seu personagem.', rating: 4.8, tags: ['skin'], thumbnail: 'https://via.placeholder.com/400x300/E91E63/FFFFFF?text=Skin+Cyberpunk', details: 'Design com luzes de neon e armadura cromada. Compatível com todas as plataformas.' },
+        { id: 3, title: 'Addon de Decoração', description: 'Mais de 100 blocos e itens decorativos.', rating: 4.2, tags: ['addon'], thumbnail: 'https://via.placeholder.com/400x300/9C27B0/FFFFFF?text=Addon+Decoracao', details: 'Perfeito para construção e criação de interiores. Funciona em servidores.' },
+        { id: 4, title: 'Arquivo de Cores Vibrantes', description: 'Um pacote de texturas com cores vivas.', rating: 4.7, tags: ['arquivos'], thumbnail: 'https://via.placeholder.com/400x300/673AB7/FFFFFF?text=Cores+Vibrantes', details: 'Melhora a experiência visual do jogo. Formato .zip.' },
+        { id: 5, title: 'Mod de Animais Exóticos', description: 'Adiciona novas criaturas e biomas.', rating: 4.6, tags: ['mod'], thumbnail: 'https://via.placeholder.com/400x300/3F51B5/FFFFFF?text=Mod+Animais', details: 'Descubra pandas, elefantes e leões. Os animais interagem entre si.' },
+        { id: 6, title: 'Addon de Armas', description: 'Novas armas de fogo e ferramentas de combate.', rating: 4.1, tags: ['addon'], thumbnail: 'https://via.placeholder.com/400x300/2196F3/FFFFFF?text=Addon+Armas', details: 'Aumente o arsenal de seu personagem com armas e munições.' },
+        { id: 7, title: 'Skin de Robô', description: 'Transforme-se em um robô superpoderoso.', rating: 4.4, tags: ['skin'], thumbnail: 'https://via.placeholder.com/400x300/03A9F4/FFFFFF?text=Skin+Robo', details: 'Inclui efeitos sonoros de metal. Disponível para download instantâneo.' }
+    ];
+
+    const searchInput2 = document.getElementById('searchInput');
+    const tagButtons = document.querySelectorAll('.tag-btn');
+    const searchResults = document.getElementById('searchResults');
+    const itemModal = document.getElementById('itemModal');
+    const closeModal = itemModal.querySelector('.close-modal');
+
+    function renderItems(filteredItems) {
+        searchResults.innerHTML = '';
+        filteredItems.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'result-card';
+            card.innerHTML = `
+            <img src="${item.thumbnail}" alt="${item.title}">
+            <div class="card-content">
+                <h4>${item.title}</h4>
+                <p>${item.description}</p>
+                <div class="card-rating">
+                    ${'★'.repeat(Math.floor(item.rating))}
+                    ${item.rating % 1 !== 0 ? '½' : ''}
+                    (${item.rating})
+                </div>
+                <button class="card-button" data-id="${item.id}">Detalhes</button>
+            </div>
+        `;
+            searchResults.appendChild(card);
+        });
+    }
+
+    function filterAndSearch() {
+        const searchTerm = searchInput2.value.toLowerCase();
+        const activeTag = document.querySelector('.tag-btn.active').dataset.tag;
+
+        const filteredItems = items.filter(item => {
+            const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
+            const matchesSearch = item.title.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+            return matchesTag && matchesSearch;
+        });
+
+        renderItems(filteredItems);
+    }
+
+    // Eventos de tags
+    tagButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            tagButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            filterAndSearch();
+        });
+    });
+
+    // Evento de pesquisa
+    searchInput2.addEventListener('input', filterAndSearch);
+
+    // Eventos de modal
+    searchResults.addEventListener('click', (e) => {
+        const button = e.target.closest('.card-button');
+        if (button) {
+            const itemId = parseInt(button.dataset.id);
+            const item = items.find(i => i.id === itemId);
+            if (item) {
+                document.getElementById('modalThumbnail').src = item.thumbnail;
+                document.getElementById('modalTitle').textContent = item.title;
+                document.getElementById('modalDescription').textContent = item.description;
+                document.getElementById('modalRating').innerHTML = `Nota: ${'★'.repeat(Math.floor(item.rating))} (${item.rating})`;
+                document.getElementById('modalDetails').innerHTML = `<p><strong>Detalhes Adicionais:</strong> ${item.details}</p>`;
+                itemModal.classList.add('show');
+            }
+        }
+    });
+
+    closeModal.addEventListener('click', () => {
+        itemModal.classList.remove('show');
+    });
+
+    itemModal.addEventListener('click', (e) => {
+        if (e.target === itemModal) {
+            itemModal.classList.remove('show');
+        }
+    });
+
+    // Inicialização
+    filterAndSearch();
+
+
+
+
+    // O array `items` é o mesmo do exemplo anterior.
+
+    const tabButton = document.querySelectorAll('.tab-search-btn');
+    const tabPane = document.querySelectorAll('.search-tab-pane');
+
+    function renderCardsToPane(paneId, itemsToRender) {
+        const pane = document.getElementById(paneId);
+        pane.innerHTML = '';
+        itemsToRender.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'result-card';
+            card.innerHTML = `
+            <img src="${item.thumbnail}" alt="${item.title}">
+            <div class="card-content">
+                <h4>${item.title}</h4>
+                <p>${item.description}</p>
+                <div class="card-rating">
+                    ${'★'.repeat(Math.floor(item.rating))}
+                    ${item.rating % 1 !== 0 ? '½' : ''}
+                    (${item.rating})
+                </div>
+                <button class="card-button" data-id="${item.id}">Detalhes</button>
+            </div>
+        `;
+            pane.appendChild(card);
+        });
+    }
+
+    function switchTab(tabId) {
+        tabPane.forEach(pane => {
+            pane.classList.remove('active');
+        });
+        document.getElementById(tabId).classList.add('active');
+
+        if (tabId === 'all') {
+            renderCardsToPane(tabId, items);
+        } else {
+            const filteredItems = items.filter(item => item.tags.includes(tabId));
+            renderCardsToPane(tabId, filteredItems);
+        }
+    }
+
+    // Eventos de abas
+    tabButton.forEach(button => {
+        button.addEventListener('click', () => {
+            tabButton.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            switchTab(button.dataset.tab);
+        });
+    });
+
+    // Eventos do modal (os mesmos do exemplo anterior)
+    document.addEventListener('click', (e) => {
+        const button = e.target.closest('.card-button');
+        if (button) {
+            const itemId = parseInt(button.dataset.id);
+            const item = items.find(i => i.id === itemId);
+            if (item) {
+                const modal = document.getElementById('itemModal'); // ou 'itemModal2' se for um modal diferente
+                document.getElementById('modalThumbnail').src = item.thumbnail;
+                document.getElementById('modalTitle').textContent = item.title;
+                document.getElementById('modalDescription').textContent = item.description;
+                document.getElementById('modalRating').innerHTML = `Nota: ${'★'.repeat(Math.floor(item.rating))} (${item.rating})`;
+                document.getElementById('modalDetails').innerHTML = `<p><strong>Detalhes Adicionais:</strong> ${item.details}</p>`;
+                modal.classList.add('show');
+            }
+        }
+    });
+
+    // Inicialização
+    switchTab('all');
+
+
+
+
+
 });
