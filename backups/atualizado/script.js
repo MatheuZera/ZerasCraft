@@ -108,115 +108,81 @@ document.addEventListener('DOMContentLoaded', () => {
         const secs = Math.floor(seconds % 60);
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
+
+    // =====================================
+    // Configuração de Áudio
     // =====================================
 
-    // A lógica para tocar o som de hover e clique em cards e botões.
-    // Garante que o som seja tocado imediatamente, mesmo se houver múltiplos hovers.
-    // ----------------------------------------------------------------------------------
-
-    // Altere o arquivo de áudio para card.mp3
-    const cardSound = new Audio('audios/effects/card.mp3');
-    cardSound.preload = 'auto';
-
-    // Seleciona todos os elementos que devem ter o som de "seleção".
-    // Adicione '.card-container' para incluir os containers do seu print.
-    const interactiveElement = document.querySelectorAll(
-        '.result-card, .card-container, button, .card-som, .btn-push-down, .liquid-btn, .btn-destaque, .btn-primary, .btn-primary-ghost, .tag-btn, .btn-loading, .btn-top, .card'
-    );
-
-    interactiveElement.forEach(element => {
-        // Adiciona o evento para passar o mouse/tocar (mouseenter)
-        element.addEventListener('mouseenter', () => {
-            const playSound = cardSound.cloneNode();
-            playSound.play();
-        });
-
-        // Adiciona o evento para o clique (mousedown)
-        element.addEventListener('mousedown', () => {
-            const playSound = cardSound.cloneNode();
-            playSound.play();
-        });
-    });
-
-    // A lógica para tocar o som de hover e clique em cards e botões.
-    // Garante que o som seja tocado imediatamente, mesmo se houver múltiplos hovers.
-    // ----------------------------------------------------------------------------------
-
+    // Define os caminhos e pre-carrega os sons
+    const linkSound = new Audio('assets/audios/effects/link.mp3');
+    const cardSound = new Audio('assets/audios/effects/card.mp3');
+    const buttonSound = new Audio('asset/saudios/effects/button.mp3');
     const selectSound = new Audio('assets/audios/effects/select.mp3');
+
+    linkSound.preload = 'auto';
+    cardSound.preload = 'auto';
+    buttonSound.preload = 'auto';
     selectSound.preload = 'auto';
 
-    // Seleciona todos os elementos que devem ter o som de "seleção".
-    // Adapte essa lista de seletores de acordo com as classes dos seus cards e botões.
-    const interactiveElements = document.querySelectorAll(
-        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, button, .tag-btn, .btn-push-down, .liquid-btn, .btn-destaque, .btn-primary, .btn-primary-ghost, .btn-loading, .btn-top, .card-container, .result-card'
-    );
+    // =====================================
+    // Funções de Execução de Áudio
+    // =====================================
 
-    interactiveElements.forEach(element => {
-        // Adiciona o evento para passar o mouse/tocar (mouseenter)
-        element.addEventListener('mouseenter', () => {
-            const playSound = selectSound.cloneNode();
-            playSound.play();
-        });
+    /**
+     * Toca um som de forma controlada, clonando o áudio para evitar interrupções.
+     * @param {HTMLAudioElement} sound - O objeto de áudio a ser tocado.
+     */
+    function playSound(sound) {
+        const clonedSound = sound.cloneNode();
+        clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
+    }
 
-        // Adiciona o evento para o clique (mousedown)
-        element.addEventListener('mousedown', () => {
-            const playSound = selectSound.cloneNode();
-            playSound.play();
-        });
-    });
-
-    // A lógica para tocar o som de "preview" em links de texto.
-    // ----------------------------------------------------------------------------------
-
-    const previewSound = new Audio('assets/audios/effects/preview.mp3');
-    previewSound.preload = 'auto';
-
-    // Seleciona todos os links na página.
-    const allLinks = document.querySelectorAll('a');
-
-    allLinks.forEach(link => {
-        // Adiciona o evento de hover apenas em links que não são botões.
-        // Isso evita o conflito com o som de 'card.mp3' nos botões.
-        if (!link.closest('button')) {
-            link.addEventListener('mouseenter', () => {
-                const playSound = previewSound.cloneNode();
-                playSound.play();
-            });
-        }
-    });
-
-    // A lógica para tocar o som de link antes de navegar.
-    // Isso garante uma experiência de usuário consistente e responsiva.
-    // ----------------------------------------------------------------------------------
-
-    const linkSound = new Audio('assets/audios/effects/link.mp3');
-    linkSound.preload = 'auto';
+    // =====================================
+    // Gerenciamento de Eventos de Clique
+    // =====================================
 
     document.addEventListener('click', (event) => {
-        // Encontra o link mais próximo do elemento clicado.
+        // Toca o som de link para qualquer navegação
         const targetLink = event.target.closest('a');
-
-        // Verifica se o elemento clicado é um link de navegação válido.
-        // Ignora links que são âncoras internas (#secao) e os que abrem modais.
-        if (
-            targetLink &&
-            targetLink.href &&
-            !targetLink.href.startsWith('#') &&
-            !targetLink.href.includes('javascript:')
-        ) {
-            // Previne a navegação padrão para tocar o som primeiro.
+        if (targetLink && targetLink.href && !targetLink.href.startsWith('#') && !targetLink.href.includes('javascript:')) {
             event.preventDefault();
-
-            // Toca o som do link.
-            linkSound.play();
-
-            // Aguarda um pequeno tempo para garantir que o som seja reproduzido
-            // antes de redirecionar para a nova página.
+            playSound(linkSound);
             setTimeout(() => {
                 window.location.href = targetLink.href;
-            }, 300); // Atraso de 300 milissegundos
+            }, 300);
         }
     });
+
+    // =====================================
+    // Gerenciamento de Eventos de Hover
+    // =====================================
+
+    // Seletores para os elementos
+    const cardElements = document.querySelectorAll(
+        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card'
+    );
+
+    const buttonElements = document.querySelectorAll(
+        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn'
+    );
+
+    const textLinkElements = document.querySelectorAll(
+        'p a, span a, li a' // Adicione outros seletores de links de texto se necessário
+    );
+
+    // Adiciona os event listeners
+    cardElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(cardSound));
+    });
+
+    buttonElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(buttonSound));
+    });
+
+    textLinkElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(selectSound));
+    });
+
 
     // =====================================
     // Lógica de Controle da Música de Fundo
