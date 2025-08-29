@@ -581,7 +581,7 @@ Navigation Menu para iti Desktop (Manipud iti 769px)
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    background-image: url('assets/images/1.site/banner-fundo.gif');
+    background-image: url('assets/images/image.png');
     /* Naadjust a dalan */
     background-size: cover;
     background-position: center center;
@@ -1860,6 +1860,13 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     /* Adiciona margem entre o conteúdo e o copyright */
 }
 
+.espaco-invisivel {
+    /* Define a altura do espaço */
+    height: 50px; 
+    
+    /* Opcional: Para debugar, você pode adicionar uma cor de fundo */
+    /* background-color: rgba(255, 0, 0, 0.1); */
+}
 
 /* ------------------------------------- */
 /* Estilos para o Audio Control Bar (Minimalista) */
@@ -2338,6 +2345,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* 1. A     */
 /* ============================================================= */
 
+/* Estilos para telas grandes (Desktop) */
 .pricing-grid {
     display: grid;
     gap: var(--gap-grid);
@@ -2358,7 +2366,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     justify-content: space-between;
     position: relative;
     overflow: hidden;
-    padding-top: 40px;
+    padding-top: 20px;
 }
 
 .pricing-card:hover {
@@ -2436,6 +2444,25 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 .pricing-card.highlighted:hover {
     transform: translateY(-15px) scale(1.07);
     box-shadow: 0 18px 36px rgba(0, 0, 0, 0.8);
+}
+
+
+/* Media Query para Otimização Mobile */
+@media (max-width: 768px) {
+    .pricing-grid {
+        display: flex; /* Muda para layout flexbox */
+        flex-direction: column; /* Organiza os itens em colunas */
+        align-items: center; /* Centraliza os cards horizontalmente */
+        gap: 30px; /* Espaço entre os cards */
+        margin-top: 30px;
+        padding: 0 10px; /* Adiciona um pequeno padding nas laterais */
+    }
+
+    .pricing-card {
+        width: 90%; /* Define a largura para 90% da tela */
+        max-width: 350px; /* Garante que o card não fique muito largo */
+        padding: 20px; /* Reduz o padding para se ajustar melhor */
+    }
 }
 
 /* ============================================================= */
@@ -2706,6 +2733,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* 1. A     */
 /* ============================================================= */
 
+/* Estilos Padrão para Desktop */
 .testimonials-carousel-container {
     position: relative;
     width: 100%;
@@ -2787,6 +2815,29 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 
 .carousel-nav-btn:hover {
     background-color: var(--cor-primaria);
+}
+
+@media (max-width: 768px) {
+    .testimonials-carousel-container {
+        padding: 0 10px;
+        overflow: visible; /* Remove a rolagem oculta */
+    }
+
+    .testimonials-track {
+        flex-direction: column; /* Coloca os cards em colunas */
+        align-items: center; /* Centraliza os cards */
+        gap: 20px; /* Adiciona espaço entre os cards */
+    }
+
+    .testimonial-card {
+        width: 100%; /* Ocupa a largura total */
+        max-width: 400px; /* Limita a largura para não ficar muito grande */
+        margin: 0; /* Remove a margem lateral */
+    }
+    
+    .carousel-nav-btn {
+        display: none; /* Esconde os botões de navegação, já que não são mais necessários */
+    }
 }
 
 /* ============================================================= */
@@ -3881,7 +3932,7 @@ input:checked+.slider:before {
 
 .btn-scroll-top {
     position: fixed;
-    bottom: 20px;
+    bottom: 80px;
     right: 20px;
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
@@ -4306,16 +4357,17 @@ input:checked+.slider:before {
 /* 1. A     */
 /* ============================================================= */
 
+/* Estilos para telas grandes (Desktop) */
 .timeline-container {
     position: relative;
     max-width: 800px;
-    margin: 50px auto;
+    margin: 30px auto; /* Margem reduzida */
 }
 
 .timeline-container::after {
     content: '';
     position: absolute;
-    width: 3px;
+    width: 2px; /* Linha mais fina */
     background-color: var(--cor-bordas);
     top: 0;
     bottom: 0;
@@ -4324,7 +4376,7 @@ input:checked+.slider:before {
 }
 
 .timeline-item {
-    padding: 10px 40px;
+    padding: 5px 25px; /* Padding reduzido */
     position: relative;
     background-color: inherit;
     width: 50%;
@@ -4333,12 +4385,12 @@ input:checked+.slider:before {
 .timeline-item::after {
     content: '';
     position: absolute;
-    width: 25px;
-    height: 25px;
-    right: -13px;
+    width: 20px; /* Círculo menor */
+    height: 20px; /* Círculo menor */
+    right: -10px; /* Ajuste a posição */
     background-color: var(--cor-primaria);
-    border: 4px solid var(--cor-fundo-escuro);
-    top: 15px;
+    border: 3px solid var(--cor-fundo-escuro); /* Borda mais fina */
+    top: 10px; /* Posição mais alta */
     border-radius: 50%;
     z-index: 1;
 }
@@ -4352,11 +4404,11 @@ input:checked+.slider:before {
 }
 
 .timeline-item:nth-child(even)::after {
-    left: -12px;
+    left: -10px; /* Ajuste a posição */
 }
 
 .timeline-content {
-    padding: 20px 30px;
+    padding: 15px 20px; /* Padding reduzido */
     background-color: var(--cor-card-bg);
     position: relative;
     border-radius: var(--border-radius);
@@ -4373,6 +4425,7 @@ input:checked+.slider:before {
 }
 
 .timeline-titulo {
+    font-size: 1.1em; /* Título menor */
     color: var(--cor-link);
 }
 
@@ -4380,7 +4433,33 @@ input:checked+.slider:before {
     color: var(--cor-texto-claro);
     font-family: var(--fonte-mini);
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Espaço reduzido */
+}
+
+@media (max-width: 768px) {
+    /* Esconde a linha central e centraliza os elementos */
+    .timeline-container::after {
+        left: 10px;
+        transform: none;
+    }
+
+    .timeline-item {
+        width: 0%;
+        padding-left: 50px;
+        padding-right: 10px;
+        left: 0 !important;
+    }
+
+    /* Ajusta a posição da bolinha para a esquerda */
+    .timeline-item::after,
+    .timeline-item:nth-child(even)::after {
+        left: 13px;
+    }
+
+    /* Garante que o conteúdo fique à direita da linha */
+    .timeline-item:nth-child(even) .timeline-content {
+        animation-delay: 0.2s;
+    }
 }
 
 /* ============================================================= */
@@ -4630,8 +4709,8 @@ input:checked+.slider:before {
 
 .chatbot-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 80px;
+    right: 1790px;
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
     border: none;
@@ -4653,8 +4732,8 @@ input:checked+.slider:before {
 .chatbot-box {
     display: none;
     position: fixed;
-    bottom: 90px;
-    right: 20px;
+    bottom: 160px;
+    right: 1490px;
     width: 350px;
     height: 400px;
     background-color: var(--cor-card-bg);
@@ -4694,6 +4773,34 @@ input:checked+.slider:before {
 @keyframes slide-in-up {
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .chatbot-btn {
+        bottom: 70px;
+        right:380px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .chatbot-box {
+        bottom: 80px;
+        right: 50%; /* Centraliza horizontalmente */
+        transform: translateX(50%);
+        width: 90%; /* Ocupa a maior parte da tela */
+        height: 80vh; /* Altura flexível */
+    }
+    
+    .chatbot-box.show {
+        /* Garante que a caixa fique no lugar certo no mobile */
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    @keyframes slide-in-up {
+        from { transform: translateX(50%) translateY(20px); opacity: 0; }
+        to { transform: translateX(50%) translateY(0); opacity: 1; }
+    }
 }
 
 /* ============================================================= */
@@ -5028,11 +5135,11 @@ input:checked+.slider:before {
 /* 1. A     */
 /* ============================================================= */
 
+/* Estilos para telas grandes (Desktop) */
 .cookie-consent {
     position: fixed;
-    bottom: 20px;
+    bottom: 100px;
     left: 50%;
-    transform: translateX(-50%) translateY(150%);
     width: 90%;
     max-width: 600px;
     background-color: var(--cor-card-bg);
@@ -5043,11 +5150,16 @@ input:checked+.slider:before {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    /* Transição para a entrada e saída */
     transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     z-index: 99;
+    
+    /* Posição inicial (fora da tela, mais abaixo) */
+    transform: translateX(-50%) translateY(calc(100% + 100px)); /* Move para fora da tela, para baixo */
 }
 
 .cookie-consent.show {
+    /* Posição final (visível na tela) */
     transform: translateX(-50%) translateY(0);
 }
 
@@ -5078,6 +5190,7 @@ input:checked+.slider:before {
     background-color: var(--cor-fundo-escuro);
     color: var(--cor-texto-claro);
     border: 1px solid var(--cor-bordas);
+    border-radius: var(--border-radius);
 }
 
 .btn-aceitar-cookie:hover {
@@ -5086,6 +5199,39 @@ input:checked+.slider:before {
 
 .btn-rejeitar-cookie:hover {
     background-color: var(--cor-card-hover);
+    border-radius: var(--border-radius);
+}
+
+
+/* Media Query para dispositivos móveis */
+@media (max-width: 768px) {
+    .cookie-consent {
+        bottom: 0; /* Altera a posição para o fundo da tela */
+        width: 90%;
+        max-width: none;
+        border-radius: var(--border-radius); /* Remove o border-radius para ocupar a largura total */
+        padding: 15px; /* Reduz o padding */
+        text-align: center; /* Centraliza o texto */
+
+        /* Posição inicial (fora da tela, para baixo) no mobile */
+        transform: translateX(-50%) translateY(100%); 
+    }
+
+    .cookie-consent.show {
+        /* Posição final (visível na tela) no mobile */
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .cookie-btns {
+        flex-direction: column; /* Botões um em cima do outro */
+        justify-content: center;
+        align-items: center; /* Centraliza os botões */
+    }
+
+    .btn-aceitar-cookie, .btn-rejeitar-cookie {
+        width: 100%; /* Botões com 100% da largura do container */
+        padding: 15px;
+    }
 }
 
 /* ============================================================= */
@@ -5119,7 +5265,7 @@ input:checked+.slider:before {
     flex-shrink: 0;
     cursor: grab;
 }
-
+.btn-scroll-top.show
 .scroll-item:active {
     cursor: grabbing;
 }
@@ -6206,33 +6352,90 @@ input:checked+.slider:before {
 /* 1. A     */
 /* ============================================================= */
 
-.toolbox-trigger {
+/* Estilos Padrão para Desktop */
+.testimonials-carousel-container {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+    width: 100%;
+    margin-top: 50px;
+    overflow: hidden;
+    padding: 0 40px;
 }
-.toolbox-trigger .toolbox-conteudo {
-    position: absolute;
-    top: 0;
-    left: calc(100% + 15px);
+
+.testimonials-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.testimonial-card {
     background-color: var(--cor-card-bg);
-    padding: 15px;
+    flex-shrink: 0;
+    width: calc(100% / 3 - 20px);
+    margin: 0 10px;
+    padding: var(--padding-card);
     border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card);
-    width: 250px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(10px);
-    transition: all 0.3s ease;
+    text-align: left;
+    box-shadow: var(--sombra-leve);
+    border-left: 5px solid var(--cor-destaque);
+}
+
+.testimonial-card .quote {
+    font-style: italic;
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 20px;
+}
+
+.testimonial-card .author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.testimonial-card .author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--cor-primaria);
+}
+
+.testimonial-card .author h4 {
+    font-family: var(--fonte-titulo);
+    margin: 0;
+}
+
+.testimonial-card .author .player-name {
+    color: var(--cor-destaque);
+    font-family: var(--fonte-pixel);
+    font-size: 0.8em;
+}
+
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
     z-index: 10;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
 }
-.toolbox-trigger.active .toolbox-conteudo {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
+
+.carousel-nav-btn.prev {
+    left: 0;
 }
+
+.carousel-nav-btn.next {
+    right: 0;
+}
+
+.carousel-nav-btn:hover {
+    background-color: var(--cor-primaria);
+}
+
 
 /* ============================================================= */
 /* 1. A     */
@@ -6280,8 +6483,8 @@ input:checked+.slider:before {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
     background-color: rgba(0, 0, 0, 0.7);
     justify-content: center;
     align-items: center;
@@ -6298,8 +6501,8 @@ input:checked+.slider:before {
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-card-hover);
     text-align: center;
-    width: 90%;
-    max-width: 400px;
+    width: 20%; /* Reduz a largura para 40% */
+    max-width: 100px; /* Reduz a largura máxima para 300px */
     transform: translateY(-50px);
     opacity: 0;
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
@@ -6313,23 +6516,44 @@ input:checked+.slider:before {
 /* 1. A     */
 /* ============================================================= */
 
+/* Estilo base para a toolbox no rodapé */
 .toolbox-rodape {
     position: fixed;
     bottom: -100px;
-    left: 0;
-    width: 100%;
+    left: 100px;
+    width: 20%;
+    height:8%;
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
-    padding: 15px 20px;
+    padding: 2px 10px;
     text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: bottom 0.5s ease-out;
     z-index: 100;
+    border-radius: var(--border-radius);
 }
+
+/* Estado visível da toolbox */
 .toolbox-rodape.show {
-    bottom: 0;
+    bottom: 70px; /* Eleva a toolbox 40px acima do rodapé */
+}
+
+/* Media Query para Dispositivos Móveis */
+@media (max-width: 768px) {
+    .toolbox-rodape {
+        /* Ajusta o posicionamento e tamanho para mobile */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        padding: 5px 15px;
+        bottom: -100px; /* Mantém a animação de entrada */
+    }
+
+    .toolbox-rodape.show {
+        bottom: 90px; /* Eleva a toolbox no mobile (valor um pouco menor para não atrapalhar) */
+    }
 }
 
 /* ============================================================= */
@@ -6952,13 +7176,14 @@ input:checked+.slider:before {
 
 .toc {
     position: fixed;
-    top: 100px;
+    top: 150px;
     left: 20px;
     width: 250px;
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-leve);
+    z-index: 100;
 }
 
 .toc h3 {
@@ -7644,40 +7869,53 @@ input:checked + .slider:before {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: background-color 0.3s ease;
-    min-width: 180px; /* Garante espaço para o spinner e texto */
+    transition: all 0.3s ease; /* Transição em todas as propriedades */
+    min-width: 180px;
+    
+    /* Centraliza o conteúdo (texto e spinner) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-loading:hover {
     background-color: var(--cor-secundaria);
+    transform: translateY(-2px); /* Adiciona um leve efeito de elevação */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
 }
 
 .btn-loading .btn-text {
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(0);
 }
 
 .btn-loading .spinner {
-    display: none; /* Escondido por padrão */
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0); /* Escondido por padrão, com escala 0 */
+    opacity: 0;
     width: 24px;
     height: 24px;
     border: 3px solid rgba(255, 255, 255, 0.3);
     border-top-color: var(--cor-btn-text);
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Estado de carregamento */
 .btn-loading.loading .btn-text {
     opacity: 0;
+    transform: translateY(-10px); /* Move o texto para cima ao esconder */
 }
 
 .btn-loading.loading .spinner {
-    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); /* Faz o spinner aparecer e girar */
 }
 
+/* Animação */
 @keyframes spin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
