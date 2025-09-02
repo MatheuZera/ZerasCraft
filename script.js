@@ -1054,8 +1054,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // A
     // =======================================================
 
-    const acordeaoBtns = document.querySelectorAll('.acordeao-btn');
-    acordeaoBtns.forEach(btn => {
+    const acordeaoBtns1 = document.querySelectorAll('.acordeao-btn');
+    acordeaoBtns1.forEach(btn => {
         btn.addEventListener('click', function () {
             this.classList.toggle('active');
             const painel = this.nextElementSibling;
@@ -1163,22 +1163,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const carrosselSlider = document.querySelector('.carrossel-slider');
     const carrosselPrev = document.querySelector('.carrossel-prev');
     const carrosselNext = document.querySelector('.carrossel-next');
-    let slideIndex = 0;
+    let slideIndex1 = 0;
 
     carrosselNext.addEventListener('click', () => {
-        slideIndex++;
-        if (slideIndex >= carrosselSlider.children.length) {
-            slideIndex = 0;
+        slideIndex1++;
+        if (slideIndex1 >= carrosselSlider.children.length) {
+            slideIndex1 = 0;
         }
-        carrosselSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
+        carrosselSlider.style.transform = `translateX(-${slideIndex1 * 100}%)`;
     });
 
     carrosselPrev.addEventListener('click', () => {
-        slideIndex--;
-        if (slideIndex < 0) {
-            slideIndex = carrosselSlider.children.length - 1;
+        slideIndex1--;
+        if (slideIndex1 < 0) {
+            slideIndex1 = carrosselSlider.children.length - 1;
         }
-        carrosselSlider.style.transform = `translateX(-${slideIndex * 100}%)`;
+        carrosselSlider.style.transform = `translateX(-${slideIndex1 * 100}%)`;
     });
 
 
@@ -1287,7 +1287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCount();
     };
 
-    const options = {
+    const options1 = {
         root: null,
         rootMargin: '0px',
         threshold: 0.5 // Aciona quando 50% do elemento está visível
@@ -1738,14 +1738,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =======================================================
-    // A
+    // Lógica do JavaScript (Sua lógica com melhorias)
     // =======================================================
-
     const pageLoader = document.getElementById('page-loader');
+    const conteudoPrincipal = document.querySelector('.conteudo-principal');
 
+    // Esconde o loader e mostra o conteúdo após a página carregar
     window.addEventListener('load', () => {
         setTimeout(() => {
-            pageLoader.classList.add('hidden');
+            if (pageLoader) {
+                pageLoader.classList.add('hidden');
+            }
+            if (conteudoPrincipal) {
+                conteudoPrincipal.style.display = 'block';
+            }
         }, 1000); // Esconde o loader após 1 segundo
     });
 
@@ -1935,19 +1941,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // =======================================================
 
     const carouselItems = document.querySelectorAll('.carousel-full-screen .carousel-item');
-    const prevBtn = document.querySelector('.carousel-control.prev');
-    const nextBtn = document.querySelector('.carousel-control.next');
+    const prevBtn1 = document.querySelector('.carousel-control.prev');
+    const nextBtn1 = document.querySelector('.carousel-control.next');
     let currentSlide = 0;
     function showSlide(index) {
         carouselItems.forEach((item, i) => {
             item.classList.toggle('active', i === index);
         });
     }
-    prevBtn.addEventListener('click', () => {
+    prevBtn1.addEventListener('click', () => {
         currentSlide = (currentSlide > 0) ? currentSlide - 1 : carouselItems.length - 1;
         showSlide(currentSlide);
     });
-    nextBtn.addEventListener('click', () => {
+    nextBtn1.addEventListener('click', () => {
         currentSlide = (currentSlide < carouselItems.length - 1) ? currentSlide + 1 : 0;
         showSlide(currentSlide);
     });
@@ -1957,14 +1963,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // =======================================================
 
     const wrapper = document.querySelector('.carousel-cards-wrapper');
-    const dots = document.querySelectorAll('.carousel-dots .dot');
+    const dots1 = document.querySelectorAll('.carousel-dots .dot');
     let currentCard = 0;
     const cardsPerView = 3;
     function updateCarousel(index) {
         wrapper.style.transform = `translateX(-${index * (100 / cardsPerView)}%)`;
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        dots1.forEach((dot, i) => dot.classList.toggle('active', i === index));
     }
-    dots.forEach((dot, index) => {
+    dots1.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             currentCard = index;
             updateCarousel(currentCard);
@@ -1980,9 +1986,9 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('O elemento .modern-tabs-container não foi encontrado.');
         return;
     }
-    
-    const tabButtons = tabsContainer.querySelectorAll('.tab-button');
-    const tabPanes = tabsContainer.querySelectorAll('.tab-pane');
+
+    const tabButtons1 = tabsContainer.querySelectorAll('.tab-button');
+    const tabPanes1 = tabsContainer.querySelectorAll('.tab-pane');
     const tabActiveIndicator = tabsContainer.querySelector('.tab-active-indicator');
 
     function updateIndicator(button) {
@@ -1992,18 +1998,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const buttonRect = button.getBoundingClientRect();
         const containerRect = tabsContainer.querySelector('.tabs-header').getBoundingClientRect(); // Usa o header como referência
-        
+
         tabActiveIndicator.style.left = `${buttonRect.left - containerRect.left}px`;
         tabActiveIndicator.style.width = `${buttonRect.width}px`;
     }
 
-    tabButtons.forEach(button => {
+    tabButtons1.forEach(button => {
         button.addEventListener('click', () => {
             const tabId = button.dataset.tab;
 
             // Remove a classe 'active' de todos os botões e painéis
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabPanes.forEach(pane => pane.classList.remove('active'));
+            tabButtons1.forEach(btn => btn.classList.remove('active'));
+            tabPanes1.forEach(pane => pane.classList.remove('active'));
 
             // Adiciona a classe 'active' ao botão e ao painel correspondente
             button.classList.add('active');
@@ -2445,7 +2451,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tagButtons = document.querySelectorAll('.tag-btn');
     const searchResults = document.getElementById('searchResults');
     const itemModal = document.getElementById('itemModal');
-    const closeModal = itemModal.querySelector('.close-modal');
+    const closeModal1 = itemModal.querySelector('.close-modal');
 
     function renderItems(filteredItems) {
         searchResults.innerHTML = '';
@@ -2511,7 +2517,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    closeModal.addEventListener('click', () => {
+    closeModal1.addEventListener('click', () => {
         itemModal.classList.remove('show');
     });
 
@@ -2613,7 +2619,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function mostrarNotificacao() {
         // Adiciona a classe 'show' para ativar a animação
         notificacaoAviso.classList.add('show');
-        
+
         // Esconde a notificação automaticamente após 5 segundos
         setTimeout(() => {
             notificacaoAviso.classList.remove('show');
@@ -2629,9 +2635,333 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnNotificacao2) {
         btnNotificacao2.addEventListener('click', mostrarNotificacao);
     }
-    
+
     // Adiciona o evento de clique ao botão de fechar
     if (btnFechar) {
         btnFechar.addEventListener('click', fecharNotificacao);
     }
+
+    // Lógica do Componente de Senha
+    const passwordInput = document.getElementById('passwordInput');
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    if (togglePasswordBtn && passwordInput) {
+        togglePasswordBtn.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = togglePasswordBtn.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    }
+
+    // Lógica do Modal
+    const modal = document.getElementById('simpleModal');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.querySelector('.modal-close-btn');
+    const footerBtn = document.querySelector('.modal-footer-btn');
+    const openModal = () => { if (modal) modal.style.display = 'flex'; };
+    const closeModal = () => { if (modal) modal.style.display = 'none'; };
+    if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (footerBtn) footerBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
+
+    // Lógica das Abas Modernas
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const indicator = document.querySelector('.tab-active-indicator');
+    const updateIndicator = (activeButton) => {
+        if (!activeButton) return;
+        const rect = activeButton.getBoundingClientRect();
+        const headerRect = activeButton.parentElement.getBoundingClientRect();
+        indicator.style.width = `${rect.width}px`;
+        indicator.style.left = `${rect.left - headerRect.left}px`;
+    };
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.getAttribute('data-tab-id');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+            button.classList.add('active');
+            const targetPane = document.querySelector(`.tab-pane[data-tab-id="${tabId}"]`);
+            if (targetPane) targetPane.classList.add('active');
+            updateIndicator(button);
+        });
+    });
+    const activeTab = document.querySelector('.tab-button.active');
+    if (activeTab) updateIndicator(activeTab);
+
+    // Lógica das Abas de Arquivos - Simples
+    document.querySelectorAll('.file-tab-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.file-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.file-tab-pane').forEach(pane => pane.classList.remove('active'));
+            button.classList.add('active');
+            document.querySelector(`.file-tab-pane[data-tab-id="${button.dataset.tabId}"]`).classList.add('active');
+        });
+    });
+
+    // Lógica das Abas de Arquivos - Avançada
+    document.querySelectorAll('.file-tab-btn-advanced').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.file-tab-btn-advanced').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.file-tab-pane-advanced').forEach(pane => pane.classList.remove('active'));
+            button.classList.add('active');
+            document.querySelector(`.file-tab-pane-advanced[data-tab-id="${button.dataset.tabId}"]`).classList.add('active');
+        });
+    });
+
+    // Lógica das Abas de Arquivos - Compacta
+    document.querySelectorAll('.file-tab-btn-compact').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.file-tab-btn-compact').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.file-tab-pane-compact').forEach(pane => pane.classList.remove('active'));
+            button.classList.add('active');
+            document.querySelector(`.file-tab-pane-compact[data-tab-id="${button.dataset.tabId}"]`).classList.add('active');
+        });
+    });
+
+    // Lógica do Acordeão
+    const acordeaoBtns = document.querySelectorAll('.acordeao-btn');
+    acordeaoBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.classList.toggle('active');
+            const painel = this.nextElementSibling;
+            if (painel.style.maxHeight) {
+                painel.style.maxHeight = null;
+            } else {
+                painel.style.maxHeight = painel.scrollHeight + 'px';
+            }
+        });
+    });
+
+    // Lógica do Carrossel
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.carousel-img');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    const prevBtn = document.querySelector('.carousel-prev-btn');
+    const nextBtn = document.querySelector('.carousel-next-btn');
+
+    const showSlide = (n) => {
+        if (!slides.length) return;
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        slideIndex = (n + slides.length) % slides.length;
+        slides[slideIndex].classList.add('active');
+        dots[slideIndex].classList.add('active');
+    };
+
+    if (prevBtn) prevBtn.addEventListener('click', () => showSlide(slideIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => showSlide(slideIndex + 1));
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.slideTo)));
+    });
+    if (slides.length > 0) showSlide(slideIndex);
+
+    // Lógica do Visualizador de Imagens
+    const mainImage = document.getElementById('mainImage');
+    const imageTitle = document.getElementById('imageTitle');
+    const imageDescription = document.getElementById('imageDescription');
+    const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
+    thumbnailBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            thumbnailBtns.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const imgSrc = button.dataset.imgSrc;
+            const title = button.dataset.title;
+            const desc = button.dataset.desc;
+            if (mainImage) mainImage.src = imgSrc;
+            if (imageTitle) imageTitle.textContent = title;
+            if (imageDescription) imageDescription.textContent = desc;
+        });
+    });
+
+    // Lógica do Toolbox
+    const toolboxToggleBtn = document.getElementById('toolboxToggleBtn');
+    const toolboxMenu = document.getElementById('toolboxMenu');
+    if (toolboxToggleBtn) {
+        toolboxToggleBtn.addEventListener('click', () => {
+            toolboxToggleBtn.classList.toggle('active');
+            toolboxMenu.classList.toggle('active');
+        });
+    }
+
+    // Lógica do CountUp.js para Estatísticas
+    const options = {
+        useEasing: true,
+        useGrouping: true,
+        separator: '.',
+        decimal: ',',
+    };
+    const statNumbers = document.querySelectorAll('.stat-number');
+    statNumbers.forEach(element => {
+        const targetValue = parseInt(element.dataset.target);
+        const countUp = new CountUp(element, targetValue, options);
+        if (!countUp.error) {
+            countUp.start();
+        } else {
+            console.error(countUp.error);
+        }
+    });
+
+    // Lógica do Índice UI
+    const toggleIndexBtn = document.getElementById('toggleIndexBtn');
+    const indexUi = document.getElementById('indexUi');
+    const indexCloseBtn = document.querySelector('.index-close-btn');
+    if (toggleIndexBtn) {
+        toggleIndexBtn.addEventListener('click', () => {
+            indexUi.classList.add('active');
+            document.body.classList.add('no-scroll');
+        });
+    }
+    if (indexCloseBtn) {
+        indexCloseBtn.addEventListener('click', () => {
+            indexUi.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        });
+    }
+    window.addEventListener('click', (event) => {
+        if (event.target === indexUi) {
+            indexUi.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+    });
+
+    const openAdvancedPanelBtn = document.getElementById('openAdvancedPanelBtn');
+    const advancedPanel = document.getElementById('advancedPanel');
+    const closeAdvancedPanelBtn = document.querySelector('.close-advanced-panel-btn');
+
+    if (openAdvancedPanelBtn) {
+        openAdvancedPanelBtn.addEventListener('click', () => {
+            advancedPanel.classList.add('active');
+            document.body.classList.add('no-scroll');
+        });
+    }
+
+    if (closeAdvancedPanelBtn) {
+        closeAdvancedPanelBtn.addEventListener('click', () => {
+            advancedPanel.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        });
+    }
+
+
+    const imagemPrincipal = document.getElementById('imagemPrincipal');
+    const tituloImagem = document.getElementById('tituloImagem');
+    const descricaoImagem = document.getElementById('descricaoImagem');
+    const botoesMiniatura = document.querySelectorAll('.thumbnail-btn');
+
+    botoesMiniatura.forEach(botao => {
+        botao.addEventListener('click', () => {
+            const urlImagem = botao.dataset.imgSrc;
+            const titulo = botao.dataset.title;
+            const descricao = botao.dataset.desc;
+
+            // Remove a classe 'active' de todos os botões e adiciona ao botão clicado
+            botoesMiniatura.forEach(btn => btn.classList.remove('active'));
+            botao.classList.add('active');
+
+            // Atualiza a imagem principal e os textos
+            imagemPrincipal.src = urlImagem;
+            tituloImagem.textContent = titulo;
+            descricaoImagem.textContent = descricao;
+        });
+    });
+
+
+    (function () {
+        'use strict';
+
+        const componentePrincipal = document.getElementById('componenteCopiar');
+
+        if (!componentePrincipal) {
+            console.error('O componente de copiar não foi encontrado. Verifique o ID.');
+            return;
+        }
+
+        // Função de feedback visual
+        function mostrarFeedback(mensagem, sucesso = true) {
+            const elementoFeedback = componentePrincipal.querySelector('[data-feedback]');
+            if (elementoFeedback) {
+                elementoFeedback.textContent = mensagem;
+                elementoFeedback.style.color = sucesso ? 'var(--cor-primaria)' : 'red';
+                elementoFeedback.style.opacity = '1';
+
+                setTimeout(() => {
+                    elementoFeedback.style.opacity = '0';
+                }, 2000);
+            }
+        }
+
+        // Lógica principal de cópia e tratamento de eventos
+        componentePrincipal.addEventListener('click', async (evento) => {
+            const botao = evento.target.closest('[data-acao="copiar"]');
+
+            if (botao) {
+                const textoAlvo = componentePrincipal.querySelector('#textoParaCopiar');
+                if (textoAlvo) {
+                    try {
+                        await navigator.clipboard.writeText(textoAlvo.textContent);
+                        mostrarFeedback('Copiado para a área de transferência!', true);
+                    } catch (err) {
+                        console.error('Falha ao copiar:', err);
+                        mostrarFeedback('Falha ao copiar. Permissões negadas.', false);
+                    }
+                } else {
+                    console.error('Elemento de texto para copiar não encontrado.');
+                    mostrarFeedback('Erro interno. Texto não encontrado.', false);
+                }
+            }
+        });
+
+
+        // =====================================
+        // JavaScript (Lógica Complexa e Funcional)
+        // =====================================
+        const botaoCopiarTexto = document.getElementById('botaoCopiarTexto');
+        const textoParaCopiar = document.getElementById('textoParaCopiar');
+        const feedbackCopia = document.getElementById('feedbackCopia');
+
+        if (botaoCopiarTexto && textoParaCopiar && feedbackCopia) {
+            botaoCopiarTexto.addEventListener('click', () => {
+                // Lógica para copiar texto de forma robusta
+                const texto = textoParaCopiar.textContent;
+
+                // Cria um elemento temporário para garantir a cópia em todos os navegadores
+                const elementoTemp = document.createElement('textarea');
+                elementoTemp.value = texto;
+                elementoTemp.style.position = 'absolute';
+                elementoTemp.style.left = '-9999px';
+                document.body.appendChild(elementoTemp);
+                elementoTemp.select();
+
+                try {
+                    document.execCommand('copy');
+
+                    // Mostra feedback de sucesso
+                    feedbackCopia.textContent = 'Copiado para a área de transferência!';
+                    feedbackCopia.style.opacity = '1';
+
+                    // Faz a mensagem de feedback desaparecer após 2 segundos
+                    setTimeout(() => {
+                        feedbackCopia.style.opacity = '0';
+                    }, 2000);
+
+                } catch (err) {
+                    // Caso a cópia falhe, mostra um erro
+                    console.error('Falha ao copiar:', err);
+                    feedbackCopia.textContent = 'Falha ao copiar. Tente novamente.';
+                    feedbackCopia.style.opacity = '1';
+
+                    setTimeout(() => {
+                        feedbackCopia.style.opacity = '0';
+                    }, 2000);
+                } finally {
+                    document.body.removeChild(elementoTemp);
+                }
+            });
+        } else {
+            console.error('Um ou mais elementos não foram encontrados no DOM.');
+        }
+    });
 });
