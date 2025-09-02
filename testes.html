@@ -1804,623 +1804,706 @@
         </span>
         <p class="notificacao-texto">Operação concluída com sucesso!</p>
         <button class="notificacao-fechar">
-            <i class="fas fa-times"></i>
         </button>
     </div>
 
-    <div class="page-wrapper">
-        <section class="component-section">
-            <h2 class="section-title">Senha</h2>
-            <div class="password-input-container">
-                <input type="password" id="passwordInput" class="password-input" placeholder="Digite sua senha">
-                <button id="togglePassword" class="toggle-password-button">
-                    <i class="fas fa-eye"></i>
-                </button>
-            </div>
-        </section>
 
-        <section class="component-section">
-            <h2 class="section-title">Modal</h2>
-            <div class="modal-button-container">
-                <button id="openModalBtn" class="open-modal-button">Abrir Modal</button>
+    <section class="componente-secao">
+        <div class="card-base">
+            <button class="botao-3d">Clique-me!</button>
+        </div>
+    </section>
+
+
+    <section class="componente-secao">
+        <div class="card-base cartao-expansivel">
+            <h3 class="titulo-cartao">Clique para Expandir</h3>
+            <p class="conteudo-escondido">Aqui está o conteúdo extra. Este texto fica visível somente quando o cartão é
+                expandido. Ótimo para FAQs ou detalhes de produto.</p>
+        </div>
+    </section>
+
+
+    <section class="componente-secao">
+        <div class="card-base">
+            <h3>Progresso</h3>
+            <div class="barra-progresso">
+                <div class="barra-preenchimento"></div>
             </div>
-            <div id="simpleModal" class="modal">
-                <div class="modal-content">
-                    <span class="modal-close-btn">&times;</span>
-                    <div class="modal-header">
-                        <h3>Título do Modal</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>Este é um modal de exemplo. O conteúdo se adapta ao tamanho da tela e o modal é centrado
-                            automaticamente.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="modal-footer-btn">OK</button>
-                    </div>
+        </div>
+    </section>
+
+
+    <section class="componente-secao">
+        <div class="card-base">
+            <button id="abrirModal" class="btn btn-primary">Abrir Modal</button>
+        </div>
+    </section>
+
+    <div id="modal" class="modal-fundo">
+        <div class="modal-conteudo">
+            <span class="fechar-modal">&times;</span>
+            <h3>Título do Modal</h3>
+            <p>Este é o conteúdo do modal. Ele aparece sobre o resto da página.</p>
+        </div>
+    </div>
+
+    <section class="componente-secao">
+        <nav class="menu-navegacao">
+            <a href="#" class="logo">Meu Logo</a>
+            <button class="botao-menu"><i class="fas fa-bars"></i></button>
+            <ul class="menu-lista">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Serviços</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+    </section>
+
+
+    <section class="componente-secao">
+        <div class="card-base slider-testemunhos">
+            <div class="item-slider ativo" data-index="0">
+                <p>"Este é o melhor site que já vi. Incrível!"</p>
+                <cite>- João P.</cite>
+            </div>
+            <div class="item-slider" data-index="1">
+                <p>"Muito fácil de usar e com um design elegante."</p>
+                <cite>- Maria S.</cite>
+            </div>
+            <div class="item-slider" data-index="2">
+                <p>"Adorei a funcionalidade e o suporte!"</p>
+                <cite>- Pedro L.</cite>
+            </div>
+            <button class="botao-proximo">Próximo &rarr;</button>
+            <button class="botao-anterior">&larr; Anterior</button>
+        </div>
+    </section>
+
+    <section class="componente-secao">
+        <div class="card-base">
+            <div class="elemento-com-tooltip">
+                Passe o mouse aqui!
+                <span class="tooltip-texto">Esta é a mensagem do tooltip.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="componente-cards">
+        <div class="card-base card-personalizado">
+            <h3 class="card-titulo-personalizado">Cartão Personalizado</h3>
+            <p class="card-texto">Este é um exemplo de cartão estilizado com borda e um botão de ação. Perfeito para
+                exibir informações de forma organizada.</p>
+            <button class="btn btn-secundario">Ver Detalhes</button>
+        </div>
+    </section>
+
+
+<section class="componente-carrossel">
+    <div class="carrossel-container">
+        <div class="carrossel-slides">
+            <img src="https://via.placeholder.com/800x400/FF6C6C/FFFFFF?text=Slide+1" alt="Slide 1">
+            <img src="https://via.placeholder.com/800x400/6A9BD8/FFFFFF?text=Slide+2" alt="Slide 2">
+            <img src="https://via.placeholder.com/800x400/4CAF50/FFFFFF?text=Slide+3" alt="Slide 3">
+        </div>
+        <button class="carrossel-botao anterior">&larr;</button>
+        <button class="carrossel-botao proximo">&rarr;</button>
+    </div>
+</section>
+
+
+<section class="componente-galeria">
+    <div class="galeria-grid">
+        <img class="miniatura" src="https://via.placeholder.com/300x200/FF6C6C/FFFFFF?text=Img+1" alt="Imagem 1">
+        <img class="miniatura" src="https://via.placeholder.com/300x200/6A9BD8/FFFFFF?text=Img+2" alt="Imagem 2">
+        <img class="miniatura" src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Img+3" alt="Imagem 3">
+    </div>
+</section>
+
+<div id="visualizador" class="visualizador-modal">
+    <span class="visualizador-fechar">&times;</span>
+    <img class="visualizador-conteudo" id="imagemVisualizada">
+</div>
+
+
+<section class="componente-secao">
+    <button class="botao-gradiente">Botão Gradiente</button>
+</section>
+
+
+<section class="componente-secao">
+    <div class="cards-grade">
+        <div class="card-item card-base">
+            <h4>Título do Card 1</h4>
+            <p>Texto de exemplo para o card.</p>
+        </div>
+        <div class="card-item card-base">
+            <h4>Título do Card 2</h4>
+            <p>Texto de exemplo para o card.</p>
+        </div>
+        <div class="card-item card-base">
+            <h4>Título do Card 3</h4>
+            <p>Texto de exemplo para o card.</p>
+        </div>
+        <div class="card-item card-base">
+            <h4>Título do Card 4</h4>
+            <p>Texto de exemplo para o card.</p>
+        </div>
+    </div>
+</section>
+
+<section class="componente-secao">
+    <div class="timeline-container">
+        <div class="timeline-item">
+            <div class="timeline-ponto"></div>
+            <div class="timeline-conteudo card-base">
+                <h4>Evento 1</h4>
+                <p>Detalhes do primeiro evento. Data: 01/01/2023</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-ponto"></div>
+            <div class="timeline-conteudo card-base">
+                <h4>Evento 2</h4>
+                <p>Detalhes do segundo evento. Data: 05/03/2023</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-ponto"></div>
+            <div class="timeline-conteudo card-base">
+                <h4>Evento 3</h4>
+                <p>Detalhes do terceiro evento. Data: 10/06/2023</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="barra-leitura"></div>
+<section class="componente-secao" style="height: 150vh; text-align: center; padding-top: 50vh;">
+    <p>Role a página para ver a barra de leitura funcionar.</p>
+</section>
+
+
+<section class="componente-secao">
+    <div class="card-rotativo-container">
+        <div class="card-rotativo">
+            <div class="card-face card-frente card-base">
+                <h4>Frente do Card</h4>
+                <p>Passe o mouse para ver o verso.</p>
+            </div>
+            <div class="card-face card-verso card-base">
+                <h4>Verso do Card</h4>
+                <p>Informações adicionais aqui.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="componente-secao">
+    <div class="spinner-container">
+        <div class="spinner-animacao"></div>
+    </div>
+</section>
+
+<section class="componente-secao">
+    <div class="tabela-container">
+        <table class="tabela-responsiva">
+            <thead>
+                <tr>
+                    <th data-rotulo="Nome">Nome</th>
+                    <th data-rotulo="Idade">Idade</th>
+                    <th data-rotulo="Cidade">Cidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-rotulo="Nome">João</td>
+                    <td data-rotulo="Idade">25</td>
+                    <td data-rotulo="Cidade">São Paulo</td>
+                </tr>
+                <tr>
+                    <td data-rotulo="Nome">Maria</td>
+                    <td data-rotulo="Idade">32</td>
+                    <td data-rotulo="Cidade">Rio de Janeiro</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<table class="tabela-planilha">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Estoque</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Notebook Gamer</td>
+            <td>Eletrônicos</td>
+            <td>R$ 7.500,00</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td>Teclado Mecânico</td>
+            <td>Periféricos</td>
+            <td>R$ 450,00</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Monitor Ultrawide</td>
+            <td>Eletrônicos</td>
+            <td>R$ 2.800,00</td>
+            <td>23</td>
+        </tr>
+        <tr>
+            <td>Mouse Sem Fio</td>
+            <td>Periféricos</td>
+            <td>R$ 180,00</td>
+            <td>85</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="tabela-card-responsiva">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Data de Início</th>
+            <th>Total Gasto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td data-label="Cliente">João Silva</td>
+            <td data-label="Status" class="status-ativo">Ativo</td>
+            <td data-label="Data de Início">01/03/2023</td>
+            <td data-label="Total Gasto">R$ 1.250,00</td>
+        </tr>
+        <tr>
+            <td data-label="Cliente">Maria Souza</td>
+            <td data-label="Status" class="status-pendente">Pendente</td>
+            <td data-label="Data de Início">15/05/2023</td>
+            <td data-label="Total Gasto">R$ 540,00</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="senha-container">
+    <label for="senha-input">Digite a senha:</label>
+    <input type="password" id="senha-input">
+    <button id="verificarSenhaBtn">Entrar</button>
+</div>
+
+<div id="modalSenhaSucesso" class="modal-avancado-container">
+    <div class="modal-avancado-conteudo">
+        <span class="modal-avancado-fechar">&times;</span>
+        <div class="modal-header">
+            <h3>Acesso Concedido!</h3>
+        </div>
+        <div class="modal-body">
+            <p>A senha está correta. Você pode prosseguir.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="https://www.exemplo.com" class="btn-modal-link" target="_blank">Ir para o Link</a>
+        </div>
+    </div>
+</div>
+
+<div class="visualizador-galeria">
+    <div class="galeria-grid">
+        <img src="https://via.placeholder.com/250x250" alt="Descrição da Imagem 1" class="miniatura" data-legenda="Cenário de montanha no pôr do sol.">
+        <img src="https://via.placeholder.com/250x250" alt="Descrição da Imagem 2" class="miniatura" data-legenda="Floresta densa com luz solar filtrada.">
+        <img src="https://via.placeholder.com/250x250" alt="Descrição da Imagem 3" class="miniatura" data-legenda="Cidade à noite com luzes de néon.">
+    </div>
+</div>
+
+<div id="visualizadorModal" class="visualizador-modal">
+    <span class="visualizador-fechar">&times;</span>
+    <div class="visualizador-conteudo-container">
+        <img class="visualizador-conteudo" id="imagemVisualizada">
+        <div id="legendaImagem" class="visualizador-legenda"></div>
+    </div>
+</div>
+
+<div class="notas-container">
+    <div class="timeline-container">
+        <div class="timeline-item">
+            <div class="timeline-ponto"></div>
+            <div class="timeline-conteudo">
+                <span class="nota-data">23 de Dezembro de 2023</span>
+                <h4 class="nota-titulo">Lançamento da Versão 2.0</h4>
+                <ul class="nota-lista">
+                    <li>Novo design de interface.</li>
+                    <li>Melhora no desempenho.</li>
+                    <li>Correção de bugs menores.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-ponto"></div>
+            <div class="timeline-conteudo">
+                <span class="nota-data">10 de Novembro de 2023</span>
+                <h4 class="nota-titulo">Integração com API Externa</h4>
+                <ul class="nota-lista">
+                    <li>Agora é possível sincronizar dados.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="embed-estatisticas-container">
+    <div class="card-estatisticas">
+        <h4>Estatísticas de Vendas</h4>
+        <div class="estatisticas-conteudo">
+            <div class="estatistica-item">
+                <span class="estatistica-valor">12.5k</span>
+                <span class="estatistica-rotulo">Acessos</span>
+            </div>
+            <div class="estatistica-item">
+                <span class="estatistica-valor">87%</span>
+                <span class="estatistica-rotulo">Conversão</span>
+            </div>
+            <div class="estatistica-item">
+                <span class="estatistica-valor">R$ 50k</span>
+                <span class="estatistica-rotulo">Receita</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-embed">
+        <h4>Vídeo de Lançamento</h4>
+        <div class="embed-responsive">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+
+<div class="botoes-container">
+    <button class="btn btn-primario">Primário</button>
+    <button class="btn btn-secundario">Secundário</button>
+    <button class="btn btn-sucesso">Sucesso</button>
+    <button class="btn btn-perigo">Perigo</button>
+    <button class="btn btn-aviso">Aviso</button>
+    <button class="btn btn-link">Link</button>
+    <button class="btn btn-outline">Contorno</button>
+    <button class="btn btn-gradiente">Gradiente</button>
+    <button class="btn btn-sombreado">Sombreado</button>
+    <button class="btn btn-icone"><i class="fas fa-cog"></i></button>
+</div>
+
+<div class="copiar-container">
+    <textarea id="textoParaCopiar" readonly>Este é o texto que será copiado para a área de transferência.</textarea>
+    <button id="copiarBtn">Copiar Texto</button>
+</div>
+
+
+<div class="painel-container">
+    <button id="abrirPainelBtn">Abrir Painel de Informações</button>
+    <div id="painelInformacoes" class="painel-info">
+        <div class="painel-info-cabecalho">
+            <h4>Painel de Detalhes</h4>
+            <span class="painel-fechar">&times;</span>
+        </div>
+        <div class="painel-info-corpo">
+            <p>Este painel contém informações importantes. Você pode adicionar texto, botões ou outros elementos aqui.</p>
+            <button class="btn btn-secundario">Detalhes Adicionais</button>
+            <a href="#" class="btn btn-link">Ir para a página</a>
+        </div>
+    </div>
+</div>
+
+<div class="abas-notas-container">
+    <div class="abas-notas-nav">
+        <button class="abas-notas-btn active" data-tab="nota1">Anotações do Projeto</button>
+        <button class="abas-notas-btn" data-tab="nota2">Requisitos Técnicos</button>
+        <button class="abas-notas-btn" data-tab="nota3">Equipe</button>
+    </div>
+
+    <div class="abas-notas-conteudo">
+        <div id="nota1" class="abas-notas-pane active">
+            <h4>Anotações do Projeto</h4>
+            <p>O projeto foi iniciado em janeiro de 2023. O objetivo principal é otimizar o fluxo de trabalho.</p>
+        </div>
+        <div id="nota2" class="abas-notas-pane">
+            <h4>Requisitos Técnicos</h4>
+            <ul>
+                <li>Linguagem: JavaScript, HTML5, CSS3</li>
+                <li>Framework: React ou Vue.js</li>
+                <li>Banco de dados: MySQL</li>
+            </ul>
+        </div>
+        <div id="nota3" class="abas-notas-pane">
+            <h4>Equipe</h4>
+            <table class="tabela-planilha">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Função</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td>Desenvolvedora Front-end</td>
+                    </tr>
+                    <tr>
+                        <td>Carlos Santos</td>
+                        <td>Gerente de Projeto</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<button class="btn-abrir-modal-aviso" data-modal="avisoModal">Abrir Aviso</button>
+<div id="avisoModal" class="modal-simples-container">
+    <div class="modal-simples-conteudo">
+        <span class="modal-simples-fechar">&times;</span>
+        <p>Aviso: Esta é uma mensagem importante.</p>
+    </div>
+</div>
+
+<button class="btn-carregamento" id="btnCarregamento">
+    <span class="btn-texto">Enviar</span>
+    <div class="spinner-pequeno hidden"></div>
+</button>
+
+
+<div class="tabela-precos-container">
+    <div class="plano">
+        <h3>Básico</h3>
+        <p class="preco">R$9,99/mês</p>
+        <ul>
+            <li>5GB de armazenamento</li>
+            <li>100GB de tráfego</li>
+        </ul>
+        <button class="btn-assinar">Assinar</button>
+    </div>
+    <div class="plano popular">
+        <h3>Profissional</h3>
+        <p class="preco">R$29,99/mês</p>
+        <div class="tag-destaque">Mais Popular</div>
+        <ul>
+            <li>50GB de armazenamento</li>
+            <li>Tráfego ilimitado</li>
+        </ul>
+        <button class="btn-assinar">Assinar</button>
+    </div>
+</div>
+
+<div class="depoimentos-container">
+    <div class="depoimento-carrossel">
+        <div class="depoimento-item">
+            <p>"Excelente serviço! A equipe foi muito atenciosa e o resultado superou minhas expectativas."</p>
+            <h4>- João Silva</h4>
+            <span>CEO, Empresa XYZ</span>
+        </div>
+        <div class="depoimento-item">
+            <p>"Produto de alta qualidade e entrega rápida. Recomendo a todos!"</p>
+            <h4>- Maria Santos</h4>
+            <span>Gerente de Marketing</span>
+        </div>
+    </div>
+    <div class="depoimento-navegacao">
+        <span class="ponto-nav active" data-slide="0"></span>
+        <span class="ponto-nav" data-slide="1"></span>
+    </div>
+</div>
+
+
+<div class="pagina-com-indice">
+    <aside class="indice-fixo">
+        <ul id="menuIndice">
+            <li><a href="#intro">Introdução</a></li>
+            <li><a href="#recursos">Recursos</a></li>
+            <li><a href="#conclusao">Conclusão</a></li>
+        </ul>
+    </aside>
+    <main class="conteudo-principal">
+        <section id="intro"><h2>Introdução</h2><p>...</p></section>
+        <section id="recursos"><h2>Recursos</h2><p>...</p></section>
+        <section id="conclusao"><h2>Conclusão</h2><p>...</p></section>
+    </main>
+</div>
+
+
+
+<div class="card-3d-container">
+    <div class="card-3d">
+        <div class="card-face card-front">
+            <img src="https://via.placeholder.com/200x200" alt="Produto" />
+            <h3>Nome do Produto</h3>
+            <p>R$ 99,99</p>
+        </div>
+        <div class="card-face card-back">
+            <h4>Descrição Detalhada</h4>
+            <p>Este produto oferece alta qualidade e durabilidade, com um design moderno e elegante.</p>
+            <button class="btn-comprar">Comprar</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="cards-rolaveis-container">
+    <div class="card-rolavel">
+        <h4>Serviço 1</h4>
+        <p>Descrição do serviço.</p>
+    </div>
+    <div class="card-rolavel">
+        <h4>Serviço 2</h4>
+        <p>Descrição do serviço.</p>
+    </div>
+    <div class="card-rolavel">
+        <h4>Serviço 3</h4>
+        <p>Descrição do serviço.</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!---------------------------------------------------------------->
+    <!-- Main Footer with Audio Control -->
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
+                <p>Seu destino para aventura, criatividade e comunidade no Minecraft. Junte-se a nós para explorar
+                    mundos ilimitados!</p>
+                <div class="footer-social-links">
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Abas / Tabs</h2>
-            <div class="modern-tabs-container">
-                <div class="tabs-header">
-                    <button class="tab-button active" data-tab-id="tab1">Aba 1</button>
-                    <button class="tab-button" data-tab-id="tab2">Aba 2</button>
-                    <button class="tab-button" data-tab-id="tab3">Aba 3</button>
-                    <span class="tab-active-indicator"></span>
-                </div>
-                <div class="tabs-content">
-                    <div class="tab-pane active" data-tab-id="tab1">
-                        <h3>Conteúdo da Aba 1</h3>
-                        <p>Este é o conteúdo da primeira aba. O sistema de abas é otimizado para navegação intuitiva em
-                            qualquer dispositivo.</p>
-                    </div>
-                    <div class="tab-pane" data-tab-id="tab2">
-                        <h3>Conteúdo da Aba 2</h3>
-                        <p>Conteúdo da segunda aba.</p>
-                    </div>
-                    <div class="tab-pane" data-tab-id="tab3">
-                        <h3>Conteúdo da Aba 3</h3>
-                        <p>Conteúdo da terceira aba.</p>
-                    </div>
-                </div>
+            <div class="footer-column footer-nav-links">
+                <h4>Navegação Rápida</h4>
+                <ul>
+                    <li><a href="#hero-section">Início</a></li>
+                    <li><a href="#componentes-basicos">Componentes Básicos</a></li>
+                    <li><a href="#elementos-ux">Elementos UX</a></li>
+                    <li><a href="#galeria-section">Galeria</a></li>
+                    <li><a href="#dados-info">Dados & Info</a></li>
+                    <li><a href="#interacoes-avancadas">Interações Avançadas</a></li>
+                    <li><a href="#formularios">Formulários</a></li>
+                    <li><a href="#outros-componentes">Outros</a></li>
+                </ul>
             </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Abas de Arquivos</h2>
-
-            <div class="file-tabs-simple-container">
-                <div class="file-tabs-header">
-                    <button class="file-tab-btn active" data-tab-id="simple-file1">Arquivo 1</button>
-                    <button class="file-tab-btn" data-tab-id="simple-file2">Arquivo 2</button>
-                    <button class="file-tab-btn" data-tab-id="simple-file3">Arquivo 3</button>
-                </div>
-                <div class="file-tabs-content">
-                    <div class="file-tab-pane active" data-tab-id="simple-file1">Conteúdo do Arquivo 1.</div>
-                    <div class="file-tab-pane" data-tab-id="simple-file2">Conteúdo do Arquivo 2.</div>
-                    <div class="file-tab-pane" data-tab-id="simple-file3">Conteúdo do Arquivo 3.</div>
-                </div>
+            <div class="footer-column">
+                <h4>Fique Conectado</h4>
+                <p>Assine nossa newsletter para as últimas notícias e atualizações.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Seu e-mail" required>
+                    <button type="submit" class="btn-primary">Assinar</button>
+                </form>
             </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.
+        </div>
+        <div class="espaco-invisivel"></div>
 
-            <div class="file-tabs-advanced-container">
-                <div class="file-tabs-header-advanced">
-                    <button class="file-tab-btn-advanced active" data-tab-id="adv-file1">
-                        <i class="fas fa-code"></i>
-                        <span>Código</span>
+        <div class="audio-control-bar">
+            <div class="container audio-control-content">
+                <div class="music-player-details">
+                    <span id="musicTitleDisplay">Clique para Tocar</span>
+                    <div class="progress-bar-and-times">
+                        <span id="currentTimeDisplay" class="time-display">0:00</span>
+                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
+                        <span id="durationDisplay" class="time-display">0:00</span>
+                    </div>
+                </div>
+                <div class="music-playback-controls">
+                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
+                        <i class="fas fa-backward"></i>
                     </button>
-                    <button class="file-tab-btn-advanced" data-tab-id="adv-file2">
-                        <i class="fas fa-file-alt"></i>
-                        <span>Documento</span>
+                    <button id="audioControlButton" class="music-button main-play-pause-button"
+                        aria-label="Tocar/Pausar música">
+                        <i class="fas fa-play"></i>
                     </button>
-                    <button class="file-tab-btn-advanced" data-tab-id="adv-file3">
-                        <i class="fas fa-image"></i>
-                        <span>Imagens</span>
-                    </button>
-                </div>
-                <div class="file-tabs-content-advanced">
-                    <div class="file-tab-pane-advanced active" data-tab-id="adv-file1">
-                        <h3>Conteúdo de Código</h3>
-                        <p>Este painel contém um exemplo de código.</p>
-                    </div>
-                    <div class="file-tab-pane-advanced" data-tab-id="adv-file2">
-                        <h3>Conteúdo de Documento</h3>
-                        <p>Este painel contém um exemplo de texto de documento.</p>
-                    </div>
-                    <div class="file-tab-pane-advanced" data-tab-id="adv-file3">
-                        <h3>Conteúdo de Imagens</h3>
-                        <p>Este painel contém uma galeria de imagens.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="file-tabs-compact-container">
-                <div class="file-tabs-header-compact">
-                    <button class="file-tab-btn-compact active" data-tab-id="compact-file1">Item 1</button>
-                    <button class="file-tab-btn-compact" data-tab-id="compact-file2">Item 2</button>
-                    <button class="file-tab-btn-compact" data-tab-id="compact-file3">Item 3</button>
-                </div>
-                <div class="file-tabs-content-compact">
-                    <div class="file-tab-pane-compact active" data-tab-id="compact-file1">
-                        <h4>Conteúdo Compacto 1</h4>
-                    </div>
-                    <div class="file-tab-pane-compact" data-tab-id="compact-file2">
-                        <h4>Conteúdo Compacto 2</h4>
-                    </div>
-                    <div class="file-tab-pane-compact" data-tab-id="compact-file3">
-                        <h4>Conteúdo Compacto 3</h4>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Acordeão</h2>
-            <div class="acordeao-container">
-                <div class="acordeao-item">
-                    <button class="acordeao-btn">
-                        <span>O que é o Mundo Zera's Craft?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="acordeao-painel">
-                        <p>O Mundo Zera's Craft é um servidor de Minecraft...</p>
-                    </div>
-                </div>
-                <div class="acordeao-item">
-                    <button class="acordeao-btn">
-                        <span>Como posso entrar no servidor?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="acordeao-painel">
-                        <p>Para entrar, basta usar o IP "zeras.craft.com" na sua versão Java...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Carrossel de Imagens</h2>
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="https://via.placeholder.com/800x400/81A1C1/ECEFF4?text=Imagem+1" alt="Imagem 1"
-                        class="carousel-img active">
-                    <img src="https://via.placeholder.com/800x400/B48EAD/ECEFF4?text=Imagem+2" alt="Imagem 2"
-                        class="carousel-img">
-                    <img src="https://via.placeholder.com/800x400/A3BE8C/ECEFF4?text=Imagem+3" alt="Imagem 3"
-                        class="carousel-img">
-                </div>
-                <div class="carousel-dots">
-                    <span class="dot active" data-slide-to="0"></span>
-                    <span class="dot" data-slide-to="1"></span>
-                    <span class="dot" data-slide-to="2"></span>
-                </div>
-                <button class="carousel-prev-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-next-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Visualizador de Imagens</h2>
-            <div class="image-viewer-container">
-                <div class="image-main-display">
-                    <img id="mainImage" src="https://via.placeholder.com/800x600/5E81AC/ECEFF4?text=Imagem+Principal+1"
-                        alt="Imagem Principal">
-                    <div class="image-text-overlay">
-                        <h4 id="imageTitle">Título da Imagem 1</h4>
-                        <p id="imageDescription">Descrição detalhada da imagem principal 1.</p>
-                    </div>
-                </div>
-                <div class="image-thumbnails-container">
-                    <button class="thumbnail-btn active"
-                        data-img-src="https://via.placeholder.com/800x600/5E81AC/ECEFF4?text=Imagem+Principal+1"
-                        data-title="Título da Imagem 1" data-desc="Descrição detalhada da imagem principal 1.">
-                        <img src="https://via.placeholder.com/150x100/5E81AC/ECEFF4?text=Thumb+1" alt="Miniatura 1">
-                    </button>
-                    <button class="thumbnail-btn"
-                        data-img-src="https://via.placeholder.com/800x600/BF616A/ECEFF4?text=Imagem+Principal+2"
-                        data-title="Título da Imagem 2" data-desc="Descrição detalhada da imagem principal 2.">
-                        <img src="https://via.placeholder.com/150x100/BF616A/ECEFF4?text=Thumb+2" alt="Miniatura 2">
-                    </button>
-                    <button class="thumbnail-btn"
-                        data-img-src="https://via.placeholder.com/800x600/D08770/ECEFF4?text=Imagem+Principal+3"
-                        data-title="Título da Imagem 3" data-desc="Descrição detalhada da imagem principal 3.">
-                        <img src="https://via.placeholder.com/150x100/D08770/ECEFF4?text=Thumb+3" alt="Miniatura 3">
+                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
+                        <i class="fas fa-forward"></i>
                     </button>
                 </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Toolbox e Tooltips</h2>
-            <p class="section-description">O Toolbox fica no canto inferior direito e os Tooltips aparecem ao passar o
-                mouse sobre os elementos.</p>
-            <div class="toolbox-container">
-                <button id="toolboxToggleBtn" class="toolbox-toggle-btn">
-                    <i class="fas fa-cog"></i>
-                </button>
-                <div id="toolboxMenu" class="toolbox-menu">
-                    <div class="toolbox-item">
-                        <i class="fas fa-palette"></i>
-                        <span>Tema</span>
-                    </div>
-                    <div class="toolbox-item">
-                        <i class="fas fa-ruler-combined"></i>
-                        <span>Medidas</span>
-                    </div>
-                    <div class="toolbox-item">
-                        <i class="fas fa-info-circle"></i>
-                        <span>Informações</span>
-                    </div>
+                <div class="playback-speed-control">
+                    <select id="playbackSpeed" class="playback-speed-select">
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
+                    </select>
                 </div>
             </div>
+        </div>
+    </footer>
 
-            <div class="tooltip-container-inline">
-                <span class="tooltip-trigger">Passe o mouse aqui</span>
-                <div class="tooltip-content">
-                    Esta é uma dica de ferramenta!
-                </div>
-            </div>
-            <div class="tooltip-container-inline">
-                <button class="tooltip-trigger-btn">Botão com Dica</button>
-                <div class="tooltip-content">
-                    Ação do botão: clique para continuar.
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Exemplos de Cards</h2>
-            <div class="cards-grid">
-                <div class="card-base card-content">
-                    <h3>Título do Card</h3>
-                    <p>Este é um card simples para exibir texto e informações. Ele tem um design limpo e moderno.</p>
-                </div>
-                <div class="card-base card-with-image">
-                    <img src="https://via.placeholder.com/600x400/5E81AC/ECEFF4?text=Imagem+do+Card"
-                        alt="Imagem descritiva">
-                    <div class="card-content">
-                        <h3>Card com Imagem</h3>
-                        <p>Este card é ideal para portfólios, blogs ou galerias. A imagem se destaca na parte superior.
-                        </p>
-                    </div>
-                </div>
-                <div class="card-base card-action">
-                    <div class="card-content">
-                        <h3>Card com Ação</h3>
-                        <p>Use este card para guiar o usuário a uma ação específica.</p>
-                        <button class="btn-primary">Ação Principal</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Notas de Atualizações</h2>
-            <div class="updates-card-container">
-                <div class="card-base updates-card">
-                    <div class="card-content">
-                        <h3>Notas de Atualizações <i class="fas fa-history"></i></h3>
-                        <p class="update-date">21 de Julho de 2024</p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Melhoria de performance no servidor.</li>
-                            <li><i class="fas fa-check-circle"></i> Adicionado novo item ao inventário.</li>
-                            <li><i class="fas fa-check-circle"></i> Corrigido bug no sistema de teleporte.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Embeds</h2>
-            <div class="card-base card-embed">
-                <div class="embed-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-                <div class="card-content">
-                    <h3>Vídeo Incorporado</h3>
-                    <p>Assista ao nosso vídeo de apresentação diretamente aqui, com um design que se integra ao resto da
-                        página.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Estatísticas</h2>
-            <div class="cards-grid stats-grid">
-                <div class="card-base stat-card">
-                    <i class="fas fa-users icon-stat"></i>
-                    <h2 class="stat-number" data-target="1500000">0</h2>
-                    <p class="stat-text">Jogadores Ativos</p>
-                </div>
-                <div class="card-base stat-card">
-                    <i class="fas fa-server icon-stat"></i>
-                    <h2 class="stat-number" data-target="500">0</h2>
-                    <p class="stat-text">Servidores Ativos</p>
-                </div>
-                <div class="card-base stat-card">
-                    <i class="fas fa-trophy icon-stat"></i>
-                    <h2 class="stat-number" data-target="250">0</h2>
-                    <p class="stat-text">Torneios Vencidos</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Timeline</h2>
-            <div class="timeline-container">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="card-base timeline-content">
-                        <span class="timeline-date">2021</span>
-                        <h4>Início do Projeto</h4>
-                        <p>O conceito do servidor Mundo Zera's Craft é criado.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="card-base timeline-content">
-                        <span class="timeline-date">2022</span>
-                        <h4>Lançamento Beta</h4>
-                        <p>O servidor é lançado para um pequeno grupo de testers.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="card-base timeline-content">
-                        <span class="timeline-date">2023</span>
-                        <h4>Lançamento Oficial</h4>
-                        <p>Mundo Zera's Craft é oficialmente lançado para o público.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Cards Rolativos</h2>
-            <div class="cards-rolativos-container">
-                <div class="card-base card-content">
-                    <h3>Card 1</h3>
-                    <p>Role para o lado para ver mais.</p>
-                </div>
-                <div class="card-base card-content">
-                    <h3>Card 2</h3>
-                    <p>Conteúdo de exemplo.</p>
-                </div>
-                <div class="card-base card-content">
-                    <h3>Card 3</h3>
-                    <p>Conteúdo de exemplo.</p>
-                </div>
-                <div class="card-base card-content">
-                    <h3>Card 4</h3>
-                    <p>Conteúdo de exemplo.</p>
-                </div>
-                <div class="card-base card-content">
-                    <h3>Card 5</h3>
-                    <p>Conteúdo de exemplo.</p>
-                </div>
-                <div class="card-base card-content">
-                    <h3>Card 6</h3>
-                    <p>Conteúdo de exemplo.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Índice</h2>
-            <p class="section-description">O botão do índice fica no canto inferior esquerdo.</p>
-            <div class="index-button-container">
-                <button id="toggleIndexBtn" class="index-toggle-btn">
-                    <i class="fas fa-list"></i>
-                </button>
-            </div>
-            <div id="indexUi" class="index-ui-overlay">
-                <div class="index-ui-content">
-                    <button class="index-close-btn">&times;</button>
-                    <h3>Índice de Seções</h3>
-                    <nav class="index-nav">
-                        <a href="#secao1">Seção 1: Introdução</a>
-                        <a href="#secao2">Seção 2: Jogabilidade</a>
-                        <a href="#secao3">Seção 3: Comunidade</a>
-                    </nav>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Botões</h2>
-            <div class="button-container">
-                <button class="btn btn-primary">Botão Primário</button>
-                <button class="btn btn-secondary">Botão Secundário</button>
-                <button class="btn btn-tertiary">Botão Terciário</button>
-                <button class="btn btn-ghost">Botão Fantasma</button>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Formatações Estilo Minecraft</h2>
-            <div class="card-base card-content">
-                <p>Aqui você pode usar a formatação do Minecraft no HTML!</p>
-                <p>
-                    <span class="mc-bold mc-green">§l§aMinecraft</span>
-                    <span class="mc-obfuscated mc-green">§kaa</span>
-                    <span class="mc-yellow mc-underline">§e§nComunidade</span>
-                    <span class="mc-bold">a</span>
-                </p>
-                <p>O texto acima usa classes para simular os códigos de cor e estilo do jogo.</p>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Painel de Informações Avançado</h2>
-            <div class="info-panel-container">
-                <button id="openAdvancedPanelBtn" class="btn btn-primary open-panel-btn">
-                    <i class="fas fa-info-circle"></i> Abrir Painel Avançado
-                </button>
-            </div>
-            <div id="advancedPanel" class="advanced-info-panel">
-                <div class="advanced-panel-header">
-                    <h3>Detalhes do Servidor</h3>
-                    <button class="close-advanced-panel-btn">&times;</button>
-                </div>
-                <div class="advanced-panel-content">
-                    <h4>Bem-vindo ao Mundo Zera's Craft!</h4>
-                    <p>Este painel contém informações detalhadas sobre as regras, novidades e eventos especiais do
-                        servidor.</p>
-                    <hr>
-                    <div class="advanced-panel-section">
-                        <h5><i class="fas fa-scroll"></i> Regras</h5>
-                        <p>É fundamental respeitar os outros jogadores e as construções. O uso de hacks é estritamente
-                            proibido.</p>
-                    </div>
-                    <div class="advanced-panel-section">
-                        <h5><i class="fas fa-bell"></i> Últimas Notícias</h5>
-                        <p>A nova atualização "Era dos Dragões" está no ar! Explore novas dimensões e enfrente desafios
-                            épicos.</p>
-                    </div>
-                    <div class="advanced-panel-buttons">
-                        <button class="btn btn-primary">Ver Nossos Planos</button>
-                        <button class="btn btn-secondary">Entrar em Contato</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="component-section">
-            <h2 class="section-title">Aba de Imagens</h2>
-            <div class="image-viewer-container card-base">
-                <div class="image-main-display">
-                    <img id="imagemPrincipal" src="https://via.placeholder.com/800x600/BF616A/ECEFF4?text=Imagem+1"
-                        alt="Imagem Principal">
-                    <div class="image-text-overlay">
-                        <h4 id="tituloImagem">Título da Imagem 1</h4>
-                        <p id="descricaoImagem">Descrição detalhada da imagem principal 1.</p>
-                    </div>
-                </div>
-                <div class="image-thumbnails-container">
-                    <button class="thumbnail-btn active"
-                        data-img-src="https://via.placeholder.com/800x600/BF616A/ECEFF4?text=Imagem+1"
-                        data-title="Título da Imagem 1" data-desc="Descrição detalhada da imagem principal 1.">
-                        <img src="https://via.placeholder.com/150x100/BF616A/ECEFF4?text=Thumb+1" alt="Miniatura 1">
-                    </button>
-                    <button class="thumbnail-btn"
-                        data-img-src="https://via.placeholder.com/800x600/A3BE8C/ECEFF4?text=Imagem+2"
-                        data-title="Título da Imagem 2" data-desc="Descrição detalhada da imagem principal 2.">
-                        <img src="https://via.placeholder.com/150x100/A3BE8C/ECEFF4?text=Thumb+2" alt="Miniatura 2">
-                    </button>
-                    <button class="thumbnail-btn"
-                        data-img-src="https://via.placeholder.com/800x600/81A1C1/ECEFF4?text=Imagem+3"
-                        data-title="Título da Imagem 3" data-desc="Descrição detalhada da imagem principal 3.">
-                        <img src="https://via.placeholder.com/150x100/81A1C1/ECEFF4?text=Thumb+3" alt="Miniatura 3">
-                    </button>
-                    <button class="thumbnail-btn"
-                        data-img-src="https://via.placeholder.com/800x600/B48EAD/ECEFF4?text=Imagem+4"
-                        data-title="Título da Imagem 4" data-desc="Descrição detalhada da imagem principal 4.">
-                        <img src="https://via.placeholder.com/150x100/B48EAD/ECEFF4?text=Thumb+4" alt="Miniatura 4">
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!--<section class="component-section">
-            <h2 class="section-title">Novo Sistema de Copiar</h2>
-            <div class="card-base card-content">
-                <p class="texto-para-copiar" id="textoParaCopiar">servidor.zeracraft.com.br</p>
-                <button id="botaoCopiarTexto" class="btn btn-primary botao-copiar-texto">
-                    <i class="fas fa-clipboard"></i>
-                    <span class="texto-botao">Copiar Endereço</span>
-                </button>
-                <span id="feedbackCopia" class="copy-feedback"></span>
-            </div>
-        </section>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        <!---------------------------------------------------------------->
-        <!-- Main Footer with Audio Control -->
-        <footer class="main-footer">
-            <div class="container footer-content">
-                <div class="footer-column">
-                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Seu destino para aventura, criatividade e comunidade no Minecraft. Junte-se a nós para explorar
-                        mundos ilimitados!</p>
-                    <div class="footer-social-links">
-                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column footer-nav-links">
-                    <h4>Navegação Rápida</h4>
-                    <ul>
-                        <li><a href="#hero-section">Início</a></li>
-                        <li><a href="#componentes-basicos">Componentes Básicos</a></li>
-                        <li><a href="#elementos-ux">Elementos UX</a></li>
-                        <li><a href="#galeria-section">Galeria</a></li>
-                        <li><a href="#dados-info">Dados & Info</a></li>
-                        <li><a href="#interacoes-avancadas">Interações Avançadas</a></li>
-                        <li><a href="#formularios">Formulários</a></li>
-                        <li><a href="#outros-componentes">Outros</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Fique Conectado</h4>
-                    <p>Assine nossa newsletter para as últimas notícias e atualizações.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Seu e-mail" required>
-                        <button type="submit" class="btn-primary">Assinar</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                &copy; <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.
-            </div>
-            <div class="espaco-invisivel"></div>
-
-            <div class="audio-control-bar">
-                <div class="container audio-control-content">
-                    <div class="music-player-details">
-                        <span id="musicTitleDisplay">Clique para Tocar</span>
-                        <div class="progress-bar-and-times">
-                            <span id="currentTimeDisplay" class="time-display">0:00</span>
-                            <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
-                            <span id="durationDisplay" class="time-display">0:00</span>
-                        </div>
-                    </div>
-                    <div class="music-playback-controls">
-                        <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
-                            <i class="fas fa-backward"></i>
-                        </button>
-                        <button id="audioControlButton" class="music-button main-play-pause-button"
-                            aria-label="Tocar/Pausar música">
-                            <i class="fas fa-play"></i>
-                        </button>
-                        <button id="audioNextButton" class="music-button" aria-label="Próxima música">
-                            <i class="fas fa-forward"></i>
-                        </button>
-                    </div>
-                    <div class="playback-speed-control">
-                        <select id="playbackSpeed" class="playback-speed-select">
-                            <option value="0.75">0.75x</option>
-                            <option value="1" selected>1x</option>
-                            <option value="1.25">1.25x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="2">2x</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
