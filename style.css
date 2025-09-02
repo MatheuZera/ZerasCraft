@@ -9,28 +9,28 @@
 
 @font-face {
     font-family: 'TitleFont';
-    src: url('assets/fonts/title.otf') format('opentype');
+    src: url('/assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'SubTitleFont';
-    src: url('assets/fonts/subtitle.otf') format('opentype');
+    src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'TextFont';
-    src: url('assets/fonts/text.otf') format('opentype');
+    src: url('assets/fonts/Minecraftia-Regular-Text.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MiniTextFont';
-    src: url('assets/fonts/mini-text.otf') format('opentype');
+    src: url('assets/fonts/Minecraftia-Regular-Text.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -2438,7 +2438,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     right: 0;
     background-color: var(--cor-destaque);
     color: var(--cor-texto-escuro);
-    font-family: var(--fonte-pixel);
+    font-family: var(--fonte-subtitulo);
     font-size: 0.8em;
     padding: 5px 10px;
     border-bottom-left-radius: 8px;
