@@ -9,28 +9,28 @@
 
 @font-face {
     font-family: 'TitleFont';
-    src: url('/assets/fonts/Minecraft-Five-Title.otf') format('opentype');
+    src: url('/WEBSITES/ZerasCraft/fonts/Minecraft-Seven-29cc6.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'SubTitleFont';
-    src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
+    src: url('/WEBSITES/ZerasCraft/fonts/Minecraft-Five-070d5.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'TextFont';
-    src: url('assets/fonts/Minecraftia-Regular-Text.ttf') format('opentype');
+    src: url('/WEBSITES/ZerasCraft/fonts/Minecraftia-Regular.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MiniTextFont';
-    src: url('assets/fonts/Minecraftia-Regular-Text.ttf') format('opentype');
+    src: url('/WEBSITES/ZerasCraft/fonts/mini-text.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -71,7 +71,7 @@
     --fonte-subtitulo: 'SubTitleFont', 'Montserrat', sans-serif;
     --fonte-corpo: 'TextFont', 'Roboto', sans-serif;
     --fonte-mini: 'MiniTextFont', 'Roboto', sans-serif;
-    --fonte-pixel: 'Pixelify Sans', sans-serif;
+    --fonte-pixel: 'SubTitleFont', 'Montserrat', sans-serif;
 
     /* Spacing ken Sizes */
     --padding-section: 80px 0;
@@ -126,6 +126,7 @@ a:hover {
     text-decoration: underline;
 }
 
+button,
 h1,
 h2,
 h3,
@@ -333,7 +334,7 @@ ul {
     /* Usar ti Pixelify Sans */
     font-size: 1.8em;
     /* Dakdakkel a size para iti logo iti desktop */
-    color: #c4d96a;
+    color: #ffffff;
     /* Kolor ti logo */
     text-transform: uppercase;
     font-weight: bold;
@@ -2390,7 +2391,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 
 .pricing-card .card-title {
     font-size: 1.8em;
-    font-family: var(--fonte-pixel);
+    font-family: var(--fonte-subtitulo);
     margin-bottom: 5px;
 }
 
@@ -2438,7 +2439,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     right: 0;
     background-color: var(--cor-destaque);
     color: var(--cor-texto-escuro);
-    font-family: var(--fonte-subtitulo);
+    font-family: var(--fonte-pixel);
     font-size: 0.8em;
     padding: 5px 10px;
     border-bottom-left-radius: 8px;
@@ -2579,7 +2580,6 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     /* Mudança de cor do ícone ao passar o mouse */
     color: var(--cor-texto-escuro);
 }
-
 .service-card h4 {
     /* Estilo para o título do card */
     font-family: var(--fonte-titulo);
