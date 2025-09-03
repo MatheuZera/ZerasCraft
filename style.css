@@ -9,28 +9,35 @@
 
 @font-face {
     font-family: 'TitleFont';
-    src: url('/WEBSITES/ZerasCraft/fonts/Minecraft-Seven-29cc6.otf') format('opentype');
+    src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ButtonFont';
+    src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'SubTitleFont';
-    src: url('/WEBSITES/ZerasCraft/fonts/Minecraft-Five-070d5.otf') format('opentype');
+    src: url('/assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'TextFont';
-    src: url('/WEBSITES/ZerasCraft/fonts/Minecraftia-Regular.ttf') format('opentype');
+    src: url('/assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MiniTextFont';
-    src: url('/WEBSITES/ZerasCraft/fonts/mini-text.otf') format('opentype');
+    src: url('/assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -71,6 +78,7 @@
     --fonte-subtitulo: 'SubTitleFont', 'Montserrat', sans-serif;
     --fonte-corpo: 'TextFont', 'Roboto', sans-serif;
     --fonte-mini: 'MiniTextFont', 'Roboto', sans-serif;
+    --fonte-botao: 'ButtonFont', 'Montserrat', sans-serif;
     --fonte-pixel: 'SubTitleFont', 'Montserrat', sans-serif;
 
     /* Spacing ken Sizes */
@@ -127,7 +135,6 @@ a:hover {
 }
 
 p,
-button,
 h1,
 h2,
 h3,
@@ -157,6 +164,10 @@ h3 {
 h4 {
     font-size: 1.8em;
     font-family: var(--fonte-subtitulo);
+}
+
+button {
+    font-family: var(--fonte-botao);
 }
 
 p {
