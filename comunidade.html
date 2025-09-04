@@ -171,26 +171,32 @@
             <div class="footer-content">
                 <div class="footer-column footer-about">
                     <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa comunidade vibrante.</p>
+                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa
+                        comunidade vibrante.</p>
                     <div class="footer-social-links">
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
+                            aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
+                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-column footer-nav-links">
                     <h4>Navegação</h4>
                     <ul>
                         <li><a href="index.html">Início</a></li>
-                        <li><a href="community.html">Comunidade</a></li>
-                        <li><a href="events.html">Eventos</a></li>
-                        <li><a href="about.html">Sobre Nós</a></li>
-                        <li><a href="#contact">Contato</a></li>
+                        <li><a href="comunidade.html">Comunidade</a></li>
+                        <li><a href="eventos.html">Eventos</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="suporte.html">Suporte</a></li>
                     </ul>
                 </div>
                 <div class="footer-column footer-contact">
                     <h4>Contato & Suporte</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a></p>
-                    <p><i class="fas fa-headset"></i> <a href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via Discord</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a>
+                    </p>
+                    <p><i class="fas fa-headset"></i> <a
+                            href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via
+                            Discord</a></p>
                     <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
                 </div>
                 <div class="footer-column footer-newsletter">
@@ -198,7 +204,8 @@
                     <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
                     <form class="newsletter-form">
                         <div class="text-center margin-top-50">
-                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501" class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
+                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501"
+                                class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
                         </div>
                     </form>
                 </div>
@@ -207,7 +214,6 @@
                 <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
             </div>
         </div>
-        
         <div class="audio-control-bar">
             <div class="container audio-control-content">
                 <div class="music-player-details">
@@ -222,13 +228,21 @@
                     <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
                         <i class="fas fa-backward"></i>
                     </button>
-                    <button id="audioControlButton" class="music-button main-play-pause-button" aria-label="Tocar/Pausar música">
+                    <button id="audioControlButton" class="music-button main-play-pause-button"
+                        aria-label="Tocar/Pausar música">
                         <i class="fas fa-play"></i>
                     </button>
                     <button id="audioNextButton" class="music-button" aria-label="Próxima música">
                         <i class="fas fa-forward"></i>
                     </button>
                 </div>
+                    <div class="volume-container">
+                        <button id="volumeButton" class="music-button volume-button" aria-label="Controle de volume">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <input type="range" id="volumeSlider" class="audio-progress-bar volume-slider" min="0" max="1"
+                            step="0.01" value="1">
+                    </div>
                 <div class="playback-speed-control">
                     <select id="playbackSpeed" class="playback-speed-select">
                         <option value="0.75">0.75x</option>
