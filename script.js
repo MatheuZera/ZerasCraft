@@ -134,35 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clonedSound = sound.cloneNode();
         clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
     }
-
     // =====================================
-    // Gerenciamento de Eventos de Clique
-    // =====================================
-
-    document.addEventListener('click', (event) => {
-        const target = event.target.closest('a, button');
-
-        if (!target) {
-            return;
-        }
-
-        const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
-        const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
-
-        if (isNavLink) {
-            // Toca o som de link para navegação
-            event.preventDefault();
-            playSound(linkSound);
-            setTimeout(() => {
-                window.location.href = target.href;
-            }, 300);
-        } else if (isSpecialButton) {
-            // Toca o som de clique para botões e links internos
-            playSound(buttonClickSound);
-        }
-    });
-
-// =====================================
     // Gerenciamento do Volume (VERSÃO CORRIGIDA)
     // =====================================
     const volumeButton = document.getElementById('volumeButton');
@@ -170,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeContainer = document.querySelector('.volume-container');
 
     // A variável correta para o seu áudio de fundo
-    const mainAudio = backgroundAudio; 
+    const mainAudio = backgroundAudio;
 
     if (mainAudio) {
         // Sincroniza o slider com o volume atual do áudio
@@ -209,6 +181,32 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (event) => {
         if (volumeSlider.classList.contains('is-active') && !volumeContainer.contains(event.target)) {
             volumeSlider.classList.remove('is-active');
+        }
+    });
+    // =====================================
+    // Gerenciamento de Eventos de Clique
+    // =====================================
+
+    document.addEventListener('click', (event) => {
+        const target = event.target.closest('a, button');
+
+        if (!target) {
+            return;
+        }
+
+        const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
+        const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
+
+        if (isNavLink) {
+            // Toca o som de link para navegação
+            event.preventDefault();
+            playSound(linkSound);
+            setTimeout(() => {
+                window.location.href = target.href;
+            }, 300);
+        } else if (isSpecialButton) {
+            // Toca o som de clique para botões e links internos
+            playSound(buttonClickSound);
         }
     });
 
