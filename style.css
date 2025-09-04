@@ -1880,59 +1880,51 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     /* background-color: rgba(255, 0, 0, 0.1); */
 }
 
-/* ------------------------------------- */
-/* Estilos para o Audio Control Bar (Minimalista) */
-/* ------------------------------------- */
+/* ============================================================= */
+/* 2. Audio Control Bar - VERSÃO FINAL E ULTRA-COMPACTA */
+/* ============================================================= */
+
 .audio-control-bar {
-    /* Player fixo na parte inferior da tela em desktops */
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    /* Novo tema verde minimalista */
-    background-color: #1a3c1c;
-    padding: 12px 0;
-    box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.5);
+    /* Fundo discreto e levemente transparente */
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 6px 0;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
     z-index: 1001;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60px;
-    /* Definindo uma altura fixa para a barra de áudio */
+    height: 55px; /* Altura fixa e muito baixa */
 }
 
 .audio-control-content {
-    /* Layout horizontal que funciona em todas as telas */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
-    flex-wrap: nowrap;
-    /* Mantém os elementos na mesma linha */
-    max-width: 900px;
+    gap: 15px;
     width: 100%;
-    padding: 0 25px;
+    max-width: var(--max-width-content);
+    padding: 0 15px;
 }
 
-/* Informações da Música e Barra de Progresso */
+/* --- Informações da Música e Barra de Progresso --- */
 .music-player-details {
     display: flex;
     flex-direction: column;
-    /* Continua empilhado: título e barra */
     flex-grow: 1;
-    flex-shrink: 1;
-    align-items: flex-start;
     min-width: 0;
-    /* Permite que o texto seja cortado com ellipsis */
 }
 
 #musicTitleDisplay {
-    color: #c0c0c0;
-    /* Título em cinza claro */
-    font-size: 1em;
-    text-align: left;
-    margin-bottom: 6px;
-    width: 100%;
+    color: #f0f0f0;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1942,261 +1934,281 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     display: flex;
     align-items: center;
     width: 100%;
-    gap: 8px;
+    gap: 6px;
 }
 
 .audio-progress-bar {
     -webkit-appearance: none;
+    appearance: none;
     width: 100%;
-    height: 5px;
-    background: #4a6a4c;
-    border-radius: 2.5px;
+    height: 3px; /* Barra de progresso super fina */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
     outline: none;
     cursor: pointer;
-    transition: background 0.2s ease-in-out;
 }
 
+/* O "thumb" agora está centralizado na linha */
 .audio-progress-bar::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 14px;
-    height: 14px;
-    background: #dcdcdc;
-    /* Thumb em cinza claro */
+    width: 10px;
+    height: 10px;
+    background: var(--cor-primaria);
     border-radius: 50%;
     cursor: grab;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    margin-top: -3.5px; /* Move o thumb para o centro da linha */
+    transition: transform 0.2s ease;
+}
+
+.audio-progress-bar::-webkit-slider-thumb {
+    /* ... outras propriedades ... */
+    margin-top: -2.5px; /* Teste este valor, pode ser -3px ou -4px */
 }
 
 .audio-progress-bar::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    background: #dcdcdc;
-    border-radius: 50%;
-    cursor: grab;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+    /* ... outras propriedades ... */
+    margin-top: -2.5px; /* Teste este valor, pode ser -3px ou -4px */
 }
 
 .time-display {
-    font-size: 0.8em;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.7em;
+    color: rgba(255, 255, 255, 0.6);
     white-space: nowrap;
-    flex-shrink: 0;
 }
 
-/* Botões de Playback - Estilo Minimalista */
+/* --- Botões de Playback --- */
 .music-playback-controls {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-shrink: 0;
 }
 
 .music-button {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #dcdcdc;
-    font-size: 1em;
+    background: transparent;
+    border: none;
+    color: #f0f0f0;
+    font-size: 1.1em;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    transition: all 0.2s ease-out;
-    position: relative;
-    overflow: hidden;
-}
-
-.music-button.main-play-pause-button {
-    width: 50px;
-    height: 50px;
-    font-size: 1.6em;
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.music-button i {
-    color: #dcdcdc;
-    transition: color 0.2s ease-out;
+    transition: all 0.2s ease;
 }
 
 .music-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: scale(1.08);
+    color: var(--cor-primaria);
+    transform: scale(1.1);
 }
 
-.music-button:hover i {
-    color: #fff;
+.main-play-pause-button {
+    font-size: 1.8em;
+    color: var(--cor-primaria);
 }
 
-.music-button.is-playing i {
-    animation: pulseIcon 1.5s infinite alternate;
+/* --- Controle de Volume e Velocidade --- */
+.volume-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-@keyframes pulseIcon {
-    0% {
-        filter: drop-shadow(0 0 3px #dcdcdc);
-        transform: scale(1);
-        opacity: 0.9;
-    }
-
-    100% {
-        filter: drop-shadow(0 0 8px #dcdcdc);
-        transform: scale(1.05);
-        opacity: 1;
-    }
+.volume-slider {
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s;
 }
 
-.playback-speed-control {
-    flex-shrink: 0;
+.volume-container:hover .volume-slider {
+    width: 80px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.volume-slider.audio-progress-bar::-webkit-slider-thumb,
+.volume-slider.audio-progress-bar::-moz-range-thumb {
+    margin-top: 0;
+}
+
+.volume-button {
+    font-size: 1.2em;
 }
 
 .playback-speed-select {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #818181;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--border-radius);
-    padding: 7px 10px;
-    font-size: 0.85em;
+    padding: 5px 8px;
+    font-size: 0.8em;
     cursor: pointer;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23dcdcdc%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200%20-13.6-6.4H19.5c-6%200-11.8%204-13.6%206.4s-2%206.8%200%2010.5l128.8%20127.9c4.8%204.8%2012.5%204.8%2017.3%200l128.8-127.9c2-3.8%201.8-8.6%200-10.5z%22%2F%2F%3E%3C%2Fsvg%3E');
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200%20-13.6-6.4H19.5c-6%200-11.8%204-13.6%206.4s-2%206.8%200%2010.5l128.8%20127.9c4.8%204.8%2012.5%204.8%2017.3%200l128.8-127.9c2-3.8%201.8-8.6%200-10.5z%22%2F%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
-    background-position: right 6px top 50%;
-    background-size: 9px auto;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-position: right 6px center;
+    background-size: 8px auto;
 }
 
-.playback-speed-select:focus {
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+.playback-speed-select:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
-/* ------------------------------------- */
-/* Ajustes para Mobile (max-width: 768px) */
-/* ------------------------------------- */
+/* ============================================================= */
+/* 9. Media Queries (VERSÃO FINAL E COMPLETA) */
+/* ============================================================= */
+
 @media (max-width: 768px) {
-    body {
-        padding-bottom: 60px;
-        /* Ajusta o padding-bottom para a altura da barra de áudio */
+    /* --- Tipografia e Fontes --- */
+    h1 {
+        font-size: 2.5em;
     }
 
+    h2 {
+        font-size: 2em;
+    }
+
+    h3 {
+        font-size: 1.6em;
+    }
+
+    .hero-section h1 {
+        font-size: 3em;
+    }
+
+    .hero-section .hero-subtitle {
+        font-size: 1.3em;
+    }
+
+    /* --- Layout Geral e Espaçamento --- */
+    .section-padded {
+        padding: 60px 0;
+    }
+    
+    .main-header {
+        padding: 10px 15px;
+    }
+
+    .header-logo {
+        font-size: 1.3em;
+    }
+
+    .hero-section {
+        height: 500px;
+    }
+
+    .hero-section.small-hero {
+        height: 250px;
+    }
+
+    /* --- Rodapé (Footer) --- */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-column {
+        align-items: center;
+    }
+
+    .footer-social-links {
+        justify-content: center;
+    }
+
+    .footer-contact p {
+        justify-content: center;
+    }
+    
+    /* --- Player de Áudio (FINAL) --- */
     .audio-control-bar {
-        position: fixed;
-        /* Garante que o player permaneça fixo na parte inferior */
-        bottom: 0;
-        left: 0;
-        z-index: 1001;
-        box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.5);
-        /* Mantém a sombra inferior */
-        padding: 8px 0;
-        /* Padding mais compacto para mobile */
         height: 50px;
-        /* Reduz a altura da barra de áudio para mobile */
+        padding: 5px 0;
     }
 
     .audio-control-content {
         flex-direction: row;
-        /* Mantém em linha */
         flex-wrap: nowrap;
-        /* Impede quebra de linha */
         justify-content: space-between;
         align-items: center;
-        gap: 8px;
-        /* Reduz o gap para mobile */
-        padding: 0 10px;
-        /* Padding horizontal mais compacto para mobile */
-        max-width: none;
-        /* Remove a largura máxima para se adaptar à tela */
-        width: 100%;
-        /* Ocupa 100% da largura disponível */
+        gap: 10px;
+        padding: 0 8px;
     }
-
-    .music-player-details {
-        flex-grow: 1;
-        /* Permite que o título e a barra de progresso se expandam */
-        flex-shrink: 1;
-        /* Permite que encolham */
-        min-width: 0;
-        /* Permite que o texto seja cortado com ellipsis */
-        max-width: calc(100% - 150px);
-        /* Garante espaço para os botões e select */
-    }
-
+    
     #musicTitleDisplay {
         font-size: 0.8em;
-        /* Título um pouco menor */
-        margin-bottom: 2px;
-        /* Margem menor */
     }
-
+    
     .progress-bar-and-times {
-        width: 100%;
-        justify-content: center;
-        /* Centraliza a barra de progresso */
         gap: 4px;
-        /* Reduz o gap */
     }
-
+    
+    .audio-progress-bar {
+        height: 2px;
+    }
+    
+    .audio-progress-bar::-webkit-slider-thumb,
+    .audio-progress-bar::-moz-range-thumb {
+        width: 8px;
+        height: 8px;
+        margin-top: -3px;
+    }
+    
     .time-display {
         font-size: 0.65em;
-        /* Reduz o tamanho da fonte do tempo */
     }
-
+    
     .music-playback-controls {
-        flex-shrink: 0;
-        /* Impede que os botões encolham */
-        gap: 6px;
-        /* Reduz o gap entre os botões */
+        gap: 8px;
     }
-
+    
     .music-button {
-        width: 35px;
-        /* Botões menores */
-        height: 35px;
         font-size: 0.9em;
     }
-
-    .music-button.main-play-pause-button {
-        width: 45px;
-        /* Botão principal ligeiramente maior */
-        height: 45px;
-        font-size: 1.3em;
+    
+    .main-play-pause-button {
+        font-size: 1.6em;
     }
-
-    .playback-speed-control {
+    
+    /* --- Controle de Volume e Velocidade em Mobile --- */
+    .volume-container {
+        display: flex;
+        align-items: center;
+        gap: 5px;
         flex-shrink: 0;
-        /* Impede que o select encolha */
     }
-
+    
+    .volume-slider {
+        width: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+    }
+    
+    /* Ativação do slider de volume ao clicar no botão */
+    .volume-slider.is-active {
+        width: 80px;
+        opacity: 1;
+        visibility: visible;
+    }
+    
     .playback-speed-select {
-        padding: 5px 8px;
-        /* Padding menor */
-        font-size: 0.8em;
-        /* Fonte menor */
-        background-position: right 4px top 50%;
-        /* Ajusta a posição do ícone da seta */
-        background-size: 7px auto;
-        /* Ajusta o tamanho do ícone da seta */
+        padding: 4px 6px;
+        font-size: 0.7em;
+        background-position: right 4px center;
     }
 
-    /* O botão voltar ao topo precisa ser ajustado para ficar acima da barra de áudio no mobile */
+    /* --- Outros Componentes --- */
     .scroll-top-button {
-        bottom: 60px;
-        /* Ajusta para ficar acima da barra de áudio, considerando a nova altura */
-        right: 15px;
-        /* Move um pouco para a esquerda para não ficar tão na ponta */
-        width: 40px;
-        /* Botão menor */
-        height: 40px;
-        font-size: 1.2em;
+        bottom: 70px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .image-compare-handle::before,
+    .image-compare-handle::after {
+        display: none;
     }
 }
 
@@ -2205,15 +2217,15 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* ===================================== */
 .scroll-top-button {
     position: fixed;
-    bottom: 80px;
+    bottom: 60px;
     /* Acima da barra de áudio */
-    right: 30px;
+    right: 10px;
     background-color: var(--cor-primaria);
     /* Fundo verde primário */
     color: var(--cor-btn-text);
     /* Ícone branco */
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -2245,105 +2257,6 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     /* Sombra mais vibrante e ligeiramente mais espalhada no hover */
     box-shadow: 0 0 15px rgba(76, 175, 80, 0.9), 0 0 25px rgba(56, 142, 60, 0.6);
 }
-
-
-/* ===================================== */
-/* 9. Media Queries */
-/* ===================================== */
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5em;
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    h3 {
-        font-size: 1.6em;
-    }
-
-    .hero-section {
-        height: 500px;
-    }
-
-    .hero-section.small-hero {
-        height: 250px;
-    }
-
-    .hero-section h1 {
-        font-size: 3em;
-    }
-
-    .hero-section .hero-subtitle {
-        font-size: 1.3em;
-    }
-
-    .main-header {
-        padding: 10px 15px;
-    }
-
-    .header-logo {
-        font-size: 1.3em;
-    }
-
-    .section-padded {
-        padding: 60px 0;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .footer-column {
-        align-items: center;
-    }
-
-    .footer-social-links {
-        justify-content: center;
-    }
-
-    .footer-contact p {
-        justify-content: center;
-    }
-
-    .audio-control-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .music-player-details,
-    .music-playback-controls,
-    .playback-speed-control {
-        width: 100%;
-        justify-content: center;
-    }
-
-    #musicTitleDisplay {
-        max-width: none;
-        /* Remove a limitação de largura em mobile */
-    }
-
-    .progress-bar-and-times {
-        min-width: unset;
-        width: 100%;
-    }
-
-    .scroll-top-button {
-        bottom: 60px;
-        /* Ajusta para a barra de áudio em mobile */
-    }
-
-    /* Ajustes para o slider de comparação de imagem em mobile */
-    .image-compare-handle::before,
-    .image-compare-handle::after {
-        display: none;
-        /* Esconde os ícones de seta em mobile para simplicidade */
-    }
-}
-
 
 /* ================================================================== */
 /* ================================================================== */

@@ -162,6 +162,56 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+// =====================================
+    // Gerenciamento do Volume (VERSÃO CORRIGIDA)
+    // =====================================
+    const volumeButton = document.getElementById('volumeButton');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeContainer = document.querySelector('.volume-container');
+
+    // A variável correta para o seu áudio de fundo
+    const mainAudio = backgroundAudio; 
+
+    if (mainAudio) {
+        // Sincroniza o slider com o volume atual do áudio
+        volumeSlider.value = mainAudio.volume;
+        updateVolumeIcon(mainAudio.volume);
+
+        // Adiciona evento para mudar o volume
+        volumeSlider.addEventListener('input', () => {
+            const volumeValue = parseFloat(volumeSlider.value);
+            mainAudio.volume = volumeValue;
+            updateVolumeIcon(volumeValue);
+        });
+
+        // Função para atualizar o ícone do botão de volume
+        function updateVolumeIcon(volume) {
+            const icon = volumeButton.querySelector('i');
+            if (volume === 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (volume < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+    }
+
+    // Lógica de clique para mostrar/esconder o slider (funciona em mobile)
+    volumeButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Impede que o clique no botão esconda o slider
+        volumeSlider.classList.toggle('is-active');
+        // Você pode adicionar um som de efeito aqui, se desejar.
+        // playEffectSound(buttonClickSound);
+    });
+
+    // Esconde o slider se o usuário clicar em qualquer lugar fora dele
+    document.addEventListener('click', (event) => {
+        if (volumeSlider.classList.contains('is-active') && !volumeContainer.contains(event.target)) {
+            volumeSlider.classList.remove('is-active');
+        }
+    });
+
     // =====================================
     // Gerenciamento de Eventos de Hover
     // =====================================
@@ -2834,7 +2884,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const verificarSenhaBtn = document.getElementById('verificarSenhaBtn');
     const modalSucesso = document.getElementById('modalSenhaSucesso');
     const modalFecharr = modalSucesso.querySelector('.modal-avancado-fechar');
-    
+
     // Lista de senhas corretas
     const senhasCorretas = ['senha123', 'admin456', 'projeto@2024'];
 
