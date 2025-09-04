@@ -1,22 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
+    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Zera's Craft - Recursos</title>
+    <title>Mundo Zera's Craft - Comunidade</title> <!---->
+    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
     <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!---->
 
-    <meta name="description" content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
-    <meta name="keywords" content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
+    <!--é a breve descrição da sua página que pode aparecer no Google-->
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
+    <meta name="keywords"
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
+    <!--Identifica o autor do documento HTML.-->
     <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
-    <meta name="robots" content="index, follow"> <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
-    <meta property="og:description" content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
-    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg"> <meta property="og:url" content="https://seusite.com.br/index.html"> <meta property="og:type" content="website"> <meta property="og:site_name" content="Mundo Zera's Craft">
-    <meta property="og:locale" content="pt_BR"> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:site" content="@SeuTwitterHandle"> <meta name="twitter:creator" content="@SeuTwitterHandle"> <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
-    <meta name="twitter:description" content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
-    <meta name="twitter:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg"> <meta name="theme-color" content="#347C2F">
+    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
+    <meta name="robots" content="index, follow">
+
+<!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--O título que aparece na pré-visualização.-->
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
+    <!--A descrição que aparece na pré-visualização.-->
+    <meta property="og:description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
+    <!--A URL da página.-->
+    <meta property="og:url" content="https://seusite.com.br/index.html">
+    
+    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mundo Zera's Craft">
+    <meta property="og:locale" content="pt_BR">
+    
+<!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@SeuTwitterHandle">
+    <meta name="twitter:creator" content="@SeuTwitterHandle">
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
+    <meta name="twitter:description"
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
+    <!---->
+    <meta name="twitter:image"
+
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
+<!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <meta name="theme-color" content="#347C2F">
+<!-- Links para ScrollReveal e CountUp.js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
 </head>
 <body>
 
@@ -110,6 +147,10 @@
                     <h4>Navegação</h4>
                     <ul>
                         <li><a href="index.html">Início</a></li>
+                        <li><a href="community.html">Comunidade</a></li>
+                        <li><a href="events.html">Eventos</a></li>
+                        <li><a href="about.html">Sobre Nós</a></li>
+                        <li><a href="#contact">Contato</a></li>
                     </ul>
                 </div>
                 <div class="footer-column footer-contact">
@@ -132,24 +173,44 @@
                 <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
             </div>
         </div>
+        
         <div class="audio-control-bar">
             <div class="container audio-control-content">
-                <button id="audioControlButton" aria-label="Controlar áudio">
-                    <i class="fas fa-music"></i>
+                <div class="music-player-details">
                     <span id="musicTitleDisplay">Clique para Tocar</span>
-                </button>
-                <div class="audio-progress-indicator" id="audioProgressArc">
-                     <svg viewBox="0 0 60 60" class="audio-progress-svg">
-                        <circle class="arc-background" cx="30" cy="30" r="27"></circle>
-                        <circle class="arc-progress" cx="30" cy="30" r="27"></circle>
-                    </svg>
+                    <div class="progress-bar-and-times">
+                        <span id="currentTimeDisplay" class="time-display">0:00</span>
+                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
+                        <span id="durationDisplay" class="time-display">0:00</span>
+                    </div>
                 </div>
-                <button id="audioNextButton" aria-label="Próxima música">
-                    <i class="fas fa-forward"></i>
-                </button>
+                <div class="music-playback-controls">
+                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    <button id="audioControlButton" class="music-button main-play-pause-button" aria-label="Tocar/Pausar música">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                </div>
+                <div class="playback-speed-control">
+                    <select id="playbackSpeed" class="playback-speed-select">
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
             </div>
         </div>
     </footer>
+
+    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
         <i class="fas fa-arrow-up"></i>
