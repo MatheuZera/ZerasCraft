@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
             volumeSlider.classList.remove('is-active');
         }
     });
+    
     // =====================================
     // Gerenciamento de Eventos de Clique
     // =====================================
