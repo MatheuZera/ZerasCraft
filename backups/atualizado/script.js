@@ -134,7 +134,56 @@ document.addEventListener('DOMContentLoaded', () => {
         const clonedSound = sound.cloneNode();
         clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
     }
+    // =====================================
+    // Gerenciamento do Volume (VERSÃO CORRIGIDA)
+    // =====================================
+    const volumeButton = document.getElementById('volumeButton');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeContainer = document.querySelector('.volume-container');
 
+    // A variável correta para o seu áudio de fundo
+    const mainAudio = backgroundAudio;
+
+    if (mainAudio) {
+        // Sincroniza o slider com o volume atual do áudio
+        volumeSlider.value = mainAudio.volume;
+        updateVolumeIcon(mainAudio.volume);
+
+        // Adiciona evento para mudar o volume
+        volumeSlider.addEventListener('input', () => {
+            const volumeValue = parseFloat(volumeSlider.value);
+            mainAudio.volume = volumeValue;
+            updateVolumeIcon(volumeValue);
+        });
+
+        // Função para atualizar o ícone do botão de volume
+        function updateVolumeIcon(volume) {
+            const icon = volumeButton.querySelector('i');
+            if (volume === 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (volume < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+    }
+
+    // Lógica de clique para mostrar/esconder o slider (funciona em mobile)
+    volumeButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Impede que o clique no botão esconda o slider
+        volumeSlider.classList.toggle('is-active');
+        // Você pode adicionar um som de efeito aqui, se desejar.
+        // playEffectSound(buttonClickSound);
+    });
+
+    // Esconde o slider se o usuário clicar em qualquer lugar fora dele
+    document.addEventListener('click', (event) => {
+        if (volumeSlider.classList.contains('is-active') && !volumeContainer.contains(event.target)) {
+            volumeSlider.classList.remove('is-active');
+        }
+    });
+    
     // =====================================
     // Gerenciamento de Eventos de Clique
     // =====================================
@@ -1050,15 +1099,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. ELEMENTOS
     // =====================================
 
-    // =======================================================
-    // A
-    // =======================================================
+    // O JavaScript para a seção de FAQ é necessário para a funcionalidade de acordeão.
+    // Adicione este código ao seu arquivo 'script.js' para que as perguntas se expandam.
 
-    const acordeaoBtns = document.querySelectorAll('.acordeao-btn');
+    const acordeaoBtns = document.querySelectorAll('.accordion-btn');
+
     acordeaoBtns.forEach(btn => {
         btn.addEventListener('click', function () {
+            // Alterna a classe 'active' no botão clicado
             this.classList.toggle('active');
+
+            // Seleciona o painel de conteúdo
             const painel = this.nextElementSibling;
+
+            // Alterna a exibição do painel
             if (painel.style.maxHeight) {
                 painel.style.maxHeight = null;
             } else {
@@ -1067,20 +1121,108 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Exemplo JS: Interação simples
-    const btnDestaque = document.querySelector('.btn-destaque');
-    btnDestaque.addEventListener('click', () => {
-        console.log('Botão clicado!');
-    });
 
+    // O JavaScript a seguir é um exemplo de como você pode lidar
+    // com o envio de um formulário de contato. É importante notar que
+    // para o envio real, você precisará de um backend.
 
-    // Exemplo JS: Interação de clique
-    const cards = document.querySelectorAll('.card-conteudo');
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            alert('Card clicado!');
+    // Adicione este código ao seu arquivo 'script.js'.
+    const contactForm = document.querySelector('.contact-form');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const nome = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const mensagem = this.querySelector('textarea').value;
+
+            // Aqui você faria uma chamada para um serviço de backend
+            // para processar os dados do formulário. Por exemplo, usando 'fetch'.
+            // Ex: fetch('seu-endpoint-api', { method: 'POST', body: ... });
+
+            console.log('Dados do formulário a serem enviados:');
+            console.log(`Nome: ${nome}`);
+            console.log(`E-mail: ${email}`);
+            console.log(`Mensagem: ${mensagem}`);
+
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            this.reset(); // Limpa o formulário após o envio
         });
+    }
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    // JavaScript para a animação de contagem na seção de estatísticas
+    const stats = document.querySelectorAll('.stat-number');
+    const statsSection = document.getElementById('estatisticas');
+    let statsAnimated = false;
+
+    // Esta função anima a contagem dos números
+    function animateStats() {
+        if (statsAnimated) return; // Garante que a animação só rode uma vez
+        statsAnimated = true;
+
+        stats.forEach(stat => {
+            const target = +stat.getAttribute('data-target');
+            const duration = 2000; // Duração da animação em milissegundos
+            const frameRate = 60; // Frames por segundo
+            const totalFrames = (duration / 1000) * frameRate;
+            const increment = target / totalFrames;
+            let current = 0;
+
+            const counter = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(counter);
+                }
+                stat.innerText = Math.floor(current).toLocaleString('pt-BR');
+            }, 1000 / frameRate); // Intervalo para corresponder ao frame rate
+        });
+    }
+
+    // Cria um 'IntersectionObserver' para detectar quando a seção de estatísticas entra na tela
+    const observerStats = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                observerStats.unobserve(entry.target); // Para de observar após a animação
+            }
+        });
+    }, {
+        threshold: 0.5 // Aciona quando 50% da seção está visível
     });
+
+    // Começa a observar a seção de estatísticas
+    if (statsSection) {
+        observerStats.observe(statsSection);
+    }
+
+    // Para a funcionalidade de log-in/registro, você precisará de um backend.
+    // Este é um código de exemplo que você pode adicionar ao seu 'script.js'
+    // para capturar os dados do formulário, mas o envio real dependerá do seu servidor.
+
+    const loginForm = document.querySelector('.login-form');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão
+
+            const username = this.querySelector('#username').value;
+            const password = this.querySelector('#password').value;
+
+            // Aqui você faria uma chamada para o seu backend para autenticação.
+            console.log('Tentativa de login:');
+            console.log(`Usuário: ${username}`);
+            console.log(`Senha: ${password}`);
+
+            alert('Funcionalidade de login ainda não implementada no backend.');
+            this.reset();
+        });
+    }
 
     // =======================================================
     // A
@@ -2834,7 +2976,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const verificarSenhaBtn = document.getElementById('verificarSenhaBtn');
     const modalSucesso = document.getElementById('modalSenhaSucesso');
     const modalFecharr = modalSucesso.querySelector('.modal-avancado-fechar');
-    
+
     // Lista de senhas corretas
     const senhasCorretas = ['senha123', 'admin456', 'projeto@2024'];
 
@@ -2846,7 +2988,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Senha incorreta. Tente novamente.');
         }
     });
-
+    
     modalFecharr.addEventListener('click', () => {
         modalSucesso.style.display = 'none';
     });
@@ -2953,19 +3095,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.ponto-nav.active').classList.remove('active');
         pontos[index].classList.add('active');
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

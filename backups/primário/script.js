@@ -134,7 +134,56 @@ document.addEventListener('DOMContentLoaded', () => {
         const clonedSound = sound.cloneNode();
         clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
     }
+    // =====================================
+    // Gerenciamento do Volume (VERSÃO CORRIGIDA)
+    // =====================================
+    const volumeButton = document.getElementById('volumeButton');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeContainer = document.querySelector('.volume-container');
 
+    // A variável correta para o seu áudio de fundo
+    const mainAudio = backgroundAudio;
+
+    if (mainAudio) {
+        // Sincroniza o slider com o volume atual do áudio
+        volumeSlider.value = mainAudio.volume;
+        updateVolumeIcon(mainAudio.volume);
+
+        // Adiciona evento para mudar o volume
+        volumeSlider.addEventListener('input', () => {
+            const volumeValue = parseFloat(volumeSlider.value);
+            mainAudio.volume = volumeValue;
+            updateVolumeIcon(volumeValue);
+        });
+
+        // Função para atualizar o ícone do botão de volume
+        function updateVolumeIcon(volume) {
+            const icon = volumeButton.querySelector('i');
+            if (volume === 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (volume < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+    }
+
+    // Lógica de clique para mostrar/esconder o slider (funciona em mobile)
+    volumeButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Impede que o clique no botão esconda o slider
+        volumeSlider.classList.toggle('is-active');
+        // Você pode adicionar um som de efeito aqui, se desejar.
+        // playEffectSound(buttonClickSound);
+    });
+
+    // Esconde o slider se o usuário clicar em qualquer lugar fora dele
+    document.addEventListener('click', (event) => {
+        if (volumeSlider.classList.contains('is-active') && !volumeContainer.contains(event.target)) {
+            volumeSlider.classList.remove('is-active');
+        }
+    });
+    
     // =====================================
     // Gerenciamento de Eventos de Clique
     // =====================================
@@ -1050,15 +1099,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. ELEMENTOS
     // =====================================
 
-    // =======================================================
-    // A
-    // =======================================================
+    // O JavaScript para a seção de FAQ é necessário para a funcionalidade de acordeão.
+    // Adicione este código ao seu arquivo 'script.js' para que as perguntas se expandam.
 
-    const acordeaoBtns = document.querySelectorAll('.acordeao-btn');
+    const acordeaoBtns = document.querySelectorAll('.accordion-btn');
+
     acordeaoBtns.forEach(btn => {
         btn.addEventListener('click', function () {
+            // Alterna a classe 'active' no botão clicado
             this.classList.toggle('active');
+
+            // Seleciona o painel de conteúdo
             const painel = this.nextElementSibling;
+
+            // Alterna a exibição do painel
             if (painel.style.maxHeight) {
                 painel.style.maxHeight = null;
             } else {
@@ -1067,20 +1121,108 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Exemplo JS: Interação simples
-    const btnDestaque = document.querySelector('.btn-destaque');
-    btnDestaque.addEventListener('click', () => {
-        console.log('Botão clicado!');
-    });
 
+    // O JavaScript a seguir é um exemplo de como você pode lidar
+    // com o envio de um formulário de contato. É importante notar que
+    // para o envio real, você precisará de um backend.
 
-    // Exemplo JS: Interação de clique
-    const cards = document.querySelectorAll('.card-conteudo');
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            alert('Card clicado!');
+    // Adicione este código ao seu arquivo 'script.js'.
+    const contactForm = document.querySelector('.contact-form');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const nome = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const mensagem = this.querySelector('textarea').value;
+
+            // Aqui você faria uma chamada para um serviço de backend
+            // para processar os dados do formulário. Por exemplo, usando 'fetch'.
+            // Ex: fetch('seu-endpoint-api', { method: 'POST', body: ... });
+
+            console.log('Dados do formulário a serem enviados:');
+            console.log(`Nome: ${nome}`);
+            console.log(`E-mail: ${email}`);
+            console.log(`Mensagem: ${mensagem}`);
+
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            this.reset(); // Limpa o formulário após o envio
         });
+    }
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    // JavaScript para a animação de contagem na seção de estatísticas
+    const stats = document.querySelectorAll('.stat-number');
+    const statsSection = document.getElementById('estatisticas');
+    let statsAnimated = false;
+
+    // Esta função anima a contagem dos números
+    function animateStats() {
+        if (statsAnimated) return; // Garante que a animação só rode uma vez
+        statsAnimated = true;
+
+        stats.forEach(stat => {
+            const target = +stat.getAttribute('data-target');
+            const duration = 2000; // Duração da animação em milissegundos
+            const frameRate = 60; // Frames por segundo
+            const totalFrames = (duration / 1000) * frameRate;
+            const increment = target / totalFrames;
+            let current = 0;
+
+            const counter = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(counter);
+                }
+                stat.innerText = Math.floor(current).toLocaleString('pt-BR');
+            }, 1000 / frameRate); // Intervalo para corresponder ao frame rate
+        });
+    }
+
+    // Cria um 'IntersectionObserver' para detectar quando a seção de estatísticas entra na tela
+    const observerStats = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                observerStats.unobserve(entry.target); // Para de observar após a animação
+            }
+        });
+    }, {
+        threshold: 0.5 // Aciona quando 50% da seção está visível
     });
+
+    // Começa a observar a seção de estatísticas
+    if (statsSection) {
+        observerStats.observe(statsSection);
+    }
+
+    // Para a funcionalidade de log-in/registro, você precisará de um backend.
+    // Este é um código de exemplo que você pode adicionar ao seu 'script.js'
+    // para capturar os dados do formulário, mas o envio real dependerá do seu servidor.
+
+    const loginForm = document.querySelector('.login-form');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão
+
+            const username = this.querySelector('#username').value;
+            const password = this.querySelector('#password').value;
+
+            // Aqui você faria uma chamada para o seu backend para autenticação.
+            console.log('Tentativa de login:');
+            console.log(`Usuário: ${username}`);
+            console.log(`Senha: ${password}`);
+
+            alert('Funcionalidade de login ainda não implementada no backend.');
+            this.reset();
+        });
+    }
 
     // =======================================================
     // A
@@ -1980,7 +2122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('O elemento .modern-tabs-container não foi encontrado.');
         return;
     }
-    
+
     const tabButtons = tabsContainer.querySelectorAll('.tab-button');
     const tabPanes = tabsContainer.querySelectorAll('.tab-pane');
     const tabActiveIndicator = tabsContainer.querySelector('.tab-active-indicator');
@@ -1992,7 +2134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const buttonRect = button.getBoundingClientRect();
         const containerRect = tabsContainer.querySelector('.tabs-header').getBoundingClientRect(); // Usa o header como referência
-        
+
         tabActiveIndicator.style.left = `${buttonRect.left - containerRect.left}px`;
         tabActiveIndicator.style.width = `${buttonRect.width}px`;
     }
@@ -2613,7 +2755,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function mostrarNotificacao() {
         // Adiciona a classe 'show' para ativar a animação
         notificacaoAviso.classList.add('show');
-        
+
         // Esconde a notificação automaticamente após 5 segundos
         setTimeout(() => {
             notificacaoAviso.classList.remove('show');
@@ -2629,9 +2771,339 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnNotificacao2) {
         btnNotificacao2.addEventListener('click', mostrarNotificacao);
     }
-    
+
     // Adiciona o evento de clique ao botão de fechar
     if (btnFechar) {
         btnFechar.addEventListener('click', fecharNotificacao);
     }
+
+
+    const cartaoExpansivel = document.querySelector('.cartao-expansivel');
+    if (cartaoExpansivel) {
+        cartaoExpansivel.addEventListener('click', () => {
+            cartaoExpansivel.classList.toggle('ativo');
+        });
+    }
+
+
+
+    const barraPreenchimento = document.querySelector('.barra-preenchimento');
+    if (barraPreenchimento) {
+        setTimeout(() => {
+            barraPreenchimento.style.width = '75%'; /* Defina o progresso aqui */
+        }, 500);
+    }
+
+
+    const abrirModalBtn = document.getElementById('abrirModal');
+    const fecharModalBtn = document.querySelector('.fechar-modal');
+    const modal = document.getElementById('modal');
+
+    if (abrirModalBtn && fecharModalBtn && modal) {
+        abrirModalBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        fecharModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (evento) => {
+            if (evento.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+
+
+
+    const botaoMenu = document.querySelector('.botao-menu');
+    const menuLista = document.querySelector('.menu-lista');
+
+    if (botaoMenu && menuLista) {
+        botaoMenu.addEventListener('click', () => {
+            menuLista.classList.toggle('visivel');
+        });
+    }
+
+
+    const sliderContainer = document.querySelector('.slider-testemunhos');
+    if (!sliderContainer) return;
+
+    const itens = sliderContainer.querySelectorAll('.item-slider');
+    const botaoProximo = sliderContainer.querySelector('.botao-proximo');
+    const botaoAnterior = sliderContainer.querySelector('.botao-anterior');
+    let indiceAtual = 0;
+
+    function mostrarItem(indice) {
+        itens.forEach(item => item.classList.remove('ativo'));
+        itens[indice].classList.add('ativo');
+    }
+
+    if (botaoProximo) {
+        botaoProximo.addEventListener('click', () => {
+            indiceAtual = (indiceAtual + 1) % itens.length;
+            mostrarItem(indiceAtual);
+        });
+    }
+
+    if (botaoAnterior) {
+        botaoAnterior.addEventListener('click', () => {
+            indiceAtual = (indiceAtual - 1 + itens.length) % itens.length;
+            mostrarItem(indiceAtual);
+        });
+    }
+
+    const carrosselContainer = document.querySelector('.carrossel-container');
+
+    if (carrosselContainer) {
+        const slides = carrosselContainer.querySelector('.carrossel-slides');
+        const botoes = carrosselContainer.querySelectorAll('.carrossel-botao');
+        let indice = 0;
+        const totalSlides = slides.children.length;
+
+        botoes.forEach(botao => {
+            botao.addEventListener('click', () => {
+                if (botao.classList.contains('proximo')) {
+                    indice = (indice + 1) % totalSlides;
+                } else {
+                    indice = (indice - 1 + totalSlides) % totalSlides;
+                }
+                slides.style.transform = `translateX(${-indice * 100}%)`;
+            });
+        });
+    }
+
+
+    const miniaturas = document.querySelectorAll('.miniatura');
+    const visualizador = document.getElementById('visualizador');
+    const imagemVisualizada = document.getElementById('imagemVisualizada');
+    const fechar = document.querySelector('.visualizador-fechar');
+
+    miniaturas.forEach(miniatura => {
+        miniatura.addEventListener('click', () => {
+            visualizador.style.display = 'block';
+            imagemVisualizada.src = miniatura.src;
+        });
+    });
+
+    fechar.addEventListener('click', () => {
+        visualizador.style.display = 'none';
+    });
+
+    window.addEventListener('click', (evento) => {
+        if (evento.target === visualizador) {
+            visualizador.style.display = 'none';
+        }
+    });
+
+    const barraLeitura = document.querySelector('.barra-leitura');
+
+    if (barraLeitura) {
+        window.addEventListener('scroll', () => {
+            const alturaTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progresso = (window.scrollY / alturaTotal) * 100;
+            barraLeitura.style.width = progresso + '%';
+        });
+    }
+
+    /* ============================================================= */
+    /* JavaScript para Interatividade nas Tabelas */
+    /* ============================================================= */
+
+    // Adiciona evento de clique em todas as linhas das tabelas
+    const tableRows = document.querySelectorAll('.tabela-planilha tbody tr');
+
+    tableRows.forEach(row => {
+        row.addEventListener('click', () => {
+            // Remove a classe 'selecionada' de todas as outras linhas
+            tableRows.forEach(r => r.classList.remove('selecionada'));
+
+            // Adiciona a classe 'selecionada' na linha clicada
+            row.classList.add('selecionada');
+
+            // Exemplo de ação: exibir os dados da linha no console
+            const rowData = Array.from(row.cells).map(cell => cell.textContent);
+            console.log('Dados da linha selecionada:', rowData);
+
+            // Você pode adicionar outras lógicas aqui, como abrir um modal
+            // ou preencher um formulário com os dados da linha.
+        });
+    });
+
+    // Função para ordenar a tabela por coluna
+    const sortTableByColumn = (table, column, asc = true) => {
+        const dirModifier = asc ? 1 : -1;
+        const tBody = table.tBodies[0];
+        const rows = Array.from(tBody.querySelectorAll("tr"));
+
+        const sortedRows = rows.sort((a, b) => {
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+
+            return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+        });
+
+        // Remove todas as linhas existentes do corpo da tabela
+        while (tBody.firstChild) {
+            tBody.removeChild(tBody.firstChild);
+        }
+
+        // Adiciona as linhas ordenadas
+        tBody.append(...sortedRows);
+    };
+
+    // Adiciona evento de clique nos cabeçalhos para ordenação
+    document.querySelectorAll(".tabela-planilha th").forEach((header, index) => {
+        header.addEventListener("click", () => {
+            const currentTable = header.closest("table");
+            const isAsc = header.classList.contains("th-sort-asc");
+
+            // Limpa as classes de ordenação de todos os cabeçalhos
+            document.querySelectorAll(".tabela-planilha th").forEach(th => {
+                th.classList.remove("th-sort-asc", "th-sort-desc");
+            });
+
+            // Adiciona a classe de ordenação no cabeçalho clicado
+            header.classList.toggle(isAsc ? "th-sort-desc" : "th-sort-asc");
+
+            sortTableByColumn(currentTable, index, !isAsc);
+        });
+    });
+
+
+    const senhaInput = document.getElementById('senha-input');
+    const verificarSenhaBtn = document.getElementById('verificarSenhaBtn');
+    const modalSucesso = document.getElementById('modalSenhaSucesso');
+    const modalFecharr = modalSucesso.querySelector('.modal-avancado-fechar');
+
+    // Lista de senhas corretas
+    const senhasCorretas = ['senha123', 'admin456', 'projeto@2024'];
+
+    verificarSenhaBtn.addEventListener('click', () => {
+        const senhaDigitada = senhaInput.value;
+        if (senhasCorretas.includes(senhaDigitada)) {
+            modalSucesso.style.display = 'flex';
+        } else {
+            alert('Senha incorreta. Tente novamente.');
+        }
+    });
+    
+    modalFecharr.addEventListener('click', () => {
+        modalSucesso.style.display = 'none';
+    });
+
+    const copiarBtn = document.getElementById('copiarBtn');
+    const textoParaCopiar = document.getElementById('textoParaCopiar');
+
+    copiarBtn.addEventListener('click', () => {
+        // Seleciona o texto dentro da textarea
+        textoParaCopiar.select();
+        textoParaCopiar.setSelectionRange(0, 99999); // Para mobile
+
+        try {
+            // Tenta copiar o texto para a área de transferência
+            document.execCommand('copy');
+            alert('Texto copiado para a área de transferência!');
+        } catch (err) {
+            console.error('Falha ao copiar o texto: ', err);
+            alert('Erro ao copiar o texto. Por favor, tente manualmente.');
+        }
+    });
+
+    const abrirPainelBtn = document.getElementById('abrirPainelBtn');
+    const painelInformacoes = document.getElementById('painelInformacoes');
+    const fecharPainelBtn = document.querySelector('.painel-fechar');
+
+    abrirPainelBtn.addEventListener('click', () => {
+        painelInformacoes.style.display = 'block';
+    });
+
+    fecharPainelBtn.addEventListener('click', () => {
+        painelInformacoes.style.display = 'none';
+    });
+
+    const abasNotasNav = document.querySelector('.abas-notas-nav');
+
+    abasNotasNav.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            const clickedBtn = e.target;
+            const tabId = clickedBtn.dataset.tab;
+            const tabContainer = clickedBtn.closest('.abas-notas-container');
+
+            tabContainer.querySelectorAll('.abas-notas-btn').forEach(btn => btn.classList.remove('active'));
+            tabContainer.querySelectorAll('.abas-notas-pane').forEach(pane => pane.classList.remove('active'));
+
+            clickedBtn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    });
+
+    const botoesAbrirModal = document.querySelectorAll('.btn-abrir-modal-aviso');
+    const botoesFecharModal = document.querySelectorAll('.modal-simples-fechar');
+
+    botoesAbrirModal.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modalId = btn.dataset.modal;
+            document.getElementById(modalId).style.display = 'block';
+        });
+    });
+
+    botoesFecharModal.forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.closest('.modal-simples-container').style.display = 'none';
+        });
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target.classList.contains('modal-simples-container')) {
+            event.target.style.display = 'none';
+        }
+    });
+
+    const btnCarregamento = document.getElementById('btnCarregamento');
+    const btnTexto = btnCarregamento.querySelector('.btn-texto');
+    const spinner = btnCarregamento.querySelector('.spinner-pequeno');
+
+    btnCarregamento.addEventListener('click', () => {
+        btnTexto.style.opacity = '0';
+        spinner.classList.remove('hidden');
+        btnCarregamento.disabled = true;
+
+        setTimeout(() => {
+            btnTexto.style.opacity = '1';
+            spinner.classList.add('hidden');
+            btnCarregamento.disabled = false;
+        }, 3000); // Simula o tempo de carregamento
+    });
+
+    const carrossel = document.querySelector('.depoimento-carrossel');
+    const pontos = document.querySelectorAll('.ponto-nav');
+
+    pontos.forEach(ponto => {
+        ponto.addEventListener('click', () => {
+            const slideIndex = ponto.dataset.slide;
+            carrossel.scrollLeft = carrossel.clientWidth * slideIndex;
+
+            document.querySelector('.ponto-nav.active').classList.remove('active');
+            ponto.classList.add('active');
+        });
+    });
+
+    carrossel.addEventListener('scroll', () => {
+        let index = Math.round(carrossel.scrollLeft / carrossel.clientWidth);
+        document.querySelector('.ponto-nav.active').classList.remove('active');
+        pontos[index].classList.add('active');
+    });
+
+
+
+
+
+
+
+
+
+
+
 });
