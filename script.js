@@ -1098,15 +1098,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. ELEMENTOS
     // =====================================
 
-    // =======================================================
-    // A
-    // =======================================================
+    // O JavaScript para a seção de FAQ é necessário para a funcionalidade de acordeão.
+    // Adicione este código ao seu arquivo 'script.js' para que as perguntas se expandam.
 
-    const acordeaoBtns = document.querySelectorAll('.acordeao-btn');
+    const acordeaoBtns = document.querySelectorAll('.accordion-btn');
+
     acordeaoBtns.forEach(btn => {
         btn.addEventListener('click', function () {
+            // Alterna a classe 'active' no botão clicado
             this.classList.toggle('active');
+
+            // Seleciona o painel de conteúdo
             const painel = this.nextElementSibling;
+
+            // Alterna a exibição do painel
             if (painel.style.maxHeight) {
                 painel.style.maxHeight = null;
             } else {
@@ -1115,20 +1120,108 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Exemplo JS: Interação simples
-    const btnDestaque = document.querySelector('.btn-destaque');
-    btnDestaque.addEventListener('click', () => {
-        console.log('Botão clicado!');
-    });
 
+    // O JavaScript a seguir é um exemplo de como você pode lidar
+    // com o envio de um formulário de contato. É importante notar que
+    // para o envio real, você precisará de um backend.
 
-    // Exemplo JS: Interação de clique
-    const cards = document.querySelectorAll('.card-conteudo');
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            alert('Card clicado!');
+    // Adicione este código ao seu arquivo 'script.js'.
+    const contactForm = document.querySelector('.contact-form');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const nome = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const mensagem = this.querySelector('textarea').value;
+
+            // Aqui você faria uma chamada para um serviço de backend
+            // para processar os dados do formulário. Por exemplo, usando 'fetch'.
+            // Ex: fetch('seu-endpoint-api', { method: 'POST', body: ... });
+
+            console.log('Dados do formulário a serem enviados:');
+            console.log(`Nome: ${nome}`);
+            console.log(`E-mail: ${email}`);
+            console.log(`Mensagem: ${mensagem}`);
+
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            this.reset(); // Limpa o formulário após o envio
         });
+    }
+
+    // =======================================================
+    // A
+    // =======================================================
+
+    // JavaScript para a animação de contagem na seção de estatísticas
+    const stats = document.querySelectorAll('.stat-number');
+    const statsSection = document.getElementById('estatisticas');
+    let statsAnimated = false;
+
+    // Esta função anima a contagem dos números
+    function animateStats() {
+        if (statsAnimated) return; // Garante que a animação só rode uma vez
+        statsAnimated = true;
+
+        stats.forEach(stat => {
+            const target = +stat.getAttribute('data-target');
+            const duration = 2000; // Duração da animação em milissegundos
+            const frameRate = 60; // Frames por segundo
+            const totalFrames = (duration / 1000) * frameRate;
+            const increment = target / totalFrames;
+            let current = 0;
+
+            const counter = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(counter);
+                }
+                stat.innerText = Math.floor(current).toLocaleString('pt-BR');
+            }, 1000 / frameRate); // Intervalo para corresponder ao frame rate
+        });
+    }
+
+    // Cria um 'IntersectionObserver' para detectar quando a seção de estatísticas entra na tela
+    const observerStats = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                observerStats.unobserve(entry.target); // Para de observar após a animação
+            }
+        });
+    }, {
+        threshold: 0.5 // Aciona quando 50% da seção está visível
     });
+
+    // Começa a observar a seção de estatísticas
+    if (statsSection) {
+        observerStats.observe(statsSection);
+    }
+
+    // Para a funcionalidade de log-in/registro, você precisará de um backend.
+    // Este é um código de exemplo que você pode adicionar ao seu 'script.js'
+    // para capturar os dados do formulário, mas o envio real dependerá do seu servidor.
+
+    const loginForm = document.querySelector('.login-form');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão
+
+            const username = this.querySelector('#username').value;
+            const password = this.querySelector('#password').value;
+
+            // Aqui você faria uma chamada para o seu backend para autenticação.
+            console.log('Tentativa de login:');
+            console.log(`Usuário: ${username}`);
+            console.log(`Senha: ${password}`);
+
+            alert('Funcionalidade de login ainda não implementada no backend.');
+            this.reset();
+        });
+    }
 
     // =======================================================
     // A
@@ -2894,7 +2987,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Senha incorreta. Tente novamente.');
         }
     });
-
+    
     modalFecharr.addEventListener('click', () => {
         modalSucesso.style.display = 'none';
     });
@@ -3001,19 +3094,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.ponto-nav.active').classList.remove('active');
         pontos[index].classList.add('active');
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
