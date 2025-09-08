@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM totalmente carregado e pronto!");
 
-    // =====================================
-    // Variáveis Globais de Áudio e Elementos
-    // =====================================
     const backgroundAudio = document.getElementById('backgroundAudio');
     const audioControlButton = document.getElementById('audioControlButton');
     const audioPrevButton = document.getElementById('audioPrevButton');
@@ -82,10 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const playEffectSound = (name) => {
         const audioElement = audioEffects[name];
         if (audioElement) {
-            // Cria um clone para permitir que o mesmo som toque sobre si mesmo
             const clonedAudio = audioElement.cloneNode();
             clonedAudio.volume = audioElement.volume;
-            clonedAudio.play().catch(e => console.warn("Erro ao tentar tocar som de efeito:", e.message));
+            clonedAudio.play().catch(e => {
+                console.error(`Erro ao tentar tocar som de efeito '${name}':`, e.message);
+                console.error(`Verifique se o arquivo '${audioElement.src}' existe e está acessível.`);
+            });
         }
     };
 
@@ -325,22 +324,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Eventos para efeitos sonoros
     const soundEffectListeners = [
         { selector: 'a', sound: 'link' },
-        { selector: 'button:not([id^="audio"])', sound: 'button' }, // Corrigido para evitar conflito com botões de áudio
+        { selector: 'button:not([id^="audio"])', sound: 'button' },
         { selector: '.card', sound: 'card' },
         { selector: 'select', sound: 'select', event: 'change' },
     ];
     
-    // Adicionei um cache para evitar sons duplicados em eventos como mouseenter
     const playedSounds = new Set();
     const playEffectAndCache = (sound) => {
         if (!playedSounds.has(sound)) {
             playEffectSound(sound);
             playedSounds.add(sound);
-            setTimeout(() => playedSounds.delete(sound), 500); // Limpa o cache após 500ms
+            setTimeout(() => playedSounds.delete(sound), 500);
         }
     };
 
-    // Aprimorado para usar a lógica de cache
     soundEffectListeners.forEach(({ selector, sound, event = 'click' }) => {
         document.querySelectorAll(selector).forEach(element => {
             element.addEventListener(event, () => playEffectAndCache(sound));
