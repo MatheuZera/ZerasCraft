@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clonedSound = sound.cloneNode();
         clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
     }
-    
+
     // =====================================
     // Gerenciamento do Volume
     // =====================================
@@ -605,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    
+
     // =====================================
     // 1. Menu Hambúrguer (Otimizado para mais páginas)
     // =====================================
@@ -2221,18 +2221,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const toolboxRodape = document.querySelector('.toolbox-rodape');
     const toolboxFechar = document.querySelector('.toolbox-fechar');
-    setTimeout(() => toolboxRodape.classList.add('show'), 1000);
-    toolboxFechar.addEventListener('click', () => toolboxRodape.classList.remove('show'));
 
+    // Verifica se a toolbox principal existe na página
+    if (toolboxRodape) {
+        // Adiciona a classe 'show' após um pequeno atraso para a animação
+        // 1000ms (1 segundo) é um pouco longo, 100ms é mais comum para essa animação.
+        setTimeout(() => {
+            toolboxRodape.classList.add('show');
+        }, 100);
 
-
-    // Incluir a funcionalidade de copiar código do item 25.
-    document.querySelectorAll('.toolbox-codigo-trigger').forEach(trigger => {
-        trigger.addEventListener('click', function (event) {
-            event.stopPropagation();
-            this.classList.toggle('active');
-        });
-    });
+        // Verifica se o botão de fechar existe na página e adiciona o evento
+        if (toolboxFechar) {
+            toolboxFechar.addEventListener('click', () => {
+                toolboxRodape.classList.remove('show');
+            });
+        }
+    }
 
     // =======================================================
     // A

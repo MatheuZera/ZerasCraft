@@ -7150,7 +7150,7 @@ input:checked + .slider:before {
 /* Estilo base para a toolbox no rodapé */
 .toolbox-rodape {
     position: fixed;
-    bottom: -50px;
+    bottom: -100px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
