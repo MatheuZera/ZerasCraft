@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioEffects[name] = audio;
         return audio;
     };
-    const clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7);
+    clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7);
 
     const playEffectSoundInternal = (audioElement) => {
         if (audioElement) {
@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Função para formatar o tempo (0:00)
     function formatTime(seconds) {
         if (isNaN(seconds) || seconds < 0) return "0:00";
         const minutes = Math.floor(seconds / 60);
@@ -113,6 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // Configuração de Áudio
     // =====================================
+
+    // Define os caminhos e pre-carrega os sons
     const linkSound = new Audio('assets/audios/effects/link.mp3');
     const cardSound = new Audio('assets/audios/effects/card.mp3');
     const buttonSound = new Audio('assets/audios/effects/button.mp3');
@@ -125,11 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
     selectSound.preload = 'auto';
     buttonClickSound.preload = 'auto';
 
+    /**
+     * Toca um som de forma controlada, clonando o áudio para evitar interrupções.
+     * @param {HTMLAudioElement} sound - O objeto de áudio a ser tocado.
+     */
     function playSound(sound) {
         const clonedSound = sound.cloneNode();
         clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
     }
-
+    
     // =====================================
     // Gerenciamento do Volume
     // =====================================
@@ -213,6 +220,62 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+    // =====================================
+    // Gerenciamento de Eventos de Clique
+    // =====================================
+
+    document.addEventListener('click', (event) => {
+        const target = event.target.closest('a, button');
+
+        if (!target) {
+            return;
+        }
+
+        const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
+        const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
+
+        if (isNavLink) {
+            // Toca o som de link para navegação
+            event.preventDefault();
+            playSound(linkSound);
+            setTimeout(() => {
+                window.location.href = target.href;
+            }, 300);
+        } else if (isSpecialButton) {
+            // Toca o som de clique para botões e links internos
+            playSound(buttonClickSound);
+        }
+    });
+
+    // =====================================
+    // Gerenciamento de Eventos de Hover
+    // =====================================
+
+    // Seletores para os elementos
+    const cardElements = document.querySelectorAll(
+        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card'
+    );
+
+    const buttonElements = document.querySelectorAll(
+        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top'
+    );
+
+    const textLinkElements = document.querySelectorAll(
+        'p a, span a, li a'
+    );
+
+    // Adiciona os event listeners
+    cardElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(cardSound));
+    });
+
+    buttonElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(buttonSound));
+    });
+
+    textLinkElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(selectSound));
+    });
 
     // =====================================
     // Lógica de Controle da Música de Fundo
@@ -223,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!iconElement) return;
 
         if (currentMode === 'sequencial') {
-            iconElement.className = 'fas fa-list-ol'; // NOVO ÍCONE
+            iconElement.className = 'fas fa-list-ol';
             audioModeButton.setAttribute('title', 'Tocar em sequência');
             showCentralMessage('Modo: Sequencial');
         } else if (currentMode === 'aleatorio') {
@@ -285,7 +348,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Nova função para carregar a música
     const loadMusic = (index) => {
         if (index === -1 || !musicPlaylist[index]) {
             console.warn("Índice de música inválido.");
@@ -321,7 +383,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (currentMode === 'sequencial') {
             nextIndex = (currentMusicIndex + 1) % musicPlaylist.length;
         } else if (currentMode === 'loop') {
-            // No modo loop, a música reinicia, não muda para a próxima
             backgroundAudio.currentTime = 0;
             playMusic();
             return;
@@ -339,7 +400,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (currentMode === 'sequencial') {
             prevIndex = (currentMusicIndex - 1 + musicPlaylist.length) % musicPlaylist.length;
         } else if (currentMode === 'loop') {
-            // No modo loop, a música reinicia
             backgroundAudio.currentTime = 0;
             playMusic();
             return;
@@ -430,6 +490,20 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("DOM totalmente carregado e pronto!");
         restoreAudioState();
         updateModeIcon();
+
+        // Eventos para efeitos sonoros
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => playEffectSound(linkSound));
+        });
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => playEffectSound(buttonSound));
+        });
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', () => playEffectSound(cardSound));
+        });
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', () => playEffectSound(selectSound));
+        });
     });
 
     document.addEventListener('visibilitychange', () => {
@@ -445,7 +519,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (audioModeButton) {
-        audioModeButton.addEventListener('click', () => {
+        audioModeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
             playEffectSound(buttonClickSound);
             if (currentMode === 'sequencial') {
                 currentMode = 'aleatorio';
@@ -476,7 +551,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (audioControlButton) {
-        audioControlButton.addEventListener('click', () => {
+        audioControlButton.addEventListener('click', (e) => {
+            e.stopPropagation();
             playEffectSound(clickSound);
             userInteractedWithAudio = true;
             if (backgroundAudio.paused) {
@@ -495,6 +571,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     backgroundAudio.addEventListener('timeupdate', updateProgressAndTimers);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     // =====================================
     // 1. Menu Hambúrguer (Otimizado para mais páginas)
     // =====================================
