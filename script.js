@@ -73,16 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
         buttonClick: new Audio('assets/audios/effects/button-click.mp3'),
     };
     
-    // Preload dos efeitos
     Object.values(audioEffects).forEach(audio => {
         audio.preload = 'auto';
-        audio.volume = 0.5; // Ajuste de volume padrão para efeitos
+        audio.volume = 0.5;
     });
-    audioEffects.click.volume = 0.7; // Volume específico para o 'click'
+    audioEffects.click.volume = 0.7;
 
     const playEffectSound = (name) => {
         const audioElement = audioEffects[name];
         if (audioElement) {
+            // Cria um clone para permitir que o mesmo som toque sobre si mesmo
             const clonedAudio = audioElement.cloneNode();
             clonedAudio.volume = audioElement.volume;
             clonedAudio.play().catch(e => console.warn("Erro ao tentar tocar som de efeito:", e.message));
@@ -325,17 +325,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Eventos para efeitos sonoros
     const soundEffectListeners = [
         { selector: 'a', sound: 'link' },
-        { selector: 'button', sound: 'button' },
+        { selector: 'button:not([id^="audio"])', sound: 'button' }, // Corrigido para evitar conflito com botões de áudio
         { selector: '.card', sound: 'card' },
         { selector: 'select', sound: 'select', event: 'change' },
-        { selector: '.card', sound: 'card', event: 'mouseenter' },
-        { selector: 'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top', sound: 'button', event: 'mouseenter' },
-        { selector: 'p a, span a, li a', sound: 'select', event: 'mouseenter' },
     ];
     
+    // Adicionei um cache para evitar sons duplicados em eventos como mouseenter
+    const playedSounds = new Set();
+    const playEffectAndCache = (sound) => {
+        if (!playedSounds.has(sound)) {
+            playEffectSound(sound);
+            playedSounds.add(sound);
+            setTimeout(() => playedSounds.delete(sound), 500); // Limpa o cache após 500ms
+        }
+    };
+
+    // Aprimorado para usar a lógica de cache
     soundEffectListeners.forEach(({ selector, sound, event = 'click' }) => {
         document.querySelectorAll(selector).forEach(element => {
-            element.addEventListener(event, () => playEffectSound(sound));
+            element.addEventListener(event, () => playEffectAndCache(sound));
         });
     });
 
@@ -405,33 +413,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gerenciamento da Barra de Progresso
     if (audioProgressBar && backgroundAudio) {
-        let isSeeking = false;
-
-        const updateAudioTime = (e) => {
-            const rect = audioProgressBar.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const width = audioProgressBar.offsetWidth;
-            const newTime = (offsetX / width) * backgroundAudio.duration;
-
+        audioProgressBar.addEventListener('input', () => {
+            const newTime = (audioProgressBar.value / 100) * backgroundAudio.duration;
             if (!isNaN(newTime) && isFinite(newTime)) {
                 backgroundAudio.currentTime = newTime;
             }
-        };
-
-        audioProgressBar.addEventListener('mousedown', (e) => {
-            isSeeking = true;
-            updateAudioTime(e);
         });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isSeeking) updateAudioTime(e);
-        });
-
-        document.addEventListener('mouseup', () => {
-            isSeeking = false;
-        });
-
-        audioProgressBar.addEventListener('click', updateAudioTime);
     }
 
 
