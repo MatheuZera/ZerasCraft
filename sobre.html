@@ -258,14 +258,18 @@
                     <button id="audioNextButton" class="music-button" aria-label="Próxima música">
                         <i class="fas fa-forward"></i>
                     </button>
+
+                    <button id="audioModeButton" class="music-button" aria-label="Modo de reprodução">
+                        <i class="fas fa-repeat"></i>
+                    </button>
                 </div>
-                    <div class="volume-container">
-                        <button id="volumeButton" class="music-button volume-button" aria-label="Controle de volume">
-                            <i class="fas fa-volume-up"></i>
-                        </button>
-                        <input type="range" id="volumeSlider" class="audio-progress-bar volume-slider" min="0" max="1"
-                            step="0.01" value="1">
-                    </div>
+                <div class="volume-container">
+                    <button id="volumeButton" class="music-button volume-button" aria-label="Controle de volume">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <input type="range" id="volumeSlider" class="audio-progress-bar volume-slider" min="0" max="1"
+                        step="0.01" value="1">
+                </div>
                 <div class="playback-speed-control">
                     <select id="playbackSpeed" class="playback-speed-select">
                         <option value="0.75">0.75x</option>
