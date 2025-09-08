@@ -5252,8 +5252,8 @@ input:checked + .slider:before {
 /* Botão de abrir o chatbot */
 .chatbot-btn {
     position: fixed;
-    bottom: 20px; /* Posição ajustada */
-    right: 20px; /* Posição ajustada */
+    bottom: 60px; /* Posição ajustada */
+    left: 20px; /* Posição ajustada */
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
     border: none;
@@ -5276,8 +5276,8 @@ input:checked + .slider:before {
 .chatbot-box {
     display: none;
     position: fixed;
-    bottom: 90px; /* Posição ajustada */
-    right: 20px; /* Posição ajustada */
+    bottom: 150px; /* Posição ajustada */
+    left: 20px; /* Posição ajustada */
     width: 350px;
     height: 400px;
     background-color: var(--cor-card-bg);
@@ -5748,7 +5748,7 @@ input:checked + .slider:before {
 /* Estilos para telas grandes (Desktop) */
 .cookie-consent {
     position: fixed;
-    bottom: 20px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -7150,7 +7150,7 @@ input:checked + .slider:before {
 /* Estilo base para a toolbox no rodapé */
 .toolbox-rodape {
     position: fixed;
-    bottom: -100px;
+    bottom: -50px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -7170,7 +7170,7 @@ input:checked + .slider:before {
 
 /* Estado visível da toolbox */
 .toolbox-rodape.show {
-    bottom: 20px;
+    bottom: 65px;
 }
 
 /* Media Query para Dispositivos Móveis */
