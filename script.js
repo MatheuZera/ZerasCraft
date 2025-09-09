@@ -1,21 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM totalmente carregado e pronto!");
 
+    // =====================================
+    // Variáveis Globais de Áudio e Elementos
+    // =====================================
+    let hoverSound;
+    let clickSound;
     const backgroundAudio = document.getElementById('backgroundAudio');
+    const audioEffects = {};
+
     const audioControlButton = document.getElementById('audioControlButton');
     const audioPrevButton = document.getElementById('audioPrevButton');
     const audioNextButton = document.getElementById('audioNextButton');
-    const audioModeButton = document.getElementById('audioModeButton');
     const musicTitleDisplay = document.getElementById('musicTitleDisplay');
     const audioProgressBar = document.getElementById('audioProgressBar');
     const currentTimeDisplay = document.getElementById('currentTimeDisplay');
     const durationDisplay = document.getElementById('durationDisplay');
     const playbackSpeedSelect = document.getElementById('playbackSpeed');
+    const audioModeButton = document.getElementById('audioModeButton'); // Mantido apenas uma vez
 
     let preparingNextMusic = false;
-    let userInteractedWithAudio = localStorage.getItem('userInteractedWithAudio') === 'true';
-    let currentMode = localStorage.getItem('audioMode') || 'sequencial';
-    let currentMusicIndex = -1;
+    let userInteractedWithAudio = localStorage.getItem('userInteractedWithAudio') === 'true'; // Inicializa do localStorage
 
     const musicPlaylist = [
         { title: '✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
@@ -57,41 +62,36 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
         { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
     ];
-    
-    // =====================================
-    // Efeitos Sonoros
-    // =====================================
-    const audioEffects = {
-        link: new Audio('assets/audios/effects/link.mp3'),
-        card: new Audio('assets/audios/effects/card.mp3'),
-        button: new Audio('assets/audios/effects/button.mp3'),
-        select: new Audio('assets/audios/effects/select.mp3'),
-        click: new Audio('assets/audios/effects/click.mp3'),
-        buttonClick: new Audio('assets/audios/effects/button-click.mp3'),
-    };
-    
-    Object.values(audioEffects).forEach(audio => {
-        audio.preload = 'auto';
-        audio.volume = 0.5;
-    });
-    audioEffects.click.volume = 0.7;
+    let currentMusicIndex = -1;
+    let playbackMode = 'sequential';
+    let shuffledPlaylist = [];
 
-    const playEffectSound = (name) => {
-        const audioElement = audioEffects[name];
+    // =====================================
+    // Funções Auxiliares de Áudio
+    // =====================================
+    const initializeAudioEffect = (name, path, volume = 0.5) => {
+        const audio = new Audio(path);
+        audio.preload = 'auto';
+        audio.volume = volume;
+        audioEffects[name] = audio;
+        return audio;
+    };
+    clickSound = initializeAudioEffect('click', 'assets/audios/effects/click.mp3', 0.7);
+
+    const playEffectSoundInternal = (audioElement) => {
         if (audioElement) {
             const clonedAudio = audioElement.cloneNode();
             clonedAudio.volume = audioElement.volume;
-            clonedAudio.play().catch(e => {
-                console.error(`Erro ao tentar tocar som de efeito '${name}':`, e.message);
-                console.error(`Verifique se o arquivo '${audioElement.src}' existe e está acessível.`);
-            });
+            clonedAudio.play().catch(e => console.warn("Erro ao tentar tocar som de efeito:", e.message));
         }
     };
+    const playEffectSound = (audioElement) => {
+        setTimeout(() => {
+            playEffectSoundInternal(audioElement);
+        }, 10);
+    };
 
-    // =====================================
-    // Funções Auxiliares
-    // =====================================
-    const showCentralMessage = (message) => {
+    function showCentralMessage(message) {
         const centralMessageElement = document.getElementById('centralMessage');
         if (centralMessageElement) {
             centralMessageElement.textContent = message;
@@ -102,70 +102,149 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             console.log(`[Mensagem Central] ${message}`);
         }
-    };
+    }
 
-    const formatTime = (seconds) => {
+    function formatTime(seconds) {
         if (isNaN(seconds) || seconds < 0) return "0:00";
         const minutes = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-    };
+    }
 
     // =====================================
-    // Gerenciamento de Áudio Principal
+    // Configuração de Áudio
     // =====================================
-    const updateModeIcon = () => {
-        const iconElement = audioModeButton ? audioModeButton.querySelector('i') : null;
-        if (!iconElement) return;
+    const linkSound = new Audio('assets/audios/effects/link.mp3');
+    const cardSound = new Audio('assets/audios/effects/card.mp3');
+    const buttonSound = new Audio('assets/audios/effects/button.mp3');
+    const selectSound = new Audio('assets/audios/effects/select.mp3');
+    const buttonClickSound = new Audio('assets/audios/effects/button-click.mp3');
 
-        switch (currentMode) {
-            case 'sequencial':
-                iconElement.className = 'fas fa-list-ol';
-                audioModeButton.setAttribute('title', 'Tocar em sequência');
-                showCentralMessage('Modo: Sequencial');
-                break;
-            case 'aleatorio':
-                iconElement.className = 'fas fa-random';
-                audioModeButton.setAttribute('title', 'Reprodução aleatória');
-                showCentralMessage('Modo: Aleatório');
-                break;
-            case 'loop':
-                iconElement.className = 'fas fa-repeat';
-                audioModeButton.setAttribute('title', 'Repetir a música atual');
-                showCentralMessage('Modo: Repetir');
-                break;
+    linkSound.preload = 'auto';
+    cardSound.preload = 'auto';
+    buttonSound.preload = 'auto';
+    selectSound.preload = 'auto';
+    buttonClickSound.preload = 'auto';
+
+    function playSound(sound) {
+        const clonedSound = sound.cloneNode();
+        clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
+    }
+
+    // =====================================
+    // Gerenciamento do Volume
+    // =====================================
+    const volumeButton = document.getElementById('volumeButton');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeContainer = document.querySelector('.volume-container');
+    const mainAudio = backgroundAudio;
+
+    if (mainAudio) {
+        volumeSlider.value = mainAudio.volume;
+        updateVolumeIcon(mainAudio.volume);
+        volumeSlider.addEventListener('input', () => {
+            const volumeValue = parseFloat(volumeSlider.value);
+            mainAudio.volume = volumeValue;
+            updateVolumeIcon(volumeValue);
+        });
+        function updateVolumeIcon(volume) {
+            const icon = volumeButton.querySelector('i');
+            if (volume === 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (volume < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
         }
+    }
+
+    volumeButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        volumeSlider.classList.toggle('is-active');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (volumeSlider.classList.contains('is-active') && !volumeContainer.contains(event.target)) {
+            volumeSlider.classList.remove('is-active');
+        }
+    });
+
+    // =====================================
+    // Gerenciamento de Eventos de Interação
+    // =====================================
+    document.addEventListener('click', (event) => {
+        const target = event.target.closest('a, button');
+        if (!target) return;
+        const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
+        const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
+        if (isNavLink) {
+            event.preventDefault();
+            playSound(linkSound);
+            setTimeout(() => {
+                window.location.href = target.href;
+            }, 300);
+        } else if (isSpecialButton) {
+            playSound(buttonClickSound);
+        }
+    });
+
+    const cardElements = document.querySelectorAll(
+        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card'
+    );
+    const buttonElements = document.querySelectorAll(
+        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top'
+    );
+    const textLinkElements = document.querySelectorAll(
+        'p a, span a, li a'
+    );
+
+    cardElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(cardSound));
+    });
+    buttonElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(buttonSound));
+    });
+    textLinkElements.forEach(element => {
+        element.addEventListener('mouseenter', () => playSound(selectSound));
+    });
+
+    // =====================================
+    // Lógica de Controle da Música de Fundo
+    // =====================================
+
+    // =====================================
+    // Lógica de Controle da Música de Fundo
+    // (Sistema refeito com loop, faixa e aleatório)
+    // =====================================
+
+    const shuffleArray = (array) => {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
     };
 
     const updateAudioButtonTitle = () => {
         const iconElement = audioControlButton ? audioControlButton.querySelector('i') : null;
-        if (!musicTitleDisplay || !iconElement) return;
-
-        if (!backgroundAudio.paused && currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
-            musicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
-            iconElement.classList.remove('fa-play');
-            iconElement.classList.add('fa-pause');
-            if (audioControlButton) audioControlButton.classList.add('is-playing');
-        } else {
-            musicTitleDisplay.textContent = 'Clique para Tocar';
-            iconElement.classList.remove('fa-pause');
-            iconElement.classList.add('fa-play');
-            if (audioControlButton) audioControlButton.classList.remove('is-playing');
+        if (musicTitleDisplay && iconElement) {
+            if (!backgroundAudio.paused && currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
+                musicTitleDisplay.textContent = musicPlaylist[currentMusicIndex].title;
+                iconElement.classList.remove('fa-play');
+                iconElement.classList.add('fa-pause');
+                if (audioControlButton) audioControlButton.classList.add('is-playing');
+            } else {
+                musicTitleDisplay.textContent = 'Clique para Tocar';
+                iconElement.classList.remove('fa-pause');
+                iconElement.classList.add('fa-play');
+                if (audioControlButton) audioControlButton.classList.remove('is-playing');
+            }
         }
     };
 
-    const getRandomMusicIndex = () => {
-        if (musicPlaylist.length === 0) return -1;
-        let newIndex;
-        if (musicPlaylist.length > 1) {
-            do {
-                newIndex = Math.floor(Math.random() * musicPlaylist.length);
-            } while (newIndex === currentMusicIndex);
-        } else {
-            newIndex = 0;
-        }
-        return newIndex;
-    };
+
 
     const playMusic = () => {
         if (!backgroundAudio || !backgroundAudio.src) {
@@ -184,19 +263,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const loadMusic = (index) => {
-        if (index === -1 || !musicPlaylist[index]) {
-            console.warn("Índice de música inválido.");
+    const loadNewMusic = (playAfterLoad = false, specificIndex = -1) => {
+        if (musicPlaylist.length === 0) {
+            console.warn("Playlist vazia, não é possível carregar música.");
+            preparingNextMusic = false;
+            updateAudioButtonTitle();
             return;
         }
+        if (preparingNextMusic) {
+            console.log("Já está preparando a próxima música, abortando nova carga.");
+            return;
+        }
+
         preparingNextMusic = true;
-        currentMusicIndex = index;
+
+        let targetIndex = currentMusicIndex;
+
+        if (specificIndex !== -1) {
+            targetIndex = specificIndex;
+        } else {
+            if (playbackMode === 'shuffle') {
+                const currentShuffleIndex = shuffledPlaylist.indexOf(currentMusicIndex);
+                targetIndex = shuffledPlaylist[(currentShuffleIndex + 1) % shuffledPlaylist.length];
+            } else { // sequential ou loop
+                targetIndex = (currentMusicIndex + 1) % musicPlaylist.length;
+            }
+        }
+
+        currentMusicIndex = targetIndex;
         const music = musicPlaylist[currentMusicIndex];
+        if (!music) {
+            console.warn("Não foi possível obter um índice de música válido. Playlist vazia ou erro.");
+            preparingNextMusic = false;
+            return;
+        }
+
         backgroundAudio.src = music.src;
         backgroundAudio.load();
+        backgroundAudio.loop = (playbackMode === 'loop');
+
         backgroundAudio.oncanplaythrough = () => {
             preparingNextMusic = false;
-            playMusic();
+            if (playAfterLoad) {
+                playMusic();
+            } else {
+                updateAudioButtonTitle();
+            }
             updateProgressAndTimers();
             backgroundAudio.oncanplaythrough = null;
             saveAudioState();
@@ -206,48 +318,17 @@ document.addEventListener('DOMContentLoaded', () => {
             showCentralMessage('Erro ao carregar música. Pulando...');
             preparingNextMusic = false;
             backgroundAudio.onerror = null;
-            setTimeout(() => playNextMusic(), 500);
+            setTimeout(() => loadNewMusic(playAfterLoad), 500);
         };
-    };
-
-    const playNextMusic = () => {
-        if (musicPlaylist.length === 0) return;
-        let nextIndex;
-        if (currentMode === 'aleatorio') {
-            nextIndex = getRandomMusicIndex();
-        } else if (currentMode === 'sequencial') {
-            nextIndex = (currentMusicIndex + 1) % musicPlaylist.length;
-        } else if (currentMode === 'loop') {
-            backgroundAudio.currentTime = 0;
-            playMusic();
-            return;
-        }
-        loadMusic(nextIndex);
-    };
-
-    const playPrevMusic = () => {
-        if (musicPlaylist.length === 0) return;
-        let prevIndex;
-        if (currentMode === 'aleatorio') {
-            prevIndex = getRandomMusicIndex();
-        } else if (currentMode === 'sequencial') {
-            prevIndex = (currentMusicIndex - 1 + musicPlaylist.length) % musicPlaylist.length;
-        } else if (currentMode === 'loop') {
-            backgroundAudio.currentTime = 0;
-            playMusic();
-            return;
-        }
-        loadMusic(prevIndex);
     };
 
     const updateProgressAndTimers = () => {
         if (!audioProgressBar || !currentTimeDisplay || !durationDisplay) return;
-        const duration = backgroundAudio.duration;
-        if (duration > 0 && isFinite(duration)) {
-            const progress = backgroundAudio.currentTime / duration;
+        if (backgroundAudio.duration > 0 && !isNaN(backgroundAudio.duration) && isFinite(backgroundAudio.duration)) {
+            const progress = (backgroundAudio.currentTime / backgroundAudio.duration);
             audioProgressBar.value = progress * 100;
             currentTimeDisplay.textContent = formatTime(backgroundAudio.currentTime);
-            durationDisplay.textContent = formatTime(duration);
+            durationDisplay.textContent = formatTime(backgroundAudio.duration);
         } else {
             audioProgressBar.value = 0;
             currentTimeDisplay.textContent = "0:00";
@@ -264,7 +345,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 volume: backgroundAudio.volume,
                 playbackRate: backgroundAudio.playbackRate,
                 userInteracted: userInteractedWithAudio,
-                currentMode: currentMode
+                playbackMode: playbackMode,
+                shuffledPlaylist: shuffledPlaylist
             };
             localStorage.setItem('audioState', JSON.stringify(audioState));
         }
@@ -278,17 +360,17 @@ document.addEventListener('DOMContentLoaded', () => {
             backgroundAudio.volume = audioState.volume;
             backgroundAudio.playbackRate = audioState.playbackRate || 1;
             userInteractedWithAudio = audioState.userInteracted;
-            currentMode = audioState.currentMode || 'sequencial';
-            updateModeIcon();
-
+            playbackMode = audioState.playbackMode || 'sequential';
+            shuffledPlaylist = audioState.shuffledPlaylist || [];
             if (playbackSpeedSelect) {
                 playbackSpeedSelect.value = backgroundAudio.playbackRate;
             }
+            updateAudioModeIcon();
 
             if (currentMusicIndex !== -1 && musicPlaylist[currentMusicIndex]) {
                 backgroundAudio.src = musicPlaylist[currentMusicIndex].src;
                 backgroundAudio.load();
-
+                backgroundAudio.loop = (playbackMode === 'loop');
                 backgroundAudio.onloadedmetadata = () => {
                     if (backgroundAudio.duration > 0 && audioState.currentTime < backgroundAudio.duration) {
                         backgroundAudio.currentTime = audioState.currentTime;
@@ -305,44 +387,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 backgroundAudio.onerror = (e) => {
                     console.error("Erro ao carregar música restaurada:", e);
                     showCentralMessage('Erro ao restaurar música. Pulando...');
-                    playNextMusic();
+                    loadNewMusic(true);
                 };
             } else {
-                playNextMusic();
+                loadNewMusic(false);
             }
         } else {
-            playNextMusic();
+            loadNewMusic(false);
         }
     };
 
     // =====================================
-    // Listeners de Eventos
+    // Listeners de Eventos do Player de Música
     // =====================================
-    restoreAudioState();
-    updateModeIcon();
-
-    // Eventos para efeitos sonoros
-    const soundEffectListeners = [
-        { selector: 'a', sound: 'link' },
-        { selector: 'button:not([id^="audio"])', sound: 'button' },
-        { selector: '.card', sound: 'card' },
-        { selector: 'select', sound: 'select', event: 'change' },
-    ];
-    
-    const playedSounds = new Set();
-    const playEffectAndCache = (sound) => {
-        if (!playedSounds.has(sound)) {
-            playEffectSound(sound);
-            playedSounds.add(sound);
-            setTimeout(() => playedSounds.delete(sound), 500);
-        }
-    };
-
-    soundEffectListeners.forEach(({ selector, sound, event = 'click' }) => {
-        document.querySelectorAll(selector).forEach(element => {
-            element.addEventListener(event, () => playEffectAndCache(sound));
-        });
-    });
 
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
@@ -356,67 +413,84 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    if (audioModeButton) {
-        audioModeButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            playEffectSound('buttonClick');
-            switch (currentMode) {
-                case 'sequencial':
-                    currentMode = 'aleatorio';
-                    break;
-                case 'aleatorio':
-                    currentMode = 'loop';
-                    break;
-                default:
-                    currentMode = 'sequencial';
-            }
-            updateModeIcon();
-            localStorage.setItem('audioMode', currentMode);
-        });
-    }
-
-    if (backgroundAudio) {
-        backgroundAudio.addEventListener('ended', playNextMusic);
-        if (audioNextButton) audioNextButton.addEventListener('click', () => {
-            playEffectSound('buttonClick');
-            playNextMusic();
-        });
-        if (audioPrevButton) audioPrevButton.addEventListener('click', () => {
-            playEffectSound('buttonClick');
-            playPrevMusic();
-        });
-        backgroundAudio.addEventListener('timeupdate', updateProgressAndTimers);
-    }
-    
-    if (audioControlButton) {
-        audioControlButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            playEffectSound('click');
-            userInteractedWithAudio = true;
-            if (backgroundAudio.paused) {
-                if (currentMusicIndex === -1) {
-                    playNextMusic();
-                } else {
-                    playMusic();
-                }
-            } else {
-                backgroundAudio.pause();
-                updateAudioButtonTitle();
-                showCentralMessage('Reprodução Pausada');
-            }
+    audioControlButton.addEventListener('click', () => {
+        if (backgroundAudio.paused) {
+            playMusic();
+        } else {
+            backgroundAudio.pause();
+            showCentralMessage('Música pausada.');
+            updateAudioButtonTitle();
             saveAudioState();
-        });
-    }
+        }
+        userInteractedWithAudio = true;
+        localStorage.setItem('userInteractedWithAudio', 'true');
+    });
 
-    // Gerenciamento da Barra de Progresso
-    if (audioProgressBar && backgroundAudio) {
-        audioProgressBar.addEventListener('input', () => {
-            const newTime = (audioProgressBar.value / 100) * backgroundAudio.duration;
-            if (!isNaN(newTime) && isFinite(newTime)) {
-                backgroundAudio.currentTime = newTime;
-            }
-        });
-    }
+    audioPrevButton.addEventListener('click', () => {
+        if (playbackMode === 'shuffle') {
+            const currentShuffleIndex = shuffledPlaylist.indexOf(currentMusicIndex);
+            const prevShuffleIndex = (currentShuffleIndex - 1 + shuffledPlaylist.length) % shuffledPlaylist.length;
+            currentMusicIndex = shuffledPlaylist[prevShuffleIndex];
+        } else {
+            currentMusicIndex = (currentMusicIndex - 1 + musicPlaylist.length) % musicPlaylist.length;
+        }
+        loadNewMusic(true);
+    });
+
+    audioNextButton.addEventListener('click', () => {
+        // A lógica de avanço de faixa agora está centralizada no loadNewMusic
+        loadNewMusic(true);
+    });
+
+    audioModeButton.addEventListener('click', () => {
+        if (playbackMode === 'sequential') {
+            playbackMode = 'loop';
+            showCentralMessage('Modo: Repetir faixa atual');
+            backgroundAudio.loop = true;
+        } else if (playbackMode === 'loop') {
+            playbackMode = 'shuffle';
+            showCentralMessage('Modo: Aleatório');
+            backgroundAudio.loop = false;
+            // Cria a playlist aleatória apenas quando entra no modo shuffle
+            shuffledPlaylist = shuffleArray(Array.from({ length: musicPlaylist.length }, (_, i) => i));
+        } else if (playbackMode === 'shuffle') {
+            playbackMode = 'sequential';
+            showCentralMessage('Modo: Sequencial');
+            backgroundAudio.loop = false;
+        }
+        updateAudioModeIcon();
+        saveAudioState();
+    });
+
+    backgroundAudio.addEventListener('ended', () => {
+        // A lógica para a próxima música agora está centralizada no loadNewMusic
+        // Esta verificação garante que a música não avance se o loop estiver ativo
+        if (playbackMode !== 'loop') {
+            loadNewMusic(true);
+        }
+    });
+
+    backgroundAudio.addEventListener('timeupdate', updateProgressAndTimers);
+
+    audioProgressBar.addEventListener('input', () => {
+        const newTime = audioProgressBar.value / 100 * backgroundAudio.duration;
+        backgroundAudio.currentTime = newTime;
+    });
+
+    playbackSpeedSelect.addEventListener('change', () => {
+        backgroundAudio.playbackRate = parseFloat(playbackSpeedSelect.value);
+        saveAudioState();
+    });
+
+    // Chama a função de restauração de estado para iniciar a aplicação
+    restoreAudioState();
+
+
+
+
+
+
+
 
 
 
@@ -2068,22 +2142,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const toolboxRodape = document.querySelector('.toolbox-rodape');
     const toolboxFechar = document.querySelector('.toolbox-fechar');
+    setTimeout(() => toolboxRodape.classList.add('show'), 1000);
+    toolboxFechar.addEventListener('click', () => toolboxRodape.classList.remove('show'));
 
-    // Verifica se a toolbox principal existe na página
-    if (toolboxRodape) {
-        // Adiciona a classe 'show' após um pequeno atraso para a animação
-        // 1000ms (1 segundo) é um pouco longo, 100ms é mais comum para essa animação.
-        setTimeout(() => {
-            toolboxRodape.classList.add('show');
-        }, 100);
 
-        // Verifica se o botão de fechar existe na página e adiciona o evento
-        if (toolboxFechar) {
-            toolboxFechar.addEventListener('click', () => {
-                toolboxRodape.classList.remove('show');
-            });
-        }
-    }
+
+    // Incluir a funcionalidade de copiar código do item 25.
+    document.querySelectorAll('.toolbox-codigo-trigger').forEach(trigger => {
+        trigger.addEventListener('click', function (event) {
+            event.stopPropagation();
+            this.classList.toggle('active');
+        });
+    });
 
     // =======================================================
     // A
