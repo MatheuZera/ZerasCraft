@@ -57,36 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
         { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
     ];
-    
-    // =====================================
-    // Efeitos Sonoros
-    // =====================================
-    const audioEffects = {
-        link: new Audio('assets/audios/effects/link.mp3'),
-        card: new Audio('assets/audios/effects/card.mp3'),
-        button: new Audio('assets/audios/effects/button.mp3'),
-        select: new Audio('assets/audios/effects/select.mp3'),
-        click: new Audio('assets/audios/effects/click.mp3'),
-        buttonClick: new Audio('assets/audios/effects/button-click.mp3'),
-    };
-    
-    Object.values(audioEffects).forEach(audio => {
-        audio.preload = 'auto';
-        audio.volume = 0.5;
-    });
-    audioEffects.click.volume = 0.7;
-
-    const playEffectSound = (name) => {
-        const audioElement = audioEffects[name];
-        if (audioElement) {
-            const clonedAudio = audioElement.cloneNode();
-            clonedAudio.volume = audioElement.volume;
-            clonedAudio.play().catch(e => {
-                console.error(`Erro ao tentar tocar som de efeito '${name}':`, e.message);
-                console.error(`Verifique se o arquivo '${audioElement.src}' existe e está acessível.`);
-            });
-        }
-    };
 
     // =====================================
     // Funções Auxiliares
