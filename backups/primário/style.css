@@ -1885,6 +1885,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* ============================================================= */
 
 .audio-control-bar {
+    display: flex;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -5252,8 +5253,8 @@ input:checked + .slider:before {
 /* Botão de abrir o chatbot */
 .chatbot-btn {
     position: fixed;
-    bottom: 20px; /* Posição ajustada */
-    right: 20px; /* Posição ajustada */
+    bottom: 60px; /* Posição ajustada */
+    left: 20px; /* Posição ajustada */
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
     border: none;
@@ -5276,8 +5277,8 @@ input:checked + .slider:before {
 .chatbot-box {
     display: none;
     position: fixed;
-    bottom: 90px; /* Posição ajustada */
-    right: 20px; /* Posição ajustada */
+    bottom: 150px; /* Posição ajustada */
+    left: 20px; /* Posição ajustada */
     width: 350px;
     height: 400px;
     background-color: var(--cor-card-bg);
@@ -5748,7 +5749,7 @@ input:checked + .slider:before {
 /* Estilos para telas grandes (Desktop) */
 .cookie-consent {
     position: fixed;
-    bottom: 20px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -7170,7 +7171,7 @@ input:checked + .slider:before {
 
 /* Estado visível da toolbox */
 .toolbox-rodape.show {
-    bottom: 20px;
+    bottom: 65px;
 }
 
 /* Media Query para Dispositivos Móveis */
@@ -7185,6 +7186,43 @@ input:checked + .slider:before {
     }
 }
 
+.toolbox-fechar {
+    position: relative; /* Essencial para posicionar os pseudo-elementos */
+    width: 20px; /* Largura do botão ou do ícone */
+    height: 20px; /* Altura do botão ou do ícone */
+    background: none; /* Remove o fundo padrão do botão se não quiser */
+    border: none; /* Remove a borda padrão do botão */
+    cursor: pointer;
+    padding: 0;
+    display: flex; /* Para centralizar o X se necessário */
+    justify-content: center;
+    align-items: center;
+    font-size: 0; /* Oculta qualquer texto padrão dentro do botão */
+    color: var(--cor-btn-text); /* Cor do X */
+}
+
+.toolbox-fechar::before,
+.toolbox-fechar::after {
+    content: ''; /* Essencial para pseudo-elementos */
+    position: absolute;
+    width: 100%; /* Largura das linhas do X */
+    height: 2px; /* Espessura das linhas do X */
+    background-color: currentColor; /* Usa a cor definida no .toolbox-fechar */
+    border-radius: 1px; /* Bordas arredondadas para um visual mais suave */
+}
+
+.toolbox-fechar::before {
+    transform: rotate(45deg); /* Gira 45 graus para a primeira linha */
+}
+
+.toolbox-fechar::after {
+    transform: rotate(-45deg); /* Gira -45 graus para a segunda linha */
+}
+
+/* Opcional: Efeito hover */
+.toolbox-fechar:hover {
+    opacity: 0.8;
+}
 /* ============================================================= */
 /* Caixa de Ferramentas de Código (Hover) */
 /* ============================================================= */
