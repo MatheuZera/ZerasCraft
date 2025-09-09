@@ -1885,6 +1885,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* ============================================================= */
 
 .audio-control-bar {
+    display: flex;
     position: fixed;
     bottom: 0;
     left: 0;
