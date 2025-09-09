@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
         { title: '✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
         { title: '✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
-        { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
         { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp3' },
+        { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
         { title: '⛏️ Beginning', src: 'assets/audios/musics/Beginning.mp3' },
         { title: '⛏️ Biome Fest', src: 'assets/audios/musics/Biome-Fest.mp3' },
         { title: '⛏️ Blind Spots', src: 'assets/audios/musics/Blind-Spots.mp3' },
@@ -57,6 +57,36 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
         { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
     ];
+    
+    // =====================================
+    // Efeitos Sonoros
+    // =====================================
+    const audioEffects = {
+        link: new Audio('assets/audios/effects/link.mp3'),
+        card: new Audio('assets/audios/effects/card.mp3'),
+        button: new Audio('assets/audios/effects/button.mp3'),
+        select: new Audio('assets/audios/effects/select.mp3'),
+        click: new Audio('assets/audios/effects/click.mp3'),
+        buttonClick: new Audio('assets/audios/effects/button-click.mp3'),
+    };
+    
+    Object.values(audioEffects).forEach(audio => {
+        audio.preload = 'auto';
+        audio.volume = 0.5;
+    });
+    audioEffects.click.volume = 0.7;
+
+    const playEffectSound = (name) => {
+        const audioElement = audioEffects[name];
+        if (audioElement) {
+            const clonedAudio = audioElement.cloneNode();
+            clonedAudio.volume = audioElement.volume;
+            clonedAudio.play().catch(e => {
+                console.error(`Erro ao tentar tocar som de efeito '${name}':`, e.message);
+                console.error(`Verifique se o arquivo '${audioElement.src}' existe e está acessível.`);
+            });
+        }
+    };
 
     // =====================================
     // Funções Auxiliares
@@ -231,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
             saveAudioState();
         }).catch(e => {
             console.error("Erro ao tentar tocar áudio (provavelmente autoplay bloqueado):", e.message);
-            showCentralMessage('Autoplay bloqueado. Clique para tocar.');
+            showCentralMessage('Clique para tentar tocar..');
             updateAudioButtonTitle();
             saveAudioState();
         });
@@ -276,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         loadMusic(nextIndex);
+        showCentralMessage('Carregando..');
     };
 
     const playPrevMusic = () => {
@@ -291,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         loadMusic(prevIndex);
+        showCentralMessage('Carregando..');
     };
 
     const updateProgressAndTimers = () => {
