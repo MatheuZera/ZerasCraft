@@ -308,10 +308,10 @@ ul {
 .main-header {
     width: 100%;
     position: fixed;
-    top: 0;
+    top: -15px;
     left: 0;
     z-index: 1001;
-    background-color: rgba(26, 26, 26, 0.85);
+    background-color: rgba(24, 24, 24, 0.85);
     /* Ad-adu a opacity ken nasisinit a background */
     backdrop-filter: blur(8px);
     /* Napigpigsa a blur effect */
@@ -322,7 +322,7 @@ ul {
     justify-content: center;
     /* Mangisentro ti content iti horizontal */
     align-items: center;
-    padding: 10px 0;
+    padding: 50px 0;
     /* Vertical padding naadjust, horizontal nakontrol iti container */
     height: 70px;
     /* Fixed height para iti header */
@@ -2433,18 +2433,43 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 
 /* Específicos de Serviços */
 .services-grid {
-    display: flex;
+    /* Layout de grade flexível para organizar os cards em linhas. */
+    display: grid;
+    
+    /* Configura colunas que se adaptam. Cada coluna terá no mínimo 280px,
+       distribuindo o espaço restante de forma igual. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    
+    /* Espaçamento consistente entre os cards. */
     gap: 30px;
+    
+    /* Faz com que todos os cards na mesma linha tenham a mesma altura,
+       garantindo um visual limpo e alinhado. */
+    align-items: stretch;
+    
+    /* Centraliza os cartões horizontalmente dentro do contêiner. */
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .service-card {
+    /* Estilo padrão do cartão. */
     width: 100%;
-    max-width: 350px;
+    text-align: center;
+    padding: var(--padding-card);
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    transition: var(--transicao-padrao);
+}
+
+.service-card:hover {
+    /* Efeito de elevação ao passar o mouse. */
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-card-hover);
 }
 
 .service-card .icon-wrapper {
+    /* Estilo para o ícone. */
     width: 80px;
     height: 80px;
     background-color: var(--cor-secundaria);
@@ -2458,8 +2483,22 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 }
 
 .service-card .service-icon {
+    /* Animação do ícone. */
     font-size: 2.5rem;
     animation: pulse 1.5s infinite;
+}
+
+.service-card h4 {
+    /* Estilo para o título do cartão. */
+    color: var(--cor-texto-claro);
+    font-family: var(--fonte-subtitulo);
+    margin-bottom: 5px;
+}
+
+.service-card p {
+    /* Estilo para a descrição do cartão. */
+    color: var(--cor-card-text);
+    line-height: 1.6;
 }
 
 /* Específicos de Equipe */
@@ -4263,10 +4302,12 @@ input:checked + .slider:before {
 }
 
 /* ============================================================= */
-/* Modal */
+/* Modal Otimizado e Centralizado */
 /* ============================================================= */
 .modal-bg {
-    display: none;
+    /* O modal já está com display: flex e centralizado.
+       Adicionei uma animação de fade in para uma transição mais suave. */
+    display: flex;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -4276,27 +4317,48 @@ input:checked + .slider:before {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
-    display: flex; /* Adicionado para centralizar o conteúdo */
+    display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .modal-content {
+    /* Estilo do conteúdo do modal.
+       Substituí o "margin: 20px" por "padding" para manter o alinhamento central em telas pequenas.
+       Usei `translateY` para garantir um alinhamento perfeito no centro. */
     background-color: var(--cor-card-bg);
-    padding: 20px;
+    padding: 30px; /* Aumentei o padding para um visual mais espaçoso */
     border: 1px solid var(--cor-destaque);
-    width: 90%; /* Ajuste para mobile */
+    width: 90%;
     max-width: 500px;
     border-radius: var(--border-radius);
     position: relative;
     box-shadow: var(--sombra-card);
-    animation: fadeIn 0.3s ease-in-out;
+    
+    /* Animação para o modal aparecer do meio para o topo */
+    animation: modalSlideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Animação para transição de entrada do modal */
+@keyframes modalSlideUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .modal-close {
+    /* Ajustes para o botão de fechar. */
+    position: absolute; /* Posição absoluta dentro do modal-content */
+    top: 10px;
+    right: 15px;
     color: var(--cor-link-hover);
-    float: right;
-    font-size: 28px;
+    font-size: 32px; /* Aumentei para ser mais fácil de clicar */
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -4305,14 +4367,9 @@ input:checked + .slider:before {
 .modal-close:hover,
 .modal-close:focus {
     color: var(--cor-link);
+    transform: scale(1.2) rotate(10deg); /* Adicionei uma animação de rotação */
 }
 
-/* Otimização para Mobile */
-@media (max-width: 600px) {
-    .modal-content {
-        margin: 20px; /* Adicionado para telas menores */
-    }
-}
 
 /* ============================================================= */
 /* 1. Componente de Abas (Tabs) */
@@ -4997,7 +5054,7 @@ input:checked + .slider:before {
 /* ============================================================= */
 .aviso-toast {
     position: fixed;
-    bottom: 20px;
+    bottom: 100px;
     right: 20px;
     background-color: var(--cor-secundaria);
     color: var(--cor-texto-claro);
@@ -7924,9 +7981,9 @@ input:checked + .slider:before {
 /* ============================================================= */
 .toc {
     position: fixed;
-    top: 50px;
+    top: 120px;
     left: 20px;
-    width: 250px;
+    width: 230px;
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
     border-radius: var(--border-radius);
@@ -10893,7 +10950,7 @@ h1 {
     width: 0;
     height: 0;
 }
-
+ 
 .slider {
     position: absolute;
     cursor: pointer;
