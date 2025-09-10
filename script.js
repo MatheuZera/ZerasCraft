@@ -18,46 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMusicIndex = -1;
 
     const musicPlaylist = [
-        { title: '✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
-        { title: '✨ Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
-        { title: '✨ Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
-        { title: '✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
-        { title: '✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
         { title: '✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
-        { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp3' },
-        { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
-        { title: '⛏️ Beginning', src: 'assets/audios/musics/Beginning.mp3' },
-        { title: '⛏️ Biome Fest', src: 'assets/audios/musics/Biome-Fest.mp3' },
-        { title: '⛏️ Blind Spots', src: 'assets/audios/musics/Blind-Spots.mp3' },
-        { title: '⛏️ Clark', src: 'assets/audios/musics/Clark.mp3' },
-        { title: '⛏️ Danny', src: 'assets/audios/musics/Danny.mp3' },
-        { title: '⛏️ Dreiton', src: 'assets/audios/musics/Dreiton.mp3' },
-        { title: '⛏️ Dry Hands', src: 'assets/audios/musics/Dry-Hands.mp3' },
-        { title: '⛏️ Floating Trees', src: 'assets/audios/musics/Floating-Trees.mp3' },
-        { title: '⛏️ Haggstrom', src: 'assets/audios/musics/Haggstrom.mp3' },
-        { title: '⛏️ Key', src: 'assets/audios/musics/Key.mp3' },
-        { title: '⛏️ Living Mice', src: 'assets/audios/musics/Living-Mice.mp3' },
-        { title: '⛏️ Mice On Venus', src: 'assets/audios/musics/Mice-On-Venus.mp3' },
-        { title: '⛏️ Minecraft', src: 'assets/audios/musics/Minecraft.mp3' },
-        { title: '⛏️ Moog City', src: 'assets/audios/musics/Moog-City.mp3' },
-        { title: '⛏️ Mutation', src: 'assets/audios/musics/Mutation.mp3' },
-        { title: '⛏️ Sweden', src: 'assets/audios/musics/Sweden.mp3' },
-        { title: '⛏️ Taswell', src: 'assets/audios/musics/Taswell.mp3' },
-        { title: '⛏️ Wet Hands', src: 'assets/audios/musics/Wet-Hands.mp3' },
-        { title: '💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
-        { title: '💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
-        { title: '💿 Far', src: 'assets/audios/musics/records/Far.mp3' },
-        { title: '💿 Mall', src: 'assets/audios/musics/records/Mall.mp3' },
-        { title: '💿 Mellohi', src: 'assets/audios/musics/records/Mellohi.mp3' },
-        { title: '💿 Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
-        { title: '💿 Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
         { title: '💿 Relic', src: 'assets/audios/musics/records/Relic.mp3' },
-        { title: '💿 Stal', src: 'assets/audios/musics/records/Stal.mp3' },
-        { title: '💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
-        { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
-        { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
     ];
-    
+
     // =====================================
     // Efeitos Sonoros
     // =====================================
@@ -69,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         click: new Audio('assets/audios/effects/click.mp3'),
         buttonClick: new Audio('assets/audios/effects/button-click.mp3'),
     };
-    
+
     Object.values(audioEffects).forEach(audio => {
         audio.preload = 'auto';
         audio.volume = 0.5;
@@ -110,6 +74,60 @@ document.addEventListener('DOMContentLoaded', () => {
         const secs = Math.floor(seconds % 60);
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     };
+
+    // =====================================
+    // Gerenciamento do Volume
+    // =====================================
+    const volumeButton = document.getElementById('volumeButton');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeContainer = document.querySelector('.volume-container');
+
+    // A variável correta para o seu áudio de fundo
+    const mainAudio = backgroundAudio;
+
+    if (mainAudio && volumeButton && volumeSlider && volumeContainer) {
+        // Função para atualizar o ícone do botão de volume
+        function updateVolumeIcon(volume) {
+            const icon = volumeButton.querySelector('i');
+            if (!icon) return;
+            icon.classList.remove('fa-volume-mute', 'fa-volume-down', 'fa-volume-up');
+            if (volume === 0) {
+                icon.classList.add('fa-volume-mute');
+            } else if (volume < 0.5) {
+                icon.classList.add('fa-volume-down');
+            } else {
+                icon.classList.add('fa-volume-up');
+            }
+        }
+
+        // Sincroniza o slider com o volume atual do áudio
+        volumeSlider.value = mainAudio.volume;
+        updateVolumeIcon(mainAudio.volume);
+
+        // Adiciona evento para mudar o volume
+        volumeSlider.addEventListener('input', () => {
+            const volumeValue = parseFloat(volumeSlider.value);
+            mainAudio.volume = volumeValue;
+            updateVolumeIcon(volumeValue);
+            // Salva o estado do áudio no localStorage sempre que o volume muda
+            saveAudioState();
+        });
+
+        // Lógica de clique para mostrar/esconder o slider
+        volumeButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Impede que o clique no botão esconda o slider
+            volumeSlider.classList.toggle('is-active');
+            // Você pode adicionar um som de efeito aqui, se desejar.
+            playEffectSound('buttonClick');
+        });
+
+        // Esconde o slider se o usuário clicar em qualquer lugar fora dele
+        document.addEventListener('click', (event) => {
+            if (volumeSlider.classList.contains('is-active') && !volumeContainer.contains(event.target)) {
+                volumeSlider.classList.remove('is-active');
+            }
+        });
+    }
 
     // =====================================
     // Configuração de Áudio
@@ -193,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     textLinkElements.forEach(element => {
         element.addEventListener('mouseenter', () => playSound(selectSound));
     });
-    
+
     // =====================================
     // Gerenciamento de Áudio Principal
     // =====================================
@@ -413,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { selector: '.card', sound: 'card' },
         { selector: 'select', sound: 'select', event: 'change' },
     ];
-    
+
     const playedSounds = new Set();
     const playEffectAndCache = (sound) => {
         if (!playedSounds.has(sound)) {
@@ -472,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         backgroundAudio.addEventListener('timeupdate', updateProgressAndTimers);
     }
-    
+
     if (audioControlButton) {
         audioControlButton.addEventListener('click', (e) => {
             e.stopPropagation();
