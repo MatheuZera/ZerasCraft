@@ -3,9 +3,9 @@
  * Nabukel manipud iti naited a HTML structure ken napasayaat para iti multi-pahina.
 */
 
-/* ===================================== */
-/* 0. Custom Fonts from assets/fonts     */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* FONTES CUSTOMIZÁVEIS */
+/* ====================================================================================================================== */
 
 @font-face {
     font-family: 'TitleFont';
@@ -45,9 +45,9 @@
 /* Import fonts manipud iti Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap');
 
-/* ===================================== */
-/* 1. Dagiti Variables ken Basic Reset   */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* VARIÁVEIS GLOBAIS CSS */
+/* ====================================================================================================================== */
 
 :root {
     /* Dagiti Kolor */
@@ -99,6 +99,9 @@
     --transicao-icon-rotate: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* ====================================================================================================================== */
+/* SITE EM GERAL */
+/* ====================================================================================================================== */
 /* Basic Reset */
 *,
 *::before,
@@ -211,13 +214,16 @@ ul {
     font-family: var(--fonte-mini);
 }
 
+/* ====================================================================================================================== */
+/* MENSAGEM CENTRAL */
+/* ====================================================================================================================== */
 .central-message {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -20px);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: var(--cor-destaque);
+    background-color:var(--cor-secundaria);
+    color: var(--cor-fundo-claro);
     padding: 15px 30px;
     border-radius: var(--border-radius);
     z-index: 9999;
@@ -237,9 +243,9 @@ ul {
     transform: translate(-50%, 0);
 }
 
-/* ===================================== */
-/* 1. General Layout ken Containers */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* CONTAINERS E LAYOUTS GERAIS */
+/* ====================================================================================================================== */
 .container {
     max-width: var(--max-width-content);
     margin: 0 auto;
@@ -302,16 +308,16 @@ ul {
     transition: none !important;
 }
 
-/* ===================================== */
-/* 2. Header ken Navigation (Narebisa) */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* BARRA DE NAVEGAÇÃO */
+/* ====================================================================================================================== */
 .main-header {
     width: 100%;
     position: fixed;
-    top: 0;
+    top: -12px;
     left: 0;
     z-index: 1001;
-    background-color: rgba(26, 26, 26, 0.85);
+    background-color: rgba(24, 24, 24, 0.85);
     /* Ad-adu a opacity ken nasisinit a background */
     backdrop-filter: blur(8px);
     /* Napigpigsa a blur effect */
@@ -322,7 +328,7 @@ ul {
     justify-content: center;
     /* Mangisentro ti content iti horizontal */
     align-items: center;
-    padding: 10px 0;
+    padding: 50px 0;
     /* Vertical padding naadjust, horizontal nakontrol iti container */
     height: 70px;
     /* Fixed height para iti header */
@@ -383,9 +389,9 @@ ul {
 }
 
 
-/* =====================================
-Navigation Menu para iti Mobile (Agtultuloy iti 768px)
-===================================== */
+/* ========================================== */
+/* NAVEGAÇÃO PARA MOBILE 768PX */
+/* ========================================== */
 @media (max-width: 768px) {
     .main-header {
         height: 60px;
@@ -403,7 +409,7 @@ Navigation Menu para iti Mobile (Agtultuloy iti 768px)
         display: block;
         position: fixed;
         /* Fixed para iti nasaysayaat a access */
-        top: 10px;
+        top: 20px;
         /* Naadjust a ngato */
         right: 10px;
         /* Naadjust iti kanawan */
@@ -497,9 +503,9 @@ Navigation Menu para iti Mobile (Agtultuloy iti 768px)
     }
 }
 
-/* =====================================
-Navigation Menu para iti Desktop (Manipud iti 769px)
-===================================== */
+/* ========================================== */
+/* NAVEGAÇÃO PARA MOBILE 769PX */
+/* ========================================== */
 @media (min-width: 769px) {
 
     /* Siguradoen a saan nga aggapu ti hamburger button */
@@ -576,9 +582,9 @@ Navigation Menu para iti Desktop (Manipud iti 769px)
     }
 }
 
-/* ===================================== */
-/* 3. Hero Section (Main Highlight) - Naurnos */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* HERO SECTION - INÍCIO DA PÁGINA */
+/* ====================================================================================================================== */
 .hero-section {
     position: relative;
     width: 100%;
@@ -811,10 +817,9 @@ Navigation Menu para iti Desktop (Manipud iti 769px)
     }
 }
 
-
-/* ===================================== */
-/* 4. Botões e Elementos Interativos */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* BOTÕES E ELEMENTOS INTERATIVOS */
+/* ====================================================================================================================== */
 
 .btn-primary {
     display: inline-block;
@@ -906,9 +911,9 @@ h3 .fas {
     margin-right: 10px;
 }
 
-/* ===================================== */
-/* 5. Seções com Grids */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* SEÇÕES COM GRIDS */
+/* ====================================================================================================================== */
 
 .section-description {
     text-align: center;
@@ -1161,9 +1166,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-bottom: 20px;
 }
 
-/* ------------------------------------- */
+/* ---------------- */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE ACESSO (IP/Porta) */
-/* ------------------------------------- */
+/* ---------------- */
 .access-section .access-info {
     /* Usando classe pai para maior especificidade */
     background-color: var(--cor-card-bg);
@@ -1254,9 +1259,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 }
 
 
-/* ------------------------------------- */
+/* -------------- */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE EVENTO */
-/* ------------------------------------- */
+/* -------------- */
 .events-sub-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1379,9 +1384,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
-/* ------------------------------------- */
+/* --------------- */
 /* ESTILOS ESPECÍFICOS PARA CARDS DA COMUNIDADE */
-/* ------------------------------------- */
+/* --------------- */
 .community-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
@@ -1411,18 +1416,18 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 }
 
 
-/* ------------------------------------- */
+/* ------------ */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE PARCERIA */
-/* ------------------------------------- */
+/* ------------ */
 .partnership-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     /* Talvez um pouco menores */
 }
 
 
-/* ------------------------------------- */
+/* ----------- */
 /* ESTILOS PARA SEÇÃO DE ARQUIVOS E CARDS (PÁGINA ARQUIVOS.HTML) */
-/* ------------------------------------- */
+/* ----------- */
 .search-and-filter-container {
     display: flex;
     flex-direction: column;
@@ -1605,9 +1610,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 }
 
 
-/* ------------------------------------- */
+/* --------- */
 /* ESTILOS DO MODAL DE DOWNLOAD */
-/* ------------------------------------- */
+/* --------- */
 #download-modal {
     display: none;
     /* Inicia oculto */
@@ -1716,9 +1721,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     box-shadow: var(--sombra-card-hover);
 }
 
-/* ===================================== */
-/* 6. Rodapé (Footer) - APRIMORADO */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* RODAPÉ COMPLETO DE TODAS AS PÁGINAS */
+/* ====================================================================================================================== */
 
 .main-footer {
     background-color: var(--cor-fundo-escuro);
@@ -1880,9 +1885,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     /* background-color: rgba(255, 0, 0, 0.1); */
 }
 
-/* ============================================================= */
-/* 2. Audio Control Bar - VERSÃO FINAL E ULTRA-COMPACTA */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CONTROLE DE ÁUDIO E PLAYLIST AVANÇADA NO .JS */
+/* ====================================================================================================================== */
 
 .audio-control-bar {
     display: flex;
@@ -2057,9 +2062,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* ============================================================= */
-/* 9. Media Queries (VERSÃO FINAL E COMPLETA) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MEDIA QUERIES - ADAPTAÇÃO PARA MOBILES */
+/* ====================================================================================================================== */
 
 @media (max-width: 768px) {
     /* --- Tipografia e Fontes --- */
@@ -2213,9 +2218,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
-/* ===================================== */
-/* 8. Botão Voltar ao Topo */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* BOTÃO VOLTAR AO TOPO */
+/* ====================================================================================================================== */
 .scroll-top-button {
     position: fixed;
     bottom: 60px;
@@ -2259,13 +2264,121 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     box-shadow: 0 0 15px rgba(76, 175, 80, 0.9), 0 0 25px rgba(56, 142, 60, 0.6);
 }
 
-/* ================================================================== */
-/* ================================================================== */
-/* ================================================================== */
 
-/* ===================================== */
-/* 10. ELEMENTOS */
-/* ===================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ====================================================================================================================== */
+/* ====================================================================================================================== */
+/* ====================================================================================================================== */
+/* ====================================================================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ====================================================================================================================== */
+/* PREÇOS GERAIS DE PLANOS */
+/* ====================================================================================================================== */
 
 /* Específicos de Planos - Atualizado com Pop-up Fixo */
 .pricing-grid {
@@ -2391,6 +2504,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
+/* ====================================================================================================================== */
+/* PARCERIAS */
+/* ====================================================================================================================== */
 /* Específicos de Parcerias */
 .partnership-grid {
     display: flex;
@@ -2431,37 +2547,79 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     text-transform: uppercase;
 }
 
-/* Específicos de Serviços */
+/* ====================================================================================================================== */
+/* ESTATÍSTICAS (NOVO ESTILO) */
+/* ====================================================================================================================== */
 .services-grid {
-    display: flex;
-    gap: 30px;
+    /* Usa CSS Grid para um alinhamento perfeito */
+    display: grid;
+    
+    /* Configura as colunas para que os cards fiquem um ao lado do outro. */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    
+    /* Espaçamento consistente entre os cards */
+    gap: 20px;
+    
+    /* Centraliza o grid dentro do contêiner */
     justify-content: center;
-    flex-wrap: wrap;
+    
+    /* Garante que todos os cards na mesma linha tenham a mesma altura */
+    align-items: stretch;
 }
 
 .service-card {
+    /* Estilo do cartão para se parecer com a imagem */
     width: 100%;
-    max-width: 350px;
+    text-align: center;
+    padding: 30px 15px; /* Aumentei o padding vertical para mais espaço */
+    background-color: #2F394C; /* Cor de fundo do card da imagem */
+    color: #fff; /* Cor do texto padrão */
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
+    transition: var(--transicao-padrao);
+}
+
+.service-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação sutil */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .service-card .icon-wrapper {
-    width: 80px;
-    height: 80px;
-    background-color: var(--cor-secundaria);
-    color: var(--cor-fundo-claro);
+    /* Estilo para o ícone */
+    width: 60px; /* Tamanho do wrapper do ícone */
+    height: 60px;
+    background-color: transparent; /* Fundo transparente */
+    color: var(--neon-flame-color1); /* Cor do ícone */
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 20px;
-    box-shadow: 0 0 10px rgba(0, 128, 0, 0.4);
+    margin: 0 auto 10px; /* Reduzi a margem inferior */
 }
 
 .service-card .service-icon {
-    font-size: 2.5rem;
-    animation: pulse 1.5s infinite;
+    font-size: 3rem; /* Tamanho maior do ícone */
+    color: var(--cor-primaria); /* Cor principal do ícone */
 }
 
+.service-card h4 {
+    color: var(--cor-destaque); /* Cor de destaque para o número */
+    font-family: var(--fonte-titulo);
+    font-size: 2.5em; /* Tamanho do número */
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+.service-card p {
+    color: var(--cor-texto-claro); /* Cor do texto descritivo */
+    font-family: var(--fonte-corpo);
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* ====================================================================================================================== */
+/* EQUIPE */
+/* ====================================================================================================================== */
 /* Específicos de Equipe */
 .team-grid {
     display: flex;
@@ -2499,7 +2657,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: var(--cor-texto-claro);
 }
 
-
+/* ====================================================================================================================== */
+/* GALERIA */
+/* ====================================================================================================================== */
 /* Específicos da Galeria */
 .gallery-grid {
     display: grid;
@@ -2529,8 +2689,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     transform: scale(1.1);
 }
 
-
-
+/* ====================================================================================================================== */
+/* SOBRE NÓS */
+/* ====================================================================================================================== */
 /* Específicos de Sobre Nós */
 .about-grid {
     display: flex;
@@ -2564,7 +2725,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
-
+/* ====================================================================================================================== */
+/* TESTIMONIALS - DEPOIMENTOS */
+/* ====================================================================================================================== */
 /* Específicos de Depoimentos */
 .testimonials-grid {
     display: flex;
@@ -2617,7 +2780,167 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: var(--cor-texto-claro);
 }
 
+/* ====================================================================================================================== */
+/* NOVO MODELO DE ACORDEÃO */
+/* ====================================================================================================================== */
+.acordeao-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 0 10px;
+}
 
+.acordeao-item {
+    background-color: transparent;
+    border: 1px solid var(--cor-bordas);
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+}
+
+.acordeao-item.active {
+    background-color: var(--cor-card-bg);
+    border-color: var(--cor-primaria);
+    box-shadow: var(--sombra-card-hover);
+}
+
+.acordeao-btn {
+    background-color: transparent;
+    color: var(--cor-card-text);
+    cursor: pointer;
+    padding: 18px 25px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+    font-family: var(--fonte-subtitulo);
+    transition: var(--transicao-padrao);
+}
+
+.acordeao-btn:hover {
+    color: var(--cor-destaque);
+}
+
+.acordeao-btn .acordeao-icon {
+    font-size: 1.5em;
+    color: var(--cor-primaria);
+    transition: transform 0.4s ease, color 0.4s ease;
+}
+
+.acordeao-btn.active .acordeao-icon {
+    transform: rotate(45deg); /* Gira 45 graus para um visual moderno */
+    color: var(--cor-destaque);
+}
+
+.acordeao-painel {
+    padding: 0 25px;
+    background-color: var(--cor-card-bg);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-top: 1px solid var(--cor-bordas);
+}
+
+.acordeao-painel p {
+    padding: 20px 0;
+    margin: 0;
+    color: var(--cor-card-text);
+    line-height: 1.6;
+}
+
+.acordeao-painel.show {
+    max-height: 500px; /* Garante que o conteúdo seja exibido */
+}
+
+/* ====================================================================================================================== */
+/* NOVO MODELO DE ACORDEÃO (CARD INTERATIVO) */
+/* ====================================================================================================================== */
+.faq-accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    transition: var(--transicao-padrao);
+}
+
+.accordion-item:hover {
+    box-shadow: var(--cor-card-bg);
+    transform: translateY(-5px); /* Efeito de elevação sutil */
+}
+
+.accordion-btn {
+    width: 100%;
+    display: flex; /* Usado para alinhar o texto e o ícone */
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    color: var(--cor-texto-claro);
+    text-align: left;
+    padding: 20px 25px; /* Padding maior para mais espaço */
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-btn:hover {
+    background-color: var(--cor-card-hover);
+}
+
+.accordion-btn.active {
+    background-color: var(--cor-primaria);
+    color: var(--cor-fundo-claro);
+}
+
+/* Novo ícone de expansão */
+.accordion-btn::after {
+    content: '\2b'; /* Símbolo de mais */
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--cor-fundo-escuro);
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.accordion-btn.active::after {
+    content: '\2212'; /* Símbolo de menos */
+    transform: rotate(180deg);
+    color: var(--cor-fundo-claro);
+}
+
+.accordion-panel {
+    background-color: var(--cor-card-bg-sutil);
+    color: var(--cor-texto-secundario);
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais suave */
+}
+
+.accordion-panel p {
+    padding: 15px 0;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.accordion-panel.show {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+/* ====================================================================================================================== */
+/* ARCODEAO GERAL */
+/* ====================================================================================================================== */
 /* Específicos de FAQ */
 .faq-accordion {
     max-width: 800px;
@@ -2645,7 +2968,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 }
 
 .accordion-btn:hover {
-    background-color: var(--cor-fundo-escuro);
+    background-color: var(--cor-card-hover);
 }
 
 .accordion-btn.active {
@@ -2654,7 +2977,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 }
 
 .accordion-panel {
-    background-color: var(--cor-card-bg-sutil);
+    background-color: var(--cor-card-hover);
     color: var(--cor-texto-secundario);
     padding: 0 18px;
     max-height: 0;
@@ -2667,59 +2990,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin: 0;
 }
 
-/* Específicos de Sobre Nós */
-.about-grid {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    flex-wrap: wrap;
-}
-
-.about-content {
-    flex: 1;
-    min-width: 300px;
-}
-
-.about-image {
-    flex: 1;
-    min-width: 300px;
-    text-align: center;
-}
-
-.about-image img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 12px;
-    box-shadow: var(--sombra-card);
-}
-
-@media (max-width: 768px) {
-    .about-grid {
-        flex-direction: column-reverse; /* Imagem acima do texto em telas menores */
-        gap: 20px;
-    }
-}
-
-/* Específicos de CTA */
-#cta {
-    background-image: url('https://via.placeholder.com/1920x600'); /* Altere para uma imagem de fundo real */
-    background-size: cover;
-    background-position: center;
-    color: var(--cor-fundo-claro);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-#cta .section-title {
-    color: var(--cor-fundo-claro);
-}
-
-.btn-lg {
-    font-size: 1.5rem;
-    padding: 15px 40px;
-    border-radius: 50px;
-}
-
-
+/* ====================================================================================================================== */
+/* CONTATO */
+/* ====================================================================================================================== */
 /* Específicos de Contato */
 .contact-form {
     max-width: 600px;
@@ -2746,6 +3019,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     box-shadow: 0 0 10px var(--cor-primaria);
 }
 
+/* ====================================================================================================================== */
+/* RECURSOS */
+/* ====================================================================================================================== */
 /* Específicos de Recursos */
 .features-grid {
     display: flex;
@@ -2775,6 +3051,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: var(--cor-card-text);
 }
 
+/* ====================================================================================================================== */
+/* COMUNIDADE */
+/* ====================================================================================================================== */
 /* Específicos de Comunidade */
 .community-grid {
     display: flex;
@@ -2816,6 +3095,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     font-size: 0.9em;
 }
 
+/* ====================================================================================================================== */
+/* ESTATÍSTICAS */
+/* ====================================================================================================================== */
 /* Específicos de Estatísticas */
 .stats-grid {
     display: flex;
@@ -2851,6 +3133,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: var(--cor-card-text);
 }
 
+/* ====================================================================================================================== */
+/* ANÚNCIOS */
+/* ====================================================================================================================== */
 /* Específicos de Anúncios */
 .announcements-grid {
     display: flex;
@@ -2888,7 +3173,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: var(--cor-card-text);
 }
 
-
+/* ====================================================================================================================== */
+/* BANNER */
+/* ====================================================================================================================== */
 /* Específicos do Banner */
 .banner-promo {
     background: linear-gradient(90deg, var(--cor-primaria-sutil) 0%, var(--cor-primaria) 100%);
@@ -2922,6 +3209,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
+/* ====================================================================================================================== */
+/* LOGIN */
+/* ====================================================================================================================== */
 /* Específicos de Login */
 .login-form {
     max-width: 400px;
@@ -2973,6 +3263,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: var(--cor-card-text);
 }
 
+/* ====================================================================================================================== */
+/* EVENTOS */
+/* ====================================================================================================================== */
 /* Específicos de Eventos */
 .event-grid {
     display: flex;
@@ -3024,6 +3317,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-top: 20px;
 }
 
+/* ====================================================================================================================== */
+/* LOJA */
+/* ====================================================================================================================== */
 /* Específicos da Loja */
 .store-grid {
     display: flex;
@@ -3056,6 +3352,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-bottom: 15px;
 }
 
+/* ====================================================================================================================== */
+/* CLASSES */
+/* ====================================================================================================================== */
 /* Específicos de Classes */
 .class-grid {
     display: flex;
@@ -3079,7 +3378,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-bottom: 10px;
 }
 
-
+/* ====================================================================================================================== */
+/* BLOG */
+/* ====================================================================================================================== */
 /* Específicos do Blog */
 .blog-grid {
     display: flex;
@@ -3124,7 +3425,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: var(--cor-card-text);
 }
 
-
+/* ====================================================================================================================== */
+/* ÁREA DE MEMBROS */
+/* ====================================================================================================================== */
 /* Específicos de Área de Membros */
 .member-area-grid {
     display: flex;
@@ -3162,8 +3465,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: var(--cor-card-text);
 }
 
-
-
+/* ====================================================================================================================== */
+/* TRANSMISSÃO AO VIVO */
+/* ====================================================================================================================== */
 /* Específicos de Transmissão ao Vivo */
 .live-stream-container {
     position: relative;
@@ -3189,10 +3493,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-top: 30px;
 }
 
-/* ============================================================= */
-/* 1. Carrossel de Depoimentos */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* CARROSSEL DE DEPOIMENTOS */
+/* ====================================================================================================================== */
 /* Estilos para telas grandes (Desktop) */
 .testimonials-carousel-container {
     position: relative;
@@ -3305,117 +3608,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
-/* ============================================================= */
-/* 1. Botão com Brilho (Glow Button) */
-/* ============================================================= */
-
-.glow-btn {
-    /* Estilo base do botão */
-    position: relative;
-    border: none;
-    background: none;
-    font-family: var(--fonte-pixel);
-    font-size: 1em;
-    padding: 15px 30px;
-    cursor: pointer;
-    text-transform: uppercase;
-    border-radius: var(--border-radius);
-    color: var(--cor-texto-claro);
-    background-color: var(--cor-primaria);
-    box-shadow: var(--sombra-leve);
-    transition: all 0.3s ease;
-}
-
-.glow-btn:hover {
-    /* Efeito de hover principal */
-    background-color: var(--cor-secundaria);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.glow-btn::before {
-    /* Pseudo-elemento para o efeito de brilho */
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    background: var(--cor-primaria);
-    opacity: 0;
-    filter: blur(8px);
-    transition: all 0.5s ease;
-    border-radius: var(--border-radius);
-    z-index: -1;
-}
-
-.glow-btn:hover::before {
-    /* Ativação do brilho ao passar o mouse */
-    opacity: 0.8;
-    transform: scale(1.05);
-}
-
-/* ============================================================= */
-/* 1. Alternador de Tema */
-/* ============================================================= */
-
-#theme-toggle {
-    /* Estilo e posicionamento do botão */
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--cor-secundaria);
-    color: var(--cor-destaque);
-    border: none;
-    cursor: pointer;
-    font-size: 1.5em;
-    box-shadow: var(--sombra-leve);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    z-index: 9999;
-}
-
-#theme-toggle:hover {
-    background-color: var(--cor-primaria);
-    transform: scale(1.1) rotate(20deg);
-}
-
-/* Estilos para o tema claro */
-body.light-theme {
-    background-color: var(--cor-fundo-claro);
-    color: var(--cor-texto-escuro);
-}
-
-body.light-theme .card,
-body.light-theme .advanced-tabs-container {
-    background-color: #FFF;
-    border-color: #E0E0E0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-body.light-theme .testimonial-card .quote,
-body.light-theme .pricing-features li,
-body.light-theme .stat-label {
-    color: var(--cor-texto-escuro);
-}
-
-body.light-theme .testimonial-card .author .player-name,
-body.light-theme .pricing-price,
-body.light-theme .stat-number,
-body.light-theme .stat-icon {
-    color: var(--cor-destaque);
-}
-
-body.light-theme .pricing-features li {
-    border-color: #EEE;
-}
-
-/* ============================================================= */
-/* 1. Cards de Preço 3D */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* CARDS 3D DE PREÇOS */
+/* ====================================================================================================================== */
 .pricing-3d-grid {
     /* Layout de grade flexível para se adaptar a diferentes tamanhos de tela */
     display: grid;
@@ -3461,10 +3656,9 @@ body.light-theme .pricing-features li {
     margin-top: 20px;
 }
 
-/* ============================================================= */
-/* 1. A     */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* MINI-CARD DE AVISO */
+/* ====================================================================================================================== */
 .alert-banner {
     display: flex;
     align-items: center;
@@ -3515,10 +3709,9 @@ body.light-theme .pricing-features li {
     transform: scale(1.2);
 }
 
-/* ============================================================= */
-/* 1. Sistema de Chat */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* CARD DE COMUNIDADE (COM PREENCHIMENTO DE OPÇÕES) */
+/* ====================================================================================================================== */
 .chat-container {
     max-width: 600px;
     margin: 50px auto 0 auto;
@@ -3591,10 +3784,9 @@ body.light-theme .pricing-features li {
     }
 }
 
-/* ============================================================= */
-/* 1. Tabela de Estatísticas */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* TABELA DE ESTATÍSTICAS */
+/* ====================================================================================================================== */
 .stats-table {
     width: 100%;
     max-width: 600px;
@@ -3678,57 +3870,9 @@ body.light-theme .pricing-features li {
     }
 }
 
-/* ============================================================= */
-/* 1. Botão de Coração (Favoritar) */
-/* ============================================================= */
-
-.btn-heart {
-    /* Estilo base do botão */
-    background: none;
-    border: none;
-    color: var(--cor-texto-claro);
-    font-size: 1.2em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-}
-
-.btn-heart:hover {
-    /* Efeito de hover principal */
-    color: var(--cor-destaque);
-    transform: scale(1.05);
-}
-
-.btn-heart i {
-    /* Estilo e animação do ícone */
-    transition: color 0.3s ease;
-}
-
-.btn-heart:not(.active) i {
-    /* Aplica a animação somente quando o botão não está ativo */
-    animation: heartBeat 1.5s ease-in-out infinite;
-}
-
-.btn-heart.active i {
-    /* Estilo para o estado ativo (curtido) */
-    color: var(--cor-destaque);
-    animation: none; /* Desativa a animação quando ativo */
-}
-
-@keyframes heartBeat {
-    0% { transform: scale(1); }
-    15% { transform: scale(1.2); }
-    30% { transform: scale(1); }
-    45% { transform: scale(1.2); }
-    60% { transform: scale(1); }
-    100% { transform: scale(1); }
-}
-
-/* ============================================================= */
-/* 1. Grid Interativo (Flip Cards) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARDS DE FLIP 3D */
+/* ====================================================================================================================== */
 .interactive-grid {
     display: grid;
     gap: var(--gap-grid);
@@ -3776,9 +3920,9 @@ body.light-theme .pricing-features li {
     text-align: center;
 }
 
-/* ============================================================= */
-/* 2. Modal de Membro da Equipe */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MODAL DE MEMBRO DA EQUIPE */
+/* ====================================================================================================================== */
 .team-member-modal {
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -3815,130 +3959,6 @@ body.light-theme .pricing-features li {
     font-size: 2em;
     margin-bottom: 10px;
     color: var(--cor-primaria);
-}
-
-/* ============================================================= */
-/* 1. Depoimento com Efeito de Digitação */
-/* ============================================================= */
-
-.testimonial-typing-container {
-    /* Estilo e layout base do contêiner */
-    max-width: 700px;
-    margin: 50px auto;
-    padding: var(--padding-card);
-    background-color: var(--cor-card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card);
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.testimonial-typing-container p {
-    /* Estilo do texto principal do depoimento */
-    font-size: 1.2em;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.testimonial-typing-container .testimonial-author {
-    /* Estilo do contêiner do autor */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.testimonial-typing-container .testimonial-author img {
-    /* Estilo da imagem do autor */
-    width: 60px;
-    height: 60px;
-    border-radius: 0%; /* Mantido para ser fiel ao original */
-    border: 2px solid var(--cor-primaria);
-    object-fit: cover;
-}
-
-.testimonial-typing-container .testimonial-author p {
-    /* Estilo do nome/título do autor */
-    font-family: var(--fonte-pixel);
-    color: var(--cor-destaque);
-    font-size: 1em;
-    margin: 0;
-}
-
-/* Otimização para Mobile */
-@media (max-width: 768px) {
-    .testimonial-typing-container {
-        margin: 20px 15px;
-        padding: 20px;
-    }
-
-    .testimonial-typing-container p {
-        font-size: 1em;
-    }
-}
-
-/* ============================================================= */
-/* 1. Efeito Glitch no Texto */
-/* ============================================================= */
-
-.glitch-text {
-    /* Estilo base do texto */
-    font-family: var(--fonte-pixel);
-    color: var(--cor-texto-claro);
-    font-size: 2.5em;
-    line-height: 1.2;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap; /* Evita quebra de linha indesejada */
-}
-
-/* Pseudo-elementos para criar as camadas do efeito */
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text); /* Copia o texto original */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--cor-fundo-escuro);
-    overflow: hidden;
-}
-
-/* Camada superior do glitch (efeito primário) */
-.glitch-text::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--cor-primaria);
-    animation: glitch-anim-1 2s infinite linear alternate-reverse;
-}
-
-/* Camada inferior do glitch (efeito secundário) */
-.glitch-text::after {
-    left: -2px;
-    text-shadow: -2px 0 var(--cor-destaque);
-    animation: glitch-anim-2 2s infinite linear alternate-reverse;
-}
-
-/* Animações de clip-path otimizadas */
-@keyframes glitch-anim-1 {
-    0% { clip-path: inset(62% 0 17% 0); }
-    25% { clip-path: inset(5% 0 74% 0); }
-    50% { clip-path: inset(71% 0 18% 0); }
-    75% { clip-path: inset(44% 0 50% 0); }
-    100% { clip-path: inset(34% 0 17% 0); }
-}
-
-@keyframes glitch-anim-2 {
-    0% { clip-path: inset(4% 0 83% 0); }
-    25% { clip-path: inset(55% 0 35% 0); }
-    50% { clip-path: inset(84% 0 12% 0); }
-    75% { clip-path: inset(5% 0 74% 0); }
-    100% { clip-path: inset(58% 0 14% 0); }
 }
 
 /* ============================================================= */
@@ -4038,98 +4058,9 @@ body.light-theme .pricing-features li {
     }
 }
 
-/* ============================================================= */
-/* Acordeão (FAQ) */
-/* ============================================================= */
-.acordeao-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 0 10px; /* Adicionado para mobile */
-}
-
-.acordeao-btn {
-    background-color: var(--cor-card-bg);
-    color: var(--cor-card-text);
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    border-radius: var(--border-radius);
-    font-size: 1.2em;
-    font-family: var(--fonte-titulo); /* Usado a fonte do título para consistência */
-}
-
-.acordeao-btn:hover,
-.acordeao-btn.active {
-    background-color: var(--cor-card-hover);
-}
-
-.acordeao-btn::after {
-    content: '+';
-    font-size: 1.5em;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-    color: var(--cor-destaque); /* Mudança de cor para destaque */
-    transition: transform 0.3s ease;
-}
-
-.acordeao-btn.active::after {
-    content: '-';
-    transform: rotate(180deg);
-}
-
-.acordeao-painel {
-    padding: 0 18px;
-    background-color: var(--cor-card-hover);
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-    border-radius: var(--border-radius);
-    margin-top: -10px; /* Para 'esconder' a borda do botão */
-    border: 1px solid var(--cor-bordas);
-    border-top: none;
-}
-
-.acordeao-painel p {
-    padding: 18px 0;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.acordeao-painel.show {
-    max-height: 500px; /* Valor alto para garantir que o conteúdo caiba */
-    padding: 18px;
-}
-
-/* ============================================================= */
-/* Botão de Destaque (Call-to-Action) */
-/* ============================================================= */
-.btn-destaque {
-    background-color: var(--cor-primaria);
-    color: var(--cor-btn-text);
-    border: none;
-    padding: 12px 24px;
-    border-radius: var(--border-radius);
-    font-family: var(--fonte-corpo);
-    font-size: 1em;
-    cursor: pointer;
-    box-shadow: var(--sombra-leve);
-    transition: all 0.3s ease;
-}
-
-.btn-destaque:hover {
-    background-color: var(--cor-secundaria);
-    transform: translateY(-2px);
-    box-shadow: var(--sombra-card);
-}
-
-/* ============================================================= */
-/* Card de Conteúdo Genérico */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD DE CONTEÚDO GENÉRICO */
+/* ====================================================================================================================== */
 .card-conteudo {
     background-color: var(--cor-card-bg);
     color: var(--cor-card-text);
@@ -4146,94 +4077,9 @@ body.light-theme .pricing-features li {
     box-shadow: var(--sombra-card-hover);
 }
 
-/* ============================================================= */
-/* Título com Efeito Neon */
-/* ============================================================= */
-.titulo-neon {
-    font-family: var(--fonte-titulo);
-    font-size: 4em;
-    color: var(--cor-texto-claro);
-    text-shadow:
-        0 0 10px var(--neon-flame-color1),
-        0 0 20px var(--neon-flame-color2),
-        0 0 30px var(--neon-flame-color1),
-        0 0 40px var(--neon-flame-color2);
-    animation: neon-glow 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes neon-glow {
-    from {
-        text-shadow:
-            0 0 5px var(--neon-flame-color1),
-            0 0 10px var(--neon-flame-color2),
-            0 0 15px var(--neon-flame-color1);
-    }
-    to {
-        text-shadow:
-            0 0 15px var(--neon-flame-color1),
-            0 0 25px var(--neon-flame-color2),
-            0 0 35px var(--neon-flame-color1);
-    }
-}
-
-/* Otimização para Mobile */
-@media (max-width: 768px) {
-    .titulo-neon {
-        font-size: 2.5em; /* Reduz o tamanho da fonte em telas menores */
-    }
-}
-
-/* ============================================================= */
-/* Botão de Alternância (Toggle Switch) */
-/* ============================================================= */
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--cor-card-bg);
-    transition: background-color 0.4s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: var(--cor-destaque);
-    transition: transform 0.4s ease;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: var(--cor-primaria);
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-/* ============================================================= */
-/* Barra de Progresso */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BARRA DE PROGRESSO */
+/* ====================================================================================================================== */
 .progress-bar-container {
     width: 80%;
     background-color: var(--cor-card-bg);
@@ -4262,11 +4108,13 @@ input:checked + .slider:before {
     font-weight: bold;
 }
 
-/* ============================================================= */
-/* Modal */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MODAL CENTRALIZADO (QUANDO INICIA A PÁGINA O MODAL APARECE) */
+/* ====================================================================================================================== */
 .modal-bg {
-    display: none;
+    /* O modal já está com display: flex e centralizado.
+       Adicionei uma animação de fade in para uma transição mais suave. */
+    display: flex;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -4276,27 +4124,48 @@ input:checked + .slider:before {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
-    display: flex; /* Adicionado para centralizar o conteúdo */
+    display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .modal-content {
+    /* Estilo do conteúdo do modal.
+       Substituí o "margin: 20px" por "padding" para manter o alinhamento central em telas pequenas.
+       Usei `translateY` para garantir um alinhamento perfeito no centro. */
     background-color: var(--cor-card-bg);
-    padding: 20px;
+    padding: 30px; /* Aumentei o padding para um visual mais espaçoso */
     border: 1px solid var(--cor-destaque);
-    width: 90%; /* Ajuste para mobile */
+    width: 90%;
     max-width: 500px;
     border-radius: var(--border-radius);
     position: relative;
     box-shadow: var(--sombra-card);
-    animation: fadeIn 0.3s ease-in-out;
+    
+    /* Animação para o modal aparecer do meio para o topo */
+    animation: modalSlideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Animação para transição de entrada do modal */
+@keyframes modalSlideUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .modal-close {
+    /* Ajustes para o botão de fechar. */
+    position: absolute; /* Posição absoluta dentro do modal-content */
+    top: 10px;
+    right: 15px;
     color: var(--cor-link-hover);
-    float: right;
-    font-size: 28px;
+    font-size: 32px; /* Aumentei para ser mais fácil de clicar */
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -4305,19 +4174,13 @@ input:checked + .slider:before {
 .modal-close:hover,
 .modal-close:focus {
     color: var(--cor-link);
+    transform: scale(1.2) rotate(10deg); /* Adicionei uma animação de rotação */
 }
 
-/* Otimização para Mobile */
-@media (max-width: 600px) {
-    .modal-content {
-        margin: 20px; /* Adicionado para telas menores */
-    }
-}
 
-/* ============================================================= */
-/* 1. Componente de Abas (Tabs) */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* ABAS (COMPONENTE DE TABS) */
+/* ====================================================================================================================== */
 .abas-botoes {
     /* Contêiner para os botões das abas */
     display: flex;
@@ -4368,9 +4231,9 @@ input:checked + .slider:before {
     display: block;
 }
 
-/* ============================================================= */
-/* Carrossel de Imagens */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARROSSEL DE IMAGENS */
+/* ====================================================================================================================== */
 .carrossel-container {
     position: relative;
     width: 90%; /* Ajuste para mobile */
@@ -4420,9 +4283,9 @@ input:checked + .slider:before {
     border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 
-/* ============================================================= */
-/* Formulário de Contato */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* FORMULÁRIO DE CONTATO */
+/* ====================================================================================================================== */
 .form-contato {
     display: flex;
     flex-direction: column;
@@ -4447,60 +4310,9 @@ input:checked + .slider:before {
     box-shadow: 0 0 8px rgba(var(--neon-flame-color1-rgb), 0.5);
 }
 
-/* ============================================================= */
-/* Formulário de Contato */
-/* ============================================================= */
-.form-contato {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.input-field {
-    background-color: var(--cor-card-hover);
-    color: var(--cor-card-text);
-    border: 2px solid transparent;
-    padding: 12px;
-    border-radius: var(--border-radius);
-    transition: all 0.3s ease;
-    font-family: var(--fonte-corpo);
-}
-
-.input-field:focus {
-    outline: none;
-    border-color: var(--cor-primaria);
-    box-shadow: 0 0 8px rgba(var(--neon-flame-color1-rgb), 0.5);
-}
-/* ============================================================= */
-/* Efeito de Texto Digitado */
-/* ============================================================= */
-.typing-text {
-    font-family: var(--fonte-pixel);
-    font-size: 2em;
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid var(--cor-destaque);
-    animation:
-        typing 4s steps(40, end) forwards,
-        blink-caret 0.75s step-end infinite;
-}
-
-@keyframes blink-caret {
-    from,
-    to {
-        border-color: transparent
-    }
-    50% {
-        border-color: var(--cor-destaque)
-    }
-}
-
-/* ============================================================= */
-/* Seção com Efeito Parallax */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* PARALLAX SECTION */
+/* ====================================================================================================================== */
 .secao-parallax {
     background-attachment: fixed;
     background-position: center;
@@ -4541,10 +4353,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Galeria de Imagens com Lightbox */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* GALERIA DE IMAGENS COM LIGHTBOX */
+/* ====================================================================================================================== */
 .galeria-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -4606,10 +4417,9 @@ input:checked + .slider:before {
     color: var(--cor-primaria);
 }
 
-/* ============================================================= */
-/* Botão de Compartilhamento Social */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* BOTÃO DE COMPARTILHAMENTO SOCIAL */
+/* ====================================================================================================================== */
 .social-share {
     position: relative;
     display: inline-block;
@@ -4671,10 +4481,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Contador de Estatísticas (Animated Counter) */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* CONTADOR DE ESTATÍSTICAS */
+/* ====================================================================================================================== */
 .contador-container {
     display: flex;
     justify-content: center;
@@ -4710,9 +4519,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Botão com Ícone */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BOTÃO COM ÍCONE */
+/* ====================================================================================================================== */
 .btn-icon {
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
@@ -4742,9 +4551,9 @@ input:checked + .slider:before {
     transform: rotate(10deg);
 }
 
-/* ============================================================= */
-/* Card com Sombra e Borda Animada */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD DE SOMBRA E BORDA ANIMADA */
+/* ====================================================================================================================== */
 .card-sombra-borda {
     background-color: var(--cor-card-bg);
     color: var(--cor-card-text);
@@ -4765,9 +4574,9 @@ input:checked + .slider:before {
     border-color: var(--cor-primaria);
 }
 
-/* ============================================================= */
-/* Modal com Fundo Borrado (Blur) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MODAL COM EFEITO BORRADO - BLUR */
+/* ====================================================================================================================== */
 .modal-blur-bg {
     /* Escondido por padrão, `show` via JavaScript */
     display: none; 
@@ -4820,9 +4629,9 @@ input:checked + .slider:before {
     color: var(--cor-link);
 }
 
-/* ============================================================= */
-/* Abas com Indicador Animado */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* ABAS COM INDICADOR ANIMADO */
+/* ====================================================================================================================== */
 .abas-botoes-animadas {
     position: relative;
     display: flex;
@@ -4889,9 +4698,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Linha do Tempo (Timeline) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TIMELINE - LINHA DO TEMPO */
+/* ====================================================================================================================== */
 .timeline-container {
     position: relative;
     max-width: 800px;
@@ -4992,12 +4801,12 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Toast de Aviso (Pop-up de Notificação) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* AVISO EM POPUP - TOAST */
+/* ====================================================================================================================== */
 .aviso-toast {
     position: fixed;
-    bottom: 20px;
+    bottom: 100px;
     right: 20px;
     background-color: var(--cor-secundaria);
     color: var(--cor-texto-claro);
@@ -5025,9 +4834,9 @@ input:checked + .slider:before {
     transform: translateY(0);
 }
 
-/* ============================================================= */
-/* Bloco de Código com Botão de Copiar */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* COPIAR CONTEÚDO */
+/* ====================================================================================================================== */
 .copy-container {
     position: relative;
     background-color: var(--cor-card-bg);
@@ -5061,9 +4870,9 @@ input:checked + .slider:before {
     background-color: var(--cor-primaria);
 }
 
-/* ============================================================= */
-/* Menu Lateral (Sidebar) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MENU LATERAL ANIMADO - MODAL DE LINKS */
+/* ====================================================================================================================== */
 .btn-sidebar-open {
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
@@ -5136,9 +4945,9 @@ input:checked + .slider:before {
     transform: translateX(5px);
 }
 
-/* ============================================================= */
-/* Galeria com Filtros (Portfólio) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* GALERIA COM FILTROS - PORTFÓLIO */
+/* ====================================================================================================================== */
 .filtro-botoes {
     text-align: center;
     margin-bottom: 30px;
@@ -5195,9 +5004,9 @@ input:checked + .slider:before {
     margin: 0;
 }
 
-/* ============================================================= */
-/* Menu de Ícones com Tooltip */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MENU DE ÍCONES - TOOLTIPS */
+/* ====================================================================================================================== */
 .icon-menu {
     display: flex;
     justify-content: center;
@@ -5246,10 +5055,9 @@ input:checked + .slider:before {
     transform: translateX(-50%) translateY(0);
 }
 
-/* ============================================================= */
-/* Chatbot (Floating Widget) */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* CHATBOT - MENU SUSPENSO ATRAVÉS DO BOTÃO */
+/* ====================================================================================================================== */
 /* Botão de abrir o chatbot */
 .chatbot-btn {
     position: fixed;
@@ -5361,9 +5169,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Tabela Estilizada */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TABELA DE ESTATÍSTICAS */
+/* ====================================================================================================================== */
 .tabela-estilizada {
     width: 100%;
     border-collapse: collapse;
@@ -5442,9 +5250,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Card com Efeito de Luz (Hover Light Effect) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD COM EFEITO DE LUZ */
+/* ====================================================================================================================== */
 .card-luz {
     position: relative;
     background-color: var(--cor-card-bg);
@@ -5485,9 +5293,9 @@ input:checked + .slider:before {
     z-index: 2;
 }
 
-/* ============================================================= */
-/* Botão com Efeito Ripple */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BOTÃO COM EFEITO RIPPLE */
+/* ====================================================================================================================== */
 .btn-ripple {
     position: relative;
     overflow: hidden;
@@ -5521,9 +5329,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Imagem com Efeito de Foco (Zoom e Overlay) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* IMAGEM COM SISTEMA DE FOCO - ZOOM E OVERLAY */
+/* ====================================================================================================================== */
 .image-focus {
     position: relative;
     width: 100%;
@@ -5560,9 +5368,9 @@ input:checked + .slider:before {
     transform: scale(1.05);
 }
 
-/* ============================================================= */
-/* Formulário com Validação em Tempo Real */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* FORMULÁRIO DE VALIDAÇÃO AVANÇADO */
+/* ====================================================================================================================== */
 .form-validacao {
     display: flex;
     flex-direction: column;
@@ -5599,54 +5407,9 @@ input:checked + .slider:before {
     display: none;
 }
 
-/* ============================================================= */
-/* Título com Efeito 3D (Text Shadow) */
-/* ============================================================= */
-.titulo-3d {
-    font-family: var(--fonte-titulo);
-    font-size: 5em;
-    text-transform: uppercase;
-    color: var(--cor-texto-claro);
-    text-shadow:
-        1px 1px 0 var(--cor-secundaria),
-        2px 2px 0 var(--cor-secundaria),
-        3px 3px 0 var(--cor-secundaria),
-        4px 4px 0 var(--cor-secundaria),
-        5px 5px 0 var(--cor-secundaria),
-        6px 6px 0 var(--cor-terciaria),
-        7px 7px 0 var(--cor-terciaria),
-        8px 8px 0 var(--cor-terciaria),
-        9px 9px 0 var(--cor-terciaria),
-        10px 10px 0 var(--cor-terciaria);
-    transition: all 0.3s ease-out;
-    cursor: pointer;
-    white-space: nowrap;
-    text-align: center;
-}
-
-.titulo-3d:hover {
-    transform: translate(-5px, -5px);
-    text-shadow:
-        1px 1px 0 var(--cor-secundaria),
-        2px 2px 0 var(--cor-secundaria),
-        3px 3px 0 var(--cor-secundaria),
-        4px 4px 0 var(--cor-secundaria),
-        5px 5px 0 var(--cor-terciaria),
-        6px 6px 0 var(--cor-terciaria),
-        7px 7px 0 var(--cor-terciaria);
-}
-
-/* Otimização para Mobile */
-@media (max-width: 768px) {
-    .titulo-3d {
-        font-size: 3em;
-        overflow: hidden;
-    }
-}
-
-/* ============================================================= */
-/* Card de Perfil 3D */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD DE PERFIL 3D */
+/* ====================================================================================================================== */
 .card-perfil-3d {
     width: 300px;
     height: 400px;
@@ -5690,9 +5453,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Botão de Download com Animação */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BOTÃO DE DOWNLOAD - COM SISTEMA DE MENSAGEM DE CONSOLE */
+/* ====================================================================================================================== */
 .btn-download {
     background-color: var(--cor-primaria);
     color: var(--cor-btn-text);
@@ -5742,10 +5505,9 @@ input:checked + .slider:before {
     display: none;
 }
 
-/* ============================================================= */
-/* Consentimento de Cookies */
-/* ============================================================= */
-
+/* ====================================================================================================================== */
+/* COOKIES - SISTEMA DE MENU SUSPENSO CENTRAL */
+/* ====================================================================================================================== */
 /* Estilos para telas grandes (Desktop) */
 .cookie-consent {
     position: fixed;
@@ -5837,44 +5599,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Rolagem Horizontal (Drag to Scroll) */
-/* ============================================================= */
-.scroll-horizontal-container {
-    width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE e Edge */
-}
-
-.scroll-horizontal-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
-
-.scroll-wrapper {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-}
-
-.scroll-item {
-    min-width: 300px;
-    height: 250px;
-    background-color: var(--cor-card-bg);
-    border-radius: var(--border-radius);
-    padding: var(--padding-card);
-    box-shadow: var(--sombra-leve);
-    flex-shrink: 0;
-    cursor: grab;
-}
-
-.scroll-item:active {
-    cursor: grabbing;
-}
-
-/* ============================================================= */
-/* Cartões de Preços (Pricing Cards) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARDS DE PREÇOS */
+/* ====================================================================================================================== */
 .pricing-container {
     display: flex;
     justify-content: center;
@@ -5930,9 +5657,9 @@ input:checked + .slider:before {
     margin-right: 10px;
 }
 
-/* ============================================================= */
-/* Navegação com Linha de Hover */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MINI BARRA DE NAVEGAÇÃO COM LINHA HOVER */
+/* ====================================================================================================================== */
 .nav-linha {
     display: flex;
     justify-content: center;
@@ -5969,9 +5696,9 @@ input:checked + .slider:before {
     transform: scaleX(1);
 }
 
-/* ============================================================= */
-/* Carrossel de Testemunhos */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARROSSEL DE TESTEMUNHOS */
+/* ====================================================================================================================== */
 .carrossel-testemunhos {
     position: relative;
     max-width: 800px;
@@ -6028,9 +5755,9 @@ input:checked + .slider:before {
     transform: scale(1.2);
 }
 
-/* ============================================================= */
-/* Contador de Números (Rolling Counter) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CONTADOR DE NÚMEROS */
+/* ====================================================================================================================== */
 .contador-rolling {
     display: flex;
     justify-content: center;
@@ -6046,9 +5773,9 @@ input:checked + .slider:before {
     position: relative;
 }
 
-/* ============================================================= */
-/* Botão de Compartilhamento Flutuante */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BOTÃO DE COMPARTILHAMENTO */
+/* ====================================================================================================================== */
 .share-container {
     position: relative;
     display: inline-block;
@@ -6116,9 +5843,9 @@ input:checked + .slider:before {
     transform: scale(1.1);
 }
 
-/* ============================================================= */
-/* Galeria com Efeito Parallax (no scroll) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* GALERIA COM EFEITO PARALLAX - SEM SCROLL */
+/* ====================================================================================================================== */
 .galeria-parallax {
     display: flex;
     gap: 20px;
@@ -6140,9 +5867,9 @@ input:checked + .slider:before {
     box-shadow: var(--sombra-card);
 }
 
-/* ============================================================= */
-/* Botão de Notificação com Dropdown */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BOTÃO DE NOTIFICAÇAO (COM DROPDOWN) - APARECE ACIMA DA PÁGINA */
+/* ====================================================================================================================== */
 .btn-notificacao-container {
     position: relative;
     display: inline-block;
@@ -6219,44 +5946,9 @@ input:checked + .slider:before {
     background-color: var(--cor-card-hover);
 }
 
-/* ============================================================= */
-/* Título com Efeito Neon */
-/* ============================================================= */
-.neon-flicker {
-    font-family: var(--fonte-titulo);
-    font-size: 3em;
-    color: var(--cor-texto-claro);
-    text-align: center;
-    position: relative;
-    text-transform: uppercase;
-}
-
-.neon-flicker span {
-    color: var(--neon-flame-color1);
-    animation: flicker-animation 3s infinite alternate;
-}
-
-@keyframes flicker-animation {
-    0%, 19.9% {
-        text-shadow: none;
-    }
-    20%, 21% {
-        text-shadow: 0 0 5px var(--neon-flame-color1), 0 0 10px var(--neon-flame-color2);
-    }
-    22%, 24% {
-        text-shadow: none;
-    }
-    25%, 26% {
-        text-shadow: 0 0 5px var(--neon-flame-color1), 0 0 10px var(--neon-flame-color2);
-    }
-    27%, 100% {
-        text-shadow: 0 0 5px var(--neon-flame-color1), 0 0 10px var(--neon-flame-color2), 0 0 15px var(--neon-flame-color1);
-    }
-}
-
-/* ============================================================= */
-/* Botão com Micro-Interação (Active State) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BOTÃO COM MICRO INTERAÇÃO */
+/* ====================================================================================================================== */
 .btn-micro-interacao {
     background-color: var(--cor-card-bg);
     color: var(--cor-link);
@@ -6277,9 +5969,9 @@ input:checked + .slider:before {
     box-shadow: 0 0 0 2px var(--cor-primaria);
 }
 
-/* ============================================================= */
-/* Menu Dropdown Animado */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MENU DROPDOWN ANIMADO */
+/* ====================================================================================================================== */
 .dropdown-menu-container {
     position: relative;
     display: inline-block;
@@ -6340,9 +6032,9 @@ input:checked + .slider:before {
     background-color: var(--cor-primaria);
 }
 
-/* ============================================================= */
-/* Card com Efeito de Corte (Skew Hover) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD COM EFEITO DE CORTE */
+/* ====================================================================================================================== */
 .card-corte {
     background-color: var(--cor-card-bg);
     color: var(--cor-card-text);
@@ -6371,10 +6063,10 @@ input:checked + .slider:before {
     transform: skewY(0deg);
 }
 
-/* ============================================================= */
-/* Carregador de Página (Page Loader) */
-/* ============================================================= */
-/*.page-loader {
+/* ====================================================================================================================== */
+/* LOADING DE PÁGINA */
+/* ====================================================================================================================== */
+.page-loader {
     position: fixed;
     top: 0;
     left: 0;
@@ -6414,10 +6106,10 @@ input:checked + .slider:before {
     opacity: 0;
     visibility: hidden;
 }
-*/
-/* ============================================================= */
-/* Tabela de Dados Responsiva */
-/* ============================================================= */
+
+/* ====================================================================================================================== */
+/* TABELA DE DADOS */
+/* ====================================================================================================================== */
 .tabela-dados {
     width: 100%;
     border-collapse: collapse;
@@ -6507,9 +6199,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Card de Estatística com Progresso Circular */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD DE ESTATÍSTICA COM PROGRESSO CIRCULAR */
+/* ====================================================================================================================== */
 .card-estatistica {
     display: flex;
     justify-content: space-between;
@@ -6566,9 +6258,9 @@ input:checked + .slider:before {
     stroke-dashoffset: 283;
 }
 
-/* ============================================================= */
-/* Card de Notícia com Efeito de Hover */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD DE NOTÍCIA COM EFEITO HOVER */
+/* ====================================================================================================================== */
 .card-noticia {
     background-color: var(--cor-card-bg);
     border-radius: var(--border-radius);
@@ -6633,9 +6325,9 @@ input:checked + .slider:before {
     color: var(--cor-link-hover);
 }
 
-/* ============================================================= */
-/* Gráfico de Barras Animado */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* GRÁFICO DE BARRAS ANIMADO */
+/* ====================================================================================================================== */
 .grafico-barras {
     display: flex;
     justify-content: space-around;
@@ -6713,9 +6405,9 @@ input:checked + .slider:before {
     font-size: 0.9em;
 }
 
-/* ============================================================= */
-/* Card com Efeito de Camadas (Hover) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD COM EFEITOS DE CAMADAS */
+/* ====================================================================================================================== */
 .card-camadas {
     position: relative;
     width: 100%;
@@ -6766,9 +6458,9 @@ input:checked + .slider:before {
     transform: scale(1.15);
 }
 
-/* ============================================================= */
-/* Campo de Busca com Efeito de Expansão */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CAMPO DE BUSCA COM EFEITO DE EXPANSÃO */
+/* ====================================================================================================================== */
 .search-efeito {
     position: relative;
     width: 50px;
@@ -6814,9 +6506,9 @@ input:checked + .slider:before {
     right: 15px;
 }
 
-/* ============================================================= */
-/* Ícones de Redes Sociais com Efeito de Hover */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* ÍCONES DE REDES SOCIAIS COM EFEITO HOVER */
+/* ====================================================================================================================== */
 .social-icons {
     display: flex;
     justify-content: center;
@@ -6844,9 +6536,9 @@ input:checked + .slider:before {
     transform: scale(1.1);
 }
 
-/* ============================================================= */
-/* Específicos de FAQ */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* FAQS GRID SEÇÃO */
+/* ====================================================================================================================== */
 .faq-grid {
     display: flex;
     flex-direction: column;
@@ -6870,9 +6562,9 @@ input:checked + .slider:before {
     color: var(--cor-card-text);
 }
 
-/* ============================================================= */
-/* Caixa com Borda Animada (Top & Bottom) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CAIXA COM BORDA ANIMADA */
+/* ====================================================================================================================== */
 .caixa-borda-animada {
     position: relative;
     background-color: var(--cor-card-bg);
@@ -6911,9 +6603,9 @@ input:checked + .slider:before {
     width: 100%;
 }
 
-/* ============================================================= */
-/* Pop-up de Aviso com Animação */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* POPUP DE AVISO COM ANIMAÇÃO */
+/* ====================================================================================================================== */
 .aviso-popup-overlay {
     display: none;
     position: fixed;
@@ -6961,9 +6653,9 @@ input:checked + .slider:before {
     right: 20px;
 }
 
-/* ============================================================= */
-/* Carrossel de Testemunhos Responsivo */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARROSSEL DE TESTEMUNHOS RESPONSIVO */
+/* ====================================================================================================================== */
 .testimonials-carousel-container {
     position: relative;
     width: 100%;
@@ -7064,9 +6756,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Caixa de Ferramentas com Seta (Tooltip) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CAIXA DE FERRAMENTAS COM SETAS - TOOLTIP */
+/* ====================================================================================================================== */
 .toolbox-seta-trigger {
     position: relative;
     display: inline-block;
@@ -7104,9 +6796,9 @@ input:checked + .slider:before {
     transform: translateX(-50%) scale(1);
 }
 
-/* ============================================================= */
-/* Tooltip com Efeito de Fade (Overlay) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TOOLTIP COM EFEITO DE FADE - OVERLAY */
+/* ====================================================================================================================== */
 .tooltip-fade-overlay {
     display: none;
     position: fixed;
@@ -7145,9 +6837,9 @@ input:checked + .slider:before {
     opacity: 1;
 }
 
-/* ============================================================= */
-/* Caixa de Ferramentas no Rodapé (Sliding Footer Toolbox) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CAIXA DE FERRAMENTAS COM RODAPÉ */
+/* ====================================================================================================================== */
 /* Estilo base para a toolbox no rodapé */
 .toolbox-rodape {
     position: fixed;
@@ -7223,105 +6915,10 @@ input:checked + .slider:before {
 .toolbox-fechar:hover {
     opacity: 0.8;
 }
-/* ============================================================= */
-/* Caixa de Ferramentas de Código (Hover) */
-/* ============================================================= */
-.toolbox-codigo-conteudo {
-    background-color: var(--cor-fundo-escuro);
-    border: 1px solid var(--cor-bordas);
-    color: var(--cor-destaque);
-    font-family: var(--fonte-pixel);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 10;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
 
-.toolbox-codigo-trigger.active .toolbox-codigo-conteudo {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* ============================================================= */
-/* Título com Gradiente Animado */
-/* ============================================================= */
-.titulo-gradiente-animado {
-    font-family: var(--fonte-titulo);
-    font-size: 3em;
-    background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria), var(--cor-destaque));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
-    animation: gradiente-animado 5s linear infinite;
-    text-align: center;
-}
-
-@keyframes gradiente-animado {
-    to {
-        background-position: -200% center;
-    }
-}
-
-/* ============================================================= */
-/* Efeito de Texto Typewriter */
-/* ============================================================= */
-.typewriter-texto {
-    font-family: var(--fonte-mini);
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 2px solid var(--cor-primaria);
-    animation: 
-        typing 3s steps(30, end) forwards,
-        blink-caret 0.75s step-end infinite;
-    width: 0;
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--cor-primaria); }
-}
-
-/* ============================================================= */
-/* Texto Vazado (Outline) */
-/* ============================================================= */
-.texto-vazado {
-    font-family: var(--fonte-titulo);
-    font-size: 4em;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--cor-primaria);
-    text-stroke: 1px var(--cor-primaria);
-}
-
-/* ============================================================= */
-/* Texto com Sombra Longa */
-/* ============================================================= */
-.texto-sombra-longa {
-    font-family: var(--fonte-titulo);
-    color: var(--cor-primaria);
-    text-shadow: 
-        -1px 1px var(--cor-secundaria),
-        -2px 2px var(--cor-secundaria),
-        -3px 3px var(--cor-secundaria),
-        -4px 4px var(--cor-secundaria),
-        -5px 5px var(--cor-secundaria),
-        -6px 6px var(--cor-secundaria);
-}
-
-/* ============================================================= */
-/* Carrossel em Tela Cheia */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARROSSEL DE TELA CHEIA */
+/* ====================================================================================================================== */
 .carousel-full-screen {
     position: relative;
     width: 100%;
@@ -7375,9 +6972,9 @@ input:checked + .slider:before {
     background-color: var(--cor-primaria); 
 }
 
-/* ============================================================= */
-/* Carrossel de Cartões */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARROSSEL DE CARTÃO */
+/* ====================================================================================================================== */
 .carousel-cards-container {
     overflow: hidden;
     position: relative;
@@ -7420,9 +7017,9 @@ input:checked + .slider:before {
     background-color: var(--cor-primaria);
 }
 
-/* ============================================================= */
-/* Card com Efeito Glassmorphism */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD COM EFEITO GLASSMORPHISM - VIDRO */
+/* ====================================================================================================================== */
 .card-glass {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -7434,62 +7031,9 @@ input:checked + .slider:before {
     border-radius: var(--border-radius);
 }
 
-/* ============================================================= */
-/* Texto com Efeito "Líquido" */
-/* ============================================================= */
-.liquid-text {
-    font-family: var(--fonte-titulo);
-    font-size: 5em;
-    position: relative;
-    background: linear-gradient(120deg, var(--cor-primaria), var(--cor-destaque));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.liquid-text::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--cor-secundaria);
-    z-index: -1;
-    animation: wave-animation 2s linear infinite;
-}
-
-@keyframes wave-animation {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-5px); }
-}
-
-/* ============================================================= */
-/* Forma "Blob" Animada */
-/* ============================================================= */
-.blob-container {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-}
-
-.blob-forma {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, var(--cor-primaria), var(--cor-destaque));
-    border-radius: 50% 30% 60% 40% / 60% 30% 70% 40%;
-    animation: blob-move 5s ease-in-out infinite alternate;
-    transition: all 0.5s ease;
-}
-
-@keyframes blob-move {
-    0% { border-radius: 50% 30% 60% 40% / 60% 30% 70% 40%; }
-    50% { border-radius: 60% 40% 50% 50% / 40% 60% 50% 50%; }
-    100% { border-radius: 50% 30% 60% 40% / 60% 30% 70% 40%; }
-}
-
-/* ============================================================= */
-/* Abas Modernas com Indicador Animado */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* ABAS COM INDICADORES ANIMADOS - TABS */
+/* ====================================================================================================================== */
 .modern-tabs-container {
     background-color: var(--cor-card-bg);
     border-radius: var(--border-radius);
@@ -7618,9 +7162,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Card de Ferramenta */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD COM ÍCONE/THUMB -> TEXTO -> BOTÃO (ANÁLISE DE DADOS) */
+/* ====================================================================================================================== */
 .card-ferramenta {
     display: flex;
     align-items: flex-start;
@@ -7670,9 +7214,9 @@ input:checked + .slider:before {
     margin-bottom: 15px;
 }
 
-/* ============================================================= */
-/* Formulário de Contato Estilizado */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* FORMULÁRIO DE CONTATO ESTILIZADO */
+/* ====================================================================================================================== */
 .form-contato {
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
@@ -7724,9 +7268,9 @@ input:checked + .slider:before {
     border-color: #e74c3c;
 }
 
-/* ============================================================= */
-/* Carrossel com Efeito "Liquid Swipe" */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARROSSEL COM EFEITO DE LÍQUIDO SWIPE */
+/* ====================================================================================================================== */
 .liquid-swipe-container {
     max-width: 900px;
     margin: 50px auto;
@@ -7773,9 +7317,9 @@ input:checked + .slider:before {
     transform: scale(1.1);
 }
 
-/* ============================================================= */
-/* Card com Efeito de Reflexo */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD COM EFEITO REFLEXIVO DO MOUSE */
+/* ====================================================================================================================== */
 .card-reflexo {
     position: relative;
     background-color: var(--cor-card-bg);
@@ -7803,35 +7347,9 @@ input:checked + .slider:before {
     opacity: 1;
 }
 
-/* ============================================================= */
-/* Estrelas de Avaliação Interativas */
-/* ============================================================= */
-.rating-stars {
-    display: inline-block;
-    font-size: 2em;
-    color: var(--cor-bordas);
-    cursor: pointer;
-}
-
-.rating-stars i {
-    transition: color 0.3s ease;
-}
-
-.rating-stars i.filled {
-    color: var(--cor-destaque);
-}
-
-.rating-stars i:hover ~ i {
-    color: var(--cor-bordas);
-}
-
-.rating-stars:hover i {
-    color: var(--cor-destaque);
-}
-
-/* ============================================================= */
-/* Carrossel 3D */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARROSSEL 3D */
+/* ====================================================================================================================== */
 .carousel-3d-container {
     max-width: 900px;
     margin: 50px auto;
@@ -7880,9 +7398,9 @@ input:checked + .slider:before {
     transform: scale(1.1);
 }
 
-/* ============================================================= */
-/* Card com Efeito "Ler Mais" */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD COM FUNÇÃO - LER MAIS */
+/* ====================================================================================================================== */
 .card-ler-mais {
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
@@ -7919,14 +7437,14 @@ input:checked + .slider:before {
     color: var(--cor-destaque);
 }
 
-/* ============================================================= */
-/* Tabela de Conteúdos (TOC) Flutuante */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* ABA DE INDEXS DA PÁGINA - COM SEU HTML # FIXADAS */
+/* ====================================================================================================================== */
 .toc {
     position: fixed;
-    top: 50px;
+    top: 120px;
     left: 20px;
-    width: 250px;
+    width: 230px;
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
     border-radius: var(--border-radius);
@@ -7960,9 +7478,9 @@ input:checked + .slider:before {
     font-weight: bold;
 }
 
-/* ============================================================= */
-/* Campo com Botão de Copiar */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CAMPO DE TEXTO DE COPIAR */
+/* ====================================================================================================================== */
 .campo-copia {
     display: flex;
     align-items: center;
@@ -8008,9 +7526,9 @@ input:checked + .slider:before {
     opacity: 1;
 }
 
-/* ============================================================= */
-/* Card de Compartilhamento */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD DE COMPARTILHAMENTO */
+/* ====================================================================================================================== */
 .card-compartilhar {
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
@@ -8054,9 +7572,9 @@ input:checked + .slider:before {
 .btn-share.twitter:hover { background-color: #00acee; transform: scale(1.1); }
 .btn-share.whatsapp:hover { background-color: #25d366; transform: scale(1.1); }
 
-/* ============================================================= */
-/* Tooltip Avançado */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TOOLTIP AVANÇADO */
+/* ====================================================================================================================== */
 .tooltip-avancado {
     position: relative;
     display: inline-block;
@@ -8099,9 +7617,9 @@ input:checked + .slider:before {
     border-top: 8px solid var(--cor-card-bg);
 }
 
-/* ============================================================= */
-/* Tooltip Rico (com Conteúdo) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TOOLTIP COM CARD DE CONTEÚDO */
+/* ====================================================================================================================== */
 .tooltip-rich-trigger {
     position: relative;
     display: inline-block;
@@ -8163,9 +7681,9 @@ input:checked + .slider:before {
     border-color: transparent transparent var(--cor-card-bg) transparent;
 }
 
-/* ============================================================= */
-/* Tooltip Interativo com Botão de Alternância */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TOOLTIP MINIMALISTA */
+/* ====================================================================================================================== */
 .tooltip-interactive-trigger {
     position: relative;
     display: inline-flex;
@@ -8252,9 +7770,9 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/* ============================================================= */
-/* Tooltip com Status e Ícones */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TOOLTIP DE STATUS */
+/* ====================================================================================================================== */
 .tooltip-status-trigger {
     position: relative;
     display: inline-flex;
@@ -8314,9 +7832,9 @@ input:checked + .slider:before {
     color: #f39c12;
 }
 
-/* ============================================================= */
-/* Tooltip em Campo de Input */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TOOLTIP DE CAMPO */
+/* ====================================================================================================================== */
 .input-tooltip-container {
     position: relative;
     display: inline-block;
@@ -8364,9 +7882,9 @@ input:checked + .slider:before {
     transform: translateY(0);
 }
 
-/* ============================================================= */
-/* Tabela de Comparação de Cards Responsiva */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TABELA DE PREÇOS (BÁSICO, POPULAR E EMPRESARIAL) */
+/* ====================================================================================================================== */
 .comparison-cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -8472,9 +7990,9 @@ input:checked + .slider:before {
     margin-bottom: 10px;
 }
 
-/* ============================================================= */
-/* Modal de Detalhes com Carrossel */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MODAL COM CARROSSEL DE IMAGENS - SELEÇÃO DE CARDS COM MOUSE APENAS */
+/* ====================================================================================================================== */
 .modal-detalhes-overlay {
     display: none;
     position: fixed;
@@ -8595,71 +8113,9 @@ input:checked + .slider:before {
     color: #27ae60;
 }
 
-/* ============================================================= */
-/* Botão com Efeito de Carregamento */
-/* ============================================================= */
-.btn-loading {
-    background-color: var(--cor-primaria);
-    color: var(--cor-btn-text);
-    border: none;
-    padding: 15px 30px;
-    border-radius: var(--border-radius);
-    font-size: 1.1em;
-    font-weight: bold;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    min-width: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-loading:hover {
-    background-color: var(--cor-secundaria);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.btn-loading .btn-text {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(0);
-}
-
-.btn-loading .spinner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    width: 24px;
-    height: 24px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top-color: var(--cor-btn-text);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.btn-loading.loading .btn-text {
-    opacity: 0;
-    transform: translateY(-10px);
-}
-
-.btn-loading.loading .spinner {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-@keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* ============================================================= */
-/* Galeria de Imagens com Lightbox */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* GALERIA DE IMAGENS COM LIGHTBOX */
+/* ====================================================================================================================== */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -8722,9 +8178,9 @@ input:checked + .slider:before {
     color: var(--cor-link-hover);
 }
 
-/* ============================================================= */
-/* Seção Parallax Simples */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* SEÇÃO PARALLAX SIMPLES */
+/* ====================================================================================================================== */
 .parallax-section {
     position: relative;
     height: 500px;
@@ -8754,9 +8210,9 @@ input:checked + .slider:before {
     font-size: 1.2em;
 }
 
-/* ============================================================= */
-/* Card de Estatística Animada */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD DE ESTATÍSTICA ANIMADA - NOVOS USUÁRIOS */
+/* ====================================================================================================================== */
 .card-estatistica-animada {
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
@@ -8803,117 +8259,9 @@ input:checked + .slider:before {
     font-family: var(--fonte-pixel);
 }
 
-/* ============================================================= */
-/* Timeline Responsiva */
-/* ============================================================= */
-.timeline-container {
-    position: relative;
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px 0;
-}
-
-.timeline-container::after {
-    content: '';
-    position: absolute;
-    width: 2px;
-    background-color: var(--cor-bordas);
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -1px;
-}
-
-.timeline-item {
-    padding: 10px 0;
-    position: relative;
-    width: 50%;
-}
-
-.timeline-item:nth-child(odd) {
-    left: 0;
-    text-align: right;
-    padding-right: 30px;
-}
-
-.timeline-item:nth-child(even) {
-    left: 50%;
-    text-align: left;
-    padding-left: 30px;
-}
-
-.timeline-dot {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: var(--cor-primaria);
-    border-radius: 50%;
-    border: 3px solid var(--cor-fundo-escuro);
-    z-index: 1;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.timeline-item:nth-child(odd) .timeline-dot {
-    right: -10px;
-}
-
-.timeline-item:nth-child(even) .timeline-dot {
-    left: -10px;
-}
-
-.timeline-content {
-    background-color: var(--cor-card-bg);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.timeline-content h4 {
-    color: var(--cor-card-text);
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-.timeline-content p {
-    color: var(--cor-texto-claro);
-    font-size: 0.9em;
-}
-
-.timeline-item:hover .timeline-content {
-    transform: translateY(-5px);
-    box-shadow: var(--sombra-card-hover);
-}
-
-@media screen and (max-width: 768px) {
-    .timeline-container::after {
-        left: 20px;
-    }
-    .timeline-item {
-        width: 100%;
-        padding-left: 50px;
-        text-align: left;
-    }
-    .timeline-item:nth-child(odd) {
-        left: 0;
-        padding-right: 0;
-    }
-    .timeline-item:nth-child(even) {
-        left: 0;
-    }
-    .timeline-item .timeline-dot {
-        left: 10px;
-        transform: translateY(-50%);
-    }
-    .timeline-item:nth-child(odd) .timeline-dot {
-        right: auto;
-    }
-}
-
-/* ============================================================= */
-/* Seção de Pesquisa com Filtros de Tag */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* SEÇÃO DE PESQUISA SIMPLES */
+/* ====================================================================================================================== */
 .search-section {
     padding: var(--padding-section);
     max-width: 1200px;
@@ -8934,7 +8282,7 @@ input:checked + .slider:before {
     min-width: 250px;
     padding: 12px 20px;
     border: 2px solid var(--cor-bordas);
-    background-color: var(--cor-fundo-claro);
+    background-color: var(--cor-fundo-escuro);
     color: var(--cor-texto-escuro);
     border-radius: var(--border-radius);
     transition: var(--transicao-padrao);
@@ -8952,7 +8300,7 @@ input:checked + .slider:before {
 }
 
 .tag-btn {
-    background-color: var(--cor-fundo-claro);
+    background-color: var(--cor-fundo-escuro);
     color: var(--cor-texto-claro);
     border: 1px solid var(--cor-bordas);
     padding: 8px 15px;
@@ -9041,9 +8389,9 @@ input:checked + .slider:before {
     background-color: var(--cor-secundaria);
 }
 
-/* ============================================================= */
-/* Seção de Pesquisa com Abas */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* SEÇÃO DE PESQUISA AVANÇADA - COM ABAS */
+/* ====================================================================================================================== */
 .search-section-tabs {
     padding: var(--padding-section);
     max-width: 1200px;
@@ -9108,9 +8456,9 @@ input:checked + .slider:before {
     }
 }
 
-/* ============================================================= */
-/* Notificação Flutuante com Animação */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* NOTIFICAÇÃO FLUTUANTE - SUPERIOR DIREITA */
+/* ====================================================================================================================== */
 .container-principal {
     display: flex;
     justify-content: center;
@@ -9198,9 +8546,9 @@ h1 {
     }
 }
 
-/* ============================================================= */
-/* Botão com Efeito 3D */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BOTÃO COM EFEITO 3D */
+/* ====================================================================================================================== */
 .botao-3d {
     background-color: var(--cor-primaria);
     color: white;
@@ -9221,9 +8569,9 @@ h1 {
     box-shadow: 0 0 0 var(--cor-borda-escura);
 }
 
-/* ============================================================= */
-/* Cartão de Expansão (Accordion) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CARD DE ARCODEÃO - FAQS */
+/* ====================================================================================================================== */
 .cartao-expansivel {
     max-width: 400px;
     margin: 0 auto;
@@ -9247,9 +8595,9 @@ h1 {
     opacity: 1;
 }
 
-/* ============================================================= */
-/* Barra de Progresso */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BARRA DE PROGRESSO */
+/* ====================================================================================================================== */
 .barra-progresso {
     width: 100%;
     height: 25px;
@@ -9265,9 +8613,9 @@ h1 {
     transition: width 2s ease-in-out;
 }
 
-/* ============================================================= */
-/* Modal */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MODAL ANIMADO */
+/* ====================================================================================================================== */
 .modal-fundo {
     display: none;
     position: fixed;
@@ -9314,11 +8662,11 @@ h1 {
     }
 }
 
-/* ============================================================= */
-/* Menu de Navegação Responsivo */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* MINI ABA DE NAVEGAÇÃO */
+/* ====================================================================================================================== */
 .menu-navegacao {
-    display: flex;
+    display: grid;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
@@ -9383,9 +8731,9 @@ h1 {
     }
 }
 
-/* ============================================================= */
-/* Slider de Testemunhos */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* BARRA DE TEXTOS COM BOTÕES */
+/* ====================================================================================================================== */
 .slider-testemunhos {
     max-width: 600px;
     position: relative;
@@ -9437,9 +8785,9 @@ h1 {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* ===================================== */
-/* Tooltip */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* TOOLTIP DE TEXTO */
+/* ====================================================================================================================== */
 .elemento-com-tooltip {
     position: relative;
     display: inline-block;
@@ -9479,9 +8827,9 @@ h1 {
     }
 }
 
-/* ===================================== */
-/* Cards Personalizados */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* CARD COM BORDA DE EMBED PERSONALIZADO */
+/* ====================================================================================================================== */
 .card-personalizado {
     background-color: var(--cor-card-bg);
     padding: var(--padding-card);
@@ -9505,9 +8853,9 @@ h1 {
     line-height: 1.6;
 }
 
-/* ===================================== */
-/* Carrossel de Imagens */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* CARROSSEL DE SLIDES DE TEXTOS */
+/* ====================================================================================================================== */
 .carrossel-container {
     max-width: 800px;
     margin: 0 auto;
@@ -9559,9 +8907,9 @@ h1 {
     }
 }
 
-/* ===================================== */
-/* Visualizador de Imagens (Lightbox) */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* GALERIA DE IMAGENS */
+/* ====================================================================================================================== */
 .galeria-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -9634,29 +8982,9 @@ h1 {
     }
 }
 
-/* ===================================== */
-/* Botão Gradiente */
-/* ===================================== */
-.botao-gradiente {
-    background-image: linear-gradient(45deg, var(--cor-primaria), var(--cor-secundaria));
-    background-size: 200% 200%;
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-position 0.4s ease-in-out, box-shadow 0.3s ease;
-}
-
-.botao-gradiente:hover {
-    background-position: 100% 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* ===================================== */
-/* Cards em Grade */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* CARDS INVISÍVEIS - FUNDO LIMPO */
+/* ====================================================================================================================== */
 .cards-grade {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -9664,84 +8992,9 @@ h1 {
     padding: 20px;
 }
 
-/* ===================================== */
-/* Timeline Vertical */
-/* ===================================== */
-.timeline-container {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.timeline-container::after {
-    content: '';
-    position: absolute;
-    width: 2px;
-    background-color: var(--cor-bordas);
-    top: 0;
-    bottom: 0;
-    left: 20px;
-    margin-left: -1px;
-}
-
-.timeline-item {
-    padding: 10px 0 10px 40px;
-    position: relative;
-    width: 100%;
-}
-
-.timeline-ponto {
-    width: 15px;
-    height: 15px;
-    background-color: var(--cor-primaria);
-    position: absolute;
-    top: 20px;
-    left: 13px;
-    border-radius: 50%;
-    border: 3px solid var(--cor-fundo-escuro);
-    z-index: 1;
-}
-
-.timeline-conteudo {
-    padding: 15px;
-    background-color: var(--cor-card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card);
-    transition: transform 0.3s ease;
-}
-
-.timeline-item:hover .timeline-conteudo {
-    transform: translateY(-5px);
-    box-shadow: var(--sombra-card-hover);
-}
-
-@media (max-width: 600px) {
-    .timeline-container::after {
-        left: 20px;
-    }
-    .timeline-item {
-        padding-left: 40px;
-    }
-}
-
-/* ===================================== */
-/* Indicador de Scroll */
-/* ===================================== */
-.barra-leitura {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 5px;
-    background-color: var(--cor-primaria);
-    z-index: 1000;
-    transition: width 0.1s linear;
-}
-
-/* ===================================== */
-/* Cards que Rotacionam */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* CARD COM FLIP 3D MAIS SIMPLES */
+/* ====================================================================================================================== */
 .card-rotativo-container {
     perspective: 1000px;
     width: 300px;
@@ -9786,9 +9039,9 @@ h1 {
     transform: rotateY(180deg);
 }
 
-/* ===================================== */
-/* Animação de Carregamento */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* ELEMENTO DE LOADING */
+/* ====================================================================================================================== */
 .spinner-container {
     display: flex;
     justify-content: center;
@@ -9811,9 +9064,9 @@ h1 {
     }
 }
 
-/* ===================================== */
-/* Tabela Responsiva */
-/* ===================================== */
+/* ====================================================================================================================== */
+/* TABELA SEM FUNDO COM TEXTOS SIMPLES */
+/* ====================================================================================================================== */
 .tabela-container {
     overflow-x: auto;
 }
@@ -9866,9 +9119,9 @@ h1 {
     }
 }
 
-/* ============================================================= */
-/* CSS da Tabela com Estilo de Planilha */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* TABELA DE PLANILHAS COM FUNDO */
+/* ====================================================================================================================== */
 .tabela-planilha {
     width: 100%;
     border-collapse: collapse;
@@ -9910,9 +9163,9 @@ h1 {
     transition: background-color 0.2s ease;
 }
 
-/* ============================================================= */
-/* CSS da Tabela Responsiva (Estilo de Cartão) */
-/* ============================================================= */
+/* ====================================================================================================================== */
+/* CSS DA TABELA RESPONSIVA (CARDS ACIMA) */
+/* ====================================================================================================================== */
 @media (max-width: 768px) {
     .tabela-card-responsiva thead {
         display: none;
@@ -9955,6 +9208,9 @@ h1 {
     }
 }
 
+/* ====================================================================================================================== */
+/* CARD DE SENHA */
+/* ====================================================================================================================== */
 /* Estilo para o campo de senha */
 .senha-container {
     display: flex;
@@ -9986,7 +9242,9 @@ h1 {
     background-color: var(--cor-secundaria);
 }
 
-
+/* ====================================================================================================================== */
+/* MODAL AVANÇADO */
+/* ====================================================================================================================== */
 /* Reutilizando estilos do Modal Avançado */
 .modal-avancado-container {
     display: none;
@@ -10066,150 +9324,9 @@ h1 {
     background-color: var(--cor-secundaria);
 }
 
-.galeria-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    padding: 20px;
-}
-
-.miniatura {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.miniatura:hover {
-    transform: scale(1.05);
-    box-shadow: var(--sombra-card);
-}
-
-.visualizador-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    padding-top: 50px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.9);
-}
-
-.visualizador-conteudo-container {
-    margin: auto;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-}
-
-.visualizador-conteudo {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 80vh;
-    border-radius: var(--border-radius);
-}
-
-.visualizador-legenda {
-    color: white;
-    padding: 10px 0;
-    font-size: 1.2em;
-}
-
-.visualizador-fechar {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.visualizador-fechar:hover,
-.visualizador-fechar:focus {
-    color: var(--cor-primaria);
-    text-decoration: none;
-}
-
-.notas-container {
-    padding: 20px;
-}
-
-.timeline-container {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline-container::after {
-    content: '';
-    position: absolute;
-    width: 2px;
-    background-color: var(--cor-bordas);
-    top: 0;
-    bottom: 0;
-    left: 20px;
-    margin-left: -1px;
-}
-
-.timeline-item {
-    padding: 10px 0 10px 40px;
-    position: relative;
-    width: 100%;
-}
-
-.timeline-ponto {
-    width: 15px;
-    height: 15px;
-    background-color: var(--cor-primaria);
-    position: absolute;
-    top: 20px;
-    left: 13px;
-    border-radius: 50%;
-    border: 3px solid var(--cor-fundo-escuro);
-    z-index: 1;
-}
-
-.timeline-conteudo {
-    padding: 15px;
-    background-color: var(--cor-card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card);
-    transition: transform 0.3s ease;
-}
-
-.timeline-item:hover .timeline-conteudo {
-    transform: translateY(-5px);
-    box-shadow: var(--sombra-card-hover);
-}
-
-.nota-data {
-    font-size: 0.9em;
-    color: var(--cor-texto-claro);
-    display: block;
-    margin-bottom: 5px;
-}
-
-.nota-titulo {
-    font-size: 1.2em;
-    color: var(--cor-card-text);
-    margin-top: 0;
-}
-
-.nota-lista {
-    list-style-type: disc;
-    padding-left: 20px;
-    color: var(--cor-texto-claro);
-    margin: 0;
-}
-
+/* ====================================================================================================================== */
+/* EMBED DE ESTATÍSTICAS */
+/* ====================================================================================================================== */
 .embed-estatisticas-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -10267,6 +9384,9 @@ h1 {
     height: 100%;
 }
 
+/* ====================================================================================================================== */
+/* ELEMENTOS DE BOTÕES */
+/* ====================================================================================================================== */
 .botoes-container {
     display: flex;
     flex-wrap: wrap;
@@ -10387,6 +9507,7 @@ h1 {
     font-size: 1.5em;
 }
 
+
 .copiar-container {
     display: flex;
     flex-direction: column;
@@ -10420,21 +9541,9 @@ h1 {
     background-color: var(--cor-secundaria);
 }
 
-.painel-container {
-    text-align: center;
-    padding: 20px;
-}
-
-.painel-info {
-    display: none;
-    background-color: var(--cor-card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card);
-    max-width: 500px;
-    margin: 20px auto;
-    animation: fadein 0.5s ease;
-}
-
+/* ====================================================================================================================== */
+/* PAINEL/SEÇÃO DE DETALHES */
+/* ====================================================================================================================== */
 .painel-info-cabecalho {
     display: flex;
     justify-content: space-between;
@@ -10473,7 +9582,9 @@ h1 {
     margin-right: 10px;
 }
 
-
+/* ====================================================================================================================== */
+/* SEÇÃO COM CABEÇÁRIO - O TÍTULO PODE SER USADO COMO BOTÃO */
+/* ====================================================================================================================== */
 .abas-notas-container {
     max-width: 900px;
     margin: 20px auto;
@@ -10543,86 +9654,9 @@ h1 {
     width: 100%;
 }
 
-.modal-simples-container {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-simples-conteudo {
-    background-color: var(--cor-card-bg);
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: var(--border-radius);
-    max-width: 400px;
-    position: relative;
-    text-align: center;
-    box-shadow: var(--sombra-card);
-}
-
-.modal-simples-fechar {
-    color: var(--cor-texto-claro);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.modal-simples-fechar:hover,
-.modal-simples-fechar:focus {
-    color: var(--cor-primaria);
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.btn-carregamento {
-    position: relative;
-    overflow: hidden;
-    width: 150px;
-    height: 50px;
-    background-color: var(--cor-primaria);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-carregamento:hover {
-    background-color: var(--cor-secundaria);
-}
-
-.btn-texto {
-    display: block;
-    transition: opacity 0.3s;
-}
-
-.spinner-pequeno {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s ease-in-out infinite;
-}
-
-.hidden {
-    display: none;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
+/* ====================================================================================================================== */
+/* TABELA DE PREÇOS SIMPLES */
+/* ====================================================================================================================== */
 .tabela-precos-container {
     display: flex;
     justify-content: center;
@@ -10694,6 +9728,9 @@ h1 {
     cursor: pointer;
 }
 
+/* ====================================================================================================================== */
+/* CARD COM MENSAGEM CENTRAL */
+/* ====================================================================================================================== */
 .depoimentos-container {
     max-width: 800px;
     margin: 50px auto;
@@ -10730,6 +9767,9 @@ h1 {
     margin-top: 20px;
 }
 
+/* ====================================================================================================================== */
+/* # DAS PÁGINAS COM UMA ABA DE INDEXAÇÕES DO HTML - SEGUE A TELA DO USUÁRIO */
+/* ====================================================================================================================== */
 .ponto-nav {
     display: inline-block;
     width: 12px;
@@ -10745,7 +9785,6 @@ h1 {
     background-color: var(--cor-primaria);
 }
 
-
 .pagina-com-indice {
     display: flex;
     justify-content: center;
@@ -10755,7 +9794,7 @@ h1 {
 
 .indice-fixo {
     position: sticky;
-    top: 20px;
+    top: 140px;
     align-self: flex-start;
     padding: 20px;
     background-color: var(--cor-card-bg);
@@ -10790,8 +9829,9 @@ h1 {
     margin-bottom: 20px;
 }
 
-
-
+/* ====================================================================================================================== */
+/* CARD FLIP 3D ESTILIZADO */
+/* ====================================================================================================================== */
 .card-3d-container {
     perspective: 1000px;
     width: 250px;
@@ -10856,62 +9896,3 @@ h1 {
     align-items: center;
     text-align: center;
 }
-
-
-.toast-notificacao {
-    visibility: hidden;
-    min-width: 250px;
-    background-color: var(--cor-primaria);
-    color: white;
-    text-align: center;
-    border-radius: var(--border-radius);
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 30px;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
-}
-
-.toast-notificacao.show {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-.switch-mode {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-
-.switch-mode input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-} 

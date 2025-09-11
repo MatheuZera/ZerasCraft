@@ -52,12 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '💿 Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
         { title: '💿 Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
         { title: '💿 Relic', src: 'assets/audios/musics/records/Relic.mp3' },
-        { title: '💿 Stal', src: 'assets/audios/musics/records/Stal.mp3' },
-        { title: '💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
-        { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
-        { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
     ];
-    
+
     // =====================================
     // Efeitos Sonoros
     // =====================================
@@ -69,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         click: new Audio('assets/audios/effects/click.mp3'),
         buttonClick: new Audio('assets/audios/effects/button-click.mp3'),
     };
-    
+
     Object.values(audioEffects).forEach(audio => {
         audio.preload = 'auto';
         audio.volume = 0.5;
@@ -110,6 +106,60 @@ document.addEventListener('DOMContentLoaded', () => {
         const secs = Math.floor(seconds % 60);
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     };
+
+    // =====================================
+    // Gerenciamento do Volume
+    // =====================================
+    const volumeButton = document.getElementById('volumeButton');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeContainer = document.querySelector('.volume-container');
+
+    // A variável correta para o seu áudio de fundo
+    const mainAudio = backgroundAudio;
+
+    if (mainAudio && volumeButton && volumeSlider && volumeContainer) {
+        // Função para atualizar o ícone do botão de volume
+        function updateVolumeIcon(volume) {
+            const icon = volumeButton.querySelector('i');
+            if (!icon) return;
+            icon.classList.remove('fa-volume-mute', 'fa-volume-down', 'fa-volume-up');
+            if (volume === 0) {
+                icon.classList.add('fa-volume-mute');
+            } else if (volume < 0.5) {
+                icon.classList.add('fa-volume-down');
+            } else {
+                icon.classList.add('fa-volume-up');
+            }
+        }
+
+        // Sincroniza o slider com o volume atual do áudio
+        volumeSlider.value = mainAudio.volume;
+        updateVolumeIcon(mainAudio.volume);
+
+        // Adiciona evento para mudar o volume
+        volumeSlider.addEventListener('input', () => {
+            const volumeValue = parseFloat(volumeSlider.value);
+            mainAudio.volume = volumeValue;
+            updateVolumeIcon(volumeValue);
+            // Salva o estado do áudio no localStorage sempre que o volume muda
+            saveAudioState();
+        });
+
+        // Lógica de clique para mostrar/esconder o slider
+        volumeButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Impede que o clique no botão esconda o slider
+            volumeSlider.classList.toggle('is-active');
+            // Você pode adicionar um som de efeito aqui, se desejar.
+            playEffectSound('buttonClick');
+        });
+
+        // Esconde o slider se o usuário clicar em qualquer lugar fora dele
+        document.addEventListener('click', (event) => {
+            if (volumeSlider.classList.contains('is-active') && !volumeContainer.contains(event.target)) {
+                volumeSlider.classList.remove('is-active');
+            }
+        });
+    }
 
     // =====================================
     // Configuração de Áudio
@@ -193,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
     textLinkElements.forEach(element => {
         element.addEventListener('mouseenter', () => playSound(selectSound));
     });
-    
+
     // =====================================
     // Gerenciamento de Áudio Principal
     // =====================================
@@ -413,7 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { selector: '.card', sound: 'card' },
         { selector: 'select', sound: 'select', event: 'change' },
     ];
-    
+
     const playedSounds = new Set();
     const playEffectAndCache = (sound) => {
         if (!playedSounds.has(sound)) {
@@ -472,7 +522,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         backgroundAudio.addEventListener('timeupdate', updateProgressAndTimers);
     }
-    
+
     if (audioControlButton) {
         audioControlButton.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1199,20 +1249,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // O JavaScript para a seção de FAQ é necessário para a funcionalidade de acordeão.
     // Adicione este código ao seu arquivo 'script.js' para que as perguntas se expandam.
 
-    const acordeaoBtns = document.querySelectorAll('.accordion-btn');
+    const botoesAcordeao = document.querySelectorAll('.acordeao-btn');
 
-    acordeaoBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            // Alterna a classe 'active' no botão clicado
-            this.classList.toggle('active');
+    botoesAcordeao.forEach(botao => {
+        botao.addEventListener('click', () => {
+            // Encontra o painel de conteúdo que está imediatamente após o botão
+            const painel = botao.nextElementSibling;
 
-            // Seleciona o painel de conteúdo
-            const painel = this.nextElementSibling;
+            // Alterna a classe 'ativo' no botão
+            botao.classList.toggle('ativo');
 
             // Alterna a exibição do painel
             if (painel.style.maxHeight) {
-                painel.style.maxHeight = null;
+                painel.style.maxHeight = null; // Fecha o painel
             } else {
+                // Define a altura do painel para a altura de rolagem (conteúdo completo)
                 painel.style.maxHeight = painel.scrollHeight + 'px';
             }
         });
@@ -3069,25 +3120,87 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    const senhaInput = document.getElementById('senha-input');
-    const verificarSenhaBtn = document.getElementById('verificarSenhaBtn');
-    const modalSucesso = document.getElementById('modalSenhaSucesso');
-    const modalFecharr = modalSucesso.querySelector('.modal-avancado-fechar');
 
-    // Lista de senhas corretas
-    const senhasCorretas = ['senha123', 'admin456', 'projeto@2024'];
 
-    verificarSenhaBtn.addEventListener('click', () => {
-        const senhaDigitada = senhaInput.value;
+
+
+    // Referências aos elementos do DOM
+    // O código só chega aqui depois que a página está pronta.
+    const acessoInput = document.getElementById('acesso-input');
+    const verificarAcessoBtn = document.getElementById('verificarAcessoBtn');
+    const modalAcessoConcedido = document.getElementById('modalAcessoConcedido');
+    const fecharModalAcessoBtn = document.querySelector('.modal-acesso-fechar');
+    const linkModalAcesso = document.querySelector('.btn-modal-acesso');
+
+    // A lista de senhas corretas
+    const senhasCorretas = ['admin123'];
+
+    // Função para abrir o modal
+    const abrirModal = () => {
+        modalAcessoConcedido.classList.add('ativo');
+    };
+
+    // Função para fechar o modal
+    const fecharModal = () => {
+        modalAcessoConcedido.classList.remove('ativo');
+    };
+
+    // Função para verificar a senha
+    const verificarSenha = () => {
+        const senhaDigitada = acessoInput.value;
+
         if (senhasCorretas.includes(senhaDigitada)) {
-            modalSucesso.style.display = 'flex';
+            abrirModal();
+            // Você pode mudar o link aqui, se quiser
+            // linkModalAcesso.href = 'https://www.novodestino.com';
         } else {
-            alert('Senha incorreta. Tente novamente.');
+            alert('Senha incorreta! Tente novamente.');
+            acessoInput.value = '';
+            acessoInput.focus();
+        }
+    };
+
+    // Adiciona o evento de clique ao botão
+    if (verificarAcessoBtn) {
+        verificarAcessoBtn.addEventListener('click', verificarSenha);
+    } else {
+        console.error("Botão 'verificarAcessoBtn' não encontrado!");
+    }
+
+    // Adiciona o evento para fechar o modal
+    if (fecharModalAcessoBtn) {
+        fecharModalAcessoBtn.addEventListener('click', fecharModal);
+    }
+
+    // Fecha o modal ao clicar fora dele
+    window.addEventListener('click', (event) => {
+        if (event.target === modalAcessoConcedido) {
+            fecharModal();
         }
     });
 
-    modalFecharr.addEventListener('click', () => {
-        modalSucesso.style.display = 'none';
+
+
+
+
+
+    // Adiciona um evento para fechar o modal ao clicar no 'x'
+    fecharModalAcessoBtn.addEventListener('click', () => {
+        modalAcessoConcedido.classList.remove('ativo');
+    });
+
+    // Adiciona um evento para fechar o modal ao clicar fora dele
+    window.addEventListener('click', (event) => {
+        if (event.target === modalAcessoConcedido) {
+            modalAcessoConcedido.classList.remove('ativo');
+        }
+    });
+
+    // Adiciona um evento para fechar o modal ao clicar fora dele
+    window.addEventListener('click', (event) => {
+        if (event.target === modalSucesso) {
+            modalSucesso.classList.remove('ativo');
+        }
     });
 
     const copiarBtn = document.getElementById('copiarBtn');
