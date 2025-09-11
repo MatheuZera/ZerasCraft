@@ -676,8 +676,6 @@ ul {
 .hero-section h1 {
     font-size: 4em;
     margin-bottom: 0;
-    /* Naala ti negative margin, ti gap ti parent ket mangkontrol ti spacing */
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9), 0 0 15px rgba(var(--neon-flame-color1-rgb), 0.7);
     /* Neon glow iti title */
     line-height: 1.2;
     font-weight: bold;
