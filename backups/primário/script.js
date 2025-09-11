@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM totalmente carregado e pronto!");
 
+    // ===================================================================
+    // 1. SISTEMA DE ÁUDIO & MÚSICAS
+    // =================================================================== 
     const backgroundAudio = document.getElementById('backgroundAudio');
     const audioControlButton = document.getElementById('audioControlButton');
     const audioPrevButton = document.getElementById('audioPrevButton');
@@ -558,46 +561,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // =====================================
-    // 1. Menu Hambúrguer (Otimizado para mais páginas)
-    // =====================================
+    // ===================================================================
+    // 2. Menu Hambúrguer (Otimizado para mais páginas)
+    // ===================================================================
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.main-nav');
     const desktopNav = document.querySelector('.desktop-nav'); // Adicionado para a navegação desktop
@@ -644,9 +610,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =====================================
-    // 2. Funcionalidade de Copiar Texto
-    // =====================================
+    // ===================================================================
+    // 3. Funcionalidade de Copiar Texto
+    // ===================================================================
     // Esta função foi atualizada para incluir a lógica para o IP/Porta do servidor
     const copyButtons = document.querySelectorAll('.copy-button'); // Certifique-se de que seus botões de cópia têm esta classe
     if (copyButtons.length > 0) {
@@ -708,9 +674,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =====================================
-    // 3. Sistema de Áudio de Fundo (Event Listeners Principais)
-    // =====================================
+    // ===================================================================
+    // 4. Sistema de Áudio de Fundo (Event Listeners Principais)
+    // ===================================================================
     if (backgroundAudio) {
         restoreAudioState();
         backgroundAudio.addEventListener('timeupdate', updateProgressAndTimers);
@@ -846,9 +812,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    // =====================================
+    // ===================================================================
     // 5. Animações de Rolagem com ScrollReveal
-    // =====================================
+    // ===================================================================
     // Adicionado um pequeno atraso para o ScrollReveal carregar e evitar piscar
     setTimeout(() => {
         if (typeof ScrollReveal !== 'undefined') {
@@ -883,98 +849,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500); // Atraso de 500ms
 
 
-    // =====================================
-    // 6. Componentes Interativos Específicos
-    // =====================================
-
-
-    // Cookie Consent Banner (não presente no HTML atual, mas mantido para referência futura)
-    const cookieBanner = document.getElementById('cookieBanner');
-    const acceptCookiesBtn = document.getElementById('acceptCookiesBtn');
-    const declineCookiesBtn = document.getElementById('declineCookiesBtn');
-
-    if (cookieBanner && acceptCookiesBtn && declineCookiesBtn) {
-        const hasAcceptedCookies = localStorage.getItem('cookieConsent') === 'accepted';
-
-        if (!hasAcceptedCookies) {
-            cookieBanner.style.display = 'flex'; // Mostra o banner se não aceitou
-        }
-
-        acceptCookiesBtn.addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'accepted');
-            cookieBanner.style.display = 'none';
-            showCentralMessage('Cookies aceitos!');
-            playEffectSound(clickSound);
-        });
-
-        declineCookiesBtn.addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'declined'); // Ou simplesmente esconde sem aceitar
-            cookieBanner.style.display = 'none';
-            showCentralMessage('Cookies recusados. Algumas funcionalidades podem ser limitadas.');
-            playEffectSound(clickSound);
-        });
-    }
-
-    // Multi-Step Form Indicator (não presente no HTML atual, mas mantido para referência futura)
-    const stepIndicatorContainer = document.querySelector('.step-indicator-container');
-    if (stepIndicatorContainer) {
-        const stepItems = stepIndicatorContainer.querySelectorAll('.step-item');
-        const prevStepBtn = document.getElementById('prevStepBtn');
-        const nextStepBtn = document.getElementById('nextStepBtn');
-        const stepContentText = document.getElementById('stepContentText');
-
-        let currentStep = 1;
-
-        const updateStepUI = () => {
-            stepItems.forEach(item => {
-                const step = parseInt(item.dataset.step);
-                if (step === currentStep) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-
-            // Atualiza o texto do conteúdo
-            let contentMessage = '';
-            switch (currentStep) {
-                case 1:
-                    contentMessage = 'Preencha seus dados básicos para começar.';
-                    break;
-                case 2:
-                    contentMessage = 'Selecione suas preferências e opções.';
-                    break;
-                case 3:
-                    contentMessage = 'Revise suas informações e confirme o cadastro.';
-                    break;
-                default:
-                    contentMessage = 'Erro no passo.';
-            }
-            stepContentText.textContent = contentMessage;
-
-            // Habilita/desabilita botões
-            prevStepBtn.disabled = currentStep === 1;
-            nextStepBtn.disabled = currentStep === stepItems.length;
-        };
-
-        nextStepBtn.addEventListener('click', () => {
-            if (currentStep < stepItems.length) {
-                currentStep++;
-                updateStepUI();
-            }
-            playEffectSound(clickSound);
-        });
-
-        prevStepBtn.addEventListener('click', () => {
-            if (currentStep > 1) {
-                currentStep--;
-                updateStepUI();
-            }
-            playEffectSound(clickSound);
-        });
-
-        updateStepUI(); // Inicia a UI no primeiro passo
-    }
+    // ===================================================================
+    // 6. Sistema de arquivos.html
+    // ===================================================================
 
     // Filter Buttons for Arquivos (addons.html)
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1054,7 +931,10 @@ document.addEventListener('DOMContentLoaded', () => {
             downloadLink: '#'
         }
     ];
-
+    
+    // ===============================
+    // Card de Download
+    // ===============================
     const generateDownloadCard = (item) => {
         const card = document.createElement('div');
         card.classList.add('card', 'download-card');
@@ -1083,6 +963,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     };
 
+    // ===============================
+    // Visualizar Itens de Download
+    // ===============================
     const renderDownloadItems = (filter = 'all') => {
         if (!cardGrid) return;
         cardGrid.innerHTML = ''; // Limpa o grid atual
@@ -1138,6 +1021,9 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDownloadItems('all'); // Renderiza todos os itens na carga inicial
     }
 
+    // ===============================
+    // Modal de Detalhes & Baixar
+    // ===============================
     // Modal de Download (do arquivos.html)
     const downloadModal = document.getElementById('download-modal');
     const downloadModalCloseBtn = downloadModal ? downloadModal.querySelector('.modal-close-btn') : null;
@@ -1154,6 +1040,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ===============================
+    // Sistema de Busca
+    // ===============================
     // Search Input for Downloads/Arquivos
     const searchInput = document.getElementById('search-input'); // Para arquivos.html
     const downloadSearchInput = document.getElementById('download-search-input'); // Para downloads.html
@@ -1216,9 +1105,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =====================================
-    // 99. Usabilidade e Ajustes Finais
-    // =====================================
+    // ===================================================================
+    // 7. Botão Voltar ao Topo
+    // ===================================================================
 
     // Botão Voltar ao Topo
     const scrollTopButton = document.getElementById('scrollTopButton');
@@ -1246,9 +1135,9 @@ document.addEventListener('DOMContentLoaded', () => {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // =====================================
-    // 7. ELEMENTOS
-    // =====================================
+    // ===================================================================
+    // 8. ELEMENTOS
+    // ===================================================================
 
 
 
