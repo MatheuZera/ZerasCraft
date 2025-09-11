@@ -2548,73 +2548,71 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 }
 
 /* ====================================================================================================================== */
-/* ESTATÍSTICAS (NOVO ESTILO) */
+/* LAYOUT DA SEÇÃO DE SERVIÇOS */
 /* ====================================================================================================================== */
-.services-grid {
-    /* Usa CSS Grid para um alinhamento perfeito */
+.service-grid {
+    /* **Ajuste principal: Usa CSS Grid para alinhar os cards horizontalmente** */
     display: grid;
     
-    /* Configura as colunas para que os cards fiquem um ao lado do outro. */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Cria colunas que se adaptam. Cada card terá no mínimo 280px e se expande. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     
     /* Espaçamento consistente entre os cards */
-    gap: 20px;
+    gap: 30px;
     
-    /* Centraliza o grid dentro do contêiner */
+    /* Centraliza os cartões na grade */
     justify-content: center;
     
     /* Garante que todos os cards na mesma linha tenham a mesma altura */
     align-items: stretch;
 }
 
+/* ====================================================================================================================== */
+/* ESTILO DOS CARDS INDIVIDUAIS */
+/* ====================================================================================================================== */
 .service-card {
-    /* Estilo do cartão para se parecer com a imagem */
+    /* Estilo básico do seu card, baseado nos exemplos anteriores */
     width: 100%;
     text-align: center;
-    padding: 30px 15px; /* Aumentei o padding vertical para mais espaço */
-    background-color: #2F394C; /* Cor de fundo do card da imagem */
-    color: #fff; /* Cor do texto padrão */
+    padding: var(--padding-card);
+    background-color: var(--cor-card-bg);
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
+    box-shadow: var(--sombra-card);
     transition: var(--transicao-padrao);
 }
 
 .service-card:hover {
-    transform: translateY(-5px); /* Efeito de elevação sutil */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-card-hover);
 }
 
-.service-card .icon-wrapper {
-    /* Estilo para o ícone */
-    width: 60px; /* Tamanho do wrapper do ícone */
-    height: 60px;
-    background-color: transparent; /* Fundo transparente */
-    color: var(--neon-flame-color1); /* Cor do ícone */
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-fundo-claro);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 10px; /* Reduzi a margem inferior */
+    margin: 0 auto 20px;
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.4);
 }
 
-.service-card .service-icon {
-    font-size: 3rem; /* Tamanho maior do ícone */
-    color: var(--cor-primaria); /* Cor principal do ícone */
+.service-icon {
+    font-size: 2.5rem;
+    animation: pulse 1.5s infinite;
 }
 
-.service-card h4 {
-    color: var(--cor-destaque); /* Cor de destaque para o número */
-    font-family: var(--fonte-titulo);
-    font-size: 2.5em; /* Tamanho do número */
+h4 {
+    color: var(--cor-texto-claro);
+    font-family: var(--fonte-subtitulo);
     margin-bottom: 5px;
-    margin-top: 0;
 }
 
 .service-card p {
-    color: var(--cor-texto-claro); /* Cor do texto descritivo */
-    font-family: var(--fonte-corpo);
-    line-height: 1.2;
-    margin: 0;
+    color: var(--cor-card-text);
+    line-height: 1.6;
 }
 
 /* ====================================================================================================================== */
