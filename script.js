@@ -52,10 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '💿 Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
         { title: '💿 Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
         { title: '💿 Relic', src: 'assets/audios/musics/records/Relic.mp3' },
-        { title: '💿 Stal', src: 'assets/audios/musics/records/Stal.mp3' },
-        { title: '💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
-        { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
-        { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
     ];
 
     // =====================================
