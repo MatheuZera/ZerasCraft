@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
@@ -9,7 +10,8 @@
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
     <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!---->
 
     <!--é a breve descrição da sua página que pode aparecer no Google-->
     <meta name="description"
@@ -22,7 +24,7 @@
     <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
     <meta name="robots" content="index, follow">
 
-<!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
     <!--O título que aparece na pré-visualização.-->
     <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
     <!--A descrição que aparece na pré-visualização.-->
@@ -32,13 +34,13 @@
     <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
     <!--A URL da página.-->
     <meta property="og:url" content="https://seusite.com.br/index.html">
-    
+
     <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Mundo Zera's Craft">
     <meta property="og:locale" content="pt_BR">
-    
-<!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@SeuTwitterHandle">
     <meta name="twitter:creator" content="@SeuTwitterHandle">
@@ -47,14 +49,14 @@
         content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
     <!---->
     <meta name="twitter:image"
-
         content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
-<!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
     <meta name="theme-color" content="#347C2F">
-<!-- Links para ScrollReveal e CountUp.js -->
+    <!-- Links para ScrollReveal e CountUp.js -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
 </head>
+
 <body>
 
     <div id="centralMessage" class="central-message"></div>
@@ -82,69 +84,79 @@
                     <img src="assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft" class="server-icon">
                 </div>
                 <h1>Arquivos do Canal</h1>
-                <p class="hero-subtitle">É aqui onde ficará todos os Addons, Mods, e Arquivos/Pastas Gerais do Canal!</p>
+                <p class="hero-subtitle">É aqui onde ficará todos os Addons, Mods, e Arquivos/Pastas Gerais do Canal!
+                </p>
                 <div class="hero-social-links">
-                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank"
+                        rel="noopener noreferrer" class="btn-primary">
                         <i class="fab fa-discord"></i> Pixel Legends
                     </a>
-                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
+                        class="btn-primary">
                         <i class="fab fa-discord"></i> Entrar no Discord
                     </a>
-                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
+                        class="btn-primary">
                         <i class="fab fa-youtube"></i> Canal YouTube
                     </a>
                 </div>
             </div>
         </section>
 
-<!--PESQUISA GERAL DE ARQUIVOS-->
-    <section class="section-padded container">
-    <div class="search-and-filter-container">
-        <input type="text" id="search-input" class="search-bar" placeholder="Pesquisar por título...">
-        <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="Addon">Addon</button>
-            <button class="filter-btn" data-filter="Mod">Mod</button>
-            <button class="filter-btn" data-filter="Skin">Skin</button>
-            <button class="filter-btn" data-filter="Arquivos Gerais">Arquivos Gerais</button>
-        </div>
-    </div>
-<!--Sub Recurso-->
-    <div id="card-grid" class="card-grid">
-        </div>
+        <!--PESQUISA GERAL DE ARQUIVOS-->
+        <section class="section-padded container">
+            <div class="search-and-filter-container">
+                <input type="text" id="search-input" class="search-bar" placeholder="Pesquisar por título...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="Addon">Addon</button>
+                    <button class="filter-btn" data-filter="Mod">Mod</button>
+                    <button class="filter-btn" data-filter="Skin">Skin</button>
+                    <button class="filter-btn" data-filter="Arquivos Gerais">Arquivos Gerais</button>
+                </div>
+            </div>
+            <!--Sub Recurso-->
+            <div id="card-grid" class="card-grid">
+            </div>
 
-    <div id="download-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close-btn">&times;</button>
-            <img id="modal-image" src="" alt="Thumbnail" class="modal-image">
-            <h3 id="modal-title"></h3>
-            <p id="modal-description"></p>
-            <a id="modal-download-link" href="#" target="_blank" class="modal-download-btn">Baixar Agora</a>
-        </div>
-    </div>
-</section>
+            <div id="download-modal" class="modal-overlay">
+                <div class="modal-content">
+                    <button class="modal-close-btn">&times;</button>
+                    <img id="modal-image" src="" alt="Thumbnail" class="modal-image">
+                    <h3 id="modal-title"></h3>
+                    <p id="modal-description"></p>
+                    <a id="modal-download-link" href="#" target="_blank" class="modal-download-btn">Baixar Agora</a>
+                </div>
+            </div>
+        </section>
 
         <section id="social-channels" class="section-padded section-alt-bg fade-in-section">
             <div class="container text-center">
                 <h2><i class="fas fa-users-line"></i> Nossos Canais de Comunidade</h2>
-                <p class="section-description">Conecte-se conosco em nossas redes sociais e não perca nenhuma novidade!</p>
+                <p class="section-description">Conecte-se conosco em nossas redes sociais e não perca nenhuma novidade!
+                </p>
 
                 <div class="community-grid max-3-columns">
                     <div class="community-card">
                         <i class="fab fa-discord card-icon"></i>
                         <h3 class="card-title">Discord Oficial</h3>
-                        <p class="card-description">Junte-se ao nosso servidor Discord para interagir com a comunidade, receber suporte e ficar por dentro dos anúncios!</p>
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" class="btn-primary">Entrar no Discord</a>
+                        <p class="card-description">Junte-se ao nosso servidor Discord para interagir com a comunidade,
+                            receber suporte e ficar por dentro dos anúncios!</p>
+                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
+                            class="btn-primary">Entrar no Discord</a>
                     </div>
                     <div class="community-card">
                         <i class="fab fa-youtube card-icon"></i>
                         <h3 class="card-title">Canal do YouTube</h3>
-                        <p class="card-description">Assista nossos vídeos de gameplay, tutoriais, destaques da comunidade e trailers de eventos!</p>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" class="btn-primary">Inscreva-se</a>
+                        <p class="card-description">Assista nossos vídeos de gameplay, tutoriais, destaques da
+                            comunidade e trailers de eventos!</p>
+                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
+                            class="btn-primary">Inscreva-se</a>
                     </div>
                 </div>
-                 <div class="text-center margin-top-50">
-                    <a href="comunidade.html" class="btn-primary"><i class="fas fa-users"></i> Ver Mais da Comunidade</a>
+                <div class="text-center margin-top-50">
+                    <a href="comunidade.html" class="btn-primary"><i class="fas fa-users"></i> Ver Mais da
+                        Comunidade</a>
                 </div>
             </div>
         </section>
@@ -250,5 +262,7 @@
     </button>
 
     <script src="script.js"></script>
+    <script src="elementos.js"></script>
 </body>
+
 </html>
