@@ -2798,35 +2798,44 @@ h4 {
 }
 
 /* ====================================================================================================================== */
-/* NOVO MODELO DE ACORDEÃO */
+/* NOVO MODELO DE ACORDEÃO (ESTILO MODERNO) */
 /* ====================================================================================================================== */
+
+/* Container Principal */
 .acordeao-container {
-    max-width: 700px;
+    max-width: 800px;
     margin: 50px auto;
     padding: 0 10px;
 }
 
+/* Item Individual do Acordeão */
 .acordeao-item {
-    background-color: transparent;
+    background-color: var(--cor-card-bg);
     border: 1px solid var(--cor-bordas);
     border-radius: var(--border-radius);
     margin-bottom: 15px;
     overflow: hidden;
+    box-shadow: var(--sombra-card);
     transition: var(--transicao-padrao);
 }
 
-.acordeao-item.active {
-    background-color: var(--cor-card-bg);
-    border-color: var(--cor-primaria);
+.acordeao-item:hover {
+    transform: translateY(-8px);
     box-shadow: var(--sombra-card-hover);
 }
 
+.acordeao-item.active {
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 20px rgba(var(--neon-flame-color1-rgb), 0.5); /* Sombra neon ao abrir */
+}
+
+/* Botão do Acordeão (Cabeçalho) */
 .acordeao-btn {
+    width: 100%;
     background-color: transparent;
     color: var(--cor-card-text);
     cursor: pointer;
-    padding: 18px 25px;
-    width: 100%;
+    padding: 20px 25px;
     text-align: left;
     border: none;
     outline: none;
@@ -2834,6 +2843,7 @@ h4 {
     justify-content: space-between;
     align-items: center;
     font-size: 1.1em;
+    font-weight: bold;
     font-family: var(--fonte-subtitulo);
     transition: var(--transicao-padrao);
 }
@@ -2842,6 +2852,7 @@ h4 {
     color: var(--cor-destaque);
 }
 
+/* Ícone de Expansão */
 .acordeao-btn .acordeao-icon {
     font-size: 1.5em;
     color: var(--cor-primaria);
@@ -2849,14 +2860,14 @@ h4 {
 }
 
 .acordeao-btn.active .acordeao-icon {
-    transform: rotate(45deg);
-    /* Gira 45 graus para um visual moderno */
+    transform: rotate(45deg); /* Gira 45 graus para o efeito de "abrir" */
     color: var(--cor-destaque);
 }
 
+/* Painel de Conteúdo */
 .acordeao-painel {
     padding: 0 25px;
-    background-color: var(--cor-card-bg);
+    background-color: var(--cor-card-hover);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -2870,97 +2881,9 @@ h4 {
     line-height: 1.6;
 }
 
+/* Estado Expandido */
 .acordeao-painel.show {
-    max-height: 500px;
-    /* Garante que o conteúdo seja exibido */
-}
-
-/* ====================================================================================================================== */
-/* NOVO MODELO DE ACORDEÃO (CARD INTERATIVO) */
-/* ====================================================================================================================== */
-.faq-accordion {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.accordion-item {
-    margin-bottom: 20px;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--sombra-card);
-    transition: var(--transicao-padrao);
-}
-
-.accordion-item:hover {
-    box-shadow: var(--cor-card-bg);
-    transform: translateY(-5px);
-    /* Efeito de elevação sutil */
-}
-
-.accordion-btn {
-    width: 100%;
-    display: flex;
-    /* Usado para alinhar o texto e o ícone */
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--cor-card-bg);
-    color: var(--cor-texto-claro);
-    text-align: left;
-    padding: 20px 25px;
-    /* Padding maior para mais espaço */
-    font-size: 1.1em;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    transition: background-color 0.3s ease;
-}
-
-.accordion-btn:hover {
-    background-color: var(--cor-card-hover);
-}
-
-.accordion-btn.active {
-    background-color: var(--cor-primaria);
-    color: var(--cor-fundo-claro);
-}
-
-/* Novo ícone de expansão */
-.accordion-btn::after {
-    content: '\2b';
-    /* Símbolo de mais */
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--cor-fundo-escuro);
-    border-radius: var(--border-radius);
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.accordion-btn.active::after {
-    content: '\2212';
-    /* Símbolo de menos */
-    transform: rotate(180deg);
-    color: var(--cor-fundo-claro);
-}
-
-.accordion-panel {
-    background-color: var(--cor-card-bg-sutil);
-    color: var(--cor-texto-secundario);
-    padding: 0 25px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Transição mais suave */
-}
-
-.accordion-panel p {
-    padding: 15px 0;
-    margin: 0;
-    line-height: 1.6;
-}
-
-.accordion-panel.show {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    max-height: 500px; /* Garante que o conteúdo seja exibido */
 }
 
 /* ====================================================================================================================== */
@@ -4229,59 +4152,86 @@ h4 {
 
 
 /* ====================================================================================================================== */
-/* ABAS (COMPONENTE DE TABS) */
+/* NOVO MODELO DE ABAS (ESTILO BLOCO E ATIVO) */
 /* ====================================================================================================================== */
+
+/* Contêiner para os botões das abas */
 .abas-botoes {
-    /* Contêiner para os botões das abas */
     display: flex;
     justify-content: center;
-    border-bottom: 2px solid var(--cor-bordas);
+    gap: 8px; /* Espaçamento entre os botões reduzido */
+    border-bottom: none;
     overflow-x: auto;
-    /* Permite rolagem horizontal em telas pequenas */
-    padding: 0 10px;
-    /* Adicionado para evitar que os botões grudem nas bordas */
+    padding: 8px 8px 0; /* Padding na parte superior para separação visual */
 }
 
+/* Estilo base dos botões de aba */
 .aba-btn {
-    /* Estilo base dos botões de aba */
-    background-color: transparent;
+    background-color: var(--cor-card-bg);
     border: none;
-    padding: 15px 25px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    padding: 12px 24px; /* Padding reduzido para um botão menor */
     cursor: pointer;
-    font-size: 1em;
-    color: var(--cor-texto-claro);
+    font-size: 0.9em; /* Tamanho da fonte reduzido */
+    font-family: var(--fonte-subtitulo);
+    color: var(--cor-card-text);
     white-space: nowrap;
-    /* Impede que o texto quebre */
-    transition: all 0.3s ease;
+    transition: var(--transicao-padrao);
+    box-shadow: var(--sombra-leve);
 }
 
-.aba-btn:hover {
+/* Efeito ao passar o mouse sobre o botão */
+.aba-btn:not(.active):hover {
+    background-color: var(--cor-card-hover);
     color: var(--cor-link-hover);
 }
 
+/* Estilo do botão de aba ativo */
 .aba-btn.active {
-    /* Estilo do botão de aba ativo */
-    border-bottom: 3px solid var(--cor-primaria);
-    color: var(--cor-primaria);
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
     font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
+/* Estilo do contêiner de conteúdo das abas */
 .abas-conteudo {
-    /* Estilo do contêiner de conteúdo das abas */
-    padding: 20px;
+    padding: 20px; /* Padding reduzido */
     background-color: var(--cor-card-bg);
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
-    box-shadow: var(--sombra-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card-hover);
+    min-height: 200px; /* Altura mínima reduzida */
+    max-width: 800px; /* Largura máxima para centralizar e afastar das bordas */
+    margin: 20px auto; /* Centraliza o card na página */
 }
 
+/* Estilo dos painéis de conteúdo */
 .aba-painel {
-    /* Estilo dos painéis de conteúdo */
     display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    color: var(--cor-card-text);
+    line-height: 1.6;
 }
 
+/* Estilo do painel de conteúdo ativo */
 .aba-painel.active {
-    /* Estilo do painel de conteúdo ativo */
     display: block;
+    opacity: 1;
+}
+
+/* Keyframe para o efeito de fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ====================================================================================================================== */
