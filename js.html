@@ -108,6 +108,23 @@
             </div>
         </section>
 
+        <main class="section-padded">
+            <div class="container">
+                <h2>Secção de Conteúdo</h2>
+                <div class="cartao">
+                    <p>Aqui pode colocar qualquer conteúdo da sua página. A janela modal é um pop-up que pode ser usado
+                        para formulários, avisos ou informações adicionais, sem que o utilizador precise de sair da
+                        página principal.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="rodape">
+            <div class="container">
+                <p>&copy; 2024 Empresa de Exemplo. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
         <div class="acordeao-container">
             <button class="acordeao-btn">O que é a Plataforma?</button>
             <div class="acordeao-painel">
@@ -200,6 +217,15 @@
         <div class="lightbox-overlay">
             <span class="lightbox-close">&times;</span>
             <img src="" class="lightbox-imagem" alt="">
+        </div>
+
+        <div class="social-share">
+            <button class="btn-share">Compartilhar</button>
+            <div class="share-icons">
+                <a href="#" class="icon-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="icon-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="icon-link"><i class="fab fa-linkedin-in"></i></a>
+            </div>
         </div>
 
         <div class="contador-container">
@@ -318,6 +344,24 @@
             </div>
         </div>
 
+        <form class="form-validacao">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" class="input-validacao" required>
+            <div class="feedback-validacao"></div>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" class="input-validacao" required>
+            <div class="feedback-validacao"></div>
+        </form>
+
+        <button class="btn-download">
+            <span class="btn-download-text">Baixar Arquivo</span>
+            <span class="btn-download-icon">
+                <i class="fas fa-download"></i>
+                <i class="fas fa-check"></i>
+            </span>
+        </button>
+
         <div class="cookie-consent" id="cookie-consent">
             <p>Nós usamos cookies para melhorar sua experiência. Ao continuar, você concorda com o uso de cookies. <a
                     href="#">Saiba mais</a></p>
@@ -351,6 +395,17 @@
 
         <!--------------------------------------->
 
+        <div class="share-container">
+            <button class="btn-share-toggle"><i class="fas fa-share-alt"></i></button>
+            <div class="share-links">
+                <a href="#" class="share-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="share-icon twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="share-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <!--------------------------------------->
+
         <div class="galeria-parallax">
             <div class="galeria-coluna" data-speed="1.2">
                 <img src="https://via.placeholder.com/400x600/4CAF50/FFFFFF?text=Imagem+1">
@@ -364,6 +419,19 @@
 
         <!--------------------------------------->
 
+        <button class="btn-notificacao">
+            <i class="fas fa-bell"></i>
+            <span class="badge" id="notification-count">0</span>
+        </button>
+        <div class="notification-dropdown">
+            <div class="notification-header">
+                <h4>Notificações</h4>
+                <button class="btn-limpar">Limpar</button>
+            </div>
+            <ul class="notification-list" id="notification-list">
+                <li>Nenhuma notificação nova.</li>
+            </ul>
+        </div>
 
         <!--------------------------------------->
 
@@ -443,6 +511,11 @@
                 <span>Fev</span>
                 <span>Mar</span>
             </div>
+        </div>
+
+        <div class="search-efeito">
+            <input type="text" class="input-efeito" placeholder="Pesquisar...">
+            <i class="fas fa-search"></i>
         </div>
 
         <button class="btn-abrir-aviso">Abrir Aviso</button>
@@ -655,6 +728,14 @@
             </section>
         </div>
 
+        <div class="campo-copia">
+            <input type="text" id="texto-copiar" value="Conteúdo para ser copiado">
+            <button class="btn-copiar">
+                <i class="fas fa-copy"></i>
+            </button>
+            <span class="feedback-copia">Copiado!</span>
+        </div>
+
         <div class="comparison-cards-grid">
             <div class="comparison-card">
                 <span class="card-badge">Básico</span>
@@ -808,6 +889,24 @@
         </div>
 
         <section class="componente-secao">
+            <div class="card-base cartao-expansivel">
+                <h3 class="titulo-cartao">Clique para Expandir</h3>
+                <p class="conteudo-escondido">Aqui está o conteúdo extra. Este texto fica visível somente quando o
+                    cartão é
+                    expandido. Ótimo para FAQs ou detalhes de produto.</p>
+            </div>
+        </section>
+
+        <section class="componente-secao">
+            <div class="card-base">
+                <h3>Progresso</h3>
+                <div class="barra-progresso">
+                    <div class="barra-preenchimento"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="componente-secao">
             <div class="card-base">
                 <button id="abrirModal" class="btn btn-primary">Abrir Modal</button>
             </div>
@@ -839,6 +938,29 @@
                 <button class="botao-anterior">&larr; Anterior</button>
             </div>
         </section>
+
+        <section class="componente-carrossel">
+            <div class="carrossel-container">
+                <div class="carrossel-slides">
+                    <img src="https://via.placeholder.com/800x400/FF6C6C/FFFFFF?text=Slide+1" alt="Slide 1">
+                    <img src="https://via.placeholder.com/800x400/6A9BD8/FFFFFF?text=Slide+2" alt="Slide 2">
+                    <img src="https://via.placeholder.com/800x400/4CAF50/FFFFFF?text=Slide+3" alt="Slide 3">
+                </div>
+                <button class="carrossel-botao anterior">&larr;</button>
+                <button class="carrossel-botao proximo">&rarr;</button>
+            </div>
+        </section>
+
+        <div id="visualizador" class="visualizador-modal">
+            <span class="visualizador-fechar">&times;</span>
+            <img class="visualizador-conteudo" id="imagemVisualizada">
+        </div>
+
+        <div class="senha-container">
+            <label for="senha-input">Digite a senha:</label>
+            <input type="password" id="senha-input">
+            <button id="verificarSenhaBtn">Entrar</button>
+        </div>
 
         <div id="modalSenhaSucesso" class="modal-avancado-container">
             <div class="modal-avancado-conteudo">
