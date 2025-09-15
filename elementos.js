@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Copiar para a Área de Transferência
     // =====================================
     const btnCopy = document.querySelector('.btn-copy');
-    
+
     if (btnCopy) {
         // Armazena o conteúdo original do botão (o ícone de copiar)
         const originalContent = btnCopy.innerHTML;
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Muda o conteúdo do botão para o texto "Copiado!"
                 btnCopy.innerHTML = 'Copiado!';
-                
+
                 // Após 2 segundos, restaura o conteúdo original do botão
                 setTimeout(() => {
                     btnCopy.innerHTML = '<i class="fas fa-clipboard"></i>';
@@ -1144,4 +1144,30 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // =====================================
+    // 21. ABAS DE NAVEGAÇÃO
+    // =====================================
+
+    // Seleciona todos os links de navegação na página
+    const itensNav = document.querySelectorAll('.item-navegacao');
+
+    // Obtém o nome do ficheiro da página atual a partir do URL
+    // Exemplo: 'http://localhost/index.html' -> 'index.html'
+    const nomePaginaAtual = window.location.pathname.split('/').pop().replace('.html', '');
+
+    // Itera sobre cada link para verificar se corresponde à página atual
+    itensNav.forEach(link => {
+        // Obtém o nome da página definido no atributo 'data-pagina'
+        const dadoPagina = link.getAttribute('data-pagina');
+
+        // Compara o nome da página do link com o nome da página atual
+        if (dadoPagina === nomePaginaAtual) {
+            // Se corresponder, adiciona a classe 'ativo' para destacar o ícone
+            link.classList.add('ativo');
+        } else {
+            // Caso contrário, remove a classe 'ativo'
+            link.classList.remove('ativo');
+        }
+    });
 });

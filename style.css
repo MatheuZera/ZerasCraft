@@ -2826,7 +2826,8 @@ h4 {
 
 .acordeao-item.active {
     border-color: var(--cor-primaria);
-    box-shadow: 0 0 20px rgba(var(--neon-flame-color1-rgb), 0.5); /* Sombra neon ao abrir */
+    box-shadow: 0 0 20px rgba(var(--neon-flame-color1-rgb), 0.5);
+    /* Sombra neon ao abrir */
 }
 
 /* Botão do Acordeão (Cabeçalho) */
@@ -2860,7 +2861,8 @@ h4 {
 }
 
 .acordeao-btn.active .acordeao-icon {
-    transform: rotate(45deg); /* Gira 45 graus para o efeito de "abrir" */
+    transform: rotate(45deg);
+    /* Gira 45 graus para o efeito de "abrir" */
     color: var(--cor-destaque);
 }
 
@@ -2883,7 +2885,8 @@ h4 {
 
 /* Estado Expandido */
 .acordeao-painel.show {
-    max-height: 500px; /* Garante que o conteúdo seja exibido */
+    max-height: 500px;
+    /* Garante que o conteúdo seja exibido */
 }
 
 /* ====================================================================================================================== */
@@ -4159,10 +4162,12 @@ h4 {
 .abas-botoes {
     display: flex;
     justify-content: center;
-    gap: 8px; /* Espaçamento entre os botões reduzido */
+    gap: 8px;
+    /* Espaçamento entre os botões reduzido */
     border-bottom: none;
     overflow-x: auto;
-    padding: 8px 8px 0; /* Padding na parte superior para separação visual */
+    padding: 8px 8px 0;
+    /* Padding na parte superior para separação visual */
 }
 
 /* Estilo base dos botões de aba */
@@ -4170,9 +4175,11 @@ h4 {
     background-color: var(--cor-card-bg);
     border: none;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
-    padding: 12px 24px; /* Padding reduzido para um botão menor */
+    padding: 12px 24px;
+    /* Padding reduzido para um botão menor */
     cursor: pointer;
-    font-size: 0.9em; /* Tamanho da fonte reduzido */
+    font-size: 0.9em;
+    /* Tamanho da fonte reduzido */
     font-family: var(--fonte-subtitulo);
     color: var(--cor-card-text);
     white-space: nowrap;
@@ -4197,13 +4204,17 @@ h4 {
 
 /* Estilo do contêiner de conteúdo das abas */
 .abas-conteudo {
-    padding: 20px; /* Padding reduzido */
+    padding: 20px;
+    /* Padding reduzido */
     background-color: var(--cor-card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-card-hover);
-    min-height: 200px; /* Altura mínima reduzida */
-    max-width: 800px; /* Largura máxima para centralizar e afastar das bordas */
-    margin: 20px auto; /* Centraliza o card na página */
+    min-height: 200px;
+    /* Altura mínima reduzida */
+    max-width: 800px;
+    /* Largura máxima para centralizar e afastar das bordas */
+    margin: 20px auto;
+    /* Centraliza o card na página */
 }
 
 /* Estilo dos painéis de conteúdo */
@@ -4228,6 +4239,7 @@ h4 {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -9994,4 +10006,203 @@ h1 {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+/* ====================================================================================================================== */
+/* ABA DE NAVEGAÇÃO */
+/* ====================================================================================================================== */
+
+/* Base da barra de navegação */
+.navegador-icones {
+    position: fixed;
+    background-color: var(--cor-card-bg);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: var(--sombra-nav);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+}
+
+.item-navegacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    color: var(--cor-texto-claro);
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: var(--transicao-padrao);
+    border-radius: 50%;
+}
+
+.item-navegacao:hover {
+    background-color: var(--cor-card-hover);
+}
+
+.item-navegacao.ativo {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-btn-text);
+    box-shadow: var(--sombra-leve);
+}
+
+/* 1. NAVEGAÇÃO À ESQUERDA (PADRÃO) */
+.posicao-esquerda {
+    flex-direction: column;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+/* 2. NAVEGAÇÃO À DIREITA */
+.posicao-direita {
+    flex-direction: column;
+    top: 50%;
+    right: 20px;
+    left: auto;
+    transform: translateY(-50%);
+}
+
+/* 3. NAVEGAÇÃO SUPERIOR */
+.posicao-superior {
+    flex-direction: row;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+}
+
+/* 4. NAVEGAÇÃO INFERIOR */
+.posicao-inferior {
+    flex-direction: row;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+}
+
+/* 5. NAVEGAÇÃO: BARRA FINA SUPERIOR */
+.superior-fina {
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    background-color: var(--cor-card-hover);
+    padding: 5px 20px;
+    box-shadow: var(--sombra-leve);
+    justify-content: center;
+}
+
+.superior-fina .item-navegacao {
+    width: 40px;
+    height: 40px;
+}
+
+/* 6. NAVEGAÇÃO: BARRA FINA INFERIOR */
+.inferior-fina {
+    flex-direction: row;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    background-color: var(--cor-card-hover);
+    padding: 5px 20px;
+    box-shadow: var(--sombra-leve);
+    justify-content: center;
+}
+
+.inferior-fina .item-navegacao {
+    width: 40px;
+    height: 40px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navegador-icones {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px;
+        top: auto;
+        flex-direction: row;
+        width: 90%;
+        justify-content: space-around;
+        padding: 5px;
+    }
+
+    .posicao-esquerda,
+    .posicao-direita,
+    .posicao-superior,
+    .posicao-inferior {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
+        bottom: 10px;
+        flex-direction: row;
+        width: 90%;
+        justify-content: space-around;
+        padding: 5px;
+        border-radius: 50px;
+    }
+
+    .superior-fina,
+    .inferior-fina {
+        left: 0;
+        right: 0;
+        transform: none;
+        width: 100%;
+        border-radius: 0;
+    }
+}
+
+/* ====================================================================================================================== */
+/* CARDS ESTILO RODAPÉ */
+/* ====================================================================================================================== */
+
+.botao {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 15px 30px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    border: none;
+    cursor: pointer;
+}
+
+.botao:hover {
+    background-color: var(--cor-secundaria);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.section-padded {
+    padding: var(--padding-section) 0;
+}
+
+.cartao {
+    background-color: var(--cor-card-bg);
+    padding: var(--padding-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    transition: var(--transicao-card-hover);
+    text-align: center;
+}
+
+.rodape {
+    background-color: var(--cor-card-bg);
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--cor-bordas);
+}
+
+.rodape p {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--cor-texto-claro);
 }
