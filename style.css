@@ -10206,3 +10206,700 @@ h1 {
     font-size: 0.9em;
     color: var(--cor-texto-claro);
 }
+
+/*
+  ======================================================
+  Contêineres Principais
+  ======================================================
+  Estilos para os contêineres que organizam os cards.
+*/
+.container-galeria, .container-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap-grid);
+    max-width: var(--max-width-content);
+    /* Adiciona margem acima e abaixo para espaçamento */
+    margin: 50px auto; 
+}
+
+.container-cards-lado {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    /* Adiciona margem acima e abaixo para espaçamento */
+    margin: 30px auto;
+}
+
+/*
+  ======================================================
+  1. Modelo de Cards Simples (Imagem no Topo)
+  ======================================================
+*/
+.card-simples {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    display: flex;
+    flex-direction: column;
+}
+.card-simples:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card);
+}
+.imagem-topo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.conteudo-simples {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+.conteudo-simples h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin: 0 0 10px 0;
+}
+.conteudo-simples p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 20px 0;
+}
+.botao-ler-mais {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+.botao-ler-mais:hover {
+    background-color: var(--cor-secundaria);
+    transform: scale(1.05);
+}
+
+/*
+  ======================================================
+  2. Modelo de Card Flutuante (Imagem no Topo)
+  ======================================================
+*/
+.card-flutuante {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    display: flex;
+    flex-direction: column;
+}
+.card-flutuante:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--sombra-card-hover);
+}
+.conteudo-flutuante {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+.conteudo-flutuante h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin: 0 0 5px 0;
+}
+.conteudo-flutuante p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 15px 0;
+}
+.preco-container {
+    font-family: var(--fonte-subtitulo);
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.botao-adicionar {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    width: 100%;
+}
+.botao-adicionar:hover {
+    background-color: var(--cor-secundaria);
+    transform: translateY(-2px);
+}
+
+/*
+  ======================================================
+  3. Modelo de Card de Destaque (Imagem no Topo)
+  ======================================================
+*/
+.card-destaque {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    display: flex;
+    flex-direction: column;
+}
+.card-destaque:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card-hover);
+}
+.conteudo-destaque {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+.titulo-destaque {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.8em;
+    margin: 0 0 10px 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.conteudo-destaque p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 20px 0;
+}
+.link-ver-projeto {
+    color: var(--cor-link);
+    font-family: var(--fonte-botao);
+    font-weight: bold;
+    text-decoration: none;
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+.link-ver-projeto:hover {
+    color: var(--cor-link-hover);
+    transform: translateX(5px);
+}
+
+/*
+  ======================================================
+  4. Modelo de Cartão de Equipa (Imagem no Topo)
+  ======================================================
+*/
+.cartao-equipa {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.cartao-equipa:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card);
+}
+.foto-membro {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.info-equipa {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+.info-equipa h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin: 0;
+}
+.info-equipa span {
+    font-family: var(--fonte-subtitulo);
+    color: var(--cor-terciaria);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+.redes-sociais a {
+    color: var(--cor-texto-claro);
+    font-size: 1.2em;
+    margin: 0 10px;
+    transition: var(--transicao-padrao);
+}
+.redes-sociais a:hover {
+    color: var(--cor-link);
+}
+
+/*
+  ======================================================
+  5. Modelo de Card com Borda (Imagem no Topo)
+  ======================================================
+*/
+.card-borda {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    border: 2px solid var(--cor-primaria);
+    display: flex;
+    flex-direction: column;
+}
+.card-borda:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card);
+    border-color: var(--cor-destaque);
+}
+.conteudo-borda {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+.categoria {
+    font-family: var(--fonte-mini);
+    color: var(--cor-terciaria);
+    background-color: var(--cor-fundo-escuro);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.conteudo-borda h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin: 0 0 10px 0;
+}
+.conteudo-borda p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 20px 0;
+}
+.botao-inscrever {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+.botao-inscrever:hover {
+    background-color: var(--cor-secundaria);
+    transform: scale(1.05);
+}
+
+/*
+  ======================================================
+  6. Modelo de Card de Download (Imagem ao Lado)
+  ======================================================
+*/
+.card-download {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+}
+.card-download:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+.icone-documento {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--border-radius);
+    margin-right: 20px;
+}
+.info-download {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.info-download h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
+}
+.info-download p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 10px 0;
+}
+.detalhe-ficheiro {
+    font-family: var(--fonte-mini);
+    color: var(--cor-terciaria);
+    font-size: 0.8em;
+    margin: 0 0 15px 0;
+}
+.botao-download {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+.botao-download:hover {
+    background-color: var(--cor-secundaria);
+}
+
+/*
+  ======================================================
+  7. Modelo de Cartão de Perfil (Imagem ao Lado)
+  ======================================================
+*/
+.card-perfil {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+}
+.card-perfil:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+.foto-perfil {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+.info-perfil {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.info-perfil h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
+}
+.info-perfil p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 15px 0;
+}
+.acoes-perfil {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.botao-seguir {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+}
+.botao-seguir:hover {
+    background-color: var(--cor-secundaria);
+}
+.link-perfil {
+    color: var(--cor-link);
+    text-decoration: none;
+    font-family: var(--fonte-mini);
+    font-weight: bold;
+    transition: var(--transicao-padrao);
+}
+.link-perfil:hover {
+    color: var(--cor-link-hover);
+}
+
+/*
+  ======================================================
+  8. Modelo de Card com Ícone (Imagem ao Lado)
+  ======================================================
+*/
+.card-icone-lado {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+}
+.card-icone-lado:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+.icone-container {
+    background-color: var(--cor-terciaria);
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+.icone-container i {
+    font-size: 2em;
+    color: var(--cor-btn-text);
+}
+.info-icone-lado {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.info-icone-lado h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
+}
+.info-icone-lado p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 10px 0;
+}
+.link-saber-mais {
+    color: var(--cor-link);
+    text-decoration: none;
+    font-family: var(--fonte-mini);
+    font-weight: bold;
+    transition: var(--transicao-padrao);
+}
+.link-saber-mais:hover {
+    color: var(--cor-link-hover);
+    transform: translateX(5px);
+}
+
+/*
+  ======================================================
+  9. Modelo de Card com Ícone
+  ======================================================
+*/
+.card-icone {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    flex-basis: calc(50% - 10px);
+}
+
+.card-icone:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.circulo-icone {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    background-color: var(--cor-primaria);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    transition: var(--transicao-padrao);
+}
+
+.circulo-icone:hover {
+    background-color: var(--cor-secundaria);
+}
+
+.circulo-icone i {
+    font-size: 1.5em;
+    color: var(--cor-btn-text);
+}
+
+.info-icone {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-icone h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.2em;
+    margin: 0 0 5px 0;
+}
+
+.info-icone p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 15px 0;
+}
+
+.botao-descobrir {
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-botao);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+
+.botao-descobrir:hover {
+    background-color: #FFB300;
+    transform: scale(1.05);
+}
+
+/*
+  ======================================================
+  10. Modelo de Cartão de Citação
+  ======================================================
+*/
+.card-citacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    flex-basis: calc(50% - 10px);
+    text-align: center;
+}
+
+.card-citacao:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.foto-autor {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--cor-primaria);
+    margin-bottom: 20px;
+}
+
+.conteudo-citacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icone-citacao {
+    font-size: 2.5em;
+    color: var(--cor-destaque);
+    margin-bottom: 15px;
+}
+
+.conteudo-citacao p {
+    font-family: var(--fonte-corpo);
+    font-style: italic;
+    color: var(--cor-card-text);
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+}
+
+.autor-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.autor-info h4 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-texto-claro);
+    margin: 0;
+}
+
+.cargo {
+    font-family: var(--fonte-mini);
+    color: var(--cor-terciaria);
+    font-size: 0.9em;
+}
+
+/*
+  ======================================================
+  Responsividade
+  ======================================================
+*/
+@media (max-width: 768px) {
+    .container-cards-lado {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-icone, .card-citacao {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .card-icone {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .circulo-icone {
+        margin: 0 0 15px 0;
+    }
+
+    .botao-descobrir {
+        align-self: center;
+    }
+}
