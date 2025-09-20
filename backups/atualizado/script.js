@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
         { title: '✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
         { title: '✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
+
         { title: '⛏️ Aria Math', src: 'assets/audios/musics/Aria-Math.mp3' },
         { title: '⛏️ Aria Math Lofi', src: 'assets/audios/musics/Aria-Math-Lofi.mp3' },
         { title: '⛏️ Beginning', src: 'assets/audios/musics/Beginning.mp3' },
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '⛏️ Sweden', src: 'assets/audios/musics/Sweden.mp3' },
         { title: '⛏️ Taswell', src: 'assets/audios/musics/Taswell.mp3' },
         { title: '⛏️ Wet Hands', src: 'assets/audios/musics/Wet-Hands.mp3' },
+
         { title: '💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
         { title: '💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
         { title: '💿 Far', src: 'assets/audios/musics/records/Far.mp3' },
@@ -59,6 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
         { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
         { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
+
+        { title: '🍃 Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
+        { title: '🍃 Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
+        { title: '🍃 Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
+        { title: '🍃 Creative 4', src: 'assets/audios/musics/minecraft/Creative4.mp3' },
+        { title: '🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
+        { title: '🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
+
+        { title: '🎵 ', src: 'assets/audios/musics/others/Over-the-Waterfall.mp3' },
     ];
 
     // =====================================
