@@ -318,53 +318,36 @@ ul {
     left: 0;
     z-index: 1001;
     background-color: rgba(24, 24, 24, 0.85);
-    /* Ad-adu a opacity ken nasisinit a background */
     backdrop-filter: blur(8px);
-    /* Napigpigsa a blur effect */
     -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
-    /* Ad-adu a pronunsia a shadow */
     display: flex;
     justify-content: center;
-    /* Mangisentro ti content iti horizontal */
     align-items: center;
     padding: 50px 0;
-    /* Vertical padding naadjust, horizontal nakontrol iti container */
     height: 70px;
-    /* Fixed height para iti header */
 }
 
 .header-content-wrapper {
-    /* Wrapper ti header content */
     display: flex;
     justify-content: space-between;
-    /* Agpalpalawlaw ti espasyo ti logo ken nav */
     align-items: center;
     width: 100%;
     max-width: var(--max-width-content);
-    /* Limitan ti content width */
     padding: 0 20px;
-    /* Inadduan ti internal padding */
 }
 
 .header-logo {
     font-family: var(--fonte-pixel);
-    /* Usar ti Pixelify Sans */
     font-size: 1.8em;
-    /* Dakdakkel a size para iti logo iti desktop */
     color: #ffffff;
-    /* Kolor ti logo */
     text-transform: uppercase;
     font-weight: bold;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    /* Napigpigsa a shadow */
     margin-right: 20px;
-    /* Espasyo iti kanawan ti logo */
     flex-shrink: 0;
-    /* Manglapped ti logo a bumaba */
 }
 
-/* Style para iti animation ti header title */
 .header-logo[data-text]:hover {
     animation: neonGlow 1.5s infinite alternate;
 }
@@ -388,76 +371,64 @@ ul {
     }
 }
 
-
-/* ========================================== */
+/* ============ */
 /* NAVEGAÇÃO PARA MOBILE 768PX */
-/* ========================================== */
+/* ============ */
 @media (max-width: 768px) {
     .main-header {
         height: 55px;
-        /* Bassit a height para iti mobile header */
         padding: 5px 0;
         top: -5px;
+        align-items: center;
     }
 
     .header-content-wrapper {
         padding: 0 5px;
-        /* Bassit a padding iti mobile */
     }
 
-    /* Ipakita ti hamburger button laeng iti mobile */
     .menu-toggle {
         display: block;
-        position: fixed;
-        /* Fixed para iti nasaysayaat a access */
-        top: 15px;
-        /* Naadjust a ngato */
+        position: absolute;
+        top: 50%;
         right: 10px;
-        /* Naadjust iti kanawan */
+        transform: translateY(-50%);
         font-size: 1.8em;
-        /* Bassit a font size */
         color: #f0f0f0;
         background: none;
         border: none;
         cursor: pointer;
         z-index: 1002;
-        transition: transform 0.3s ease, color 0.3s ease;
         -webkit-tap-highlight-color: transparent;
     }
 
-    .menu-toggle.active {
+    .menu-toggle i {
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .menu-toggle.active i {
         transform: rotate(90deg);
         color: #72ef85;
     }
 
-    /* Off-canvas mobile menu */
     .main-nav {
         display: flex;
         position: fixed;
         top: 0;
         left: -100%;
-        /* Agpang a nakalimed */
         width: 100%;
         max-width: 280px;
-        /* Limitan ti width ti mobile menu */
         height: 100vh;
-        /* Mangsakup ti intero a viewport height */
         background-color: rgba(26, 26, 26, 0.98);
-        /* Nasisinit a background */
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         flex-direction: column;
         justify-content: flex-start;
-        /* Ag-align ti content iti ngato */
         align-items: center;
         transition: left 0.5s ease-in-out;
         z-index: 999;
         overflow-y: auto;
-        /* Mangpalubos ti scroll no dakkel ti content */
         padding-top: 70px;
-        /* Espasyo para iti fixed header (60px header + 10px spacing) */
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-        /* Side shadow */
     }
 
     .main-nav.active {
@@ -475,19 +446,15 @@ ul {
     .main-nav a {
         display: block;
         padding: 15px;
-        /* Bassit a padding para iti mobile */
         font-size: 1.2em;
-        /* Bassit a font size para iti mobile */
         color: #f0f0f0;
         text-decoration: none;
         transition: background-color 0.3s ease, color 0.3s ease;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        /* Separator */
     }
 
     .main-nav ul li:last-child a {
         border-bottom: none;
-        /* Ilisan ti border iti last item */
     }
 
     .main-nav a:hover,
@@ -498,23 +465,18 @@ ul {
 
     .header-logo {
         font-size: 1.2em;
-        /* Bassit a logo iti mobile */
         margin-right: 10px;
-        /* Bassit a kanawan a margin */
     }
 }
 
-/* ========================================== */
-/* NAVEGAÇÃO PARA MOBILE 769PX */
-/* ========================================== */
+/* ========== */
+/* NAVEGAÇÃO PARA DESKTOP */
+/* ========== */
 @media (min-width: 769px) {
-
-    /* Siguradoen a saan nga aggapu ti hamburger button */
     .menu-toggle {
         display: none;
     }
 
-    /* Ipakita ti horizontal navigation menu */
     .main-nav {
         display: block;
         position: static;
@@ -525,7 +487,6 @@ ul {
         -webkit-backdrop-filter: none;
         box-shadow: none;
         flex-grow: 1;
-        /* PERMITIR QUE A NAVEGAÇÃO OCUPE O ESPAÇO RESTANTE */
     }
 
     .main-nav ul {
@@ -534,31 +495,24 @@ ul {
         padding: 0;
         margin: 0;
         gap: 20px;
-        /* Naurnos a spacing kadagiti links */
         align-items: center;
         justify-content: flex-end;
-        /* ALINHAR OS ITENS À DIREITA DA NAVEGAÇÃO */
         flex-wrap: nowrap;
-        /* Impeduan ti panagsina ti linya */
         width: 100%;
-        /* Garante que a UL ocupe o espaço disponível dentro do main-nav */
     }
 
     .main-nav a {
         color: #f0f0f0;
         font-weight: 400;
-        /* Nanam-ay a thickness */
         text-decoration: none;
         padding: 5px 0;
         position: relative;
         transition: color 0.3s ease;
         white-space: nowrap;
-        /* Impeduan ti panagsina ti linya kadagiti desktop links */
     }
 
     .main-nav a:hover {
         color: var(--cor-primaria);
-        /* Usar ti primary color iti hover */
     }
 
     .main-nav a.active {
@@ -573,7 +527,6 @@ ul {
         width: 0;
         height: 2px;
         background-color: var(--cor-primaria);
-        /* Berde a highlight line */
         transition: width 0.3s ease;
     }
 
@@ -1165,9 +1118,10 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-bottom: 20px;
 }
 
-/* ---------------- */
+/* ====================================================================================================================== */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE ACESSO (IP/Porta) */
-/* ---------------- */
+/* ====================================================================================================================== */
+
 .access-section {
     /* Adicionando padding para controlar o espaçamento acima e abaixo de toda a seção */
     padding-top: 50px;
@@ -1264,6 +1218,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
+
 /* ---------------- */
 /* ESTILO PARA O BOTÃO DE COPIAR IP E PORTA COMBINADO */
 /* ---------------- */
@@ -1309,9 +1264,10 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     font-size: 1.2em;
 }
 
-/* -------------- */
+/* ====================================================================================================================== */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE EVENTO */
-/* -------------- */
+/* ====================================================================================================================== */
+
 .events-sub-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1434,9 +1390,10 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
-/* --------------- */
+/* ====================================================================================================================== */
 /* ESTILOS ESPECÍFICOS PARA CARDS DA COMUNIDADE */
-/* --------------- */
+/* ====================================================================================================================== */
+
 .community-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
@@ -1465,19 +1422,19 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-bottom: 15px;
 }
 
-
-/* ------------ */
+/* ====================================================================================================================== */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE PARCERIA */
-/* ------------ */
+/* ====================================================================================================================== */
+
 .partnership-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     /* Talvez um pouco menores */
 }
 
-
-/* ----------- */
+/* ====================================================================================================================== */
 /* ESTILOS PARA SEÇÃO DE ARQUIVOS E CARDS (PÁGINA ARQUIVOS.HTML) */
-/* ----------- */
+/* ====================================================================================================================== */
+
 .search-and-filter-container {
     display: flex;
     flex-direction: column;
@@ -1659,10 +1616,10 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-top: 50px;
 }
 
-
-/* --------- */
+/* ====================================================================================================================== */
 /* ESTILOS DO MODAL DE DOWNLOAD */
-/* --------- */
+/* ====================================================================================================================== */
+
 #download-modal {
     display: none;
     /* Inicia oculto */

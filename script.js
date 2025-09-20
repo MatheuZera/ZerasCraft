@@ -565,48 +565,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Menu Hambúrguer (Otimizado para mais páginas)
     // ===================================================================
     const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.main-nav');
-    const desktopNav = document.querySelector('.desktop-nav'); // Adicionado para a navegação desktop
-    const mobileNav = document.querySelector('.mobile-nav');   // Adicionado para a navegação mobile
+    const nav = document.querySelector('.main-nav');
+    const menuIcon = menuToggle.querySelector('i');
 
-    // Função para copiar links do desktop para o mobile
-    const populateMobileNav = () => {
-        if (desktopNav && mobileNav) {
-            mobileNav.innerHTML = desktopNav.innerHTML; // Copia os itens de navegação
-        }
-    };
-    populateMobileNav(); // Popula o menu mobile na carga inicial
-
-    if (menuToggle && navMenu) {
+    if (menuToggle && nav) {
         menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            nav.classList.toggle('active');
             menuToggle.classList.toggle('active');
-            playEffectSound(clickSound);
-            document.body.classList.toggle('no-scroll', navMenu.classList.contains('active'));
-        });
-        document.querySelectorAll('.main-nav a').forEach(item => {
-            item.addEventListener('click', (event) => {
-                // Manipula a navegação suave para IDs de seção
-                const href = item.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    event.preventDefault(); // Previne o comportamento padrão do link
-                    const targetId = href.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
 
-                // Fecha o menu mobile após a seleção
-                if (navMenu.classList.contains('active')) {
-                    setTimeout(() => {
-                        navMenu.classList.remove('active');
-                        menuToggle.classList.remove('active');
-                        document.body.classList.remove('no-scroll');
-                    }, 300);
-                }
-                playEffectSound(clickSound);
-            });
+            if (nav.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
         });
     }
 
@@ -931,7 +904,7 @@ document.addEventListener('DOMContentLoaded', () => {
             downloadLink: '#'
         }
     ];
-    
+
     // ===============================
     // Card de Download
     // ===============================
