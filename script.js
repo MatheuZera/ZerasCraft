@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
         { title: '🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
 
-        { title: '🎵 ', src: 'assets/audios/musics/others/Over-the-Waterfall.mp3' },
+        { title: '🎵 over the Waterfall (By Varu)', src: 'assets/audios/musics/others/Over-the-Waterfall.mp3' },
     ];
 
     // =====================================
