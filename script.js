@@ -62,14 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: '💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
         { title: '💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
 
-        { title: '', src: 'assets/audios/musics/.mp3' },
-        { title: '', src: 'assets/audios/musics/.mp3' },
-        { title: '', src: 'assets/audios/musics/.mp3' },
-        { title: '', src: 'assets/audios/musics/.mp3' },
-        { title: '', src: 'assets/audios/musics/.mp3' },
-        { title: '', src: 'assets/audios/musics/.mp3' },
+        { title: '🍃 Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
+        { title: '🍃 Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
+        { title: '🍃 Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
+        { title: '🍃 Creative 4', src: 'assets/audios/musics/minecraft/Creative4.mp3' },
+        { title: '🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
+        { title: '🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
 
-        { title: '', src: 'assets/audios/musics/.mp3' },
+        { title: '🎵 ', src: 'assets/audios/musics/others/.mp3' },
     ];
 
     // =====================================
