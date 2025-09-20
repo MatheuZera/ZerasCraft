@@ -224,13 +224,13 @@ ul {
     transform: translate(-50%, -20px);
     background-color: var(--cor-secundaria);
     color: var(--cor-fundo-claro);
-    padding: 15px 30px;
-    border-radius: var(--border-radius);
+    padding: 5px 10px;
+    border-radius: 5px;
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease-out, transform 0.5s ease-out, visibility 0.5s ease-out;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: bold;
     text-align: center;
     pointer-events: none;
