@@ -82,7 +82,7 @@
     --fonte-pixel: 'SubTitleFont', 'Montserrat', sans-serif;
 
     /* Spacing ken Sizes */
-    --padding-section: 80px 0;
+    --padding-section: 20px 0;
     --padding-card: 25px;
     --gap-grid: 30px;
     --border-radius: 8px;
@@ -249,7 +249,7 @@ ul {
 .container {
     max-width: var(--max-width-content);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
 .section-padded {
@@ -590,7 +590,7 @@ ul {
     position: relative;
     width: 100%;
     height: 600px;
-    /* Height ti banner. Adjust daytoy a value kas iti kayatmo. */
+    /* Height do banner. Ajuste este valor como preferir. */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -601,20 +601,20 @@ ul {
     box-sizing: border-box;
     overflow: hidden;
     background-image: url('assets/images/1.site/banner-fundo.gif');
-    /* Naadjust a dalan */
+    /* Caminho ajustável */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     /* background-attachment: fixed; */
 }
 
-/* Para kadagiti bassit a Hero Sections kadagiti dadduma a pahina */
+/* Para Hero Sections menores em outras páginas */
 .hero-section.small-hero {
     height: 350px;
-    /* Bassit a height para iti internal pages */
+    /* Altura menor para páginas internas */
 }
 
-/* Dark overlay layer tapno mapasayaat ti readability ti text iti banner */
+/* Camada de overlay escuro para melhorar a leitura do texto no banner */
 .hero-image-overlay {
     position: absolute;
     top: 0;
@@ -622,11 +622,11 @@ ul {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Nangisit a kolor nga addaan 50% opacity */
+    /* Cor preta com 50% de opacidade */
     z-index: 1;
 }
 
-/* Styles para iti content iti uneg ti banner (logo, titulo, subtitulo, buton) */
+/* Estilos para o conteúdo dentro do banner (logo, titulo, subtitulo, botões) */
 .hero-content {
     position: relative;
     z-index: 2;
@@ -634,23 +634,23 @@ ul {
     margin: 0 auto;
     padding: 20px;
     padding-top: 100px;
-    /* Naadjust tapno mangted iti espasyo iti fixed header */
+    /* Ajustado para dar espaço ao cabeçalho fixo */
     display: flex;
-    /* Mangaramid iti flexbox */
+    /* Cria um flexbox */
     flex-direction: column;
-    /* Mangurnos kadagiti annak iti column */
+    /* Organiza os filhos em coluna */
     align-items: center;
-    /* Mangisentro iti horizontal */
+    /* Centraliza horizontalmente */
     justify-content: center;
-    /* Mangisentro iti vertical */
+    /* Centraliza verticalmente */
     gap: 20px;
-    /* Spacing kadagiti elemento ti hero-content */
+    /* Espaçamento entre os elementos do hero-content */
 }
 
-/* Styles para iti server branding (ti fox icon) */
+/* Estilos para a marca do servidor (o ícone da raposa) */
 .server-branding {
     margin-bottom: 0;
-    /* Naala ti negative margin, ti gap ti parent ket mangkontrol ti spacing */
+    /* Removida a margem negativa, o gap do pai controla o espaçamento */
 }
 
 .server-branding .server-icon {
@@ -658,9 +658,9 @@ ul {
     height: 150px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px var(--cor-primaria));
-    /* Primary glow around the icon */
+    /* Brilho primário ao redor do ícone */
     animation: pulseGlow 2s infinite alternate;
-    /* Pulsing glow animation */
+    /* Animação de brilho pulsante */
 }
 
 @keyframes pulseGlow {
@@ -673,146 +673,146 @@ ul {
     }
 }
 
-/* Styles para iti main title iti banner */
+/* Estilos para o título principal do banner */
 .hero-section h1 {
     font-size: 4em;
     margin-bottom: 0;
-    /* Neon glow iti title */
+    /* Brilho neon no título */
     line-height: 1.2;
     font-weight: bold;
     white-space: nowrap;
-    /* Manglapped ti panagsina ti linya iti desktop */
+    /* Impede a quebra de linha no desktop */
 }
 
-/* Styles para iti subtitle iti banner */
+/* Estilos para o subtítulo do banner */
 .hero-section .hero-subtitle {
     font-size: 1.6em;
     margin-bottom: 0;
-    /* Naala ti margin, ti gap ti parent ket mangkontrol ti spacing */
+    /* Removida a margem, o gap do pai controla o espaçamento */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     line-height: 1.5;
 }
 
-/* Styles para iti social links/buttons iti banner */
+/* Estilos para os links/botões sociais do banner */
 .hero-social-links {
     display: flex;
-    /* Naurnos iti flex */
+    /* Organiza em flex */
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    /* Mangpalubos ti panagsina ti linya kadagiti bassit a screen */
+    /* Permite a quebra de linha em telas pequenas */
     margin-top: 20px;
-    /* Manginayon ti extra space iti baet ti subtitulo ken dagiti buton */
+    /* Adiciona espaço extra entre o subtítulo e os botões */
 }
 
-/* Media Query para kadagiti bassit a screen */
+/* Media Query para telas pequenas */
 @media (max-width: 768px) {
     .hero-section {
         height: 380px;
-        /* Naadjust a height para iti mobile, ad-adu a compact */
+        /* Altura ajustada para mobile, mais compacta */
         padding: 5px;
-        /* Bassit a padding iti hero section */
+        /* Padding menor na seção hero */
     }
 
     .hero-content {
         padding-top: 70px;
-        /* Naadjust a padding-top para iti mobile nav-bar height (60px header + 10px spacing) */
+        /* Padding-top ajustado para a altura da barra de navegação móvel (cabeçalho de 60px + 10px de espaço) */
         gap: 10px;
-        /* Bassit a gap para iti mobile, tapno ad-adu a compact */
+        /* Gap menor para mobile, para ser mais compacto */
     }
 
     .server-branding .server-icon {
         width: 70px;
-        /* Bassit a icon iti mobile */
+        /* Ícone menor no mobile */
         height: 70px;
     }
 
     .hero-section h1 {
         font-size: 7vw;
-        /* Responsive font iti based ti viewport width tapno mailisan ti panagsina ti linya */
+        /* Fonte responsiva baseada na largura da viewport para evitar quebra de linha */
         white-space: normal;
-        /* Mangpalubos ti panagsina ti linya no nasken unay */
+        /* Permite a quebra de linha se for necessário */
         line-height: 1.1;
-        /* Nasiit a line-height para iti title */
+        /* Line-height mais apertado para o título */
         padding: 0 8px;
-        /* Manginayon ti padding tapno saan a dumket kadagiti igid */
+        /* Adiciona padding para não colar nas bordas */
     }
 
     .hero-section .hero-subtitle {
         font-size: 0.5em;
-        /* Bassit a font para iti subtitulo iti mobile */
+        /* Fonte menor para o subtítulo no mobile */
         padding: 0 5px;
-        /* Manginayon ti bassit a horizontal padding tapno saan a dumket kadagiti igid */
+        /* Adiciona um pequeno padding horizontal para não colar nas bordas */
     }
 
     .hero-social-links {
         flex-direction: column;
-        /* Mangurnos kadagiti buton iti column iti mobile */
+        /* Organiza os botões em coluna no mobile */
         gap: 8px;
-        /* Bassit a gap kadagiti buton iti mobile */
+        /* Gap menor entre os botões no mobile */
         margin-top: 10px;
-        /* Naadjust a margin para iti mobile */
+        /* Margem ajustada para mobile */
         width: 90%;
-        /* Mangsakup ti 90% ti container width para kadagiti buton */
+        /* Ocupa 90% da largura do contêiner pai (`hero-social-links`) */
         max-width: 280px;
-        /* Limitan ti maximum width dagiti buton */
+        /* Limita a largura máxima dos botões */
     }
 
     .hero-social-links .btn-primary {
         width: 100%;
-        /* Ti buton ket sakupenna ti 100% ti parent container width (`hero-social-links`) */
+        /* O botão ocupa 100% da largura do contêiner pai */
         padding: 8px 15px;
-        /* Bassit a padding para kadagiti buton iti mobile */
+        /* Padding menor para os botões no mobile */
         font-size: 0.85em;
-        /* Bassit a font para kadagiti buton iti mobile */
+        /* Fonte menor para os botões no mobile */
     }
 }
 
-/* Media Query para kadagiti bassit a screen (e.g. ~320px - 400px) */
+/* Media Query para telas muito pequenas (e.g. ~320px - 400px) */
 @media (max-width: 480px) {
     .hero-section {
         height: 320px;
-        /* Ad-adu a compact height para kadagiti bassit unay a screen */
+        /* Altura ainda mais compacta para telas muito pequenas */
     }
 
     .hero-content {
         padding-top: 60px;
-        /* Naadjust a padding-top */
+        /* Padding-top ajustado */
         gap: 8px;
-        /* Bassit a gap */
+        /* Gap menor */
     }
 
     .server-branding .server-icon {
         width: 50px;
-        /* Ad-adu a bassit a icon */
+        /* Ícone ainda menor */
         height: 50px;
     }
 
     .hero-section h1 {
         font-size: 8vw;
-        /* Adjust para kadagiti bassit unay a screen, mabalin a nasken a matesting */
+        /* Ajusta para telas muito pequenas, pode ser necessário testar */
         line-height: 1;
     }
 
     .hero-section .hero-subtitle {
         font-size: 0.7em;
-        /* Ad-adu a bassit a font */
+        /* Fonte ainda menor */
     }
 
     .hero-social-links {
         width: 95%;
-        /* Mangsakup ad-adu a width kadagiti bassit unay a screen */
+        /* Ocupa mais largura em telas muito pequenas */
         max-width: 220px;
-        /* Limitan ti maximum width dagiti buton */
+        /* Limita a largura máxima dos botões */
         gap: 6px;
-        /* Bassit a gap */
+        /* Gap menor */
     }
 
     .hero-social-links .btn-primary {
         padding: 6px 12px;
-        /* Minimum padding */
+        /* Padding mínimo */
         font-size: 0.75em;
-        /* Minimum font */
+        /* Fonte mínima */
     }
 }
 
@@ -1168,12 +1168,19 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* ---------------- */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE ACESSO (IP/Porta) */
 /* ---------------- */
+.access-section {
+    /* Adicionando padding para controlar o espaçamento acima e abaixo de toda a seção */
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 .access-section .access-info {
     /* Usando classe pai para maior especificidade */
     background-color: var(--cor-card-bg);
     padding: 30px;
     border-radius: var(--border-radius);
-    margin-top: 20px;
+    margin-top: 0;
+    /* Removido o margin-top para que o padding da seção controle o espaçamento */
     box-shadow: var(--sombra-leve);
     border: 1px solid rgba(255, 255, 255, 0.08);
     text-align: center;
@@ -1204,8 +1211,8 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.2);
     /* Brilho interno sutil */
-    font-family: var(--fonte-pixel);
-    /* Usando fonte pixel para IP/Porta */
+    font-family: var(--fonte-ip);
+    /* Usando nova variável para a fonte do IP/Porta */
     font-size: 1.1em;
 }
 
@@ -1219,9 +1226,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     /* Remove sombra extra */
     transform: translateY(0);
     /* Remove levitação no hover para este tipo de botão */
-    background-color: var(--cor-secundaria);
-    /* Um verde mais escuro para o botão de cópia pequeno */
-    border-color: var(--cor-secundaria);
+    background-color: var(--btn-copiar-bg);
+    /* Usa a nova variável para a cor de fundo */
+    border-color: var(--btn-copiar-bg);
 }
 
 .access-info .copy-button:hover {
@@ -1257,6 +1264,50 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     }
 }
 
+/* ---------------- */
+/* ESTILO PARA O BOTÃO DE COPIAR IP E PORTA COMBINADO */
+/* ---------------- */
+.access-info .btn-copy-combined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    /* Padding maior para o botão combinado */
+    margin-top: 20px;
+    /* Espaço acima do botão */
+    border-radius: var(--border-radius);
+    background-color: var(--cor-fundo-escuro);
+    border: 1px solid var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    font-family: var(--fonte-botao);
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3), inset 0 0 5px rgba(0, 255, 0, 0.2);
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+    transform: translateY(0);
+}
+
+.access-info .btn-copy-combined:hover {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-fundo-escuro);
+    box-shadow: 0 0 15px var(--cor-destaque), inset 0 0 8px var(--cor-destaque);
+    transform: translateY(-3px);
+}
+
+.btn-copy-combined.copied {
+    background-color: var(--cor-destaque);
+    color: var(--cor-fundo-escuro);
+    font-weight: bold;
+    animation: copiedFeedback 0.8s ease-out forwards;
+}
+
+.btn-copy-combined .icon {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
 
 /* -------------- */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE EVENTO */
@@ -1728,31 +1779,27 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     background-color: var(--cor-fundo-escuro);
     color: rgba(255, 255, 255, 0.7);
     padding: 60px 0 20px 0;
-    /* Mais padding no topo para espaço */
     border-top: 1px solid var(--cor-bordas);
     position: relative;
-    /* Para o controle de áudio flutuante */
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    /* Layout de grid flexível */
-    gap: 40px;
-    /* Aumenta o espaço entre as colunas */
+    gap: var(--gap-grid);
     margin-bottom: 40px;
-    /* Espaço antes da seção de direitos autorais */
 }
 
 .footer-column {
     padding: 10px;
+    text-align: center;
+    /* Centraliza o conteúdo por padrão */
 }
 
 .footer-logo-title {
-    font-family: 'Pixelify Sans', sans-serif;
-    /* Usando Pixelify Sans */
+    font-family: var(--fonte-pixel);
     font-size: 1.8em;
-    color: #c4d96a;
+    color: var(--cor-destaque);
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 1px;
@@ -1767,26 +1814,28 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     text-transform: uppercase;
     position: relative;
     padding-bottom: 8px;
-    /* Espaço para o underline */
 }
 
 .footer-column h4::after {
     content: '';
     position: absolute;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 0;
     width: 50px;
-    /* Linha de destaque para os títulos */
     height: 2px;
     background-color: var(--cor-primaria);
     border-radius: 2px;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+    .footer-column {
+        text-align: left;
+    }
+
     .footer-column h4::after {
-        left: 42%;
-        width: 100px;
-        /* Linha de destaque para os títulos */
+        left: 0;
+        transform: translateX(0);
     }
 }
 
@@ -1809,12 +1858,17 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     font-size: 2em;
     margin-right: 20px;
     transition: var(--transicao-padrao);
+    display: inline-block;
 }
 
 .footer-social-links a:hover {
     color: var(--cor-destaque);
     transform: translateY(-5px) scale(1.1);
-    /* Animação mais pronunciada */
+}
+
+.footer-nav-links ul {
+    list-style: none;
+    padding: 0;
 }
 
 .footer-nav-links ul li {
@@ -1825,12 +1879,12 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: rgba(255, 255, 255, 0.7);
     font-size: 1.05em;
     transition: var(--transicao-padrao);
+    display: inline-block;
 }
 
 .footer-nav-links a:hover {
     color: var(--cor-link-hover);
     transform: translateX(5px);
-    /* Desliza o link no hover */
     text-decoration: none;
 }
 
@@ -1861,9 +1915,18 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 
 .newsletter-form .btn-primary {
     width: 100%;
-    /* Botão preenche a largura */
     padding: 12px 15px;
     font-size: 1em;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+}
+
+.newsletter-form .btn-primary:hover {
+    background-color: var(--cor-secundaria);
 }
 
 .footer-bottom {
@@ -1873,15 +1936,24 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     font-size: 0.9em;
     color: rgba(255, 255, 255, 0.5);
     margin-top: 20px;
-    /* Adiciona margem entre o conteúdo e o copyright */
 }
 
-.espaco-invisivel {
-    /* Define a altura do espaço */
-    height: 50px;
+.footer-bottom a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+}
 
-    /* Opcional: Para debugar, você pode adicionar uma cor de fundo */
-    /* background-color: rgba(255, 0, 0, 0.1); */
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
 }
 
 /* ====================================================================================================================== */
@@ -10205,4 +10277,763 @@ h1 {
     margin: 0;
     font-size: 0.9em;
     color: var(--cor-texto-claro);
+}
+
+/*
+  ======================================================
+  Contêineres Principais
+  ======================================================
+  Estilos para os contêineres que organizam os cards.
+*/
+.container-galeria,
+.container-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap-grid);
+    max-width: var(--max-width-content);
+    /* Adiciona margem acima e abaixo para espaçamento */
+    margin: 50px auto;
+}
+
+.container-cards-lado {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    /* Adiciona margem acima e abaixo para espaçamento */
+    margin: 30px auto;
+}
+
+/*
+  ======================================================
+  1. Modelo de Cards Simples (Imagem no Topo)
+  ======================================================
+*/
+.card-simples {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-simples:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card);
+}
+
+.imagem-topo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.conteudo-simples {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.conteudo-simples h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin: 0 0 10px 0;
+}
+
+.conteudo-simples p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 20px 0;
+}
+
+.botao-ler-mais {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+
+.botao-ler-mais:hover {
+    background-color: var(--cor-secundaria);
+    transform: scale(1.05);
+}
+
+/*
+  ======================================================
+  2. Modelo de Card Flutuante (Imagem no Topo)
+  ======================================================
+*/
+.card-flutuante {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-flutuante:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--sombra-card-hover);
+}
+
+.conteudo-flutuante {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.conteudo-flutuante h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin: 0 0 5px 0;
+}
+
+.conteudo-flutuante p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 15px 0;
+}
+
+.preco-container {
+    font-family: var(--fonte-subtitulo);
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.botao-adicionar {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    width: 100%;
+}
+
+.botao-adicionar:hover {
+    background-color: var(--cor-secundaria);
+    transform: translateY(-2px);
+}
+
+/*
+  ======================================================
+  3. Modelo de Card de Destaque (Imagem no Topo)
+  ======================================================
+*/
+.card-destaque {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-destaque:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card-hover);
+}
+
+.conteudo-destaque {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.titulo-destaque {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.8em;
+    margin: 0 0 10px 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.conteudo-destaque p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 20px 0;
+}
+
+.link-ver-projeto {
+    color: var(--cor-link);
+    font-family: var(--fonte-botao);
+    font-weight: bold;
+    text-decoration: none;
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+
+.link-ver-projeto:hover {
+    color: var(--cor-link-hover);
+    transform: translateX(5px);
+}
+
+/*
+  ======================================================
+  4. Modelo de Cartão de Equipa (Imagem no Topo)
+  ======================================================
+*/
+.cartao-equipa {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartao-equipa:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card);
+}
+
+.foto-membro {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.info-equipa {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.info-equipa h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin: 0;
+}
+
+.info-equipa span {
+    font-family: var(--fonte-subtitulo);
+    color: var(--cor-terciaria);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.redes-sociais a {
+    color: var(--cor-texto-claro);
+    font-size: 1.2em;
+    margin: 0 10px;
+    transition: var(--transicao-padrao);
+}
+
+.redes-sociais a:hover {
+    color: var(--cor-link);
+}
+
+/*
+  ======================================================
+  5. Modelo de Card com Borda (Imagem no Topo)
+  ======================================================
+*/
+.card-borda {
+    width: 300px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    overflow: hidden;
+    transition: var(--transicao-padrao);
+    border: 2px solid var(--cor-primaria);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-borda:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card);
+    border-color: var(--cor-destaque);
+}
+
+.conteudo-borda {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.categoria {
+    font-family: var(--fonte-mini);
+    color: var(--cor-terciaria);
+    background-color: var(--cor-fundo-escuro);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.conteudo-borda h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin: 0 0 10px 0;
+}
+
+.conteudo-borda p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 20px 0;
+}
+
+.botao-inscrever {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+
+.botao-inscrever:hover {
+    background-color: var(--cor-secundaria);
+    transform: scale(1.05);
+}
+
+/*
+  ======================================================
+  6. Modelo de Card de Download (Imagem ao Lado)
+  ======================================================
+*/
+.card-download {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+}
+
+.card-download:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.icone-documento {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--border-radius);
+    margin-right: 20px;
+}
+
+.info-download {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.info-download h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
+}
+
+.info-download p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 10px 0;
+}
+
+.detalhe-ficheiro {
+    font-family: var(--fonte-mini);
+    color: var(--cor-terciaria);
+    font-size: 0.8em;
+    margin: 0 0 15px 0;
+}
+
+.botao-download {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+
+.botao-download:hover {
+    background-color: var(--cor-secundaria);
+}
+
+/*
+  ======================================================
+  7. Modelo de Cartão de Perfil (Imagem ao Lado)
+  ======================================================
+*/
+.card-perfil {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+}
+
+.card-perfil:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.foto-perfil {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.info-perfil {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.info-perfil h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
+}
+
+.info-perfil p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 15px 0;
+}
+
+.acoes-perfil {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.botao-seguir {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+}
+
+.botao-seguir:hover {
+    background-color: var(--cor-secundaria);
+}
+
+.link-perfil {
+    color: var(--cor-link);
+    text-decoration: none;
+    font-family: var(--fonte-mini);
+    font-weight: bold;
+    transition: var(--transicao-padrao);
+}
+
+.link-perfil:hover {
+    color: var(--cor-link-hover);
+}
+
+/*
+  ======================================================
+  8. Modelo de Card com Ícone (Imagem ao Lado)
+  ======================================================
+*/
+.card-icone-lado {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+}
+
+.card-icone-lado:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.icone-container {
+    background-color: var(--cor-terciaria);
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.icone-container i {
+    font-size: 2em;
+    color: var(--cor-btn-text);
+}
+
+.info-icone-lado {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.info-icone-lado h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
+}
+
+.info-icone-lado p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 10px 0;
+}
+
+.link-saber-mais {
+    color: var(--cor-link);
+    text-decoration: none;
+    font-family: var(--fonte-mini);
+    font-weight: bold;
+    transition: var(--transicao-padrao);
+}
+
+.link-saber-mais:hover {
+    color: var(--cor-link-hover);
+    transform: translateX(5px);
+}
+
+/*
+  ======================================================
+  9. Modelo de Card com Ícone
+  ======================================================
+*/
+.card-icone {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    flex-basis: calc(50% - 10px);
+}
+
+.card-icone:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.circulo-icone {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    background-color: var(--cor-primaria);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    transition: var(--transicao-padrao);
+}
+
+.circulo-icone:hover {
+    background-color: var(--cor-secundaria);
+}
+
+.circulo-icone i {
+    font-size: 1.5em;
+    color: var(--cor-btn-text);
+}
+
+.info-icone {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-icone h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.2em;
+    margin: 0 0 5px 0;
+}
+
+.info-icone p {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    margin: 0 0 15px 0;
+}
+
+.botao-descobrir {
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-botao);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    align-self: flex-start;
+}
+
+.botao-descobrir:hover {
+    background-color: #FFB300;
+    transform: scale(1.05);
+}
+
+/*
+  ======================================================
+  10. Modelo de Cartão de Citação
+  ======================================================
+*/
+.card-citacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--cor-card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    flex-basis: calc(50% - 10px);
+    text-align: center;
+}
+
+.card-citacao:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.foto-autor {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--cor-primaria);
+    margin-bottom: 20px;
+}
+
+.conteudo-citacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icone-citacao {
+    font-size: 2.5em;
+    color: var(--cor-destaque);
+    margin-bottom: 15px;
+}
+
+.conteudo-citacao p {
+    font-family: var(--fonte-corpo);
+    font-style: italic;
+    color: var(--cor-card-text);
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+}
+
+.autor-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.autor-info h4 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-texto-claro);
+    margin: 0;
+}
+
+.cargo {
+    font-family: var(--fonte-mini);
+    color: var(--cor-terciaria);
+    font-size: 0.9em;
+}
+
+/*
+  ======================================================
+  Responsividade
+  ======================================================
+*/
+@media (max-width: 768px) {
+    .container-cards-lado {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-icone,
+    .card-citacao {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .card-icone {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .circulo-icone {
+        margin: 0 0 15px 0;
+    }
+
+    .botao-descobrir {
+        align-self: center;
+    }
 }
