@@ -3294,60 +3294,6 @@ h4 {
 }
 
 /* ====================================================================================================================== */
-/* EVENTOS */
-/* ====================================================================================================================== */
-/* Específicos de Eventos */
-.event-grid {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.event-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 350px;
-}
-
-.event-date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--cor-destaque);
-    color: var(--cor-fundo-escuro);
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.event-date .day {
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-.event-date .month {
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    font-weight: 500;
-}
-
-.event-content {
-    text-align: center;
-    flex-grow: 1;
-}
-
-.event-content .card-title {
-    margin-bottom: 10px;
-}
-
-.event-card .btn-primary {
-    margin-top: 20px;
-}
-
-/* ====================================================================================================================== */
 /* LOJA */
 /* ====================================================================================================================== */
 /* Específicos da Loja */
@@ -10309,7 +10255,7 @@ h1 {
 
 /*
   ======================================================
-  1. Modelo de Cards Simples (Imagem no Topo)
+  MODELO DE CARDS SIMPLES (IMAGEM NO TOPO)
   ======================================================
 */
 .card-simples {
@@ -10375,7 +10321,7 @@ h1 {
 
 /*
   ======================================================
-  2. Modelo de Card Flutuante (Imagem no Topo)
+  MODELO DE CARD FLUTUANTE 9IMAGEM NO TOPO)
   ======================================================
 */
 .card-flutuante {
@@ -10443,7 +10389,7 @@ h1 {
 
 /*
   ======================================================
-  3. Modelo de Card de Destaque (Imagem no Topo)
+  MODELO DE CARD DE DESTAQUE (IMAGEM NO TOPO)
   ======================================================
 */
 .card-destaque {
@@ -10501,7 +10447,7 @@ h1 {
 
 /*
   ======================================================
-  4. Modelo de Cartão de Equipa (Imagem no Topo)
+  MODELO DE CARD DE EQUIPE (IMAGEM NO TOPO)
   ======================================================
 */
 .cartao-equipa {
@@ -10561,7 +10507,7 @@ h1 {
 
 /*
   ======================================================
-  5. Modelo de Card com Borda (Imagem no Topo)
+  MODELO DE CARD COM BORDA (IMAGEM NO TOPO)
   ======================================================
 */
 .card-borda {
@@ -10632,7 +10578,7 @@ h1 {
 
 /*
   ======================================================
-  6. Modelo de Card de Download (Imagem ao Lado)
+  MODELO DE CARD DE DOWNLOAD (IMAGEM AO LADO)
   ======================================================
 */
 .card-download {
@@ -10704,7 +10650,7 @@ h1 {
 
 /*
   ======================================================
-  7. Modelo de Cartão de Perfil (Imagem ao Lado)
+  MODELO DE CARD DE PERFIL 9IMAGEM AO LADO)
   ======================================================
 */
 .card-perfil {
@@ -10787,7 +10733,7 @@ h1 {
 
 /*
   ======================================================
-  8. Modelo de Card com Ícone (Imagem ao Lado)
+  MODELO DE CARD COM ÍCONE (IMAGEM AO LADO)
   ======================================================
 */
 .card-icone-lado {
@@ -10856,7 +10802,7 @@ h1 {
 
 /*
   ======================================================
-  9. Modelo de Card com Ícone
+  MODELO DE CARD COM ÍCONE (OUTRO MODELO)
   ======================================================
 */
 .card-icone {
@@ -10938,7 +10884,7 @@ h1 {
 
 /*
   ======================================================
-  10. Modelo de Cartão de Citação
+  MODELO DE CARD DE CITAÇÃO
   ======================================================
 */
 .card-citacao {
@@ -11008,9 +10954,9 @@ h1 {
 }
 
 /*
-  ======================================================
+  =================
   Responsividade
-  ======================================================
+  =================
 */
 @media (max-width: 768px) {
     .container-cards-lado {
@@ -11036,4 +10982,222 @@ h1 {
     .botao-descobrir {
         align-self: center;
     }
+}
+
+/*
+  ======================================================
+  ABA DE TABS COM BOTÕES DE LINKS E CONTEINER DE TEXTO
+  ======================================================
+*/
+
+.layout-principal {
+    display: flex;
+    background-color: var(--cor-card-bg);
+    border-radius: 8px;
+    box-shadow: var(--sombra-card);
+    border: 1px solid var(--cor-bordas);
+    overflow: hidden;
+    flex-direction: column;
+    max-width: var(--max-largura);
+    width: 93%;
+    margin: 0 20px;
+    /* Adiciona 20px de margem em cada lado */
+}
+
+.barra-lateral {
+    background-color: var(--cor-secundaria);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.item-link {
+    display: block;
+    padding: 18px 25px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: var(--fonte-titulo);
+    transition: var(--transicao-padrao);
+    text-align: center;
+}
+
+.item-link:hover {
+    background-color: var(--cor-terciaria);
+    color: var(--cor-destaque);
+    border-radius: 6px;
+}
+
+.conteudo-principal {
+    padding: 40px;
+    background-color: var(--cor-card-bg);
+    flex-grow: 1;
+}
+
+.conteudo-principal h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 2em;
+    color: var(--cor-primaria);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.conteudo-principal p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: var(--cor-card-text);
+    margin-bottom: 1em;
+}
+
+/* Layout para telas maiores (Desktop) */
+@media (min-width: 769px) {
+    .layout-principal {
+        flex-direction: row;
+        margin: 60px auto;
+    }
+
+    .barra-lateral {
+        width: 250px;
+        flex-shrink: 0;
+        flex-direction: column;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: none;
+    }
+
+    .item-link {
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0;
+    }
+}
+
+/* Layout para telas menores (Mobile) */
+@media (max-width: 768px) {
+    .barra-lateral {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .item-link {
+        flex-grow: 1;
+        border-bottom: none;
+        font-size: 1em;
+        /* Reduz o tamanho da fonte */
+        padding: 18px 15px;
+        /* Reduz o padding horizontal */
+        white-space: nowrap;
+        /* Evita quebra de linha */
+    }
+}
+
+/*
+  ======================================================
+  SEÇÃO PERGUNTAS FREQUENTES
+  ======================================================
+*/
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faq-item {
+    background-color: var(--cor-secundaria);
+    border-radius: 8px;
+    padding: 20px 25px;
+    transition: var(--transicao-padrao);
+    border: 1px solid transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.faq-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--cor-destaque);
+}
+
+.faq-item h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 1.5em;
+    color: var(--cor-texto-claro);
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.faq-item h3::before {
+    content: "Q.";
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--cor-destaque);
+    margin-right: 10px;
+}
+
+.faq-item p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--cor-card-text);
+}
+
+/*
+  ======================================================
+  ESTILO DE CARD DE STATUS COM TEXTO
+  ======================================================
+*/
+
+.status-section {
+    background-color: #1A1A1A;
+    color: #ECF0F1;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 600px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.status-section .header {
+    margin-bottom: 25px;
+}
+
+.status-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: #4CAF50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.status-section p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.status-info {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+.status-text {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.status-online {
+    color: #4CAF50;
+}
+
+.status-offline {
+    color: #FF5252;
 }
