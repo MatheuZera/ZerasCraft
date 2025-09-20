@@ -11065,7 +11065,11 @@ h1 {
 .faq-item {
     background-color: var(--cor-secundaria);
     border-radius: 8px;
-    padding: 20px 25px;
+    width: 96%;
+    margin: 0 25px;
+    /* Adiciona 20px de margem em cada lado */
+    padding: 20px 15px;
+    /* Margens laterais diminuídas */
     transition: var(--transicao-padrao);
     border: 1px solid transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
