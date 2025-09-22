@@ -2076,7 +2076,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 
 .playback-speed-select {
     background: rgba(255, 255, 255, 0.1);
-    color: #f0f0f0;
+    color: #575757;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--border-radius);
     padding: 5px 8px;
