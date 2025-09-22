@@ -108,7 +108,6 @@
         </section>
 
         <section class="layout-principal">
-            <!-- Conteúdo principal -->
             <div class="conteudo-principal">
                 <h2>O que é Minecraft?</h2>
                 <p>Minecraft é um jogo eletrônico tipo sandbox de mundo aberto criado por Markus "Notch" Persson e
@@ -116,24 +115,34 @@
                     tridimensional infinito, gerado proceduralmente, construindo e criando estruturas com uma variedade
                     de blocos texturizados. O jogo não tem um objetivo específico, permitindo aos jogadores total
                     liberdade para escolher como jogar.</p>
+                <p>O jogo oferece dois modos principais: <strong>Modo Sobrevivência</strong>, onde os jogadores devem
+                    adquirir
+                    recursos para construir o seu mundo e se manterem saudáveis, e <strong>Modo Criativo</strong>, onde
+                    os jogadores
+                    têm recursos ilimitados para construir o que quiserem.</p>
+                <p>Além disso, o Minecraft possui um vasto ecossistema online, com servidores multiplayer que
+                    oferecem diferentes minijogos e experiências, como SkyWars, BedWars e muitos outros. A
+                    comunidade é ativa, e a criatividade dos jogadores é o limite.</p>
+            </div>
+
+            <div class="card-copia">
                 <div class="caixa-texto">
-                    <p><strong>IP do Servidor: </strong><span id="serverIp">57178</span></p>
-                    <p><strong>Porta do Servidor: </strong><span id="serverPort">MCPixelLegends.aternos.me</span></p>
+                    <p><strong>IP do Servidor: </strong><span id="serverPort">MCPixelLegends.aternos.me</span></p>
+                    <p><strong>Porta do Servidor: </strong><span id="serverIp">57178</span></p>
+                </div>
+                <div class="botoes-copiar">
+                    <button class="copy-button btn-copy-text" data-copy-target="#serverPort">
+                        <i class="fas fa-server"></i> Copiar Servidor
+                    </button>
+                    <button class="copy-button btn-copy-text" data-copy-target="#serverIp">
+                        <i class="fas fa-envelope"></i> Copiar Porta
+                    </button>
+                    <button class="copy-button btn-copy-text" data-copy-target="#serverPort, #serverIp">
+                        <i class="fas fa-clipboard"></i> Copiar Tudo
+                    </button>
                 </div>
             </div>
-            <div class="barra-lateral">
-                <button class="copy-button btn-copy-text" data-copy-target="#serverPort">
-                    <i class="fas fa-server"></i> Copiar Porta
-                </button>
-                <button class="copy-button btn-copy-text" data-copy-target="#serverIp">
-                    <i class="fas fa-envelope"></i> Copiar IP
-                </button>
-                <button class="copy-button btn-copy-text" data-copy-target="#serverPort, #serverIp">
-                    <i class="fas fa-clipboard"></i> Copiar IP e Porta
-                </button>
-            </div>
         </section>
-
 
         <section id="about-server" class="section-padded section-alt-bg fade-in-section">
             <div class="container content-two-columns">

@@ -1310,6 +1310,59 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     box-shadow: var(--sombra-leve);
 }
 
+/* Novos estilos para o layout e o card de cópia */
+/* Layout principal e responsividade */
+.layout-principal {
+    display: flex;
+    flex-direction: column; /* Padrão para mobile (os itens se empilham) */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilo do card de cópia */
+.card-copia {
+    background-color: var(--cor-card); /* Supondo uma variável para a cor de fundo do card */
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center; /* Centraliza os itens horizontalmente no mobile */
+}
+
+.caixa-texto {
+    /* Estilo para a caixa que contém o IP e a porta */
+    text-align: center;
+}
+
+.botoes-copiar {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Versão Desktop */
+@media (min-width: 768px) {
+    .layout-principal {
+        flex-direction: row; /* Alinha os itens lado a lado no desktop */
+        align-items: flex-start; /* Alinha o conteúdo no topo */
+    }
+
+    .conteudo-principal {
+        flex: 2; /* O conteúdo principal ocupa mais espaço */
+    }
+
+    .card-copia {
+        flex: 1; /* O card de cópia ocupa menos espaço */
+        position: sticky; /* Mantém o card fixo ao rolar a página */
+        top: 20px;
+    }
+}
+
 /* ====================================================================================================================== */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE PARCERIA */
 /* ====================================================================================================================== */
