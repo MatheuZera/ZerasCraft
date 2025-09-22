@@ -266,9 +266,36 @@ ul {
     padding: var(--padding-section);
 }
 
+/* ========================== */
+/* SEÇÃO ESVERDEADA */
+/* ========================== */
 .section-alt-bg {
     background-color: var(--cor-terciaria);
     /* Nasisinit a berde a background */
+}
+
+.section-alt-bg {
+    background-color: var(--cor-terciaria);
+    /* Nasisinit a berde a background */
+    margin-top: 20px; /* Adiciona um espaço de 50px acima da seção */
+}
+
+.section-alt-bg::before,
+.section-alt-bg::after {
+    content: "";
+    display: block;
+    height: 0px; /* Altura do efeito de diminuição */
+    background-color: transparent;
+}
+
+.section-alt-bg::before {
+    /* Gradiente que vai de transparente para a cor da seção */
+    background: linear-gradient(to bottom, transparent, var(--cor-terciaria));
+}
+
+.section-alt-bg::after {
+    /* Gradiente que vai da cor da seção para transparente */
+    background: linear-gradient(to top, transparent, var(--cor-terciaria));
 }
 
 /* Flexbox para iti two columns */
@@ -1200,14 +1227,6 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.95em;
     margin-bottom: 10px;
-}
-
-.event-card p strong {
-    color: var(--cor-primaria);
-    /* Data em verde */
-    font-size: 0.9em;
-    display: block;
-    margin-bottom: 15px;
 }
 
 .event-card .btn-primary,
