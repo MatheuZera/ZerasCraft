@@ -224,7 +224,8 @@ ul {
     transform: translate(-50%, -20px);
     background-color: var(--cor-secundaria);
     color: var(--cor-fundo-claro);
-    padding: 5px 10px;
+    padding: 15px 30px;
+    /* Padding maior (desktop) */
     border-radius: 5px;
     z-index: 9999;
     opacity: 0;
@@ -241,6 +242,15 @@ ul {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
+}
+
+/* * Media query para telas menores (mobile) 
+         * A mensagem fica menor em telas até 767px.
+         */
+@media (max-width: 770px) {
+    .central-message {
+        padding: 5px 8px;
+    }
 }
 
 /* ====================================================================================================================== */
@@ -1314,7 +1324,8 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* Layout principal e responsividade */
 .layout-principal {
     display: flex;
-    flex-direction: column; /* Padrão para mobile (os itens se empilham) */
+    flex-direction: column;
+    /* Padrão para mobile (os itens se empilham) */
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -1323,14 +1334,16 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 
 /* Estilo do card de cópia */
 .card-copia {
-    background-color: var(--cor-card); /* Supondo uma variável para a cor de fundo do card */
+    background-color: var(--cor-card);
+    /* Supondo uma variável para a cor de fundo do card */
     padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-card);
     display: flex;
     flex-direction: column;
     gap: 15px;
-    align-items: center; /* Centraliza os itens horizontalmente no mobile */
+    align-items: center;
+    /* Centraliza os itens horizontalmente no mobile */
 }
 
 .caixa-texto {
@@ -1340,7 +1353,8 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 
 .botoes-copiar {
     display: flex;
-    flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+    flex-wrap: wrap;
+    /* Permite que os botões quebrem a linha */
     justify-content: center;
     gap: 10px;
 }
@@ -1348,17 +1362,22 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 /* Versão Desktop */
 @media (min-width: 768px) {
     .layout-principal {
-        flex-direction: row; /* Alinha os itens lado a lado no desktop */
-        align-items: flex-start; /* Alinha o conteúdo no topo */
+        flex-direction: row;
+        /* Alinha os itens lado a lado no desktop */
+        align-items: flex-start;
+        /* Alinha o conteúdo no topo */
     }
 
     .conteudo-principal {
-        flex: 2; /* O conteúdo principal ocupa mais espaço */
+        flex: 2;
+        /* O conteúdo principal ocupa mais espaço */
     }
 
     .card-copia {
-        flex: 1; /* O card de cópia ocupa menos espaço */
-        position: sticky; /* Mantém o card fixo ao rolar a página */
+        flex: 1;
+        /* O card de cópia ocupa menos espaço */
+        position: sticky;
+        /* Mantém o card fixo ao rolar a página */
         top: 20px;
     }
 }
