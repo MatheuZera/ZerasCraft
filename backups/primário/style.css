@@ -1119,152 +1119,6 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 }
 
 /* ====================================================================================================================== */
-/* ESTILOS ESPECÍFICOS PARA CARDS DE ACESSO (IP/Porta) */
-/* ====================================================================================================================== */
-
-.access-section {
-    /* Adicionando padding para controlar o espaçamento acima e abaixo de toda a seção */
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-.access-section .access-info {
-    /* Usando classe pai para maior especificidade */
-    background-color: var(--cor-card-bg);
-    padding: 30px;
-    border-radius: var(--border-radius);
-    margin-top: 0;
-    /* Removido o margin-top para que o padding da seção controle o espaçamento */
-    box-shadow: var(--sombra-leve);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    /* Para o efeito de animação */
-}
-
-.access-info p {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-    color: var(--cor-texto-claro);
-}
-
-.access-info p strong {
-    color: var(--cor-primaria);
-}
-
-.access-info span {
-    font-weight: bold;
-    color: var(--cor-destaque);
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 8px 15px;
-    border-radius: 5px;
-    display: inline-block;
-    margin: 5px 10px;
-    /* Adicionado margem vertical */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.2);
-    /* Brilho interno sutil */
-    font-family: var(--fonte-ip);
-    /* Usando nova variável para a fonte do IP/Porta */
-    font-size: 1.1em;
-}
-
-.access-info .copy-button {
-    /* Ajuste do botão de cópia dentro do access-info */
-    margin-left: 10px;
-    padding: 6px 12px;
-    font-size: 0.9em;
-    border-radius: 4px;
-    box-shadow: none;
-    /* Remove sombra extra */
-    transform: translateY(0);
-    /* Remove levitação no hover para este tipo de botão */
-    background-color: var(--btn-copiar-bg);
-    /* Usa a nova variável para a cor de fundo */
-    border-color: var(--btn-copiar-bg);
-}
-
-.access-info .copy-button:hover {
-    background-color: var(--cor-primaria);
-    transform: translateY(-2px);
-    /* Pequena levitação no hover */
-}
-
-/* Animação para o botão de cópia "Copiado!" */
-.copy-button.copied {
-    background-color: var(--cor-destaque);
-    /* Dourado */
-    color: var(--cor-fundo-escuro);
-    /* Texto escuro */
-    font-weight: bold;
-    animation: copiedFeedback 0.8s ease-out forwards;
-}
-
-@keyframes copiedFeedback {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.05);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-
-/* ---------------- */
-/* ESTILO PARA O BOTÃO DE COPIAR IP E PORTA COMBINADO */
-/* ---------------- */
-.access-info .btn-copy-combined {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 25px;
-    /* Padding maior para o botão combinado */
-    margin-top: 20px;
-    /* Espaço acima do botão */
-    border-radius: var(--border-radius);
-    background-color: var(--cor-fundo-escuro);
-    border: 1px solid var(--cor-secundaria);
-    color: var(--cor-texto-claro);
-    font-family: var(--fonte-botao);
-    font-size: 1em;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3), inset 0 0 5px rgba(0, 255, 0, 0.2);
-    cursor: pointer;
-    transition: var(--transicao-padrao);
-    transform: translateY(0);
-}
-
-.access-info .btn-copy-combined:hover {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-fundo-escuro);
-    box-shadow: 0 0 15px var(--cor-destaque), inset 0 0 8px var(--cor-destaque);
-    transform: translateY(-3px);
-}
-
-.btn-copy-combined.copied {
-    background-color: var(--cor-destaque);
-    color: var(--cor-fundo-escuro);
-    font-weight: bold;
-    animation: copiedFeedback 0.8s ease-out forwards;
-}
-
-.btn-copy-combined .icon {
-    margin-right: 8px;
-    font-size: 1.2em;
-}
-
-/* ====================================================================================================================== */
 /* ESTILOS ESPECÍFICOS PARA CARDS DE EVENTO */
 /* ====================================================================================================================== */
 
@@ -1420,6 +1274,40 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 .youtube-card iframe {
     border-radius: var(--border-radius);
     margin-bottom: 15px;
+}
+
+/* ====================================================================================================================== */
+/* ESTILO DO BOTÃO DE COPIAR TEXTO */
+/* ====================================================================================================================== */
+.btn-copy-text {
+    /* Cores e fontes baseadas nas variáveis */
+    background-color: var(--cor-terciaria);
+    color: var(--cor-btn-text);
+    font-family: var(--fonte-botao);
+    font-weight: bold;
+    text-transform: uppercase;
+
+    /* Propriedades de layout e design */
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transicao-padrao);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-copy-text:hover {
+    background-color: var(--cor-secundaria);
+    box-shadow: var(--sombra-card);
+    transform: translateY(-2px);
+}
+
+.btn-copy-text:active {
+    transform: translateY(0);
+    box-shadow: var(--sombra-leve);
 }
 
 /* ====================================================================================================================== */

@@ -638,7 +638,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             document.body.removeChild(textArea);
                         }
 
-                        showCentralMessage(`(${textToCopy}) copiado!`);
+                        showCentralMessage(`(${textToCopy})  copiado!`);
                         button.textContent = 'Copiado!';
                         button.classList.add('copied');
                         setTimeout(() => {
