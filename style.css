@@ -8467,11 +8467,6 @@ input:checked+.slider:before {
     text-align: center;
 }
 
-h1 {
-    font-size: 2.5em;
-    color: #4CAF50;
-}
-
 .botao-ativar {
     background-color: #4CAF50;
     color: white;
