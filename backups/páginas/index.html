@@ -58,6 +58,7 @@
 </head>
 
 <body>
+
     <div id="centralMessage" class="central-message"></div>
     <audio id="backgroundAudio"></audio>
 
@@ -69,18 +70,12 @@
             </button>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="arquivos.html" class="nav-link" data-page="home">Arquivos</a></li>
-                    <li><a href="comunidade.html" class="nav-link" data-page="home">Comunidade</a></li>
-                    <li><a href="eventos.html" class="nav-link" data-page="home">Eventos</a></li>
-                    <li><a href="equipe.html" class="nav-link" data-page="home">Equipe</a></li>
-                    <li><a href="sobre.html" class="nav-link" data-page="home">Sobre</a></li>
-                    <li><a href="suporte.html" class="nav-link" data-page="home">Suporte</a></li>
-                    <li><a href="recursos.html" class="nav-link" data-page="home">Recursos</a></li>
+                    <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
+    <!-------------------------------------------------------------------------------------------------------------->
     <main>
         <section class="hero-section">
             <div class="hero-image-overlay"></div>
@@ -107,173 +102,286 @@
             </div>
         </section>
 
-        <section class="layout-principal">
-            <div class="conteudo-principal">
-                <h2>Pixel Legends</h2>
-                <p>Este é o nosso Servidor de Pixel Legends! Aqui todos tem o direito de criar suas guildas e batalhar contra outras Guildas pelo mundo, ou formar alianças e diversas coisas que podem fazer! Para ficar mais organizado, os líderes de cada Guilda podem criar Chats de Grupo 9Canais de Texto) para seus membros de Guilda, tornando mais fácil e prático para todos, evitando terem que criar grupos externos para interagirem com todos.</p>
-            </div>
+        
+        <div class="secao-cards-preta">
+            <secao-titulo>ADOBE WINDOWS ULTIMATE [WEB]</secao-titulo>
+            <p>Todos os Softwares da Adobe para a Versão Web!</p>
+            <p>Não se preocupe pois não tem vírus, são sites oficial da própria Adobe.</p>
 
-            <div class="card-copia">
-                <div class="caixa-texto">
-                    <p><strong>IP do Servidor: </strong><span id="serverPort">MCPixelLegends.aternos.me</span></p>
-                    <p><strong>Porta do Servidor: </strong><span id="serverIp">57178</span></p>
-                </div>
-                <div class="botoes-copiar">
-                    <button class="copy-button btn-copy-text" data-copy-target="#serverPort">
-                        <i class="fas fa-server"></i> Copiar Servidor
-                    </button>
-                    <button class="copy-button btn-copy-text" data-copy-target="#serverIp">
-                        <i class="fas fa-envelope"></i> Copiar Porta
-                    </button>
-                    <button class="copy-button btn-copy-text" data-copy-target="#serverPort, #serverIp">
-                        <i class="fas fa-clipboard"></i> Copiar IP + Porta
-                    </button>
-                </div>
-            </div>
-        </section>
+            <div class="cards-container">
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Fonts.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Fonts</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="https://fonts.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
 
-        <section id="about-server" class="section-padded section-alt-bg fade-in-section">
-            <div class="container content-two-columns">
-                <div class="text-content">
-                    <h2><i class="fas fa-cube"></i> Explore o nosso Servidor</h2>
-                    <p>Se jogue na imensidão do melhor servidor de Minecraft que voçe já viu!</p>
-                    <p>Temos muitos recursos e apoiamos novos criadores de Minecraft, como Addons, Mods, Criador de Mapas e Skins, e muitas coisas!</p>
-                    <a href="sobre.html" class="btn-primary margin-top-70"><i class="fas fa-info-circle"></i> Saiba Mais
-                        Sobre Nós</a>
-                </div>
-                <div class="image-content">
-                    <img src="assets/images/1.site/sobre-o-mundo.gif" alt="Screenshot do servidor"
-                        class="responsive-image bordered-image">
-                </div>
-            </div>
-        </section>
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Color.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Color</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="https://color.adobe.com/pt/create/color-wheel" class="btn-download">ACESSAR</a>
+                </card-compact>
 
-        <section id="social-channels" class="section-padded section-alt-bg fade-in-section">
-            <div class="container text-center">
-                <h2><i class="fas fa-users-line"></i> Nossos Canais de Comunidade</h2>
-                <p class="section-description">Conecte-se conosco em nossas redes sociais e não perca nenhuma novidade!
-                </p>
-                <div class="community-grid max-3-columns">
-                    <div class="community-card">
-                        <i class="fab fa-discord card-icon"></i>
-                        <h3 class="card-title">Discord Oficial</h3>
-                        <p class="card-description">Junte-se ao nosso servidor Discord para interagir com a comunidade,
-                            receber suporte e ficar por dentro dos anúncios!</p>
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                            class="btn-primary">Entrar no Discord</a>
-                    </div>
-                    <div class="community-card">
-                        <i class="fab fa-youtube card-icon"></i>
-                        <h3 class="card-title">Canal do YouTube</h3>
-                        <p class="card-description">Assista nossos vídeos de gameplay, tutoriais, destaques da
-                            comunidade e trailers de eventos!</p>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                            class="btn-primary">Inscreva-se</a>
-                    </div>
-                </div>
-                <div class="text-center margin-top-50">
-                    <a href="comunidade.html" class="btn-primary"><i class="fas fa-users"></i> Ver Mais da
-                        Comunidade</a>
-                </div>
-            </div>
-        </section>
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Stock.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Stock</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="https://stock.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
 
-        <!-- Seção de Perguntas Frequentes -->
-        <section id="our-team">
-            <div class="container text-center">
-                <h2><i class="fas fa-users-gear"></i> </h2>
-                <p class="section-description"></p>
-                <div class="community-grid max-3-columns">
-                    <div class="team-member-card community-card">
-                        <img src="assets/images/cards/team-member1.jpg" alt="Foto do Admin" class="member-avatar">
-                        <h3 class="card-title">ZeraCraft_Admin</h3>
-                        <p class="card-description"><strong>Fundador & Desenvolvedor Principal</strong><br>A mente por trás do Mundo Zera's Craft. Dedicado a inovações e à experiência do jogador.</p>
-                        <div class="team-social-links">
-                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member-card community-card">
-                        <img src="assets/images/cards/member2.png" alt="Foto do Moderador" class="member-avatar">
-                        <h3 class="card-title">Mod_Builder</h3>
-                        <p class="card-description"><strong>Moderador Chefe & Construtor</strong><br>Responsável por manter a ordem e criar as estruturas mais impressionantes.</p>
-                        <div class="team-social-links">
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member-card community-card">
-                        <img src="assets/images/cards/member3.png" alt="Foto do Suporte" class="member-avatar">
-                        <h3 class="card-title">Support_Hero</h3>
-                        <p class="card-description"><strong>Especialista de Suporte</strong><br>Sempre pronto para ajudar com quaisquer dúvidas ou problemas que surgirem.</p>
-                        <div class="team-social-links">
-                            <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        </div>
-                    </div>
-                    </div>
-                <div class="text-center margin-top-50">
-                    <p class="section-description">Interessado em se juntar à nossa equipe? <a href="#contact" class="discord-channel-link">Entre em contato via Discord!</a></p>
-                </div>
-            </div>
-        </section>
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Behance.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Behance</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="https://www.behance.net/" class="btn-download">ACESSAR</a>
+                </card-compact>
 
-        <!-- Seção de Status do Servidor -->
-        <section id="status-section" class="status-section">
-            <div class="header">
-                <h2><i class="fas fa-server"></i> Status do Servidor</h2>
-                <p>Verifique o status do nosso servidor em tempo real antes de se conectar.</p>
-            </div>
-            <div class="status-info">
-                Status: <span class="status-text status-online">Online</span>
-            </div>
-            <div class="status-info">
-                Jogadores Online: <span class="status-text">15/50</span>
-            </div>
-        </section>
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Firefly.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Firefly</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="https://firefly.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
 
-        <section id="gallery-section social-channels" class="section-padded section-alt-bg fade-in-section" class="section-padded fade-in-section">
-            <div class="container">
-                <h2 class="text-center"><i class="fas fa-images"></i> Galeria de Momentos</h2>
-                <p class="section-description text-center">Clique nas imagens para expandir e ver mais detalhes!</p>
-                <div class="gallery-grid max-3-columns">
-                    <a href="assets/images/gallery/sobre-o-mundo.gif" data-lightbox="gallery" class="lightbox-link">
-                        <img src="assets/images/gallery/sobre-o-mundo.gif" alt="Descrição da imagem 1"
-                            class="gallery-image">
-                    </a>
-                    <a href="assets/images/gallery/sobre-o-mundo.gif" data-lightbox="gallery" class="lightbox-link">
-                        <img src="assets/images/gallery/sobre-o-mundo.gif" alt="Descrição da imagem 2"
-                            class="gallery-image">
-                    </a>
-                    <a href="assets/images/gallery/sobre-o-mundo.gif" data-lightbox="gallery" class="lightbox-link">
-                        <img src="assets/images/gallery/sobre-o-mundo.gif" alt="Descrição da imagem 3"
-                            class="gallery-image">
-                    </a>
-                </div>
-            </div>
-        </section>
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Express.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Express</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="https://new.express.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
 
-        <section class="layout-principal">
-            <!-- Barra de navegação lateral/superior -->
-            <div class="barra-lateral">
-                <a href="https://discord.com/channels/1390120239588577482/1390323519438721125" class="item-link">REGRAS</a>
-                <a href="https://discord.com/channels/1390120239588577482/1411317448073941132" class="item-link">CARGOS</a>
-                <a href="https://discord.com/channels/1390120239588577482/1394708633010311168" class="item-link">EVENTOS</a>
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Acrobat.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Acrobat Web</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="https://acrobat.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
             </div>
+        </div>
 
-            <!-- Conteúdo principal -->
-            <div class="conteudo-principal">
-                <h2>O que é Minecraft?</h2>
-                <p>Minecraft é um jogo eletrônico tipo sandbox de mundo aberto criado por Markus "Notch" Persson e
-                    desenvolvido e publicado pela Mojang Studios. Ele permite que os jogadores explorem um mundo
-                    tridimensional infinito, gerado proceduralmente, construindo e criando estruturas com uma variedade
-                    de blocos texturizados. O jogo não tem um objetivo específico, permitindo aos jogadores total
-                    liberdade para escolher como jogar.</p>
-                <P>No nosso servidor voçe tem toda esta liberdade de demonstrar a sua criatividade, mostrando à todos a sua paixão pelo jogo. Claro que respeitando todas as pessoas também.</P>
+<!---------------------------------------------------------------->
+
+        <div class="secao-cards-verde">
+            <secao-titulo>ADOBE WINDOWS ULTIMATE [APPS]</secao-titulo>
+            <p>Todos os Aplicativos da Adobe Atualiados e prontinho para download!</p>
+            <p>Não se preocupe pois não tem vírus, podem baixar sem problemas.</p>
+
+            <div class="cards-container">
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Premiere.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Premire</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">MEDIAFIRE</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/After-Effects.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe After Effects</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Photoshop.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Photoshop</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/ --------" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Photoshop Lightroom</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Media-Encoder.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Media Encoder</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/XD.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe XD</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/InCopy.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe InCopy</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Animate.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Animate</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/----------" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Camera Raw</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Illustrator.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Illustrator</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Audition.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Audition</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/-------------" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Bridge</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Dimension.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Dimension</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/InDesign.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe InDesign</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Substance-3d-Modeler.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Substance 3D Modeler</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Substance-3d-Painter.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Susbtance 3D Painter</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Substance-3d-Sampler.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Substance 3D Sampler</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/Acrobat.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Acrobat Pró</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="assets/images/adobe/GenP.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe GenP</titulo-card>
+                    <subtitulo-card>--</subtitulo-card>
+                    <texto-card>--</texto-card>
+                    <a href="#" class="btn-download">BAIXAR</a>
+                </card-compact>
             </div>
-        </section>
-
+        </div>
     </main>
-
+    <!-------------------------------------------------------------------------------------------------------------->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
@@ -373,8 +481,8 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="elementos.js"></script>
     <script src="script.js"></script>
+    <script src="elementos.js"></script>
 </body>
 
 </html>
