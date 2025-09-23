@@ -86,7 +86,7 @@
     --padding-card: 25px;
     --gap-grid: 30px;
     --border-radius: 8px;
-    --max-width-content: 1200px;
+    --max-width-content: 12000px;
 
     /* Shadows */
     --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -277,14 +277,16 @@ ul {
 .section-alt-bg {
     background-color: var(--cor-terciaria);
     /* Nasisinit a berde a background */
-    margin-top: 20px; /* Adiciona um espaço de 50px acima da seção */
+    margin-top: 20px;
+    /* Adiciona um espaço de 50px acima da seção */
 }
 
 .section-alt-bg::before,
 .section-alt-bg::after {
     content: "";
     display: block;
-    height: 20px; /* Altura do efeito de diminuição */
+    height: 20px;
+    /* Altura do efeito de diminuição */
     background-color: transparent;
 }
 
@@ -1595,9 +1597,9 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
     margin-top: 50px;
 }
 
-/* ====================================================================================================================== */
+/* ================================ */
 /* ESTILOS DO MODAL DE DOWNLOAD */
-/* ====================================================================================================================== */
+/* ================================ */
 
 #download-modal {
     display: none;
@@ -11134,4 +11136,176 @@ input:checked+.slider:before {
 
 .status-offline {
     color: #FF5252;
+}
+
+/*
+  ======================================================
+  ESTILOS DE ÍCONES SOCIAIS DENTRO DE CARDS GERAIS
+  ======================================================
+*/
+
+/* Estilo da tag personalizada <links-sociais> */
+links-sociais {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+}
+
+links-sociais a {
+    color: var(--cor-texto-claro);
+    font-size: 1.5rem;
+    transition: var(--transicao-padrao);
+}
+
+links-sociais a:hover {
+    color: var(--cor-destaque);
+    transform: scale(1.1);
+}
+
+/*
+  ======================================================
+  ESTILO DE CARD COMPACTA PARA DOWNLOADS EXTERNOS
+  ======================================================
+*/
+
+.secao-cards-preta {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo para o container principal da seção */
+.secao-cards-verde {
+    background-color: var(--cor-terciaria);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo para a tag personalizada <secao-titulo> */
+secao-titulo {
+    display: block;
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
+    color: var(--cor-texto-claro);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+/* Estilo para a tag personalizada <secao-subtitulo> */
+secao-subtitulo {
+    display: block;
+    font-family: var(--fonte-subtitulo);
+    font-size: 1rem;
+    color: var(--cor-texto-claro);
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+/* Estilo para o container dos cards */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap-grid);
+    max-width: var(--max-width-content);
+    width: 100%;
+}
+
+/* Estilo da tag personalizada <card-compact> */
+card-compact {
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    padding: 25px;
+    flex: 1 1 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transicao-padrao);
+    border: 1px solid var(--cor-bordas);
+}
+
+/* Efeito de hover */
+card-compact:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-card-hover);
+}
+
+icone-imagem {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+}
+
+icone-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Estilo da tag personalizada <titulo-card> */
+titulo-card {
+    display: block;
+    font-family: var(--fonte-titulo);
+    font-size: 1rem;
+    color: var(--cor-fundo-claro);
+    margin: 0 0 5px;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+/* Estilo da tag personalizada <subtitulo-card> */
+subtitulo-card {
+    display: block;
+    font-family: var(--fonte-subtitulo);
+    font-size: 0.8rem;
+    color: var(--cor-card-text);
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+/* Estilo da tag personalizada <texto-card> */
+texto-card {
+    display: block;
+    font-family: var(--fonte-corpo);
+    font-size: 0.9rem;
+    color: var(--cor-card-text);
+    margin-bottom: 20px;
+}
+
+/* Estilo para o novo botão de download */
+.btn-download {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: var(--fonte-subtitulo);
+    font-weight: bold;
+    margin-bottom: 15px;
+    transition: var(--transicao-padrao);
+}
+
+.btn-download:hover {
+    background-color: var(--cor-secundaria);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-leve);
 }
