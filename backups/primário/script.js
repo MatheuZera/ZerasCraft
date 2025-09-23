@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     const buttonElements = document.querySelectorAll(
-        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top, .btn-download'
+        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top, .btn-download, .item-link, .gallery-image'
     );
 
     const textLinkElements = document.querySelectorAll(
