@@ -86,7 +86,7 @@
     --padding-card: 25px;
     --gap-grid: 30px;
     --border-radius: 8px;
-    --max-width-content: 1200px;
+    --max-width-content: 1400px;
 
     /* Shadows */
     --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -11308,4 +11308,105 @@ texto-card {
     background-color: var(--cor-secundaria);
     transform: translateY(-2px);
     box-shadow: var(--sombra-leve);
+}
+
+/*
+  ======================================================
+  ESTILO DE CARD GRANDES PARA DOWNLOADS EXTERNOS
+  ======================================================
+*/
+
+.container-cards-grandes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Adicionado transição para o hover */
+card-grande {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--cor-card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    border: 1px solid var(--cor-bordas);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito de elevação no hover */
+card-grande:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+card-grande .card-thumb {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+/* Efeito de zoom na imagem no hover */
+card-grande .card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+card-grande:hover .card-thumb img {
+    transform: scale(1.05);
+}
+
+card-grande .card-body {
+    padding: var(--padding-card);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+card-grande .card-titulo {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--cor-texto-claro);
+}
+
+card-grande .card-descricao {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--cor-card-text);
+    flex-grow: 1;
+}
+
+card-grande .card-button {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+card-grande .card-button:hover {
+    background-color: var(--cor-secundaria);
+}
+
+@media (min-width: 768px) {
+    card-grande {
+        width: calc(50% - 10px);
+    }
 }
