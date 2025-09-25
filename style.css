@@ -10933,7 +10933,7 @@ input:checked+.slider:before {
     flex-direction: column;
     max-width: var(--max-largura);
     width: 93%;
-    margin: 0 20px;
+    margin: 0 13px;
     /* Adiciona 20px de margem em cada lado */
 }
 
@@ -11007,6 +11007,9 @@ input:checked+.slider:before {
 
 /* Layout para telas menores (Mobile) */
 @media (max-width: 768px) {
+    .layout-principal {
+        margin-top: 10px;
+    }
     .barra-lateral {
         flex-direction: row;
         justify-content: space-around;
