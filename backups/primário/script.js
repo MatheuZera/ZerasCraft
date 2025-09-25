@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
             saveAudioState();
         }).catch(e => {
             console.error("Erro ao tentar tocar áudio (provavelmente autoplay bloqueado):", e.message);
-            showCentralMessage('Clique para tentar tocar..');
+            showCentralMessage('[#] Clique para tentar tocar..');
             updateAudioButtonTitle();
             saveAudioState();
         });
@@ -571,95 +571,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // ===================================================================
-    // 2. Menu Hambúrguer (Otimizado para mais páginas)
-    // ===================================================================
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.main-nav');
-    const menuIcon = menuToggle.querySelector('i');
-
-    if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-
-            if (nav.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        });
-    }
-
-    // ===================================================================
-    // 3. Funcionalidade de Copiar Texto
-    // ===================================================================
-    // Esta função foi atualizada para incluir a lógica para o IP/Porta do servidor
-    const copyButtons = document.querySelectorAll('.copy-button'); // Certifique-se de que seus botões de cópia têm esta classe
-    if (copyButtons.length > 0) {
-        copyButtons.forEach(button => {
-            button.addEventListener('click', async () => {
-                let textToCopy = '';
-                let targetElementSelector = button.dataset.copyTarget; // Ex: '#serverIp, #serverPort'
-                let originalButtonText = button.textContent;
-
-                if (targetElementSelector) {
-                    const selectors = targetElementSelector.split(',').map(s => s.trim());
-                    let partsToCopy = [];
-                    for (const selector of selectors) {
-                        const targetElement = document.querySelector(selector);
-                        if (targetElement) {
-                            partsToCopy.push(targetElement.textContent.trim());
-                        }
-                    }
-                    if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
-                        textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
-                    } else {
-                        textToCopy = partsToCopy.join(' '); // Junta com espaço se for outro tipo de múltiplos elementos
-                    }
-                } else if (button.dataset.copyText) {
-                    textToCopy = button.dataset.copyText;
-                }
-
-                if (textToCopy) {
-                    try {
-                        // Usa a API Clipboard mais moderna se disponível, com fallback para execCommand
-                        if (navigator.clipboard && navigator.clipboard.writeText) {
-                            await navigator.clipboard.writeText(textToCopy);
-                        } else {
-                            const textArea = document.createElement("textarea");
-                            textArea.value = textToCopy;
-                            document.body.appendChild(textArea);
-                            textArea.select();
-                            document.execCommand('copy');
-                            document.body.removeChild(textArea);
-                        }
-
-                        showCentralMessage(`(${textToCopy})  copiado!`);
-                        button.textContent = 'Copiado!';
-                        button.classList.add('copied');
-                        setTimeout(() => {
-                            button.textContent = originalButtonText;
-                            button.classList.remove('copied');
-                        }, 2000);
-                    } catch (err) {
-                        console.error('Erro ao copiar: ', err);
-                        showCentralMessage('Falha ao copiar.');
-                    }
-                } else {
-                    showCentralMessage('Nada para copiar.');
-                }
-                playEffectSound(clickSound);
-            });
-        });
-    }
-
-
-    // ===================================================================
-    // 4. Sistema de Áudio de Fundo (Event Listeners Principais)
+    // Sistema de Áudio de Fundo (Event Listeners Principais)
     // ===================================================================
     if (backgroundAudio) {
         restoreAudioState();
@@ -694,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
             audioNextButton.addEventListener('click', () => {
                 playEffectSound(clickSound);
                 backgroundAudio.pause(); // Pausa a música atual imediatamente
-                showCentralMessage('Próxima música...');
+                showCentralMessage('↪️ Próxima música...');
                 preparingNextMusic = false;
                 loadNewMusic(true); // Carrega a próxima música e a toca
             });
@@ -704,7 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
             audioPrevButton.addEventListener('click', () => {
                 playEffectSound(clickSound);
                 backgroundAudio.pause(); // Pausa a música atual imediatamente
-                showCentralMessage('Música anterior...');
+                showCentralMessage('↩️ Música anterior...');
                 preparingNextMusic = false;
                 let prevIndex = currentMusicIndex - 1;
                 if (prevIndex < 0) {
@@ -785,7 +698,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!isNaN(newSpeed) && newSpeed > 0) {
                     backgroundAudio.playbackRate = newSpeed;
                     saveAudioState();
-                    showCentralMessage(`Velocidade: ${newSpeed}x`);
+                    showCentralMessage(`[⏩] Velocidade: ${newSpeed}x`);
                 }
             });
         }
@@ -794,10 +707,93 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('pagehide', saveAudioState);
     }
 
+    // ==================================================================================================================================================
+    // 1. Menu Hambúrguer (Otimizado para mais páginas)
+    // ==================================================================================================================================================
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.main-nav');
+    const menuIcon = menuToggle.querySelector('i');
 
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+
+            if (nav.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+    }
 
     // ===================================================================
-    // 5. Animações de Rolagem com ScrollReveal
+    // 2. Funcionalidade de Copiar Texto
+    // ===================================================================
+    // Esta função foi atualizada para incluir a lógica para o IP/Porta do servidor
+    const copyButtons = document.querySelectorAll('.copy-button'); // Certifique-se de que seus botões de cópia têm esta classe
+    if (copyButtons.length > 0) {
+        copyButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                let textToCopy = '';
+                let targetElementSelector = button.dataset.copyTarget; // Ex: '#serverIp, #serverPort'
+                let originalButtonText = button.textContent;
+
+                if (targetElementSelector) {
+                    const selectors = targetElementSelector.split(',').map(s => s.trim());
+                    let partsToCopy = [];
+                    for (const selector of selectors) {
+                        const targetElement = document.querySelector(selector);
+                        if (targetElement) {
+                            partsToCopy.push(targetElement.textContent.trim());
+                        }
+                    }
+                    if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
+                        textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
+                    } else {
+                        textToCopy = partsToCopy.join(' '); // Junta com espaço se for outro tipo de múltiplos elementos
+                    }
+                } else if (button.dataset.copyText) {
+                    textToCopy = button.dataset.copyText;
+                }
+
+                if (textToCopy) {
+                    try {
+                        // Usa a API Clipboard mais moderna se disponível, com fallback para execCommand
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            await navigator.clipboard.writeText(textToCopy);
+                        } else {
+                            const textArea = document.createElement("textarea");
+                            textArea.value = textToCopy;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                        }
+
+                        showCentralMessage(`[📃] (${textToCopy})  copiado!`);
+                        button.textContent = 'Copiado!';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalButtonText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Erro ao copiar: ', err);
+                        showCentralMessage('[❗] Falha ao copiar.');
+                    }
+                } else {
+                    showCentralMessage('[📌] Nada para copiar.');
+                }
+                playEffectSound(clickSound);
+            });
+        });
+    }
+
+    // ===================================================================
+    // 3. Animações de Rolagem com ScrollReveal
     // ===================================================================
     // Adicionado um pequeno atraso para o ScrollReveal carregar e evitar piscar
     setTimeout(() => {
@@ -833,7 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500); // Atraso de 500ms
 
     // ===================================================================
-    // 6. Botão Voltar ao Topo
+    // 4. Botão Voltar ao Topo
     // ===================================================================
 
     // Botão Voltar ao Topo
@@ -857,7 +853,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===================================================================
-    // 7. Atualizar ano no Rodapé
+    // 5. Atualizar ano no Rodapé
     // ===================================================================
     // Atualização do Ano no Rodapé
     const currentYearSpan = document.getElementById('currentYear');
