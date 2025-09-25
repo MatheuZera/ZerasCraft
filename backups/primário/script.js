@@ -273,17 +273,17 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'sequencial':
                 iconElement.className = 'fas fa-list-ol';
                 audioModeButton.setAttribute('title', 'Tocar em sequência');
-                showCentralMessage('Modo: Sequencial');
+                showCentralMessage('Modo: 📃 Sequencial');
                 break;
             case 'aleatorio':
                 iconElement.className = 'fas fa-random';
                 audioModeButton.setAttribute('title', 'Reprodução aleatória');
-                showCentralMessage('Modo: Aleatório');
+                showCentralMessage('Modo: 🎲 Aleatório');
                 break;
             case 'loop':
                 iconElement.className = 'fas fa-repeat';
                 audioModeButton.setAttribute('title', 'Repetir a música atual');
-                showCentralMessage('Modo: Repetir');
+                showCentralMessage('Modo: 🔂 Repetir');
                 break;
         }
     };
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
             iconElement.classList.add('fa-pause');
             if (audioControlButton) audioControlButton.classList.add('is-playing');
         } else {
-            musicTitleDisplay.textContent = 'Clique para Tocar';
+            musicTitleDisplay.textContent = '[#] 📌 Clique para Tocar';
             iconElement.classList.remove('fa-pause');
             iconElement.classList.add('fa-play');
             if (audioControlButton) audioControlButton.classList.remove('is-playing');
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         backgroundAudio.play().then(() => {
-            showCentralMessage(`Tocando: ${musicPlaylist[currentMusicIndex].title}`);
+            showCentralMessage(`[📌] Tocando: ${musicPlaylist[currentMusicIndex].title}`);
             updateAudioButtonTitle();
             saveAudioState();
         }).catch(e => {
@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         backgroundAudio.onerror = (e) => {
             console.error(`Erro ao carregar áudio: ${music.src}`, e);
-            showCentralMessage('Erro ao carregar música. Pulando...');
+            showCentralMessage('[❗] Erro ao carregar música. Pulando...');
             preparingNextMusic = false;
             backgroundAudio.onerror = null;
             setTimeout(() => playNextMusic(), 500);
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         loadMusic(nextIndex);
-        showCentralMessage('Carregando..');
+        showCentralMessage('↪️ Carregando..');
     };
 
     const playPrevMusic = () => {
@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         loadMusic(prevIndex);
-        showCentralMessage('Carregando..');
+        showCentralMessage('↪️ Carregando..');
     };
 
     const updateProgressAndTimers = () => {
@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 backgroundAudio.pause();
                 updateAudioButtonTitle();
-                showCentralMessage('Reprodução Pausada');
+                showCentralMessage('[⏸️] Reprodução Pausada');
             }
             saveAudioState();
         });
