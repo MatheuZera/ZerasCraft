@@ -635,7 +635,7 @@ ul {
     /* Centraliza horizontalmente */
     justify-content: center;
     /* Centraliza verticalmente */
-    gap: 20px;
+    gap: 10px;
     /* Espaçamento entre os elementos do hero-content */
 }
 
@@ -668,7 +668,7 @@ ul {
 /* Estilos para o título principal do banner */
 .hero-section h1 {
     font-size: 4em;
-    margin-bottom: 0;
+    margin-bottom: 30px;
     /* Brilho neon no título */
     line-height: 1.2;
     font-weight: bold;
@@ -770,7 +770,7 @@ ul {
     .hero-content {
         padding-top: 60px;
         /* Padding-top ajustado */
-        gap: 8px;
+        gap: 2px;
         /* Gap menor */
     }
 
@@ -801,7 +801,7 @@ ul {
     }
 
     .hero-social-links .btn-primary {
-        padding: 6px 12px;
+        padding: 6px 30px;
         /* Padding mínimo */
         font-size: 0.75em;
         /* Fonte mínima */
@@ -10943,6 +10943,7 @@ input:checked+.slider:before {
     flex-direction: column;
     padding: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
 }
 
 .item-link {
@@ -11021,7 +11022,7 @@ input:checked+.slider:before {
         border-bottom: none;
         font-size: 1em;
         /* Reduz o tamanho da fonte */
-        padding: 18px 15px;
+        padding: 18px 5px;
         /* Reduz o padding horizontal */
         white-space: nowrap;
         /* Evita quebra de linha */
@@ -11082,6 +11083,12 @@ input:checked+.slider:before {
     color: var(--cor-card-text);
 }
 
+/* Layout para telas menores (Mobile) */
+@media (max-width: 768px) {
+   .faq-item {
+    margin: 0 10px;
+   } 
+}
 /*
   ======================================================
   ESTILO DE CARD DE STATUS COM TEXTO
