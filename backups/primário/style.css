@@ -2884,6 +2884,7 @@ h4 {
     overflow: hidden;
     transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border-top: 1px solid var(--cor-bordas);
+    border-radius: 10px;
 }
 
 .acordeao-painel p {
