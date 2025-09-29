@@ -4170,7 +4170,7 @@ h4 {
     /* Altura mínima reduzida */
     max-width: 800px;
     /* Largura máxima para centralizar e afastar das bordas */
-    margin: 20px auto;
+    margin: 0px auto;
     /* Centraliza o card na página */
 }
 
