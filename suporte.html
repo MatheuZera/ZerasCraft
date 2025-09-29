@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
@@ -9,7 +10,8 @@
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
     <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!---->
 
     <!--é a breve descrição da sua página que pode aparecer no Google-->
     <meta name="description"
@@ -22,7 +24,7 @@
     <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
     <meta name="robots" content="index, follow">
 
-<!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
     <!--O título que aparece na pré-visualização.-->
     <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
     <!--A descrição que aparece na pré-visualização.-->
@@ -32,13 +34,13 @@
     <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
     <!--A URL da página.-->
     <meta property="og:url" content="https://seusite.com.br/index.html">
-    
+
     <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Mundo Zera's Craft">
     <meta property="og:locale" content="pt_BR">
-    
-<!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@SeuTwitterHandle">
     <meta name="twitter:creator" content="@SeuTwitterHandle">
@@ -47,14 +49,14 @@
         content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
     <!---->
     <meta name="twitter:image"
-
         content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
-<!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
     <meta name="theme-color" content="#347C2F">
-<!-- Links para ScrollReveal e CountUp.js -->
+    <!-- Links para ScrollReveal e CountUp.js -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
 </head>
+
 <body>
 
     <div id="centralMessage" class="central-message"></div>
@@ -69,11 +71,17 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
+                    <li><a href="arquivos.html" class="nav-link" data-page="home">Arquivos</a></li>
+                    <li><a href="comunidade.html" class="nav-link" data-page="home">Comunidade</a></li>
+                    <li><a href="eventos.html" class="nav-link" data-page="home">Eventos</a></li>
+                    <li><a href="sobre.html" class="nav-link" data-page="home">Sobre</a></li>
+                    <li><a href="suporte.html" class="nav-link" data-page="home">Suporte</a></li>
+                    <li><a href="recursos.html" class="nav-link" data-page="home">Recursos</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-<!-------------------------------------------------------------------------------------------------------------->
+
     <main>
         <section class="hero-section">
             <div class="hero-image-overlay"></div>
@@ -82,7 +90,7 @@
                     <img src="assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft" class="server-icon">
                 </div>
                 <h1>Mundo Zera's Craft</h1>
-                <p class="hero-subtitle">Entenda como a nossa Administração funciona!</p>
+                <p class="hero-subtitle">Nossa Equipe da Moderação e Organização!</p>
                 <div class="hero-social-links">
                     <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank"
                         rel="noopener noreferrer" class="btn-primary">
@@ -99,8 +107,180 @@
                 </div>
             </div>
         </section>
+
+        <section id="leadership-team" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-users-crown"></i> Liderança</h2>
+                <p class="section-description">Os visionários que guiam o nosso servidor.</p>
+                <div class="card-grid max-2-columns">
+                    <div class="team-member-card card">
+                        <img src="assets/images/team/matheuzera.png" alt="Matheu Zera"
+                            class="member-avatar responsive-image rounded-image">
+                        <h3 class="card-title">MatheuZera</h3>
+                        <p class="card-description">Fundador & Desenvolvedor Chefe</p>
+                        <p class="member-bio">Visionário por trás do Mundo Zera's Craft, Matheu é o responsável pela
+                            arquitetura do servidor e pelas maiores inovações.</p>
+                        <div class="team-social-links">
+                            <a href="https://discord.com/users/771887741678911508" target="_blank"
+                                rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                            <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
+                                aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-card card">
+                        <img src="assets/images/team/admin.png" alt="Admin A"
+                            class="member-avatar responsive-image rounded-image">
+                        <h3 class="card-title">CALiXTO</h3>
+                        <p class="card-description">Gerente de Comunidade</p>
+                        <p class="member-bio">Responsável por manter a comunidade unida, organizada e sempre ativa com
+                            eventos e interação.</p>
+                        <div class="team-social-links">
+                            <a href="https://discord.com/users/748917112441012275" target="_blank"
+                                rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i
+                                    class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mission-vision" class="section-padded fade-in-section">
+            <div class="container content-two-columns">
+                <div class="text-content">
+                    <h2><i class="fas fa-bullseye"></i> Nossa Missão</h2>
+                    <p>No Mundo Zera's Craft, nossa missão é proporcionar uma experiência de jogo em Minecraft que seja
+                        divertida, segura e inovadora. Nos dedicamos a criar um ambiente onde a criatividade floresce, a
+                        amizade é incentivada e todos os jogadores se sintam bem-vindos e valorizados.</p>
+                    <p>Estamos empenhados em oferecer atualizações regulares, eventos emocionantes e um suporte dedicado
+                        para garantir que sua jornada em nosso servidor seja inesquecível.</p>
+                </div>
+                <div class="image-content">
+                    <img src="assets/images/gallery/mission-image.jpg" alt="Missão Zera's Craft"
+                        class="responsive-image bordered-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section-padded section-alt-bg fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-question-circle"></i> Perguntas Frequentes</h2>
+                <p class="section-description">Confira as respostas para as dúvidas mais comuns sobre o Zera's Craft.
+                </p>
+                <div class="faq-grid max-2-columns">
+                    <div class="faq-item info-card text-left">
+                        <h3 class="card-title">TICKETS</h3>
+                        <p class="card-description">Você pode tanto criar Tickets Públicos como Privados também, a
+                            diferença entre um e outro é que o Público todos podem lhe responder, enquanto o Privado
+                            apenas você e os Administradores podem ter acesso. Use em casos de dúvidas, avisando algo e
+                            etc..</p>
+                    </div>
+                    <div class="faq-item info-card text-left">
+                        <h3 class="card-title">SUGESTÕES DE NOVOS RECURSOS</h3>
+                        <p class="card-description">Temos vários canais para abraçar novas sugestões, incluindo
+                            Sugestões para ser implementadas dentro de nosso Servidor Discord, Eventos, Pixel Legends e
+                            etc..</p>
+                    </div>
+                    <div class="faq-item info-card text-left">
+                        <h3 class="card-title">FEEDBACKS</h3>
+                        <p class="card-description">Caso tiver algo incomodando você, não tenha vergonha e fale conosco,
+                            caso quiser comversar por meio de Tickets não tem problemas.</p>
+                    </div>
+                    <div class="faq-item info-card text-left">
+                        <h3 class="card-title">DENÚNCIAS</h3>
+                        <p class="card-description">Ser viu algo que você achou muito errado como por exemplo: Membros
+                            desrespeitando os outros, ou quebrando as Regras, nos avise imediatamente por meio de
+                            Tickets Privados!</p>
+                    </div>
+                    <div class="faq-item info-card text-left">
+                        <h3 class="card-title">PARCERIAS</h3>
+                        <p class="card-description">Temos um sistema de parcerias dentro do nosso Servidor, baseado no
+                            sistema de Tickets a Solicitação de Parcerias funciona de uma maneira direta e prática >
+                            Você cria um Ticket solicitando a Parceria do seu Servidor/Comunidade, preencha algumas
+                            coisinhas, então apenas aguarde a resposta de algum Admin, e pronto!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padded">
+            <div class="container">
+                <div class="container text-center">
+                    <h2><i class="fas fa-comment-dots"></i> Veja nossa Meta</h2>
+                    <p class="section-description">Aqui listamos nossas Metas.</p>
+                    <div class="stats-grid max-4-columns">
+                        <div class="stat-item card">
+                            <i class="fas fa-users stat-icon"></i>
+                            <h3 class="stat-number" data-target="25000">2.000</h3>
+                            <p class="stat-label">Membros no Servidor</p>
+                    </div>
+                </div>
+        </section>
+
+        <section id="staff-members" class="section-padded section-alt-bg fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-users-cog"></i> Moderadores e Staff</h2>
+                <p class="section-description">A equipe dedicada que garante um ambiente justo e divertido para todos.
+                </p>
+                <div class="card-grid max-3-columns">
+                    <div class="team-member-card card">
+                        <img src="https://placehold.co/100x100/388E3C/FFFFFF?text=MOD" alt="Moderador 1"
+                            class="member-avatar responsive-image rounded-image">
+                        <h3 class="card-title">Moderador Alfa</h3>
+                        <p class="card-description">Moderador de Jogo</p>
+                        <p class="member-bio">Sempre atento para ajudar jogadores e garantir que as regras sejam
+                            seguidas.</p>
+                        <div class="team-social-links">
+                            <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-card card">
+                        <img src="https://placehold.co/100x100/2E7D32/FFFFFF?text=DEV" alt="Desenvolvedor 1"
+                            class="member-avatar responsive-image rounded-image">
+                        <h3 class="card-title">Dev Beta</h3>
+                        <p class="card-description">Desenvolvedor de Addons</p>
+                        <p class="member-bio">Cria e implementa novos recursos e addons para enriquecer a experiência de
+                            jogo.</p>
+                        <div class="team-social-links">
+                            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-card card">
+                        <img src="https://placehold.co/100x100/4CAF50/FFFFFF?text=BUILD" alt="Construtor 1"
+                            class="member-avatar responsive-image rounded-image">
+                        <h3 class="card-title">Construtor Omega</h3>
+                        <p class="card-description">Construtor de Mapas</p>
+                        <p class="member-bio">O mestre das construções, responsável pelas paisagens e estruturas épicas
+                            do servidor.</p>
+                        <div class="team-social-links">
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-card card">
+                        <img src="https://placehold.co/100x100/388E3C/FFFFFF?text=SUP" alt="Suporte 1"
+                            class="member-avatar responsive-image rounded-image">
+                        <h3 class="card-title">Suporte Gamma</h3>
+                        <p class="card-description">Especialista de Suporte</p>
+                        <p class="member-bio">Disponível para auxiliar com todas as dúvidas e problemas técnicos dos
+                            jogadores.</p>
+                        <div class="team-social-links">
+                            <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="join-our-team" class="section-padded fade-in-section">
+            <div class="container text-center">
+                <h2><i class="fas fa-handshake"></i> Junte-se à Nossa Equipe!</h2>
+                <p class="section-description">Você tem paixão por Minecraft e quer fazer a diferença? Junte-se a nós!
+                    Vá para a página de Comunidades para ver mais coisas legais.</p>
+                <a href="comunidade.html" class="btn-primary"><i class="fas fa-map-marker-alt"></i> Checar Página</a>
+            </div>
+        </section>
     </main>
-<!-------------------------------------------------------------------------------------------------------------->
+
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
@@ -203,4 +383,5 @@
     <script src="script.js"></script>
     <script src="elementos.js"></script>
 </body>
+
 </html>
