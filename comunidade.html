@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
@@ -9,7 +10,8 @@
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
     <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!---->
 
     <!--é a breve descrição da sua página que pode aparecer no Google-->
     <meta name="description"
@@ -22,7 +24,7 @@
     <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
     <meta name="robots" content="index, follow">
 
-<!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
     <!--O título que aparece na pré-visualização.-->
     <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
     <!--A descrição que aparece na pré-visualização.-->
@@ -32,13 +34,13 @@
     <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
     <!--A URL da página.-->
     <meta property="og:url" content="https://seusite.com.br/index.html">
-    
+
     <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Mundo Zera's Craft">
     <meta property="og:locale" content="pt_BR">
-    
-<!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@SeuTwitterHandle">
     <meta name="twitter:creator" content="@SeuTwitterHandle">
@@ -47,14 +49,14 @@
         content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
     <!---->
     <meta name="twitter:image"
-
         content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
-<!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
     <meta name="theme-color" content="#347C2F">
-<!-- Links para ScrollReveal e CountUp.js -->
+    <!-- Links para ScrollReveal e CountUp.js -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
 </head>
+
 <body>
 
     <div id="centralMessage" class="central-message"></div>
@@ -70,10 +72,11 @@
                 <ul>
                     <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
                     <li><a href="arquivos.html" class="nav-link" data-page="home">Arquivos</a></li>
+                    <li><a href="comunidade.html" class="nav-link" data-page="home">Comunidade</a></li>
                     <li><a href="eventos.html" class="nav-link" data-page="home">Eventos</a></li>
+                    <li><a href="pixel-legends.html" class="nav-link" data-page="home">Pixel Legends</a></li>
                     <li><a href="equipe.html" class="nav-link" data-page="home">Equipe</a></li>
-                    <li><a href="sobre.html" class="nav-link" data-page="home">Sobre</a></li>
-                    <li><a href="suporte.html" class="nav-link" data-page="home">Suporte</a></li>
+                    <li><a href="canal.html" class="nav-link" data-page="home">Canal Oficial</a></li>
                     <li><a href="recursos.html" class="nav-link" data-page="home">Recursos</a></li>
                 </ul>
             </nav>
@@ -106,16 +109,79 @@
             </div>
         </section>
 
-        <section id="community-spotlight" class="section-padded section-alt-bg fade-in-section">
+        <div class="abas-container">
+            <div class="abas-botoes">
+                <button class="aba-btn active" data-tab="tab1">Sobre Nós</button>
+                <button class="aba-btn" data-tab="tab2">Nosso Servidor</button>
+            </div>
+            <div class="abas-conteudo">
+                <div id="tab1" class="aba-painel active">
+                    <h3>Olá Prazer!</h3>
+                    <p>Somos parte de uma organização dentro da nossa Comunidade de Minecraft no Discord, lá ajudamos
+                        novos membros, e colaboramos uns com os outros, mantendo a união e amizade uns com os outros.
+                    </p>
+                </div>
+                <div id="tab2" class="aba-painel">
+                    <h3>Explicando bem Resumido..</h3>
+                    <p>Nosso Servidor abrange tudo relacionado ao jogo quanto conversas aleatórias também kkkk.. Somos
+                        divertidos e muito atenciosos com engraçadinhos que gostam de ficar zoando dos outros.</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="section-padded section-alt-bg">
+            <div class="container text-center">
+                <h2>O que Nossos Jogadores Dizem</h2>
+                <p class="section-description">A prova de que a nossa comunidade é a melhor!</p>
+                <div class="testimonials-carousel-container">
+                    <div class="testimonials-track">
+                        <div class="testimonial-card card">
+                            <p class="quote">"--"</p>
+                            <div class="author">
+                                <img src="assets/img/avatar1.png" alt="Avatar do Jogador 1">
+                                <div>
+                                    <h4>--"</h4>
+                                    <p class="player-name">@--</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card card">
+                            <p class="quote">"--"</p>
+                            <div class="author">
+                                <img src="assets/img/avatar2.png" alt="Avatar do Jogador 2">
+                                <div>
+                                    <h4>--"</h4>
+                                    <p class="player-name">@--</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card card">
+                            <p class="quote">"--"</p>
+                            <div class="author">
+                                <img src="assets/img/avatar3.png" alt="Avatar do Jogador 3">
+                                <div>
+                                    <h4>--</h4>
+                                    <p class="player-name">@--</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="community-spotlight" class="section-padded fade-in-section">
             <div class="container text-center">
                 <h2><i class="fas fa-star"></i> Destaques da Comunidade</h2>
                 <p class="section-description">Conheça alguns dos nossos membros mais ativos e talentosos!</p>
                 <div class="community-grid max-4-columns">
                     <div class="community-card">
-                        <img src="assets/images/8.parceria/colaboradores/icone.gif" alt="Avatar do Jogador A" class="member-avatar">
+                        <img src="assets/images/8.parceria/colaboradores/icone.gif" alt="Avatar do Jogador A"
+                            class="member-avatar">
                         <h3 class="card-title">Ninguém</h3>
                         <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a> </div>
+                        <a href="" class="btn-link">Ver Perfil</a>
+                    </div>
                     <div class="community-card">
                         <img src="assets/images/cards/member2.png" alt="Avatar da Jogadora B" class="member-avatar">
                         <h3 class="card-title">Ninguém</h3>
@@ -138,7 +204,7 @@
             </div>
         </section>
 
-        <section id="partnerships" class="section-padded fade-in-section">
+        <section id="partnerships" class="section-padded section-alt-bg fade-in-section">
             <div class="container text-center">
                 <h2><i class="fas fa-handshake"></i> Nossas Parcerias</h2>
                 <p class="section-description">Apoie os projetos que nos apoiam! Conheça nossos parceiros.</p>
@@ -146,7 +212,8 @@
                     <div class="partnership-card community-card">
                         <img src="assets/images/cards/partner1.png" alt="Logo do Parceiro 1" class="partnership-logo">
                         <h3 class="card-title">Sem Colaboradores</h3>
-                        <p class="card-description">Servidores de alta performance para a melhor experiência de jogo.</p>
+                        <p class="card-description">Servidores de alta performance para a melhor experiência de jogo.
+                        </p>
                         <a href="" target="_blank" rel="noopener noreferrer" class="btn-primary">Visitar Site</a>
                     </div>
                     <div class="partnership-card community-card">
@@ -159,29 +226,78 @@
             </div>
         </section>
 
-        <section id="official-channels" class="section-padded section-alt-bg fade-in-section">
-            <div class="container text-center">
-                <h2><i class="fas fa-comments"></i> Nossos Canais Oficiais</h2>
-                <p class="section-description">Onde a magia da comunidade acontece! Junte-se a nós e participe das conversas.</p>
-                <div class="community-grid max-3-columns">
-                    <div class="community-card">
-                        <i class="fab fa-discord card-icon"></i>
-                        <h3 class="card-title">Servidor Discord</h3>
-                        <p class="card-description">O coração da nossa comunidade! Converse, receba suporte e participe de eventos exclusivos.</p>
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer" class="btn-primary">Entrar no Discord</a>
-                    </div>
-                    <div class="community-card youtube-card">
-                        <i class="fab fa-youtube card-icon"></i>
-                        <h3 class="card-title">Canal do YouTube</h3>
-                        <p class="card-description">Vídeos de gameplay, tutoriais, destaques e trailers de nossos eventos. Inscreva-se!</p>
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-bottom: 15px;">
-                            <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-                        </div>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer" class="btn-primary">Ver Canal</a>
-                    </div>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">MARKETPLACE CRAFT</h4>
+                    <p>Todos podem postar as suas criações aqui, podendo obter muita presença no servidor pelas criatividades de seus projetos.</p>
                 </div>
             </div>
-        </section>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">CHATS DE MINECRAFT</h4>
+                    <p>Tudo relacionado ao Minecraft, desde conversas, Gameplay, Construção, Redstone, Comandos, PvP e muito mais!</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">CANAIS DE CRIAÇÕES</h4>
+                    <p>Implementação de novas funcionalidades e otimizações de performance.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">MINECOINS (Economia)</h4>
+                    <p>Nosso sistema de economia dentro da Comunidade, onde todos podem obter moedas, pegar uns dos outros e assim vai a história kkkkk</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">WIKIPÉDIAS</h4>
+                    <p>Cada um pode criar um fórum com uma coisa relevante sobre minecraft, como teoria, dica, ideia, tutorial e etc..</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">DIVULGAÇÃO DA COMUNIDADE</h4>
+                    <p>Assim como temos um Canal de Conteúdos Oficiais do Canal (MatheuZera), temos canais de Conteúdos da Comunidade, incluindo um canal de Conteúdos Exclusivos onde apenas cargos especiais podem acessar.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">CARGOS EXCLUSIVOS</h4>
+                    <p>Acho q é o que mais temos, sim kkkk, lá você pode ser bastante reconhecido pelos seus atos e suas criações e o quanto você é ativo também! Tudo Influencia para obter seu cargo.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">PIXEL LEGENDS</h4>
+                    <p>Nosso servidor oficial de Minecraft, lá cada um pode criar a sua Guilda e batalhar uma com as outras, podendo formar alianças e muito mais! Entre no nosso servidor para mais informações.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">EVENTOS</h4>
+                    <p>Temos vários, mas os principais são: MC Team Ultimate (<u>Onde todas as Guildas de Pixel Legends se juntam em um mapa só e batalham PvP até restar apenas uma em pé!</u>) // CraftJam (<u></u>Aqui todos participam de um Torneio de Criação, onde mandamos um Tema específico, então cada um faz uma coisa aleatória de Minecraft que tenha sentido com o Tema abordado pelos Admins, quem tiver mais "Votos" Digamos Assim vençe, cheque a página de Eventos para mais detalhes.</u>)</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-bolha"></div>
+                <div class="timeline-content">
+                    <h4 class="timeline-titulo">E MUITO MAIS!!!</h4>
+                    <p>Esperamos por você e todos os seus Amigos/Amigas!!</p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="main-footer">
@@ -286,4 +402,5 @@
     <script src="script.js"></script>
     <script src="elementos.js"></script>
 </body>
+
 </html>
