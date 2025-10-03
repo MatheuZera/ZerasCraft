@@ -169,6 +169,16 @@ h4 {
     font-family: var(--fonte-subtitulo);
 }
 
+h5 {
+    font-size: 1.4em;
+    font-family: var(--fonte-subtitulo);
+}
+
+h6 {
+    font-size: 1.2em;
+    font-family: var(--fonte-subtitulo);
+}
+
 button {
     font-family: var(--fonte-botao);
 }
@@ -2815,7 +2825,9 @@ h4 {
 .acordeao-container {
     max-width: 800px;
     margin: 50px auto;
+    /* Centraliza o container na tela */
     padding: 0 10px;
+    /* Adiciona um pequeno padding lateral para telas muito pequenas */
 }
 
 /* Item Individual do Acordeão */
@@ -2898,6 +2910,17 @@ h4 {
 .acordeao-painel.show {
     max-height: 500px;
     /* Garante que o conteúdo seja exibido */
+}
+
+@media (max-width: 768px) {
+    /* Ajuste para telas maiores: Centraliza o container */
+    .acordeao-container {
+        max-width: 380px;
+        margin: 10px auto;
+        /* Centraliza o container na tela */
+        padding: 0 0px;
+        /* Adiciona um pequeno padding lateral para telas muito pequenas */
+    }
 }
 
 /* ====================================================================================================================== */
@@ -11012,6 +11035,7 @@ input:checked+.slider:before {
     .layout-principal {
         margin-top: 10px;
     }
+
     .barra-lateral {
         flex-direction: row;
         justify-content: space-around;
@@ -11086,10 +11110,11 @@ input:checked+.slider:before {
 
 /* Layout para telas menores (Mobile) */
 @media (max-width: 768px) {
-   .faq-item {
-    margin: 0 10px;
-   } 
+    .faq-item {
+        margin: 0 10px;
+    }
 }
+
 /*
   ======================================================
   ESTILO DE CARD DE STATUS COM TEXTO
