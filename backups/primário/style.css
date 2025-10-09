@@ -2604,6 +2604,7 @@ QUANDO O CARD PAI ESTÁ EM HOVER */
 
     /* Garante que todos os cards na mesma linha tenham a mesma altura */
     align-items: stretch;
+    margin-bottom: 20px;
 }
 
 /* ====================================================================================================================== */
@@ -6672,111 +6673,6 @@ h4 {
     position: absolute;
     top: 10px;
     right: 20px;
-}
-
-/* ====================================================================================================================== */
-/* CARROSSEL DE TESTEMUNHOS RESPONSIVO */
-/* ====================================================================================================================== */
-.testimonials-carousel-container {
-    position: relative;
-    width: 100%;
-    margin-top: 50px;
-    overflow: hidden;
-}
-
-.testimonials-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.testimonial-card {
-    background-color: var(--cor-card-bg);
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 350px;
-    padding: var(--padding-card);
-    border-radius: var(--border-radius);
-    text-align: left;
-    box-shadow: var(--sombra-leve);
-    border-left: 5px solid var(--cor-destaque);
-    margin: 0 15px;
-    /* Adiciona espaçamento entre os cards */
-}
-
-.testimonial-card .quote {
-    font-style: italic;
-    font-size: 1.1em;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 20px;
-}
-
-.testimonial-card .author {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.testimonial-card .author img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 2px solid var(--cor-primaria);
-}
-
-.testimonial-card .author h4 {
-    font-family: var(--fonte-titulo);
-    margin: 0;
-}
-
-.testimonial-card .author .player-name {
-    color: var(--cor-destaque);
-    font-family: var(--fonte-pixel);
-    font-size: 0.8em;
-}
-
-.carousel-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 10;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-
-.carousel-nav-btn.prev {
-    left: 10px;
-}
-
-.carousel-nav-btn.next {
-    right: 10px;
-}
-
-.carousel-nav-btn:hover {
-    background-color: var(--cor-primaria);
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .testimonials-track {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .testimonial-card {
-        width: 90%;
-        margin-bottom: 20px;
-    }
-
-    .carousel-nav-btn {
-        display: none;
-        /* Oculta os botões em telas pequenas se a rolagem for a principal UX */
-    }
 }
 
 /* ====================================================================================================================== */
