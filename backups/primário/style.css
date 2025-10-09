@@ -2934,6 +2934,7 @@ h4 {
 }
 
 .accordion-item {
+    margin-top: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
     overflow: hidden;
@@ -7697,8 +7698,8 @@ h4 {
     padding: 15px;
     border-radius: var(--border-radius);
     box-shadow: var(--sombra-card-hover);
-    min-width: 300px;
-    max-width: 400px;
+    min-width: 200px;
+    max-width: 100px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -11013,7 +11014,7 @@ input:checked+.slider:before {
 @media (min-width: 769px) {
     .layout-principal {
         flex-direction: row;
-        margin: 60px auto;
+        margin-top: 30px;
     }
 
     .barra-lateral {
