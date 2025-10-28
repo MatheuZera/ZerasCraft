@@ -66,6 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [Músicas] 🎵 Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/Over-the-Waterfall.mp3' },
         { title: ' [Músicas] 🎵 Rat Dance (Jatis)', src: 'assets/audios/musics/musics/Rat-Dance.mp3' },
 
+        // OFFICIAL MUSICS
+        { title: ' [Oficial] ⚡ Créditos', src: 'assets/audios/musics/official/Credits.mp3' },
+
         // RECORDS
         { title: ' [Discos] 💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
         { title: ' [Discos] 💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
