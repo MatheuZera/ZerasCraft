@@ -70,6 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         { title: ' [Músicas] 🎵 over the Waterfall (By Varu)', src: 'assets/audios/musics/others/Over-the-Waterfall.mp3' },
         { title: ' [Músicas] 🎵 Aria Math Lofi', src: 'assets/audios/musics/others/Aria-Math-Lofi.mp3' },
+        { title: ' [Músicas] 🎵 ', src: 'assets/audios/musics/others/Over-the-Waterfall.mp3' },
+
+        { title: ' [Remix] 🔥, src: 'assets/audios/musics/remix/Aria Math.mp3' },
+        { title: ' [Remix] 🔥, src: 'assets/audios/musics/remix/.mp3' },
+        { title: ' [Remix] 🔥, src: 'assets/audios/musics/remix/.mp3' },
+        { title: ' [Remix] 🔥, src: 'assets/audios/musics/remix/.mp3' },
+        { title: ' [Remix] 🔥, src: 'assets/audios/musics/remix/.mp3' },
+        { title: ' [Remix] 🔥, src: 'assets/audios/musics/remix/.mp3' },
     ];
 
     // =====================================
