@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [C418] ⛏️ Taswell', src: 'assets/audios/musics/c418/Taswell.mp3' },
         { title: ' [C418] ⛏️ Wet Hands', src: 'assets/audios/musics/c418/Wet-Hands.mp3' },
 
-        // MINECRAFT MUSICS
+        // CREATIVE MUSICS
         { title: ' [Minecraft] 🍃 Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
         { title: ' [Minecraft] 🍃 Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
         { title: ' [Minecraft] 🍃 Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
@@ -59,15 +59,27 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [Minecraft] 🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
         { title: ' [Minecraft] 🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
 
+        // END MUSICS
+        { title: ' [Oficial] ⚡ Boss', src: 'assets/audios/musics/end/Boss.mp3' },
+        { title: ' [Oficial] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
+        { title: ' [Oficial] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
+
         // MUSICS GENERAL
         { title: ' [Músicas] 🎵 Alone', src: 'assets/audios/musics/musics/Alone.mp3' },
         { title: ' [Músicas] 🎵 Aria Math Lofi', src: 'assets/audios/musics/musics/Aria-Math-Lofi.mp3' },
         { title: ' [Músicas] 🎵 Megalovania (hakkaku)', src: 'assets/audios/musics/musics/Megalovania.mp3' },
         { title: ' [Músicas] 🎵 Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/Over-the-Waterfall.mp3' },
         { title: ' [Músicas] 🎵 Rat Dance (Jatis)', src: 'assets/audios/musics/musics/Rat-Dance.mp3' },
+        { title: ' [Músicas] 🎵 Rat Dance (Jatis)', src: 'assets/audios/musics/musics/TheFatRat_NoteBlock.mp3' },
 
-        // OFFICIAL MUSICS
-        { title: ' [Oficial] ⚡ Créditos', src: 'assets/audios/musics/official/Credits.mp3' },
+        // NETHER MUSICS
+        { title: ' [Oficial] 🌠 Chrysopoeia', src: 'assets/audios/musics/nether/Chrysopoeia.mp3' },
+        { title: ' [Oficial] 🌠 Nether 1', src: 'assets/audios/musics/nether/Nether1.mp3' },
+        { title: ' [Oficial] 🌠 Nether 2', src: 'assets/audios/musics/nether/Nether2.mp3' },
+        { title: ' [Oficial] 🌠 Nether 3', src: 'assets/audios/musics/nether/Nether3.mp3' },
+        { title: ' [Oficial] 🌠 Nether 4', src: 'assets/audios/musics/nether/Nether4.mp3' },
+        { title: ' [Oficial] 🌠 Rubedo', src: 'assets/audios/musics/nether/Rubedo.mp3' },
+        { title: ' [Oficial] 🌠 So Below', src: 'assets/audios/musics/nether/So_Below.mp3' },
 
         // RECORDS
         { title: ' [Discos] 💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
