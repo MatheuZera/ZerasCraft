@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [Remix] 🔥 Aria Math Piano', src: 'assets/audios/musics/remix/Aria-Math-Piano.mp3' },
         { title: ' [Remix] 🔥 Cat Remix (Caution & Remix)', src: 'assets/audios/musics/remix/Cat-Remix.mp3' },
         { title: ' [Remix] 🔥 Minecraft Music Remix', src: 'assets/audios/musics/remix/Minecraft-Remix.mp3' },
-        { title: ' [Remix] 🔥 Pigstep Remix (Trap Music)', src: 'assets/audios/musics/remix/Pigstep-Remix.mp3' },
+        { title: ' [Remix] 🔥 Pigstep Remix (Fury Hearted)', src: 'assets/audios/musics/remix/Pigstep-Remix.mp3' },
         { title: ' [Remix] 🔥 Sweden Remix (Caution & Crisis)', src: 'assets/audios/musics/remix/Sweden.mp3' },
     ];
 
