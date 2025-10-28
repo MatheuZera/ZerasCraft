@@ -22,12 +22,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const musicPlaylist = [
         // BACKGROUND
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
         { title: ' [Background] ✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
         { title: ' [Background] ✨ Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
         { title: ' [Background] ✨ Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
         { title: ' [Background] ✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
         { title: ' [Background] ✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
         { title: ' [Background] ✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
+        { title: ' [Background] ✨ ', src: 'assets/audios/musics/background/.mp3' },
 
         // C418 ALBUM
         { title: ' [C418] ⛏️ Aria Math', src: 'assets/audios/musics/c418/Aria-Math.mp3' },
@@ -62,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // END MUSICS
         { title: ' [End] ⚡ Boss', src: 'assets/audios/musics/end/Boss.mp3' },
         { title: ' [End] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
-        { title: ' [End] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
+        { title: ' [End] ⚡ Fim', src: 'assets/audios/musics/end/End.mp3' },
 
         // MUSICS GENERAL
         { title: ' [Músicas] 🎵 Alone', src: 'assets/audios/musics/musics/Alone.mp3' },
@@ -70,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [Músicas] 🎵 Megalovania (hakkaku)', src: 'assets/audios/musics/musics/Megalovania.mp3' },
         { title: ' [Músicas] 🎵 Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/Over-the-Waterfall.mp3' },
         { title: ' [Músicas] 🎵 Rat Dance (Jatis)', src: 'assets/audios/musics/musics/Rat-Dance.mp3' },
-        { title: ' [Músicas] 🎵 Rat Dance (Jatis)', src: 'assets/audios/musics/musics/TheFatRat_NoteBlock.mp3' },
+        { title: ' [Músicas] 🎵 The Fat Rat - Note Block', src: 'assets/audios/musics/musics/TheFatRat_NoteBlock.mp3' },
 
         // NETHER MUSICS
         { title: ' [Nether] 🌠 Chrysopoeia', src: 'assets/audios/musics/nether/Chrysopoeia.mp3' },
