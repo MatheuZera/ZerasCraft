@@ -56,11 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [Minecraft] 🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
         { title: ' [Minecraft] 🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
 
-        { title: ' [Músicas] ⚡ Alone', src: 'assets/audios/musics/musics/.mp3' },
-        { title: ' [Músicas] ⚡ Aria Math Lofi', src: 'assets/audios/musics/musics/.mp3' },
-        { title: ' [Músicas] ⚡ Megalovania (hakkaku)', src: 'assets/audios/musics/musics/.mp3' },
-        { title: ' [Músicas] ⚡ Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/.mp3' },
-        { title: ' [Músicas] ⚡ Rat Dance (Jatis)', src: 'assets/audios/musics/musics/.mp3' },
+        { title: ' [Músicas] ⚡ Alone', src: 'assets/audios/musics/musics/Alone.mp3' },
+        { title: ' [Músicas] ⚡ Aria Math Lofi', src: 'assets/audios/musics/musics/Arie-Math-Lofi.mp3' },
+        { title: ' [Músicas] ⚡ Megalovania (hakkaku)', src: 'assets/audios/musics/musics/Megalovania.mp3' },
+        { title: ' [Músicas] ⚡ Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/Over-the-Waterfall.mp3' },
+        { title: ' [Músicas] ⚡ Rat Dance (Jatis)', src: 'assets/audios/musics/musics/Rat-Dance.mp3' },
 
         { title: ' [Discos] 💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
         { title: ' [Discos] 💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
