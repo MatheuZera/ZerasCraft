@@ -52,17 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [C418] ⛏️ Wet Hands', src: 'assets/audios/musics/c418/Wet-Hands.mp3' },
 
         // CREATIVE MUSICS
-        { title: ' [Minecraft] 🍃 Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
-        { title: ' [Minecraft] 🍃 Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
-        { title: ' [Minecraft] 🍃 Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
-        { title: ' [Minecraft] 🍃 Creative 4', src: 'assets/audios/musics/minecraft/Creative4.mp3' },
-        { title: ' [Minecraft] 🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
-        { title: ' [Minecraft] 🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
+        { title: ' [Creative] 🍃 Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
+        { title: ' [Creative] 🍃 Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
+        { title: ' [Creative] 🍃 Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
+        { title: ' [Creative] 🍃 Creative 4', src: 'assets/audios/musics/minecraft/Creative4.mp3' },
+        { title: ' [Creative] 🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
+        { title: ' [Creative] 🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
 
         // END MUSICS
-        { title: ' [Oficial] ⚡ Boss', src: 'assets/audios/musics/end/Boss.mp3' },
-        { title: ' [Oficial] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
-        { title: ' [Oficial] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
+        { title: ' [End] ⚡ Boss', src: 'assets/audios/musics/end/Boss.mp3' },
+        { title: ' [End] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
+        { title: ' [End] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
 
         // MUSICS GENERAL
         { title: ' [Músicas] 🎵 Alone', src: 'assets/audios/musics/musics/Alone.mp3' },
@@ -73,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [Músicas] 🎵 Rat Dance (Jatis)', src: 'assets/audios/musics/musics/TheFatRat_NoteBlock.mp3' },
 
         // NETHER MUSICS
-        { title: ' [Oficial] 🌠 Chrysopoeia', src: 'assets/audios/musics/nether/Chrysopoeia.mp3' },
-        { title: ' [Oficial] 🌠 Nether 1', src: 'assets/audios/musics/nether/Nether1.mp3' },
-        { title: ' [Oficial] 🌠 Nether 2', src: 'assets/audios/musics/nether/Nether2.mp3' },
-        { title: ' [Oficial] 🌠 Nether 3', src: 'assets/audios/musics/nether/Nether3.mp3' },
-        { title: ' [Oficial] 🌠 Nether 4', src: 'assets/audios/musics/nether/Nether4.mp3' },
-        { title: ' [Oficial] 🌠 Rubedo', src: 'assets/audios/musics/nether/Rubedo.mp3' },
-        { title: ' [Oficial] 🌠 So Below', src: 'assets/audios/musics/nether/So_Below.mp3' },
+        { title: ' [Nether] 🌠 Chrysopoeia', src: 'assets/audios/musics/nether/Chrysopoeia.mp3' },
+        { title: ' [Nether] 🌠 Nether 1', src: 'assets/audios/musics/nether/Nether1.mp3' },
+        { title: ' [Nether] 🌠 Nether 2', src: 'assets/audios/musics/nether/Nether2.mp3' },
+        { title: ' [Nether] 🌠 Nether 3', src: 'assets/audios/musics/nether/Nether3.mp3' },
+        { title: ' [Nether] 🌠 Nether 4', src: 'assets/audios/musics/nether/Nether4.mp3' },
+        { title: ' [Nether] 🌠 Rubedo', src: 'assets/audios/musics/nether/Rubedo.mp3' },
+        { title: ' [Nether] 🌠 So Below', src: 'assets/audios/musics/nether/So_Below.mp3' },
 
         // RECORDS
         { title: ' [Discos] 💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
@@ -102,6 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: ' [Remix] 🔥 Minecraft Music Remix', src: 'assets/audios/musics/remix/Minecraft-Remix.mp3' },
         { title: ' [Remix] 🔥 Pigstep Remix (Fury Hearted)', src: 'assets/audios/musics/remix/Pigstep-Remix.mp3' },
         { title: ' [Remix] 🔥 Sweden Remix (Caution & Crisis)', src: 'assets/audios/musics/remix/Sweden.mp3' },
+
+        // WATER
+        { title: ' [Water] ⭐ Axolotl', src: 'assets/audios/musics/water/Axolotl.mp3' },
+        { title: ' [Water] ⭐ Deagon Fish', src: 'assets/audios/musics/water/Dragon_Fish.mp3' },
+        { title: ' [Water] ⭐ Shuniji', src: 'assets/audios/musics/water/Shuniji.mp3' },
     ];
 
     // =====================================
