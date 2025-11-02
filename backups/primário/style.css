@@ -67,6 +67,21 @@
     --cor-link-hover: #aed581;
     --cor-btn-text: #FFFFFF;
 
+    --color-primary-green: #4CAF50;
+    /* Verde Vibrante para Destaques (Primária) */
+    --color-secondary-dark: #2C3E50;
+    /* Azul Marinho Escuro/Carvão (Fundo dos Cards) */
+    --color-background: #1A1A1A;
+    /* Preto/Cinza Escuro (Fundo do Body) */
+    --color-text-light: #ECF0F1;
+    /* Branco Quase Puro (Texto Principal) */
+    --color-border-subtle: rgba(255, 255, 255, 0.05);
+    /* Borda muito sutil */
+    --color-background-section: #1F2937;
+    /* Fundo de Seção um pouco mais claro que o body */
+    --color-highlight-blue: #3498DB;
+    /* Novo: Azul para destaque secundário */
+
     /* Dagiti kolor ti neon */
     --neon-flame-color1: #00FF00;
     --neon-flame-color2: #00FFFF;
@@ -74,24 +89,29 @@
     --neon-flame-color2-rgb: 0, 255, 255;
 
     /* Dagiti Font */
-    --fonte-titulo: 'TitleFont', 'Montserrat', sans-serif;
-    --fonte-subtitulo: 'SubTitleFont', 'Montserrat', sans-serif;
-    --fonte-corpo: 'TextFont', 'Roboto', sans-serif;
-    --fonte-mini: 'MiniTextFont', 'Roboto', sans-serif;
-    --fonte-botao: 'ButtonFont', 'Montserrat', sans-serif;
-    --fonte-pixel: 'SubTitleFont', 'Montserrat', sans-serif;
+    --fonte-titulo: 'Inter', 'Montserrat', sans-serif;
+    /* Usando Inter como padrão */
+    --fonte-subtitulo: 'Inter', 'Montserrat', sans-serif;
+    --fonte-corpo: 'Inter', 'Roboto', sans-serif;
+    --fonte-mini: 'Inter', 'Roboto', sans-serif;
+    --fonte-botao: 'Inter', 'Montserrat', sans-serif;
+    --fonte-pixel: 'Inter', 'Montserrat', sans-serif;
 
     /* Spacing ken Sizes */
-    --padding-section: 20px 0;
-    --padding-card: 25px;
-    --gap-grid: 30px;
-    --border-radius: 8px;
+    --padding-section: 0px 0;
+    --padding-card: 20px;
+    /* Reduzido de 25px */
+    --gap-grid: 20px;
+    /* Reduzido de 30px */
+    --border-radius: 6px;
+    /* Levemente reduzido */
     --max-width-content: 1400px;
 
     /* Shadows */
     --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
-    --sombra-card: 0 8px 16px rgba(0, 0, 0, 0.4);
-    --sombra-card-hover: 0 12px 24px rgba(0, 0, 0, 0.6);
+    --sombra-card: 0 5px 10px rgba(0, 0, 0, 0.3);
+    /* Sombra mais leve */
+    --sombra-card-hover: 0 10px 20px rgba(0, 0, 0, 0.5);
 
     /* Transitions */
     --transicao-padrao: all 0.3s ease-in-out;
@@ -114,7 +134,8 @@
 
 body {
     font-family: var(--fonte-corpo);
-    line-height: 1.6;
+    line-height: 1.5;
+    /* Linha de altura ajustada */
     color: var(--cor-texto-claro);
     background-color: var(--cor-fundo-escuro);
     -webkit-font-smoothing: antialiased;
@@ -288,7 +309,7 @@ ul {
 .section-alt-bg {
     background-color: var(--cor-terciaria);
     /* Nasisinit a berde a background */
-    margin-top: 20px;
+    margin-top: 5px;
     /* Adiciona um espaço de 50px acima da seção */
 }
 
@@ -2915,6 +2936,7 @@ h4 {
 }
 
 @media (max-width: 768px) {
+
     /* Ajuste para telas maiores: Centraliza o container */
     .acordeao-container {
         max-width: 380px;
@@ -3436,27 +3458,40 @@ h4 {
 }
 
 /* ====================================================================================================================== */
-/* CARROSSEL DE DEPOIMENTOS */
+/* CARROSSEL DE DEPOIMENTOS (APENAS CSS) */
 /* ====================================================================================================================== */
-/* Estilos para telas grandes (Desktop) */
+
+/* O contêiner onde a rolagem ocorrerá */
 .testimonials-carousel-container {
-    position: relative;
     width: 100%;
     margin-top: 50px;
-    overflow: hidden;
-    padding: 0 40px;
+    
+    /* Configuração principal para rolagem horizontal */
+    overflow-x: scroll; 
+    scroll-behavior: smooth; /* Rolagem suave */
+    scroll-snap-type: x mandatory; /* Garante que a rolagem pare em um ponto de snap */
+    
+    /* Opcional: Estilo de barra de rolagem (pode ser escondido ou estilizado) */
+    -webkit-overflow-scrolling: touch; /* Melhor rolagem em iOS */
+    padding-bottom: 20px; /* Espaço para a barra de rolagem */
 }
 
+/* O contêiner flexível que contém os cards */
 .testimonials-track {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    flex-wrap: nowrap;
+    padding: 0 10px; /* Padding para garantir que os cards nas bordas não fiquem colados */
 }
 
+/* Estilo do Card individual */
 .testimonial-card {
     background-color: var(--cor-card-bg);
     flex-shrink: 0;
-    width: calc(100% / 3 - 20px);
-    margin: 0 10px;
+    
+    /* Snap point: Garante que o scroll pare no início do card */
+    scroll-snap-align: start; 
+    
+    margin: 0 10px; /* Espaçamento entre os cards */
     padding: var(--padding-card);
     border-radius: var(--border-radius);
     text-align: left;
@@ -3482,71 +3517,42 @@ h4 {
     height: 60px;
     border-radius: 50%;
     border: 2px solid var(--cor-primaria);
+    object-fit: cover;
 }
 
 .testimonial-card .author h4 {
-    font-family: var(--fonte-titulo);
+    /* ... outros estilos ... */
     margin: 0;
+    color: var(--cor-texto-claro);
 }
 
 .testimonial-card .author .player-name {
     color: var(--cor-destaque);
-    font-family: var(--fonte-pixel);
     font-size: 0.8em;
+    /* ... outros estilos ... */
 }
 
-.carousel-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 10;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
 
-.carousel-nav-btn.prev {
-    left: 0;
-}
+/* Otimização Responsiva */
 
-.carousel-nav-btn.next {
-    right: 0;
-}
-
-.carousel-nav-btn:hover {
-    background-color: var(--cor-primaria);
-}
-
-/* Otimização para Mobile (layout de coluna) */
-@media (max-width: 768px) {
-    .testimonials-carousel-container {
-        padding: 0 10px;
-        /* Em telas menores, o overflow é visível para o scroll horizontal */
-        /* ou a transição para layout de coluna. */
-        overflow: visible;
-    }
-
-    .testimonials-track {
-        /* Muda para layout de coluna para melhor visualização */
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
+/* Desktop (Mostra 3 Cards por vez) */
+@media (min-width: 993px) {
     .testimonial-card {
-        width: 100%;
-        max-width: 400px;
-        margin: 0;
+        width: calc(100% / 3 - 20px); /* 3 cards na tela - margens */
     }
+}
 
-    .carousel-nav-btn {
-        /* Esconde os botões, pois a navegação é feita por rolagem vertical */
-        display: none;
+/* Tablet (Mostra 2 Cards por vez) */
+@media (min-width: 601px) and (max-width: 992px) {
+    .testimonial-card {
+        width: calc(100% / 2 - 20px); /* 2 cards na tela - margens */
+    }
+}
+
+/* Mobile (Mostra 1 Card por vez) */
+@media (max-width: 600px) {
+    .testimonial-card {
+        width: calc(100% - 20px); /* 1 card na tela - margens */
     }
 }
 
@@ -3597,7 +3603,95 @@ h4 {
     color: var(--cor-destaque);
     margin-top: 20px;
 }
+.testimonial-typing-container {
+    /* Centralização e Aparência do Card */
+    display: inline-block;
+    max-width: 600px;
+    width: 100%;
+    margin-top: 30px;
+    padding: 40px;
+    
+    /* Propriedades do seu Card */
+    background-color: var(--cor-card-bg); /* Ex: #2c2c2c */
+    border-radius: var(--border-radius); /* Ex: 12px */
+    box-shadow: var(--sombra-card);
+    text-align: left;
+    border-top: 5px solid var(--cor-primaria); /* Destaque superior */
 
+    /* Efeito de digitação precisa do espaço do texto, mas com overflow oculto no JS */
+    min-height: 150px; /* Garante que o card não encolha demais */
+    position: relative; /* Para posicionar o cursor */
+}
+
+/* 2. Estilo da Citação */
+.testimonial-typing-container .quote {
+    font-size: 1.3em;
+    font-style: italic;
+    color: var(--cor-texto-claro);
+    margin-bottom: 30px;
+    border-right: 2px solid transparent; /* Essencial para a animação de digitação (largura zero) */
+    overflow: hidden; /* Oculta o texto que está sendo 'digitado' (controlado por JS) */
+    white-space: nowrap; /* Mantém o texto na mesma linha (controlado por JS) */
+}
+
+
+/* 3. Estilo do Cursor Piscante (Blinking Caret) */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--cor-destaque); } /* Ex: #FFEB3B */
+}
+
+.typing-cursor {
+    /* Posiciona o cursor após o texto */
+    position: absolute;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--cor-destaque);
+    
+    /* Aplica a animação */
+    animation: blink-caret 0.8s step-end infinite;
+    /* Ajuste o 'top' para alinhar com a linha de texto */
+    top: 50px; /* Ajuste conforme o padding */
+    left: 40px; /* Alinha com o texto */
+    z-index: 10;
+}
+
+
+/* 4. Estilo do Autor */
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--cor-primaria);
+}
+
+.testimonial-author .author-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.testimonial-author #testimonial-author-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    margin: 0;
+}
+
+.testimonial-author .player-tag {
+    font-size: 0.9em;
+    color: var(--cor-texto-claro);
+    opacity: 0.7;
+    margin: 0;
+}
 /* ====================================================================================================================== */
 /* MINI-CARD DE AVISO */
 /* ====================================================================================================================== */
@@ -3918,98 +4012,133 @@ h4 {
 /* ============================================================= */
 .stepper-container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center; /* Centraliza a coluna no container */
+    padding: 20px 0;
     position: relative;
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 0 10px;
-    /* Adicionado para evitar que o conteúdo grude nas bordas em mobile */
 }
 
-/* Linha de progresso */
+/* 2. LINHA DE CONEXÃO VERTICAL (Vertical Connector Line) */
 .stepper-container::before {
     content: '';
     position: absolute;
-    top: 25px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0.1);
-    z-index: 0;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    /* Centraliza a linha, compensando a largura com transform */
+    transform: translateX(-50%); 
+    width: 2px;
+    background-color: var(--cor-borda-inativa);
+    z-index: 1; /* Fica abaixo dos ícones */
+
+    /* Em telas menores, a linha deve ficar à esquerda */
+    @media (max-width: 768px) {
+        left: 30px;
+        transform: none;
+    }
 }
 
+/* 3. ITEM INDIVIDUAL DO STEPPER */
 .stepper-item {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    flex: 1;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 40px;
     position: relative;
-    z-index: 1;
+    z-index: 2; /* Fica acima da linha */
 }
 
+/* 4. POSICIONAMENTO RESPONSIVO DO ITEM */
+
+/* Para telas grandes (Acima de 768px): Alterna os passos esquerda/direita */
+@media (min-width: 769px) {
+    .stepper-item:nth-child(odd) {
+        flex-direction: row-reverse; /* Ícone à direita, conteúdo à esquerda */
+        text-align: right;
+        padding-right: calc(50% + 30px); /* Espaço para a linha e o ícone */
+    }
+
+    .stepper-item:nth-child(even) {
+        flex-direction: row; /* Ícone à esquerda, conteúdo à direita */
+        text-align: left;
+        padding-left: calc(50% + 30px); /* Espaço para a linha e o ícone */
+    }
+
+    .stepper-item:nth-child(odd) .stepper-content {
+        margin-right: 30px;
+    }
+    .stepper-item:nth-child(even) .stepper-content {
+        margin-left: 30px;
+    }
+}
+
+/* Para telas pequenas (Abaixo de 768px): Todos os passos alinhados à esquerda */
+@media (max-width: 768px) {
+    .stepper-item {
+        flex-direction: row; /* Ícone sempre à esquerda */
+        text-align: left;
+        padding-left: 60px; /* Garante o espaço para o ícone */
+    }
+    
+    .stepper-icon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: none !important; /* Anula o transform do stepper-icon */
+    }
+    
+    .stepper-content {
+        width: 100%;
+    }
+}
+
+/* 5. ESTILO DO ÍCONE (O CÍRCULO) */
 .stepper-icon {
     width: 50px;
     height: 50px;
-    background-color: var(--cor-secundaria);
-    color: var(--cor-texto-claro);
+    background-color: var(--cor-card-bg);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5em;
-    border: 3px solid rgba(255, 255, 255, 0.1);
+    border: 3px solid var(--cor-borda-inativa);
     transition: all 0.3s ease;
+    color: var(--cor-texto-secundario);
+    font-size: 1.2em;
+
+    /* Posicionamento absoluto para que o conteúdo possa se alinhar */
+    position: absolute;
+    top: 0;
+
+    /* Posicionamento em Desktop (Centralizado na Linha Vertical) */
+    @media (min-width: 769px) {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
-.stepper-item.active .stepper-icon {
-    background-color: var(--cor-primaria);
-    color: var(--cor-texto-escuro);
-    border-color: var(--cor-destaque);
-}
-
-.stepper-content {
-    margin-top: 15px;
-}
-
+/* 6. ESTILO DO CONTEÚDO */
 .stepper-content h4 {
-    font-family: var(--fonte-titulo);
-    color: var(--cor-primaria);
-    font-size: 1.3em;
+    font-size: 1.5em;
+    color: var(--cor-texto-claro);
+    margin-bottom: 5px;
 }
 
 .stepper-content p {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--cor-texto-secundario);
+    font-size: 0.95em;
 }
 
-/* Otimização para Mobile */
-@media (max-width: 768px) {
-    .stepper-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 30px;
-        margin: 30px auto;
-    }
+/* 7. ESTADO ATIVO (Active State) */
+.stepper-item.active .stepper-icon {
+    border-color: var(--cor-primaria);
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.3); /* Efeito de brilho */
+}
 
-    .stepper-container::before {
-        height: 100%;
-        width: 3px;
-        top: 0;
-        left: 25px;
-    }
-
-    .stepper-item {
-        flex-direction: row;
-        text-align: left;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .stepper-icon {
-        flex-shrink: 0;
-        /* Impede que o ícone diminua */
-    }
+.stepper-item.active .stepper-content h4 {
+    color: var(--cor-primaria);
 }
 
 /* ====================================================================================================================== */
@@ -9753,36 +9882,35 @@ input:checked+.slider:before {
 /* ====================================================================================================================== */
 /* # DAS PÁGINAS COM UMA ABA DE INDEXAÇÕES DO HTML - SEGUE A TELA DO USUÁRIO */
 /* ====================================================================================================================== */
-.ponto-nav {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin: 0 5px;
-    background-color: var(--cor-bordas);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.ponto-nav.active {
-    background-color: var(--cor-primaria);
-}
+/* ====================================================================================================================== */
+/* ESTILOS PARA O ÍNDICE LATERAL (PAGINA COM ÍNDICE) */
+/* ====================================================================================================================== */
 
 .pagina-com-indice {
+    /* Define o layout principal (índice + conteúdo) como flex */
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 20px;
+    gap: 40px; /* Espaço entre o índice e o conteúdo */
+    padding: 20px; /* Padding interno para afastar das margens do contêiner pai */
 }
 
 .indice-fixo {
+    /* Torna o índice "pegajoso" ao rolar */
     position: sticky;
-    top: 140px;
-    align-self: flex-start;
+    top: 140px; /* Distância do topo da tela (ajuste conforme o tamanho do seu header) */
+    align-self: flex-start; /* Fixa no topo do contêiner flex */
+
+    /* Estilo do Card do Índice */
     padding: 20px;
     background-color: var(--cor-card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--sombra-card);
+    border-radius: 0.75rem; /* Assumindo o valor de var(--border-radius) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Assumindo o valor de var(--sombra-card) */
+    border: 1px solid var(--cor-bordas);
+    
+    /* Controle de Largura */
+    max-width: 200px; /* Largura máxima do índice */
+    min-width: 150px;
+    width: 100%; 
 }
 
 .indice-fixo ul {
@@ -9795,8 +9923,10 @@ input:checked+.slider:before {
     text-decoration: none;
     color: var(--cor-texto-claro);
     display: block;
-    padding: 5px 0;
+    padding: 8px 0; /* Mais padding para melhor clique */
     transition: color 0.3s;
+    font-size: 0.95rem;
+    font-weight: 600; /* Levemente mais ousado */
 }
 
 .indice-fixo a:hover {
@@ -9804,13 +9934,14 @@ input:checked+.slider:before {
 }
 
 .conteudo-principal {
+    /* Permite que o conteúdo ocupe o espaço restante */
     max-width: 800px;
+    flex-grow: 1; 
 }
 
 .conteudo-principal section {
-    min-height: 500px;
-    /* Apenas para demonstração */
-    margin-bottom: 20px;
+    /* Ajuste o min-height conforme a necessidade real de conteúdo, ou remova */
+    min-height: 500px; 
 }
 
 /* ====================================================================================================================== */
@@ -11343,4 +11474,105 @@ card-grande .card-button:hover {
     card-grande {
         width: calc(50% - 10px);
     }
+}
+
+/* ====================================================================================================================== */
+/* CLASSE DE TEMA E COMPONENTES PERSONALIZADOS */
+/* ====================================================================================================================== */
+
+/* Estilo para Headers de Seção (mc-section-header) */
+.mc-section-header {
+    border-left: 5px solid var(--cor-primaria);
+    padding-left: 1rem;
+
+}
+
+/* Classe utilitária para aplicar a cor primária (mc-text-primary) */
+.mc-text-primary {
+    color: var(--cor-primaria);
+}
+
+/* Estilo para as seções (mc-content-section) */
+.mc-content-section {
+    background-color: var(--cor-card-bg);
+    /* Fundo das Seções */
+    padding: 2.5rem;
+    /* p-10 */
+    border-radius: 0.75rem;
+    /* xl */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--cor-bordas);
+
+    /* ADICIONADO: Margem uniforme para afastar de tudo, inclusive das margens da tela e outras seções */
+    margin: 1.5rem;
+}
+
+/* Estilo para Cards (mc-card) - Usado para itens internos e notícias */
+.mc-card {
+    transition: var(--transicao-card-hover);
+    cursor: pointer;
+    border: 1px solid var(--cor-bordas);
+    background-color: var(--cor-card-hover);
+    /* Fundo dos Cards mais interno */
+    border-radius: 0.5rem;
+    /* 8px */
+
+    /* Nota: Removi o margin: 1rem; daqui para evitar margem dupla, 
+       pois os cards já estão em divs com gap no HTML */
+}
+
+.mc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+    background-color: #40546C;
+    /* Um pouco mais claro no hover */
+}
+
+/* Classe utilitária para botões primários */
+.mc-btn-primary {
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+
+.mc-btn-primary:hover {
+    background-color: var(--cor-secundaria);
+    /* Usa a cor secundária para o hover do botão */
+}
+
+/* Estilo para o span de badge de data (mc-badge-date) */
+.mc-badge-date {
+    background-color: var(--cor-terciaria);
+    color: var(--cor-texto-claro);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    /* full */
+    font-weight: 700;
+}
+
+/* Estilo para métricas */
+.mc-metric-value {
+    color: var(--cor-destaque);
+    /* Amarelo/Destaque */
+    font-size: 2.5rem;
+    /* text-4xl */
+    font-weight: 800;
+    /* extra-bold */
+}
+
+/* Estilo para destaque principal (mc-highlight-card) */
+.mc-highlight-card {
+    background: linear-gradient(135deg, var(--cor-card-bg), #1F2937);
+    /* Gradiente sutil */
+    border: 2px solid var(--cor-primaria);
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+    /* Sombra verde */
+}
+
+/* Estilo do Rodapé */
+.mc-footer {
+    border-top: 1px solid var(--cor-bordas);
 }
