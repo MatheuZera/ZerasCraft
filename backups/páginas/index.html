@@ -55,6 +55,9 @@
     <!-- Links para ScrollReveal e CountUp.js -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
@@ -108,24 +111,39 @@
             </div>
         </section>
 
-        <section id="past-events" class="section-padded section-alt-bg fade-in-section">
-            <div class="container text-center">
-                <h2><i class="fas fa-info-circle"></i> NOTÍCIAS!</h2>
-                <p class="section-description">Nada por enquanto..</p>
-                <div class="events-sub-grid max-2-columns">
-                    <div class="event-card">
-                        <img src="assets/images/3.eventos/mctu.jpg" alt="MCTU" class="event-card-image">
-                        <div class="card-content">
-                            <h3 class="card-title">--</h3>
-                            <p class="card-description">--</p>
-                            <p><strong>--</p>
-                            <a href="#" class="btn-link">Ver Destaques</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center margin-top-50">
-                    <a href="#" class="btn-primary"><i class="fas fa-images"></i> Galeria de Eventos</a>
-                </div>
+        <section id="noticias" class="mc-content-section">
+            <h2 class="mc-section-header text-3xl font-bold mb-8 mc-text-primary">
+                <i class="fas fa-newspaper mr-2"></i> Notícias Principais
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <article class="mc-card p-6">
+                    <span class="text-sm font-semibold mc-text-primary mb-2 block">10 de Novembro, 2025</span>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Lançamento da Versão Beta 3.0: O Que Esperar</h3>
+                    <p class="text-gray-400 text-sm mb-4">A próxima grande atualização promete otimizar a performance em
+                        40%
+                        e introduzir novos recursos de colaboração em tempo real.</p>
+                    <a href="#" class="text-sm font-semibold hover:underline" style="color: var(--cor-link);">Leia Mais
+                        &rarr;</a>
+                </article>
+                <article class="mc-card p-6">
+                    <span class="text-sm font-semibold mc-text-primary mb-2 block">05 de Novembro, 2025</span>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Entrevista Exclusiva com o CEO sobre o Futuro da
+                        Plataforma</h3>
+                    <p class="text-gray-400 text-sm mb-4">Nosso CEO compartilha insights sobre a expansão do mercado e
+                        os
+                        planos para integração de inteligência artificial em 2026.</p>
+                    <a href="#" class="text-sm font-semibold hover:underline" style="color: var(--cor-link);">Leia Mais
+                        &rarr;</a>
+                </article>
+                <article class="mc-card p-6 hidden lg:block">
+                    <span class="text-sm font-semibold mc-text-primary mb-2 block">01 de Novembro, 2025</span>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Guia Rápido: Maximizando o Novo Painel de Controle
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Um passo a passo essencial para aproveitar ao máximo as novas
+                        funcionalidades de gerenciamento lançadas este mês.</p>
+                    <a href="#" class="text-sm font-semibold hover:underline" style="color: var(--cor-link);">Leia Mais
+                        &rarr;</a>
+                </article>
             </div>
         </section>
 
