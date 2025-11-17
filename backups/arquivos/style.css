@@ -393,19 +393,23 @@ ul {
     -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centraliza o wrapper (container header-content) */
     align-items: center;
     padding: 50px 0;
     height: 70px;
 }
 
-.header-content-wrapper {
+/* Usando a classe correta do seu HTML: .header-content */
+.container.header-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: var(--max-width-content);
     padding: 0 20px;
+    
+    /* Configuração para PC: Centralizar logo e navegação empilhados */
+    flex-direction: column; 
+    gap: 0px;
 }
 
 .header-logo {
@@ -415,10 +419,10 @@ ul {
     text-transform: uppercase;
     font-weight: bold;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    margin-right: 20px;
     flex-shrink: 0;
 }
 
+/* Regras de animação Neon Glow (sem alteração) */
 .header-logo[data-text]:hover {
     animation: neonGlow 1.5s infinite alternate;
 }
@@ -450,13 +454,33 @@ ul {
         height: 55px;
         padding: 5px 0;
         top: -5px;
-        align-items: center;
+        /* Define a referência para o posicionamento absoluto do logo/botão */
+        position: relative;
+        /* Remove o flexbox padrão para usar o posicionamento absoluto */
+        display: block; 
     }
 
-    .header-content-wrapper {
+    /* O wrapper no mobile apenas garante a largura máxima e padding */
+    .container.header-content {
         padding: 0 5px;
+        flex-direction: row; 
+        /* Remove o flexbox no mobile para o wrapper */
+        display: block; 
     }
 
+    /* Centralização perfeita do Logo no Mobile (em relação ao .main-header) */
+    .header-logo {
+        font-size: 1.2em;
+        margin: 0; /* Remove qualquer margem que possa deslocar */
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%); /* Centraliza 100% no meio */
+        width: auto; 
+        white-space: nowrap;
+    }
+
+    /* Posicionamento absoluto para o botão no Mobile */
     .menu-toggle {
         display: block;
         position: absolute;
@@ -533,11 +557,6 @@ ul {
         background-color: rgba(114, 239, 133, 0.1);
         color: #72ef85;
     }
-
-    .header-logo {
-        font-size: 1.2em;
-        margin-right: 10px;
-    }
 }
 
 /* ========== */
@@ -548,16 +567,21 @@ ul {
         display: none;
     }
 
+    /* Garantir que o logo fique perfeitamente centralizado no desktop */
+    .header-logo {
+        width: 100%; /* Ocupa a largura total do container para a centralização */
+        text-align: center;
+    }
+
     .main-nav {
         display: block;
         position: static;
-        width: auto;
+        width: 100%;
         height: auto;
         background: none;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         box-shadow: none;
-        flex-grow: 1;
     }
 
     .main-nav ul {
@@ -567,7 +591,8 @@ ul {
         margin: 0;
         gap: 20px;
         align-items: center;
-        justify-content: flex-end;
+        /* Centralização dos Links no Desktop */
+        justify-content: center; 
         flex-wrap: nowrap;
         width: 100%;
     }
