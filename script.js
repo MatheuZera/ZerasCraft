@@ -84,47 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('mouseenter', () => playSound(selectSound));
     });
 
-    // =================================================================== -->
-    // CÓDIGO DO SISTEMA DE MÚSICA ÚNICA E INVISÍVEL(NOVO)-- >
-    // Este script inicia a música na primeira interação do usuário. -- >
-    // =================================================================== -->
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log("Sistema de Áudio de Fundo Invisível carregado.");
-
-        const backgroundAudio = document.getElementById('backgroundAudio');
-        let audioStarted = false;
-
-        // Define o volume inicial da música (50% é um bom padrão para fundo)
-        if (backgroundAudio) {
-            // Tenta carregar o último volume, se não, usa 0.5
-            const storedVolume = localStorage.getItem('audioBackgroundVolume');
-            backgroundAudio.volume = storedVolume !== null ? parseFloat(storedVolume) : 0.5;
-        }
-
-        // Função que tenta iniciar a reprodução do áudio
-        const startAudio = () => {
-            if (!backgroundAudio || audioStarted) return;
-
-            // Tenta iniciar a reprodução (necessita de interação do usuário)
-            backgroundAudio.play()
-                .then(() => {
-                    console.log("Música de fundo iniciada com sucesso.");
-                    audioStarted = true;
-                    // Remove os listeners de eventos após o início bem-sucedido
-                    document.body.removeEventListener('click', startAudio);
-                    document.body.removeEventListener('touchstart', startAudio);
-                })
-                .catch(error => {
-                    // Se houver erro (bloqueio do navegador), o listener continua ativo
-                    console.log("Aguardando interação do usuário para iniciar o áudio...");
-                });
-        };
-
-        // Adiciona listeners para os eventos de interação do usuário mais comuns
-        // A música será iniciada no primeiro evento que ocorrer (clique ou toque).
-        document.body.addEventListener('click', startAudio);
-        document.body.addEventListener('touchstart', startAudio);
-
         // ==================================================================================================================================================
         // 1. Menu Hambúrguer (Otimizado para mais páginas)
         // ==================================================================================================================================================

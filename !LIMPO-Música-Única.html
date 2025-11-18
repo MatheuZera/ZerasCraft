@@ -181,6 +181,56 @@
     </button>
     <script src="script.js"></script>
     <script src="elementos.js"></script>
+
+        <!-- =================================================================== -->
+    <!-- CÓDIGO DO SISTEMA DE MÚSICA ÚNICA E INVISÍVEL (FINAL DO HTML) -->
+    <!-- Este é o script simples que garante que a música comece a tocar após a interação do usuário. -->
+    <!-- Ele foi movido para depois dos scripts externos para evitar conflitos de carregamento. -->
+    <!-- =================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Sistema de Áudio de Fundo Invisível carregado.");
+
+            const backgroundAudio = document.getElementById('backgroundAudio');
+            let audioStarted = false;
+            
+            // Verifica se a tag <audio> existe
+            if (!backgroundAudio) {
+                console.error("ERRO: A tag de áudio com ID 'backgroundAudio' não foi encontrada.");
+                return;
+            }
+
+            // Define o volume inicial da música (50% é um bom padrão para fundo)
+            const storedVolume = localStorage.getItem('audioBackgroundVolume');
+            backgroundAudio.volume = storedVolume !== null ? parseFloat(storedVolume) : 0.5;
+
+            // Função que tenta iniciar a reprodução do áudio
+            const startAudio = () => {
+                if (audioStarted) return;
+                
+                // Tenta iniciar a reprodução (necessita de interação do usuário - Autoplay Policy)
+                backgroundAudio.play()
+                    .then(() => {
+                        console.log("Música de fundo iniciada com sucesso. (Autoplay bem-sucedido)");
+                        audioStarted = true;
+                        // Remove os listeners de eventos após o início bem-sucedido
+                        document.body.removeEventListener('click', startAudio);
+                        document.body.removeEventListener('touchstart', startAudio);
+                    })
+                    .catch(error => {
+                        // Se houver erro (bloqueio do navegador), o listener continua ativo
+                        console.log("Aguardando interação do usuário para iniciar o áudio...");
+                        // Se o caminho da música estiver errado, este erro também será capturado.
+                        console.error("Erro ao tentar tocar o áudio:", error.message);
+                    });
+            };
+
+            // Adiciona listeners para os eventos de interação do usuário mais comuns
+            // A música será iniciada no primeiro evento que ocorrer (clique ou toque).
+            document.body.addEventListener('click', startAudio);
+            document.body.addEventListener('touchstart', startAudio);
+        });
+    </script>
 </body>
 
 </html>
