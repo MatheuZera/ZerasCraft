@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
 
     // Define os caminhos e pre-carrega os sons
-    const linkSound = new Audio('../assets/audios/effects/link.mp3');
-    const cardSound = new Audio('../assets/audios/effects/card.mp3');
-    const buttonSound = new Audio('../assets/audios/effects/button.mp3');
-    const selectSound = new Audio('../assets/audios/effects/select.mp3');
-    const buttonClickSound = new Audio('../assets/audios/effects/button-click.mp3');
+    const linkSound = new Audio('effects/link.mp3');
+    const cardSound = new Audio('effects/card.mp3');
+    const buttonSound = new Audio('effects/button.mp3');
+    const selectSound = new Audio('effects/select.mp3');
+    const buttonClickSound = new Audio('effects/button-click.mp3');
 
     linkSound.preload = 'auto';
     cardSound.preload = 'auto';
