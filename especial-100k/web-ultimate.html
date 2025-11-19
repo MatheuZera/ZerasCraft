@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
+    <meta charset="UTF-8">
+    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Zera's Craft - Adobe</title> <!---->
+    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
+    <link rel="icon" href="../assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css"> <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!---->
+
+    <!--é a breve descrição da sua página que pode aparecer no Google-->
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
+    <meta name="keywords"
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
+    <!--Identifica o autor do documento HTML.-->
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
+    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
+    <meta name="robots" content="index, follow">
+
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--O título que aparece na pré-visualização.-->
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
+    <!--A descrição que aparece na pré-visualização.-->
+    <meta property="og:description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
+    <!--A URL da página.-->
+    <meta property="og:url" content="https://seusite.com.br/index.html">
+
+    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mundo Zera's Craft">
+    <meta property="og:locale" content="pt_BR">
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@SeuTwitterHandle">
+    <meta name="twitter:creator" content="@SeuTwitterHandle">
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
+    <meta name="twitter:description"
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
+    <!---->
+    <meta name="twitter:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <meta name="theme-color" content="#347C2F">
+    <!-- Links para ScrollReveal e CountUp.js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div id="centralMessage" class="central-message"></div>
+    <audio id="backgroundAudio"></audio>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="header-logo">Zera's Craft</a>
+            <button class="menu-toggle" aria-label="Abrir menu de navegação">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html" class="nav-link" data-page="home">Início</a></li>
+                    <li><a href="../arquivos.html" class="nav-link" data-page="home">Arquivos</a></li>
+                    <li><a href="../comunidade.html" class="nav-link" data-page="home">Comunidade</a></li>
+                    <li><a href="../eventos.html" class="nav-link" data-page="home">Eventos</a></li>
+                    <li><a href="../pixel-legends.html" class="nav-link" data-page="home">Pixel Legends</a></li>
+                    <li><a href="../equipe.html" class="nav-link" data-page="home">Equipe</a></li>
+                    <li><a href="../canal.html" class="nav-link" data-page="home">Canal Oficial</a></li>
+                    <li><a href="../recursos.html" class="nav-link" data-page="home">Recursos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-------------------------------------------------------------------------------------------------------------->
+    <main>
+        <section class="hero-section">
+            <div class="hero-image-overlay"></div>
+            <div class="hero-content">
+                <div class="server-branding">
+                    <img src="../assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft" class="server-icon">
+                </div>
+                <h1>Mundo Zera's Craft</h1>
+                <p class="hero-subtitle">Pack completo da Adobe para seu PC!</p>
+                <div class="hero-social-links">
+                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank"
+                        rel="noopener noreferrer" class="btn-primary">
+                        <i class="fab fa-discord"></i> Pixel Legends
+                    </a>
+                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
+                        class="btn-primary">
+                        <i class="fab fa-discord"></i> Entrar no Discord
+                    </a>
+                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
+                        class="btn-primary">
+                        <i class="fab fa-youtube"></i> Canal YouTube
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="secao-cards-preta">
+            <secao-titulo>ADOBE WINDOWS ULTIMATE [WEB]</secao-titulo>
+            <p>Todos os Softwares da Adobe para a Versão Web!</p>
+            <p>Não se preocupem pois não tem vírus, são sites oficiais da própria Adobe.</p>
+
+            <div class="cards-container">
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Acrobat.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Acrobat Web</titulo-card>
+                    <texto-card>Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados</texto-card>
+                    <a href="https://acrobat.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Behance.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Behance</titulo-card>
+                    <texto-card>Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados</texto-card>
+                    <a href="https://www.behance.net/" class="btn-download">ACESSAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Color.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Color</titulo-card>
+                    <texto-card>Uma ferramenta para criar, explorar e salvar paletas de cores.</texto-card>
+                    <a href="https://color.adobe.com/pt/create/color-wheel" class="btn-download">ACESSAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Express.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Express</titulo-card>
+                    <texto-card>Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados</texto-card>
+                    <a href="https://new.express.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Firefly.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Firefly</titulo-card>
+                    <texto-card>Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados</texto-card>
+                    <a href="https://firefly.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Fonts.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Fonts</titulo-card>
+                    <texto-card>Uma biblioteca de milhares de fontes que podem ser sincronizadas e usadas em todos os
+                        aplicativos da Creative Cloud.</texto-card>
+                    <a href="https://fonts.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Stock.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Stock</titulo-card>
+                    <texto-card>Um serviço de banco de imagens, vídeos, ilustrações e templates
+                        licenciados.</texto-card>
+                    <a href="https://stock.adobe.com/" class="btn-download">ACESSAR</a>
+                </card-compact>
+            </div>
+        </div>
+
+        <!---------------------------------------------------------------->
+
+        <div class="secao-cards-verde">
+            <secao-titulo>ADOBE WINDOWS ULTIMATE [EDIÇÃO]</secao-titulo>
+            <p>Todos os Aplicativos da Adobe Atualiados e prontinho para download!</p>
+            <p>Não se preocupem pois não tem vírus (Utilizo o Premiere, After Media Encoder e Photoshop e tá deboa).</p>
+            <p>Podem baixar sem
+                problemas.</p>
+
+            <div class="secao-cards-verde">
+                <div class="abas-container">
+                    <div class="abas-botoes">
+                        <button class="aba-btn active" data-tab="tab1">AVISO</button>
+                        <button class="aba-btn" data-tab="tab2">BAIXANDO</button>
+                        <button class="aba-btn" data-tab="tab3">NOTAS</button>
+                    </div>
+                    <div class="abas-conteudo">
+                        <div id="tab1" class="aba-painel active">
+                            <p>Antes de mais nada, instale este arquivo <a
+                                    href="https://drive.usercontent.google.com/download?id=16FFKAabLQ_NUqE5uUOdFWHxeLqyWIONl&export=download&authuser=0">OneClickFirewall</a>
+                                e Execute como Administrador, após <br>isto este sistema estará integrado no seu PC.</p>
+                            <h7>PARA QUE ELE SERVE?</h7>
+                            <p>Bem, este recurso simplesmente desabilita a Internet do Aplicativo ou Software
+                                Selecionado pelo Explorer. Explicarei mais detalhadamente sobre, nesta outra Aba ao
+                                Lado.</p>
+                        </div>
+                        <div id="tab2" class="aba-painel">
+                            <h6>EXPLICANDO..</h6>
+                            <p>
+                                Muito bem, quando abrir o Site para Baixar o seu App da Adobe que estão listadas abaixo
+                                por Cards, você <br>vai baixar em <strong>.rar</strong>, então precisará do Software <a
+                                    href="https://www.win-rar.com/">WinRAR</a> para extraír as Pastas.
+                            </p>
+                            <h6>EXTRAÍNDO E INSTALANDO</h6>
+                            <p>
+                                # Após baixar o WinRAR, apenas instale no seu PC.
+                                <br>Agora com o <strong>.RAR</strong> da sua Adobe que você baixou, extraía com o seu
+                                WinRAR e lhe pedirá uma Senha: <strong>taiwebs.com</strong>, e então após descompactar
+                                verá uma pasta, dentro dela poderá ter (Adobe, Autoplay, Crack+ e alguns Arquivos), eu
+                                não sugiro Executar via <strong>autoplay.exe</strong> pois não sei se é seguro ou não,
+                                então abra a Pasta Adobe e Execute o <strong>Set-up.exe</strong> ou algo semelhante
+                                (Arquivo para Instalar seu App Adobe).
+                            </p>
+                            <h6>SEGURANÇA DO WINDOWS</h6>
+                            <p>
+                                Um aviso que devo falar rapidamente, é Desativar a Segurança do Windows (Proteção em
+                                tempo real, e etc..), pois se você executar e estiver ativada, o Set-up.exe (Arquivo de
+                                instalação do App Adobe), será deletado como medidas de segurança do Windows. Então
+                                Desabilite a Segurança nas Configurações ok.
+                            </p>
+                        </div>
+                        <div id="tab3" class="aba-painel">
+                            <h6>ONE-CLICK-FIREWALL</h6>
+                            <p>
+                                Agora, após instalar NÃO ABRA O APLICATIVO! Calma.. Agora você deve procurar o
+                                Aplicativo Adobe desejado na aba de Iniciar (Tecla Win), e clicar sobre o Aplicativo da
+                                Adobe com o <strong>Botão Direito > Abrir Local do Arquivo > E então aparecerá alguns
+                                    atalhos de seus Aplicativos, clique sobre o Atalho do seu App da Adobe desejado,
+                                    Clique com o Botão Direito > BLOCK INTERNET ACCESS // Agora, clique novamente com o
+                                    Botão Direito > Abrir Local do Arquivo > (E então você entrará no "Diretório" do App
+                                    Adobe que você está Modificando) > E terá um App Adobe já selecionado > Clique com o
+                                    Botão Direito > BLOCK INTERNET ACCESS</strong>
+                            </p>
+                            <h6>APROVEITE.</h6>
+                            <p>
+                                <li>E PRONTO, AGORA FAÇA O MESMO PROCESSO PARA TODOS OS APLICATIVOS ADOBE QUE VOCÊ FOR
+                                BAIXAR E INSTALAR. ESTE PROCEDIMENTO QUE VOCÊ ACABOU DE FAZER, FOI BASICAMENTE DESABILITAR A
+                                INTERNET DO SEU APP ADOBE, ENTÃO MESMO SE ABRIR COM INTERNET, NÃO APARECERÁ AQUELE MENU CHATO DE COMPRAR E COISAS ASSIM!
+                            </li>
+                                <br><li>NÃO SE ESQUEÇA DE ATIVAR A SEGURANÇA DO SEU WINDOWS NOVAMENTE QUANDO TERMINAR, E
+                                DESATIVÁ-LA SOMENTE QUANDO FOR INSTALAR ALGUM DELES NOVAMENTE.</li>
+                                <br><li>LEMBRANDO NOVAMENTE.. QUE NÃO SUGIRO EXECUTAR O autoplay.exe, E SIM O Set-up.exe OU ALGO
+                                ASSIM BLZ? SENHA PARA EXTRAÍR: <strong>taiwebs.com</strong></li>
+                            </P>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cards-container">
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Acrobat.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Acrobat Pró</titulo-card>
+                    <subtitulo-card>Popular</subtitulo-card>
+                    <texto-card>Permite criar, editar, assinar e gerenciar documentos PDF.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/001en-adobe-acrobat-pro-458-3430.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/After-Effects.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe After Effects</titulo-card>
+                    <subtitulo-card>Popular</subtitulo-card>
+                    <texto-card>Focado em motion graphics e efeitos visuais, permitindo criar animações complexas,
+                        títulos de filmes e efeitos especiais.</texto-card>
+                    <a href="https://br0wsers.com/detail/product/nglb6jyUk9LEig7wBDBekwvt4-2793-16448.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Animate.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Animate</titulo-card>
+                    <subtitulo-card>Mediano</subtitulo-card>
+                    <texto-card>Utilizado para criar animações vetoriais interativas, como jogos, anúncios e desenhos
+                        animados para a web e plataformas móveis.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/fFydanbqG3tJejBlgA0fplSch-1221-15543.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Audition.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Audition</titulo-card>
+                    <subtitulo-card>Popular</subtitulo-card>
+                    <texto-card>Um editor de áudio profissional para gravação, mixagem e restauração de áudio para
+                        projetos de vídeo, podcast e música.</texto-card>
+                    <a href="https://br0wsers.com/detail/product/ZKl0nlYEau8eqkbRyJvT64scG-1246-15533.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Bridge.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Bridge</titulo-card>
+                    <subtitulo-card>Mediano</subtitulo-card>
+                    <texto-card>Um gerenciador de ativos de mídia que organiza e ajuda a visualizar arquivos de projetos
+                        criativos antes de abri-los em outros aplicativos da Adobe.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/eaibX41DtUPd8kOQ5Y2j0nqBC-1338-16937.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Camera-Raw.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Camera Raw</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>Um plugin que permite a edição de imagens em formato RAW (o "negativo digital") dentro
+                        do Photoshop e do Bridge.</texto-card>
+                    <a href="https://br0wsers.com/detail/product/3c9435015579e19dc2fb6312a2258ab5-785-4624.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Dimension.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Dimension</titulo-card>
+                    <subtitulo-card>Mediano</subtitulo-card>
+                    <texto-card>Ele foi desenvolvido para designers gráficos que não têm experiência avançada com 3D,
+                        permitindo que eles combinem facilmente modelos 3D, materiais, texturas e imagens 2D em uma
+                        única cena.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/9bEHdZhxc5f4ew26XzdbCuq4m-254-6925.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Fresco.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Fresco</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>proporciona uma experiência de pintura e desenho completamente natural. Para pintores,
+                        ilustradores, artistas, cartunistas, desenhistas e qualquer pessoa que queira descobrir – ou
+                        redescobrir – a alegria de pintar e desenhar.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/adobe-fresco-3453-11537.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/GenP.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe GenP</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>Este não é um produto oficial da Adobe; é um tipo de ativador de software que modifica
+                        os aplicativos para ignorar a necessidade de licença, o que é ilegal e pode representar um risco
+                        de seguranç</texto-card>
+                    <a href="hhttps://br0wsers.com/blog/detail/a0icqnG3utkRdbPBlMkft95Qv-9964-18722.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/InCopy.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe InCopy</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>Ele permite que você escreva e revise o conteúdo de um documento ao mesmo tempo em que o
+                        designer trabalha no layout da página usando o InDesign, sem que um atrapalhe o
+                        outro.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/3tgfaaFKsdWSTA8wgB6Bpu1RA-3894-18728.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/InDesign.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe InDesign</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>Software de editoração eletrônica para criar layouts de páginas, como revistas, jornais,
+                        e-books e folhetos.</texto-card>
+                    <a href="https://br0wsers.com/detail/product/6ryg3REKBJz1pXe7sZIvSusmD-334-16901.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Illustrator.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Illustrator</titulo-card>
+                    <subtitulo-card>Mediano</subtitulo-card>
+                    <texto-card>Ferramenta de criação de gráficos vetoriais, ideal para logotipos, ícones, ilustrações e
+                        tipografia que podem ser redimensionados infinitamente sem perda de qualidade.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/PyDsc1CEYSBtqoTHjwK6zhX8o-749-15771.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Lightroom.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Lightroom</titulo-card>
+                    <subtitulo-card>Mediano</subtitulo-card>
+                    <texto-card>Ferramenta dedicada para fotógrafos gerenciarem e editarem grandes bibliotecas de fotos,
+                        com foco no processamento de imagens RAW.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/6qx1f3naJuETyupsjfHAa9s5Q-734-15637.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Media-Encoder.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Media Encoder</titulo-card>
+                    <subtitulo-card>Popular</subtitulo-card>
+                    <texto-card>Um codificador de vídeo que trabalha em conjunto com outros programas da Adobe para
+                        converter arquivos para diversos formatos, otimizando o fluxo de trabalho.</texto-card>
+                    <a href="https://br0wsers.com/detail/product/umEPhaOBCpb2fskSmVCw5AWcF-1360-13774.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Photoshop.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Photoshop</titulo-card>
+                    <subtitulo-card>Popular</subtitulo-card>
+                    <texto-card>O padrão da indústria para edição de imagens e manipulação de fotos, usado para retocar,
+                        compor e criar designs digitais.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/uDmsixeD9080EdPRnLhMUCzAl-737-18485.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Premiere.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Premiere Pró</titulo-card>
+                    <subtitulo-card>Popular</subtitulo-card>
+                    <texto-card>Essencial para a edição de vídeo, usado para cortar, montar, e aprimorar produções de
+                        vídeo de todos os tipos.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/adobe-premiere-pro-0021-1361-14616.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Premiere-Rush.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Premiere Rush</titulo-card>
+                    <subtitulo-card>Mediano</subtitulo-card>
+                    <texto-card>Ferramenta dedicada para fotógrafos gerenciarem e editarem grandes bibliotecas de fotos,
+                        com foco no processamento de imagens RAW.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/adobe-premiere-rush-cc-3866-14611.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Substance-3d-Designer.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Substance 3D Designer</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>Com ele, você pode criar texturas e materiais complexos do zero, usando um sistema de
+                        nós (nós interligados que geram o resultado final</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/syqv3tsJlpZrHXYwKmtkoC3G7-908-17894.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Substance-3d-Painter.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Susbtance 3D Painter</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>Ele funciona como um "Photoshop para modelos 3D". Você pode importar um objeto 3D e
+                        pintar diretamente sobre sua superfície, adicionando detalhes como sujeira, ferrugem, arranhões
+                        ou até mesmo a textura da pele de um personagem</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/jewngIVgTlv6CW0ykHbzhsbwG-1279-5674.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Substance-3d-Sampler.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Substance 3D Sampler</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>O Sampler é um aplicativo de criação de materiais a partir de fotos. Ele simplifica o
+                        processo de transformar uma foto real em uma textura 3D</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/dl8Pk2a3Xwv9As1szuqgoRBtp-6625-21844.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/Substance-3d-Stager.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe Substance 3D Stager</titulo-card>
+                    <subtitulo-card>Pouco Falado</subtitulo-card>
+                    <texto-card>Você pode importar modelos 3D, aplicar os materiais que você criou no Designer ou no
+                        Sampler, e depois ajustar a iluminação, a câmera e a composição da cena para criar uma imagem
+                        final fotorrealista</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/lNChpyYoxwLbO0lf217tI2oEc-6624-13695.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+
+                <card-compact>
+                    <icone-imagem>
+                        <img src="adobe/XD.png" alt="Imagem">
+                    </icone-imagem>
+                    <titulo-card>Adobe XD</titulo-card>
+                    <subtitulo-card>Mediano</subtitulo-card>
+                    <texto-card>Usado para design e prototipagem de interfaces de usuário (UI) e experiência de usuário
+                        (UX) para aplicativos móveis e websites.</texto-card>
+                    <a href="https://br0wsers.com/blog/detail/tJnfCz6vSd07YoCQ9m1EMkD32-776-8166.html"
+                        class="btn-download">BAIXAR</a>
+                </card-compact>
+            </div>
+        </div>
+    </main>
+    <!-------------------------------------------------------------------------------------------------------------->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
+                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa
+                        comunidade vibrante.</p>
+                    <div class="footer-social-links">
+                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
+                            aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
+                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column footer-nav-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="../index.html">Início</a></li>
+                        <li><a href="../arquivos.html">Arquivos</a></li>
+                        <li><a href="../comunidade.html">Comunidade</a></li>
+                        <li><a href="../eventos.html">Eventos</a></li>
+                        <li><a href="../pixel-legends.html">Pixel Legends</a></li>
+                        <li><a href="../equipe.html">Equipe</a></li>
+                        <li><a href="../canal.html">Canal Oficial</a></li>
+                        <li><a href="../recursos.html">Recursos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-contact">
+                    <h4>Contato & Suporte</h4>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a>
+                    </p>
+                    <p><i class="fas fa-headset"></i> <a
+                            href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via
+                            Discord</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
+                </div>
+                <div class="footer-column footer-newsletter">
+                    <h4>Fique por Dentro</h4>
+                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
+                    <form class="newsletter-form">
+                        <div class="text-center margin-top-20">
+                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501"
+                                class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+            </div>
+        </div>
+        <div class="audio-control-bar">
+            <div class="container audio-control-content">
+                <div class="music-player-details">
+                    <span id="musicTitleDisplay">Clique para Tocar</span>
+                    <div class="progress-bar-and-times">
+                        <span id="currentTimeDisplay" class="time-display">0:00</span>
+                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
+                        <span id="durationDisplay" class="time-display">0:00</span>
+                    </div>
+                </div>
+                <div class="music-playback-controls">
+                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    <button id="audioControlButton" class="music-button main-play-pause-button"
+                        aria-label="Tocar/Pausar música">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                </div>
+                <div>
+                    <button id="audioModeButton" class="music-button" aria-label="Modo de reprodução">
+                        <i class="fas fa-repeat"></i>
+                    </button>
+                </div>
+                <div class="volume-container">
+                    <button id="volumeButton" class="music-button volume-button" aria-label="Controle de volume">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <input type="range" id="volumeSlider" class="audio-progress-bar volume-slider" min="0" max="1"
+                        step="0.01" value="1">
+                </div>
+                <div class="playback-speed-control">
+                    <select id="playbackSpeed" class="playback-speed-select">
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="../script.js"></script>
+    <script src="../reprodutor-musica.js"></script>
+    <script src="../elementos.js"></script>
+</body>
+
+</html>
