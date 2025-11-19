@@ -393,7 +393,8 @@ ul {
     -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
     display: flex;
-    justify-content: center; /* Centraliza o wrapper (container header-content) */
+    justify-content: center;
+    /* Centraliza o wrapper (container header-content) */
     align-items: center;
     padding: 50px 0;
     height: 70px;
@@ -406,9 +407,9 @@ ul {
     width: 100%;
     max-width: var(--max-width-content);
     padding: 0 20px;
-    
+
     /* Configuração para PC: Centralizar logo e navegação empilhados */
-    flex-direction: column; 
+    flex-direction: column;
     gap: 0px;
 }
 
@@ -457,26 +458,28 @@ ul {
         /* Define a referência para o posicionamento absoluto do logo/botão */
         position: relative;
         /* Remove o flexbox padrão para usar o posicionamento absoluto */
-        display: block; 
+        display: block;
     }
 
     /* O wrapper no mobile apenas garante a largura máxima e padding */
     .container.header-content {
         padding: 0 5px;
-        flex-direction: row; 
+        flex-direction: row;
         /* Remove o flexbox no mobile para o wrapper */
-        display: block; 
+        display: block;
     }
 
     /* Centralização perfeita do Logo no Mobile (em relação ao .main-header) */
     .header-logo {
         font-size: 1.2em;
-        margin: 0; /* Remove qualquer margem que possa deslocar */
+        margin: 0;
+        /* Remove qualquer margem que possa deslocar */
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%); /* Centraliza 100% no meio */
-        width: auto; 
+        transform: translate(-50%, -50%);
+        /* Centraliza 100% no meio */
+        width: auto;
         white-space: nowrap;
     }
 
@@ -569,7 +572,8 @@ ul {
 
     /* Garantir que o logo fique perfeitamente centralizado no desktop */
     .header-logo {
-        width: 100%; /* Ocupa a largura total do container para a centralização */
+        width: 100%;
+        /* Ocupa a largura total do container para a centralização */
         text-align: center;
     }
 
@@ -592,7 +596,7 @@ ul {
         gap: 20px;
         align-items: center;
         /* Centralização dos Links no Desktop */
-        justify-content: center; 
+        justify-content: center;
         flex-wrap: nowrap;
         width: 100%;
     }
@@ -3490,33 +3494,39 @@ h4 {
 .testimonials-carousel-container {
     width: 100%;
     margin-top: 50px;
-    
+
     /* Configuração principal para rolagem horizontal */
-    overflow-x: scroll; 
-    scroll-behavior: smooth; /* Rolagem suave */
-    scroll-snap-type: x mandatory; /* Garante que a rolagem pare em um ponto de snap */
-    
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    /* Rolagem suave */
+    scroll-snap-type: x mandatory;
+    /* Garante que a rolagem pare em um ponto de snap */
+
     /* Opcional: Estilo de barra de rolagem (pode ser escondido ou estilizado) */
-    -webkit-overflow-scrolling: touch; /* Melhor rolagem em iOS */
-    padding-bottom: 20px; /* Espaço para a barra de rolagem */
+    -webkit-overflow-scrolling: touch;
+    /* Melhor rolagem em iOS */
+    padding-bottom: 20px;
+    /* Espaço para a barra de rolagem */
 }
 
 /* O contêiner flexível que contém os cards */
 .testimonials-track {
     display: flex;
     flex-wrap: nowrap;
-    padding: 0 10px; /* Padding para garantir que os cards nas bordas não fiquem colados */
+    padding: 0 10px;
+    /* Padding para garantir que os cards nas bordas não fiquem colados */
 }
 
 /* Estilo do Card individual */
 .testimonial-card {
     background-color: var(--cor-card-bg);
     flex-shrink: 0;
-    
+
     /* Snap point: Garante que o scroll pare no início do card */
-    scroll-snap-align: start; 
-    
-    margin: 0 10px; /* Espaçamento entre os cards */
+    scroll-snap-align: start;
+
+    margin: 0 10px;
+    /* Espaçamento entre os cards */
     padding: var(--padding-card);
     border-radius: var(--border-radius);
     text-align: left;
@@ -3563,21 +3573,24 @@ h4 {
 /* Desktop (Mostra 3 Cards por vez) */
 @media (min-width: 993px) {
     .testimonial-card {
-        width: calc(100% / 3 - 20px); /* 3 cards na tela - margens */
+        width: calc(100% / 3 - 20px);
+        /* 3 cards na tela - margens */
     }
 }
 
 /* Tablet (Mostra 2 Cards por vez) */
 @media (min-width: 601px) and (max-width: 992px) {
     .testimonial-card {
-        width: calc(100% / 2 - 20px); /* 2 cards na tela - margens */
+        width: calc(100% / 2 - 20px);
+        /* 2 cards na tela - margens */
     }
 }
 
 /* Mobile (Mostra 1 Card por vez) */
 @media (max-width: 600px) {
     .testimonial-card {
-        width: calc(100% - 20px); /* 1 card na tela - margens */
+        width: calc(100% - 20px);
+        /* 1 card na tela - margens */
     }
 }
 
@@ -3628,6 +3641,7 @@ h4 {
     color: var(--cor-destaque);
     margin-top: 20px;
 }
+
 .testimonial-typing-container {
     /* Centralização e Aparência do Card */
     display: inline-block;
@@ -3635,17 +3649,22 @@ h4 {
     width: 100%;
     margin-top: 30px;
     padding: 40px;
-    
+
     /* Propriedades do seu Card */
-    background-color: var(--cor-card-bg); /* Ex: #2c2c2c */
-    border-radius: var(--border-radius); /* Ex: 12px */
+    background-color: var(--cor-card-bg);
+    /* Ex: #2c2c2c */
+    border-radius: var(--border-radius);
+    /* Ex: 12px */
     box-shadow: var(--sombra-card);
     text-align: left;
-    border-top: 5px solid var(--cor-primaria); /* Destaque superior */
+    border-top: 5px solid var(--cor-primaria);
+    /* Destaque superior */
 
     /* Efeito de digitação precisa do espaço do texto, mas com overflow oculto no JS */
-    min-height: 150px; /* Garante que o card não encolha demais */
-    position: relative; /* Para posicionar o cursor */
+    min-height: 150px;
+    /* Garante que o card não encolha demais */
+    position: relative;
+    /* Para posicionar o cursor */
 }
 
 /* 2. Estilo da Citação */
@@ -3654,16 +3673,26 @@ h4 {
     font-style: italic;
     color: var(--cor-texto-claro);
     margin-bottom: 30px;
-    border-right: 2px solid transparent; /* Essencial para a animação de digitação (largura zero) */
-    overflow: hidden; /* Oculta o texto que está sendo 'digitado' (controlado por JS) */
-    white-space: nowrap; /* Mantém o texto na mesma linha (controlado por JS) */
+    border-right: 2px solid transparent;
+    /* Essencial para a animação de digitação (largura zero) */
+    overflow: hidden;
+    /* Oculta o texto que está sendo 'digitado' (controlado por JS) */
+    white-space: nowrap;
+    /* Mantém o texto na mesma linha (controlado por JS) */
 }
 
 
 /* 3. Estilo do Cursor Piscante (Blinking Caret) */
 @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--cor-destaque); } /* Ex: #FFEB3B */
+    from, to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: var(--cor-destaque);
+    }
+
+    /* Ex: #FFEB3B */
 }
 
 .typing-cursor {
@@ -3672,12 +3701,14 @@ h4 {
     font-size: 1.3em;
     font-weight: bold;
     color: var(--cor-destaque);
-    
+
     /* Aplica a animação */
     animation: blink-caret 0.8s step-end infinite;
     /* Ajuste o 'top' para alinhar com a linha de texto */
-    top: 50px; /* Ajuste conforme o padding */
-    left: 40px; /* Alinha com o texto */
+    top: 50px;
+    /* Ajuste conforme o padding */
+    left: 40px;
+    /* Alinha com o texto */
     z-index: 10;
 }
 
@@ -3717,6 +3748,7 @@ h4 {
     opacity: 0.7;
     margin: 0;
 }
+
 /* ====================================================================================================================== */
 /* MINI-CARD DE AVISO */
 /* ====================================================================================================================== */
@@ -4038,7 +4070,8 @@ h4 {
 .stepper-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza a coluna no container */
+    align-items: center;
+    /* Centraliza a coluna no container */
     padding: 20px 0;
     position: relative;
 }
@@ -4051,10 +4084,11 @@ h4 {
     bottom: 0;
     left: 50%;
     /* Centraliza a linha, compensando a largura com transform */
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     width: 2px;
     background-color: var(--cor-borda-inativa);
-    z-index: 1; /* Fica abaixo dos ícones */
+    z-index: 1;
+    /* Fica abaixo dos ícones */
 
     /* Em telas menores, a linha deve ficar à esquerda */
     @media (max-width: 768px) {
@@ -4070,7 +4104,8 @@ h4 {
     width: 100%;
     margin-bottom: 40px;
     position: relative;
-    z-index: 2; /* Fica acima da linha */
+    z-index: 2;
+    /* Fica acima da linha */
 }
 
 /* 4. POSICIONAMENTO RESPONSIVO DO ITEM */
@@ -4078,20 +4113,25 @@ h4 {
 /* Para telas grandes (Acima de 768px): Alterna os passos esquerda/direita */
 @media (min-width: 769px) {
     .stepper-item:nth-child(odd) {
-        flex-direction: row-reverse; /* Ícone à direita, conteúdo à esquerda */
+        flex-direction: row-reverse;
+        /* Ícone à direita, conteúdo à esquerda */
         text-align: right;
-        padding-right: calc(50% + 30px); /* Espaço para a linha e o ícone */
+        padding-right: calc(50% + 30px);
+        /* Espaço para a linha e o ícone */
     }
 
     .stepper-item:nth-child(even) {
-        flex-direction: row; /* Ícone à esquerda, conteúdo à direita */
+        flex-direction: row;
+        /* Ícone à esquerda, conteúdo à direita */
         text-align: left;
-        padding-left: calc(50% + 30px); /* Espaço para a linha e o ícone */
+        padding-left: calc(50% + 30px);
+        /* Espaço para a linha e o ícone */
     }
 
     .stepper-item:nth-child(odd) .stepper-content {
         margin-right: 30px;
     }
+
     .stepper-item:nth-child(even) .stepper-content {
         margin-left: 30px;
     }
@@ -4100,18 +4140,21 @@ h4 {
 /* Para telas pequenas (Abaixo de 768px): Todos os passos alinhados à esquerda */
 @media (max-width: 768px) {
     .stepper-item {
-        flex-direction: row; /* Ícone sempre à esquerda */
+        flex-direction: row;
+        /* Ícone sempre à esquerda */
         text-align: left;
-        padding-left: 60px; /* Garante o espaço para o ícone */
+        padding-left: 60px;
+        /* Garante o espaço para o ícone */
     }
-    
+
     .stepper-icon {
         position: absolute;
         left: 0;
         top: 0;
-        transform: none !important; /* Anula o transform do stepper-icon */
+        transform: none !important;
+        /* Anula o transform do stepper-icon */
     }
-    
+
     .stepper-content {
         width: 100%;
     }
@@ -4159,7 +4202,8 @@ h4 {
     border-color: var(--cor-primaria);
     background-color: var(--cor-primaria);
     color: var(--cor-texto-claro);
-    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.3); /* Efeito de brilho */
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.3);
+    /* Efeito de brilho */
 }
 
 .stepper-item.active .stepper-content h4 {
@@ -9915,27 +9959,34 @@ input:checked+.slider:before {
     /* Define o layout principal (índice + conteúdo) como flex */
     display: flex;
     justify-content: center;
-    gap: 40px; /* Espaço entre o índice e o conteúdo */
-    padding: 20px; /* Padding interno para afastar das margens do contêiner pai */
+    gap: 40px;
+    /* Espaço entre o índice e o conteúdo */
+    padding: 20px;
+    /* Padding interno para afastar das margens do contêiner pai */
 }
 
 .indice-fixo {
     /* Torna o índice "pegajoso" ao rolar */
     position: sticky;
-    top: 140px; /* Distância do topo da tela (ajuste conforme o tamanho do seu header) */
-    align-self: flex-start; /* Fixa no topo do contêiner flex */
+    top: 140px;
+    /* Distância do topo da tela (ajuste conforme o tamanho do seu header) */
+    align-self: flex-start;
+    /* Fixa no topo do contêiner flex */
 
     /* Estilo do Card do Índice */
     padding: 20px;
     background-color: var(--cor-card-bg);
-    border-radius: 0.75rem; /* Assumindo o valor de var(--border-radius) */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Assumindo o valor de var(--sombra-card) */
+    border-radius: 0.75rem;
+    /* Assumindo o valor de var(--border-radius) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    /* Assumindo o valor de var(--sombra-card) */
     border: 1px solid var(--cor-bordas);
-    
+
     /* Controle de Largura */
-    max-width: 200px; /* Largura máxima do índice */
+    max-width: 200px;
+    /* Largura máxima do índice */
     min-width: 150px;
-    width: 100%; 
+    width: 100%;
 }
 
 .indice-fixo ul {
@@ -9948,10 +9999,12 @@ input:checked+.slider:before {
     text-decoration: none;
     color: var(--cor-texto-claro);
     display: block;
-    padding: 8px 0; /* Mais padding para melhor clique */
+    padding: 8px 0;
+    /* Mais padding para melhor clique */
     transition: color 0.3s;
     font-size: 0.95rem;
-    font-weight: 600; /* Levemente mais ousado */
+    font-weight: 600;
+    /* Levemente mais ousado */
 }
 
 .indice-fixo a:hover {
@@ -9961,12 +10014,12 @@ input:checked+.slider:before {
 .conteudo-principal {
     /* Permite que o conteúdo ocupe o espaço restante */
     max-width: 800px;
-    flex-grow: 1; 
+    flex-grow: 1;
 }
 
 .conteudo-principal section {
     /* Ajuste o min-height conforme a necessidade real de conteúdo, ou remova */
-    min-height: 500px; 
+    min-height: 500px;
 }
 
 /* ====================================================================================================================== */
