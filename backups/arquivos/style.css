@@ -174,7 +174,7 @@ h6 {
 }
 
 h1 {
-    font-size: 3.5em;
+    font-size: 1.5em;
 }
 
 h2 {
@@ -182,22 +182,22 @@ h2 {
 }
 
 h3 {
-    font-size: 2em;
+    font-size: 3.2em;
     font-family: var(--fonte-subtitulo);
 }
 
 h4 {
-    font-size: 1.6em;
+    font-size: 4em;
     font-family: var(--fonte-subtitulo);
 }
 
 h5 {
-    font-size: 1.4em;
+    font-size: 5em;
     font-family: var(--fonte-subtitulo);
 }
 
 h6 {
-    font-size: 1.2em;
+    font-size: 5.5em;
     font-family: var(--fonte-subtitulo);
 }
 
