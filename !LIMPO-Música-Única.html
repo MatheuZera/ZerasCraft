@@ -172,7 +172,8 @@
                 Tag <audio> com 'loop' para tocar em repetição.
                 *** IMPORTANTE: Ajuste o caminho 'src' para o seu arquivo de música real! ***
             -->
-            <audio id="backgroundAudio" src="assets/audios/musics/musicas-unicas/musica.mp3" preload="auto" loop></audio>
+            <audio id="backgroundAudio" src="assets/audios/musics/musicas-unicas/musica.mp3" preload="auto"
+                loop></audio>
         </div>
     </footer>
 
@@ -182,7 +183,7 @@
     <script src="script.js"></script>
     <script src="elementos.js"></script>
 
-        <!-- =================================================================== -->
+    <!-- =================================================================== -->
     <!-- CÓDIGO DO SISTEMA DE MÚSICA ÚNICA E INVISÍVEL (FINAL DO HTML) -->
     <!-- Este é o script simples que garante que a música comece a tocar após a interação do usuário. -->
     <!-- Ele foi movido para depois dos scripts externos para evitar conflitos de carregamento. -->
@@ -193,7 +194,7 @@
 
             const backgroundAudio = document.getElementById('backgroundAudio');
             let audioStarted = false;
-            
+
             // Verifica se a tag <audio> existe
             if (!backgroundAudio) {
                 console.error("ERRO: A tag de áudio com ID 'backgroundAudio' não foi encontrada.");
@@ -207,7 +208,7 @@
             // Função que tenta iniciar a reprodução do áudio
             const startAudio = () => {
                 if (audioStarted) return;
-                
+
                 // Tenta iniciar a reprodução (necessita de interação do usuário - Autoplay Policy)
                 backgroundAudio.play()
                     .then(() => {
