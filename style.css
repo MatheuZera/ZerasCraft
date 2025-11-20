@@ -14,24 +14,21 @@
 */
 
 @font-face {
-    font-family: 'TitleFontCustom';
-    /* Nome alterado para evitar conflito com var */
+    font-family: 'TitleFontCustom'; /* Nome alterado para evitar conflito com var */
     src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'ButtonFontCustom';
-    /* Nome alterado para evitar conflito com var */
+    font-family: 'ButtonFontCustom'; /* Nome alterado para evitar conflito com var */
     src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'SubTitleFontCustom';
-    /* Nome alterado para evitar conflito com var */
+    font-family: 'SubTitleFontCustom'; /* Nome alterado para evitar conflito com var */
     /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
     src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
@@ -39,8 +36,7 @@
 }
 
 @font-face {
-    font-family: 'TextFontCustom';
-    /* Nome alterado para evitar conflito com var */
+    font-family: 'TextFontCustom'; /* Nome alterado para evitar conflito com var */
     /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
     src: url('assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
     font-weight: normal;
@@ -48,8 +44,7 @@
 }
 
 @font-face {
-    font-family: 'MiniTextFontCustom';
-    /* Nome alterado para evitar conflito com var */
+    font-family: 'MiniTextFontCustom'; /* Nome alterado para evitar conflito com var */
     /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
     src: url('assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
     font-weight: normal;
@@ -147,8 +142,7 @@
 
 /* CORREÇÃO CRÍTICA: Define o tamanho da fonte raiz em pixels para que REM seja previsível */
 html {
-    font-size: 16px;
-    /* 1rem = 16px (padrão, mas explicitado) */
+    font-size: 16px; /* 1rem = 16px (padrão, mas explicitado) */
 }
 
 body {
@@ -195,43 +189,35 @@ h6 {
 }
 
 p {
-    font-size: 1rem;
-    /* 1rem = 16px */
-    font-family: var(--fonte-corpo);
-    /* Garante que 'p' use a fonte de corpo */
+    font-size: 1rem; /* 1rem = 16px */
+    font-family: var(--fonte-corpo); /* Garante que 'p' use a fonte de corpo */
 }
 
 h1 {
-    font-size: 3rem;
-    /* Era 3.8em, agora é 3.8 * 16px = 60.8px */
+    font-size: 3.8rem; /* Era 3.8em, agora é 3.8 * 16px = 60.8px */
 }
 
 h2 {
-    font-size: 2rem;
-    /* Era 3.2em, agora é 3.2 * 16px = 51.2px */
+    font-size: 3.2rem; /* Era 3.2em, agora é 3.2 * 16px = 51.2px */
 }
 
 h3 {
-    font-size: 1.5rem;
-    /* Era 2.6em, agora é 2.6 * 16px = 41.6px */
+    font-size: 2.6rem; /* Era 2.6em, agora é 2.6 * 16px = 41.6px */
     font-family: var(--fonte-subtitulo);
 }
 
 h4 {
-    font-size: 1.2rem;
-    /* Era 2.2em, agora é 2.2 * 16px = 35.2px. Deve estar grande o suficiente. */
+    font-size: 2.2rem; /* Era 2.2em, agora é 2.2 * 16px = 35.2px. Deve estar grande o suficiente. */
     font-family: var(--fonte-subtitulo);
 }
 
 h5 {
-    font-size: 1rem;
-    /* Era 1.5em, agora é 1.5 * 16px = 24px */
+    font-size: 1.5rem; /* Era 1.5em, agora é 1.5 * 16px = 24px */
     font-family: var(--fonte-subtitulo);
 }
 
 h6 {
-    font-size: 0.8rem;
-    /* Era 1em, agora é 1rem = 16px */
+    font-size: 1rem; /* Era 1em, agora é 1rem = 16px */
     font-family: var(--fonte-subtitulo);
 }
 
@@ -240,8 +226,7 @@ button {
 }
 
 p {
-    margin-bottom: 1rem;
-    /* Ajustando para rem */
+    margin-bottom: 1rem; /* Ajustando para rem */
 }
 
 ul {
@@ -279,8 +264,7 @@ ul {
 .small-text,
 .footer-note {
     font-family: var(--fonte-mini);
-    font-size: 0.875rem;
-    /* Menor que o parágrafo padrão (14px) */
+    font-size: 0.875rem; /* Menor que o parágrafo padrão (14px) */
 }
 
 /* ====================================================================================================================== */
