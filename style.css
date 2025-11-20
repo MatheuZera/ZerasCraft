@@ -7,37 +7,46 @@
 /* FONTES CUSTOMIZÁVEIS */
 /* ====================================================================================================================== */
 
+/* O @font-face está usando caminhos relativos (sem '../'). 
+   Se o style.css estiver na pasta raiz, 'assets/fonts/...' está correto. 
+   Se o style.css estiver na subpasta "especial-100k", o caminho deve ser '../assets/fonts/...'
+   Assumindo que o `style.css` está na pasta raiz.
+*/
+
 @font-face {
-    font-family: 'TitleFont';
+    font-family: 'TitleFontCustom'; /* Nome alterado para evitar conflito com var */
     src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'ButtonFont';
+    font-family: 'ButtonFontCustom'; /* Nome alterado para evitar conflito com var */
     src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'SubTitleFont';
-    src: url('/assets/fonts/Minecraft-Five-Title.otf') format('opentype');
+    font-family: 'SubTitleFontCustom'; /* Nome alterado para evitar conflito com var */
+    /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
+    src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'TextFont';
-    src: url('/assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
+    font-family: 'TextFontCustom'; /* Nome alterado para evitar conflito com var */
+    /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
+    src: url('assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'MiniTextFont';
-    src: url('/assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
+    font-family: 'MiniTextFontCustom'; /* Nome alterado para evitar conflito com var */
+    /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
+    src: url('assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -88,14 +97,13 @@
     --neon-flame-color1-rgb: 0, 255, 0;
     --neon-flame-color2-rgb: 0, 255, 255;
 
-    /* Dagiti Font */
-    --fonte-titulo: 'Inter', 'Montserrat', sans-serif;
-    /* Usando Inter como padrão */
-    --fonte-subtitulo: 'Inter', 'Montserrat', sans-serif;
-    --fonte-corpo: 'Inter', 'Roboto', sans-serif;
-    --fonte-mini: 'Inter', 'Roboto', sans-serif;
-    --fonte-botao: 'Inter', 'Montserrat', sans-serif;
-    --fonte-pixel: 'Inter', 'Montserrat', sans-serif;
+    /* Dagiti Font - Usando as fontes customizadas como primeira opção */
+    --fonte-titulo: 'TitleFontCustom', 'Pixelify Sans', 'Montserrat', sans-serif;
+    --fonte-subtitulo: 'SubTitleFontCustom', 'Pixelify Sans', 'Montserrat', sans-serif;
+    --fonte-corpo: 'TextFontCustom', 'Roboto', sans-serif;
+    --fonte-mini: 'MiniTextFontCustom', 'Roboto', sans-serif;
+    --fonte-botao: 'ButtonFontCustom', 'Montserrat', sans-serif;
+    --fonte-pixel: 'Pixelify Sans', sans-serif;
 
     /* Spacing ken Sizes */
     --padding-section: 0px 0;
@@ -132,6 +140,11 @@
     box-sizing: border-box;
 }
 
+/* CORREÇÃO CRÍTICA: Define o tamanho da fonte raiz em pixels para que REM seja previsível */
+html {
+    font-size: 16px; /* 1rem = 16px (padrão, mas explicitado) */
+}
+
 body {
     font-family: var(--fonte-corpo);
     line-height: 1.5;
@@ -141,7 +154,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    padding-bottom: 80px;
+    /* padding-bottom: 80px; Removido, deve ser feito no conteúdo principal ou footer */
 }
 
 body.no-scroll {
@@ -159,6 +172,7 @@ a:hover {
     text-decoration: underline;
 }
 
+/* CORREÇÃO CRÍTICA: Usando REM em vez de EM para tamanhos de fonte previsíveis */
 p,
 h1,
 h2,
@@ -169,39 +183,41 @@ h6 {
     font-family: var(--fonte-titulo);
     color: var(--cor-texto-claro);
     margin-bottom: 0.8em;
+    /* mantendo 'em' aqui para ser relativo ao próprio font-size */
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 p {
-    font-size: 1em;
+    font-size: 1rem; /* 1rem = 16px */
+    font-family: var(--fonte-corpo); /* Garante que 'p' use a fonte de corpo */
 }
 
 h1 {
-    font-size: 3.8em;
+    font-size: 3.8rem; /* Era 3.8em, agora é 3.8 * 16px = 60.8px */
 }
 
 h2 {
-    font-size: 3.2em;
+    font-size: 3.2rem; /* Era 3.2em, agora é 3.2 * 16px = 51.2px */
 }
 
 h3 {
-    font-size: 2.6em;
+    font-size: 2.6rem; /* Era 2.6em, agora é 2.6 * 16px = 41.6px */
     font-family: var(--fonte-subtitulo);
 }
 
 h4 {
-    font-size: 2.2em;
+    font-size: 2.2rem; /* Era 2.2em, agora é 2.2 * 16px = 35.2px. Deve estar grande o suficiente. */
     font-family: var(--fonte-subtitulo);
 }
 
 h5 {
-    font-size: 1.5em;
+    font-size: 1.5rem; /* Era 1.5em, agora é 1.5 * 16px = 24px */
     font-family: var(--fonte-subtitulo);
 }
 
 h6 {
-    font-size: 1em;
+    font-size: 1rem; /* Era 1em, agora é 1rem = 16px */
     font-family: var(--fonte-subtitulo);
 }
 
@@ -210,7 +226,7 @@ button {
 }
 
 p {
-    margin-bottom: 1em;
+    margin-bottom: 1rem; /* Ajustando para rem */
 }
 
 ul {
@@ -248,6 +264,7 @@ ul {
 .small-text,
 .footer-note {
     font-family: var(--fonte-mini);
+    font-size: 0.875rem; /* Menor que o parágrafo padrão (14px) */
 }
 
 /* ====================================================================================================================== */
