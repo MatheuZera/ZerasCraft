@@ -60,9 +60,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap');
 
 /* ====================================================================================================================== */
-/* VARIÁVEIS GLOBAIS CSS */
+/* 0. VARIÁVEIS CSS (:ROOT) - Baseado no seu original */
 /* ====================================================================================================================== */
-
 :root {
     /* Dagiti Kolor */
     --cor-primaria: #4CAF50;
@@ -82,19 +81,12 @@
     --cor-btn-text: #FFFFFF;
 
     --color-primary-green: #4CAF50;
-    /* Verde Vibrante para Destaques (Primária) */
     --color-secondary-dark: #2C3E50;
-    /* Azul Marinho Escuro/Carvão (Fundo dos Cards) */
     --color-background: #1A1A1A;
-    /* Preto/Cinza Escuro (Fundo do Body) */
     --color-text-light: #ECF0F1;
-    /* Branco Quase Puro (Texto Principal) */
     --color-border-subtle: rgba(255, 255, 255, 0.05);
-    /* Borda muito sutil */
     --color-background-section: #1F2937;
-    /* Fundo de Seção um pouco mais claro que o body */
     --color-highlight-blue: #3498DB;
-    /* Novo: Azul para destaque secundário */
 
     /* Dagiti kolor ti neon */
     --neon-flame-color1: #00FF00;
@@ -102,7 +94,7 @@
     --neon-flame-color1-rgb: 0, 255, 0;
     --neon-flame-color2-rgb: 0, 255, 255;
 
-    /* Dagiti Font - Usando as fontes customizadas como primeira opção */
+    /* Dagiti Font */
     --fonte-titulo: 'TitleFontCustom', 'Pixelify Sans', 'Montserrat', sans-serif;
     --fonte-subtitulo: 'SubTitleFontCustom', 'Pixelify Sans', 'Montserrat', sans-serif;
     --fonte-corpo: 'TextFontCustom', 'Roboto', sans-serif;
@@ -113,17 +105,13 @@
     /* Spacing ken Sizes */
     --padding-section: 0px 0;
     --padding-card: 20px;
-    /* Reduzido de 25px */
     --gap-grid: 20px;
-    /* Reduzido de 30px */
     --border-radius: 6px;
-    /* Levemente reduzido */
     --max-width-content: 1400px;
 
     /* Shadows */
     --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
     --sombra-card: 0 5px 10px rgba(0, 0, 0, 0.3);
-    /* Sombra mais leve */
     --sombra-card-hover: 0 10px 20px rgba(0, 0, 0, 0.5);
 
     /* Transitions */
@@ -133,7 +121,7 @@
 }
 
 /* ====================================================================================================================== */
-/* SITE EM GERAL */
+/* 1. SITE EM GERAL & RESET */
 /* ====================================================================================================================== */
 
 /* Basic Reset */
@@ -145,22 +133,19 @@
     box-sizing: border-box;
 }
 
-/* CORREÇÃO CRÍTICA: Define o tamanho da fonte raiz em pixels para que REM seja previsível */
+/* Define o tamanho da fonte raiz em pixels para que REM seja previsível */
 html {
     font-size: 16px;
-    /* 1rem = 16px (padrão, mas explicitado) */
 }
 
 body {
     font-family: var(--fonte-corpo);
     line-height: 1.5;
-    /* Linha de altura ajustada */
     color: var(--cor-texto-claro);
     background-color: var(--cor-fundo-escuro);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    /* padding-bottom: 80px; Removido, deve ser feito no conteúdo principal ou footer */
 }
 
 body.no-scroll {
@@ -178,7 +163,11 @@ a:hover {
     text-decoration: underline;
 }
 
-/* CORREÇÃO CRÍTICA: Usando REM em vez de EM para tamanhos de fonte previsíveis */
+/* ====================================================================================================================== */
+/* 2. TIPOGRAFIA - 100% CORRIGIDA E UNIFICADA (FIM DOS CONFLITOS DE H1-H6) */
+/* ====================================================================================================================== */
+
+/* Aplicamos as propriedades comuns e o MARGIN-BOTTOM em REM, eliminando o 0.8em problemático */
 p,
 h1,
 h2,
@@ -186,67 +175,60 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--fonte-titulo);
+    margin-bottom: 1rem;
+    font-family: var(--fonte-titulo); 
     color: var(--cor-texto-claro);
-    margin-bottom: 0.8em;
-    /* mantendo 'em' aqui para ser relativo ao próprio font-size */
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* O parágrafo recebe o tamanho de corpo e fonte de corpo */
 p {
     font-size: 1rem;
-    /* 1rem = 16px */
     font-family: var(--fonte-corpo);
-    /* Garante que 'p' use a fonte de corpo */
 }
 
+/* Os títulos recebem seus tamanhos específicos */
 h1 {
-    font-size: 3rem;
-    /* Era 3.8em, agora é 3.8 * 16px = 60.8px */
+    font-size: 3rem; 
 }
 
 h2 {
-    font-size: 2rem;
-    /* Era 3.2em, agora é 3.2 * 16px = 51.2px */
+    font-size: 2rem; 
 }
 
 h3 {
-    font-size: 1.5rem;
-    /* Era 2.6em, agora é 2.6 * 16px = 41.6px */
+    font-size: 1.5rem; 
     font-family: var(--fonte-subtitulo);
 }
 
 h4 {
-    font-size: 1.2rem;
-    /* Era 2.2em, agora é 2.2 * 16px = 35.2px. Deve estar grande o suficiente. */
+    font-size: 1.2rem; 
     font-family: var(--fonte-subtitulo);
 }
 
 h5 {
-    font-size: 1rem;
-    /* Era 1.5em, agora é 1.5 * 16px = 24px */
+    font-size: 1rem; 
     font-family: var(--fonte-subtitulo);
 }
 
 h6 {
-    font-size: 0.8rem;
-    /* Era 1em, agora é 1rem = 16px */
+    font-size: 0.8rem; 
     font-family: var(--fonte-subtitulo);
 }
 
+/* Garante que o botão use a fonte específica */
 button {
     font-family: var(--fonte-botao);
-}
-
-p {
-    margin-bottom: 1rem;
-    /* Ajustando para rem */
 }
 
 ul {
     list-style: none;
 }
+
+/* ====================================================================================================================== */
+/* 3. CLASSES UTILIÁRIAS (Mantidas do original) */
+/* ====================================================================================================================== */
 
 .margin-bottom-30 {
     margin-bottom: 30px !important;
@@ -280,7 +262,6 @@ ul {
 .footer-note {
     font-family: var(--fonte-mini);
     font-size: 0.875rem;
-    /* Menor que o parágrafo padrão (14px) */
 }
 
 /* ====================================================================================================================== */
@@ -11690,4 +11671,228 @@ card-grande .card-button:hover {
 /* Estilo do Rodapé */
 .mc-footer {
     border-top: 1px solid var(--cor-bordas);
+}
+
+/* ====================================================================================================================== */
+/* CARD DE CONTEÚDO EM GRADE */
+/* ====================================================================================================================== */
+
+/* Container Principal para centralizar e dar espaçamento */
+.content-section {
+    padding: 40px 20px; /* Adapte conforme necessário */
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+}
+
+.section-title {
+    margin-bottom: 0.5rem;
+    color: var(--cor-primaria); /* Usando o verde para o título */
+}
+
+.section-description {
+    margin-bottom: 2rem;
+    color: var(--cor-texto-claro);
+    font-family: var(--fonte-corpo);
+    font-size: 1.125rem;
+}
+
+/* 1. Grade de 4 Colunas */
+.grid-container {
+    display: grid;
+    /* 4 colunas de largura igual e adaptável */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: var(--gap-grid); /* Espaçamento entre os cards */
+    padding: var(--padding-card) 0;
+}
+
+/* 2. Estilo Base do Card */
+.content-card {
+    background-color: var(--cor-card-bg); /* Azul Marinho Escuro */
+    border: 1px solid var(--cor-bordas);
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Garante que a imagem se ajuste ao border-radius */
+    box-shadow: var(--sombra-card);
+    transition: var(--transicao-card-hover);
+    display: flex;
+    flex-direction: column; /* Organiza Thumbnail, Título, Descrição e Botão em coluna */
+}
+
+/* Efeito de Hover (Animação) */
+.content-card:hover {
+    /* Efeito de Levantamento e Sombra */
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-card-hover);
+    background-color: var(--cor-card-hover); /* Fundo um pouco mais claro no hover */
+    border-color: var(--cor-primaria); /* Borda destaca no hover */
+}
+
+/* 3. Estilização da Miniatura (Thumbnail) */
+.card-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    /* Define a proporção da miniatura (ex: 16:9) */
+    padding-top: 56.25%; 
+    overflow: hidden;
+}
+
+.card-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    transition: transform 0.4s ease-out;
+}
+
+/* Zoom Sutil na Imagem ao passar o mouse sobre o Card */
+.content-card:hover .card-thumbnail {
+    transform: scale(1.05); 
+}
+
+.card-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--cor-destaque); /* Amarelo Dourado */
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+
+/* 4. Conteúdo de Texto */
+.card-content {
+    padding: var(--padding-card);
+    flex-grow: 1; /* Faz o conteúdo esticar para o card ficar alinhado */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-family: var(--fonte-subtitulo);
+    font-size: 1.25rem; /* Título do Card */
+    color: var(--cor-primaria);
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    font-family: var(--fonte-corpo);
+    font-size: 0.95rem;
+    color: var(--cor-card-text);
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Empurra o botão para baixo */
+}
+
+/* 5. Estilização do Botão */
+.card-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 15px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    border-radius: var(--border-radius);
+    font-family: var(--fonte-botao);
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: var(--transicao-padrao);
+}
+
+.card-button:hover {
+    background-color: var(--cor-secundaria);
+    text-decoration: none; /* Remove sublinhado ao passar o mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.card-button i {
+    margin-left: 8px;
+    transition: var(--transicao-padrao);
+}
+
+/* Animação do Botão: seta se move levemente para a direita no hover */
+.content-card:hover .card-button i {
+    transform: translateX(3px);
+}
+
+/* 6. Responsividade: De 4 para 2 e depois 1 coluna */
+@media (max-width: 1200px) {
+    /* 3 colunas em telas maiores (opcional) */
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    /* 2 colunas em tablets */
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    /* 1 coluna em celulares */
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====================================================================================================================== */
+/* NOTIFICAÇÃO DE STATUS/ERRO */
+/* ====================================================================================================================== */
+
+/* Container para posicionar a notificação */
+.notification-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 400px; /* Limite a largura para não ser muito invasivo */
+}
+
+.status-notification {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    font-family: var(--fonte-mini);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.status-icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* Estilo para SUCESSO/STATUS (Verde - usa cor primária) */
+.success-status {
+    background-color: var(--cor-primaria); /* Fundo Verde */
+    color: var(--cor-btn-text); /* Texto Branco */
+    border: 1px solid var(--cor-secundaria);
+}
+
+.success-status .status-icon {
+    color: var(--cor-destaque); /* Ícone Amarelo */
+}
+
+/* Estilo para ERRO (Vermelho escuro/marrom, pois você não tem um vermelho forte) */
+.error-status {
+    /* Usando uma cor escura com um tom de erro para contraste */
+    background-color: #A93226; 
+    color: var(--cor-texto-claro);
+    border: 1px solid #7B241C;
+}
+
+.error-status .status-icon {
+    color: var(--cor-destaque); /* Ícone Amarelo de Alerta */
 }
