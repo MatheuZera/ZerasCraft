@@ -11798,8 +11798,8 @@ card-grande .card-button:hover {
 
 .card-title {
     font-family: var(--fonte-subtitulo);
-    font-size: 1.25rem; 
-    color: var(--cor-primaria);
+    font-size: 1.5rem; 
+    color: var(--cor-fundo-claro);
     margin-bottom: 0.5rem;
 }
 
