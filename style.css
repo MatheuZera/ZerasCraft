@@ -11673,18 +11673,21 @@ card-grande .card-button:hover {
     border-top: 1px solid var(--cor-bordas);
 }
 
+
 /* ====================================================================================================================== */
-/* CARD DE CONTEÚDO EM GRADE */
+/* CARD DE CONTEÚDO EM GRADE (VERSÃO FLEXBOX CENTRALIZADA) */
 /* ====================================================================================================================== */
 
 /* Container Principal para centralizar e dar espaçamento */
 .content-section {
-    padding: 40px 20px; /* Adapte conforme necessário */
+    padding: 40px 20px;
     max-width: var(--max-width-content);
     margin: 0 auto;
+    text-align: center; 
 }
 
 .section-title {
+    /* Herdando as regras de h1/h2 corrigidas */
     margin-bottom: 0.5rem;
     color: var(--cor-primaria); /* Usando o verde para o título */
 }
@@ -11696,13 +11699,18 @@ card-grande .card-button:hover {
     font-size: 1.125rem;
 }
 
-/* 1. Grade de 4 Colunas */
+/* 1. Grade de Colunas (CORREÇÃO CRÍTICA: AGORA É FLEXBOX) */
 .grid-container {
-    display: grid;
-    /* 4 colunas de largura igual e adaptável */
-    grid-template-columns: repeat(4, 1fr); 
+    display: flex; /* CRÍTICO: Usa Flexbox para controle de linha */
+    flex-wrap: wrap; /* Permite a quebra de linha após o 4º card */
     gap: var(--gap-grid); /* Espaçamento entre os cards */
     padding: var(--padding-card) 0;
+    
+    /* CRÍTICO: Centraliza o GRUPO de cards (1, 2, 3...) na linha atual */
+    justify-content: center; 
+    
+    /* Garante que ele utilize toda a largura disponível */
+    width: 100%;
 }
 
 /* 2. Estilo Base do Card */
@@ -11710,11 +11718,15 @@ card-grande .card-button:hover {
     background-color: var(--cor-card-bg); /* Azul Marinho Escuro */
     border: 1px solid var(--cor-bordas);
     border-radius: var(--border-radius);
-    overflow: hidden; /* Garante que a imagem se ajuste ao border-radius */
+    overflow: hidden; 
     box-shadow: var(--sombra-card);
     transition: var(--transicao-card-hover);
     display: flex;
-    flex-direction: column; /* Organiza Thumbnail, Título, Descrição e Botão em coluna */
+    flex-direction: column;
+
+    /* CRÍTICO: Define o tamanho do card para caber 4 na linha com espaçamento (Flexbox) */
+    flex-basis: 22%; 
+    max-width: 350px; /* Impede que ele fique gigante em telas muito largas */
 }
 
 /* Efeito de Hover (Animação) */
@@ -11741,7 +11753,7 @@ card-grande .card-button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    object-fit: cover; 
     transition: transform 0.4s ease-out;
 }
 
@@ -11750,9 +11762,9 @@ card-grande .card-button:hover {
     transform: scale(1.05); 
 }
 
-.card-tag {
+.card-tag-amarela {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 10px;
     background-color: var(--cor-destaque); /* Amarelo Dourado */
     color: var(--cor-texto-escuro);
@@ -11763,6 +11775,18 @@ card-grande .card-button:hover {
     z-index: 10;
 }
 
+.card-tag-branca {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: var(--color-text-light); /* Amarelo Dourado */
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
 
 /* 4. Conteúdo de Texto */
 .card-content {
@@ -11774,7 +11798,7 @@ card-grande .card-button:hover {
 
 .card-title {
     font-family: var(--fonte-subtitulo);
-    font-size: 1.25rem; /* Título do Card */
+    font-size: 1.25rem; 
     color: var(--cor-primaria);
     margin-bottom: 0.5rem;
 }
@@ -11806,7 +11830,7 @@ card-grande .card-button:hover {
 
 .card-button:hover {
     background-color: var(--cor-secundaria);
-    text-decoration: none; /* Remove sublinhado ao passar o mouse */
+    text-decoration: none; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
@@ -11820,25 +11844,25 @@ card-grande .card-button:hover {
     transform: translateX(3px);
 }
 
-/* 6. Responsividade: De 4 para 2 e depois 1 coluna */
+/* 6. Responsividade (Adaptada para Flexbox) */
+
 @media (max-width: 1200px) {
-    /* 3 colunas em telas maiores (opcional) */
-    .grid-container {
-        grid-template-columns: repeat(3, 1fr);
+    .content-card {
+        flex-basis: 31%; /* 3 cards por linha */
     }
 }
 
 @media (max-width: 992px) {
-    /* 2 colunas em tablets */
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr);
+    .content-card {
+        flex-basis: 48%; /* 2 cards por linha */
     }
 }
 
 @media (max-width: 576px) {
-    /* 1 coluna em celulares */
-    .grid-container {
-        grid-template-columns: 1fr;
+    .content-card {
+        /* Garante 1 card por linha e centralizado */
+        flex-basis: 100%; 
+        max-width: 400px; /* Limita o tamanho do card em mobile para telas pequenas */
     }
 }
 
