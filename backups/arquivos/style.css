@@ -7,37 +7,51 @@
 /* FONTES CUSTOMIZÁVEIS */
 /* ====================================================================================================================== */
 
+/* O @font-face está usando caminhos relativos (sem '../'). 
+   Se o style.css estiver na pasta raiz, 'assets/fonts/...' está correto. 
+   Se o style.css estiver na subpasta "especial-100k", o caminho deve ser '../assets/fonts/...'
+   Assumindo que o `style.css` está na pasta raiz.
+*/
+
 @font-face {
-    font-family: 'TitleFont';
+    font-family: 'TitleFontCustom';
+    /* Nome alterado para evitar conflito com var */
     src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'ButtonFont';
+    font-family: 'ButtonFontCustom';
+    /* Nome alterado para evitar conflito com var */
     src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'SubTitleFont';
-    src: url('/assets/fonts/Minecraft-Five-Title.otf') format('opentype');
+    font-family: 'SubTitleFontCustom';
+    /* Nome alterado para evitar conflito com var */
+    /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
+    src: url('assets/fonts/Minecraft-Five-Title.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'TextFont';
-    src: url('/assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
+    font-family: 'TextFontCustom';
+    /* Nome alterado para evitar conflito com var */
+    /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
+    src: url('assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'MiniTextFont';
-    src: url('/assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
+    font-family: 'MiniTextFontCustom';
+    /* Nome alterado para evitar conflito com var */
+    /* Note que aqui você estava usando '/assets/fonts/', use o caminho relativo sem a barra inicial */
+    src: url('assets/fonts/Minecraft-Regular-Text.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -46,9 +60,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap');
 
 /* ====================================================================================================================== */
-/* VARIÁVEIS GLOBAIS CSS */
+/* 0. VARIÁVEIS CSS (:ROOT) - Baseado no seu original */
 /* ====================================================================================================================== */
-
 :root {
     /* Dagiti Kolor */
     --cor-primaria: #4CAF50;
@@ -68,19 +81,12 @@
     --cor-btn-text: #FFFFFF;
 
     --color-primary-green: #4CAF50;
-    /* Verde Vibrante para Destaques (Primária) */
     --color-secondary-dark: #2C3E50;
-    /* Azul Marinho Escuro/Carvão (Fundo dos Cards) */
     --color-background: #1A1A1A;
-    /* Preto/Cinza Escuro (Fundo do Body) */
     --color-text-light: #ECF0F1;
-    /* Branco Quase Puro (Texto Principal) */
     --color-border-subtle: rgba(255, 255, 255, 0.05);
-    /* Borda muito sutil */
     --color-background-section: #1F2937;
-    /* Fundo de Seção um pouco mais claro que o body */
     --color-highlight-blue: #3498DB;
-    /* Novo: Azul para destaque secundário */
 
     /* Dagiti kolor ti neon */
     --neon-flame-color1: #00FF00;
@@ -89,28 +95,23 @@
     --neon-flame-color2-rgb: 0, 255, 255;
 
     /* Dagiti Font */
-    --fonte-titulo: 'Inter', 'Montserrat', sans-serif;
-    /* Usando Inter como padrão */
-    --fonte-subtitulo: 'Inter', 'Montserrat', sans-serif;
-    --fonte-corpo: 'Inter', 'Roboto', sans-serif;
-    --fonte-mini: 'Inter', 'Roboto', sans-serif;
-    --fonte-botao: 'Inter', 'Montserrat', sans-serif;
-    --fonte-pixel: 'Inter', 'Montserrat', sans-serif;
+    --fonte-titulo: 'TitleFontCustom', 'Pixelify Sans', 'Montserrat', sans-serif;
+    --fonte-subtitulo: 'SubTitleFontCustom', 'Pixelify Sans', 'Montserrat', sans-serif;
+    --fonte-corpo: 'TextFontCustom', 'Roboto', sans-serif;
+    --fonte-mini: 'MiniTextFontCustom', 'Roboto', sans-serif;
+    --fonte-botao: 'ButtonFontCustom', 'Montserrat', sans-serif;
+    --fonte-pixel: 'Pixelify Sans', sans-serif;
 
     /* Spacing ken Sizes */
     --padding-section: 0px 0;
     --padding-card: 20px;
-    /* Reduzido de 25px */
     --gap-grid: 20px;
-    /* Reduzido de 30px */
     --border-radius: 6px;
-    /* Levemente reduzido */
     --max-width-content: 1400px;
 
     /* Shadows */
     --sombra-leve: 0 4px 8px rgba(0, 0, 0, 0.2);
     --sombra-card: 0 5px 10px rgba(0, 0, 0, 0.3);
-    /* Sombra mais leve */
     --sombra-card-hover: 0 10px 20px rgba(0, 0, 0, 0.5);
 
     /* Transitions */
@@ -120,7 +121,7 @@
 }
 
 /* ====================================================================================================================== */
-/* SITE EM GERAL */
+/* 1. SITE EM GERAL & RESET */
 /* ====================================================================================================================== */
 
 /* Basic Reset */
@@ -132,16 +133,19 @@
     box-sizing: border-box;
 }
 
+/* Define o tamanho da fonte raiz em pixels para que REM seja previsível */
+html {
+    font-size: 16px;
+}
+
 body {
     font-family: var(--fonte-corpo);
     line-height: 1.5;
-    /* Linha de altura ajustada */
     color: var(--cor-texto-claro);
     background-color: var(--cor-fundo-escuro);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    padding-bottom: 80px;
 }
 
 body.no-scroll {
@@ -159,6 +163,11 @@ a:hover {
     text-decoration: underline;
 }
 
+/* ====================================================================================================================== */
+/* 2. TIPOGRAFIA - 100% CORRIGIDA E UNIFICADA (FIM DOS CONFLITOS DE H1-H6) */
+/* ====================================================================================================================== */
+
+/* Aplicamos as propriedades comuns e o MARGIN-BOTTOM em REM, eliminando o 0.8em problemático */
 p,
 h1,
 h2,
@@ -166,56 +175,60 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--fonte-titulo);
+    margin-bottom: 1rem;
+    font-family: var(--fonte-titulo); 
     color: var(--cor-texto-claro);
-    margin-bottom: 0.8em;
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* O parágrafo recebe o tamanho de corpo e fonte de corpo */
 p {
-    font-size: 1em;
+    font-size: 1rem;
+    font-family: var(--fonte-corpo);
 }
 
+/* Os títulos recebem seus tamanhos específicos */
 h1 {
-    font-size: 3.8em;
+    font-size: 3rem; 
 }
 
 h2 {
-    font-size: 3.2em;
+    font-size: 2rem; 
 }
 
 h3 {
-    font-size: 2.6em;
+    font-size: 1.5rem; 
     font-family: var(--fonte-subtitulo);
 }
 
 h4 {
-    font-size: 2.2em;
+    font-size: 1.2rem; 
     font-family: var(--fonte-subtitulo);
 }
 
 h5 {
-    font-size: 1.5em;
+    font-size: 1rem; 
     font-family: var(--fonte-subtitulo);
 }
 
 h6 {
-    font-size: 1em;
+    font-size: 0.8rem; 
     font-family: var(--fonte-subtitulo);
 }
 
+/* Garante que o botão use a fonte específica */
 button {
     font-family: var(--fonte-botao);
-}
-
-p {
-    margin-bottom: 1em;
 }
 
 ul {
     list-style: none;
 }
+
+/* ====================================================================================================================== */
+/* 3. CLASSES UTILIÁRIAS (Mantidas do original) */
+/* ====================================================================================================================== */
 
 .margin-bottom-30 {
     margin-bottom: 30px !important;
@@ -248,6 +261,7 @@ ul {
 .small-text,
 .footer-note {
     font-family: var(--fonte-mini);
+    font-size: 0.875rem;
 }
 
 /* ====================================================================================================================== */
@@ -313,7 +327,7 @@ ul {
 .section-alt-bg {
     background-color: var(--cor-terciaria);
     /* Nasisinit a berde a background */
-    margin-top: 5px;
+    margin-top: 0px;
     /* Adiciona um espaço de 50px acima da seção */
 }
 
@@ -11657,4 +11671,371 @@ card-grande .card-button:hover {
 /* Estilo do Rodapé */
 .mc-footer {
     border-top: 1px solid var(--cor-bordas);
+}
+
+
+/* ====================================================================================================================== */
+/* CARD DE CONTEÚDO EM GRADE (VERSÃO FLEXBOX CENTRALIZADA) */
+/* ====================================================================================================================== */
+
+/* Container Principal para centralizar e dar espaçamento */
+.content-section {
+    padding: 40px 20px;
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    text-align: center; 
+}
+
+.section-title {
+    /* Herdando as regras de h1/h2 corrigidas */
+    margin-bottom: 0.5rem;
+    color: var(--cor-primaria); /* Usando o verde para o título */
+}
+
+.section-description {
+    margin-bottom: 2rem;
+    color: var(--cor-texto-claro);
+    font-family: var(--fonte-corpo);
+    font-size: 1.125rem;
+}
+
+/* 1. Grade de Colunas (CORREÇÃO CRÍTICA: AGORA É FLEXBOX) */
+.grid-container {
+    display: flex; /* CRÍTICO: Usa Flexbox para controle de linha */
+    flex-wrap: wrap; /* Permite a quebra de linha após o 4º card */
+    gap: var(--gap-grid); /* Espaçamento entre os cards */
+    padding: var(--padding-card) 0;
+    
+    /* CRÍTICO: Centraliza o GRUPO de cards (1, 2, 3...) na linha atual */
+    justify-content: center; 
+    
+    /* Garante que ele utilize toda a largura disponível */
+    width: 100%;
+}
+
+/* 2. Estilo Base do Card */
+.content-card {
+    background-color: var(--cor-card-bg); /* Azul Marinho Escuro */
+    border: 1px solid var(--cor-bordas);
+    border-radius: var(--border-radius);
+    overflow: hidden; 
+    box-shadow: var(--sombra-card);
+    transition: var(--transicao-card-hover);
+    display: flex;
+    flex-direction: column;
+
+    /* CRÍTICO: Define o tamanho do card para caber 4 na linha com espaçamento (Flexbox) */
+    flex-basis: 22%; 
+    max-width: 350px; /* Impede que ele fique gigante em telas muito largas */
+}
+
+/* Efeito de Hover (Animação) */
+.content-card:hover {
+    /* Efeito de Levantamento e Sombra */
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-card-hover);
+    background-color: var(--cor-card-hover); /* Fundo um pouco mais claro no hover */
+    border-color: var(--cor-primaria); /* Borda destaca no hover */
+}
+
+/* 3. Estilização da Miniatura (Thumbnail) */
+.card-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    /* Define a proporção da miniatura (ex: 16:9) */
+    padding-top: 56.25%; 
+    overflow: hidden;
+}
+
+.card-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.4s ease-out;
+}
+
+/* Zoom Sutil na Imagem ao passar o mouse sobre o Card */
+.content-card:hover .card-thumbnail {
+    transform: scale(1.05); 
+}
+
+.card-tag-amarela {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: var(--cor-destaque); /* Amarelo Dourado */
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.card-tag-branca {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: var(--color-text-light); /* Amarelo Dourado */
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+/* 4. Conteúdo de Texto */
+.card-content {
+    padding: var(--padding-card);
+    flex-grow: 1; /* Faz o conteúdo esticar para o card ficar alinhado */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-family: var(--fonte-subtitulo);
+    font-size: 1.5rem; 
+    color: var(--cor-fundo-claro);
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    font-family: var(--fonte-corpo);
+    font-size: 0.95rem;
+    color: var(--cor-card-text);
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Empurra o botão para baixo */
+}
+
+/* 5. Estilização do Botão */
+.card-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 15px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    border-radius: var(--border-radius);
+    font-family: var(--fonte-botao);
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: var(--transicao-padrao);
+}
+
+.card-button:hover {
+    background-color: var(--cor-secundaria);
+    text-decoration: none; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.card-button i {
+    margin-left: 8px;
+    transition: var(--transicao-padrao);
+}
+
+/* Animação do Botão: seta se move levemente para a direita no hover */
+.content-card:hover .card-button i {
+    transform: translateX(3px);
+}
+
+/* 6. Responsividade (Adaptada para Flexbox) */
+
+@media (max-width: 1200px) {
+    .content-card {
+        flex-basis: 31%; /* 3 cards por linha */
+    }
+}
+
+@media (max-width: 992px) {
+    .content-card {
+        flex-basis: 48%; /* 2 cards por linha */
+    }
+}
+
+@media (max-width: 576px) {
+    .content-card {
+        /* Garante 1 card por linha e centralizado */
+        flex-basis: 100%; 
+        max-width: 400px; /* Limita o tamanho do card em mobile para telas pequenas */
+    }
+}
+
+/* ====================================================================================================================== */
+/* NOTIFICAÇÃO DE STATUS/ERRO */
+/* ====================================================================================================================== */
+
+/* Container para posicionar a notificação */
+.notification-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 400px; /* Limite a largura para não ser muito invasivo */
+}
+
+.status-notification {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    font-family: var(--fonte-mini);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.status-icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* Estilo para SUCESSO/STATUS (Verde - usa cor primária) */
+.success-status {
+    background-color: var(--cor-primaria); /* Fundo Verde */
+    color: var(--cor-btn-text); /* Texto Branco */
+    border: 1px solid var(--cor-secundaria);
+}
+
+.success-status .status-icon {
+    color: var(--cor-destaque); /* Ícone Amarelo */
+}
+
+/* Estilo para ERRO (Vermelho escuro/marrom, pois você não tem um vermelho forte) */
+.error-status {
+    /* Usando uma cor escura com um tom de erro para contraste */
+    background-color: #A93226; 
+    color: var(--cor-texto-claro);
+    border: 1px solid #7B241C;
+}
+
+.error-status .status-icon {
+    color: var(--cor-destaque); /* Ícone Amarelo de Alerta */
+}
+
+/* ====================================================================================================================== */
+/* CARDS DE CITAÇÃO (TESTEMUNHOS) EM GRID RESPONSIVO */
+/* ====================================================================================================================== */
+
+/* 1. CONTAINER DA GRADE (4 COLUNAS RESPONSIVAS) */
+.container-citacoes-grid {
+    /* O container principal do HTML deve ter essa classe */
+    display: grid;
+    /* Configura 4 colunas que se adaptam, com um mínimo de 250px */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--gap-grid); /* Espaçamento entre os cards */
+    
+    /* Centraliza o grid dentro da seção, se o container for mais estreito */
+    justify-content: center; 
+    
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 2. ESTILO BASE DO CARD DE CITAÇÃO */
+.card-citacao {
+    display: flex; /* Flex para organizar a foto e o texto */
+    flex-direction: column; /* Coloca a foto em cima do texto (mais adequado para 4 colunas) */
+    align-items: center;
+    text-align: center;
+    
+    /* Estilo visual do card */
+    background-color: var(--cor-card-bg);
+    border: 1px solid var(--cor-bordas);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-card);
+    transition: var(--transicao-card-hover);
+    padding: 25px;
+    height: 100%; /* Garante que todos os cards na mesma linha tenham a mesma altura */
+}
+
+.card-citacao:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-card-hover);
+    border-color: var(--cor-destaque);
+}
+
+/* 3. IMAGEM DO AUTOR/MEMBRO */
+.foto-membro {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    /* Borda de destaque */
+    border: 3px solid var(--cor-primaria); 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 4. CONTEÚDO DA CITAÇÃO (TEXTO E AUTOR) */
+.conteudo-citacao {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icone-citacao {
+    color: var(--cor-primaria);
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.conteudo-citacao p {
+    color: var(--cor-texto-claro);
+    font-style: italic;
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Empurra o botão para baixo para alinhamento */
+}
+
+/* 5. INFORMAÇÕES DO AUTOR */
+.autor-info {
+    margin-bottom: 20px;
+}
+
+.autor-info h4 {
+    font-size: 1.4em;
+    color: var(--cor-destaque);
+    margin-bottom: 5px;
+}
+
+.autor-info .cargo {
+    color: var(--cor-card-text);
+    font-size: 0.9em;
+    display: block;
+}
+
+/* 6. ESTILO DO BOTÃO DE YOUTUBE */
+/* O botão usa a classe existente 'btn-primary' */
+.btn-primary {
+    /* Adaptado do seu estilo de botão, mas aqui como uma âncora */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-btn-text);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-secundaria);
+}
+
+.btn-primary i {
+    margin-right: 8px;
 }
