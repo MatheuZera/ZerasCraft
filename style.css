@@ -327,7 +327,7 @@ ul {
 .section-alt-bg {
     background-color: var(--cor-terciaria);
     /* Nasisinit a berde a background */
-    margin-top: 5px;
+    margin-top: 0px;
     /* Adiciona um espaço de 50px acima da seção */
 }
 
