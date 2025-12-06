@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
 
     // Define os caminhos e pre-carrega os sons
-    const linkSound = new Audio('assets/audios/effects/link.mp3');
-    const cardSound = new Audio('assets/audios/effects/card.mp3');
-    const buttonSound = new Audio('assets/audios/effects/button.mp3');
-    const selectSound = new Audio('assets/audios/effects/select.mp3');
-    const buttonClickSound = new Audio('assets/audios/effects/button-click.mp3');
+    const linkSound = new Audio('effects/link.mp3');
+    const cardSound = new Audio('effects/card.mp3');
+    const buttonSound = new Audio('effects/button.mp3');
+    const selectSound = new Audio('effects/select.mp3');
+    const buttonClickSound = new Audio('effects/button-click.mp3');
 
     linkSound.preload = 'auto';
     cardSound.preload = 'auto';
@@ -60,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Seletores para os elementos
     const cardElements = document.querySelectorAll(
-        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card, .card-compact, .container-cards-grandes'
+        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card, .card-compact, .container-cards-grandes, .content-card'
     );
 
     const buttonElements = document.querySelectorAll(
-        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top, .btn-download, .item-link, .gallery-image, .container-cards-grandes'
+        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top, .btn-download, .item-link, .gallery-image, .container-cards-grandes, .card-button'
     );
 
     const textLinkElements = document.querySelectorAll(
