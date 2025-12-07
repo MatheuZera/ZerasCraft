@@ -11815,7 +11815,7 @@ card-grande .card-button:hover {
     position: absolute;
     top: 5px;
     right: 10px;
-    background-color: #da190b;
+    background-color: #e74c3c;
     color: var(--cor-texto-escuro);
     font-family: var(--fonte-mini);
     padding: 4px 8px;
