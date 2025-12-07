@@ -11779,7 +11779,46 @@ card-grande .card-button:hover {
     position: absolute;
     top: 5px;
     right: 10px;
-    background-color: var(--color-text-light); /* Amarelo Dourado */
+    background-color: var(--color-text-light);
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.card-tag-verde {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: var(--color-primary-green);
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.card-tag-vermelha {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: #ff1212;
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.card-tag-azul {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: #03A9F4;
     color: var(--cor-texto-escuro);
     font-family: var(--fonte-mini);
     padding: 4px 8px;
