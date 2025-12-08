@@ -5,12 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configuração de Áudio
     // =====================================
 
+    // Define o prefixo do caminho absoluto para a pasta de efeitos
+    // ATENÇÃO: Corrigido para Caminho Absoluto (usando o placeholder /ZerasCraft/)
+    const AUDIO_BASE_PATH = 'assets/audios/effects/';
+
     // Define os caminhos e pre-carrega os sons
-    const linkSound = new Audio('effects/link.mp3');
-    const cardSound = new Audio('effects/card.mp3');
-    const buttonSound = new Audio('effects/button.mp3');
-    const selectSound = new Audio('effects/select.mp3');
-    const buttonClickSound = new Audio('effects/button-click.mp3');
+    const linkSound = new Audio(AUDIO_BASE_PATH + 'link.mp3');
+    const cardSound = new Audio(AUDIO_BASE_PATH + 'card.mp3');
+    const buttonSound = new Audio(AUDIO_BASE_PATH + 'button.mp3');
+    const selectSound = new Audio(AUDIO_BASE_PATH + 'select.mp3');
+    const buttonClickSound = new Audio(AUDIO_BASE_PATH + 'button-click.mp3');
 
     linkSound.preload = 'auto';
     cardSound.preload = 'auto';
@@ -60,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Seletores para os elementos
     const cardElements = document.querySelectorAll(
-        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card, .card-compact, .container-cards-grandes, .content-card'
+        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card, .card-compact, .container-cards-grandes, .content-card, .cards-container'
     );
 
     const buttonElements = document.querySelectorAll(
