@@ -402,7 +402,7 @@ ul {
 /* ====================================================================================================================== */
 .main-header {
     width: 100%;
-    position: fixed;
+    position: fixed; /* Comportamento Padrão: Fixo */
     top: -12px;
     left: 0;
     z-index: 1001;
@@ -412,7 +412,6 @@ ul {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
-    /* Centraliza o wrapper (container header-content) */
     align-items: center;
     padding: 50px 0;
     height: 70px;
@@ -466,24 +465,26 @@ ul {
 }
 
 /* ============ */
-/* NAVEGAÇÃO PARA MOBILE 768PX */
+/* NAVEGAÇÃO PARA MOBILE 768PX (AGORA FIXADA) */
 /* ============ */
 @media (max-width: 768px) {
     .main-header {
         height: 55px;
         padding: 5px 0;
-        top: -5px;
-        /* Define a referência para o posicionamento absoluto do logo/botão */
-        position: relative;
-        /* Remove o flexbox padrão para usar o posicionamento absoluto */
-        display: block;
+        top: 0; /* Agora rente ao topo */
+        
+        /* CORREÇÃO: Força a posição fixa para garantir que ele não role. */
+        position: fixed; 
+        
+        /* Garantir que o display seja flexível para centralizar o logo/botão
+           ou use block se o posicionamento for absoluto */
+        display: block; 
     }
 
     /* O wrapper no mobile apenas garante a largura máxima e padding */
     .container.header-content {
         padding: 0 5px;
         flex-direction: row;
-        /* Remove o flexbox no mobile para o wrapper */
         display: block;
     }
 
@@ -491,12 +492,10 @@ ul {
     .header-logo {
         font-size: 1.2em;
         margin: 0;
-        /* Remove qualquer margem que possa deslocar */
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        /* Centraliza 100% no meio */
         width: auto;
         white-space: nowrap;
     }
@@ -528,7 +527,8 @@ ul {
 
     .main-nav {
         display: flex;
-        position: fixed;
+        /* O menu lateral deve ser fixed para cobrir toda a tela */
+        position: fixed; 
         top: 0;
         left: -100%;
         width: 100%;
@@ -543,7 +543,7 @@ ul {
         transition: left 0.5s ease-in-out;
         z-index: 999;
         overflow-y: auto;
-        padding-top: 70px;
+        padding-top: 70px; /* Garante espaço abaixo do header fixo */
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
     }
 
@@ -591,7 +591,6 @@ ul {
     /* Garantir que o logo fique perfeitamente centralizado no desktop */
     .header-logo {
         width: 100%;
-        /* Ocupa a largura total do container para a centralização */
         text-align: center;
     }
 
@@ -613,7 +612,6 @@ ul {
         margin: 0;
         gap: 20px;
         align-items: center;
-        /* Centralização dos Links no Desktop */
         justify-content: center;
         flex-wrap: nowrap;
         width: 100%;
