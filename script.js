@@ -6,11 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
 
     // Define o prefixo do caminho absoluto para a pasta de efeitos
-    // ATENÇÃO: Verifique se '/ZerasCraft/' é o caminho correto para a raiz do seu repositório.
-    const AUDIO_BASE_PATH = 'assets/audios/effects/';
+    // ATENÇÃO: Corrigido para Caminho Absoluto (usando o placeholder /ZerasCraft/)
+    const AUDIO_BASE_PATH = '/ZerasCraft/assets/audios/effects/';
 
     // Define os caminhos e pre-carrega os sons
-    // Agora usamos o Caminho Absoluto completo para garantir o carregamento
     const linkSound = new Audio(AUDIO_BASE_PATH + 'link.mp3');
     const cardSound = new Audio(AUDIO_BASE_PATH + 'card.mp3');
     const buttonSound = new Audio(AUDIO_BASE_PATH + 'button.mp3');
