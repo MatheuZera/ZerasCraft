@@ -176,7 +176,7 @@ h4,
 h5,
 h6 {
     margin-bottom: 1rem;
-    font-family: var(--fonte-titulo); 
+    font-family: var(--fonte-titulo);
     color: var(--cor-texto-claro);
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -190,30 +190,30 @@ p {
 
 /* Os títulos recebem seus tamanhos específicos */
 h1 {
-    font-size: 3rem; 
+    font-size: 3rem;
 }
 
 h2 {
-    font-size: 2rem; 
+    font-size: 2rem;
 }
 
 h3 {
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
     font-family: var(--fonte-subtitulo);
 }
 
 h4 {
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
     font-family: var(--fonte-subtitulo);
 }
 
 h5 {
-    font-size: 1rem; 
+    font-size: 1rem;
     font-family: var(--fonte-subtitulo);
 }
 
 h6 {
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
     font-family: var(--fonte-subtitulo);
 }
 
@@ -402,7 +402,7 @@ ul {
 /* ====================================================================================================================== */
 .main-header {
     width: 100%;
-    position: fixed;
+    position: fixed; /* Comportamento Padrão: Fixo */
     top: -12px;
     left: 0;
     z-index: 1001;
@@ -412,7 +412,6 @@ ul {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
-    /* Centraliza o wrapper (container header-content) */
     align-items: center;
     padding: 50px 0;
     height: 70px;
@@ -466,24 +465,26 @@ ul {
 }
 
 /* ============ */
-/* NAVEGAÇÃO PARA MOBILE 768PX */
+/* NAVEGAÇÃO PARA MOBILE 768PX (AGORA FIXADA) */
 /* ============ */
 @media (max-width: 768px) {
     .main-header {
         height: 55px;
         padding: 5px 0;
-        top: -5px;
-        /* Define a referência para o posicionamento absoluto do logo/botão */
-        position: relative;
-        /* Remove o flexbox padrão para usar o posicionamento absoluto */
-        display: block;
+        top: 0; /* Agora rente ao topo */
+        
+        /* CORREÇÃO: Força a posição fixa para garantir que ele não role. */
+        position: fixed; 
+        
+        /* Garantir que o display seja flexível para centralizar o logo/botão
+           ou use block se o posicionamento for absoluto */
+        display: block; 
     }
 
     /* O wrapper no mobile apenas garante a largura máxima e padding */
     .container.header-content {
         padding: 0 5px;
         flex-direction: row;
-        /* Remove o flexbox no mobile para o wrapper */
         display: block;
     }
 
@@ -491,12 +492,10 @@ ul {
     .header-logo {
         font-size: 1.2em;
         margin: 0;
-        /* Remove qualquer margem que possa deslocar */
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        /* Centraliza 100% no meio */
         width: auto;
         white-space: nowrap;
     }
@@ -528,7 +527,8 @@ ul {
 
     .main-nav {
         display: flex;
-        position: fixed;
+        /* O menu lateral deve ser fixed para cobrir toda a tela */
+        position: fixed; 
         top: 0;
         left: -100%;
         width: 100%;
@@ -543,7 +543,7 @@ ul {
         transition: left 0.5s ease-in-out;
         z-index: 999;
         overflow-y: auto;
-        padding-top: 70px;
+        padding-top: 70px; /* Garante espaço abaixo do header fixo */
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
     }
 
@@ -591,7 +591,6 @@ ul {
     /* Garantir que o logo fique perfeitamente centralizado no desktop */
     .header-logo {
         width: 100%;
-        /* Ocupa a largura total do container para a centralização */
         text-align: center;
     }
 
@@ -613,7 +612,6 @@ ul {
         margin: 0;
         gap: 20px;
         align-items: center;
-        /* Centralização dos Links no Desktop */
         justify-content: center;
         flex-wrap: nowrap;
         width: 100%;
@@ -2992,6 +2990,17 @@ h4 {
         padding: 0 0px;
         /* Adiciona um pequeno padding lateral para telas muito pequenas */
     }
+
+    .acordeao-painel {
+        padding: 0 25px;
+        background-color: var(--cor-card-hover);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border-top: 1px solid var(--cor-bordas);
+        margin-right: 65px;
+        border-radius: 10px;
+    }
 }
 
 /* ====================================================================================================================== */
@@ -3702,7 +3711,9 @@ h4 {
 
 /* 3. Estilo do Cursor Piscante (Blinking Caret) */
 @keyframes blink-caret {
-    from, to {
+
+    from,
+    to {
         border-color: transparent
     }
 
@@ -11683,13 +11694,14 @@ card-grande .card-button:hover {
     padding: 40px 20px;
     max-width: var(--max-width-content);
     margin: 0 auto;
-    text-align: center; 
+    text-align: center;
 }
 
 .section-title {
     /* Herdando as regras de h1/h2 corrigidas */
     margin-bottom: 0.5rem;
-    color: var(--cor-primaria); /* Usando o verde para o título */
+    color: var(--cor-primaria);
+    /* Usando o verde para o título */
 }
 
 .section-description {
@@ -11701,32 +11713,37 @@ card-grande .card-button:hover {
 
 /* 1. Grade de Colunas (CORREÇÃO CRÍTICA: AGORA É FLEXBOX) */
 .grid-container {
-    display: flex; /* CRÍTICO: Usa Flexbox para controle de linha */
-    flex-wrap: wrap; /* Permite a quebra de linha após o 4º card */
-    gap: var(--gap-grid); /* Espaçamento entre os cards */
+    display: flex;
+    /* CRÍTICO: Usa Flexbox para controle de linha */
+    flex-wrap: wrap;
+    /* Permite a quebra de linha após o 4º card */
+    gap: var(--gap-grid);
+    /* Espaçamento entre os cards */
     padding: var(--padding-card) 0;
-    
+
     /* CRÍTICO: Centraliza o GRUPO de cards (1, 2, 3...) na linha atual */
-    justify-content: center; 
-    
+    justify-content: center;
+
     /* Garante que ele utilize toda a largura disponível */
     width: 100%;
 }
 
 /* 2. Estilo Base do Card */
 .content-card {
-    background-color: var(--cor-card-bg); /* Azul Marinho Escuro */
+    background-color: var(--cor-card-bg);
+    /* Azul Marinho Escuro */
     border: 1px solid var(--cor-bordas);
     border-radius: var(--border-radius);
-    overflow: hidden; 
+    overflow: hidden;
     box-shadow: var(--sombra-card);
     transition: var(--transicao-card-hover);
     display: flex;
     flex-direction: column;
 
     /* CRÍTICO: Define o tamanho do card para caber 4 na linha com espaçamento (Flexbox) */
-    flex-basis: 22%; 
-    max-width: 350px; /* Impede que ele fique gigante em telas muito largas */
+    flex-basis: 22%;
+    max-width: 350px;
+    /* Impede que ele fique gigante em telas muito largas */
 }
 
 /* Efeito de Hover (Animação) */
@@ -11734,8 +11751,10 @@ card-grande .card-button:hover {
     /* Efeito de Levantamento e Sombra */
     transform: translateY(-8px);
     box-shadow: var(--sombra-card-hover);
-    background-color: var(--cor-card-hover); /* Fundo um pouco mais claro no hover */
-    border-color: var(--cor-primaria); /* Borda destaca no hover */
+    background-color: var(--cor-card-hover);
+    /* Fundo um pouco mais claro no hover */
+    border-color: var(--cor-primaria);
+    /* Borda destaca no hover */
 }
 
 /* 3. Estilização da Miniatura (Thumbnail) */
@@ -11743,7 +11762,7 @@ card-grande .card-button:hover {
     position: relative;
     width: 100%;
     /* Define a proporção da miniatura (ex: 16:9) */
-    padding-top: 56.25%; 
+    padding-top: 56.25%;
     overflow: hidden;
 }
 
@@ -11753,20 +11772,21 @@ card-grande .card-button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     transition: transform 0.4s ease-out;
 }
 
 /* Zoom Sutil na Imagem ao passar o mouse sobre o Card */
 .content-card:hover .card-thumbnail {
-    transform: scale(1.05); 
+    transform: scale(1.05);
 }
 
 .card-tag-amarela {
     position: absolute;
     top: 5px;
     right: 10px;
-    background-color: var(--cor-destaque); /* Amarelo Dourado */
+    background-color: var(--cor-destaque);
+    /* Amarelo Dourado */
     color: var(--cor-texto-escuro);
     font-family: var(--fonte-mini);
     padding: 4px 8px;
@@ -11779,7 +11799,47 @@ card-grande .card-button:hover {
     position: absolute;
     top: 5px;
     right: 10px;
-    background-color: var(--color-text-light); /* Amarelo Dourado */
+    background-color: var(--color-text-light);
+    /* Amarelo Dourado */
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.card-tag-vermelha {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: #ff7b00;
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.card-tag-verde {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: #00FF00;
+    color: var(--cor-texto-escuro);
+    font-family: var(--fonte-mini);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.card-tag-azul {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: #03e4f4;
     color: var(--cor-texto-escuro);
     font-family: var(--fonte-mini);
     padding: 4px 8px;
@@ -11791,14 +11851,15 @@ card-grande .card-button:hover {
 /* 4. Conteúdo de Texto */
 .card-content {
     padding: var(--padding-card);
-    flex-grow: 1; /* Faz o conteúdo esticar para o card ficar alinhado */
+    flex-grow: 1;
+    /* Faz o conteúdo esticar para o card ficar alinhado */
     display: flex;
     flex-direction: column;
 }
 
 .card-title {
     font-family: var(--fonte-subtitulo);
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
     color: var(--cor-fundo-claro);
     margin-bottom: 0.5rem;
 }
@@ -11808,7 +11869,8 @@ card-grande .card-button:hover {
     font-size: 0.95rem;
     color: var(--cor-card-text);
     margin-bottom: 1rem;
-    flex-grow: 1; /* Empurra o botão para baixo */
+    flex-grow: 1;
+    /* Empurra o botão para baixo */
 }
 
 /* 5. Estilização do Botão */
@@ -11830,7 +11892,7 @@ card-grande .card-button:hover {
 
 .card-button:hover {
     background-color: var(--cor-secundaria);
-    text-decoration: none; 
+    text-decoration: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
@@ -11848,21 +11910,24 @@ card-grande .card-button:hover {
 
 @media (max-width: 1200px) {
     .content-card {
-        flex-basis: 31%; /* 3 cards por linha */
+        flex-basis: 31%;
+        /* 3 cards por linha */
     }
 }
 
 @media (max-width: 992px) {
     .content-card {
-        flex-basis: 48%; /* 2 cards por linha */
+        flex-basis: 48%;
+        /* 2 cards por linha */
     }
 }
 
 @media (max-width: 576px) {
     .content-card {
         /* Garante 1 card por linha e centralizado */
-        flex-basis: 100%; 
-        max-width: 400px; /* Limita o tamanho do card em mobile para telas pequenas */
+        flex-basis: 100%;
+        max-width: 400px;
+        /* Limita o tamanho do card em mobile para telas pequenas */
     }
 }
 
@@ -11878,7 +11943,8 @@ card-grande .card-button:hover {
     transform: translateX(-50%);
     z-index: 1000;
     width: 90%;
-    max-width: 400px; /* Limite a largura para não ser muito invasivo */
+    max-width: 400px;
+    /* Limite a largura para não ser muito invasivo */
 }
 
 .status-notification {
@@ -11900,25 +11966,29 @@ card-grande .card-button:hover {
 
 /* Estilo para SUCESSO/STATUS (Verde - usa cor primária) */
 .success-status {
-    background-color: var(--cor-primaria); /* Fundo Verde */
-    color: var(--cor-btn-text); /* Texto Branco */
+    background-color: var(--cor-primaria);
+    /* Fundo Verde */
+    color: var(--cor-btn-text);
+    /* Texto Branco */
     border: 1px solid var(--cor-secundaria);
 }
 
 .success-status .status-icon {
-    color: var(--cor-destaque); /* Ícone Amarelo */
+    color: var(--cor-destaque);
+    /* Ícone Amarelo */
 }
 
 /* Estilo para ERRO (Vermelho escuro/marrom, pois você não tem um vermelho forte) */
 .error-status {
     /* Usando uma cor escura com um tom de erro para contraste */
-    background-color: #A93226; 
+    background-color: #A93226;
     color: var(--cor-texto-claro);
     border: 1px solid #7B241C;
 }
 
 .error-status .status-icon {
-    color: var(--cor-destaque); /* Ícone Amarelo de Alerta */
+    color: var(--cor-destaque);
+    /* Ícone Amarelo de Alerta */
 }
 
 /* ====================================================================================================================== */
@@ -11931,11 +12001,12 @@ card-grande .card-button:hover {
     display: grid;
     /* Configura 4 colunas que se adaptam, com um mínimo de 250px */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--gap-grid); /* Espaçamento entre os cards */
-    
+    gap: var(--gap-grid);
+    /* Espaçamento entre os cards */
+
     /* Centraliza o grid dentro da seção, se o container for mais estreito */
-    justify-content: center; 
-    
+    justify-content: center;
+
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -11943,11 +12014,13 @@ card-grande .card-button:hover {
 
 /* 2. ESTILO BASE DO CARD DE CITAÇÃO */
 .card-citacao {
-    display: flex; /* Flex para organizar a foto e o texto */
-    flex-direction: column; /* Coloca a foto em cima do texto (mais adequado para 4 colunas) */
+    display: flex;
+    /* Flex para organizar a foto e o texto */
+    flex-direction: column;
+    /* Coloca a foto em cima do texto (mais adequado para 4 colunas) */
     align-items: center;
     text-align: center;
-    
+
     /* Estilo visual do card */
     background-color: var(--cor-card-bg);
     border: 1px solid var(--cor-bordas);
@@ -11955,7 +12028,8 @@ card-grande .card-button:hover {
     box-shadow: var(--sombra-card);
     transition: var(--transicao-card-hover);
     padding: 25px;
-    height: 100%; /* Garante que todos os cards na mesma linha tenham a mesma altura */
+    height: 100%;
+    /* Garante que todos os cards na mesma linha tenham a mesma altura */
 }
 
 .card-citacao:hover {
@@ -11972,7 +12046,7 @@ card-grande .card-button:hover {
     object-fit: cover;
     margin-bottom: 20px;
     /* Borda de destaque */
-    border: 3px solid var(--cor-primaria); 
+    border: 3px solid var(--cor-primaria);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -11996,7 +12070,8 @@ card-grande .card-button:hover {
     font-size: 1.1em;
     line-height: 1.5;
     margin-bottom: 15px;
-    flex-grow: 1; /* Empurra o botão para baixo para alinhamento */
+    flex-grow: 1;
+    /* Empurra o botão para baixo para alinhamento */
 }
 
 /* 5. INFORMAÇÕES DO AUTOR */
