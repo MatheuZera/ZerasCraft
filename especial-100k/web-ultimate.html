@@ -168,7 +168,8 @@
                             </icone-imagem>
                             <h3 class="card-title">Adobe Acrobat Web</h3>
                             <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados.</p>
+                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates
+                                licenciados.</p>
 
                             <a href="https://acrobat.adobe.com/" class="card-button">
                                 BAIXAR <i class="fas fa-arrow-right"></i>
@@ -183,7 +184,8 @@
                             </icone-imagem>
                             <h3 class="card-title">Adobe Behance</h3>
                             <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados.</p>
+                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates
+                                licenciados.</p>
 
                             <a href="https://www.behance.net/" class="card-button">
                                 BAIXAR <i class="fas fa-arrow-right"></i>
@@ -198,7 +200,8 @@
                             </icone-imagem>
                             <h3 class="card-title">Adobe Color</h3>
                             <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Uma ferramenta para criar, explorar e salvar paletas de cores.</p>
+                            <p class="card-description">Uma ferramenta para criar, explorar e salvar paletas de cores.
+                            </p>
 
                             <a href="https://color.adobe.com/pt/create/color-wheel" class="card-button">
                                 BAIXAR <i class="fas fa-arrow-right"></i>
@@ -213,7 +216,8 @@
                             </icone-imagem>
                             <h3 class="card-title">Adobe Express</h3>
                             <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados.</p>
+                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates
+                                licenciados.</p>
 
                             <a href="https://new.express.adobe.com/" class="card-button">
                                 BAIXAR <i class="fas fa-arrow-right"></i>
@@ -228,7 +232,8 @@
                             </icone-imagem>
                             <h3 class="card-title">Adobe Firefly</h3>
                             <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados.</p>
+                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates
+                                licenciados.</p>
 
                             <a href="https://firefly.adobe.com/" class="card-button">
                                 BAIXAR <i class="fas fa-arrow-right"></i>
@@ -243,7 +248,8 @@
                             </icone-imagem>
                             <h3 class="card-title">Adobe Fonts</h3>
                             <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Uma biblioteca de milhares de fontes que podem ser sincronizadas e usadas em todos os aplicativos da Creative Cloud.</p>
+                            <p class="card-description">Uma biblioteca de milhares de fontes que podem ser sincronizadas
+                                e usadas em todos os aplicativos da Creative Cloud.</p>
 
                             <a href="https://fonts.adobe.com/" class="card-button">
                                 BAIXAR <i class="fas fa-arrow-right"></i>
@@ -258,7 +264,8 @@
                             </icone-imagem>
                             <h3 class="card-title">Adobe Stock</h3>
                             <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates licenciados.</p>
+                            <p class="card-description">Um serviço de banco de imagens, vídeos, ilustrações e templates
+                                licenciados.</p>
 
                             <a href="https://stock.adobe.com/" class="card-button">
                                 BAIXAR <i class="fas fa-arrow-right"></i>
@@ -351,7 +358,7 @@
             console.log("Sistema de Áudio de Fundo Invisível carregado.");
 
             const backgroundAudio = document.getElementById('backgroundAudio');
-            let audioStarted = false;
+            let audioStarted = false; // Estado para saber se o áudio foi iniciado pelo menos uma vez
 
             // Verifica se a tag <audio> existe
             if (!backgroundAudio) {
@@ -377,17 +384,37 @@
                         document.body.removeEventListener('touchstart', startAudio);
                     })
                     .catch(error => {
-                        // Se houver erro (bloqueio do navegador), o listener continua ativo
                         console.log("Aguardando interação do usuário para iniciar o áudio...");
-                        // Se o caminho da música estiver errado, este erro também será capturado.
                         console.error("Erro ao tentar tocar o áudio:", error.message);
                     });
             };
 
             // Adiciona listeners para os eventos de interação do usuário mais comuns
-            // A música será iniciada no primeiro evento que ocorrer (clique ou toque).
             document.body.addEventListener('click', startAudio);
             document.body.addEventListener('touchstart', startAudio);
+        });
+
+        // ===================================================================
+        // CORREÇÃO PARA O PROBLEMA DO BOTÃO VOLTAR / BFCACHE
+        // ===================================================================
+        window.addEventListener('pageshow', (event) => {
+            // Verifica se a página foi restaurada do BFcache (botão Voltar)
+            if (event.persisted) {
+                console.log("Página restaurada do cache. Tentando resumir o áudio.");
+
+                const backgroundAudio = document.getElementById('backgroundAudio');
+                if (backgroundAudio) {
+                    // Tenta retomar a reprodução. Geralmente é permitido se já tocou antes.
+                    backgroundAudio.play()
+                        .then(() => {
+                            console.log("Música de fundo resumida com sucesso após retorno.");
+                        })
+                        .catch(error => {
+                            console.error("Falha ao resumir o áudio via BFcache:", error.message);
+                            // Se falhar, o listener de clique/toque original deve ser usado na próxima interação.
+                        });
+                }
+            }
         });
     </script>
 </body>
