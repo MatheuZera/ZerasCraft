@@ -677,6 +677,28 @@ ul {
     /* background-attachment: fixed; */
 }
 
+.hero-section-especial {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    /* Height do banner. Ajuste este valor como preferir. */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-image: url('assets/images/');
+    /* Caminho ajustável */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+}
+
 /* Para Hero Sections menores em outras páginas */
 .hero-section.small-hero {
     height: 350px;
