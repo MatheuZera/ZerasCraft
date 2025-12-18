@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     const buttonElements = document.querySelectorAll(
-        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top, .btn-download, .item-link, .gallery-image, .container-cards-grandes, .card-button, .pricing-features'
+        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top, .btn-download, .item-link, .gallery-image, .container-cards-grandes, .card-button, .pricing-features, .fab'
     );
 
     const textLinkElements = document.querySelectorAll(
