@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Define o prefixo do caminho absoluto para a pasta de efeitos
     // ATENÇÃO: Corrigido para Caminho Absoluto (usando o placeholder /ZerasCraft/)
-    const AUDIO_BASE_PATH = 'assets/audios/effects/';
+    const AUDIO_BASE_PATH = 'effects/';
 
     // Define os caminhos e pre-carrega os sons
     const linkSound = new Audio(AUDIO_BASE_PATH + 'link.mp3');
