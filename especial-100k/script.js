@@ -242,4 +242,34 @@ document.addEventListener('DOMContentLoaded', () => {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
+        // 1. Pega todos os links da página
+    const links = document.querySelectorAll('a');
+
+    links.forEach(link => {
+        const href = link.getAttribute('href');
+
+        // Ignora se o link for apenas um ID de âncora (#) ou vazio
+        if (!href || href.startsWith('#') || href.startsWith('javascript:')) {
+            return;
+        }
+
+        // 2. Verifica se o link é EXTERNO
+        // Ele é externo se começar com http e não contiver o seu domínio atual
+        const isExternal = href.startsWith('http') && !href.includes(window.location.hostname);
+
+        if (isExternal) {
+            // Configura para abrir em nova aba
+            link.setAttribute('target', '_blank');
+            // Boa prática de segurança para links externos
+            link.setAttribute('rel', 'noopener noreferrer'); 
+            
+            console.log(`Link Externo detectado: ${href} (Abrirá em nova aba)`);
+        } else {
+            // 3. Link INTERNO (suas páginas)
+            // Garante que ele abra na mesma aba (padrão do navegador)
+            link.setAttribute('target', '_self');
+            
+            console.log(`Link Interno detectado: ${href} (Abrirá na mesma aba)`);
+        }
+    });
 });
