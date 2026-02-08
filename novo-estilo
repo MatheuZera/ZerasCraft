@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeras Craft | Universo Minecraft</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="mobile-nav">
+        <div class="logo header-logo">ZERAS CRAFT</div>
+        <ul class="nav-links">
+            <button class="burger" onclick="toggleSidebar()">
+                <i id="burgerIcon" class="fas fa-bars"></i>
+            </button>
+        </ul>
+    </nav>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>MENU</span>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Jogos</a></li>
+            <li><a href="#">Comunidade</a></li>
+            <li><a href="#">Suporte</a></li>
+        </ul>
+        <a href="#" class="btn-sidebar">JOGAR AGORA</a>
+    </aside>
+
+    <header class="pc-header">
+        <div class="container header-flex">
+            <div class="logo header-logo">ZERAS CRAFT</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">JOGOS <i class="fas fa-angle-down"></i></a></li>
+                <li><a href="#">COMUNIDADE</a></li>
+                <li><a href="#">MERCADO</a></li>
+                <li><a href="#">SUPORTE</a></li>
+            </ul>
+            <div class="header-actions">
+                <span class="server-ip" onclick="copyIP()">jogar.zerascraft.net</span>
+                <a href="#" class="btn-green">LOJA VIP</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg"
+                style="background-image: url('https://www.minecraft.net/content/dam/games/minecraft/key-art/Mounts_Mayhem_MainBanner.jpg')">
+            </div>
+            <div class="container hero-content reveal">
+                <span class="hero-tag">ATUALIZAÇÃO 2.0</span>
+                <h1>MOUNTS OF MAYHEM</h1>
+                <p>Uma nova arma para empunhar, montarias para domar e inimigos para enfrentar. Jogue hoje mesmo no
+                    Zeras Craft!</p>
+                <div class="hero-btns">
+                    <button class="btn-big-green">JOGAR AGORA <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-big-outline">VER TRAILER</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-games">
+            <div class="container">
+                <div class="section-header center reveal">
+                    <h2>DESCUBRA NOSSOS MODOS</h2>
+                    <a href="#" class="link-green">Ver todos os modos ></a>
+                </div>
+
+                <div class="games-grid">
+                    <div class="game-card reveal">
+                        <div class="card-img">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Java_Bedrock_600x600.jpg"
+                                alt="Survival">
+                        </div>
+                        <div class="card-info">
+                            <h3>Survival 1.21</h3>
+                            <p>Sobrevivência clássica com economia balanceada, terrenos e clãs.</p>
+                            <div class="platforms">
+                                <i class="fab fa-windows"></i> <i class="fab fa-android"></i> <i
+                                    class="fab fa-apple"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card reveal delay-1">
+                        <div class="card-img">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Dungeons_600x600.jpg"
+                                alt="Dungeons">
+                        </div>
+                        <div class="card-info">
+                            <h3>Dungeons RPG</h3>
+                            <p>Masmorras instanciadas, chefes customizados e loot lendário.</p>
+                            <div class="platforms">
+                                <i class="fas fa-users"></i> MMO RPG
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card reveal delay-2">
+                        <div class="card-img">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Legends_600x600.jpg"
+                                alt="PvP">
+                        </div>
+                        <div class="card-info">
+                            <h3>Arena Legends</h3>
+                            <p>Combate estratégico PvP. Bedwars, Skywars e The Bridge.</p>
+                            <div class="platforms">
+                                <i class="fas fa-skull"></i> COMPETITIVO
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-card reveal delay-3">
+                        <div class="card-img">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/screenshots/Minecraft_Preview_26.10.21.jpg"
+                                alt="Criativo">
+                        </div>
+                        <div class="card-info">
+                            <h3>Criativo Free</h3>
+                            <p>Construa sem limites em plots gigantes com acesso ao WorldEdit.</p>
+                            <div class="platforms">
+                                <i class="fas fa-cube"></i> SANDBOX
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="promo-gold">
+            <div class="container reveal">
+                <h2 class="gold-title">Não perca essa chance</h2>
+                <p class="promo-desc">Atualize sua jogabilidade com o VIP Lendário! Comece a explorar hoje mesmo com
+                    vantagens exclusivas.</p>
+
+                <div class="promo-box-wrapper">
+                    <div class="promo-box">
+                        <div class="promo-image">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/marketplace/MythicUtilities_587x330.jpg"
+                                alt="Promo">
+                        </div>
+                        <div class="promo-details">
+                            <h3>VIP LENDÁRIO</h3>
+                            <span class="sub-txt">Pacote de Vantagens</span>
+                            <div class="rating"><i class="fas fa-star"></i> 5.0</div>
+                            <div class="price-tag">OFERTA LIMITADA</div>
+                        </div>
+                    </div>
+                    <div class="glow-effect"></div>
+                </div>
+
+                <div class="promo-actions">
+                    <button class="btn-gold">ENTRAR E OBTER <i class="fas fa-chevron-right"></i></button>
+                    <a href="#" class="link-gold">VER TODOS OS PACOTES ></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-links-section">
+            <div class="container">
+                <div class="links-grid reveal">
+                    <a href="#" class="link-btn-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Loja Oficial</span>
+                    </a>
+                    <a href="#" class="link-btn-card">
+                        <i class="fas fa-map"></i>
+                        <span>Mapa Dinâmico</span>
+                    </a>
+                    <a href="#" class="link-btn-card">
+                        <i class="fas fa-gavel"></i>
+                        <span>Regras</span>
+                    </a>
+                    <a href="#" class="link-btn-card">
+                        <i class="fas fa-discord"></i>
+                        <span>Discord</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="marketplace-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>DESTAQUES DA LOJA</h2>
+                    <div class="tooltip-container">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="tooltip-text">Itens exclusivos resetam mensalmente!</span>
+                    </div>
+                </div>
+
+                <div class="market-grid">
+                    <div class="market-card reveal">
+                        <div class="market-badge">NOVO</div>
+                        <img src="https://www.minecraft.net/content/dam/games/minecraft/marketplace/Generic_Avatar_Base.jpg"
+                            alt="Skin Pack">
+                        <div class="market-body">
+                            <h3>Pacote de Skins: Guardiões</h3>
+                            <div class="read-more-wrapper">
+                                <p class="text-content">Este pacote inclui 15 skins lendárias baseadas nos mobs do
+                                    oceano. Ideal para jogadores que amam exploração marítima e querem se destacar no
+                                    lobby principal com efeitos de partículas únicos.</p>
+                                <button class="read-more-toggle">Ler mais...</button>
+                            </div>
+                            <div class="market-footer">
+                                <span class="price">R$ 29,90</span>
+                                <button class="btn-buy">COMPRAR <i class="fas fa-cart-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="market-card reveal delay-1">
+                        <img src="https://www.minecraft.net/content/dam/games/minecraft/marketplace/ResourcePack_Icon.jpg"
+                            alt="Texture Pack">
+                        <div class="market-body">
+                            <h3>Textura Ultra HD</h3>
+                            <div class="read-more-wrapper">
+                                <p class="text-content">Transforme seu Minecraft com sombras realistas e texturas de
+                                    alta resolução. Compatível com a versão 1.21 e otimizado para não causar lag em
+                                    computadores intermediários.</p>
+                                <button class="read-more-toggle">Ler mais...</button>
+                            </div>
+                            <div class="market-footer">
+                                <span class="price">R$ 19,90</span>
+                                <button class="btn-buy ghost">DETALHES</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="internal-nav reveal">
+            <div class="container nav-pills">
+                <a href="#downloads" class="pill-btn tooltip-container">
+                    Downloads <i class="fas fa-download"></i>
+                    <span class="tooltip-text">Baixe mods e launchers</span>
+                </a>
+                <a href="#recursos" class="pill-btn tooltip-container">
+                    Recursos <i class="fas fa-gem"></i>
+                    <span class="tooltip-text">Texturas e Shaders</span>
+                </a>
+                <a href="#abas-interativas" class="pill-btn">Avisos</a>
+                <a href="#compras" class="pill-btn gold">Loja VIP</a>
+            </div>
+        </nav>
+
+        <section class="ranking-section-bg" style="background-image: url('URL_DA_SUA_IMAGEM_DE_MINERACAO.jpg');">
+            <div class="tabs-overlay"></div>
+            <div class="container tabs-relative">
+                <div class="section-header center reveal">
+                    <h2>LENDAS DO SERVIDOR</h2>
+                    <p>Os jogadores que dominam o Zeras Craft</p>
+                </div>
+
+                <div class="ranking-grid">
+                    <div class="rank-card reveal">
+                        <div class="rank-badge"><i class="fas fa-coins"></i> MAGNATAS</div>
+                        <div class="rank-list">
+                            <div class="rank-item first">
+                                <img src="https://minotar.net/helm/Steve/50.png" alt="Skin">
+                                <span class="name">Steve</span>
+                                <span class="value">1.5M</span>
+                            </div>
+                            <div class="rank-item">
+                                <img src="https://minotar.net/helm/Alex/40.png" alt="Skin">
+                                <span class="name">Alex</span>
+                                <span class="value">900k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section reveal">
+            <div class="container">
+                <h2 class="center">DÚVIDAS FREQUENTES</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAcc(this)">
+                            <span>Como entro no servidor?</span>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Basta copiar nosso IP (jogar.zerascraft.net) e adicionar na sua lista de servidores na
+                                versão 1.21.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section-bg" style="background-image: url('URL_DA_SUA_IMAGEM_DO_SPAWN.jpg');">
+            <div class="tabs-overlay"></div>
+            <div class="container tabs-relative">
+                <h2 class="center">NOSSO UNIVERSO</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item reveal">
+                        <img src="https://www.minecraft.net/content/dam/games/minecraft/screenshots/Minecraft_Preview_26.10.21.jpg"
+                            alt="Print 1">
+                        <div class="gallery-hover"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="gallery-item reveal">
+                        <img src="https://www.minecraft.net/content/dam/games/minecraft/screenshots/Minecraft_Preview_26.10.21.jpg"
+                            alt="Print 2">
+                        <div class="gallery-hover"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="gallery-item reveal">
+                        <img src="https://www.minecraft.net/content/dam/games/minecraft/screenshots/Minecraft_Preview_26.10.21.jpg"
+                            alt="Print 3">
+                        <div class="gallery-hover"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="side-banner-bg reveal"
+            style="background-image: url('https://www.minecraft.net/content/dam/games/minecraft/screenshots/Minecraft_Preview_26.10.21.jpg');">
+
+            <div class="banner-overlay"></div>
+
+            <div class="container banner-relative">
+                <div class="banner-flex">
+                    <div class="banner-image">
+                        <img src="https://www.minecraft.net/content/dam/games/minecraft/screenshots/Minecraft_Preview_26.10.21.jpg"
+                            alt="Update">
+                        <div class="image-border-effect"></div>
+                    </div>
+
+                    <div class="banner-text">
+                        <span class="badge">NOVIDADE</span>
+                        <h2>Otimização de Performance</h2>
+                        <p>Nosso novo cliente personalizado reduz o uso de memória em até 40%. Experimente a fluidez
+                            total mesmo em máquinas modestas.</p>
+
+                        <ul class="custom-list">
+                            <li><i class="fas fa-bolt"></i> <span>+60 FPS garantidos</span></li>
+                            <li><i class="fas fa-shield-alt"></i> <span>Anti-cheat integrado</span></li>
+                            <li><i class="fas fa-paint-brush"></i> <span>Shaders pré-instalados</span></li>
+                        </ul>
+
+                        <div class="banner-actions">
+                            <button class="btn-green">SAIBA MAIS <i class="fas fa-external-link-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="abas-interativas" class="tabs-section">
+            <div class="container">
+                <div class="section-header center">
+                    <h2>CENTRAL DE INFORMAÇÕES</h2>
+                </div>
+                <div class="tabs-container reveal">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" onclick="openTab(event, 'tab-regras')">REGRAS</button>
+                        <button class="tab-btn" onclick="openTab(event, 'tab-equipe')">EQUIPE</button>
+                        <button class="tab-btn" onclick="openTab(event, 'tab-votos')">VOTAÇÃO</button>
+                    </div>
+                    <div id="tab-regras" class="tab-content active">
+                        <h3>Regras da Comunidade</h3>
+                        <p>1. Proibido uso de clientes hackers ou qualquer vantagem injusta.</p>
+                        <p>2. Respeite todos os jogadores no chat global.</p>
+                        <p>3. Não abuse de bugs; reporte-os para ganhar recompensas.</p>
+                    </div>
+                    <div id="tab-equipe" class="tab-content">
+                        <h3>Nossa Staff</h3>
+                        <p>Nossa equipe está online 24/7 no Discord para ajudar você com qualquer problema técnico ou
+                            denúncia.</p>
+                    </div>
+                    <div id="tab-votos" class="tab-content">
+                        <h3>Vote e Ganhe</h3>
+                        <p>Vote diariamente no servidor para receber Chaves de Caixa Misteriosa e multiplicadores de
+                            coins!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="downloads" class="download-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>DOWNLOADS E UTILITÁRIOS</h2>
+                </div>
+                <div class="download-grid">
+                    <div class="dl-card reveal">
+                        <div class="dl-img">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Java_Bedrock_600x600.jpg"
+                                alt="Launcher">
+                        </div>
+                        <div class="dl-body">
+                            <h4>Launcher Oficial</h4>
+                            <p>Acesso rápido a todos os nossos servidores com um clique.</p>
+                            <button class="btn-dl"><i class="fas fa-download"></i> DOWNLOAD .EXE</button>
+                        </div>
+                    </div>
+                    <div class="dl-card reveal delay-1">
+                        <div class="dl-img">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/marketplace/ResourcePack_Icon.jpg"
+                                alt="Textura">
+                        </div>
+                        <div class="dl-body">
+                            <h4>Pack de Texturas</h4>
+                            <p>Texturas oficiais do Zeras Craft para melhor visibilidade em PvP.</p>
+                            <button class="btn-dl"><i class="fas fa-download"></i> DOWNLOAD .ZIP</button>
+                        </div>
+                    </div>
+                    <div class="dl-card reveal delay-2">
+                        <div class="dl-img">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Dungeons_600x600.jpg"
+                                alt="Mods">
+                        </div>
+                        <div class="dl-body">
+                            <h4>Modpack Essencial</h4>
+                            <p>Otimizações de som e interface para uma experiência imersiva.</p>
+                            <button class="btn-dl"><i class="fas fa-download"></i> DOWNLOAD .JAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="server-status-bar reveal">
+            <div class="container status-flex">
+                <div class="status-info">
+                    <span class="pulse-icon"></span>
+                    <strong>STATUS:</strong> <span id="online-count">Carregando jogadores...</span>
+                </div>
+                <div class="status-news">
+                    <marquee>🔥 Promoção de Verão: Use o cupom <strong>ZERAS20</strong> para 20% de desconto em toda a
+                        loja!</marquee>
+                </div>
+            </div>
+        </div>
+
+        <section class="pricing-section">
+            <div class="container">
+                <h2 class="section-title center reveal">Escolha sua Jornada</h2>
+                <div class="pricing-grid">
+                    <div class="price-card reveal">
+                        <div class="price-header">
+                            <h3>MEMBRO</h3>
+                            <div class="amount">Grátis</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check"></i> Acesso Global</li>
+                            <li><i class="fas fa-check"></i> Kits Iniciais</li>
+                            <li><i class="fas fa-times"></i> Nick Colorido</li>
+                            <li><i class="fas fa-times"></i> Prioridade na Fila</li>
+                        </ul>
+                        <button class="btn-price">JOGAR AGORA</button>
+                    </div>
+                    <div class="price-card featured reveal delay-1">
+                        <div class="popular-badge">MAIS POPULAR</div>
+                        <div class="price-header">
+                            <h3>VIP GOLD</h3>
+                            <div class="amount">R$ 15,00<span>/mês</span></div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check"></i> Tudo do Membro</li>
+                            <li><i class="fas fa-check"></i> Nick Dourado</li>
+                            <li><i class="fas fa-check"></i> 5 Home a mais</li>
+                            <li><i class="fas fa-check"></i> Voo no Lobby</li>
+                        </ul>
+                        <button class="btn-price gold">ASSINAR AGORA</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <div class="testimonial-slider reveal">
+                    <div class="testimonial-item">
+                        <img src="https://minotar.net/helm/Steve/100.png" alt="Avatar">
+                        <p>"O melhor survival que já joguei em anos. A comunidade é super receptiva e a economia é
+                            justa!"</p>
+                        <span>- @JogadorMaster</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="goals-section">
+            <div class="container reveal">
+                <h4>Meta Mensal da Comunidade (Reset em 15 dias)</h4>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 75%;">
+                        <span class="progress-text">75% - Próximo Evento: XP DOBRADO</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <div class="container">
+                <div class="video-wrapper reveal">
+                    <div class="video-header">
+                        <img src="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/img/minecraft-creeper-face.jpg"
+                            class="video-icon" alt="icon">
+                        <h3>Trailer Oficial - Season 5</h3>
+                    </div>
+                    <div class="video-frame">
+                        <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Mounts_Mayhem_MainBanner.jpg"
+                            alt="Video Thumbnail">
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                    </div>
+                    <div class="video-footer">
+                        <div class="video-text">
+                            <p>Explore seus próprios mundos, sobreviva à noite e crie tudo o que puder imaginar!</p>
+                            <span>Assista ao vídeo de jogabilidade completo no YouTube.</span>
+                        </div>
+                        <button class="btn-green">COMPRAR VIP AGORA <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="accordion-list reveal">
+                    <div class="acc-item">
+                        <div class="acc-trigger" onclick="toggleAcc(this)">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Dungeons_600x600.jpg"
+                                class="mini-icon">
+                            <span>Dúvidas Frequentes</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acc-content">
+                            <p>Aqui você encontra respostas sobre conexões, pagamentos e regras.</p>
+                        </div>
+                    </div>
+                    <div class="acc-item">
+                        <div class="acc-trigger" onclick="toggleAcc(this)">
+                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Legends_600x600.jpg"
+                                class="mini-icon">
+                            <span>Regras do Servidor</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="acc-content">
+                            <p>Leia atentamente para evitar punições e banimentos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <div class="container">
+                <h2 class="section-title reveal">ÚLTIMAS NOTÍCIAS</h2>
+                <div class="news-grid">
+                    <article class="news-card big reveal">
+                        <div class="news-thumb">
+                            <img
+                                src="https://www.minecraft.net/content/dam/games/minecraft/screenshots/SafetyCouncil_Thumbnail.jpg">
+                            <span class="badge-news">NEWS</span>
+                        </div>
+                        <div class="news-content">
+                            <h3>Atualização de Segurança</h3>
+                            <p>Novos sistemas anti-cheat implementados para garantir o fair play.</p>
+                        </div>
+                    </article>
+
+                    <article class="news-card small reveal">
+                        <div class="news-thumb">
+                            <img
+                                src="https://www.minecraft.net/content/dam/games/minecraft/screenshots/Minecraft_Preview_26.10.21.jpg">
+                            <span class="badge-news">UPDATE</span>
+                        </div>
+                        <div class="news-content">
+                            <h4>Patch Notes: v3.5.0</h4>
+                            <p>Correção de bugs no Skyblock.</p>
+                        </div>
+                    </article>
+
+                    <article class="news-card small reveal">
+                        <div class="news-thumb">
+                            <img
+                                src="https://www.minecraft.net/content/dam/games/minecraft/marketplace/MythicUtilities_587x330.jpg">
+                            <span class="badge-news">MARKET</span>
+                        </div>
+                        <div class="news-content">
+                            <h4>Novos Itens Míticos</h4>
+                            <p>Disponíveis na loja oficial.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container stats-flex reveal">
+                <div class="stat-item">
+                    <strong class="counter" data-target="1500">0</strong>
+                    <span>JOGADORES ON</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong class="counter" data-target="12000">0</strong>
+                    <span>CONTAS CRIADAS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong class="counter" data-target="365">0</strong>
+                    <span>DIAS ONLINE</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="music-player-container reveal">
+        <div class="player-controls">
+            <div class="now-playing">
+                <i class="fas fa-music"></i>
+                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
+            </div>
+
+            <div class="progress-area">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <span id="durationDisplay">0:00</span>
+            </div>
+
+            <div class="main-controls">
+                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
+                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
+                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
+                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+
+                <div class="volume-container">
+                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="backgroundAudio"></audio>
+
+    <div id="centralMessage" class="central-message">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message-content">
+            <strong>Título</strong>
+            <span>Informação</span>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-divider"></div>
+
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">ZERAS<span>CRAFT</span></div>
+                <p class="brand-description">
+                    O maior servidor de Minecraft da nova geração. Explore mundos infinitos, participe de eventos épicos
+                    e construa sua própria lenda.
+                </p>
+                <div class="newsletter-footer">
+                    <button class="btn-sidebar" onclick="showClickNotification('Sucesso', 'Você clicou no botão!')">
+                        CLIQUE AQUI
+                    </button>
+                    <h5>FIQUE POR DENTRO</h5>
+                    <form class="f-nav-form">
+                        <input type="email" placeholder="Seu melhor e-mail...">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>EXPLORAR</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Survival 1.21</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Skyblock RPG</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Bedwars Arena</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Criativo Free</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>UTILITÁRIOS</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Wiki do Servidor</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Trabalhe Conosco</a></li>
+                    <li><a href="#" class="status-indicator"><span class="dot"></span> Status do Server</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>COMUNIDADE</h4>
+                <p class="join-text">Junte-se a mais de 5.000 membros no nosso Discord oficial.</p>
+                <div class="social-grid">
+                    <a href="#" class="social-box discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-box youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <div class="legal">
+                    <p class="copyright-text"
+                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                        &copy;
+                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        Zeras Craft. Todos os direitos reservados.
+                    </p>
+
+                    <span class="mojang-disclaimer"
+                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                        Não afiliado à Mojang Studios ou Microsoft.
+                    </span>
+                </div>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-pix"></i>
+                    <i class="fas fa-barcode"></i>
+                </div>
+                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="effects.js"></script>
+    <script src="player.js"></script>
+</body>
+
+</html>

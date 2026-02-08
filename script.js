@@ -1,245 +1,215 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM totalmente carregado e pronto!");
+// Atualizar o ano do copyright automaticamente
+document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // =====================================
-    // Configuração de Áudio
-    // =====================================
-
-    // Define o prefixo do caminho absoluto para a pasta de efeitos
-    // ATENÇÃO: Corrigido para Caminho Absoluto (usando o placeholder /ZerasCraft/)
-    const AUDIO_BASE_PATH = 'assets/audios/effects/';
-
-    // Define os caminhos e pre-carrega os sons
-    const linkSound = new Audio(AUDIO_BASE_PATH + 'link.mp3');
-    const cardSound = new Audio(AUDIO_BASE_PATH + 'card.mp3');
-    const buttonSound = new Audio(AUDIO_BASE_PATH + 'button.mp3');
-    const selectSound = new Audio(AUDIO_BASE_PATH + 'select.mp3');
-    const buttonClickSound = new Audio(AUDIO_BASE_PATH + 'button-click.mp3');
-
-    linkSound.preload = 'auto';
-    cardSound.preload = 'auto';
-    buttonSound.preload = 'auto';
-    selectSound.preload = 'auto';
-    buttonClickSound.preload = 'auto';
-
-    /**
-     * Toca um som de forma controlada, clonando o áudio para evitar interrupções.
-     * @param {HTMLAudioElement} sound - O objeto de áudio a ser tocado.
-     */
-    function playSound(sound) {
-        const clonedSound = sound.cloneNode();
-        clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
+window.onscroll = function() {
+    const btn = document.querySelector('.back-to-top');
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "flex";
+    } else {
+        btn.style.display = "none";
     }
+};
 
-    // =====================================
-    // Gerenciamento de Eventos de Clique
-    // =====================================
+// 1. Sidebar Toggle
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const burgerIcon = document.getElementById('burgerIcon');
+    
+    // Abre ou fecha a sidebar
+    sidebar.classList.toggle('open');
+    
+    // Troca o ícone baseado no estado da sidebar
+    if (sidebar.classList.contains('open')) {
+        burgerIcon.classList.replace('fa-bars', 'fa-times');
+    } else {
+        burgerIcon.classList.replace('fa-times', 'fa-bars');
+    }
+}
 
-    document.addEventListener('click', (event) => {
-        const target = event.target.closest('a, button');
+// 2. Copiar IP
+function copyIP() {
+    const ip = "jogar.zerascraft.net";
+    navigator.clipboard.writeText(ip).then(() => {
+        alert("IP Copiado! Te esperamos no servidor.");
+    }).catch(err => {
+        console.error('Erro ao copiar', err);
+    });
+}
 
-        if (!target) {
-            return;
-        }
+// 3. Scroll Animation (Reveal)
+const observerOptions = {
+    threshold: 0.15, // Ativa quando 15% do elemento estiver visível
+    rootMargin: "0px 0px -50px 0px"
+};
 
-        const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
-        const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
-
-        if (isNavLink) {
-            // Toca o som de link para navegação
-            event.preventDefault();
-            playSound(linkSound);
-            setTimeout(() => {
-                window.location.href = target.href;
-            }, 300);
-        } else if (isSpecialButton) {
-            // Toca o som de clique para botões e links internos
-            playSound(buttonClickSound);
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); // Para de observar após animar
         }
     });
+}, observerOptions);
 
-    // =====================================
-    // Gerenciamento de Eventos de Hover
-    // =====================================
-
-    // Seletores para os elementos
-    const cardElements = document.querySelectorAll(
-        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card, .card-compact, .container-cards-grandes, .content-card, .cards-container, .card-citacao'
-    );
-
-    const buttonElements = document.querySelectorAll(
-        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top, .btn-download, .item-link, .gallery-image, .container-cards-grandes, .card-button, .pricing-features, .fab'
-    );
-
-    const textLinkElements = document.querySelectorAll(
-        'p a, span a, li a'
-    );
-
-    // Adiciona os event listeners
-    cardElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(cardSound));
-    });
-
-    buttonElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(buttonSound));
-    });
-
-    textLinkElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(selectSound));
-    });
-
-    // ==================================================================================================================================================
-    // 1. Menu Hambúrguer (Otimizado para mais páginas)
-    // ==================================================================================================================================================
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.main-nav');
-    const menuIcon = menuToggle.querySelector('i');
-
-    if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-
-            if (nav.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        });
-    }
-
-    // ===================================================================
-    // 2. Funcionalidade de Copiar Texto
-    // ===================================================================
-    // Esta função foi atualizada para incluir a lógica para o IP/Porta do servidor
-    const copyButtons = document.querySelectorAll('.copy-button'); // Certifique-se de que seus botões de cópia têm esta classe
-    if (copyButtons.length > 0) {
-        copyButtons.forEach(button => {
-            button.addEventListener('click', async () => {
-                let textToCopy = '';
-                let targetElementSelector = button.dataset.copyTarget; // Ex: '#serverIp, #serverPort'
-                let originalButtonText = button.textContent;
-
-                if (targetElementSelector) {
-                    const selectors = targetElementSelector.split(',').map(s => s.trim());
-                    let partsToCopy = [];
-                    for (const selector of selectors) {
-                        const targetElement = document.querySelector(selector);
-                        if (targetElement) {
-                            partsToCopy.push(targetElement.textContent.trim());
-                        }
-                    }
-                    if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
-                        textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
-                    } else {
-                        textToCopy = partsToCopy.join(' '); // Junta com espaço se for outro tipo de múltiplos elementos
-                    }
-                } else if (button.dataset.copyText) {
-                    textToCopy = button.dataset.copyText;
-                }
-
-                if (textToCopy) {
-                    try {
-                        // Usa a API Clipboard mais moderna se disponível, com fallback para execCommand
-                        if (navigator.clipboard && navigator.clipboard.writeText) {
-                            await navigator.clipboard.writeText(textToCopy);
-                        } else {
-                            const textArea = document.createElement("textarea");
-                            textArea.value = textToCopy;
-                            document.body.appendChild(textArea);
-                            textArea.select();
-                            document.execCommand('copy');
-                            document.body.removeChild(textArea);
-                        }
-
-                        showCentralMessage(`[📃] (${textToCopy})  copiado!`);
-                        button.textContent = 'Copiado!';
-                        button.classList.add('copied');
-                        setTimeout(() => {
-                            button.textContent = originalButtonText;
-                            button.classList.remove('copied');
-                        }, 2000);
-                    } catch (err) {
-                        console.error('Erro ao copiar: ', err);
-                        showCentralMessage('[❗] Falha ao copiar.');
-                    }
-                } else {
-                    showCentralMessage('[📌] Nada para copiar.');
-                }
-                playEffectSound(clickSound);
-            });
-        });
-    }
-
-    // ===================================================================
-    // 3. Animações de Rolagem com ScrollReveal
-    // ===================================================================
-    // Adicionado um pequeno atraso para o ScrollReveal carregar e evitar piscar
-    setTimeout(() => {
-        if (typeof ScrollReveal !== 'undefined') {
-            ScrollReveal().reveal('.reveal', {
-                delay: 200,
-                distance: '50px',
-                origin: 'bottom',
-                interval: 100,
-                mobile: true // Habilitado em mobile agora para melhor UX
-            });
-            ScrollReveal().reveal('.reveal-left', {
-                delay: 200,
-                distance: '50px',
-                origin: 'left',
-                mobile: true
-            });
-            ScrollReveal().reveal('.reveal-right', {
-                delay: 200,
-                distance: '50px',
-                origin: 'right',
-                mobile: true
-            });
-            ScrollReveal().reveal('.reveal-up', {
-                delay: 200,
-                distance: '50px',
-                origin: 'top',
-                mobile: true
-            });
-        } else {
-            console.warn("ScrollReveal não está definido. Verifique se o script foi incluído corretamente.");
-        }
-    }, 500); // Atraso de 500ms
-
-    // ===================================================================
-    // 4. Botão Voltar ao Topo
-    // ===================================================================
-
-    // Botão Voltar ao Topo
-    const scrollTopButton = document.getElementById('scrollTopButton');
-    if (scrollTopButton) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 200) {
-                scrollTopButton.classList.add('show');
-            } else {
-                scrollTopButton.classList.remove('show');
-            }
-        });
-
-        scrollTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            playEffectSound(clickSound);
-        });
-    }
-
-    // ===================================================================
-    // 5. Atualizar ano no Rodapé
-    // ===================================================================
-    // Atualização do Ano no Rodapé
-    const currentYearSpan = document.getElementById('currentYear');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear();
-    }
-
+document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
 });
+
+// 4. Accordion Function
+function toggleAcc(element) {
+    const content = element.nextElementSibling;
+    const icon = element.querySelector('.fa-chevron-down');
+
+    content.classList.toggle('open');
+
+    if (content.classList.contains('open')) {
+        icon.style.transform = "rotate(180deg)";
+    } else {
+        icon.style.transform = "rotate(0deg)";
+    }
+}
+
+// 5. Contadores Animados (Stats)
+const counters = document.querySelectorAll('.counter');
+const speed = 200;
+
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 25);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+            statsObserver.unobserve(counter);
+        }
+    });
+});
+
+counters.forEach(counter => statsObserver.observe(counter));
+
+// Funcionalidade "Ler Mais" nos cards
+document.querySelectorAll('.read-more-toggle').forEach(button => {
+    button.addEventListener('click', function () {
+        const textContent = this.previousElementSibling;
+        textContent.classList.toggle('expanded');
+
+        if (textContent.classList.contains('expanded')) {
+            this.textContent = 'Ler menos';
+        } else {
+            this.textContent = 'Ler mais...';
+        }
+    });
+});
+
+
+
+
+// 1. Simulação de Jogadores Online (Número Aleatório para dar vida)
+function updatePlayers() {
+    const countElement = document.getElementById('online-count');
+    const randomCount = Math.floor(Math.random() * (1500 - 1200 + 1)) + 1200;
+    if (countElement) countElement.innerText = `${randomCount} JOGADORES ONLINE AGORA`;
+}
+updatePlayers();
+
+// 2. Filtro de Categorias (Lógica)
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        document.querySelector('.filter-btn.active').classList.remove('active');
+        this.classList.add('active');
+        const target = this.getAttribute('data-target');
+
+        // Exemplo: Esconder/Mostrar cards de jogo baseado no target
+        document.querySelectorAll('.game-card').forEach(card => {
+            if (target === 'todos' || card.innerText.toLowerCase().includes(target)) {
+                card.style.display = 'flex';
+                card.style.animation = 'fadeIn 0.5s forwards';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+
+// Lógica de Troca de Abas
+function openTab(evt, tabName) {
+    let i, tabContent, tabBtns;
+
+    // Esconde todos os conteúdos
+    tabContent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+        tabContent[i].classList.remove("active");
+    }
+
+    // Remove a classe 'active' de todos os botões
+    tabBtns = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].classList.remove("active");
+    }
+
+    // Mostra a aba atual e adiciona a classe active ao botão
+    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+
+
+function toggleAcc(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('i');
+
+    // Fecha outros abertos (opcional)
+    document.querySelectorAll('.faq-answer').forEach(el => {
+        if (el !== answer) {
+            el.classList.remove('open');
+            el.previousElementSibling.querySelector('i').classList.replace('fa-minus', 'fa-plus');
+        }
+    });
+
+    answer.classList.toggle('open');
+    if (answer.classList.contains('open')) {
+        icon.classList.replace('fa-plus', 'fa-minus');
+    } else {
+        icon.classList.replace('fa-minus', 'fa-plus');
+    }
+}
+
+
+function showClickNotification(titulo, mensagem) {
+    // Cria o elemento
+    const notification = document.createElement('div');
+    notification.className = 'click-notification';
+    
+    notification.innerHTML = `
+        <strong>${titulo}</strong>
+        <span>${mensagem}</span>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Ativa a animação
+    setTimeout(() => {
+        notification.classList.add('active');
+    }, 100);
+
+    // Remove após 3 segundos
+    setTimeout(() => {
+        notification.classList.remove('active');
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, 3000);
+}
