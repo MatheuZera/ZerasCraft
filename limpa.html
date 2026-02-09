@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
+    <meta charset="UTF-8">
+    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Zera's Craft - Início</title> <!---->
+    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
+    <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!---->
+
+    <!--é a breve descrição da sua página que pode aparecer no Google-->
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
+    <meta name="keywords"
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
+    <!--Identifica o autor do documento HTML.-->
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
+    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
+    <meta name="robots" content="index, follow">
+
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--O título que aparece na pré-visualização.-->
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
+    <!--A descrição que aparece na pré-visualização.-->
+    <meta property="og:description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
+    <!--A URL da página.-->
+    <meta property="og:url" content="https://seusite.com.br/index.html">
+
+    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mundo Zera's Craft">
+    <meta property="og:locale" content="pt_BR">
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@SeuTwitterHandle">
+    <meta name="twitter:creator" content="@SeuTwitterHandle">
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
+    <meta name="twitter:description"
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
+    <!---->
+    <meta name="twitter:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <meta name="theme-color" content="#347C2F">
+    <!-- Links para ScrollReveal e CountUp.js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<!--------------------------------------------------------------->
+
+<body>
+
+    <nav class="mobile-nav">
+        <div class="logo header-logo">ZERAS CRAFT</div>
+        <ul class="nav-links">
+            <button class="burger" onclick="toggleSidebar()">
+                <i id="burgerIcon" class="fas fa-bars"></i>
+            </button>
+        </ul>
+    </nav>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>MENU</span>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="page">Início</a></li>
+            <li><a href="#">Jogos</a></li>
+            <li><a href="#">Comunidade</a></li>
+            <li><a href="#">Suporte</a></li>
+        </ul>
+        <a href="#" class="btn-sidebar">JOGAR AGORA</a>
+    </aside>
+
+<!--------------------------------------------------------------->
+
+    <header class="pc-header">
+        <div class="container header-flex">
+            <div class="logo header-logo">ZERAS CRAFT</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">JOGOS <i class="fas fa-angle-down"></i></a></li>
+                <li><a href="#">COMUNIDADE</a></li>
+                <li><a href="#">MERCADO</a></li>
+                <li><a href="#">SUPORTE</a></li>
+            </ul>
+            <div class="header-actions">
+                <span class="server-ip" onclick="copyIP()">jogar.zerascraft.net</span>
+                <a href="#" class="btn-green">LOJA VIP</a>
+            </div>
+        </div>
+    </header>
+
+<!--------------------------------------------------------------->
+
+    <main>
+
+    </main>
+
+
+
+<!--------------------------------------------------------------->
+
+    <div class="music-player-container reveal">
+        <div class="player-controls">
+            <div class="now-playing">
+                <i class="fas fa-music"></i>
+                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
+            </div>
+
+            <div class="progress-area">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <span id="durationDisplay">0:00</span>
+            </div>
+
+            <div class="main-controls">
+                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
+                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
+                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
+                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+
+                <div class="volume-container">
+                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="backgroundAudio"></audio>
+
+    <div id="centralMessage" class="central-message">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message-content">
+            <strong>Título</strong>
+            <span>Informação</span>
+        </div>
+    </div>
+
+<!--------------------------------------------------------------->
+
+    <footer class="main-footer">
+        <div class="footer-divider"></div>
+
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">ZERAS<span>CRAFT</span></div>
+                <p class="brand-description">
+                    O maior servidor de Minecraft da nova geração. Explore mundos infinitos, participe de eventos épicos
+                    e construa sua própria lenda.
+                </p>
+                <div class="newsletter-footer">
+                    <button class="btn-sidebar" onclick="showClickNotification('Sucesso', 'Você clicou no botão!')">
+                        CLIQUE AQUI
+                    </button>
+                    <h5>FIQUE POR DENTRO</h5>
+                    <form class="f-nav-form">
+                        <input type="email" placeholder="Seu melhor e-mail...">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>EXPLORAR</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Survival 1.21</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Skyblock RPG</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Bedwars Arena</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Criativo Free</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>UTILITÁRIOS</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Wiki do Servidor</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Trabalhe Conosco</a></li>
+                    <li><a href="#" class="status-indicator"><span class="dot"></span> Status do Server</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>COMUNIDADE</h4>
+                <p class="join-text">Junte-se a mais de 5.000 membros no nosso Discord oficial.</p>
+                <div class="social-grid">
+                    <a href="#" class="social-box discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-box youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <div class="legal">
+                    <p class="copyright-text"
+                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                        &copy;
+                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        Zeras Craft. Todos os direitos reservados.
+                    </p>
+
+                    <span class="mojang-disclaimer"
+                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                        Não afiliado à Mojang Studios ou Microsoft.
+                    </span>
+                </div>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-pix"></i>
+                    <i class="fas fa-barcode"></i>
+                </div>
+                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="effects.js"></script>
+    <script src="player.js"></script>
+</body>
+
+</html>
