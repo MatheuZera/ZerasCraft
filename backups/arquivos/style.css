@@ -708,7 +708,6 @@ body {
 .hero {
     position: relative;
     height: 80vh;
-    /* Ajuste a altura conforme preferir */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -727,9 +726,6 @@ body {
     background-repeat: no-repeat;
     z-index: -1;
     /* Joga a imagem para trás do texto */
-
-    /* Overlay opcional para dar leitura ao texto branco */
-    filter: brightness(0.6);
 }
 
 .hero:hover .hero-bg {
