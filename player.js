@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMusicIndex = 0;
     let isDragging = false;
 
-    const musicPlaylist = [
+    const playlist = [
         // BACKGROUND
         { title: ' [Background] ✨ A Familiar Room', src: 'assets/audios/musics/background/a_familiar_room.mp3' },
         { title: ' [Background] ✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
