@@ -1945,7 +1945,7 @@ var .play-pause {
 /* --- SETA VOLTAR AO TOPO --- */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
+    bottom: 40px;
     right: 30px;
     background: var(--green-mc);
     color: white;
