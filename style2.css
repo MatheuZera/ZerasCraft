@@ -1186,7 +1186,8 @@
 
 /* Destaque do Discord */
 .discord-highlight {
-    border: 1px solid #5865F2; /* Cor oficial Discord */
+    border: 1px solid #5865F2;
+    /* Cor oficial Discord */
     background: linear-gradient(145deg, #111, #161a3d);
 }
 
@@ -1222,4 +1223,200 @@
 .btn-outline:hover {
     background: white;
     color: black;
+}
+
+
+
+
+
+
+
+
+:root {
+    --mc-green: #ffffff;
+    --mc-dark: #0f0f0f;
+    --mc-border: #333;
+    --mc-card: #141414;
+}
+
+.archive-section {
+    width: 100%;
+    min-height: 75vh;
+    background: var(--mc-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centralização Horizontal */
+    padding: 10px 20px;
+}
+
+.archive-header {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Busca Quadrada */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 25px auto;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 15px 15px 15px 50px;
+    background: #111;
+    border: 2px solid var(--mc-border);
+    color: #fff;
+    outline: none;
+}
+
+.search-container input:focus {
+    border-color: var(--mc-green);
+}
+
+.search-container i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--mc-green);
+}
+
+/* Menu de Filtros */
+.filter-menu {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: #1a1a1a;
+    border: 1px solid var(--mc-border);
+    color: #888;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--mc-green);
+    color: #000;
+    border-color: var(--mc-green);
+}
+
+/* Grid e Cards Quadrados */
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.file-card {
+    background: var(--mc-card);
+    border: 2px solid var(--mc-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--mc-green);
+    color: #000;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.card-content {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-label {
+    color: var(--mc-green);
+    font-size: 0.6rem;
+    font-weight: 900;
+}
+
+.card-content h3 {
+    color: #fff;
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.card-content p {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.btn-action {
+    width: 100%;
+    padding: 12px;
+    background: #222;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-action:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Modal Quadrado */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: #0a0a0a;
+    border: 2px solid #333;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #fff;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
