@@ -491,32 +491,29 @@
             </div>
         </section>
 
-        <section id="abas-interativas" class="tabs-section">
+        <section class="tabs-section">
             <div class="container">
-                <div class="section-header center">
-                    <h2>CENTRAL DE INFORMAÇÕES</h2>
-                </div>
-                <div class="tabs-container reveal">
+                <div class="tabs-container">
                     <div class="tabs-header">
-                        <button class="tab-btn active" onclick="openTab(event, 'tab-regras')">REGRAS</button>
-                        <button class="tab-btn" onclick="openTab(event, 'tab-equipe')">EQUIPE</button>
-                        <button class="tab-btn" onclick="openTab(event, 'tab-votos')">VOTAÇÃO</button>
+                        <button class="tab-btn active" onclick="switchTab(event, 'tab-regras')">REGRAS</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-equipe')">EQUIPE</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-votos')">VOTAÇÃO</button>
                     </div>
-                    <div id="tab-regras" class="tab-content active">
+
+                    <div id="tab-regras" class="tab-content active" style="display: block;">
                         <h3>Regras da Comunidade</h3>
-                        <p>1. Proibido uso de clientes hackers ou qualquer vantagem injusta.</p>
-                        <p>2. Respeite todos os jogadores no chat global.</p>
-                        <p>3. Não abuse de bugs; reporte-os para ganhar recompensas.</p>
+                        <p>1. Proibido uso de hacks ou vantagens injustas.</p>
+                        <p>2. Respeite todos os jogadores no chat.</p>
                     </div>
+
                     <div id="tab-equipe" class="tab-content">
                         <h3>Nossa Staff</h3>
-                        <p>Nossa equipe está online 24/7 no Discord para ajudar você com qualquer problema técnico ou
-                            denúncia.</p>
+                        <p>Suporte 24/7 disponível em nosso Discord oficial.</p>
                     </div>
+
                     <div id="tab-votos" class="tab-content">
                         <h3>Vote e Ganhe</h3>
-                        <p>Vote diariamente no servidor para receber Chaves de Caixa Misteriosa e multiplicadores de
-                            coins!</p>
+                        <p>Ajude o servidor e receba chaves de caixas misteriosas!</p>
                     </div>
                 </div>
             </div>

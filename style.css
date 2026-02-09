@@ -1565,13 +1565,39 @@ var .play-pause {
     flex-grow: 1;
 }
 
+/* --- ACCORDION AJUSTADO --- */
+
+/* Estilo base da flecha */
+.acc-trigger i {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: var(--green-mc); /* Usa o verde do seu servidor */
+}
+
+/* Rotação da flecha quando o item pai estiver ativo */
+.acc-item.active .acc-trigger i {
+    transform: rotate(180deg);
+}
+
+/* Conteúdo com transição suave */
 .acc-content {
     max-height: 0;
     overflow: hidden;
-    transition: 0.5s ease;
     background: #111;
-    padding: 0 20px;
     color: #999;
+    padding: 0 20px; /* Padding lateral fixo para não dar pulo */
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
+}
+
+/* Estado aberto controlado pelo pai */
+.acc-item.active .acc-content {
+    max-height: 200px; /* Valor suficiente para o texto */
+    padding: 20px;
+}
+
+/* Destaque opcional no trigger quando aberto */
+.acc-item.active .acc-trigger {
+    background: #202020;
+    color: #fff;
 }
 
 .acc-content.open {
@@ -2619,65 +2645,34 @@ var .play-pause {
     }
 }
 
-/* --- SISTEMA DE ABAS --- */
-.tabs-section {
-    padding: 80px 0;
-    background: #161616;
-}
+
+
+
+/* SISTEMA DE ABAS*/
 
 .tabs-container {
     background: var(--bg-card);
     border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .tabs-header {
     display: flex;
-    flex-wrap: wrap;
-    /* Permite que os botões pulem para a linha de baixo */
     background: #111;
     border-bottom: 1px solid var(--border);
-    gap: 0;
-    /* Tiramos o gap para o cálculo de % ser exato */
 }
 
 .tab-btn {
-    /* O segredo está aqui: */
-    flex: 1 1 33.33%;
-    /* Ocupa um terço da largura */
-    min-width: 100px;
-    /* Largura mínima para não esmagar o texto */
-
-    padding: 20px 10px;
+    flex: 1;
+    padding: 18px;
     border: none;
     background: none;
     color: #666;
     font-weight: 800;
-    font-size: 0.85rem;
-    /* Ajuste leve no tamanho da fonte */
     cursor: pointer;
     transition: 0.3s;
     border-bottom: 3px solid transparent;
-    text-align: center;
-    text-transform: uppercase;
-
-    /* Previne que o texto saia do botão */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Quando houver muitos botões ou a tela for pequena */
-@media (max-width: 600px) {
-    .tab-btn {
-        flex: 1 1 50%;
-        /* No celular muito pequeno, vira 2 por fila */
-        font-size: 0.75rem;
-    }
-}
-
-.tab-btn:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.02);
 }
 
 .tab-btn.active {
@@ -2686,17 +2681,26 @@ var .play-pause {
     background: rgba(60, 133, 39, 0.1);
 }
 
-/* Garante que o conteúdo da aba não "vaze" */
+/* CONTEÚDO: Escondido e sem ocupar espaço */
 .tab-content {
+    display: none !important; 
     padding: 30px;
-    display: none;
-    animation: fadeIn 0.4s ease;
-    word-wrap: break-word;
-    /* Força quebra de texto longo */
+    color: #ccc;
+    opacity: 0;
+    transform: translateY(10px);
 }
 
+/* CONTEÚDO ATIVO: Ocupa o lugar certo */
 .tab-content.active {
-    display: block;
+    display: block !important;
+    animation: tabFadeIn 0.4s forwards;
+}
+
+@keyframes tabFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- DOWNLOAD CARDS (Correção Responsiva) --- */
