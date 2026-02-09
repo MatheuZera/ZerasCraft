@@ -1,66 +1,105 @@
 // Atualizar o ano do copyright automaticamente
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
-window.onscroll = function () {
-    const btn = document.querySelector('.back-to-top');
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        btn.style.display = "flex";
+const backToTop = document.querySelector('.back-to-top');
+
+window.addEventListener('scroll', () => {
+    // Aparece quando rolar mais de 400px
+    if (window.scrollY > 400) {
+        backToTop.classList.add('active');
     } else {
-        btn.style.display = "none";
-    }
-};
-
-// Abre e fecha a Sidebar inteira
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const icon = document.getElementById('burgerIcon');
-    
-    sidebar.classList.toggle('active');
-    
-    // Troca o ícone de hambúrguer por um "X" suavemente
-    if(sidebar.classList.contains('active')) {
-        icon.classList.replace('fa-bars', 'fa-times');
-        icon.style.transform = 'rotate(90deg)';
-    } else {
-        icon.classList.replace('fa-times', 'fa-bars');
-        icon.style.transform = 'rotate(0deg)';
-    }
-}
-
-// Abre e fecha o sub-menu de "Jogos" dentro da sidebar
-function toggleMobileSubmenu(element) {
-    const parent = element.parentElement;
-    parent.classList.toggle('open');
-}
-
-// Opcional: Fechar a sidebar se clicar fora dela
-document.addEventListener('click', function(event) {
-    const sidebar = document.getElementById('sidebar');
-    const burger = document.querySelector('.burger');
-    
-    if (!sidebar.contains(event.target) && !burger.contains(event.target) && sidebar.classList.contains('active')) {
-        sidebar.classList.remove('active');
+        backToTop.classList.remove('active');
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const dropdownTrigger = document.querySelector('.dropdown-trigger');
-    const dropdownParent = document.querySelector('.dropdown');
-
-    dropdownTrigger.addEventListener('click', function(e) {
-        // Impede o link de recarregar a página
-        e.preventDefault();
-        
-        // Alterna a classe 'open' para mostrar o menu e girar a flecha
-        dropdownParent.classList.toggle('open');
+// Função de clique suave
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
+});
 
-    // Fecha o menu se clicar fora dele
-    window.addEventListener('click', function(e) {
-        if (!dropdownParent.contains(e.target)) {
-            dropdownParent.classList.remove('open');
+const handlePlayerVisibility = () => {
+    const player = document.querySelector('.music-player-container');
+    if (!player) return;
+
+    // Altura total do documento
+    const totalHeight = document.documentElement.scrollHeight;
+    // Posição atual do scroll + altura da janela do navegador
+    const currentScroll = window.innerHeight + window.pageYOffset;
+    
+    // Distância do fim da página para ativar o desaparecimento (ajuste se necessário)
+    const threshold = 150; 
+
+    if (currentScroll >= (totalHeight - threshold)) {
+        player.classList.add('player-hidden');
+    } else {
+        player.classList.remove('player-hidden');
+    }
+};
+
+// Evento de scroll otimizado
+let scrollTimer;
+window.addEventListener('scroll', () => {
+    window.clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(handlePlayerVisibility, 10);
+}, { passive: true });
+
+// Executa uma vez ao carregar para caso a página já inicie no fim
+window.addEventListener('load', handlePlayerVisibility);
+
+/**
+ * SISTEMA DE NAVEGAÇÃO ZERAS CRAFT
+ */
+
+// Abrir e fechar Sidebar Mobile
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const body = document.body;
+
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+
+    // Impede o scroll do site com o menu aberto
+    if (sidebar.classList.contains('active')) {
+        body.style.overflow = 'hidden';
+    } else {
+        body.style.overflow = 'auto';
+    }
+}
+
+// Controle de Dropdown Mobile (Sistema de Painel Lateral)
+function toggleDrop(element) {
+    const parent = element.parentElement;
+    
+    // Opcional: Fecha outros dropdowns ao abrir um novo
+    /*
+    document.querySelectorAll('.sidebar-dropdown').forEach(item => {
+        if (item !== parent) item.classList.remove('open');
+    });
+    */
+
+    parent.classList.toggle('open');
+}
+
+// Fechar sidebar ao clicar em um link (opcional)
+document.querySelectorAll('.sidebar-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.classList.contains('active')) {
+            toggleSidebar();
         }
     });
+});
+
+// Fechar com a tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.classList.contains('active')) toggleSidebar();
+    }
 });
 
 // 2. Copiar IP
