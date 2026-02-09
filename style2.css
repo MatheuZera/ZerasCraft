@@ -431,7 +431,8 @@
     display: flex;
     gap: 50px;
     align-items: center;
-    flex-wrap: wrap; /* Garante que em ecrãs pequenos o texto desça */
+    flex-wrap: wrap;
+    /* Garante que em ecrãs pequenos o texto desça */
 }
 
 /* Galeria de Imagens */
@@ -450,7 +451,7 @@
     width: 100%;
     height: auto;
     border-radius: 4px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Efeito de destaque ao passar o rato */
@@ -484,7 +485,8 @@
 /* Botão Verde (Sincronizado com o seu player.js) */
 .bundle-btn {
     display: inline-block;
-    background-color: #1db954; /* O mesmo verde do showMessage */
+    background-color: #1db954;
+    /* O mesmo verde do showMessage */
     color: #ffffff;
     text-decoration: none;
     font-weight: 800;
@@ -497,4 +499,375 @@
 .bundle-btn:hover {
     filter: brightness(1.1);
     transform: scale(1.02);
+}
+
+
+
+
+
+
+
+
+/* Container e Dark Mode */
+.zigzag-section {
+    background: #0c0c0c;
+    color: #fff;
+    padding: 60px 20px;
+}
+
+/* Menu de Abas */
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.tab-btn {
+    background: #1a1a1a;
+    color: #888;
+    /* Texto inativo mais escuro */
+    border: 2px solid #333;
+    padding: 10px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Quando a aba está selecionada: borda branca e texto branco */
+.tab-btn.active {
+    border-color: #ffffff;
+    color: #ffffff;
+    background: #252525;
+}
+
+.zz-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    /* Título branco em vez de verde */
+}
+
+/* Linhas em Zigue-Zague */
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.zigzag-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 80px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* A MÁGICA: Inverte a ordem nas linhas pares */
+.zigzag-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.zz-text {
+    flex: 1;
+    text-align: left;
+}
+
+.zz-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.zz-text p {
+    color: #d3d3d3;
+    line-height: 1.6;
+}
+
+.zz-image {
+    flex: 1;
+}
+
+.zz-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.dark-theme {
+    background: #080808;
+    color: #ffffff;
+    padding: 40px 20px;
+}
+
+/* Hero Principal */
+.portal-hero {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 40px;
+    background: #111;
+    border-radius: 4px;
+}
+
+.hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin: 15px 0;
+}
+
+.category-tag {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: #888;
+    border-bottom: 2px solid #444;
+}
+
+/* Botões Neutros */
+.btn-primary {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #444;
+    padding: 13px 30px;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.btn-outline:hover {
+    background: #222;
+    border-color: #888;
+}
+
+/* Banner com Máscara */
+.mask-pixel {
+    width: 100%;
+    max-width: 500px;
+    clip-path: polygon(5% 0, 95% 0, 95% 5%, 100% 5%, 100% 95%, 95% 95%, 95% 100%, 5% 100%, 5% 95%, 0 95%, 0 5%, 5% 5%);
+}
+
+/* Grade de Conteúdo Inferior */
+.content-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.content-item {
+    background: #151515;
+    padding: 15px;
+    transition: 0.3s;
+}
+
+.content-item:hover {
+    background: #1c1c1c;
+    transform: translateY(-5px);
+}
+
+.content-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.content-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.content-item p {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+
+.links-section {
+    background-color: #0a0a0a;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.links-container {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: #151515;
+    border: 1px solid #222;
+    transition: all 0.3s ease;
+}
+
+.link-item:hover {
+    background: #1c1c1c;
+    border-color: #444;
+    transform: translateX(10px); /* Leve deslize para a direita no hover */
+}
+
+/* Imagem quadrada pequena */
+.link-img {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.link-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Área de Texto */
+.link-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.link-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.link-title i {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.link-info p {
+    color: #888;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.link-item:hover .link-title {
+    color: #f0f0f0;
+}
+
+
+.edu-container {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr; /* Lado esquerdo bem mais largo */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Galeria de Cards */
+.edu-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.edu-card img {
+    width: 100%;
+    aspect-ratio: 1/1; /* Garante que as imagens sejam quadradas */
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.edu-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: #fff; }
+.edu-card p { font-size: 0.85rem; color: #aaa; line-height: 1.4; }
+
+/* Sidebar de Links à Direita */
+.edu-links-sidebar {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Link Verde (O único destaque de cor que resta) */
+.special-link {
+    color: #4CAF50; /* Um verde mais sóbrio e educacional */
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.divider {
+    height: 1px;
+    background: #333;
+    margin-bottom: 20px;
+}
+
+.sidebar-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 12px 0;
+    border-bottom: 1px solid #222; /* Linha sutil entre os links */
+    transition: 0.2s;
+}
+
+.sidebar-link:hover {
+    color: #888;
+    padding-left: 5px;
+}
+
+/* Responsividade para Celular */
+@media (max-width: 900px) {
+    .edu-container { grid-template-columns: 1fr; }
+    .edu-links-sidebar { margin-top: 40px; }
 }
