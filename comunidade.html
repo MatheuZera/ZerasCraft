@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
     <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zera's Craft - Comunidade</title> <!---->
+    <title>Mundo Zera's Craft - Início</title> <!---->
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
     <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="style2.css"> <!---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!---->
 
@@ -60,388 +61,398 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
+<!--------------------------------------------------------------->
+
 <body>
 
-    <div id="centralMessage" class="central-message"></div>
-    <audio id="backgroundAudio" loop></audio>
-
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="index.html" class="header-logo">Zera's Craft</a>
-            <button class="menu-toggle" aria-label="Abrir menu de navegação">
-                <i class="fas fa-bars"></i>
+    <nav class="mobile-nav">
+        <div class="logo header-logo">ZERAS CRAFT</div>
+        <ul class="nav-links">
+            <button class="burger" onclick="toggleSidebar()">
+                <i id="burgerIcon" class="fas fa-bars"></i>
             </button>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="arquivos" class="nav-link" data-page="home">Arquivos</a></li>
-                    <li><a href="comunidade" class="nav-link" data-page="home">Comunidade</a></li>
-                    <li><a href="eventos" class="nav-link" data-page="home">Eventos</a></li>
-                    <li><a href="pixel-legends" class="nav-link" data-page="home">Pixel Legends</a></li>
-                    <li><a href="equipe" class="nav-link" data-page="home">Equipe</a></li>
-                    <li><a href="canal" class="nav-link" data-page="home">Canal Oficial</a></li>
-                    <li><a href="recursos" class="nav-link" data-page="home">Recursos</a></li>
-                </ul>
-            </nav>
+        </ul>
+    </nav>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>MENU</span>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="page">Início</a></li>
+            <li><a href="#">Jogos</a></li>
+            <li><a href="#">Comunidade</a></li>
+            <li><a href="#">Suporte</a></li>
+        </ul>
+        <a href="#" class="btn-sidebar">JOGAR AGORA</a>
+    </aside>
+
+    <!--------------------------------------------------------------->
+
+    <header class="pc-header">
+        <div class="container header-flex">
+            <div class="logo header-logo">ZERAS CRAFT</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">JOGOS <i class="fas fa-angle-down"></i></a></li>
+                <li><a href="#">COMUNIDADE</a></li>
+                <li><a href="#">MERCADO</a></li>
+                <li><a href="#">SUPORTE</a></li>
+            </ul>
+            <div class="header-actions">
+                <span class="server-ip" onclick="copyIP()">jogar.zerascraft.net</span>
+                <a href="#" class="btn-green">LOJA VIP</a>
+            </div>
         </div>
     </header>
 
+    <!--------------------------------------------------------------->
+
     <main>
-        <section class="hero-section">
-            <div class="hero-image-overlay"></div>
-            <div class="hero-content">
-                <div class="server-branding">
-                    <img src="assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft" class="server-icon">
-                </div>
-                <h1>Mundo Zera's Craft</h1>
-                <p class="hero-subtitle">Se junte à nossa Comunidade do Discord!</p>
-                <div class="hero-social-links">
-                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank"
-                        rel="noopener noreferrer" class="btn-primary">
-                        <i class="fab fa-discord"></i> Pixel Legends
-                    </a>
-                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-discord"></i> Entrar no Discord
-                    </a>
-                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-youtube"></i> Canal YouTube
-                    </a>
+        <section class="hero">
+            <div class="hero-bg"
+                style="background-image: url('https://www.minecraft.net/content/dam/games/minecraft/key-art/Mounts_Mayhem_MainBanner.jpg')">
+            </div>
+            <div class="container hero-content reveal">
+                <span class="hero-tag">ATUALIZAÇÃO 2.0</span>
+                <h1>MOUNTS OF MAYHEM</h1>
+                <p>Uma nova arma para empunhar, montarias para domar e inimigos para enfrentar. Jogue hoje mesmo no
+                    Zeras Craft!</p>
+                <div class="hero-btns">
+                    <button class="btn-big-green">JOGAR AGORA <i class="fas fa-chevron-right"></i></button>
+                    <button class="btn-big-outline">VER TRAILER</button>
                 </div>
             </div>
         </section>
 
-        <div class="abas-container">
-            <br>
-            <div class="abas-botoes">
-                <button class="aba-btn active" data-tab="tab1">Sobre Nós</button>
-                <button class="aba-btn" data-tab="tab2">Nosso Servidor</button>
+        <section class="news-grid-container">
+            <a href="#" class="mc-news-card">
+                <div class="news-image">
+                    <img src="assets/images/news/snapshot.jpg" alt="Notícia">
+                </div>
+                <div class="news-info-overlay">
+                    <span class="news-tag">NEWS</span>
+                    <h3 class="news-headline">MINECRAFT 26.1 SNAPSHOT 6</h3>
+                    <p class="news-description">Confira as novas mudanças técnicas e correções de bugs desta semana.</p>
+                </div>
+            </a>
+
+        </section>
+
+        <section class="collectibles-section">
+            <div class="collectibles-header">
+                <h2 class="mc-title">ITENS COLECIONÁVEIS</h2>
+                <p class="mc-subtitle">Personalize seu dispositivo com nossos papéis de parede favoritos do Minecraft,
+                    banners e muito mais!</p>
+                <a href="#" class="mc-link-all">Ver todos os itens colecionáveis <i
+                        class="fas fa-external-link-alt"></i></a>
+
+                <div class="mc-carousel-controls">
+                    <button class="mc-arrow prev" onclick="moveCarousel(-1)">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="mc-arrow next" onclick="moveCarousel(1)">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
-            <div class="abas-conteudo">
-                <div id="tab1" class="aba-painel active">
-                    <h3>Olá Prazer!</h3>
-                    <p>Somos parte de uma organização dentro da nossa Comunidade de Minecraft no Discord, lá ajudamos
-                        novos membros, e colaboramos uns com os outros, mantendo a união e amizade uns com os outros.
+
+            <div class="mc-carousel-viewport">
+                <div class="mc-carousel-track" id="carouselTrack">
+                    <div class="mc-collectible-card">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs">
+                        </div>
+                        <div class="card-info">
+                            <span class="card-tag">PAPEL DE PAREDE</span>
+                            <h3 class="card-title">Coleção Crocs</h3>
+                            <i class="fas fa-download card-icon-dl"></i>
+                        </div>
+                    </div>
+
+                    <div class="mc-collectible-card">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs">
+                        </div>
+                        <div class="card-info">
+                            <span class="card-tag">PAPEL DE PAREDE</span>
+                            <h3 class="card-title">Coleção Crocs</h3>
+                            <i class="fas fa-download card-icon-dl"></i>
+                        </div>
+                    </div>
+
+                    <div class="mc-collectible-card">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs">
+                        </div>
+                        <div class="card-info">
+                            <span class="card-tag">PAPEL DE PAREDE</span>
+                            <h3 class="card-title">Coleção Crocs</h3>
+                            <i class="fas fa-download card-icon-dl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mc-section friends-dark">
+            <h2 class="mc-title">JOGUE COM AMIGOS</h2>
+            <div class="f-container">
+                <div class="f-card border-brown">
+                    <div class="f-img-box"><img src="assets/images/play/online.png"></div>
+                    <div class="f-content">
+                        <span class="f-badge">PÚBLICO</span>
+                        <h3>Online</h3>
+                        <div class="f-accordion">
+                            <button class="acc-btn" onclick="toggleAccordion(this)">MUNDOS <i
+                                    class="fas fa-plus"></i></button>
+                            <div class="acc-panel">Jogue em servidores comunitários com milhares de jogadores.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="f-card border-purple">
+                    <div class="f-img-box"><img src="assets/images/play/realms.png"></div>
+                    <div class="f-content">
+                        <span class="f-badge">PRIVADO</span>
+                        <h3>Realms</h3>
+                        <div class="f-accordion">
+                            <button class="acc-btn" onclick="toggleAccordion(this)">RECURSOS <i
+                                    class="fas fa-plus"></i></button>
+                            <div class="acc-panel">Seu próprio servidor online contínuo e seguro na nuvem.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="f-card border-blue">
+                    <div class="f-img-box"><img src="assets/images/play/coop.png"></div>
+                    <div class="f-content">
+                        <span class="f-badge">PRIVADO</span>
+                        <h3>Cooperativo</h3>
+                        <div class="f-accordion">
+                            <button class="acc-btn" onclick="toggleAccordion(this)">LOCAL <i
+                                    class="fas fa-plus"></i></button>
+                            <div class="acc-panel">Jogue com amigos e familiares na sua rede local (LAN).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mc-section world-dark">
+            <h2 class="mc-title">EXPANDA SEU MUNDO</h2>
+            <div class="w-slider">
+                <button class="w-arrow prev" onclick="moveWorld(-1)"><i class="fas fa-arrow-left"></i></button>
+                <div class="w-viewport">
+                    <div class="w-track" id="worldTrack">
+                        <div class="w-item active"><img src="img1.jpg">
+                            <h3>Cobre</h3>
+                            <p>Novos tons e ferramentas.</p>
+                        </div>
+                        <div class="w-item"><img src="img2.jpg">
+                            <h3>Chase the Skies</h3>
+                            <p>Voe sobre o mundo.</p>
+                        </div>
+                        <div class="w-item"><img src="img3.jpg">
+                            <h3>Spring to Life</h3>
+                            <p>Novas variantes de mobs.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-arrow next" onclick="moveWorld(1)"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section class="mc-section hero-dark">
+            <div class="h-nav">
+                <button class="w-arrow prev" onclick="moveHero(-1)"><i class="fas fa-arrow-left"></i></button>
+            </div>
+            <div class="h-container" id="heroTrack">
+
+                <div class="h-slide active">
+                    <div class="h-info">
+                        <span>1/2 EXPLORE OS MODOS</span>
+                        <h2>MODO SOBREVIVÊNCIA</h2>
+                        <p>Lute contra criaturas e construa para sobreviver ao anoitecer.</p>
+                    </div>
+                    <div class="h-media">
+                        <img src="img.jpg" class="pixel-mask">
+                    </div>
+                </div>
+
+                <div class="h-slide">
+                    <div class="h-info">
+                        <span>2/2 EXPLORE OS MODOS</span>
+                        <h2>MODO CRIATIVO</h2>
+                        <p>Use recursos ilimitados para criar construções incríveis e voar livremente.</p>
+                    </div>
+                    <div class="h-media">
+                        <img src="img.jpg" class="pixel-mask">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="h-nav">
+                <button class="w-arrow next" onclick="moveHero(1)"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section class="bundle-section">
+            <div class="bundle-container">
+                <div class="bundle-gallery">
+                    <div class="game-card">
+                        <img src="assets/images/games/mc-java.jpg" alt="Minecraft Java & Bedrock">
+                    </div>
+                    <div class="game-card">
+                        <img src="assets/images/games/mc-dungeons.jpg" alt="Minecraft Dungeons">
+                    </div>
+                    <div class="game-card">
+                        <img src="assets/images/games/mc-legends.jpg" alt="Minecraft Legends">
+                    </div>
+                </div>
+
+                <div class="bundle-content">
+                    <h2 class="bundle-title">COMPRE OS TRÊS JOGOS DO MINECRAFT</h2>
+                    <p class="bundle-text">
+                        Entre em um universo de blocos repleto de criatividade,
+                        mistérios e aventuras com três jogos em um só pacote.
+                        O Pacote Triplo inclui Minecraft: Java & Bedrock Edition,
+                        Minecraft Dungeons e Minecraft Legends.
                     </p>
-                </div>
-                <div id="tab2" class="aba-painel">
-                    <h3>Explicando bem Resumido..</h3>
-                    <p>Nosso Servidor abrange tudo relacionado ao jogo quanto conversas aleatórias também kkkk.. Somos
-                        divertidos e muito atenciosos com engraçadinhos que gostam de ficar zoando dos outros.</p>
+                    <a href="#" class="bundle-btn">ADQUIRA O PACOTE TRIPLO</a>
                 </div>
             </div>
-            <br>
-        </div>
-
-        <section class="section-padded section-alt-bg">
-            <div class="container text-center">
-                <br>
-                <secao-titulo>O que Nossos Jogadores Dizem</secao-titulo>
-                <p class="section-description">A prova de que a nossa comunidade é a melhor!</p>
-                <div class="testimonials-carousel-container">
-                    <div class="testimonials-track">
-                        <div class="testimonial-card card">
-                            <p class="quote">"--"</p>
-                            <div class="author">
-                                <img src="assets/img/avatar1.png" alt="Avatar do Jogador 1">
-                                <div>
-                                    <h4>--"</h4>
-                                    <p class="player-name">@--</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-card card">
-                            <p class="quote">"--"</p>
-                            <div class="author">
-                                <img src="assets/img/avatar2.png" alt="Avatar do Jogador 2">
-                                <div>
-                                    <h4>--"</h4>
-                                    <p class="player-name">@--</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-card card">
-                            <p class="quote">"--"</p>
-                            <div class="author">
-                                <img src="assets/img/avatar3.png" alt="Avatar do Jogador 3">
-                                <div>
-                                    <h4>--</h4>
-                                    <p class="player-name">@--</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
         </section>
-
-        <section id="community-spotlight" class="section-padded fade-in-section">
-            <div class="container text-center">
-                <br>
-                <secao-titulo><i class="fas fa-star"></i> Destaques da Comunidade</secao-titulo>
-                <p class="section-description">Conheça alguns dos nossos membros mais ativos e talentosos!</p>
-                <div class="community-grid max-4-columns">
-                    <div class="community-card">
-                        <img src="assets/images/8.parceria/colaboradores/icone.gif" alt="Avatar do Jogador A"
-                            class="member-avatar">
-                        <h3 class="card-title">Ninguém</h3>
-                        <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a>
-                    </div>
-                    <div class="community-card">
-                        <img src="assets/images/cards/member2.png" alt="Avatar da Jogadora B" class="member-avatar">
-                        <h3 class="card-title">Ninguém</h3>
-                        <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a>
-                    </div>
-                    <div class="community-card">
-                        <img src="assets/images/cards/member3.png" alt="Avatar do Jogador C" class="member-avatar">
-                        <h3 class="card-title">Ninguém</h3>
-                        <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a>
-                    </div>
-                    <div class="community-card">
-                        <img src="assets/images/cards/member1.png" alt="Avatar do Jogador D" class="member-avatar">
-                        <h3 class="card-title">Ninguém</h3>
-                        <p class="card-description">...</p>
-                        <a href="" class="btn-link">Ver Perfil</a>
-                    </div>
-                </div>
-            </div>
-            <br>
-        </section>
-
-        <section id="partnerships" class="section-padded section-alt-bg fade-in-section">
-            <div class="container text-center">
-                <br>
-                <secao-titulo><i class="fas fa-handshake"></i> Nossas Parcerias</secao-titulo>
-                <p class="section-description">Apoie os projetos que nos apoiam! Conheça nossos parceiros.</p>
-                <div class="partnership-grid max-4-columns">
-                    <div class="partnership-card community-card">
-                        <img src="assets/images/cards/partner1.png" alt="Logo do Parceiro 1" class="partnership-logo">
-                        <h3 class="card-title">Sem Colaboradores</h3>
-                        <p class="card-description">Servidores de alta performance para a melhor experiência de jogo.
-                        </p>
-                        <a href="" target="_blank" rel="noopener noreferrer" class="btn-primary">Visitar Site</a>
-                    </div>
-                    <div class="partnership-card community-card">
-                        <img src="assets/images/cards/partner1.png" alt="Logo do Parceiro 2" class="partnership-logo">
-                        <h3 class="card-title">Sem Parceiros</h3>
-                        <p class="card-description">Os melhores plugins e ferramentas para otimizar seu servidor.</p>
-                        <a href="" target="_blank" rel="noopener noreferrer" class="btn-primary">Visitar Site</a>
-                    </div>
-                </div>
-            </div>
-            <br>
-        </section>
-
-        <br>
-        <secao-titulo>Todas as Categorias!</secao-titulo>
-        <div class="timeline-container">
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">MARKETPLACE CRAFT</h4>
-                    <p>Todos podem postar as suas criações aqui, podendo obter muita presença no servidor pelas
-                        criatividades de seus projetos.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">CHATS DE MINECRAFT</h4>
-                    <p>Tudo relacionado ao Minecraft, desde conversas, Gameplay, Construção, Redstone, Comandos, PvP e
-                        muito mais!</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">CANAIS DE CRIAÇÕES</h4>
-                    <p>Implementação de novas funcionalidades e otimizações de performance.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">MINECOINS (Economia)</h4>
-                    <p>Nosso sistema de economia dentro da Comunidade, onde todos podem obter moedas, pegar uns dos
-                        outros e assim vai a história kkkkk</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">DESENVOLVIMENTO GERAL</h4>
-                    <p>Temos alguns canais de texto para ajudar no desenvolvimento de algum projeto seu, ou orientar em
-                        algo.. Tendo os canais de Desenvolvimento do Discord em Geral (Bots & Servidores); Edição de
-                        Vídeos, Efeitos & Áudio; Programação e Ajuda em Softwares.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">WIKIPÉDIAS</h4>
-                    <p>Cada um pode criar um fórum com uma coisa relevante sobre minecraft, como teoria, dica, ideia,
-                        tutorial e etc..</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">DIVULGAÇÃO DA COMUNIDADE</h4>
-                    <p>Assim como temos um Canal de Conteúdos Oficiais do Canal (MatheuZera), temos canais de Conteúdos
-                        da Comunidade, incluindo um canal de Conteúdos Exclusivos onde apenas cargos especiais podem
-                        acessar.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">CARGOS EXCLUSIVOS</h4>
-                    <p>Acho q é o que mais temos, sim kkkk, lá você pode ser bastante reconhecido pelos seus atos e suas
-                        criações e o quanto você é ativo também! Tudo Influencia para obter seu cargo.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">PIXEL LEGENDS</h4>
-                    <p>Nosso servidor oficial de Minecraft, lá cada um pode criar a sua Guilda e batalhar uma com as
-                        outras, podendo formar alianças e muito mais! Entre no nosso servidor para mais informações.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">EVENTOS</h4>
-                    <p>Temos vários, mas os principais são: MC Team Ultimate (<u>Onde todas as Guildas de Pixel Legends
-                            se juntam em um mapa só e batalham PvP até restar apenas uma em pé!</u>) // CraftJam
-                        (<u></u>Aqui todos participam de um Torneio de Criação, onde mandamos um Tema específico, então
-                        cada um faz uma coisa aleatória de Minecraft que tenha sentido com o Tema abordado pelos Admins,
-                        quem tiver mais "Votos" Digamos Assim vençe, cheque a página de Eventos para mais detalhes.</u>)
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-bolha"></div>
-                <div class="timeline-content">
-                    <h4 class="timeline-titulo">E MUITO MAIS!!!</h4>
-                    <p>Esperamos por você e todos os seus Amigos/Amigas!!</p>
-                </div>
-            </div>
-        </div>
     </main>
 
+
+
+    <!--------------------------------------------------------------->
+
+    <div class="music-player-container reveal">
+        <div class="player-controls">
+            <div class="now-playing">
+                <i class="fas fa-music"></i>
+                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
+            </div>
+
+            <div class="progress-area">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <span id="durationDisplay">0:00</span>
+            </div>
+
+            <div class="main-controls">
+                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
+                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
+                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
+                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+
+                <div class="volume-container">
+                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="backgroundAudio"></audio>
+
+    <div id="centralMessage" class="central-message">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message-content">
+            <strong>Título</strong>
+            <span>Informação</span>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------->
+
     <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa
-                        comunidade vibrante.</p>
-                    <div class="footer-social-links">
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                            aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column footer-nav-links">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="index">Início</a></li>
-                        <li><a href="arquivos">Arquivos</a></li>
-                        <li><a href="comunidade">Comunidade</a></li>
-                        <li><a href="eventos">Eventos</a></li>
-                        <li><a href="pixel-legends">Pixel Legends</a></li>
-                        <li><a href="equipe">Equipe</a></li>
-                        <li><a href="canal">Canal Oficial</a></li>
-                        <li><a href="recursos">Recursos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-contact">
-                    <h4>Contato & Suporte</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a>
-                    </p>
-                    <p><i class="fas fa-headset"></i> <a
-                            href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via
-                            Discord</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
-                </div>
-                <div class="footer-column footer-newsletter">
-                    <h4>Fique por Dentro</h4>
-                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
-                    <form class="newsletter-form">
-                        <div class="text-center margin-top-20">
-                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501"
-                                class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
-                        </div>
+        <div class="footer-divider"></div>
+
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">ZERAS<span>CRAFT</span></div>
+                <p class="brand-description">
+                    O maior servidor de Minecraft da nova geração. Explore mundos infinitos, participe de eventos épicos
+                    e construa sua própria lenda.
+                </p>
+                <div class="newsletter-footer">
+                    <button class="btn-sidebar" onclick="showClickNotification('Sucesso', 'Você clicou no botão!')">
+                        CLIQUE AQUI
+                    </button>
+                    <h5>FIQUE POR DENTRO</h5>
+                    <form class="f-nav-form">
+                        <input type="email" placeholder="Seu melhor e-mail...">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+
+            <div class="footer-col">
+                <h4>EXPLORAR</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Survival 1.21</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Skyblock RPG</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Bedwars Arena</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Criativo Free</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>UTILITÁRIOS</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Wiki do Servidor</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Trabalhe Conosco</a></li>
+                    <li><a href="#" class="status-indicator"><span class="dot"></span> Status do Server</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>COMUNIDADE</h4>
+                <p class="join-text">Junte-se a mais de 5.000 membros no nosso Discord oficial.</p>
+                <div class="social-grid">
+                    <a href="#" class="social-box discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-box youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
+                </div>
             </div>
         </div>
-        <br>
-        <br>
-        <div class="audio-control-bar">
-            <div class="container audio-control-content">
-                <div class="music-player-details">
-                    <span id="musicTitleDisplay">Clique para Tocar</span>
-                    <div class="progress-bar-and-times">
-                        <span id="currentTimeDisplay" class="time-display">0:00</span>
-                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
-                        <span id="durationDisplay" class="time-display">0:00</span>
-                    </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <div class="legal">
+                    <p class="copyright-text"
+                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                        &copy;
+                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        Zeras Craft. Todos os direitos reservados.
+                    </p>
+
+                    <span class="mojang-disclaimer"
+                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                        Não afiliado à Mojang Studios ou Microsoft.
+                    </span>
                 </div>
-                <div class="music-playback-controls">
-                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
-                        <i class="fas fa-backward"></i>
-                    </button>
-                    <button id="audioControlButton" class="music-button main-play-pause-button"
-                        aria-label="Tocar/Pausar música">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
-                        <i class="fas fa-forward"></i>
-                    </button>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-pix"></i>
+                    <i class="fas fa-barcode"></i>
                 </div>
-                <div>
-                    <button id="audioModeButton" class="music-button" aria-label="Modo de reprodução">
-                        <i class="fas fa-repeat"></i>
-                    </button>
-                </div>
-                <div class="volume-container">
-                    <button id="volumeButton" class="music-button volume-button" aria-label="Controle de volume">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                    <input type="range" id="volumeSlider" class="audio-progress-bar volume-slider" min="0" max="1"
-                        step="0.01" value="1">
-                </div>
-                <div class="playback-speed-control">
-                    <select id="playbackSpeed" class="playback-speed-select">
-                        <option value="0.75">0.75x</option>
-                        <option value="1" selected>1x</option>
-                        <option value="1.25">1.25x</option>
-                        <option value="1.5">1.5x</option>
-                        <option value="2">2x</option>
-                    </select>
+                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up"></i>
                 </div>
             </div>
         </div>
     </footer>
 
-    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script src="script.js"></script>
-    <script src="reprodutor-musica.js"></script>
-    <script src="elementos.js"></script>
+    <script src="effects.js"></script>
+    <script src="player.js"></script>
 </body>
 
 </html>
