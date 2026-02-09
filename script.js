@@ -220,34 +220,36 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 
 // Lógica de Troca de Abas
-function switchTab(evt, tabId) {
-    // 1. Busca todos os elementos
-    const allContents = document.querySelectorAll('.tab-content');
-    const allButtons = document.querySelectorAll('.tab-btn');
+window.switchTab = function(evt, tabName) {
+    // Impede o navegador de tentar seguir um link ou recarregar
+    if (evt) evt.preventDefault();
 
-    // 2. REMOÇÃO FORÇADA: Limpa classes e estilos inline de todas as abas
-    allContents.forEach(content => {
-        content.classList.remove('active');
+    const tabContents = document.querySelectorAll(".tab-content");
+    const tabBtns = document.querySelectorAll(".tab-btn");
+
+    // 1. Esconde tudo com prioridade máxima
+    tabContents.forEach(content => {
         content.style.setProperty('display', 'none', 'important');
+        content.classList.remove("active");
     });
 
-    // 3. Reseta os botões
-    allButtons.forEach(btn => {
-        btn.classList.remove('active');
+    // 2. Reseta botões
+    tabBtns.forEach(btn => {
+        btn.classList.remove("active");
     });
 
-    // 4. ATIVAÇÃO: Mostra apenas a aba clicada
-    const target = document.getElementById(tabId);
+    // 3. Mostra a aba correta
+    const target = document.getElementById(tabName);
     if (target) {
         target.style.setProperty('display', 'block', 'important');
-        // Pequeno delay para garantir que o navegador processe o display antes da animação
         setTimeout(() => {
-            target.classList.add('active');
+            target.classList.add("active");
         }, 10);
     }
 
-    // 5. Destaca o botão atual
-    evt.currentTarget.classList.add('active');
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add("active");
+    }
 }
 
 
