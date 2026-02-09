@@ -707,7 +707,8 @@ body {
 /* --- HERO SECTION --- */
 .hero {
     position: relative;
-    height: 80vh; /* Ajuste a altura conforme preferir */
+    height: 80vh;
+    /* Ajuste a altura conforme preferir */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -719,13 +720,16 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover; /* Faz a imagem cobrir tudo */
-    background-position: center; /* Centraliza a montaria/personagem */
+    background-size: cover;
+    /* Faz a imagem cobrir tudo */
+    background-position: center;
+    /* Centraliza a montaria/personagem */
     background-repeat: no-repeat;
-    z-index: -1; /* Joga a imagem para trás do texto */
-    
+    z-index: -1;
+    /* Joga a imagem para trás do texto */
+
     /* Overlay opcional para dar leitura ao texto branco */
-    filter: brightness(0.6); 
+    filter: brightness(0.6);
 }
 
 .hero:hover .hero-bg {
@@ -1568,7 +1572,8 @@ var .play-pause {
 /* Estilo base da flecha */
 .acc-trigger i {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    color: var(--green-mc); /* Usa o verde do seu servidor */
+    color: var(--green-mc);
+    /* Usa o verde do seu servidor */
 }
 
 /* Rotação da flecha quando o item pai estiver ativo */
@@ -1582,13 +1587,15 @@ var .play-pause {
     overflow: hidden;
     background: #111;
     color: #999;
-    padding: 0 20px; /* Padding lateral fixo para não dar pulo */
+    padding: 0 20px;
+    /* Padding lateral fixo para não dar pulo */
     transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
 }
 
 /* Estado aberto controlado pelo pai */
 .acc-item.active .acc-content {
-    max-height: 200px; /* Valor suficiente para o texto */
+    max-height: 200px;
+    /* Valor suficiente para o texto */
     padding: 20px;
 }
 
@@ -2244,38 +2251,45 @@ var .play-pause {
     transform: scale(1.05);
 }
 
-/* --- LER MAIS (Clamp) --- */
+/* --- LER MAIS (Suave e Sem Avisos) --- */
 .text-content {
     font-size: 0.9rem;
     color: var(--text-muted);
+
+    /* O segredo da suavidade está aqui */
+    max-height: 2.8rem;
+    /* Altura de + ou - 2 linhas (0.9rem * 1.5 de line-height) */
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    /* Número de linhas visíveis */
-    -webkit-box-orient: vertical;
-    transition: all 0.5s ease;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+
+    display: block;
+    /* Tiramos o -webkit-box que causava o erro */
+    position: relative;
 }
 
+/* Quando expandido */
 .text-content.expanded {
-    -webkit-line-clamp: unset;
+    max-height: 1000px;
+    /* Um valor alto o suficiente para qualquer texto */
 }
 
-.read-more-toggle {
-    background: none;
-    border: none;
-    color: var(--green-mc);
-    font-size: 0.8rem;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 0;
-    margin-top: 5px;
+/* Opcional: Efeito de degradê no final para parecer que o texto continua */
+.text-content:not(.expanded)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.2rem;
+    background: linear-gradient(transparent, var(--bg-card));
 }
 
 
 /* 1. Status Bar */
 .server-status-bar {
     background: #1a1a1a;
-    border-y: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     padding: 10px 0;
     margin: 20px 0;
 }
@@ -2681,7 +2695,7 @@ var .play-pause {
 
 /* CONTEÚDO: Escondido e sem ocupar espaço */
 .tab-content {
-    display: none !important; 
+    display: none !important;
     padding: 30px;
     color: #ccc;
     opacity: 0;
@@ -3043,7 +3057,6 @@ var .play-pause {
 
 .asset-btn-download {
     background-color: #a0a0a0;
-    /* Cor do showMessage do player.js */
     color: white;
     text-decoration: none;
     font-weight: 700;
@@ -3054,9 +3067,11 @@ var .play-pause {
     justify-content: center;
     gap: 10px;
     width: 100%;
-    transition: background 0.2s;
+    /* Especificar background-color remove o aviso e melhora a performance */
+    transition: background-color 0.2s ease;
 }
 
 .asset-btn-download:hover {
-    background-color: #464646;
+    background-color: #808080;
+    /* Uma cor um pouco mais escura para o hover */
 }
