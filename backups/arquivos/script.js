@@ -1,73 +1,112 @@
 // Atualizar o ano do copyright automaticamente
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
-window.onscroll = function () {
-    const btn = document.querySelector('.back-to-top');
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        btn.style.display = "flex";
+const backToTop = document.querySelector('.back-to-top');
+
+window.addEventListener('scroll', () => {
+    // Aparece quando rolar mais de 400px
+    if (window.scrollY > 400) {
+        backToTop.classList.add('active');
     } else {
-        btn.style.display = "none";
-    }
-};
-
-// Abre e fecha a Sidebar inteira
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const icon = document.getElementById('burgerIcon');
-    
-    sidebar.classList.toggle('active');
-    
-    // Troca o ícone de hambúrguer por um "X" suavemente
-    if(sidebar.classList.contains('active')) {
-        icon.classList.replace('fa-bars', 'fa-times');
-        icon.style.transform = 'rotate(90deg)';
-    } else {
-        icon.classList.replace('fa-times', 'fa-bars');
-        icon.style.transform = 'rotate(0deg)';
-    }
-}
-
-// Abre e fecha o sub-menu de "Jogos" dentro da sidebar
-function toggleMobileSubmenu(element) {
-    const parent = element.parentElement;
-    parent.classList.toggle('open');
-}
-
-// Opcional: Fechar a sidebar se clicar fora dela
-document.addEventListener('click', function(event) {
-    const sidebar = document.getElementById('sidebar');
-    const burger = document.querySelector('.burger');
-    
-    if (!sidebar.contains(event.target) && !burger.contains(event.target) && sidebar.classList.contains('active')) {
-        sidebar.classList.remove('active');
+        backToTop.classList.remove('active');
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const dropdownTrigger = document.querySelector('.dropdown-trigger');
-    const dropdownParent = document.querySelector('.dropdown');
-
-    dropdownTrigger.addEventListener('click', function(e) {
-        // Impede o link de recarregar a página
-        e.preventDefault();
-        
-        // Alterna a classe 'open' para mostrar o menu e girar a flecha
-        dropdownParent.classList.toggle('open');
+// Função de clique suave
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
+});
 
-    // Fecha o menu se clicar fora dele
-    window.addEventListener('click', function(e) {
-        if (!dropdownParent.contains(e.target)) {
-            dropdownParent.classList.remove('open');
+const handlePlayerVisibility = () => {
+    const player = document.querySelector('.music-player-container');
+    if (!player) return;
+
+    // Altura total do documento
+    const totalHeight = document.documentElement.scrollHeight;
+    // Posição atual do scroll + altura da janela do navegador
+    const currentScroll = window.innerHeight + window.pageYOffset;
+    
+    // Distância do fim da página para ativar o desaparecimento (ajuste se necessário)
+    const threshold = 150; 
+
+    if (currentScroll >= (totalHeight - threshold)) {
+        player.classList.add('player-hidden');
+    } else {
+        player.classList.remove('player-hidden');
+    }
+};
+
+// Evento de scroll otimizado
+let scrollTimer;
+window.addEventListener('scroll', () => {
+    window.clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(handlePlayerVisibility, 10);
+}, { passive: true });
+
+// Executa uma vez ao carregar para caso a página já inicie no fim
+window.addEventListener('load', handlePlayerVisibility);
+
+/**
+ * SISTEMA DE NAVEGAÇÃO ZERAS CRAFT
+ */
+
+// Abrir e fechar Sidebar Mobile
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const body = document.body;
+
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+
+    // Impede o scroll do site com o menu aberto
+    if (sidebar.classList.contains('active')) {
+        body.style.overflow = 'hidden';
+    } else {
+        body.style.overflow = 'auto';
+    }
+}
+
+// Controle de Dropdown Mobile (Sistema de Painel Lateral)
+function toggleDrop(element) {
+    const parent = element.parentElement;
+    
+    // Opcional: Fecha outros dropdowns ao abrir um novo
+    /*
+    document.querySelectorAll('.sidebar-dropdown').forEach(item => {
+        if (item !== parent) item.classList.remove('open');
+    });
+    */
+
+    parent.classList.toggle('open');
+}
+
+// Fechar sidebar ao clicar em um link (opcional)
+document.querySelectorAll('.sidebar-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.classList.contains('active')) {
+            toggleSidebar();
         }
     });
 });
 
+// Fechar com a tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.classList.contains('active')) toggleSidebar();
+    }
+});
+
 // 2. Copiar IP
 function copyIP() {
-    const ip = "jogar.zerascraft.net";
+    const ip = "MCPixelLegends88.aternos.me:0000";
     navigator.clipboard.writeText(ip).then(() => {
-        alert("IP Copiado! Te esperamos no servidor.");
+        alert("Te Vemos por Lá! // (Nosso Servidor tem suporte nativo para Bedrock e Java) ;)");
     }).catch(err => {
         console.error('Erro ao copiar', err);
     });
@@ -181,47 +220,48 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 
 // Lógica de Troca de Abas
-function openTab(evt, tabName) {
-    let i, tabContent, tabBtns;
+function switchTab(evt, tabId) {
+    // 1. Busca todos os elementos
+    const allContents = document.querySelectorAll('.tab-content');
+    const allButtons = document.querySelectorAll('.tab-btn');
 
-    // Esconde todos os conteúdos
-    tabContent = document.getElementsByClassName("tab-content");
-    for (i = 0; i < tabContent.length; i++) {
-        tabContent[i].style.display = "none";
-        tabContent[i].classList.remove("active");
+    // 2. REMOÇÃO FORÇADA: Limpa classes e estilos inline de todas as abas
+    allContents.forEach(content => {
+        content.classList.remove('active');
+        content.style.setProperty('display', 'none', 'important');
+    });
+
+    // 3. Reseta os botões
+    allButtons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // 4. ATIVAÇÃO: Mostra apenas a aba clicada
+    const target = document.getElementById(tabId);
+    if (target) {
+        target.style.setProperty('display', 'block', 'important');
+        // Pequeno delay para garantir que o navegador processe o display antes da animação
+        setTimeout(() => {
+            target.classList.add('active');
+        }, 10);
     }
 
-    // Remove a classe 'active' de todos os botões
-    tabBtns = document.getElementsByClassName("tab-btn");
-    for (i = 0; i < tabBtns.length; i++) {
-        tabBtns[i].classList.remove("active");
-    }
-
-    // Mostra a aba atual e adiciona a classe active ao botão
-    document.getElementById(tabName).style.display = "block";
-    document.getElementById(tabName).classList.add("active");
-    evt.currentTarget.classList.add("active");
+    // 5. Destaca o botão atual
+    evt.currentTarget.classList.add('active');
 }
 
 
-function toggleAcc(element) {
-    const answer = element.nextElementSibling;
-    const icon = element.querySelector('i');
-
-    // Fecha outros abertos (opcional)
-    document.querySelectorAll('.faq-answer').forEach(el => {
-        if (el !== answer) {
-            el.classList.remove('open');
-            el.previousElementSibling.querySelector('i').classList.replace('fa-minus', 'fa-plus');
-        }
+function toggleAccordion(element) {
+    const item = element.parentElement; // Pega o .acc-item
+    
+    // Opcional: Fecha outros itens abertos (Estilo único)
+    const allItems = document.querySelectorAll('.acc-item');
+    allItems.forEach(i => {
+        if (i !== item) i.classList.remove('active');
     });
 
-    answer.classList.toggle('open');
-    if (answer.classList.contains('open')) {
-        icon.classList.replace('fa-plus', 'fa-minus');
-    } else {
-        icon.classList.replace('fa-minus', 'fa-plus');
-    }
+    // Alterna o estado do item clicado
+    item.classList.toggle('active');
 }
 
 

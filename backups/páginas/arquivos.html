@@ -61,63 +61,85 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
-<!--------------------------------------------------------------->
+<!----------------------------- Desktop --------------------------------->
 
 <body>
 
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <span>MENU</span>
-            <button class="burger" onclick="toggleSidebar()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
+    <nav class="nav-pc">
+        <div class="container-pc">
+            <div class="logo">ZERAS CRAFT</div>
 
-        <ul class="sidebar-links">
-            <li><a href="#">Início</a></li>
-
-            <li class="sidebar-dropdown">
-                <div class="dropdown-header" onclick="toggleMobileSubmenu(this)">
-                    <a href="javascript:void(0)">Jogos <i class="fas fa-angle-down arrow-icon"></i></a>
-                </div>
-                <ul class="sidebar-submenu">
-                    <li><a href="#">Minecraft Java</a></li>
-                    <li><a href="#">Minecraft Bedrock</a></li>
-                    <li><a href="#">Minecraft Dungeons</a></li>
-                </ul>
-            </li>
-
-            <li><a href="#">Comunidade</a></li>
-            <li><a href="#">Suporte</a></li>
-        </ul>
-
-        <a href="#" class="btn-sidebar">JOGAR AGORA</a>
-    </aside>
-
-    <header class="pc-header">
-        <div class="container header-flex">
-            <div class="logo header-logo">ZERAS CRAFT</div>
-            <ul class="nav-links">
+            <ul class="menu-pc">
+                <li><a href="index.html">Início</a></li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-trigger active">
-                        JOGOS <i class="fas fa-angle-down arrow-icon"></i>
-                    </a>
-                    <ul class="dropdown-content">
-                        <li><a href="#">MINECRAFT JAVA</a></li>
-                        <li><a href="#">MINECRAFT BEDROCK</a></li>
-                        <li><a href="#">DUNGEONS</a></li>
+                    <a href="#">Jogos <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="#">Bedrock Edition</a></li>
+                        <li><a href="#">Java Edition</a></li>
                     </ul>
                 </li>
-                <li><a href="#">COMUNIDADE</a></li>
-                <li><a href="#">MERCADO</a></li>
-                <li><a href="#">SUPORTE</a></li>
+                <li><a href="arquivos.html">Arquivos</a></li>
+                <li><a href="comunidade.html">Comunidade</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="pixel-legends.html">Pixel Legends</a></li>
+                <li><a href="canais.html">Canais</a></li>
+                <li><a href="suporte.html">Suporte</a></li>
             </ul>
+
             <div class="header-actions">
-                <span class="server-ip" onclick="copyIP()">jogar.zerascraft.net</span>
+                <span class="server-ip" onclick="copyIP()">IP Pixel Legends</span>
                 <a href="#" class="btn-green">LOJA VIP</a>
             </div>
         </div>
-    </header>
+    </nav>
+
+    <!----------------------------- Mobile ---------------------------------->
+
+    <nav class="nav-mobile">
+        <div class="logo-mobile">ZERAS CRAFT</div>
+        <button class="burger-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars" id="icon-bars"></i>
+        </button>
+    </nav>
+
+    <aside class="sidebar-glass" id="sidebar">
+        <div class="sidebar-header">
+            <span class="menu-title">MENU</span>
+            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        </div>
+
+        <ul class="sidebar-links">
+            <li><a href="index.html">Início</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Jogos</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <ul class="sidebar-sub">
+                    <li><a href="#">Bedrock Edition</a></li>
+                    <li><a href="#">Java Edition</a></li>
+                </ul>
+            </li>
+            <li><a href="arquivos.html">Arquivos</a></li>
+            <li><a href="comunidade.html">Comunidade</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="pixel-legends.html">Pixel Legends</a></li>
+            <li><a href="canais.html">Canais</a></li>
+            <li><a href="suporte.html">Suporte</a></li>
+        </ul>
+
+        <div class="sidebar-actions">
+            <div class="server-ip-box" onclick="copyIP()">
+                <span class="ip-text">IP Pixel Legends</span>
+                <i class="far fa-copy"></i>
+            </div>
+
+            <a href="#" class="btn-green">LOJA VIP</a>
+            <a href="#" class="btn-jogar-agora">JOGAR AGORA <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </aside>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
     <!--------------------------------------------------------------->
 
