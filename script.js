@@ -104,9 +104,9 @@ document.addEventListener('keydown', (e) => {
 
 // 2. Copiar IP
 function copyIP() {
-    const ip = "jogar.zerascraft.net";
+    const ip = "MCPixelLegends88.aternos.me:0000";
     navigator.clipboard.writeText(ip).then(() => {
-        alert("IP Copiado! Te esperamos no servidor.");
+        alert("Te Vemos por Lá! // (Nosso Servidor tem suporte nativo para Bedrock e Java) ;)");
     }).catch(err => {
         console.error('Erro ao copiar', err);
     });
