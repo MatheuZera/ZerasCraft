@@ -1,245 +1,441 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM totalmente carregado e pronto!");
+// Atualizar o ano do copyright automaticamente
+document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // =====================================
-    // Configuração de Áudio
-    // =====================================
-
-    // Define o prefixo do caminho absoluto para a pasta de efeitos
-    // ATENÇÃO: Corrigido para Caminho Absoluto (usando o placeholder /ZerasCraft/)
-    const AUDIO_BASE_PATH = 'assets/audios/effects/';
-
-    // Define os caminhos e pre-carrega os sons
-    const linkSound = new Audio(AUDIO_BASE_PATH + 'link.mp3');
-    const cardSound = new Audio(AUDIO_BASE_PATH + 'card.mp3');
-    const buttonSound = new Audio(AUDIO_BASE_PATH + 'button.mp3');
-    const selectSound = new Audio(AUDIO_BASE_PATH + 'select.mp3');
-    const buttonClickSound = new Audio(AUDIO_BASE_PATH + 'button-click.mp3');
-
-    linkSound.preload = 'auto';
-    cardSound.preload = 'auto';
-    buttonSound.preload = 'auto';
-    selectSound.preload = 'auto';
-    buttonClickSound.preload = 'auto';
-
-    /**
-     * Toca um som de forma controlada, clonando o áudio para evitar interrupções.
-     * @param {HTMLAudioElement} sound - O objeto de áudio a ser tocado.
-     */
-    function playSound(sound) {
-        const clonedSound = sound.cloneNode();
-        clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
+window.onscroll = function () {
+    const btn = document.querySelector('.back-to-top');
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "flex";
+    } else {
+        btn.style.display = "none";
     }
+};
 
-    // =====================================
-    // Gerenciamento de Eventos de Clique
-    // =====================================
-
-    document.addEventListener('click', (event) => {
-        const target = event.target.closest('a, button');
-
-        if (!target) {
-            return;
-        }
-
-        const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
-        const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
-
-        if (isNavLink) {
-            // Toca o som de link para navegação
-            event.preventDefault();
-            playSound(linkSound);
-            setTimeout(() => {
-                window.location.href = target.href;
-            }, 300);
-        } else if (isSpecialButton) {
-            // Toca o som de clique para botões e links internos
-            playSound(buttonClickSound);
-        }
-    });
-
-    // =====================================
-    // Gerenciamento de Eventos de Hover
-    // =====================================
-
-    // Seletores para os elementos
-    const cardElements = document.querySelectorAll(
-        '.service-card, .role-category-card, .access-card, .community-card, .event-card, .security-card, .faq-item, .info-card, .card, .marketplace-item, .wiki-category-card, .article-card, .youtube-card, .server-card, .donation-tier-card, .vote-site-card, .team-member-card, .news-featured-card, .news-article-card, .job-opening-card, .forum-post-card, .comment-card, .stat-item, .parallax-card, .card-container, .result-card, .card-compact, .container-cards-grandes, .content-card, .cards-container, .card-citacao'
-    );
-
-    const buttonElements = document.querySelectorAll(
-        'button, .btn, .btn-primary, .btn-destaque, .btn-push-down, .liquid-btn, .tag-btn, .btn-top, .btn-download, .item-link, .gallery-image, .container-cards-grandes, .card-button, .pricing-features, .fab'
-    );
-
-    const textLinkElements = document.querySelectorAll(
-        'p a, span a, li a'
-    );
-
-    // Adiciona os event listeners
-    cardElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(cardSound));
-    });
-
-    buttonElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(buttonSound));
-    });
-
-    textLinkElements.forEach(element => {
-        element.addEventListener('mouseenter', () => playSound(selectSound));
-    });
-
-    // ==================================================================================================================================================
-    // 1. Menu Hambúrguer (Otimizado para mais páginas)
-    // ==================================================================================================================================================
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.main-nav');
-    const menuIcon = menuToggle.querySelector('i');
-
-    if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-
-            if (nav.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        });
+// Abre e fecha a Sidebar inteira
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const icon = document.getElementById('burgerIcon');
+    
+    sidebar.classList.toggle('active');
+    
+    // Troca o ícone de hambúrguer por um "X" suavemente
+    if(sidebar.classList.contains('active')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+        icon.style.transform = 'rotate(90deg)';
+    } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+        icon.style.transform = 'rotate(0deg)';
     }
+}
 
-    // ===================================================================
-    // 2. Funcionalidade de Copiar Texto
-    // ===================================================================
-    // Esta função foi atualizada para incluir a lógica para o IP/Porta do servidor
-    const copyButtons = document.querySelectorAll('.copy-button'); // Certifique-se de que seus botões de cópia têm esta classe
-    if (copyButtons.length > 0) {
-        copyButtons.forEach(button => {
-            button.addEventListener('click', async () => {
-                let textToCopy = '';
-                let targetElementSelector = button.dataset.copyTarget; // Ex: '#serverIp, #serverPort'
-                let originalButtonText = button.textContent;
+// Abre e fecha o sub-menu de "Jogos" dentro da sidebar
+function toggleMobileSubmenu(element) {
+    const parent = element.parentElement;
+    parent.classList.toggle('open');
+}
 
-                if (targetElementSelector) {
-                    const selectors = targetElementSelector.split(',').map(s => s.trim());
-                    let partsToCopy = [];
-                    for (const selector of selectors) {
-                        const targetElement = document.querySelector(selector);
-                        if (targetElement) {
-                            partsToCopy.push(targetElement.textContent.trim());
-                        }
-                    }
-                    if (selectors.includes('#serverIp') && selectors.includes('#serverPort') && partsToCopy.length === 2) {
-                        textToCopy = `${partsToCopy[0]}:${partsToCopy[1]}`;
-                    } else {
-                        textToCopy = partsToCopy.join(' '); // Junta com espaço se for outro tipo de múltiplos elementos
-                    }
-                } else if (button.dataset.copyText) {
-                    textToCopy = button.dataset.copyText;
-                }
+// Opcional: Fechar a sidebar se clicar fora dela
+document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const burger = document.querySelector('.burger');
+    
+    if (!sidebar.contains(event.target) && !burger.contains(event.target) && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+    }
+});
 
-                if (textToCopy) {
-                    try {
-                        // Usa a API Clipboard mais moderna se disponível, com fallback para execCommand
-                        if (navigator.clipboard && navigator.clipboard.writeText) {
-                            await navigator.clipboard.writeText(textToCopy);
-                        } else {
-                            const textArea = document.createElement("textarea");
-                            textArea.value = textToCopy;
-                            document.body.appendChild(textArea);
-                            textArea.select();
-                            document.execCommand('copy');
-                            document.body.removeChild(textArea);
-                        }
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    const dropdownParent = document.querySelector('.dropdown');
 
-                        showCentralMessage(`[📃] (${textToCopy})  copiado!`);
-                        button.textContent = 'Copiado!';
-                        button.classList.add('copied');
-                        setTimeout(() => {
-                            button.textContent = originalButtonText;
-                            button.classList.remove('copied');
-                        }, 2000);
-                    } catch (err) {
-                        console.error('Erro ao copiar: ', err);
-                        showCentralMessage('[❗] Falha ao copiar.');
-                    }
+    dropdownTrigger.addEventListener('click', function(e) {
+        // Impede o link de recarregar a página
+        e.preventDefault();
+        
+        // Alterna a classe 'open' para mostrar o menu e girar a flecha
+        dropdownParent.classList.toggle('open');
+    });
+
+    // Fecha o menu se clicar fora dele
+    window.addEventListener('click', function(e) {
+        if (!dropdownParent.contains(e.target)) {
+            dropdownParent.classList.remove('open');
+        }
+    });
+});
+
+// 2. Copiar IP
+function copyIP() {
+    const ip = "jogar.zerascraft.net";
+    navigator.clipboard.writeText(ip).then(() => {
+        alert("IP Copiado! Te esperamos no servidor.");
+    }).catch(err => {
+        console.error('Erro ao copiar', err);
+    });
+}
+
+// 3. Scroll Animation (Reveal)
+const observerOptions = {
+    threshold: 0.15, // Ativa quando 15% do elemento estiver visível
+    rootMargin: "0px 0px -50px 0px"
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); // Para de observar após animar
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+});
+
+// 4. Accordion Function
+function toggleAcc(element) {
+    const content = element.nextElementSibling;
+    const icon = element.querySelector('.fa-chevron-down');
+
+    content.classList.toggle('open');
+
+    if (content.classList.contains('open')) {
+        icon.style.transform = "rotate(180deg)";
+    } else {
+        icon.style.transform = "rotate(0deg)";
+    }
+}
+
+// 5. Contadores Animados (Stats)
+const counters = document.querySelectorAll('.counter');
+const speed = 200;
+
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 25);
                 } else {
-                    showCentralMessage('[📌] Nada para copiar.');
+                    counter.innerText = target;
                 }
-                playEffectSound(clickSound);
-            });
-        });
-    }
-
-    // ===================================================================
-    // 3. Animações de Rolagem com ScrollReveal
-    // ===================================================================
-    // Adicionado um pequeno atraso para o ScrollReveal carregar e evitar piscar
-    setTimeout(() => {
-        if (typeof ScrollReveal !== 'undefined') {
-            ScrollReveal().reveal('.reveal', {
-                delay: 200,
-                distance: '50px',
-                origin: 'bottom',
-                interval: 100,
-                mobile: true // Habilitado em mobile agora para melhor UX
-            });
-            ScrollReveal().reveal('.reveal-left', {
-                delay: 200,
-                distance: '50px',
-                origin: 'left',
-                mobile: true
-            });
-            ScrollReveal().reveal('.reveal-right', {
-                delay: 200,
-                distance: '50px',
-                origin: 'right',
-                mobile: true
-            });
-            ScrollReveal().reveal('.reveal-up', {
-                delay: 200,
-                distance: '50px',
-                origin: 'top',
-                mobile: true
-            });
-        } else {
-            console.warn("ScrollReveal não está definido. Verifique se o script foi incluído corretamente.");
+            };
+            updateCount();
+            statsObserver.unobserve(counter);
         }
-    }, 500); // Atraso de 500ms
+    });
+});
 
-    // ===================================================================
-    // 4. Botão Voltar ao Topo
-    // ===================================================================
+counters.forEach(counter => statsObserver.observe(counter));
 
-    // Botão Voltar ao Topo
-    const scrollTopButton = document.getElementById('scrollTopButton');
-    if (scrollTopButton) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 200) {
-                scrollTopButton.classList.add('show');
+// Funcionalidade "Ler Mais" nos cards
+document.querySelectorAll('.read-more-toggle').forEach(button => {
+    button.addEventListener('click', function () {
+        const textContent = this.previousElementSibling;
+        textContent.classList.toggle('expanded');
+
+        if (textContent.classList.contains('expanded')) {
+            this.textContent = 'Ler menos';
+        } else {
+            this.textContent = 'Ler mais...';
+        }
+    });
+});
+
+
+
+
+// 1. Simulação de Jogadores Online (Número Aleatório para dar vida)
+function updatePlayers() {
+    const countElement = document.getElementById('online-count');
+    const randomCount = Math.floor(Math.random() * (1500 - 1200 + 1)) + 1200;
+    if (countElement) countElement.innerText = `${randomCount} JOGADORES ONLINE AGORA`;
+}
+updatePlayers();
+
+// 2. Filtro de Categorias (Lógica)
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        document.querySelector('.filter-btn.active').classList.remove('active');
+        this.classList.add('active');
+        const target = this.getAttribute('data-target');
+
+        // Exemplo: Esconder/Mostrar cards de jogo baseado no target
+        document.querySelectorAll('.game-card').forEach(card => {
+            if (target === 'todos' || card.innerText.toLowerCase().includes(target)) {
+                card.style.display = 'flex';
+                card.style.animation = 'fadeIn 0.5s forwards';
             } else {
-                scrollTopButton.classList.remove('show');
+                card.style.display = 'none';
             }
         });
+    });
+});
 
-        scrollTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            playEffectSound(clickSound);
+
+
+// Lógica de Troca de Abas
+function openTab(evt, tabName) {
+    let i, tabContent, tabBtns;
+
+    // Esconde todos os conteúdos
+    tabContent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+        tabContent[i].classList.remove("active");
+    }
+
+    // Remove a classe 'active' de todos os botões
+    tabBtns = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].classList.remove("active");
+    }
+
+    // Mostra a aba atual e adiciona a classe active ao botão
+    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+
+
+function toggleAcc(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('i');
+
+    // Fecha outros abertos (opcional)
+    document.querySelectorAll('.faq-answer').forEach(el => {
+        if (el !== answer) {
+            el.classList.remove('open');
+            el.previousElementSibling.querySelector('i').classList.replace('fa-minus', 'fa-plus');
+        }
+    });
+
+    answer.classList.toggle('open');
+    if (answer.classList.contains('open')) {
+        icon.classList.replace('fa-plus', 'fa-minus');
+    } else {
+        icon.classList.replace('fa-minus', 'fa-plus');
+    }
+}
+
+
+function showClickNotification(titulo, mensagem) {
+    // Cria o elemento
+    const notification = document.createElement('div');
+    notification.className = 'click-notification';
+
+    notification.innerHTML = `
+        <strong>${titulo}</strong>
+        <span>${mensagem}</span>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Ativa a animação
+    setTimeout(() => {
+        notification.classList.add('active');
+    }, 100);
+
+    // Remove após 3 segundos
+    setTimeout(() => {
+        notification.classList.remove('active');
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, 3000);
+}
+
+
+let currentScroll = 0;
+
+function moveCarousel(direction) {
+    const track = document.getElementById('carouselTrack');
+    const viewport = document.querySelector('.mc-carousel-viewport');
+
+    if (!track || !viewport) return;
+
+    const card = track.querySelector('.mc-collectible-card');
+    const cardWidth = card.offsetWidth + 20; // Largura do card + gap
+    const totalWidth = track.scrollWidth;
+    const visibleWidth = viewport.offsetWidth;
+    const maxScroll = totalWidth - visibleWidth;
+
+    // Calcula o próximo movimento
+    // direction 1 = próximo (move para esquerda/negativo)
+    // direction -1 = anterior (move para direita/positivo)
+    currentScroll -= (direction * cardWidth);
+
+    // LÓGICA DE LOOP
+    // Se tentou ir além do final, volta para o início
+    if (Math.abs(currentScroll) > maxScroll && direction === 1) {
+        currentScroll = 0;
+    }
+    // Se tentou voltar antes do início, vai para o final
+    else if (currentScroll > 0 && direction === -1) {
+        currentScroll = -maxScroll;
+    }
+
+    // Aplica o movimento
+    track.style.transform = `translateX(${currentScroll}px)`;
+}
+
+
+
+// CONFIGURAÇÃO DOS ÍNDICES
+let worldIndex = 0;
+let heroIndex = 0;
+
+// 1. Lógica Slider "Expanda seu Mundo" (Pula 1 por 1)
+function moveWorld(direction) {
+    const track = document.getElementById('worldTrack');
+    const items = track.children.length;
+    const step = track.children[0].offsetWidth;
+
+    // Loop Infinito Matemático
+    worldIndex = (worldIndex + direction + items) % items;
+
+    track.style.transform = `translateX(-${worldIndex * step}px)`;
+}
+
+// 2. Lógica Hero "Sobrevivência"
+function moveHero(direction) {
+    const slides = document.querySelectorAll('.h-slide');
+    slides[heroIndex].classList.remove('active');
+
+    // Loop Infinito Matemático
+    heroIndex = (heroIndex + direction + slides.length) % slides.length;
+
+    slides[heroIndex].classList.add('active');
+}
+
+// 3. Lógica de Accordions
+function toggleAccordion(button) {
+    const panel = button.nextElementSibling;
+    const icon = button.querySelector('i');
+
+    // Fecha outros painéis abertos para evitar bugs visuais
+    document.querySelectorAll('.acc-panel').forEach(p => {
+        if (p !== panel) p.style.maxHeight = null;
+    });
+
+    if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+        icon.className = "fas fa-plus";
+    } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        icon.className = "fas fa-minus";
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const bundleBtn = document.querySelector('.bundle-btn');
+
+    if (bundleBtn) {
+        bundleBtn.addEventListener('click', (e) => {
+            // Se quiser que o botão apenas simule uma ação por agora
+            e.preventDefault();
+
+            // Chama a função showMessage que já existe no seu player.js
+            if (typeof showMessage === 'function') {
+                showMessage("SUCESSO", "Redirecionando para a loja...", "fa-shopping-cart");
+            } else {
+                alert("A processar compra...");
+            }
         });
     }
+});
 
-    // ===================================================================
-    // 5. Atualizar ano no Rodapé
-    // ===================================================================
-    // Atualização do Ano no Rodapé
-    const currentYearSpan = document.getElementById('currentYear');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear();
+
+
+function openTab(evt, tabId) {
+    // Esconde todos os panes
+    const panes = document.querySelectorAll(".tab-pane");
+    panes.forEach(p => p.classList.remove("active"));
+
+    // Remove classe active dos botões
+    const btns = document.querySelectorAll(".tab-btn");
+    btns.forEach(b => b.classList.remove("active"));
+
+    // Mostra a aba atual e marca o botão
+    document.getElementById(tabId).classList.add("active");
+    evt.currentTarget.classList.add("active");
+    
+    // Feedback visual (opcional, integra com seu player.js)
+    if (typeof showMessage === 'function') {
+        showMessage("ABA ALTERADA", "Explorando novo conteúdo", "fa-th-large");
     }
+}
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.content-item');
+    
+    // Animação de fade-in para os itens da grade
+    items.forEach((item, index) => {
+        item.style.opacity = "0";
+        item.style.transform = "translateY(20px)";
+        
+        setTimeout(() => {
+            item.style.transition = "all 0.6s ease";
+            item.style.opacity = "1";
+            item.style.transform = "translateY(0)";
+        }, 200 * index);
+    });
+
+    // Integração com o seu showMessage do player.js
+    const downloadBtn = document.querySelector('.btn-primary');
+    downloadBtn.addEventListener('click', () => {
+        if (typeof showMessage === 'function') {
+            showMessage("SISTEMA", "Iniciando download seguro...", "fa-download");
+        }
+    });
+});
+
+
+document.querySelectorAll('.link-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const title = item.querySelector('.link-title').innerText;
+        
+        // Se a função showMessage existir no seu player.js, ela será chamada
+        if (typeof showMessage === 'function') {
+            showMessage("REDIRECIONANDO", `Abrindo: ${title}`, "fa-external-link-alt");
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const block = document.querySelector('.pixel-block');
+    
+    // Verificamos se o bloco existe antes de iniciar o intervalo
+    if (block) {
+        // Pequeno efeito visual de "glitch" aleatório
+        setInterval(() => {
+            block.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+        }, 100);
+
+        // Integração com sua mensagem do player.js
+        if (typeof showMessage === 'function') {
+            setTimeout(() => {
+                showMessage("ERRO 404", "Coordenadas não encontradas!", "fa-ghost");
+            }, 500);
+        }
+    }
+});
+
+document.querySelectorAll('.btn-access').forEach(button => {
+    button.addEventListener('click', (e) => {
+        const channelName = e.target.closest('.creator-card').querySelector('h3').innerText;
+        
+        if (typeof showMessage === 'function') {
+            showMessage("EXTERNAL LINK", `Abrindo o canal de ${channelName}...`, "fa-external-link-alt");
+        }
+    });
 });
