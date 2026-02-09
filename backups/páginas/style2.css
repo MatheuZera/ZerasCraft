@@ -1,0 +1,1122 @@
+/* Container com lógica de 4 colunas e centralização */
+.news-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Centraliza a sobra (ex: o 5º item) */
+    gap: 15px;
+    padding: 40px;
+    background-color: #0d1117;
+}
+
+/* Base do Card */
+.mc-news-card {
+    position: relative;
+    width: 280px;
+    /* Largura para manter 4 por linha */
+    height: 280px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    border-radius: 4px;
+    /* Minecraft usa bordas mais quadradas */
+    background-color: #161b22;
+}
+
+/* Imagem de Fundo */
+.news-image {
+    width: 100%;
+    height: 100%;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Camada de Texto (Overlay) */
+.news-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Começa com altura menor */
+    height: 90px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(2px);
+}
+
+/* Efeito de Levantamento no Hover */
+.mc-news-card:hover .news-info-overlay {
+    height: 100%;
+    /* Levanta até cobrir o card */
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.mc-news-card:hover .news-image img {
+    transform: scale(1.1);
+    /* Zoom leve na imagem */
+}
+
+/* Estilização dos Textos */
+.news-tag {
+    background: #ffffff;
+    color: #000000;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 2px 6px;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.news-headline {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.news-description {
+    color: #cbd3dc;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    opacity: 0;
+    /* Invisível no estado normal */
+    transition: opacity 0.3s ease;
+}
+
+.mc-news-card:hover .news-description {
+    opacity: 1;
+    /* Aparece quando o texto levanta */
+}
+
+
+
+
+.collectibles-section {
+    background-color: #000;
+    padding: 60px 20px;
+    display: flex;
+    gap: 40px;
+    overflow: hidden;
+}
+
+.collectibles-header {
+    min-width: 300px;
+    max-width: 350px;
+}
+
+.mc-title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.mc-subtitle {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.mc-link-all {
+    color: #1db954;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Setas de Navegação */
+.mc-carousel-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.mc-arrow {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.mc-arrow:hover {
+    border-color: #1db954;
+    color: #1db954;
+}
+
+/* Logica do Carrossel */
+.mc-carousel-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    /* Transição suave de 0.5 segundos, igual às animações do sistema */
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+/* Garante que o container pai não mostre os cards que "saíram" da tela */
+.mc-carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Card Individual (Efeito Minecraft) */
+.mc-collectible-card {
+    min-width: 280px;
+    /* Garante os 4 cards por tela */
+    background: #161b22;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-img-wrapper {
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.card-info {
+    padding: 20px;
+    background: #212121;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Efeito de "levantar" no hover */
+.mc-collectible-card:hover .card-img-wrapper img {
+    transform: scale(1.05);
+}
+
+.mc-collectible-card:hover .card-info {
+    background: #333;
+}
+
+.card-tag {
+    color: #aaa;
+    font-size: 0.7rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.card-icon-dl {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    color: #fff;
+    opacity: 0.6;
+}
+
+
+
+/* Configurações Globais Dark */
+.mc-section {
+    background: #0c0c0c;
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.mc-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+/* 1. Friends Accordions */
+.f-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.f-card {
+    background: #181818;
+    width: 320px;
+    border-bottom: 6px solid;
+    text-align: left;
+}
+
+.border-brown {
+    border-color: #7a5c41;
+}
+
+.border-purple {
+    border-color: #7b4fb6;
+}
+
+.border-blue {
+    border-color: #0085ff;
+}
+
+.f-img-box img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.f-content {
+    padding: 25px;
+}
+
+.f-badge {
+    background: #333;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 2px;
+}
+
+.acc-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.4s ease;
+    color: #aaa;
+    font-size: 14px;
+}
+
+.acc-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    cursor: pointer;
+    border-top: 1px solid #333;
+    margin-top: 15px;
+}
+
+/* 2. World Slider */
+.w-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.w-viewport {
+    width: 450px;
+    overflow: hidden;
+}
+
+/* Mostra 1 por vez */
+.w-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.w-item {
+    min-width: 450px;
+    background: #1a1a1a;
+    padding-bottom: 20px;
+}
+
+.w-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.w-arrow {
+    background: #333;
+    color: #fff;
+    border: 2px solid #555;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 10;
+    margin: 0 10px;
+}
+
+.w-arrow:hover {
+    background: #1db954;
+}
+
+/* Cor verde do seu player */
+
+/* 3. Hero Survival */
+.hero-dark {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.h-slide {
+    display: none;
+    width: 90%;
+    max-width: 1200px;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.h-slide.active {
+    display: flex;
+    animation: fadeIn 0.5s ease;
+}
+
+.h-info h2 {
+    font-size: 3.5rem;
+    margin: 10px 0;
+}
+
+.pixel-mask {
+    width: 500px;
+    clip-path: polygon(10% 0, 90% 0, 90% 10%, 100% 10%, 100% 90%, 90% 90%, 90% 100%, 10% 100%, 10% 90%, 0 90%, 0 10%, 10% 10%);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+
+
+
+
+
+
+/* Container Principal */
+.bundle-section {
+    background-color: #000000;
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bundle-container {
+    max-width: 1200px;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Garante que em ecrãs pequenos o texto desça */
+}
+
+/* Galeria de Imagens */
+.bundle-gallery {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+}
+
+.game-card {
+    flex: 1;
+    transition: transform 0.3s ease;
+}
+
+.game-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Efeito de destaque ao passar o rato */
+.game-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Bloco de Texto */
+.bundle-content {
+    flex: 1;
+    color: #ffffff;
+    text-align: left;
+}
+
+.bundle-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.bundle-text {
+    font-size: 1.1rem;
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    max-width: 500px;
+}
+
+/* Botão Verde (Sincronizado com o seu player.js) */
+.bundle-btn {
+    display: inline-block;
+    background-color: #1db954;
+    /* O mesmo verde do showMessage */
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 18px 35px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: filter 0.2s, transform 0.2s;
+}
+
+.bundle-btn:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+
+
+
+
+
+
+
+/* Container e Dark Mode */
+.zigzag-section {
+    background: #0c0c0c;
+    color: #fff;
+    padding: 60px 20px;
+}
+
+/* Menu de Abas */
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.tab-btn {
+    background: #1a1a1a;
+    color: #888;
+    /* Texto inativo mais escuro */
+    border: 2px solid #333;
+    padding: 10px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Quando a aba está selecionada: borda branca e texto branco */
+.tab-btn.active {
+    border-color: #ffffff;
+    color: #ffffff;
+    background: #252525;
+}
+
+.zz-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    /* Título branco em vez de verde */
+}
+
+/* Linhas em Zigue-Zague */
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.zigzag-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 80px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* A MÁGICA: Inverte a ordem nas linhas pares */
+.zigzag-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.zz-text {
+    flex: 1;
+    text-align: left;
+}
+
+.zz-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.zz-text p {
+    color: #d3d3d3;
+    line-height: 1.6;
+}
+
+.zz-image {
+    flex: 1;
+}
+
+.zz-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.dark-theme {
+    background: #080808;
+    color: #ffffff;
+    padding: 40px 20px;
+}
+
+/* Hero Principal */
+.portal-hero {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 40px;
+    background: #111;
+    border-radius: 4px;
+}
+
+.hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin: 15px 0;
+}
+
+.category-tag {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: #888;
+    border-bottom: 2px solid #444;
+}
+
+/* Botões Neutros */
+.btn-primary {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #444;
+    padding: 13px 30px;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.btn-outline:hover {
+    background: #222;
+    border-color: #888;
+}
+
+/* Banner com Máscara */
+.mask-pixel {
+    width: 100%;
+    max-width: 500px;
+    clip-path: polygon(5% 0, 95% 0, 95% 5%, 100% 5%, 100% 95%, 95% 95%, 95% 100%, 5% 100%, 5% 95%, 0 95%, 0 5%, 5% 5%);
+}
+
+/* Grade de Conteúdo Inferior */
+.content-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.content-item {
+    background: #151515;
+    padding: 15px;
+    transition: 0.3s;
+}
+
+.content-item:hover {
+    background: #1c1c1c;
+    transform: translateY(-5px);
+}
+
+.content-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.content-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.content-item p {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+
+.links-section {
+    background-color: #0a0a0a;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.links-container {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: #151515;
+    border: 1px solid #222;
+    transition: all 0.3s ease;
+}
+
+.link-item:hover {
+    background: #1c1c1c;
+    border-color: #444;
+    transform: translateX(10px);
+    /* Leve deslize para a direita no hover */
+}
+
+/* Imagem quadrada pequena */
+.link-img {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.link-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Área de Texto */
+.link-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.link-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.link-title i {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.link-info p {
+    color: #888;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.link-item:hover .link-title {
+    color: #f0f0f0;
+}
+
+
+.edu-container {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    /* Lado esquerdo bem mais largo */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Galeria de Cards */
+.edu-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.edu-card img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    /* Garante que as imagens sejam quadradas */
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.edu-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.edu-card p {
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.4;
+}
+
+/* Sidebar de Links à Direita */
+.edu-links-sidebar {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Link Verde (O único destaque de cor que resta) */
+.special-link {
+    color: #4CAF50;
+    /* Um verde mais sóbrio e educacional */
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.divider {
+    height: 1px;
+    background: #333;
+    margin-bottom: 20px;
+}
+
+.sidebar-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 12px 0;
+    border-bottom: 1px solid #222;
+    /* Linha sutil entre os links */
+    transition: 0.2s;
+}
+
+.sidebar-link:hover {
+    color: #888;
+    padding-left: 5px;
+}
+
+/* Responsividade para Celular */
+@media (max-width: 900px) {
+    .edu-container {
+        grid-template-columns: 1fr;
+    }
+
+    .edu-links-sidebar {
+        margin-top: 40px;
+    }
+}
+
+
+.error-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #050505;
+    /* Fundo bem escuro */
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.error-container {
+    max-width: 600px;
+    padding: 20px;
+}
+
+/* O "Bloco" 404 */
+.pixel-block {
+    font-size: 8rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    text-shadow: 2px 2px 0 #333, 4px 4px 0 #111;
+    background: #111;
+    display: inline-block;
+    padding: 20px 40px;
+    border: 4px solid #222;
+    margin-bottom: 30px;
+    position: relative;
+    clip-path: polygon(5% 0, 95% 0, 95% 5%, 100% 5%, 100% 95%, 95% 95%, 95% 100%, 5% 100%, 5% 95%, 0 95%, 0 5%, 5% 5%);
+}
+
+.error-content h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.error-content p {
+    color: #777;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Botões */
+.error-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-back {
+    background: #ffffff;
+    color: #000;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-report {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #333;
+    padding: 13px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    transform: scale(1.05);
+    background: #ddd;
+}
+
+.btn-report:hover {
+    border-color: #666;
+    background: #111;
+}
+
+
+/* Container Geral */
+.creators-section {
+    background-color: #080808;
+    padding: 60px 20px;
+}
+
+.creators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estrutura do Card */
+.creator-card {
+    background: #121212;
+    border: 1px solid #222;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: 0.3s ease;
+}
+
+.creator-card:hover {
+    border-color: #444;
+}
+
+/* Cabeçalho */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-sq {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.header-text h3 {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.platform-tag {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    font-weight: 900;
+}
+
+.youtube {
+    background: #ff0000;
+    color: #fff;
+}
+
+.twitch {
+    background: #9146ff;
+    color: #fff;
+}
+
+.card-description p {
+    color: #d1d1d1;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* BANNER CLICÁVEL */
+.card-banner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+    display: block;
+    border-radius: 2px;
+}
+
+.card-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease;
+    opacity: 0.8;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.banner-overlay span {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.card-banner:hover img {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.card-banner:hover .banner-overlay {
+    opacity: 1;
+}
+
+/* Rodapé e Botão */
+.cool-phrase {
+    font-size: 0.8rem;
+    color: #444;
+    font-style: italic;
+    text-align: center;
+}
+
+.btn-access {
+    background: #ffffff;
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 800;
+    padding: 12px;
+    font-size: 0.85rem;
+    transition: 0.2s;
+    text-transform: uppercase;
+}
+
+.btn-access:hover {
+    background: #bbb;
+    transform: translateY(-2px);
+}
