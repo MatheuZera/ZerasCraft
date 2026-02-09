@@ -805,6 +805,10 @@ body {
 
 
 
+
+
+
+
 /* MENSAGEM LATERAL - ESTILO TOAST VIDRO */
 .central-message {
     position: fixed;
@@ -901,7 +905,7 @@ body {
 /* Ajuste Mobile */
 @media (max-width: 770px) {
     .central-message {
-        bottom: 710px;
+        bottom: 650px;
         right: 20px;
         left: 20px;
         /* No mobile vira uma barra inferior */
