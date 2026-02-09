@@ -25,9 +25,117 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMusicIndex = 0;
     let isDragging = false;
 
-    const playlist = [
-        { title: 'Calm 1', src: 'assets/audios/musics/c418/calm1.mp3' },
-        { title: 'Calm 2', src: 'assets/audios/musics/c418/calm2.mp3' }
+    const musicPlaylist = [
+        // BACKGROUND
+        { title: ' [Background] ✨ A Familiar Room', src: 'assets/audios/musics/background/a_familiar_room.mp3' },
+        { title: ' [Background] ✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
+        { title: ' [Background] ✨ An Ordinary Day', src: 'assets/audios/musics/background/an_ordinary_day.mp3' },
+        { title: ' [Background] ✨ Ancestry', src: 'assets/audios/musics/background/ancestry.mp3' },
+        { title: ' [Background] ✨ Bromeliad', src: 'assets/audios/musics/background/bromeliad.mp3' },
+        { title: ' [Background] ✨ Calm 1', src: 'assets/audios/musics/background/calm1.mp3' },
+        { title: ' [Background] ✨ Calm 2', src: 'assets/audios/musics/background/calm2.mp3' },
+        { title: ' [Background] ✨ Calm 3', src: 'assets/audios/musics/background/calm3.mp3' },
+        { title: ' [Background] ✨ Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
+        { title: ' [Background] ✨ Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
+        { title: ' [Background] ✨ Dunes', src: 'assets/audios/musics/background/dunes.mp3' },
+        { title: ' [Background] ✨ Echo in the Wind', src: 'assets/audios/musics/background/echo_in_the_wind.mp3' },
+        { title: ' [Background] ✨ Firebugs', src: 'assets/audios/musics/background/firebugs.mp3' },
+        { title: ' [Background] ✨ Floating Dream', src: 'assets/audios/musics/background/floating_dream.mp3' },
+        { title: ' [Background] ✨ Hal 1', src: 'assets/audios/musics/background/hal1.mp3' },
+        { title: ' [Background] ✨ Hal 2', src: 'assets/audios/musics/background/hal2.mp3' },
+        { title: ' [Background] ✨ Hal 3', src: 'assets/audios/musics/background/hal3.mp3' },
+        { title: ' [Background] ✨ Hal 4', src: 'assets/audios/musics/background/hal4.mp3' },
+        { title: ' [Background] ✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
+        { title: ' [Background] ✨ Labyrinthine', src: 'assets/audios/musics/background/labyrinthine.mp3' },
+        { title: ' [Background] ✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
+        { title: ' [Background] ✨ Nuance 1', src: 'assets/audios/musics/background/nuance1.mp3' },
+        { title: ' [Background] ✨ Nuance 2', src: 'assets/audios/musics/background/nuance2.mp3' },
+        { title: ' [Background] ✨ One more Day!', src: 'assets/audios/musics/background/one_more_day.mp3' },
+        { title: ' [Background] ✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
+        { title: ' [Background] ✨ Piano 1', src: 'assets/audios/musics/background/piano1.mp3' },
+        { title: ' [Background] ✨ Piano 2', src: 'assets/audios/musics/background/piano2.mp3' },
+        { title: ' [Background] ✨ Piano 3', src: 'assets/audios/musics/background/piano3.mp3' },
+        { title: ' [Background] ✨ Stand Tall', src: 'assets/audios/musics/background/stand_tall.mp3' },
+        { title: ' [Background] ✨ Wending', src: 'assets/audios/musics/background/wending.mp3' },
+
+        // C418 ALBUM
+        { title: ' [C418] ⛏️ Aria Math', src: 'assets/audios/musics/c418/Aria-Math.mp3' },
+        { title: ' [C418] ⛏️ Beginning', src: 'assets/audios/musics/c418/Beginning.mp3' },
+        { title: ' [C418] ⛏️ Biome Fest', src: 'assets/audios/musics/c418/Biome-Fest.mp3' },
+        { title: ' [C418] ⛏️ Blind Spots', src: 'assets/audios/musics/c418/Blind-Spots.mp3' },
+        { title: ' [C418] ⛏️ Clark', src: 'assets/audios/musics/c418/Clark.mp3' },
+        { title: ' [C418] ⛏️ Danny', src: 'assets/audios/musics/c418/Danny.mp3' },
+        { title: ' [C418] ⛏️ Dreiton', src: 'assets/audios/musics/c418/Dreiton.mp3' },
+        { title: ' [C418] ⛏️ Dry Hands', src: 'assets/audios/musics/c418/Dry-Hands.mp3' },
+        { title: ' [C418] ⛏️ Floating Trees', src: 'assets/audios/musics/c418/Floating-Trees.mp3' },
+        { title: ' [C418] ⛏️ Haggstrom', src: 'assets/audios/musics/c418/Haggstrom.mp3' },
+        { title: ' [C418] ⛏️ Key', src: 'assets/audios/musics/c418/Key.mp3' },
+        { title: ' [C418] ⛏️ Living Mice', src: 'assets/audios/musics/c418/Living-Mice.mp3' },
+        { title: ' [C418] ⛏️ Mice On Venus', src: 'assets/audios/musics/c418/Mice-On-Venus.mp3' },
+        { title: ' [C418] ⛏️ Minecraft', src: 'assets/audios/musics/c418/Minecraft.mp3' },
+        { title: ' [C418] ⛏️ Moog City 1', src: 'assets/audios/musics/c418/Moog-City1.mp3' },
+        { title: ' [C418] ⛏️ Moog City 2', src: 'assets/audios/musics/c418/Moog-City2.mp3' },
+        { title: ' [C418] ⛏️ Mutation', src: 'assets/audios/musics/c418/Mutation.mp3' },
+        { title: ' [C418] ⛏️ Sweden', src: 'assets/audios/musics/c418/Sweden.mp3' },
+        { title: ' [C418] ⛏️ Taswell', src: 'assets/audios/musics/c418/Taswell.mp3' },
+        { title: ' [C418] ⛏️ Wet Hands', src: 'assets/audios/musics/c418/Wet-Hands.mp3' },
+
+        // CREATIVE MUSICS
+        { title: ' [Creative] 🍃 Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
+        { title: ' [Creative] 🍃 Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
+        { title: ' [Creative] 🍃 Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
+        { title: ' [Creative] 🍃 Creative 4', src: 'assets/audios/musics/minecraft/Creative4.mp3' },
+        { title: ' [Creative] 🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
+        { title: ' [Creative] 🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
+
+        // END MUSICS
+        { title: ' [End] ⚡ Boss', src: 'assets/audios/musics/end/Boss.mp3' },
+        { title: ' [End] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
+        { title: ' [End] ⚡ Fim', src: 'assets/audios/musics/end/End.mp3' },
+
+        // MUSICS GENERAL
+        { title: ' [Músicas] 🎵 Alone', src: 'assets/audios/musics/musics/Alone.mp3' },
+        { title: ' [Músicas] 🎵 Aria Math Lofi', src: 'assets/audios/musics/musics/Aria-Math-Lofi.mp3' },
+        { title: ' [Músicas] 🎵 Megalovania (hakkaku)', src: 'assets/audios/musics/musics/Megalovania.mp3' },
+        { title: ' [Músicas] 🎵 Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/Over-the-Waterfall.mp3' },
+        { title: ' [Músicas] 🎵 Rat Dance (Jatis)', src: 'assets/audios/musics/musics/Rat-Dance.mp3' },
+        { title: ' [Músicas] 🎵 The Fat Rat - Note Block', src: 'assets/audios/musics/musics/TheFatRat_NoteBlock.mp3' },
+
+        // NETHER MUSICS
+        { title: ' [Nether] 🌠 Chrysopoeia', src: 'assets/audios/musics/nether/Chrysopoeia.mp3' },
+        { title: ' [Nether] 🌠 Nether 1', src: 'assets/audios/musics/nether/Nether1.mp3' },
+        { title: ' [Nether] 🌠 Nether 2', src: 'assets/audios/musics/nether/Nether2.mp3' },
+        { title: ' [Nether] 🌠 Nether 3', src: 'assets/audios/musics/nether/Nether3.mp3' },
+        { title: ' [Nether] 🌠 Nether 4', src: 'assets/audios/musics/nether/Nether4.mp3' },
+        { title: ' [Nether] 🌠 Rubedo', src: 'assets/audios/musics/nether/Rubedo.mp3' },
+        { title: ' [Nether] 🌠 So Below', src: 'assets/audios/musics/nether/So_Below.mp3' },
+
+        // RECORDS
+        { title: ' [Discos] 💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
+        { title: ' [Discos] 💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
+        { title: ' [Discos] 💿 Far', src: 'assets/audios/musics/records/Far.mp3' },
+        { title: ' [Discos] 💿 Mall', src: 'assets/audios/musics/records/Mall.mp3' },
+        { title: ' [Discos] 💿 Mellohi', src: 'assets/audios/musics/records/Mellohi.mp3' },
+        { title: ' [Discos] 💿 Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
+        { title: ' [Discos] 💿 Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
+        { title: ' [Discos] 💿 Relic', src: 'assets/audios/musics/records/Relic.mp3' },
+        { title: ' [Discos] 💿 Stal', src: 'assets/audios/musics/records/Stal.mp3' },
+        { title: ' [Discos] 💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
+        { title: ' [Discos] 💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
+        { title: ' [Discos] 💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
+
+        // REMIX
+        { title: ' [Remix] 🔥 Aria Math (Synthwave)', src: 'assets/audios/musics/remix/Aria-Math.mp3' },
+        { title: ' [Remix] 🔥 Aria Math Piano', src: 'assets/audios/musics/remix/Aria-Math-Piano.mp3' },
+        { title: ' [Remix] 🔥 Cat Remix (Caution & Remix)', src: 'assets/audios/musics/remix/Cat-Remix.mp3' },
+        { title: ' [Remix] 🔥 Minecraft Music Remix', src: 'assets/audios/musics/remix/Minecraft-Remix.mp3' },
+        { title: ' [Remix] 🔥 Pigstep Remix (Fury Hearted)', src: 'assets/audios/musics/remix/Pigstep-Remix.mp3' },
+        { title: ' [Remix] 🔥 Sweden Remix (Caution & Crisis)', src: 'assets/audios/musics/remix/Sweden.mp3' },
+
+        // WATER
+        { title: ' [Water] ⭐ Axolotl', src: 'assets/audios/musics/water/Axolotl.mp3' },
+        { title: ' [Water] ⭐ Deagon Fish', src: 'assets/audios/musics/water/Dragon_Fish.mp3' },
+        { title: ' [Water] ⭐ Shuniji', src: 'assets/audios/musics/water/Shuniji.mp3' },
     ];
 
     // ===================================================================
