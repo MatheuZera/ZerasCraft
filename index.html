@@ -76,23 +76,46 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <span>MENU</span>
+            <button class="burger" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
+
         <ul class="sidebar-links">
-            <li><a href="page">Início</a></li>
-            <li><a href="#">Jogos</a></li>
+            <li><a href="#">Início</a></li>
+
+            <li class="sidebar-dropdown">
+                <div class="dropdown-header" onclick="toggleMobileSubmenu(this)">
+                    <a href="javascript:void(0)">Jogos <i class="fas fa-angle-down arrow-icon"></i></a>
+                </div>
+                <ul class="sidebar-submenu">
+                    <li><a href="#">Minecraft Java</a></li>
+                    <li><a href="#">Minecraft Bedrock</a></li>
+                    <li><a href="#">Minecraft Dungeons</a></li>
+                </ul>
+            </li>
+
             <li><a href="#">Comunidade</a></li>
             <li><a href="#">Suporte</a></li>
         </ul>
+
         <a href="#" class="btn-sidebar">JOGAR AGORA</a>
     </aside>
-
-<!--------------------------------------------------------------->
 
     <header class="pc-header">
         <div class="container header-flex">
             <div class="logo header-logo">ZERAS CRAFT</div>
             <ul class="nav-links">
-                <li><a href="#" class="active">JOGOS <i class="fas fa-angle-down"></i></a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-trigger active">
+                        JOGOS <i class="fas fa-angle-down arrow-icon"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">MINECRAFT JAVA</a></li>
+                        <li><a href="#">MINECRAFT BEDROCK</a></li>
+                        <li><a href="#">DUNGEONS</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">COMUNIDADE</a></li>
                 <li><a href="#">MERCADO</a></li>
                 <li><a href="#">SUPORTE</a></li>

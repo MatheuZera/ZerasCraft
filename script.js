@@ -10,21 +10,58 @@ window.onscroll = function () {
     }
 };
 
-// 1. Sidebar Toggle
+// Abre e fecha a Sidebar inteira
 function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    const burgerIcon = document.getElementById('burgerIcon');
-
-    // Abre ou fecha a sidebar
-    sidebar.classList.toggle('open');
-
-    // Troca o ícone baseado no estado da sidebar
-    if (sidebar.classList.contains('open')) {
-        burgerIcon.classList.replace('fa-bars', 'fa-times');
+    const sidebar = document.getElementById('sidebar');
+    const icon = document.getElementById('burgerIcon');
+    
+    sidebar.classList.toggle('active');
+    
+    // Troca o ícone de hambúrguer por um "X" suavemente
+    if(sidebar.classList.contains('active')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+        icon.style.transform = 'rotate(90deg)';
     } else {
-        burgerIcon.classList.replace('fa-times', 'fa-bars');
+        icon.classList.replace('fa-times', 'fa-bars');
+        icon.style.transform = 'rotate(0deg)';
     }
 }
+
+// Abre e fecha o sub-menu de "Jogos" dentro da sidebar
+function toggleMobileSubmenu(element) {
+    const parent = element.parentElement;
+    parent.classList.toggle('open');
+}
+
+// Opcional: Fechar a sidebar se clicar fora dela
+document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const burger = document.querySelector('.burger');
+    
+    if (!sidebar.contains(event.target) && !burger.contains(event.target) && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    const dropdownParent = document.querySelector('.dropdown');
+
+    dropdownTrigger.addEventListener('click', function(e) {
+        // Impede o link de recarregar a página
+        e.preventDefault();
+        
+        // Alterna a classe 'open' para mostrar o menu e girar a flecha
+        dropdownParent.classList.toggle('open');
+    });
+
+    // Fecha o menu se clicar fora dele
+    window.addEventListener('click', function(e) {
+        if (!dropdownParent.contains(e.target)) {
+            dropdownParent.classList.remove('open');
+        }
+    });
+});
 
 // 2. Copiar IP
 function copyIP() {
@@ -369,6 +406,36 @@ document.querySelectorAll('.link-item').forEach(item => {
         // Se a função showMessage existir no seu player.js, ela será chamada
         if (typeof showMessage === 'function') {
             showMessage("REDIRECIONANDO", `Abrindo: ${title}`, "fa-external-link-alt");
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const block = document.querySelector('.pixel-block');
+    
+    // Verificamos se o bloco existe antes de iniciar o intervalo
+    if (block) {
+        // Pequeno efeito visual de "glitch" aleatório
+        setInterval(() => {
+            block.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+        }, 100);
+
+        // Integração com sua mensagem do player.js
+        if (typeof showMessage === 'function') {
+            setTimeout(() => {
+                showMessage("ERRO 404", "Coordenadas não encontradas!", "fa-ghost");
+            }, 500);
+        }
+    }
+});
+
+document.querySelectorAll('.btn-access').forEach(button => {
+    button.addEventListener('click', (e) => {
+        const channelName = e.target.closest('.creator-card').querySelector('h3').innerText;
+        
+        if (typeof showMessage === 'function') {
+            showMessage("EXTERNAL LINK", `Abrindo o canal de ${channelName}...`, "fa-external-link-alt");
         }
     });
 });

@@ -752,7 +752,8 @@
 .link-item:hover {
     background: #1c1c1c;
     border-color: #444;
-    transform: translateX(10px); /* Leve deslize para a direita no hover */
+    transform: translateX(10px);
+    /* Leve deslize para a direita no hover */
 }
 
 /* Imagem quadrada pequena */
@@ -806,7 +807,8 @@
 
 .edu-container {
     display: grid;
-    grid-template-columns: 2.5fr 1fr; /* Lado esquerdo bem mais largo */
+    grid-template-columns: 2.5fr 1fr;
+    /* Lado esquerdo bem mais largo */
     gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
@@ -822,13 +824,23 @@
 
 .edu-card img {
     width: 100%;
-    aspect-ratio: 1/1; /* Garante que as imagens sejam quadradas */
+    aspect-ratio: 1/1;
+    /* Garante que as imagens sejam quadradas */
     object-fit: cover;
     margin-bottom: 15px;
 }
 
-.edu-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: #fff; }
-.edu-card p { font-size: 0.85rem; color: #aaa; line-height: 1.4; }
+.edu-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.edu-card p {
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.4;
+}
 
 /* Sidebar de Links à Direita */
 .edu-links-sidebar {
@@ -839,7 +851,8 @@
 
 /* Link Verde (O único destaque de cor que resta) */
 .special-link {
-    color: #4CAF50; /* Um verde mais sóbrio e educacional */
+    color: #4CAF50;
+    /* Um verde mais sóbrio e educacional */
     font-weight: bold;
     text-decoration: none;
     margin-bottom: 15px;
@@ -857,7 +870,8 @@
     text-decoration: none;
     font-size: 0.95rem;
     padding: 12px 0;
-    border-bottom: 1px solid #222; /* Linha sutil entre os links */
+    border-bottom: 1px solid #222;
+    /* Linha sutil entre os links */
     transition: 0.2s;
 }
 
@@ -868,6 +882,241 @@
 
 /* Responsividade para Celular */
 @media (max-width: 900px) {
-    .edu-container { grid-template-columns: 1fr; }
-    .edu-links-sidebar { margin-top: 40px; }
+    .edu-container {
+        grid-template-columns: 1fr;
+    }
+
+    .edu-links-sidebar {
+        margin-top: 40px;
+    }
+}
+
+
+.error-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #050505;
+    /* Fundo bem escuro */
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.error-container {
+    max-width: 600px;
+    padding: 20px;
+}
+
+/* O "Bloco" 404 */
+.pixel-block {
+    font-size: 8rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    text-shadow: 2px 2px 0 #333, 4px 4px 0 #111;
+    background: #111;
+    display: inline-block;
+    padding: 20px 40px;
+    border: 4px solid #222;
+    margin-bottom: 30px;
+    position: relative;
+    clip-path: polygon(5% 0, 95% 0, 95% 5%, 100% 5%, 100% 95%, 95% 95%, 95% 100%, 5% 100%, 5% 95%, 0 95%, 0 5%, 5% 5%);
+}
+
+.error-content h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.error-content p {
+    color: #777;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Botões */
+.error-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-back {
+    background: #ffffff;
+    color: #000;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-report {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #333;
+    padding: 13px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    transform: scale(1.05);
+    background: #ddd;
+}
+
+.btn-report:hover {
+    border-color: #666;
+    background: #111;
+}
+
+
+/* Container Geral */
+.creators-section {
+    background-color: #080808;
+    padding: 60px 20px;
+}
+
+.creators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estrutura do Card */
+.creator-card {
+    background: #121212;
+    border: 1px solid #222;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: 0.3s ease;
+}
+
+.creator-card:hover {
+    border-color: #444;
+}
+
+/* Cabeçalho */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-sq {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.header-text h3 {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.platform-tag {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    font-weight: 900;
+}
+
+.youtube {
+    background: #ff0000;
+    color: #fff;
+}
+
+.twitch {
+    background: #9146ff;
+    color: #fff;
+}
+
+.card-description p {
+    color: #d1d1d1;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* BANNER CLICÁVEL */
+.card-banner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+    display: block;
+    border-radius: 2px;
+}
+
+.card-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease;
+    opacity: 0.8;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.banner-overlay span {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.card-banner:hover img {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.card-banner:hover .banner-overlay {
+    opacity: 1;
+}
+
+/* Rodapé e Botão */
+.cool-phrase {
+    font-size: 0.8rem;
+    color: #444;
+    font-style: italic;
+    text-align: center;
+}
+
+.btn-access {
+    background: #ffffff;
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 800;
+    padding: 12px;
+    font-size: 0.85rem;
+    transition: 0.2s;
+    text-transform: uppercase;
+}
+
+.btn-access:hover {
+    background: #bbb;
+    transform: translateY(-2px);
 }

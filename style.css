@@ -249,28 +249,92 @@ body {
     box-shadow: 0 4px 15px rgba(60, 133, 39, 0.4);
 }
 
-/* Mobile Nav Estilo PC (Glassmorphism) */
+/* --- Variáveis e Configurações Globais --- */
+:root {
+    --green-mc: #4CAF50;
+    --dark-bg: rgba(10, 10, 10, 0.98);
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-elastic: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- Dropdown Desktop (Nav PC) --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: block;
+    /* Mantemos block para controlar via opacity/visibility */
+    position: absolute;
+    top: 110%;
+    /* Começa um pouco abaixo para o efeito de subida */
+    left: 0;
+    background-color: #1a1a1a;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    border: 1px solid #333;
+    list-style: none;
+    padding: 10px 0;
+
+    /* Animação Suave Desktop */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition-smooth);
+}
+
+.dropdown-content li a {
+    padding: 12px 20px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-content li a:hover {
+    background-color: #333;
+    color: var(--green-mc);
+}
+
+/* Hover PC com transição */
+@media (min-width: 992px) {
+    .dropdown:hover .dropdown-content {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        top: 100%;
+    }
+
+    .dropdown:hover .arrow-icon {
+        transform: rotate(180deg);
+        color: var(--green-mc);
+        /* Animação da Flecha */
+        transition: transform 0.3s ease;
+
+        margin-left: 5px;
+    }
+}
+
+/* --- Mobile Nav (Header com Glassmorphism) --- */
 .mobile-nav {
-    display: none;
-    /* Ativado via Media Query */
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     padding: 12px 20px;
     z-index: 1000;
-
-    /* Efeito Glass igual ao PC */
     background: rgba(15, 15, 15, 0.7);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
     justify-content: space-between;
     align-items: center;
 }
 
-/* Garante que o conteúdo não suba para baixo do nav fixo no mobile */
 @media (max-width: 768px) {
     body {
         padding-top: 60px;
@@ -283,67 +347,142 @@ body {
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: transform 0.3s ease;
-    z-index: 1001;
-    /* Fica acima do blur do mobile nav */
+    transition: var(--transition-smooth);
 }
 
-#burgerIcon {
-    transition: all 0.3s ease-in-out;
-}
-
-/* Efeito de rotação quando vira o X */
-.fa-times {
-    transform: rotate(90deg);
-    color: var(--green-mc);
-    /* Opcional: o X fica verde quando ativo */
-}
-
+/* --- Sidebar Mobile --- */
 .sidebar {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
-    height: 45%;
-    background: #1a1a1a;
-    z-index: 200;
-    transition: 0.4s;
-    padding: 20px;
-    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+    width: 300px;
+    height: 100%;
+    background: var(--dark-bg);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    transition: var(--transition-smooth);
+    padding: 30px;
+    border-left: 1px solid #333;
 }
 
-.sidebar.open {
+.sidebar.active {
     right: 0;
-    top: 35px;
 }
 
+/* Cabeçalho da Sidebar (MENU + X no canto) */
 .sidebar-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 30px;
-    font-weight: bold;
-    font-size: 1.2rem;
 }
 
-.close-btn {
-    background: none;
-    border: none;
+.sidebar-header span {
     color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-.sidebar-links li {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #333;
+/* Botão X fixo no topo direito da sidebar */
+.sidebar .burger {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+}
+
+/* Lista de Links e Animação Staggered */
+.sidebar-links {
+    list-style: none;
+}
+
+.sidebar.active .sidebar-links li {
+    animation: slideInRight 0.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.sidebar-links li:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.sidebar-links li:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.sidebar-links li:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.sidebar-links li:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* Estilo dos Links Individuais */
+.sidebar-links li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.sidebar-links li a:hover {
+    padding-left: 10px;
+    color: var(--green-mc);
+}
+
+/* --- Dropdown dentro da Sidebar (Flecha ao lado) --- */
+.sidebar-dropdown .dropdown-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+}
+
+/* Flecha colada no nome */
+.sidebar-dropdown .arrow-icon {
+    margin-left: 8px;
+    font-size: 0.9rem;
+    transition: var(--transition-elastic);
+}
+
+/* Submenu Expansível */
+.sidebar-submenu {
+    max-height: 0;
+    overflow: hidden;
+    list-style: none;
+    padding-left: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    opacity: 0;
+}
+
+.sidebar-dropdown.open .sidebar-submenu {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 5px;
     padding-bottom: 10px;
 }
 
-.sidebar-links a {
-    font-weight: bold;
-    font-size: 1.1rem;
+.sidebar-dropdown.open .arrow-icon {
+    transform: rotate(180deg);
+    color: var(--green-mc);
 }
 
+/* Botão JOGAR AGORA */
 .btn-sidebar {
     display: block;
     background: var(--green-mc);
@@ -352,6 +491,14 @@ body {
     padding: 15px;
     margin-top: 20px;
     font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: var(--transition-elastic);
+}
+
+.btn-sidebar:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 /* --- HERO SECTION --- */
@@ -458,24 +605,27 @@ body {
 /* MENSAGEM LATERAL - ESTILO TOAST VIDRO */
 .central-message {
     position: fixed;
-    bottom: 30px; /* Posicionamento lateral inferior */
+    bottom: 30px;
+    /* Posicionamento lateral inferior */
     right: 120px;
-    transform: translateX(120%); /* Começa fora da tela pela direita */
-    
+    transform: translateX(120%);
+    /* Começa fora da tela pela direita */
+
     /* Design Branco Vidro */
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    
+
     padding: 12px 20px;
-    border-radius: 12px; /* Cantos arredondados estilo card */
+    border-radius: 12px;
+    /* Cantos arredondados estilo card */
     display: flex;
     align-items: center;
     gap: 15px;
     z-index: 10000;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    
+
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
     opacity: 0;
     visibility: hidden;
@@ -485,7 +635,8 @@ body {
 .central-message.show {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0); /* Desliza para dentro */
+    transform: translateX(0);
+    /* Desliza para dentro */
 }
 
 /* Círculo do Ícone (Verde Sucesso) */
@@ -493,7 +644,8 @@ body {
     background: #1db954;
     width: 32px;
     height: 32px;
-    border-radius: 8px; /* Quadrado arredondado como na imagem */
+    border-radius: 8px;
+    /* Quadrado arredondado como na imagem */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -524,7 +676,8 @@ body {
 #centralMessage {
     opacity: 0;
     transform: translateX(-20px);
-    transition: all 0.5s ease; /* Duração da animação */
+    transition: all 0.5s ease;
+    /* Duração da animação */
     pointer-events: none;
 }
 
@@ -538,7 +691,8 @@ body {
 /* Estado de Saída (Animação de fechamento) */
 #centralMessage.hide {
     opacity: 0;
-    transform: translateX(20px); /* Desliza para o outro lado ao sair */
+    transform: translateX(20px);
+    /* Desliza para o outro lado ao sair */
 }
 
 /* Ajuste Mobile */
@@ -546,10 +700,12 @@ body {
     .central-message {
         bottom: 710px;
         right: 20px;
-        left: 20px; /* No mobile vira uma barra inferior */
+        left: 20px;
+        /* No mobile vira uma barra inferior */
         transform: translateY(150%);
         width: auto;
     }
+
     .central-message.show {
         transform: translateY(0);
     }
@@ -677,8 +833,10 @@ body {
 /* Classe aplicada via JavaScript quando o footer aparece */
 .player-hidden {
     opacity: 0;
-    transform: translateY(100%); /* Desliza para baixo */
-    pointer-events: none; /* Impede cliques enquanto estiver invisível */
+    transform: translateY(100%);
+    /* Desliza para baixo */
+    pointer-events: none;
+    /* Impede cliques enquanto estiver invisível */
 }
 
 /* --- PLAYER ULTRA COMPACTO (ESTILO BARRA) --- */
@@ -2564,19 +2722,22 @@ body {
 
 /* O Card com altura flexível, mas botões alinhados */
 .mc-asset-card {
-    background-color: #161b22; /* Cor extraída do player.js */
+    background-color: #161b22;
+    /* Cor extraída do player.js */
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     width: 280px;
     padding: 24px;
     display: flex;
-    flex-direction: column; /* Organiza os itens em coluna */
+    flex-direction: column;
+    /* Organiza os itens em coluna */
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .mc-asset-card:hover {
     transform: translateY(-5px);
-    border-color: #f5f5f5; /* Verde de sucesso do seu sistema */
+    border-color: #f5f5f5;
+    /* Verde de sucesso do seu sistema */
 }
 
 /* Ícone de Asset */
@@ -2623,11 +2784,13 @@ body {
 
 /* A MÁGICA DO ALINHAMENTO: Footer com margin-top: auto */
 .asset-footer {
-    margin-top: auto; /* Empurra o botão para o fundo do card, alinhando todos */
+    margin-top: auto;
+    /* Empurra o botão para o fundo do card, alinhando todos */
 }
 
 .asset-btn-download {
-    background-color: #a0a0a0; /* Cor do showMessage do player.js */
+    background-color: #a0a0a0;
+    /* Cor do showMessage do player.js */
     color: white;
     text-decoration: none;
     font-weight: 700;
