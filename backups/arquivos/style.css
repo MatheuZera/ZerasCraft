@@ -706,14 +706,11 @@ body {
 
 /* --- HERO SECTION --- */
 .hero {
-    height: 80vh;
-    min-height: 500px;
     position: relative;
+    height: 80vh; /* Ajuste a altura conforme preferir */
+    overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-bottom: 40px;
 }
 
 .hero-bg {
@@ -722,12 +719,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.5);
-    z-index: -1;
-    transform: scale(1.05);
-    transition: 5s;
+    background-size: cover; /* Faz a imagem cobrir tudo */
+    background-position: center; /* Centraliza a montaria/personagem */
+    background-repeat: no-repeat;
+    z-index: -1; /* Joga a imagem para trás do texto */
+    
+    /* Overlay opcional para dar leitura ao texto branco */
+    filter: brightness(0.6); 
 }
 
 .hero:hover .hero-bg {
