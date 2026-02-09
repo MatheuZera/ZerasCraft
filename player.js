@@ -223,23 +223,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. LÓGICA DO PLAYER
     // =================================================================== 
     const loadMusic = (index, autoPlay = true, titleMsg = "TOCANDO", iconMsg = "fa-play") => {
-        if (!playlist[index]) index = 0;
-        currentMusicIndex = index; // Atualiza o índice global
+        // Garante que o índice rode em loop pela lista
+        if (index >= playlist.length) index = 0;
+        if (index < 0) index = playlist.length - 1;
+
+        currentMusicIndex = index;
         const music = playlist[currentMusicIndex];
 
         backgroundAudio.pause();
         backgroundAudio.src = music.src;
         backgroundAudio.load();
-        updateUI(); // Atualiza o título no painel
+        updateUI();
 
         if (autoPlay) {
             backgroundAudio.play()
                 .then(() => {
+                    // SUCESSO: Música encontrada e tocando
                     updateUI();
-                    // Exibe a mensagem com o Título da ação, Nome da Música e o Ícone correto
                     showMessage(titleMsg, music.title, iconMsg);
                 })
-                .catch(() => updateUI());
+                .catch((error) => {
+                    // ERRO: Arquivo não existe no GitHub/Servidor
+                    console.warn(`Arquivo não encontrado: ${music.title}. Pulando...`);
+
+                    // Tenta a próxima música imediatamente sem mostrar erro pro usuário
+                    const nextIdx = (currentMusicIndex + 1) % playlist.length;
+                    loadMusic(nextIdx, true, "BUSCANDO", "fa-search");
+                });
         }
     };
 
@@ -315,7 +325,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         backgroundAudio.addEventListener('error', () => {
-            showMessage("ERRO", "Não foi possível carregar a música", "fa-exclamation-triangle");
+            const nextIdx = (currentMusicIndex + 1) % playlist.length;
+            loadMusic(nextIdx, true, "PULANDO", "fa-forward");
         });
     }
 
