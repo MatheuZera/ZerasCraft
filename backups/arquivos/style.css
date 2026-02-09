@@ -2244,38 +2244,42 @@ var .play-pause {
     transform: scale(1.05);
 }
 
-/* --- LER MAIS (Clamp) --- */
+/* --- LER MAIS (Suave e Sem Avisos) --- */
 .text-content {
     font-size: 0.9rem;
     color: var(--text-muted);
+    
+    /* O segredo da suavidade está aqui */
+    max-height: 2.8rem; /* Altura de + ou - 2 linhas (0.9rem * 1.5 de line-height) */
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    /* Número de linhas visíveis */
-    -webkit-box-orient: vertical;
-    transition: all 0.5s ease;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+    
+    display: block; /* Tiramos o -webkit-box que causava o erro */
+    position: relative;
 }
 
+/* Quando expandido */
 .text-content.expanded {
-    -webkit-line-clamp: unset;
+    max-height: 1000px; /* Um valor alto o suficiente para qualquer texto */
 }
 
-.read-more-toggle {
-    background: none;
-    border: none;
-    color: var(--green-mc);
-    font-size: 0.8rem;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 0;
-    margin-top: 5px;
+/* Opcional: Efeito de degradê no final para parecer que o texto continua */
+.text-content:not(.expanded)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.2rem;
+    background: linear-gradient(transparent, var(--bg-card));
 }
 
 
 /* 1. Status Bar */
 .server-status-bar {
     background: #1a1a1a;
-    border-y: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     padding: 10px 0;
     margin: 20px 0;
 }
