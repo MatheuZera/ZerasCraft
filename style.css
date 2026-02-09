@@ -515,19 +515,43 @@ body {
     /* SIDEBAR GLASS (Painel que ajusta ao conteúdo) */
     .sidebar-glass {
         position: fixed;
+        /* Alinhado ao topo (0 em vez de -25px para não cortar o conteúdo) */
         top: -25px;
         right: -100%;
         width: 300px;
-        height: auto;
-        max-height: 90vh;
-        /* Ajuste automático de altura */
+
+        /* Força a altura total da tela para o fundo cinza ser contínuo */
+        height: 100vh;
+
+        /* Sistema de Scroll: permite rolar se o conteúdo for maior que a tela */
+        overflow-y: auto;
+        /* Garante que o scroll não quebre o layout horizontal */
+        overflow-x: hidden;
+
         background: rgba(15, 15, 15, 0.95);
         backdrop-filter: blur(20px);
         z-index: 10001;
+
+        /* Padding ajustado para não "comer" espaço no scroll */
         padding: 30px;
+
         transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         border: 1px solid var(--border-light);
         border-top: none;
+
+        /* Configuração para o Slider (barra de rolagem) */
+        scrollbar-width: thin;
+        scrollbar-color: var(--green-mc) transparent;
+    }
+
+    /* Estilização do Slider para navegadores Chrome/Safari */
+    .sidebar-glass::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .sidebar-glass::-webkit-scrollbar-thumb {
+        background-color: var(--green-mc);
+        border-radius: 10px;
     }
 
     .sidebar-glass.active {
@@ -1079,15 +1103,15 @@ var .play-pause {
         opacity: 0;
         visibility: hidden;
         transform: translateY(1px) scale(0.1);
-        transform: translateX(50%) scale(0.1); 
-        
+        transform: translateX(50%) scale(0.1);
+
         /* Curva Back-In (o inverso que você pediu) */
         /* Ela garante que ele desacelere enquanto encolhe */
-        transition: 
-            opacity 0.3s ease, 
-            transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
             visibility 0.3s;
-        
+
     }
 
     /* --- ESTADO ATIVO (IN) --- */
@@ -1095,10 +1119,10 @@ var .play-pause {
         opacity: 1;
         visibility: visible;
         transform: translateY(0) scale(1);
-        
+
         /* Sua curva elástica de entrada */
-        transition: 
-            opacity 0.3s ease, 
+        transition:
+            opacity 0.3s ease,
             transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -1112,7 +1136,8 @@ var .play-pause {
         border-radius: 2px;
         outline: none;
         margin: 0;
-        padding: 0; /* Importante para o deslize total */
+        padding: 0;
+        /* Importante para o deslize total */
     }
 
     #volumeSlider input[type="range"]::-webkit-slider-thumb {
