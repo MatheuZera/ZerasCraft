@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
     <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Zera's Craft - Recursos</title> <!---->
+    <title>Mundo Zera's Craft - Início</title> <!---->
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
     <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="style2.css"> <!---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!---->
 
@@ -60,458 +61,431 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
+<!----------------------------- Desktop --------------------------------->
+
 <body>
 
-    <div id="centralMessage" class="central-message"></div>
-    <audio id="backgroundAudio"></audio>
+    <nav class="nav-pc">
+        <div class="container-pc">
+            <div class="logo">ZERAS CRAFT</div>
 
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="index.html" class="header-logo">Zera's Craft</a>
-            <button class="menu-toggle" aria-label="Abrir menu de navegação">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="arquivos.html" class="nav-link" data-page="home">Arquivos</a></li>
-                    <li><a href="comunidade.html" class="nav-link" data-page="home">Comunidade</a></li>
-                    <li><a href="eventos.html" class="nav-link" data-page="home">Eventos</a></li>
-                    <li><a href="pixel-legends.html" class="nav-link" data-page="home">Pixel Legends</a></li>
-                    <li><a href="equipe.html" class="nav-link" data-page="home">Equipe</a></li>
-                    <li><a href="canal.html" class="nav-link" data-page="home">Canal Oficial</a></li>
-                    <li><a href="recursos.html" class="nav-link" data-page="home">Recursos</a></li>
-                </ul>
-            </nav>
+            <ul class="menu-pc">
+                <li><a href="index.html">Início</a></li>
+                <li class="dropdown">
+                    <a href="#">Jogos <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="#">Bedrock Edition</a></li>
+                        <li><a href="#">Java Edition</a></li>
+                    </ul>
+                </li>
+                <li><a href="arquivos.html">Arquivos</a></li>
+                <li><a href="comunidade.html">Comunidade</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="pixel-legends.html">Pixel Legends</a></li>
+                <li><a href="canais.html">Canais</a></li>
+                <li><a href="suporte.html">Suporte</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <span class="server-ip" onclick="copyIP()">IP Pixel Legends</span>
+                <a href="#" class="btn-green">LOJA VIP</a>
+            </div>
         </div>
-    </header>
+    </nav>
+
+    <!----------------------------- Mobile ---------------------------------->
+
+    <nav class="nav-mobile">
+        <div class="logo-mobile">ZERAS CRAFT</div>
+        <button class="burger-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars" id="icon-bars"></i>
+        </button>
+    </nav>
+
+    <aside class="sidebar-glass" id="sidebar">
+        <div class="sidebar-header">
+            <span class="menu-title">MENU</span>
+            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        </div>
+
+        <ul class="sidebar-links">
+            <li><a href="index.html">Início</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Jogos</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <ul class="sidebar-sub">
+                    <li><a href="#">Bedrock Edition</a></li>
+                    <li><a href="#">Java Edition</a></li>
+                </ul>
+            </li>
+            <li><a href="arquivos.html">Arquivos</a></li>
+            <li><a href="comunidade.html">Comunidade</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="pixel-legends.html">Pixel Legends</a></li>
+            <li><a href="canais.html">Canais</a></li>
+            <li><a href="suporte.html">Suporte</a></li>
+        </ul>
+
+        <div class="sidebar-actions">
+            <div class="server-ip-box" onclick="copyIP()">
+                <span class="ip-text">IP Pixel Legends</span>
+                <i class="far fa-copy"></i>
+            </div>
+
+            <a href="#" class="btn-green">LOJA VIP</a>
+            <a href="#" class="btn-jogar-agora">JOGAR AGORA <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </aside>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!--------------------------------------------------------------->
 
     <main>
-        <section class="hero-section">
-            <div class="hero-image-overlay"></div>
-            <div class="hero-content">
-                <div class="server-branding">
-                    <img src="assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft" class="server-icon">
-                </div>
-                <h1>Nossos Recursos</h1>
-                <p class="hero-subtitle">Estes são os nossos Recursos Disponíveis.</p>
-                <div class="hero-social-links">
-                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank"
-                        rel="noopener noreferrer" class="btn-primary">
-                        <i class="fab fa-discord"></i> Pixel Legends
-                    </a>
-                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-discord"></i> Entrar no Discord
-                    </a>
-                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-youtube"></i> Canal YouTube
-                    </a>
+        <section class="hero">
+            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif')">
+            </div>
+
+            <div class="container hero-content reveal">
+                <span class="hero-tag">Mundo Zera's Craft</span>
+                <h1>Recursos Externos</h1>
+                <p>Isto Inclui: Recursos Nossos, Sites Externos para alguma coisa útil sobre Minecraft, Programas,
+                    Aplicativos e Muito Mais!</p>
+                <div class="hero-btns">
+                    <a href="https://discord.gg/GYGVBqGEwP" class="btn-big-green">DISCORD <i
+                            class="fas fa-chevron-right"></i></a>
+                    <a href="https://www.youtube.com/@MatheuZera88" class="btn-big-outline">CANAL OFICIAL</a>
                 </div>
             </div>
         </section>
 
-        <div class="secao-cards-preta">
-            <secao-titulo>RECURSOS DA WEBSITE</secao-titulo>
-            <p>Alguns sistemas feitos para apenas diversão e interagir.</p>
-            <br>
+        <section class="mc-container">
+            <div class="mc-grid-layout">
 
-            <div class="grid-container">
-                <div class="grid-container">
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Paint Craft</h3>
-                            <subtitulo-card>Criação</subtitulo-card>
-                            <p class="card-description">Um template para você se divertir pintando pixels e fazendo a sua arte!.</p>
-
-                            <a href="RecursosWeb/PaintCraft/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
+                <div class="mc-modern-card">
+                    <div class="mc-card-header">
+                        <div class="mc-icon-wrapper">
+                            <img src="icone.png" alt="Survival">
                         </div>
+                        <div class="mc-badge">POPULAR</div>
                     </div>
 
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Mine RPG</h3>
-                            <subtitulo-card>Competitivo</subtitulo-card>
-                            <p class="card-description">Aqui você contra outro oponente batalham até acabar com a vida de seu adversário
-                        (Disponível apenas para PC).</p>
+                    <div class="mc-card-body">
+                        <span class="mc-category">MODO DE JOGO</span>
+                        <h3 class="mc-title">SURVIVAL 1.21</h3>
+                        <p class="mc-description">
+                            Sobrevivência clássica com economia balanceada, terrenos protegidos e sistema de clãs
+                            exclusivo.
+                        </p>
+                    </div>
 
-                            <a href="RecursosWeb/MineRPG/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
+                    <div class="mc-card-footer">
+                        <div class="mc-platform-icons">
+                            <i class="fab fa-windows"></i>
+                            <i class="fab fa-android"></i>
                         </div>
+                        <button class="mc-btn-animate">
+                            <span>JOGAR AGORA</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mc-modern-card">
+                    <div class="mc-card-header">
+                        <div class="mc-icon-wrapper">
+                            <img src="assets/img/survival-icon.png" alt="Survival">
+                        </div>
+                        <div class="mc-badge">POPULAR</div>
+                    </div>
+
+                    <div class="mc-card-body">
+                        <span class="mc-category">MODO DE JOGO</span>
+                        <h3 class="mc-title">SURVIVAL 1.21</h3>
+                        <p class="mc-description">
+                            Sobrevivência clássica com economia balanceada, terrenos protegidos e sistema de clãs
+                            exclusivo.
+                        </p>
+                    </div>
+
+                    <div class="mc-card-footer">
+                        <div class="mc-platform-icons">
+                            <i class="fab fa-windows"></i>
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <button class="mc-btn-animate">
+                            <span>JOGAR AGORA</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mc-modern-card">
+                    <div class="mc-card-header">
+                        <div class="mc-icon-wrapper">
+                            <img src="assets/img/survival-icon.png" alt="Survival">
+                        </div>
+                        <div class="mc-badge">POPULAR</div>
+                    </div>
+
+                    <div class="mc-card-body">
+                        <span class="mc-category">MODO DE JOGO</span>
+                        <h3 class="mc-title">SURVIVAL 1.21</h3>
+                        <p class="mc-description">
+                            Sobrevivência clássica com economia balanceada, terrenos protegidos e sistema de clãs
+                            exclusivo.
+                        </p>
+                    </div>
+
+                    <div class="mc-card-footer">
+                        <div class="mc-platform-icons">
+                            <i class="fab fa-windows"></i>
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <button class="mc-btn-animate">
+                            <span>JOGAR AGORA</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mc-modern-card">
+                    <div class="mc-card-header">
+                        <div class="mc-icon-wrapper">
+                            <img src="assets/img/survival-icon.png" alt="Survival">
+                        </div>
+                        <div class="mc-badge">POPULAR</div>
+                    </div>
+
+                    <div class="mc-card-body">
+                        <span class="mc-category">MODO DE JOGO</span>
+                        <h3 class="mc-title">SURVIVAL 1.21</h3>
+                        <p class="mc-description">
+                            Sobrevivência clássica com economia balanceada, terrenos protegidos e sistema de clãs
+                            exclusivo.
+                        </p>
+                    </div>
+
+                    <div class="mc-card-footer">
+                        <div class="mc-platform-icons">
+                            <i class="fab fa-windows"></i>
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <button class="mc-btn-animate">
+                            <span>JOGAR AGORA</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mc-modern-card">
+                    <div class="mc-card-header">
+                        <div class="mc-icon-wrapper">
+                            <img src="assets/img/survival-icon.png" alt="Survival">
+                        </div>
+                        <div class="mc-badge">POPULAR</div>
+                    </div>
+
+                    <div class="mc-card-body">
+                        <span class="mc-category">MODO DE JOGO</span>
+                        <h3 class="mc-title">SURVIVAL 1.21</h3>
+                        <p class="mc-description">
+                            Sobrevivência clássica com economia balanceada, terrenos protegidos e sistema de clãs
+                            exclusivo.
+                        </p>
+                    </div>
+
+                    <div class="mc-card-footer">
+                        <div class="mc-platform-icons">
+                            <i class="fab fa-windows"></i>
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <button class="mc-btn-animate">
+                            <span>JOGAR AGORA</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mc-modern-card">
+                    <div class="mc-card-header">
+                        <div class="mc-icon-wrapper">
+                            <img src="assets/img/survival-icon.png" alt="Survival">
+                        </div>
+                        <div class="mc-badge">POPULAR</div>
+                    </div>
+
+                    <div class="mc-card-body">
+                        <span class="mc-category">MODO DE JOGO</span>
+                        <h3 class="mc-title">SURVIVAL 1.21</h3>
+                        <p class="mc-description">
+                            Sobrevivência clássica com economia balanceada, terrenos protegidos e sistema de clãs
+                            exclusivo.
+                        </p>
+                    </div>
+
+                    <div class="mc-card-footer">
+                        <div class="mc-platform-icons">
+                            <i class="fab fa-windows"></i>
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <button class="mc-btn-animate">
+                            <span>JOGAR AGORA</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mc-modern-card">
+                    <div class="mc-card-header">
+                        <div class="mc-icon-wrapper">
+                            <img src="assets/img/survival-icon.png" alt="Survival">
+                        </div>
+                        <div class="mc-badge">POPULAR</div>
+                    </div>
+
+                    <div class="mc-card-body">
+                        <span class="mc-category">MODO DE JOGO</span>
+                        <h3 class="mc-title">SURVIVAL 1.21</h3>
+                        <p class="mc-description">
+                            Sobrevivência clássica com economia balanceada, terrenos protegidos e sistema de clãs
+                            exclusivo.
+                        </p>
+                    </div>
+
+                    <div class="mc-card-footer">
+                        <div class="mc-platform-icons">
+                            <i class="fab fa-windows"></i>
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <button class="mc-btn-animate">
+                            <span>JOGAR AGORA</span>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="secao-cards-verde">
-            <secao-titulo>ALGUNS SITES & APPS INTERESSANTES</secao-titulo>
-            <p>Aqui, listei alguns sites e páginas de apps (mobile) e softwares (desktops) interessantes, tando externos
-                como recursos úteis de Minecraft!</p>
-            <br>
-
-            <div class="grid-container">
-                <div class="grid-container">
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Addon Maker</h3>
-                            <subtitulo-card>Mobile</subtitulo-card>
-                            <p class="card-description">.</p>
-
-                            <a href="http://127.0.0.1:5500/Websites/Zera's%20Craft/https.com" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Aternos</h3>
-                            <subtitulo-card>Web</subtitulo-card>
-                            <p class="card-description">.</p>
-
-                            <a href="http://127.0.0.1:5500/Websites/Zera's%20Craft/https.com" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Chunk Base</h3>
-                            <subtitulo-card>Web</subtitulo-card>
-                            <p class="card-description">.</p>
-
-                            <a href="https://www.chunkbase.com/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Chunker</h3>
-                            <subtitulo-card>Web</subtitulo-card>
-                            <p class="card-description">.</p>
-
-                            <a href="http://127.0.0.1:5500/Websites/Zera's%20Craft/https.com" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Curse Forge</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Explore milhares de mods lendários.</p>
-
-                            <a href="https://www.curseforge.com/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">HueBlocks</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Escolha uma cor específica e o site irá te listar um gradiente da sua Cor A até a Cor B, com os blocos do jogo baseado em Gradiente.</p>
-
-                            <a href="https://1280px.github.io/hueblocks/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">MCreator</h3>
-                            <subtitulo-card>Desktop</subtitulo-card>
-                            <p class="card-description">.</p>
-
-                            <a href="http://127.0.0.1:5500/Websites/Zera's%20Craft/https.com" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">MCPEDL</h3>
-                            <subtitulo-card>Web</subtitulo-card>
-                            <p class="card-description">No MCPEDL tem uma vasta coleção de Addons e Diversos outros Recursos para Minecraft Bedrock.</p>
-
-                            <a href="https://mcpedl.com/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Mine Imator</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">.</p>
-
-                            <a href="http://127.0.0.1:5500/Websites/Zera's%20Craft/https.com" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">MTrim</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">É um testador de Armaduras com as Guarnições, para ver como ficará no seu Personagem.</p>
-
-                            <a href="https://minetrim.com/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Modrinth</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Descubra, jogue e compartilhe conteúdo do Minecraft por meio de nossa plataforma de código aberto criada para a comunidade.</p>
-
-                            <a href="https://modrinth.com/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Nova Skin</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Um ótimo site para criar as suas Skins, tendo até um recurso de Thumbnail para colocar como template no seu canal.</p>
-
-                            <a href="http://127.0.0.1:5500/Websites/Zera's%20Craft/https.com" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Ordem de Encantamentos</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Quando encantando itens no Minecraft, a ordem em que você combina armaduras, armas e ferramentas com livros em sua bigorna faz uma enorme diferença.</p>
-
-                            <a href="https://iamcal.github.io/enchant-order/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Planet Craft</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Um lugar sem igual, cheio de conteúdos para o seu Minecraft!</p>
-
-                            <a href="https://www.planetminecraft.com/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Skins MC</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Permite você criar skins personalizadas de acordo com o que deseja.</p>
-
-                            <a href="https://skinmc.net/" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-content">
-                            <icone-imagem>
-                                <img src="adobe/After-Effects.png" alt="Imagem">
-                            </icone-imagem>
-                            <h3 class="card-title">Vanilla Tweaks</h3>
-                            <subtitulo-card>Popular</subtitulo-card>
-                            <p class="card-description">Criador fácil de Resource Pack (Pacote de Recurso) de uma maneira bem prática.</p>
-
-                            <a href="http://127.0.0.1:5500/Websites/Zera's%20Craft/https.com" class="card-button">
-                                BAIXAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
 
+    <!--------------------------------------------------------------->
+
+    <div class="music-player-container reveal">
+        <div class="player-controls">
+            <div class="now-playing">
+                <i class="fas fa-music"></i>
+                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
+            </div>
+
+            <div class="progress-area">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <span id="durationDisplay">0:00</span>
+            </div>
+
+            <div class="main-controls">
+                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
+                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
+                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
+                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+
+                <div class="volume-container">
+                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="backgroundAudio"></audio>
+
+    <div id="centralMessage" class="central-message">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message-content">
+            <strong>Título</strong>
+            <span>Informação</span>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------->
+
     <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa
-                        comunidade vibrante.</p>
-                    <div class="footer-social-links">
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                            aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column footer-nav-links">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="arquivos.html">Arquivos</a></li>
-                        <li><a href="comunidade.html">Comunidade</a></li>
-                        <li><a href="eventos.html">Eventos</a></li>
-                        <li><a href="pixel-legends.html">Pixel Legends</a></li>
-                        <li><a href="equipe.html">Equipe</a></li>
-                        <li><a href="canal.html">Canal Oficial</a></li>
-                        <li><a href="recursos.html">Recursos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-contact">
-                    <h4>Contato & Suporte</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a>
-                    </p>
-                    <p><i class="fas fa-headset"></i> <a
-                            href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via
-                            Discord</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
-                </div>
-                <div class="footer-column footer-newsletter">
-                    <h4>Fique por Dentro</h4>
-                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
-                    <form class="newsletter-form">
-                        <div class="text-center margin-top-50">
-                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501"
-                                class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
-                        </div>
+        <div class="footer-divider"></div>
+
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">ZERAS<span>CRAFT</span></div>
+                <p class="brand-description">
+                    O maior servidor de Minecraft da nova geração. Explore mundos infinitos, participe de eventos épicos
+                    e construa sua própria lenda.
+                </p>
+                <div class="newsletter-footer">
+                    <button class="btn-sidebar" onclick="showClickNotification('Sucesso', 'Você clicou no botão!')">
+                        CLIQUE AQUI
+                    </button>
+                    <h5>FIQUE POR DENTRO</h5>
+                    <form class="f-nav-form">
+                        <input type="email" placeholder="Seu melhor e-mail...">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+
+            <div class="footer-col">
+                <h4>EXPLORAR</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Survival 1.21</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Skyblock RPG</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Bedwars Arena</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Criativo Free</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>UTILITÁRIOS</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Wiki do Servidor</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Trabalhe Conosco</a></li>
+                    <li><a href="#" class="status-indicator"><span class="dot"></span> Status do Server</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>COMUNIDADE</h4>
+                <p class="join-text">Junte-se a mais de 5.000 membros no nosso Discord oficial.</p>
+                <div class="social-grid">
+                    <a href="#" class="social-box discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-box youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
+                </div>
             </div>
         </div>
-        <br>
-        <br>
-        <div class="audio-control-bar">
-            <div class="container audio-control-content">
-                <div class="music-player-details">
-                    <span id="musicTitleDisplay">Clique para Tocar</span>
-                    <div class="progress-bar-and-times">
-                        <span id="currentTimeDisplay" class="time-display">0:00</span>
-                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
-                        <span id="durationDisplay" class="time-display">0:00</span>
-                    </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <div class="legal">
+                    <p class="copyright-text"
+                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                        &copy;
+                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        Zeras Craft. Todos os direitos reservados.
+                    </p>
+
+                    <span class="mojang-disclaimer"
+                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                        Não afiliado à Mojang Studios ou Microsoft.
+                    </span>
                 </div>
-                <div class="music-playback-controls">
-                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
-                        <i class="fas fa-backward"></i>
-                    </button>
-                    <button id="audioControlButton" class="music-button main-play-pause-button"
-                        aria-label="Tocar/Pausar música">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
-                        <i class="fas fa-forward"></i>
-                    </button>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-pix"></i>
+                    <i class="fas fa-barcode"></i>
                 </div>
-                <div>
-                    <button id="audioModeButton" class="music-button" aria-label="Modo de reprodução">
-                        <i class="fas fa-repeat"></i>
-                    </button>
-                </div>
-                <div class="volume-container">
-                    <button id="volumeButton" class="music-button volume-button" aria-label="Controle de volume">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                    <input type="range" id="volumeSlider" class="audio-progress-bar volume-slider" min="0" max="1"
-                        step="0.01" value="1">
-                </div>
-                <div class="playback-speed-control">
-                    <select id="playbackSpeed" class="playback-speed-select">
-                        <option value="0.75">0.75x</option>
-                        <option value="1" selected>1x</option>
-                        <option value="1.25">1.25x</option>
-                        <option value="1.5">1.5x</option>
-                        <option value="2">2x</option>
-                    </select>
+                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up"></i>
                 </div>
             </div>
         </div>
     </footer>
 
-    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script src="script.js"></script>
-    <script src="reprodutor-musica.js"></script>
-    <script src="elementos.js"></script>
+    <script src="effects.js"></script>
+    <script src="player.js"></script>
 </body>
 
 </html>
