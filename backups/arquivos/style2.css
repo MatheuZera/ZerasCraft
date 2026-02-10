@@ -1420,3 +1420,238 @@
     font-size: 1.5rem;
     cursor: pointer;
 }
+
+
+
+.modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.mode-card {
+    background: #151515;
+    /* Fundo escuro do card */
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mode-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--green-mc);
+}
+
+.mode-banner {
+    aspect-ratio: 1 / 1;
+    /* Força o formato quadrado */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Gradiente para garantir que o texto seja legível sobre a imagem */
+.mode-overlay {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: 25px;
+    height: 50%;
+    /* Ocupa metade inferior do card */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.mode-tag {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.mode-overlay p {
+    color: #aaa;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.mode-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.mode-icons span {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+
+
+/* Seção e Grid Centralizado */
+.mc-container {
+    background-color: #0d0e12;
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.mc-grid-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Centraliza mesmo se sobrar 1 card embaixo */
+    gap: 30px;
+    max-width: 1400px;
+    width: 100%;
+}
+
+/* O Card Moderno */
+.mc-modern-card {
+    background-color: #16181d;
+    border: 1px solid #2a2d35;
+    border-radius: 16px;
+    padding: 24px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.mc-modern-card:hover {
+    transform: translateY(-8px);
+    border-color: #444a55;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Cabeçalho e Ícone */
+.mc-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.mc-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: #1f2229;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+.mc-icon-wrapper img {
+    width: 58px;
+    height: 58px;
+    image-rendering: pixelated;
+    /* Toque Minecraft */
+}
+
+.mc-badge {
+    font-size: 10px;
+    font-weight: 800;
+    color: #8b949e;
+    background: #21262d;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+}
+
+/* Textos */
+.mc-category {
+    color: #5baf41;
+    /* Verde Minecraft mais sóbrio */
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.mc-title {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+
+.mc-description {
+    color: #94a3b8;
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+/* --- BOTÃO COM ANIMAÇÃO SUAVE --- */
+.mc-card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mc-platform-icons {
+    display: flex;
+    gap: 12px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.mc-btn-animate {
+    position: relative;
+    background: #23272f;
+    border: 1px solid #30363d;
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: border-color 0.3s;
+}
+
+/* O efeito de preenchimento (Slide) */
+.mc-btn-animate::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #3e812a;
+    /* Verde floresta/grama */
+    transition: left 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: -1;
+}
+
+.mc-modern-card:hover .mc-btn-animate::before {
+    left: 0;
+}
+
+.mc-modern-card:hover .mc-btn-animate {
+    border-color: #5baf41;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .mc-modern-card {
+        width: 100%;
+    }
+}
