@@ -10,7 +10,7 @@
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
     <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
-    <link rel="stylesheet" href="style2.css"> <!---->
+    <link rel="stylesheet" href="404.css"> <!---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!---->
 
@@ -144,152 +144,29 @@
     <!--------------------------------------------------------------->
 
     <main>
-        <section class="error-page dark-theme">
-            <div class="error-container">
-                <div class="error-gfx">
-                    <div class="pixel-block">404</div>
-                </div>
 
-                <div class="error-content">
-                    <h1>CHUNKS NÃO CARREGADOS!</h1>
-                    <p>Parece que este local ainda não foi gerado ou um Creeper explodiu o link que você estava tentando
-                        acessar.</p>
+        <section class="minecraft-scene">
+            <div class="creeper-actor">
+                <div class="creeper-sprite"></div>
+                <div class="sizzle-overlay"></div>
+            </div>
 
-                    <div class="error-actions">
-                        <a href="index.html" class="btn-back">VOLTAR AO SPAWN</a>
-                        <a href="contato.html" class="btn-report">REPORTAR BUG</a>
-                    </div>
-                </div>
+            <div class="explosion-container">
+                <div class="exp-shockwave"></div>
+                <div class="debris d1"></div>
+                <div class="debris d2"></div>
+                <div class="debris d3"></div>
+                <div class="debris d4"></div>
+            </div>
+
+            <div class="error-display">
+                <h1 class="glitch" data-text="404">404</h1>
+                <span>CHUNK NÃO ENCONTRADA</span>
             </div>
         </section>
     </main>
 
-
-
     <!--------------------------------------------------------------->
-
-    <div class="music-player-container reveal">
-        <div class="player-controls">
-            <div class="now-playing">
-                <i class="fas fa-music"></i>
-                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
-            </div>
-
-            <div class="progress-area">
-                <span id="currentTimeDisplay">0:00</span>
-                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
-                <span id="durationDisplay">0:00</span>
-            </div>
-
-            <div class="main-controls">
-                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
-                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
-                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
-                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
-
-                <div class="volume-container">
-                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
-                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <audio id="backgroundAudio"></audio>
-
-    <div id="centralMessage" class="central-message">
-        <div class="message-icon">
-            <i class="fas fa-check"></i>
-        </div>
-        <div class="message-content">
-            <strong>Título</strong>
-            <span>Informação</span>
-        </div>
-    </div>
-
-    <!--------------------------------------------------------------->
-
-    <footer class="main-footer">
-        <div class="footer-divider"></div>
-
-        <div class="container footer-content">
-            <div class="footer-col brand-col">
-                <div class="logo">ZERAS<span>CRAFT</span></div>
-                <p class="brand-description">
-                    O maior servidor de Minecraft da nova geração. Explore mundos infinitos, participe de eventos épicos
-                    e construa sua própria lenda.
-                </p>
-                <div class="newsletter-footer">
-                    <button class="btn-sidebar" onclick="showClickNotification('Sucesso', 'Você clicou no botão!')">
-                        CLIQUE AQUI
-                    </button>
-                    <h5>FIQUE POR DENTRO</h5>
-                    <form class="f-nav-form">
-                        <input type="email" placeholder="Seu melhor e-mail...">
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="footer-col">
-                <h4>EXPLORAR</h4>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Survival 1.21</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Skyblock RPG</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Bedwars Arena</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Criativo Free</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>UTILITÁRIOS</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Wiki do Servidor</a></li>
-                    <li><a href="#">Termos de Uso</a></li>
-                    <li><a href="#">Política de Privacidade</a></li>
-                    <li><a href="#">Trabalhe Conosco</a></li>
-                    <li><a href="#" class="status-indicator"><span class="dot"></span> Status do Server</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>COMUNIDADE</h4>
-                <p class="join-text">Junte-se a mais de 5.000 membros no nosso Discord oficial.</p>
-                <div class="social-grid">
-                    <a href="#" class="social-box discord"><i class="fab fa-discord"></i></a>
-                    <a href="#" class="social-box youtube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container footer-bottom-flex">
-                <div class="legal">
-                    <p class="copyright-text"
-                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
-                        &copy;
-                        <span id="current-year" style="color: #ffffff !important;"></span>
-                        Zeras Craft. Todos os direitos reservados.
-                    </p>
-
-                    <span class="mojang-disclaimer"
-                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
-                        Não afiliado à Mojang Studios ou Microsoft.
-                    </span>
-                </div>
-                <div class="payment-methods">
-                    <i class="fab fa-cc-visa"></i>
-                    <i class="fab fa-cc-mastercard"></i>
-                    <i class="fab fa-pix"></i>
-                    <i class="fas fa-barcode"></i>
-                </div>
-                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                    <i class="fas fa-arrow-up"></i>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
     <script src="effects.js"></script>
