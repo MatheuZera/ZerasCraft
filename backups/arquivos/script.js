@@ -28,9 +28,9 @@ const handlePlayerVisibility = () => {
     const totalHeight = document.documentElement.scrollHeight;
     // Posição atual do scroll + altura da janela do navegador
     const currentScroll = window.innerHeight + window.pageYOffset;
-    
+
     // Distância do fim da página para ativar o desaparecimento (ajuste se necessário)
-    const threshold = 150; 
+    const threshold = 150;
 
     if (currentScroll >= (totalHeight - threshold)) {
         player.classList.add('player-hidden');
@@ -73,7 +73,7 @@ function toggleSidebar() {
 // Controle de Dropdown Mobile (Sistema de Painel Lateral)
 function toggleDrop(element) {
     const parent = element.parentElement;
-    
+
     // Opcional: Fecha outros dropdowns ao abrir um novo
     /*
     document.querySelectorAll('.sidebar-dropdown').forEach(item => {
@@ -220,7 +220,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 
 // Lógica de Troca de Abas
-window.switchTab = function(evt, tabName) {
+window.switchTab = function (evt, tabName) {
     // Impede o navegador de tentar seguir um link ou recarregar
     if (evt) evt.preventDefault();
 
@@ -255,7 +255,7 @@ window.switchTab = function(evt, tabName) {
 
 function toggleAccordion(element) {
     const item = element.parentElement; // Pega o .acc-item
-    
+
     // Opcional: Fecha outros itens abertos (Estilo único)
     const allItems = document.querySelectorAll('.acc-item');
     allItems.forEach(i => {
@@ -294,37 +294,35 @@ function showClickNotification(titulo, mensagem) {
 }
 
 
-let currentScroll = 0;
+let currentIndex = 0;
 
 function moveCarousel(direction) {
     const track = document.getElementById('carouselTrack');
-    const viewport = document.querySelector('.mc-carousel-viewport');
+    const cards = document.querySelectorAll('.mc-collectible-card');
+    const cardWidth = cards[0].offsetWidth + 20; // Largura do card + gap
+    const visibleCards = window.innerWidth > 768 ? 3 : 1; // Quantos cards aparecem por vez
+    const maxIndex = cards.length - visibleCards;
 
-    if (!track || !viewport) return;
+    // Atualiza o índice com base na direção
+    currentIndex += direction;
 
-    const card = track.querySelector('.mc-collectible-card');
-    const cardWidth = card.offsetWidth + 20; // Largura do card + gap
-    const totalWidth = track.scrollWidth;
-    const visibleWidth = viewport.offsetWidth;
-    const maxScroll = totalWidth - visibleWidth;
+    // --- AS TRAVAS DE SEGURANÇA ---
 
-    // Calcula o próximo movimento
-    // direction 1 = próximo (move para esquerda/negativo)
-    // direction -1 = anterior (move para direita/positivo)
-    currentScroll -= (direction * cardWidth);
-
-    // LÓGICA DE LOOP
-    // Se tentou ir além do final, volta para o início
-    if (Math.abs(currentScroll) > maxScroll && direction === 1) {
-        currentScroll = 0;
-    }
-    // Se tentou voltar antes do início, vai para o final
-    else if (currentScroll > 0 && direction === -1) {
-        currentScroll = -maxScroll;
+    // 1. Trava da Esquerda: Se o índice for menor que 0, força a voltar para 0
+    if (currentIndex < 0) {
+        currentIndex = 0;
+        return; // Interrompe a função para não animar sem necessidade
     }
 
-    // Aplica o movimento
-    track.style.transform = `translateX(${currentScroll}px)`;
+    // 2. Trava da Direita: Se passar do último card visível, trava no máximo
+    if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
+        return;
+    }
+
+    // Aplica o movimento apenas se estiver dentro dos limites
+    const moveDistance = currentIndex * cardWidth;
+    track.style.transform = `translateX(-${moveDistance}px)`;
 }
 
 
@@ -345,15 +343,25 @@ function moveWorld(direction) {
     track.style.transform = `translateX(-${worldIndex * step}px)`;
 }
 
-// 2. Lógica Hero "Sobrevivência"
+let currentHeroSlide = 0;
+
 function moveHero(direction) {
     const slides = document.querySelectorAll('.h-slide');
-    slides[heroIndex].classList.remove('active');
 
-    // Loop Infinito Matemático
-    heroIndex = (heroIndex + direction + slides.length) % slides.length;
+    // Remove o ativo do atual
+    slides[currentHeroSlide].classList.remove('active');
 
-    slides[heroIndex].classList.add('active');
+    // Calcula o próximo (com trava para não bugar)
+    currentHeroSlide += direction;
+
+    if (currentHeroSlide < 0) {
+        currentHeroSlide = slides.length - 1;
+    } else if (currentHeroSlide >= slides.length) {
+        currentHeroSlide = 0;
+    }
+
+    // Adiciona ativo ao novo slide
+    slides[currentHeroSlide].classList.add('active');
 }
 
 // 3. Lógica de Accordions
@@ -408,7 +416,7 @@ function openTab(evt, tabId) {
     // Mostra a aba atual e marca o botão
     document.getElementById(tabId).classList.add("active");
     evt.currentTarget.classList.add("active");
-    
+
     // Feedback visual (opcional, integra com seu player.js)
     if (typeof showMessage === 'function') {
         showMessage("ABA ALTERADA", "Explorando novo conteúdo", "fa-th-large");
@@ -418,12 +426,12 @@ function openTab(evt, tabId) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.content-item');
-    
+
     // Animação de fade-in para os itens da grade
     items.forEach((item, index) => {
         item.style.opacity = "0";
         item.style.transform = "translateY(20px)";
-        
+
         setTimeout(() => {
             item.style.transition = "all 0.6s ease";
             item.style.opacity = "1";
@@ -444,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.link-item').forEach(item => {
     item.addEventListener('click', () => {
         const title = item.querySelector('.link-title').innerText;
-        
+
         // Se a função showMessage existir no seu player.js, ela será chamada
         if (typeof showMessage === 'function') {
             showMessage("REDIRECIONANDO", `Abrindo: ${title}`, "fa-external-link-alt");
@@ -455,7 +463,7 @@ document.querySelectorAll('.link-item').forEach(item => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const block = document.querySelector('.pixel-block');
-    
+
     // Verificamos se o bloco existe antes de iniciar o intervalo
     if (block) {
         // Pequeno efeito visual de "glitch" aleatório
@@ -475,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.btn-access').forEach(button => {
     button.addEventListener('click', (e) => {
         const channelName = e.target.closest('.creator-card').querySelector('h3').innerText;
-        
+
         if (typeof showMessage === 'function') {
             showMessage("EXTERNAL LINK", `Abrindo o canal de ${channelName}...`, "fa-external-link-alt");
         }

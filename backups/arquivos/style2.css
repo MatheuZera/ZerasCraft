@@ -100,6 +100,7 @@
 
 
 
+/* --- MANTER ESTILO PC ATUAL --- */
 
 .collectibles-section {
     background-color: #000;
@@ -134,7 +135,6 @@
     font-weight: 700;
 }
 
-/* Setas de Navegação */
 .mc-carousel-controls {
     display: flex;
     gap: 10px;
@@ -159,29 +159,31 @@
     color: #1db954;
 }
 
-/* Logica do Carrossel */
+.mc-carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    /* Garante alinhamento interno */
+    justify-content: flex-start;
+}
+
 .mc-carousel-track {
     display: flex;
     gap: 20px;
     width: max-content;
-    /* Transição suave de 0.5 segundos, igual às animações do sistema */
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
+    /* Certifique-se de que não há margens sobrando aqui */
+    margin: 0;
 }
 
-/* Garante que o container pai não mostre os cards que "saíram" da tela */
-.mc-carousel-viewport {
-    overflow: hidden;
-    width: 100%;
-}
-
-/* Card Individual (Efeito Minecraft) */
 .mc-collectible-card {
     min-width: 280px;
-    /* Garante os 4 cards por tela */
     background: #161b22;
     cursor: pointer;
     position: relative;
+    flex-shrink: 0;
+    /* Impede o card de achatar no mobile */
 }
 
 .card-img-wrapper {
@@ -204,7 +206,6 @@
     position: relative;
 }
 
-/* Efeito de "levantar" no hover */
 .mc-collectible-card:hover .card-img-wrapper img {
     transform: scale(1.05);
 }
@@ -232,6 +233,56 @@
     color: #fff;
     opacity: 0.6;
 }
+
+/* --- ADICIONADO PARA MOBILE (ABAIXO DE 768px) --- */
+
+@media (max-width: 768px) {
+    .collectibles-section {
+        flex-direction: column;
+        /* Empilha o texto acima dos cards */
+        padding: 40px 15px;
+        gap: 20px;
+    }
+
+    .collectibles-header {
+        min-width: 100%;
+        max-width: 100%;
+        text-align: left;
+    }
+
+    .mc-carousel-controls {
+        margin-top: 20px;
+        justify-content: flex-start;
+    }
+
+    .mc-collectible-card {
+        /* Define a largura do quadrado no mobile */
+        min-width: calc(100vw - 40px);
+        width: calc(100vw - 40px);
+    }
+
+    .card-img-wrapper {
+        /* Aumenta a altura no mobile para parecer mais quadrado/imponente */
+        height: 300px;
+    }
+
+    .mc-carousel-track {
+        /* Se você usa o deslize do dedo (scroll), isso evita que passe do limite */
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .mc-collectible-card {
+        /* Garante que o card pare exatamente no início da tela */
+        scroll-snap-align: start;
+    }
+
+    /* Oculta barra de rolagem para manter o design limpo */
+    .mc-carousel-track::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 
 
 
@@ -316,99 +367,250 @@
     margin-top: 15px;
 }
 
-/* 2. World Slider */
+.mc-section.world-dark {
+    background-color: #0d0d0d;
+    padding: 80px 0;
+    text-align: center;
+    overflow: hidden;
+    /* Importante para não vazar nada */
+}
+
+/* Container do Slider */
 .w-slider {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    max-width: 1200px;
+    /* Limite de largura para PC */
+    margin: 0 auto;
 }
 
+/* O "Palco" onde a imagem aparece */
 .w-viewport {
-    width: 450px;
+    width: 65%;
+    /* Aumentado em ~1/4 do padrão para ficar maior no PC */
     overflow: hidden;
+    position: relative;
+    border: 1px solid #333;
+    /* Borda sutil como no design */
 }
 
-/* Mostra 1 por vez */
 .w-track {
     display: flex;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
 }
 
+/* Item Individual */
 .w-item {
-    min-width: 450px;
+    flex: 0 0 100%;
+    /* Cada item ocupa exatamente a largura do viewport */
     background: #1a1a1a;
-    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .w-item img {
     width: 100%;
-    height: 300px;
+    height: auto;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
 }
 
-.w-arrow {
-    background: #333;
+.w-item h3,
+.w-item p {
+    padding: 10px 20px;
+    margin: 0;
     color: #fff;
-    border: 2px solid #555;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
+}
+
+/* Setas flutuantes */
+.w-arrow {
+    position: absolute;
     z-index: 10;
-    margin: 0 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.w-arrow.prev {
+    left: 5%;
+}
+
+.w-arrow.next {
+    right: 5%;
 }
 
 .w-arrow:hover {
-    background: #1db954;
+    background: rgba(255, 255, 255, 0.3);
 }
 
-/* Cor verde do seu player */
+/* --- AJUSTE MOBILE --- */
+@media (max-width: 768px) {
+    .w-viewport {
+        width: 60%;
+        /* Quase tela cheia no mobile */
+    }
 
-/* 3. Hero Survival */
+    .w-arrow {
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.5);
+        /* Fundo escuro para destacar no mobile */
+    }
+
+    .w-arrow.prev {
+        left: 2%;
+    }
+
+    .w-arrow.next {
+        right: 2%;
+    }
+}
+
+
+
+
+/* --- ESTILO BASE PC --- */
 .hero-dark {
-    min-height: 500px;
+    position: relative;
+    background-color: #000;
+    padding: 80px 0;
+    width: 100%;
+    min-height: 600px;
     display: flex;
+    flex-direction: column;
+    /* Permite que o container e as setas se organizem */
     align-items: center;
     justify-content: center;
-    position: relative;
     overflow: hidden;
+}
+
+.h-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
 }
 
 .h-slide {
     display: none;
-    width: 90%;
-    max-width: 1200px;
+    /* Esconde todos */
+    width: 100%;
     align-items: center;
-    justify-content: space-between;
-    text-align: left;
+    gap: 40px;
+    padding: 0 80px;
+    /* Espaço para as setas no PC */
 }
 
 .h-slide.active {
     display: flex;
-    animation: fadeIn 0.5s ease;
+    /* Mostra o atual */
+}
+
+.h-info {
+    flex: 1;
+    color: #fff;
 }
 
 .h-info h2 {
     font-size: 3.5rem;
-    margin: 10px 0;
+    font-weight: 900;
+    margin: 15px 0;
+    line-height: 1;
 }
 
-.pixel-mask {
-    width: 500px;
-    clip-path: polygon(10% 0, 90% 0, 90% 10%, 100% 10%, 100% 90%, 90% 90%, 90% 100%, 10% 100%, 10% 90%, 0 90%, 0 10%, 10% 10%);
+.h-media {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
+.h-media img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* --- BOTÕES DE NAVEGAÇÃO --- */
+.h-item {
+    position: absolute;
+    width: 100%;
+    max-width: 1300px;
+    /* Um pouco maior que o container */
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    /* Não bloqueia cliques no centro */
+    z-index: 10;
+}
+
+.h-arrow {
+    pointer-events: auto;
+    /* Reativa o clique nos botões */
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.h-arrow:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* --- AJUSTE EXCLUSIVO MOBILE --- */
+@media (max-width: 768px) {
+    .hero-dark {
+        padding: 40px 20px;
+        min-height: auto;
     }
 
-    to {
-        opacity: 1;
-        transform: scale(1);
+    .h-container {
+        max-width: 100%;
+    }
+
+    .h-slide.active {
+        flex-direction: column-reverse;
+        /* Imagem no topo, texto embaixo */
+        padding: 0;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .h-info h2 {
+        font-size: 2rem;
+        /* Tamanho menor para não cortar no celular */
+        word-wrap: break-word;
+    }
+
+    .h-media img {
+        max-width: 80%;
+        /* Garante que a imagem caiba na largura */
+    }
+
+    /* Posiciona as setas abaixo do conteúdo no mobile para não cobrir texto */
+    .h-item {
+        position: relative;
+        transform: none;
+        max-width: 100%;
+        margin-top: 40px;
+        justify-content: center;
+        gap: 30px;
+        pointer-events: auto;
     }
 }
+
 
 
 
@@ -459,46 +661,164 @@
     transform: translateY(-10px);
 }
 
-/* Bloco de Texto */
-.bundle-content {
+
+
+
+/* --- CONTAINER PRINCIPAL --- */
+.bundle-section {
+    background-color: #000;
+    padding: 60px 0;
+    width: 100%;
+}
+
+.bundle-banner {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    /* Altura de banner no PC */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(90deg, #000 30%, transparent 100%);
+}
+
+/* --- GALERIA DE FUNDO/DESTAQUE --- */
+.bundle-gallery {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 70%;
+    /* Ocupa a maior parte da tela à direita */
+    height: 100%;
+    display: flex;
+    z-index: 1;
+    /* Inclinação para dar estilo de "cards cortados" */
+    transform: skewX(-10deg) translateX(50px);
+}
+
+.game-card {
     flex: 1;
-    color: #ffffff;
-    text-align: left;
+    height: 100%;
+    border-left: 4px solid #000;
+    overflow: hidden;
+}
+
+.game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Faz a imagem ser ampliada e cortada no centro */
+    transform: skewX(10deg) scale(1.2);
+    /* Reverte a inclinação na imagem */
+}
+
+/* --- CONTEÚDO SOBREPOSTO --- */
+.bundle-content {
+    position: relative;
+    z-index: 2;
+    padding-left: 10%;
+    width: 45%;
+    color: #fff;
 }
 
 .bundle-title {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 25px;
-    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
 }
 
-.bundle-text {
-    font-size: 1.1rem;
-    color: #cccccc;
-    line-height: 1.6;
-    margin-bottom: 35px;
-    max-width: 500px;
-}
-
-/* Botão Verde (Sincronizado com o seu player.js) */
 .bundle-btn {
     display: inline-block;
-    background-color: #1db954;
-    /* O mesmo verde do showMessage */
-    color: #ffffff;
+    background-color: #12b04b;
+    color: #fff;
+    padding: 20px 40px;
+    font-weight: 900;
     text-decoration: none;
-    font-weight: 800;
-    padding: 18px 35px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    transition: filter 0.2s, transform 0.2s;
+    border-radius: 2px;
+    box-shadow: 0 4px 0 #0a6b2e;
 }
 
-.bundle-btn:hover {
-    filter: brightness(1.1);
-    transform: scale(1.02);
+/* --- AJUSTE MOBILE (ESTILO BANNER INTEGRADO) --- */
+@media (max-width: 768px) {
+    .bundle-banner {
+        flex-direction: column;
+        justify-content: flex-end;
+        /* Joga o texto para a base do banner */
+        min-height: 500px;
+        /* Aumenta a altura para caber tudo sobre a imagem */
+        padding: 0;
+        background: #000;
+    }
+
+    .bundle-gallery {
+        position: absolute;
+        /* Vira o fundo do banner */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Ocupa todo o fundo */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        transform: none;
+        z-index: 1;
+    }
+
+    .game-card {
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        /* Divisória sutil */
+        transform: none;
+    }
+
+    .game-card img {
+        transform: none;
+        object-fit: cover;
+        height: 100%;
+        filter: brightness(0.8) contrast(1.2);
+        /* Escurece a imagem para o texto brilhar */
+    }
+
+    /* Camada de degradê para garantir leitura */
+    .bundle-banner::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70%;
+        background: linear-gradient(to top, #000 20%, transparent 100%);
+        z-index: 2;
+    }
+
+    .bundle-content {
+        position: relative;
+        z-index: 3;
+        /* Fica acima das imagens e do degradê */
+        width: 100%;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .bundle-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .bundle-text {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+        line-height: 1.4;
+    }
+
+    .bundle-btn {
+        width: 90%;
+        /* Botão maior no mobile para facilitar o toque */
+        padding: 15px 0;
+        font-size: 0.9rem;
+    }
 }
 
 
@@ -892,87 +1212,7 @@
 }
 
 
-.error-page {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #050505;
-    /* Fundo bem escuro */
-    color: #ffffff;
-    text-align: center;
-    font-family: 'Segoe UI', sans-serif;
-}
 
-.error-container {
-    max-width: 600px;
-    padding: 20px;
-}
-
-/* O "Bloco" 404 */
-.pixel-block {
-    font-size: 8rem;
-    font-weight: 900;
-    color: #1a1a1a;
-    text-shadow: 2px 2px 0 #333, 4px 4px 0 #111;
-    background: #111;
-    display: inline-block;
-    padding: 20px 40px;
-    border: 4px solid #222;
-    margin-bottom: 30px;
-    position: relative;
-    clip-path: polygon(5% 0, 95% 0, 95% 5%, 100% 5%, 100% 95%, 95% 95%, 95% 100%, 5% 100%, 5% 95%, 0 95%, 0 5%, 5% 5%);
-}
-
-.error-content h1 {
-    font-size: 2rem;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-}
-
-.error-content p {
-    color: #777;
-    margin-bottom: 40px;
-    line-height: 1.6;
-}
-
-/* Botões */
-.error-actions {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.btn-back {
-    background: #ffffff;
-    color: #000;
-    padding: 15px 30px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-
-.btn-report {
-    background: transparent;
-    color: #ffffff;
-    border: 2px solid #333;
-    padding: 13px 30px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-
-.btn-back:hover {
-    transform: scale(1.05);
-    background: #ddd;
-}
-
-.btn-report:hover {
-    border-color: #666;
-    background: #111;
-}
 
 
 /* Container Geral */
