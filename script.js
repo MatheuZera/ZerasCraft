@@ -637,3 +637,48 @@ function toggleAccordion(btn) {
         parent.classList.add("active");
     }
 }
+
+
+const ZerasCountEngine = {
+    init() {
+        const targets = document.querySelectorAll('.count-me');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animate(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        targets.forEach(t => observer.observe(t));
+    },
+
+    animate(el) {
+        const target = parseFloat(el.getAttribute('data-target'));
+        const unit = el.getAttribute('data-unit') || "";
+        const isDecimal = target % 1 !== 0; // Deteta se é GB/MB ou Inteiro
+
+        const duration = 2000;
+        const start = performance.now();
+
+        const step = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            let current = progress * target;
+
+            if (isDecimal) {
+                // Formatação para GB/MB: 2 casas decimais
+                el.innerText = `${current.toFixed(2)} ${unit}`;
+            } else {
+                // Formatação para Inteiros: Sem decimais e com ponto de milhar
+                el.innerText = Math.floor(current).toLocaleString('pt-BR') + unit;
+            }
+
+            if (progress < 1) requestAnimationFrame(step);
+            else el.innerText = isDecimal ? `${target.toFixed(2)} ${unit}` : target.toLocaleString('pt-BR') + unit;
+        };
+
+        requestAnimationFrame(step);
+    }
+};
+document.addEventListener('DOMContentLoaded', () => ZerasCountEngine.init());

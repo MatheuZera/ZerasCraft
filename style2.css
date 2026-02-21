@@ -2040,7 +2040,6 @@
 .software-card {
     background: #1a1a1f;
     border: 1px solid #2a2a35;
-    border-radius: 12px;
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -2091,7 +2090,6 @@
 }
 
 .card-info {
-    border-radius: 12px;
     padding: 25px;
     display: flex;
     flex-direction: column;

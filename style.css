@@ -1457,6 +1457,82 @@ var .play-pause {
     box-sizing: border-box;
 }
 
+.card-header-banner {
+    position: relative;
+    /* Necessário para ancorar o banner absoluto */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    min-height: 120px;
+    overflow: hidden;
+    /* Garante que o banner não transborde as bordas do card */
+    user-select: none;
+    /* Remove o cursor de seleção "|" indesejado */
+}
+
+/* Estilo para a imagem do banner se comportar como background */
+.header-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Faz a imagem preencher a área sem distorcer */
+    z-index: 1;
+    /* Coloca a imagem na camada inferior */
+    pointer-events: none;
+    /* Impede que a imagem interfira nos cliques do mouse */
+}
+
+/* Container da Tabela */
+.stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 0;
+    user-select: none;
+    /* Remove o cursor "|" */
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a1a;
+    /* Divisória sutil */
+    padding-bottom: 8px;
+}
+
+.stat-row span {
+    font-size: 0.85rem;
+    color: #888;
+    font-weight: 500;
+}
+
+.stat-row strong {
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.preco-container span {
+    color: #666;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* Garante que o ícone e a tag tenham contraste sobre a imagem */
+.card-icon,
+.tag-adobe {
+    z-index: 2;
+    position: relative;
+}
+
 .card-icon {
     width: 50px;
     height: 50px;
@@ -1854,27 +1930,32 @@ var .play-pause {
 }
 
 /* Conteúdo com transição suave */
+/* Conteúdo com transição dinâmica real */
 .acc-content {
-    max-height: 0;
-    overflow: hidden;
+    display: grid;
+    grid-template-rows: 0fr;
+    /* Altura zero absoluta */
+    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     background: #111;
-    color: #999;
-    padding: 0 20px;
-    /* Padding lateral fixo para não dar pulo */
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
+    /* Fundo preto puro solicitado */
+    overflow: hidden;
 }
 
-/* Estado aberto controlado pelo pai */
+/* Estado Aberto: O grid expande exatamente para o tamanho do conteúdo interno */
 .acc-item.active .acc-content {
-    max-height: 200px;
-    /* Valor suficiente para o texto */
-    padding: 20px;
+    grid-template-rows: 1fr;
 }
 
-/* Destaque opcional no trigger quando aberto */
-.acc-item.active .acc-trigger {
-    background: #202020;
-    color: #fff;
+/* Container interno para evitar o "pulo" do padding */
+.acc-inner {
+    min-height: 0;
+    padding: 0 20px;
+    transition: padding 0.5s ease;
+}
+
+.acc-item.active .acc-inner {
+    padding: 20px;
+    /* Padding aplicado apenas com o item aberto */
 }
 
 .acc-content.open {
