@@ -2074,8 +2074,8 @@
 }
 
 .card-icon img {
-    max-width: 150%;
-    max-height: 150%;
+    max-width: 180%;
+    max-height: 180%;
     object-fit: contain;
 }
 
