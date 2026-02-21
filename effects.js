@@ -9,7 +9,7 @@ const EFFECT_VOLUMES = {
     link: 70,        // Volume para sons de navegação
     card: 50,        // Volume para hover em cards
     button: 15,      // Volume para hover em botões
-    select:80,      // Volume para hover em links de texto
+    select:40,      // Volume para hover em links de texto
     click: 30         // Volume para cliques em botões
 };
 
