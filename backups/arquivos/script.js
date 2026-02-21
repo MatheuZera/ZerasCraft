@@ -20,6 +20,43 @@ backToTop.addEventListener('click', () => {
     });
 });
 
+const ZerasSync = {
+    // ID fornecido pelo usuário: 1390120239588577482
+    guildID: '1390120239588577482',
+
+    async update() {
+        // Null Check: verifica se o elemento existe antes de renderizar
+        const display = document.getElementById('discord-count');
+        if (!display) return;
+
+        try {
+            // Chamada ao endpoint JSON fornecido
+            const response = await fetch(`https://discord.com/api/guilds/${this.guildID}/widget.json`);
+            if (!response.ok) throw new Error("API Offline");
+
+            const data = await response.json();
+
+            // O widget.json retorna o 'presence_count' (membros online)
+            if (data.presence_count !== undefined) {
+                const onlineCount = data.presence_count;
+                // Atualização parcial: altera apenas o texto para manter o foco
+                display.innerText = `${onlineCount.toLocaleString()} membros online agora`;
+            }
+        } catch (error) {
+            console.error("Zera's Craft Sync Error:", error);
+            // Fallback para manter a imersão visual caso a API falhe
+            display.innerText = "mais de 5.000 membros";
+        }
+    }
+};
+
+// Inicia a sincronização após o carregamento total para evitar erros de ID
+window.addEventListener('DOMContentLoaded', () => {
+    ZerasSync.update();
+    // Atualiza a cada 5 minutos (300000ms)
+    setInterval(() => ZerasSync.update(), 300000);
+});
+
 const handlePlayerVisibility = () => {
     const player = document.querySelector('.music-player-container');
     if (!player) return;

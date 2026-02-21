@@ -177,7 +177,7 @@ body {
 }
 
 .logo span {
-    color: var(--green-mc);
+    color: #00ff00;
 }
 
 .header-logo {
@@ -1800,35 +1800,6 @@ var .play-pause {
     color: var(--gold);
 }
 
-.f-nav-form {
-    display: flex;
-    background: #151515;
-    padding: 5px;
-    border: 1px solid #333;
-}
-
-.f-nav-form input {
-    background: none;
-    border: none;
-    padding: 10px;
-    color: #fff;
-    flex: 1;
-    outline: none;
-}
-
-.f-nav-form button {
-    background: var(--green-mc);
-    border: none;
-    color: #fff;
-    padding: 0 15px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.f-nav-form button:hover {
-    background: var(--green-hover);
-}
-
 /* Links Estilizados */
 .footer-links li {
     margin-bottom: 12px;
@@ -1860,17 +1831,16 @@ var .play-pause {
 
 /* Status do Servidor no Footer */
 .status-indicator {
-    color: var(--green-mc) !important;
     font-weight: bold;
 }
 
 .status-indicator .dot {
-    height: 8px;
-    width: 8px;
-    background: var(--green-mc);
-    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    background: #00ff00;
+    border-radius: 30%;
     display: inline-block;
-    box-shadow: 0 0 10px var(--green-mc);
+    box-shadow: 0 0 10px #00ff00;
     animation: blink 2s infinite;
 }
 
@@ -1895,12 +1865,12 @@ var .play-pause {
 
 .social-box:hover {
     transform: translateY(-5px);
-    border-color: var(--green-mc);
+    border-color: #00ff00;
     color: #fff;
 }
 
 .discord:hover {
-    background: #5865F2;
+    background: #462dff;
 }
 
 .youtube:hover {
@@ -1908,7 +1878,34 @@ var .play-pause {
 }
 
 .twitch:hover {
-    background: #039aff;
+    background: #23f8f1;
+}
+
+.other:hover {
+    background: #ddd;
+}
+
+/* SISTEMA DE CONTAGEM DE MEMBROS */
+.join-text {
+    font-family: 'Inter', sans-serif;
+    /* Conforme o manual [cite: 3, 4] */
+    color: #eee;
+    font-size: 14px;
+    background: #000;
+    /* Fundo preto puro sem bolinhas [cite: 192, 230] */
+    padding: 12px;
+    border-radius: 4px;
+    display: inline-block;
+    user-select: none;
+}
+
+#discord-count {
+    font-weight: 900;
+    /* Gradiente industrial padrão [cite: 73, 113] */
+    background: linear-gradient(90deg, #347C2F, #4ade80);
+    background-clip: text;
+    color: transparent;
+    transition: color 0.3s ease;
 }
 
 /* Bottom Area */
@@ -1934,18 +1931,6 @@ var .play-pause {
     font-size: 0.75rem;
     color: #555;
 }
-
-.payment-methods {
-    display: flex;
-    gap: 20px;
-    font-size: 1.5rem;
-    color: #333;
-}
-
-.payment-methods i:hover {
-    color: #666;
-}
-
 
 /* --- SETA VOLTAR AO TOPO --- */
 .back-to-top {
