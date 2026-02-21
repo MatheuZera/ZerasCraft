@@ -1,103 +1,269 @@
-/* Container com lógica de 4 colunas e centralização */
+/* --- HERO CAROUSEL CSS --- */
+.hero-container {
+    background: #0b0b0b;
+    max-width: 1200px;
+    margin: 20px auto;
+    user-select: none;
+    /* Mantendo o padrão Industrial */
+}
+
+.hero-main {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    /* Proporção PC */
+    overflow: hidden;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Card de Informações */
+.hero-card {
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    background: #111;
+    padding: 35px;
+    width: 440px;
+    border-top: 4px solid #333;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.hero-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tag-new {
+    background: #fff;
+    color: #000;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 2px 6px;
+}
+
+.tag-event {
+    color: #aaa;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.hero-card h2 {
+    font-size: 28px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.hero-details {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    color: #3c8527;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.hero-card p {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Botão Verde Minecraft */
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #3c8527;
+    color: #fff;
+    padding: 14px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border-bottom: 4px solid #1a3a11;
+}
+
+/* Miniaturas */
+.hero-thumbs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    background: var(--mc-card);
+}
+
+.thumb {
+    width: 120px;
+    height: 70px;
+    border: 2px solid #222;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.thumb.active {
+    border-color: #3c8527;
+    /* Verde oficial */
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 768px) {
+    .hero-main {
+        aspect-ratio: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hero-img {
+        height: 240px;
+    }
+
+    .hero-card {
+        position: relative;
+        width: 100%;
+        left: 0;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: none;
+    }
+
+    .hero-meta,
+    .hero-details {
+        justify-content: center;
+    }
+
+    .hero-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-thumbs {
+        gap: 10px;
+    }
+
+    .thumb {
+        width: 90px;
+        height: 55px;
+    }
+}
+
+/* Container de Notícias: Centralização Industrial */
 .news-grid-container {
     display: flex;
     flex-wrap: wrap;
+    /* Permite que os cards pulem de linha se não couberem */
     justify-content: center;
-    /* Centraliza a sobra (ex: o 5º item) */
-    gap: 15px;
-    padding: 40px;
-    background-color: #0d1117;
+    /* Centraliza horizontalmente os cards */
+    gap: 20px;
+    padding: 40px 20px;
+    width: 100%;
+    /* Garante que o container ocupe a largura total para centralizar */
+    background-color: #0b0b0b;
+    /* Fundo preto puro solicitado */
+    margin: 0 auto;
 }
 
-/* Base do Card */
+/* Base do Card: Mantemos o tamanho fixo de 280px para evitar que fique "gigante" */
 .mc-news-card {
     position: relative;
     width: 280px;
-    /* Largura para manter 4 por linha */
     height: 280px;
+    flex-shrink: 0;
+    /* Impede que o card seja espremido pelo flexbox */
     overflow: hidden;
     display: block;
     text-decoration: none;
     border-radius: 4px;
-    /* Minecraft usa bordas mais quadradas */
-    background-color: #161b22;
+    background-color: #111;
+    user-select: none;
+    /* Remove o cursor "|" indesejado */
 }
 
-/* Imagem de Fundo */
-.news-image {
-    width: 100%;
-    height: 100%;
-}
-
+/* Imagem com Zoom Industrial */
+.news-image,
 .news-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
 }
 
-/* Camada de Texto (Overlay) */
+.news-image img {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mc-news-card:hover .news-image img {
+    transform: scale(1.1);
+}
+
+/* Overlay: Agora usamos TranslateY para uma animação muito mais fluida */
 .news-info-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 15px;
+    /* Mostra apenas a TAG e o TÍTULO inicialmente */
+    transform: translateY(calc(100% - 85px));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 100%);
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    /* Começa com altura menor */
-    height: 95px;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    backdrop-filter: blur(2px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
 }
 
-/* Efeito de Levantamento no Hover */
+/* No Hover, o overlay sobe totalmente */
 .mc-news-card:hover .news-info-overlay {
-    height: 100%;
-    /* Levanta até cobrir o card */
+    transform: translateY(0);
     background: rgba(0, 0, 0, 0.85);
 }
 
-.mc-news-card:hover .news-image img {
-    transform: scale(1.1);
-    /* Zoom leve na imagem */
-}
-
-/* Estilização dos Textos */
+/* Estilização Interna */
 .news-tag {
-    background: #ffffff;
-    color: #000000;
-    font-size: 0.65rem;
+    background: #fff;
+    color: #000;
+    font-size: 10px;
     font-weight: 900;
-    padding: 2px 6px;
+    padding: 3px 8px;
     width: fit-content;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .news-headline {
-    color: #ffffff;
+    color: #fff;
     font-size: 1.1rem;
     font-weight: 700;
     margin: 0;
     line-height: 1.2;
+    text-transform: uppercase;
 }
 
 .news-description {
-    color: #cbd3dc;
+    color: #aaa;
     font-size: 0.85rem;
     margin-top: 15px;
     opacity: 0;
-    /* Invisível no estado normal */
     transition: opacity 0.3s ease;
+    line-height: 1.4;
 }
 
 .mc-news-card:hover .news-description {
     opacity: 1;
-    /* Aparece quando o texto levanta */
 }
-
 
 
 /* --- MANTER ESTILO PC ATUAL --- */
@@ -302,21 +468,22 @@
     font-weight: 900;
 }
 
-/* 1. Friends Accordions */
 .f-container {
     display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
+    user-select: none;
 }
 
 .f-card {
     background: #181818;
     width: 320px;
     border-bottom: 6px solid;
-    text-align: left;
+    overflow: hidden;
 }
 
+/* Cores de Borda */
 .border-brown {
     border-color: #7a5c41;
 }
@@ -344,12 +511,26 @@
     font-size: 11px;
     padding: 3px 10px;
     border-radius: 2px;
+    color: #fff;
 }
 
+/* ACORDEÃO INDUSTRIAL */
 .acc-panel {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
     overflow: hidden;
-    transition: 0.4s ease;
+    opacity: 0;
+}
+
+.f-accordion.active .acc-panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.acc-inner {
+    min-height: 0;
+    padding-bottom: 15px;
     color: #aaa;
     font-size: 14px;
 }
@@ -365,14 +546,7 @@
     cursor: pointer;
     border-top: 1px solid #333;
     margin-top: 15px;
-}
-
-.mc-section.world-dark {
-    background-color: #0d0d0d;
-    padding: 80px 0;
-    text-align: center;
-    overflow: hidden;
-    /* Importante para não vazar nada */
+    font-weight: bold;
 }
 
 /* Container do Slider */
@@ -1895,103 +2069,90 @@
     }
 }
 
-
-
+/* --- ESTILO PC --- */
 .zeras-hub {
     display: flex;
-    background: #111;
-    border: 1px solid #333;
-    max-width: 1200px;
+    background: #1e1e1e;
+    border: 2px solid #333;
+    max-width: 1100px;
     margin: 20px auto;
     user-select: none;
-    /* Remove o cursor de digitação | */
+    /* */
 }
 
-/* --- LAYOUT PC --- */
 .hub-sidebar {
     width: 300px;
-    background: #000;
-    border-right: 1px solid #333;
+    background: #181818;
+    border-right: 2px solid #333;
 }
 
 .tab-link {
     width: 100%;
-    padding: 15px;
+    padding: 18px;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #333;
     color: #aaa;
     display: flex;
     align-items: center;
     gap: 15px;
     cursor: pointer;
-    text-align: left;
     transition: 0.3s;
 }
 
 .tab-link.active {
-    background: #1a1a1a;
+    background: #252525;
     color: #fff;
-    border-left: 4px solid #347C2F;
+    outline: 2px solid #ffffff;
+    /* Destaque azul */
 }
 
 .hub-main {
     flex: 1;
-    background: #000;
-    position: relative;
+    background: var(--mc-card);
+    padding: 25px;
 }
 
+.accordion-header {
+    display: none;
+}
+
+/* Escondido no PC */
 .hub-content {
     display: none;
-    height: 100%;
-    flex-direction: column;
 }
 
 .hub-content.active {
-    display: flex;
-}
-
-.hub-media img {
-    width: 100%;
-    height: auto;
     display: block;
-    object-fit: cover;
-}
-
-.hub-info {
-    padding: 20px;
-    color: #ccc;
 }
 
 .btn-saiba-mais {
     display: inline-block;
-    margin-top: 15px;
-    background: #347C2F;
+    background: #3c8527;
     color: #fff;
-    padding: 10px 20px;
+    padding: 12px 30px;
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-/* --- MOBILE: TRANSFORMAÇÃO EM ACORDEÃO --- */
-.accordion-header {
-    display: none;
-}
-
+/* --- MOBILE: ACORDEÃO FECHADO POR PADRÃO --- */
 @media (max-width: 768px) {
     .zeras-hub {
         flex-direction: column;
         border: none;
+        background: transparent;
     }
 
     .hub-sidebar {
         display: none;
     }
 
+    /* Força todos os itens a aparecerem para mostrar os cabeçalhos */
     .hub-content {
-        display: block;
-        border-bottom: 1px solid #222;
+        display: block !important;
+        margin-bottom: 10px;
+        border: 1px solid #333;
     }
 
     .accordion-header {
@@ -1999,31 +2160,36 @@
         justify-content: space-between;
         width: 100%;
         padding: 20px;
-        background: #111;
-        border: none;
+        background: #181818;
         color: #fff;
+        border: none;
         font-weight: bold;
         text-transform: uppercase;
+        cursor: pointer;
     }
 
+    /* Motor de Expansão Grid (Sem cortes) */
     .hub-body {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-out;
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         background: #000;
+        overflow: hidden;
     }
 
-    /* Quando ativo no mobile, expande o corpo */
     .hub-content.active .hub-body {
-        max-height: 1000px;
+        grid-template-rows: 1fr;
     }
 
-    .hub-content.active .accordion-header {
-        border-left: 4px solid #347C2F;
+    .hub-inner {
+        min-height: 0;
+        padding: 0 20px;
+    }
+
+    .hub-content.active .hub-inner {
+        padding: 20px;
     }
 }
-
-
 
 /* =========================================
    GRID E CARD (Base Centralizada)

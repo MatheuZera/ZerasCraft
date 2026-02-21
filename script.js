@@ -605,19 +605,12 @@ document.querySelectorAll('.btn-access').forEach(button => {
 });
 
 function openHub(evt, gameId) {
-    // 1. Esconde todos os conteúdos
     const contents = document.getElementsByClassName("hub-content");
-    for (let i = 0; i < contents.length; i++) {
-        contents[i].classList.remove("active");
-    }
-
-    // 2. Remove "active" de todas as abas
     const tabs = document.getElementsByClassName("tab-link");
-    for (let i = 0; i < tabs.length; i++) {
-        tabs[i].classList.remove("active");
-    }
 
-    // 3. Mostra o atual e marca a aba
+    for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+    for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+
     document.getElementById(gameId).classList.add("active");
     evt.currentTarget.classList.add("active");
 }
@@ -626,18 +619,24 @@ function toggleAccordion(btn) {
     const parent = btn.parentElement;
     const isActive = parent.classList.contains("active");
 
-    // Fecha todos os outros (opcional, estilo sanfona)
-    const allContents = document.getElementsByClassName("hub-content");
-    for (let content of allContents) {
-        content.classList.remove("active");
-    }
+    // Fecha os outros (Estilo Industrial)
+    document.querySelectorAll('.hub-content').forEach(item => item.classList.remove('active'));
 
-    // Se não estava ativo, abre
-    if (!isActive) {
-        parent.classList.add("active");
+    if (!isActive) parent.classList.add("active");
+}
+
+// NOVO: Função para garantir que comece fechado no Mobile
+function initHub() {
+    if (window.innerWidth <= 768) {
+        document.querySelectorAll('.hub-content').forEach(item => {
+            item.classList.remove('active');
+        });
     }
 }
 
+// Executa ao carregar e ao redimensionar
+window.addEventListener('load', initHub);
+window.addEventListener('resize', initHub);
 
 const ZerasCountEngine = {
     init() {
@@ -682,3 +681,57 @@ const ZerasCountEngine = {
     }
 };
 document.addEventListener('DOMContentLoaded', () => ZerasCountEngine.init());
+
+
+function toggleAccordion(btn) {
+    const accordion = btn.closest('.f-accordion');
+    const icon = btn.querySelector('i');
+
+    // Alterna estado
+    const isActive = accordion.classList.toggle('active');
+
+    // Troca ícone
+    if (isActive) {
+        icon.classList.replace('fa-plus', 'fa-minus');
+    } else {
+        icon.classList.replace('fa-minus', 'fa-plus');
+    }
+}
+
+// Resete Mobile: Inicia fechado
+if (window.innerWidth <= 768) {
+    document.querySelectorAll('.f-accordion').forEach(acc => acc.classList.remove('active'));
+}
+
+
+/**
+ * MOTOR DO CARROSSEL
+ * Atualiza o banner principal baseado na miniatura clicada.
+ */
+function updateHero(element) {
+    const banner = document.getElementById('heroBanner');
+    const title = document.getElementById('heroTitle');
+    const desc = document.getElementById('heroDesc');
+    const allThumbs = document.querySelectorAll('.thumb');
+
+    // Inicia transição suave
+    banner.style.opacity = '0.5';
+
+    setTimeout(() => {
+        // Coleta dados dos atributos HTML
+        const newImg = element.getAttribute('data-img');
+        const newTitle = element.getAttribute('data-title');
+        const newDesc = element.getAttribute('data-desc');
+
+        // Atualiza elementos
+        banner.src = newImg;
+        title.innerText = newTitle;
+        desc.innerText = newDesc;
+
+        // Gerencia classe de destaque (Active)
+        allThumbs.forEach(t => t.classList.remove('active'));
+        element.classList.add('active');
+
+        banner.style.opacity = '1';
+    }, 150);
+}
