@@ -1,0 +1,418 @@
+:root {
+    --bg-color: #0d0e12;
+    --c-green: #437d34;
+    --c-body: #356329;
+    --c-leg: #24441c;
+    --timing: 14s;
+}
+
+.minecraft-scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* --- CREEPER ACTOR (TRAJETO E ESCALA PROGRESSIVA) --- */
+.creeper-actor {
+    position: absolute;
+    width: 64px;
+    height: 128px;
+    z-index: 10;
+    animation: master-timeline var(--timing) linear infinite;
+}
+
+.creeper-body-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: screen-shake var(--timing) linear infinite;
+}
+
+/* --- MEMBROS --- */
+.c-head {
+    width: 64px;
+    height: 64px;
+    background: var(--c-green);
+    position: relative;
+    z-index: 5;
+}
+
+.c-body {
+    width: 32px;
+    height: 48px;
+    background: var(--c-body);
+    position: relative;
+}
+
+.c-legs {
+    display: flex;
+    justify-content: center;
+    width: 64px;
+}
+
+.c-leg {
+    width: 16px;
+    height: 16px;
+    background: var(--c-leg);
+    margin: 0 1px;
+    position: relative;
+}
+
+/* --- PISCAR CONSTANTE (SIZZLE) --- 
+   Aumenta a intensidade conforme ele infla */
+.sizzle-overlay,
+.c-body::after,
+.c-leg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0;
+    animation: sizzle-logic var(--timing) linear infinite;
+}
+
+@keyframes sizzle-logic {
+
+    0%,
+    48% {
+        opacity: 0;
+    }
+
+    /* Começa a piscar constante a partir do momento que ele decide explodir */
+    49%,
+    51%,
+    53%,
+    55%,
+    57%,
+    59%,
+    61%,
+    63%,
+    65%,
+    67%,
+    69% {
+        opacity: 0.6;
+    }
+
+    50%,
+    52%,
+    54%,
+    56%,
+    58%,
+    60%,
+    62%,
+    64%,
+    66%,
+    68%,
+    70% {
+        opacity: 0;
+    }
+
+    70.5% {
+        opacity: 1;
+    }
+
+    /* Flash final */
+    71%,
+    100% {
+        opacity: 0;
+    }
+}
+
+/* --- CAMINHADA (PARA APENAS NA EXPLOSÃO) --- */
+.l-front,
+.r-back {
+    animation: walk-8bit 0.4s steps(2) infinite,
+        leg-stopper var(--timing) steps(1) infinite;
+}
+
+.r-front,
+.l-back {
+    animation: walk-8bit 0.4s steps(2) infinite reverse,
+        leg-stopper var(--timing) steps(1) infinite;
+}
+
+@keyframes walk-8bit {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-6px);
+    }
+}
+
+/* As pernas param de andar exatamente quando o scale trava para a explosão final */
+@keyframes leg-stopper {
+
+    0%,
+    69.9% {
+        animation-play-state: running;
+    }
+
+    70%,
+    100% {
+        animation-play-state: paused;
+        transform: translateY(0);
+    }
+}
+
+/* --- TIMELINE MESTRA (MOVIMENTO -> IDLE -> SCALE ANDANDO -> EXPLOSÃO) --- */
+@keyframes master-timeline {
+    0% {
+        transform: translateX(-60vw) scale(1);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    /* 30%: Chega ao centro */
+    30% {
+        transform: translateX(0) scale(1);
+    }
+
+    /* 30% a 45%: IDLE (Fica parado por aprox 2s olhando o player) */
+    45% {
+        transform: translateX(0) scale(1);
+    }
+
+    /* 45% a 70%: SCALE AOS POUCOS (Ele cresce enquanto ainda faz o movimento das pernas) */
+    70% {
+        transform: translateX(0) scale(2.8);
+        filter: brightness(1);
+        opacity: 1;
+    }
+
+    /* Flash Branco */
+    70.8% {
+        transform: translateX(0) scale(3.2);
+        filter: brightness(15);
+    }
+
+    /* 71%: Detonação */
+    71% {
+        opacity: 0;
+        transform: translateX(0) scale(4);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* --- ROSTO E TREMOR --- */
+.c-face-pixel {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    box-shadow: 8px 16px #000, 16px 16px #000, 8px 24px #000, 16px 24px #000,
+        40px 16px #000, 48px 16px #000, 40px 24px #000, 48px 24px #000,
+        24px 32px #000, 32px 32px #000, 16px 40px #000, 24px 40px #000,
+        32px 40px #000, 40px 40px #000, 16px 48px #000, 24px 48px #000,
+        32px 48px #000, 40px 48px #000, 16px 56px #000, 40px 56px #000;
+    animation: face-visibility var(--timing) steps(1) infinite;
+}
+
+@keyframes face-visibility {
+
+    0%,
+    29.9% {
+        opacity: 0;
+    }
+
+    30%,
+    70.9% {
+        opacity: 1;
+    }
+
+    71%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes screen-shake {
+
+    0%,
+    55% {
+        transform: translate(0, 0);
+    }
+
+    56%,
+    70% {
+        transform: translate(1px, -1px);
+    }
+
+    57%,
+    70.5% {
+        transform: translate(-1px, 1px);
+    }
+}
+
+/* --- PARTÍCULAS --- */
+.p-white {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    opacity: 0;
+    animation: burst var(--timing) cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes burst {
+
+    0%,
+    70.9% {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+
+    71% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(0);
+    }
+}
+
+.p1 {
+    --x: -450px;
+    --y: -300px
+}
+
+.p2 {
+    --x: 450px;
+    --y: -300px
+}
+
+.p3 {
+    --x: -200px;
+    --y: -500px
+}
+
+.p4 {
+    --x: 200px;
+    --y: 500px
+}
+
+.p5 {
+    --x: -550px;
+    --y: 100px
+}
+
+.p6 {
+    --x: 550px;
+    --y: -100px
+}
+
+.p7 {
+    --x: -300px;
+    --y: 400px
+}
+
+.p8 {
+    --x: 300px;
+    --y: -400px
+}
+
+.p9 {
+    --x: 0px;
+    --y: -600px
+}
+
+.p10 {
+    --x: 0px;
+    --y: 600px
+}
+
+.p11 {
+    --x: -600px;
+    --y: 0px
+}
+
+.p12 {
+    --x: 600px;
+    --y: 0px
+}
+
+.p13 {
+    --x: -350px;
+    --y: -450px
+}
+
+.p14 {
+    --x: 350px;
+    --y: 450px
+}
+
+.p15 {
+    --x: -500px;
+    --y: 500px
+}
+
+.p16 {
+    --x: 500px;
+    --y: -500px
+}
+
+.p17 {
+    --x: -180px;
+    --y: 200px
+}
+
+.p18 {
+    --x: 180px;
+    --y: -200px
+}
+
+.p19 {
+    --x: -80px;
+    --y: 350px
+}
+
+.p20 {
+    --x: 80px;
+    --y: -350px
+}
+
+/* --- 404 GLITCH --- */
+.error-display {
+    position: absolute;
+    text-align: center;
+    animation: err-reveal var(--timing) linear infinite;
+}
+
+@keyframes err-reveal {
+
+    0%,
+    75% {
+        opacity: 0;
+    }
+
+    80%,
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.glitch {
+    font-size: 8rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 4px 0 #f00, -4px 0 #0ff;
+}
