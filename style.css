@@ -25,6 +25,17 @@
     padding: 0;
 }
 
+/* Aplique isso aos elementos que estão mostrando o cursor */
+.status-indicator,
+.join-text,
+.counter,
+.btn-sidebar {
+    user-select: none;
+    /* Impede a seleção de texto e o aparecimento do cursor | */
+    cursor: default;
+    /* Garante que o mouse não mude para o formato de "I" (edição) */
+}
+
 html,
 body {
     max-width: 100%;
@@ -39,6 +50,9 @@ body {
     font-family: 'Inter', sans-serif;
     line-height: 1.5;
     overflow-x: hidden;
+    -webkit-user-select: none;
+    /* Suporte para navegadores baseados em Webkit */
+    user-select: none;
 }
 
 h1,
