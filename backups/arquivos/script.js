@@ -37,6 +37,8 @@ const ZerasEngine = {
             // 1. Sincroniza Membros (Online e Total) [cite: 153]
             this.updateCounter('stat-total', data.approximate_member_count || 5000);
             this.updateCounter('stat-online', data.approximate_presence_count || 0);
+            // Adicione o complemento como uma string no final
+            this.updateCounter('discord-count', data.approximate_presence_count || 0, ' Membros Online agora');
 
             // 2. Sincroniza Data de Criação via ID (Snowflake)
             this.syncCreationDate();
@@ -93,25 +95,37 @@ const ZerasEngine = {
         requestAnimationFrame(step);
     },
 
-    updateCounter(id, target) {
+    // 1. Prepara o alvo e define o valor final com o complemento
+    updateCounter(id, target, suffix = "") {
         const el = document.getElementById(id);
         if (el) {
+            // Define o valor final no atributo para a lógica de animação [cite: 191]
             el.setAttribute('data-target', target);
-            this.animateNumber(el);
+            this.animateNumber(el, suffix);
         }
     },
 
-    animateNumber(el) {
+    // 2. Executa a animação suave via requestAnimationFrame 
+    animateNumber(el, suffix) {
         const target = +el.getAttribute('data-target');
+
         const update = () => {
-            const current = +el.innerText.replace(/\D/g, '');
-            const inc = Math.ceil(target / 100);
+            // Remove caracteres não numéricos para calcular o progresso [cite: 191]
+            const current = +el.innerText.replace(/\D/g, '') || 0;
+            const increment = Math.ceil(target / 100);
+
             if (current < target) {
-                el.innerText = Math.min(target, current + inc).toLocaleString();
+                const nextValue = Math.min(target, current + increment);
+                // Atualização parcial: número formatado + complemento [cite: 191]
+                el.innerText = `${nextValue.toLocaleString()}${suffix}`;
                 requestAnimationFrame(update);
+            } else {
+                // Garante que o valor final exato seja exibido com o sufixo [cite: 191]
+                el.innerText = `${target.toLocaleString()}${suffix}`;
             }
         };
-        update();
+
+        requestAnimationFrame(update);
     }
 };
 
