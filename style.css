@@ -814,6 +814,16 @@ body {
     margin-bottom: 15px;
 }
 
+.especial-tag {
+    background: #ff2323;
+    color: black;
+    padding: 5px 12px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
 .hero h1 {
     font-size: 4rem;
     line-height: 1;

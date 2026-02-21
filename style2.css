@@ -2091,6 +2091,7 @@
 }
 
 .card-info {
+    border-radius: 12px;
     padding: 25px;
     display: flex;
     flex-direction: column;
