@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
     <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Especial 100k - PackZera</title> <!---->
+    <title>Zera's Craft | PackZera Oficial</title> <!---->
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
-    <link rel="icon" href="../assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="../style.css"> <!---->
+    <link rel="stylesheet" href="../style2.css">
+    <!---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!---->
 
@@ -60,663 +64,868 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
+<!----------------------------- Desktop --------------------------------->
+
 <body>
 
-    <div id="centralMessage" class="central-message"></div>
+    <nav class="nav-pc">
+        <div class="container-pc">
+            <div class="logo">ZERAS CRAFT</div>
 
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="index.html" class="header-logo">Zera's Craft</a>
-            <button class="menu-toggle" aria-label="Abrir menu de navegação">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="../index" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="../arquivos" class="nav-link" data-page="home">Arquivos</a></li>
-                    <li><a href="../comunidade" class="nav-link" data-page="home">Comunidade</a></li>
-                    <li><a href="../eventos" class="nav-link" data-page="home">Eventos</a></li>
-                    <li><a href="../pixel-legends" class="nav-link" data-page="home">Pixel Legends</a></li>
-                    <li><a href="../equipe" class="nav-link" data-page="home">Equipe</a></li>
-                    <li><a href="../canal" class="nav-link" data-page="home">Canal Oficial</a></li>
-                    <li><a href="../recursos" class="nav-link" data-page="home">Recursos</a></li>
-                    <li><a href="../@!&@@!especial-100k">100k de Inscritos</a></li>
-                </ul>
-            </nav>
+            <ul class="menu-pc">
+                <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
+                <li class="dropdown">
+                    <a href="#">Jogos <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="#">Bedrock Edition</a></li>
+                        <li><a href="#">Java Edition</a></li>
+                    </ul>
+                </li>
+                <li><a href="arquivos">Arquivos</a></li>
+                <li><a href="comunidade">Comunidade</a></li>
+                <li><a href="eventos">Eventos</a></li>
+                <li><a href="pixel-legends">Pixel Legends</a></li>
+                <li><a href="canais">Canais</a></li>
+                <li><a href="suporte">Suporte</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <span class="server-ip" onclick="copyIP()">IP Pixel Legends</span>
+                <a href="#" class="btn-green">LOJA VIP</a>
+            </div>
         </div>
-    </header>
-    <!-------------------------------------------------------------------------------------------------------------->
-    <main>
-        <section class="hero-section">
-            <div class="hero-image-overlay"></div>
-            <div class="hero-content">
-                <div class="server-branding">
-                    <img src="../assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft"
-                        class="server-icon">
+    </nav>
+
+    <!----------------------------- Mobile ---------------------------------->
+
+    <nav class="nav-mobile">
+        <div class="logo-mobile">ZERAS CRAFT</div>
+        <button class="burger-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars" id="icon-bars"></i>
+        </button>
+    </nav>
+
+    <aside class="sidebar-glass" id="sidebar">
+        <div class="sidebar-header">
+            <span class="menu-title">MENU</span>
+            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        </div>
+
+        <ul class="sidebar-links">
+            <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Jogos</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
                 </div>
-                <h1>Mundo Zera's Craft</h1>
-                <p class="hero-subtitle">Pack Completo de Edição para seus Vídeos!</p>
-                <div class="hero-social-links">
-                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank"
-                        rel="noopener noreferrer" class="btn-primary">
-                        <i class="fab fa-discord"></i> Pixel Legends
-                    </a>
-                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-discord"></i> Entrar no Discord
-                    </a>
-                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-youtube"></i> Canal YouTube
-                    </a>
+                <ul class="sidebar-sub">
+                    <li><a href="#">Bedrock Edition</a></li>
+                    <li><a href="#">Java Edition</a></li>
+                </ul>
+            </li>
+            <li><a href="arquivos">Arquivos</a></li>
+            <li><a href="comunidade">Comunidade</a></li>
+            <li><a href="eventos">Eventos</a></li>
+            <li><a href="pixel-legends">Pixel Legends</a></li>
+            <li><a href="canais">Canais</a></li>
+            <li><a href="suporte">Suporte</a></li>
+        </ul>
+
+        <div class="sidebar-actions">
+            <div class="server-ip-box" onclick="copyIP()">
+                <span class="ip-text">IP Pixel Legends</span>
+                <i class="far fa-copy"></i>
+            </div>
+
+            <a href="#" class="btn-green">LOJA VIP</a>
+            <a href="#" class="btn-jogar-agora">JOGAR AGORA <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </aside>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!--------------------------------------------------------------->
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif')">
+            </div>
+
+            <div class="container hero-content reveal">
+                <span class="hero-tag">Mundo Zera's Craft</span>
+                <span class="especial-tag">Especial 100k</span>
+                <h1>PackZera Oficial</h1>
+                <p>Meu Pack de Edição Complto! Aproveitem.</p>
+                <div class="hero-btns">
+                    <a href="https://discord.gg/GYGVBqGEwP" class="btn-big-green">DISCORD <i
+                            class="fas fa-chevron-right"></i></a>
+                    <a href="https://www.youtube.com/@MatheuZera88" class="btn-big-outline">CANAL OFICIAL</a>
                 </div>
             </div>
         </section>
 
-        <div class="secao-cards-preta">
-            <secao-titulo>
-                <h5>🔍 PACKZERA OFICIAL [4.0]!</h5>
-            </secao-titulo>
-            <p>Leia isto Antes de Baixar os Pacotes..
-            </p>
-
-            <div class="acordeao-container">
-
-                <button class="acordeao-btn">Por Favor, Leia!</button>
-                <div class="acordeao-painel">
-                    <br>
-                    <h4>SEJAM BEM VINDOS(AS)!</h4>
-                    <p>
-                        Este pack foi coletado de vários lugares diferentes do YouTube, tanto que eu até deixei os
-                        Créditos e Avisos de Copyright e entre outras coisas dentro das Pastas..
-                        <br>> Modifiquei e organizei basicamente
-                        tudo neste pack, como: Nome das Pastas, Organização (para deixar com mais clareza o que cada
-                        parte significa e etc..)
-                        <br>> Espero que gostem desse pack.
-                    </p>
-                    <hr>
-                    <br>
-
-
-                    <h4>Jornada</h4>
-                    Início da Jornada dos Conteúdos: (--/--/----)
-                    Meta de 100K de Inscritos: (--/--/----)
-                    <br>
-                    <br>
-                    <hr>
-                    <br>
-
-
-                    <h4>Redes Sociais</h4>
-                    <br>
-                    <i class="fab fa-youtube"></i> YOUTUBE (MatheuZera):
-                    <br># <a href="https://www.youtube.com/@MatheuZera88"
-                        target="_blank">https://www.youtube.com/@MatheuZera88</a>
-                    <br>
-                    <br> <i class="fab fa-discord"></i> DISCORD (Mundo Zera's Craft):
-                    <br># <a href="https://discord.gg/GYGVBqGEwP" target="_blank">https://discord.gg/GYGVBqGEwP</a>
-                    <br>
-                    <br>
-                </div>
-
-                <button class="acordeao-btn">Sobre o PackZera</button>
-                <div class="acordeao-painel">
-                    <br>
-                    <h4>SOBRE O PACKZERA!</h4>
-                    <br>1. Pack de MatheuZera e de outras Fontes da Internet/YouTube;
-                    <br>2. Tudo organizado por Listas, Pastas, Nomes, Arquivos e etc para melhor mapeamento de
-                    cada local..
-                    <br>3. Imagens (Elelentos, Memes, Texturas e etc..), Gifs, Vídeos (Efeitos e Entre Outros..), Memes
-                    (Vídeos, Imagens, Sons, e etc..),
-                    <br>4. Sons (Selecionados, Para Momentos Específicos e Entre Outras), Músicas (De Fundo, Animadas e
-                    Muito Mais),
-                    <br>5. Efeitos Sonoros, Edição Completa de Minecraft (Com Mais Pastas de Chroma Key, Sons, Imagens,
-                    Fontes e Muito Mais!), Plugins e Mods,
-                    <br>6. Pasta com Arquivos do PackZera Lite para melhorar a praticidade do seu Download com recursos
-                    de edição mais básicas, porém muito legais e completas!
-                    <br>7. Plugins, Mods, e Recursos para instalar em seu Software!
-                    <br>8. Inúmeros Templates para usar em sua Edição, economizando muito tempo para fazer algo que já
-                    está neste Pack;
-                    <br>9. E MUITA COISA QUE NEM CONSIGO DESCREVER NESSE TEXTO! APROVEITEM 😉.
-                    <br>
-                    <br>
-                    <hr>
-                    <br>
-
-                    <h4>VERSÕES DO PACKZERA:</h4>
-                    Pack 1.0 Finalizado em: (02/05/2024) - Criado a Base de Assets de Edição apenas;
-                    <br>Pack 2.0 Finalizado em: (03/03/2025) - Adicionado mais Assets e Pastas para melhor visualização;
-                    <br>Pack 3.0 Finalizado em: (09/08/2025) - Repaginado com mais pastas e recursos para otimizar o
-                    Pack;
-                    <br>Pack 4.0 Finalizado em: (08/10/2025) - Adicionado mais Recursos de Edição e Plugins, Pastas e
-                    Sistemas de Softwares, com alguns arquivos para melhorar a sua Edição da sua maneira!
-                    <br>
-                    <br>
-                    <hr>
-                    <br>
-                </div>
-
-                <button class="acordeao-btn">Armazenamento Geral do Pack</button>
-                <div class="acordeao-painel">
-                    <br>
-                    <h4>ARMAZENAMENTO GERAL:</h4>
-                    <p>
-                        # Todo o PackZera Completamente Compactado
-                        <br>> Tamanho Geral: // GB
-                        <br>> Arquivos: // no Total
-                        <br>> Pastas: //
-                    </p>
-                    <hr>
-                    <p>
-                        # Todo o PackZera Completamente Descompactado
-                        <br>> Tamanho Geral: 55.4 GB
-                        <br>> Arquivos: 49.436
-                        <br>> Pastas: 1.660
-                    </p>
-                </div>
-
-                <button class="acordeao-btn">Notas</button>
-                <div class="acordeao-painel">
-                    <br>
-                    <h5>NOTAS:</h5>
-                    Este Pack está protegido com senha!
-                    (A senha está no vídeo oficial onde publiquei o link deste pack).
-                    <br>
-                    <br>
-                    <h5>AVISO:</h5>
-                    Sabendo que este pack foi praticamente obtido de toda a internet, sei que os créditos não
-                    são meus, podendo ter algumas coisas com Direitos Autorais..
-                    <br>
-                    <br># Enfim, queria apenas pedir que após o descompactamento das pastas e dos arquivos, e se
-                    você
-                    quiser compartilhar com seus/suas amigos/amigas que colocassem o link do vídeo oficial do meu
-                    canal onde publiquei o PackZera pra ajuda o Canal!
-                    <p>
-                        Bem é só isso mesmo. APROVEITEM BASTANTE! :)
-                    </p>
-                </div>
-            </div>
+        <div class="section-header section-games">
+            <h2>MENUS & NOTAS</h2>
         </div>
 
-        <div class="secao-cards-verde">
-            <secao-titulo>
-                <h5>⚜️ PACKZERA DELUXE! [Básico]</h5>
-            </secao-titulo>
-            <p>Aqui está meus arquivos que uso em Minha Edição à bastante tempo.. Aqui listei <strong>4 Versões</strong> de Categorias do meu
-                Pack Básico, mas conhecido como <strong>PackZera Deluxe!</strong>
-            </p>
-
-            <div class="grid-container">
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="packzera/Craft.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-verde">MINECRAFT</div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PACKZERA CRAFT</h3>
-                        <p>Um pack de edição totalmente focado no Minecraft, com png, gifs, Áudios e Etc..Tem
-                            literalmente tudo do Jogo neste pack.</p>
-                        <br>
-                        <hr>
-                        <br>
-                        <div class="pricing-features">     
-                            </li>
-                            <li>
-                                🏕️ Chroma Keys / 💥 Efeitos Visuais VFX / 🪧 Fontes / 🖼️ Imagens / 🗿 Mod-Packs / 🎵 Músicas / 📂 Premiere Presets & Mogrts / 🎶 Sons & Áudios / 🎞️ Transições / 🗺️ Websites.
-                            </li>
-                            <br>
-                            <hr>
-                            <br>
-                            <li>
-                                <h3>📩 Compactado - // GB</h3>
-                            </li>
-                            <li>
-                                <h4>🗂️ Descompactado - 3.02 GB</h4>
-                            </li>
-                            <li>
-                                📄 Arquivos: 6.208
-                            </li>
-                            <li>
-                                📂 Pastas: 144
-                            </li>
-                            <li>
-                                <div class="preco-container">Total 3.03 GB</div>
-                            </li>
+        <section>
+            <div class="container">
+                <div class="accordion-list reveal">
+                    <div class="acc-item">
+                        <div class="acc-trigger" onclick="this.parentElement.classList.toggle('active')">
+                            <img src="icone.png" class="mini-icon">
+                            <span>CONTEÚDOS NO PACK</span>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
 
-                        <a href="#" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <div class="acc-content">
+                            <div class="acc-inner">
+                                <p>1. Pack de MatheuZera e de outras Fontes da Internet/YouTube;
+                                    <br>2. Tudo organizado por Listas, Pastas, Nomes, Arquivos e etc para melhor
+                                    mapeamento
+                                    de cada local..
+                                    <br>3. Imagens (Elelentos, Memes, Texturas e etc..), Gifs, Vídeos (Efeitos e Entre
+                                    Outros..), Memes (Vídeos, Imagens, Sons, e etc..),
+                                    <br>4. Sons (Selecionados, Para Momentos Específicos e Entre Outras), Músicas (De
+                                    Fundo,
+                                    Animadas e Muito Mais),
+                                    <br>5. Efeitos Sonoros, Edição Completa de Minecraft (Com Mais Pastas de Chroma Key,
+                                    Sons, Imagens, Fontes e Muito Mais!), Plugins e Mods,
+                                    <br>6. Pasta com Arquivos do PackZera Lite para melhorar a praticidade do seu
+                                    Download
+                                    com recursos de edição mais básicas, porém muito legais e completas!
+                                    <br>7. Plugins, Mods, e Recursos para instalar em seu Software!
+                                    <br>8. Inúmeros Templates para usar em sua Edição, economizando muito tempo para
+                                    fazer
+                                    algo que já está neste Pack;
+                                    <br>9. E MUITA COISA QUE NEM CONSIGO DESCREVER NESSE TEXTO! APROVEITEM 😉.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="packzera/Essenciais.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-amarela">BÁSICO</div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PACKZERA ESSENCIAIS </h3>
-                        <p>Neste pack de edição não tem muitas coisas, somente algumas pastas de coisas específicas,
-                            como Efeitos de Edição, Finais, Transições e Etc, tudo neste pack de edição.</p>
-                        <br>
-                        <hr>
-                        <br>
-                        <div class="pricing-features">
-                            <li>
-                                ☁️ Efeitos de Edição / 🌠 Overlays / ⭐ Transições
-                            </li>
-                            <br>
-                            <hr>
-                            <br>
-                            <li>
-                                <h3>📩 Compactado - // GB</h3>
-                            </li>
-                            <li>
-                                <h4>🗂️ Descompactado - 5.21 GB</h4>
-                            </li>
-                            <li>
-                                📄 Arquivos: 2.868
-                            </li>
-                            <li>
-                                📂 Pastas: 77
-                            </li>
-                            <li>
-                                <div class="preco-container">Total 5.21 GB</div>
-                            </li>
+                    <br>
+
+                    <div class="acc-item">
+                        <div class="acc-trigger" onclick="this.parentElement.classList.toggle('active')">
+                            <img src="icone.png" class="mini-icon">
+                            <span>ARMAZENAMENTO GERAL</span>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
 
-                        <a href="#" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <div class="acc-content">
+                            <div class="acc-inner">
+                                <p># Todo o PackZera Completamente Compactado
+                                    <br>> Tamanho Geral: // GB
+                                    <br>> Arquivos: // no Total
+                                    <br>> Pastas: //
+                                    <br>
+                                    <br>
+                                    <hr>
+                                    <br># Todo o PackZera Completamente Descompactado
+                                    <br>> Tamanho Geral: 55.4 GB
+                                    <br>> Arquivos: 49.436
+                                    <br>> Pastas: 1.660
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="packzera/Legacy.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-amarela">AVANÇADO</div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PACKZERA LEGACY</h3>
-                        <p>Neste pack de edição não tem muitas coisas, somente algumas pastas de coisas específicas,
-                            como Backgorund, Elementos e Efeitos de Vídeo, Overlays e Etc, tudo neste pack de edição.
-                        </p>
-                        <br>
-                        <hr>
-                        <br>
-                        <div class="pricing-features">
-                            <li>
-                                🗺️ Backgrounds / 📂 Elementos / 📽️ Vídeos & Efeitos
-                            </li>
-                            <br>
-                            <hr>
-                            <br>
-                            <li>
-                                <h3>📩 Compactado - // GB</h3>
-                            </li>
-                            <li>
-                                <h4>🗂️ Descompactado - 6.91 GB</h4>
-                            </li>
-                            <li>
-                                📄 Arquivos: 2.199
-                            </li>
-                            <li>
-                                📂 Pastas: 78
-                            </li>
-                            <li>
-                                <div class="preco-container">Total 6.91 GB</div>
-                            </li>
+                    <br>
+
+                    <div class="acc-item">
+                        <div class="acc-trigger" onclick="this.parentElement.classList.toggle('active')">
+                            <img src="icone.png" class="mini-icon">
+                            <span>LEIA, IMPORTANTE</span>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
 
-                        <a href="#" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
+                        <div class="acc-content">
+                            <div class="acc-inner">
+                                <p>Este Pack está protegido com senha! (A senha está no vídeo oficial onde publiquei o
+                                    link deste pack).
 
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="packzera/Templates.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-verde">PACK</div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PACKZERA TEMPLATES</h3>
-                        <p>Com as mesmas coisas de PackZera Essenciais e Legacy, este é somente de Templates que podem
-                            ser usados no meio de suas edições, ajudando a você com Assets Interessantes.</p>
-                        <br>
-                        <hr>
-                        <br>
-                        <div class="pricing-features">
-                            <li>
-                                🖼️ Footage / 📽️ Pack de Vídeos / ✨ PACK GERAL 1.0 / 🌟 PACK GERAL 2.0 / ✅ Vídeos sem Copyright
-                            </li>
-                            <br>
-                            <hr>
-                            <br>
-                            <li>
-                                <h3>📩 Compactado - // GB</h3>
-                            </li>
-                            <li>
-                                <h4>🗂️ Descompactado - 5.33 GB</h4>
-                            </li>
-                            <li>
-                                📄 Arquivos: 611
-                            </li>
-                            <li>
-                                📂 Pastas: 46
-                            </li>
-                            <li>
-                                <div class="preco-container">Total 5.33 GB</div>
-                            </li>
+                                    <br>
+                                    <br>
+                                <h5>AVISO:</h5>
+                                Sabendo que este pack foi praticamente obtido de toda a internet, sei que os
+                                créditos não são meus, podendo ter algumas coisas com Direitos Autorais..
+
+                                <br>
+                                <br>
+
+                                <h5>Enfim..</h5>
+                                Queria apenas pedir que após o descompactamento das pastas e dos arquivos,
+                                e se você quiser compartilhar com seus/suas amigos/amigas que colocassem o link do
+                                vídeo oficial do meu canal onde publiquei o PackZera pra ajuda o Canal!
+
+                                <br>
+
+                                <br>Bem é só isso mesmo. APROVEITEM BASTANTE! :)
+                                </p>
+                            </div>
                         </div>
-
-                        <a href="#" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="secao-cards-preta">
-            <secao-titulo>
-                <h5>☁️ PACKZERA STORM! [Avançado]</h5>
-            </secao-titulo>
-            <p>Aqui está meus arquivos que uso em Minha Edição à bastante tempo.. Aqui listei <strong>4 Versões</strong> de Categorias do meu
-                Pack Avançado, mas conhecido como <strong>PackZera Storm!</strong>
-            </p>
+        <br>
+        <hr>
+        <br>
+        <br>
 
-            <div class="grid-container">
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="packzera/GFX.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-verde">EDIÇÃO GFX</div>
+        <secao-titulo>⚜️ PACKZERA DELUXE! [Básico]</secao-titulo>
+        <secao-subtitulo>Aqui está meus arquivos que uso em Minha Edição à bastante tempo.. Aqui listei 4 Versões de
+            Categorias do meu Pack Básico, mas conhecido como PackZera Deluxe!</secao-subtitulo>
+
+        <section class="section-software">
+            <div class="software-grid">
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="../assets/images/geral/banner-fundo.gif" class="header-banner">
+
+                        <div class="card-icon">
+                            <img src="img.png">
+                        </div>
+                        <div class="tag-adobe">Ferramenta</div>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PACKZERA GFX</h3>
-                        <p>Pack Completo de Imagens para Thumbnail ou na sua Própria Edição! Aproveite Bastante.</p>
+
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PACKZERA CRAFT</h3>
+                            <p>Um pack de edição totalmente focado no Minecraft, com png, gifs, Áudios e Etc..Tem
+                                literalmente tudo do Jogo neste pack.</p>
+                        </div>
+                        <hr>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <span>📩 Compactado</span>
+                                <strong class="count-me" data-target="0" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>🗂️ Descompactado</span>
+                                <strong class="count-me" data-target="3.02" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📄 Arquivos</span>
+                                <strong class="count-me" data-target="6208" data-unit="">0</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📂 Pastas</span>
+                                <strong class="count-me" data-target="144" data-unit="">0</strong>
+                            </div>
+                        </div>
+                        <div class="preco-container">
+                            <span>Tamanho Total</span>
+                            <strong class="count-me" data-target="3.03" data-unit="GB">0.00 GB</strong>
+                        </div>
                         <br>
                         <hr>
-                        <br>
-                        <div class="pricing-features">
-                            <li>
-                                🔥 É tanta coisa, que não consigo Descrever Aqui!
-                            </li>
-                            <br>
-                            <hr>
-                            <br>
-                            <li>
-                                <h3>📩 Compactado - // GB</h3>
-                            </li>
-                            <li>
-                                <h4>🗂️ Descompactado - 12.2 GB</h4>
-                            </li>
-                            <li>
-                                📄 Arquivos: 17.869
-                            </li>
-                            <li>
-                                📂 Pastas: 250
-                            </li>
-                            <li>
-                                <div class="preco-container">Total 12.2 GB</div>
-                            </li>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fas fa-arrow-down"></i> Download
+                            </a>
                         </div>
-
-                        <a href="#" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
                     </div>
                 </div>
 
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="packzera/Lite.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-azul">LEVE</div>
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="../assets/images/geral/banner-fundo.gif" class="header-banner">
+
+                        <div class="card-icon">
+                            <img src="img.png">
+                        </div>
+                        <div class="tag-adobe">Ferramenta</div>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PACKZERA LITE</h3>
-                        <p>Caso estiver com pressa, ou uma internet limitadíssima, este pack pode te ajudar pois aqui
-                            temos um resumo do PackZera Pró, somente com um porém, aqui não tem nada de assets de edição
-                            existente no PackZera Craft..</p>
+
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PACKZERA ESSENCIAIS</h3>
+                            <p>Neste pack de edição não tem muitas coisas, somente algumas pastas de coisas específicas,
+                                como Efeitos de Edição, Finais, Transições e Etc, tudo neste pack de edição.</p>
+                        </div>
+                        <hr>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <span>📩 Compactado</span>
+                                <strong class="count-me" data-target="0" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>🗂️ Descompactado</span>
+                                <strong class="count-me" data-target="5.01" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📄 Arquivos</span>
+                                <strong class="count-me" data-target="2868" data-unit="">0</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📂 Pastas</span>
+                                <strong class="count-me" data-target="77" data-unit="">0</strong>
+                            </div>
+                        </div>
+                        <div class="preco-container">
+                            <span>Tamanho Total</span>
+                            <strong class="count-me" data-target="5.21" data-unit="GB">0.00 GB</strong>
+                        </div>
                         <br>
                         <hr>
-                        <br>
-                        <div class="pricing-features">
-                            <li>
-                                🏕️ Chrome Keys / 🎶 Efeitos Sonoros SFX / 🖼️ Imagens / 🤣 Memes / ✨ Meme Chroma Keys / 🎵 Músicas de Fundo
-                            </li>
-                            <br>
-                            <hr>
-                            <br>
-                            <li>
-                                <h3>📩 Compactado - // GB</h3>
-                            </li>
-                            <li>
-                                <h4>🗂️ Descompactado - 7.25 GB</h4>
-                            </li>
-                            <li>
-                                📄 Arquivos: 6.114
-                            </li>
-                            <li>
-                                📂 Pastas: 161
-                            </li>
-                            <li>
-                                <div class="preco-container">Total 7.26 GB</div>
-                            </li>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fas fa-arrow-down"></i> Download
+                            </a>
                         </div>
-
-                        <a href="#" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="packzera/Plus.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-branca">RECURSOS</div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PACKZERA PLUS</h3>
-                        <p>Aqui voçe encontra vários Assets, Mods, Plugins, e diversas coisas para importar ou instalar
-                            em Softwares como Premiere, Davinci, Capcut, Sony Vegas e etc..</p>
-                        <br>
-                        <hr>
-                        <br>
-                        <div class="pricing-features">
-                            <li>
-                                🌟 #Edição Geral / 🔎 After Effects / 🏕️ CapCut / 🎬 Davinci Resolve / 🖼️ Photoshop / 🎞️ Premiere Pró / 📹 Sony Vegas
-                            </li>
-                            <br>
-                            <hr>
-                            <br>
-                            <li>
-                                <h3>📩 Compactado - // GB</h3>
-                            </li>
-                            <li>
-                                <h4>🗂️ Descompactado - 6.92 GB</h4>
-                            </li>
-                            <li>
-                                📄 Arquivos: 1.651
-                            </li>
-                            <li>
-                                📂 Pastas: 193
-                            </li>
-                            <li>
-                                <div class="preco-container">Total 6.93 GB</div>
-                            </li>
-                        </div>
-
-                        <a href="#" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
                     </div>
                 </div>
 
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="packzera/Pró.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-vermelha">POPULAR</div>
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="../assets/images/geral/banner-fundo.gif" class="header-banner">
+
+                        <div class="card-icon">
+                            <img src="img.png">
+                        </div>
+                        <div class="tag-adobe">Ferramenta</div>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PACKZERA PRÓ</h3>
-                        <p>Aqui é o Ultimate da Edição, todas as pastas principais e recursos essenciais para a sua
-                            edição estarão disponíveis aqui! TUDO MESMO. Esta é a pasta principal do Pack Inteiro!</p>
+
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PACKZERA LEGACY</h3>
+                            <p>Neste pack de edição não tem muitas coisas, somente algumas pastas de coisas específicas,
+                                como Backgorund, Elementos e Efeitos de Vídeo, Overlays e Etc, tudo neste pack de
+                                edição.</p>
+                        </div>
+                        <hr>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <span>📩 Compactado</span>
+                                <strong class="count-me" data-target="0" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>🗂️ Descompactado</span>
+                                <strong class="count-me" data-target="6.91" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📄 Arquivos</span>
+                                <strong class="count-me" data-target="2199" data-unit="">0</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📂 Pastas</span>
+                                <strong class="count-me" data-target="78" data-unit="">0</strong>
+                            </div>
+                        </div>
+                        <div class="preco-container">
+                            <span>Tamanho Total</span>
+                            <strong class="count-me" data-target="6.91" data-unit="GB">0.00 GB</strong>
+                        </div>
                         <br>
                         <hr>
-                        <br>
-                        <div class="pricing-features">
-                            <li>
-                                🗺️ Background Motion / 🏕️ Chroma Key / 🎞️ Finais / 🪧 Fontes / ✨ Gifs / 🤣 Memes / 🎵 Sons & Áudios
-                            </li>
-                            <br>
-                            <hr>
-                            <br>
-                            <li>
-                                <h3>📩 Compactado - // GB</h3>
-                            </li>
-                            <li>
-                                <h4>🗂️ Descompactado - 8.45 GB</h4>
-                            </li>
-                            <li>
-                                📄 Arquivos: 11.359
-                            </li>
-                            <li>
-                                📂 Pastas: 701
-                            </li>
-                            <li>
-                                <div class="preco-container">Total 8.47 GB</div>
-                            </li>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fas fa-arrow-down"></i> Download
+                            </a>
                         </div>
+                    </div>
+                </div>
 
-                        <a href="#" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="../assets/images/geral/banner-fundo.gif" class="header-banner">
+
+                        <div class="card-icon">
+                            <img src="img.png">
+                        </div>
+                        <div class="tag-adobe">Ferramenta</div>
+                    </div>
+
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PACKZERA TEMPLATES</h3>
+                            <p>Com as mesmas coisas de PackZera Essenciais e Legacy, este é somente de Templates que
+                                podem
+                                ser usados no meio de suas edições, ajudando a você com Assets Interessantes.</p>
+                        </div>
+                        <hr>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <span>📩 Compactado</span>
+                                <strong class="count-me" data-target="0" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>🗂️ Descompactado</span>
+                                <strong class="count-me" data-target="5.33" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📄 Arquivos</span>
+                                <strong class="count-me" data-target="611" data-unit="">0</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📂 Pastas</span>
+                                <strong class="count-me" data-target="46" data-unit="">0</strong>
+                            </div>
+                        </div>
+                        <div class="preco-container">
+                            <span>Tamanho Total</span>
+                            <strong class="count-me" data-target="5.33" data-unit="GB">0.00 GB</strong>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fas fa-arrow-down"></i> Download
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <br>
+        <hr>
+        <br>
+        <br>
+
+        <secao-titulo>☁️ PACKZERA STORM! [Avançado]</secao-titulo>
+        <secao-subtitulo>Aqui está meus arquivos que uso em Minha Edição à bastante tempo.. Aqui listei 4 Versões de
+            Categorias do meu Pack Avançado, mas conhecido como PackZera Storm!</secao-subtitulo>
+
+        <section class="section-software">
+            <div class="software-grid">
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="../assets/images/geral/banner-fundo.gif" class="header-banner">
+
+                        <div class="card-icon">
+                            <img src="img.png">
+                        </div>
+                        <div class="tag-adobe">Ferramenta</div>
+                    </div>
+
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PACKZERA GFX</h3>
+                            <p>Pack Completo de Imagens para Thumbnail ou na sua Própria Edição! Aproveite Bastante.</p>
+                        </div>
+                        <hr>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <span>📩 Compactado</span>
+                                <strong class="count-me" data-target="0" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>🗂️ Descompactado</span>
+                                <strong class="count-me" data-target="12.2" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📄 Arquivos</span>
+                                <strong class="count-me" data-target="17869" data-unit="">0</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📂 Pastas</span>
+                                <strong class="count-me" data-target="250" data-unit="">0</strong>
+                            </div>
+                        </div>
+                        <div class="preco-container">
+                            <span>Tamanho Total</span>
+                            <strong class="count-me" data-target="12.2" data-unit="GB">0.00 GB</strong>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fas fa-arrow-down"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="../assets/images/geral/banner-fundo.gif" class="header-banner">
+
+                        <div class="card-icon">
+                            <img src="img.png">
+                        </div>
+                        <div class="tag-adobe">Ferramenta</div>
+                    </div>
+
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PACKZERA LITE</h3>
+                            <p>Caso estiver com pressa, ou uma internet limitadíssima, este pack pode te ajudar pois
+                                aqui
+                                temos um resumo do PackZera Pró, somente com um porém, aqui não tem nada de assets de
+                                edição
+                                existente no PackZera Craft...</p>
+                        </div>
+                        <hr>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <span>📩 Compactado</span>
+                                <strong class="count-me" data-target="0" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>🗂️ Descompactado</span>
+                                <strong class="count-me" data-target="7.25" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📄 Arquivos</span>
+                                <strong class="count-me" data-target="6.114" data-unit="">0</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📂 Pastas</span>
+                                <strong class="count-me" data-target="161" data-unit="">0</strong>
+                            </div>
+                        </div>
+                        <div class="preco-container">
+                            <span>Tamanho Total</span>
+                            <strong class="count-me" data-target="7.26" data-unit="GB">0.00 GB</strong>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fas fa-arrow-down"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="../assets/images/geral/banner-fundo.gif" class="header-banner">
+
+                        <div class="card-icon">
+                            <img src="img.png">
+                        </div>
+                        <div class="tag-adobe">Ferramenta</div>
+                    </div>
+
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PACKZERA PLUS</h3>
+                            <p>Text.</p>
+                        </div>
+                        <hr>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <span>📩 Compactado</span>
+                                <strong class="count-me" data-target="0" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>🗂️ Descompactado</span>
+                                <strong class="count-me" data-target="6.92" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📄 Arquivos</span>
+                                <strong class="count-me" data-target="1651" data-unit="">0</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📂 Pastas</span>
+                                <strong class="count-me" data-target="193" data-unit="">0</strong>
+                            </div>
+                        </div>
+                        <div class="preco-container">
+                            <span>Tamanho Total</span>
+                            <strong class="count-me" data-target="6.93" data-unit="GB">0.00 GB</strong>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fas fa-arrow-down"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="../assets/images/geral/banner-fundo.gif" class="header-banner">
+
+                        <div class="card-icon">
+                            <img src="img.png">
+                        </div>
+                        <div class="tag-adobe">Ferramenta</div>
+                    </div>
+
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PACKZERA PRÓ</h3>
+                            <p>Aqui é o Ultimate da Edição, todas as pastas principais e recursos essenciais para a sua
+                                edição estarão disponíveis aqui! TUDO MESMO. Esta é a pasta principal do Pack Inteiro!
+                            </p>
+                        </div>
+                        <hr>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <span>📩 Compactado</span>
+                                <strong class="count-me" data-target="0" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>🗂️ Descompactado</span>
+                                <strong class="count-me" data-target="8.45" data-unit="GB">0.00 GB</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📄 Arquivos</span>
+                                <strong class="count-me" data-target="11359" data-unit="">0</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>📂 Pastas</span>
+                                <strong class="count-me" data-target="701" data-unit="">0</strong>
+                            </div>
+                        </div>
+                        <div class="preco-container">
+                            <span>Tamanho Total</span>
+                            <strong class="count-me" data-target="8.47" data-unit="GB">0.00 GB</strong>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fas fa-arrow-down"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container stats-flex reveal">
+                <div class="stat-item">
+                    <strong class="counter" id="stat-total" data-target="0">0</strong>
+                    <span>MEMBROS TOTAIS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong class="counter" id="stat-online" data-target="0">0</strong>
+                    <span>MEMBROS ONLINE</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong>02/07/2025</strong>
+                    <span>CRIADO EM</span>
+                </div>
+            </div>
+        </section>
     </main>
-    <!-------------------------------------------------------------------------------------------------------------->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa
-                        comunidade vibrante.</p>
-                    <div class="footer-social-links">
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                            aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column footer-nav-links">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="../index" class="nav-link" data-page="home">Início</a></li>
-                        <li><a href="../arquivos" class="nav-link" data-page="home">Arquivos</a></li>
-                        <li><a href="../comunidade" class="nav-link" data-page="home">Comunidade</a></li>
-                        <li><a href="../eventos" class="nav-link" data-page="home">Eventos</a></li>
-                        <li><a href="../pixel-legends" class="nav-link" data-page="home">Pixel Legends</a></li>
-                        <li><a href="../equipe" class="nav-link" data-page="home">Equipe</a></li>
-                        <li><a href="../canal" class="nav-link" data-page="home">Canal Oficial</a></li>
-                        <li><a href="../recursos" class="nav-link" data-page="home">Recursos</a></li>
-                        <li><a href="../@!&@@!especial-100k">100k de Inscritos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-contact">
-                    <h4>Contato & Suporte</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a>
-                    </p>
-                    <p><i class="fas fa-headset"></i> <a
-                            href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via
-                            Discord</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
-                </div>
-                <div class="footer-column footer-newsletter">
-                    <h4>Fique por Dentro</h4>
-                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
-                    <form class="newsletter-form">
-                        <div class="text-center margin-top-20">
-                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501"
-                                class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
-                        </div>
-                    </form>
-                </div>
+
+    <!--------------------------------------------------------------->
+
+    <div class="music-player-container reveal">
+        <div class="player-controls">
+            <div class="now-playing">
+                <i class="fas fa-music"></i>
+                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
             </div>
-            <div class="footer-bottom">
-                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+
+            <div class="progress-area">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <span id="durationDisplay">0:00</span>
+            </div>
+
+            <div class="main-controls">
+                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
+                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
+                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
+                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+
+                <div class="volume-container">
+                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
             </div>
         </div>
-        <!-- 
+    </div>
+
+    <audio id="backgroundAudio"></audio>
+
+    <div id="centralMessage" class="central-message">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message-content">
+            <strong>Título</strong>
+            <span>Informação</span>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------->
+
+    <footer class="main-footer">
+        <div class="footer-divider"></div>
+
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">ZERAS<span>CRAFT</span></div>
+                <p class="brand-description">
+                    Esta é o nosso lugar para conversar, mostrar e interagir com nossos Inscritos/Membros de Minecraft,
+                    nossos Crafters sempre buscando novas maneiras de Jogar com a Rapaziada.
+                </p>
+                <div class="newsletter-footer">
+                    <button class="btn-sidebar"
+                        onclick="showClickNotification('Olá Crafter!', 'Acesse nosso Canal! <br> E Nossos Links.')">
+                        <i class="fas fa-bolt"></i> CLIQUE AQUI
+                    </button>
+                    <h5 class="newsletter-footer">FIQUE POR DENTRO</h5>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>EXPLORAR</h4>
+                <ul class="footer-links">
+                    <li><a href="https://www.youtube.com/@MatheuZera88"><i class="fas fa-chevron-right"></i> Canal
+                            Oficial YT</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125436805185656"><i
+                                class="fas fa-chevron-right"></i> Nosso Marketplace Craft</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125442731868180"><i
+                                class="fas fa-chevron-right"></i> Sobre nossas Wikipédias</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125448662614027"><i
+                                class="fas fa-chevron-right"></i> Solicite Parcerias!</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394709165640781975"><i
+                                class="fas fa-chevron-right"></i> Crie sua Página Web!</a></li>
+                    <li><a href="https://www.minecraft.net/"><i class="fas fa-chevron-right"></i> Minecraft.net</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>INFORMATIVOS</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.com/channels/1390120239588577482/1404385093493198909"><i
+                                class="fas fa-chevron-right"></i> Criar uma Guilda</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1398008350796546068"><i
+                                class="fas fa-chevron-right"></i> Pixel Legends</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Nossos Eventos</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125374695931994"><i
+                                class="fas fa-chevron-right"></i> Feedbacks</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Seja um(a) Staff</a></li>
+                    <li><a href="https://discord.gg/GYGVBqGEwP" class="status-indicator"><span class="dot"></span>
+                            EXPLORAR MAIS</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>COMUNIDADE</h4>
+                <p class="join-text">
+                    Junte-se a <span id="discord-count"></span> no nosso Discord Oficial.
+                </p>
+                <div class="social-grid">
+                    <a href="https://discord.gg/GYGVBqGEwP" class="social-box discord"><i
+                            class="fab fa-discord"></i></a>
+                    <a href="https://www.youtube.com/@MatheuZera88" class="social-box youtube"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
+                    <a href="#" class="social-box other"><i class="fab fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <div class="legal">
+                    <p class="copyright-text"
+                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                        &copy;
+                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        Zeras Craft. Todos os direitos reservados.
+                    </p>
+
+                    <span class="mojang-disclaimer"
+                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                        Não afiliado à Mojang Studios ou Microsoft.
+                    </span>
+                </div>
+                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+            </div>
+            <!-- 
             SISTEMA DE MÚSICA DE FUNDO (NOVO)
             Substitui o player de música anterior para garantir apenas a reprodução em looping, sem interface.
         -->
-        <div class="music-player-invisible-container">
-            <!-- 
-                Tag <audio> com 'loop' para tocar em repetição.
-                *** IMPORTANTE: Ajuste o caminho 'src' para o seu arquivo de música real! ***
-            -->
-            <audio id="backgroundAudio" src="musica/packzera.mp3" preload="auto" loop></audio>
-        </div>
+            <div class="music-player-invisible-container">
+                <audio id="backgroundAudio" preload="auto"></audio>
+            </div>
     </footer>
 
-    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
     <script src="script.js"></script>
-    <script src="elementos.js"></script>
+    <script src="../script.js"></script>
 
-    <!-- =================================================================== -->
+    <!-- =================================== -->
     <!-- CÓDIGO DO SISTEMA DE MÚSICA ÚNICA E INVISÍVEL (FINAL DO HTML) -->
-    <!-- Este é o script simples que garante que a música comece a tocar após a interação do usuário. -->
-    <!-- Ele foi movido para depois dos scripts externos para evitar conflitos de carregamento. -->
-    <!-- =================================================================== -->
+    <!-- =================================== -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log("Sistema de Áudio de Fundo Invisível carregado.");
+        /**
+        * ZERA'S CRAFT - MOTOR DE ÁUDIO CÍCLICO
+        * Garante que a playlist retorne ao início (Música 1) após a última faixa.
+        */
+        const ZerasAudio = {
+            audioId: 'backgroundAudio',
+            // LISTA DE MÚSICAS: Adicione aqui todos os arquivos da sua pasta /musics
+            playlist: ['calm1.mp3', 'calm2.mp3'],
+            currentIndex: 0,
+            started: false,
 
-            const backgroundAudio = document.getElementById('backgroundAudio');
-            let audioStarted = false;
+            init() {
+                const audio = document.getElementById(this.audioId);
+                if (!audio) return console.error("Erro: Elemento de áudio não encontrado.");
 
-            // Verifica se a tag <audio> existe
-            if (!backgroundAudio) {
-                console.error("ERRO: A tag de áudio com ID 'backgroundAudio' não foi encontrada.");
-                return;
-            }
+                // Configuração de Volume (Industrial Logic)
+                const savedVolume = localStorage.getItem('audioBackgroundVolume');
+                audio.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.3;
 
-            // Define o volume inicial da música (50% é um bom padrão para fundo)
-            const storedVolume = localStorage.getItem('audioBackgroundVolume');
-            backgroundAudio.volume = storedVolume !== null ? parseFloat(storedVolume) : 0.5;
+                // EVENTO CHAVE: Detecta o fim da música para disparar a próxima ou resetar
+                audio.addEventListener('ended', () => {
+                    console.log("Faixa encerrada. Reiniciando ciclo ou próxima música...");
+                    this.nextTrack(audio);
+                });
 
-            // Função que tenta iniciar a reprodução do áudio
-            const startAudio = () => {
-                if (audioStarted) return;
+                // Listeners para iniciar após o toque do usuário (Regra de Autoplay)
+                const startTrigger = () => this.startPlaylist(audio);
+                window.addEventListener('click', startTrigger, { once: true });
+                window.addEventListener('touchstart', startTrigger, { once: true });
+            },
 
-                // Tenta iniciar a reprodução (necessita de interação do usuário - Autoplay Policy)
-                backgroundAudio.play()
+            startPlaylist(audio) {
+                if (this.started) return;
+                this.playCurrentTrack(audio);
+            },
+
+            playCurrentTrack(audio) {
+                // Define o arquivo baseado no índice atual
+                audio.src = `pages/musics/${this.playlist[this.currentIndex]}`;
+                audio.src = `musics/${this.playlist[this.currentIndex]}`;
+
+                audio.play()
                     .then(() => {
-                        console.log("Música de fundo iniciada com sucesso. (Autoplay bem-sucedido)");
-                        audioStarted = true;
-                        // Remove os listeners de eventos após o início bem-sucedido
-                        document.body.removeEventListener('click', startAudio);
-                        document.body.removeEventListener('touchstart', startAudio);
+                        this.started = true;
+                        console.log(`Zera's Craft: Reproduzindo ${this.playlist[this.currentIndex]}`);
                     })
-                    .catch(error => {
-                        // Se houver erro (bloqueio do navegador), o listener continua ativo
-                        console.log("Aguardando interação do usuário para iniciar o áudio...");
-                        // Se o caminho da música estiver errado, este erro também será capturado.
-                        console.error("Erro ao tentar tocar o áudio:", error.message);
+                    .catch(err => {
+                        console.warn("Aguardando interação para áudio...");
+                        this.started = false;
                     });
-            };
+            },
 
-            // Adiciona listeners para os eventos de interação do usuário mais comuns
-            // A música será iniciada no primeiro evento que ocorrer (clique ou toque).
-            document.body.addEventListener('click', startAudio);
-            document.body.addEventListener('touchstart', startAudio);
-        });
+            nextTrack(audio) {
+                // LÓGICA DE LOOP INFINITO: 
+                // (Índice Atual + 1) dividido pelo Total de Músicas. O resto é o novo índice.
+                // Exemplo com 2 músicas: (1 + 1) % 2 = 0 (Volta para a música 1)
+                this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
+
+                this.playCurrentTrack(audio);
+            }
+        };
+
+        // Inicialização segura sem re-renderização agressiva
+        document.addEventListener('DOMContentLoaded', () => ZerasAudio.init());
     </script>
 </body>
 
