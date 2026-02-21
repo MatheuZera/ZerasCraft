@@ -1740,8 +1740,7 @@
 
 /* Seção e Grid Centralizado */
 .mc-container {
-    background-color: #0d0e12;
-    padding: 80px 20px;
+    padding-bottom: 20px;
     display: flex;
     justify-content: center;
     font-family: 'Inter', sans-serif;
@@ -1759,9 +1758,9 @@
 
 /* O Card Moderno */
 .mc-modern-card {
-    background-color: #16181d;
+    background-color: var(--mc-card);
     border: 1px solid #2a2d35;
-    border-radius: 16px;
+    border-radius: 5px;
     padding: 24px;
     width: 280px;
     display: flex;
@@ -1893,5 +1892,290 @@
 @media (max-width: 600px) {
     .mc-modern-card {
         width: 100%;
+    }
+}
+
+
+
+.zeras-hub {
+    display: flex;
+    background: #111;
+    border: 1px solid #333;
+    max-width: 1200px;
+    margin: 20px auto;
+    user-select: none;
+    /* Remove o cursor de digitação | */
+}
+
+/* --- LAYOUT PC --- */
+.hub-sidebar {
+    width: 300px;
+    background: #000;
+    border-right: 1px solid #333;
+}
+
+.tab-link {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #222;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.tab-link.active {
+    background: #1a1a1a;
+    color: #fff;
+    border-left: 4px solid #347C2F;
+}
+
+.hub-main {
+    flex: 1;
+    background: #000;
+    position: relative;
+}
+
+.hub-content {
+    display: none;
+    height: 100%;
+    flex-direction: column;
+}
+
+.hub-content.active {
+    display: flex;
+}
+
+.hub-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.hub-info {
+    padding: 20px;
+    color: #ccc;
+}
+
+.btn-saiba-mais {
+    display: inline-block;
+    margin-top: 15px;
+    background: #347C2F;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* --- MOBILE: TRANSFORMAÇÃO EM ACORDEÃO --- */
+.accordion-header {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .zeras-hub {
+        flex-direction: column;
+        border: none;
+    }
+
+    .hub-sidebar {
+        display: none;
+    }
+
+    .hub-content {
+        display: block;
+        border-bottom: 1px solid #222;
+    }
+
+    .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 20px;
+        background: #111;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .hub-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        background: #000;
+    }
+
+    /* Quando ativo no mobile, expande o corpo */
+    .hub-content.active .hub-body {
+        max-height: 1000px;
+    }
+
+    .hub-content.active .accordion-header {
+        border-left: 4px solid #347C2F;
+    }
+}
+
+
+
+/* =========================================
+   GRID E CARD (Base Centralizada)
+   ========================================= */
+.software-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    align-items: stretch;
+    padding: 30px;
+}
+
+.software-card {
+    background: #1a1a1f;
+    border: 1px solid #2a2a35;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+    width: calc(20% - 24px);
+    flex: 0 0 calc(20% - 24px);
+}
+
+.software-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: #4CAF50;
+}
+
+/* --- Conteúdo Interno --- */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 25px 0 25px;
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: #22222a;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.tag-adobe {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: rgb(58, 71, 255);
+    text-transform: uppercase;
+}
+
+.card-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-text {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.card-text h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+}
+
+.card-text p {
+    color: #a0a0ab;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* =========================================
+   RODAPÉ (Novos Links de Download)
+   ========================================= */
+.card-footer {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #2a2a35;
+    display: flex;
+    flex-direction: column;
+    /* Links um abaixo do outro */
+    gap: 12px;
+}
+
+.dl-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.dl-link i {
+    font-size: 1.1rem;
+    width: 20px;
+    /* Alinha os ícones verticalmente */
+    text-align: center;
+}
+
+.dl-link:hover {
+    color: #4CAF50;
+    /* Verde ao passar o mouse */
+}
+
+/* --- Responsividade --- */
+@media (max-width: 1200px) {
+    .software-card {
+        width: calc(25% - 23px);
+        flex: 0 0 calc(25% - 23px);
+    }
+}
+
+@media (max-width: 900px) {
+    .software-card {
+        width: calc(33.3% - 20px);
+        flex: 0 0 calc(33.3% - 20px);
+    }
+}
+
+@media (max-width: 650px) {
+    .software-card {
+        width: calc(50% - 15px);
+        flex: 0 0 calc(50% - 15px);
+    }
+}
+
+@media (max-width: 450px) {
+    .software-card {
+        width: 100%;
+        flex: 0 0 100%;
     }
 }

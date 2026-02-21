@@ -66,8 +66,56 @@ h4,
     letter-spacing: 1px;
 }
 
+/*
+  ======================================================
+  ESTILO DE CARD COMPACTA PARA DOWNLOADS EXTERNOS
+  ======================================================
+*/
 
+.secao-cards-preta {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
 
+/* Estilo para o container principal da seção */
+.secao-cards-verde {
+    background-color: var(--cor-terciaria);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo para a tag personalizada <secao-titulo> */
+secao-titulo {
+    display: block;
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
+    color: var(--cor-texto-claro);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+/* Estilo para a tag personalizada <secao-subtitulo> */
+secao-subtitulo {
+    display: block;
+    font-family: var(--fonte-subtitulo);
+    font-size: 1rem;
+    color: var(--cor-texto-claro);
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
 
 /* Feedback visual para cliques em botões e links */
 .btn-green:active,
@@ -1184,13 +1232,6 @@ var .play-pause {
     }
 }
 
-
-
-
-
-
-
-
 /* ===================================================================
    AJUSTES PARA MOBILE (TELAS ATÉ 768px)
    =================================================================== */
@@ -1223,19 +1264,88 @@ var .play-pause {
 
 
 
+/* */
+.games-grid2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
 
-/* --- GAMES GRID (Print 2) --- */
+.game-card2 {
+    background: var(--bg-card);
+    transition: 0.4s;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card2:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-img2 {
+    overflow: hidden;
+    height: 200px;
+}
+
+.card-img2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.game-card2:hover .card-img2 img {
+    transform: scale(1.1);
+}
+
+.card-info2 {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-info2 h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.card-info2 p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.platforms2 {
+    color: #555;
+    font-size: 1.2rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+/* TÍTULO DIVISÓRIO*/
 .section-games {
-    padding: 60px 0;
+    padding: 20px 20px 60px 20px;
+    max-width: 1400px;
+    /* Espaço amplo para caber as 5 colunas */
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 40px;
-    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+    border-bottom: 1px solid #2a2a35;
     padding-bottom: 15px;
+    box-sizing: border-box;
 }
 
 .section-header h2 {
@@ -1245,78 +1355,216 @@ var .play-pause {
 }
 
 .link-green {
-    color: var(--green-mc);
+    color: #4CAF50;
     font-weight: bold;
     font-size: 1rem;
+    text-decoration: none;
 }
 
 .link-green:hover {
-    color: var(--green-hover);
+    color: #45a049;
     text-decoration: underline;
 }
 
+/* =========================================
+   GRID INDESTRUTÍVEL (CSS Grid Nativo)
+   ========================================= */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    /* Força EXATAMENTE 5 colunas idênticas, sem choro nem matemática complexa */
+    grid-template-columns: repeat(5, 1fr);
     gap: 30px;
+    align-items: stretch;
+    /* Garante que todos da linha tenham a mesma altura */
 }
 
+/* =========================================
+   O CARD 
+   ========================================= */
 .game-card {
-    background: var(--bg-card);
-    transition: 0.4s;
-    cursor: pointer;
-    height: 100%;
+    background: #1a1a1f;
+    border: 1px solid #2a2a35;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Organização interna do card para os botões descerem */
     display: flex;
     flex-direction: column;
+
+    /* Prevenção de bugs internos */
+    box-sizing: border-box;
+    min-width: 0;
+    /* Impede que uma palavra muito longa estoure a largura do card */
 }
 
 .game-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: #444;
 }
 
-.card-img {
-    overflow: hidden;
-    height: 200px;
+/* --- RESPONSIVIDADE ULTRA SIMPLES --- */
+@media (max-width: 1200px) {
+    .games-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* 4 Colunas */
 }
 
-.card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: 0.5s;
+@media (max-width: 900px) {
+    .games-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* 3 Colunas */
 }
 
-.game-card:hover .card-img img {
-    transform: scale(1.1);
+@media (max-width: 650px) {
+    .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 2 Colunas */
 }
 
+@media (max-width: 450px) {
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 1 Coluna */
+}
+
+/* =========================================
+   4. CONTEÚDO INTERNO
+   ========================================= */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 25px 0 25px;
+    box-sizing: border-box;
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: #22222a;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.card-tags {
+    display: flex;
+}
+
+.tag-mc {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.tag-java {
+    color: #f39c12;
+    background: rgba(243, 156, 18, 0.15);
+}
+
+.tag-bedrock {
+    color: #00a8ff;
+    background: rgba(0, 168, 255, 0.15);
+}
+
+.tag-ambos {
+    color: #4cd137;
+    background: rgba(76, 209, 55, 0.15);
+}
+
+/* --- TEXTOS E EMPURRÃO DO RODAPÉ --- */
 .card-info {
     padding: 25px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    /* Faz o corpo crescer para empurrar o rodapé */
+    box-sizing: border-box;
 }
 
-.card-info h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-}
-
-.card-info p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 20px;
+.card-text {
     flex-grow: 1;
+    /* Preenche vazios se o texto for muito curto */
+    margin-bottom: 25px;
+}
+
+.card-text h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+}
+
+.card-text p {
+    color: #a0a0ab;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* --- O RODAPÉ (Os botões cravados na mesma linha) --- */
+.card-footer {
+    margin-top: auto;
+    /* A MÁGICA: Fixa na base do card */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #2a2a35;
+    box-sizing: border-box;
+
+    /* 👇 ADICIONADO PARA OS BOTÕES NUNCA MAIS BATEREM NOS ÍCONES 👇 */
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 .platforms {
-    color: #555;
-    font-size: 1.2rem;
+    color: #666;
     display: flex;
-    gap: 10px;
-    align-items: center;
+    gap: 12px;
+    font-size: 1.1rem;
 }
+
+.btn-abrir {
+    background: #2a2a35;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    /* 👇 LEVEMENTE REDUZIDO PARA ENCAIXAR MELHOR 👇 */
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap;
+    /* Impede que a palavra do botão quebre ao meio */
+}
+
+.btn-abrir:hover {
+    background: #4CAF50;
+    transform: scale(1.05);
+}
+
+
 
 /* --- PROMO GOLD (Print 3) --- */
 .promo-gold {

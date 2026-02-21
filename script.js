@@ -603,3 +603,37 @@ document.querySelectorAll('.btn-access').forEach(button => {
         }
     });
 });
+
+function openHub(evt, gameId) {
+    // 1. Esconde todos os conteúdos
+    const contents = document.getElementsByClassName("hub-content");
+    for (let i = 0; i < contents.length; i++) {
+        contents[i].classList.remove("active");
+    }
+
+    // 2. Remove "active" de todas as abas
+    const tabs = document.getElementsByClassName("tab-link");
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+    }
+
+    // 3. Mostra o atual e marca a aba
+    document.getElementById(gameId).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+
+function toggleAccordion(btn) {
+    const parent = btn.parentElement;
+    const isActive = parent.classList.contains("active");
+
+    // Fecha todos os outros (opcional, estilo sanfona)
+    const allContents = document.getElementsByClassName("hub-content");
+    for (let content of allContents) {
+        content.classList.remove("active");
+    }
+
+    // Se não estava ativo, abre
+    if (!isActive) {
+        parent.classList.add("active");
+    }
+}
