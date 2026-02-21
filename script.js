@@ -20,43 +20,106 @@ backToTop.addEventListener('click', () => {
     });
 });
 
-const ZerasSync = {
-    // ID fornecido pelo usuário: 1390120239588577482
+
+/**
+ * ZERA'S CRAFT ENGINE - MÓDULO DE DATA
+ * Converte Snowflake ID em Data e anima a contagem
+ */
+const ZerasEngine = {
     guildID: '1390120239588577482',
+    inviteCode: 'GYGVBqGEwP',
 
-    async update() {
-        // Null Check: verifica se o elemento existe antes de renderizar
-        const display = document.getElementById('discord-count');
-        if (!display) return;
-
+    async syncAll() {
         try {
-            // Chamada ao endpoint JSON fornecido
-            const response = await fetch(`https://discord.com/api/guilds/${this.guildID}/widget.json`);
-            if (!response.ok) throw new Error("API Offline");
-
+            const response = await fetch(`https://discord.com/api/v9/invites/${this.inviteCode}?with_counts=true`);
             const data = await response.json();
 
-            // O widget.json retorna o 'presence_count' (membros online)
-            if (data.presence_count !== undefined) {
-                const onlineCount = data.presence_count;
-                // Atualização parcial: altera apenas o texto para manter o foco
-                display.innerText = `${onlineCount.toLocaleString()} membros online agora`;
-            }
+            // 1. Sincroniza Membros (Online e Total) [cite: 153]
+            this.updateCounter('stat-total', data.approximate_member_count || 5000);
+            this.updateCounter('stat-online', data.approximate_presence_count || 0);
+
+            // 2. Sincroniza Data de Criação via ID (Snowflake)
+            this.syncCreationDate();
+
         } catch (error) {
-            console.error("Zera's Craft Sync Error:", error);
-            // Fallback para manter a imersão visual caso a API falhe
-            display.innerText = "mais de 5.000 membros";
+            console.error("Zera's Craft: Erro de sincronização.");
         }
+    },
+
+    // Converte o ID do Discord para Data Real
+    syncCreationDate() {
+        const id = BigInt(this.guildID);
+        // Constante de tempo do Discord (Epoch) 
+        const timestamp = Number((id >> 22n) + 1420070400000n);
+        const date = new Date(timestamp);
+
+        const targetDate = {
+            day: date.getDate(),
+            month: date.getMonth() + 1,
+            year: date.getFullYear()
+        };
+
+        this.animateDate('stat-date', targetDate);
+    },
+
+    // Animação de Data dd/mm/aaaa a 60fps [cite: 153]
+    animateDate(id, target) {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        let current = { day: 0, month: 0, year: 2000 };
+        const duration = 2000; // 2 segundos
+        const start = performance.now();
+
+        const step = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+
+            // Lógica de interpolação linear [cite: 106]
+            current.day = Math.floor(progress * target.day);
+            current.month = Math.floor(progress * target.month);
+            current.year = Math.floor(2000 + (progress * (target.year - 2000)));
+
+            // Formatação com zeros à esquerda (Partial Update) [cite: 190]
+            const d = String(current.day).padStart(2, '0');
+            const m = String(current.month).padStart(2, '0');
+            const y = current.year;
+
+            el.innerText = `${d}/${m}/${y}`;
+
+            if (progress < 1) requestAnimationFrame(step);
+            else el.innerText = `${String(target.day).padStart(2, '0')}/${String(target.month).padStart(2, '0')}/${target.year}`;
+        };
+
+        requestAnimationFrame(step);
+    },
+
+    updateCounter(id, target) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.setAttribute('data-target', target);
+            this.animateNumber(el);
+        }
+    },
+
+    animateNumber(el) {
+        const target = +el.getAttribute('data-target');
+        const update = () => {
+            const current = +el.innerText.replace(/\D/g, '');
+            const inc = Math.ceil(target / 100);
+            if (current < target) {
+                el.innerText = Math.min(target, current + inc).toLocaleString();
+                requestAnimationFrame(update);
+            }
+        };
+        update();
     }
 };
 
-// Inicia a sincronização após o carregamento total para evitar erros de ID
-window.addEventListener('DOMContentLoaded', () => {
-    ZerasSync.update();
-    // Atualiza a cada 5 minutos (300000ms)
-    setInterval(() => ZerasSync.update(), 300000);
-});
+window.addEventListener('DOMContentLoaded', () => ZerasEngine.syncAll());
 
+
+// SISTEMA DO PLAYER DE MÚSICA DESAPARECER
+// SE ESTIVER NO FIM DA PÁGINA
 const handlePlayerVisibility = () => {
     const player = document.querySelector('.music-player-container');
     if (!player) return;
