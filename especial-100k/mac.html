@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
     <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Especial 100k - MacOS</title> <!---->
+    <title>Zera's Craft | MacOS Ultimate</title> <!---->
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
-    <link rel="icon" href="../assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="../style.css"> <!---->
+    <link rel="stylesheet" href="../style2.css">
+    <!---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!---->
 
@@ -60,609 +64,367 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
+<!----------------------------- Desktop --------------------------------->
+
 <body>
 
-    <div id="centralMessage" class="central-message"></div>
+    <nav class="nav-pc">
+        <div class="container-pc">
+            <div class="logo">ZERAS CRAFT</div>
 
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="index.html" class="header-logo">Zera's Craft</a>
-            <button class="menu-toggle" aria-label="Abrir menu de navegação">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="../index" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="../arquivos" class="nav-link" data-page="home">Arquivos</a></li>
-                    <li><a href="../comunidade" class="nav-link" data-page="home">Comunidade</a></li>
-                    <li><a href="../eventos" class="nav-link" data-page="home">Eventos</a></li>
-                    <li><a href="../pixel-legends" class="nav-link" data-page="home">Pixel Legends</a></li>
-                    <li><a href="../equipe" class="nav-link" data-page="home">Equipe</a></li>
-                    <li><a href="../canal" class="nav-link" data-page="home">Canal Oficial</a></li>
-                    <li><a href="../recursos" class="nav-link" data-page="home">Recursos</a></li>
-                    <li><a href="../@!&@@!especial-100k">100k de Inscritos</a></li>
-                </ul>
-            </nav>
+            <ul class="menu-pc">
+                <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
+                <li class="dropdown">
+                    <a href="#">Jogos <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="#">Bedrock Edition</a></li>
+                        <li><a href="#">Java Edition</a></li>
+                    </ul>
+                </li>
+                <li><a href="arquivos">Arquivos</a></li>
+                <li><a href="comunidade">Comunidade</a></li>
+                <li><a href="eventos">Eventos</a></li>
+                <li><a href="pixel-legends">Pixel Legends</a></li>
+                <li><a href="canais">Canais</a></li>
+                <li><a href="suporte">Suporte</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <span class="server-ip" onclick="copyIP()">IP Pixel Legends</span>
+                <a href="#" class="btn-green">LOJA VIP</a>
+            </div>
         </div>
-    </header>
-    <!-------------------------------------------------------------------------------------------------------------->
-    <main>
-        <section class="hero-section">
-            <div class="hero-image-overlay"></div>
-            <div class="hero-content">
-                <div class="server-branding">
-                    <img src="../assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft"
-                        class="server-icon">
+    </nav>
+
+    <!----------------------------- Mobile ---------------------------------->
+
+    <nav class="nav-mobile">
+        <div class="logo-mobile">ZERAS CRAFT</div>
+        <button class="burger-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars" id="icon-bars"></i>
+        </button>
+    </nav>
+
+    <aside class="sidebar-glass" id="sidebar">
+        <div class="sidebar-header">
+            <span class="menu-title">MENU</span>
+            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        </div>
+
+        <ul class="sidebar-links">
+            <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Jogos</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
                 </div>
-                <h1>Mundo Zera's Craft</h1>
-                <p class="hero-subtitle">Pack completo para Mac-OS (Apple)!</p>
-                <div class="hero-social-links">
-                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank"
-                        rel="noopener noreferrer" class="btn-primary">
-                        <i class="fab fa-discord"></i> Pixel Legends
-                    </a>
-                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-discord"></i> Entrar no Discord
-                    </a>
-                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-youtube"></i> Canal YouTube
-                    </a>
+                <ul class="sidebar-sub">
+                    <li><a href="#">Bedrock Edition</a></li>
+                    <li><a href="#">Java Edition</a></li>
+                </ul>
+            </li>
+            <li><a href="arquivos">Arquivos</a></li>
+            <li><a href="comunidade">Comunidade</a></li>
+            <li><a href="eventos">Eventos</a></li>
+            <li><a href="pixel-legends">Pixel Legends</a></li>
+            <li><a href="canais">Canais</a></li>
+            <li><a href="suporte">Suporte</a></li>
+        </ul>
+
+        <div class="sidebar-actions">
+            <div class="server-ip-box" onclick="copyIP()">
+                <span class="ip-text">IP Pixel Legends</span>
+                <i class="far fa-copy"></i>
+            </div>
+
+            <a href="#" class="btn-green">LOJA VIP</a>
+            <a href="#" class="btn-jogar-agora">JOGAR AGORA <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </aside>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!--------------------------------------------------------------->
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif')">
+            </div>
+
+            <div class="container hero-content reveal">
+                <span class="hero-tag">Mundo Zera's Craft</span>
+                <span class="especial-tag">Especial 100k</span>
+                <h1>MacOS Ultimate</h1>
+                <p>Todos os Apps Selecionados para MacOS.</p>
+                <div class="hero-btns">
+                    <a href="https://discord.gg/GYGVBqGEwP" class="btn-big-green">DISCORD <i
+                            class="fas fa-chevron-right"></i></a>
+                    <a href="https://www.youtube.com/@MatheuZera88" class="btn-big-outline">CANAL OFICIAL</a>
                 </div>
             </div>
         </section>
 
-        <div class="secao-cards-preta">
-            <secao-titulo>MAC-OS ULTIMATE [APPS]</secao-titulo>
-            <p>Todos os Aplicativos/Softwares em Gerais!</p>
-            <br>
-
-            <div class="grid-container">
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/After-Effects.png" alt="Imagem">
-                        </icone-imagem>
-                        <h3 class="card-title">NADA</h3>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">.</p>
-
-                        <a href="#" class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="section-header section-games">
+            <h2>MAC'OS APPs</h2>
         </div>
 
-        <div class="secao-cards-verde">
-            <secao-titulo>MAC-OS ULTIMATE [EDIÇÃO]</secao-titulo>
-            <p>Todos os Aplicativos/Softwares em Gerais de Edição!</p>
-            <br>
+        <section class="section-software">
+            <div class="software-grid">
 
-            <div class="grid-container">
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/After-Effects.png" alt="Imagem">
-                        </icone-imagem>
-                        <h3 class="card-title">NADA</h3>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">.</p>
-
-                        <a href="#" class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!---------------------------------------------------------------->
-
-        <div class="secao-cards-preta">
-            <secao-titulo>MAC-OS ULTIMATE [ADOBE]</secao-titulo>
-            <p>Todos os Aplicativos da Adobe para MacOS Atualiados e prontinho para download!</p>
-            <br>
-
-            <div class="grid-container">
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Acrobat.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Acrobat Pró</h6>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">Permite criar, editar, assinar e gerenciar documentos PDF.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/001en-adobe-acrobat-pro-458-3430.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/After-Effects.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe After Effects</h6>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">Focado em motion graphics e efeitos visuais, permitindo criar animações complexas, títulos de filmes e efeitos especiais.</p>
-
-                        <a href="https://br0wsers.com/detail/product/nglb6jyUk9LEig7wBDBekwvt4-2793-16448.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Animate.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Animate</h6>
-                        <subtitulo-card>Mediano</subtitulo-card>
-                        <p class="card-description">Utilizado para criar animações vetoriais interativas, como jogos, anúncios e desenhos
-                        animados para a web e plataformas móveis.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/fFydanbqG3tJejBlgA0fplSch-1221-15543.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Audition.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Audition</h6>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">Um editor de áudio profissional para gravação, mixagem e restauração de áudio para projetos de vídeo, podcast e música.</p>
-
-                        <a href="https://br0wsers.com/detail/product/ZKl0nlYEau8eqkbRyJvT64scG-1246-15533.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Bridge.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Bridge</h6>
-                        <subtitulo-card>Mediano</subtitulo-card>
-                        <p class="card-description">Um gerenciador de ativos de mídia que organiza e ajuda a visualizar arquivos de projetos criativos antes de abri-los em outros aplicativos da Adobe.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/eaibX41DtUPd8kOQ5Y2j0nqBC-1338-16937.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Camera-Raw.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Camera Raw</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">Um plugin que permite a edição de imagens em formato RAW (o "negativo digital") dentro do Photoshop e do Bridge.
-                        </p>
-
-                        <a href="https://br0wsers.com/detail/product/3c9435015579e19dc2fb6312a2258ab5-785-4624.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Dimension.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Dimension</h6>
-                        <subtitulo-card>Mediano</subtitulo-card>
-                        <p class="card-description">Ele foi desenvolvido para designers gráficos que não têm experiência avançada com 3D, permitindo que eles combinem facilmente modelos 3D, materiais, texturas e imagens 2D em uma única cena.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/9bEHdZhxc5f4ew26XzdbCuq4m-254-6925.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Fresco.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Fresco</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">Proporciona uma experiência de pintura e desenho completamente natural. Para pintores, ilustradores, artistas, cartunistas, desenhistas e qualquer pessoa que queira descobrir – ou redescobrir – a alegria de pintar e desenhar.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/adobe-fresco-3453-11537.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/GenP.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe GenP</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">Este não é um produto oficial da Adobe; é um tipo de ativador de software que modifica os aplicativos para ignorar a necessidade de licença, o que é ilegal e pode representar um risco de segurança</p>
-
-                        <a href="hhttps://br0wsers.com/blog/detail/a0icqnG3utkRdbPBlMkft95Qv-9964-18722.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/InCopy.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe InCopy</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">Ele permite que você escreva e revise o conteúdo de um documento ao mesmo tempo em que o designer trabalha no layout da página usando o InDesign, sem que um atrapalhe o outro.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/3tgfaaFKsdWSTA8wgB6Bpu1RA-3894-18728.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/InDesign.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe InDesign</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">Software de editoração eletrônica para criar layouts de páginas, como revistas, jornais, e-books e folhetos.</p>
-
-                        <a href="https://br0wsers.com/detail/product/6ryg3REKBJz1pXe7sZIvSusmD-334-16901.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Illustrator.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Illustrator</h6>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">Ferramenta de criação de gráficos vetoriais, ideal para logotipos, ícones, ilustrações e tipografia que podem ser redimensionados infinitamente sem perda de qualidade.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/PyDsc1CEYSBtqoTHjwK6zhX8o-749-15771.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Lightroom.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Lightroom</h6>
-                        <subtitulo-card>Mediano</subtitulo-card>
-                        <p class="card-description">.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/6qx1f3naJuETyupsjfHAa9s5Q-734-15637.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Media-Encoder.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Media Encoder</h6>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">Um codificador de vídeo que trabalha em conjunto com outros programas da Adobe para converter arquivos para diversos formatos, otimizando o fluxo de trabalh</p>
-
-                        <a href="https://br0wsers.com/detail/product/umEPhaOBCpb2fskSmVCw5AWcF-1360-13774.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Photoshop.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Photoshop</h6>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">O padrão da indústria para edição de imagens e manipulação de fotos, usado para retocar, compor e criar designs digitais.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/uDmsixeD9080EdPRnLhMUCzAl-737-18485.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Premiere.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Premiere Pró</h6>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">Essencial para a edição de vídeo, usado para cortar, montar, e aprimorar produções de vídeo de todos os tipos.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/adobe-premiere-pro-0021-1361-14616.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Premiere-Rush.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Premiere Rush</h6>
-                        <subtitulo-card>Mediano</subtitulo-card>
-                        <p class="card-description">Ferramenta dedicada para fotógrafos gerenciarem e editarem grandes bibliotecas de fotos, com foco no processamento de imagens RAW.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/adobe-premiere-rush-cc-3866-14611.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Substance-3d-Designer.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Substance 3D Designer</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">Com ele, você pode criar texturas e materiais complexos do zero, usando um sistema de nós (nós interligados que geram o resultado final.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/syqv3tsJlpZrHXYwKmtkoC3G7-908-17894.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Substance-3d-Painter.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Susbtance 3D Painter</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">Ele funciona como um "Photoshop para modelos 3D". Você pode importar um objeto 3D e pintar diretamente sobre sua superfície, adicionando detalhes como sujeira, ferrugem, arranhões ou até mesmo a textura da pele de um personagem.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/jewngIVgTlv6CW0ykHbzhsbwG-1279-5674.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Substance-3d-Sampler.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Substance 3D Sampler</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">O Sampler é um aplicativo de criação de materiais a partir de fotos. Ele simplifica o processo de transformar uma foto real em uma textura 3D.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/dl8Pk2a3Xwv9As1szuqgoRBtp-6625-21844.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/Substance-3d-Stager.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe Substance 3D Stager</h6>
-                        <subtitulo-card>Pouco Falado</subtitulo-card>
-                        <p class="card-description">Você pode importar modelos 3D, aplicar os materiais que você criou no Designer ou no Sampler, e depois ajustar a iluminação, a câmera e a composição da cena para criar uma imagem final fotorrealista.</p>
-
-                        <a href="https://br0wsers.com/blog/detail/lNChpyYoxwLbO0lf217tI2oEc-6624-13695.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-content">
-                        <icone-imagem>
-                            <img src="adobe/XD.png" alt="Imagem">
-                        </icone-imagem>
-                        <h6 class="card-title">Adobe XD</h6>
-                        <subtitulo-card>Popular</subtitulo-card>
-                        <p class="card-description">Usado para design e prototipagem de interfaces de usuário (UI) e experiência de usuário (UX) para aplicativos móveis e websites</p>
-
-                        <a href="https://br0wsers.com/blog/detail/tJnfCz6vSd07YoCQ9m1EMkD32-776-8166.html"
-                            class="card-button">
-                            BAIXAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <!-------------------------------------------------------------------------------------------------------------->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa
-                        comunidade vibrante.</p>
-                    <div class="footer-social-links">
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                            aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column footer-nav-links">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="../index" class="nav-link" data-page="home">Início</a></li>
-                        <li><a href="../arquivos" class="nav-link" data-page="home">Arquivos</a></li>
-                        <li><a href="../comunidade" class="nav-link" data-page="home">Comunidade</a></li>
-                        <li><a href="../eventos" class="nav-link" data-page="home">Eventos</a></li>
-                        <li><a href="../pixel-legends" class="nav-link" data-page="home">Pixel Legends</a></li>
-                        <li><a href="../equipe" class="nav-link" data-page="home">Equipe</a></li>
-                        <li><a href="../canal" class="nav-link" data-page="home">Canal Oficial</a></li>
-                        <li><a href="../recursos" class="nav-link" data-page="home">Recursos</a></li>
-                        <li><a href="../@!&@@!especial-100k">100k de Inscritos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-contact">
-                    <h4>Contato & Suporte</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a>
-                    </p>
-                    <p><i class="fas fa-headset"></i> <a
-                            href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via
-                            Discord</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
-                </div>
-                <div class="footer-column footer-newsletter">
-                    <h4>Fique por Dentro</h4>
-                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
-                    <form class="newsletter-form">
-                        <div class="text-center margin-top-20">
-                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501"
-                                class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="img.png">
                         </div>
-                    </form>
+                        <div class="tag-adobe">Ferramenta</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>AppName</h3>
+                            <p>Text.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> Download
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+        </section>
+
+        <section class="stats-section">
+            <div class="container stats-flex reveal">
+                <div class="stat-item">
+                    <strong class="counter" id="stat-total" data-target="0">0</strong>
+                    <span>MEMBROS TOTAIS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong class="counter" id="stat-online" data-target="0">0</strong>
+                    <span>MEMBROS ONLINE</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong>02/07/2025</strong>
+                    <span>CRIADO EM</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--------------------------------------------------------------->
+
+    <div class="music-player-container reveal">
+        <div class="player-controls">
+            <div class="now-playing">
+                <i class="fas fa-music"></i>
+                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
+            </div>
+
+            <div class="progress-area">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <span id="durationDisplay">0:00</span>
+            </div>
+
+            <div class="main-controls">
+                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
+                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
+                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
+                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+
+                <div class="volume-container">
+                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
             </div>
         </div>
-        <!-- 
+    </div>
+
+    <audio id="backgroundAudio"></audio>
+
+    <div id="centralMessage" class="central-message">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message-content">
+            <strong>Título</strong>
+            <span>Informação</span>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------->
+
+    <footer class="main-footer">
+        <div class="footer-divider"></div>
+
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">ZERAS<span>CRAFT</span></div>
+                <p class="brand-description">
+                    Esta é o nosso lugar para conversar, mostrar e interagir com nossos Inscritos/Membros de Minecraft,
+                    nossos Crafters sempre buscando novas maneiras de Jogar com a Rapaziada.
+                </p>
+                <div class="newsletter-footer">
+                    <button class="btn-sidebar"
+                        onclick="showClickNotification('Olá Crafter!', 'Acesse nosso Canal! <br> E Nossos Links.')">
+                        <i class="fas fa-bolt"></i> CLIQUE AQUI
+                    </button>
+                    <h5 class="newsletter-footer">FIQUE POR DENTRO</h5>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>EXPLORAR</h4>
+                <ul class="footer-links">
+                    <li><a href="https://www.youtube.com/@MatheuZera88"><i class="fas fa-chevron-right"></i> Canal
+                            Oficial YT</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125436805185656"><i
+                                class="fas fa-chevron-right"></i> Nosso Marketplace Craft</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125442731868180"><i
+                                class="fas fa-chevron-right"></i> Sobre nossas Wikipédias</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125448662614027"><i
+                                class="fas fa-chevron-right"></i> Solicite Parcerias!</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394709165640781975"><i
+                                class="fas fa-chevron-right"></i> Crie sua Página Web!</a></li>
+                    <li><a href="https://www.minecraft.net/"><i class="fas fa-chevron-right"></i> Minecraft.net</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>INFORMATIVOS</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.com/channels/1390120239588577482/1404385093493198909"><i
+                                class="fas fa-chevron-right"></i> Criar uma Guilda</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1398008350796546068"><i
+                                class="fas fa-chevron-right"></i> Pixel Legends</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Nossos Eventos</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125374695931994"><i
+                                class="fas fa-chevron-right"></i> Feedbacks</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Seja um(a) Staff</a></li>
+                    <li><a href="https://discord.gg/GYGVBqGEwP" class="status-indicator"><span class="dot"></span>
+                            EXPLORAR MAIS</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>COMUNIDADE</h4>
+                <p class="join-text">
+                    Junte-se a <span id="discord-count"></span> no nosso Discord Oficial.
+                </p>
+                <div class="social-grid">
+                    <a href="https://discord.gg/GYGVBqGEwP" class="social-box discord"><i
+                            class="fab fa-discord"></i></a>
+                    <a href="https://www.youtube.com/@MatheuZera88" class="social-box youtube"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
+                    <a href="#" class="social-box other"><i class="fab fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <div class="legal">
+                    <p class="copyright-text"
+                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                        &copy;
+                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        Zeras Craft. Todos os direitos reservados.
+                    </p>
+
+                    <span class="mojang-disclaimer"
+                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                        Não afiliado à Mojang Studios ou Microsoft.
+                    </span>
+                </div>
+                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+            </div>
+            <!-- 
             SISTEMA DE MÚSICA DE FUNDO (NOVO)
             Substitui o player de música anterior para garantir apenas a reprodução em looping, sem interface.
         -->
-        <div class="music-player-invisible-container">
-            <!-- 
-                Tag <audio> com 'loop' para tocar em repetição.
-                *** IMPORTANTE: Ajuste o caminho 'src' para o seu arquivo de música real! ***
-            -->
-            <audio id="backgroundAudio" src="musica/musica.mp3" preload="auto" loop></audio>
-        </div>
+            <div class="music-player-invisible-container">
+                <audio id="backgroundAudio" preload="auto"></audio>
+            </div>
     </footer>
 
-    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
     <script src="script.js"></script>
-    <script src="elementos.js"></script>
+    <script src="../script.js"></script>
 
-    <!-- =================================================================== -->
+    <!-- =================================== -->
     <!-- CÓDIGO DO SISTEMA DE MÚSICA ÚNICA E INVISÍVEL (FINAL DO HTML) -->
-    <!-- Este é o script simples que garante que a música comece a tocar após a interação do usuário. -->
-    <!-- Ele foi movido para depois dos scripts externos para evitar conflitos de carregamento. -->
-    <!-- =================================================================== -->
+    <!-- =================================== -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log("Sistema de Áudio de Fundo Invisível carregado.");
+        /**
+        * ZERA'S CRAFT - MOTOR DE ÁUDIO CÍCLICO
+        * Garante que a playlist retorne ao início (Música 1) após a última faixa.
+        */
+        const ZerasAudio = {
+            audioId: 'backgroundAudio',
+            // LISTA DE MÚSICAS: Adicione aqui todos os arquivos da sua pasta /musics
+            playlist: ['calm1.mp3', 'calm2.mp3'],
+            currentIndex: 0,
+            started: false,
 
-            const backgroundAudio = document.getElementById('backgroundAudio');
-            let audioStarted = false; // Estado para saber se o áudio foi iniciado pelo menos uma vez
+            init() {
+                const audio = document.getElementById(this.audioId);
+                if (!audio) return console.error("Erro: Elemento de áudio não encontrado.");
 
-            // Verifica se a tag <audio> existe
-            if (!backgroundAudio) {
-                console.error("ERRO: A tag de áudio com ID 'backgroundAudio' não foi encontrada.");
-                return;
-            }
+                // Configuração de Volume (Industrial Logic)
+                const savedVolume = localStorage.getItem('audioBackgroundVolume');
+                audio.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.3;
 
-            // Define o volume inicial da música (50% é um bom padrão para fundo)
-            const storedVolume = localStorage.getItem('audioBackgroundVolume');
-            backgroundAudio.volume = storedVolume !== null ? parseFloat(storedVolume) : 0.5;
+                // EVENTO CHAVE: Detecta o fim da música para disparar a próxima ou resetar
+                audio.addEventListener('ended', () => {
+                    console.log("Faixa encerrada. Reiniciando ciclo ou próxima música...");
+                    this.nextTrack(audio);
+                });
 
-            // Função que tenta iniciar a reprodução do áudio
-            const startAudio = () => {
-                if (audioStarted) return;
+                // Listeners para iniciar após o toque do usuário (Regra de Autoplay)
+                const startTrigger = () => this.startPlaylist(audio);
+                window.addEventListener('click', startTrigger, { once: true });
+                window.addEventListener('touchstart', startTrigger, { once: true });
+            },
 
-                // Tenta iniciar a reprodução (necessita de interação do usuário - Autoplay Policy)
-                backgroundAudio.play()
+            startPlaylist(audio) {
+                if (this.started) return;
+                this.playCurrentTrack(audio);
+            },
+
+            playCurrentTrack(audio) {
+                // Define o arquivo baseado no índice atual
+                audio.src = `pages/musics/${this.playlist[this.currentIndex]}`;
+                audio.src = `musics/${this.playlist[this.currentIndex]}`;
+
+                audio.play()
                     .then(() => {
-                        console.log("Música de fundo iniciada com sucesso. (Autoplay bem-sucedido)");
-                        audioStarted = true;
-                        // Remove os listeners de eventos após o início bem-sucedido
-                        document.body.removeEventListener('click', startAudio);
-                        document.body.removeEventListener('touchstart', startAudio);
+                        this.started = true;
+                        console.log(`Zera's Craft: Reproduzindo ${this.playlist[this.currentIndex]}`);
                     })
-                    .catch(error => {
-                        console.log("Aguardando interação do usuário para iniciar o áudio...");
-                        console.error("Erro ao tentar tocar o áudio:", error.message);
+                    .catch(err => {
+                        console.warn("Aguardando interação para áudio...");
+                        this.started = false;
                     });
-            };
+            },
 
-            // Adiciona listeners para os eventos de interação do usuário mais comuns
-            document.body.addEventListener('click', startAudio);
-            document.body.addEventListener('touchstart', startAudio);
-        });
+            nextTrack(audio) {
+                // LÓGICA DE LOOP INFINITO: 
+                // (Índice Atual + 1) dividido pelo Total de Músicas. O resto é o novo índice.
+                // Exemplo com 2 músicas: (1 + 1) % 2 = 0 (Volta para a música 1)
+                this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
 
-        // ===================================================================
-        // CORREÇÃO PARA O PROBLEMA DO BOTÃO VOLTAR / BFCACHE
-        // ===================================================================
-        window.addEventListener('pageshow', (event) => {
-            // Verifica se a página foi restaurada do BFcache (botão Voltar)
-            if (event.persisted) {
-                console.log("Página restaurada do cache. Tentando resumir o áudio.");
-
-                const backgroundAudio = document.getElementById('backgroundAudio');
-                if (backgroundAudio) {
-                    // Tenta retomar a reprodução. Geralmente é permitido se já tocou antes.
-                    backgroundAudio.play()
-                        .then(() => {
-                            console.log("Música de fundo resumida com sucesso após retorno.");
-                        })
-                        .catch(error => {
-                            console.error("Falha ao resumir o áudio via BFcache:", error.message);
-                            // Se falhar, o listener de clique/toque original deve ser usado na próxima interação.
-                        });
-                }
+                this.playCurrentTrack(audio);
             }
-        });
+        };
+
+        // Inicialização segura sem re-renderização agressiva
+        document.addEventListener('DOMContentLoaded', () => ZerasAudio.init());
     </script>
 </body>
 
