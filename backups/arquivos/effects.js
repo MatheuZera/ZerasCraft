@@ -6,7 +6,7 @@ const AUDIO_BASE_PATH = 'assets/audios/effects/';
 
 // Sistema de volumes individuais (0 a 100)
 const EFFECT_VOLUMES = {
-    link: 70,        // Volume para sons de navegação
+    link: 50,        // Volume para sons de navegação
     card: 50,        // Volume para hover em cards
     button: 15,      // Volume para hover em botões
     select: 20,      // Volume para hover em links de texto
