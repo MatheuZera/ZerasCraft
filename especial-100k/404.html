@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
     <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Error :/</title> <!---->
+    <title>Error 404 Page</title> <!---->
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
-    <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="../404.css"> <!---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!---->
 
@@ -60,174 +61,141 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
+<!----------------------------- Desktop --------------------------------->
+
 <body>
 
-    <div id="centralMessage" class="central-message"></div>
+    <nav class="nav-pc">
+        <div class="container-pc">
+            <div class="logo">ZERAS CRAFT</div>
 
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="index.html" class="header-logo">Zera's Craft</a>
-            <button class="menu-toggle" aria-label="Abrir menu de navegação">
-                <i class="fas fa-bars"></i>
-            </button>
+            <ul class="menu-pc">
+                <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
+                <li class="dropdown">
+                    <a href="#">Jogos <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="#">Bedrock Edition</a></li>
+                        <li><a href="#">Java Edition</a></li>
+                    </ul>
+                </li>
+                <li><a href="arquivos">Arquivos</a></li>
+                <li><a href="comunidade">Comunidade</a></li>
+                <li><a href="eventos">Eventos</a></li>
+                <li><a href="pixel-legends">Pixel Legends</a></li>
+                <li><a href="canais">Canais</a></li>
+                <li><a href="suporte">Suporte</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <span class="server-ip" onclick="copyIP()">IP Pixel Legends</span>
+                <a href="#" class="btn-green">LOJA VIP</a>
+            </div>
         </div>
-    </header>
-    <!-------------------------------------------------------------------------------------------------------------->
+    </nav>
+
+    <!----------------------------- Mobile ---------------------------------->
+
+    <nav class="nav-mobile">
+        <div class="logo-mobile">ZERAS CRAFT</div>
+        <button class="burger-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars" id="icon-bars"></i>
+        </button>
+    </nav>
+
+    <aside class="sidebar-glass" id="sidebar">
+        <div class="sidebar-header">
+            <span class="menu-title">MENU</span>
+            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        </div>
+
+        <ul class="sidebar-links">
+            <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Jogos</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <ul class="sidebar-sub">
+                    <li><a href="#">Bedrock Edition</a></li>
+                    <li><a href="#">Java Edition</a></li>
+                </ul>
+            </li>
+            <li><a href="arquivos">Arquivos</a></li>
+            <li><a href="comunidade">Comunidade</a></li>
+            <li><a href="eventos">Eventos</a></li>
+            <li><a href="pixel-legends">Pixel Legends</a></li>
+            <li><a href="canais">Canais</a></li>
+            <li><a href="suporte">Suporte</a></li>
+        </ul>
+
+        <div class="sidebar-actions">
+            <div class="server-ip-box" onclick="copyIP()">
+                <span class="ip-text">IP Pixel Legends</span>
+                <i class="far fa-copy"></i>
+            </div>
+
+            <a href="#" class="btn-green">LOJA VIP</a>
+            <a href="#" class="btn-jogar-agora">JOGAR AGORA <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </aside>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!--------------------------------------------------------------->
+
     <main>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="">
-            <secao-titulo>404 Page.</secao-titulo>
-        </div>
-        <br>
-        <br>
-        <br>
-    </main>
-    <!-------------------------------------------------------------------------------------------------------------->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa
-                        comunidade vibrante.</p>
-                    <div class="footer-social-links">
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                            aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+
+        <section class="minecraft-scene">
+            <div class="creeper-actor">
+                <div class="creeper-body-wrapper">
+                    <div class="c-head">
+                        <div class="c-face-pixel"></div>
+                        <div class="sizzle-overlay"></div>
+                    </div>
+                    <div class="c-body"></div>
+                    <div class="c-legs">
+                        <div class="c-leg l-front"></div>
+                        <div class="c-leg r-front"></div>
+                        <div class="c-leg l-back"></div>
+                        <div class="c-leg r-back"></div>
                     </div>
                 </div>
-                <div class="footer-column footer-nav-links">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="index">Início</a></li>
-                        <li><a href="arquivos">Arquivos</a></li>
-                        <li><a href="comunidade">Comunidade</a></li>
-                        <li><a href="eventos">Eventos</a></li>
-                        <li><a href="pixel-legends">Pixel Legends</a></li>
-                        <li><a href="equipe">Equipe</a></li>
-                        <li><a href="canal">Canal Oficial</a></li>
-                        <li><a href="recursos">Recursos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-contact">
-                    <h4>Contato & Suporte</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a>
-                    </p>
-                    <p><i class="fas fa-headset"></i> <a
-                            href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via
-                            Discord</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
-                </div>
-                <div class="footer-column footer-newsletter">
-                    <h4>Fique por Dentro</h4>
-                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
-                    <form class="newsletter-form">
-                        <div class="text-center margin-top-20">
-                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501"
-                                class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
-                        </div>
-                    </form>
-                </div>
             </div>
-            <div class="footer-bottom">
-                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+
+            <div class="particle-burst-container">
+                <div class="p-white p1"></div>
+                <div class="p-white p2"></div>
+                <div class="p-white p3"></div>
+                <div class="p-white p4"></div>
+                <div class="p-white p5"></div>
+                <div class="p-white p6"></div>
+                <div class="p-white p7"></div>
+                <div class="p-white p8"></div>
+                <div class="p-white p9"></div>
+                <div class="p-white p10"></div>
+                <div class="p-white p11"></div>
+                <div class="p-white p12"></div>
+                <div class="p-white p13"></div>
+                <div class="p-white p14"></div>
+                <div class="p-white p15"></div>
+                <div class="p-white p16"></div>
+                <div class="p-white p17"></div>
+                <div class="p-white p18"></div>
+                <div class="p-white p19"></div>
+                <div class="p-white p20"></div>
             </div>
-        </div>
-        <!-- 
-            SISTEMA DE MÚSICA DE FUNDO (NOVO)
-            Substitui o player de música anterior para garantir apenas a reprodução em looping, sem interface.
-        -->
-        <div class="music-player-invisible-container">
-            <!-- 
-                Tag <audio> com 'loop' para tocar em repetição.
-                *** IMPORTANTE: Ajuste o caminho 'src' para o seu arquivo de música real! ***
-            -->
-            <audio id="backgroundAudio" src="assets/audios/musics/c418/Sweden.mp3" preload="auto"
-                loop></audio>
-        </div>
-    </footer>
 
-    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    <script src="script.js"></script>
-    <script src="elementos.js"></script>
+            <div class="error-display">
+                <h1 class="glitch" data-text="404">404</h1>
+                <span>CHUNK NOT FOUND</span>
+            </div>
+        </section>
+    </main>
 
-    <!-- =================================================================== -->
-    <!-- CÓDIGO DO SISTEMA DE MÚSICA ÚNICA E INVISÍVEL (FINAL DO HTML) -->
-    <!-- Este é o script simples que garante que a música comece a tocar após a interação do usuário. -->
-    <!-- Ele foi movido para depois dos scripts externos para evitar conflitos de carregamento. -->
-    <!-- =================================================================== -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log("Sistema de Áudio de Fundo Invisível carregado.");
+    <!--------------------------------------------------------------->
 
-            const backgroundAudio = document.getElementById('backgroundAudio');
-            let audioStarted = false; // Estado para saber se o áudio foi iniciado pelo menos uma vez
-
-            // Verifica se a tag <audio> existe
-            if (!backgroundAudio) {
-                console.error("ERRO: A tag de áudio com ID 'backgroundAudio' não foi encontrada.");
-                return;
-            }
-
-            // Define o volume inicial da música (50% é um bom padrão para fundo)
-            const storedVolume = localStorage.getItem('audioBackgroundVolume');
-            backgroundAudio.volume = storedVolume !== null ? parseFloat(storedVolume) : 0.5;
-
-            // Função que tenta iniciar a reprodução do áudio
-            const startAudio = () => {
-                if (audioStarted) return;
-
-                // Tenta iniciar a reprodução (necessita de interação do usuário - Autoplay Policy)
-                backgroundAudio.play()
-                    .then(() => {
-                        console.log("Música de fundo iniciada com sucesso. (Autoplay bem-sucedido)");
-                        audioStarted = true;
-                        // Remove os listeners de eventos após o início bem-sucedido
-                        document.body.removeEventListener('click', startAudio);
-                        document.body.removeEventListener('touchstart', startAudio);
-                    })
-                    .catch(error => {
-                        console.log("Aguardando interação do usuário para iniciar o áudio...");
-                        console.error("Erro ao tentar tocar o áudio:", error.message);
-                    });
-            };
-
-            // Adiciona listeners para os eventos de interação do usuário mais comuns
-            document.body.addEventListener('click', startAudio);
-            document.body.addEventListener('touchstart', startAudio);
-        });
-
-        // ===================================================================
-        // CORREÇÃO PARA O PROBLEMA DO BOTÃO VOLTAR / BFCACHE
-        // ===================================================================
-        window.addEventListener('pageshow', (event) => {
-            // Verifica se a página foi restaurada do BFcache (botão Voltar)
-            if (event.persisted) {
-                console.log("Página restaurada do cache. Tentando resumir o áudio.");
-
-                const backgroundAudio = document.getElementById('backgroundAudio');
-                if (backgroundAudio) {
-                    // Tenta retomar a reprodução. Geralmente é permitido se já tocou antes.
-                    backgroundAudio.play()
-                        .then(() => {
-                            console.log("Música de fundo resumida com sucesso após retorno.");
-                        })
-                        .catch(error => {
-                            console.error("Falha ao resumir o áudio via BFcache:", error.message);
-                            // Se falhar, o listener de clique/toque original deve ser usado na próxima interação.
-                        });
-                }
-            }
-        });
-    </script>
+    <script src="../script.js"></script>
+    <script src="../effects.js"></script>
 </body>
 
 </html>
