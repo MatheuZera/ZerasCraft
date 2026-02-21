@@ -603,3 +603,82 @@ document.querySelectorAll('.btn-access').forEach(button => {
         }
     });
 });
+
+function openHub(evt, gameId) {
+    // 1. Esconde todos os conteúdos
+    const contents = document.getElementsByClassName("hub-content");
+    for (let i = 0; i < contents.length; i++) {
+        contents[i].classList.remove("active");
+    }
+
+    // 2. Remove "active" de todas as abas
+    const tabs = document.getElementsByClassName("tab-link");
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+    }
+
+    // 3. Mostra o atual e marca a aba
+    document.getElementById(gameId).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+
+function toggleAccordion(btn) {
+    const parent = btn.parentElement;
+    const isActive = parent.classList.contains("active");
+
+    // Fecha todos os outros (opcional, estilo sanfona)
+    const allContents = document.getElementsByClassName("hub-content");
+    for (let content of allContents) {
+        content.classList.remove("active");
+    }
+
+    // Se não estava ativo, abre
+    if (!isActive) {
+        parent.classList.add("active");
+    }
+}
+
+
+const ZerasCountEngine = {
+    init() {
+        const targets = document.querySelectorAll('.count-me');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animate(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        targets.forEach(t => observer.observe(t));
+    },
+
+    animate(el) {
+        const target = parseFloat(el.getAttribute('data-target'));
+        const unit = el.getAttribute('data-unit') || "";
+        const isDecimal = target % 1 !== 0; // Deteta se é GB/MB ou Inteiro
+
+        const duration = 2000;
+        const start = performance.now();
+
+        const step = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            let current = progress * target;
+
+            if (isDecimal) {
+                // Formatação para GB/MB: 2 casas decimais
+                el.innerText = `${current.toFixed(2)} ${unit}`;
+            } else {
+                // Formatação para Inteiros: Sem decimais e com ponto de milhar
+                el.innerText = Math.floor(current).toLocaleString('pt-BR') + unit;
+            }
+
+            if (progress < 1) requestAnimationFrame(step);
+            else el.innerText = isDecimal ? `${target.toFixed(2)} ${unit}` : target.toLocaleString('pt-BR') + unit;
+        };
+
+        requestAnimationFrame(step);
+    }
+};
+document.addEventListener('DOMContentLoaded', () => ZerasCountEngine.init());

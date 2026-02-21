@@ -29,10 +29,10 @@ const buttonClickSound = new Audio(AUDIO_BASE_PATH + 'button-click.mp3');
  */
 function playSound(sound, volumePercentage) {
     const clonedSound = sound.cloneNode();
-    
+
     // Converte a porcentagem (ex: 70) para o valor decimal do JS (ex: 0.7)
     clonedSound.volume = volumePercentage / 100;
-    
+
     clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
 }
 
