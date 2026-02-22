@@ -518,23 +518,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+/**
+ * ZERA'S CRAFT - MOTOR DE ABAS ZIGZAG
+ * Controla a visibilidade dos painéis.
+ */
 function openTab(evt, tabId) {
-    // Esconde todos os panes
-    const panes = document.querySelectorAll(".tab-pane");
-    panes.forEach(p => p.classList.remove("active"));
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const tabBtns = document.querySelectorAll('.tab-btn');
 
-    // Remove classe active dos botões
-    const btns = document.querySelectorAll(".tab-btn");
-    btns.forEach(b => b.classList.remove("active"));
+    // 1. Esconde todos os painéis e remove active dos botões
+    tabPanes.forEach(pane => pane.classList.remove('active'));
+    tabBtns.forEach(btn => btn.classList.remove('active'));
 
-    // Mostra a aba atual e marca o botão
-    document.getElementById(tabId).classList.add("active");
-    evt.currentTarget.classList.add("active");
-
-    // Feedback visual (opcional, integra com seu player.js)
-    if (typeof showMessage === 'function') {
-        showMessage("ABA ALTERADA", "Explorando novo conteúdo", "fa-th-large");
-    }
+    // 2. Mostra o painel selecionado e ativa o botão clicado
+    document.getElementById(tabId).classList.add('active');
+    evt.currentTarget.classList.add('active');
 }
 
 
@@ -705,33 +703,23 @@ if (window.innerWidth <= 768) {
 
 
 /**
- * MOTOR DO CARROSSEL
- * Atualiza o banner principal baseado na miniatura clicada.
+ * ZERA'S CRAFT - HERO ENGINE
+ * Troca imagem do banner pela da thumb e atualiza textos.
  */
-function updateHero(element) {
-    const banner = document.getElementById('heroBanner');
+function heroSwitcher(element) {
+    const banner = document.getElementById('mainBanner');
     const title = document.getElementById('heroTitle');
     const desc = document.getElementById('heroDesc');
-    const allThumbs = document.querySelectorAll('.thumb');
+    const thumbs = document.querySelectorAll('.t-box');
 
-    // Inicia transição suave
-    banner.style.opacity = '0.5';
+    // 1. Atualiza a imagem (Captura a mesma da thumb)
+    banner.src = element.querySelector('img').src;
 
-    setTimeout(() => {
-        // Coleta dados dos atributos HTML
-        const newImg = element.getAttribute('data-img');
-        const newTitle = element.getAttribute('data-title');
-        const newDesc = element.getAttribute('data-desc');
+    // 2. Atualiza textos do card estático
+    title.innerText = element.getAttribute('data-title');
+    desc.innerText = element.getAttribute('data-desc');
 
-        // Atualiza elementos
-        banner.src = newImg;
-        title.innerText = newTitle;
-        desc.innerText = newDesc;
-
-        // Gerencia classe de destaque (Active)
-        allThumbs.forEach(t => t.classList.remove('active'));
-        element.classList.add('active');
-
-        banner.style.opacity = '1';
-    }, 150);
+    // 3. Gerencia destaque visual
+    thumbs.forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
 }

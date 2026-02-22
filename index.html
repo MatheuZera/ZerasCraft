@@ -160,51 +160,37 @@
             </div>
         </section>
 
-        <div class="hero-container">
-            <div class="hero-main">
-                <img src="assets/images/geral/banner-fundo.gif" id="heroBanner" class="hero-img">
+        <div class="hero-viewport">
+            <div class="hero-banner-area">
+                <img src="assets/images/geral/banner-img.jpg" id="mainBanner" class="hero-full-img">
 
-                <div class="hero-card">
-                    <div class="hero-meta">
-                        <span class="tag-new">NOVIDADE</span>
-                        <span class="tag-event"><i class="fas fa-calendar-alt"></i> EVENTO LUNAR</span>
-                    </div>
-
+                <div class="hero-info-static">
                     <h2 id="heroTitle">Ano Novo Lunar</h2>
-
-                    <div class="hero-details">
-                        <span class="detail-item"><i class="fas fa-gift"></i> Recompensa Grátis</span>
-                        <span class="detail-item"><i class="fas fa-clock"></i> Tempo Limitado</span>
-                    </div>
-
                     <p id="heroDesc">
                         Comemore o Ano do Cavalo com conteúdos selecionados no Minecraft Marketplace e ganhe o pacote de
                         skins Elegance do Ano Novo Lunar gratuitamente!
                     </p>
 
-                    <a href="#" class="hero-btn">
+                    <a href="#" class="hero-btn-animate">
                         CONFIRA AS OFERTAS <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
-            </div>
 
-            <div class="hero-thumbs">
-                <div class="thumb active" onclick="updateHero(this)" data-img="assets/images/geral/banner-fundo.gif"
-                    data-title="Ano Novo Lunar"
-                    data-desc="Comemore o Ano do Cavalo com conteúdos selecionados no Minecraft Marketplace e ganhe o pacote de skins Elegance do Ano Novo Lunar gratuitamente!">
-                    <img src="assets/images/geral/banner-fundo.gif">
-                </div>
+                <div class="hero-thumbs-floating">
+                    <div class="t-box active" onclick="heroSwitcher(this)" data-title="Ano Novo Lunar"
+                        data-desc="Comemore o Ano do Cavalo com conteúdos selecionados no Minecraft Marketplace e ganhe o pacote de skins Elegance do Ano Novo Lunar gratuitamente!">
+                        <img src="assets/images/geral/banner-img.jpg">
+                    </div>
 
-                <div class="thumb" onclick="updateHero(this)" data-img="assets/images/geral/banner-img.jpg"
-                    data-title="Snapshot 26.1"
-                    data-desc="Explore as novas mudanças técnicas e correções de bugs na versão de testes mais recente do Java Edition.">
-                    <img src="assets/images/geral/banner-img.jpg">
-                </div>
+                    <div class="t-box" onclick="heroSwitcher(this)" data-title="Snapshot 26.1"
+                        data-desc="Confira as novas mudanças técnicas e correções de bugs desta semana diretamente no seu jogo.">
+                        <img src="assets/images/promo/snapshot.jpg">
+                    </div>
 
-                <div class="thumb" onclick="updateHero(this)" data-img="assets/images/geral/icone.png"
-                    data-title="Minecraft Legends"
-                    data-desc="Lidere seus aliados em batalhas heróicas para defender o Overworld da devastação dos piglins.">
-                    <img src="assets/images/geral/icone.png">
+                    <div class="t-box" onclick="heroSwitcher(this)" data-title="Marketplace"
+                        data-desc="Explore novos mundos e texturas criadas pela comunidade para expandir sua experiência.">
+                        <img src="assets/images/promo/market.jpg">
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,165 +1,129 @@
-/* --- HERO CAROUSEL CSS --- */
-.hero-container {
-    background: #0b0b0b;
-    max-width: 1200px;
-    margin: 20px auto;
-    user-select: none;
-    /* Mantendo o padrão Industrial */
-}
-
-.hero-main {
+/* --- ESTILOS DO HERO --- */
+.hero-viewport {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 7;
-    /* Proporção PC */
+    background: #0b0b0b;
     overflow: hidden;
+    user-select: none;
+    /* */
 }
 
-.hero-img {
+.hero-banner-area {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    /* Ocupa grande parte da tela no PC */
+}
+
+.hero-full-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.3s ease-in-out;
+    /* Garante que a imagem preencha todo o espaço */
 }
 
-/* Card de Informações */
-.hero-card {
+/* MENU DE TEXTO ESTÁTICO */
+.hero-info-static {
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     left: 40px;
     background: #111;
     padding: 35px;
-    width: 440px;
+    width: 420px;
     border-top: 4px solid #333;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+    z-index: 10;
 }
 
-.hero-meta {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.tag-new {
-    background: #fff;
-    color: #000;
-    font-size: 9px;
-    font-weight: 900;
-    padding: 2px 6px;
-}
-
-.tag-event {
-    color: #aaa;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.hero-card h2 {
-    font-size: 28px;
+.hero-info-static h2 {
+    font-size: 26px;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
-.hero-details {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-    color: #3c8527;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.hero-card p {
+.hero-info-static p {
     font-size: 14px;
     color: #ccc;
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 25px;
 }
 
-/* Botão Verde Minecraft */
-.hero-btn {
+/* BOTÃO COM ANIMAÇÃO SUAVE */
+.hero-btn-animate {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     background: #3c8527;
     color: #fff;
-    padding: 14px 30px;
+    padding: 12px 25px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 15px;
     border-bottom: 4px solid #1a3a11;
+    transition: transform 0.3s ease, background 0.3s ease;
+    /* Animação exclusiva */
 }
 
-/* Miniaturas */
-.hero-thumbs {
+.hero-btn-animate:hover {
+    transform: translateY(-3px);
+    background: #4ca332;
+}
+
+/* THUMBS FLUTUANTES À DIREITA */
+.hero-thumbs-floating {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    padding: 20px;
-    background: var(--mc-card);
+    gap: 12px;
+    z-index: 10;
 }
 
-.thumb {
-    width: 120px;
-    height: 70px;
+.t-box {
+    width: 110px;
+    height: 60px;
     border: 2px solid #222;
     cursor: pointer;
-    opacity: 0.6;
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.3s;
 }
 
-.thumb.active {
+.t-box.active {
     border-color: #3c8527;
-    /* Verde oficial */
-    opacity: 1;
-    transform: translateY(-5px);
+    transform: scale(1.05);
 }
 
-.thumb img {
+.t-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* RESPONSIVIDADE MOBILE */
+/* MOBILE: COMPACTAÇÃO */
 @media (max-width: 768px) {
-    .hero-main {
-        aspect-ratio: auto;
+    .hero-banner-area {
+        height: auto;
         display: flex;
         flex-direction: column;
     }
 
-    .hero-img {
-        height: 240px;
+    .hero-full-img {
+        height: 250px;
     }
 
-    .hero-card {
+    .hero-info-static {
         position: relative;
         width: 100%;
         left: 0;
-        padding: 30px 20px;
+        bottom: 0;
         text-align: center;
-        box-shadow: none;
+        padding: 30px 20px;
     }
 
-    .hero-meta,
-    .hero-details {
+    .hero-thumbs-floating {
+        position: relative;
+        right: 0;
+        bottom: 0;
         justify-content: center;
-    }
-
-    .hero-btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .hero-thumbs {
-        gap: 10px;
-    }
-
-    .thumb {
-        width: 90px;
-        height: 55px;
+        padding: 20px;
+        background: #0b0b0b;
     }
 }
 
@@ -1004,7 +968,7 @@
 
 /* Container e Dark Mode */
 .zigzag-section {
-    background: #0c0c0c;
+    background: var(--mc-dark);
     color: #fff;
     padding: 60px 20px;
 }
@@ -1042,46 +1006,72 @@
     /* Título branco em vez de verde */
 }
 
-/* Linhas em Zigue-Zague */
+/* --- LAYOUT ZIGZAG --- */
+
+/* Navegação das Abas */
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 50px;
+    border-bottom: 2px solid var(--mc-border);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: #888;
+    padding: 15px 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.tab-btn.active {
+    color: #fff;
+    border-bottom: 3px solid #3c8527;
+    /* Verde Minecraft */
+}
+
+/* Gerenciamento de Visibilidade */
 .tab-pane {
     display: none;
+    /* Esconde por padrão */
 }
 
 .tab-pane.active {
     display: block;
-    animation: fadeIn 0.5s ease;
+    /* Mostra apenas a ativa */
 }
 
+/* Lógica das Linhas Zigzag */
 .zigzag-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 50px;
+    gap: 40px;
     margin-bottom: 80px;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-/* A MÁGICA: Inverte a ordem nas linhas pares */
+/* Inverte a ordem em linhas pares para criar o zigzag */
 .zigzag-row:nth-child(even) {
     flex-direction: row-reverse;
 }
 
 .zz-text {
     flex: 1;
-    text-align: left;
 }
 
 .zz-text h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #ffffff;
+    color: #fff;
 }
 
 .zz-text p {
-    color: #d3d3d3;
-    line-height: 1.6;
+    color: #aaa;
+    line-height: 1.8;
+    font-size: 1.1rem;
 }
 
 .zz-image {
@@ -1094,15 +1084,29 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+/* --- RESPONSIVIDADE MOBILE --- */
+@media (max-width: 768px) {
+    .tabs-nav {
+        flex-direction: column;
+        /* Abas empilham no mobile */
+        border: none;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .tab-btn {
+        width: 100%;
+        border-bottom: 1px solid #222;
+    }
+
+    .zigzag-row,
+    .zigzag-row:nth-child(even) {
+        flex-direction: column;
+        /* Tira o zigzag e empilha tudo verticalmente */
+        text-align: center;
+        gap: 20px;
+    }
+
+    .zz-text h2 {
+        font-size: 1.8rem;
     }
 }
 
