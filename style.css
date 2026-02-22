@@ -406,22 +406,29 @@ body {
 /* --- NAVEGAÇÃO DESKTOP (PC) --- */
 @media (min-width: 1025px) {
 
-    .nav-mobile,
-    .sidebar-glass,
-    .overlay {
-        display: none !important;
-    }
-
+    /* --- NAVEGAÇÃO PC COM EFEITO DE VIDRO --- */
     .nav-pc {
         position: fixed;
         top: 0;
         width: 100%;
         height: 80px;
-        background: var(--dark-bg);
-        border-bottom: 1px solid #222;
+        z-index: 1000;
         display: flex;
         align-items: center;
-        z-index: 1000;
+
+        /* A mágica do vidro */
+        background: rgba(11, 11, 11, 0.7);
+        /* Fundo preto semi-transparente */
+        backdrop-filter: blur(12px);
+        /* Desfoque do que está atrás */
+        -webkit-backdrop-filter: blur(12px);
+        /* Suporte para Safari */
+
+        /* Borda sutil de reflexo */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* Sombra para destacar do conteúdo */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
 
     .container-pc {
@@ -431,7 +438,14 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 20px;
+        padding: 0 40px;
+    }
+
+    /* Esconde elementos mobile conforme seu código */
+    .nav-mobile,
+    .sidebar-glass,
+    .overlay {
+        display: none !important;
     }
 
     .logo {
@@ -3190,7 +3204,7 @@ var .play-pause {
 
 .faq-question:hover {
     background: #222;
-    color: var(--green-mc);
+    color: #acacac;
 }
 
 .faq-answer {

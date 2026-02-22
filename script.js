@@ -516,8 +516,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
-
 /**
  * ZERA'S CRAFT - MOTOR DE ABAS ZIGZAG
  * Controla a visibilidade dos painéis.
