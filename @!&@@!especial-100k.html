@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
     <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zera's Craft - 100k!</title> <!---->
+    <title>Zera's Craft | Especial 100k</title> <!---->
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
-    <link rel="icon" href="assets/images/1.site/icone.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="style2.css"> <!---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!---->
 
@@ -60,309 +61,438 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
+<!----------------------------- Desktop --------------------------------->
+
 <body>
 
-    <div id="centralMessage" class="central-message"></div>
-    <audio id="backgroundAudio"></audio>
+    <nav class="nav-pc">
+        <div class="container-pc">
+            <div class="logo">ZERAS CRAFT</div>
 
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="index.html" class="header-logo">Zera's Craft</a>
-            <button class="menu-toggle" aria-label="Abrir menu de navegação">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index" class="nav-link" data-page="home">Início</a></li>
-                    <li><a href="arquivos" class="nav-link" data-page="home">Arquivos</a></li>
-                    <li><a href="comunidade" class="nav-link" data-page="home">Comunidade</a></li>
-                    <li><a href="eventos" class="nav-link" data-page="home">Eventos</a></li>
-                    <li><a href="pixel-legends" class="nav-link" data-page="home">Pixel Legends</a></li>
-                    <li><a href="equipe" class="nav-link" data-page="home">Equipe</a></li>
-                    <li><a href="canal" class="nav-link" data-page="home">Canal Oficial</a></li>
-                    <li><a href="recursos" class="nav-link" data-page="home">Recursos</a></li>
-                </ul>
-            </nav>
+            <ul class="menu-pc">
+                <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
+                <li class="dropdown">
+                    <a href="#">Jogos <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="#">Bedrock Edition</a></li>
+                        <li><a href="#">Java Edition</a></li>
+                    </ul>
+                </li>
+                <li><a href="arquivos">Arquivos</a></li>
+                <li><a href="comunidade">Comunidade</a></li>
+                <li><a href="eventos">Eventos</a></li>
+                <li><a href="pixel-legends">Pixel Legends</a></li>
+                <li><a href="canais">Canais</a></li>
+                <li class="dropdown">
+                    <a href="#">Outros <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="suporte">Suporte</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="header-actions">
+                <span class="server-ip" onclick="copyIP() ">IP Pixel Legends</span>
+                <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
+            </div>
         </div>
-    </header>
-    <!-------------------------------------------------------------------------------------------------------------->
+    </nav>
+
+    <!----------------------------- Mobile ---------------------------------->
+
+    <nav class="nav-mobile">
+        <div class="logo-mobile">ZERAS CRAFT</div>
+        <button class="burger-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars" id="icon-bars"></i>
+        </button>
+    </nav>
+
+    <aside class="sidebar-glass" id="sidebar">
+        <div class="sidebar-header">
+            <span class="menu-title">MENU</span>
+            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        </div>
+
+        <ul class="sidebar-links">
+            <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Jogos</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <ul class="sidebar-sub">
+                    <li><a href="#">Bedrock Edition</a></li>
+                    <li><a href="#">Java Edition</a></li>
+                </ul>
+            </li>
+            <li><a href="arquivos">Arquivos</a></li>
+            <li><a href="comunidade">Comunidade</a></li>
+            <li><a href="eventos">Eventos</a></li>
+            <li><a href="pixel-legends">Pixel Legends</a></li>
+            <li><a href="canais">Canais</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Outros</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <ul class="sidebar-sub">
+                    <li><a href="suporte">Suporte</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="sidebar-actions">
+            <div class="server-ip-box" onclick="copyIP()">
+                <span class="ip-text">IP Pixel Legends</span>
+                <i class="far fa-copy"></i>
+            </div>
+
+            <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
+        </div>
+    </aside>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!--------------------------------------------------------------->
+
     <main>
-        <section class="hero-section">
-            <div class="hero-image-overlay"></div>
-            <div class="hero-content">
-                <div class="server-branding">
-                    <img src="assets/images/1.site/icone.png" alt="Ícone do Servidor Zera's Craft" class="server-icon">
-                </div>
-                <h1>Especial 100k de Inscritos!</h1>
-                <p class="hero-subtitle">Agradeço à Todos e Todas pelo Apoio!</p>
-                <div class="hero-social-links">
-                    <a href="https://discord.com/channels/1390120239588577482/1398008350796546068" target="_blank"
-                        rel="noopener noreferrer" class="btn-primary">
-                        <i class="fab fa-discord"></i> Pixel Legends
-                    </a>
-                    <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-discord"></i> Entrar no Discord
-                    </a>
-                    <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                        class="btn-primary">
-                        <i class="fab fa-youtube"></i> Canal YouTube
-                    </a>
+        <section class="hero">
+            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif')">
+            </div>
+
+            <div class="container hero-content reveal">
+                <span class="hero-tag">Mundo Zera's Craft</span>
+                <h1>Especial 100k Inscritos!</h1>
+                <p>Muito Obrigado pelo Apoio de Todos e Todas por me acompanharem desde o Início! TMJ.</p>
+                <div class="hero-btns">
+                    <a href="https://discord.gg/GYGVBqGEwP" class="btn-big-green">DISCORD <i
+                            class="fas fa-chevron-right"></i></a>
+                    <a href="https://www.youtube.com/@MatheuZera88" class="btn-big-outline">CANAL OFICIAL</a>
                 </div>
             </div>
         </section>
 
-        <section class="content-section">
-            <div class="secao-cards-preta">
-                <secao-titulo>ESPECIAL 100K DE INSCRITOS! - Recursos</secao-titulo>
-                <p>Meu Pack de Edição Completa e Outras Coisas para todos vocês usarem!</p>
-                <br>
-                <div class="grid-container">
-                    <div class="content-card">
-                        <div class="card-thumbnail-wrapper">
-                            <img src="especial-100k/packzera/Craft.gif" alt="Miniatura do Conteúdo"
-                                class="card-thumbnail">
-                            <div class="card-tag-amarela">PACK DE EDIÇÃO</div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">PACKZERA DELUXE [4.0]</h3>
-                            <p class="card-description">Meu Pack de Edição Completa!.</p>
+        <div class="section-header section-games">
+            <h2>RECURSOS ESPECIAIS</h2>
+        </div>
 
-                            <a href="especial-100k/packzera" class="card-button">
-                                ACESSAR <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
+        <section class="section-software">
+            <div class="software-grid">
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="assets/images/geral/banner-fundo.gif" class="header-banner">
                     </div>
-
-                     <div class="content-card">
-                        <div class="card-thumbnail-wrapper">
-                            <img src="especial-100k/packzera/Plus.gif" alt="Miniatura do Conteúdo"
-                                class="card-thumbnail">
-                            <div class="card-tag-amarela">WEB</div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Ultimate</h3>
+                            <p>Text.</p>
                         </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Web Ultimate</h3>
-                            <p class="card-description">Tudo que você Precisa está na Web!.</p>
-
-                            <a href="especial-100k/web-ultimate" class="card-button">
-                                ACESSAR <i class="fas fa-arrow-right"></i>
+                        <div class="card-footer">
+                            <a href="especial-100k/adobe" class="dl-link">
+                                <i class="fas fa-edit"></i> Instalar
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="secao-cards-verde">
-            <div class="">
-                <secao-titulo>ESPECIAL 100K DE INSCRITOS! - Mobile Ultimate</secao-titulo>
-                <p>Listei várias coisas para cada Plataforma para o meu <strong>Especial 100K de Inscritos</strong> do
-                    Canal, como..</p>
-                <br>
-            </div>
-
-            <div class="grid-container">
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="especial-100k/packzera/Legacy.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-verde">MOBILE</div>
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="assets/images/geral/banner-fundo.gif" class="header-banner">
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Android Ultimate</h3>
-                        <subtitulo-card>Google</subtitulo-card>
-                        <p class="card-description">Dispositivos Android são famosos pela liberdade de Instalar Aplicativos Externos, então tome aqui uns Recursos Massas!</p>
-                        <a href="especial-100k/android-ultimate" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>PackZera Oficial</h3>
+                            <p>Text.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="especial-100k/packzera" class="dl-link">
+                                <i class="fas fa-folder"></i> Ver Pacotes
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="especial-100k/packzera/Lite.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-verde">MOBILE</div>
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="assets/images/geral/banner-fundo.gif" class="header-banner">
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">iPhone Ultimate</h3>
-                        <subtitulo-card>Apple</subtitulo-card>
-                        <p class="card-description">Sendo um Dispotivo bem famoso pela sua Elegância, tem um ótimo sistema de Segurança, então temos alguns Links Interessantes.. (Incluí o <strong>jailbreak-ios</strong> Caso Quiser hehe).</p>
-
-                        <a href="especial-100k/iphone-ultimate" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Web Ultimate</h3>
+                            <p>Text.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="especial-100k/web" class="dl-link">
+                                <i class="fas fa-archive"></i> Acessar
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="secao-cards-preta">
-            <div class="content-section">
-                <secao-titulo>ESPECIAL 100K DE INSCRITOS! - PC Ultimate</secao-titulo>
-                <p>Listei várias coisas para cada Plataforma para o meu <strong>Especial 100K de Inscritos</strong> do
-                    Canal, como..</p>
-                <br>
+        <div class="section-header section-games">
+            <h2>MOBILE ULTIMATE</h2>
+        </div>
+
+        <section class="section-software">
+            <div class="software-grid">
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="assets/images/geral/banner-fundo.gif" class="header-banner">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Android Ultimate</h3>
+                            <p>Dispositivos Android são famosos pela liberdade de Instalar Aplicativos Externos, então tome aqui uns Recursos Maneiros!!.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="especial-100k/android" class="dl-link">
+                                <i class="fab fa-android"></i> Acessar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="assets/images/geral/banner-fundo.gif" class="header-banner">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>iPhone Ultimate</h3>
+                            <p>Sendo um dos Dispositivos mais famosos pela sua Elegância, tendo um ótimo Sistema de Segurança, então temos alguns Links Interessantes e Seguros.. (Incluí o <strong>jailbreak-ios</strong> Caso Queira hehe).</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="especial-100k/iphone" class="dl-link">
+                                <i class="fab fa-apple"></i> Acessar
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="grid-container">
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="especial-100k/packzera/Essenciais.gif" alt="Miniatura do Conteúdo"
-                            class="card-thumbnail">
-                        <div class="card-tag-branca">PC/DESKTOP</div>
+        <div class="section-header section-games">
+            <h2>DESKTOP ULTIMATE (PC)</h2>
+        </div>
+
+        <section class="section-software">
+            <div class="software-grid">
+
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="assets/images/geral/banner-fundo.gif" class="header-banner">
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Linux Ultimate</h3>
-                        <subtitulo-card>Linus Torvalds</subtitulo-card>
-                        <p class="card-description">Um Sistema Leve e Otimizado para Todos os PCs, tem uma estrutura muito Limpa e Dinâmica, mas o problema de Incompatibilidade atrapalha bastante, então seraparei algumas coisas que tornarão seu Linux em outra cara!</p>
-
-                        <a href="especial-100k/linux-ultimate" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="especial-100k/packzera/Plus.gif" alt="Miniatura do Conteúdo" class="card-thumbnail">
-                        <div class="card-tag-branca">PC/DESKTOP</div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">MacOS Ultimate</h3>
-                        <subtitulo-card>Apple</subtitulo-card>
-                        <p class="card-description">O Sistema Operacional mais Famoso pela sua Produtividade e Edição em Geral, sendo usado em diversas áreas e sistemas, para deixar mais intuitivo ainda, incluí algumas coisas aqui também!</p>
-
-                        <a href="especial-100k/mac-ultimate" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Mac'OS Ultimate</h3>
+                            <p>O Sistema Operacional mais Famoso pela sua Produtividade e Edição Geral, sendo usado em diversas áreas e sistemas, para deixar mais intuitivo ainda, incluí algumas coisas legais aqui também!</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="especial-100k/mac" class="dl-link">
+                                <i class="fab fa-apple"></i> Acessar
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="content-card">
-                    <div class="card-thumbnail-wrapper">
-                        <img src="especial-100k/packzera/Templates.gif" alt="Miniatura do Conteúdo"
-                            class="card-thumbnail">
-                        <div class="card-tag-branca">PC/DESKTOP</div>
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="assets/images/geral/banner-fundo.gif" class="header-banner">
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Windows Ultimate</h3>
-                        <subtitulo-card>Microsoft</subtitulo-card>
-                        <p class="card-description">Agora.. Agora chegou o mais Conhecido no Mundo Inteiro, pela sua Simplicidade de Usar, e ter bastante Suporte à várias coisa, (tá certo que a Microsoft dá uns vacilos, más.. fazer oq), incluí várias coisas de Produtividade e Recursos Gerais.</p>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Linux Ultimate</h3>
+                            <p>Um Sistema Leve e Otimizado para Todos os PCs, tendo uma estrutura muito Limpa e Dinâmica, mas o problema de Incompatibilidade atrapalha bastante, então separei algumas coisas que tornarão seu Linux em outra cara!</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="especial-100k/linux" class="dl-link">
+                                <i class="fab fa-linux"></i> Acessar
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-                        <a href="especial-100k/windows-ultimate" class="card-button">
-                            ACESSAR <i class="fas fa-arrow-right"></i>
-                        </a>
+                <div class="software-card">
+                    <div class="card-header-banner">
+                        <img src="assets/images/geral/banner-fundo.gif" class="header-banner">
                     </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Windows Ultimate</h3>
+                            <p>Agora.. Agora chegou o mais Conhecido no Mundo Inteiro, pela sua Simplicidade de Usar, e ter bastante Suporte à várias coisas, (tá certo que a Microsoft dá uns vacilos, más.. fazer oq); incluí várias coisas de Produtividade e Recursos Gerais sugeridos pela nossa Comunidade.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="especial-100k/windows" class="dl-link">
+                                <i class="fab fa-windows"></i> Acessar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container stats-flex reveal">
+                <div class="stat-item">
+                    <strong class="counter" id="stat-total" data-target="0">0</strong>
+                    <span>MEMBROS TOTAIS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong class="counter" id="stat-online" data-target="0">0</strong>
+                    <span>MEMBROS ONLINE</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong>02/07/2025</strong>
+                    <span>CRIADO EM</span>
                 </div>
             </div>
         </section>
     </main>
-    <!-------------------------------------------------------------------------------------------------------------->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <h3 class="footer-logo-title">Mundo Zera's Craft</h3>
-                    <p>Sua aventura em Minecraft começa aqui! Conecte-se e explore um mundo de possibilidades com nossa
-                        comunidade vibrante.</p>
-                    <div class="footer-social-links">
-                        <a href="https://discord.gg/GYGVBqGEwP" target="_blank" rel="noopener noreferrer"
-                            aria-label="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.youtube.com/@MatheuZera88" target="_blank" rel="noopener noreferrer"
-                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column footer-nav-links">
-                    <ul>
-                        <li><a href="index">Início</a></li>
-                        <li><a href="arquivos">Arquivos</a></li>
-                        <li><a href="comunidade">Comunidade</a></li>
-                        <li><a href="eventos">Eventos</a></li>
-                        <li><a href="pixel-legends">Pixel Legends</a></li>
-                        <li><a href="equipe">Equipe</a></li>
-                        <li><a href="canal">Canal Oficial</a></li>
-                        <li><a href="recursos">Recursos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-contact">
-                    <h4>Contato & Suporte</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:contato@zeracraft.com">contato@zeracraft.com</a>
-                    </p>
-                    <p><i class="fas fa-headset"></i> <a
-                            href="https://discord.com/channels/1390120239588577482/1390125316239917118">Suporte via
-                            Discord</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mundo Zera's Craft - Servidor Online</p>
-                </div>
-                <div class="footer-column footer-newsletter">
-                    <h4>Fique por Dentro</h4>
-                    <p>Entre no nosso Servidor para receber as últimas notícias e atualizações!</p>
-                    <form class="newsletter-form">
-                        <div class="text-center margin-top-20">
-                            <a href="https://discord.com/channels/1390120239588577482/1390125369306255501"
-                                class="btn-primary"><i class="fas fa-users"></i> Entrar</a>
-                        </div>
-                    </form>
-                </div>
+
+    <!--------------------------------------------------------------->
+
+    <div class="music-player-container reveal">
+        <div class="player-controls">
+            <div class="now-playing">
+                <i class="fas fa-music"></i>
+                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
             </div>
-            <div class="footer-bottom">
-                <p>© <span id="currentYear"></span> Mundo Zera's Craft. Todos os direitos reservados.</p>
+
+            <div class="progress-area">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <span id="durationDisplay">0:00</span>
+            </div>
+
+            <div class="main-controls">
+                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
+                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
+                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
+                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+
+                <div class="volume-container">
+                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
             </div>
         </div>
-        <br>
-        <br>
-        <div class="audio-control-bar">
-            <div class="container audio-control-content">
-                <div class="music-player-details">
-                    <span id="musicTitleDisplay">Clique para Tocar</span>
-                    <div class="progress-bar-and-times">
-                        <span id="currentTimeDisplay" class="time-display">0:00</span>
-                        <input type="range" id="audioProgressBar" class="audio-progress-bar" value="0">
-                        <span id="durationDisplay" class="time-display">0:00</span>
-                    </div>
+    </div>
+
+    <audio id="backgroundAudio"></audio>
+
+    <div id="centralMessage" class="central-message">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message-content">
+            <strong>Título</strong>
+            <span>Informação</span>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------->
+
+    <footer class="main-footer">
+        <div class="footer-divider"></div>
+
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">ZERAS<span>CRAFT</span></div>
+                <p class="brand-description">
+                    Esta é o nosso lugar para conversar, mostrar e interagir com nossos Inscritos/Membros de Minecraft,
+                    nossos Crafters sempre buscando novas maneiras de Jogar com a Rapaziada.
+                </p>
+                <div class="newsletter-footer">
+                    <button class="btn-sidebar"
+                        onclick="showClickNotification('Olá Crafter!', 'Acesse nosso Canal! <br> E Nossos Links.')">
+                        <i class="fas fa-bolt"></i> CLIQUE AQUI
+                    </button>
+                    <h5 class="newsletter-footer">FIQUE POR DENTRO</h5>
                 </div>
-                <div class="music-playback-controls">
-                    <button id="audioPrevButton" class="music-button" aria-label="Música anterior">
-                        <i class="fas fa-backward"></i>
-                    </button>
-                    <button id="audioControlButton" class="music-button main-play-pause-button"
-                        aria-label="Tocar/Pausar música">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button id="audioNextButton" class="music-button" aria-label="Próxima música">
-                        <i class="fas fa-forward"></i>
-                    </button>
+            </div>
+
+            <div class="footer-col">
+                <h4>EXPLORAR</h4>
+                <ul class="footer-links">
+                    <li><a href="https://www.youtube.com/@MatheuZera88"><i class="fas fa-chevron-right"></i> Canal
+                            Oficial YT</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125436805185656"><i
+                                class="fas fa-chevron-right"></i> Nosso Marketplace Craft</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125442731868180"><i
+                                class="fas fa-chevron-right"></i> Sobre nossas Wikipédias</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125448662614027"><i
+                                class="fas fa-chevron-right"></i> Solicite Parcerias!</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394709165640781975"><i
+                                class="fas fa-chevron-right"></i> Crie sua Página Web!</a></li>
+                    <li><a href="https://www.minecraft.net/"><i class="fas fa-chevron-right"></i> Minecraft.net</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>INFORMATIVOS</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.com/channels/1390120239588577482/1404385093493198909"><i
+                                class="fas fa-chevron-right"></i> Criar uma Guilda</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1398008350796546068"><i
+                                class="fas fa-chevron-right"></i> Pixel Legends</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Nossos Eventos</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125374695931994"><i
+                                class="fas fa-chevron-right"></i> Feedbacks</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Seja um(a) Staff</a></li>
+                    <li><a href="https://discord.gg/GYGVBqGEwP" class="status-indicator"><span class="dot"></span>
+                            EXPLORAR MAIS</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>COMUNIDADE</h4>
+                <p class="join-text">
+                    Junte-se a <span id="discord-count"></span> no nosso Discord Oficial.
+                </p>
+                <div class="social-grid">
+                    <a href="https://discord.gg/GYGVBqGEwP" class="social-box discord"><i
+                            class="fab fa-discord"></i></a>
+                    <a href="https://www.youtube.com/@MatheuZera88" class="social-box youtube"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
+                    <a href="#" class="social-box other"><i class="fab fa-plus"></i></a>
                 </div>
-                <div>
-                    <button id="audioModeButton" class="music-button" aria-label="Modo de reprodução">
-                        <i class="fas fa-repeat"></i>
-                    </button>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <div class="legal">
+                    <p class="copyright-text"
+                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                        &copy;
+                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        Zeras Craft. Todos os direitos reservados.
+                    </p>
+
+                    <span class="mojang-disclaimer"
+                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                        Não afiliado à Mojang Studios ou Microsoft.
+                    </span>
                 </div>
-                <div class="volume-container">
-                    <button id="volumeButton" class="music-button volume-button" aria-label="Controle de volume">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                    <input type="range" id="volumeSlider" class="audio-progress-bar volume-slider" min="0" max="1"
-                        step="0.01" value="1">
-                </div>
-                <div class="playback-speed-control">
-                    <select id="playbackSpeed" class="playback-speed-select">
-                        <option value="0.75">0.75x</option>
-                        <option value="1" selected>1x</option>
-                        <option value="1.25">1.25x</option>
-                        <option value="1.5">1.5x</option>
-                        <option value="2">2x</option>
-                    </select>
+                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up"></i>
                 </div>
             </div>
         </div>
     </footer>
 
-    <button id="scrollTopButton" class="scroll-top-button" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script src="script.js"></script>
-    <script src="reprodutor-musica.js"></script>
-    <script src="elementos.js"></script>
+    <script src="effects.js"></script>
+    <script src="player.js"></script>
 </body>
 
 </html>
