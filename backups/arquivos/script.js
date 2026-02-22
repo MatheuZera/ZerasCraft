@@ -518,23 +518,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+/**
+ * ZERA'S CRAFT - MOTOR DE ABAS ZIGZAG
+ * Controla a visibilidade dos painéis.
+ */
 function openTab(evt, tabId) {
-    // Esconde todos os panes
-    const panes = document.querySelectorAll(".tab-pane");
-    panes.forEach(p => p.classList.remove("active"));
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const tabBtns = document.querySelectorAll('.tab-btn');
 
-    // Remove classe active dos botões
-    const btns = document.querySelectorAll(".tab-btn");
-    btns.forEach(b => b.classList.remove("active"));
+    // 1. Esconde todos os painéis e remove active dos botões
+    tabPanes.forEach(pane => pane.classList.remove('active'));
+    tabBtns.forEach(btn => btn.classList.remove('active'));
 
-    // Mostra a aba atual e marca o botão
-    document.getElementById(tabId).classList.add("active");
-    evt.currentTarget.classList.add("active");
-
-    // Feedback visual (opcional, integra com seu player.js)
-    if (typeof showMessage === 'function') {
-        showMessage("ABA ALTERADA", "Explorando novo conteúdo", "fa-th-large");
-    }
+    // 2. Mostra o painel selecionado e ativa o botão clicado
+    document.getElementById(tabId).classList.add('active');
+    evt.currentTarget.classList.add('active');
 }
 
 
@@ -605,19 +603,12 @@ document.querySelectorAll('.btn-access').forEach(button => {
 });
 
 function openHub(evt, gameId) {
-    // 1. Esconde todos os conteúdos
     const contents = document.getElementsByClassName("hub-content");
-    for (let i = 0; i < contents.length; i++) {
-        contents[i].classList.remove("active");
-    }
-
-    // 2. Remove "active" de todas as abas
     const tabs = document.getElementsByClassName("tab-link");
-    for (let i = 0; i < tabs.length; i++) {
-        tabs[i].classList.remove("active");
-    }
 
-    // 3. Mostra o atual e marca a aba
+    for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+    for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+
     document.getElementById(gameId).classList.add("active");
     evt.currentTarget.classList.add("active");
 }
@@ -626,18 +617,24 @@ function toggleAccordion(btn) {
     const parent = btn.parentElement;
     const isActive = parent.classList.contains("active");
 
-    // Fecha todos os outros (opcional, estilo sanfona)
-    const allContents = document.getElementsByClassName("hub-content");
-    for (let content of allContents) {
-        content.classList.remove("active");
-    }
+    // Fecha os outros (Estilo Industrial)
+    document.querySelectorAll('.hub-content').forEach(item => item.classList.remove('active'));
 
-    // Se não estava ativo, abre
-    if (!isActive) {
-        parent.classList.add("active");
+    if (!isActive) parent.classList.add("active");
+}
+
+// NOVO: Função para garantir que comece fechado no Mobile
+function initHub() {
+    if (window.innerWidth <= 768) {
+        document.querySelectorAll('.hub-content').forEach(item => {
+            item.classList.remove('active');
+        });
     }
 }
 
+// Executa ao carregar e ao redimensionar
+window.addEventListener('load', initHub);
+window.addEventListener('resize', initHub);
 
 const ZerasCountEngine = {
     init() {
@@ -682,3 +679,47 @@ const ZerasCountEngine = {
     }
 };
 document.addEventListener('DOMContentLoaded', () => ZerasCountEngine.init());
+
+
+function toggleAccordion(btn) {
+    const accordion = btn.closest('.f-accordion');
+    const icon = btn.querySelector('i');
+
+    // Alterna estado
+    const isActive = accordion.classList.toggle('active');
+
+    // Troca ícone
+    if (isActive) {
+        icon.classList.replace('fa-plus', 'fa-minus');
+    } else {
+        icon.classList.replace('fa-minus', 'fa-plus');
+    }
+}
+
+// Resete Mobile: Inicia fechado
+if (window.innerWidth <= 768) {
+    document.querySelectorAll('.f-accordion').forEach(acc => acc.classList.remove('active'));
+}
+
+
+/**
+ * ZERA'S CRAFT - HERO ENGINE
+ * Troca imagem do banner pela da thumb e atualiza textos.
+ */
+function heroSwitcher(element) {
+    const banner = document.getElementById('mainBanner');
+    const title = document.getElementById('heroTitle');
+    const desc = document.getElementById('heroDesc');
+    const thumbs = document.querySelectorAll('.t-box');
+
+    // 1. Atualiza a imagem (Captura a mesma da thumb)
+    banner.src = element.querySelector('img').src;
+
+    // 2. Atualiza textos do card estático
+    title.innerText = element.getAttribute('data-title');
+    desc.innerText = element.getAttribute('data-desc');
+
+    // 3. Gerencia destaque visual
+    thumbs.forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+}
