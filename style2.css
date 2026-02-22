@@ -2348,3 +2348,254 @@
         flex: 0 0 100%;
     }
 }
+
+/* --- FUNDAÇÃO INDUSTRIAL SÓLIDA --- */
+.rank-container-elite {
+    padding: 60px 20px;
+    background: #0b0b0b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* MOLDURA BRANCA INDUSTRIAL */
+.table-frame-white {
+    width: 100%;
+    max-width: 1200px;
+    background: #111;
+}
+
+.thead-industrial {
+    display: flex;
+    background: #181818;
+    padding: 25px;
+    border-bottom: 2px solid #ffffff;
+}
+
+.th-c {
+    flex: 1;
+    text-align: center;
+    font-weight: 900;
+    color: #777;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+/* LINHAS REATIVAS */
+.t-row-elite {
+    display: flex;
+    padding: 25px;
+    align-items: center;
+    border-bottom: 1px solid #222;
+    transition: 0.2s ease;
+    background: #111;
+}
+
+.t-row-elite:hover {
+    background: #1a1a1a;
+    transform: scale(1.01);
+    z-index: 5;
+}
+
+/* NICKNAME: PRESERVA MINÚSCULAS */
+.nick-txt {
+    font-weight: 900;
+    color: #fff;
+    font-size: 15px;
+    text-transform: none;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.xbox-head {
+    width: 64px;
+    height: 64px;
+    border: 2px solid #333;
+    margin-bottom: 8px;
+}
+
+/* --- ÍCONES DE PÓDIO (AUTO-ANIMADOS) --- */
+.rank-icon-gold,
+.rank-icon-silver,
+.rank-icon-bronze,
+.rank-big,
+.gold-shield {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 5px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gold-shield,
+.rank-icon-gold {
+    color: #ffcc00;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+}
+
+.rank-icon-silver {
+    color: #c0c0c0;
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+}
+
+.rank-icon-bronze {
+    color: #cd7f32;
+    text-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
+}
+
+/* Animação disparada pelo hover da linha */
+.t-row-elite:hover .rank-icon-gold,
+.t-row-elite:hover .gold-shield {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+.t-row-elite:hover .rank-icon-silver {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.t-row-elite:hover .rank-icon-bronze {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.t-row-elite:hover .rank-big {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+/* POSIÇÕES E NÚMEROS GRANDES */
+.t-c {
+    flex: 1;
+    text-align: center;
+    color: #ccc;
+    font-weight: bold;
+}
+
+.rank-big {
+    font-size: 28px;
+    color: #444;
+    font-weight: 900;
+}
+
+/* TAGS BONITINHAS */
+.badge-pretty {
+    padding: 6px 15px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    border-radius: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+}
+
+.estrategico {
+    background: #37ad16;
+    color: #fff;
+}
+
+.combate {
+    background: #ff2525;
+    color: #fff;
+}
+
+/* BOTÃO DE MENU */
+.btn-elite-plus {
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.btn-elite-plus:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* TOOLTIP PREMIUM (MOBILE FIX) */
+.tooltip-premium-solid {
+    position: absolute;
+    background: #111;
+    border: 3px solid #ffffff;
+    padding: 0;
+    width: 340px;
+    display: none;
+    z-index: 9999;
+    box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.8);
+}
+
+.tip-header {
+    background: #ffffff;
+    color: #000;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tip-label {
+    font-weight: 900;
+    font-size: 10px;
+}
+
+.tip-close-btn {
+    background: none;
+    border: none;
+    font-weight: 900;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.tip-body {
+    padding: 30px 20px;
+}
+
+.tip-divider {
+    width: 50px;
+    height: 5px;
+    background: #3c8527;
+    margin: 15px 0;
+}
+
+.tip-footer {
+    background: #181818;
+    padding: 10px;
+    font-size: 10px;
+    font-weight: 900;
+    color: #444;
+    text-align: center;
+}
+
+/* --- RESPONSIVIDADE MOBILE --- */
+@media (max-width: 768px) {
+    .thead-industrial {
+        display: none;
+    }
+
+    .t-row-elite {
+        flex-direction: column;
+        gap: 20px;
+        border: 2px solid #333;
+        margin-bottom: 30px;
+        padding: 45px 20px;
+        text-align: center;
+    }
+
+    .t-c {
+        width: 100%;
+    }
+
+    /* Tooltip Centro no Mobile com Overlay de Fundo */
+    .tooltip-premium-solid {
+        position: fixed;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 85%;
+        box-shadow: 0 0 0 100vh rgba(0, 0, 0, 0.9);
+    }
+}

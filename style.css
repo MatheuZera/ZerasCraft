@@ -67,11 +67,8 @@ h4,
 }
 
 /*
-  ======================================================
-  ESTILO DE CARD COMPACTA PARA DOWNLOADS EXTERNOS
-  ======================================================
+  ESTILO GERAIS CSS
 */
-
 .secao-cards-preta {
     width: 100%;
     display: flex;
@@ -2077,7 +2074,6 @@ var .play-pause {
 .stats-section {
     background: var(--green-mc);
     padding: 40px 0;
-    margin-top: 60px;
 }
 
 .stats-flex {
@@ -3121,63 +3117,6 @@ var .play-pause {
         /* Botão maior para facilitar o clique no touch */
         font-size: 0.9rem;
     }
-}
-
-
-/* --- RANKINGS --- */
-.ranking-section-bg {
-    padding: 80px 0;
-    position: relative;
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-.ranking-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.rank-card {
-    background: rgba(20, 20, 20, 0.9);
-    border: 1px solid #444;
-    padding: 25px;
-    border-radius: 10px;
-}
-
-.rank-badge {
-    color: var(--gold);
-    font-weight: 800;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
-}
-
-.rank-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: #151515;
-    border-radius: 5px;
-}
-
-.rank-item.first {
-    border-left: 4px solid var(--gold);
-    background: #222;
-}
-
-.rank-item img {
-    border-radius: 4px;
-    border: 1px solid #444;
-}
-
-.rank-item .value {
-    margin-left: auto;
-    color: var(--green-mc);
-    font-weight: bold;
 }
 
 /* --- FAQ (Acordeão) --- */
