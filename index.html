@@ -83,12 +83,17 @@
                 <li><a href="eventos">Eventos</a></li>
                 <li><a href="pixel-legends">Pixel Legends</a></li>
                 <li><a href="canais">Canais</a></li>
-                <li><a href="suporte">Suporte</a></li>
+                <li class="dropdown">
+                    <a href="#">Outros <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="suporte">Suporte</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <div class="header-actions">
-                <span class="server-ip" onclick="copyIP()">IP Pixel Legends</span>
-                <a href="#" class="btn-green">LOJA VIP</a>
+                <span class="server-ip" onclick="copyIP() ">IP Pixel Legends</span>
+                <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
             </div>
         </div>
     </nav>
@@ -125,7 +130,15 @@
             <li><a href="eventos">Eventos</a></li>
             <li><a href="pixel-legends">Pixel Legends</a></li>
             <li><a href="canais">Canais</a></li>
-            <li><a href="suporte">Suporte</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Outros</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <ul class="sidebar-sub">
+                    <li><a href="suporte">Suporte</a></li>
+                </ul>
+            </li>
         </ul>
 
         <div class="sidebar-actions">
@@ -134,8 +147,7 @@
                 <i class="far fa-copy"></i>
             </div>
 
-            <a href="#" class="btn-green">LOJA VIP</a>
-            <a href="#" class="btn-jogar-agora">JOGAR AGORA <i class="fas fa-chevron-right"></i></a>
+            <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
         </div>
     </aside>
 
@@ -443,24 +455,6 @@
             </div>
         </section>
 
-        <section class="faq-section reveal">
-            <div class="container">
-                <h2 class="center">DÚVIDAS FREQUENTES</h2>
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleAcc(this)">
-                            <span>Como entro no servidor?</span>
-                            <i class="fas fa-plus"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Basta copiar nosso IP (jogar.zerascraft.net) e adicionar na sua lista de servidores na
-                                versão 1.21.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="gallery-section-bg" style="background-image: url('URL_DA_SUA_IMAGEM_DO_SPAWN.jpg');">
             <div class="tabs-overlay"></div>
             <div class="container tabs-relative">
@@ -682,28 +676,21 @@
                         <button class="btn-green">COMPRAR VIP AGORA <i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="accordion-list reveal">
-                    <div class="acc-item">
-                        <div class="acc-trigger" onclick="toggleAcc(this)">
-                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Dungeons_600x600.jpg"
-                                class="mini-icon">
-                            <span>Dúvidas Frequentes</span>
+        <section class="faq-section reveal">
+            <div class="container">
+                <h2 class="center"><br>DÚVIDAS FREQUENTES</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAcc(this)">
+                            <span>Como entro no servidor?</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
-                        <div class="acc-content">
-                            <p>Aqui você encontra respostas sobre conexões, pagamentos e regras.</p>
-                        </div>
-                    </div>
-                    <div class="acc-item">
-                        <div class="acc-trigger" onclick="toggleAcc(this)">
-                            <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft_Legends_600x600.jpg"
-                                class="mini-icon">
-                            <span>Regras do Servidor</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="acc-content">
-                            <p>Leia atentamente para evitar punições e banimentos.</p>
+                        <div class="faq-answer">
+                            <p>Basta copiar nosso IP (jogar.zerascraft.net) e adicionar na sua lista de servidores na
+                                versão 1.21.</p>
                         </div>
                     </div>
                 </div>
