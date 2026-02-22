@@ -83,12 +83,17 @@
                 <li><a href="eventos">Eventos</a></li>
                 <li><a href="pixel-legends">Pixel Legends</a></li>
                 <li><a href="canais">Canais</a></li>
-                <li><a href="suporte">Suporte</a></li>
+                <li class="dropdown">
+                    <a href="#">Outros <i class="fas fa-chevron-down arrow-icon"></i></a>
+                    <ul class="dropdown-pc-content">
+                        <li><a href="suporte">Suporte</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <div class="header-actions">
-                <span class="server-ip" onclick="copyIP()">IP Pixel Legends</span>
-                <a href="#" class="btn-green">LOJA VIP</a>
+                <span class="server-ip" onclick="copyIP() ">IP Pixel Legends</span>
+                <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
             </div>
         </div>
     </nav>
@@ -125,7 +130,15 @@
             <li><a href="eventos">Eventos</a></li>
             <li><a href="pixel-legends">Pixel Legends</a></li>
             <li><a href="canais">Canais</a></li>
-            <li><a href="suporte">Suporte</a></li>
+            <li class="sidebar-dropdown">
+                <div class="drop-header" onclick="toggleDrop(this)">
+                    <span>Outros</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <ul class="sidebar-sub">
+                    <li><a href="suporte">Suporte</a></li>
+                </ul>
+            </li>
         </ul>
 
         <div class="sidebar-actions">
@@ -134,8 +147,7 @@
                 <i class="far fa-copy"></i>
             </div>
 
-            <a href="#" class="btn-green">LOJA VIP</a>
-            <a href="#" class="btn-jogar-agora">JOGAR AGORA <i class="fas fa-chevron-right"></i></a>
+            <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
         </div>
     </aside>
 
@@ -164,15 +176,31 @@
         <section class="news-grid-container">
             <a href="#" class="mc-news-card">
                 <div class="news-image">
-                    <img src="assets/images/news/snapshot.jpg" alt="Notícia">
+                    <img src="assets/images/geral/banner-img.jpg" alt="Notícia">
                 </div>
+
                 <div class="news-info-overlay">
                     <span class="news-tag">NEWS</span>
-                    <h3 class="news-headline">MINECRAFT 26.1 SNAPSHOT 6</h3>
-                    <p class="news-description">Confira as novas mudanças técnicas e correções de bugs desta semana.</p>
+                    <h3 class="news-headline">MINECRAFT 26.1 SNAPSHOT 8</h3>
+                    <p class="news-description">
+                        A Minecraft Java Snapshot: Confira as novas mudanças técnicas e correções de bugs desta semana.
+                    </p>
                 </div>
             </a>
 
+            <a href="#" class="mc-news-card">
+                <div class="news-image">
+                    <img src="assets/images/news/snapshot.jpg" alt="Notícia">
+                </div>
+
+                <div class="news-info-overlay">
+                    <span class="news-tag">NEWS</span>
+                    <h3 class="news-headline">MINECRAFT 26.1 SNAPSHOT 8</h3>
+                    <p class="news-description">
+                        A Minecraft Java Snapshot: Confira as novas mudanças técnicas e correções de bugs desta semana.
+                    </p>
+                </div>
+            </a>
         </section>
 
         <section class="collectibles-section">
@@ -240,33 +268,44 @@
                         <span class="f-badge">PÚBLICO</span>
                         <h3>Online</h3>
                         <div class="f-accordion">
-                            <button class="acc-btn" onclick="toggleAccordion(this)">MUNDOS <i
-                                    class="fas fa-plus"></i></button>
-                            <div class="acc-panel">Jogue em servidores comunitários com milhares de jogadores.</div>
+                            <button class="acc-btn" onclick="toggleAccordion(this)">
+                                MUNDOS <i class="fas fa-plus"></i>
+                            </button>
+                            <div class="acc-panel">
+                                <div class="acc-inner">Jogue em servidores comunitários com milhares de jogadores.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="f-card border-purple">
                     <div class="f-img-box"><img src="assets/images/play/realms.png"></div>
                     <div class="f-content">
                         <span class="f-badge">PRIVADO</span>
                         <h3>Realms</h3>
                         <div class="f-accordion">
-                            <button class="acc-btn" onclick="toggleAccordion(this)">RECURSOS <i
-                                    class="fas fa-plus"></i></button>
-                            <div class="acc-panel">Seu próprio servidor online contínuo e seguro na nuvem.</div>
+                            <button class="acc-btn" onclick="toggleAccordion(this)">
+                                RECURSOS <i class="fas fa-plus"></i>
+                            </button>
+                            <div class="acc-panel">
+                                <div class="acc-inner">Seu próprio servidor online contínuo e seguro na nuvem.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="f-card border-blue">
                     <div class="f-img-box"><img src="assets/images/play/coop.png"></div>
                     <div class="f-content">
                         <span class="f-badge">PRIVADO</span>
                         <h3>Cooperativo</h3>
                         <div class="f-accordion">
-                            <button class="acc-btn" onclick="toggleAccordion(this)">LOCAL <i
-                                    class="fas fa-plus"></i></button>
-                            <div class="acc-panel">Jogue com amigos e familiares na sua rede local (LAN).</div>
+                            <button class="acc-btn" onclick="toggleAccordion(this)">
+                                LOCAL <i class="fas fa-plus"></i>
+                            </button>
+                            <div class="acc-panel">
+                                <div class="acc-inner">Jogue com amigos e familiares na sua rede local (LAN).</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -296,6 +335,53 @@
                 <button class="w-arrow next" onclick="moveWorld(1)"><i class="fas fa-arrow-right"></i></button>
             </div>
         </section>
+
+        <div class="zeras-hub" id="main-hub">
+            <div class="hub-sidebar">
+                <button class="tab-link active" onclick="openHub(event, 'game-1')">
+                    <img src="icon-mc.png"> Minecraft
+                </button>
+                <button class="tab-link" onclick="openHub(event, 'game-2')">
+                    <img src="icon-dungeons.png"> Minecraft Dungeons
+                </button>
+            </div>
+
+            <div class="hub-main">
+                <div id="game-1" class="hub-content active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Minecraft</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="hub-body">
+                        <div class="hub-inner">
+                            <div class="hub-media">
+                                <img src="assets/images/geral/banner-fundo.gif">
+                            </div>
+                            <div class="hub-info">
+                                <p>Explore mundos infinitos e construa castelos.</p>
+                                <a href="#" class="btn-saiba-mais">SAIBA MAIS ></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="game-2" class="hub-content">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Minecraft Dungeons</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="hub-body">
+                        <div class="hub-inner">
+                            <div class="hub-media">
+                                <img src="preview-dungeons.jpg">
+                            </div>
+                            <div class="hub-info">
+                                <p>Ação e aventura nas masmorras.</p>
+                                <a href="#" class="btn-saiba-mais">SAIBA MAIS ></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <section class="mc-section hero-dark">
             <div class="h-container" id="heroTrack">
