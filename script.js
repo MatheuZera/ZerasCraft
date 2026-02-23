@@ -21,6 +21,148 @@ backToTop.addEventListener('click', () => {
 });
 
 
+
+// SISTEMA DE NAVEGAÇÃO (PC & Mobile)
+// =================================================
+/**
+ * ZERA'S CRAFT - MOTOR DE NAVEGAÇÃO
+ */
+
+// 1. DESKTOP: ABRIR MEGA MENU (Animação Opacity/Visibility)
+function toggleMegaMenu(evt) {
+    if (evt.target.closest('.znav-mega-panel') || evt.target.closest('.znav-simple-drop')) {
+        return;
+    }
+
+    const clickedBtn = evt.currentTarget;
+    const isOpen = clickedBtn.classList.contains('open');
+
+    // Fecha todos
+    document.querySelectorAll('.znav-mega-btn').forEach(btn => btn.classList.remove('open'));
+
+    if (!isOpen) {
+        clickedBtn.classList.add('open');
+
+        // Auto-Reset: Força a primeira aba a aparecer e corrige conflito de layout flexível
+        const panel = clickedBtn.querySelector('.znav-mega-grid');
+        if (panel) {
+            const tabs = panel.querySelectorAll('.znav-tab');
+            const contents = panel.querySelectorAll('.znav-tab-content');
+
+            if (tabs.length > 0 && contents.length > 0) {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => { c.classList.remove('active'); });
+
+                tabs[0].classList.add('active');
+                contents[0].classList.add('active');
+            }
+        }
+    }
+}
+
+// Fechar com clique fora
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.znav-mega-btn')) {
+        document.querySelectorAll('.znav-mega-btn').forEach(btn => btn.classList.remove('open'));
+    }
+});
+
+// 2. DESKTOP: TROCA DE ABAS (Dinâmico para Main e Direita)
+function switchZnavTab(evt, targetId) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    const parentGrid = evt.currentTarget.closest('.znav-mega-grid');
+
+    // Remove classe ativa de todas as abas e painéis
+    parentGrid.querySelectorAll('.znav-tab').forEach(tab => tab.classList.remove('active'));
+    parentGrid.querySelectorAll('.znav-tab-content').forEach(content => content.classList.remove('active'));
+
+    // Adiciona classe ativa apenas na clicada e no conteúdo alvo
+    evt.currentTarget.classList.add('active');
+    const targetElement = parentGrid.querySelector(`#${targetId}`);
+    if (targetElement) {
+        targetElement.classList.add('active');
+    }
+}
+
+// 3. MOBILE: FULL SCREEN & SCROLL LOCK
+function openMobileMenu() {
+    document.getElementById('zmobSidebar').classList.add('active');
+    document.getElementById('zmobOverlay').classList.add('active');
+    document.documentElement.classList.add('z-lock-scroll');
+    document.body.classList.add('z-lock-scroll');
+}
+
+function closeMobileMenu() {
+    document.getElementById('zmobSidebar').classList.remove('active');
+    document.getElementById('zmobOverlay').classList.remove('active');
+    document.documentElement.classList.remove('z-lock-scroll');
+    document.body.classList.remove('z-lock-scroll');
+    setTimeout(slideBack, 300); // Reseta as telas ao fundo
+}
+
+function slideMobile(panelId) {
+    document.getElementById('zpanel-main').classList.add('slide-left');
+    document.getElementById(panelId).classList.add('active');
+}
+
+function slideBack() {
+    document.getElementById('zpanel-main').classList.remove('slide-left');
+    document.querySelectorAll('.zpanel-sub').forEach(panel => panel.classList.remove('active'));
+}
+
+// 4. PESQUISA
+const zcIndex = [
+    { name: "Minecraft Zera's", link: "/jogos/minecraft" },
+    { name: "Pixel Legends", link: "/jogos/legends" },
+    { name: "Marketplace / Loja", link: "/loja" },
+    { name: "CraftJam", link: "/eventos/craftjam" },
+    { name: "Suporte e Ajuda", link: "/suporte" },
+    { name: "Regras", link: "/regras" }
+];
+
+function openSearch() {
+    if (document.getElementById('zmobSidebar').classList.contains('active')) closeMobileMenu();
+    document.getElementById('zSearchModal').classList.add('active');
+    document.documentElement.classList.add('z-lock-scroll');
+    document.body.classList.add('z-lock-scroll');
+    const input = document.getElementById('zSearchInput');
+    input.value = ""; input.focus(); runSearch();
+}
+
+function closeSearch() {
+    document.getElementById('zSearchModal').classList.remove('active');
+    document.documentElement.classList.remove('z-lock-scroll');
+    document.body.classList.remove('z-lock-scroll');
+}
+
+function clearSearch() {
+    document.getElementById('zSearchInput').value = "";
+    document.getElementById('zSearchInput').focus();
+    runSearch();
+}
+
+function runSearch() {
+    const query = document.getElementById('zSearchInput').value.toLowerCase();
+    const resultList = document.getElementById('zSearchResults');
+    resultList.innerHTML = '';
+
+    const filteredPages = query === "" ? zcIndex.slice(0, 3) : zcIndex.filter(p => p.name.toLowerCase().includes(query));
+
+    if (filteredPages.length === 0) {
+        resultList.innerHTML = '<li><a href="#" style="color:#555; pointer-events:none;">Sem resultados.</a></li>';
+        return;
+    }
+
+    filteredPages.forEach(p => {
+        resultList.innerHTML += `<li><a href="${p.link}"><i class="fas fa-search"></i> ${p.name}</a></li>`;
+    });
+}
+// =================================================
+
+
+
 /**
  * ZERA'S CRAFT ENGINE - MÓDULO DE DATA
  * Converte Snowflake ID em Data e anima a contagem
@@ -162,69 +304,6 @@ window.addEventListener('scroll', () => {
 
 // Executa uma vez ao carregar para caso a página já inicie no fim
 window.addEventListener('load', handlePlayerVisibility);
-
-/**
- * SISTEMA DE NAVEGAÇÃO ZERAS CRAFT
- */
-
-// Abrir e fechar Sidebar Mobile
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const body = document.body;
-
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-
-    // Impede o scroll do site com o menu aberto
-    if (sidebar.classList.contains('active')) {
-        body.style.overflow = 'hidden';
-    } else {
-        body.style.overflow = 'auto';
-    }
-}
-
-// Controle de Dropdown Mobile (Sistema de Painel Lateral)
-function toggleDrop(element) {
-    const parent = element.parentElement;
-
-    // Opcional: Fecha outros dropdowns ao abrir um novo
-    /*
-    document.querySelectorAll('.sidebar-dropdown').forEach(item => {
-        if (item !== parent) item.classList.remove('open');
-    });
-    */
-
-    parent.classList.toggle('open');
-}
-
-// Fechar sidebar ao clicar em um link (opcional)
-document.querySelectorAll('.sidebar-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar.classList.contains('active')) {
-            toggleSidebar();
-        }
-    });
-});
-
-// Fechar com a tecla ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar.classList.contains('active')) toggleSidebar();
-    }
-});
-
-// 2. Copiar IP
-function copyIP() {
-    const ip = "MCPixelLegends88.aternos.me:0000";
-    navigator.clipboard.writeText(ip).then(() => {
-        alert("Te Vemos por Lá! // (Nosso Servidor tem suporte nativo para Bedrock e Java) ;)");
-    }).catch(err => {
-        console.error('Erro ao copiar', err);
-    });
-}
 
 // 3. Scroll Animation (Reveal)
 const observerOptions = {
@@ -721,3 +800,51 @@ function heroSwitcher(element) {
     thumbs.forEach(t => t.classList.remove('active'));
     element.classList.add('active');
 }
+
+/* RANKING */
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.t-row-elite').forEach((row, i) => {
+        const nick = row.getAttribute('data-nick');
+        if (nick) {
+            // Carrega skin e preserva o texto original (Mixed-Case)
+            row.querySelector('.xbox-head').src = `https://mc-heads.net/avatar/${nick}/64`;
+            row.querySelector('.nick-txt').innerText = nick;
+        }
+
+        // Revelação Industrial
+        row.style.opacity = "0";
+        setTimeout(() => {
+            row.style.transition = "all 0.5s ease";
+            row.style.opacity = "1";
+        }, i * 80);
+    });
+});
+
+function handleEliteTip(btn, event) {
+    const row = btn.closest('.t-row-elite');
+    const tooltip = document.getElementById('eliteTooltip');
+    const isMobile = window.innerWidth <= 768;
+
+    // Injeção de Dados Real
+    document.getElementById('ttUser').innerText = row.getAttribute('data-nick');
+    document.getElementById('ttDesc').innerText = row.getAttribute('data-bio');
+
+    tooltip.style.display = "block";
+
+    if (!isMobile) {
+        // PC: Posicionamento Dinâmico
+        tooltip.style.left = (event.pageX + 20) + "px";
+        tooltip.style.top = (event.pageY + 20) + "px";
+    }
+    // Mobile: O CSS cuida do centro (fixed)
+    event.stopPropagation();
+}
+
+function closeEliteTip() {
+    document.getElementById('eliteTooltip').style.display = "none";
+}
+
+// Segurança: Fecha ao clicar fora do tooltip
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.tooltip-premium-solid')) closeEliteTip();
+});
