@@ -64,99 +64,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
-<!----------------------------- Desktop --------------------------------->
-
 <body>
+    <!--=======================================================================================================-->
 
-    <nav class="nav-pc">
-        <div class="container-pc">
-            <div class="logo">ZERAS CRAFT</div>
+    <body>
+        <div id="nav-placeholder"></div>
 
-            <ul class="menu-pc">
-                <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
-                <li class="dropdown">
-                    <a href="#">Jogos <i class="fas fa-chevron-down arrow-icon"></i></a>
-                    <ul class="dropdown-pc-content">
-                        <li><a href="#">Bedrock Edition</a></li>
-                        <li><a href="#">Java Edition</a></li>
-                    </ul>
-                </li>
-                <li><a href="../arquivos">Arquivos</a></li>
-                <li><a href="../comunidade">Comunidade</a></li>
-                <li><a href="../eventos">Eventos</a></li>
-                <li><a href="../pixel-legends">Pixel Legends</a></li>
-                <li><a href="../canais">Canais</a></li>
-                <li class="dropdown">
-                    <a href="#">Outros <i class="fas fa-chevron-down arrow-icon"></i></a>
-                    <ul class="dropdown-pc-content">
-                        <li><a href="../suporte">Suporte</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <section class="game-section">
+        </section>
 
-            <div class="header-actions">
-                <span class="server-ip" onclick="copyIP() ">IP Pixel Legends</span>
-                <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
-            </div>
-        </div>
-    </nav>
-
-    <!----------------------------- Mobile ---------------------------------->
-
-    <nav class="nav-mobile">
-        <div class="logo-mobile">ZERAS CRAFT</div>
-        <button class="burger-btn" onclick="toggleSidebar()">
-            <i class="fas fa-bars" id="icon-bars"></i>
-        </button>
-    </nav>
-
-    <aside class="sidebar-glass" id="sidebar">
-        <div class="sidebar-header">
-            <span class="menu-title">MENU</span>
-            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
-        </div>
-
-        <ul class="sidebar-links">
-            <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
-            <li class="sidebar-dropdown">
-                <div class="drop-header" onclick="toggleDrop(this)">
-                    <span>Jogos</span>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <ul class="sidebar-sub">
-                    <li><a href="#">Bedrock Edition</a></li>
-                    <li><a href="#">Java Edition</a></li>
-                </ul>
-            </li>
-            <li><a href="../arquivos">Arquivos</a></li>
-            <li><a href="../comunidade">Comunidade</a></li>
-            <li><a href="../eventos">Eventos</a></li>
-            <li><a href="../pixel-legends">Pixel Legends</a></li>
-            <li><a href="../canais">Canais</a></li>
-            <li class="sidebar-dropdown">
-                <div class="drop-header" onclick="toggleDrop(this)">
-                    <span>Outros</span>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <ul class="sidebar-sub">
-                    <li><a href="../suporte">Suporte</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <div class="sidebar-actions">
-            <div class="server-ip-box" onclick="copyIP()">
-                <span class="ip-text">IP Pixel Legends</span>
-                <i class="far fa-copy"></i>
-            </div>
-
-            <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
-        </div>
-    </aside>
-
-    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
-    <!--------------------------------------------------------------->
+        <script src="assets/js/scripts.js"></script>
+    </body>
+    <!--=======================================================================================================-->
 
     <main>
         <section class="hero">
