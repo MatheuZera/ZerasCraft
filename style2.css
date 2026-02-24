@@ -2599,3 +2599,810 @@
         box-shadow: 0 0 0 100vh rgba(0, 0, 0, 0.9);
     }
 }
+
+
+/* ==========================================
+   PALETA DE CORES DO COMPONENTE
+========================================== */
+:root {
+    --bg-page: #111111;
+    /* Fundo da página */
+    --bg-card: #181818;
+    /* Fundo das caixas e galeria */
+    --bg-tag: #1f1f1f;
+    /* Fundo das tags */
+    --accent-color: #54bd34;
+    /* Verde Minecraft */
+    --accent-blue: #2b90d9;
+    /* Borda azul de seleção */
+    --border-color: #2a2a2a;
+    /* Bordas gerais */
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+}
+
+/* ==========================================
+   LAYOUT BASE
+========================================== */
+.game-section {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.game-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Título com Barrinha Verde Oficial */
+.section-title {
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+}
+
+.section-title::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 22px;
+    margin-right: 12px;
+}
+
+/* ==========================================
+   NAVEGAÇÃO (ABAS HORIZONTAIS)
+========================================== */
+.nav-tabs-wrapper {
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 40px;
+}
+
+.nav-tabs-list {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.nav-tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 15px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.nav-tab-btn i {
+    font-size: 16px;
+}
+
+.nav-tab-btn:hover {
+    color: var(--text-main);
+}
+
+.nav-tab-btn.active {
+    color: var(--text-main);
+    border-bottom-color: var(--accent-color);
+}
+
+.nav-tab-btn.active i {
+    color: var(--accent-color);
+}
+
+/* ==========================================
+   PAINÉIS DE CONTEÚDO E GRID
+========================================== */
+.content-panel {
+    display: none;
+    animation: fadePanelIn 0.4s ease forwards;
+}
+
+.content-panel.active {
+    display: block;
+}
+
+@keyframes fadePanelIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 50px;
+}
+
+/* Grid específica para a aba RECURSOS */
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Lista de Requisitos */
+.req-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.req-list li {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.req-list li strong {
+    color: var(--text-main);
+}
+
+/* ==========================================
+   GALERIA DE IMAGENS (COM SCROLL)
+========================================== */
+.gallery-container {
+    display: flex;
+    gap: 15px;
+    background-color: var(--bg-card);
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.gallery-main-view {
+    flex: 1;
+    position: relative;
+    display: flex;
+}
+
+.gallery-main-view img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.btn-next-img {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #444;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 2px;
+}
+
+.btn-next-img:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.gallery-thumbnails {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 380px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.gallery-thumbnails::-webkit-scrollbar {
+    display: none;
+}
+
+.thumb-item {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+}
+
+.thumb-item:hover {
+    opacity: 1;
+}
+
+.thumb-item.active {
+    opacity: 1;
+    border-color: var(--accent-blue);
+}
+
+.gallery-description {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   CAIXAS DE INFORMAÇÃO E TAGS
+========================================== */
+.info-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-header h4,
+.card-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--text-main);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.card-title {
+    margin-bottom: 20px;
+}
+
+.btn-toggle-text {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-toggle-text:hover {
+    color: var(--text-main);
+}
+
+.btn-toggle-text i {
+    transition: transform 0.3s ease;
+}
+
+.btn-toggle-text.active i {
+    transform: rotate(180deg);
+}
+
+.card-body p {
+    color: #cccccc;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.text-collapsed {
+    max-height: 72px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.4s ease;
+}
+
+.text-collapsed::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--bg-card));
+    pointer-events: none;
+}
+
+.text-expanded {
+    max-height: 800px;
+    transition: max-height 0.5s ease;
+}
+
+.text-expanded::after {
+    display: none;
+}
+
+.tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.feature-tag {
+    background-color: var(--bg-tag);
+    border: 1px solid var(--border-color);
+    color: #cccccc;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: default;
+    transition: 0.2s;
+}
+
+.feature-tag:hover {
+    background-color: #2a2a2a;
+    color: var(--text-main);
+    border-color: #555;
+}
+
+/* ==========================================
+   RESPONSIVIDADE (MOBILE SUPER COMPACTO)
+========================================== */
+/* ==========================================
+   RESPONSIVIDADE (MOBILE SUPER COMPACTO)
+========================================== */
+@media (max-width: 1024px) {
+    .game-section {
+        padding: 25px 0;
+    }
+
+    .game-container {
+        padding: 0 15px;
+    }
+
+    /* Abas Compactas */
+    .nav-tabs-wrapper {
+        margin-bottom: 25px;
+    }
+
+    .nav-tabs-list {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        gap: 15px;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .nav-tabs-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-tab-btn {
+        white-space: nowrap;
+        padding: 10px 5px;
+        font-size: 13px;
+    }
+
+    /* Destrava a grid e IMPEDE que o conteúdo vaze da tela */
+    .content-grid {
+        grid-template-columns: minmax(0, 1fr);
+        /* O minmax(0) é a mágica que segura o layout na tela */
+        gap: 25px;
+        width: 100%;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Títulos colados */
+    .section-title {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .section-title::before {
+        height: 18px;
+        width: 4px;
+        margin-right: 10px;
+    }
+
+    /* Galeria Mobile com Scroll Automático Horizontal */
+    .gallery-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        background: transparent;
+        border: none;
+        gap: 10px;
+        margin-bottom: 5px;
+    }
+
+    .gallery-main-view {
+        width: 100%;
+    }
+
+    .gallery-main-view img {
+        border-radius: 4px;
+    }
+
+    .btn-next-img {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+        bottom: 10px;
+        left: 10px;
+    }
+
+    /* A Rolagem Horizontal Oficial */
+    .gallery-thumbnails {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        /* Força as miniaturas a ficarem numa linha só */
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        /* Habilita rolagem pelo toque */
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        /* Deixa a rolagem suave no iPhone/Android */
+        padding-bottom: 10px;
+        gap: 10px;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .gallery-thumbnails::-webkit-scrollbar {
+        display: none;
+    }
+
+    .thumb-item {
+        width: 110px;
+        /* Largura fixa da miniatura */
+        flex: 0 0 auto;
+        /* A propriedade que trava a imagem e obriga o container a rolar */
+        height: auto;
+        border-radius: 3px;
+    }
+
+    .gallery-description {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-top: 5px;
+    }
+
+    /* Caixas Compactas */
+    .info-card {
+        padding: 15px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .card-header {
+        margin-bottom: 10px;
+    }
+
+    .card-header h4,
+    .card-title {
+        font-size: 13px;
+    }
+
+    .card-title {
+        margin-bottom: 15px;
+    }
+
+    .card-body p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .text-collapsed {
+        max-height: 60px;
+    }
+
+    .text-collapsed::after {
+        height: 30px;
+    }
+
+    .tags-wrapper {
+        gap: 6px;
+    }
+
+    .feature-tag {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+
+
+/* ==========================================
+   BANNER DE CHECKOUT (ESTILO OFICIAL)
+========================================== */
+.checkout-banner {
+    background-color: #1a1a1a;
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a2a;
+    padding: 12px 0;
+    width: 100%;
+    z-index: 990;
+    /* Fica abaixo do Header que é 10000 */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.checkout-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkout-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.checkout-info img {
+    width: 45px;
+    height: 45px;
+    border-radius: 2px;
+    object-fit: cover;
+    border: 1px solid #333;
+}
+
+.checkout-title {
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Botão com efeito 3D (Igual à referência) */
+.checkout-btn {
+    background-color: #54bd34;
+    /* Verde Zera's */
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    /* Efeito de profundidade */
+    box-shadow: 0 4px 0 #3a8c22;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s ease;
+}
+
+.checkout-btn i {
+    font-size: 12px;
+}
+
+.checkout-btn:hover {
+    background-color: #6ae544;
+}
+
+.checkout-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #3a8c22;
+    /* Botão afunda e zera a sombra */
+}
+
+/* ==========================================
+   CLASSES DINÂMICAS PARA FIXAÇÃO (VIA JS)
+========================================== */
+/* Fixado no PC (Gruda abaixo do header) */
+.checkout-banner.is-fixed-pc {
+    position: fixed;
+    top: 70px;
+    /* Altura do seu Header PC */
+    left: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    background-color: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+/* Fixado no Mobile (Gruda no fundo da tela) */
+.checkout-banner.is-fixed-mob {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    padding: 15px 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.9);
+    background-color: rgba(26, 26, 26, 0.98);
+    border-top: 2px solid #54bd34;
+    /* Destaque verde no mobile */
+    border-bottom: none;
+}
+
+/* Responsividade Mobile do Banner */
+@media (max-width: 1024px) {
+    .checkout-container {
+        padding: 0 20px;
+    }
+
+    .checkout-title {
+        font-size: 14px;
+        /* Ajuste para não quebrar a tela */
+    }
+
+    .checkout-btn {
+        padding: 12px 20px;
+        font-size: 13px;
+    }
+}
+
+
+/* ==========================================
+   SHOWCASE DE RECURSOS (CLASSES "feat-")
+========================================== */
+.feat-showcase {
+    background-color: #111111;
+    padding: 60px 0;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.feat-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    /* Esquerda levemente maior */
+    gap: 50px;
+    align-items: start;
+}
+
+/* --- ESQUERDA (IMAGEM E TEXTO BASE) --- */
+.feat-image-wrapper {
+    background-color: #1a1a1a;
+    padding: 10px;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    margin-bottom: 25px;
+}
+
+.feat-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 2px;
+    display: block;
+    transition: opacity 0.3s ease;
+    /* Animação suave na troca de imagem */
+}
+
+.feat-meta h2 {
+    font-size: 26px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+    letter-spacing: 1px;
+}
+
+.feat-meta p {
+    color: #aaaaaa;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 90%;
+}
+
+/* --- DIREITA (ABAS CLICÁVEIS) --- */
+.feat-tabs-area {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feat-tab {
+    background-color: #181818;
+    border: 2px solid #2a2a2a;
+    padding: 22px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.feat-tab:hover {
+    border-color: #444444;
+    background-color: #1f1f1f;
+}
+
+/* Aba Ativa (Borda Verde) */
+.feat-tab.active {
+    border-color: #54bd34;
+    background-color: #1c1c1c;
+}
+
+.feat-tab h3 {
+    font-size: 16px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.2s;
+}
+
+.feat-tab.active h3 {
+    color: #54bd34;
+    /* Título fica verde quando ativo */
+}
+
+.feat-tab h3 i {
+    font-size: 18px;
+}
+
+.feat-tab p {
+    font-size: 14px;
+    color: #cccccc;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ==========================================
+   RESPONSIVIDADE MOBILE
+========================================== */
+@media (max-width: 1024px) {
+    .feat-showcase {
+        padding: 40px 0;
+    }
+
+    .feat-container {
+        grid-template-columns: 1fr;
+        /* Empilha os blocos */
+        gap: 30px;
+        padding: 0 20px;
+    }
+
+    .feat-meta h2 {
+        font-size: 22px;
+    }
+
+    .feat-meta p {
+        max-width: 100%;
+        font-size: 14px;
+    }
+
+    .feat-tab {
+        padding: 18px 20px;
+    }
+}

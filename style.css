@@ -360,6 +360,7 @@ body.z-lock-scroll {
         display: flex;
         min-height: 450px;
         padding: 40px 20px;
+        /* <--- ESTE "40px" cria o espaço no topo interno */
         align-items: stretch;
     }
 
@@ -553,6 +554,38 @@ body.z-lock-scroll {
         /* Afunda totalmente ao clicar */
         box-shadow: 0 0px 0 #357a20;
         /* Zera a sombra dando sensação física de clique */
+    }
+
+    .znav-btn-green2 {
+        display: inline-block;
+        align-self: flex-start;
+        background: var(--zc-green);
+        color: #ffffff;
+        font-weight: 900;
+        text-decoration: none;
+        font-size: 13px;
+        padding: 13px 28px;
+        border-radius: 3px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        /* Dá um respiro mais elegante nas letras */
+        transition: all 0.25s ease;
+        /* Transição mais fluida */
+    }
+
+    .znav-btn-green2:hover {
+        background: var(--zc-green-hover);
+        transform: translateY(-3px);
+        /* Levanta o botão suavemente */
+        box-shadow: 0 8px 10px rgba(84, 189, 52, 0.35);
+        /* Brilho verde neon projetado */
+    }
+
+    .znav-btn-green2:active {
+        transform: translateY(1px);
+        /* Afunda quando clica */
+        box-shadow: 0 2px 5px rgba(84, 189, 52, 0.4);
+        /* Brilho diminui no clique */
     }
 
     .znav-template-mixed {
@@ -1101,11 +1134,16 @@ body.z-lock-scroll {
 /* --- HERO SECTION --- */
 .hero {
     position: relative;
-    height: 80vh;
-    /* Ajuste a altura conforme preferir */
+    width: 100%;
+    /* 100vh faz o banner ocupar exatamente a altura total da tela do leitor */
+    height: 100vh;
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    background-color: #000;
+    /* Fundo de segurança */
 }
 
 .hero-bg {
@@ -1115,98 +1153,144 @@ body.z-lock-scroll {
     width: 100%;
     height: 100%;
     background-size: cover;
-    /* Faz a imagem cobrir tudo */
     background-position: center;
-    /* Centraliza a montaria/personagem */
     background-repeat: no-repeat;
-    z-index: -1;
-    /* Joga a imagem para trás do texto */
-
-    /* Overlay opcional para dar leitura ao texto branco */
-    filter: brightness(0.85);
+    z-index: 1;
+    filter: brightness(0.6);
+    /* Escurece um pouco mais para dar leitura ao texto */
+    transition: transform 0.8s ease-out;
 }
 
+/* Efeito sutil de zoom ao carregar ou hover */
 .hero:hover .hero-bg {
-    transform: scale(1);
+    transform: scale(1.05);
 }
 
 .hero-content {
-    text-align: center;
-    max-width: 800px;
+    position: relative;
     z-index: 2;
+    /* Fica acima da imagem */
+    text-align: center;
+    max-width: 900px;
+    padding: 0 20px;
+    animation: fadeInUp 1s ease;
 }
 
+/* Etiqueta Amarela */
 .hero-tag {
-    background: var(--gold);
-    color: black;
-    padding: 5px 12px;
-    font-weight: 800;
-    font-size: 0.8rem;
     display: inline-block;
-    margin-bottom: 15px;
-}
-
-.especial-tag {
-    background: #ff2323;
-    color: black;
-    padding: 5px 12px;
-    font-weight: 800;
-    font-size: 0.8rem;
-    display: inline-block;
-    margin-bottom: 15px;
-}
-
-.hero h1 {
-    font-size: 4rem;
-    line-height: 1;
+    background-color: #e2b41c;
+    color: #000;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
     margin-bottom: 20px;
-    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    border-radius: 2px;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: #ddd;
+.hero-title {
+    color: #fff;
+    font-size: clamp(32px, 5vw, 64px);
+    /* Tamanho adaptável conforme a tela */
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    line-height: 1.1;
 }
 
-.hero-btns {
+.hero-desc {
+    color: #eee;
+    font-size: 18px;
+    margin-bottom: 35px;
+    font-weight: 400;
+}
+
+/* Grupo de Botões do Hero */
+.hero-actions {
     display: flex;
     gap: 15px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.btn-big-green {
-    background: var(--green-mc);
-    color: white;
-    border: none;
-    padding: 18px 35px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.3s;
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+/* Botão Verde 3D */
+.btn-hero-green {
+    background-color: #448a27;
+    color: #fff;
+    padding: 15px 35px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 0 #2d5d1a;
+    /* Efeito 3D na base */
+    transition: all 0.2s;
 }
 
-.btn-big-green:hover {
-    background: var(--green-hover);
-    transform: scale(1.05);
+.btn-hero-green:hover {
+    background-color: #54bd34;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #2d5d1a;
 }
 
-.btn-big-outline {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    padding: 16px 35px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.3s;
+.btn-hero-green:active {
+    transform: translateY(2px);
+    box-shadow: 0 0px 0 #2d5d1a;
 }
 
-.btn-big-outline:hover {
-    background: white;
-    color: black;
+/* Botão Contorno */
+.btn-hero-outline {
+    background-color: transparent;
+    color: #fff;
+    padding: 15px 35px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-hero-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #eee;
+}
+
+/* Animação de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste Mobile */
+@media (max-width: 768px) {
+    .hero {
+        height: 100vh;
+    }
+
+    /* Mantém tela cheia no celular */
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
 }
 
 
