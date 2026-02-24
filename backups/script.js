@@ -21,6 +21,148 @@ backToTop.addEventListener('click', () => {
 });
 
 
+
+// SISTEMA DE NAVEGAÇÃO (PC & Mobile)
+// =================================================
+/**
+ * ZERA'S CRAFT - MOTOR DE NAVEGAÇÃO
+ */
+
+// 1. DESKTOP: ABRIR MEGA MENU (Animação Opacity/Visibility)
+function toggleMegaMenu(evt) {
+    if (evt.target.closest('.znav-mega-panel') || evt.target.closest('.znav-simple-drop')) {
+        return;
+    }
+
+    const clickedBtn = evt.currentTarget;
+    const isOpen = clickedBtn.classList.contains('open');
+
+    // Fecha todos
+    document.querySelectorAll('.znav-mega-btn').forEach(btn => btn.classList.remove('open'));
+
+    if (!isOpen) {
+        clickedBtn.classList.add('open');
+
+        // Auto-Reset: Força a primeira aba a aparecer e corrige conflito de layout flexível
+        const panel = clickedBtn.querySelector('.znav-mega-grid');
+        if (panel) {
+            const tabs = panel.querySelectorAll('.znav-tab');
+            const contents = panel.querySelectorAll('.znav-tab-content');
+
+            if (tabs.length > 0 && contents.length > 0) {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => { c.classList.remove('active'); });
+
+                tabs[0].classList.add('active');
+                contents[0].classList.add('active');
+            }
+        }
+    }
+}
+
+// Fechar com clique fora
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.znav-mega-btn')) {
+        document.querySelectorAll('.znav-mega-btn').forEach(btn => btn.classList.remove('open'));
+    }
+});
+
+// 2. DESKTOP: TROCA DE ABAS (Dinâmico para Main e Direita)
+function switchZnavTab(evt, targetId) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    const parentGrid = evt.currentTarget.closest('.znav-mega-grid');
+
+    // Remove classe ativa de todas as abas e painéis
+    parentGrid.querySelectorAll('.znav-tab').forEach(tab => tab.classList.remove('active'));
+    parentGrid.querySelectorAll('.znav-tab-content').forEach(content => content.classList.remove('active'));
+
+    // Adiciona classe ativa apenas na clicada e no conteúdo alvo
+    evt.currentTarget.classList.add('active');
+    const targetElement = parentGrid.querySelector(`#${targetId}`);
+    if (targetElement) {
+        targetElement.classList.add('active');
+    }
+}
+
+// 3. MOBILE: FULL SCREEN & SCROLL LOCK
+function openMobileMenu() {
+    document.getElementById('zmobSidebar').classList.add('active');
+    document.getElementById('zmobOverlay').classList.add('active');
+    document.documentElement.classList.add('z-lock-scroll');
+    document.body.classList.add('z-lock-scroll');
+}
+
+function closeMobileMenu() {
+    document.getElementById('zmobSidebar').classList.remove('active');
+    document.getElementById('zmobOverlay').classList.remove('active');
+    document.documentElement.classList.remove('z-lock-scroll');
+    document.body.classList.remove('z-lock-scroll');
+    setTimeout(slideBack, 300); // Reseta as telas ao fundo
+}
+
+function slideMobile(panelId) {
+    document.getElementById('zpanel-main').classList.add('slide-left');
+    document.getElementById(panelId).classList.add('active');
+}
+
+function slideBack() {
+    document.getElementById('zpanel-main').classList.remove('slide-left');
+    document.querySelectorAll('.zpanel-sub').forEach(panel => panel.classList.remove('active'));
+}
+
+// 4. PESQUISA
+const zcIndex = [
+    { name: "Minecraft Zera's", link: "/jogos/minecraft" },
+    { name: "Pixel Legends", link: "/jogos/legends" },
+    { name: "Marketplace / Loja", link: "/loja" },
+    { name: "CraftJam", link: "/eventos/craftjam" },
+    { name: "Suporte e Ajuda", link: "/suporte" },
+    { name: "Regras", link: "/regras" }
+];
+
+function openSearch() {
+    if (document.getElementById('zmobSidebar').classList.contains('active')) closeMobileMenu();
+    document.getElementById('zSearchModal').classList.add('active');
+    document.documentElement.classList.add('z-lock-scroll');
+    document.body.classList.add('z-lock-scroll');
+    const input = document.getElementById('zSearchInput');
+    input.value = ""; input.focus(); runSearch();
+}
+
+function closeSearch() {
+    document.getElementById('zSearchModal').classList.remove('active');
+    document.documentElement.classList.remove('z-lock-scroll');
+    document.body.classList.remove('z-lock-scroll');
+}
+
+function clearSearch() {
+    document.getElementById('zSearchInput').value = "";
+    document.getElementById('zSearchInput').focus();
+    runSearch();
+}
+
+function runSearch() {
+    const query = document.getElementById('zSearchInput').value.toLowerCase();
+    const resultList = document.getElementById('zSearchResults');
+    resultList.innerHTML = '';
+
+    const filteredPages = query === "" ? zcIndex.slice(0, 3) : zcIndex.filter(p => p.name.toLowerCase().includes(query));
+
+    if (filteredPages.length === 0) {
+        resultList.innerHTML = '<li><a href="#" style="color:#555; pointer-events:none;">Sem resultados.</a></li>';
+        return;
+    }
+
+    filteredPages.forEach(p => {
+        resultList.innerHTML += `<li><a href="${p.link}"><i class="fas fa-search"></i> ${p.name}</a></li>`;
+    });
+}
+// =================================================
+
+
+
 /**
  * ZERA'S CRAFT ENGINE - MÓDULO DE DATA
  * Converte Snowflake ID em Data e anima a contagem
@@ -162,69 +304,6 @@ window.addEventListener('scroll', () => {
 
 // Executa uma vez ao carregar para caso a página já inicie no fim
 window.addEventListener('load', handlePlayerVisibility);
-
-/**
- * SISTEMA DE NAVEGAÇÃO ZERAS CRAFT
- */
-
-// Abrir e fechar Sidebar Mobile
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const body = document.body;
-
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-
-    // Impede o scroll do site com o menu aberto
-    if (sidebar.classList.contains('active')) {
-        body.style.overflow = 'hidden';
-    } else {
-        body.style.overflow = 'auto';
-    }
-}
-
-// Controle de Dropdown Mobile (Sistema de Painel Lateral)
-function toggleDrop(element) {
-    const parent = element.parentElement;
-
-    // Opcional: Fecha outros dropdowns ao abrir um novo
-    /*
-    document.querySelectorAll('.sidebar-dropdown').forEach(item => {
-        if (item !== parent) item.classList.remove('open');
-    });
-    */
-
-    parent.classList.toggle('open');
-}
-
-// Fechar sidebar ao clicar em um link (opcional)
-document.querySelectorAll('.sidebar-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar.classList.contains('active')) {
-            toggleSidebar();
-        }
-    });
-});
-
-// Fechar com a tecla ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar.classList.contains('active')) toggleSidebar();
-    }
-});
-
-// 2. Copiar IP
-function copyIP() {
-    const ip = "MCPixelLegends88.aternos.me:0000";
-    navigator.clipboard.writeText(ip).then(() => {
-        alert("Te Vemos por Lá! // (Nosso Servidor tem suporte nativo para Bedrock e Java) ;)");
-    }).catch(err => {
-        console.error('Erro ao copiar', err);
-    });
-}
 
 // 3. Scroll Animation (Reveal)
 const observerOptions = {
@@ -408,92 +487,106 @@ function showClickNotification(titulo, mensagem) {
 }
 
 
-let currentIndex = 0;
-
+/* ==========================================
+   CARROSSEL INFINITO (COLECIONÁVEIS)
+========================================== */
 function moveCarousel(direction) {
     const track = document.getElementById('carouselTrack');
-    const cards = document.querySelectorAll('.mc-collectible-card');
-    const cardWidth = cards[0].offsetWidth + 20; // Largura do card + gap
-    const visibleCards = window.innerWidth > 768 ? 3 : 1; // Quantos cards aparecem por vez
-    const maxIndex = cards.length - visibleCards;
+    // Pegamos todos os cards dinamicamente toda vez que a função roda
+    const cards = track.querySelectorAll('.mc-collectible-card');
 
-    // Atualiza o índice com base na direção
-    currentIndex += direction;
+    // Calcula a largura real do card + gap (margem) que você definiu no CSS
+    const cardWidth = cards[0].offsetWidth;
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+    const moveDistance = cardWidth + gap;
 
-    // --- AS TRAVAS DE SEGURANÇA ---
+    // Desativa a transição temporariamente para não animar o "teletransporte" do DOM
+    track.style.transition = 'none';
 
-    // 1. Trava da Esquerda: Se o índice for menor que 0, força a voltar para 0
-    if (currentIndex < 0) {
-        currentIndex = 0;
-        return; // Interrompe a função para não animar sem necessidade
+    if (direction === 1) {
+        // --- MOVER PARA A DIREITA (NEXT) ---
+        // Anima o trilho para a esquerda
+        track.style.transition = 'transform 0.4s ease-in-out';
+        track.style.transform = `translateX(-${moveDistance}px)`;
+
+        // Espera a animação terminar (400ms = 0.4s)
+        setTimeout(() => {
+            track.style.transition = 'none'; // Tira animação
+            // Pega o PRIMEIRO card e joga para o FINAL da lista no HTML
+            track.appendChild(cards[0]);
+            // Zera a posição do trilho (porque o card que estava escondendo a esquerda já foi pro final)
+            track.style.transform = 'translateX(0)';
+        }, 400);
+
+    } else if (direction === -1) {
+        // --- MOVER PARA A ESQUERDA (PREV) ---
+        // Pega o ÚLTIMO card e joga para o INÍCIO da lista no HTML (antes do primeiro)
+        const lastCard = cards[cards.length - 1];
+        track.insertBefore(lastCard, cards[0]);
+
+        // Empurra o trilho para a esquerda (escondendo o card recém adicionado) sem animar
+        track.style.transform = `translateX(-${moveDistance}px)`;
+
+        // Força o navegador a registrar a mudança acima antes de animar (Reflow)
+        void track.offsetWidth;
+
+        // Agora sim, liga a animação e desliza de volta para o 0
+        track.style.transition = 'transform 0.4s ease-in-out';
+        track.style.transform = 'translateX(0)';
     }
-
-    // 2. Trava da Direita: Se passar do último card visível, trava no máximo
-    if (currentIndex > maxIndex) {
-        currentIndex = maxIndex;
-        return;
-    }
-
-    // Aplica o movimento apenas se estiver dentro dos limites
-    const moveDistance = currentIndex * cardWidth;
-    track.style.transform = `translateX(-${moveDistance}px)`;
 }
 
 
 
-// CONFIGURAÇÃO DOS ÍNDICES
-let worldIndex = 0;
-let heroIndex = 0;
+// Removemos a variável "worldIndex" pois não precisamos mais dela
+// let worldIndex = 0; 
 
-// 1. Lógica Slider "Expanda seu Mundo" (Pula 1 por 1)
+/* ==========================================
+   1. Lógica Slider "Expanda seu Mundo" (Loop Infinito Liso)
+========================================== */
 function moveWorld(direction) {
     const track = document.getElementById('worldTrack');
-    const items = track.children.length;
-    const step = track.children[0].offsetWidth;
+    const items = track.querySelectorAll('.w-item');
 
-    // Loop Infinito Matemático
-    worldIndex = (worldIndex + direction + items) % items;
+    // Calcula o tamanho exato de um item para saber quanto deve andar
+    const step = items[0].offsetWidth;
 
-    track.style.transform = `translateX(-${worldIndex * step}px)`;
-}
+    // Desativa a transição momentaneamente para preparar o terreno
+    track.style.transition = 'none';
 
-let currentHeroSlide = 0;
+    if (direction === 1) {
+        // --- NEXT (Botão Direito >) ---
+        // Ativa a animação e desliza a esteira inteira para a esquerda
+        track.style.transition = 'transform 0.4s ease-in-out';
+        track.style.transform = `translateX(-${step}px)`;
 
-function moveHero(direction) {
-    const slides = document.querySelectorAll('.h-slide');
+        // Espera a animação terminar (400ms = 0.4s)
+        setTimeout(() => {
+            // Desliga a animação para não piscar
+            track.style.transition = 'none';
 
-    // Remove o ativo do atual
-    slides[currentHeroSlide].classList.remove('active');
+            // Magia: Pega a PRIMEIRA div (que sumiu na esquerda) e "cola" no FINAL da fila
+            track.appendChild(items[0]);
 
-    // Calcula o próximo (com trava para não bugar)
-    currentHeroSlide += direction;
+            // Zera a posição do trilho (o visual não muda porque a div da ponta já foi pro final)
+            track.style.transform = 'translateX(0)';
+        }, 400);
 
-    if (currentHeroSlide < 0) {
-        currentHeroSlide = slides.length - 1;
-    } else if (currentHeroSlide >= slides.length) {
-        currentHeroSlide = 0;
-    }
+    } else if (direction === -1) {
+        // --- PREV (Botão Esquerdo <) ---
+        // Magia: Pega a ÚLTIMA div da fila e "cola" no começo (antes da primeira)
+        const lastItem = items[items.length - 1];
+        track.insertBefore(lastItem, items[0]);
 
-    // Adiciona ativo ao novo slide
-    slides[currentHeroSlide].classList.add('active');
-}
+        // Imediatamente e sem animar, empurra o trilho pra esquerda (escondendo a div que acabamos de colocar lá)
+        track.style.transform = `translateX(-${step}px)`;
 
-// 3. Lógica de Accordions
-function toggleAccordion(button) {
-    const panel = button.nextElementSibling;
-    const icon = button.querySelector('i');
+        // Força o navegador a renderizar esse empurrão instantâneo (Reflow)
+        void track.offsetWidth;
 
-    // Fecha outros painéis abertos para evitar bugs visuais
-    document.querySelectorAll('.acc-panel').forEach(p => {
-        if (p !== panel) p.style.maxHeight = null;
-    });
-
-    if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-        icon.className = "fas fa-plus";
-    } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        icon.className = "fas fa-minus";
+        // Agora liga a animação e desliza de volta para o 0 (trazendo a nova div para a tela)
+        track.style.transition = 'transform 0.4s ease-in-out';
+        track.style.transform = 'translateX(0)';
     }
 }
 
@@ -721,3 +814,221 @@ function heroSwitcher(element) {
     thumbs.forEach(t => t.classList.remove('active'));
     element.classList.add('active');
 }
+
+/* RANKING */
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.t-row-elite').forEach((row, i) => {
+        const nick = row.getAttribute('data-nick');
+        if (nick) {
+            // Carrega skin e preserva o texto original (Mixed-Case)
+            row.querySelector('.xbox-head').src = `https://mc-heads.net/avatar/${nick}/64`;
+            row.querySelector('.nick-txt').innerText = nick;
+        }
+
+        // Revelação Industrial
+        row.style.opacity = "0";
+        setTimeout(() => {
+            row.style.transition = "all 0.5s ease";
+            row.style.opacity = "1";
+        }, i * 80);
+    });
+});
+
+function handleEliteTip(btn, event) {
+    const row = btn.closest('.t-row-elite');
+    const tooltip = document.getElementById('eliteTooltip');
+    const isMobile = window.innerWidth <= 768;
+
+    // Injeção de Dados Real
+    document.getElementById('ttUser').innerText = row.getAttribute('data-nick');
+    document.getElementById('ttDesc').innerText = row.getAttribute('data-bio');
+
+    tooltip.style.display = "block";
+
+    if (!isMobile) {
+        // PC: Posicionamento Dinâmico
+        tooltip.style.left = (event.pageX + 20) + "px";
+        tooltip.style.top = (event.pageY + 20) + "px";
+    }
+    // Mobile: O CSS cuida do centro (fixed)
+    event.stopPropagation();
+}
+
+function closeEliteTip() {
+    document.getElementById('eliteTooltip').style.display = "none";
+}
+
+// Segurança: Fecha ao clicar fora do tooltip
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.tooltip-premium-solid')) closeEliteTip();
+});
+
+
+/* ==========================================
+   1. CONTROLE DAS ABAS (Com Auto-Scroll no Mobile)
+========================================== */
+function switchInnerTab(evt, targetId) {
+    evt.preventDefault();
+    const section = evt.currentTarget.closest('.game-section');
+
+    // Desativa abas e painéis
+    section.querySelectorAll('.nav-tab-btn').forEach(tab => tab.classList.remove('active'));
+    section.querySelectorAll('.content-panel').forEach(panel => panel.classList.remove('active'));
+
+    // Ativa clicados
+    evt.currentTarget.classList.add('active');
+    const targetPanel = document.getElementById(targetId);
+    if (targetPanel) {
+        targetPanel.classList.add('active');
+    }
+
+    // Auto-centraliza a aba clicada na tela (ótimo para mobile)
+    evt.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+/* ==========================================
+   2. SISTEMA DA GALERIA DE IMAGENS (Com Auto-Scroll)
+========================================== */
+function setGalleryImg(evt, newSrc) {
+    const galleryBox = evt.currentTarget.closest('.gallery-container');
+    const mainImg = galleryBox.querySelector('#active-gallery-img');
+
+    // Troca a foto gigante
+    mainImg.src = newSrc;
+
+    // Atualiza a borda azul
+    galleryBox.querySelectorAll('.thumb-item').forEach(thumb => thumb.classList.remove('active'));
+    evt.currentTarget.classList.add('active');
+
+    // Centraliza a miniatura clicada automaticamente (Funciona no PC e no Mobile)
+    evt.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+}
+
+// Botão de Próxima Foto
+function nextGalleryImg(evt) {
+    const galleryBox = evt.currentTarget.closest('.gallery-container');
+    const thumbs = Array.from(galleryBox.querySelectorAll('.thumb-item'));
+
+    // Identifica a atual e calcula a próxima
+    let currentIndex = thumbs.findIndex(thumb => thumb.classList.contains('active'));
+    let nextIndex = (currentIndex + 1) % thumbs.length;
+
+    // Aciona o clique na próxima (isso já puxa a rolagem automática)
+    thumbs[nextIndex].click();
+}
+
+/* ==========================================
+   3. BOTÃO DE EXPANDIR TEXTO ("Mostrar mais")
+========================================== */
+function toggleDescription(evt, btnElement) {
+    evt.preventDefault();
+
+    const infoCard = btnElement.closest('.info-card');
+    const textContainer = infoCard.querySelector('.card-body');
+    const btnText = btnElement.querySelector('span');
+
+    if (textContainer.classList.contains('text-collapsed')) {
+        textContainer.classList.remove('text-collapsed');
+        textContainer.classList.add('text-expanded');
+        btnElement.classList.add('active');
+        btnText.innerText = "Mostrar menos";
+    } else {
+        textContainer.classList.remove('text-expanded');
+        textContainer.classList.add('text-collapsed');
+        btnElement.classList.remove('active');
+        btnText.innerText = "Mostrar mais";
+    }
+}
+
+
+/* ==========================================
+   BANNER DE CHECKOUT INTELIGENTE (SCROLL)
+========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('checkout-banner');
+    const anchor = document.getElementById('checkout-anchor');
+
+    if (!banner || !anchor) return;
+
+    window.addEventListener('scroll', () => {
+        // Pega a posição da âncora invisível em relação ao topo da janela
+        const anchorRect = anchor.getBoundingClientRect();
+
+        // Verifica se é mobile (usando a mesma medida do seu CSS)
+        const isMobile = window.innerWidth <= 1024;
+
+        // No PC, o header tem 70px, então ativamos quando a âncora chegar no 70
+        // No Mobile, o header tem 60px.
+        const triggerPoint = isMobile ? 60 : 70;
+
+        if (anchorRect.top <= triggerPoint) {
+            // Passou do ponto: GRUDAR!
+
+            // Compensa a altura do banner na âncora para a página não "pular"
+            anchor.style.height = banner.offsetHeight + 'px';
+
+            if (isMobile) {
+                banner.classList.add('is-fixed-mob');
+                banner.classList.remove('is-fixed-pc');
+            } else {
+                banner.classList.add('is-fixed-pc');
+                banner.classList.remove('is-fixed-mob');
+            }
+        } else {
+            // Voltou para cima: DESGRUDAR!
+            banner.classList.remove('is-fixed-pc', 'is-fixed-mob');
+            anchor.style.height = '0px';
+        }
+    });
+});
+
+
+/* ==========================================
+   SHOWCASE DE RECURSOS (TROCA DE IMAGEM)
+========================================== */
+function changeFeatureImage(clickedTab, newImgSrc) {
+    // Encontra o container principal
+    const container = clickedTab.closest('.feat-container');
+    const mainImg = container.querySelector('#feat-main-img');
+
+    // Remove a classe 'active' de todas as abas
+    const allTabs = container.querySelectorAll('.feat-tab');
+    allTabs.forEach(tab => tab.classList.remove('active'));
+
+    // Adiciona a classe 'active' na aba que o usuário clicou
+    clickedTab.classList.add('active');
+
+    // Efeito de Fade (Oculta, troca a fonte, e mostra novamente)
+    mainImg.style.opacity = 0;
+
+    setTimeout(() => {
+        mainImg.src = newImgSrc;
+        mainImg.style.opacity = 1;
+    }, 200); // 200ms é o tempo exato para um piscar suave
+}
+
+/* ==========================================
+   SISTEMA DE AUTOLOAD DA NAVEGAÇÃO
+========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const navPlaceholder = document.getElementById('nav-placeholder');
+
+    if (navPlaceholder) {
+        // O caminho aqui deve apontar para onde seu nav.html está salvo.
+        // Se estiver na mesma pasta, 'nav.html' basta.
+        fetch('nav.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar o menu de navegação.');
+                }
+                return response.text();
+            })
+            .then(htmlData => {
+                // Injeta o HTML do menu na página
+                navPlaceholder.innerHTML = htmlData;
+            })
+            .catch(error => {
+                console.error("Falha no Autoload do Menu:", error);
+            });
+    }
+});

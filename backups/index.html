@@ -61,113 +61,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
-<!----------------------------- Desktop --------------------------------->
-
 <body>
+    <!--=======================================================================================================-->
 
-    <nav class="nav-pc">
-        <div class="container-pc">
-            <div class="logo">ZERAS CRAFT</div>
+    <body>
+        <div id="nav-placeholder"></div>
 
-            <ul class="menu-pc">
-                <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
-                <li class="dropdown">
-                    <a href="#">Jogos <i class="fas fa-chevron-down arrow-icon"></i></a>
-                    <ul class="dropdown-pc-content">
-                        <li><a href="#">Bedrock Edition</a></li>
-                        <li><a href="#">Java Edition</a></li>
-                    </ul>
-                </li>
-                <li><a href="arquivos">Arquivos</a></li>
-                <li><a href="comunidade">Comunidade</a></li>
-                <li><a href="eventos">Eventos</a></li>
-                <li><a href="pixel-legends">Pixel Legends</a></li>
-                <li><a href="canais">Canais</a></li>
-                <li class="dropdown">
-                    <a href="#">Outros <i class="fas fa-chevron-down arrow-icon"></i></a>
-                    <ul class="dropdown-pc-content">
-                        <li><a href="suporte">Suporte</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <section class="game-section">
+        </section>
 
-            <div class="header-actions">
-                <span class="server-ip" onclick="copyIP() ">IP Pixel Legends</span>
-                <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
-            </div>
-        </div>
-    </nav>
-
-    <!----------------------------- Mobile ---------------------------------->
-
-    <nav class="nav-mobile">
-        <div class="logo-mobile">ZERAS CRAFT</div>
-        <button class="burger-btn" onclick="toggleSidebar()">
-            <i class="fas fa-bars" id="icon-bars"></i>
-        </button>
-    </nav>
-
-    <aside class="sidebar-glass" id="sidebar">
-        <div class="sidebar-header">
-            <span class="menu-title">MENU</span>
-            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
-        </div>
-
-        <ul class="sidebar-links">
-            <li><a href="https://matheuzera.github.io/ZerasCraft/">Início</a></li>
-            <li class="sidebar-dropdown">
-                <div class="drop-header" onclick="toggleDrop(this)">
-                    <span>Jogos</span>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <ul class="sidebar-sub">
-                    <li><a href="#">Bedrock Edition</a></li>
-                    <li><a href="#">Java Edition</a></li>
-                </ul>
-            </li>
-            <li><a href="arquivos">Arquivos</a></li>
-            <li><a href="comunidade">Comunidade</a></li>
-            <li><a href="eventos">Eventos</a></li>
-            <li><a href="pixel-legends">Pixel Legends</a></li>
-            <li><a href="canais">Canais</a></li>
-            <li class="sidebar-dropdown">
-                <div class="drop-header" onclick="toggleDrop(this)">
-                    <span>Outros</span>
-                    <i class="fas fa-chevron-down arrow-icon"></i>
-                </div>
-                <ul class="sidebar-sub">
-                    <li><a href="suporte">Suporte</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <div class="sidebar-actions">
-            <div class="server-ip-box" onclick="copyIP()">
-                <span class="ip-text">IP Pixel Legends</span>
-                <i class="far fa-copy"></i>
-            </div>
-
-            <a href="https://discord.gg/GYGVBqGEwP" class="btn-green">DISCORD</a>
-        </div>
-    </aside>
-
-    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
-    <!--------------------------------------------------------------->
+        <script src="assets/js/scripts.js"></script>
+    </body>
+    <!--=======================================================================================================-->
 
     <main>
         <section class="hero">
-            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif')">
-            </div>
+            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif');"></div>
 
-            <div class="container hero-content reveal">
+            <div class="hero-content">
                 <span class="hero-tag">Mundo Zera's Craft</span>
-                <h1>Bem Vindo(a) ;)</h1>
-                <p>Esta é a nossa Website Oficial! Aproveite e fique a vontade. Temos um Player de Música Imbutido.</p>
-                <div class="hero-btns">
-                    <a href="https://discord.gg/GYGVBqGEwP" class="btn-big-green">DISCORD <i
-                            class="fas fa-chevron-right"></i></a>
-                    <a href="https://www.youtube.com/@MatheuZera88" class="btn-big-outline">CANAL OFICIAL</a>
+
+                <h1 class="hero-title">MODELO DE PÁGINA LIMPA</h1>
+
+                <p class="hero-desc">Descrição breve e impactante sobre o seu servidor ou modo de jogo aqui.</p>
+
+                <div class="hero-actions">
+                    <a href="#" class="btn-hero-green">DISCORD <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" class="btn-hero-outline">CANAL OFICIAL</a>
                 </div>
             </div>
         </section>
@@ -426,34 +346,6 @@
                 <a href="#compras" class="pill-btn gold">Loja VIP</a>
             </div>
         </nav>
-
-        <section class="ranking-section-bg" style="background-image: url('URL_DA_SUA_IMAGEM_DE_MINERACAO.jpg');">
-            <div class="tabs-overlay"></div>
-            <div class="container tabs-relative">
-                <div class="section-header center reveal">
-                    <h2>LENDAS DO SERVIDOR</h2>
-                    <p>Os jogadores que dominam o Zeras Craft</p>
-                </div>
-
-                <div class="ranking-grid">
-                    <div class="rank-card reveal">
-                        <div class="rank-badge"><i class="fas fa-coins"></i> MAGNATAS</div>
-                        <div class="rank-list">
-                            <div class="rank-item first">
-                                <img src="https://minotar.net/helm/Steve/50.png" alt="Skin">
-                                <span class="name">Steve</span>
-                                <span class="value">1.5M</span>
-                            </div>
-                            <div class="rank-item">
-                                <img src="https://minotar.net/helm/Alex/40.png" alt="Skin">
-                                <span class="name">Alex</span>
-                                <span class="value">900k</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section class="gallery-section-bg" style="background-image: url('URL_DA_SUA_IMAGEM_DO_SPAWN.jpg');">
             <div class="tabs-overlay"></div>
