@@ -1451,10 +1451,6 @@ body.z-lock-scroll {
         bottom: 15px;
         padding: 10px;
     }
-
-    .player-hidden {
-        transform: translateX(-20px) translateY(20px) scale(0.9);
-    }
 }
 
 /* Título da Música */
