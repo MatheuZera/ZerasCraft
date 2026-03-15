@@ -10,19 +10,19 @@
             <ul class="znav-menu">
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item">JOGOS <i class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item">INÍCIO <i class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'jogos-1')">Zera's
+                                <button class="znav-tab active" onclick="switchZnavTab(event, 'inicio-1')">Zera's
                                     Craft</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'jogos-2')">Pixel
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-2')">Pixel
                                     Legends</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'jogos-3')">Minigames</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'jogos-4')">Eventos
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-3')">Minigames</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-4')">Eventos
                                     Sazonais</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'jogos-5')">Dungeons</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-5')">Dungeons</button>
 
                                 <div class="znav-bottom-links">
                                     <a href="#">Ir para Downloads</a>
@@ -32,7 +32,7 @@
 
                             <div class="znav-col-main">
 
-                                <div id="jogos-1" class="znav-tab-content active">
+                                <div id="inicio-1" class="znav-tab-content active">
                                     <div class="znav-col-center">
                                         <div class="znav-grid-3">
                                             <div class="znav-card">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
 
-                                <div id="jogos-2" class="znav-tab-content">
+                                <div id="inicio-2" class="znav-tab-content">
                                     <div class="znav-col-center">
                                         <div class="znav-template-single">
                                             <img src="https://via.placeholder.com/800x350/111/54bd34?text=PIXEL+LEGENDS+RPG"
@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
 
-                                <div id="jogos-3" class="znav-tab-content">
+                                <div id="inicio-3" class="znav-tab-content">
                                     <div class="znav-col-center">
                                         <div class="znav-grid-2">
                                             <div class="znav-card">
@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
 
-                                <div id="jogos-4" class="znav-tab-content">
+                                <div id="inicio-4" class="znav-tab-content">
                                     <div class="znav-col-center">
                                         <div class="znav-template-mixed">
                                             <div class="znav-mixed-top">
@@ -158,7 +158,7 @@
                                     </div>
                                 </div>
 
-                                <div id="jogos-5" class="znav-tab-content">
+                                <div id="inicio-5" class="znav-tab-content">
                                     <div class="znav-col-center">
                                         <div class="znav-template-mixed">
                                             <div class="znav-mixed-top">
@@ -191,7 +191,78 @@
                 </li>
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item">LOJA <i class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item">NOVIDADES <i class="fas fa-chevron-down znav-arrow"></i></span>
+                    <div class="znav-mega-panel" onclick="event.stopPropagation()">
+                        <div class="znav-mega-grid">
+
+                            <div class="znav-col-left">
+                                <button class="znav-tab active" onclick="switchZnavTab(event, 'nov-1')">Últimas
+                                    Notícias</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'nov-2')">Atualizações</button>
+                            </div>
+
+                            <div class="znav-col-main">
+                                <div id="nov-1" class="znav-tab-content active">
+                                    <div class="znav-col-center">
+                                        <div class="znav-grid-3">
+                                            <div class="znav-card">
+                                                <img src="https://via.placeholder.com/400x225/111/54bd34?text=Nova+Economia"
+                                                    alt="News">
+                                                <h4>Restart da Economia</h4>
+                                                <p>Entenda as mudanças no mercado global.</p>
+                                            </div>
+                                            <div class="znav-card">
+                                                <img src="https://via.placeholder.com/400x225/222/54bd34?text=Entrevista"
+                                                    alt="News">
+                                                <h4>Entrevista com a Staff</h4>
+                                                <p>O que planejamos para o próximo semestre.</p>
+                                            </div>
+                                            <div class="znav-card">
+                                                <img src="https://via.placeholder.com/400x225/333/54bd34?text=Campeoes"
+                                                    alt="News">
+                                                <h4>Campeões do CraftJam</h4>
+                                                <p>Veja as construções vencedoras do evento.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="znav-col-right">
+                                        <ul class="znav-link-list">
+                                            <li><a href="#" class="znav-link-green">Blog Oficial</a></li>
+                                            <li><a href="#">Assinar Newsletter</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div id="nov-2" class="znav-tab-content">
+                                    <div class="znav-col-center">
+                                        <div class="znav-grid-2">
+                                            <div class="znav-card">
+                                                <img src="https://via.placeholder.com/400x250/111/54bd34?text=Patch+2.5"
+                                                    alt="Patch">
+                                                <h4>Patch 2.5 - O Despertar</h4>
+                                                <p>Novos monstros, itens e balanceamento geral de classes.</p>
+                                            </div>
+                                            <div class="znav-card">
+                                                <img src="https://via.placeholder.com/400x250/222/54bd34?text=Roadmap+2026"
+                                                    alt="Roadmap">
+                                                <h4>Roadmap 2026</h4>
+                                                <p>Descubra o que estamos desenvolvendo em segredo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="znav-col-right">
+                                        <ul class="znav-link-list">
+                                            <li><a href="#" class="znav-link-green">Ler todas as Patch Notes</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
+                    <span class="znav-item">OFICIAL <i class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
@@ -287,77 +358,6 @@
                                     <div class="znav-col-right">
                                         <ul class="znav-link-list">
                                             <li><a href="#" class="znav-link-green">Preview de Cosméticos</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item">NOVIDADES <i class="fas fa-chevron-down znav-arrow"></i></span>
-                    <div class="znav-mega-panel" onclick="event.stopPropagation()">
-                        <div class="znav-mega-grid">
-
-                            <div class="znav-col-left">
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'nov-1')">Últimas
-                                    Notícias</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'nov-2')">Atualizações</button>
-                            </div>
-
-                            <div class="znav-col-main">
-                                <div id="nov-1" class="znav-tab-content active">
-                                    <div class="znav-col-center">
-                                        <div class="znav-grid-3">
-                                            <div class="znav-card">
-                                                <img src="https://via.placeholder.com/400x225/111/54bd34?text=Nova+Economia"
-                                                    alt="News">
-                                                <h4>Restart da Economia</h4>
-                                                <p>Entenda as mudanças no mercado global.</p>
-                                            </div>
-                                            <div class="znav-card">
-                                                <img src="https://via.placeholder.com/400x225/222/54bd34?text=Entrevista"
-                                                    alt="News">
-                                                <h4>Entrevista com a Staff</h4>
-                                                <p>O que planejamos para o próximo semestre.</p>
-                                            </div>
-                                            <div class="znav-card">
-                                                <img src="https://via.placeholder.com/400x225/333/54bd34?text=Campeoes"
-                                                    alt="News">
-                                                <h4>Campeões do CraftJam</h4>
-                                                <p>Veja as construções vencedoras do evento.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="znav-col-right">
-                                        <ul class="znav-link-list">
-                                            <li><a href="#" class="znav-link-green">Blog Oficial</a></li>
-                                            <li><a href="#">Assinar Newsletter</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div id="nov-2" class="znav-tab-content">
-                                    <div class="znav-col-center">
-                                        <div class="znav-grid-2">
-                                            <div class="znav-card">
-                                                <img src="https://via.placeholder.com/400x250/111/54bd34?text=Patch+2.5"
-                                                    alt="Patch">
-                                                <h4>Patch 2.5 - O Despertar</h4>
-                                                <p>Novos monstros, itens e balanceamento geral de classes.</p>
-                                            </div>
-                                            <div class="znav-card">
-                                                <img src="https://via.placeholder.com/400x250/222/54bd34?text=Roadmap+2026"
-                                                    alt="Roadmap">
-                                                <h4>Roadmap 2026</h4>
-                                                <p>Descubra o que estamos desenvolvendo em segredo.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="znav-col-right">
-                                        <ul class="znav-link-list">
-                                            <li><a href="#" class="znav-link-green">Ler todas as Patch Notes</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -468,7 +468,7 @@
             </ul>
 
             <div class="znav-actions">
-                <a href="/comprar" class="znav-btn-outline">COMPRAR AGORA <i class="fas fa-chevron-right"></i></a>
+                <a href="#" class="znav-btn-outline">ENTRE NO NOSSO DISCORD <i class="fas fa-chevron-right"></i></a>
 
                 <div class="znav-icon-wrapper" onclick="openSearch()">
                     <i class="fas fa-search"></i>

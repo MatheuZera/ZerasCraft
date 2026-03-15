@@ -114,12 +114,9 @@ function slideBack() {
 
 // 4. PESQUISA
 const zcIndex = [
-    { name: "Minecraft Zera's", link: "/jogos/minecraft" },
-    { name: "Pixel Legends", link: "/jogos/legends" },
-    { name: "Marketplace / Loja", link: "/loja" },
-    { name: "CraftJam", link: "/eventos/craftjam" },
-    { name: "Suporte e Ajuda", link: "/suporte" },
-    { name: "Regras", link: "/regras" }
+    { name: "CraftJam", link: "craftjam" },
+    { name: "Eventos", link: "eventos" },
+    { name: "MC Team Ulimate", link: "mctu" },
 ];
 
 function openSearch() {
@@ -1008,27 +1005,22 @@ function changeFeatureImage(clickedTab, newImgSrc) {
 }
 
 /* ==========================================
-   SISTEMA DE AUTOLOAD DA NAVEGAÇÃO
+   AUTOLOADER DE NAVEGAÇÃO CORRIGIDO
 ========================================== */
 document.addEventListener("DOMContentLoaded", () => {
     const navPlaceholder = document.getElementById('nav-placeholder');
 
     if (navPlaceholder) {
-        // O caminho aqui deve apontar para onde seu nav.html está salvo.
-        // Se estiver na mesma pasta, 'nav.html' basta.
+        // Tentamos carregar da raiz. Se falhar (em subpastas), tentamos subir um nível.
         fetch('nav.html')
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao carregar o menu de navegação.');
-                }
-                return response.text();
+                if (!response.ok) return fetch('../nav.html'); // Busca na pasta anterior se não achar na atual
+                return response;
             })
+            .then(response => response.text())
             .then(htmlData => {
-                // Injeta o HTML do menu na página
                 navPlaceholder.innerHTML = htmlData;
             })
-            .catch(error => {
-                console.error("Falha no Autoload do Menu:", error);
-            });
+            .catch(error => console.error("Erro ao carregar nav.html:", error));
     }
 });

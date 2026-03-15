@@ -2523,6 +2523,16 @@ var .play-pause {
     margin-bottom: 80px;
 }
 
+.logo {
+    justify-self: start;
+    color: var(--zc-text);
+    font-weight: 900;
+    font-size: 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .footer-content {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
@@ -2735,6 +2745,15 @@ var .play-pause {
 
 /* --- RESPONSIVO --- */
 @media (max-width: 900px) {
+    .logo {
+        width: 200px;
+        /* Defina uma largura fixa */
+        margin: 0 auto;
+        /* Centraliza horizontalmente */
+        display: block;
+        /* Necessário para que margin: auto funcione com elementos block */
+    }
+
     .back-to-top {
         bottom: 20px;
         right: 10px;
