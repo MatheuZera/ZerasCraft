@@ -127,108 +127,123 @@
     }
 }
 
-/* Container de Notícias: Centralização Industrial */
+/* Container de Notícias: Centralização e Organização */
 .news-grid-container {
     display: flex;
     flex-wrap: wrap;
-    /* Permite que os cards pulem de linha se não couberem */
+    /* Permite quebrar linha se não couber */
     justify-content: center;
-    /* Centraliza horizontalmente os cards */
+    /* Centraliza os cards horizontalmente */
     gap: 20px;
+    /* Espaçamento entre os cards */
     padding: 40px 20px;
-    width: 100%;
-    /* Garante que o container ocupe a largura total para centralizar */
     background-color: #0b0b0b;
-    /* Fundo preto puro solicitado */
-    margin: 0 auto;
+    /* Fundo preto industrial */
+    width: 100%;
 }
 
-/* Base do Card: Mantemos o tamanho fixo de 280px para evitar que fique "gigante" */
+/* O Card Quadrado Industrial */
 .mc-news-card {
     position: relative;
     width: 280px;
-    height: 280px;
-    flex-shrink: 0;
-    /* Impede que o card seja espremido pelo flexbox */
+    /* Largura fixa para não ficar gigante */
+    aspect-ratio: 1 / 1;
+    /* Força o formato quadrado perfeito */
     overflow: hidden;
     display: block;
     text-decoration: none;
-    border-radius: 4px;
     background-color: #111;
-    user-select: none;
-    /* Remove o cursor "|" indesejado */
+    border-radius: 0;
+    /* Cantos retos conforme a referência */
+
+    /* Animação Snappy (Rápida) */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Imagem com Zoom Industrial */
-.news-image,
+.mc-news-card.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efeito de Hover na Imagem */
+.news-image {
+    width: 100%;
+    height: 100%;
+}
+
 .news-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.news-image img {
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Garante que a imagem preencha o quadrado sem distorcer */
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .mc-news-card:hover .news-image img {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    filter: brightness(0.4);
+    /* Escurece para destacar o texto */
 }
 
-/* Overlay: Agora usamos TranslateY para uma animação muito mais fluida */
+/* Overlay de Informações (Texto na base) */
 .news-info-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    /* Mostra apenas a TAG e o TÍTULO inicialmente */
-    transform: translateY(calc(100% - 85px));
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 100%);
-    padding: 20px;
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 40%, transparent 100%);
     display: flex;
     flex-direction: column;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
+    justify-content: flex-end;
+    /* Começa escondendo a descrição */
+    transform: translateY(60px);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* No Hover, o overlay sobe totalmente */
 .mc-news-card:hover .news-info-overlay {
     transform: translateY(0);
-    background: rgba(0, 0, 0, 0.85);
 }
 
-/* Estilização Interna */
+/* Tags e Títulos */
 .news-tag {
     background: #fff;
+    /* Fundo branco conforme referência */
     color: #000;
+    /* Texto preto */
     font-size: 10px;
     font-weight: 900;
-    padding: 3px 8px;
+    padding: 2px 6px;
     width: fit-content;
     margin-bottom: 8px;
+    text-transform: uppercase;
 }
 
 .news-headline {
     color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    /* Sua fonte oficial */
     font-size: 1.1rem;
     font-weight: 700;
-    margin: 0;
     line-height: 1.2;
     text-transform: uppercase;
 }
 
 .news-description {
-    color: #aaa;
-    font-size: 0.85rem;
-    margin-top: 15px;
+    color: #ccc;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    line-height: 1.3;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    line-height: 1.4;
+    transition: opacity 0.2s ease;
 }
 
 .mc-news-card:hover .news-description {
     opacity: 1;
 }
-
 
 /* --- MANTER ESTILO PC ATUAL --- */
 
@@ -2423,6 +2438,7 @@
 .rank-icon-silver,
 .rank-icon-bronze,
 .rank-big,
+.white-shield,
 .gold-shield {
     font-size: 32px;
     display: block;
@@ -2433,6 +2449,11 @@
 .gold-shield,
 .rank-icon-gold {
     color: #ffcc00;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+}
+
+.white-shield {
+    color: #fff;
     text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
 }
 
@@ -2448,6 +2469,7 @@
 
 /* Animação disparada pelo hover da linha */
 .t-row-elite:hover .rank-icon-gold,
+.t-row-elite:hover .white-shield,
 .t-row-elite:hover .gold-shield {
     transform: scale(1.2) rotate(-5deg);
 }
@@ -2539,7 +2561,7 @@
 
 .tip-label {
     font-weight: 900;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .tip-close-btn {
@@ -2557,16 +2579,16 @@
 .tip-divider {
     width: 50px;
     height: 5px;
-    background: #3c8527;
+    background: #ff5e5e;
     margin: 15px 0;
 }
 
 .tip-footer {
     background: #181818;
     padding: 10px;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 900;
-    color: #444;
+    color: #ffffff;
     text-align: center;
 }
 
@@ -3176,7 +3198,6 @@
     height: 45px;
     border-radius: 2px;
     object-fit: cover;
-    border: 1px solid #333;
 }
 
 .checkout-title {
@@ -3187,7 +3208,7 @@
     letter-spacing: 0.5px;
 }
 
-/* Botão com efeito 3D (Igual à referência) */
+/* Botão com efeito 3D (Refinado com subida suave) */
 .checkout-btn {
     background-color: #54bd34;
     /* Verde Zera's */
@@ -3202,23 +3223,35 @@
     align-items: center;
     gap: 10px;
     text-transform: uppercase;
-    /* Efeito de profundidade */
+
+    /* Estado inicial da profundidade */
     box-shadow: 0 4px 0 #3a8c22;
-    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s ease;
+
+    /* Transição ajustada para ser mais suave (0.2s ou 0.3s) */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .checkout-btn i {
     font-size: 12px;
 }
 
+/* EFEITO DE SUBIDA LEVE */
 .checkout-btn:hover {
     background-color: #6ae544;
+    /* Move o botão 3px para cima */
+    transform: translateY(-3px);
+    /* Aumenta a sombra para 7px para compensar a subida e manter o 3D */
+    box-shadow: 0 7px 0 #3a8c22;
 }
 
+/* EFEITO DE PRESSIONAR (ACTIVE) */
 .checkout-btn:active {
-    transform: translateY(4px);
-    box-shadow: 0 0 0 #3a8c22;
-    /* Botão afunda e zera a sombra */
+    /* Desce o botão abaixo da linha original */
+    transform: translateY(2px);
+    /* Quase zera a sombra para parecer que encostou no fundo */
+    box-shadow: 0 2px 0 #3a8c22;
+    transition: transform 0.05s ease;
+    /* Resposta imediata ao clique */
 }
 
 /* ==========================================
@@ -3235,33 +3268,38 @@
     backdrop-filter: blur(10px);
 }
 
-/* Fixado no Mobile (Gruda no fundo da tela) */
+/* Fixado no Mobile (Agora na parte SUPERIOR) */
 .checkout-banner.is-fixed-mob {
     position: fixed;
-    bottom: 0;
+    top: 60px;
+    /* Alinha logo abaixo do cabeçalho mobile de 60px */
+    bottom: auto;
+    /* Garante que não grude embaixo */
     left: 0;
-    top: auto;
-    padding: 15px 0;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.9);
+    padding: 10px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    /* Sombra projetada para baixo */
     background-color: rgba(26, 26, 26, 0.98);
-    border-top: 2px solid #54bd34;
-    /* Destaque verde no mobile */
-    border-bottom: none;
+    border-bottom: 2px solid #54bd34;
+    /* Destaque verde agora na base */
+    border-top: none;
+    z-index: 990;
 }
 
 /* Responsividade Mobile do Banner */
 @media (max-width: 1024px) {
     .checkout-container {
         padding: 0 20px;
+        /* Removido o bottom: 100px que estava aqui */
     }
 
     .checkout-title {
         font-size: 14px;
-        /* Ajuste para não quebrar a tela */
     }
 
     .checkout-btn {
-        padding: 12px 20px;
+        padding: 10px 18px;
+        /* Leve redução para caber melhor no topo */
         font-size: 13px;
     }
 }
@@ -3291,7 +3329,7 @@
 /* --- ESQUERDA (IMAGEM E TEXTO BASE) --- */
 .feat-image-wrapper {
     background-color: #1a1a1a;
-    padding: 10px;
+    padding: 0px;
     border: 1px solid #2a2a2a;
     border-radius: 4px;
     margin-bottom: 25px;
@@ -3405,4 +3443,394 @@
     .feat-tab {
         padding: 18px 20px;
     }
+}
+
+
+.discovery-section {
+    background: #000;
+    padding: 60px 0;
+    width: 100%;
+}
+
+/* Display de Cima */
+.discovery-main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main-img-container {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border: 1px solid #222;
+}
+
+.main-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.main-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: left;
+}
+
+#discovery-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+}
+
+/* Área das Miniaturas */
+.discovery-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 30px auto 0;
+    gap: 10px;
+}
+
+.discovery-viewport {
+    width: 100%;
+    overflow: hidden;
+    /* Esconde o excesso de miniaturas */
+}
+
+.discovery-track {
+    display: flex;
+    gap: 12px;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.d-thumb {
+    flex: 0 0 160px;
+    /* NUNCA muda de tamanho */
+    height: 90px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    border: 3px solid transparent;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+}
+
+.d-thumb:hover {
+    opacity: 0.8;
+}
+
+.d-thumb.active {
+    border-color: #54bd34;
+    /* Verde Zera's */
+    opacity: 1;
+}
+
+/* Setas */
+.nav-arrow {
+    background: none;
+    border: 1px solid #444;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.nav-arrow:hover {
+    background: #111;
+    border-color: #fff;
+}
+
+
+
+.explorer-section {
+    background-color: #0b0b0b;
+    padding: 60px 20px;
+    width: 100%;
+}
+
+.explorer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Base do Card */
+.explorer-card {
+    background: #151515;
+    border: 1px solid #252525;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+.explorer-card:hover {
+    border-color: #54bd34;
+    /* Verde Zera's */
+}
+
+/* Banner com Autocomplete */
+.explorer-banner {
+    width: 100%;
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.explorer-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Ícone Central e Botão de Fechar */
+.explorer-icon {
+    position: relative;
+    z-index: 2;
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.explorer-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #444;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Conteúdo Expandível */
+.explorer-content {
+    padding: 20px;
+    text-align: left;
+}
+
+.explorer-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.explorer-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    /* Começa fechado */
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.explorer-details p {
+    overflow: hidden;
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ESTADO ATIVO (Aba aberta) */
+.explorer-card.active .explorer-details {
+    grid-template-rows: 1fr;
+    margin-top: 15px;
+}
+
+.explorer-card.active .explorer-toggle {
+    transform: rotate(45deg);
+    /* Transforma o + em X */
+    background: #54bd34;
+    border-color: #fff;
+}
+
+
+
+/* --- FUNDO E GRID PRINCIPAL --- */
+.mc-modes-section {
+    background-color: #0b0b0b;
+    padding: 80px 20px;
+}
+
+.mc-modes-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 15px;
+    align-items: stretch;
+}
+
+/* --- BANNER (Topo solto) --- */
+.mc-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.mc-card-banner {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    background-color: #383838;
+}
+
+/* --- CONTEÚDO (Com moldura colorida) --- */
+.mc-card-content {
+    background-color: #121212;
+    padding: 25px;
+    flex-grow: 1;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+
+    /* ALINHAMENTO INDUSTRIAL: Força as linhas a terem o mesmo tamanho */
+    display: grid;
+    grid-template-rows: 25px 45px 85px 65px auto;
+}
+
+/* Cores dos Temas */
+.theme-brown {
+    border-color: #8b5a2b;
+}
+
+.theme-purple {
+    border-color: #7b3fbf;
+}
+
+.theme-blue {
+    border-color: #007fff;
+}
+
+/* --- ELEMENTOS INTERNOS --- */
+.mc-status {
+    grid-row: 1;
+    text-align: right;
+    font-size: 11px;
+    font-weight: 900;
+    color: #555;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.mc-card-title {
+    grid-row: 2;
+    font-family: 'Rajdhani', sans-serif;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.mc-card-desc {
+    grid-row: 3;
+    color: #888;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.4;
+    margin-top: 10px;
+}
+
+.mc-tag-box {
+    grid-row: 4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 6px;
+}
+
+.mc-tag-box span {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 10px;
+    padding: 5px 10px;
+    font-weight: 700;
+}
+
+/* --- ACCORDION (OCULTAÇÃO TOTAL) --- */
+.mc-accordion {
+    grid-row: 5;
+    margin-top: 15px;
+}
+
+.mc-acc-item {
+    border-top: 1px solid #222;
+}
+
+.mc-acc-trigger {
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.mc-acc-trigger i {
+    transition: transform 0.3s ease;
+    color: #444;
+    /* Flecha discreta padrão */
+}
+
+.mc-acc-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    /* TOTALMENTE FECHADO */
+    visibility: hidden;
+    /* TEXTO NÃO APARECE */
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.mc-acc-content p {
+    min-height: 0;
+    color: #666;
+    font-size: 13px;
+    padding-bottom: 15px;
+    margin: 0;
+}
+
+/* --- ESTADO ATIVO --- */
+.mc-acc-item.active .mc-acc-content {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    opacity: 1;
+}
+
+.mc-acc-item.active .mc-acc-trigger i {
+    transform: rotate(180deg);
+    color: #54bd34;
+    /* Verde Zera's na abertura */
 }
