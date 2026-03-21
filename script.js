@@ -22,37 +22,71 @@ backToTop.addEventListener('click', () => {
 
 
 
-// SISTEMA DE NAVEGAÇÃO (PC & Mobile)
-// =================================================
 /**
- * ZERA'S CRAFT - MOTOR DE NAVEGAÇÃO
+ * ZERA'S CRAFT - MOTOR DE NAVEGAÇÃO COMPLETO
+ * Autoload + PC Mega Menu + Mobile Menu + Search + Scroll Lock
  */
 
-// 1. DESKTOP: ABRIR MEGA MENU (Animação Opacity/Visibility)
-function toggleMegaMenu(evt) {
-    if (evt.target.closest('.znav-mega-panel') || evt.target.closest('.znav-simple-drop')) {
-        return;
+/* ==========================================
+   1. UTILITÁRIOS: TRAVA DE SCROLL
+   (Usa a classe .z-lock-scroll definida no CSS)
+========================================== */
+function lockScroll() {
+    document.documentElement.classList.add('z-lock-scroll');
+    document.body.classList.add('z-lock-scroll');
+}
+
+function unlockScroll() {
+    document.documentElement.classList.remove('z-lock-scroll');
+    document.body.classList.remove('z-lock-scroll');
+}
+
+/* ==========================================
+   2. SISTEMA DE AUTOLOAD (nav.html)
+========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const navPlaceholder = document.getElementById('nav-placeholder');
+    if (navPlaceholder) {
+        // Tenta carregar nav.html da raiz ou pasta anterior
+        fetch('nav.html')
+            .then(res => {
+                if (!res.ok) return fetch('../nav.html');
+                return res;
+            })
+            .then(res => res.text())
+            .then(html => {
+                navPlaceholder.innerHTML = html;
+            })
+            .catch(err => console.error("Erro ao carregar o menu:", err));
     }
+});
+
+/* ==========================================
+   3. DESKTOP: MEGA MENU INTERATIVO
+========================================== */
+function toggleMegaMenu(evt) {
+    // Impede fechar ao clicar dentro do painel ou dropdown simples
+    if (evt.target.closest('.znav-mega-panel') || evt.target.closest('.znav-simple-drop')) return;
 
     const clickedBtn = evt.currentTarget;
     const isOpen = clickedBtn.classList.contains('open');
 
-    // Fecha todos
+    // Fecha todos os menus abertos e destrava o scroll antes de checar o próximo
     document.querySelectorAll('.znav-mega-btn').forEach(btn => btn.classList.remove('open'));
+    unlockScroll();
 
     if (!isOpen) {
         clickedBtn.classList.add('open');
+        lockScroll(); // Trava a página ao abrir o menu no PC
 
-        // Auto-Reset: Força a primeira aba a aparecer e corrige conflito de layout flexível
+        // Garante que a primeira aba interna apareça por padrão
         const panel = clickedBtn.querySelector('.znav-mega-grid');
         if (panel) {
             const tabs = panel.querySelectorAll('.znav-tab');
             const contents = panel.querySelectorAll('.znav-tab-content');
-
             if (tabs.length > 0 && contents.length > 0) {
                 tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => { c.classList.remove('active'); });
-
+                contents.forEach(c => c.classList.remove('active'));
                 tabs[0].classList.add('active');
                 contents[0].classList.add('active');
             }
@@ -60,36 +94,40 @@ function toggleMegaMenu(evt) {
     }
 }
 
-// Fechar com clique fora
+// Fecha o menu ao clicar em qualquer lugar fora dele
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.znav-mega-btn')) {
-        document.querySelectorAll('.znav-mega-btn').forEach(btn => btn.classList.remove('open'));
+        const opened = document.querySelector('.znav-mega-btn.open');
+        if (opened) {
+            opened.classList.remove('open');
+            unlockScroll();
+        }
     }
 });
 
-// 2. DESKTOP: TROCA DE ABAS (Dinâmico para Main e Direita)
+// Troca de Abas dentro do Mega Menu
 function switchZnavTab(evt, targetId) {
     evt.preventDefault();
     evt.stopPropagation();
-
     const parentGrid = evt.currentTarget.closest('.znav-mega-grid');
-
-    // Remove classe ativa de todas as abas e painéis
     parentGrid.querySelectorAll('.znav-tab').forEach(tab => tab.classList.remove('active'));
     parentGrid.querySelectorAll('.znav-tab-content').forEach(content => content.classList.remove('active'));
-
-    // Adiciona classe ativa apenas na clicada e no conteúdo alvo
     evt.currentTarget.classList.add('active');
-    const targetElement = parentGrid.querySelector(`#${targetId}`);
-    if (targetElement) {
-        targetElement.classList.add('active');
-    }
+    const target = parentGrid.querySelector(`#${targetId}`);
+    if (target) target.classList.add('active');
 }
 
-// 3. MOBILE: FULL SCREEN & SCROLL LOCK
-function openMobileMenu() {
+/* ==========================================
+   4. MOBILE: SIDEBAR E SLIDING PANELS
+========================================== */
+function openMobileMenu(evt) {
+    // Se você passar o evento (evt), preventDefault garante que a página não se mova
+    if (evt) evt.preventDefault();
+
     document.getElementById('zmobSidebar').classList.add('active');
     document.getElementById('zmobOverlay').classList.add('active');
+
+    // Aplica a trava
     document.documentElement.classList.add('z-lock-scroll');
     document.body.classList.add('z-lock-scroll');
 }
@@ -97,9 +135,8 @@ function openMobileMenu() {
 function closeMobileMenu() {
     document.getElementById('zmobSidebar').classList.remove('active');
     document.getElementById('zmobOverlay').classList.remove('active');
-    document.documentElement.classList.remove('z-lock-scroll');
-    document.body.classList.remove('z-lock-scroll');
-    setTimeout(slideBack, 300); // Reseta as telas ao fundo
+    unlockScroll();
+    setTimeout(slideBack, 300); // Retorna os painéis para o início após fechar
 }
 
 function slideMobile(panelId) {
@@ -109,35 +146,31 @@ function slideMobile(panelId) {
 
 function slideBack() {
     document.getElementById('zpanel-main').classList.remove('slide-left');
-    document.querySelectorAll('.zpanel-sub').forEach(panel => panel.classList.remove('active'));
+    document.querySelectorAll('.zpanel-sub').forEach(p => p.classList.remove('active'));
 }
 
-// 4. PESQUISA
+/* ==========================================
+   5. PESQUISA (MODAL)
+========================================== */
 const zcIndex = [
-    { name: "CraftJam", link: "craftjam" },
-    { name: "Eventos", link: "eventos" },
-    { name: "MC Team Ulimate", link: "mctu" },
+    { name: "CraftJam", link: "craftjam.html" },
+    { name: "Eventos", link: "eventos.html" },
+    { name: "Loja VIP", link: "loja.html" }
 ];
 
 function openSearch() {
     if (document.getElementById('zmobSidebar').classList.contains('active')) closeMobileMenu();
     document.getElementById('zSearchModal').classList.add('active');
-    document.documentElement.classList.add('z-lock-scroll');
-    document.body.classList.add('z-lock-scroll');
+    lockScroll();
     const input = document.getElementById('zSearchInput');
-    input.value = ""; input.focus(); runSearch();
+    input.value = "";
+    input.focus();
+    runSearch();
 }
 
 function closeSearch() {
     document.getElementById('zSearchModal').classList.remove('active');
-    document.documentElement.classList.remove('z-lock-scroll');
-    document.body.classList.remove('z-lock-scroll');
-}
-
-function clearSearch() {
-    document.getElementById('zSearchInput').value = "";
-    document.getElementById('zSearchInput').focus();
-    runSearch();
+    unlockScroll();
 }
 
 function runSearch() {
@@ -145,19 +178,17 @@ function runSearch() {
     const resultList = document.getElementById('zSearchResults');
     resultList.innerHTML = '';
 
-    const filteredPages = query === "" ? zcIndex.slice(0, 3) : zcIndex.filter(p => p.name.toLowerCase().includes(query));
+    const filtered = query === "" ? zcIndex.slice(0, 3) : zcIndex.filter(p => p.name.toLowerCase().includes(query));
 
-    if (filteredPages.length === 0) {
+    if (filtered.length === 0) {
         resultList.innerHTML = '<li><a href="#" style="color:#555; pointer-events:none;">Sem resultados.</a></li>';
         return;
     }
 
-    filteredPages.forEach(p => {
+    filtered.forEach(p => {
         resultList.innerHTML += `<li><a href="${p.link}"><i class="fas fa-search"></i> ${p.name}</a></li>`;
     });
 }
-// =================================================
-
 
 
 /**
@@ -896,9 +927,6 @@ function setGalleryImg(evt, newSrc) {
     // Atualiza a borda azul
     galleryBox.querySelectorAll('.thumb-item').forEach(thumb => thumb.classList.remove('active'));
     evt.currentTarget.classList.add('active');
-
-    // Centraliza a miniatura clicada automaticamente (Funciona no PC e no Mobile)
-    evt.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
 }
 
 // Botão de Próxima Foto
@@ -981,27 +1009,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ==========================================
-   SHOWCASE DE RECURSOS (TROCA DE IMAGEM)
+   SHOWCASE DE RECURSOS - MOTOR DE TROCA VIA URL
 ========================================== */
-function changeFeatureImage(clickedTab, newImgSrc) {
-    // Encontra o container principal
+function changeFeatureImage(clickedTab) {
     const container = clickedTab.closest('.feat-container');
     const mainImg = container.querySelector('#feat-main-img');
-
-    // Remove a classe 'active' de todas as abas
     const allTabs = container.querySelectorAll('.feat-tab');
-    allTabs.forEach(tab => tab.classList.remove('active'));
 
-    // Adiciona a classe 'active' na aba que o usuário clicou
-    clickedTab.classList.add('active');
+    // 1. Evita recarregar se a aba já estiver ativa
+    if (clickedTab.classList.contains('active')) return;
 
-    // Efeito de Fade (Oculta, troca a fonte, e mostra novamente)
-    mainImg.style.opacity = 0;
+    // 2. Captura a URL do atributo style
+    // O navegador retorna algo como: url("assets/images/...")
+    let bgUrl = clickedTab.style.backgroundImage;
+
+    // 3. Limpa a string para pegar apenas o caminho do arquivo
+    let cleanPath = bgUrl.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+
+    // 4. Efeito Visual de Fade Out
+    mainImg.style.opacity = '0';
 
     setTimeout(() => {
-        mainImg.src = newImgSrc;
-        mainImg.style.opacity = 1;
-    }, 200); // 200ms é o tempo exato para um piscar suave
+        // 5. Aplica o novo caminho no SRC da imagem
+        mainImg.src = cleanPath;
+
+        // 6. Atualiza as classes visuais
+        allTabs.forEach(tab => tab.classList.remove('active'));
+        clickedTab.classList.add('active');
+
+        // 7. Fade In
+        mainImg.style.opacity = '1';
+    }, 200);
 }
 
 /* ==========================================
@@ -1024,3 +1062,82 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error("Erro ao carregar nav.html:", error));
     }
 });
+
+
+
+/**
+ * ZERA'S CRAFT - MOTOR DE NOTÍCIAS
+ * Gerencia a entrada suave e as transições dos cards
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    const newsCards = document.querySelectorAll(".mc-news-card");
+
+    const newsObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Delay reduzido para 50ms (efeito quase instantâneo)
+                setTimeout(() => {
+                    entry.target.classList.add("reveal-active");
+                }, index * 50);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    newsCards.forEach(card => newsObserver.observe(card));
+});
+
+let currentOffset = 0;
+
+function setDiscovery(el) {
+    const mainImg = document.getElementById('discovery-img');
+    const mainCaption = document.getElementById('discovery-caption');
+    const allThumbs = document.querySelectorAll('.d-thumb');
+
+    // Extrai os dados do HTML
+    let bgUrl = el.style.backgroundImage;
+    let path = bgUrl.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+    let caption = el.getAttribute('data-caption');
+
+    // Troca Visual
+    mainImg.style.opacity = '0';
+    setTimeout(() => {
+        mainImg.src = path;
+        mainCaption.innerText = caption;
+        mainImg.style.opacity = '1';
+    }, 200);
+
+    // Classe Ativa
+    allThumbs.forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+}
+
+function slideTrack(direction) {
+    const track = document.getElementById('discoveryTrack');
+    const viewportWidth = document.querySelector('.discovery-viewport').offsetWidth;
+    const itemWidth = 160 + 12; // largura + gap
+    const maxScroll = track.scrollWidth - viewportWidth;
+
+    currentOffset += (direction * itemWidth);
+
+    // Limites de segurança
+    if (currentOffset < 0) currentOffset = 0;
+    if (currentOffset > maxScroll) currentOffset = maxScroll;
+
+    track.style.transform = `translateX(-${currentOffset}px)`;
+}
+
+
+function toggleExplorer(card) {
+    // Opcional: Fecha os outros cards ao abrir um novo (Comente se quiser abrir vários)
+    document.querySelectorAll('.explorer-card').forEach(c => {
+        if (c !== card) c.classList.remove('active');
+    });
+
+    // Alterna o estado do card clicado
+    card.classList.toggle('active');
+}
+
+function toggleMcAcc(element) {
+    element.classList.toggle('active');
+}

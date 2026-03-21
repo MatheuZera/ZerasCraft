@@ -101,7 +101,7 @@
             <div class="checkout-container">
 
                 <div class="checkout-info">
-                    <img src="https://via.placeholder.com/50x50/111/54bd34?text=Img" alt="Thumbnail">
+                    <img src="assets/images/geral/icone.png" alt="Thumbnail">
                     <span class="checkout-title">DELUXE EDITION</span>
                 </div>
 
@@ -117,47 +117,39 @@
 
                 <div class="feat-visuals">
                     <div class="feat-image-wrapper">
-                        <img id="feat-main-img"
-                            src="https://via.placeholder.com/800x450/111/54bd34?text=SISTEMA+DE+GUILDAS"
-                            alt="Destaque Principal" class="feat-img">
+                        <img id="feat-main-img" src="assets/images/geral/banner-img.jpg" alt="Destaque"
+                            class="feat-img">
                     </div>
                     <div class="feat-meta">
-                        <h2>SISTEMAS EXCLUSIVOS</h2>
-                        <p>Descubra as mecânicas únicas que tornam o nosso servidor a melhor experiência do momento.
-                            Selecione um recurso ao lado para visualizar.</p>
+                        <h2 class="section-title">SISTEMAS EXCLUSIVOS</h2>
+                        <p>Descubra as mecânicas únicas que tornam o nosso servidor a melhor experiência do momento.</p>
                     </div>
                 </div>
 
                 <div class="feat-tabs-area">
 
-                    <div class="feat-tab active"
-                        onclick="changeFeatureImage(this, 'https://via.placeholder.com/800x450/111/54bd34?text=SISTEMA+DE+GUILDAS')">
+                    <div class="feat-tab active" style="background-image: url('assets/images/geral/banner-img.jpg');"
+                        onclick="changeFeatureImage(this)">
                         <h3><i class="fas fa-shield-alt"></i> Sistema de Guildas</h3>
-                        <p>Crie seu clã, recrute seus amigos e construa uma base impenetrável. Declare guerra contra
-                            guildas
-                            rivais e domine o servidor.</p>
+                        <p>Crie seu clã, recrute seus amigos e domine o servidor.</p>
                     </div>
 
-                    <div class="feat-tab"
-                        onclick="changeFeatureImage(this, 'https://via.placeholder.com/800x450/222/54bd34?text=ECONOMIA+DINAMICA')">
+                    <div class="feat-tab" style="background-image: url('assets/images/features/economia.png');"
+                        onclick="changeFeatureImage(this)">
                         <h3><i class="fas fa-coins"></i> Economia Dinâmica</h3>
-                        <p>O mercado é controlado 100% pelos jogadores. Os preços dos itens sobem e descem de acordo com
-                            a
-                            oferta e a demanda.</p>
+                        <p>O mercado é controlado 100% pelos jogadores de forma estratégica.</p>
                     </div>
 
-                    <div class="feat-tab"
-                        onclick="changeFeatureImage(this, 'https://via.placeholder.com/800x450/333/54bd34?text=BOSSES+EPICOS')">
+                    <div class="feat-tab" style="background-image: url('assets/images/features/bosses.png');"
+                        onclick="changeFeatureImage(this)">
                         <h3><i class="fas fa-dragon"></i> Bosses Épicos</h3>
-                        <p>Enfrente chefes customizados em masmorras sombrias. Cada boss possui magias únicas e garante
-                            itens lendários caso você sobreviva.</p>
+                        <p>Enfrente chefes customizados em masmorras sombrias com loots raros.</p>
                     </div>
 
-                    <div class="feat-tab"
-                        onclick="changeFeatureImage(this, 'https://via.placeholder.com/800x450/000/54bd34?text=HABILIDADES+RPG')">
+                    <div class="feat-tab" style="background-image: url('assets/images/features/habilidades.png');"
+                        onclick="changeFeatureImage(this)">
                         <h3><i class="fas fa-magic"></i> Habilidades RPG</h3>
-                        <p>Evolua mineração, combate, escavação e muito mais. Quanto mais você joga, mais forte seu
-                            personagem se torna.</p>
+                        <p>Evolua mineração, combate e torne seu personagem único.</p>
                     </div>
 
                 </div>
@@ -191,36 +183,34 @@
 
                                 <div class="gallery-container">
                                     <div class="gallery-main-view">
-                                        <img id="active-gallery-img"
-                                            src="https://via.placeholder.com/800x450/111/54bd34?text=Exploracao+Epica"
+                                        <img id="active-gallery-img" src="assets/images/geral/banner-fundo.gif"
                                             alt="Cena do Jogo">
-                                        <button class="btn-next-img" onclick="nextGalleryImg(event)"><i
-                                                class="fas fa-chevron-right"></i></button>
+                                        <button class="btn-next-img" onclick="nextGalleryImg(event)">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
                                     </div>
 
                                     <div class="gallery-thumbnails">
-                                        <img class="thumb-item active"
-                                            src="https://via.placeholder.com/800x450/111/54bd34?text=Exploracao+Epica"
+                                        <img class="thumb-item active" src="assets/images/geral/banner-fundo.gif"
                                             alt="Thumb 1" onclick="setGalleryImg(event, this.src)">
-                                        <img class="thumb-item"
-                                            src="https://via.placeholder.com/800x450/222/54bd34?text=Batalhas+PVP"
-                                            alt="Thumb 2" onclick="setGalleryImg(event, this.src)">
-                                        <img class="thumb-item"
-                                            src="https://via.placeholder.com/800x450/333/54bd34?text=Masmorras"
-                                            alt="Thumb 3" onclick="setGalleryImg(event, this.src)">
-                                        <img class="thumb-item"
-                                            src="https://via.placeholder.com/800x450/000/54bd34?text=Construcoes"
-                                            alt="Thumb 4" onclick="setGalleryImg(event, this.src)">
-                                        <img class="thumb-item"
-                                            src="https://via.placeholder.com/800x450/1a1a1a/54bd34?text=Eventos"
-                                            alt="Thumb 5" onclick="setGalleryImg(event, this.src)">
+                                        <img class="thumb-item" src="assets/images/geral/banner-img.jpg" alt="Thumb 2"
+                                            onclick="setGalleryImg(event, this.src)">
+                                        <img class="thumb-item" src="assets/images/geral/banner-img.jpg" alt="Thumb 3"
+                                            onclick="setGalleryImg(event, this.src)">
+                                        <img class="thumb-item" src="assets/images/geral/banner-img.jpg" alt="Thumb 4"
+                                            onclick="setGalleryImg(event, this.src)">
+                                        <img class="thumb-item" src="assets/images/geral/banner-img.jpg" alt="Thumb 5"
+                                            onclick="setGalleryImg(event, this.src)">
                                     </div>
                                 </div>
                                 <p class="gallery-description">Lute contra criaturas icônicas, encare missões repletas
                                     de
                                     tesouros e colete itens lendários. Mergulhe na aventura definitiva com seus amigos
                                     no
-                                    maior servidor de RPG.</p>
+                                    maior servidor de RPG.
+                                    <br>
+                                    <br>
+                                </p>
                             </div>
 
                             <div class="info-column">
@@ -347,6 +337,199 @@
                     </div>
 
                 </div>
+            </div>
+        </section>
+
+        <section class="discovery-section">
+            <div class="discovery-main">
+                <div class="main-img-container">
+                    <img id="discovery-img" src="assets/images/geral/mundo1.jpg">
+                    <div class="main-overlay">
+                        <p id="discovery-caption">Atravesse paisagens impressionantes e descubra os mistérios.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discovery-nav">
+                <button class="nav-arrow left" onclick="slideTrack(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="discovery-viewport">
+                    <div class="discovery-track" id="discoveryTrack">
+                        <div class="d-thumb active"
+                            style="background-image: url('assets/images/geral/banner-fundo.gif');"
+                            data-caption="Atravesse paisagens impressionantes e descubra os mistérios."
+                            onclick="setDiscovery(this)"></div>
+
+                        <div class="d-thumb" style="background-image: url('assets/images/geral/banner-img.jpg');"
+                            data-caption="Jogue conteúdos incríveis criados pela comunidade."
+                            onclick="setDiscovery(this)"></div>
+
+                        <div class="d-thumb" style="background-image: url('assets/images/geral/banner-img.jpg');"
+                            data-caption="Explore fortalezas antigas e defenda seu território."
+                            onclick="setDiscovery(this)"></div>
+
+                        <div class="d-thumb" style="background-image: url('assets/images/geral/banner-img.jpg');"
+                            data-caption="Crie biomas personalizados e dê vida às construções."
+                            onclick="setDiscovery(this)"></div>
+
+                        <div class="d-thumb" style="background-image: url('assets/images/geral/banner-img.jpg');"
+                            data-caption="Enfrente perigos e colete recursos raros no Nether."
+                            onclick="setDiscovery(this)"></div>
+                    </div>
+                </div>
+
+                <button class="nav-arrow right" onclick="slideTrack(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+
+        <section class="explorer-section">
+            <div class="explorer-container">
+
+                <div class="explorer-card" onclick="toggleExplorer(this)">
+                    <div class="explorer-banner" style="background-image: url('assets/images/features/banner1.jpg');">
+                        <div class="explorer-icon"><i class="fas fa- fortress-gate"></i></div>
+                        <button class="explorer-toggle"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div class="explorer-content">
+                        <h3 class="explorer-title">Sistemas de Vilas</h3>
+                        <div class="explorer-details">
+                            <p>Construa sua própria vila, gerencie recursos e proteja seus aldeões de invasões noturnas
+                                com sistemas de defesa automatizados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="explorer-card" onclick="toggleExplorer(this)">
+                    <div class="explorer-banner" style="background-image: url('assets/images/features/banner2.jpg');">
+                        <div class="explorer-icon"><i class="fas fa-shield-halved"></i></div>
+                        <button class="explorer-toggle"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div class="explorer-content">
+                        <h3 class="explorer-title">Guerra de Guildas</h3>
+                        <div class="explorer-details">
+                            <p>Declare guerra contra territórios inimigos. Use máquinas de cerco e conquiste o castelo
+                                adversário para dominar a economia local.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="explorer-card" onclick="toggleExplorer(this)">
+                    <div class="explorer-banner" style="background-image: url('assets/images/features/banner3.jpg');">
+                        <div class="explorer-icon"><i class="fas fa-gem"></i></div>
+                        <button class="explorer-toggle"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div class="explorer-content">
+                        <h3 class="explorer-title">Itens Lendários</h3>
+                        <div class="explorer-details">
+                            <p>Encontre artefatos escondidos em masmorras procedurais. Cada item possui atributos
+                                mágicos únicos e raridade industrial.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mc-modes-section">
+            <div class="mc-modes-grid">
+
+                <div class="mc-card">
+                    <div class="mc-card-banner" style="background-image: url('assets/images/geral/banner-fundo.gif');">
+                    </div>
+                    <div class="mc-card-content theme-brown">
+                        <div class="mc-status">PÚBLICO <i class="fas fa-external-link-alt"></i></div>
+                        <h2 class="mc-card-title">Online</h2>
+                        <p class="mc-card-desc">Conecte-se e jogue com jogadores de todo o mundo, onde quer que eles
+                            estejam.</p>
+                        <div class="mc-tag-box">
+                            <span>MAIS DE 1 MILHÃO DE JOGADORES</span>
+                            <span>BEDROCK</span>
+                        </div>
+                        <div class="mc-accordion">
+                            <div class="mc-acc-item" onclick="toggleMcAcc(this)">
+                                <div class="mc-acc-trigger"><span>MUNDOS</span> <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="mc-acc-content">
+                                    <p>Jogue com outros jogadores em um mundo personalizado.</p>
+                                </div>
+                            </div>
+                            <div class="mc-acc-item" onclick="toggleMcAcc(this)">
+                                <div class="mc-acc-trigger"><span>SERVIDORES</span> <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="mc-acc-content">
+                                    <p>Descubra servidores administrados pela comunidade.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mc-card">
+                    <div class="mc-card-banner" style="background-image: url('assets/images/geral/banner-fundo.gif');">
+                    </div>
+                    <div class="mc-card-content theme-purple">
+                        <div class="mc-status">PRIVADO <i class="fas fa-lock"></i></div>
+                        <h2 class="mc-card-title">Realms</h2>
+                        <p class="mc-card-desc">Jogue no seu próprio servidor; um mundo online contínuo e seguro na
+                            nuvem.</p>
+                        <div class="mc-tag-box">
+                            <span>ATÉ 11 JOGADORES</span>
+                            <span>BEDROCK</span>
+                        </div>
+                        <div class="mc-accordion">
+                            <div class="mc-acc-item" onclick="toggleMcAcc(this)">
+                                <div class="mc-acc-trigger"><span>REALMS PLUS</span> <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="mc-acc-content">
+                                    <p>Acesso instantâneo a um catálogo atualizado todo mês.</p>
+                                </div>
+                            </div>
+                            <div class="mc-acc-item" onclick="toggleMcAcc(this)">
+                                <div class="mc-acc-trigger"><span>JAVA PLUS</span> <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="mc-acc-content">
+                                    <p>Crie e gerencie seu próprio servidor pessoal com 10 amigos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mc-card">
+                    <div class="mc-card-banner" style="background-image: url('assets/images/geral/banner-fundo.gif');">
+                    </div>
+                    <div class="mc-card-content theme-blue">
+                        <div class="mc-status">PRIVADO <i class="fas fa-lock"></i></div>
+                        <h2 class="mc-card-title">Cooperativo</h2>
+                        <p class="mc-card-desc">Jogue no modo cooperativo com amigos e familiares no seu dispositivo.
+                        </p>
+                        <div class="mc-tag-box">
+                            <span>QUATRO OU MAIS JOGADORES</span>
+                            <span>BEDROCK</span>
+                        </div>
+                        <div class="mc-accordion">
+                            <div class="mc-acc-item" onclick="toggleMcAcc(this)">
+                                <div class="mc-acc-trigger"><span>LOCAL</span> <i class="fas fa-chevron-down"></i></div>
+                                <div class="mc-acc-content">
+                                    <p>Servidor privado local com dispositivos separados.</p>
+                                </div>
+                            </div>
+                            <div class="mc-acc-item" onclick="toggleMcAcc(this)">
+                                <div class="mc-acc-trigger"><span>MUNDOS</span> <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="mc-acc-content">
+                                    <p>Plataforma compartilhada ou por meio de rede LAN.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 

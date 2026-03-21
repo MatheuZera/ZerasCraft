@@ -55,6 +55,17 @@ body {
     user-select: none;
 }
 
+/* ESPAÇO ENTRE O SCROLL LATERAL E OS ELEMENTOS */
+/* Reserva o espaço da barra de rolagem permanentemente no HTML */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* Garante que o body não tente compensar o espaço novamente */
+body {
+    width: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -217,12 +228,14 @@ body {
     color: var(--zc-text);
 }
 
-/* Trava absoluta de Scroll */
-html.z-lock-scroll,
+/* Remova a trava do HTML e mantenha apenas no BODY */
 body.z-lock-scroll {
     overflow: hidden !important;
-    height: 100vh !important;
-    touch-action: none;
+}
+
+/* Opcional: Se o mobile ainda rolar, use apenas overflow no html */
+html.z-lock-scroll {
+    overflow: hidden !important;
 }
 
 /* ==========================================
