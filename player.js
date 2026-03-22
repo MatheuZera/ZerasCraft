@@ -1,771 +1,410 @@
-// Atualizar o ano do copyright automaticamente
-document.getElementById('current-year').textContent = new Date().getFullYear();
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Player Otimizado Iniciado (Sem Efeitos)");
 
-const backToTop = document.querySelector('.back-to-top');
+    // ===================================================================
+    // 1. ELEMENTOS DOM
+    // =================================================================== 
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    const audioControlButton = document.getElementById('audioControlButton');
+    const audioPrevButton = document.getElementById('audioPrevButton');
+    const audioNextButton = document.getElementById('audioNextButton');
+    const audioModeButton = document.getElementById('audioModeButton');
+    const musicTitleDisplay = document.getElementById('musicTitleDisplay');
+    const audioProgressBar = document.getElementById('audioProgressBar');
+    const currentTimeDisplay = document.getElementById('currentTimeDisplay');
+    const durationDisplay = document.getElementById('durationDisplay');
+    const playbackSpeedSelect = document.getElementById('playbackSpeed');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeButton = document.getElementById('volumeButton');
+    const centralMessage = document.getElementById('centralMessage');
 
-window.addEventListener('scroll', () => {
-    // Aparece quando rolar mais de 400px
-    if (window.scrollY > 400) {
-        backToTop.classList.add('active');
-    } else {
-        backToTop.classList.remove('active');
-    }
-});
+    // ===================================================================
+    // 2. CONFIGURAÇÃO E ESTADO
+    // =================================================================== 
+    let currentMode = localStorage.getItem('audioMode') || 'sequencial';
+    let currentMusicIndex = 0;
+    let isDragging = false;
 
-// Função de clique suave
-backToTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
+    const playlist = [
+        // BACKGROUND
+        { title: ' [Background] ✨ A Familiar Room', src: 'assets/audios/musics/background/a_familiar_room.mp3' },
+        { title: ' [Background] ✨ Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
+        { title: ' [Background] ✨ An Ordinary Day', src: 'assets/audios/musics/background/an_ordinary_day.mp3' },
+        { title: ' [Background] ✨ Ancestry', src: 'assets/audios/musics/background/ancestry.mp3' },
+        { title: ' [Background] ✨ Bromeliad', src: 'assets/audios/musics/background/bromeliad.mp3' },
+        { title: ' [Background] ✨ Calm 1', src: 'assets/audios/musics/background/calm1.mp3' },
+        { title: ' [Background] ✨ Calm 2', src: 'assets/audios/musics/background/calm2.mp3' },
+        { title: ' [Background] ✨ Calm 3', src: 'assets/audios/musics/background/calm3.mp3' },
+        { title: ' [Background] ✨ Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
+        { title: ' [Background] ✨ Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
+        { title: ' [Background] ✨ Dunes', src: 'assets/audios/musics/background/dunes.mp3' },
+        { title: ' [Background] ✨ Echo in the Wind', src: 'assets/audios/musics/background/echo_in_the_wind.mp3' },
+        { title: ' [Background] ✨ Firebugs', src: 'assets/audios/musics/background/firebugs.mp3' },
+        { title: ' [Background] ✨ Floating Dream', src: 'assets/audios/musics/background/floating_dream.mp3' },
+        { title: ' [Background] ✨ Hal 1', src: 'assets/audios/musics/background/hal1.mp3' },
+        { title: ' [Background] ✨ Hal 2', src: 'assets/audios/musics/background/hal2.mp3' },
+        { title: ' [Background] ✨ Hal 3', src: 'assets/audios/musics/background/hal3.mp3' },
+        { title: ' [Background] ✨ Hal 4', src: 'assets/audios/musics/background/hal4.mp3' },
+        { title: ' [Background] ✨ Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
+        { title: ' [Background] ✨ Labyrinthine', src: 'assets/audios/musics/background/labyrinthine.mp3' },
+        { title: ' [Background] ✨ Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
+        { title: ' [Background] ✨ Nuance 1', src: 'assets/audios/musics/background/nuance1.mp3' },
+        { title: ' [Background] ✨ Nuance 2', src: 'assets/audios/musics/background/nuance2.mp3' },
+        { title: ' [Background] ✨ One more Day!', src: 'assets/audios/musics/background/one_more_day.mp3' },
+        { title: ' [Background] ✨ Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
+        { title: ' [Background] ✨ Piano 1', src: 'assets/audios/musics/background/piano1.mp3' },
+        { title: ' [Background] ✨ Piano 2', src: 'assets/audios/musics/background/piano2.mp3' },
+        { title: ' [Background] ✨ Piano 3', src: 'assets/audios/musics/background/piano3.mp3' },
+        { title: ' [Background] ✨ Stand Tall', src: 'assets/audios/musics/background/stand_tall.mp3' },
+        { title: ' [Background] ✨ Wending', src: 'assets/audios/musics/background/wending.mp3' },
 
+        // C418 ALBUM
+        { title: ' [C418] ⛏️ Aria Math', src: 'assets/audios/musics/c418/Aria-Math.mp3' },
+        { title: ' [C418] ⛏️ Beginning', src: 'assets/audios/musics/c418/Beginning.mp3' },
+        { title: ' [C418] ⛏️ Biome Fest', src: 'assets/audios/musics/c418/Biome-Fest.mp3' },
+        { title: ' [C418] ⛏️ Blind Spots', src: 'assets/audios/musics/c418/Blind-Spots.mp3' },
+        { title: ' [C418] ⛏️ Clark', src: 'assets/audios/musics/c418/Clark.mp3' },
+        { title: ' [C418] ⛏️ Danny', src: 'assets/audios/musics/c418/Danny.mp3' },
+        { title: ' [C418] ⛏️ Dreiton', src: 'assets/audios/musics/c418/Dreiton.mp3' },
+        { title: ' [C418] ⛏️ Dry Hands', src: 'assets/audios/musics/c418/Dry-Hands.mp3' },
+        { title: ' [C418] ⛏️ Floating Trees', src: 'assets/audios/musics/c418/Floating-Trees.mp3' },
+        { title: ' [C418] ⛏️ Haggstrom', src: 'assets/audios/musics/c418/Haggstrom.mp3' },
+        { title: ' [C418] ⛏️ Key', src: 'assets/audios/musics/c418/Key.mp3' },
+        { title: ' [C418] ⛏️ Living Mice', src: 'assets/audios/musics/c418/Living-Mice.mp3' },
+        { title: ' [C418] ⛏️ Mice On Venus', src: 'assets/audios/musics/c418/Mice-On-Venus.mp3' },
+        { title: ' [C418] ⛏️ Minecraft', src: 'assets/audios/musics/c418/Minecraft.mp3' },
+        { title: ' [C418] ⛏️ Moog City 1', src: 'assets/audios/musics/c418/Moog-City1.mp3' },
+        { title: ' [C418] ⛏️ Moog City 2', src: 'assets/audios/musics/c418/Moog-City2.mp3' },
+        { title: ' [C418] ⛏️ Mutation', src: 'assets/audios/musics/c418/Mutation.mp3' },
+        { title: ' [C418] ⛏️ Sweden', src: 'assets/audios/musics/c418/Sweden.mp3' },
+        { title: ' [C418] ⛏️ Taswell', src: 'assets/audios/musics/c418/Taswell.mp3' },
+        { title: ' [C418] ⛏️ Wet Hands', src: 'assets/audios/musics/c418/Wet-Hands.mp3' },
 
-/**
- * ZERA'S CRAFT ENGINE - MÓDULO DE DATA
- * Converte Snowflake ID em Data e anima a contagem
- */
-const ZerasEngine = {
-    guildID: '1390120239588577482',
-    inviteCode: 'GYGVBqGEwP',
+        // CREATIVE MUSICS
+        { title: ' [Creative] 🍃 Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
+        { title: ' [Creative] 🍃 Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
+        { title: ' [Creative] 🍃 Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
+        { title: ' [Creative] 🍃 Creative 4', src: 'assets/audios/musics/minecraft/Creative4.mp3' },
+        { title: ' [Creative] 🍃 Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
+        { title: ' [Creative] 🍃 Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
 
-    async syncAll() {
-        try {
-            const response = await fetch(`https://discord.com/api/v9/invites/${this.inviteCode}?with_counts=true`);
-            const data = await response.json();
+        // END MUSICS
+        { title: ' [End] ⚡ Boss', src: 'assets/audios/musics/end/Boss.mp3' },
+        { title: ' [End] ⚡ Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
+        { title: ' [End] ⚡ Fim', src: 'assets/audios/musics/end/End.mp3' },
 
-            // 1. Sincroniza Membros (Online e Total) [cite: 153]
-            this.updateCounter('stat-total', data.approximate_member_count || 5000);
-            this.updateCounter('stat-online', data.approximate_presence_count || 0);
-            // Adicione o complemento como uma string no final
-            this.updateCounter('discord-count', data.approximate_presence_count || 0, ' Membros Online agora');
+        // MUSICS GENERAL
+        { title: ' [Músicas] 🎵 Alone', src: 'assets/audios/musics/musics/Alone.mp3' },
+        { title: ' [Músicas] 🎵 Aria Math Lofi', src: 'assets/audios/musics/musics/Aria-Math-Lofi.mp3' },
+        { title: ' [Músicas] 🎵 Megalovania (hakkaku)', src: 'assets/audios/musics/musics/Megalovania.mp3' },
+        { title: ' [Músicas] 🎵 Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/Over-the-Waterfall.mp3' },
+        { title: ' [Músicas] 🎵 Rat Dance (Jatis)', src: 'assets/audios/musics/musics/Rat-Dance.mp3' },
+        { title: ' [Músicas] 🎵 The Fat Rat - Note Block', src: 'assets/audios/musics/musics/TheFatRat_NoteBlock.mp3' },
 
-            // 2. Sincroniza Data de Criação via ID (Snowflake)
-            this.syncCreationDate();
+        // NETHER MUSICS
+        { title: ' [Nether] 🌠 Chrysopoeia', src: 'assets/audios/musics/nether/Chrysopoeia.mp3' },
+        { title: ' [Nether] 🌠 Nether 1', src: 'assets/audios/musics/nether/Nether1.mp3' },
+        { title: ' [Nether] 🌠 Nether 2', src: 'assets/audios/musics/nether/Nether2.mp3' },
+        { title: ' [Nether] 🌠 Nether 3', src: 'assets/audios/musics/nether/Nether3.mp3' },
+        { title: ' [Nether] 🌠 Nether 4', src: 'assets/audios/musics/nether/Nether4.mp3' },
+        { title: ' [Nether] 🌠 Rubedo', src: 'assets/audios/musics/nether/Rubedo.mp3' },
+        { title: ' [Nether] 🌠 So Below', src: 'assets/audios/musics/nether/So_Below.mp3' },
 
-        } catch (error) {
-            console.error("Zera's Craft: Erro de sincronização.");
-        }
-    },
+        // RECORDS
+        { title: ' [Discos] 💿 Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
+        { title: ' [Discos] 💿 Cat', src: 'assets/audios/musics/records/Cat.mp3' },
+        { title: ' [Discos] 💿 Far', src: 'assets/audios/musics/records/Far.mp3' },
+        { title: ' [Discos] 💿 Mall', src: 'assets/audios/musics/records/Mall.mp3' },
+        { title: ' [Discos] 💿 Mellohi', src: 'assets/audios/musics/records/Mellohi.mp3' },
+        { title: ' [Discos] 💿 Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
+        { title: ' [Discos] 💿 Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
+        { title: ' [Discos] 💿 Relic', src: 'assets/audios/musics/records/Relic.mp3' },
+        { title: ' [Discos] 💿 Stal', src: 'assets/audios/musics/records/Stal.mp3' },
+        { title: ' [Discos] 💿 Strad', src: 'assets/audios/musics/records/Strad.mp3' },
+        { title: ' [Discos] 💿 Wait', src: 'assets/audios/musics/records/Wait.mp3' },
+        { title: ' [Discos] 💿 Ward', src: 'assets/audios/musics/records/Ward.mp3' },
 
-    // Converte o ID do Discord para Data Real
-    syncCreationDate() {
-        const id = BigInt(this.guildID);
-        // Constante de tempo do Discord (Epoch) 
-        const timestamp = Number((id >> 22n) + 1420070400000n);
-        const date = new Date(timestamp);
+        // REMIX
+        { title: ' [Remix] 🔥 Aria Math (Synthwave)', src: 'assets/audios/musics/remix/Aria-Math.mp3' },
+        { title: ' [Remix] 🔥 Aria Math Piano', src: 'assets/audios/musics/remix/Aria-Math-Piano.mp3' },
+        { title: ' [Remix] 🔥 Cat Remix (Caution & Remix)', src: 'assets/audios/musics/remix/Cat-Remix.mp3' },
+        { title: ' [Remix] 🔥 Minecraft Music Remix', src: 'assets/audios/musics/remix/Minecraft-Remix.mp3' },
+        { title: ' [Remix] 🔥 Pigstep Remix (Fury Hearted)', src: 'assets/audios/musics/remix/Pigstep-Remix.mp3' },
+        { title: ' [Remix] 🔥 Sweden Remix (Caution & Crisis)', src: 'assets/audios/musics/remix/Sweden.mp3' },
 
-        const targetDate = {
-            day: date.getDate(),
-            month: date.getMonth() + 1,
-            year: date.getFullYear()
-        };
+        // WATER
+        { title: ' [Water] ⭐ Axolotl', src: 'assets/audios/musics/water/Axolotl.mp3' },
+        { title: ' [Water] ⭐ Deagon Fish', src: 'assets/audios/musics/water/Dragon_Fish.mp3' },
+        { title: ' [Water] ⭐ Shuniji', src: 'assets/audios/musics/water/Shuniji.mp3' },
+    ];
 
-        this.animateDate('stat-date', targetDate);
-    },
+    // ===================================================================
+    // 3. FUNÇÕES AUXILIARES E MENSAGENS (COM DESCRIÇÃO)
+    // =================================================================== 
+    const formatTime = (seconds) => {
+        if (isNaN(seconds) || seconds < 0) return "0:00";
+        const min = Math.floor(seconds / 60);
+        const sec = Math.floor(seconds % 60);
+        return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    };
 
-    // Animação de Data dd/mm/aaaa a 60fps [cite: 153]
-    animateDate(id, target) {
-        const el = document.getElementById(id);
-        if (!el) return;
+    const showMessage = (title, desc, iconClass = "fa-check") => {
+        if (centralMessage) {
+            const titleStrong = centralMessage.querySelector('.message-content strong');
+            const descSpan = centralMessage.querySelector('.message-content span');
+            const iconI = centralMessage.querySelector('.message-icon i');
+            const iconContainer = centralMessage.querySelector('.message-icon');
 
-        let current = { day: 0, month: 0, year: 2000 };
-        const duration = 2000; // 2 segundos
-        const start = performance.now();
+            if (titleStrong) titleStrong.textContent = title.toUpperCase();
+            if (descSpan) descSpan.textContent = desc;
 
-        const step = (now) => {
-            const progress = Math.min((now - start) / duration, 1);
-
-            // Lógica de interpolação linear [cite: 106]
-            current.day = Math.floor(progress * target.day);
-            current.month = Math.floor(progress * target.month);
-            current.year = Math.floor(2000 + (progress * (target.year - 2000)));
-
-            // Formatação com zeros à esquerda (Partial Update) [cite: 190]
-            const d = String(current.day).padStart(2, '0');
-            const m = String(current.month).padStart(2, '0');
-            const y = current.year;
-
-            el.innerText = `${d}/${m}/${y}`;
-
-            if (progress < 1) requestAnimationFrame(step);
-            else el.innerText = `${String(target.day).padStart(2, '0')}/${String(target.month).padStart(2, '0')}/${target.year}`;
-        };
-
-        requestAnimationFrame(step);
-    },
-
-    // 1. Prepara o alvo e define o valor final com o complemento
-    updateCounter(id, target, suffix = "") {
-        const el = document.getElementById(id);
-        if (el) {
-            // Define o valor final no atributo para a lógica de animação [cite: 191]
-            el.setAttribute('data-target', target);
-            this.animateNumber(el, suffix);
-        }
-    },
-
-    // 2. Executa a animação suave via requestAnimationFrame 
-    animateNumber(el, suffix) {
-        const target = +el.getAttribute('data-target');
-
-        const update = () => {
-            // Remove caracteres não numéricos para calcular o progresso [cite: 191]
-            const current = +el.innerText.replace(/\D/g, '') || 0;
-            const increment = Math.ceil(target / 100);
-
-            if (current < target) {
-                const nextValue = Math.min(target, current + increment);
-                // Atualização parcial: número formatado + complemento [cite: 191]
-                el.innerText = `${nextValue.toLocaleString()}${suffix}`;
-                requestAnimationFrame(update);
-            } else {
-                // Garante que o valor final exato seja exibido com o sufixo [cite: 191]
-                el.innerText = `${target.toLocaleString()}${suffix}`;
-            }
-        };
-
-        requestAnimationFrame(update);
-    }
-};
-
-window.addEventListener('DOMContentLoaded', () => ZerasEngine.syncAll());
-
-
-// SISTEMA DO PLAYER DE MÚSICA DESAPARECER
-// SE ESTIVER NO FIM DA PÁGINA
-const handlePlayerVisibility = () => {
-    const player = document.querySelector('.music-player-container');
-    if (!player) return;
-
-    // Altura total do documento
-    const totalHeight = document.documentElement.scrollHeight;
-    // Posição atual do scroll + altura da janela do navegador
-    const currentScroll = window.innerHeight + window.pageYOffset;
-
-    // Distância do fim da página para ativar o desaparecimento (ajuste se necessário)
-    const threshold = 150;
-
-    if (currentScroll >= (totalHeight - threshold)) {
-        player.classList.add('player-hidden');
-    } else {
-        player.classList.remove('player-hidden');
-    }
-};
-
-// Evento de scroll otimizado
-let scrollTimer;
-window.addEventListener('scroll', () => {
-    window.clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(handlePlayerVisibility, 10);
-}, { passive: true });
-
-// Executa uma vez ao carregar para caso a página já inicie no fim
-window.addEventListener('load', handlePlayerVisibility);
-
-/**
- * SISTEMA DE NAVEGAÇÃO ZERAS CRAFT
- */
-
-// Abrir e fechar Sidebar Mobile
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const body = document.body;
-
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-
-    // Impede o scroll do site com o menu aberto
-    if (sidebar.classList.contains('active')) {
-        body.style.overflow = 'hidden';
-    } else {
-        body.style.overflow = 'auto';
-    }
-}
-
-// Controle de Dropdown Mobile (Sistema de Painel Lateral)
-function toggleDrop(element) {
-    const parent = element.parentElement;
-
-    // Opcional: Fecha outros dropdowns ao abrir um novo
-    /*
-    document.querySelectorAll('.sidebar-dropdown').forEach(item => {
-        if (item !== parent) item.classList.remove('open');
-    });
-    */
-
-    parent.classList.toggle('open');
-}
-
-// Fechar sidebar ao clicar em um link (opcional)
-document.querySelectorAll('.sidebar-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar.classList.contains('active')) {
-            toggleSidebar();
-        }
-    });
-});
-
-// Fechar com a tecla ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar.classList.contains('active')) toggleSidebar();
-    }
-});
-
-// 2. Copiar IP
-function copyIP() {
-    const ip = "MCPixelLegends88.aternos.me:0000";
-    navigator.clipboard.writeText(ip).then(() => {
-        alert("Te Vemos por Lá! // (Nosso Servidor tem suporte nativo para Bedrock e Java) ;)");
-    }).catch(err => {
-        console.error('Erro ao copiar', err);
-    });
-}
-
-// 3. Scroll Animation (Reveal)
-const observerOptions = {
-    threshold: 0.15, // Ativa quando 15% do elemento estiver visível
-    rootMargin: "0px 0px -50px 0px"
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target); // Para de observar após animar
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.reveal').forEach(el => {
-    observer.observe(el);
-});
-
-// 4. Accordion Function
-function toggleAcc(element) {
-    const content = element.nextElementSibling;
-    const icon = element.querySelector('.fa-chevron-down');
-
-    content.classList.toggle('open');
-
-    if (content.classList.contains('open')) {
-        icon.style.transform = "rotate(180deg)";
-    } else {
-        icon.style.transform = "rotate(0deg)";
-    }
-}
-
-// 5. Contadores Animados (Stats)
-const counters = document.querySelectorAll('.counter');
-const speed = 200;
-
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const counter = entry.target;
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const inc = target / speed;
-
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 25);
-                } else {
-                    counter.innerText = target;
+            if (iconI) {
+                iconI.className = `fas ${iconClass}`;
+                if (iconContainer) {
+                    const t = title.toUpperCase();
+                    if (t.includes("ERRO")) iconContainer.style.background = "#ff4444";
+                    else if (t.includes("PAUSADO")) iconContainer.style.background = "#ffa000";
+                    else if (t.includes("VOLUME")) iconContainer.style.background = "#2196F3";
+                    else iconContainer.style.background = "#1db954";
                 }
-            };
-            updateCount();
-            statsObserver.unobserve(counter);
-        }
-    });
-});
-
-counters.forEach(counter => statsObserver.observe(counter));
-
-// Funcionalidade "Ler Mais" nos cards
-document.querySelectorAll('.read-more-toggle').forEach(button => {
-    button.addEventListener('click', function () {
-        const textContent = this.previousElementSibling;
-        textContent.classList.toggle('expanded');
-
-        if (textContent.classList.contains('expanded')) {
-            this.textContent = 'Ler menos';
-        } else {
-            this.textContent = 'Ler mais...';
-        }
-    });
-});
-
-
-
-
-// 1. Simulação de Jogadores Online (Número Aleatório para dar vida)
-function updatePlayers() {
-    const countElement = document.getElementById('online-count');
-    const randomCount = Math.floor(Math.random() * (1500 - 1200 + 1)) + 1200;
-    if (countElement) countElement.innerText = `${randomCount} JOGADORES ONLINE AGORA`;
-}
-updatePlayers();
-
-// 2. Filtro de Categorias (Lógica)
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-        document.querySelector('.filter-btn.active').classList.remove('active');
-        this.classList.add('active');
-        const target = this.getAttribute('data-target');
-
-        // Exemplo: Esconder/Mostrar cards de jogo baseado no target
-        document.querySelectorAll('.game-card').forEach(card => {
-            if (target === 'todos' || card.innerText.toLowerCase().includes(target)) {
-                card.style.display = 'flex';
-                card.style.animation = 'fadeIn 0.5s forwards';
-            } else {
-                card.style.display = 'none';
             }
-        });
-    });
-});
 
+            // Animação de entrada
+            centralMessage.classList.remove('hide');
+            centralMessage.classList.add('show');
 
+            clearTimeout(centralMessage.timer);
+            centralMessage.timer = setTimeout(() => {
+                // Animação de saída
+                centralMessage.classList.add('hide');
+                setTimeout(() => {
+                    centralMessage.classList.remove('show', 'hide');
+                }, 500); // Tempo da transição CSS
+            }, 3500);
+        }
+    };
 
-// Lógica de Troca de Abas
-window.switchTab = function (evt, tabName) {
-    // Impede o navegador de tentar seguir um link ou recarregar
-    if (evt) evt.preventDefault();
-
-    const tabContents = document.querySelectorAll(".tab-content");
-    const tabBtns = document.querySelectorAll(".tab-btn");
-
-    // 1. Esconde tudo com prioridade máxima
-    tabContents.forEach(content => {
-        content.style.setProperty('display', 'none', 'important');
-        content.classList.remove("active");
-    });
-
-    // 2. Reseta botões
-    tabBtns.forEach(btn => {
-        btn.classList.remove("active");
-    });
-
-    // 3. Mostra a aba correta
-    const target = document.getElementById(tabName);
-    if (target) {
-        target.style.setProperty('display', 'block', 'important');
-        setTimeout(() => {
-            target.classList.add("active");
-        }, 10);
-    }
-
-    if (evt && evt.currentTarget) {
-        evt.currentTarget.classList.add("active");
-    }
-}
-
-
-function toggleAccordion(element) {
-    const item = element.parentElement; // Pega o .acc-item
-
-    // Opcional: Fecha outros itens abertos (Estilo único)
-    const allItems = document.querySelectorAll('.acc-item');
-    allItems.forEach(i => {
-        if (i !== item) i.classList.remove('active');
-    });
-
-    // Alterna o estado do item clicado
-    item.classList.toggle('active');
-}
-
-
-function showClickNotification(titulo, mensagem) {
-    // Cria o elemento
-    const notification = document.createElement('div');
-    notification.className = 'click-notification';
-
-    notification.innerHTML = `
-        <strong>${titulo}</strong>
-        <span>${mensagem}</span>
-    `;
-
-    document.body.appendChild(notification);
-
-    // Ativa a animação
-    setTimeout(() => {
-        notification.classList.add('active');
-    }, 100);
-
-    // Remove após 3 segundos
-    setTimeout(() => {
-        notification.classList.remove('active');
-        setTimeout(() => {
-            notification.remove();
-        }, 500);
-    }, 3000);
-}
-
-
-let currentIndex = 0;
-
-function moveCarousel(direction) {
-    const track = document.getElementById('carouselTrack');
-    const cards = document.querySelectorAll('.mc-collectible-card');
-    const cardWidth = cards[0].offsetWidth + 20; // Largura do card + gap
-    const visibleCards = window.innerWidth > 768 ? 3 : 1; // Quantos cards aparecem por vez
-    const maxIndex = cards.length - visibleCards;
-
-    // Atualiza o índice com base na direção
-    currentIndex += direction;
-
-    // --- AS TRAVAS DE SEGURANÇA ---
-
-    // 1. Trava da Esquerda: Se o índice for menor que 0, força a voltar para 0
-    if (currentIndex < 0) {
-        currentIndex = 0;
-        return; // Interrompe a função para não animar sem necessidade
-    }
-
-    // 2. Trava da Direita: Se passar do último card visível, trava no máximo
-    if (currentIndex > maxIndex) {
-        currentIndex = maxIndex;
-        return;
-    }
-
-    // Aplica o movimento apenas se estiver dentro dos limites
-    const moveDistance = currentIndex * cardWidth;
-    track.style.transform = `translateX(-${moveDistance}px)`;
-}
-
-
-
-// CONFIGURAÇÃO DOS ÍNDICES
-let worldIndex = 0;
-let heroIndex = 0;
-
-// 1. Lógica Slider "Expanda seu Mundo" (Pula 1 por 1)
-function moveWorld(direction) {
-    const track = document.getElementById('worldTrack');
-    const items = track.children.length;
-    const step = track.children[0].offsetWidth;
-
-    // Loop Infinito Matemático
-    worldIndex = (worldIndex + direction + items) % items;
-
-    track.style.transform = `translateX(-${worldIndex * step}px)`;
-}
-
-let currentHeroSlide = 0;
-
-function moveHero(direction) {
-    const slides = document.querySelectorAll('.h-slide');
-
-    // Remove o ativo do atual
-    slides[currentHeroSlide].classList.remove('active');
-
-    // Calcula o próximo (com trava para não bugar)
-    currentHeroSlide += direction;
-
-    if (currentHeroSlide < 0) {
-        currentHeroSlide = slides.length - 1;
-    } else if (currentHeroSlide >= slides.length) {
-        currentHeroSlide = 0;
-    }
-
-    // Adiciona ativo ao novo slide
-    slides[currentHeroSlide].classList.add('active');
-}
-
-// 3. Lógica de Accordions
-function toggleAccordion(button) {
-    const panel = button.nextElementSibling;
-    const icon = button.querySelector('i');
-
-    // Fecha outros painéis abertos para evitar bugs visuais
-    document.querySelectorAll('.acc-panel').forEach(p => {
-        if (p !== panel) p.style.maxHeight = null;
-    });
-
-    if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-        icon.className = "fas fa-plus";
-    } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        icon.className = "fas fa-minus";
-    }
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const bundleBtn = document.querySelector('.bundle-btn');
-
-    if (bundleBtn) {
-        bundleBtn.addEventListener('click', (e) => {
-            // Se quiser que o botão apenas simule uma ação por agora
-            e.preventDefault();
-
-            // Chama a função showMessage que já existe no seu player.js
-            if (typeof showMessage === 'function') {
-                showMessage("SUCESSO", "Redirecionando para a loja...", "fa-shopping-cart");
-            } else {
-                alert("A processar compra...");
+    const updateUI = () => {
+        if (audioControlButton) {
+            const icon = audioControlButton.querySelector('i');
+            if (icon) {
+                icon.className = (!backgroundAudio.paused && backgroundAudio.duration > 0)
+                    ? 'fas fa-pause' : 'fas fa-play';
             }
-        });
-    }
-});
-
-/**
- * ZERA'S CRAFT - MOTOR DE ABAS ZIGZAG
- * Controla a visibilidade dos painéis.
- */
-function openTab(evt, tabId) {
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    const tabBtns = document.querySelectorAll('.tab-btn');
-
-    // 1. Esconde todos os painéis e remove active dos botões
-    tabPanes.forEach(pane => pane.classList.remove('active'));
-    tabBtns.forEach(btn => btn.classList.remove('active'));
-
-    // 2. Mostra o painel selecionado e ativa o botão clicado
-    document.getElementById(tabId).classList.add('active');
-    evt.currentTarget.classList.add('active');
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const items = document.querySelectorAll('.content-item');
-
-    // Animação de fade-in para os itens da grade
-    items.forEach((item, index) => {
-        item.style.opacity = "0";
-        item.style.transform = "translateY(20px)";
-
-        setTimeout(() => {
-            item.style.transition = "all 0.6s ease";
-            item.style.opacity = "1";
-            item.style.transform = "translateY(0)";
-        }, 200 * index);
-    });
-
-    // Integração com o seu showMessage do player.js
-    const downloadBtn = document.querySelector('.btn-primary');
-    downloadBtn.addEventListener('click', () => {
-        if (typeof showMessage === 'function') {
-            showMessage("SISTEMA", "Iniciando download seguro...", "fa-download");
         }
-    });
-});
-
-
-document.querySelectorAll('.link-item').forEach(item => {
-    item.addEventListener('click', () => {
-        const title = item.querySelector('.link-title').innerText;
-
-        // Se a função showMessage existir no seu player.js, ela será chamada
-        if (typeof showMessage === 'function') {
-            showMessage("REDIRECIONANDO", `Abrindo: ${title}`, "fa-external-link-alt");
+        if (musicTitleDisplay && playlist[currentMusicIndex]) {
+            musicTitleDisplay.textContent = playlist[currentMusicIndex].title;
         }
-    });
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const block = document.querySelector('.pixel-block');
-
-    // Verificamos se o bloco existe antes de iniciar o intervalo
-    if (block) {
-        // Pequeno efeito visual de "glitch" aleatório
-        setInterval(() => {
-            block.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
-        }, 100);
-
-        // Integração com sua mensagem do player.js
-        if (typeof showMessage === 'function') {
-            setTimeout(() => {
-                showMessage("ERRO 404", "Coordenadas não encontradas!", "fa-ghost");
-            }, 500);
+        if (audioModeButton) {
+            const modeIcon = audioModeButton.querySelector('i');
+            if (modeIcon) {
+                const icons = {
+                    'sequencial': 'fas fa-list-ol',
+                    'aleatorio': 'fas fa-random',
+                    'loop': 'fas fa-repeat'
+                };
+                modeIcon.className = icons[currentMode];
+            }
         }
-    }
-});
+    };
 
-document.querySelectorAll('.btn-access').forEach(button => {
-    button.addEventListener('click', (e) => {
-        const channelName = e.target.closest('.creator-card').querySelector('h3').innerText;
+    const saveState = () => {
+        const state = {
+            index: currentMusicIndex,
+            currentTime: backgroundAudio.currentTime,
+            volume: backgroundAudio.volume,
+            mode: currentMode,
+            paused: backgroundAudio.paused
+        };
+        localStorage.setItem('audioState', JSON.stringify(state));
+    };
 
-        if (typeof showMessage === 'function') {
-            showMessage("EXTERNAL LINK", `Abrindo o canal de ${channelName}...`, "fa-external-link-alt");
+    // ===================================================================
+    // 4. LÓGICA DO PLAYER
+    // =================================================================== 
+    const loadMusic = (index, autoPlay = true, titleMsg = "TOCANDO", iconMsg = "fa-play") => {
+        if (!playlist[index]) index = 0;
+        currentMusicIndex = index; // Atualiza o índice global
+        const music = playlist[currentMusicIndex];
+
+        backgroundAudio.pause();
+        backgroundAudio.src = music.src;
+        backgroundAudio.load();
+        updateUI(); // Atualiza o título no painel
+
+        if (autoPlay) {
+            backgroundAudio.play()
+                .then(() => {
+                    updateUI();
+                    // Exibe a mensagem com o Título da ação, Nome da Música e o Ícone correto
+                    showMessage(titleMsg, music.title, iconMsg);
+                })
+                .catch(() => updateUI());
         }
-    });
-});
+    };
 
-function openHub(evt, gameId) {
-    const contents = document.getElementsByClassName("hub-content");
-    const tabs = document.getElementsByClassName("tab-link");
-
-    for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
-    for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
-
-    document.getElementById(gameId).classList.add("active");
-    evt.currentTarget.classList.add("active");
-}
-
-function toggleAccordion(btn) {
-    const parent = btn.parentElement;
-    const isActive = parent.classList.contains("active");
-
-    // Fecha os outros (Estilo Industrial)
-    document.querySelectorAll('.hub-content').forEach(item => item.classList.remove('active'));
-
-    if (!isActive) parent.classList.add("active");
-}
-
-// NOVO: Função para garantir que comece fechado no Mobile
-function initHub() {
-    if (window.innerWidth <= 768) {
-        document.querySelectorAll('.hub-content').forEach(item => {
-            item.classList.remove('active');
-        });
-    }
-}
-
-// Executa ao carregar e ao redimensionar
-window.addEventListener('load', initHub);
-window.addEventListener('resize', initHub);
-
-const ZerasCountEngine = {
-    init() {
-        const targets = document.querySelectorAll('.count-me');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.animate(entry.target);
-                    observer.unobserve(entry.target);
-                }
+    const togglePlay = () => {
+        if (backgroundAudio.paused) {
+            backgroundAudio.play().then(() => {
+                updateUI();
+                showMessage("RETOMADO", playlist[currentMusicIndex].title, "fa-play");
             });
-        }, { threshold: 0.2 });
+        } else {
+            backgroundAudio.pause();
+            updateUI();
+            showMessage("PAUSADO", "O áudio foi interrompido", "fa-pause");
+        }
+    };
 
-        targets.forEach(t => observer.observe(t));
-    },
+    // ===================================================================
+    // 5. EVENT LISTENERS
+    // =================================================================== 
+    if (audioControlButton) audioControlButton.addEventListener('click', togglePlay);
 
-    animate(el) {
-        const target = parseFloat(el.getAttribute('data-target'));
-        const unit = el.getAttribute('data-unit') || "";
-        const isDecimal = target % 1 !== 0; // Deteta se é GB/MB ou Inteiro
+    if (audioNextButton) {
+        audioNextButton.addEventListener('click', () => {
+            let nextIndex = (currentMusicIndex + 1) % playlist.length;
+            if (currentMode === 'aleatorio') {
+                nextIndex = Math.floor(Math.random() * playlist.length);
+            }
+            // O terceiro parâmetro define o Título da mensagem, o quarto o Ícone
+            loadMusic(nextIndex, true, "PRÓXIMO", "fa-step-forward");
+        });
+    }
 
-        const duration = 2000;
-        const start = performance.now();
-
-        const step = (now) => {
-            const progress = Math.min((now - start) / duration, 1);
-            let current = progress * target;
-
-            if (isDecimal) {
-                // Formatação para GB/MB: 2 casas decimais
-                el.innerText = `${current.toFixed(2)} ${unit}`;
+    if (audioPrevButton) {
+        audioPrevButton.addEventListener('click', () => {
+            if (backgroundAudio.currentTime > 3) {
+                backgroundAudio.currentTime = 0;
+                showMessage("REINICIADO", playlist[currentMusicIndex].title, "fa-undo");
             } else {
-                // Formatação para Inteiros: Sem decimais e com ponto de milhar
-                el.innerText = Math.floor(current).toLocaleString('pt-BR') + unit;
+                const prevIndex = (currentMusicIndex - 1 + playlist.length) % playlist.length;
+                loadMusic(prevIndex, true, "ANTERIOR", "fa-step-backward");
+            }
+        });
+    }
+
+    if (audioModeButton) {
+        audioModeButton.addEventListener('click', () => {
+            const modes = ['sequencial', 'aleatorio', 'loop'];
+            let nextModeIndex = (modes.indexOf(currentMode) + 1) % modes.length;
+            currentMode = modes[nextModeIndex];
+            localStorage.setItem('audioMode', currentMode);
+            updateUI();
+            showMessage("MODO ALTERADO", `Ativado: ${currentMode.toUpperCase()}`, "fa-sync-alt");
+        });
+    }
+
+    if (backgroundAudio) {
+        backgroundAudio.addEventListener('timeupdate', () => {
+            if (!isDragging && audioProgressBar && backgroundAudio.duration) {
+                audioProgressBar.value = (backgroundAudio.currentTime / backgroundAudio.duration) * 100;
+                currentTimeDisplay.textContent = formatTime(backgroundAudio.currentTime);
+                durationDisplay.textContent = formatTime(backgroundAudio.duration);
+            }
+        });
+        backgroundAudio.addEventListener('ended', () => {
+            if (currentMode === 'loop') loadMusic(currentMusicIndex, true, "REPETINDO");
+            else {
+                showMessage("PULANDO", "Iniciando próxima faixa...", "fa-forward");
+                setTimeout(() => {
+                    let nextIndex = (currentMusicIndex + 1) % playlist.length;
+                    if (currentMode === 'aleatorio') nextIndex = Math.floor(Math.random() * playlist.length);
+                    loadMusic(nextIndex, true);
+                }, 1000);
+            }
+        });
+        backgroundAudio.addEventListener('error', () => {
+            showMessage("ERRO", "Não foi possível carregar a música", "fa-exclamation-triangle");
+        });
+    }
+
+    // Dentro do evento DOMContentLoaded
+    if (volumeButton && volumeSlider) {
+        volumeButton.addEventListener('click', (e) => {
+            e.stopPropagation(); //
+            volumeSlider.classList.toggle('is-active');
+        });
+
+        // Impede que o clique no próprio slider o feche
+        volumeSlider.addEventListener('click', (e) => e.stopPropagation());
+    }
+
+    // Garante que o slider feche ao clicar fora
+    document.addEventListener('click', () => {
+        if (volumeSlider) volumeSlider.classList.remove('is-active');
+    });
+
+    // Fecha o slider ao clicar em qualquer outro lugar da página
+    document.addEventListener('click', () => {
+        if (volumeSlider) volumeSlider.classList.remove('is-active');
+    });
+
+    // Controle de Volume e Mensagens
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', () => {
+            backgroundAudio.volume = volumeSlider.value;
+            const volPercent = Math.round(backgroundAudio.volume * 100);
+
+            const icon = volumeButton.querySelector('i');
+            if (icon) {
+                if (backgroundAudio.volume == 0) icon.className = 'fas fa-volume-mute';
+                else if (backgroundAudio.volume < 0.5) icon.className = 'fas fa-volume-down';
+                else icon.className = 'fas fa-volume-up';
             }
 
-            if (progress < 1) requestAnimationFrame(step);
-            else el.innerText = isDecimal ? `${target.toFixed(2)} ${unit}` : target.toLocaleString('pt-BR') + unit;
-        };
-
-        requestAnimationFrame(step);
+            // Mensagem informativa com Título, Descrição e Ícone
+            if (volPercent % 20 === 0) {
+                showMessage("VOLUME ATUAL", `${volPercent}% do volume total`, "fa-volume-up");
+            }
+            saveState();
+        });
     }
-};
-document.addEventListener('DOMContentLoaded', () => ZerasCountEngine.init());
 
-
-function toggleAccordion(btn) {
-    const accordion = btn.closest('.f-accordion');
-    const icon = btn.querySelector('i');
-
-    // Alterna estado
-    const isActive = accordion.classList.toggle('active');
-
-    // Troca ícone
-    if (isActive) {
-        icon.classList.replace('fa-plus', 'fa-minus');
+    // Restante do estado e inicialização...
+    const savedState = JSON.parse(localStorage.getItem('audioState'));
+    if (savedState) {
+        currentMusicIndex = savedState.index || 0;
+        currentMode = savedState.mode || 'sequencial';
+        backgroundAudio.volume = savedState.volume ?? 1;
+        if (volumeSlider) volumeSlider.value = backgroundAudio.volume;
+        loadMusic(currentMusicIndex, false);
+        backgroundAudio.currentTime = savedState.currentTime || 0;
     } else {
-        icon.classList.replace('fa-minus', 'fa-plus');
+        loadMusic(0, false);
     }
-}
+    updateUI();
 
-// Resete Mobile: Inicia fechado
-if (window.innerWidth <= 768) {
-    document.querySelectorAll('.f-accordion').forEach(acc => acc.classList.remove('active'));
-}
+    // BARRA DE PROGRESSO: Permite selecionar e arrastar a música
+    if (audioProgressBar) {
+        audioProgressBar.addEventListener('input', () => {
+            isDragging = true; // Pausa a atualização automática do tempo enquanto arrasta
+        });
 
-
-/**
- * ZERA'S CRAFT - HERO ENGINE
- * Troca imagem do banner pela da thumb e atualiza textos.
- */
-function heroSwitcher(element) {
-    const banner = document.getElementById('mainBanner');
-    const title = document.getElementById('heroTitle');
-    const desc = document.getElementById('heroDesc');
-    const thumbs = document.querySelectorAll('.t-box');
-
-    // 1. Atualiza a imagem (Captura a mesma da thumb)
-    banner.src = element.querySelector('img').src;
-
-    // 2. Atualiza textos do card estático
-    title.innerText = element.getAttribute('data-title');
-    desc.innerText = element.getAttribute('data-desc');
-
-    // 3. Gerencia destaque visual
-    thumbs.forEach(t => t.classList.remove('active'));
-    element.classList.add('active');
-}
-
-/* RANKING */
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.t-row-elite').forEach((row, i) => {
-        const nick = row.getAttribute('data-nick');
-        if (nick) {
-            // Carrega skin e preserva o texto original (Mixed-Case)
-            row.querySelector('.xbox-head').src = `https://mc-heads.net/avatar/${nick}/64`;
-            row.querySelector('.nick-txt').innerText = nick;
-        }
-
-        // Revelação Industrial
-        row.style.opacity = "0";
-        setTimeout(() => {
-            row.style.transition = "all 0.5s ease";
-            row.style.opacity = "1";
-        }, i * 80);
-    });
-});
-
-function handleEliteTip(btn, event) {
-    const row = btn.closest('.t-row-elite');
-    const tooltip = document.getElementById('eliteTooltip');
-    const isMobile = window.innerWidth <= 768;
-
-    // Injeção de Dados Real
-    document.getElementById('ttUser').innerText = row.getAttribute('data-nick');
-    document.getElementById('ttDesc').innerText = row.getAttribute('data-bio');
-
-    tooltip.style.display = "block";
-
-    if (!isMobile) {
-        // PC: Posicionamento Dinâmico
-        tooltip.style.left = (event.pageX + 20) + "px";
-        tooltip.style.top = (event.pageY + 20) + "px";
+        audioProgressBar.addEventListener('change', () => {
+            if (backgroundAudio.duration) {
+                const time = (audioProgressBar.value / 100) * backgroundAudio.duration;
+                backgroundAudio.currentTime = time;
+            }
+            isDragging = false;
+        });
     }
-    // Mobile: O CSS cuida do centro (fixed)
-    event.stopPropagation();
-}
 
-function closeEliteTip() {
-    document.getElementById('eliteTooltip').style.display = "none";
-}
+    // ===================================================================
+    // 7. OCULTAR PLAYER NO FOOTER (MOBILE)
+    // =================================================================== 
+    // BARRA DE PROGRESSO: Permite selecionar e arrastar a música
+    if (audioProgressBar) {
+        audioProgressBar.addEventListener('input', () => {
+            isDragging = true; // Pausa a atualização automática do tempo enquanto arrasta
+        });
 
-// Segurança: Fecha ao clicar fora do tooltip
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.tooltip-premium-solid')) closeEliteTip();
+        audioProgressBar.addEventListener('change', () => {
+            if (backgroundAudio.duration) {
+                const time = (audioProgressBar.value / 100) * backgroundAudio.duration;
+                backgroundAudio.currentTime = time;
+            }
+            isDragging = false;
+        });
+    }
 });
