@@ -192,28 +192,53 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-/*===============================================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============================================================================================== */
 
 /* ==========================================
-   VARIÁVEIS DE COR E RESET
+   1. VARIÁVEIS DE COR E ESTILO (VIDRO NEUTRO)
 ========================================== */
 :root {
-    --zc-bg-main: #222222;
-    /* Topbar */
-    --zc-bg-panel: #151515;
-    /* Painel Inferior */
-    /* Fundo dos Painéis/Mega Menu (Preto) */
-    --zc-bg-hover: #2a2a2a;
-    /* Fundo da aba ativa (Cinza) */
+    /* Tons de Fundo - Escuros e opacos para legibilidade máxima */
+    --zc-bg-main: #474747;
+    --zc-bg-panel: rgba(26, 26, 26, 0.8);
+    /* Vidro mínimo: 96% de opacidade */
+    --zc-bg-tab: rgba(19, 19, 19, 0.99);
+    /* Vidro mínimo: 96% de opacidade */
+    --zc-bg-hover: rgba(255, 255, 255, 0.05);
 
-    --zc-green: #54bd34;
-    /* Verde Minecraft Vibrante */
-    --zc-green-hover: #6ae544;
+    /* Cores de Destaque - Agora Neutras (Branco e Cinza) */
+    --zc-accent: #ffffff;
+    /* Destaque principal agora é branco puro */
+    --zc-accent-soft: rgba(255, 255, 255, 0.1);
+    /* Destaque suave para fundos ativos */
 
-    --zc-border: #333333;
-    /* Linhas divisórias sutis */
+    /* Bordas e Textos */
+    --zc-border: rgba(255, 255, 255, 0.08);
     --zc-text: #ffffff;
-    --zc-muted: #aaaaaa;
+    --zc-muted: #a0a0a0;
 }
 
 * {
@@ -224,22 +249,17 @@ body {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #000;
+    background: var(--zc-bg-main);
     color: var(--zc-text);
 }
 
-/* Remova a trava do HTML e mantenha apenas no BODY */
-body.z-lock-scroll {
-    overflow: hidden !important;
-}
-
-/* Opcional: Se o mobile ainda rolar, use apenas overflow no html */
+body.z-lock-scroll,
 html.z-lock-scroll {
     overflow: hidden !important;
 }
 
 /* ==========================================
-   DESKTOP (PC) 
+   2. DESKTOP (PC) - LAYOUT MONOCROMÁTICO
 ========================================== */
 @media (min-width: 1025px) {
 
@@ -249,18 +269,20 @@ html.z-lock-scroll {
         display: none !important;
     }
 
-    /* Barra Superior Fixa */
+    /* BARRA SUPERIOR */
     .znav-pc {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 70px;
-        background: var(--zc-bg-main);
+        background: var(--zc-bg-panel);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         z-index: 10000;
+        border-bottom: 1px solid var(--zc-border);
     }
 
-    /* O SEGREDO DO LAYOUT: Grid permite o Menu ficar no centro sem "prender" o painel */
     .znav-container {
         width: 100%;
         max-width: 1800px;
@@ -278,11 +300,10 @@ html.z-lock-scroll {
         font-weight: 900;
         font-size: 24px;
         text-decoration: none;
-        text-transform: uppercase;
         letter-spacing: 1px;
     }
 
-    /* Menu Centralizado */
+    /* BOTOES DA NAVBAR */
     .znav-menu {
         justify-self: center;
         display: flex;
@@ -292,7 +313,6 @@ html.z-lock-scroll {
         align-items: center;
     }
 
-    /* IMPORTANTE: position: static libera o menu para usar 100% da tela */
     .znav-mega-btn {
         position: static;
         height: 100%;
@@ -303,35 +323,38 @@ html.z-lock-scroll {
         transition: 0.2s;
     }
 
-    /* Apenas as Dropdowns Simples precisam prender a posição (Ex: CONTA) */
+    /* FIX: Prende a dropdown simples ao botão pai */
     .znav-mega-btn.drop-conta,
     .has-simple-drop {
         position: relative;
     }
 
     .znav-item {
-        color: var(--zc-text);
+        color: var(--zc-muted);
         font-weight: 800;
-        font-size: 13px;
+        font-size: 14px;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
         text-transform: uppercase;
         transition: 0.2s;
     }
 
     .znav-arrow {
-        font-size: 10px;
-        transition: transform 0.3s;
-        color: var(--zc-text);
+        font-size: 11px;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--zc-muted);
     }
 
-    /* Hover no Botão Principal */
+    /* Destaque neutro (Branco) ao interagir */
     .znav-mega-btn:hover .znav-item,
-    .znav-mega-btn.open .znav-item,
+    .znav-mega-btn.open .znav-item {
+        color: var(--zc-accent);
+    }
+
     .znav-mega-btn:hover .znav-arrow,
     .znav-mega-btn.open .znav-arrow {
-        color: var(--zc-green);
+        color: var(--zc-accent);
     }
 
     .znav-mega-btn.open .znav-arrow {
@@ -339,20 +362,21 @@ html.z-lock-scroll {
     }
 
     /* ==========================================
-       PAINEL MEGA MENU (AGORA COM 100% DA TELA)
+       PAINEL MEGA MENU (VIDRO ESCURO & ROLAGEM)
     ========================================== */
     .znav-mega-panel {
         position: absolute;
         top: 70px;
         left: 0;
         width: 100%;
-        background: var(--zc-bg-panel);
+        background: var(--zc-bg-tab);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         border-bottom: 1px solid var(--zc-border);
-        border-top: 2px solid var(--zc-green);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+        border-top: 1px solid var(--zc-border);
+        /* Linha sutil separando a navbar */
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
         cursor: default;
-
-        /* Animação Suave */
         visibility: hidden;
         opacity: 0;
         transform: translateY(-10px);
@@ -368,96 +392,103 @@ html.z-lock-scroll {
     }
 
     .znav-mega-grid {
-        max-width: 1500px;
+        max-width: 1600px;
         margin: 0 auto;
         display: flex;
-        min-height: 450px;
-        padding: 40px 20px;
-        /* <--- ESTE "40px" cria o espaço no topo interno */
+        height: 600px;
+        padding: 50px 30px;
         align-items: stretch;
     }
 
-    /* 1. Coluna Esquerda: Abas */
+    /* 1. COLUNA ESQUERDA: BOTÕES NEUTROS */
     .znav-col-left {
-        width: 250px;
+        width: 300px;
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 8px;
         border-right: 1px solid var(--zc-border);
-        padding-right: 30px;
+        padding-right: 40px;
+        flex-shrink: 0;
     }
 
     .znav-tab {
         background: transparent;
         border: 1px solid transparent;
-        color: var(--zc-text);
+        color: var(--zc-muted);
         text-align: left;
-        padding: 18px 20px;
+        padding: 16px 20px;
         font-weight: 800;
-        font-size: 14px;
+        font-size: 15px;
         cursor: pointer;
-        border-left: 3px solid transparent;
-        transition: 0.2s;
-        border-radius: 2px;
+        transition: all 0.2s ease;
+        border-radius: 6px;
         outline: none;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     .znav-tab:hover {
-        background: #222;
-    }
-
-    .znav-tab.active {
         background: var(--zc-bg-hover);
-        border: 1px solid #333;
-        border-left: 3px solid var(--zc-green);
-        color: #fff;
+        color: var(--zc-accent);
+        transform: translateX(4px);
     }
 
+    /* Estilo Ativo: Branco no Preto */
+    .znav-tab.active {
+        background: var(--zc-accent-soft);
+        border-color: var(--zc-border);
+        border-left: 4px solid var(--zc-accent);
+        color: var(--zc-accent);
+        transform: translateX(8px);
+    }
+
+    /* Links Inferiores */
     .znav-bottom-links {
         margin-top: auto;
-        padding-top: 40px;
+        padding-top: 20px;
         display: flex;
         flex-direction: column;
         gap: 15px;
-        padding-left: 10px;
     }
 
     .znav-bottom-links a {
         color: var(--zc-muted);
-        font-size: 12px;
-        font-weight: bold;
+        font-size: 13px;
+        font-weight: 800;
         text-decoration: none;
         transition: 0.2s;
+        text-transform: uppercase;
     }
 
     .znav-bottom-links a:hover {
-        color: var(--zc-text);
+        color: var(--zc-accent);
         text-decoration: underline;
     }
 
-    /* 2. Coluna Centro (Conteúdos) + Coluna Direita (Links Dinâmicos) */
+    /* 2. COLUNA CENTRAL (ROLAGEM) */
     .znav-col-main {
         flex: 1;
         position: relative;
+        overflow: hidden;
     }
 
-    /* A Mágica do Layout Flexível (Esconde inativos com !important para evitar bugs) */
     .znav-tab-content {
         display: none !important;
         opacity: 0;
+        height: 100%;
+        width: 100%;
     }
 
     .znav-tab-content.active {
         display: flex !important;
         opacity: 1;
-        animation: fadeTab 0.4s ease forwards;
-        width: 100%;
+        animation: fadeTab 0.3s ease forwards;
     }
 
     @keyframes fadeTab {
         from {
             opacity: 0;
-            transform: translateX(-10px);
+            transform: translateX(-15px);
         }
 
         to {
@@ -466,23 +497,35 @@ html.z-lock-scroll {
         }
     }
 
-    /* O Centro que guarda os Banners/Imagens */
     .znav-col-center {
         flex: 1;
-        padding: 0 40px;
+        padding: 0 50px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--zc-accent) rgba(255, 255, 255, 0.02);
     }
 
-    /* Templates Visuais do Centro */
-    .znav-template-single {
-        display: flex;
-        flex-direction: column;
+    .znav-col-center::-webkit-scrollbar {
+        width: 4px;
     }
 
+    .znav-col-center::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+    }
+
+    .znav-col-center::-webkit-scrollbar-thumb {
+        background: var(--zc-muted);
+        border-radius: 10px;
+    }
+
+    /* Imagens e Textos */
     .znav-banner {
         width: 100%;
+        aspect-ratio: 21/9;
         object-fit: cover;
-        border-radius: 4px;
-        margin-bottom: 20px;
+        border-radius: 6px;
+        margin-bottom: 25px;
         border: 1px solid var(--zc-border);
     }
 
@@ -490,17 +533,27 @@ html.z-lock-scroll {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 25px;
+        margin-bottom: 30px;
     }
 
     .znav-grid-2 {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
+        margin-bottom: 30px;
     }
 
     .znav-grid-1 {
         display: grid;
         grid-template-columns: 1fr;
+        margin-bottom: 30px;
+    }
+
+    .znav-template-mixed {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 30px;
     }
 
     .znav-card {
@@ -512,125 +565,77 @@ html.z-lock-scroll {
         width: 100%;
         aspect-ratio: 16/9;
         object-fit: cover;
-        border-radius: 2px;
+        border-radius: 6px;
         margin-bottom: 15px;
-        border: 1px solid transparent;
+        border: 1px solid var(--zc-border);
         transition: 0.2s;
     }
 
     .znav-card:hover img {
-        border-color: var(--zc-green);
+        border-color: var(--zc-accent);
     }
 
     .znav-tab-content h4 {
-        color: var(--zc-text);
+        color: var(--zc-accent);
         font-size: 18px;
         font-weight: 900;
         margin: 0 0 10px 0;
+        text-transform: uppercase;
     }
 
     .znav-tab-content p {
         color: var(--zc-muted);
-        font-size: 13px;
-        line-height: 1.5;
+        font-size: 14px;
+        line-height: 1.6;
         margin-bottom: 25px;
     }
 
-    .znav-btn-green {
-        display: inline-block;
-        align-self: flex-start;
-        background: var(--zc-green);
-        color: #ffffff;
-        font-weight: 900;
-        text-decoration: none;
-        font-size: 13px;
-        padding: 12px 25px;
-        border-radius: 2px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
-        /* Cria a base 3D com um verde mais escuro */
-        box-shadow: 0 5px 0 #357a20;
-    }
-
-    .znav-btn-green:hover {
-        background: var(--zc-green-hover);
-        transform: translateY(-2px);
-        /* Sobe um pouco no hover */
-        box-shadow: 0 7px 0 #357a20;
-        /* Aumenta a profundidade */
-    }
-
-    .znav-btn-green:active {
-        background: var(--zc-green);
-        transform: translateY(5px);
-        /* Afunda totalmente ao clicar */
-        box-shadow: 0 0px 0 #357a20;
-        /* Zera a sombra dando sensação física de clique */
-    }
-
+    /* Novos Botões (Branco/Preto) substituindo o Verde */
+    .znav-btn-green,
     .znav-btn-green2 {
         display: inline-block;
         align-self: flex-start;
-        background: var(--zc-green);
-        color: #ffffff;
+        background: var(--zc-accent);
+        color: #000;
         font-weight: 900;
         text-decoration: none;
         font-size: 13px;
-        padding: 13px 28px;
-        border-radius: 3px;
+        padding: 14px 28px;
+        border-radius: 4px;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        /* Dá um respiro mais elegante nas letras */
-        transition: all 0.25s ease;
-        /* Transição mais fluida */
+        transition: 0.2s;
+        border: 1px solid var(--zc-accent);
+    }
+
+    .znav-btn-green2 {
+        background: transparent;
+        color: var(--zc-accent);
+    }
+
+    .znav-btn-green:hover {
+        background: transparent;
+        color: var(--zc-accent);
     }
 
     .znav-btn-green2:hover {
-        background: var(--zc-green-hover);
-        transform: translateY(-3px);
-        /* Levanta o botão suavemente */
-        box-shadow: 0 8px 10px rgba(84, 189, 52, 0.35);
-        /* Brilho verde neon projetado */
+        background: var(--zc-accent);
+        color: #000;
     }
 
-    .znav-btn-green2:active {
-        transform: translateY(1px);
-        /* Afunda quando clica */
-        box-shadow: 0 2px 5px rgba(84, 189, 52, 0.4);
-        /* Brilho diminui no clique */
-    }
-
-    .znav-template-mixed {
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .znav-mixed-top .znav-banner {
-        height: 180px;
-        margin-bottom: 15px;
-    }
-
-    .znav-mixed-bottom .znav-card img {
-        aspect-ratio: 2/1;
-    }
-
-    /* 3. Coluna Direita (Links Específicos que trocam junto com a aba) */
+    /* 3. COLUNA DIREITA: LINKS */
     .znav-col-right {
-        width: 280px;
+        width: 300px;
         display: flex;
         flex-direction: column;
         gap: 12px;
-        padding-left: 30px;
+        padding-left: 40px;
         border-left: 1px solid var(--zc-border);
+        flex-shrink: 0;
     }
 
     .znav-link-list,
     .znav-link-list-small {
         list-style: none;
-        padding: 0;
-        margin: 0;
     }
 
     .znav-link-list li {
@@ -638,26 +643,29 @@ html.z-lock-scroll {
     }
 
     .znav-link-list a {
-        color: var(--zc-text);
-        font-weight: bold;
-        font-size: 14px;
+        color: var(--zc-muted);
+        font-weight: 800;
+        font-size: 15px;
         text-decoration: none;
         transition: 0.2s;
+        display: inline-block;
+        padding: 4px 0;
     }
 
+    /* Classe que era verde, agora dá apenas um brilho branco */
     .znav-link-list a.znav-link-green {
-        color: var(--zc-green);
+        color: var(--zc-accent);
     }
 
     .znav-link-list a:hover {
-        color: var(--zc-green);
-        text-decoration: underline;
+        color: var(--zc-accent);
+        transform: translateX(5px);
     }
 
     .znav-divider-gray {
         border-top: 1px solid var(--zc-border);
-        margin: 15px 0 25px 0;
-        width: 40px;
+        margin: 15px 0;
+        width: 50px;
     }
 
     .znav-link-list-small li {
@@ -667,61 +675,19 @@ html.z-lock-scroll {
     .znav-link-list-small a {
         color: var(--zc-muted);
         font-size: 13px;
+        font-weight: 700;
         text-decoration: none;
-        font-weight: bold;
         transition: 0.2s;
     }
 
     .znav-link-list-small a:hover {
-        color: var(--zc-text);
+        color: var(--zc-accent);
         text-decoration: underline;
     }
 
-    /* Dropdown Simples da Conta */
-    .znav-simple-drop {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: var(--zc-bg-main);
-        border: 1px solid var(--zc-border);
-        border-top: 2px solid var(--zc-green);
-        min-width: 220px;
-        list-style: none;
-        padding: 10px 0;
-        visibility: hidden;
-        opacity: 0;
-        transform: translateY(-5px);
-        transition: all 0.2s ease;
-    }
-
-    .znav-simple-drop.right-align {
-        left: auto;
-        right: 0;
-    }
-
-    .znav-mega-btn.open>.znav-simple-drop {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .znav-simple-drop li a {
-        display: block;
-        padding: 12px 25px;
-        color: var(--zc-text);
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 13px;
-        transition: 0.2s;
-    }
-
-    .znav-simple-drop li a:hover {
-        background: var(--zc-bg-hover);
-        color: var(--zc-green);
-        padding-left: 30px;
-    }
-
-    /* Ações Header Direita */
+    /* ==========================================
+       EXTERNOS E AÇÕES DIREITA
+    ========================================== */
     .znav-actions {
         justify-self: end;
         display: flex;
@@ -730,23 +696,45 @@ html.z-lock-scroll {
         height: 100%;
     }
 
-    .znav-btn-outline {
-        border: 1px solid var(--zc-green);
-        color: var(--zc-green);
-        padding: 10px 20px;
-        text-decoration: none;
-        font-weight: 800;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        transition: 0.2s;
-        border-radius: 2px;
+    .znav-simple-drop {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--zc-bg-tab);
+        backdrop-filter: blur(15px);
+        border: 1px solid var(--zc-border);
+        border-top: 1px solid var(--zc-border);
+        min-width: 220px;
+        list-style: none;
+        padding: 10px 0;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.2s ease;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+        z-index: 100000;
     }
 
-    .znav-btn-outline:hover {
-        background: var(--zc-green);
-        color: #000;
+    .znav-mega-btn.drop-conta.open>.znav-simple-drop {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .znav-simple-drop li a {
+        display: block;
+        padding: 14px 25px;
+        color: var(--zc-muted);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    .znav-simple-drop li a:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--zc-accent);
+        padding-left: 30px;
     }
 
     .znav-icon-wrapper {
@@ -762,32 +750,48 @@ html.z-lock-scroll {
     }
 
     .znav-icon-wrapper i:first-child {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .znav-arrow-small {
-        font-size: 10px;
+        font-size: 11px;
         color: var(--zc-muted);
-        transition: transform 0.3s;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .znav-icon-wrapper:hover,
     .znav-mega-btn.open .znav-icon-wrapper {
-        color: var(--zc-green);
-    }
-
-    .znav-icon-wrapper:hover .znav-arrow-small,
-    .znav-mega-btn.open .znav-arrow-small {
-        color: var(--zc-green);
+        color: var(--zc-accent);
     }
 
     .znav-mega-btn.open .znav-arrow-small {
         transform: rotate(180deg);
+        color: var(--zc-accent);
+    }
+
+    /* Botão Discord Neutro */
+    .znav-btn-outline {
+        border: 1px solid var(--zc-border);
+        color: var(--zc-accent);
+        padding: 10px 20px;
+        font-weight: 800;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: 0.2s;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .znav-btn-outline:hover {
+        background: var(--zc-accent);
+        color: #000;
     }
 }
 
 /* ==========================================
-   MOBILE (TELA CHEIA & SLIDING)
+   3. MOBILE (MANTIDO ESTÁVEL COMO SOLICITADO)
 ========================================== */
 @media (max-width: 1024px) {
     .znav-pc {
@@ -845,7 +849,7 @@ html.z-lock-scroll {
         right: -100vw;
         width: 100vw;
         height: 100vh;
-        background: var(--zc-bg-panel);
+        background: #0d0d0d;
         z-index: 9999;
         display: flex;
         flex-direction: column;
@@ -863,7 +867,7 @@ html.z-lock-scroll {
         align-items: center;
         padding: 0 20px;
         border-bottom: 1px solid var(--zc-border);
-        background: var(--zc-bg-main);
+        background: #000;
         flex-shrink: 0;
     }
 
@@ -887,7 +891,7 @@ html.z-lock-scroll {
         position: relative;
         flex: 1;
         overflow: hidden;
-        background: var(--zc-bg-panel);
+        background: #0d0d0d;
     }
 
     .zmob-panel {
@@ -897,7 +901,7 @@ html.z-lock-scroll {
         width: 100%;
         height: 100%;
         overflow-y: auto;
-        background: var(--zc-bg-panel);
+        background: #0d0d0d;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         padding-bottom: 40px;
     }
@@ -918,7 +922,6 @@ html.z-lock-scroll {
         transform: translateX(0);
     }
 
-    /* Listas Uniformes Mobile */
     .zmob-list {
         list-style: none;
     }
@@ -973,7 +976,6 @@ html.z-lock-scroll {
         text-align: center;
     }
 
-    /* Telas Secundárias (Submenus) */
     .zmob-back-btn {
         width: 100%;
         background: none;
@@ -1028,12 +1030,14 @@ html.z-lock-scroll {
 }
 
 /* ==========================================
-   MODAL DE BUSCA (LUPA)
+   4. MODAL DE BUSCA (LUPA NEUTRA)
 ========================================== */
 .zsearch-modal {
     position: fixed;
     inset: 0;
-    background: rgba(17, 17, 17, 0.98);
+    background: var(--zc-bg-tab);
+    /* Vidro denso igual o menu */
+    backdrop-filter: blur(15px);
     z-index: 100000;
     opacity: 0;
     visibility: hidden;
@@ -1068,23 +1072,35 @@ html.z-lock-scroll {
 .zsearch-header button {
     background: none;
     border: none;
-    color: #fff;
+    color: var(--zc-accent);
     font-size: 35px;
     cursor: pointer;
     line-height: 1;
+    transition: 0.2s;
+}
+
+.zsearch-header button:hover {
+    transform: scale(1.1);
 }
 
 .zsearch-input-box {
     display: flex;
     align-items: center;
-    background: #111;
-    border: 1px solid var(--zc-green);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--zc-border);
     padding: 18px 25px;
-    border-radius: 4px;
+    border-radius: 6px;
+    transition: 0.2s;
 }
 
+.zsearch-input-box:focus-within {
+    border-color: var(--zc-accent);
+}
+
+/* Borda acende ao digitar */
+
 .zsearch-input-box i:first-child {
-    color: #fff;
+    color: var(--zc-accent);
     font-size: 20px;
     margin-right: 15px;
 }
@@ -1093,20 +1109,21 @@ html.z-lock-scroll {
     flex: 1;
     background: none;
     border: none;
-    color: #fff;
+    color: var(--zc-text);
     font-size: 18px;
     font-weight: bold;
     outline: none;
 }
 
 .clear-btn {
-    color: #888;
+    color: var(--zc-muted);
     font-size: 20px;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .clear-btn:hover {
-    color: #fff;
+    color: var(--zc-accent);
 }
 
 .zsearch-results-area {
@@ -1123,7 +1140,7 @@ html.z-lock-scroll {
     display: flex;
     align-items: center;
     padding: 18px 0;
-    color: #fff;
+    color: var(--zc-text);
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
@@ -1134,15 +1151,35 @@ html.z-lock-scroll {
 .zsearch-list li a i {
     font-size: 14px;
     margin-right: 15px;
-    color: #666;
+    color: var(--zc-muted);
 }
 
 .zsearch-list li a:hover {
-    color: var(--zc-green);
+    color: var(--zc-accent);
     padding-left: 10px;
+    border-bottom-color: var(--zc-accent);
 }
 
-/*===============================================================================================*/
+/* =============================================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* --- HERO SECTION --- */
 .hero {
