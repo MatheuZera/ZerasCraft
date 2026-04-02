@@ -62,6 +62,60 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==========================================
+   FECHAR NAVEGAÇÃO AO CLICAR FORA OU ESC
+========================================== */
+
+// 1. Fechar ao clicar fora dos elementos da navegação
+document.addEventListener('click', (e) => {
+    // Verifica se o clique NÃO aconteceu dentro de um item do menu (botão ou painel)
+    if (!e.target.closest('.znav-mega-btn')) {
+        const openedMenus = document.querySelectorAll('.znav-mega-btn.open');
+
+        if (openedMenus.length > 0) {
+            // Remove a classe 'open' de todos os menus abertos
+            openedMenus.forEach(menu => menu.classList.remove('open'));
+
+            // Destrava o scroll da página (função que já existe no seu JS)
+            if (typeof unlockScroll === 'function') {
+                unlockScroll();
+            }
+        }
+    }
+});
+
+// 2. Fechar ao pressionar a tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+
+        // --- A. Fecha o Mega Menu ---
+        const openedMenus = document.querySelectorAll('.znav-mega-btn.open');
+        if (openedMenus.length > 0) {
+            openedMenus.forEach(menu => menu.classList.remove('open'));
+
+            if (typeof unlockScroll === 'function') {
+                unlockScroll();
+            }
+        }
+
+        // --- B. Fecha também a Modal de Pesquisa (Bônus) ---
+        const searchModal = document.getElementById('zSearchModal');
+        if (searchModal && searchModal.classList.contains('active')) {
+            if (typeof closeSearch === 'function') {
+                closeSearch(); // Chama a sua função existente para fechar a lupa
+            }
+        }
+
+        // --- C. Fecha também o Menu Mobile se estiver aberto (Bônus) ---
+        const mobileSidebar = document.getElementById('zmobSidebar');
+        if (mobileSidebar && mobileSidebar.classList.contains('active')) {
+            if (typeof closeMobileMenu === 'function') {
+                closeMobileMenu();
+            }
+        }
+    }
+});
+
+/* ==========================================
    3. DESKTOP: MEGA MENU INTERATIVO
 ========================================== */
 function toggleMegaMenu(evt) {
