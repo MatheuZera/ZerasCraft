@@ -1263,3 +1263,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+/* ==========================================
+   SISTEMA DE PLAYER DE VÍDEO INTELIGENTE
+========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const videoFrames = document.querySelectorAll('.video-frame');
+
+    videoFrames.forEach(frame => {
+        frame.addEventListener('click', function () {
+            // Verifica se o vídeo já está tocando
+            if (this.classList.contains('playing')) return;
+
+            // Pega o ID do vídeo do atributo HTML
+            const videoId = this.getAttribute('data-video-id');
+
+            if (videoId) {
+                this.classList.add('playing');
+
+                // Cria o iframe do YouTube dinamicamente
+                const iframe = document.createElement('iframe');
+                // Adiciona autoplay e oculta elementos desnecessários do Youtube
+                iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0&modestbranding=1`);
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                iframe.setAttribute('allowfullscreen', 'true');
+
+                // Limpa a miniatura/botão e insere o vídeo tocando
+                this.innerHTML = '';
+                this.appendChild(iframe);
+            }
+        });
+    });
+});
