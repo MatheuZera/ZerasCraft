@@ -255,7 +255,7 @@ html.z-lock-scroll {
 /* ==========================================
    2. DESKTOP (PC) - LAYOUT MONOCROMÁTICO
 ========================================== */
-@media (min-width: 1025px) {
+@media (min-width: 1440px) {
 
     .zmob-topbar,
     .zmob-overlay,
@@ -787,7 +787,7 @@ html.z-lock-scroll {
 /* ==========================================
    3. MOBILE (MANTIDO ESTÁVEL COMO SOLICITADO)
 ========================================== */
-@media (max-width: 1024px) {
+@media (max-width: 1440px) {
     .znav-pc {
         display: none !important;
     }
@@ -1268,7 +1268,6 @@ html.z-lock-scroll {
     text-decoration: none;
     text-transform: uppercase;
     border-radius: 4px;
-    display: flex;
     align-items: center;
     gap: 12px;
     box-shadow: 0 4px 0 #2d5d1a;

@@ -3553,120 +3553,7 @@
 
 
 
-.explorer-section {
-    background-color: #0b0b0b;
-    padding: 60px 20px;
-    width: 100%;
-}
 
-.explorer-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-/* Base do Card */
-.explorer-card {
-    background: #151515;
-    border: 1px solid #252525;
-    cursor: pointer;
-    overflow: hidden;
-    transition: border-color 0.2s ease;
-}
-
-.explorer-card:hover {
-    border-color: #54bd34;
-    /* Verde Zera's */
-}
-
-/* Banner com Autocomplete */
-.explorer-banner {
-    width: 100%;
-    height: 160px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.explorer-banner::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-/* Ícone Central e Botão de Fechar */
-.explorer-icon {
-    position: relative;
-    z-index: 2;
-    font-size: 40px;
-    color: #fff;
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.explorer-toggle {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index: 3;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #444;
-    color: #fff;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-/* Conteúdo Expandível */
-.explorer-content {
-    padding: 20px;
-    text-align: left;
-}
-
-.explorer-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #fff;
-    margin: 0;
-    font-size: 1.2rem;
-}
-
-.explorer-details {
-    display: grid;
-    grid-template-rows: 0fr;
-    /* Começa fechado */
-    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.explorer-details p {
-    overflow: hidden;
-    color: #aaa;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* ESTADO ATIVO (Aba aberta) */
-.explorer-card.active .explorer-details {
-    grid-template-rows: 1fr;
-    margin-top: 15px;
-}
-
-.explorer-card.active .explorer-toggle {
-    transform: rotate(45deg);
-    /* Transforma o + em X */
-    background: #54bd34;
-    border-color: #fff;
-}
 
 
 
@@ -3680,12 +3567,12 @@
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
     align-items: stretch;
 }
 
-/* --- BANNER (Topo solto) --- */
+/* --- ESTRUTURA DO CARD --- */
 .mc-card {
     display: flex;
     flex-direction: column;
@@ -3707,9 +3594,73 @@
     border-right: 8px solid transparent;
     border-bottom: 8px solid transparent;
 
-    /* ALINHAMENTO INDUSTRIAL: Força as linhas a terem o mesmo tamanho */
-    display: grid;
-    grid-template-rows: 25px 45px 85px 65px auto;
+    /* Configuração base para não "quebrar" no mobile */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ======================================================
+   ALINHAMENTO INDUSTRIAL (APENAS PC/TABLET MAIOR)
+   Volta o grid com alturas fixas para alinhar flechas
+====================================================== */
+@media (min-width: 992px) {
+    .mc-card-content {
+        display: grid;
+        grid-template-rows: 25px 45px 95px 70px auto;
+        gap: 0;
+    }
+
+    /* Devolve as linhas do grid no PC */
+    .mc-status {
+        grid-row: 1;
+    }
+
+    .mc-card-title {
+        grid-row: 2;
+    }
+
+    .mc-card-desc {
+        grid-row: 3;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .mc-tag-box {
+        grid-row: 4;
+        margin-bottom: 0;
+    }
+
+    .mc-accordion {
+        grid-row: 5;
+        margin-top: 10px;
+    }
+}
+
+/* ======================================================
+   ESPAÇAMENTO MOBILE EXCLUSIVO (Abaixo de 768px)
+   Resolve o problema da imagem colada na borda
+====================================================== */
+@media (max-width: 768px) {
+    .mc-modes-section {
+        /* Aumenta o padding lateral no mobile para afastar os cards das bordas da tela */
+        padding: 60px 10px;
+    }
+
+    .mc-card {
+        /* Adiciona margem extra em telas muito apertadas */
+        margin-bottom: 10px;
+    }
+
+    .mc-card-content {
+        padding: 20px 20px;
+        /* Um pouco mais de respiro interno */
+    }
+
+    /* Empurra o acordeon pro fundo no mobile (já que está em flexbox) */
+    .mc-accordion {
+        margin-top: auto;
+    }
 }
 
 /* Cores dos Temas */
@@ -3727,7 +3678,6 @@
 
 /* --- ELEMENTOS INTERNOS --- */
 .mc-status {
-    grid-row: 1;
     text-align: right;
     font-size: 11px;
     font-weight: 900;
@@ -3739,7 +3689,6 @@
 }
 
 .mc-card-title {
-    grid-row: 2;
     font-family: 'Rajdhani', sans-serif;
     color: #fff;
     font-size: 26px;
@@ -3749,16 +3698,13 @@
 }
 
 .mc-card-desc {
-    grid-row: 3;
     color: #888;
     font-size: 14px;
     text-align: center;
     line-height: 1.4;
-    margin-top: 10px;
 }
 
 .mc-tag-box {
-    grid-row: 4;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -3777,8 +3723,8 @@
 
 /* --- ACCORDION (OCULTAÇÃO TOTAL) --- */
 .mc-accordion {
-    grid-row: 5;
-    margin-top: 15px;
+    border-top: 1px solid transparent;
+    /* Container limpo */
 }
 
 .mc-acc-item {
@@ -3800,15 +3746,12 @@
 .mc-acc-trigger i {
     transition: transform 0.3s ease;
     color: #444;
-    /* Flecha discreta padrão */
 }
 
 .mc-acc-content {
     display: grid;
     grid-template-rows: 0fr;
-    /* TOTALMENTE FECHADO */
     visibility: hidden;
-    /* TEXTO NÃO APARECE */
     opacity: 0;
     transition: all 0.3s ease;
     overflow: hidden;
@@ -3832,5 +3775,4 @@
 .mc-acc-item.active .mc-acc-trigger i {
     transform: rotate(180deg);
     color: #54bd34;
-    /* Verde Zera's na abertura */
 }
