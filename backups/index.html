@@ -468,11 +468,11 @@
             <div class="container status-flex">
                 <div class="status-info">
                     <span class="pulse-icon"></span>
-                    <strong>STATUS:</strong> <span id="online-count">Carregando jogadores...</span>
+                    <strong>STATUS:</strong> <span id="discord-count"></span>
                 </div>
                 <div class="status-news">
-                    <marquee>🔥 Promoção de Verão: Use o cupom <strong>ZERAS20</strong> para 20% de desconto em toda a
-                        loja!</marquee>
+                    <marquee>🔥 Entre no Nosso <strong>Servidor do Discord</strong> e Receba Cargos Exclusivos!
+                    </marquee>
                 </div>
             </div>
         </div>
@@ -482,6 +482,7 @@
                 <h2 class="section-title center reveal">Escolha sua Jornada</h2>
                 <div class="pricing-grid">
                     <div class="price-card reveal">
+                        <div class="popular-badge">BÁSICO</div>
                         <div class="price-header">
                             <h3>MEMBRO</h3>
                             <div class="amount">Grátis</div>
@@ -526,8 +527,8 @@
                         <div class="testi-author">
                             <img src="https://mc-heads.net/avatar/Notch/64" alt="Avatar">
                             <div class="author-info">
-                                <h4>JogadorEpic</h4>
-                                <span>VIP Diamante</span>
+                                <h4>Notch</h4>
+                                <span>VIP Ultimato</span>
                             </div>
                         </div>
                     </div>
@@ -539,8 +540,8 @@
                         <div class="testi-author">
                             <img src="https://mc-heads.net/avatar/Alex/64" alt="Avatar">
                             <div class="author-info">
-                                <h4>AlexBuilder</h4>
-                                <span>Membro desde 2022</span>
+                                <h4>Alex</h4>
+                                <span>Caçadores de Tesouros</span>
                             </div>
                         </div>
                     </div>
@@ -552,8 +553,8 @@
                         <div class="testi-author">
                             <img src="https://mc-heads.net/avatar/Steve/64" alt="Avatar">
                             <div class="author-info">
-                                <h4>StevePvP</h4>
-                                <span>Top 10 Global</span>
+                                <h4>Steve</h4>
+                                <span>Top 1º CraftJam</span>
                             </div>
                         </div>
                     </div>
@@ -562,20 +563,23 @@
             </div>
         </section>
 
-        <div class="goals-card">
+        <div class="goals-card" id="standalone-goals" data-objective="200">
             <div class="goals-header">
                 <div class="goals-title">
                     <i class="fas fa-bullseye"></i> SISTEMA DE METAS
                 </div>
-                <div class="goals-subtitle">PROGRESSO DO SERVIDOR</div>
+                <div class="goals-subtitle">
+                    PROGRESSO DO SERVIDOR - <strong class="counter" id="stat-total" data-target="0">0</strong> TOTAIS /
+                    OBJETIVO: <span class="goal-target-val">200</span>
+                </div>
             </div>
             <br>
             <div class="progress-wrapper">
                 <div class="progress-track">
-                    <div class="progress-fill" style="width: 75%;">
+                    <div class="progress-fill" id="goal-fill" style="width: 0%;">
                         <div class="progress-indicator">
                             <span class="indicator-text">META MENSAL</span>
-                            <span class="indicator-percent">75%</span>
+                            <span class="indicator-percent" id="goal-percent-text">0%</span>
                         </div>
                     </div>
                 </div>

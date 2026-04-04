@@ -3689,19 +3689,21 @@ var .play-pause {
     }
 }
 
+
 /* ==========================================
-   5. SISTEMA DE METAS (INDICADOR DESLIZANTE)
+   MÓDULO: SISTEMA DE METAS (STANDALONE)
 ========================================== */
 .goals-card {
     background: rgba(15, 15, 15, 0.8);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
-    padding: 25px 35px;
+    border-radius: 8px;
+    padding: 30px 40px;
     margin: 30px auto;
     max-width: 1200px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    font-family: 'Inter', sans-serif;
 }
 
 .goals-header {
@@ -3713,7 +3715,7 @@ var .play-pause {
 .goals-title {
     color: #ffffff;
     font-weight: 900;
-    font-size: 15px;
+    font-size: 16px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
@@ -3727,18 +3729,20 @@ var .play-pause {
 
 .goals-subtitle {
     color: #888888;
-    font-weight: 800;
-    font-size: 12px;
+    font-weight: 700;
+    font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
-/* ==========================================
-   BARRA DE PROGRESSO E INDICADOR FLUTUANTE
-========================================== */
+.goals-subtitle strong {
+    color: #ffffff;
+    font-weight: 900;
+}
+
+/* Barra de Progresso */
 .progress-wrapper {
-    /* Margem superior grande para caber a caixa do indicador sem cortar */
-    margin-top: 60px;
+    margin-top: 55px;
     padding-bottom: 10px;
 }
 
@@ -3747,7 +3751,6 @@ var .play-pause {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     height: 8px;
-    /* Barra fina */
     position: relative;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
 }
@@ -3757,11 +3760,10 @@ var .play-pause {
     height: 100%;
     border-radius: 10px;
     position: relative;
-    transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 0 0 10px rgba(84, 189, 52, 0.3);
 }
 
-/* Bolinha Neon na ponta */
 .progress-fill::after {
     content: '';
     position: absolute;
@@ -3776,34 +3778,24 @@ var .play-pause {
     z-index: 2;
 }
 
-/* ==========================================
-   O INDICADOR QUE DESLIZA COM A BARRA
-========================================== */
+/* Indicador Flutuante */
 .progress-indicator {
     position: absolute;
     bottom: 25px;
-    /* Fica acima da barra */
     right: 0;
-    /* Segue a ponta da barra (100% do fill) */
     transform: translateX(50%);
-    /* Centraliza a caixa em cima da bolinha */
-
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #111111;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 2px solid #54bd34;
-    /* Destaque na base */
     padding: 6px 15px;
     border-radius: 6px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
     z-index: 3;
-    pointer-events: none;
-    /* Não atrapalha cliques acidentais */
 }
 
-/* Setinha do indicador apontando para a bolinha */
 .progress-indicator::after {
     content: '';
     position: absolute;
@@ -3821,7 +3813,6 @@ var .play-pause {
     font-weight: 800;
     text-transform: uppercase;
     white-space: nowrap;
-    /* Impede o texto de quebrar em duas linhas */
     margin-bottom: 2px;
 }
 
@@ -3832,25 +3823,30 @@ var .play-pause {
     line-height: 1;
 }
 
-/* ==========================================
-   RESPONSIVIDADE MOBILE
-========================================== */
+/* Mobile */
 @media (max-width: 768px) {
     .goals-card {
-        padding: 20px;
+        padding: 25px 20px;
         margin: 20px auto;
-        width: calc(100% - 40px);
+        width: calc(100% - 30px);
     }
 
     .goals-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 12px;
+    }
+
+    .goals-title {
+        font-size: 14px;
+    }
+
+    .goals-subtitle {
+        font-size: 11px;
     }
 
     .progress-wrapper {
         margin-top: 50px;
-        /* Reduz um pouco o espaço no mobile */
     }
 
     .indicator-text {
@@ -3861,7 +3857,6 @@ var .play-pause {
         font-size: 15px;
     }
 }
-
 
 /* --- NAVEGAÇÃO INTERNA CORRIGIDA --- */
 .internal-nav {

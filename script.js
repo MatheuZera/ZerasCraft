@@ -1306,3 +1306,64 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+/* ==========================================
+   MÓDULO: SISTEMA DE METAS (LÊ O HTML DIRETAMENTE)
+========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const statTotalEl = document.getElementById('stat-total'); // Puxa o total do Discord
+    const targetTextEl = document.querySelector('.goal-target-val'); // Puxa o texto do objetivo
+    const progressBar = document.getElementById('goal-fill');
+    const progressText = document.getElementById('goal-percent-text');
+
+    if (!statTotalEl || !targetTextEl) return;
+
+    // 1. MÁGICA: O JS lê o número EXATO que você digitou no HTML (Ex: 102)
+    const objectiveVal = parseFloat(targetTextEl.innerText) || 1;
+
+    // Função para animar a porcentagem fluindo (ex: 0% a 100%)
+    function animatePercent(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const current = Math.floor(progress * (end - start) + start);
+
+            obj.innerText = current + '%';
+            if (progress < 1) window.requestAnimationFrame(step);
+            else obj.innerText = Math.floor(end) + '%';
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // 2. Função que faz o cálculo com os dados reais
+    function updateProgressBar(realTotal) {
+        // Se o total for 102 e o objetivo for 102, a conta dá 100!
+        let percentage = (realTotal / objectiveVal) * 100;
+
+        // Trava de segurança: se passar da meta (ex: 105/102), a barra não fura a tela, crava no 100%.
+        if (percentage > 100) percentage = 100;
+        if (percentage < 0) percentage = 0;
+
+        // Aplica o tamanho na barra verde e anima o texto
+        if (progressBar) progressBar.style.width = percentage + '%';
+        if (progressText) animatePercent(progressText, 0, percentage, 1500);
+    }
+
+    // 3. Fica vigiando o ID do total. Quando o Discord atualizar os membros, ele calcula a barra!
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'data-target') {
+                const finalTotal = parseFloat(statTotalEl.getAttribute('data-target')) || 0;
+                updateProgressBar(finalTotal);
+            }
+        });
+    });
+
+    observer.observe(statTotalEl, { attributes: true });
+
+    // Dispara uma vez no início (caso o número já esteja carregado)
+    const initialTotal = parseFloat(statTotalEl.getAttribute('data-target')) || 0;
+    updateProgressBar(initialTotal);
+});
