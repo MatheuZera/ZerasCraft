@@ -1309,61 +1309,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ==========================================
-   MÓDULO: SISTEMA DE METAS (LÊ O HTML DIRETAMENTE)
+   MÓDULO: STATUS DO DISCORD & METAS (+100%)
 ========================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    const statTotalEl = document.getElementById('stat-total'); // Puxa o total do Discord
-    const targetTextEl = document.querySelector('.goal-target-val'); // Puxa o texto do objetivo
-    const progressBar = document.getElementById('goal-fill');
-    const progressText = document.getElementById('goal-percent-text');
+    const inviteCode = 'GYGVBqGEwP';
 
-    if (!statTotalEl || !targetTextEl) return;
+    const statusCountEl = document.getElementById('new-status-count');
+    const membersCountEl = document.getElementById('new-members-count');
+    const objectiveEl = document.getElementById('new-objective-val');
+    const progressBar = document.getElementById('new-goal-fill');
+    const progressText = document.getElementById('new-percent-text');
 
-    // 1. MÁGICA: O JS lê o número EXATO que você digitou no HTML (Ex: 102)
-    const objectiveVal = parseFloat(targetTextEl.innerText) || 1;
-
-    // Função para animar a porcentagem fluindo (ex: 0% a 100%)
-    function animatePercent(obj, start, end, duration) {
+    // Função de animação de números preparada para passar de 100%
+    function animateValue(obj, start, end, duration, isPercent = false, suffix = '') {
+        if (!obj) return;
         let startTimestamp = null;
+
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const current = Math.floor(progress * (end - start) + start);
 
-            obj.innerText = current + '%';
-            if (progress < 1) window.requestAnimationFrame(step);
-            else obj.innerText = Math.floor(end) + '%';
+            // Adiciona o símbolo "+" se for porcentagem e passar de 100
+            let prefix = (isPercent && current > 100) ? '+' : '';
+
+            obj.innerText = isPercent ? prefix + current + '%' : current.toLocaleString('pt-BR') + suffix;
+
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                let finalPrefix = (isPercent && end > 100) ? '+' : '';
+                obj.innerText = isPercent ? finalPrefix + Math.floor(end) + '%' : Math.floor(end).toLocaleString('pt-BR') + suffix;
+            }
         };
         window.requestAnimationFrame(step);
     }
 
-    // 2. Função que faz o cálculo com os dados reais
-    function updateProgressBar(realTotal) {
-        // Se o total for 102 e o objetivo for 102, a conta dá 100!
-        let percentage = (realTotal / objectiveVal) * 100;
+    async function fetchDiscordStats() {
+        try {
+            const response = await fetch(`https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`);
 
-        // Trava de segurança: se passar da meta (ex: 105/102), a barra não fura a tela, crava no 100%.
-        if (percentage > 100) percentage = 100;
-        if (percentage < 0) percentage = 0;
+            if (!response.ok) throw new Error("A API do Discord bloqueou a consulta (Rate limit ou link inválido).");
 
-        // Aplica o tamanho na barra verde e anima o texto
-        if (progressBar) progressBar.style.width = percentage + '%';
-        if (progressText) animatePercent(progressText, 0, percentage, 1500);
+            const data = await response.json();
+            const totalMembers = data.approximate_member_count || 0;
+
+            // 1. Atualiza os textos
+            if (statusCountEl) animateValue(statusCountEl, 0, totalMembers, 1500, false, ' Membros Totais');
+            if (membersCountEl) animateValue(membersCountEl, 0, totalMembers, 1500);
+
+            // 2. Lógica da % com suporte para valores além do Objetivo
+            if (objectiveEl && progressBar && progressText) {
+
+                let rawText = objectiveEl.textContent || "1";
+                let objectiveVal = parseFloat(rawText.replace(/\D/g, '')) || 1;
+
+                // PORCENTAGEM REAL (Pode ser 105%, 200%, etc.)
+                let realPercentage = (totalMembers / objectiveVal) * 100;
+                if (realPercentage < 0) realPercentage = 0;
+
+                // PORCENTAGEM VISUAL (Trava no máximo em 100% para não estourar o layout da barra)
+                let visualPercentage = realPercentage > 100 ? 100 : realPercentage;
+
+                // Anima a barra preenchendo
+                setTimeout(() => {
+                    progressBar.style.width = visualPercentage + '%';
+                    animateValue(progressText, 0, realPercentage, 1500, true);
+                }, 300);
+            }
+
+        } catch (error) {
+            console.error("Zera's Craft ->", error);
+            if (statusCountEl) statusCountEl.innerText = "Servidor Online";
+            if (membersCountEl) membersCountEl.innerText = "---";
+        }
     }
 
-    // 3. Fica vigiando o ID do total. Quando o Discord atualizar os membros, ele calcula a barra!
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'data-target') {
-                const finalTotal = parseFloat(statTotalEl.getAttribute('data-target')) || 0;
-                updateProgressBar(finalTotal);
-            }
-        });
-    });
-
-    observer.observe(statTotalEl, { attributes: true });
-
-    // Dispara uma vez no início (caso o número já esteja carregado)
-    const initialTotal = parseFloat(statTotalEl.getAttribute('data-target')) || 0;
-    updateProgressBar(initialTotal);
+    fetchDiscordStats();
 });

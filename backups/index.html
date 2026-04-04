@@ -468,7 +468,7 @@
             <div class="container status-flex">
                 <div class="status-info">
                     <span class="pulse-icon"></span>
-                    <strong>STATUS:</strong> <span id="discord-count"></span>
+                    <strong>STATUS:</strong> <span id="new-status-count">Carregando...</span>
                 </div>
                 <div class="status-news">
                     <marquee>🔥 Entre no Nosso <strong>Servidor do Discord</strong> e Receba Cargos Exclusivos!
@@ -563,26 +563,30 @@
             </div>
         </section>
 
-        <div class="goals-card" id="standalone-goals" data-objective="200">
+        <div class="goals-card" id="standalone-goals">
             <div class="goals-header">
                 <div class="goals-title">
-                    <i class="fas fa-bullseye"></i> SISTEMA DE METAS
+                    <i class="fas fa-fire"></i> NOSSA META DO DISCORD
                 </div>
                 <div class="goals-subtitle">
-                    PROGRESSO DO SERVIDOR - <strong class="counter" id="stat-total" data-target="0">0</strong> TOTAIS /
-                    OBJETIVO: <span class="goal-target-val">200</span>
+                    <i class="fas fa-user"></i> MEMBROS: <strong class="counter" id="new-members-count">0</strong> /
+                    <i class="fas fa-check"></i> OBJETIVO: <strong><span id="new-objective-val">200</span></strong>
                 </div>
             </div>
             <br>
             <div class="progress-wrapper">
                 <div class="progress-track">
-                    <div class="progress-fill" id="goal-fill" style="width: 0%;">
+                    <div class="progress-fill" id="new-goal-fill" style="width: 0%;">
                         <div class="progress-indicator">
-                            <span class="indicator-text">META MENSAL</span>
-                            <span class="indicator-percent" id="goal-percent-text">0%</span>
+                            <span class="indicator-text">META ATUALMENTE</span>
+                            <span class="indicator-percent" id="new-percent-text">0%</span>
                         </div>
                     </div>
                 </div>
+            </div>
+            <br>
+            <div class="hero-actions">
+                <a href="#" class="btn-hero-green">ENTRAR NO SERVIDOR <i class="fas fa-chevron-right"></i></a>
             </div>
         </div>
 
