@@ -347,14 +347,14 @@
             </div>
         </nav>
 
-        <section class="gallery-section-bg" style="background-image: url('URL_DA_SUA_IMAGEM_DO_SPAWN.jpg');">
-            <div class="tabs-overlay"></div>
-            <div class="container tabs-relative">
-                <h2 class="center">NOSSO UNIVERSO</h2>
+        <section class="tabs-overlay">
+            <div class="container tabs-relative banner-text">
+                <br>
+                <span class="badge">Coisas que Aconteceram na Nossa Comunidade :)</span>
+                <h2>MOMENTOS INCRÍVEIS!</h2>
                 <div class="gallery-grid">
                     <div class="gallery-item reveal">
-                        <img src="https://www.minecraft.net/content/dam/games/minecraft/screenshots/Minecraft_Preview_26.10.21.jpg"
-                            alt="Print 1">
+                        <img src="assets/images/geral/banner-img.jpg" alt="Print 1">
                         <div class="gallery-hover"><i class="fas fa-search-plus"></i></div>
                     </div>
                     <div class="gallery-item reveal">
@@ -505,6 +505,7 @@
                         </ul>
                         <button class="btn-price">JOGAR AGORA</button>
                     </div>
+
                     <div class="price-card featured reveal delay-1">
                         <div class="popular-badge">MAIS POPULAR</div>
                         <div class="price-header">
@@ -523,29 +524,74 @@
             </div>
         </section>
 
-        <section class="testimonials">
-            <div class="container">
-                <div class="testimonial-slider reveal">
-                    <div class="testimonial-item">
-                        <img src="https://minotar.net/helm/Steve/100.png" alt="Avatar">
-                        <p>"O melhor survival que já joguei em anos. A comunidade é super receptiva e a economia é
-                            justa!"</p>
-                        <span>- @JogadorMaster</span>
+        <section class="testimonials-section">
+            <div class="testi-container">
+
+                <h2 class="testi-main-title">O que dizem nossos jogadores</h2>
+
+                <div class="testi-grid">
+                    <div class="testi-card">
+                        <i class="fas fa-quote-right quote-icon"></i>
+                        <p class="testi-text">"Melhor servidor que já joguei! A economia é super balanceada e os eventos
+                            de fim de semana são incríveis. Recomendo muito!"</p>
+                        <div class="testi-author">
+                            <img src="https://mc-heads.net/avatar/Notch/64" alt="Avatar">
+                            <div class="author-info">
+                                <h4>JogadorEpic</h4>
+                                <span>VIP Diamante</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testi-card">
+                        <i class="fas fa-quote-right quote-icon"></i>
+                        <p class="testi-text">"A staff é muito ativa e sempre ajuda quando precisamos. O sistema de
+                            proteção de terrenos funciona perfeitamente."</p>
+                        <div class="testi-author">
+                            <img src="https://mc-heads.net/avatar/Alex/64" alt="Avatar">
+                            <div class="author-info">
+                                <h4>AlexBuilder</h4>
+                                <span>Membro desde 2022</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testi-card">
+                        <i class="fas fa-quote-right quote-icon"></i>
+                        <p class="testi-text">"Os minigames são muito fluidos e sem lag. Passo horas jogando BedWars com
+                            meus amigos aqui!"</p>
+                        <div class="testi-author">
+                            <img src="https://mc-heads.net/avatar/Steve/64" alt="Avatar">
+                            <div class="author-info">
+                                <h4>StevePvP</h4>
+                                <span>Top 10 Global</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <section class="goals-section">
-            <div class="container reveal">
-                <h4>Meta Mensal da Comunidade (Reset em 15 dias)</h4>
-                <div class="progress-container">
-                    <div class="progress-bar" style="width: 75%;">
-                        <span class="progress-text">75% - Próximo Evento: XP DOBRADO</span>
+        <div class="goals-card">
+            <div class="goals-header">
+                <div class="goals-title">
+                    <i class="fas fa-bullseye"></i> SISTEMA DE METAS
+                </div>
+                <div class="goals-subtitle">PROGRESSO DO SERVIDOR</div>
+            </div>
+            <br>
+            <div class="progress-wrapper">
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 75%;">
+                        <div class="progress-indicator">
+                            <span class="indicator-text">META MENSAL</span>
+                            <span class="indicator-percent">75%</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
         <section class="video-section">
             <div class="container">
@@ -669,7 +715,6 @@
 
             <div class="main-controls">
                 <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
-                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
                 <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
                 <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
 

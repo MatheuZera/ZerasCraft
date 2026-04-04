@@ -66,15 +66,56 @@ body {
     width: 100%;
 }
 
+/* ==========================================
+   TIPOGRAFIA GLOBAL E TÍTULOS (ESTÁVEL)
+========================================== */
 h1,
 h2,
 h3,
 h4,
+h5,
+h6 {
+    font-family: 'Rajdhani', sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    /* Margem padrão para evitar que o texto grude */
+}
+
+/* Tamanhos fixos escaláveis */
+h1 {
+    font-size: 3rem !important;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 2.5rem !important;
+    line-height: 1.2;
+}
+
+h3 {
+    font-size: 2rem !important;
+    line-height: 1.3;
+}
+
+h4 {
+    font-size: 1.5rem !important;
+    line-height: 1.4;
+}
+
+h5 {
+    font-size: 1.25rem !important;
+}
+
+h6 {
+    font-size: 1rem !important;
+}
+
+/* Mantém os botões grandes com a fonte correta */
 .logo,
 .btn-big-green {
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Rajdhani', sans-serif !important;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 /*
@@ -2423,7 +2464,7 @@ var .play-pause {
 }
 
 .section-title {
-    font-size: 2rem;
+    font-size: 1rem;
     margin-bottom: 30px;
     border-left: 5px solid var(--green-mc);
     padding-left: 15px;
@@ -2976,6 +3017,7 @@ var .play-pause {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .market-card {
@@ -3095,43 +3137,150 @@ var .play-pause {
 }
 
 
-/* 1. Status Bar */
+/* ==========================================
+   1. SERVER STATUS BAR (GLASS-INDUSTRIAL)
+========================================== */
 .server-status-bar {
-    background: #1a1a1a;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 10px 0;
-    margin: 20px 0;
+    background: rgba(15, 15, 15, 0.6);
+    /* Vidro escuro */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* Borda fina de vidro */
+    border-radius: 8px;
+    padding: 10px 40px;
+
+    /* ADICIONADO: Margens nas laterais e centralização no PC */
+    margin: 30px auto;
+    max-width: 1200px;
+    /* Limita o tamanho para não esticar infinitamente em monitores grandes */
+    width: calc(100% - 40px);
+    /* Garante 20px de margem em cada lado */
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de brilho de fundo (opcional) */
+.server-status-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
 }
 
 .status-flex {
     display: flex;
     align-items: center;
-    gap: 30px;
+    justify-content: center;
+    /* Centraliza os itens no PC */
+    gap: 50px;
+    /* Bastante respiro entre os blocos */
+    flex-wrap: wrap;
+    /* Previne quebra de layout */
 }
 
+/* Textos do Status */
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-label {
+    color: #888;
+    /* Texto de apoio mais apagado */
+    font-weight: 700;
+    font-size: 12px;
+}
+
+/* ==========================================
+   2. ANIMAÇÃO DO ÍCONE (RADAR PULSE)
+========================================== */
 .pulse-icon {
+    position: relative;
+    right: 8px;
     width: 10px;
     height: 10px;
-    background: #00ff00;
+    background: #54bd34;
+    /* Verde Zera's */
     border-radius: 50%;
     display: inline-block;
-    margin-right: 8px;
-    box-shadow: 0 0 10px #00ff00;
-    animation: pulse-green 2s infinite;
+    box-shadow: 0 0 10px rgba(84, 189, 52, 0.5);
 }
 
-@keyframes pulse-green {
-    0% {
-        opacity: 0.4;
-    }
+/* Animação da onda de radar saindo do ponto */
+.pulse-icon::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid #54bd34;
+    border-radius: 50%;
+    animation: radar-pulse 2s infinite ease-out;
+}
 
-    50% {
+@keyframes radar-pulse {
+    0% {
+        transform: scale(0.2);
         opacity: 1;
     }
 
     100% {
-        opacity: 0.4;
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* ==========================================
+   3. MOBILE RESPONSIVO (Abaixo de 768px)
+========================================== */
+@media (max-width: 768px) {
+    .server-status-bar {
+        padding: 20px;
+
+        /* ADICIONADO: Margens laterais soltas para o celular */
+        margin: 20px auto;
+        width: calc(100% - 40px);
+        /* Mantém os 20px de espaço nas laterais da tela */
+
+        border-radius: 8px;
+        /* Um pouco mais arredondado para combinar com as margens */
+    }
+
+    .status-flex {
+        flex-direction: column;
+        /* Empilha os itens */
+        gap: 20px;
+        /* Reduz o espaço entre eles */
+        text-align: center;
+    }
+
+    .status-item {
+        justify-content: center;
+        font-size: 13px;
+        /* Texto um pouco menor */
+        width: 100%;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        /* Divisória entre itens */
+    }
+
+    /* Remove a divisória do último item */
+    .status-item:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
     }
 }
 
@@ -3165,6 +3314,7 @@ var .play-pause {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .price-card {
@@ -3253,52 +3403,313 @@ var .play-pause {
     transform: translateY(-3px);
 }
 
-/* 4. Testimonials */
-.testimonials {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://www.minecraft.net/content/dam/games/minecraft/screenshots/pdp-minecraft-cobble-stone.jpg');
+/* ==========================================
+   4. TESTIMONIALS (GLASS-INDUSTRIAL)
+========================================== */
+.testimonials-section {
+    /* Deixei o overlay preto mais denso (0.85 e 0.95) para dar contraste aos cards de vidro */
+    background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.95)),
+        url('https://www.minecraft.net/content/dam/games/minecraft/screenshots/pdp-minecraft-cobble-stone.jpg') center/cover;
     background-attachment: fixed;
-    padding: 80px 0;
-    text-align: center;
-}
-
-.testimonial-item img {
-    border-radius: 50%;
-    border: 3px solid var(--green-mc);
-    margin-bottom: 20px;
-}
-
-.testimonial-item p {
-    font-style: italic;
-    font-size: 1.4rem;
-    max-width: 700px;
-    margin: 0 auto 20px;
-}
-
-/* 5. Progress Bar */
-.progress-container {
-    background: #222;
-    border-radius: 50px;
-    height: 30px;
+    padding: 80px 20px;
     position: relative;
-    overflow: hidden;
-    margin-top: 15px;
-    border: 1px solid #444;
 }
 
-.progress-bar {
-    background: linear-gradient(90deg, var(--green-mc), var(--green-hover));
-    height: 100%;
-    transition: 1s width ease-in-out;
+.testi-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testi-main-title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+/* O Grid que organiza os depoimentos lado a lado no PC e empilha no Mobile */
+.testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* --- CARD DO DEPOIMENTO (EFEITO VIDRO) --- */
+.testi-card {
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 40px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.testi-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(84, 189, 52, 0.5);
+    /* Borda brilha verde sutilmente */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Ícone de aspas gigante no fundo do card */
+.quote-icon {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 45px;
+    color: rgba(255, 255, 255, 0.03);
+    /* Quase invisível, apenas marca d'água */
+    pointer-events: none;
+}
+
+.testi-text {
+    color: #cccccc;
+    font-size: 15px;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- ÁREA DO AUTOR (FOTO E NOME) --- */
+.testi-author {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* Divisória sutil */
+    padding-top: 20px;
 }
 
-.progress-text {
-    font-size: 0.8rem;
+.testi-author img {
+    width: 55px;
+    height: 55px;
+    border-radius: 4px;
+    /* Bordas levemente quadradas (Estilo Minecraft/Industrial) */
+    border: 2px solid #54bd34;
+    /* Destaque Zera's Green */
+    object-fit: cover;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-info h4 {
+    color: #ffffff;
+    font-size: 16px;
     font-weight: 800;
-    color: white;
-    text-shadow: 1px 1px 2px black;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+}
+
+.author-info span {
+    color: #54bd34;
+    /* Verde Zera's */
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   RESPONSIVIDADE MOBILE
+========================================== */
+@media (max-width: 768px) {
+    .testimonials-section {
+        padding: 60px 10px;
+    }
+
+    .testi-main-title {
+        font-size: 2rem;
+        margin-bottom: 35px;
+    }
+
+    .testi-card {
+        padding: 30px 20px;
+    }
+}
+
+/* ==========================================
+   5. SISTEMA DE METAS (INDICADOR DESLIZANTE)
+========================================== */
+.goals-card {
+    background: rgba(15, 15, 15, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 25px 35px;
+    margin: 30px auto;
+    max-width: 1200px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.goals-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.goals-title {
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 15px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.goals-title i {
+    color: #54bd34;
+    font-size: 18px;
+}
+
+.goals-subtitle {
+    color: #888888;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   BARRA DE PROGRESSO E INDICADOR FLUTUANTE
+========================================== */
+.progress-wrapper {
+    /* Margem superior grande para caber a caixa do indicador sem cortar */
+    margin-top: 60px;
+    padding-bottom: 10px;
+}
+
+.progress-track {
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    height: 8px;
+    /* Barra fina */
+    position: relative;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #2a6117 0%, #54bd34 100%);
+    height: 100%;
+    border-radius: 10px;
+    position: relative;
+    transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 10px rgba(84, 189, 52, 0.3);
+}
+
+/* Bolinha Neon na ponta */
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: #54bd34;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #54bd34, inset 0 0 4px rgba(255, 255, 255, 0.5);
+    z-index: 2;
+}
+
+/* ==========================================
+   O INDICADOR QUE DESLIZA COM A BARRA
+========================================== */
+.progress-indicator {
+    position: absolute;
+    bottom: 25px;
+    /* Fica acima da barra */
+    right: 0;
+    /* Segue a ponta da barra (100% do fill) */
+    transform: translateX(50%);
+    /* Centraliza a caixa em cima da bolinha */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid #54bd34;
+    /* Destaque na base */
+    padding: 6px 15px;
+    border-radius: 6px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+    z-index: 3;
+    pointer-events: none;
+    /* Não atrapalha cliques acidentais */
+}
+
+/* Setinha do indicador apontando para a bolinha */
+.progress-indicator::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px 6px 0;
+    border-style: solid;
+    border-color: #54bd34 transparent transparent transparent;
+}
+
+.indicator-text {
+    font-size: 10px;
+    color: #888888;
+    font-weight: 800;
+    text-transform: uppercase;
+    white-space: nowrap;
+    /* Impede o texto de quebrar em duas linhas */
+    margin-bottom: 2px;
+}
+
+.indicator-percent {
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: 900;
+    line-height: 1;
+}
+
+/* ==========================================
+   RESPONSIVIDADE MOBILE
+========================================== */
+@media (max-width: 768px) {
+    .goals-card {
+        padding: 20px;
+        margin: 20px auto;
+        width: calc(100% - 40px);
+    }
+
+    .goals-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .progress-wrapper {
+        margin-top: 50px;
+        /* Reduz um pouco o espaço no mobile */
+    }
+
+    .indicator-text {
+        font-size: 9px;
+    }
+
+    .indicator-percent {
+        font-size: 15px;
+    }
 }
 
 
@@ -3470,7 +3881,7 @@ var .play-pause {
 
 
 
-/* SISTEMA DE ABAS*/
+/* SISTEMA DE ABAS */
 
 .tabs-container {
     background: var(--bg-card);
@@ -3481,12 +3892,16 @@ var .play-pause {
 
 .tabs-header {
     display: flex;
+    flex-wrap: wrap;
+    /* ADICIONADO: Permite que os botões "quebrem" para a linha de baixo */
     background: #111;
     border-bottom: 1px solid var(--border);
 }
 
 .tab-btn {
     flex: 1;
+    /* ADICIONADO: Evita que o botão encolha a ponto de quebrar a palavra ao meio no PC */
+    min-width: 120px;
     padding: 18px;
     border: none;
     background: none;
@@ -3495,6 +3910,20 @@ var .play-pause {
     cursor: pointer;
     transition: 0.3s;
     border-bottom: 3px solid transparent;
+    text-align: center;
+    /* Garante que o texto fique no meio */
+}
+
+/* REGRA MOBILE: Alinha em até dois por linha */
+@media (max-width: 768px) {
+    .tab-btn {
+        /* O botão tentará ocupar 50% da tela. Se houver um 3º, ele cai pra baixo e preenche os 100% */
+        flex: 1 1 50%;
+        padding: 15px 10px;
+        /* Reduz levemente o padding no mobile para caber melhor */
+        font-size: 13px;
+        /* Ajuste sutil de fonte para telas pequenas */
+    }
 }
 
 .tab-btn.active {
@@ -3525,32 +3954,72 @@ var .play-pause {
     }
 }
 
-/* --- DOWNLOAD CARDS (Correção Responsiva) --- */
+
+/* --- DOWNLOAD CARDS (Glass & Animado) --- */
 .download-grid {
     display: grid;
-    /* Substituímos 300px por 100% para garantir que ele nunca seja maior que a tela */
+    /* Mantém a responsividade inteligente */
     grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-    gap: 20px;
+    gap: 25px;
     margin-top: 40px;
     width: 100%;
 }
 
 .dl-card {
-    background: #1d1d1d;
-    border: 1px solid #333;
+    /* Fundo de vidro neutro */
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
     text-align: center;
-    transition: 0.3s;
-    /* Garante que o card não vaze o container pai */
+
+    /* Transição elástica (Bouncy effect) */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     width: 100%;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    position: relative;
 }
 
+/* EFEITO DE BRILHO (Shine passando pelo card) */
+.dl-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- HOVER NO CARD INTEIRO --- */
+.dl-card:hover {
+    transform: translateY(-8px);
+    /* Card levanta */
+    border-color: rgba(255, 255, 255, 0.2);
+    /* Borda acende */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    /* Sombra densa */
+}
+
+.dl-card:hover::before {
+    left: 200%;
+    /* Faz o brilho atravessar o card */
+}
+
+/* --- IMAGEM --- */
 .dl-img {
     width: 100%;
     aspect-ratio: 1/1;
+    /* Quadrado conforme seu original */
     overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .dl-img img {
@@ -3558,26 +4027,88 @@ var .play-pause {
     height: 100%;
     object-fit: cover;
     display: block;
+    /* Começa levemente opaca/cinza */
+    filter: grayscale(0.3) brightness(0.8);
+    transition: all 0.5s ease;
 }
 
+/* Hover da Imagem: Ganha cor e dá Zoom */
+.dl-card:hover .dl-img img {
+    transform: scale(1.08);
+    filter: grayscale(0) brightness(1.1);
+}
+
+/* --- CORPO DO CARD --- */
 .dl-body {
-    padding: 20px;
+    padding: 25px 20px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 15px;
+    z-index: 2;
+    /* Fica acima do efeito de brilho */
 }
 
-/* Ajuste específico para o botão de download no mobile */
+.dl-body h4 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+    transition: 0.3s;
+}
+
+/* --- BOTÃO DE DOWNLOAD --- */
+.btn-dl {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-dl i {
+    transition: transform 0.3s ease;
+}
+
+/* Hover do Botão ativado pelo Hover do Card ou dele mesmo */
+.dl-card:hover .btn-dl,
+.btn-dl:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* Efeito de "Empurrar" o ícone para baixo (ótimo se usar fa-download) */
+.dl-card:hover .btn-dl i {
+    transform: translateY(3px);
+}
+
+/* --- RESPONSIVIDADE MOBILE --- */
 @media (max-width: 480px) {
+    .dl-body {
+        padding: 20px 15px;
+    }
+
     .dl-body h4 {
         font-size: 1.1rem;
     }
 
     .btn-dl {
         padding: 15px;
-        /* Botão maior para facilitar o clique no touch */
-        font-size: 0.9rem;
+        font-size: 13px;
+        /* Melhor para leitura e clique no touch */
     }
 }
 
@@ -3625,72 +4156,155 @@ var .play-pause {
     border-top: 1px solid #333;
 }
 
-/* --- GALERIA --- */
+
+/* ==========================================
+   GALERIA DE MOMENTOS (GLASS-INDUSTRIAL)
+========================================== */
 .gallery-section-bg {
-    padding: 80px 0;
+    padding: 80px 20px;
     position: relative;
-    background-size: cover;
+    background-color: #050505;
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    /* Usa auto-fit para se adaptar sozinho no celular sem precisar de muito @media */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
     margin-top: 40px;
+    max-width: 1200px;
+    margin-inline: auto;
+    /* Centraliza a grade */
 }
 
 .gallery-item {
     position: relative;
     aspect-ratio: 16/9;
     overflow: hidden;
-    border: 2px solid #333;
-    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Borda de vidro */
+    border-radius: 4px;
     cursor: pointer;
+    background: #111;
 }
 
 .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: 0.5s;
+    /* Imagem começa levemente escura */
+    filter: brightness(0.85);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s;
 }
 
+/* Fundo de vidro ao passar o mouse */
 .gallery-hover {
     position: absolute;
     inset: 0;
-    background: rgba(60, 133, 39, 0.6);
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: 0.3s;
-    font-size: 2rem;
+    transition: 0.3s ease;
 }
 
+/* Ícone da Lupa */
+.gallery-hover i {
+    color: #fff;
+    font-size: 2.5rem;
+    transform: scale(0.5);
+    /* Começa pequeno */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Ações do Hover */
 .gallery-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.08);
+    filter: brightness(1);
+    /* Acende a cor */
 }
 
 .gallery-item:hover .gallery-hover {
     opacity: 1;
 }
 
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 992px) {
-
-    .ranking-grid,
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.gallery-item:hover .gallery-hover i {
+    transform: scale(1);
+    /* Ícone pula para a tela */
 }
 
+
+/* ==========================================
+   SISTEMA DE TELA CHEIA (LIGHTBOX/MODAL)
+========================================== */
+.gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.95);
+    /* Fundo quase sólido */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 100000;
+    /* Acima de tudo no site */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Oculto por padrão */
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+}
+
+.gallery-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+
+    /* Efeito de abrir a imagem */
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-lightbox.active .lightbox-img {
+    transform: scale(1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    color: #888;
+    font-size: 45px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: 0.2s;
+    line-height: 1;
+}
+
+.lightbox-close:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Responsividade de segurança para telas minúsculas */
 @media (max-width: 600px) {
-
-    .ranking-grid,
-    .gallery-grid {
-        grid-template-columns: 1fr;
+    .lightbox-close {
+        top: 15px;
+        right: 25px;
+        font-size: 35px;
     }
 }
+
 
 
 .click-notification {
