@@ -877,22 +877,31 @@ if (window.innerWidth <= 768) {
 
 /**
  * ZERA'S CRAFT - HERO ENGINE
- * Troca imagem do banner pela da thumb e atualiza textos.
+ * Troca imagem do banner, textos e botão dinamicamente.
  */
 function heroSwitcher(element) {
     const banner = document.getElementById('mainBanner');
     const title = document.getElementById('heroTitle');
     const desc = document.getElementById('heroDesc');
+    const btn = document.getElementById('heroBtn'); // Captura o botão
     const thumbs = document.querySelectorAll('.t-box');
 
-    // 1. Atualiza a imagem (Captura a mesma da thumb)
-    banner.src = element.querySelector('img').src;
+    // 1. Efeito visual suave na troca de imagem
+    banner.style.opacity = '0.7';
+    setTimeout(() => {
+        banner.src = element.querySelector('img').src;
+        banner.style.opacity = '1';
+    }, 150);
 
     // 2. Atualiza textos do card estático
     title.innerText = element.getAttribute('data-title');
     desc.innerText = element.getAttribute('data-desc');
 
-    // 3. Gerencia destaque visual
+    // 3. Atualiza o Botão (Link e Texto) preservando a setinha
+    btn.href = element.getAttribute('data-link');
+    btn.innerHTML = `${element.getAttribute('data-btn-text')} <i class="fas fa-chevron-right"></i>`;
+
+    // 4. Gerencia destaque visual (borda verde nas thumbs)
     thumbs.forEach(t => t.classList.remove('active'));
     element.classList.add('active');
 }

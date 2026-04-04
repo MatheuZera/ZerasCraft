@@ -3113,7 +3113,7 @@ var .play-pause {
 }
 
 .link-btn-card i {
-    color: var(--green-mc);
+    color: var(--text-muted);
     font-size: 1.5rem;
 }
 

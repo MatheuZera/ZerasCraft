@@ -75,22 +75,6 @@
     <!--=======================================================================================================-->
 
     <main>
-        <section class="hero">
-            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif');"></div>
-
-            <div class="hero-content">
-                <span class="hero-tag">Mundo Zera's Craft</span>
-
-                <h1 class="hero-title">INÍCIO</h1>
-
-                <p class="hero-desc">Seja Bem Vindo(a) à Nossa Website!</p>
-
-                <div class="hero-actions">
-                    <a href="#" class="btn-hero-green">DISCORD <i class="fas fa-chevron-right"></i></a>
-                    <a href="#" class="btn-hero-outline">CANAL OFICIAL</a>
-                </div>
-            </div>
-        </section>
 
         <div class="hero-viewport">
             <div class="hero-banner-area">
@@ -103,26 +87,31 @@
                         skins Elegance do Ano Novo Lunar gratuitamente!
                     </p>
 
-                    <a href="#" class="hero-btn-animate">
+                    <a href="#link-ofertas" id="heroBtn" class="hero-btn-animate">
                         CONFIRA AS OFERTAS <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
 
                 <div class="hero-thumbs-floating">
+
                     <div class="t-box active" onclick="heroSwitcher(this)" data-title="Ano Novo Lunar"
-                        data-desc="Comemore o Ano do Cavalo com conteúdos selecionados no Minecraft Marketplace e ganhe o pacote de skins Elegance do Ano Novo Lunar gratuitamente!">
+                        data-desc="Comemore o Ano do Cavalo com conteúdos selecionados no Minecraft Marketplace e ganhe o pacote de skins Elegance do Ano Novo Lunar gratuitamente!"
+                        data-link="#link-ofertas" data-btn-text="CONFIRA AS OFERTAS">
                         <img src="assets/images/geral/banner-img.jpg">
                     </div>
 
                     <div class="t-box" onclick="heroSwitcher(this)" data-title="Snapshot 26.1"
-                        data-desc="Confira as novas mudanças técnicas e correções de bugs desta semana diretamente no seu jogo.">
-                        <img src="assets/images/promo/snapshot.jpg">
+                        data-desc="Confira as novas mudanças técnicas e correções de bugs desta semana diretamente no seu jogo."
+                        data-link="#link-patchnotes" data-btn-text="LEIA AS NOTAS">
+                        <img src="assets/images/geral/banner-fundo.gif">
                     </div>
 
                     <div class="t-box" onclick="heroSwitcher(this)" data-title="Marketplace"
-                        data-desc="Explore novos mundos e texturas criadas pela comunidade para expandir sua experiência.">
+                        data-desc="Explore novos mundos e texturas criadas pela comunidade para expandir sua experiência."
+                        data-link="#link-loja" data-btn-text="EXPLORAR AGORA">
                         <img src="assets/images/promo/market.jpg">
                     </div>
+
                 </div>
             </div>
         </div>
@@ -240,7 +229,7 @@
                         <span>Regras</span>
                     </a>
                     <a href="#" class="link-btn-card">
-                        <i class="fas fa-discord"></i>
+                        <i class="fas fa-search"></i>
                         <span>Discord</span>
                     </a>
                 </div>
