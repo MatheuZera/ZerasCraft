@@ -1195,3 +1195,71 @@ function toggleExplorer(card) {
 function toggleMcAcc(element) {
     element.classList.toggle('active');
 }
+
+
+/* ==========================================
+   SISTEMA DE GALERIA (LIGHTBOX / TELA CHEIA)
+========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Cria o Modal no fundo do site dinamicamente
+    const lightboxHTML = `
+        <div class="gallery-lightbox" id="galleryLightbox">
+            <span class="lightbox-close" id="lightboxClose">&times;</span>
+            <img class="lightbox-img" id="lightboxImg" src="">
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+
+    const lightbox = document.getElementById('galleryLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeBtn = document.getElementById('lightboxClose');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    // 2. Abrir a imagem em tela cheia
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            if (img) {
+                lightboxImg.src = img.src; // Copia a foto do card pro modal
+                lightbox.classList.add('active');
+
+                // Trava a rolagem do site usando sua função existente (se houver)
+                if (typeof lockScroll === 'function') {
+                    lockScroll();
+                } else {
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        });
+    });
+
+    // 3. Fechar a imagem (Função central)
+    function closeGallery() {
+        lightbox.classList.remove('active');
+
+        // Limpa o src depois da animação terminar para não piscar
+        setTimeout(() => { lightboxImg.src = ""; }, 300);
+
+        // Destrava a rolagem do site
+        if (typeof unlockScroll === 'function') {
+            unlockScroll();
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+
+    // 4. Gatilhos para fechar
+    closeBtn.addEventListener('click', closeGallery); // Clicando no "X"
+
+    lightbox.addEventListener('click', (e) => { // Clicando fora da imagem
+        if (e.target === lightbox) {
+            closeGallery();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => { // Apertando ESC
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeGallery();
+        }
+    });
+});
