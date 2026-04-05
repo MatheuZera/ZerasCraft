@@ -652,19 +652,31 @@
     position: relative;
 }
 
+/* Esconde os slides por padrão */
 .h-slide {
     display: none;
-    /* Esconde todos */
-    width: 100%;
-    align-items: center;
-    gap: 40px;
-    padding: 0 80px;
-    /* Espaço para as setas no PC */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
+/* Mostra apenas o slide ativo com um fade suave */
 .h-slide.active {
     display: flex;
-    /* Mostra o atual */
+    /* ou block, dependendo do seu layout */
+    opacity: 1;
+    animation: fadeInSlide 0.5s ease forwards;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .h-info {
@@ -2091,125 +2103,260 @@
     }
 }
 
-/* --- ESTILO PC --- */
-.zeras-hub {
+/* ==========================================
+   PORTAL DE JOGOS (PC CINEMATIC & MOBILE)
+========================================== */
+
+/* --- ESTRUTURA BASE PC (AGORA GIGANTE E ESPAÇOSA) --- */
+.mc-portal-wrapper {
     display: flex;
-    background: #1e1e1e;
-    border: 2px solid #333;
-    max-width: 1100px;
-    margin: 20px auto;
-    user-select: none;
-    /* */
-}
-
-.hub-sidebar {
-    width: 300px;
     background: #181818;
-    border-right: 2px solid #333;
+    /* MÁGICA AQUI: Pulou de 1100px para 1500px, ocupando quase toda a tela do PC */
+    width: 95%;
+    max-width: 1500px;
+    margin: 60px auto;
+    /* Mais espaço respirável em cima e embaixo */
+    border: 1px solid #333;
+    font-family: 'Inter', sans-serif;
+    user-select: none;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    /* Sombra pesada para destacar do fundo */
 }
 
-.tab-link {
+/* Sidebar (Lado Esquerdo - Mais Larga) */
+.mc-portal-sidebar {
+    width: 340px;
+    /* Aumentado para dar mais presença */
+    background: #222222;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Botões da Sidebar (Maiores) */
+.mc-portal-tab {
     width: 100%;
-    padding: 18px;
+    padding: 22px 25px;
+    /* Mais alto */
     background: transparent;
     border: none;
     border-bottom: 1px solid #333;
-    color: #aaa;
+    color: #dddddd;
+    font-size: 17px;
+    /* Fonte maior */
+    font-weight: 800;
     display: flex;
     align-items: center;
     gap: 15px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
+    outline: 1px solid transparent;
+    outline-offset: -1px;
 }
 
-.tab-link.active {
-    background: #252525;
-    color: #fff;
-    outline: 2px solid #ffffff;
-    /* Destaque azul */
+.mc-portal-tab img {
+    width: 32px;
+    /* Ícones maiores */
+    height: 32px;
+    object-fit: contain;
 }
 
-.hub-main {
+/* Estado Ativo */
+.mc-portal-tab.active {
+    background: #2a2a2a;
+    color: #ffffff;
+    outline-color: #5c8aff;
+    box-shadow: inset 3px 0 0 #5c8aff;
+    /* Borda lateral azul levemente mais grossa */
+}
+
+/* Área Principal (Lado Direito - Mais Espaçosa) */
+.mc-portal-main {
     flex: 1;
-    background: var(--mc-card);
-    padding: 25px;
+    background: #111111;
+    padding: 50px;
+    /* Aumentado o respiro em volta do banner */
 }
 
-.accordion-header {
+/* Cabeçalho de Acordeão fica invisível no PC */
+.mc-portal-acc-header {
     display: none;
 }
 
-/* Escondido no PC */
-.hub-content {
+/* Conteúdo Escondido/Visível */
+.mc-portal-content {
     display: none;
 }
 
-.hub-content.active {
+.mc-portal-content.active {
+    display: block;
+    animation: fadeInPortal 0.4s ease;
+}
+
+@keyframes fadeInPortal {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media (O Banner/Vídeo que agora vai ficar enorme) */
+.mc-portal-media {
+    width: 100%;
+    margin-bottom: 30px;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.mc-portal-media img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    /* Mantém a proporção exata de cinema */
+    object-fit: cover;
     display: block;
 }
 
-.btn-saiba-mais {
-    display: inline-block;
-    background: #3c8527;
-    color: #fff;
-    padding: 12px 30px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
+/* Textos da Descrição (Maiores e mais legíveis) */
+.mc-portal-info p {
+    color: #cccccc;
+    font-size: 16px;
+    /* Aumentado */
+    line-height: 1.7;
+    margin-bottom: 25px;
+    max-width: 95%;
 }
 
-/* --- MOBILE: ACORDEÃO FECHADO POR PADRÃO --- */
+/* Botão de Ação Alinhado à Direita */
+.portal-action-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mc-portal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #3c8527;
+    color: #fff;
+    padding: 16px 35px;
+    /* Botão mais gordinho e chamativo */
+    font-size: 15px;
+    /* Fonte do botão maior */
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.2s;
+    border-radius: 2px;
+}
+
+.mc-portal-btn:hover {
+    background: #4da336;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(77, 163, 54, 0.4);
+}
+
+/* ==========================================
+   RESPONSIVIDADE MOBILE (MANTIDA INTACTA)
+========================================== */
 @media (max-width: 768px) {
-    .zeras-hub {
+    .mc-portal-wrapper {
         flex-direction: column;
         border: none;
         background: transparent;
+        margin: 20px auto;
+        width: 100%;
+        box-shadow: none;
     }
 
-    .hub-sidebar {
+    .mc-portal-sidebar {
         display: none;
     }
 
-    /* Força todos os itens a aparecerem para mostrar os cabeçalhos */
-    .hub-content {
+    .mc-portal-main {
+        padding: 0;
+        background: transparent;
+    }
+
+    .mc-portal-content {
         display: block !important;
         margin-bottom: 10px;
+        background: #181818;
         border: 1px solid #333;
     }
 
-    .accordion-header {
+    .mc-portal-acc-header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
-        padding: 20px;
-        background: #181818;
+        padding: 15px 20px;
+        background: #222222;
         color: #fff;
         border: none;
+        font-size: 15px;
         font-weight: bold;
-        text-transform: uppercase;
         cursor: pointer;
+        transition: 0.3s;
     }
 
-    /* Motor de Expansão Grid (Sem cortes) */
-    .hub-body {
+    .acc-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .acc-title img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .mc-portal-acc-header i {
+        transition: transform 0.3s ease;
+        color: #888;
+    }
+
+    .mc-portal-content.active .mc-portal-acc-header i {
+        transform: rotate(180deg);
+        color: #fff;
+    }
+
+    .mc-portal-body {
         display: grid;
         grid-template-rows: 0fr;
         transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        background: #000;
         overflow: hidden;
+        background: #111111;
     }
 
-    .hub-content.active .hub-body {
+    .mc-portal-content.active .mc-portal-body {
         grid-template-rows: 1fr;
     }
 
-    .hub-inner {
+    .mc-portal-inner {
         min-height: 0;
-        padding: 0 20px;
     }
 
-    .hub-content.active .hub-inner {
+    .mc-portal-content.active .mc-portal-inner {
         padding: 20px;
+    }
+
+    .mc-portal-info p {
+        font-size: 14px;
+        /* Retorna ao tamanho padrão no celular */
+    }
+
+    .portal-action-row {
+        justify-content: stretch;
+    }
+
+    .mc-portal-btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -3778,4 +3925,1046 @@
 .mc-acc-item.active .mc-acc-trigger i {
     transform: rotate(180deg);
     color: #54bd34;
+}
+
+/* ==========================================
+   MOTOR DE TOOLTIPS (SEM ROOT / CORES HEX)
+========================================== */
+
+/* Classes apenas para organizar o visual da vitrine */
+.showroom-container {
+    padding: 40px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.showroom-container h2 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 10px;
+}
+
+.showroom-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.btn-demo {
+    background: #333333;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-weight: 800;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+    text-transform: uppercase;
+}
+
+.btn-demo:hover {
+    background: #444444;
+}
+
+.icon-demo {
+    font-size: 30px;
+    color: #1cd5e0;
+    cursor: pointer;
+}
+
+/* ------------------------------------------
+   O CORE DO TOOLTIP (BASE)
+------------------------------------------ */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+}
+
+/* A setinha (before) e a caixa (after) */
+.tooltip::before,
+.tooltip::after {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Triângulo direcional base */
+.tooltip::before {
+    content: '';
+    border: 6px solid transparent;
+}
+
+/* Caixa de texto base */
+.tooltip::after {
+    content: attr(data-tooltip);
+    background: #222222;
+    color: #ffffff;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    border-radius: 6px;
+    white-space: nowrap;
+    /* Linha reta no PC */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border: 1px solid #444444;
+}
+
+/* ==========================================
+   1 a 4. DIREÇÕES
+========================================== */
+/* Topo */
+.tooltip-top::before {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-color: #444444;
+    margin-bottom: -1px;
+}
+
+.tooltip-top::after {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    margin-bottom: 10px;
+}
+
+.tooltip-top:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.tooltip-top:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+/* Embaixo */
+.tooltip-bottom::before {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-color: #444444;
+    margin-top: -1px;
+}
+
+.tooltip-bottom::after {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+    margin-top: 10px;
+}
+
+.tooltip-bottom:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(5px);
+}
+
+.tooltip-bottom:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(5px);
+}
+
+/* Esquerda */
+.tooltip-left::before {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left-color: #444444;
+    margin-right: -1px;
+}
+
+.tooltip-left::after {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%) translateX(5px);
+    margin-right: 10px;
+}
+
+.tooltip-left:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(-5px);
+}
+
+.tooltip-left:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(-5px);
+}
+
+/* Direita */
+.tooltip-right::before {
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-right-color: #444444;
+    margin-left: -1px;
+}
+
+.tooltip-right::after {
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-5px);
+    margin-left: 10px;
+}
+
+.tooltip-right:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(5px);
+}
+
+.tooltip-right:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(5px);
+}
+
+
+/* ==========================================
+   5 a 10. CORES E TEMAS (HEX DIRETOS)
+========================================== */
+.tooltip-success::after {
+    background: #54bd34;
+    border-color: #66cc3a;
+    color: #ffffff;
+}
+
+.tooltip-success.tooltip-top::before {
+    border-top-color: #66cc3a;
+}
+
+.tooltip-success.tooltip-bottom::before {
+    border-bottom-color: #66cc3a;
+}
+
+.tooltip-success.tooltip-left::before {
+    border-left-color: #66cc3a;
+}
+
+.tooltip-success.tooltip-right::before {
+    border-right-color: #66cc3a;
+}
+
+.tooltip-danger::after {
+    background: #d83a18;
+    border-color: #ff5533;
+    color: #ffffff;
+}
+
+.tooltip-danger.tooltip-top::before {
+    border-top-color: #ff5533;
+}
+
+.tooltip-danger.tooltip-bottom::before {
+    border-bottom-color: #ff5533;
+}
+
+.tooltip-danger.tooltip-left::before {
+    border-left-color: #ff5533;
+}
+
+.tooltip-danger.tooltip-right::before {
+    border-right-color: #ff5533;
+}
+
+.tooltip-warning::after {
+    background: #f1c40f;
+    border-color: #ffffff;
+    color: #000000;
+}
+
+.tooltip-warning.tooltip-top::before {
+    border-top-color: #ffffff;
+}
+
+.tooltip-warning.tooltip-bottom::before {
+    border-bottom-color: #ffffff;
+}
+
+.tooltip-warning.tooltip-left::before {
+    border-left-color: #ffffff;
+}
+
+.tooltip-warning.tooltip-right::before {
+    border-right-color: #ffffff;
+}
+
+.tooltip-info::after {
+    background: #1cd5e0;
+    border-color: #35e8f2;
+    color: #000000;
+}
+
+.tooltip-info.tooltip-top::before {
+    border-top-color: #35e8f2;
+}
+
+.tooltip-info.tooltip-bottom::before {
+    border-bottom-color: #35e8f2;
+}
+
+.tooltip-info.tooltip-left::before {
+    border-left-color: #35e8f2;
+}
+
+.tooltip-info.tooltip-right::before {
+    border-right-color: #35e8f2;
+}
+
+.tooltip-glass::after {
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.tooltip-glass.tooltip-top::before {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.tooltip-glass.tooltip-bottom::before {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.tooltip-glass.tooltip-left::before {
+    border-left-color: rgba(255, 255, 255, 0.2);
+}
+
+.tooltip-glass.tooltip-right::before {
+    border-right-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* ==========================================
+   11 a 15. ELEMENTOS E ANIMAÇÕES ESPECIAIS
+========================================== */
+.text-highlight {
+    color: #54bd34;
+    border-bottom: 2px dotted #54bd34;
+    padding-bottom: 2px;
+}
+
+.tooltip-large::after {
+    white-space: pre-wrap;
+    width: 280px;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.tooltip-fast::before,
+.tooltip-fast::after {
+    transition: all 0.1s ease;
+}
+
+@keyframes tooltip-bounce {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-5px);
+        opacity: 1;
+    }
+}
+
+.tooltip-bounce:hover::after,
+.tooltip-bounce:hover::before {
+    animation: tooltip-bounce 0.4s forwards;
+}
+
+/* ==========================================
+   AJUSTES PARA MOBILE (CELULAR)
+========================================== */
+@media (max-width: 768px) {
+
+    /* Ajusta a vitrine para o celular */
+    .showroom-container {
+        padding: 20px;
+    }
+
+    .showroom-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-demo {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Ajuste crucial para os tooltips não vazarem a tela */
+    .tooltip::after {
+        white-space: normal;
+        /* Permite quebrar a linha no celular */
+        width: max-content;
+        max-width: 250px;
+        /* Impede que fique maior que a tela do celular */
+        text-align: center;
+        font-size: 12px;
+        /* Fonte levemente menor para caber melhor */
+        line-height: 1.4;
+    }
+
+    /* Opcional: Força os tooltips da direita/esquerda a se comportarem como topo/fundo no celular
+       Isso evita que eles saiam pelo lado direito ou esquerdo da tela */
+    .tooltip-left::after,
+    .tooltip-right::after {
+        white-space: normal;
+        max-width: 200px;
+    }
+}
+
+
+
+/* ==========================================
+   COMPONENTES UI (SEM ROOT / CORES HEX / MODULAR)
+========================================== */
+
+/* ==========================================
+   0. BOTÕES E GRUPOS DE BOTÕES
+========================================== */
+.btn-primary {
+    background: #54bd34;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-weight: 800;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 0 #387820;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: #66cc3a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #387820;
+}
+
+.btn-primary:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #387820;
+}
+
+/* Container para alinhar vários botões */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-group .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ==========================================
+   1. ALERTAS
+========================================== */
+.alert {
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.alert-success {
+    background: rgba(84, 189, 52, 0.1);
+    border: 1px solid #54bd34;
+    color: #54bd34;
+}
+
+.alert-danger {
+    background: rgba(216, 58, 24, 0.1);
+    border: 1px solid #d83a18;
+    color: #d83a18;
+}
+
+@media (max-width: 768px) {
+    .alert {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        gap: 8px;
+    }
+}
+
+/* ==========================================
+   2. BADGES (Etiquetas)
+========================================== */
+.badge {
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 900;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.badge-vip {
+    background: linear-gradient(90deg, #1cd5e0, #0b8e96);
+    color: #000000;
+}
+
+.badge-new {
+    background: #d83a18;
+    color: #ffffff;
+}
+
+.badge-default {
+    background: #333333;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .badge {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+}
+
+/* ==========================================
+   3. BREADCRUMB (Trilha de Navegação)
+========================================== */
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 30px;
+}
+
+.breadcrumb li {
+    color: #888888;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb li a {
+    color: #54bd34;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.breadcrumb li a:hover {
+    color: #ffffff;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: '/';
+    color: #444444;
+}
+
+.breadcrumb li.active {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb {
+        font-size: 13px;
+        justify-content: center;
+    }
+}
+
+/* ==========================================
+   4. AVATAR GROUP
+========================================== */
+.avatar-group {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-img,
+.avatar-more {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 3px solid #1a1a1a;
+    margin-left: -12px;
+    object-fit: cover;
+}
+
+.avatar-img:first-child {
+    margin-left: 0;
+}
+
+.avatar-more {
+    background: #333333;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+
+    .avatar-img,
+    .avatar-more {
+        width: 38px;
+        height: 38px;
+        font-size: 11px;
+    }
+}
+
+/* ==========================================
+   5. LOADERS E TRANSIÇÕES
+========================================== */
+.spinner-loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #222222;
+    border-top-color: #54bd34;
+    border-radius: 50%;
+    animation: spin-anim 1s linear infinite;
+}
+
+@keyframes spin-anim {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.skeleton-loader {
+    background: linear-gradient(90deg, #222222 25%, #333333 50%, #222222 75%);
+    background-size: 200% 100%;
+    animation: shimmer-anim 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer-anim {
+    to {
+        background-position: -200% 0;
+    }
+}
+
+.fade-in-content {
+    animation: fadeInContentAnim 0.6s ease-out forwards;
+}
+
+@keyframes fadeInContentAnim {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   6. DROPDOWN (Menu Links Úteis)
+========================================== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: #1a1a1a;
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border: 1px solid #333333;
+    border-radius: 6px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: #cccccc;
+    padding: 14px 18px;
+    text-decoration: none;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 1px solid #222222;
+    transition: 0.2s;
+}
+
+.dropdown-content a:hover {
+    background: #2a2a2a;
+    color: #ffffff;
+    padding-left: 22px;
+}
+
+/* Animação suave para quando abrir */
+@keyframes fadeInDrop {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ABRE NO PC (Ao passar o mouse) - Só funciona em telas maiores que 768px */
+@media (min-width: 769px) {
+    .dropdown:hover .dropdown-content {
+        display: block;
+        animation: fadeInDrop 0.2s ease;
+    }
+}
+
+/* ABRE NO MOBILE (Via classe .active que o JavaScript vai colocar) */
+.dropdown.active .dropdown-content {
+    display: block;
+    animation: fadeInDrop 0.2s ease;
+}
+
+/* Ajustes visuais para o Mobile */
+@media (max-width: 768px) {
+    .dropdown {
+        width: 100%;
+        display: block;
+    }
+
+    .dropdown .btn-primary {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .dropdown-content {
+        position: static;
+        /* Ele empurra o conteúdo para baixo no celular */
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0 0 6px 6px;
+        border-top: none;
+        margin-top: -4px;
+    }
+}
+
+.dropdown .btn-primary i {
+    transition: transform 0.3s ease;
+}
+
+/* Gira 180 graus quando o menu está aberto (Hover no PC ou Active no Mobile) */
+.dropdown:hover .btn-primary i,
+.dropdown.active .btn-primary i {
+    transform: rotate(180deg);
+}
+
+/* ==========================================
+   7. DATA TABLE (Tabelas)
+========================================== */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #151515;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    min-width: 500px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.data-table th {
+    background: #111111;
+    color: #ffffff;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.data-table td {
+    color: #cccccc;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.data-table tbody tr:hover {
+    background: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+
+    /* O scroll horizontal nativo já resolve, apenas ajustes de fonte */
+    .data-table th,
+    .data-table td {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+}
+
+/* ==========================================
+   8. IMAGE CAROUSEL
+========================================== */
+.image-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #54bd34 #222222;
+}
+
+.image-carousel img {
+    scroll-snap-align: center;
+    width: 80%;
+    max-width: 500px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #333333;
+    flex-shrink: 0;
+}
+
+.image-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.image-carousel::-webkit-scrollbar-track {
+    background: #222222;
+    border-radius: 4px;
+}
+
+.image-carousel::-webkit-scrollbar-thumb {
+    background: #54bd34;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .image-carousel img {
+        width: 90%;
+    }
+}
+
+/* ==========================================
+   9. MODAL CENTRAL
+========================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-box {
+    background: #151515;
+    border: 1px solid #333333;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 90%;
+    position: relative;
+    transform: scale(0.9);
+    transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+}
+
+.modal-overlay.active .modal-box {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #888888;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-close:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.modal-box h3 {
+    color: #ffffff;
+    margin-top: 0;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.modal-box p {
+    color: #aaaaaa;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+@media (max-width: 768px) {
+    .modal-box {
+        padding: 25px;
+        width: 95%;
+    }
+
+    .modal-box h3 {
+        font-size: 18px;
+    }
+}
+
+/* ==========================================
+   10. BOTTOM BANNER
+========================================== */
+.bottom-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 2px solid #333333;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99998;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+    font-family: 'Inter', sans-serif;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    /* Adicionado para sumir com suavidade quando o JS agir */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.banner-text {
+    color: #dddddd;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+@media (max-width: 768px) {
+    .bottom-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .bottom-banner .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==========================================
+   11. FAB BUTTON (DISCORD FLUTUANTE)
+========================================== */
+.fab-button {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #5865F2;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 10px 25px rgba(88, 101, 242, 0.5);
+    z-index: 99997;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.fab-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(88, 101, 242, 0.7);
+}
+
+@media (max-width: 768px) {
+    .fab-button {
+        bottom: 90px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
 }

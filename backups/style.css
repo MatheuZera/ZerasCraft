@@ -625,38 +625,6 @@ html.z-lock-scroll {
         margin-bottom: 25px;
     }
 
-    /* Novos Botões (Branco/Preto) substituindo o Verde */
-    .znav-btn-green,
-    .znav-btn-green2 {
-        display: inline-block;
-        align-self: flex-start;
-        background: var(--zc-accent);
-        color: #000;
-        font-weight: 900;
-        text-decoration: none;
-        font-size: 13px;
-        padding: 14px 28px;
-        border-radius: 4px;
-        text-transform: uppercase;
-        transition: 0.2s;
-        border: 1px solid var(--zc-accent);
-    }
-
-    .znav-btn-green2 {
-        background: transparent;
-        color: var(--zc-accent);
-    }
-
-    .znav-btn-green:hover {
-        background: transparent;
-        color: var(--zc-accent);
-    }
-
-    .znav-btn-green2:hover {
-        background: var(--zc-accent);
-        color: #000;
-    }
-
     /* 3. COLUNA DIREITA: LINKS */
     .znav-col-right {
         width: 300px;
@@ -666,35 +634,6 @@ html.z-lock-scroll {
         padding-left: 40px;
         border-left: 1px solid var(--zc-border);
         flex-shrink: 0;
-    }
-
-    .znav-link-list,
-    .znav-link-list-small {
-        list-style: none;
-    }
-
-    .znav-link-list li {
-        margin-bottom: 18px;
-    }
-
-    .znav-link-list a {
-        color: var(--zc-muted);
-        font-weight: 800;
-        font-size: 15px;
-        text-decoration: none;
-        transition: 0.2s;
-        display: inline-block;
-        padding: 4px 0;
-    }
-
-    /* Classe que era verde, agora dá apenas um brilho branco */
-    .znav-link-list a.znav-link-green {
-        color: var(--zc-accent);
-    }
-
-    .znav-link-list a:hover {
-        color: var(--zc-accent);
-        transform: translateX(5px);
     }
 
     .znav-divider-gray {
@@ -806,7 +745,7 @@ html.z-lock-scroll {
 
     /* Botão Discord Neutro */
     .znav-btn-outline {
-        border: 1px solid var(--zc-border);
+        border: 1px solid var(--text-main);
         color: var(--zc-accent);
         padding: 10px 20px;
         font-weight: 800;
@@ -820,7 +759,7 @@ html.z-lock-scroll {
     }
 
     .znav-btn-outline:hover {
-        background: var(--zc-accent);
+        background: var(--text-main);
         color: #000;
     }
 }
@@ -1343,6 +1282,245 @@ html.z-lock-scroll {
 .btn-hero-outline:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-color: #eee;
+}
+
+/* ==========================================
+   NOVOS ESTILOS DE BOTÕES HERO
+========================================== */
+/* ==========================================
+   BOTÕES 3D ESTILO MINECRAFT
+========================================== */
+
+/* --- ESTILO 1: Físico & Responsivo --- */
+.btn-hero-green {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #5cb835; /* Verde base da imagem */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif; /* Use sua fonte */
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 6px;
+    /* A mágica do 3D: Sombra sólida para baixo */
+    box-shadow: 0 6px 0 #387820; 
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn-hero-green:hover {
+    background: #66cc3a; /* Fica levemente mais claro */
+    transform: translateY(-2px); /* Sobe um pouquinho */
+    box-shadow: 0 8px 0 #387820; /* Sombra aumenta para compensar a subida */
+}
+
+.btn-hero-green:active {
+    background: #54a630;
+    transform: translateY(6px); /* Desce tudo */
+    box-shadow: 0 0 0 #387820; /* Sombra some (efeito de botão afundado) */
+}
+
+
+/* --- ESTILO 2: Físico + Feixe de Luz (Shine) --- */
+.btn-hero-green2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #5cb835;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 6px;
+    box-shadow: 0 6px 0 #387820;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+    
+    /* Necessário para a luz não vazar do botão */
+    position: relative;
+    overflow: hidden; 
+}
+
+/* O feixe de luz invisível à esquerda */
+.btn-hero-green2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Começa fora do botão */
+    width: 50%;
+    height: 100%;
+    /* Gradiente branco transparente */
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg); /* Deixa a luz inclinada */
+}
+
+.btn-hero-green2:hover {
+    background: #3b8d18;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #387820;
+}
+
+/* Quando passa o mouse, a luz atravessa o botão rapidamente */
+.btn-hero-green2:hover::after {
+    animation: shine-sweep 0.6s ease-out forwards;
+}
+
+.btn-hero-green2:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #387820;
+}
+
+/* Animação do feixe de luz */
+@keyframes shine-sweep {
+    100% {
+        left: 200%; /* Termina fora do botão pela direita */
+    }
+}
+
+/* 1. Botão Lava (Vermelho/Laranja 3D) */
+.btn-hero-lava {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: #d83a18;
+    color: #fff;
+    padding: 15px 35px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-shadow: 0 4px 0 #8b1e06;
+    transition: all 0.2s;
+}
+.btn-hero-lava:hover {
+    background-color: #e84c2a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #8b1e06;
+}
+.btn-hero-lava:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 #8b1e06;
+}
+
+/* 2. Botão Diamante (Ciano com Brilho Neon) */
+.btn-hero-diamond {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: #1cd5e0;
+    color: #00454a; /* Texto escuro para contraste */
+    padding: 15px 35px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-shadow: 0 4px 0 #0b8e96;
+    transition: all 0.2s;
+}
+.btn-hero-diamond:hover {
+    background-color: #35e8f2;
+    transform: translateY(-2px);
+    /* Sombra 3D + Brilho Neon */
+    box-shadow: 0 6px 0 #0b8e96, 0 0 20px rgba(28, 213, 224, 0.4);
+}
+.btn-hero-diamond:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 #0b8e96, 0 0 10px rgba(28, 213, 224, 0.4);
+}
+
+/* 3. Botão Vidro (Frosted Glass Industrial) */
+.btn-hero-glass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 15px 35px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Sombra de vidro (interna e externa) */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+}
+.btn-hero-glass:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+.btn-hero-glass:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 4. Botão Obsidiana (Grafite/Preto 3D) */
+.btn-hero-obsidian {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: #2b2b2b;
+    color: #fff;
+    padding: 15px 35px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-shadow: 0 4px 0 #111111;
+    border: 1px solid #3a3a3a; /* Borda sutil para separar do fundo escuro */
+    transition: all 0.2s;
+}
+.btn-hero-obsidian:hover {
+    background-color: #3b3b3b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #111111;
+}
+.btn-hero-obsidian:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 #111111;
+}
+
+/* 5. Botão Ouro (Amarelo Gradiente 3D para VIPs) */
+.btn-hero-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    /* Efeito de metal dourado */
+    background: linear-gradient(180deg, #f1c40f 0%, #d4ac0d 100%);
+    color: #4a3400; /* Texto marrom bem escuro para parecer incrustado */
+    padding: 15px 35px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-shadow: 0 4px 0 #9c7b05;
+    transition: all 0.2s;
+}
+.btn-hero-gold:hover {
+    background: linear-gradient(180deg, #f4d03f 0%, #d4ac0d 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #9c7b05;
+}
+.btn-hero-gold:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 #9c7b05;
 }
 
 /* Animação de entrada */

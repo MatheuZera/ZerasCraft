@@ -775,15 +775,81 @@ document.querySelectorAll('.btn-access').forEach(button => {
     });
 });
 
-function openHub(evt, gameId) {
-    const contents = document.getElementsByClassName("hub-content");
-    const tabs = document.getElementsByClassName("tab-link");
+/* ==========================================
+   PORTAL DE JOGOS (ABAS PC E ACORDEÃO MOBILE)
+========================================== */
 
-    for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
-    for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+// Função para PC (Alterna entre as abas laterais)
+function mcPortalSwitch(event, targetId) {
+    // 1. Pega os elementos do sistema
+    const wrapper = event.currentTarget.closest('.mc-portal-wrapper');
+    const tabs = wrapper.querySelectorAll('.mc-portal-tab');
+    const contents = wrapper.querySelectorAll('.mc-portal-content');
 
-    document.getElementById(gameId).classList.add("active");
-    evt.currentTarget.classList.add("active");
+    // 2. Remove a classe 'active' de todas as abas e de todos os conteúdos
+    tabs.forEach(tab => tab.classList.remove('active'));
+    contents.forEach(content => content.classList.remove('active'));
+
+    // 3. Adiciona a classe 'active' no botão clicado e no painel correspondente
+    event.currentTarget.classList.add('active');
+    const targetContent = document.getElementById(targetId);
+    if (targetContent) {
+        targetContent.classList.add('active');
+    }
+}
+
+/* ==========================================
+   SLIDER DOS MODOS (HERO TRACK)
+========================================== */
+function moveHero(direction) {
+    // 1. Encontra o container principal
+    const track = document.getElementById('heroTrack');
+    if (!track) return;
+
+    // 2. Pega todos os slides dentro do track
+    const slides = Array.from(track.querySelectorAll('.h-slide'));
+    if (slides.length === 0) return;
+
+    // 3. Descobre qual slide está com a classe 'active' agora
+    let currentIndex = slides.findIndex(slide => slide.classList.contains('active'));
+
+    // Fallback de segurança (se nenhum tiver active, assume o primeiro)
+    if (currentIndex === -1) currentIndex = 0;
+
+    // 4. Remove a classe active do slide atual
+    slides[currentIndex].classList.remove('active');
+
+    // 5. Calcula o índice do próximo slide (com Loop Infinito)
+    let newIndex = currentIndex + direction;
+
+    if (newIndex >= slides.length) {
+        newIndex = 0; // Se passou do limite, volta pro início
+    } else if (newIndex < 0) {
+        newIndex = slides.length - 1; // Se recuou antes do 0, vai pro final
+    }
+
+    // 6. Adiciona a classe active no novo slide
+    slides[newIndex].classList.add('active');
+}
+
+// Função para Mobile (Abre/Fecha a Sanfona)
+function mcPortalToggleAcc(btnElement) {
+    const currentItem = btnElement.closest('.mc-portal-content');
+    const wrapper = btnElement.closest('.mc-portal-wrapper');
+
+    // Se o item clicado já estiver aberto, ele o fecha
+    if (currentItem.classList.contains('active')) {
+        currentItem.classList.remove('active');
+    }
+    // Se estiver fechado, fecha os outros e abre o clicado
+    else {
+        // Opcional: Fecha todos os outros acordeões antes de abrir o novo
+        const allItems = wrapper.querySelectorAll('.mc-portal-content');
+        allItems.forEach(item => item.classList.remove('active'));
+
+        // Abre o item que foi clicado
+        currentItem.classList.add('active');
+    }
 }
 
 function toggleAccordion(btn) {
@@ -1387,3 +1453,98 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchDiscordStats();
 });
+
+
+/* ==========================================
+   CONTROLE DO MODAL
+========================================== */
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Destrava o scroll
+    }
+}
+
+// Fechar clicando fora da caixa (no fundo escuro)
+window.addEventListener('click', (event) => {
+    if (event.target.classList.contains('modal-overlay')) {
+        event.target.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+
+/* ==========================================
+   SIMULADOR DE CARREGAMENTO (LOADERS)
+========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    // Puxa as duas divs do HTML
+    const loadingState = document.getElementById('loading-state');
+    const readyState = document.getElementById('ready-state');
+
+    // Se os elementos existirem na tela, inicia a lógica
+    if (loadingState && readyState) {
+
+        // Simula um tempo de espera (Ex: 3000 milissegundos = 3 segundos)
+        setTimeout(() => {
+
+            // 1. Esconde os skeletons e o spinner
+            loadingState.style.display = 'none';
+
+            // 2. Mostra o conteúdo real
+            readyState.style.display = 'block';
+
+            // 3. Adiciona a animação suave para aparecer bonito
+            readyState.classList.add('fade-in-content');
+
+        }, 3000); // <- Mude este número para o tempo que desejar
+    }
+});
+
+/* ==========================================
+   CONTROLE DO DROPDOWN (MOBILE)
+========================================== */
+function toggleDropdown(element) {
+    // Só aplica o clique se for tela de celular (O PC usa o hover do CSS)
+    if (window.innerWidth <= 768) {
+        element.classList.toggle('active');
+    }
+}
+
+// Fecha o dropdown se o usuário tocar fora dele
+window.addEventListener('click', function (event) {
+    if (!event.target.closest('.dropdown')) {
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(drop => {
+            drop.classList.remove('active');
+        });
+    }
+});
+
+/* ==========================================
+   SISTEMA DE BANNER (MEMÓRIA LOCAL)
+========================================== */
+// Função acionada ao clicar no botão "Entendi"
+function fecharESalvarBanner(bannerId) {
+    const banner = document.getElementById(bannerId);
+
+    if (banner) {
+        // Faz uma animação de descida antes de sumir
+        banner.style.opacity = '0';
+        banner.style.transform = 'translateY(20px)';
+
+        // Espera a animação terminar (400ms) e remove da tela
+        setTimeout(() => {
+            banner.style.display = 'none';
+        }, 400);
+    }
+}
