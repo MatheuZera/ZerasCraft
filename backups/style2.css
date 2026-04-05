@@ -668,15 +668,12 @@
 
 
 /* ==========================================
-   SEÇÃO: EXPANDA SEU MUNDO (SLIDER)
+   SEÇÃO: EXPANDA SEU MUNDO (SLIDER SUAVE)
 ========================================== */
 .mc-section.world-dark {
-    /* Define a variável caso ela não exista no CSS global */
     --bg-card: #1a1a1a;
-
     padding: 80px 5%;
-    background: #111111;
-    /* Fundo principal escuro */
+    background: var(--mc-dark);
     font-family: 'Inter', sans-serif;
     color: #ffffff;
     overflow: hidden;
@@ -709,51 +706,63 @@
 .w-viewport {
     flex: 1;
     overflow: hidden;
-    /* Esconde os cards que estão fora da tela */
-    padding: 15px 0;
-    /* Espaço para o box-shadow não cortar */
+    padding: 20px 0;
+    /* Aumentei o padding para a sombra respirar melhor */
 }
 
-/* A "Trilha" que o JavaScript vai mover */
+/* A "Trilha" do Slider (A transição agora é 100% controlada pelo JS) */
 .w-track {
     display: flex;
     gap: 20px;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
 }
 
 /* ==========================================
-   OS CARDS (W-ITEM)
+   OS CARDS E EFEITOS HOVER
 ========================================== */
 .w-item {
-    /* Mostra 3 cards por vez no PC (calc divide o espaço e subtrai o gap) */
     flex: 0 0 calc(33.333% - 14px);
     background: var(--bg-card);
-    /* Variável solicitada */
     border: 1px solid #333333;
     border-radius: 12px;
     overflow: hidden;
-    /* Garante que a foto respeite os cantos arredondados */
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+    /* Levantar e Sombra muito mais fluidos */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        border-color 0.4s ease;
+    will-change: transform, box-shadow;
 }
 
-/* Efeito Hover do Card */
+/* Efeito Hover do Card (Levanta e ganha borda verde) */
 .w-item:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
     border-color: #54bd34;
-    /* Borda verde Minecraft */
 }
 
-/* Imagem do Card */
+/* Container da imagem para prender o zoom */
+.w-item-img-box {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #333333;
+}
+
 .w-item img {
     width: 100%;
     aspect-ratio: 16/9;
-    /* Formato wide */
     object-fit: cover;
-    border-bottom: 1px solid #333333;
+    display: block;
+    /* Transição longa para um zoom cinematográfico */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Zoom suave na imagem quando passa o mouse no card */
+.w-item:hover img {
+    transform: scale(1.05);
 }
 
 /* Textos do Card */
@@ -775,42 +784,40 @@
    SETAS DE NAVEGAÇÃO
 ========================================== */
 .w-arrow {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     background: transparent;
     border: 2px solid #555555;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 6px;
+    border-radius: 8px;
     flex-shrink: 0;
+    /* Suaviza a cor e o tamanho do botão */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .w-arrow:hover {
     background: #ffffff;
     border-color: #ffffff;
     color: #000000;
-    transform: scale(1.05);
+    transform: scale(1.08);
+    /* Cresce levemente ao passar o mouse */
 }
 
 /* ==========================================
-   RESPONSIVIDADE (TABLET E CELULAR)
+   RESPONSIVIDADE
 ========================================== */
 @media (max-width: 900px) {
-
-    /* No Tablet, mostra 2 cards por vez */
     .w-item {
         flex: 0 0 calc(50% - 10px);
     }
 }
 
 @media (max-width: 600px) {
-
-    /* No Celular, mostra 1 card por vez e sobrepõe as setas */
     .w-slider {
         position: relative;
         gap: 0;
@@ -820,13 +827,18 @@
         flex: 0 0 100%;
     }
 
-    /* Setas flutuantes no mobile para não espremer o card */
     .w-arrow {
         position: absolute;
         top: 40%;
+        transform: translateY(-50%);
         z-index: 10;
         background: rgba(0, 0, 0, 0.7);
         border: 1px solid #555;
+    }
+
+    /* Garante que a seta não saia do centro Y ao sofrer scale no celular */
+    .w-arrow:hover {
+        transform: translateY(-50%) scale(1.08);
     }
 
     .w-arrow.prev {

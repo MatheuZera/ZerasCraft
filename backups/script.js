@@ -619,55 +619,66 @@ function moveCarousel(direction) {
 
 
 
-// Removemos a variável "worldIndex" pois não precisamos mais dela
-// let worldIndex = 0; 
+/* ===================================================================
+   SLIDER: EXPANDA SEU MUNDO (LOOP INFINITO PERFEITO)
+=================================================================== */
+let isMoving = false; // Trava para evitar cliques rápidos demais
 
-/* ==========================================
-   1. Lógica Slider "Expanda seu Mundo" (Loop Infinito Liso)
-========================================== */
 function moveWorld(direction) {
+    // Se a animação ainda estiver rolando, ignora o clique
+    if (isMoving) return;
+    isMoving = true;
+
     const track = document.getElementById('worldTrack');
-    const items = track.querySelectorAll('.w-item');
+    if (!track || track.children.length === 0) {
+        isMoving = false;
+        return;
+    }
 
-    // Calcula o tamanho exato de um item para saber quanto deve andar
-    const step = items[0].offsetWidth;
+    // Calcula a largura exata de 1 card na tela + o espaço (gap de 20px)
+    const itemWidth = track.firstElementChild.getBoundingClientRect().width;
+    const gap = 20;
+    const moveDistance = itemWidth + gap;
 
-    // Desativa a transição momentaneamente para preparar o terreno
-    track.style.transition = 'none';
+    // Tempo da animação em milissegundos
+    const animDuration = 500;
 
     if (direction === 1) {
-        // --- NEXT (Botão Direito >) ---
-        // Ativa a animação e desliza a esteira inteira para a esquerda
-        track.style.transition = 'transform 0.4s ease-in-out';
-        track.style.transform = `translateX(-${step}px)`;
+        // --- INDO PARA A DIREITA (PRÓXIMO) ---
 
-        // Espera a animação terminar (400ms = 0.4s)
+        // 1. Liga a animação suave e move para a esquerda
+        track.style.transition = `transform ${animDuration}ms ease-out`;
+        track.style.transform = `translateX(-${moveDistance}px)`;
+
+        // 2. Quando a animação terminar...
         setTimeout(() => {
-            // Desliga a animação para não piscar
-            track.style.transition = 'none';
-
-            // Magia: Pega a PRIMEIRA div (que sumiu na esquerda) e "cola" no FINAL da fila
-            track.appendChild(items[0]);
-
-            // Zera a posição do trilho (o visual não muda porque a div da ponta já foi pro final)
-            track.style.transform = 'translateX(0)';
-        }, 400);
+            track.style.transition = 'none'; // Desliga a animação
+            track.appendChild(track.firstElementChild); // Teletransporta o 1º pro final
+            track.style.transform = 'translateX(0)'; // Reseta a posição instantaneamente
+            isMoving = false; // Libera o próximo clique
+        }, animDuration);
 
     } else if (direction === -1) {
-        // --- PREV (Botão Esquerdo <) ---
-        // Magia: Pega a ÚLTIMA div da fila e "cola" no começo (antes da primeira)
-        const lastItem = items[items.length - 1];
-        track.insertBefore(lastItem, items[0]);
+        // --- INDO PARA A ESQUERDA (ANTERIOR) ---
 
-        // Imediatamente e sem animar, empurra o trilho pra esquerda (escondendo a div que acabamos de colocar lá)
-        track.style.transform = `translateX(-${step}px)`;
+        // 1. Desliga a animação e teletransporta o último elemento para o começo
+        track.style.transition = 'none';
+        track.insertBefore(track.lastElementChild, track.firstElementChild);
 
-        // Força o navegador a renderizar esse empurrão instantâneo (Reflow)
-        void track.offsetWidth;
+        // 2. Empurra a trilha para trás invisivelmente para compensar o card novo
+        track.style.transform = `translateX(-${moveDistance}px)`;
 
-        // Agora liga a animação e desliza de volta para o 0 (trazendo a nova div para a tela)
-        track.style.transition = 'transform 0.4s ease-in-out';
+        // 3. Força o navegador a recalcular a tela (Reflow)
+        track.offsetHeight;
+
+        // 4. Liga a animação suave e desliza para a posição 0 (onde o card novo está)
+        track.style.transition = `transform ${animDuration}ms ease-out`;
         track.style.transform = 'translateX(0)';
+
+        // 5. Libera o clique quando terminar
+        setTimeout(() => {
+            isMoving = false;
+        }, animDuration);
     }
 }
 
