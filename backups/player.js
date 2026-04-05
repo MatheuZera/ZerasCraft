@@ -1,5 +1,5 @@
 /* ===================================================================
-   ZERA'S CRAFT - PLAYER DE ÁUDIO AVANÇADO (COMPLETO)
+   ZERA'S CRAFT - PLAYER DE ÁUDIO AVANÇADO (CORES NOS ÍCONES & INTERAÇÃO)
 =================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
     // 1. ELEMENTOS DOM
@@ -18,119 +18,119 @@ document.addEventListener('DOMContentLoaded', () => {
     const centralMessage = document.getElementById('centralMessage');
 
     // ===================================================================
-    // 2. PLAYLIST COMPLETA (DENTRO DO ESCOPO CORRETO)
+    // 2. PLAYLIST COMPLETA (COM CORES ESPECÍFICAS POR CATEGORIA)
     // =================================================================== 
     const playlist = [
-        // AMBIENTE (Background)
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'A Familiar Room', src: 'assets/audios/musics/background/a_familiar_room.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'An Ordinary Day', src: 'assets/audios/musics/background/an_ordinary_day.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Ancestry', src: 'assets/audios/musics/background/ancestry.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Bromeliad', src: 'assets/audios/musics/background/bromeliad.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Calm 1', src: 'assets/audios/musics/background/calm1.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Calm 2', src: 'assets/audios/musics/background/calm2.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Calm 3', src: 'assets/audios/musics/background/calm3.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Dunes', src: 'assets/audios/musics/background/dunes.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Echo in the Wind', src: 'assets/audios/musics/background/echo_in_the_wind.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Firebugs', src: 'assets/audios/musics/background/firebugs.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Floating Dream', src: 'assets/audios/musics/background/floating_dream.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Hal 1', src: 'assets/audios/musics/background/hal1.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Hal 2', src: 'assets/audios/musics/background/hal2.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Hal 3', src: 'assets/audios/musics/background/hal3.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Hal 4', src: 'assets/audios/musics/background/hal4.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Labyrinthine', src: 'assets/audios/musics/background/labyrinthine.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Nuance 1', src: 'assets/audios/musics/background/nuance1.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Nuance 2', src: 'assets/audios/musics/background/nuance2.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'One more Day!', src: 'assets/audios/musics/background/one_more_day.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Piano 1', src: 'assets/audios/musics/background/piano1.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Piano 2', src: 'assets/audios/musics/background/piano2.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Piano 3', src: 'assets/audios/musics/background/piano3.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Stand Tall', src: 'assets/audios/musics/background/stand_tall.mp3' },
-        { icon: 'fas fa-cloud', playlist: 'Ambiente', title: 'Wending', src: 'assets/audios/musics/background/wending.mp3' },
+        // BACKGROUND (Azul Claro)
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'A Familiar Room', src: 'assets/audios/musics/background/a_familiar_room.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Aerie (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Aerie.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'An Ordinary Day', src: 'assets/audios/musics/background/an_ordinary_day.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Ancestry', src: 'assets/audios/musics/background/ancestry.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Bromeliad', src: 'assets/audios/musics/background/bromeliad.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Calm 1', src: 'assets/audios/musics/background/calm1.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Calm 2', src: 'assets/audios/musics/background/calm2.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Calm 3', src: 'assets/audios/musics/background/calm3.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Comforting Memories (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Comforting.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Creator (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Creator.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Dunes', src: 'assets/audios/musics/background/dunes.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Echo in the Wind', src: 'assets/audios/musics/background/echo_in_the_wind.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Firebugs', src: 'assets/audios/musics/background/firebugs.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Floating Dream', src: 'assets/audios/musics/background/floating_dream.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Hal 1', src: 'assets/audios/musics/background/hal1.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Hal 2', src: 'assets/audios/musics/background/hal2.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Hal 3', src: 'assets/audios/musics/background/hal3.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Hal 4', src: 'assets/audios/musics/background/hal4.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Infinite Amethyst (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Infinity.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Labyrinthine', src: 'assets/audios/musics/background/labyrinthine.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Left to Bloom (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Left.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Nuance 1', src: 'assets/audios/musics/background/nuance1.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Nuance 2', src: 'assets/audios/musics/background/nuance2.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'One more Day!', src: 'assets/audios/musics/background/one_more_day.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Otherside (Andrew Prahlow Remix)', src: 'assets/audios/musics/background/Otherside.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Piano 1', src: 'assets/audios/musics/background/piano1.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Piano 2', src: 'assets/audios/musics/background/piano2.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Piano 3', src: 'assets/audios/musics/background/piano3.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Stand Tall', src: 'assets/audios/musics/background/stand_tall.mp3' },
+        { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Background', title: 'Wending', src: 'assets/audios/musics/background/wending.mp3' },
 
-        // C418 ALBUM
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Aria Math', src: 'assets/audios/musics/c418/Aria-Math.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Beginning', src: 'assets/audios/musics/c418/Beginning.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Biome Fest', src: 'assets/audios/musics/c418/Biome-Fest.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Blind Spots', src: 'assets/audios/musics/c418/Blind-Spots.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Clark', src: 'assets/audios/musics/c418/Clark.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Danny', src: 'assets/audios/musics/c418/Danny.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Dreiton', src: 'assets/audios/musics/c418/Dreiton.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Dry Hands', src: 'assets/audios/musics/c418/Dry-Hands.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Floating Trees', src: 'assets/audios/musics/c418/Floating-Trees.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Haggstrom', src: 'assets/audios/musics/c418/Haggstrom.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Key', src: 'assets/audios/musics/c418/Key.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Living Mice', src: 'assets/audios/musics/c418/Living-Mice.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Mice On Venus', src: 'assets/audios/musics/c418/Mice-On-Venus.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Minecraft', src: 'assets/audios/musics/c418/Minecraft.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Moog City 1', src: 'assets/audios/musics/c418/Moog-City1.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Moog City 2', src: 'assets/audios/musics/c418/Moog-City2.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Mutation', src: 'assets/audios/musics/c418/Mutation.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Sweden', src: 'assets/audios/musics/c418/Sweden.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Taswell', src: 'assets/audios/musics/c418/Taswell.mp3' },
-        { icon: 'fas fa-cube', playlist: 'C418', title: 'Wet Hands', src: 'assets/audios/musics/c418/Wet-Hands.mp3' },
+        // C418 ALBUM (Verde Clássico)
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Aria Math', src: 'assets/audios/musics/c418/Aria-Math.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Beginning', src: 'assets/audios/musics/c418/Beginning.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Biome Fest', src: 'assets/audios/musics/c418/Biome-Fest.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Blind Spots', src: 'assets/audios/musics/c418/Blind-Spots.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Clark', src: 'assets/audios/musics/c418/Clark.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Danny', src: 'assets/audios/musics/c418/Danny.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Dreiton', src: 'assets/audios/musics/c418/Dreiton.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Dry Hands', src: 'assets/audios/musics/c418/Dry-Hands.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Floating Trees', src: 'assets/audios/musics/c418/Floating-Trees.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Haggstrom', src: 'assets/audios/musics/c418/Haggstrom.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Key', src: 'assets/audios/musics/c418/Key.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Living Mice', src: 'assets/audios/musics/c418/Living-Mice.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Mice On Venus', src: 'assets/audios/musics/c418/Mice-On-Venus.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Minecraft', src: 'assets/audios/musics/c418/Minecraft.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Moog City 1', src: 'assets/audios/musics/c418/Moog-City1.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Moog City 2', src: 'assets/audios/musics/c418/Moog-City2.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Mutation', src: 'assets/audios/musics/c418/Mutation.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Sweden', src: 'assets/audios/musics/c418/Sweden.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Taswell', src: 'assets/audios/musics/c418/Taswell.mp3' },
+        { icon: 'fas fa-cube', color: '#54bd34', playlist: 'C418', title: 'Wet Hands', src: 'assets/audios/musics/c418/Wet-Hands.mp3' },
 
-        // CREATIVE MUSICS
-        { icon: 'fas fa-leaf', playlist: 'Creative', title: 'Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
-        { icon: 'fas fa-leaf', playlist: 'Creative', title: 'Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
-        { icon: 'fas fa-leaf', playlist: 'Creative', title: 'Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
-        { icon: 'fas fa-leaf', playlist: 'Creative', title: 'Creative 4', src: 'assets/audios/musics/minecraft/Creative4.mp3' },
-        { icon: 'fas fa-leaf', playlist: 'Creative', title: 'Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
-        { icon: 'fas fa-leaf', playlist: 'Creative', title: 'Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
+        // CREATIVE MUSICS (Verde Folha)
+        { icon: 'fas fa-leaf', color: '#8bc34a', playlist: 'Creative', title: 'Creative 1', src: 'assets/audios/musics/minecraft/Creative1.mp3' },
+        { icon: 'fas fa-leaf', color: '#8bc34a', playlist: 'Creative', title: 'Creative 2', src: 'assets/audios/musics/minecraft/Creative2.mp3' },
+        { icon: 'fas fa-leaf', color: '#8bc34a', playlist: 'Creative', title: 'Creative 3', src: 'assets/audios/musics/minecraft/Creative3.mp3' },
+        { icon: 'fas fa-leaf', color: '#8bc34a', playlist: 'Creative', title: 'Creative 4', src: 'assets/audios/musics/minecraft/Creative4.mp3' },
+        { icon: 'fas fa-leaf', color: '#8bc34a', playlist: 'Creative', title: 'Creative 5', src: 'assets/audios/musics/minecraft/Creative5.mp3' },
+        { icon: 'fas fa-leaf', color: '#8bc34a', playlist: 'Creative', title: 'Creative 6', src: 'assets/audios/musics/minecraft/Creative6.mp3' },
 
-        // END MUSICS
-        { icon: 'fas fa-bolt', playlist: 'End', title: 'Boss', src: 'assets/audios/musics/end/Boss.mp3' },
-        { icon: 'fas fa-bolt', playlist: 'End', title: 'Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
-        { icon: 'fas fa-bolt', playlist: 'End', title: 'Fim', src: 'assets/audios/musics/end/End.mp3' },
+        // END MUSICS (Roxo)
+        { icon: 'fas fa-bolt', color: '#9c27b0', playlist: 'End', title: 'Boss', src: 'assets/audios/musics/end/Boss.mp3' },
+        { icon: 'fas fa-bolt', color: '#9c27b0', playlist: 'End', title: 'Créditos', src: 'assets/audios/musics/end/Credits.mp3' },
+        { icon: 'fas fa-bolt', color: '#9c27b0', playlist: 'End', title: 'Fim', src: 'assets/audios/musics/end/End.mp3' },
 
-        // MUSICS GENERAL
-        { icon: 'fas fa-music', playlist: 'Músicas', title: 'Alone', src: 'assets/audios/musics/musics/Alone.mp3' },
-        { icon: 'fas fa-music', playlist: 'Músicas', title: 'Aria Math Lofi', src: 'assets/audios/musics/musics/Aria-Math-Lofi.mp3' },
-        { icon: 'fas fa-music', playlist: 'Músicas', title: 'Megalovania (hakkaku)', src: 'assets/audios/musics/musics/Megalovania.mp3' },
-        { icon: 'fas fa-music', playlist: 'Músicas', title: 'Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/Over-the-Waterfall.mp3' },
-        { icon: 'fas fa-music', playlist: 'Músicas', title: 'Rat Dance (Jatis)', src: 'assets/audios/musics/musics/Rat-Dance.mp3' },
-        { icon: 'fas fa-music', playlist: 'Músicas', title: 'The Fat Rat - Note Block', src: 'assets/audios/musics/musics/TheFatRat_NoteBlock.mp3' },
+        // MUSICS GENERAL (Rosa)
+        { icon: 'fas fa-music', color: '#e91e63', playlist: 'Músicas', title: 'Alone', src: 'assets/audios/musics/musics/Alone.mp3' },
+        { icon: 'fas fa-music', color: '#e91e63', playlist: 'Músicas', title: 'Aria Math Lofi', src: 'assets/audios/musics/musics/Aria-Math-Lofi.mp3' },
+        { icon: 'fas fa-music', color: '#e91e63', playlist: 'Músicas', title: 'Megalovania (hakkaku)', src: 'assets/audios/musics/musics/Megalovania.mp3' },
+        { icon: 'fas fa-music', color: '#e91e63', playlist: 'Músicas', title: 'Over the Waterfall (Varu)', src: 'assets/audios/musics/musics/Over-the-Waterfall.mp3' },
+        { icon: 'fas fa-music', color: '#e91e63', playlist: 'Músicas', title: 'Rat Dance (Jatis)', src: 'assets/audios/musics/musics/Rat-Dance.mp3' },
+        { icon: 'fas fa-music', color: '#e91e63', playlist: 'Músicas', title: 'The Fat Rat - Note Block', src: 'assets/audios/musics/musics/TheFatRat_NoteBlock.mp3' },
 
-        // NETHER MUSICS
-        { icon: 'fas fa-meteor', playlist: 'Nether', title: 'Chrysopoeia', src: 'assets/audios/musics/nether/Chrysopoeia.mp3' },
-        { icon: 'fas fa-meteor', playlist: 'Nether', title: 'Nether 1', src: 'assets/audios/musics/nether/Nether1.mp3' },
-        { icon: 'fas fa-meteor', playlist: 'Nether', title: 'Nether 2', src: 'assets/audios/musics/nether/Nether2.mp3' },
-        { icon: 'fas fa-meteor', playlist: 'Nether', title: 'Nether 3', src: 'assets/audios/musics/nether/Nether3.mp3' },
-        { icon: 'fas fa-meteor', playlist: 'Nether', title: 'Nether 4', src: 'assets/audios/musics/nether/Nether4.mp3' },
-        { icon: 'fas fa-meteor', playlist: 'Nether', title: 'Rubedo', src: 'assets/audios/musics/nether/Rubedo.mp3' },
-        { icon: 'fas fa-meteor', playlist: 'Nether', title: 'So Below', src: 'assets/audios/musics/nether/So_Below.mp3' },
+        // NETHER MUSICS (Vermelho Fogo)
+        { icon: 'fas fa-meteor', color: '#f44336', playlist: 'Nether', title: 'Chrysopoeia', src: 'assets/audios/musics/nether/Chrysopoeia.mp3' },
+        { icon: 'fas fa-meteor', color: '#f44336', playlist: 'Nether', title: 'Nether 1', src: 'assets/audios/musics/nether/Nether1.mp3' },
+        { icon: 'fas fa-meteor', color: '#f44336', playlist: 'Nether', title: 'Nether 2', src: 'assets/audios/musics/nether/Nether2.mp3' },
+        { icon: 'fas fa-meteor', color: '#f44336', playlist: 'Nether', title: 'Nether 3', src: 'assets/audios/musics/nether/Nether3.mp3' },
+        { icon: 'fas fa-meteor', color: '#f44336', playlist: 'Nether', title: 'Nether 4', src: 'assets/audios/musics/nether/Nether4.mp3' },
+        { icon: 'fas fa-meteor', color: '#f44336', playlist: 'Nether', title: 'Rubedo', src: 'assets/audios/musics/nether/Rubedo.mp3' },
+        { icon: 'fas fa-meteor', color: '#f44336', playlist: 'Nether', title: 'So Below', src: 'assets/audios/musics/nether/So_Below.mp3' },
 
-        // RECORDS
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Cat', src: 'assets/audios/musics/records/Cat.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Far', src: 'assets/audios/musics/records/Far.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Mall', src: 'assets/audios/musics/records/Mall.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Mellohi', src: 'assets/audios/musics/records/Mellohi.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Relic', src: 'assets/audios/musics/records/Relic.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Stal', src: 'assets/audios/musics/records/Stal.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Strad', src: 'assets/audios/musics/records/Strad.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Wait', src: 'assets/audios/musics/records/Wait.mp3' },
-        { icon: 'fas fa-compact-disc', playlist: 'Discos', title: 'Ward', src: 'assets/audios/musics/records/Ward.mp3' },
+        // RECORDS (Amarelo / Dourado)
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Blocks', src: 'assets/audios/musics/records/Blocks.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Cat', src: 'assets/audios/musics/records/Cat.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Far', src: 'assets/audios/musics/records/Far.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Mall', src: 'assets/audios/musics/records/Mall.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Mellohi', src: 'assets/audios/musics/records/Mellohi.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Otherside', src: 'assets/audios/musics/records/Otherside.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Pingstep Master', src: 'assets/audios/musics/records/Pingstep_Master.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Relic', src: 'assets/audios/musics/records/Relic.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Stal', src: 'assets/audios/musics/records/Stal.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Strad', src: 'assets/audios/musics/records/Strad.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Wait', src: 'assets/audios/musics/records/Wait.mp3' },
+        { icon: 'fas fa-compact-disc', color: '#ffc107', playlist: 'Discos', title: 'Ward', src: 'assets/audios/musics/records/Ward.mp3' },
 
-        // REMIX
-        { icon: 'fas fa-fire', playlist: 'Remix', title: 'Aria Math (Synthwave)', src: 'assets/audios/musics/remix/Aria-Math.mp3' },
-        { icon: 'fas fa-fire', playlist: 'Remix', title: 'Aria Math Piano', src: 'assets/audios/musics/remix/Aria-Math-Piano.mp3' },
-        { icon: 'fas fa-fire', playlist: 'Remix', title: 'Cat Remix (Caution & Remix)', src: 'assets/audios/musics/remix/Cat-Remix.mp3' },
-        { icon: 'fas fa-fire', playlist: 'Remix', title: 'Minecraft Music Remix', src: 'assets/audios/musics/remix/Minecraft-Remix.mp3' },
-        { icon: 'fas fa-fire', playlist: 'Remix', title: 'Pigstep Remix (Fury Hearted)', src: 'assets/audios/musics/remix/Pigstep-Remix.mp3' },
-        { icon: 'fas fa-fire', playlist: 'Remix', title: 'Sweden Remix (Caution & Crisis)', src: 'assets/audios/musics/remix/Sweden.mp3' },
+        // REMIX (Laranja)
+        { icon: 'fas fa-fire', color: '#ff9800', playlist: 'Remix', title: 'Aria Math (Synthwave)', src: 'assets/audios/musics/remix/Aria-Math.mp3' },
+        { icon: 'fas fa-fire', color: '#ff9800', playlist: 'Remix', title: 'Aria Math Piano', src: 'assets/audios/musics/remix/Aria-Math-Piano.mp3' },
+        { icon: 'fas fa-fire', color: '#ff9800', playlist: 'Remix', title: 'Cat Remix (Caution & Remix)', src: 'assets/audios/musics/remix/Cat-Remix.mp3' },
+        { icon: 'fas fa-fire', color: '#ff9800', playlist: 'Remix', title: 'Minecraft Music Remix', src: 'assets/audios/musics/remix/Minecraft-Remix.mp3' },
+        { icon: 'fas fa-fire', color: '#ff9800', playlist: 'Remix', title: 'Pigstep Remix (Fury Hearted)', src: 'assets/audios/musics/remix/Pigstep-Remix.mp3' },
+        { icon: 'fas fa-fire', color: '#ff9800', playlist: 'Remix', title: 'Sweden Remix (Caution & Crisis)', src: 'assets/audios/musics/remix/Sweden.mp3' },
 
-        // WATER
-        { icon: 'fas fa-water', playlist: 'Water', title: 'Axolotl', src: 'assets/audios/musics/water/Axolotl.mp3' },
-        { icon: 'fas fa-water', playlist: 'Water', title: 'Dragon Fish', src: 'assets/audios/musics/water/Dragon_Fish.mp3' },
-        { icon: 'fas fa-water', playlist: 'Water', title: 'Shuniji', src: 'assets/audios/musics/water/Shuniji.mp3' }
+        // WATER (Azul)
+        { icon: 'fas fa-water', color: '#03a9f4', playlist: 'Water', title: 'Axolotl', src: 'assets/audios/musics/water/Axolotl.mp3' },
+        { icon: 'fas fa-water', color: '#03a9f4', playlist: 'Water', title: 'Dragon Fish', src: 'assets/audios/musics/water/Dragon_Fish.mp3' },
+        { icon: 'fas fa-water', color: '#03a9f4', playlist: 'Water', title: 'Shuniji', src: 'assets/audios/musics/water/Shuniji.mp3' }
     ];
 
     // ===================================================================
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let waitingTimeout;
 
     // ===================================================================
-    // 3. SISTEMA DE NOTIFICAÇÕES (CORES E ÍCONES)
+    // 3. SISTEMA DE NOTIFICAÇÕES
     // =================================================================== 
     let messageTimeout;
     const showMessage = (title, desc, iconClass, colorHex) => {
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ===================================================================
-    // 4. MEMÓRIA DO PLAYER
+    // 4. MEMÓRIA DO PLAYER E INTERFACE
     // =================================================================== 
     const saveState = () => {
         if (!backgroundAudio) return;
@@ -212,7 +212,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (musicTitleDisplay && playlist[currentMusicIndex]) {
             const music = playlist[currentMusicIndex];
             musicTitleDisplay.textContent = `[${music.playlist}] ${music.title}`;
-            if (nowPlayingIcon) nowPlayingIcon.className = music.icon;
+            
+            // Aqui é a mágica da cor no ícone da Categoria!
+            if (nowPlayingIcon) {
+                nowPlayingIcon.className = music.icon;
+                nowPlayingIcon.style.color = music.color; 
+            }
         }
         
         if (audioModeButton) {
@@ -225,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ===================================================================
-    // 5. CONTROLES DO ÁUDIO
+    // 5. CONTROLES DO ÁUDIO E TRATAMENTO DE INTERAÇÕES
     // =================================================================== 
     const loadMusic = (index, autoPlay = true, msgTitle = "MÚSICA", msgIcon = "fa-play", msgColor = "#1db954") => {
         if (!playlist[index]) index = 0;
@@ -241,8 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUI();
 
         if (autoPlay) {
-            backgroundAudio.play().catch(() => {
-                showMessage("ÁUDIO BLOQUEADO", "O navegador exige que você clique no Play.", "fa-hand-paper", "#e91e63");
+            backgroundAudio.play().catch((error) => {
+                // Cenário 2: O Navegador (Chrome/Edge/Safari) travou e bloqueou o autoplay.
+                showMessage("INTERAÇÃO NECESSÁRIA", "O navegador bloqueou o áudio automático. Clique no play.", "fa-hand-paper", "#e91e63");
                 updateUI();
             });
         }
@@ -253,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             backgroundAudio.play().then(() => {
                 showMessage("TOCANDO", `[${playlist[currentMusicIndex].playlist}] ${playlist[currentMusicIndex].title}`, "fa-play", "#1db954");
             }).catch(() => {
-                showMessage("INTERAÇÃO NECESSÁRIA", "Permita o áudio no navegador", "fa-lock", "#e91e63");
+                showMessage("INTERAÇÃO NECESSÁRIA", "Houve um problema com a reprodução.", "fa-exclamation-circle", "#e91e63");
             });
         } else {
             backgroundAudio.pause();
@@ -297,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // ===================================================================
-    // 6. EVENTOS (API DO ÁUDIO)
+    // 6. EVENTOS (API DO ÁUDIO) - ERROS NO ARQUIVO
     // =================================================================== 
     backgroundAudio.addEventListener('waiting', () => {
         clearTimeout(waitingTimeout);
@@ -316,8 +322,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     backgroundAudio.addEventListener('error', () => {
         clearTimeout(waitingTimeout);
-        showMessage("FALHA NA FAIXA", "Pulando para a próxima música...", "fa-exclamation-triangle", "#ff4444");
-        setTimeout(playNext, 2500);
+        const failedMusic = playlist[currentMusicIndex];
+        showMessage("ERRO NA FAIXA", `Falha ao carregar: ${failedMusic.title}. Pulando...`, "fa-exclamation-triangle", "#ff4444");
+        setTimeout(playNext, 3000);
     });
 
     backgroundAudio.addEventListener('timeupdate', () => {
@@ -392,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===================================================================
-    // 8. BOOT INICIAL (MEMÓRIA)
+    // 8. BOOT INICIAL (MEMÓRIA E INTERAÇÃO PRÉVIA)
     // =================================================================== 
     const savedState = JSON.parse(localStorage.getItem('zeraAudioState'));
     if (savedState) {
@@ -403,17 +410,26 @@ document.addEventListener('DOMContentLoaded', () => {
         backgroundAudio.volume = savedState.volume !== undefined ? savedState.volume : 0.5;
         if (volumeSlider) volumeSlider.value = backgroundAudio.volume;
         
-        loadMusic(currentMusicIndex, false, "CARREGANDO...", "fa-spinner fa-spin", "#2196F3");
         backgroundAudio.currentTime = savedState.currentTime || 0;
 
         if (!savedState.paused) {
-            backgroundAudio.play().catch(() => {
-                showMessage("INTERAÇÃO NECESSÁRIA", "Clique no Play para retornar o áudio.", "fa-hand-paper", "#e91e63");
-            });
+            // Tenta dar autoplay. Se o navegador travar, avisa do bloqueio.
+            loadMusic(currentMusicIndex, true, "CARREGANDO...", "fa-spinner fa-spin", "#2196F3");
+        } else {
+            // Cenário 1: O player pede (espera) o Play pois foi pausado na outra página (ou carregou manual)
+            loadMusic(currentMusicIndex, false, "CARREGANDO...", "fa-spinner fa-spin", "#2196F3");
+            setTimeout(() => {
+                showMessage("PRONTO PARA TOCAR", "Música carregada. Clique no Play para iniciar.", "fa-play-circle", "#1db954");
+            }, 500); // Mostra o "pronto" logo após o carregando sumir
         }
     } else {
+        // Primeira vez no site
         loadMusic(0, false, "CARREGANDO...", "fa-spinner fa-spin", "#2196F3");
         backgroundAudio.volume = 0.5;
+        setTimeout(() => {
+            // Cenário 1: Avisando o novo jogador que ele pode dar play
+            showMessage("PRONTO PARA TOCAR", "Bem-vindo! Clique no Play para ouvir a rádio.", "fa-play-circle", "#1db954");
+        }, 500);
     }
     updateUI();
 });
