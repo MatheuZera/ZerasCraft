@@ -258,26 +258,34 @@
         <div class="zeras-hub" id="main-hub">
             <div class="hub-sidebar">
                 <button class="tab-link active" onclick="openHub(event, 'game-1')">
-                    <img src="icon-mc.png"> Minecraft
+                    <img src="icon-mc.png" alt="Minecraft"> Minecraft
                 </button>
                 <button class="tab-link" onclick="openHub(event, 'game-2')">
-                    <img src="icon-dungeons.png"> Minecraft Dungeons
+                    <img src="icon-dungeons.png" alt="Dungeons"> Minecraft Dungeons
                 </button>
             </div>
 
             <div class="hub-main">
+
                 <div id="game-1" class="hub-content active">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Minecraft</span> <i class="fas fa-chevron-down"></i>
+                        <div class="accordion-title">
+                            <img src="icon-mc.png" alt="Minecraft">
+                            <span>Minecraft</span>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
                     </button>
+
                     <div class="hub-body">
                         <div class="hub-inner">
                             <div class="hub-media">
-                                <img src="assets/images/geral/banner-fundo.gif">
+                                <img src="assets/images/geral/banner-fundo.gif" alt="Banner">
                             </div>
                             <div class="hub-info">
-                                <p>Explore mundos infinitos e construa castelos.</p>
-                                <a href="#" class="btn-saiba-mais">SAIBA MAIS ></a>
+                                <p>Explore seus próprios mundos, sobreviva à noite e crie tudo o que puder imaginar!<br>
+                                    Assista ao vídeo de jogabilidade do Minecraft acima ou clique em "Saiba Mais".</p>
+                                <a href="#" class="btn-saiba-mais">SAIBA MAIS <i class="fas fa-chevron-right"
+                                        style="font-size: 10px; margin-left: 5px;"></i></a>
                             </div>
                         </div>
                     </div>
@@ -285,20 +293,28 @@
 
                 <div id="game-2" class="hub-content">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Minecraft Dungeons</span> <i class="fas fa-chevron-down"></i>
+                        <div class="accordion-title">
+                            <img src="icon-dungeons.png" alt="Dungeons">
+                            <span>Minecraft Dungeons</span>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
                     </button>
+
                     <div class="hub-body">
                         <div class="hub-inner">
                             <div class="hub-media">
-                                <img src="preview-dungeons.jpg">
+                                <img src="preview-dungeons.jpg" alt="Banner Dungeons">
                             </div>
                             <div class="hub-info">
-                                <p>Ação e aventura nas masmorras.</p>
-                                <a href="#" class="btn-saiba-mais">SAIBA MAIS ></a>
+                                <p>Ação e aventura nas masmorras. Lute contra novas criaturas<br>
+                                    terríveis em uma aventura épica inspirada em dungeon crawlers clássicos!</p>
+                                <a href="#" class="btn-saiba-mais">SAIBA MAIS <i class="fas fa-chevron-right"
+                                        style="font-size: 10px; margin-left: 5px;"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 

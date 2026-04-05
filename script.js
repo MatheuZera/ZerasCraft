@@ -527,7 +527,6 @@ window.switchTab = function (evt, tabName) {
     }
 }
 
-
 function toggleAccordion(element) {
     const item = element.parentElement; // Pega o .acc-item
 
@@ -1011,10 +1010,49 @@ function handleEliteTip(btn, event) {
     event.stopPropagation();
 }
 
+/* ===================================================================
+   HUB DE JOGOS (CONTROLES DESKTOP E MOBILE)
+=================================================================== */
+
+// 1. Função para o Desktop (Cliques na Barra Lateral)
+function openHub(event, gameId) {
+    // Apenas executa se for clicado via barra lateral (Desktop)
+    if (window.innerWidth > 768) {
+        // Remove a classe 'active' de todos os botões laterais
+        const links = document.querySelectorAll('.tab-link');
+        links.forEach(link => link.classList.remove('active'));
+
+        // Remove a classe 'active' de todos os conteúdos
+        const contents = document.querySelectorAll('.hub-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        // Adiciona a classe 'active' no botão clicado e no conteúdo alvo
+        event.currentTarget.classList.add('active');
+        document.getElementById(gameId).classList.add('active');
+    }
+}
+
+// 2. Função para o Mobile (Cliques nos Cabeçalhos do Acordeão)
+function toggleAccordion(buttonElement) {
+    // Pega o contêiner pai (.hub-content) do botão clicado
+    const currentContent = buttonElement.parentElement;
+
+    // (Opcional) Se quiser que as outras abas fechem automaticamente ao abrir uma nova:
+    const allContents = document.querySelectorAll('.hub-content');
+    allContents.forEach(content => {
+        if (content !== currentContent) {
+            content.classList.remove('active');
+        }
+    });
+
+    // Alterna a classe 'active' no elemento clicado para abrir/fechar
+    currentContent.classList.toggle('active');
+}
+
 function closeEliteTip() {
     const eliteTip = document.getElementById('elite-tip'); // Substitua pelo ID real que estiver no seu código
     if (eliteTip) { // <- Essa é a proteção! Só executa se o elemento existir na página
-        eliteTip.style.display = 'none'; 
+        eliteTip.style.display = 'none';
     }
 }
 
@@ -1379,6 +1417,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function toggleAccordion(button) {
+    // Alterna a classe 'active' no botão que foi clicado
+    button.classList.toggle("active");
+}
 
 /* ==========================================
    MÓDULO: STATUS DO DISCORD & METAS (+100%)

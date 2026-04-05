@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioPrevButton = document.getElementById('audioPrevButton');
     const audioModeButton = document.getElementById('audioModeButton');
     const musicTitleDisplay = document.getElementById('musicTitleDisplay');
-    const nowPlayingIcon = document.querySelector('.now-playing i'); 
+    const nowPlayingIcon = document.querySelector('.now-playing i');
     const audioProgressBar = document.getElementById('audioProgressBar');
     const currentTimeDisplay = document.getElementById('currentTimeDisplay');
     const durationDisplay = document.getElementById('durationDisplay');
@@ -140,13 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMusicIndex = 0;
     let isDragging = false;
     let lastSaveTime = 0;
-    let playHistory = []; 
+    let playHistory = [];
 
     // ===================================================================
     // 3. SISTEMA DE NOTIFICAÇÕES (COM DURAÇÃO INTELIGENTE)
     // =================================================================== 
     let messageTimeout;
-    
+
     // Agora aceitamos um "duration". Se for 0, a mensagem nunca some sozinha!
     const showMessage = (title, desc, iconClass, colorHex, duration = 3000) => {
         if (!centralMessage) return;
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (centralMessage.classList.contains('hide')) {
                         centralMessage.classList.remove('show', 'hide');
                     }
-                }, 500); 
+                }, 500);
             }, duration);
         }
     };
@@ -214,17 +214,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const icon = audioControlButton.querySelector('i');
             if (icon) icon.className = (!backgroundAudio.paused) ? 'fas fa-pause' : 'fas fa-play';
         }
-        
+
         if (musicTitleDisplay && playlist[currentMusicIndex]) {
             const music = playlist[currentMusicIndex];
             musicTitleDisplay.textContent = `[${music.playlist}] ${music.title}`;
-            
+
             if (nowPlayingIcon) {
                 nowPlayingIcon.className = music.icon;
-                nowPlayingIcon.style.color = music.color; 
+                nowPlayingIcon.style.color = music.color;
             }
         }
-        
+
         if (audioModeButton) {
             const modeIcon = audioModeButton.querySelector('i');
             if (modeIcon) {
@@ -262,13 +262,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (backgroundAudio.paused) {
             // Volta o aviso de loading infinito logo que clica em play (caso a net engasgue)
             showMessage("CARREGANDO...", `[${playlist[currentMusicIndex].playlist}] ${playlist[currentMusicIndex].title}`, "fa-spinner fa-spin", "#2196F3", 0);
-            
+
             backgroundAudio.play().catch(() => {
                 showMessage("AVISO", "Houve um problema com a reprodução.", "fa-exclamation-circle", "#ff0000", 0);
             });
         } else {
             backgroundAudio.pause();
-            showMessage("PAUSADO", "A música foi interrompida.", "fa-pause", "#f1c40f", 3000); 
+            showMessage("PAUSADO", "A música foi interrompida.", "fa-pause", "#f1c40f", 3000);
         }
         saveState();
         updateUI();
@@ -284,14 +284,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        playHistory.push(currentMusicIndex); 
-        
+        playHistory.push(currentMusicIndex);
+
         let nextIndex = (currentMusicIndex + 1) % playlist.length;
         if (currentMode === 'aleatorio') {
             nextIndex = Math.floor(Math.random() * playlist.length);
         }
-        
-        loadMusic(nextIndex, true); 
+
+        loadMusic(nextIndex, true);
     };
 
     const playPrev = () => {
@@ -303,18 +303,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             if (playHistory.length > 0) {
-                currentMusicIndex = playHistory.pop(); 
+                currentMusicIndex = playHistory.pop();
             } else {
                 currentMusicIndex = (currentMusicIndex - 1 + playlist.length) % playlist.length;
             }
-            loadMusic(currentMusicIndex, true); 
+            loadMusic(currentMusicIndex, true);
         }
     };
 
     // ===================================================================
     // 6. EVENTOS DA API DO NAVEGADOR
     // =================================================================== 
-    
+
     // Se no meio da música a internet travar
     backgroundAudio.addEventListener('waiting', () => {
         showMessage("CARREGANDO...", `[${playlist[currentMusicIndex].playlist}] ${playlist[currentMusicIndex].title}`, "fa-spinner fa-spin", "#2196F3", 0);
@@ -329,14 +329,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // LINHA DO TEMPO DE ERROS: Falha -> Pula -> Carrega -> Toca
     backgroundAudio.addEventListener('error', () => {
         const failedMusic = playlist[currentMusicIndex];
-        
+
         // Passo 1: Informa o Erro Crítico (Fica na tela para o jogador ler)
         showMessage("ERRO NA FAIXA", `Falha em: ${failedMusic.title}`, "fa-exclamation-triangle", "#ff4444", 0);
-        
+
         // Passo 2: Após 2 segundos, avisa que vai pular
         setTimeout(() => {
             showMessage("PULANDO...", "Indo para a próxima faixa...", "fa-forward", "#ff9800", 0);
-            
+
             // Passo 3: Manda tocar a próxima (Isso chama o "CARREGANDO..." infinito que depois vira "TOCANDO")
             setTimeout(playNext, 1500);
         }, 2000);
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioModeButton.addEventListener('click', () => {
             const modes = ['sequencial', 'aleatorio', 'loop'];
             currentMode = modes[(modes.indexOf(currentMode) + 1) % modes.length];
-            showMessage("MODO ALTERADO", `Ativado: ${currentMode.toUpperCase()}`, "fa-sync-alt", "#ff9800", 3000); 
+            showMessage("MODO ALTERADO", `Ativado: ${currentMode.toUpperCase()}`, "fa-sync-alt", "#ff9800", 3000);
             saveState();
             updateUI();
         });
@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
         volumeSlider.addEventListener('input', () => {
             backgroundAudio.volume = volumeSlider.value;
             const volPercent = Math.round(backgroundAudio.volume * 100);
-            
+
             let volIcon = 'fa-volume-up';
             if (volPercent === 0) volIcon = 'fa-volume-mute';
             else if (volPercent < 50) volIcon = 'fa-volume-down';
@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (volumeButton && volumeSlider) {
         volumeButton.addEventListener('click', (e) => {
-            e.stopPropagation(); 
+            e.stopPropagation();
             volumeSlider.classList.toggle('is-active');
         });
         volumeSlider.addEventListener('click', (e) => e.stopPropagation());
@@ -420,16 +420,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedState) {
         currentMusicIndex = savedState.index || 0;
         currentMode = savedState.mode || 'sequencial';
-        playHistory = savedState.history || []; 
-        
+        playHistory = savedState.history || [];
+
         backgroundAudio.volume = savedState.volume !== undefined ? savedState.volume : 0.5;
         if (volumeSlider) volumeSlider.value = backgroundAudio.volume;
-        
+
         backgroundAudio.currentTime = savedState.currentTime || 0;
 
         if (!savedState.paused) {
             // Tenta puxar de onde parou. O loadMusic cuida do CARREGANDO -> TOCANDO.
-            loadMusic(currentMusicIndex, true); 
+            loadMusic(currentMusicIndex, true);
         } else {
             // Se estava pausado, carrega mas não dá play automático
             loadMusic(currentMusicIndex, false);

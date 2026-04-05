@@ -3746,6 +3746,260 @@ var .play-pause {
 }
 
 /* ==========================================
+   HUB DE JOGOS (DESKTOP: ABAS LATERAIS)
+========================================== */
+.zeras-hub {
+    display: flex;
+    width: 95%;
+    /* Ocupa quase toda a tela lateralmente */
+    max-width: 1200px;
+    /* Aumentado para ficar bem largo no PC */
+    margin: 50px auto;
+    background: #111111;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Coluna Esquerda: Menu Lateral */
+.hub-sidebar {
+    width: 300px;
+    /* Levemente mais largo para equilibrar o design maior */
+    background: #111111;
+    border-right: 1px solid #222222;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: transparent;
+    border: none;
+    border-left: 4px solid transparent;
+    color: #aaaaaa;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.2s ease;
+}
+
+.tab-link img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.tab-link:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+.tab-link.active {
+    background: #1a1a1a;
+    border-left-color: #54bd34;
+    color: #ffffff;
+}
+
+/* Coluna Direita: Conteúdo */
+.hub-main {
+    flex: 1;
+    background: #000000;
+    position: relative;
+}
+
+/* Oculta os conteúdos inativos no PC */
+.hub-content {
+    display: none;
+}
+
+.hub-content.active {
+    display: block;
+    animation: fadeHub 0.4s ease forwards;
+}
+
+@keyframes fadeHub {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Oculta o cabeçalho do acordeão no PC */
+.accordion-header {
+    display: none;
+}
+
+/* Estrutura Interna (Mídia e Info) */
+.hub-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.hub-media {
+    width: 100%;
+    background: #000;
+}
+
+.hub-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.hub-info {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #181818;
+    border-top: 1px solid #222222;
+}
+
+.hub-info p {
+    color: #cccccc;
+    font-size: 14px;
+    margin: 0;
+    max-width: 65%;
+    line-height: 1.5;
+}
+
+.btn-saiba-mais {
+    background: #54bd34;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 25px;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.btn-saiba-mais:hover {
+    background: #66cc3a;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   HUB DE JOGOS (MOBILE: ACORDEÃO COM ÍCONES)
+========================================== */
+@media (max-width: 768px) {
+    .zeras-hub {
+        flex-direction: column;
+        margin: 20px auto;
+    }
+
+    .hub-sidebar {
+        display: none;
+    }
+
+    .hub-main {
+        width: 100%;
+    }
+
+    .hub-content {
+        display: block;
+        border-bottom: 1px solid #222222;
+        animation: none;
+    }
+
+    .hub-content:last-child {
+        border-bottom: none;
+    }
+
+    /* Estilização do Botão Acordeão no Celular */
+    .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 18px 20px;
+        background: #111111;
+        border: none;
+        border-left: 4px solid transparent;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    /* MÁGICA DOS ÍCONES NO CELULAR */
+    .accordion-title {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        /* Espaço entre a foto e o texto */
+    }
+
+    .accordion-title img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    .accordion-header i {
+        transition: transform 0.3s ease;
+        color: #888888;
+    }
+
+    /* Quando o acordeão está aberto */
+    .hub-content.active .accordion-header {
+        border-left-color: #54bd34;
+        /* Barrinha verde à esquerda */
+        background: #1a1a1a;
+    }
+
+    .hub-content.active .accordion-header i {
+        transform: rotate(180deg);
+        color: #ffffff;
+    }
+
+    /* Corpo que expande (Body) */
+    .hub-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .hub-content.active .hub-body {
+        max-height: 1000px;
+    }
+
+    .hub-info {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 20px 15px;
+    }
+
+    .hub-info p {
+        max-width: 100%;
+        font-size: 13px;
+    }
+
+    .btn-saiba-mais {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ==========================================
    4. TESTIMONIALS (GLASS-INDUSTRIAL)
 ========================================== */
 .testimonials-section {
