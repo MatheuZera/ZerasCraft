@@ -1380,13 +1380,9 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const inviteCode = 'GYGVBqGEwP';
 
-    const statusCountEl = document.getElementById('new-status-count'); // Se existir outro no site
-    const membersCountEl = document.getElementById('new-members-count');
-    const objectiveEl = document.getElementById('new-objective-val');
-    const progressBar = document.getElementById('new-goal-fill');
-    const progressText = document.getElementById('new-percent-text');
-
-    // Função de animação de números suave
+    // ==========================================
+    // 1. FUNÇÃO DE ANIMAÇÃO GLOBAL
+    // ==========================================
     function animateValue(obj, start, end, duration, isPercent = false, suffix = '') {
         if (!obj) return;
         let startTimestamp = null;
@@ -1411,49 +1407,77 @@ document.addEventListener('DOMContentLoaded', () => {
         window.requestAnimationFrame(step);
     }
 
-    async function fetchDiscordStats() {
+    // ==========================================
+    // 2. SISTEMA INDEPENDENTE: STATUS
+    // ==========================================
+    function initStatusDisplay(totalMembers) {
+        const statusCountEl = document.getElementById('new-status-count');
+        if (statusCountEl) {
+            animateValue(statusCountEl, 0, totalMembers, 1500, false, ' Membros Totais');
+        }
+    }
+
+    // ==========================================
+    // 3. SISTEMA INDEPENDENTE: METAS
+    // ==========================================
+    function initGoalsDisplay(totalMembers) {
+        const membersCountEl = document.getElementById('new-members-count');
+        const objectiveEl = document.getElementById('new-objective-val');
+        const progressBar = document.getElementById('new-goal-fill');
+        const progressText = document.getElementById('new-percent-text');
+
+        // A. Anima o número de membros solto
+        if (membersCountEl) {
+            animateValue(membersCountEl, 0, totalMembers, 1500);
+        }
+
+        // B. Lógica da Barra de Progresso
+        if (objectiveEl && progressBar && progressText) {
+            let rawText = objectiveEl.textContent || "1";
+            let objectiveVal = parseFloat(rawText.replace(/\D/g, '')) || 1;
+
+            let realPercentage = (totalMembers / objectiveVal) * 100;
+            if (realPercentage < 0) realPercentage = 0;
+
+            let visualPercentage = realPercentage > 100 ? 100 : realPercentage;
+
+            setTimeout(() => {
+                progressBar.style.width = visualPercentage + '%';
+                animateValue(progressText, 0, realPercentage, 1500, true);
+            }, 300);
+        }
+    }
+
+    // ==========================================
+    // 4. MOTOR PRINCIPAL (BUSCA DE DADOS)
+    // ==========================================
+    async function fetchDiscordData() {
         try {
             const response = await fetch(`https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`);
 
-            if (!response.ok) throw new Error("A API do Discord bloqueou a consulta (Rate limit ou link inválido).");
+            if (!response.ok) throw new Error("A API do Discord bloqueou a consulta.");
 
             const data = await response.json();
             const totalMembers = data.approximate_member_count || 0;
 
-            // 1. Atualiza os textos numéricos
-            if (statusCountEl) animateValue(statusCountEl, 0, totalMembers, 1500, false, ' Membros Totais');
-            if (membersCountEl) animateValue(membersCountEl, 0, totalMembers, 1500);
-
-            // 2. Lógica Mestra da Meta (Lendo do HTML)
-            if (objectiveEl && progressBar && progressText) {
-                // Captura o valor direto da span no HTML (Remove qualquer coisa que não seja número)
-                let rawText = objectiveEl.textContent || "1";
-                let objectiveVal = parseFloat(rawText.replace(/\D/g, '')) || 1;
-
-                // Cálculo das Porcentagens
-                let realPercentage = (totalMembers / objectiveVal) * 100;
-                if (realPercentage < 0) realPercentage = 0;
-
-                // Trava visual para a barra não vazar a tela
-                let visualPercentage = realPercentage > 100 ? 100 : realPercentage;
-
-                // Espera um tempinho (300ms) pra interface aparecer e então dispara a animação
-                setTimeout(() => {
-                    progressBar.style.width = visualPercentage + '%';
-                    animateValue(progressText, 0, realPercentage, 1500, true);
-                }, 300);
-            }
+            // Dispara os dois sistemas simultaneamente, mas separados
+            initStatusDisplay(totalMembers);
+            initGoalsDisplay(totalMembers);
 
         } catch (error) {
-            console.error("Zera's Craft -> Erro ao buscar meta do Discord:", error);
-            // Fallback de segurança em caso de erro
+            console.error("Zera's Craft -> Erro ao buscar dados do Discord:", error);
+
+            // Fallbacks de segurança em caso de erro na internet do jogador
+            const statusCountEl = document.getElementById('new-status-count');
+            const membersCountEl = document.getElementById('new-members-count');
+
             if (statusCountEl) statusCountEl.innerText = "Servidor Online";
             if (membersCountEl) membersCountEl.innerText = "---";
         }
     }
 
-    // Inicia o sistema
-    fetchDiscordStats();
+    // Dá o pontapé inicial
+    fetchDiscordData();
 });
 
 

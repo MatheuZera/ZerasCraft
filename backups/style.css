@@ -3050,7 +3050,7 @@ var .play-pause {
 }
 
 .social-box {
-    background: #151515;
+    background: #3543ff;
     height: 45px;
     display: flex;
     align-items: center;
@@ -3062,24 +3062,24 @@ var .play-pause {
 
 .social-box:hover {
     transform: translateY(-5px);
-    border-color: #00ff00;
+    border-color: #fcfffc;
     color: #fff;
 }
 
 .discord:hover {
-    background: #462dff;
+    background: #3835ff;
 }
 
 .youtube:hover {
-    background: #FF0000;
+    background: #ff0000;
 }
 
 .twitch:hover {
-    background: #23f8f1;
+    background: #4f0792;
 }
 
 .other:hover {
-    background: #ddd;
+    background: #424242;
 }
 
 /* SISTEMA DE CONTAGEM DE MEMBROS */
