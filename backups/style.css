@@ -177,8 +177,7 @@ secao-subtitulo {
 
 /* Melhorando a transição de hover para combinar com o som */
 .market-card,
-.dl-card,
-.gallery-item {
+.dl-card {
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
 }
 
@@ -1296,9 +1295,11 @@ html.z-lock-scroll {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #5cb835; /* Verde base da imagem */
+    background: #5cb835;
+    /* Verde base da imagem */
     color: #ffffff;
-    font-family: 'Inter', sans-serif; /* Use sua fonte */
+    font-family: 'Inter', sans-serif;
+    /* Use sua fonte */
     font-weight: 900;
     font-size: 16px;
     text-transform: uppercase;
@@ -1306,22 +1307,27 @@ html.z-lock-scroll {
     padding: 16px 32px;
     border-radius: 6px;
     /* A mágica do 3D: Sombra sólida para baixo */
-    box-shadow: 0 6px 0 #387820; 
+    box-shadow: 0 6px 0 #387820;
     transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
     cursor: pointer;
     user-select: none;
 }
 
 .btn-hero-green:hover {
-    background: #66cc3a; /* Fica levemente mais claro */
-    transform: translateY(-2px); /* Sobe um pouquinho */
-    box-shadow: 0 8px 0 #387820; /* Sombra aumenta para compensar a subida */
+    background: #66cc3a;
+    /* Fica levemente mais claro */
+    transform: translateY(-2px);
+    /* Sobe um pouquinho */
+    box-shadow: 0 8px 0 #387820;
+    /* Sombra aumenta para compensar a subida */
 }
 
 .btn-hero-green:active {
     background: #54a630;
-    transform: translateY(6px); /* Desce tudo */
-    box-shadow: 0 0 0 #387820; /* Sombra some (efeito de botão afundado) */
+    transform: translateY(6px);
+    /* Desce tudo */
+    box-shadow: 0 0 0 #387820;
+    /* Sombra some (efeito de botão afundado) */
 }
 
 
@@ -1343,10 +1349,10 @@ html.z-lock-scroll {
     transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
     cursor: pointer;
     user-select: none;
-    
+
     /* Necessário para a luz não vazar do botão */
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 /* O feixe de luz invisível à esquerda */
@@ -1354,12 +1360,14 @@ html.z-lock-scroll {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%; /* Começa fora do botão */
+    left: -100%;
+    /* Começa fora do botão */
     width: 50%;
     height: 100%;
     /* Gradiente branco transparente */
-    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-    transform: skewX(-25deg); /* Deixa a luz inclinada */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    /* Deixa a luz inclinada */
 }
 
 .btn-hero-green2:hover {
@@ -1381,7 +1389,8 @@ html.z-lock-scroll {
 /* Animação do feixe de luz */
 @keyframes shine-sweep {
     100% {
-        left: 200%; /* Termina fora do botão pela direita */
+        left: 200%;
+        /* Termina fora do botão pela direita */
     }
 }
 
@@ -1401,11 +1410,13 @@ html.z-lock-scroll {
     box-shadow: 0 4px 0 #8b1e06;
     transition: all 0.2s;
 }
+
 .btn-hero-lava:hover {
     background-color: #e84c2a;
     transform: translateY(-2px);
     box-shadow: 0 6px 0 #8b1e06;
 }
+
 .btn-hero-lava:active {
     transform: translateY(4px);
     box-shadow: 0 0px 0 #8b1e06;
@@ -1418,7 +1429,8 @@ html.z-lock-scroll {
     justify-content: center;
     gap: 12px;
     background-color: #1cd5e0;
-    color: #00454a; /* Texto escuro para contraste */
+    color: #00454a;
+    /* Texto escuro para contraste */
     padding: 15px 35px;
     font-weight: 900;
     text-decoration: none;
@@ -1427,12 +1439,14 @@ html.z-lock-scroll {
     box-shadow: 0 4px 0 #0b8e96;
     transition: all 0.2s;
 }
+
 .btn-hero-diamond:hover {
     background-color: #35e8f2;
     transform: translateY(-2px);
     /* Sombra 3D + Brilho Neon */
     box-shadow: 0 6px 0 #0b8e96, 0 0 20px rgba(28, 213, 224, 0.4);
 }
+
 .btn-hero-diamond:active {
     transform: translateY(4px);
     box-shadow: 0 0px 0 #0b8e96, 0 0 10px rgba(28, 213, 224, 0.4);
@@ -1458,12 +1472,14 @@ html.z-lock-scroll {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.2s;
 }
+
 .btn-hero-glass:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
+
 .btn-hero-glass:active {
     transform: translateY(2px);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -1483,14 +1499,17 @@ html.z-lock-scroll {
     text-transform: uppercase;
     border-radius: 4px;
     box-shadow: 0 4px 0 #111111;
-    border: 1px solid #3a3a3a; /* Borda sutil para separar do fundo escuro */
+    border: 1px solid #3a3a3a;
+    /* Borda sutil para separar do fundo escuro */
     transition: all 0.2s;
 }
+
 .btn-hero-obsidian:hover {
     background-color: #3b3b3b;
     transform: translateY(-2px);
     box-shadow: 0 6px 0 #111111;
 }
+
 .btn-hero-obsidian:active {
     transform: translateY(4px);
     box-shadow: 0 0px 0 #111111;
@@ -1504,7 +1523,8 @@ html.z-lock-scroll {
     gap: 12px;
     /* Efeito de metal dourado */
     background: linear-gradient(180deg, #f1c40f 0%, #d4ac0d 100%);
-    color: #4a3400; /* Texto marrom bem escuro para parecer incrustado */
+    color: #4a3400;
+    /* Texto marrom bem escuro para parecer incrustado */
     padding: 15px 35px;
     font-weight: 900;
     text-decoration: none;
@@ -1513,11 +1533,13 @@ html.z-lock-scroll {
     box-shadow: 0 4px 0 #9c7b05;
     transition: all 0.2s;
 }
+
 .btn-hero-gold:hover {
     background: linear-gradient(180deg, #f4d03f 0%, #d4ac0d 100%);
     transform: translateY(-2px);
     box-shadow: 0 6px 0 #9c7b05;
 }
+
 .btn-hero-gold:active {
     transform: translateY(4px);
     box-shadow: 0 0px 0 #9c7b05;
@@ -1559,33 +1581,30 @@ html.z-lock-scroll {
 
 
 
-
-
-/* MENSAGEM LATERAL - ESTILO TOAST VIDRO */
+/* ==========================================
+   SISTEMA DE NOTIFICAÇÕES (TEMA ESCURO)
+========================================== */
 .central-message {
     position: fixed;
     bottom: 30px;
-    /* Posicionamento lateral inferior */
     right: 120px;
     transform: translateX(120%);
-    /* Começa fora da tela pela direita */
 
-    /* Design Branco Vidro */
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Design Escuro / Dark Mode */
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid #333333;
 
-    padding: 12px 20px;
+    padding: 12px 20px 12px 12px;
     border-radius: 12px;
-    /* Cantos arredondados estilo card */
     display: flex;
     align-items: center;
     gap: 15px;
-    z-index: 10000;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 100000;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s, visibility 0.3s;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -1595,80 +1614,73 @@ html.z-lock-scroll {
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
-    /* Desliza para dentro */
+    pointer-events: auto;
 }
 
-/* Círculo do Ícone (Verde Sucesso) */
+.central-message.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(120%);
+    pointer-events: none;
+}
+
+/* Círculo do Ícone (Cor Controlada pelo JS) */
 .message-icon {
     background: #1db954;
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     border-radius: 8px;
-    /* Quadrado arredondado como na imagem */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
-/* Conteúdo do Texto */
+.message-icon i {
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+/* Textos no Tema Escuro */
 .message-content {
     display: flex;
     flex-direction: column;
 }
 
 .message-content strong {
-    color: #1db954;
+    color: #ffffff;
     font-size: 0.9rem;
-    font-weight: 800;
+    font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .message-content span {
-    color: #444;
+    color: #aaaaaa;
     font-size: 0.85rem;
     font-weight: 500;
-}
-
-/* Estado Base (Escondido à esquerda ou transparente) */
-#centralMessage {
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: all 0.5s ease;
-    /* Duração da animação */
-    pointer-events: none;
-}
-
-/* Estado Visível */
-#centralMessage.show {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
-}
-
-/* Estado de Saída (Animação de fechamento) */
-#centralMessage.hide {
-    opacity: 0;
-    transform: translateX(20px);
-    /* Desliza para o outro lado ao sair */
 }
 
 /* Ajuste Mobile */
 @media (max-width: 770px) {
     .central-message {
-        bottom: 650px;
+        bottom: 680px;
         right: 20px;
         left: 20px;
-        /* No mobile vira uma barra inferior */
-        transform: translateY(150%);
         width: auto;
+        transform: translateY(-150%);
     }
 
     .central-message.show {
         transform: translateY(0);
     }
+
+    .central-message.hide {
+        transform: translateY(-150%);
+    }
 }
+
+
 
 
 
@@ -3167,8 +3179,10 @@ var .play-pause {
     }
 
     .back-to-top {
-        bottom: 20px;
-        right: 10px;
+        bottom: 10px;
+        right: 5px;
+        width: 30px;
+        height: 30px;
     }
 
     .pc-header {
@@ -4052,152 +4066,249 @@ var .play-pause {
     /* Opcional: dá um efeito premium de transparência */
 }
 
-/* --- BANNER LADO A LADO --- */
-/* --- SIDE BANNER COM FUNDO DINÂMICO --- */
+/* ==========================================
+   SEÇÃO: DESTAQUE / OTIMIZAÇÃO (BANNER LATERAL)
+========================================== */
+
+/* 1. Container Principal e Fundo */
 .side-banner-bg {
-    padding: 100px 0;
     position: relative;
+    padding: 80px 0;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    /* Efeito parallax opcional */
-    overflow: hidden;
+    /* Parallax suave no PC */
+    font-family: 'Inter', sans-serif;
 }
 
-/* Camada de escurecimento */
 .banner-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 30%, rgba(0, 0, 0, 0.7) 100%);
+    inset: 0;
+    background: rgba(15, 15, 15, 0.85);
+    /* Fundo escuro constante para legibilidade */
     z-index: 1;
 }
 
 .banner-relative {
     position: relative;
     z-index: 2;
+    /* Fica acima da película escura */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
+/* 2. O Segredo do Layout: Flexbox Correto */
 .banner-flex {
     display: flex;
     align-items: center;
-    gap: 60px;
+    /* Centraliza a imagem e o texto verticalmente */
+    justify-content: space-between;
+    gap: 50px;
+    /* Cria um respiro perfeito entre a foto e o texto */
 }
 
-/* Lado da Imagem */
+/* ==========================================
+   COLUNA DA ESQUERDA (IMAGEM)
+========================================== */
 .banner-image {
     flex: 1;
+    /* Ocupa 50% do espaço disponível */
     position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 550px;
 }
 
 .banner-image img {
     width: 100%;
+    border-radius: 8px;
     display: block;
-    transition: transform 0.5s ease;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease;
 }
 
-.banner-image:hover img {
-    transform: scale(1.05);
-}
-
-/* Efeito de borda brilhante na imagem */
+/* Efeito da moldura verde no fundo */
 .image-border-effect {
     position: absolute;
-    inset: 0;
-    border: 1px solid rgba(60, 133, 39, 0.3);
-    pointer-events: none;
-    border-radius: 12px;
+    top: 15px;
+    left: 15px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #54bd34;
+    border-radius: 8px;
+    z-index: 1;
+    transition: transform 0.3s ease;
 }
 
-/* Lado do Texto */
+/* Animação ao passar o mouse na imagem */
+.banner-image:hover img {
+    transform: translate(-5px, -5px);
+    /* Imagem sobe e vai pra esquerda */
+}
+
+.banner-image:hover .image-border-effect {
+    transform: translate(5px, 5px);
+    /* Borda desce e vai pra direita */
+}
+
+
+/* ==========================================
+   COLUNA DA DIREITA (TEXTO E LISTA)
+========================================== */
 .banner-text {
-    flex: 1.2;
+    flex: 1;
+    /* Ocupa os outros 50% */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Força tudo a alinhar certinho na esquerda */
+}
+
+.banner-text .badge {
+    background: #d83a18;
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
 .banner-text h2 {
-    font-size: 2.8rem;
-    margin: 15px 0;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 900;
+    text-transform: uppercase;
     line-height: 1.1;
-    color: #fff;
-    font-family: 'Rajdhani', sans-serif;
-    /* Se tiver essa fonte, fica ótimo */
+    margin: 0 0 20px 0;
 }
 
 .banner-text p {
-    font-size: 1.1rem;
-    color: #ccc;
-    margin-bottom: 25px;
+    color: #cccccc;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+    max-width: 95%;
+    /* Impede que o texto estique infinitamente */
 }
 
-/* Lista Customizada */
+/* Lista Organizada (Checklist) */
 .custom-list {
     list-style: none;
-    margin-bottom: 35px;
+    padding: 0;
+    margin: 0 0 35px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Define o espaço entre cada item da lista (sem misturar) */
 }
 
 .custom-list li {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 12px;
+    color: #eeeeee;
+    font-size: 16px;
     font-weight: 600;
 }
 
-.custom-list i {
-    color: var(--green-mc);
-    font-size: 1.2rem;
-    width: 20px;
+.custom-list li i {
+    color: #54bd34;
+    font-size: 20px;
+    width: 25px;
+    /* Trava a largura do ícone para os textos ficarem perfeitamente retos */
+    text-align: center;
 }
 
-/* Botões */
-.btn-green {
-    background: var(--green-mc);
-    color: white;
+/* Botão de Ação */
+.banner-actions .btn-green {
+    background: #54bd34;
+    color: #ffffff;
     border: none;
-    padding: 15px 35px;
+    padding: 15px 30px;
     font-weight: 800;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
     text-transform: uppercase;
+    border-radius: 4px;
     cursor: pointer;
-    transition: 0.3s;
-    display: flex;
+    transition: 0.2s;
+    box-shadow: 0 4px 0 #387820;
+    display: inline-flex;
     align-items: center;
     gap: 10px;
 }
 
-.btn-green:hover {
-    background: var(--green-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(60, 133, 39, 0.3);
+.banner-actions .btn-green:hover {
+    background: #66cc3a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #387820;
 }
 
-/* --- RESPONSIVIDADE (Mobile) --- */
-@media (max-width: 992px) {
+.banner-actions .btn-green:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #387820;
+}
+
+
+/* ==========================================
+   AJUSTES PARA MOBILE (CELULAR)
+========================================== */
+@media (max-width: 768px) {
+    .side-banner-bg {
+        padding: 50px 0;
+        background-attachment: scroll;
+        /* Tira o parallax no mobile p/ não travar */
+    }
+
     .banner-flex {
         flex-direction: column;
-        gap: 40px;
+        /* Empilha: Imagem fica em cima, Texto embaixo! */
         text-align: center;
+        /* Centraliza o visual */
+        gap: 40px;
+    }
+
+    .banner-image {
+        max-width: 100%;
+        padding-right: 15px;
+        /* Espaço para a bordinha verde não vazar da tela */
+    }
+
+    /* Centraliza os textos e botão */
+    .banner-text {
+        align-items: center;
     }
 
     .banner-text h2 {
-        font-size: 2rem;
+        font-size: 32px;
     }
 
-    .custom-list li {
+    .banner-text p {
+        max-width: 100%;
+    }
+
+    /* Lista alinhada no centro do celular */
+    .custom-list {
+        text-align: left;
+        /* O texto da lista continua pra esquerda p/ facilitar leitura */
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .banner-actions {
+        width: 100%;
+    }
+
+    .banner-actions .btn-green {
+        width: 100%;
         justify-content: center;
-    }
-
-    .banner-overlay {
-        background: rgba(0, 0, 0, 0.85);
-        /* Fundo mais escuro no mobile para ler melhor */
-    }
-
-    .btn-green {
-        margin: 0 auto;
+        /* Botão gigante no celular */
     }
 }
 
@@ -4481,84 +4592,138 @@ var .play-pause {
 
 
 /* ==========================================
-   GALERIA DE MOMENTOS (GLASS-INDUSTRIAL)
+   GALERIA DE MOMENTOS (TEXTO ACIMA + IMAGENS SOLTAS)
 ========================================== */
-.gallery-section-bg {
-    padding: 80px 20px;
-    position: relative;
-    background-color: #050505;
+.moments-section {
+    padding: 80px 0;
+    font-family: 'Inter', sans-serif;
 }
 
-.gallery-grid {
-    display: grid;
-    /* Usa auto-fit para se adaptar sozinho no celular sem precisar de muito @media */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 40px;
+.moments-container {
     max-width: 1200px;
-    margin-inline: auto;
-    /* Centraliza a grade */
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centraliza tudo no eixo horizontal */
+    text-align: center;
+    /* Centraliza o texto */
 }
 
+/* ==========================================
+   TEXTO SUPERIOR
+========================================== */
+.moments-text {
+    margin-bottom: 50px;
+    max-width: 800px;
+}
+
+.moments-badge {
+    display: inline-block;
+    color: #54bd34;
+    /* Destaque verde para o badge */
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.moments-title {
+    color: #ffffff;
+    font-size: 46px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* ==========================================
+   GALERIA (Imagens Soltas)
+========================================== */
+.moments-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que as imagens quebrem para a linha de baixo */
+    justify-content: center;
+    /* Centraliza as imagens soltas no meio da tela */
+    gap: 30px;
+    /* Espaçamento grande entre elas */
+    width: 100%;
+}
+
+/* O Card da Imagem */
 .gallery-item {
     position: relative;
-    aspect-ratio: 16/9;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    /* Borda de vidro */
-    border-radius: 4px;
+    border: 2px solid #333333;
     cursor: pointer;
-    background: #111;
+    flex: 1 1 320px;
+    /* Tamanho base flexível */
+    max-width: 360px;
+    /* Não deixa a imagem ficar gigante se sobrar espaço */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+
+    /* Suavidade no movimento do card inteiro */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gallery-item img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16/9;
     object-fit: cover;
-    /* Imagem começa levemente escura */
-    filter: brightness(0.85);
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s;
+    display: block;
+    transition: transform 0.5s ease;
 }
 
-/* Fundo de vidro ao passar o mouse */
+/* ==========================================
+   EFEITOS DE HOVER (Suavidade e Flutuação)
+========================================== */
 .gallery-hover {
     position: absolute;
     inset: 0;
-    background: rgba(10, 10, 10, 0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(5, 5, 5, 0.7);
+    /* Fundo similar ao seu lightbox */
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     opacity: 0;
-    transition: 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
-/* Ícone da Lupa */
 .gallery-hover i {
-    color: #fff;
-    font-size: 2.5rem;
+    color: #ffffff;
+    font-size: 40px;
     transform: scale(0.5);
-    /* Começa pequeno */
+    /* Começa menor */
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Ações do Hover */
+/* Quando passa o mouse no card inteiro */
+.gallery-item:hover {
+    transform: translateY(-10px);
+    /* O card flutua para cima */
+    border-color: #54bd34;
+    /* A borda acende */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
 .gallery-item:hover img {
     transform: scale(1.08);
-    filter: brightness(1);
-    /* Acende a cor */
+    /* Zoom na foto */
 }
 
 .gallery-item:hover .gallery-hover {
     opacity: 1;
+    /* Mostra a película preta */
 }
 
 .gallery-item:hover .gallery-hover i {
     transform: scale(1);
-    /* Ícone pula para a tela */
+    /* Ícone de Lupa pula pro tamanho normal */
 }
-
 
 /* ==========================================
    SISTEMA DE TELA CHEIA (LIGHTBOX/MODAL)
@@ -4625,6 +4790,30 @@ var .play-pause {
         top: 15px;
         right: 25px;
         font-size: 35px;
+    }
+}
+
+/* ==========================================
+   AJUSTES PARA MOBILE (CELULAR)
+========================================== */
+@media (max-width: 768px) {
+    .moments-section {
+        padding: 50px 0;
+    }
+
+    .moments-title {
+        font-size: 32px;
+    }
+
+    .moments-gallery {
+        gap: 20px;
+        /* Reduz um pouco o buraco entre as fotos no celular */
+    }
+
+    .gallery-item {
+        flex: 1 1 100%;
+        /* Força a ocupar 100% da largura do celular */
+        max-width: 100%;
     }
 }
 
