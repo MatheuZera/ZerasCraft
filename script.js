@@ -1012,12 +1012,18 @@ function handleEliteTip(btn, event) {
 }
 
 function closeEliteTip() {
-    document.getElementById('eliteTooltip').style.display = "none";
+    const eliteTip = document.getElementById('elite-tip'); // Substitua pelo ID real que estiver no seu código
+    if (eliteTip) { // <- Essa é a proteção! Só executa se o elemento existir na página
+        eliteTip.style.display = 'none'; 
+    }
 }
 
 // Segurança: Fecha ao clicar fora do tooltip
 document.addEventListener('click', (e) => {
-    if (!e.target.closest('.tooltip-premium-solid')) closeEliteTip();
+    // Só chama a função se não der erro
+    if (typeof closeEliteTip === 'function') {
+        closeEliteTip();
+    }
 });
 
 
