@@ -1016,7 +1016,6 @@ function handleEliteTip(btn, event) {
 
 // 1. Função para o Desktop (Cliques na Barra Lateral)
 function openHub(event, gameId) {
-    // Apenas executa se for clicado via barra lateral (Desktop)
     if (window.innerWidth > 768) {
         // Remove a classe 'active' de todos os botões laterais
         const links = document.querySelectorAll('.tab-link');
@@ -1032,12 +1031,12 @@ function openHub(event, gameId) {
     }
 }
 
-// 2. Função para o Mobile (Cliques nos Cabeçalhos do Acordeão)
-function toggleAccordion(buttonElement) {
+// 2. Função EXCLUSIVA para o Mobile do Hub (Cliques no Acordeão)
+function toggleHubAccordion(buttonElement) {
     // Pega o contêiner pai (.hub-content) do botão clicado
-    const currentContent = buttonElement.parentElement;
+    const currentContent = buttonElement.closest('.hub-content');
 
-    // (Opcional) Se quiser que as outras abas fechem automaticamente ao abrir uma nova:
+    // Fechar as outras abas ao abrir uma nova (Sanfona)
     const allContents = document.querySelectorAll('.hub-content');
     allContents.forEach(content => {
         if (content !== currentContent) {
