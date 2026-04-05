@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (autoPlay) {
             backgroundAudio.play().catch(() => {
                 // Se der bloqueio, substitui o CARREGANDO por INTERAÇÃO NECESSÁRIA infinito
-                showMessage("INTERAÇÃO NECESSÁRIA", "O navegador bloqueou o áudio automático. Clique no play.", "fa-hand-paper", "#e91e63", 0);
+                showMessage("AVISO", "O navegador bloqueou o áudio automático. Clique no play.", "fa-hand-paper", "#ff0000", 0);
                 updateUI();
             });
         }
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage("CARREGANDO...", `[${playlist[currentMusicIndex].playlist}] ${playlist[currentMusicIndex].title}`, "fa-spinner fa-spin", "#2196F3", 0);
             
             backgroundAudio.play().catch(() => {
-                showMessage("INTERAÇÃO NECESSÁRIA", "Houve um problema com a reprodução.", "fa-exclamation-circle", "#e91e63", 0);
+                showMessage("AVISO", "Houve um problema com a reprodução.", "fa-exclamation-circle", "#ff0000", 0);
             });
         } else {
             backgroundAudio.pause();
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
             backgroundAudio.currentTime = 0;
             showMessage("CARREGANDO...", `[${playlist[currentMusicIndex].playlist}] ${playlist[currentMusicIndex].title}`, "fa-spinner fa-spin", "#2196F3", 0);
             backgroundAudio.play().catch(() => {
-                showMessage("INTERAÇÃO NECESSÁRIA", "Clique no Play para iniciar.", "fa-hand-paper", "#e91e63", 0);
+                showMessage("AVISO", "Clique no Play para iniciar.", "fa-hand-paper", "#ff0000", 0);
             });
             return;
         }
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             backgroundAudio.currentTime = 0;
             showMessage("CARREGANDO...", `[${playlist[currentMusicIndex].playlist}] ${playlist[currentMusicIndex].title}`, "fa-spinner fa-spin", "#2196F3", 0);
             backgroundAudio.play().catch(() => {
-                showMessage("INTERAÇÃO NECESSÁRIA", "Clique no Play para iniciar.", "fa-hand-paper", "#e91e63", 0);
+                showMessage("AVISO", "Clique no Play para iniciar.", "fa-hand-paper", "#ff0000", 0);
             });
         } else {
             if (playHistory.length > 0) {
