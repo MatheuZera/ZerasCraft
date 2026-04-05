@@ -1380,13 +1380,13 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const inviteCode = 'GYGVBqGEwP';
 
-    const statusCountEl = document.getElementById('new-status-count');
+    const statusCountEl = document.getElementById('new-status-count'); // Se existir outro no site
     const membersCountEl = document.getElementById('new-members-count');
     const objectiveEl = document.getElementById('new-objective-val');
     const progressBar = document.getElementById('new-goal-fill');
     const progressText = document.getElementById('new-percent-text');
 
-    // Função de animação de números preparada para passar de 100%
+    // Função de animação de números suave
     function animateValue(obj, start, end, duration, isPercent = false, suffix = '') {
         if (!obj) return;
         let startTimestamp = null;
@@ -1396,7 +1396,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const current = Math.floor(progress * (end - start) + start);
 
-            // Adiciona o símbolo "+" se for porcentagem e passar de 100
+            // Se for porcentagem e passar de 100, exibe o + (Ex: +105%)
             let prefix = (isPercent && current > 100) ? '+' : '';
 
             obj.innerText = isPercent ? prefix + current + '%' : current.toLocaleString('pt-BR') + suffix;
@@ -1420,24 +1420,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             const totalMembers = data.approximate_member_count || 0;
 
-            // 1. Atualiza os textos
+            // 1. Atualiza os textos numéricos
             if (statusCountEl) animateValue(statusCountEl, 0, totalMembers, 1500, false, ' Membros Totais');
             if (membersCountEl) animateValue(membersCountEl, 0, totalMembers, 1500);
 
-            // 2. Lógica da % com suporte para valores além do Objetivo
+            // 2. Lógica Mestra da Meta (Lendo do HTML)
             if (objectiveEl && progressBar && progressText) {
-
+                // Captura o valor direto da span no HTML (Remove qualquer coisa que não seja número)
                 let rawText = objectiveEl.textContent || "1";
                 let objectiveVal = parseFloat(rawText.replace(/\D/g, '')) || 1;
 
-                // PORCENTAGEM REAL (Pode ser 105%, 200%, etc.)
+                // Cálculo das Porcentagens
                 let realPercentage = (totalMembers / objectiveVal) * 100;
                 if (realPercentage < 0) realPercentage = 0;
 
-                // PORCENTAGEM VISUAL (Trava no máximo em 100% para não estourar o layout da barra)
+                // Trava visual para a barra não vazar a tela
                 let visualPercentage = realPercentage > 100 ? 100 : realPercentage;
 
-                // Anima a barra preenchendo
+                // Espera um tempinho (300ms) pra interface aparecer e então dispara a animação
                 setTimeout(() => {
                     progressBar.style.width = visualPercentage + '%';
                     animateValue(progressText, 0, realPercentage, 1500, true);
@@ -1445,12 +1445,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } catch (error) {
-            console.error("Zera's Craft ->", error);
+            console.error("Zera's Craft -> Erro ao buscar meta do Discord:", error);
+            // Fallback de segurança em caso de erro
             if (statusCountEl) statusCountEl.innerText = "Servidor Online";
             if (membersCountEl) membersCountEl.innerText = "---";
         }
     }
 
+    // Inicia o sistema
     fetchDiscordStats();
 });
 
