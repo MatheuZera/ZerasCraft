@@ -2800,6 +2800,13 @@
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.rank-big {
+    font-size: 28px;
+    color: #e6e6e6;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(172, 172, 172, 0.507);
+}
+
 .gold-shield,
 .rank-icon-gold {
     color: #ffcc00;
@@ -2848,12 +2855,6 @@
     font-weight: bold;
 }
 
-.rank-big {
-    font-size: 28px;
-    color: #444;
-    font-weight: 900;
-}
-
 /* TAGS BONITINHAS */
 .badge-pretty {
     padding: 6px 15px;
@@ -2875,35 +2876,205 @@
     color: #fff;
 }
 
-/* BOTÃO DE MENU */
-.btn-elite-plus {
-    background: #222;
-    border: 1px solid #444;
-    color: #fff;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    font-size: 20px;
+/* --- ANIMAÇÕES --- */
+@keyframes elitePopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
-.btn-elite-plus:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+@keyframes elitePopOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
 }
 
-/* TOOLTIP PREMIUM (MOBILE FIX) */
+/* ==========================================
+   1. ANIMAÇÕES DE TRANSIÇÃO (PC)
+========================================== */
+@keyframes elitePopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes elitePopOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+}
+
+/* ==========================================
+   2. ANIMAÇÕES DE TRANSIÇÃO (MOBILE)
+========================================== */
+@keyframes elitePopInMobile {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes elitePopOutMobile {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.9);
+    }
+}
+
+/* ==========================================
+   SISTEMA DE ANIMAÇÃO (PC)
+========================================== */
+@keyframes eliteIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-15px) scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes eliteOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+}
+
+/* ==========================================
+   ESTILO BASE DO TOOLTIP
+========================================== */
 .tooltip-premium-solid {
     position: absolute;
     background: #111;
     border: 3px solid #ffffff;
-    padding: 0;
     width: 340px;
-    display: none;
     z-index: 9999;
     box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.8);
+
+    /* Estado inicial escondido */
+    display: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
+/* Estado: Abrindo (In) */
+.tooltip-premium-solid.active {
+    display: block !important;
+    pointer-events: all;
+    animation: eliteIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* Estado: Fechando (Out) */
+.tooltip-premium-solid.closing {
+    display: block !important;
+    pointer-events: none;
+    animation: eliteOut 0.3s ease-in forwards;
+}
+
+/* ==========================================
+   AJUSTE MOBILE (Centralizado)
+========================================== */
+@media (max-width: 768px) {
+    .tooltip-premium-solid.active {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        /* Trava o centro horizontal em -50% */
+        transform: translate(-50%, -50%) scale(1) !important;
+
+        /* Largura fixa e controlada */
+        width: 320px !important;
+        max-width: 90vw !important;
+
+        box-shadow: 0 0 0 100vh rgba(0, 0, 0, 0.85), 20px 20px 0px #000;
+        z-index: 99999;
+        display: block !important;
+        animation: eliteInMobile 0.4s ease forwards !important;
+    }
+
+    .tooltip-premium-solid.closing {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        /* IMPORTANTE: Mantém exatamente a mesma largura do estado ativo */
+        width: 320px !important;
+        max-width: 90vw !important;
+
+        pointer-events: none;
+        animation: eliteOutMobile 0.3s ease forwards !important;
+    }
+
+    @keyframes eliteInMobile {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -48%) scale(0.96);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    @keyframes eliteOutMobile {
+        0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        100% {
+            opacity: 0;
+            /* Mantém -50% no X para não alargar nem fugir */
+            transform: translate(-50%, -48%) scale(0.96);
+        }
+    }
+}
+
+/* ==========================================
+   4. ELEMENTOS INTERNOS DO TOOLTIP
+========================================== */
 .tip-header {
     background: #ffffff;
     color: #000;
@@ -2916,14 +3087,6 @@
 .tip-label {
     font-weight: 900;
     font-size: 14px;
-}
-
-.tip-close-btn {
-    background: none;
-    border: none;
-    font-weight: 900;
-    cursor: pointer;
-    padding: 5px;
 }
 
 .tip-body {
@@ -2946,8 +3109,64 @@
     text-align: center;
 }
 
-/* --- RESPONSIVIDADE MOBILE --- */
+/* ==========================================
+   5. BOTÕES (ABRIR E FECHAR)
+========================================== */
+/* Botão + (Menu) */
+.btn-elite-plus {
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.btn-elite-plus:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.btn-elite-plus:active {
+    transform: scale(0.9);
+}
+
+/* Botão X (Fechar) */
+.tip-close-btn {
+    background: none;
+    border: none;
+    color: #000;
+    /* Preto para contrastar com o header branco */
+    font-weight: 900;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.1s ease, color 0.2s ease;
+}
+
+.tip-close-btn:hover {
+    color: #ff5e5e !important;
+    transform: scale(1.2);
+    /* Encolhe ao clicar */
+}
+
+.tip-close-btn:active {
+    transform: scale(0.8);
+    /* Encolhe ao clicar */
+}
+
+/* ==========================================
+   6. RESPONSIVIDADE MOBILE (CELULAR)
+========================================== */
 @media (max-width: 768px) {
+
+    /* Ajuste da Tabela/Rank no mobile */
     .thead-industrial {
         display: none;
     }
@@ -2965,14 +3184,28 @@
         width: 100%;
     }
 
-    /* Tooltip Centro no Mobile com Overlay de Fundo */
-    .tooltip-premium-solid {
-        position: fixed;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: 85%;
-        box-shadow: 0 0 0 100vh rgba(0, 0, 0, 0.9);
+    /* Garante que o container da ação ocupe a largura total e centralize o conteúdo */
+    .t-c.action {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        /* Centraliza horizontalmente */
+        align-items: center;
+        /* Centraliza verticalmente */
+        padding: 10px 0;
+        /* Espaçamento extra opcional */
+    }
+
+    /* Ajuste do botão para garantir que ele não tenha floats ou margens fixas */
+    .btn-elite-plus {
+        margin: 0 auto !important;
+        /* Força a centralização por margem */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Mantém o tamanho consistente */
+        min-width: 45px;
+        min-height: 45px;
     }
 }
 

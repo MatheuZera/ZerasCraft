@@ -121,27 +121,189 @@ h6 {
 /*
   ESTILO GERAIS CSS
 */
-.secao-cards-preta {
+/* Esta classe permite que o HTML controle a cor */
+.secao-personalizavel {
     width: 100%;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    /* Aqui acontece a mágica: ele usa a variável --bg que você criar no HTML */
+    background-color: var(--secao, #0b0b0b);
+    color: white;
+}
+
+/* Seção com fundo Verde */
+.secao-verde {
+    width: 100%;
+    background-color: #00b31e !important;
+    /* Usa sua cor verde oficial */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 60px 20px;
     box-sizing: border-box;
 }
 
-/* Estilo para o container principal da seção */
-.secao-cards-verde {
-    background-color: var(--cor-terciaria);
+/* Seção com fundo Verde */
+.secao-verde2 {
     width: 100%;
+    background-color: #229e00 !important;
+    /* Usa sua cor verde oficial */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 60px 20px;
     box-sizing: border-box;
 }
+
+/* Seção com fundo Verde */
+.secao-verde3 {
+    width: 100%;
+    background-color: #187000 !important;
+    /* Usa sua cor verde oficial */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo Verde */
+.secao-roxa {
+    width: 100%;
+    background-color: #120c72 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    z-index: 1;
+    /* Z-index alto se precisar ficar sobre algo, mas 1000 costuma ser para menus */
+}
+
+/* Seção com fundo a */
+.secao-clara {
+    width: 100%;
+    background-color: var(--text-muted) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-cinza {
+    width: 100%;
+    background-color: var(--zc-bg-main) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo Cinza */
+.secao-cinza2 {
+    width: 100%;
+    background-color: #383838 !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura {
+    width: 100%;
+    background-color: var(--bg-light) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura2 {
+    width: 100%;
+    background-color: var(--bg-card) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura3 {
+    width: 100%;
+    background-color: var(--bg-dark) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo Escuro/Preto */
+.secao-preta {
+    width: 100%;
+    background-color: #0b0b0b !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Seção com fundo a */
+.secao-preto2 {
+    width: 100%;
+    background-color: var(--dark-bg);
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+
 
 /* Estilo para a tag personalizada <secao-titulo> */
 secao-titulo {
@@ -1180,8 +1342,15 @@ html.z-lock-scroll {
     background-repeat: no-repeat;
     z-index: 1;
     filter: brightness(0.6);
-    /* Escurece um pouco mais para dar leitura ao texto */
-    transition: transform 0.8s ease-out;
+    /* --- CORREÇÕES PARA FICAR ESTÁTICO --- */
+    transition: none !important;
+    /* Remove qualquer animação de movimento */
+    transform: scale(1) !important;
+    /* Trava a escala em 100% */
+    pointer-events: none;
+    /* O mouse "atravessa" a imagem, impedindo o foco/interação */
+    user-select: none;
+    /* Impede que a imagem seja "arrastada" ou selecionada */
 }
 
 /* Efeito sutil de zoom ao carregar ou hover */
@@ -1664,11 +1833,12 @@ html.z-lock-scroll {
 /* Ajuste Mobile */
 @media (max-width: 770px) {
     .central-message {
-        bottom: 680px;
+        bottom: 150px;
         right: 20px;
         left: 20px;
         width: auto;
-        transform: translateY(-150%);
+        transform: translateY(150%);
+        z-index: 998;
     }
 
     .central-message.show {
@@ -1676,7 +1846,7 @@ html.z-lock-scroll {
     }
 
     .central-message.hide {
-        transform: translateY(-150%);
+        transform: translateY(150%);
     }
 }
 
@@ -5100,7 +5270,7 @@ var .play-pause {
     .click-notification {
         width: 80%;
         top: auto;
-        bottom: 700px;
+        bottom: 630px;
         right: -100%;
     }
 
