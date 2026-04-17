@@ -2800,6 +2800,13 @@
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.rank-big {
+    font-size: 28px;
+    color: #e6e6e6;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(172, 172, 172, 0.507);
+}
+
 .gold-shield,
 .rank-icon-gold {
     color: #ffcc00;
@@ -2846,12 +2853,6 @@
     text-align: center;
     color: #ccc;
     font-weight: bold;
-}
-
-.rank-big {
-    font-size: 28px;
-    color: #444;
-    font-weight: 900;
 }
 
 /* TAGS BONITINHAS */
