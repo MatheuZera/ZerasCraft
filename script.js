@@ -1059,19 +1059,80 @@ function toggleHubAccordion(buttonElement) {
     currentContent.classList.toggle('active');
 }
 
-function closeEliteTip() {
-    const eliteTip = document.getElementById('elite-tip'); // Substitua pelo ID real que estiver no seu código
-    if (eliteTip) { // <- Essa é a proteção! Só executa se o elemento existir na página
-        eliteTip.style.display = 'none';
+/* ==========================================\
+   SISTEMA DE ELITE - POSICIONAMENTO À DIREITA
+========================================== */
+
+function handleEliteTip(btn, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
     }
+
+    const tooltip = document.getElementById('eliteTooltip');
+    const ttUser = document.getElementById('ttUser');
+    const ttDesc = document.getElementById('ttDesc');
+
+    // Alimenta os dados
+    const row = btn.closest('.t-row-elite');
+    const nick = row.getAttribute('data-nick');
+    const bio = row.getAttribute('data-bio');
+
+    ttUser.innerText = nick;
+    ttDesc.innerText = bio;
+
+    // Prepara exibição
+    tooltip.classList.remove('closing');
+    tooltip.style.display = 'block';
+
+    if (window.innerWidth > 768) {
+        // --- LÓGICA PC: ANCORAR À DIREITA ---
+        const rect = btn.getBoundingClientRect();
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // posX = Lado direito do botão + 15px de distância
+        let posX = rect.right + scrollLeft + 15;
+        // posY = Alinhado com o topo do botão
+        let posY = rect.top + scrollTop - 10;
+
+        // VERIFICAÇÃO DE BORDA: Se o menu for sair da tela na direita, ele pula para a esquerda
+        if (posX + 350 > window.innerWidth) {
+            posX = rect.left + scrollLeft - 355;
+        }
+
+        tooltip.style.left = posX + 'px';
+        tooltip.style.top = posY + 'px';
+        tooltip.style.position = 'absolute';
+    } else {
+        // --- LÓGICA MOBILE: CENTRALIZADO ---
+        tooltip.style.left = '';
+        tooltip.style.top = '';
+        tooltip.style.position = 'fixed';
+    }
+
+    setTimeout(() => {
+        tooltip.classList.add('active');
+    }, 10);
 }
 
-// Segurança: Fecha ao clicar fora do tooltip
+function closeEliteTip() {
+    const tooltip = document.getElementById('eliteTooltip');
+    if (!tooltip || !tooltip.classList.contains('active')) return;
+
+    tooltip.classList.add('closing');
+    tooltip.classList.remove('active');
+
+    setTimeout(() => {
+        tooltip.style.display = 'none';
+        tooltip.classList.remove('closing');
+    }, 300);
+}
+
+// Fecha ao clicar fora
 document.addEventListener('click', (e) => {
-    // Só chama a função se não der erro
-    if (typeof closeEliteTip === 'function') {
-        closeEliteTip();
-    }
+    const tooltip = document.getElementById('eliteTooltip');
+    if (tooltip && !tooltip.contains(e.target)) closeEliteTip();
 });
 
 
