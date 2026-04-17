@@ -3020,22 +3020,53 @@
         position: fixed !important;
         top: 50% !important;
         left: 50% !important;
-        /* No mobile usamos translate para centralizar */
-        transform: translate(-50%, -50%) !important;
-        width: 85%;
-        box-shadow: 0 0 0 100vh rgba(0, 0, 0, 0.9);
+        /* Trava o centro horizontal em -50% */
+        transform: translate(-50%, -50%) scale(1) !important;
+
+        /* Largura fixa e controlada */
+        width: 320px !important;
+        max-width: 90vw !important;
+
+        box-shadow: 0 0 0 100vh rgba(0, 0, 0, 0.85), 20px 20px 0px #000;
+        z-index: 99999;
+        display: block !important;
         animation: eliteInMobile 0.4s ease forwards !important;
+    }
+
+    .tooltip-premium-solid.closing {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        /* IMPORTANTE: Mantém exatamente a mesma largura do estado ativo */
+        width: 320px !important;
+        max-width: 90vw !important;
+
+        pointer-events: none;
+        animation: eliteOutMobile 0.3s ease forwards !important;
     }
 
     @keyframes eliteInMobile {
         0% {
             opacity: 0;
-            transform: translate(-50%, -40%) scale(0.9);
+            transform: translate(-50%, -48%) scale(0.96);
         }
 
         100% {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    @keyframes eliteOutMobile {
+        0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        100% {
+            opacity: 0;
+            /* Mantém -50% no X para não alargar nem fugir */
+            transform: translate(-50%, -48%) scale(0.96);
         }
     }
 }

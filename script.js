@@ -462,17 +462,6 @@ document.querySelectorAll('.read-more-toggle').forEach(button => {
     });
 });
 
-
-
-
-// 1. Simulação de Jogadores Online (Número Aleatório para dar vida)
-function updatePlayers() {
-    const countElement = document.getElementById('online-count');
-    const randomCount = Math.floor(Math.random() * (1500 - 1200 + 1)) + 1200;
-    if (countElement) countElement.innerText = `${randomCount} JOGADORES ONLINE AGORA`;
-}
-updatePlayers();
-
 // 2. Filtro de Categorias (Lógica)
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', function () {
@@ -491,7 +480,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         });
     });
 });
-
 
 
 // Lógica de Troca de Abas
@@ -1001,25 +989,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/* Versão Corrigida para centralizar no Mobile */
 function handleEliteTip(btn, event) {
-    const row = btn.closest('.t-row-elite');
+    if (event) { event.preventDefault(); event.stopPropagation(); }
     const tooltip = document.getElementById('eliteTooltip');
-    const isMobile = window.innerWidth <= 768;
+    const row = btn.closest('.t-row-elite');
 
-    // Injeção de Dados Real
     document.getElementById('ttUser').innerText = row.getAttribute('data-nick');
     document.getElementById('ttDesc').innerText = row.getAttribute('data-bio');
 
-    tooltip.style.display = "block";
+    // 1. Verificamos se é PC ou MOBILE
+    if (window.innerWidth > 768) {
+        // LÓGICA PC: Posicionamento dinâmico ao lado do botão
+        const rect = btn.getBoundingClientRect();
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (!isMobile) {
-        // PC: Posicionamento Dinâmico
-        tooltip.style.left = (event.pageX + 20) + "px";
-        tooltip.style.top = (event.pageY + 20) + "px";
+        let posX = rect.right + scrollLeft + 15;
+        let posY = rect.top + scrollTop - 10;
+        if (posX + 340 > window.innerWidth) posX = rect.left + scrollLeft - 345;
+
+        tooltip.style.left = posX + 'px';
+        tooltip.style.top = posY + 'px';
+    } else {
+        // LÓGICA MOBILE: Limpamos o lixo de coordenadas para o CSS centralizar
+        tooltip.style.left = '';
+        tooltip.style.top = '';
     }
-    // Mobile: O CSS cuida do centro (fixed)
-    event.stopPropagation();
+
+    tooltip.classList.remove('closing');
+    tooltip.style.display = 'block';
+    requestAnimationFrame(() => tooltip.classList.add('active'));
 }
+
+function closeEliteTip() {
+    const tooltip = document.getElementById('eliteTooltip');
+    if (!tooltip.classList.contains('active')) return;
+
+    tooltip.classList.add('closing');
+    tooltip.classList.remove('active');
+
+    setTimeout(() => {
+        tooltip.style.display = 'none';
+        tooltip.classList.remove('closing');
+    }, 300);
+}
+
+// Fechar ao clicar fora
+document.addEventListener('click', (e) => {
+    const tooltip = document.getElementById('eliteTooltip');
+    if (tooltip && !tooltip.contains(e.target)) {
+        closeEliteTip();
+    }
+});
 
 /* ===================================================================
    HUB DE JOGOS (CONTROLES DESKTOP E MOBILE)
@@ -1058,83 +1080,6 @@ function toggleHubAccordion(buttonElement) {
     // Alterna a classe 'active' no elemento clicado para abrir/fechar
     currentContent.classList.toggle('active');
 }
-
-/* ==========================================\
-   SISTEMA DE ELITE - POSICIONAMENTO À DIREITA
-========================================== */
-
-function handleEliteTip(btn, event) {
-    if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
-
-    const tooltip = document.getElementById('eliteTooltip');
-    const ttUser = document.getElementById('ttUser');
-    const ttDesc = document.getElementById('ttDesc');
-
-    // Alimenta os dados
-    const row = btn.closest('.t-row-elite');
-    const nick = row.getAttribute('data-nick');
-    const bio = row.getAttribute('data-bio');
-
-    ttUser.innerText = nick;
-    ttDesc.innerText = bio;
-
-    // Prepara exibição
-    tooltip.classList.remove('closing');
-    tooltip.style.display = 'block';
-
-    if (window.innerWidth > 768) {
-        // --- LÓGICA PC: ANCORAR À DIREITA ---
-        const rect = btn.getBoundingClientRect();
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // posX = Lado direito do botão + 15px de distância
-        let posX = rect.right + scrollLeft + 15;
-        // posY = Alinhado com o topo do botão
-        let posY = rect.top + scrollTop - 10;
-
-        // VERIFICAÇÃO DE BORDA: Se o menu for sair da tela na direita, ele pula para a esquerda
-        if (posX + 350 > window.innerWidth) {
-            posX = rect.left + scrollLeft - 355;
-        }
-
-        tooltip.style.left = posX + 'px';
-        tooltip.style.top = posY + 'px';
-        tooltip.style.position = 'absolute';
-    } else {
-        // --- LÓGICA MOBILE: CENTRALIZADO ---
-        tooltip.style.left = '';
-        tooltip.style.top = '';
-        tooltip.style.position = 'fixed';
-    }
-
-    setTimeout(() => {
-        tooltip.classList.add('active');
-    }, 10);
-}
-
-function closeEliteTip() {
-    const tooltip = document.getElementById('eliteTooltip');
-    if (!tooltip || !tooltip.classList.contains('active')) return;
-
-    tooltip.classList.add('closing');
-    tooltip.classList.remove('active');
-
-    setTimeout(() => {
-        tooltip.style.display = 'none';
-        tooltip.classList.remove('closing');
-    }, 300);
-}
-
-// Fecha ao clicar fora
-document.addEventListener('click', (e) => {
-    const tooltip = document.getElementById('eliteTooltip');
-    if (tooltip && !tooltip.contains(e.target)) closeEliteTip();
-});
-
 
 /* ==========================================
    1. CONTROLE DAS ABAS (Com Auto-Scroll no Mobile)
@@ -1678,18 +1623,15 @@ window.addEventListener('click', function (event) {
 /* ==========================================
    SISTEMA DE BANNER (MEMÓRIA LOCAL)
 ========================================== */
-// Função acionada ao clicar no botão "Entendi"
+/* Final correto do arquivo */
 function fecharESalvarBanner(bannerId) {
     const banner = document.getElementById(bannerId);
-
     if (banner) {
-        // Faz uma animação de descida antes de sumir
         banner.style.opacity = '0';
         banner.style.transform = 'translateY(20px)';
-
-        // Espera a animação terminar (400ms) e remove da tela
         setTimeout(() => {
             banner.style.display = 'none';
         }, 400);
     }
 }
+// Certifique-se de que NÃO existam mais chaves } abaixo desta linha.
