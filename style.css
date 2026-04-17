@@ -1342,8 +1342,15 @@ html.z-lock-scroll {
     background-repeat: no-repeat;
     z-index: 1;
     filter: brightness(0.6);
-    /* Escurece um pouco mais para dar leitura ao texto */
-    transition: transform 0.8s ease-out;
+    /* --- CORREÇÕES PARA FICAR ESTÁTICO --- */
+    transition: none !important;
+    /* Remove qualquer animação de movimento */
+    transform: scale(1) !important;
+    /* Trava a escala em 100% */
+    pointer-events: none;
+    /* O mouse "atravessa" a imagem, impedindo o foco/interação */
+    user-select: none;
+    /* Impede que a imagem seja "arrastada" ou selecionada */
 }
 
 /* Efeito sutil de zoom ao carregar ou hover */
