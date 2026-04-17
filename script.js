@@ -1635,3 +1635,25 @@ function fecharESalvarBanner(bannerId) {
     }
 }
 // Certifique-se de que NÃO existam mais chaves } abaixo desta linha.
+
+
+/* ==========================================
+   DROPDOWN MENU MOBILE (ACORDEÃO)
+========================================== */
+function toggleDropdown(element) {
+    // 1. Encontra o <li> mais próximo que contém o dropdown
+    const parentLi = element.closest('.zmob-has-dropdown');
+
+    // 2. Encontra a div de conteúdo dentro deste li
+    const content = parentLi.querySelector('.zmob-dropdown-content');
+
+    // 3. Alterna a classe 'active' no li (isso dispara a rotação do CSS acima)
+    const isActive = parentLi.classList.toggle('active');
+
+    // 4. Lógica de expansão suave (Ajuste de altura)
+    if (isActive) {
+        content.style.maxHeight = content.scrollHeight + "px";
+    } else {
+        content.style.maxHeight = "0px";
+    }
+}
