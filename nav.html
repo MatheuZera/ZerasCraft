@@ -751,6 +751,7 @@
             <div class="zmob-panel" id="zpanel-main">
                 <ul class="zmob-list">
                     <li><a href="#">Sobre</a></li>
+                    <li onclick="slideMobile('zpanel-explorar')">TESTE <i class="fas fa-chevron-right"></i></li>
                     <li onclick="slideMobile('zpanel-inicio')">INÍCIO <i class="fas fa-chevron-right"></i></li>
                     <li onclick="slideMobile('zpanel-novidades')">NOVIDADES <i class="fas fa-chevron-right"></i></li>
                     <li onclick="slideMobile('zpanel-oficial')">OFICIAL <i class="fas fa-chevron-right"></i></li>
@@ -766,20 +767,126 @@
                 </ul>
             </div>
 
+            <div class="zmob-panel zpanel-sub" id="zpanel-explorar">
+                <button class="zmob-back-btn" onclick="slideBack()">
+                    <i class="fas fa-chevron-left"></i> VOLTAR
+                </button>
+
+                <h2 class="zmob-title">EXPLORAR</h2>
+
+                <ul class="zmob-list">
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Home">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Página Principal</span>
+                                <span class="zmob-item-desc">Volte para a tela inicial</span>
+                            </div>
+                            <i class="fas fa-chevron-right zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Loja">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Loja Oficial</span>
+                                <span class="zmob-item-desc">Vips, Cash e Cosméticos</span>
+                            </div>
+                            <i class="fas fa-shopping-cart zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-has-dropdown">
+                        <div class="zmob-item-collapse" onclick="toggleDropdown(this)">
+                            <div class="zmob-collapse-label">
+                                <i class="fas fa-globe-americas"></i>
+                                <span>COMUNIDADE</span>
+                            </div>
+                            <i class="fas fa-chevron-down zmob-arrow"></i>
+                        </div>
+
+                        <div class="zmob-dropdown-content">
+                            <ul class="zmob-sub-list">
+                                <li class="zmob-item-list">
+                                    <a href="#">
+                                        <img src="assets/images/geral/banner-img.jpg" alt="Discord">
+                                        <div class="zmob-item-info">
+                                            <span class="zmob-item-title">Discord</span>
+                                            <span class="zmob-item-desc">Junte-se ao servidor</span>
+                                        </div>
+                                        <i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Jogos">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>Nossos Jogos</span>
+                                <span class="zmob-item-desc">Explore modos de jogo únicos</span>
+                            </div>
+                            <i class="fas fa-gamepad zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Rankings">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Rankings</span>
+                                <span class="zmob-item-desc">Veja os melhores jogadores</span>
+                            </div>
+                            <i class="fas fa-trophy zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Suporte">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Suporte</span>
+                                <span class="zmob-item-desc">Dúvidas e Tickets</span>
+                            </div>
+                            <i class="fas fa-life-ring zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Equipe">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Equipe</span>
+                                <span class="zmob-item-desc">Conheça nossos membros</span>
+                            </div>
+                            <i class="fas fa-user-tie zmob-item-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="zmob-green-line"></div>
+                <ul class="zmob-list-small">
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Termos de Compra</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Ver Carrinho</a></li>
+                </ul>
+            </div>
+
             <div class="zmob-panel zpanel-sub" id="zpanel-inicio">
                 <button class="zmob-back-btn" onclick="slideBack()"><i class="fas fa-chevron-left"></i> VOLTAR</button>
                 <h2 class="zmob-title">INÍCIO</h2>
                 <ul class="zmob-list">
                     <li><a href="#">Página Inicial <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Comuidade <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="comunidade">Comuidade <i class="fas fa-chevron-right"></i></a></li>
                     <li><a href="#">Parceiros <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Template1 <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Template2 <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="pixel-legends">Pixel Legends <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="recursos">Recursos <i class="fas fa-chevron-right"></i></a></li>
                 </ul>
                 <div class="zmob-green-line"></div>
                 <ul class="zmob-list-small">
-                    <li><a href="#">Ir para Downloads</a></li>
-                    <li><a href="#">Resgatar código VIP</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Termos de Compra</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Ver Carrinho</a></li>
                 </ul>
             </div>
 
@@ -792,7 +899,7 @@
                 </ul>
                 <div class="zmob-green-line"></div>
                 <ul class="zmob-list-small">
-                    <li><a href="#">Termos de Compra</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Termos de Compra</a></li>
                     <li><a href="#">Ver Carrinho</a></li>
                 </ul>
             </div>
@@ -801,14 +908,17 @@
                 <button class="zmob-back-btn" onclick="slideBack()"><i class="fas fa-chevron-left"></i> VOLTAR</button>
                 <h2 class="zmob-title">OFICIAL</h2>
                 <ul class="zmob-list">
-                    <li><a href="#">Eventos <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Canal Oficial <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="arquivos">Arquivos Gerais <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="eventos">Eventos <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="mctu">MCTU <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="craftjam">CraftJam <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="canais">Canal Oficial <i class="fas fa-chevron-right"></i></a></li>
                     <li><a href="#">Canais Parceiros <i class="fas fa-chevron-right"></i></a></li>
                 </ul>
                 <div class="zmob-green-line"></div>
                 <ul class="zmob-list-small">
-                    <li><a href="#">Blog Oficial</a></li>
-                    <li><a href="#">Assinar Newsletter</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Blog Oficial</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Assinar Newsletter</a></li>
                 </ul>
             </div>
 
@@ -816,13 +926,13 @@
                 <button class="zmob-back-btn" onclick="slideBack()"><i class="fas fa-chevron-left"></i> VOLTAR</button>
                 <h2 class="zmob-title">SUPORTE</h2>
                 <ul class="zmob-list">
-                    <li><a href="#">Central de Ajuda <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="suporte">Central de Ajuda <i class="fas fa-chevron-right"></i></a></li>
                     <li><a href="#">Abra seu Ticket <i class="fas fa-chevron-right"></i></a></li>
                     <li><a href="#">Solicitar Parceria (Servidor Discord) <i class="fas fa-chevron-right"></i></a></li>
                 </ul>
                 <div class="zmob-green-line"></div>
                 <ul class="zmob-list-small">
-                    <li><a href="#">Regras Oficiais do Servidor</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Regras Oficiais do Servidor</a></li>
                 </ul>
             </div>
 
@@ -841,7 +951,7 @@
                 </ul>
                 <div class="zmob-green-line"></div>
                 <ul class="zmob-list-small">
-                    <li><a href="#" style="color:#ff5555;">Indisponível..</a></li>
+                    <li><a href="#" style="color:#ff5555;"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Indisponível..</a></li>
                 </ul>
             </div>
 

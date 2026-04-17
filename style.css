@@ -1145,7 +1145,7 @@ html.z-lock-scroll {
         width: 50px;
         height: 2px;
         background: var(--zc-green);
-        margin: 20px 25px;
+        margin: 8px 25px;
     }
 
     .zmob-list-small {
@@ -1156,11 +1156,174 @@ html.z-lock-scroll {
     .zmob-list-small li a {
         display: flex;
         align-items: center;
-        padding: 12px 25px;
+        padding: 8px 25px;
         color: #ccc;
         text-decoration: none;
         font-weight: bold;
         font-size: 13px;
+    }
+
+    /* ============================================================
+   1. BASE E TIPOGRAFIA
+============================================================ */
+    .zmob-panel {
+        background: #0f0f0f;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .zmob-title {
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 800;
+        color: #fff;
+        padding: 15px 25px 5px;
+        letter-spacing: 1px;
+        font-size: 1.2rem;
+        margin: 0;
+    }
+
+    .zmob-list,
+    .zmob-sub-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* ============================================================
+   2. ITENS DA LISTA (LINHAS COM IMAGEM)
+============================================================ */
+    .zmob-item-list {
+        list-style: none;
+    }
+
+    .zmob-item-list a {
+        display: flex;
+        align-items: center;
+        padding: 12px 25px;
+        gap: 15px;
+        text-decoration: none;
+        transition: background 0.2s ease, border-color 0.2s ease;
+        border-left: 3px solid transparent;
+    }
+
+    /* Feedback de Toque/Ativo */
+    .zmob-item-list a:active {
+        background: rgba(255, 255, 255, 0.05);
+        border-left-color: var(--text-main);
+    }
+
+    .zmob-item-list a:active .zmob-item-icon {
+        color: var(--text-main);
+    }
+
+    /* Thumbnail */
+    .zmob-item-list img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border-radius: 2px;
+        /* Opcional: arredondar levemente como no print */
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Bloco de Textos Internos */
+    .zmob-item-info {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        /* Empurra o ícone para a direita */
+        justify-content: center;
+    }
+
+    .zmob-item-title {
+        color: #f1f1f1;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+
+    .zmob-item-desc {
+        color: #888;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    /* Ícone da Direita (Seta ou Link) */
+    .zmob-item-icon {
+        color: #555;
+        font-size: 14px;
+        flex-shrink: 0;
+        transition: color 0.2s ease;
+    }
+
+    /* ============================================================
+   3. SISTEMA DE ACORDEÃO (COMUNIDADE / DROPDOWN)
+============================================================ */
+    .zmob-has-dropdown {
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .zmob-item-collapse {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 25px;
+        cursor: pointer;
+        background: transparent;
+        transition: background 0.3s ease;
+    }
+
+    .zmob-collapse-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #bbb;
+        font-weight: 700;
+        font-size: 13px;
+        font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+    }
+
+    .zmob-collapse-label i {
+        color: var(--text-main);
+        font-size: 14px;
+    }
+
+    /* Seta do Dropdown */
+    .zmob-arrow {
+        font-size: 12px;
+        color: var(--text-main);
+        display: inline-block;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Conteúdo Escondido do Dropdown */
+    .zmob-dropdown-content {
+        max-height: 0;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.2);
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ------------------------------------------------------------
+   4. ESTADOS ATIVOS (QUANDO ABERTO)
+------------------------------------------------------------ */
+    /* Fundo do cabeçalho quando aberto */
+    .zmob-has-dropdown.active .zmob-item-collapse {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Rotação da seta */
+    .zmob-has-dropdown.active .zmob-arrow {
+        transform: rotate(180deg);
+    }
+
+    /* Fundo da sub-lista interna */
+    .zmob-sub-list {
+        background: rgba(0, 0, 0, 0.1);
     }
 }
 
