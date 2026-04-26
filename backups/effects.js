@@ -1,83 +1,83 @@
-// =====================================
-// Configuração de Áudio
-// =====================================
+/**
+ * ZERA'S CRAFT - SISTEMA DE ÁUDIO SINCRONIZADO
+ */
 
-const AUDIO_BASE_PATH = 'assets/audios/effects/';
+const AUDIO_PATH = "assets/audios/effects/";
 
-// Sistema de volumes individuais (0 a 100)
-const EFFECT_VOLUMES = {
-    link: 50,        // Volume para sons de navegação
-    card: 50,        // Volume para hover em cards
-    button: 15,      // Volume para hover em botões
-    select: 20,      // Volume para hover em links de texto
-    click: 30         // Volume para cliques em botões
+const sounds = {
+    button: new Audio(AUDIO_PATH + "button.mp3"),
+    buttonClick: new Audio(AUDIO_PATH + "button-click.mp3"),
+    card: new Audio(AUDIO_PATH + "card.mp3"),
+    link: new Audio(AUDIO_PATH + "link.mp3"),
+    select: new Audio(AUDIO_PATH + "select.mp3")
 };
 
-// Define os caminhos e pre-carrega os sons
-const linkSound = new Audio(AUDIO_BASE_PATH + 'link.mp3');
-const cardSound = new Audio(AUDIO_BASE_PATH + 'card.mp3');
-const buttonSound = new Audio(AUDIO_BASE_PATH + 'button.mp3');
-const selectSound = new Audio(AUDIO_BASE_PATH + 'select.mp3');
-const buttonClickSound = new Audio(AUDIO_BASE_PATH + 'button-click.mp3');
+// Pré-carrega todos
+Object.values(sounds).forEach(s => s.preload = "auto");
 
-[linkSound, cardSound, buttonSound, selectSound, buttonClickSound].forEach(s => s.preload = 'auto');
-
-/**
- * Toca um som de forma controlada com volume específico.
- * @param {HTMLAudioElement} sound - O objeto de áudio.
- * @param {number} volumePercentage - Porcentagem de 0 a 100.
- */
-function playSound(sound, volumePercentage) {
-    const clonedSound = sound.cloneNode();
-
-    // Converte a porcentagem (ex: 70) para o valor decimal do JS (ex: 0.7)
-    clonedSound.volume = volumePercentage / 100;
-
-    clonedSound.play().catch(e => console.error("Erro ao tocar o áudio:", e));
+function play(key, vol = 0.4) {
+    const s = sounds[key].cloneNode();
+    s.volume = vol;
+    s.play().catch(() => { });
 }
 
 // =====================================
-// Gerenciamento de Eventos de Clique
+// LISTAS DE CLASSES
 // =====================================
 
-document.addEventListener('click', (event) => {
-    const target = event.target.closest('a, button');
+// 1. Som 'button' no HOVER
+const HOVER_BUTTON = [".back-to-top", ".btn-primary", ".btn-outline", ".znav-tab", ".mc-arrow", ".tab-btn", ".burger", ".faq-item", ".zmob-has-dropdown", ".btn-price", ".btn-hero-green", ".video-frame", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".special-link", ".btn-abrir", ".checkout-btn", ".feat-tab", ".nav-tab-btn", ".thumb-item", ".btn-toggle-text", ".btn-next-img", ".nav-arrow", ".d-thumb"];
 
-    if (!target) return;
+// 2. Som 'button_click' no CLIQUE (Acordeões e Botões)
+const CLICK_ACTION = [".btn-outline", ".btn-sidebar", ".znav-tab", ".faq-item", ".zmob-has-dropdown", ".btn-primary", ".btn-green", ".tab-btn", ".btn-price", ".btn-hero-green", ".play-btn", ".mc-arrow", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".btn-abrir", ".checkout-btn", ".feat-tab", ".nav-tab-btn", ".thumb-item", ".btn-toggle-text", ".nav-arrow", ".d-thumb", ".mc-acc-item"];
 
-    // Ignora os botões do player principal para evitar sons duplicados
-    if (target.id === 'audioControlButton' || target.id === 'audioPrevButton' || target.id === 'audioNextButton') return;
+// 3. Som 'card' no HOVER
+const HOVER_CARD = [".mc-collectible-card", ".gallery-item", ".game-card2", ".mode-card", ".mc-news-card", ".f-card", ".w-item", ".game-card-simple", ".content-item", ".link-item", ".game-card"];
 
-    const isNavLink = target.tagName === 'A' && target.href && !target.href.startsWith('#') && !target.href.includes('javascript:');
-    const isSpecialButton = target.tagName === 'BUTTON' || (target.tagName === 'A' && target.href.startsWith('#'));
-
-    if (isNavLink) {
-        event.preventDefault();
-        playSound(linkSound, EFFECT_VOLUMES.link);
-        setTimeout(() => {
-            window.location.href = target.href;
-        }, 300);
-    } else if (isSpecialButton) {
-        playSound(buttonClickSound, EFFECT_VOLUMES.click);
-    }
-});
+// 4. Som 'select' no HOVER (Links de texto)
+const HOVER_SELECT = [".znav-item", ".footer-col a", ".mc-link-all", "p a", ".promo-box", ".link-btn-card", ".dl-card", ".testi-card", ".news-card", ".t-row-elite", ".sidebar-link", ".feature-tag", ".btn-demo ", ".dropdown-link", ".table-item", ".fab-button", ".znav-item"];
 
 // =====================================
-// Gerenciamento de Eventos de Hover
+// APLICAÇÃO DOS EVENTOS
 // =====================================
 
-const cardElements = document.querySelectorAll('.market-card, .dl-card, .rank-card, .gallery-item, .faq-item');
-const buttonElements = document.querySelectorAll('.btn-green, .btn-sidebar, .tab-btn, .pill-btn, .social-box, .back-to-top, .burger');
-const textLinkElements = document.querySelectorAll('.footer-col a, .sidebar-links a, p a');
+document.addEventListener("DOMContentLoaded", () => {
 
-cardElements.forEach(element => {
-    element.addEventListener('mouseenter', () => playSound(cardSound, EFFECT_VOLUMES.card));
-});
+    // Aplica HOVER (Som button)
+    HOVER_BUTTON.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            el.addEventListener("mouseenter", () => play("button", 0.2));
+        });
+    });
 
-buttonElements.forEach(element => {
-    element.addEventListener('mouseenter', () => playSound(buttonSound, EFFECT_VOLUMES.button));
-});
+    // Aplica CLIQUE (Som buttonClick) - ESSENCIAL PARA O ACORDEÃO
+    CLICK_ACTION.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            el.addEventListener("click", () => play("buttonClick", 0.5));
+        });
+    });
 
-textLinkElements.forEach(element => {
-    element.addEventListener('mouseenter', () => playSound(selectSound, EFFECT_VOLUMES.select));
+    // Aplica HOVER (Som card)
+    HOVER_CARD.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            el.addEventListener("mouseenter", () => play("card", 0.15));
+        });
+    });
+
+    // Aplica HOVER (Som select)
+    HOVER_SELECT.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            el.addEventListener("mouseenter", () => play("select", 0.2));
+        });
+    });
+
+    // Lógica Global de Links Externos (Som link)
+    document.addEventListener("click", (e) => {
+        const a = e.target.closest("a");
+        if (a && a.href && !a.href.startsWith("#") && !a.href.includes("javascript:")) {
+            e.preventDefault();
+            play("link", 0.6);
+            setTimeout(() => window.location.href = a.href, 400);
+        }
+    });
 });
