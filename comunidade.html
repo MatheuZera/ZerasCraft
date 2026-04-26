@@ -1,64 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
 
 <head>
     <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zera's Craft | Comunidade</title> <!---->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zera's Craft | Comunidade</title>
+    <!---->
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
-    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css"> <!---->
-    <link rel="stylesheet" href="style2.css"> <!---->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <!---->
+    <link rel="stylesheet" href="style2.css" />
+    <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!---->
 
     <!--é a breve descrição da sua página que pode aparecer no Google-->
     <meta name="description"
-        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!" />
     <!--são palavras-chave que ajudam a categorizar o conteúdo-->
     <meta name="keywords"
-        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo" />
     <!--Identifica o autor do documento HTML.-->
-    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft" />
     <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow" />
 
     <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
     <!--O título que aparece na pré-visualização.-->
-    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial" />
     <!--A descrição que aparece na pré-visualização.-->
     <meta property="og:description"
-        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!" />
     <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
-    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
+    <meta property="og:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg" />
     <!--A URL da página.-->
-    <meta property="og:url" content="https://seusite.com.br/index.html">
+    <meta property="og:url" content="https://seusite.com.br/index.html" />
 
     <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Mundo Zera's Craft">
-    <meta property="og:locale" content="pt_BR">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mundo Zera's Craft" />
+    <meta property="og:locale" content="pt_BR" />
 
     <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@SeuTwitterHandle">
-    <meta name="twitter:creator" content="@SeuTwitterHandle">
-    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SeuTwitterHandle" />
+    <meta name="twitter:creator" content="@SeuTwitterHandle" />
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!" />
     <meta name="twitter:description"
-        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!" />
     <!---->
     <meta name="twitter:image"
-        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg" />
     <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
-    <meta name="theme-color" content="#347C2F">
+    <meta name="theme-color" content="#347C2F" />
     <!-- Links para ScrollReveal e CountUp.js -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 
 <body>
@@ -67,8 +71,7 @@
     <body>
         <div id="nav-placeholder"></div>
 
-        <section class="game-section">
-        </section>
+        <section class="game-section"></section>
 
         <script src="assets/js/scripts.js"></script>
     </body>
@@ -76,14 +79,19 @@
 
     <main>
         <section class="hero">
-            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif');"></div>
+            <div class="hero-bg" style="
+            background-image: url(&quot;assets/images/geral/banner-fundo.gif&quot;);
+          "></div>
 
             <div class="hero-content">
                 <span class="hero-tag">Mundo Zera's Craft</span>
 
                 <h1 class="hero-title">COMUNIDADE</h1>
 
-                <p class="hero-desc">Nossa Comunidade em Geral, agradeço à voce por estar junto nessa! TMJ</p>
+                <p class="hero-desc">
+                    Nossa Comunidade em Geral, agradeço à voce por estar junto nessa!
+                    TMJ
+                </p>
 
                 <div class="hero-actions">
                     <a href="#" class="btn-hero-green">DISCORD <i class="fas fa-chevron-right"></i></a>
@@ -95,28 +103,30 @@
         <section class="news-grid-container">
             <a href="#" class="mc-news-card">
                 <div class="news-image">
-                    <img src="assets/images/geral/banner-img.jpg" alt="Notícia">
+                    <img src="assets/images/geral/banner-img.jpg" alt="Notícia" />
                 </div>
 
                 <div class="news-info-overlay">
                     <span class="news-tag">NEWS</span>
                     <h3 class="news-headline">MINECRAFT 26.1 SNAPSHOT 8</h3>
                     <p class="news-description">
-                        A Minecraft Java Snapshot: Confira as novas mudanças técnicas e correções de bugs desta semana.
+                        A Minecraft Java Snapshot: Confira as novas mudanças técnicas e
+                        correções de bugs desta semana.
                     </p>
                 </div>
             </a>
 
             <a href="#" class="mc-news-card">
                 <div class="news-image">
-                    <img src="assets/images/news/snapshot.jpg" alt="Notícia">
+                    <img src="assets/images/news/snapshot.jpg" alt="Notícia" />
                 </div>
 
                 <div class="news-info-overlay">
                     <span class="news-tag">NEWS</span>
                     <h3 class="news-headline">MINECRAFT 26.1 SNAPSHOT 8</h3>
                     <p class="news-description">
-                        A Minecraft Java Snapshot: Confira as novas mudanças técnicas e correções de bugs desta semana.
+                        A Minecraft Java Snapshot: Confira as novas mudanças técnicas e
+                        correções de bugs desta semana.
                     </p>
                 </div>
             </a>
@@ -125,10 +135,12 @@
         <section class="collectibles-section">
             <div class="collectibles-header">
                 <h2 class="mc-title">ITENS COLECIONÁVEIS</h2>
-                <p class="mc-subtitle">Personalize seu dispositivo com nossos papéis de parede favoritos do Minecraft,
-                    banners e muito mais!</p>
-                <a href="#" class="mc-link-all">Ver todos os itens colecionáveis <i
-                        class="fas fa-external-link-alt"></i></a>
+                <p class="mc-subtitle">
+                    Personalize seu dispositivo com nossos papéis de parede favoritos do
+                    Minecraft, banners e muito mais!
+                </p>
+                <a href="#" class="mc-link-all">Ver todos os itens colecionáveis
+                    <i class="fas fa-external-link-alt"></i></a>
 
                 <div class="mc-carousel-controls">
                     <button class="mc-arrow prev" onclick="moveCarousel(-1)">
@@ -144,7 +156,7 @@
                 <div class="mc-carousel-track" id="carouselTrack">
                     <div class="mc-collectible-card">
                         <div class="card-img-wrapper">
-                            <img src="assets/images/geral/banner-img.jpg" alt="Coleção Crocs">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Coleção Crocs" />
                         </div>
                         <div class="card-info">
                             <span class="card-tag">PAPEL DE PAREDE</span>
@@ -155,7 +167,7 @@
 
                     <div class="mc-collectible-card">
                         <div class="card-img-wrapper">
-                            <img src="assets/images/geral/banner-img.jpg" alt="Coleção Crocs">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Coleção Crocs" />
                         </div>
                         <div class="card-info">
                             <span class="card-tag">PAPEL DE PAREDE</span>
@@ -166,7 +178,7 @@
 
                     <div class="mc-collectible-card">
                         <div class="card-img-wrapper">
-                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs">
+                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs" />
                         </div>
                         <div class="card-info">
                             <span class="card-tag">PAPEL DE PAREDE</span>
@@ -177,7 +189,7 @@
 
                     <div class="mc-collectible-card">
                         <div class="card-img-wrapper">
-                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs">
+                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs" />
                         </div>
                         <div class="card-info">
                             <span class="card-tag">PAPEL DE PAREDE</span>
@@ -188,7 +200,7 @@
 
                     <div class="mc-collectible-card">
                         <div class="card-img-wrapper">
-                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs">
+                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs" />
                         </div>
                         <div class="card-info">
                             <span class="card-tag">PAPEL DE PAREDE</span>
@@ -199,7 +211,7 @@
 
                     <div class="mc-collectible-card">
                         <div class="card-img-wrapper">
-                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs">
+                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs" />
                         </div>
                         <div class="card-info">
                             <span class="card-tag">PAPEL DE PAREDE</span>
@@ -210,7 +222,7 @@
 
                     <div class="mc-collectible-card">
                         <div class="card-img-wrapper">
-                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs">
+                            <img src="assets/images/wallpapers/crocs.jpg" alt="Coleção Crocs" />
                         </div>
                         <div class="card-info">
                             <span class="card-tag">PAPEL DE PAREDE</span>
@@ -226,7 +238,9 @@
             <h2 class="mc-title">JOGUE COM AMIGOS</h2>
             <div class="f-container">
                 <div class="f-card border-brown">
-                    <div class="f-img-box"><img src="assets/images/geral/banner-img.jpg"></div>
+                    <div class="f-img-box">
+                        <img src="assets/images/geral/banner-img.jpg" />
+                    </div>
                     <div class="f-content">
                         <span class="f-badge">PÚBLICO</span>
                         <h3>Online</h3>
@@ -235,14 +249,18 @@
                                 MUNDOS <i class="fas fa-plus"></i>
                             </button>
                             <div class="acc-panel">
-                                <div class="acc-inner">Jogue em servidores comunitários com milhares de jogadores.</div>
+                                <div class="acc-inner">
+                                    Jogue em servidores comunitários com milhares de jogadores.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="f-card border-purple">
-                    <div class="f-img-box"><img src="assets/images/play/realms.png"></div>
+                    <div class="f-img-box">
+                        <img src="assets/images/play/realms.png" />
+                    </div>
                     <div class="f-content">
                         <span class="f-badge">PRIVADO</span>
                         <h3>Realms</h3>
@@ -251,14 +269,18 @@
                                 RECURSOS <i class="fas fa-plus"></i>
                             </button>
                             <div class="acc-panel">
-                                <div class="acc-inner">Seu próprio servidor online contínuo e seguro na nuvem.</div>
+                                <div class="acc-inner">
+                                    Seu próprio servidor online contínuo e seguro na nuvem.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="f-card border-blue">
-                    <div class="f-img-box"><img src="assets/images/play/coop.png"></div>
+                    <div class="f-img-box">
+                        <img src="assets/images/play/coop.png" />
+                    </div>
                     <div class="f-content">
                         <span class="f-badge">PRIVADO</span>
                         <h3>Cooperativo</h3>
@@ -267,7 +289,9 @@
                                 LOCAL <i class="fas fa-plus"></i>
                             </button>
                             <div class="acc-panel">
-                                <div class="acc-inner">Jogue com amigos e familiares na sua rede local (LAN).</div>
+                                <div class="acc-inner">
+                                    Jogue com amigos e familiares na sua rede local (LAN).
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -278,109 +302,117 @@
         <section class="mc-section world-dark">
             <h2 class="mc-title">EXPANDA SEU MUNDO</h2>
             <div class="w-slider">
-                <button class="w-arrow prev" onclick="moveWorld(-1)"><i class="fas fa-arrow-left"></i></button>
+                <button class="w-arrow prev" onclick="moveWorld(-1)">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
                 <div class="w-viewport">
                     <div class="w-track" id="worldTrack">
-                        <div class="w-item active"><img src="img1.jpg">
+                        <div class="w-item active">
+                            <img src="img1.jpg" />
                             <h3>Cobre</h3>
                             <p>Novos tons e ferramentas.</p>
                         </div>
-                        <div class="w-item"><img src="img2.jpg">
+                        <div class="w-item">
+                            <img src="img2.jpg" />
                             <h3>Chase the Skies</h3>
                             <p>Voe sobre o mundo.</p>
                         </div>
-                        <div class="w-item"><img src="img3.jpg">
+                        <div class="w-item">
+                            <img src="img3.jpg" />
                             <h3>Spring to Life</h3>
                             <p>Novas variantes de mobs.</p>
                         </div>
-                        <div class="w-item"><img src="img3.jpg">
+                        <div class="w-item">
+                            <img src="img3.jpg" />
                             <h3>Spring to Life</h3>
                             <p>Novas variantes de mobs.</p>
                         </div>
-                        <div class="w-item"><img src="img3.jpg">
+                        <div class="w-item">
+                            <img src="img3.jpg" />
                             <h3>Spring to Life</h3>
                             <p>Novas variantes de mobs.</p>
                         </div>
                     </div>
                 </div>
-                <button class="w-arrow next" onclick="moveWorld(1)"><i class="fas fa-arrow-right"></i></button>
+                <button class="w-arrow next" onclick="moveWorld(1)">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </section>
 
-        <div class="zeras-hub" id="main-hub">
-            <div class="hub-sidebar">
-                <button class="tab-link active" onclick="openHub(event, 'game-1')">
-                    <img src="icon-mc.png" alt="Minecraft"> Minecraft
-                </button>
-                <button class="tab-link" onclick="openHub(event, 'game-2')">
-                    <img src="icon-dungeons.png" alt="Dungeons"> Minecraft Dungeons
-                </button>
-            </div>
-
-            <div class="hub-main">
-
-                <div id="game-1" class="hub-content active">
-                    <button class="accordion-header" onclick="toggleHubAccordion(this)">
-                        <div class="accordion-title">
-                            <img src="icon-mc.png" alt="Minecraft">
-                            <span>Minecraft</span>
-                        </div>
-                        <i class="fas fa-chevron-down"></i>
+        <section class="mc-hub-container">
+            <div class="mc-hub-wrapper">
+                <div class="mc-sidebar-desktop">
+                    <button class="mc-tab active" onclick="openMcTab(event, 'mc-game-1')">
+                        <img src="assets/images/geral/icone.png" alt="" /> Minecraft
                     </button>
+                    <button class="mc-tab" onclick="openMcTab(event, 'mc-game-2')">
+                        <img src="assets/images/geral/icone.png" alt="" /> Minecraft
+                        Dungeons
+                    </button>
+                </div>
 
-                    <div class="hub-body">
-                        <div class="hub-inner">
-                            <div class="hub-media">
-                                <img src="assets/images/geral/banner-fundo.gif" alt="Banner">
+                <div class="mc-main-content">
+                    <div id="mc-game-1" class="mc-content-item active">
+                        <button class="mc-accordion-btn" onclick="toggleMcAccordion(this)">
+                            <div class="acc-title">
+                                <img src="assets/images/geral/icone.png" alt="" /> Minecraft
                             </div>
-                            <div class="hub-info">
-                                <p>Explore seus próprios mundos, sobreviva à noite e crie tudo o que puder imaginar!<br>
-                                    Assista ao vídeo de jogabilidade do Minecraft acima ou clique em "Saiba Mais".</p>
-                                <a href="#" class="btn-saiba-mais">SAIBA MAIS <i class="fas fa-chevron-right"
-                                        style="font-size: 10px; margin-left: 5px;"></i></a>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+
+                        <div class="mc-item-body">
+                            <div class="mc-visual">
+                                <img src="assets/images/geral/banner-fundo.gif" alt="Banner" />
+                            </div>
+                            <div class="mc-footer">
+                                <p>
+                                    Explore seus próprios mundos, sobreviva à noite e crie tudo
+                                    o que puder imaginar!
+                                </p>
+                                <a href="#" class="mc-btn">SAIBA MAIS</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mc-game-2" class="mc-content-item">
+                        <button class="mc-accordion-btn" onclick="toggleMcAccordion(this)">
+                            <div class="acc-title">
+                                <img src="assets/images/geral/icone.png" alt="" /> Minecraft
+                                Dungeons
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+
+                        <div class="mc-item-body">
+                            <div class="mc-visual">
+                                <img src="preview-dungeons.jpg" alt="Banner" />
+                            </div>
+                            <div class="mc-footer">
+                                <p>
+                                    Lute contra novas criaturas terríveis em uma aventura épica
+                                    inspirada em dungeon crawlers!
+                                </p>
+                                <a href="#" class="mc-btn">SAIBA MAIS</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div id="game-2" class="hub-content">
-                    <button class="accordion-header" onclick="toggleHubAccordion(this)">
-                        <div class="accordion-title">
-                            <img src="icon-dungeons.png" alt="Dungeons">
-                            <span>Minecraft Dungeons</span>
-                        </div>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-
-                    <div class="hub-body">
-                        <div class="hub-inner">
-                            <div class="hub-media">
-                                <img src="preview-dungeons.jpg" alt="Banner Dungeons">
-                            </div>
-                            <div class="hub-info">
-                                <p>Ação e aventura nas masmorras. Lute contra novas criaturas<br>
-                                    terríveis em uma aventura épica inspirada em dungeon crawlers clássicos!</p>
-                                <a href="#" class="btn-saiba-mais">SAIBA MAIS <i class="fas fa-chevron-right"
-                                        style="font-size: 10px; margin-left: 5px;"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </div>
+        </section>
 
         <section class="mc-section hero-dark">
             <div class="h-container" id="heroTrack">
-
                 <div class="h-slide active">
                     <div class="h-info">
                         <span>1/2 EXPLORE OS MODOS</span>
                         <h2>MODO SOBREVIVÊNCIA</h2>
-                        <p>Lute contra criaturas e construa para sobreviver ao anoitecer.</p>
+                        <p>
+                            Lute contra criaturas e construa para sobreviver ao anoitecer.
+                        </p>
                     </div>
                     <div class="h-media">
-                        <img src="assets/images/geral/banner-img.jpg" class="pixel-mask">
+                        <img src="assets/images/geral/banner-img.jpg" class="pixel-mask" />
                     </div>
                 </div>
 
@@ -388,18 +420,24 @@
                     <div class="h-info">
                         <span>2/2 EXPLORE OS MODOS</span>
                         <h2>MODO CRIATIVO</h2>
-                        <p>Use recursos ilimitados para criar construções incríveis e voar livremente.</p>
+                        <p>
+                            Use recursos ilimitados para criar construções incríveis e voar
+                            livremente.
+                        </p>
                     </div>
                     <div class="h-media">
-                        <img src="img.jpg" class="pixel-mask">
+                        <img src="img.jpg" class="pixel-mask" />
                     </div>
                 </div>
-
             </div>
 
             <div class="h-item">
-                <button class="h-arrow prev" onclick="moveHero(-1)"><i class="fas fa-arrow-left"></i></button>
-                <button class="h-arrow next" onclick="moveHero(1)"><i class="fas fa-arrow-right"></i></button>
+                <button class="h-arrow prev" onclick="moveHero(-1)">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button class="h-arrow next" onclick="moveHero(1)">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </section>
 
@@ -410,10 +448,9 @@
             </div>
 
             <div class="games-grid">
-
                 <div class="game-card-simple">
                     <div class="gc-image">
-                        <img src="assets/images/games/mc-java.jpg" alt="Minecraft Java & Bedrock">
+                        <img src="assets/images/games/mc-java.jpg" alt="Minecraft Java & Bedrock" />
                     </div>
                     <div class="gc-info">
                         <h3>Minecraft</h3>
@@ -433,7 +470,7 @@
 
                 <div class="game-card-simple">
                     <div class="gc-image">
-                        <img src="assets/images/games/mc-dungeons2.jpg" alt="Minecraft Dungeons II">
+                        <img src="assets/images/games/mc-dungeons2.jpg" alt="Minecraft Dungeons II" />
                     </div>
                     <div class="gc-info">
                         <h3>Minecraft Dungeons II</h3>
@@ -450,7 +487,7 @@
 
                 <div class="game-card-simple">
                     <div class="gc-image">
-                        <img src="assets/images/games/mc-dungeons.jpg" alt="Minecraft Dungeons">
+                        <img src="assets/images/games/mc-dungeons.jpg" alt="Minecraft Dungeons" />
                     </div>
                     <div class="gc-info">
                         <h3>Minecraft Dungeons</h3>
@@ -467,7 +504,7 @@
 
                 <div class="game-card-simple">
                     <div class="gc-image">
-                        <img src="assets/images/games/mc-legends.jpg" alt="Minecraft Legends">
+                        <img src="assets/images/games/mc-legends.jpg" alt="Minecraft Legends" />
                     </div>
                     <div class="gc-info">
                         <h3>Minecraft Legends</h3>
@@ -481,7 +518,6 @@
                         <i class="fab fa-nintendo-switch" title="Nintendo Switch"></i>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -505,8 +541,6 @@
         </section>
     </main>
 
-
-
     <!--------------------------------------------------------------->
 
     <div class="music-player-container reveal">
@@ -518,19 +552,27 @@
 
             <div class="progress-area">
                 <span id="currentTimeDisplay">0:00</span>
-                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100" />
                 <span id="durationDisplay">0:00</span>
             </div>
 
             <div class="main-controls">
-                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
-                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
-                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
-                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+                <button id="audioModeButton" title="Modo">
+                    <i class="fas fa-list-ol"></i>
+                </button>
+                <button id="audioPrevButton">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button id="audioControlButton" class="play-pause">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button id="audioNextButton">
+                    <i class="fas fa-step-forward"></i>
+                </button>
 
                 <div class="volume-container">
                     <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
-                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5" />
                 </div>
             </div>
         </div>
@@ -557,12 +599,17 @@
             <div class="footer-col brand-col">
                 <div class="logo">ZERAS<span>CRAFT</span></div>
                 <p class="brand-description">
-                    Esta é o nosso lugar para conversar, mostrar e interagir com nossos Inscritos/Membros de Minecraft,
-                    nossos Crafters sempre buscando novas maneiras de Jogar com a Rapaziada.
+                    Esta é o nosso lugar para conversar, mostrar e interagir com nossos
+                    Inscritos/Membros de Minecraft, nossos Crafters sempre buscando
+                    novas maneiras de Jogar com a Rapaziada.
                 </p>
                 <div class="newsletter-footer">
-                    <button class="btn-sidebar"
-                        onclick="showClickNotification('Olá Crafter!', 'Acesse nosso Canal! <br> E Nossos Links.')">
+                    <button class="btn-sidebar" onclick="
+                showClickNotification(
+                  'Olá Crafter!',
+                  'Acesse nosso Canal! <br> E Nossos Links.',
+                )
+              ">
                         <i class="fas fa-bolt"></i> CLIQUE AQUI
                     </button>
                     <h5 class="newsletter-footer">FIQUE POR DENTRO</h5>
@@ -572,42 +619,67 @@
             <div class="footer-col">
                 <h4>EXPLORAR</h4>
                 <ul class="footer-links">
-                    <li><a href="https://www.youtube.com/@MatheuZera88"><i class="fas fa-chevron-right"></i> Canal
-                            Oficial YT</a></li>
-                    <li><a href="https://discord.com/channels/1390120239588577482/1390125436805185656"><i
-                                class="fas fa-chevron-right"></i> Nosso Marketplace Craft</a></li>
-                    <li><a href="https://discord.com/channels/1390120239588577482/1390125442731868180"><i
-                                class="fas fa-chevron-right"></i> Sobre nossas Wikipédias</a></li>
-                    <li><a href="https://discord.com/channels/1390120239588577482/1390125448662614027"><i
-                                class="fas fa-chevron-right"></i> Solicite Parcerias!</a></li>
-                    <li><a href="https://discord.com/channels/1390120239588577482/1394709165640781975"><i
-                                class="fas fa-chevron-right"></i> Crie sua Página Web!</a></li>
-                    <li><a href="https://www.minecraft.net/"><i class="fas fa-chevron-right"></i> Minecraft.net</a></li>
+                    <li>
+                        <a href="https://www.youtube.com/@MatheuZera88"><i class="fas fa-chevron-right"></i> Canal
+                            Oficial YT</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1390125436805185656"><i
+                                class="fas fa-chevron-right"></i> Nosso Marketplace Craft</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1390125442731868180"><i
+                                class="fas fa-chevron-right"></i> Sobre nossas Wikipédias</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1390125448662614027"><i
+                                class="fas fa-chevron-right"></i> Solicite Parcerias!</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1394709165640781975"><i
+                                class="fas fa-chevron-right"></i> Crie sua Página Web!</a>
+                    </li>
+                    <li>
+                        <a href="https://www.minecraft.net/"><i class="fas fa-chevron-right"></i> Minecraft.net</a>
+                    </li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h4>INFORMATIVOS</h4>
                 <ul class="footer-links">
-                    <li><a href="https://discord.com/channels/1390120239588577482/1404385093493198909"><i
-                                class="fas fa-chevron-right"></i> Criar uma Guilda</a></li>
-                    <li><a href="https://discord.com/channels/1390120239588577482/1398008350796546068"><i
-                                class="fas fa-chevron-right"></i> Pixel Legends</a></li>
-                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
-                                class="fas fa-chevron-right"></i> Nossos Eventos</a></li>
-                    <li><a href="https://discord.com/channels/1390120239588577482/1390125374695931994"><i
-                                class="fas fa-chevron-right"></i> Feedbacks</a></li>
-                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
-                                class="fas fa-chevron-right"></i> Seja um(a) Staff</a></li>
-                    <li><a href="https://discord.gg/GYGVBqGEwP" class="status-indicator"><span class="dot"></span>
-                            EXPLORAR MAIS</a></li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1404385093493198909"><i
+                                class="fas fa-chevron-right"></i> Criar uma Guilda</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1398008350796546068"><i
+                                class="fas fa-chevron-right"></i> Pixel Legends</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Nossos Eventos</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1390125374695931994"><i
+                                class="fas fa-chevron-right"></i> Feedbacks</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Seja um(a) Staff</a>
+                    </li>
+                    <li>
+                        <a href="https://discord.gg/GYGVBqGEwP" class="status-indicator"><span class="dot"></span>
+                            EXPLORAR MAIS</a>
+                    </li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h4>COMUNIDADE</h4>
                 <p class="join-text">
-                    Junte-se a <span id="discord-count"></span> no nosso Discord Oficial.
+                    Junte-se a <span id="discord-count"></span> no nosso Discord
+                    Oficial.
                 </p>
                 <div class="social-grid">
                     <a href="https://discord.gg/GYGVBqGEwP" class="social-box discord"><i
@@ -623,19 +695,26 @@
         <div class="footer-bottom">
             <div class="container footer-bottom-flex">
                 <div class="legal">
-                    <p class="copyright-text"
-                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                    <p class="copyright-text" style="
+                color: #ffffff !important;
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+                font-weight: 600;
+              ">
                         &copy;
-                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        <span id="current-year" style="color: #ffffff !important"></span>
                         Zeras Craft. Todos os direitos reservados.
                     </p>
 
-                    <span class="mojang-disclaimer"
-                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                    <span class="mojang-disclaimer" style="
+                color: #555555 !important;
+                font-size: 0.75rem;
+                display: block;
+              ">
                         Não afiliado à Mojang Studios ou Microsoft.
                     </span>
                 </div>
-                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
                     <i class="fas fa-arrow-up"></i>
                 </div>
             </div>

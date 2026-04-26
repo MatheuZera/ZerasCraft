@@ -2,7 +2,7 @@
  * ZERA'S CRAFT - SISTEMA DE ÁUDIO SINCRONIZADO
  */
 
-const AUDIO_PATH = "assets/audios/effects/";
+const AUDIO_PATH = "../assets/audios/effects/";
 
 const sounds = {
     button: new Audio(AUDIO_PATH + "button.mp3"),
