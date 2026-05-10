@@ -29,10 +29,10 @@ function play(key, vol = 0.3) {
 // =========================================================
 
 // 1. Som 'button' no HOVER
-const HOVER_BUTTON = [".back-to-top", ".btn-primary", ".btn-outline", ".znav-tab", ".mc-arrow", ".tab-btn", ".burger", ".faq-item", ".zmob-has-dropdown", ".btn-price", ".btn-hero-green", ".video-frame", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".special-link", ".btn-abrir", ".checkout-btn", ".feat-tab", ".nav-tab-btn", ".thumb-item", ".btn-toggle-text", ".btn-next-img", ".d-thumb", ".znav-tab", ".znav-btn-outline", ".znav-icon-wrapper", ".znav-links", ".small-links"];
+const HOVER_BUTTON = [".back-to-top", ".btn-primary", ".btn-outline", ".btn-hero-outline", ".znav-tab", ".mc-arrow", ".tab-btn", ".burger", ".faq-item", ".zmob-has-dropdown", ".btn-price", ".btn-hero-green", ".video-frame", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".special-link", ".btn-abrir", ".checkout-btn", ".feat-tab", ".nav-tab-btn", ".thumb-item", ".btn-toggle-text", ".btn-next-img", ".d-thumb", ".znav-tab", ".znav-btn-outline", ".znav-icon-wrapper", ".znav-links", ".small-links"];
 
 // 2. Som 'button_click' no CLIQUE (Acordeões e Botões)
-const CLICK_ACTION = [".btn-outline", ".btn-sidebar", ".znav-tab", ".faq-item", ".zmob-has-dropdown", ".btn-primary", ".btn-green", ".tab-btn", ".btn-price", ".btn-hero-green", ".play-btn", ".mc-arrow", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".btn-abrir", ".checkout-btn", ".feat-tab", ".thumb-item", ".d-thumb", ".mc-acc-item", ".znav-icon-wrapper"];
+const CLICK_ACTION = [".btn-outline", ".btn-sidebar", ".znav-tab", ".znav-item", ".faq-item", ".zmob-has-dropdown", ".btn-primary", ".btn-green", ".tab-btn", ".btn-price", ".btn-hero-green", ".play-btn", ".mc-arrow", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".btn-abrir", ".checkout-btn", ".feat-tab", ".thumb-item", ".d-thumb", ".mc-acc-item", ".znav-icon-wrapper"];
 
 // 3. Som 'card' no HOVER
 const HOVER_CARD = [".mc-collectible-card", ".gallery-item", ".game-card2", ".mode-card", ".mc-news-card", ".f-card", ".w-item", ".game-card-simple", ".content-item", ".link-item", ".game-card"];

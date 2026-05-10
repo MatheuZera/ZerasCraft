@@ -552,6 +552,33 @@ function toggleAccordion(element) {
   item.classList.toggle("active");
 }
 /* ============================================================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  loadMinecraftProfiles();
+});
+
+function loadMinecraftProfiles() {
+  // Seleciona todas as linhas que possuem o atributo data-nick
+  const rows = document.querySelectorAll('.t-row-elite[data-nick]');
+
+  rows.forEach(row => {
+    const nick = row.getAttribute('data-nick');
+    const img = row.querySelector('.xbox-head');
+    const txt = row.querySelector('.nick-txt');
+
+    if (nick) {
+      // 1. Define a imagem da cabeça (Avatar)
+      // Usamos a mc-heads.net que é rápida e aceita nicks
+      img.src = `https://mc-heads.net/avatar/${nick}/100`;
+      img.alt = nick;
+
+      // 2. Define o texto do Nick
+      if (txt) {
+        txt.textContent = nick;
+      }
+    }
+  });
+}
+/* ============================================================================================= */
 function showClickNotification(titulo, mensagem) {
   // Cria o elemento
   const notification = document.createElement("div");
