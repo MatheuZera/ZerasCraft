@@ -43,6 +43,15 @@ const HOVER_SELECT = [".znav-item-img", ".znav-banner", ".footer-col", ".mc-link
 // =========================================================
 // SISTEMA DE ESCUTA GLOBAL
 // =========================================================
+// Lógica Global de Links Externos (Som link)
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a");
+  if (a && a.href && !a.href.startsWith("#") && !a.href.includes("javascript:")) {
+    e.preventDefault();
+    play("link", 0.6);
+    setTimeout(() => window.location.href = a.href, 400);
+  }
+});
 
 // HOVER: Monitora a entrada do mouse
 document.addEventListener("mouseover", (e) => {
