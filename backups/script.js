@@ -40,22 +40,25 @@ function unlockScroll() {
 }
 
 /* ==========================================
-   2. SISTEMA DE AUTOLOAD (nav.html)
+   2. SISTEMA DE AUTOLOAD (nav.html) atualizado
 ========================================== */
 document.addEventListener("DOMContentLoaded", () => {
   const navPlaceholder = document.getElementById("nav-placeholder");
   if (navPlaceholder) {
-    // Tenta carregar nav.html da raiz ou pasta anterior
     fetch("nav.html")
-      .then((res) => {
-        if (!res.ok) return fetch("../nav.html");
-        return res;
-      })
-      .then((res) => res.text())
-      .then((html) => {
+      .then(res => res.text())
+      .then(html => {
         navPlaceholder.innerHTML = html;
-      })
-      .catch((err) => console.error("Erro ao carregar o menu:", err));
+
+        // --- Isso faz os scripts dentro do nav.html funcionarem ---
+        const scripts = navPlaceholder.querySelectorAll("script");
+        scripts.forEach(oldScript => {
+          const newScript = document.createElement("script");
+          Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+          newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+      });
   }
 });
 
@@ -547,6 +550,33 @@ function toggleAccordion(element) {
 
   // Alterna o estado do item clicado
   item.classList.toggle("active");
+}
+/* ============================================================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  loadMinecraftProfiles();
+});
+
+function loadMinecraftProfiles() {
+  // Seleciona todas as linhas que possuem o atributo data-nick
+  const rows = document.querySelectorAll('.t-row-elite[data-nick]');
+
+  rows.forEach(row => {
+    const nick = row.getAttribute('data-nick');
+    const img = row.querySelector('.xbox-head');
+    const txt = row.querySelector('.nick-txt');
+
+    if (nick) {
+      // 1. Define a imagem da cabeça (Avatar)
+      // Usamos a mc-heads.net que é rápida e aceita nicks
+      img.src = `https://mc-heads.net/avatar/${nick}/100`;
+      img.alt = nick;
+
+      // 2. Define o texto do Nick
+      if (txt) {
+        txt.textContent = nick;
+      }
+    }
+  });
 }
 /* ============================================================================================= */
 function showClickNotification(titulo, mensagem) {

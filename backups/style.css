@@ -699,6 +699,20 @@ html.z-lock-scroll {
     border: 1px solid var(--zc-border);
   }
 
+  .znav-banner img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid var(--zc-border);
+    transition: 0.2s;
+  }
+
+  .znav-banner:hover {
+    border-color: var(--zc-accent);
+  }
+
   .znav-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -726,7 +740,8 @@ html.z-lock-scroll {
     margin-bottom: 30px;
   }
 
-  .znav-card {
+  .znav-card,
+  .znav-banner {
     display: flex;
     flex-direction: column;
   }
@@ -741,7 +756,7 @@ html.z-lock-scroll {
     transition: 0.2s;
   }
 
-  .znav-card:hover img {
+  .znav-item-img:hover {
     border-color: var(--zc-accent);
   }
 

@@ -1614,6 +1614,11 @@
   padding-left: 5px;
 }
 
+.small-links:hover {
+  color: #007413;
+  padding-left: 5px;
+}
+
 .divider {
   height: 1px;
   background: #333;
