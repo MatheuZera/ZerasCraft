@@ -10,22 +10,30 @@
             <ul class="znav-menu">
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item">INÍCIO <i class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item"><i class="fas fa-home"></i> &nbsp INÍCIO <i
+                            class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'inicio-1')">Página
+                                <button class="znav-tab active" onclick="switchZnavTab(event, 'inicio-1')"><i
+                                        class="fas fa-home"></i> &nbsp Página
                                     Inicial</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-2')">Comunidade</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-3')">Parceiros</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-4')">Pixel
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-2')"><i
+                                        class="fas fa-users"></i> &nbsp Comunidade</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-3')"><i
+                                        class="fas fa-check"></i> &nbsp Parceiros</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-4')"><i
+                                        class="fas fa-server"></i> &nbsp Pixel
                                     Legends</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-5')">Recursos</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-5')"><i
+                                        class="fas fa-box"></i> &nbsp Recursos</button>
 
                                 <div class="znav-bottom-links">
-                                    <a href="#">Ir para Downloads</a>
-                                    <a href="#">Resgatar código de presente</a>
+                                    <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp Ir
+                                        para Downloads</a>
+                                    <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp
+                                        Resgatar código de presente</a>
                                 </div>
                             </div>
 
@@ -36,21 +44,21 @@
                                         <div class="znav-grid-3">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/111/54bd34?text=Survival"
-                                                    alt="Survival">
+                                                    alt="Survival" class="znav-item-img">
                                                 <h4>Survival Custom</h4>
                                                 <p>Explore o mundo, sobreviva e crie sua jornada com sistemas únicos de
                                                     economia.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/222/54bd34?text=Terrenos"
-                                                    alt="Terrenos">
+                                                    alt="Terrenos" class="znav-item-img">
                                                 <h4>Proteção de Terrenos</h4>
                                                 <p>Garanta a segurança das suas construções e jogue pacificamente com
                                                     amigos.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/333/54bd34?text=Skills"
-                                                    alt="Skills">
+                                                    alt="Skills" class="znav-item-img">
                                                 <h4>Habilidades (MCMMO)</h4>
                                                 <p>Evolua suas perícias em mineração, combate, escavação e muito mais.
                                                 </p>
@@ -59,14 +67,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="https://matheuzera.github.io/ZerasCraft/"
-                                                class="sidebar-link">Abrir Página Inicial</a>
+                                            <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Baixe a demonstração</a>
+                                            <a href="https://matheuzera.github.io/ZerasCraft/" class="sidebar-link"><i
+                                                    class="fas fa-home"></i> &nbsp Abrir Página Inicial</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
 
@@ -76,7 +87,7 @@
                                     <div class="znav-col-center">
                                         <div class="znav-template-single">
                                             <img src="https://via.placeholder.com/800x350/111/54bd34?text=PIXEL+LEGENDS+RPG"
-                                                class="znav-banner" alt="Banner">
+                                                class="znav-banner" alt="Banner" class="znav-item-img">
                                             <h4>PIXEL LEGENDS RPG</h4>
                                             <p>Escolha sua classe, forje armas lendárias e lidere seus aliados para
                                                 defender
@@ -90,8 +101,8 @@
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#">Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#">Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -101,14 +112,14 @@
                                         <div class="znav-grid-2">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x250/111/54bd34?text=BedWars"
-                                                    alt="BedWars">
+                                                    alt="BedWars" class="znav-item-img">
                                                 <h4>BedWars</h4>
                                                 <p>Defenda sua cama, colete recursos e destrua as ilhas inimigas nesta
                                                     batalha frenética.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x250/222/54bd34?text=SkyWars"
-                                                    alt="SkyWars">
+                                                    alt="SkyWars" class="znav-item-img">
                                                 <h4>SkyWars</h4>
                                                 <p>Caia em uma ilha isolada e lute até que apenas um jogador reste vivo.
                                                 </p>
@@ -125,8 +136,8 @@
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#">Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#">Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -142,13 +153,13 @@
                                             <div class="znav-grid-2 znav-mixed-bottom">
                                                 <div class="znav-card">
                                                     <img src="https://via.placeholder.com/400x200/222/54bd34?text=CraftJam"
-                                                        alt="CraftJam">
+                                                        alt="CraftJam" class="znav-item-img">
                                                     <h4>CraftJam Build</h4>
                                                     <p>Competição de construção.</p>
                                                 </div>
                                                 <div class="znav-card">
                                                     <img src="https://via.placeholder.com/400x200/333/54bd34?text=Torneio+PVP"
-                                                        alt="PvP">
+                                                        alt="PvP" class="znav-item-img">
                                                     <h4>Torneio PvP</h4>
                                                     <p>1v1 na arena especial de gelo.</p>
                                                 </div>
@@ -162,8 +173,8 @@
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#">Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#">Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -194,8 +205,8 @@
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#">Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#">Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -206,14 +217,24 @@
                 </li>
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item">NOVIDADES <i class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item"><i class="fas fa-globe-americas"></i> &nbsp NOVIDADES <i
+                            class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'nov-1')">Últimas
+                                <button class="znav-tab active" onclick="switchZnavTab(event, 'nov-1')"><i
+                                        class="fas fa-star"></i> &nbsp Últimas
                                     Notícias</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'nov-2')">Atualizações</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'nov-2')"><i
+                                        class="fas fa-calendar"></i> &nbsp Atualizações</button>
+
+                                <div class="znav-bottom-links">
+                                    <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp Ir
+                                        para Downloads</a>
+                                    <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp
+                                        Resgatar código de presente</a>
+                                </div>
                             </div>
 
                             <div class="znav-col-main">
@@ -222,19 +243,19 @@
                                         <div class="znav-grid-3">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/111/54bd34?text=Nova+Economia"
-                                                    alt="News">
+                                                    alt="News" class="znav-item-img">
                                                 <h4>Restart da Economia</h4>
                                                 <p>Entenda as mudanças no mercado global.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/222/54bd34?text=Entrevista"
-                                                    alt="News">
+                                                    alt="News" class="znav-item-img">
                                                 <h4>Entrevista com a Staff</h4>
                                                 <p>O que planejamos para o próximo semestre.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/333/54bd34?text=Campeoes"
-                                                    alt="News">
+                                                    alt="News" class="znav-item-img">
                                                 <h4>Campeões do CraftJam</h4>
                                                 <p>Veja as construções vencedoras do evento.</p>
                                             </div>
@@ -242,16 +263,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="#" class="sidebar-link">Dê vida à ciência</a>
-                                            <a href="#" class="sidebar-link">Para os pais</a>
-                                            <a href="#" class="sidebar-link">Para educadores</a>
-                                            <a href="#" class="sidebar-link">Como comprar</a>
+                                            <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Baixe a demonstração</a>
+                                            <a href="#" class="sidebar-link"><i class="fas fa-star"></i> &nbsp Página de
+                                                Novidades</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -261,13 +283,13 @@
                                         <div class="znav-grid-2">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x250/111/54bd34?text=Patch+2.5"
-                                                    alt="Patch">
+                                                    alt="Patch" class="znav-item-img">
                                                 <h4>Patch 2.5 - O Despertar</h4>
                                                 <p>Novos monstros, itens e balanceamento geral de classes.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x250/222/54bd34?text=Roadmap+2026"
-                                                    alt="Roadmap">
+                                                    alt="Roadmap" class="znav-item-img">
                                                 <h4>Roadmap 2026</h4>
                                                 <p>Descubra o que estamos desenvolvendo em segredo.</p>
                                             </div>
@@ -276,15 +298,15 @@
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
                                             <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="#" class="sidebar-link">Dê vida à ciência</a>
-                                            <a href="#" class="sidebar-link">Para os pais</a>
-                                            <a href="#" class="sidebar-link">Para educadores</a>
-                                            <a href="#" class="sidebar-link">Como comprar</a>
+                                            <a href="#" class="sidebar-link"><i class="fas fa-calendar"></i> &nbsp
+                                                Página de Atualizações</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -294,26 +316,31 @@
                 </li>
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item">OFICIAL <i class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item"><i class="fas fa-book"></i> &nbsp OFICIAL <i
+                            class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-1')">Arquivos
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-1')"><i
+                                        class="fas fa-archive"></i> &nbsp Arquivos
                                     Gerais</button>
-                                <button class="znav-tab active"
-                                    onclick="switchZnavTab(event, 'oficial-2')">Eventos</button>
-                                <button class="znav-tab active"
-                                    onclick="switchZnavTab(event, 'oficial-3')">MCTU</button>
-                                <button class="znav-tab active"
-                                    onclick="switchZnavTab(event, 'oficial-4')">CraftJam</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-5')">Canal
+                                <button class="znav-tab active" onclick="switchZnavTab(event, 'oficial-2')"><i
+                                        class="fas fa-calendar"></i> &nbsp Eventos</button>
+                                <button class="znav-tab active" onclick="switchZnavTab(event, 'oficial-3')"><i
+                                        class="fas fa-trophy"></i> &nbsp MCTU</button>
+                                <button class="znav-tab active" onclick="switchZnavTab(event, 'oficial-4')"><i
+                                        class="fas fa-hammer"></i> &nbsp CraftJam</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-5')"><i
+                                        class="fas fa-search"></i> &nbsp Canal
                                     Oficial</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-6')">Canais
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-6')"><i
+                                        class="fas fa-user-tie"></i> &nbsp Canais
                                     Parceiros</button>
 
                                 <div class="znav-bottom-links">
-                                    <a href="#">Termos de Compra</a>
+                                    <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp
+                                        Termos de Compra</a>
                                 </div>
                             </div>
 
@@ -328,12 +355,12 @@
                                         <div class="znav-grid-2 znav-mixed-bottom">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x200/222/54bd34?text=Caixas+Misteriosas"
-                                                    alt="Keys">
+                                                    alt="Keys" class="znav-item-img">
                                                 <h4>Caixas Misteriosas</h4>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x200/333/54bd34?text=ZeraCoins"
-                                                    alt="Coins">
+                                                    alt="Coins" class="znav-item-img">
                                                 <h4>Pacotes de ZeraCoins</h4>
                                             </div>
                                         </div>
@@ -341,13 +368,17 @@
                                 </div>
                                 <div class="znav-col-right">
                                     <div class="edu-links-sidebar">
-                                        <a href="#" class="special-link">Baixe a demonstração</a>
-                                        <a href="arquivos" class="sidebar-link">Página dos Arquivos</a>
+                                        <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i> &nbsp
+                                            Baixe a demonstração</a>
+                                        <a href="arquivos" class="sidebar-link"><i class="fas fa-archive"></i> &nbsp
+                                            Página dos Arquivos</a>
                                     </div>
                                     <br>
                                     <ul class="znav-link-list-small">
-                                        <li><a href="#">Regras do Survival</a></li>
-                                        <li><a href="#">Comandos Básicos</a></li>
+                                        <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Regras do Survival</a></li>
+                                        <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Comandos Básicos</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -364,12 +395,12 @@
                                             <div class="znav-grid-2 znav-mixed-bottom">
                                                 <div class="znav-card">
                                                     <img src="https://via.placeholder.com/400x200/222/54bd34?text=Caixas+Misteriosas"
-                                                        alt="Keys">
+                                                        alt="Keys" class="znav-item-img">
                                                     <h4>Caixas Misteriosas</h4>
                                                 </div>
                                                 <div class="znav-card">
                                                     <img src="https://via.placeholder.com/400x200/333/54bd34?text=ZeraCoins"
-                                                        alt="Coins">
+                                                        alt="Coins" class="znav-item-img">
                                                     <h4>Pacotes de ZeraCoins</h4>
                                                 </div>
                                             </div>
@@ -377,13 +408,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="eventos" class="sidebar-link">Página dos Eventos</a>
+                                            <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Baixe a demonstração</a>
+                                            <a href="eventos" class="sidebar-link"><i class="fas fa-calendar"></i> &nbsp
+                                                Página dos Eventos</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -399,12 +434,12 @@
                                             <div class="znav-grid-2 znav-mixed-bottom">
                                                 <div class="znav-card">
                                                     <img src="https://via.placeholder.com/400x200/222/54bd34?text=Caixas+Misteriosas"
-                                                        alt="Keys">
+                                                        alt="Keys" class="znav-item-img">
                                                     <h4>Caixas Misteriosas</h4>
                                                 </div>
                                                 <div class="znav-card">
                                                     <img src="https://via.placeholder.com/400x200/333/54bd34?text=ZeraCoins"
-                                                        alt="Coins">
+                                                        alt="Coins" class="znav-item-img">
                                                     <h4>Pacotes de ZeraCoins</h4>
                                                 </div>
                                             </div>
@@ -412,13 +447,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="mctu" class="sidebar-link">Página MC Team Ultimate (MCTU)</a>
+                                            <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Baixe a demonstração</a>
+                                            <a href="mctu" class="sidebar-link"><i class="fas fa-trophy"></i> &nbsp
+                                                Página MC Team Ultimate (MCTU)</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -434,12 +473,12 @@
                                             <div class="znav-grid-2 znav-mixed-bottom">
                                                 <div class="znav-card">
                                                     <img src="https://via.placeholder.com/400x200/222/54bd34?text=Caixas+Misteriosas"
-                                                        alt="Keys">
+                                                        alt="Keys" class="znav-item-img">
                                                     <h4>Caixas Misteriosas</h4>
                                                 </div>
                                                 <div class="znav-card">
                                                     <img src="https://via.placeholder.com/400x200/333/54bd34?text=ZeraCoins"
-                                                        alt="Coins">
+                                                        alt="Coins" class="znav-item-img">
                                                     <h4>Pacotes de ZeraCoins</h4>
                                                 </div>
                                             </div>
@@ -447,13 +486,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="craftjam" class="sidebar-link">Página da CraftJam</a>
+                                            <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Baixe a demonstração</a>
+                                            <a href="craftjam" class="sidebar-link"><i class="fas fa-hammer"></i> &nbsp
+                                                Página da CraftJam</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -463,19 +506,19 @@
                                         <div class="znav-grid-3">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/111/54bd34?text=VIP+Ferro"
-                                                    alt="VIP Ferro">
+                                                    alt="VIP Ferro" class="znav-item-img">
                                                 <h4>VIP FERRO</h4>
                                                 <p>O pacote ideal para começar com o pé direito.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/222/54bd34?text=VIP+Ouro"
-                                                    alt="VIP Ouro">
+                                                    alt="VIP Ouro" class="znav-item-img">
                                                 <h4>VIP OURO</h4>
                                                 <p>Mais kits, prefixos exclusivos e permissões extras.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/333/54bd34?text=VIP+Diamante"
-                                                    alt="VIP Diamante">
+                                                    alt="VIP Diamante" class="znav-item-img">
                                                 <h4>VIP DIAMANTE</h4>
                                                 <p>A experiência suprema, acesso a tudo no servidor.</p>
                                             </div>
@@ -483,13 +526,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="canais" class="sidebar-link">Página Canal Oficial</a>
+                                            <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Baixe a demonstração</a>
+                                            <a href="canais" class="small-links"><i class="fas fa-search"></i> &nbsp
+                                                Página Canal Oficial</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -499,13 +546,13 @@
                                         <div class="znav-grid-2">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x250/111/54bd34?text=Pets"
-                                                    alt="Pets">
+                                                    alt="Pets" class="znav-item-img">
                                                 <h4>Pets Exclusivos</h4>
                                                 <p>Companheiros que te seguem por toda a jornada.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x250/222/54bd34?text=Particulas"
-                                                    alt="Particulas">
+                                                    alt="Particulas" class="znav-item-img">
                                                 <h4>Efeitos e Partículas</h4>
                                                 <p>Deixe um rastro de chamas ou corações por onde passar.</p>
                                             </div>
@@ -513,16 +560,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="#" class="sidebar-link">Dê vida à ciência</a>
-                                            <a href="#" class="sidebar-link">Para os pais</a>
-                                            <a href="#" class="sidebar-link">Para educadores</a>
-                                            <a href="#" class="sidebar-link">Como comprar</a>
+                                            <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i>
+                                                &nbsp Baixe a demonstração</a>
+                                            <a href="#" class="sidebar-link"><i class="fas fa-user-tie"></i> &nbsp
+                                                Página de Canais Parceiros</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -532,21 +580,27 @@
                 </li>
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item">SUPORTE <i class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item"><i class="fas fa-user"></i> &nbsp SUPORTE <i
+                            class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'sup-1')">Central de
+                                <button class="znav-tab active" onclick="switchZnavTab(event, 'sup-1')"><i
+                                        class="fas fa-user"></i> &nbsp Central de
                                     Ajuda</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-2')">Abra seu
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-2')"><i
+                                        class="fas fa-ticket"></i> &nbsp Abra seu
                                     Ticket</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-3')">Solicitar Parceria
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-3')"><i
+                                        class="fas fa-user-friends"></i> &nbsp Solicitar Parceria
                                     (Servidor Discord)</button>
 
                                 <div class="znav-bottom-links">
-                                    <a href="#">Termos de Serviço</a>
-                                    <a href="#">Regras Oficiais</a>
+                                    <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp Ir
+                                        para Downloads</a>
+                                    <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp
+                                        Resgatar código de presente</a>
                                 </div>
                             </div>
 
@@ -556,19 +610,19 @@
                                         <div class="znav-grid-3">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/111/54bd34?text=Conta"
-                                                    alt="Conta">
+                                                    alt="Conta" class="znav-item-img">
                                                 <h4>Problemas de Conta</h4>
                                                 <p>Recuperar senha, alterar skin ou dados cadastrais.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/222/54bd34?text=Conexao"
-                                                    alt="Conexao">
+                                                    alt="Conexao" class="znav-item-img">
                                                 <h4>Erros de Conexão</h4>
                                                 <p>Como resolver lag, ping alto ou mensagens de erro no login.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x225/333/54bd34?text=Pagamentos"
-                                                    alt="Pagamentos">
+                                                    alt="Pagamentos" class="znav-item-img">
                                                 <h4>Pagamentos e VIPs</h4>
                                                 <p>Dúvidas sobre ativação de pacotes comprados na loja.</p>
                                             </div>
@@ -576,13 +630,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="suporte" class="sidebar-link">Página de Suporte</a>
+                                            <a href="#" class="special-link"><i class="fas fa-edit"></i> &nbsp Baixe a
+                                                demonstração</a>
+                                            <a href="suporte" class="sidebar-link"><i class="fas fa-user"></i> &nbsp
+                                                Página de Suporte</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -592,13 +650,13 @@
                                         <div class="znav-grid-2">
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x250/111/54bd34?text=Modpack"
-                                                    alt="Modpack">
+                                                    alt="Modpack" class="znav-item-img">
                                                 <h4>Instalador Oficial (Modpack)</h4>
                                                 <p>Baixe nosso instalador otimizado para não ter problemas de mods.</p>
                                             </div>
                                             <div class="znav-card">
                                                 <img src="https://via.placeholder.com/400x250/222/54bd34?text=Texturas"
-                                                    alt="Texturas">
+                                                    alt="Texturas" class="znav-item-img">
                                                 <h4>Resource Pack Zera's</h4>
                                                 <p>Texturas obrigatórias para os minigames e armas customizadas.</p>
                                             </div>
@@ -606,16 +664,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="#" class="sidebar-link">Dê vida à ciência</a>
-                                            <a href="#" class="sidebar-link">Para os pais</a>
-                                            <a href="#" class="sidebar-link">Para educadores</a>
-                                            <a href="#" class="sidebar-link">Como comprar</a>
+                                            <a href="#" class="special-link"><i class="fas fa-edit"></i> &nbsp Baixe a
+                                                demonstração</a>
+                                            <a href="#" class="sidebar-link"><i class="fas fa-ticket"></i> &nbsp Criar
+                                                Ticket</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -635,16 +694,17 @@
                                     </div>
                                     <div class="znav-col-right">
                                         <div class="edu-links-sidebar">
-                                            <a href="#" class="special-link">Baixe a demonstração</a>
-                                            <a href="#" class="sidebar-link">Dê vida à ciência</a>
-                                            <a href="#" class="sidebar-link">Para os pais</a>
-                                            <a href="#" class="sidebar-link">Para educadores</a>
-                                            <a href="#" class="sidebar-link">Como comprar</a>
+                                            <a href="#" class="special-link"><i class="fas fa-edit"></i> &nbsp Baixe a
+                                                demonstração</a>
+                                            <a href="#" class="sidebar-link"><i class="fas fa-user-friends"></i> &nbsp
+                                                Solicitar Parceria</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
-                                            <li><a href="#">Regras do Survival</a></li>
-                                            <li><a href="#">Comandos Básicos</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Regras do Survival</a></li>
+                                            <li><a class="small-links" href="#"><i class="fas fa-external-link-alt"></i>
+                                                    &nbsp Comandos Básicos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -655,8 +715,8 @@
             </ul>
 
             <div class="znav-actions">
-                <a href="https://discord.gg/GYGVBqGEwP" class="znav-btn-outline">ENTRE NO NOSSO DISCORD <i
-                        class="fas fa-chevron-right"></i></a>
+                <a href="https://discord.gg/GYGVBqGEwP" class="znav-btn-outline"><i class="fab fa-discord"></i> &nbsp
+                    ENTRE NO NOSSO DISCORD <i class="fas fa-chevron-right"></i></a>
 
                 <div class="znav-icon-wrapper" onclick="openSearch()">
                     <i class="fas fa-search"></i>
@@ -667,21 +727,27 @@
                         <i class="fas fa-list-ul"></i> EXTERNOS <i class="fas fa-chevron-down znav-arrow-small"></i>
                     </div>
                     <ul class="znav-simple-drop right-align" onclick="event.stopPropagation()">
-                        <li><a href="https://aternos.org/ " style="color: #ffffff;"><i class="fas fa-skull"></i> &nbsp;
+                        <li><a class="znav-links" href="https://aternos.org/ " style="color: #ffffff;"><i
+                                    class="fas fa-skull"></i> &nbsp;
                                 Aternos</a></li>
-                        <li><a href="https://www.chunker.app/ " style="color: #ffffff;"><i class="fas fa-map"></i>
+                        <li><a class="znav-links" href="https://www.chunker.app/ " style="color: #ffffff;"><i
+                                    class="fas fa-map"></i>
                                 &nbsp; Chunker Convert</a></li>
-                        <li><a href="https://mcpedl.com/ " style="color: #ffffff;"><i class="fas fa-download"></i>
+                        <li><a class="znav-links" href="https://mcpedl.com/ " style="color: #ffffff;"><i
+                                    class="fas fa-download"></i>
                                 &nbsp; MCPEDL</a></li>
-                        <li><a href="https://www.planetminecraft.com/ " style="color: #ffffff;"><i
+                        <li><a class="znav-links" href="https://www.planetminecraft.com/ " style="color: #ffffff;"><i
                                     class="fas fa-box"></i> &nbsp; Planet Minecraft</a></li>
-                        <li><a href="https://minecraft.novaskin.me/" style="color: #ffffff;"><i class="fas fa-gem"></i>
+                        <li><a class="znav-links" href="https://minecraft.novaskin.me/" style="color: #ffffff;"><i
+                                    class="fas fa-gem"></i>
                                 &nbsp; Nova Skin</a></li>
-                        <li><a href="https://www.9minecraft.net/ " style="color: #ffffff;"><i class="fas fa-map"></i>
+                        <li><a class="znav-links" href="https://www.9minecraft.net/ " style="color: #ffffff;"><i
+                                    class="fas fa-map"></i>
                                 &nbsp; 9Minecraft</a></li>
-                        <li><a href="https://pt.minecraft.wiki/" style="color: #797979;"><i
+                        <li><a class="znav-links" href="https://pt.minecraft.wiki/" style="color: #797979;"><i
                                     class="fas fa-info-circle"></i> &nbsp; Minecraft Wiki</a></li>
-                        <li><a href="https://www.minecraft.net/" style="color: #797979;"><i class="fas fa-book"></i>
+                        <li><a class="znav-links" href="https://www.minecraft.net/" style="color: #797979;"><i
+                                    class="fas fa-book"></i>
                                 &nbsp; Minecraft.net</a></li>
                     </ul>
                 </div>

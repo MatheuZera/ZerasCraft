@@ -40,22 +40,25 @@ function unlockScroll() {
 }
 
 /* ==========================================
-   2. SISTEMA DE AUTOLOAD (nav.html)
+   2. SISTEMA DE AUTOLOAD (nav.html) atualizado
 ========================================== */
 document.addEventListener("DOMContentLoaded", () => {
   const navPlaceholder = document.getElementById("nav-placeholder");
   if (navPlaceholder) {
-    // Tenta carregar nav.html da raiz ou pasta anterior
     fetch("nav.html")
-      .then((res) => {
-        if (!res.ok) return fetch("../nav.html");
-        return res;
-      })
-      .then((res) => res.text())
-      .then((html) => {
+      .then(res => res.text())
+      .then(html => {
         navPlaceholder.innerHTML = html;
-      })
-      .catch((err) => console.error("Erro ao carregar o menu:", err));
+
+        // --- Isso faz os scripts dentro do nav.html funcionarem ---
+        const scripts = navPlaceholder.querySelectorAll("script");
+        scripts.forEach(oldScript => {
+          const newScript = document.createElement("script");
+          Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+          newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+      });
   }
 });
 
