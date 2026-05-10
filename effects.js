@@ -29,16 +29,16 @@ function play(key, vol = 0.3) {
 // =========================================================
 
 // 1. Som 'button' no HOVER
-const HOVER_BUTTON = [".back-to-top", ".btn-primary", ".btn-outline", ".btn-hero-outline", ".znav-tab", ".mc-arrow", ".tab-btn", ".burger", ".faq-item", ".zmob-has-dropdown", ".btn-price", ".btn-hero-green", ".video-frame", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".special-link", ".btn-abrir", ".checkout-btn", ".feat-tab", ".nav-tab-btn", ".thumb-item", ".btn-toggle-text", ".btn-next-img", ".d-thumb", ".znav-tab", ".znav-btn-outline", ".znav-icon-wrapper", ".znav-links", ".small-links"];
+const HOVER_BUTTON = [".back-to-top", ".btn-primary", ".btn-outline", ".btn-hero-outline", ".znav-tab", ".mc-arrow", ".tab-btn", ".burger", ".faq-item", ".zmob-has-dropdown", ".btn-price", ".btn-hero-green", ".video-frame", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".special-link", ".btn-abrir", ".checkout-btn", ".feat-tab", ".nav-tab-btn", ".thumb-item", ".btn-toggle-text", ".btn-next-img", ".bundle-btn", ".d-thumb", ".znav-tab", ".znav-btn-outline", ".znav-icon-wrapper", ".znav-links", ".small-links"];
 
 // 2. Som 'button_click' no CLIQUE (Acordeões e Botões)
 const CLICK_ACTION = [".btn-outline", ".btn-sidebar", ".znav-tab", ".znav-item", ".faq-item", ".zmob-has-dropdown", ".btn-primary", ".btn-green", ".tab-btn", ".btn-price", ".btn-hero-green", ".play-btn", ".mc-arrow", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".btn-abrir", ".checkout-btn", ".feat-tab", ".thumb-item", ".d-thumb", ".mc-acc-item", ".znav-icon-wrapper"];
 
 // 3. Som 'card' no HOVER
-const HOVER_CARD = [".mc-collectible-card", ".gallery-item", ".game-card2", ".mode-card", ".mc-news-card", ".f-card", ".w-item", ".game-card-simple", ".content-item", ".link-item", ".game-card"];
+const HOVER_CARD = [".mc-collectible-card", ".gallery-item2", ".game-card2", ".mode-card", ".mc-news-card", ".f-card", ".w-item", ".game-card-simple", ".content-item", ".link-item", ".game-card", ".collectible-unit"];
 
 // 4. Som 'select' no HOVER (Links de texto)
-const HOVER_SELECT = [".znav-item-img", ".znav-banner", ".footer-col", ".mc-link-all", ".promo-box", ".link-btn-card", ".dl-card", ".testi-card", ".news-card", ".t-row-elite", ".sidebar-link", ".feature-tag", ".btn-demo ", ".dropdown-link", ".table-item", ".fab-button", ".znav-mixed-top", ".znav-btn-outline", ".small-links"];
+const HOVER_SELECT = [".znav-item-img", ".znav-banner", ".footer-col", ".mc-link-all", ".promo-box", ".link-btn-card", ".dl-card", ".testi-card", ".news-card", ".t-row-elite", ".sidebar-link", ".feature-tag", ".btn-demo ", ".dropdown-link", ".table-item", ".discord-link", ".znav-mixed-top", ".znav-btn-outline", ".small-links", ".vault-action-link"];
 
 // =========================================================
 // SISTEMA DE ESCUTA GLOBAL
@@ -53,24 +53,41 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// HOVER: Monitora a entrada do mouse
+// HOVER: Monitora a entrada do mouse com trava de repetição
 document.addEventListener("mouseover", (e) => {
   const target = e.target;
-  if (!target || target.dataset.soundActive) return;
+  if (!target) return;
 
-  const checkMatch = (list) => list.some(selector => target.closest(selector));
+  // Função auxiliar para verificar e aplicar a trava
+  const handleHover = (selectors, soundKey, volume) => {
+    const el = target.closest(selectors.join(','));
+    if (el && !el.dataset.soundActive) {
+      play(soundKey, volume);
+      el.dataset.soundActive = "true";
 
-  if (checkMatch(HOVER_BUTTON)) {
-    play("button", 0.15);
-    markActive(target);
-  } else if (checkMatch(HOVER_CARD)) {
-    play("card", 0.15);
-    markActive(target);
-  } else if (checkMatch(HOVER_SELECT)) {
-    play("select", 0.2);
-    markActive(target);
-  }
+      // Remove a trava quando o mouse sair do elemento pai
+      el.addEventListener("mouseleave", () => {
+        delete el.dataset.soundActive;
+      }, { once: true });
+      return true;
+    }
+    return false;
+  };
+
+  // 1. Verifica Cards (Prioridade)
+  if (handleHover(HOVER_CARD, "card", 0.15)) return;
+
+  // 2. Verifica Botões
+  if (handleHover(HOVER_BUTTON, "button", 0.15)) return;
+
+  // 3. Verifica Select/Links (Onde o problema do texto interno ocorre muito)
+  if (handleHover(HOVER_SELECT, "select", 0.2)) return;
 });
+
+function markActive(el) {
+  el.dataset.soundActive = "true";
+  el.addEventListener("mouseleave", () => { delete el.dataset.soundActive; }, { once: true });
+}
 
 function markActive(el) {
   el.dataset.soundActive = "true";
