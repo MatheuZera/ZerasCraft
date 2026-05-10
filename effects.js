@@ -35,10 +35,10 @@ const HOVER_BUTTON = [".back-to-top", ".btn-primary", ".btn-outline", ".btn-hero
 const CLICK_ACTION = [".btn-outline", ".btn-sidebar", ".znav-tab", ".znav-item", ".faq-item", ".zmob-has-dropdown", ".btn-primary", ".btn-green", ".tab-btn", ".btn-price", ".btn-hero-green", ".play-btn", ".mc-arrow", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".btn-abrir", ".checkout-btn", ".feat-tab", ".thumb-item", ".d-thumb", ".mc-acc-item", ".znav-icon-wrapper"];
 
 // 3. Som 'card' no HOVER
-const HOVER_CARD = [".mc-collectible-card", ".gallery-item2", ".game-card2", ".mode-card", ".mc-news-card", ".f-card", ".w-item", ".game-card-simple", ".content-item", ".link-item", ".game-card", ".collectible-unit"];
+const HOVER_CARD = [".mc-collectible-card", ".gallery-item2", ".game-card2", ".mode-card", ".mc-news-card", ".f-card", ".w-item", ".game-card-simple", ".content-item", ".link-item", ".game-card", ".collectible-unit", ".quest-card"];
 
 // 4. Som 'select' no HOVER (Links de texto)
-const HOVER_SELECT = [".znav-item-img", ".znav-banner", ".footer-col", ".mc-link-all", ".promo-box", ".link-btn-card", ".dl-card", ".testi-card", ".news-card", ".t-row-elite", ".sidebar-link", ".feature-tag", ".btn-demo ", ".dropdown-link", ".table-item", ".discord-link", ".znav-mixed-top", ".znav-btn-outline", ".small-links", ".vault-action-link"];
+const HOVER_SELECT = [".znav-item-img", ".znav-banner", ".footer-col", ".mc-link-all", ".promo-box", ".link-btn-card", ".dl-card", ".testi-card", ".news-card", ".t-row-elite", ".sidebar-link", ".feature-tag", ".btn-demo ", ".dropdown-link", ".table-item", ".discord-link", ".znav-mixed-top", ".znav-btn-outline", ".small-links", ".vault-action-link", ".faq-card"];
 
 // =========================================================
 // SISTEMA DE ESCUTA GLOBAL

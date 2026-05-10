@@ -3992,7 +3992,8 @@
   gap: 15px;
 }
 
-.feat-tab {
+.feat-tab,
+.faq-card {
   background-color: #181818;
   border: 2px solid #2a2a2a;
   padding: 22px 25px;
@@ -4001,7 +4002,8 @@
   transition: all 0.2s ease;
 }
 
-.feat-tab:hover {
+.feat-tab,
+.faq-card:hover {
   border-color: #444444;
   background-color: #1f1f1f;
 }
@@ -5948,5 +5950,121 @@
     grid-template-columns: 1fr;
     /* Um card por linha no celular */
     width: 100%;
+  }
+}
+
+/* ============================================================================================= */
+
+/* --- QUEST MODES SECTION --- */
+.quest-section {
+  padding: 80px 0;
+}
+
+.quest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+}
+
+.quest-header h2 {
+  font-size: 2.2rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+/* Grid com lógica de 3 colunas */
+.quest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Card com bordas levemente arredondadas (4px) */
+.quest-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  /* O "meio arredondado" que você pediu */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  overflow: hidden;
+  /* Garante que a imagem respeite o arredondado do card */
+  display: flex;
+  flex-direction: column;
+}
+
+.quest-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--green-mc);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.quest-visual {
+  height: 220px;
+  overflow: hidden;
+  background: #000;
+}
+
+.quest-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: 0.6s ease;
+}
+
+.quest-card:hover .quest-visual img {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.quest-body {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.quest-body h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 12px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+/* Linha decorativa abaixo do título */
+.quest-body h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--green-mc);
+}
+
+.quest-body p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .quest-section {
+    padding: 60px 20px;
+  }
+
+  .quest-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quest-header h2 {
+    font-size: 1.8rem;
   }
 }
