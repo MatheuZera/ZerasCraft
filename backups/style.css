@@ -1,372 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap");
 
-:root {
-  /* Paleta Oficial Inspirada */
-  --bg-dark: #121212;
-  --bg-card: #1d1d1d;
-  --bg-light: #2a2a2a;
-  --green-mc: #3c8527;
-  /* O verde clássico do botão */
-  --green-hover: #52a535;
-  --gold: #f8cb47;
-  --text-main: #ffffff;
-  --text-muted: #a8a8a8;
-  --border: #333333;
 
-  /* Configurações */
-  --container-width: 1200px;
-  --gutter: 20px;
-  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
 
-/* ============================================================================================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* ============================================================================================= */
-/* Aplique isso aos elementos que estão mostrando o cursor */
-.status-indicator,
-.join-text,
-.counter,
-.btn-sidebar {
-  user-select: none;
-  /* Impede a seleção de texto e o aparecimento do cursor | */
-  cursor: default;
-  /* Garante que o mouse não mude para o formato de "I" (edição) */
-}
-
-/* ============================================================================================= */
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-  /* Corta qualquer coisa que tente vazar pela lateral */
-  position: relative;
-}
-
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  font-family: "Inter", sans-serif;
-  line-height: 1.5;
-  overflow-x: hidden;
-  -webkit-user-select: none;
-  /* Suporte para navegadores baseados em Webkit */
-  user-select: none;
-}
-
-/* ============================================================================================= */
-/* ESPAÇO ENTRE O SCROLL LATERAL E OS ELEMENTOS */
-/* Reserva o espaço da barra de rolagem permanentemente no HTML */
-html {
-  scrollbar-gutter: stable;
-}
-
-/* Garante que o body não tente compensar o espaço novamente */
-body {
-  width: 100%;
-}
-
-/* ============================================================================================= */
-/* ==========================================
-   TIPOGRAFIA GLOBAL E TÍTULOS (ESTÁVEL)
-========================================== */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Rajdhani", sans-serif !important;
-  text-transform: uppercase !important;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-  /* Margem padrão para evitar que o texto grude */
-}
-
-/* Tamanhos fixos escaláveis */
-h1 {
-  font-size: 3rem !important;
-  line-height: 1.1;
-}
-
-h2 {
-  font-size: 2.5rem !important;
-  line-height: 1.2;
-}
-
-h3 {
-  font-size: 2rem !important;
-  line-height: 1.3;
-}
-
-h4 {
-  font-size: 1.5rem !important;
-  line-height: 1.4;
-}
-
-h5 {
-  font-size: 1.25rem !important;
-}
-
-h6 {
-  font-size: 1rem !important;
-}
-
-/* ============================================================================================= */
-/* Mantém os botões grandes com a fonte correta */
-.logo,
-.btn-big-green {
-  font-family: "Rajdhani", sans-serif !important;
-  text-transform: uppercase;
-}
-
-/* ============================================================================================= */
-/*
-  ESTILO GERAIS CSS
-*/
-/* Esta classe permite que o HTML controle a cor */
-.secao-personalizavel {
-  width: 100%;
-  padding: 60px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  /* Aqui acontece a mágica: ele usa a variável --bg que você criar no HTML */
-  background-color: var(--secao, #0b0b0b);
-  color: white;
-}
-
-/* Seção com fundo Verde */
-.secao-verde {
-  width: 100%;
-  background-color: #00b31e !important;
-  /* Usa sua cor verde oficial */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo Verde */
-.secao-verde2 {
-  width: 100%;
-  background-color: #229e00 !important;
-  /* Usa sua cor verde oficial */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo Verde */
-.secao-verde3 {
-  width: 100%;
-  background-color: #187000 !important;
-  /* Usa sua cor verde oficial */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo Verde */
-.secao-roxa {
-  width: 100%;
-  background-color: #120c72 !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-  z-index: 1;
-  /* Z-index alto se precisar ficar sobre algo, mas 1000 costuma ser para menus */
-}
-
-/* Seção com fundo a */
-.secao-clara {
-  width: 100%;
-  background-color: var(--text-muted) !important;
-  /* Ou use var(--bg-dark) do seu style.css */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo a */
-.secao-cinza {
-  width: 100%;
-  background-color: var(--zc-bg-main) !important;
-  /* Ou use var(--bg-dark) do seu style.css */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo Cinza */
-.secao-cinza2 {
-  width: 100%;
-  background-color: #383838 !important;
-  /* Ou use var(--bg-dark) do seu style.css */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo a */
-.secao-escura {
-  width: 100%;
-  background-color: var(--bg-light) !important;
-  /* Ou use var(--bg-dark) do seu style.css */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo a */
-.secao-escura2 {
-  width: 100%;
-  background-color: var(--bg-card) !important;
-  /* Ou use var(--bg-dark) do seu style.css */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo a */
-.secao-escura3 {
-  width: 100%;
-  background-color: var(--bg-dark) !important;
-  /* Ou use var(--bg-dark) do seu style.css */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo Escuro/Preto */
-.secao-preta {
-  width: 100%;
-  background-color: #0b0b0b !important;
-  /* Ou use var(--bg-dark) do seu style.css */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* Seção com fundo a */
-.secao-preto2 {
-  width: 100%;
-  background-color: var(--dark-bg);
-  /* Ou use var(--bg-dark) do seu style.css */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  box-sizing: border-box;
-}
-
-/* ============================================================================================= */
-/* Estilo para a tag personalizada <secao-titulo> */
-secao-titulo {
-  display: block;
-  font-family: var(--fonte-titulo);
-  font-size: 2rem;
-  color: var(--cor-texto-claro);
-  text-transform: uppercase;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 5px;
-}
-
-/* Estilo para a tag personalizada <secao-subtitulo> */
-secao-subtitulo {
-  display: block;
-  font-family: var(--fonte-subtitulo);
-  font-size: 1rem;
-  color: var(--cor-texto-claro);
-  text-align: center;
-  margin-bottom: 30px;
-  opacity: 0.8;
-}
-
-/* ============================================================================================= */
-/* Feedback visual para cliques em botões e links */
-.btn-green:active,
-.tab-btn:active,
-.social-box:active {
-  transform: scale(0.95);
-  /* Efeito de botão sendo pressionado */
-  transition: transform 0.1s;
-}
-
-/* Melhorando a transição de hover para combinar com o som */
-.market-card,
-.dl-card {
-  transition:
-    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    box-shadow 0.3s;
-}
-
-/* Classe para links de texto terem um leve brilho no hover */
-.text-link:hover,
-.footer-col a:hover {
-  color: var(--green-mc);
-  text-shadow: 0 0 8px rgba(60, 133, 39, 0.5);
-}
-
-/* ============================================================================================= */
-/* --- UTILITÁRIOS --- */
-/* Ajuste global para evitar cortes */
-.container {
-  width: 100%;
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 15px;
-  /* Margem de segurança nas laterais */
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: 0.3s;
-}
-
-ul {
-  list-style: none;
-}
 
 /* ============================================================================================= */
 /* --- Variáveis e Configurações Globais --- */
@@ -914,6 +549,22 @@ html.z-lock-scroll {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ==========================================
    3. MOBILE (MANTIDO ESTÁVEL COMO SOLICITADO)
 ========================================== */
@@ -970,7 +621,7 @@ html.z-lock-scroll {
   .zmob-sidebar {
     position: fixed;
     top: 0;
-    right: -100vw;
+    right: 100vw;
     width: 100vw;
     height: 100vh;
     background: #0d0d0d;
@@ -1082,9 +733,9 @@ html.z-lock-scroll {
     text-transform: uppercase;
   }
 
-  .zmob-list li i,
+  .zmob-list i,
   .zmob-list li a i {
-    color: #888;
+    color: #cecece;
     font-size: 14px;
   }
 
@@ -1167,7 +818,7 @@ html.z-lock-scroll {
     color: #fff;
     padding: 15px 25px 5px;
     letter-spacing: 1px;
-    font-size: 1.2rem;
+    font-size: 0.2rem;
     margin: 0;
   }
 
@@ -1450,6 +1101,389 @@ html.z-lock-scroll {
 }
 
 /* =============================================================================================== */
+
+
+
+
+:root {
+  /* Paleta Oficial Inspirada */
+  --bg-dark: #121212;
+  --bg-card: #1d1d1d;
+  --bg-light: #2a2a2a;
+  --green-mc: #3c8527;
+  /* O verde clássico do botão */
+  --green-hover: #52a535;
+  --gold: #f8cb47;
+  --text-main: #ffffff;
+  --text-muted: #a8a8a8;
+  --border: #333333;
+
+  /* Configurações */
+  --container-width: 1200px;
+  --gutter: 20px;
+  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================================================= */
+/* Aplique isso aos elementos que estão mostrando o cursor */
+.status-indicator,
+.join-text,
+.counter,
+.btn-sidebar {
+  user-select: none;
+  /* Impede a seleção de texto e o aparecimento do cursor | */
+  cursor: default;
+  /* Garante que o mouse não mude para o formato de "I" (edição) */
+}
+
+/* ============================================================================================= */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Corta qualquer coisa que tente vazar pela lateral */
+  position: relative;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  /* Suporte para navegadores baseados em Webkit */
+  user-select: none;
+}
+
+/* ============================================================================================= */
+/* ESPAÇO ENTRE O SCROLL LATERAL E OS ELEMENTOS */
+/* Reserva o espaço da barra de rolagem permanentemente no HTML */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Garante que o body não tente compensar o espaço novamente */
+body {
+  width: 100%;
+}
+
+/* ============================================================================================= */
+/* ==========================================
+   TIPOGRAFIA GLOBAL E TÍTULOS (ESTÁVEL)
+========================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Rajdhani", sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  /* Margem padrão para evitar que o texto grude */
+}
+
+/* Tamanhos fixos escaláveis */
+h1 {
+  font-size: 3rem !important;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2.5rem !important;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 2rem !important;
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 1.5rem !important;
+  line-height: 1.4;
+}
+
+h5 {
+  font-size: 1.25rem !important;
+}
+
+h6 {
+  font-size: 1rem !important;
+}
+
+.title-section {
+  color: var(--text-main);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============================================================================================= */
+/* Mantém os botões grandes com a fonte correta */
+.logo,
+.btn-big-green {
+  font-family: "Rajdhani", sans-serif !important;
+  text-transform: uppercase;
+}
+
+/* ============================================================================================= */
+/*
+  ESTILO GERAIS CSS
+*/
+/* Esta classe permite que o HTML controle a cor */
+.secao-personalizavel {
+  width: 100%;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  /* Aqui acontece a mágica: ele usa a variável --bg que você criar no HTML */
+  background-color: var(--secao, #0b0b0b);
+  color: white;
+}
+
+/* Seção com fundo Verde */
+.secao-verde {
+  width: 100%;
+  background-color: #00b31e !important;
+  /* Usa sua cor verde oficial */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo Verde */
+.secao-verde2 {
+  width: 100%;
+  background-color: #229e00 !important;
+  /* Usa sua cor verde oficial */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo Verde */
+.secao-verde3 {
+  width: 100%;
+  background-color: #187000 !important;
+  /* Usa sua cor verde oficial */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo Verde */
+.secao-roxa {
+  width: 100%;
+  background-color: #120c72 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  z-index: 1;
+  /* Z-index alto se precisar ficar sobre algo, mas 1000 costuma ser para menus */
+}
+
+/* Seção com fundo a */
+.secao-clara {
+  width: 100%;
+  background-color: var(--text-muted) !important;
+  /* Ou use var(--bg-dark) do seu style.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-cinza {
+  width: 100%;
+  background-color: var(--zc-bg-main) !important;
+  /* Ou use var(--bg-dark) do seu style.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo Cinza */
+.secao-cinza2 {
+  width: 100%;
+  background-color: #383838 !important;
+  /* Ou use var(--bg-dark) do seu style.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura {
+  width: 100%;
+  background-color: var(--bg-light) !important;
+  /* Ou use var(--bg-dark) do seu style.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura2 {
+  width: 100%;
+  background-color: var(--bg-card) !important;
+  /* Ou use var(--bg-dark) do seu style.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura3 {
+  width: 100%;
+  background-color: var(--bg-dark) !important;
+  /* Ou use var(--bg-dark) do seu style.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo Escuro/Preto */
+.secao-preta {
+  width: 100%;
+  background-color: #0b0b0b !important;
+  /* Ou use var(--bg-dark) do seu style.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-preto2 {
+  width: 100%;
+  background-color: var(--dark-bg);
+  /* Ou use var(--bg-dark) do seu style.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+/* ============================================================================================= */
+/* Estilo para a tag personalizada <secao-titulo> */
+secao-titulo {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: 2rem;
+  color: var(--cor-texto-claro);
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+/* Estilo para a tag personalizada <secao-subtitulo> */
+secao-subtitulo {
+  display: block;
+  font-family: var(--fonte-subtitulo);
+  font-size: 1rem;
+  color: var(--cor-texto-claro);
+  text-align: center;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+/* ============================================================================================= */
+/* Feedback visual para cliques em botões e links */
+.btn-green:active,
+.tab-btn:active,
+.social-box:active {
+  transform: scale(0.95);
+  /* Efeito de botão sendo pressionado */
+  transition: transform 0.1s;
+}
+
+/* Melhorando a transição de hover para combinar com o som */
+.market-card,
+.dl-card {
+  transition:
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.3s;
+}
+
+/* Classe para links de texto terem um leve brilho no hover */
+.text-link:hover,
+.footer-col a:hover {
+  color: var(--green-mc);
+  text-shadow: 0 0 8px rgba(60, 133, 39, 0.5);
+}
+
+/* ============================================================================================= */
+
+/* --- UTILITÁRIOS --- */
+/* Ajuste global para evitar cortes */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 15px;
+  /* Margem de segurança nas laterais */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ============================================================================================= */
 
 /* --- HERO SECTION --- */
 .hero {
