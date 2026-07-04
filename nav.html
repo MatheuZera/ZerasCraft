@@ -810,8 +810,9 @@
 
 
     <nav class="zmob-topbar">
-        <a href="/ZerasCraft/" class="zmob-logo">ZERA'S CRAFT</a>
         <button class="zmob-burger" onclick="openMobileMenu()"><i class="fas fa-bars"></i></button>
+        <a href="/ZerasCraft/" class="zmob-logo">ZERA'S CRAFT</a>
+        <button class="zmob-burger" onclick="openSearch()"><i class="fas fa-search"></i></button>
     </nav>
 
     <div class="zmob-overlay" id="zmobOverlay" onclick="closeMobileMenu()"></div>
@@ -851,7 +852,7 @@
                 <h2 class="zmob-title">EXPLORAR</h2>
 
                 <ul class="zmob-list">
-                    <li class="zmob-item-list">
+                    <div class="zmob-item-list">
                         <a href="#">
                             <img src="assets/images/geral/banner-fundo.gif" alt="Home">
                             <div class="zmob-item-info">
@@ -860,9 +861,9 @@
                             </div>
                             <i class="fas fa-chevron-right zmob-item-icon"></i>
                         </a>
-                    </li>
+                    </div>
 
-                    <li class="zmob-item-list">
+                    <div class="zmob-item-list">
                         <a href="#">
                             <img src="assets/images/geral/banner-img.jpg" alt="Loja">
                             <div class="zmob-item-info">
@@ -871,9 +872,9 @@
                             </div>
                             <i class="fas fa-shopping-cart zmob-item-icon"></i>
                         </a>
-                    </li>
+                    </div>
 
-                    <li class="zmob-has-dropdown">
+                    <div class="zmob-has-dropdown">
                         <div class="zmob-item-collapse" onclick="toggleDropdown(this)">
                             <div class="zmob-collapse-label">
                                 <i class="fas fa-globe-americas"></i>
@@ -896,7 +897,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </div>
 
                     <li class="zmob-item-list">
                         <a href="#">

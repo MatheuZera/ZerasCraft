@@ -1,0 +1,2979 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
+    <meta charset="UTF-8">
+    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zera's Craft | Teste 2</title> <!---->
+    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css"> <!---->
+    <link rel="stylesheet" href="style2.css"> <!---->
+    <link rel="stylesheet" href="style3.css"> <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!---->
+
+    <!--é a breve descrição da sua página que pode aparecer no Google-->
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
+    <meta name="keywords"
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
+    <!--Identifica o autor do documento HTML.-->
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
+    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
+    <meta name="robots" content="index, follow">
+
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--O título que aparece na pré-visualização.-->
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
+    <!--A descrição que aparece na pré-visualização.-->
+    <meta property="og:description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
+    <!--A URL da página.-->
+    <meta property="og:url" content="https://seusite.com.br/index.html">
+
+    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mundo Zera's Craft">
+    <meta property="og:locale" content="pt_BR">
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@SeuTwitterHandle">
+    <meta name="twitter:creator" content="@SeuTwitterHandle">
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
+    <meta name="twitter:description"
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
+    <!---->
+    <meta name="twitter:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <meta name="theme-color" content="#347C2F">
+    <!-- Links para ScrollReveal e CountUp.js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <!--=======================================================================================================-->
+
+    <body>
+        <div id="nav-placeholder"></div>
+
+        <section class="game-section">
+        </section>
+
+        <script src="assets/js/scripts.js"></script>
+    </body>
+    <!--=======================================================================================================-->
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif');"></div>
+
+            <div class="hero-content">
+                <span class="hero-tag">Mundo Zera's Craft</span>
+
+                <h1 class="hero-title">MODELO DE PÁGINA LIMPA (Global)</h1>
+
+                <p class="hero-desc">Descrição breve e impactante sobre o seu servidor ou modo de jogo aqui.</p>
+
+                <div class="hero-actions">
+                    <a href="#" class="btn-hero-green">DISCORD <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" class="btn-hero-outline">CANAL OFICIAL</a>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <section class="mc-guide-section" id="tutorial">
+            <div class="mc-guide-header">
+                <h2>Como Jogar?</h2>
+                <p>Siga estes passos simples para entrar e construir sua história no servidor</p>
+            </div>
+
+            <div class="mc-guide-container">
+                <nav class="mc-guide-nav">
+                    <button class="mc-guide-tab active" onclick="window.changeGuideStep(1)">
+                        <span class="mc-guide-num">01</span> Conectar ao IP
+                    </button>
+                    <button class="mc-guide-tab" onclick="window.changeGuideStep(2)">
+                        <span class="mc-guide-num">02</span> Versão Correta
+                    </button>
+                    <button class="mc-guide-tab" onclick="window.changeGuideStep(3)">
+                        <span class="mc-guide-num">03</span> Entrar no Jogo
+                    </button>
+                </nav>
+
+                <div class="mc-guide-content">
+                    <div class="mc-guide-card active" id="card-step-1" style="display: block;">
+                        <div class="mc-guide-body">
+                            <h3>Passo 1: Copie o endereço do Servidor</h3>
+                            <p>O primeiro passo é garantir o nosso endereço de conexão. Você pode copiar o IP clicando
+                                diretamente na caixa abaixo.</p>
+                            <div class="mc-guide-ip-box"
+                                onclick="window.copyGuideIp(this), showClickNotification('📄 IP Copiado!', 'Entre agora no Servidor! <br> Te aguardaremos por Lá.')"
+                                style="cursor: pointer;">
+                                <code>PixelLegends88.aternos.me:0000</code>
+                                <i class="far fa-copy" style="margin-left: 10px; color: var(--gold, #f8cb47);"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mc-guide-card" id="card-step-2" style="display: none;">
+                        <div class="mc-guide-body">
+                            <h3>Passo 2: Selecione a Versão Recomendada</h3>
+                            <p>Abra o launcher do seu Minecraft (Seja Original, Prism, TLauncher, etc.) e configure o
+                                seu perfil de jogo para iniciar em nossa versão de compatibilidade ideal.</p>
+                            <span class="mc-guide-badge">Recomendado: 1.20.4</span>
+                        </div>
+                    </div>
+
+                    <div class="mc-guide-card" id="card-step-3" style="display: none;">
+                        <div class="mc-guide-body">
+                            <h3>Passo 3: Adicione à sua Lista</h3>
+                            <p>Dentro do jogo, clique em <strong>Multiplayer</strong>, depois em <strong>Add
+                                    Server</strong>. Cole o IP copiado no campo correspondente, clique em Concluído e
+                                entre no mundo!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="features-section" id="features">
+            <div class="features-header">
+                <h2>Por que jogar no nosso servidor?</h2>
+                <p>Descubra os recursos exclusivos que tornam a nossa comunidade única e divertida</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3 class="feature-title">Pets</h3>
+                    <p class="feature-desc">Tenha companheiros leais que te acompanham em suas jornadas, cada um com
+                        habilidades e aparências únicas.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="feature-title">Partículas</h3>
+                    <p class="feature-desc">Destaque-se dos demais jogadores com efeitos visuais e rastros incríveis ao
+                        caminhar ou batalhar.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3 class="feature-title">Modpack Próprio</h3>
+                    <p class="feature-desc">Uma experiência otimizada e customizada através do nosso modpack, trazendo
+                        novos itens sem perder o desempenho.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3 class="feature-title">Texturas Únicas</h3>
+                    <p class="feature-desc">Modelos e texturas exclusivas criadas sob medida para o nosso servidor,
+                        elevando o nível visual do seu jogo.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="feature-title">Economia Equilibrada</h3>
+                    <p class="feature-desc">Um sistema de mercado justo onde o seu esforço vale a pena. Venda, compre e
+                        gerencie suas riquezas no jogo.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">Suporte 24/7</h3>
+                    <p class="feature-desc">Nossa equipe de moderadores está sempre pronta para te ajudar diretamente
+                        pelo nosso Discord oficial.</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="mc-shop-section" id="shop">
+
+            <div class="mc-ticker-container">
+                <div class="mc-ticker-wrapper">
+                    <div class="mc-ticker-group">
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player1/24" alt="Skin">
+                            Player1 <span>R$ 50,00</span></div>
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player2/24" alt="Skin">
+                            ZerasFan <span>R$ 35,00</span></div>
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player3/24" alt="Skin">
+                            Gabriel_BR <span>R$ 100,00</span></div>
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player4/24" alt="Skin">
+                            RusticalPvP <span>R$ 15,00</span></div>
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player5/24" alt="Skin">
+                            Alok_Mine <span>R$ 60,00</span></div>
+                    </div>
+                    <div class="mc-ticker-group" aria-hidden="true">
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player1/24" alt="Skin">
+                            Player1 <span>R$ 50,00</span></div>
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player2/24" alt="Skin">
+                            ZerasFan <span>R$ 35,00</span></div>
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player3/24" alt="Skin">
+                            Gabriel_BR <span>R$ 100,00</span></div>
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player4/24" alt="Skin">
+                            RusticalPvP <span>R$ 15,00</span></div>
+                        <div class="mc-ticker-item"><img src="https://mc-heads.net/avatar/Player5/24" alt="Skin">
+                            Alok_Mine <span>R$ 60,00</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mc-shop-header">
+                <h2>Escolha seu Plano VIP</h2>
+                <p>Apoie o servidor e garanta vantagens exclusivas e comandos especiais dentro do jogo</p>
+            </div>
+
+            <div class="mc-shop-grid">
+
+                <div class="mc-shop-card">
+                    <div class="mc-card-icon-box">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="mc-card-title">VIP BÁSICO</h3>
+                    <p class="mc-card-price">R$ 15,00<span>/mês</span></p>
+                    <ul class="mc-card-list">
+                        <li><i class="fas fa-check"></i> Tag <span style="color: var(--gold);">[VIP]</span> exclusiva no
+                            chat</li>
+                        <li><i class="fas fa-check"></i> Acesso ao comando /fly no Lobby</li>
+                        <li><i class="fas fa-check"></i> Kit VIP diário básico</li>
+                        <li><i class="fas fa-check"></i> Entrada prioritária em eventos</li>
+                    </ul>
+                    <button class="mc-card-button" onclick="window.openCheckout('VIP BÁSICO', '15.00$')">Adquirir
+                        Plano</button>
+                </div>
+
+                <div class="mc-shop-card featured">
+                    <div class="mc-card-badge">MAIS VENDIDO</div>
+                    <div class="mc-card-icon-box">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="mc-card-title">VIP SUPREMO</h3>
+                    <p class="mc-card-price">R$ 35,00<span>/mês</span></p>
+                    <ul class="mc-card-list">
+                        <li><i class="fas fa-check"></i> Tag <span style="color: #52a535;">[SUPREMO]</span> no chat</li>
+                        <li><i class="fas fa-check"></i> Comando /fly liberado globalmente</li>
+                        <li><i class="fas fa-check"></i> Kit Supremo semanal completo</li>
+                        <li><i class="fas fa-check"></i> Mensagem personalizada ao entrar</li>
+                        <li><i class="fas fa-check"></i> +5 slots extras no /chest</li>
+                    </ul>
+                    <button class="mc-card-button" onclick="window.openCheckout('VIP SUPREMO', '35.00$')">Adquirir
+                        Plano</button>
+                </div>
+
+                <div class="mc-shop-card">
+                    <div class="mc-card-icon-box">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h3 class="mc-card-title">VIP LENDÁRIO</h3>
+                    <p class="mc-card-price">R$ 75,00<span>/mês</span></p>
+                    <ul class="mc-card-list">
+                        <li><i class="fas fa-check"></i> Tag <span style="color: #df4444;">[LENDÁRIO]</span> animada
+                        </li>
+                        <li><i class="fas fa-check"></i> Todos os benefícios do plano Supremo</li>
+                        <li><i class="fas fa-check"></i> Multiplicador de moedas (2x Coins)</li>
+                        <li><i class="fas fa-check"></i> Canal exclusivo no Discord oficial</li>
+                    </ul>
+                    <button class="mc-card-button" onclick="window.openCheckout('VIP LENDÁRIO', '75.00$')">Adquirir
+                        Plano</button>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="mc-ranking-section" id="ranking">
+            <div class="mc-ranking-header">
+                <h2>Ranking do Servidor</h2>
+                <p>Estes são os magnatas que dominam a economia do nosso mundo</p>
+            </div>
+
+            <div class="mc-podium-container">
+
+                <div class="mc-podium-card position-2">
+                    <div class="mc-avatar-wrapper">
+                        <img src="https://mc-heads.net/body/Player2/120" alt="2º Lugar" class="mc-avatar-3d">
+                        <span class="mc-badge-rank">2</span>
+                    </div>
+                    <h4 class="mc-rank-name">ZerasFan</h4>
+                    <p class="mc-rank-value"><i class="fas fa-coins"></i> 1,500,000</p>
+                </div>
+
+                <div class="mc-podium-card position-1">
+                    <div class="mc-crown-icon"><i class="fas fa-crown"></i></div>
+                    <div class="mc-avatar-wrapper">
+                        <img src="https://mc-heads.net/body/Player3/140" alt="1º Lugar" class="mc-avatar-3d">
+                        <span class="mc-badge-rank">1</span>
+                    </div>
+                    <h4 class="mc-rank-name">Gabriel_BR</h4>
+                    <p class="mc-rank-value"><i class="fas fa-coins"></i> 3,250,000</p>
+                </div>
+
+                <div class="mc-podium-card position-3">
+                    <div class="mc-avatar-wrapper">
+                        <img src="https://mc-heads.net/body/Player1/110" alt="3º Lugar" class="mc-avatar-3d">
+                        <span class="mc-badge-rank">3</span>
+                    </div>
+                    <h4 class="mc-rank-name">Player1</h4>
+                    <p class="mc-rank-value"><i class="fas fa-coins"></i> 950,000</p>
+                </div>
+
+            </div>
+
+            <div class="mc-ranking-table">
+
+                <div class="mc-table-row">
+                    <div class="mc-row-left">
+                        <span class="mc-row-index">#4</span>
+                        <img src="https://mc-heads.net/avatar/Player4/28" alt="Skin" class="mc-row-head">
+                        <span class="mc-row-name">RusticalPvP</span>
+                    </div>
+                    <div class="mc-row-right">
+                        <span class="mc-row-money">520,000 Coins</span>
+                    </div>
+                </div>
+
+                <div class="mc-table-row">
+                    <div class="mc-row-left">
+                        <span class="mc-row-index">#5</span>
+                        <img src="https://mc-heads.net/avatar/Player5/28" alt="Skin" class="mc-row-head">
+                        <span class="mc-row-name">Alok_Mine</span>
+                    </div>
+                    <div class="mc-row-right">
+                        <span class="mc-row-money">410,000 Coins</span>
+                    </div>
+                </div>
+
+                <div class="mc-table-row">
+                    <div class="mc-row-left">
+                        <span class="mc-row-index">#6</span>
+                        <img src="https://mc-heads.net/avatar/Steve/28" alt="Skin" class="mc-row-head">
+                        <span class="mc-row-name">MineradorPro</span>
+                    </div>
+                    <div class="mc-row-right">
+                        <span class="mc-row-money">285,000 Coins</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section class="dyn-ranking-section" id="ranking-system">
+            <div class="mc-shop-header">
+                <h2>Classificação Geral</h2>
+                <p>Acompanhe em tempo real os líderes e os dados mais competitivos do servidor</p>
+            </div>
+
+            <div class="ranking-controls-bar">
+                <div class="ranking-filter-buttons">
+                    <button class="rank-filter-btn active" onclick="window.switchRankCategory('money', this)">
+                        <i class="fas fa-coins"></i> Money
+                    </button>
+                    <button class="rank-filter-btn" onclick="window.switchRankCategory('clans', this)">
+                        <i class="fas fa-shield-halved"></i> Clãs
+                    </button>
+                    <button class="rank-filter-btn" onclick="window.switchRankCategory('kills', this)">
+                        <i class="fas fa-skull"></i> Kills
+                    </button>
+                    <button class="rank-filter-btn" onclick="window.switchRankCategory('online', this)">
+                        <i class="fas fa-clock"></i> Tempo Online
+                    </button>
+                </div>
+
+                <div class="ranking-search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="rankPlayerSearch" placeholder="Pesquisar jogador..."
+                        onkeyup="window.filterRankTable()">
+                </div>
+            </div>
+
+            <div class="ranking-table-panel">
+                <div class="ranking-table-overlay"></div>
+
+                <div class="ranking-rows-container" id="rankRowsWrapper">
+
+                    <div class="rank-data-row" data-player="gabriel_br">
+                        <div class="rank-row-left-side">
+                            <span class="rank-position pos-first">1º</span>
+                            <img src="https://mc-heads.net/avatar/Gabriel_BR/32" alt="Head" class="rank-player-head">
+                            <span class="rank-player-nick">Gabriel_BR</span>
+                        </div>
+                        <div class="rank-row-right-side">
+                            <span class="rank-dynamic-value" data-type="money">3.250.000 Coins</span>
+                            <span class="rank-dynamic-value d-none" data-type="clans">Akatsuki [AKT]</span>
+                            <span class="rank-dynamic-value d-none" data-type="kills">1,420 Kills</span>
+                            <span class="rank-dynamic-value d-none" data-type="online">342 horas</span>
+                        </div>
+                    </div>
+
+                    <div class="rank-data-row" data-player="zerasfan">
+                        <div class="rank-row-left-side">
+                            <span class="rank-position pos-second">2º</span>
+                            <img src="https://mc-heads.net/avatar/ZerasFan/32" alt="Head" class="rank-player-head">
+                            <span class="rank-player-nick">ZerasFan</span>
+                        </div>
+                        <div class="rank-row-right-side">
+                            <span class="rank-dynamic-value" data-type="money">1.500.000 Coins</span>
+                            <span class="rank-dynamic-value d-none" data-type="clans">Spartans [SPT]</span>
+                            <span class="rank-dynamic-value d-none" data-type="kills">980 Kills</span>
+                            <span class="rank-dynamic-value d-none" data-type="online">215 horas</span>
+                        </div>
+                    </div>
+
+                    <div class="rank-data-row" data-player="player1">
+                        <div class="rank-row-left-side">
+                            <span class="rank-position pos-third">3º</span>
+                            <img src="https://mc-heads.net/avatar/Player1/32" alt="Head" class="rank-player-head">
+                            <span class="rank-player-nick">Player1</span>
+                        </div>
+                        <div class="rank-row-right-side">
+                            <span class="rank-dynamic-value" data-type="money">950.000 Coins</span>
+                            <span class="rank-dynamic-value d-none" data-type="clans">Sem Clã</span>
+                            <span class="rank-dynamic-value d-none" data-type="kills">640 Kills</span>
+                            <span class="rank-dynamic-value d-none" data-type="online">180 horas</span>
+                        </div>
+                    </div>
+
+                    <div class="rank-data-row" data-player="rusticalpvp">
+                        <div class="rank-row-left-side">
+                            <span class="rank-position">4º</span>
+                            <img src="https://mc-heads.net/avatar/RusticalPvP/32" alt="Head" class="rank-player-head">
+                            <span class="rank-player-nick">RusticalPvP</span>
+                        </div>
+                        <div class="rank-row-right-side">
+                            <span class="rank-dynamic-value" data-type="money">520.000 Coins</span>
+                            <span class="rank-dynamic-value d-none" data-type="clans">Akatsuki [AKT]</span>
+                            <span class="rank-dynamic-value d-none" data-type="kills">1,110 Kills</span>
+                            <span class="rank-dynamic-value d-none" data-type="online">94 horas</span>
+                        </div>
+                    </div>
+
+                    <div class="rank-data-row" data-player="alok_mine">
+                        <div class="rank-row-left-side">
+                            <span class="rank-position">5º</span>
+                            <img src="https://mc-heads.net/avatar/Alok_Mine/32" alt="Head" class="rank-player-head">
+                            <span class="rank-player-nick">Alok_Mine</span>
+                        </div>
+                        <div class="rank-row-right-side">
+                            <span class="rank-dynamic-value" data-type="money">410.000 Coins</span>
+                            <span class="rank-dynamic-value d-none" data-type="clans">Gods [GOD]</span>
+                            <span class="rank-dynamic-value d-none" data-type="kills">230 Kills</span>
+                            <span class="rank-dynamic-value d-none" data-type="online">156 horas</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="mc-staff-section" id="staff">
+            <div class="mc-shop-header">
+                <h2 class="title-section">Nossa Equipa</h2>
+                <p>Nossa equipe de administradores e moderadores, conheça as pessoas que fazem este servidor acontecer
+                    diariamente.</p>
+            </div>
+
+            <div class="mc-staff-grid">
+                <div class="mc-staff-card staff-dev">
+                    <div class="mc-staff-3d-box">
+                        <img src="assets/images/geral/icone.png" alt="RusticalPvP" class="mc-staff-img-3d">
+                    </div>
+                    <div class="mc-staff-info">
+                        <span class="mc-staff-badge badge-dev">[DESENVOLVEDOR]</span>
+                        <h3 class="mc-staff-name">RusticalPvP</h3>
+                        <p class="mc-staff-sub">Desenvolvimento e Técnico.</p>
+                    </div>
+                </div>
+
+                <div class="mc-staff-card staff-owner">
+                    <div class="mc-staff-3d-box">
+                        <img src="https://visage.surton.cc/bust/240/Gabriel_BR.png" alt="Gabriel_BR"
+                            class="mc-staff-img-3d">
+                    </div>
+                    <div class="mc-staff-info">
+                        <span class="mc-staff-badge badge-owner">[ADMINISTRADOR]</span>
+                        <h3 class="mc-staff-name">Gabriel_BR</h3>
+                        <p class="mc-staff-sub">Líder e Fundador do Servidor.</p>
+                    </div>
+                </div>
+
+                <div class="mc-staff-card staff-admin">
+                    <div class="mc-staff-3d-box">
+                        <img src="https://visage.surton.cc/bust/240/ZerasFan.png" alt="ZerasFan"
+                            class="mc-staff-img-3d">
+                    </div>
+                    <div class="mc-staff-info">
+                        <span class="mc-staff-badge badge-admin">[ADMINISTRADOR]</span>
+                        <h3 class="mc-staff-name">ZerasFan</h3>
+                        <p class="mc-staff-sub">Responsável pela Gestão Geral.</p>
+                    </div>
+                </div>
+
+                <div class="mc-staff-card staff-mod">
+                    <div class="mc-staff-3d-box">
+                        <img src="https://visage.surton.cc/bust/240/Player1.png" alt="Player1" class="mc-staff-img-3d">
+                    </div>
+                    <div class="mc-staff-info">
+                        <span class="mc-staff-badge badge-mod">[MODERADOR]</span>
+                        <h3 class="mc-staff-name">Player1</h3>
+                        <p class="mc-staff-sub">Suporte e Moderação no Servidor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mc-gameplay-section"
+            style="background-color: var(--bg-dark); padding: 80px 0; position: relative; overflow: hidden;">
+
+            <div class="container">
+                <div class="mc-gameplay-header" style="text-align: center; margin-bottom: 50px;">
+                    <h2 class="title-section">
+                        Gameplay Plan
+                    </h2>
+                    <p
+                        style="color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 1rem; max-width: 550px; margin: 12px auto 0; line-height: 1.5;">
+                        We have a transparent system for players, check out our plan now
+                    </p>
+                </div>
+
+                <div class="mc-gameplay-grid">
+
+                    <div class="mc-gameplay-nav">
+                        <button class="mc-gameplay-btn active" data-step="1" onclick="changeGameplayStep(1)">
+                            <span class="btn-badge">Day 1</span>
+                            <span class="btn-title">Opening Phase</span>
+                        </button>
+                        <button class="mc-gameplay-btn" data-step="2" onclick="changeGameplayStep(2)">
+                            <span class="btn-badge">Day 2</span>
+                            <span class="btn-title">Faction Events</span>
+                        </button>
+                        <button class="mc-gameplay-btn" data-step="3" onclick="changeGameplayStep(3)">
+                            <span class="btn-badge">Day 3</span>
+                            <span class="btn-title">Map Expansion</span>
+                        </button>
+                        <button class="mc-gameplay-btn" data-step="4" onclick="changeGameplayStep(4)">
+                            <span class="btn-badge">Day 4</span>
+                            <span class="btn-title">Global Raid</span>
+                        </button>
+                    </div>
+
+                    <div class="mc-gameplay-display">
+
+                        <div id="gameplay-card-1" class="gameplay-info-card active">
+                            <div class="card-meta">
+                                <span class="time-tag"><i class="far fa-clock"></i> 20:00</span>
+                                <span class="date-tag">October 10</span>
+                            </div>
+                            <h3 class="card-heading">The opening of the project is scheduled for 20:00 on October 10.
+                            </h3>
+                            <p class="card-paragraph">We are waiting for you on the server, the subject of which will
+                                remain a mystery until you come to us.</p>
+                        </div>
+
+                        <div id="gameplay-card-2" class="gameplay-info-card" style="display: none;">
+                            <div class="card-meta">
+                                <span class="time-tag"><i class="far fa-clock"></i> 18:00</span>
+                                <span class="date-tag">October 11</span>
+                            </div>
+                            <h3 class="card-heading">Day 2 brings exclusive rewards and faction events.</h3>
+                            <p class="card-paragraph">Make sure your team is online to secure the drop at 18:00 sharp.
+                                Prepare your armor and arsenal.</p>
+                        </div>
+
+                        <div id="gameplay-card-3" class="gameplay-info-card" style="display: none;">
+                            <div class="card-meta">
+                                <span class="time-tag"><i class="far fa-clock"></i> 20:00</span>
+                                <span class="date-tag">October 12</span>
+                            </div>
+                            <h3 class="card-heading">The custom map survival boundaries expand tonight.</h3>
+                            <p class="card-paragraph">New dangerous dungeons and ancient structures will unlock across
+                                the border lines at 20:00.</p>
+                        </div>
+
+                        <div id="gameplay-card-4" class="gameplay-info-card" style="display: none;">
+                            <div class="card-meta">
+                                <span class="time-tag"><i class="far fa-clock"></i> 20:00</span>
+                                <span class="date-tag">October 13</span>
+                            </div>
+                            <h3 class="card-heading">Final preparation phase for the weekly global boss raid.</h3>
+                            <p class="card-paragraph">Special community challenges unlock, giving double XP and rare
+                                keys to all active players.</p>
+                        </div>
+
+                        <div class="gameplay-arrows-wrapper">
+                            <button id="gameplay-prev" class="gp-arrow-btn" aria-label="Previous step">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="gp-counter">
+                                <span id="gp-current">1</span> / <span id="gp-total">4</span>
+                            </div>
+                            <button id="gameplay-next" class="gp-arrow-btn" aria-label="Next step">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mc-modules-section"
+            style="background-color: var(--bg-dark); padding: 80px 0; position: relative;">
+            <div class="container">
+
+                <div class="mc-modules-header" style="text-align: center; margin-bottom: 55px;">
+                    <h2
+                        style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1px;">
+                        Nossos Módulos
+                    </h2>
+                    <p
+                        style="color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 1rem; max-width: 550px; margin: 12px auto 0; line-height: 1.5;">
+                        Sistemas exclusivos desenvolvidos para otimizar e enriquecer a sua jogabilidade no servidor.
+                    </p>
+                </div>
+
+                <div class="mc-modules-grid">
+
+                    <div class="module-card">
+                        <div class="module-icon-wrapper">
+                            <img src="https://i.imgur.com/placehold_coin.png" alt="Ícone Economia"
+                                class="module-icon-img mc-pixel-icon">
+                        </div>
+                        <h3 class="module-title">Economia Viva</h3>
+                        <p class="module-desc">Sistema financeiro integrado com lojas dinâmicas e leilões globais entre
+                            jogadores.</p>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon-wrapper">
+                            <img src="https://i.imgur.com/placehold_shield.png" alt="Ícone Proteção"
+                                class="module-icon-img mc-pixel-icon">
+                        </div>
+                        <h3 class="module-title">Proteção Factions</h3>
+                        <p class="module-desc">Crie a sua base sem medo com sistemas avançados de terrenos contra
+                            griefing.</p>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon-wrapper">
+                            <img src="https://i.imgur.com/placehold_bolt.png" alt="Ícone Otimização"
+                                class="module-icon-img mc-pixel-icon">
+                        </div>
+                        <h3 class="module-title">Ultra Otimização</h3>
+                        <p class="module-desc">Servidores calibrados para garantir o maior FPS possível e zero lag de
+                            input.</p>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon-wrapper">
+                            <img src="https://i.imgur.com/placehold_trophy.png" alt="Ícone Eventos"
+                                class="module-icon-img mc-pixel-icon">
+                        </div>
+                        <h3 class="module-title">Eventos Diários</h3>
+                        <p class="module-desc">Batalhas de bosses automáticas, caça ao tesouro e torneios PvP diários.
+                        </p>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon-wrapper">
+                            <img src="https://i.imgur.com/placehold_headset.png" alt="Ícone Suporte"
+                                class="module-icon-img mc-pixel-icon">
+                        </div>
+                        <h3 class="module-title">Suporte via Bot</h3>
+                        <p class="module-desc">Integração total com o Discord através de tickets automatizados e
+                            atendimento rápido.</p>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon-wrapper">
+                            <img src="https://i.imgur.com/placehold_cogs.png" alt="Ícone Customização"
+                                class="module-icon-img mc-pixel-icon">
+                        </div>
+                        <h3 class="module-title">Custom Itens</h3>
+                        <p class="module-desc">Texturas e armas tridimensionais exclusivas que não necessitam de mods
+                            instalados.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mc-products-section" style="background-color: var(--bg-dark); padding: 80px 0;">
+            <div class="container">
+
+                <div class="mc-products-header" style="text-align: center; margin-bottom: 55px;">
+                    <h2
+                        style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1px;">
+                        Escolha seu Plano
+                    </h2>
+                    <p
+                        style="color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 1rem; max-width: 550px; margin: 12px auto 0; line-height: 1.5;">
+                        Adquira vantagens exclusivas e apoie o desenvolvimento do nosso universo.
+                    </p>
+                </div>
+
+                <div class="mc-products-grid">
+
+                    <div class="product-card">
+                        <div class="product-badge">Pacote Inicial</div>
+                        <h3 class="product-name">VIP Iron</h3>
+                        <div class="product-price-area">
+                            <span class="currency">R$</span>
+                            <span class="price-value">14</span>
+                            <span class="price-period">/mês</span>
+                        </div>
+                        <p class="product-description">Perfeito para quem está começando a explorar o servidor e quer
+                            garantir kits básicos diários e tags exclusivas no chat.</p>
+                        <button class="product-action-btn">Adquirir Agora</button>
+                    </div>
+
+                    <div class="product-card featured">
+                        <div class="product-badge">Mais Vendido</div>
+                        <h3 class="product-name">VIP Gold</h3>
+                        <div class="product-price-area">
+                            <span class="currency">R$</span>
+                            <span class="price-value">29</span>
+                            <span class="price-period">/mês</span>
+                        </div>
+                        <p class="product-description">Acesso completo a comandos de teleporte instantâneo,
+                            multiplicador de XP ativo, slots reservados em dias de evento e 3 plots extras.</p>
+                        <button class="product-action-btn">Adquirir Agora</button>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-badge">Plano Supremo</div>
+                        <h3 class="product-name">VIP Diamond</h3>
+                        <div class="product-price-area">
+                            <span class="currency">R$</span>
+                            <span class="price-value">59</span>
+                            <span class="price-period">/mês</span>
+                        </div>
+                        <p class="product-description">O nível máximo de vantagens. Contém todas as permissões
+                            anteriores, prioridade máxima no suporte via bot, tags animadas e itens tridimensionais.</p>
+                        <button class="product-action-btn">Adquirir Agora</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mc-staff-section" style="background-color: var(--bg-dark); padding: 80px 0;">
+            <div class="container">
+
+                <div class="mc-staff-header" style="text-align: center; margin-bottom: 55px;">
+                    <h2
+                        style="color: var(--text-main); font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1px;">
+                        Nossa Equipe
+                    </h2>
+                    <p
+                        style="color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 1rem; max-width: 550px; margin: 12px auto 0; line-height: 1.5;">
+                        Conheça os administradores e desenvolvedores responsáveis por manter o universo ativo.
+                    </p>
+                </div>
+
+                <div class="mc-staff-grid">
+
+                    <div class="staff-card">
+                        <div class="staff-avatar-wrapper">
+                            <img src="https://i.imgur.com/placehold_skin1.png" alt="Avatar Staff"
+                                class="staff-avatar mc-pixel-icon">
+                        </div>
+                        <h3 class="staff-name">Zera_</h3>
+                        <span class="staff-badge badge-admin">Fundador</span>
+
+                        <div class="staff-socials">
+                            <a href="#" class="staff-social-link" aria-label="Discord"><i
+                                    class="fab fa-discord"></i></a>
+                            <a href="#" class="staff-social-link" aria-label="Twitter"><i
+                                    class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="staff-card">
+                        <div class="staff-avatar-wrapper">
+                            <img src="https://i.imgur.com/placehold_skin2.png" alt="Avatar Staff"
+                                class="staff-avatar mc-pixel-icon">
+                        </div>
+                        <h3 class="staff-name">Matheus</h3>
+                        <span class="staff-badge badge-dev">Developer</span>
+
+                        <div class="staff-socials">
+                            <a href="#" class="staff-social-link" aria-label="Discord"><i
+                                    class="fab fa-discord"></i></a>
+                            <a href="#" class="staff-social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="staff-card">
+                        <div class="staff-avatar-wrapper">
+                            <img src="assets/images/geral/icone.png" alt="Avatar Staff"
+                                class="staff-avatar mc-pixel-icon">
+                        </div>
+                        <h3 class="staff-name">Kronos</h3>
+                        <span class="staff-badge badge-mod">Moderador</span>
+
+                        <div class="staff-socials">
+                            <a href="#" class="staff-social-link" aria-label="Discord"><i
+                                    class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mc-hero-banner">
+            <div class="hero-bg-overlay">
+                <img src="assets/images/geral/banner-fundo.gif" alt="Zera's Craft Universo" class="hero-bg-img">
+            </div>
+
+            <div class="container hero-content-container">
+                <div class="hero-info-card">
+                    <div class="card-status-indicator">
+                        <span class="pulse-dot"></span>
+                        <span class="status-text">Server Online</span>
+                    </div>
+
+                    <h1 class="hero-card-title">Zera's Craft<br>Survival</h1>
+
+                    <p class="hero-card-desc">
+                        Explore dungeons misteriosas, construa o seu império com economia viva e domine territórios em
+                        eventos diários épicos.
+                    </p>
+
+                    <div class="hero-ip-box" onclick="copyGuideIp(this)">
+                        <div class="ip-details">
+                            <span class="ip-label">Endereço IP</span>
+                            <span class="ip-address">jogar.zerascraft.net</span>
+                        </div>
+                        <div class="ip-copy-icon">
+                            <i class="far fa-copy"></i>
+                        </div>
+                    </div>
+
+                    <div class="hero-card-actions">
+                        <a href="#jogar" class="hero-btn-primary">Começar Jornada</a>
+                        <a href="#discord" class="hero-btn-secondary"><i class="fab fa-discord"></i> Discord</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mc-advantages-section">
+            <div class="container">
+                <div class="advantages-header">
+                    <h2>Nossas Vantagens</h2>
+                    <p>Descobre o que torna o nosso universo único e diferente de qualquer outro servidor.</p>
+                </div>
+
+                <div class="advantages-grid">
+                    <div class="adv-card">
+                        <i class="fas fa-shield-alt adv-watermark"></i>
+                        <h3 class="adv-title">Sistema de Clãs</h3>
+                        <p class="adv-desc">Funda o teu clã, domina territórios em eventos semanais e disputa o topo do
+                            ranking de kdr com recompensas reais.</p>
+                        <a href="#saiba-mais" class="adv-link">Ler Mais <i class="fas fa-chevron-right"></i></a>
+                    </div>
+
+                    <div class="adv-card">
+                        <i class="fas fa-pickaxe adv-watermark"></i>
+                        <h3 class="adv-title">Economia Viva</h3>
+                        <p class="adv-desc">Mercado dinâmico baseado inteiramente nos jogadores. Cria lojas físicas,
+                            vende itens em leilões globais e enriquece.</p>
+                        <a href="#saiba-mais" class="adv-link">Ler Mais <i class="fas fa-chevron-right"></i></a>
+                    </div>
+
+                    <div class="adv-card">
+                        <i class="fas fa-dungeon adv-watermark"></i>
+                        <h3 class="adv-title">Dungeons Diárias</h3>
+                        <p class="adv-desc">Explora masmorras geradas proceduralmente com chefes customizados, mecânicas
+                            MMORPG e drops de equipamentos épicos.</p>
+                        <a href="#saiba-mais" class="adv-link">Ler Mais <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <div class="mc-changelog-box">
+            <div class="changelog-tabs">
+                <button class="cl-tab active" onclick="switchChangelog('adds')">Adicionado</button>
+                <button class="cl-tab" onclick="switchChangelog('fixes')">Corrigido</button>
+            </div>
+
+            <div class="changelog-content">
+                <ul id="cl-adds" class="changelog-list active">
+                    <li><span class="cl-badge badge-add">Novo</span> Novo evento de boss no mundo Survival às 19h.</li>
+                    <li><span class="cl-badge badge-add">Novo</span> Sistema de crates cosméticas adicionado ao Spawn.
+                    </li>
+                    <li><span class="cl-badge badge-add">Novo</span> Adicionado suporte para a versão 1.20.4 do
+                        Minecraft.</li>
+                </ul>
+
+                <ul id="cl-fixes" class="changelog-list">
+                    <li><span class="cl-badge badge-fix">Fix</span> Corrigido bug visual de duplicação no mercado de
+                        blocos.</li>
+                    <li><span class="cl-badge badge-fix">Fix</span> Otimização de latência nos blocos de comandos de
+                        portais.</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="mc-floating-status">
+            <div class="floating-pulse"></div>
+            <div class="floating-info">
+                <span class="floating-label">IP: jogar.zerascraft.net</span>
+                <span class="floating-players"><strong id="floating-count">142</strong> Jogadores Online</span>
+            </div>
+        </div>
+
+        <section class="mc-goal-grid">
+            <div class="mc-goal-card" data-current="1500" data-target="2000">
+                <div class="goal-header">
+                    <span class="goal-title"><i class="fab fa-discord"></i> Meta da Comunidade</span>
+                    <span class="goal-percentage">-</span>
+                </div>
+                <div class="goal-bar-bg">
+                    <div class="goal-bar-fill"></div>
+                </div>
+                <p class="goal-footer-desc">Alcance a meta de membros para desbloquear o evento de <strong>Double XP &
+                        Drops</strong>!</p>
+            </div>
+
+            <div class="mc-goal-card" data-current="450" data-target="1000">
+                <div class="goal-header">
+                    <span class="goal-title"><i class="fab fa-youtube"></i> Meta do Canal YT</span>
+                    <span class="goal-percentage">-</span>
+                </div>
+                <div class="goal-bar-bg">
+                    <div class="goal-bar-fill"></div>
+                </div>
+                <p class="goal-footer-desc">Alcance a meta de inscritos para desbloquear o evento de <strong>Double XP &
+                        Drops</strong>!</p>
+            </div>
+
+            <div class="mc-goal-card" data-current="920" data-target="1000">
+                <div class="goal-header">
+                    <span class="goal-title"><i class="fas fa-star"></i> Meta Geral</span>
+                    <span class="goal-percentage">-</span>
+                </div>
+                <div class="goal-bar-bg">
+                    <div class="goal-bar-fill"></div>
+                </div>
+                <p class="goal-footer-desc">Alcance 100% de votos para desbloquear o evento de <strong>Double XP &
+                        Drops</strong>!</p>
+            </div>
+        </section>
+
+        <section class="mc-auction-section">
+            <div class="container">
+
+                <div class="auction-header">
+                    <h2>Mercado Global / Leilões</h2>
+                    <p>Acompanhe os lances mais altos e disputas ativas em tempo real no servidor.</p>
+                </div>
+
+                <div class="auction-grid">
+
+                    <div class="auction-card status-live">
+                        <div class="card-badge-live">
+                            <span class="pulse-dot"></span> LIVE
+                        </div>
+                        <div class="auction-card-body">
+                            <span class="item-category">Armamentos</span>
+                            <h3 class="item-name">Espada de Netherita V</h3>
+                            <div class="item-value">
+                                <i class="fas fa-coins"></i> 450,000 <span class="currency-tag">Coins</span>
+                            </div>
+                        </div>
+                        <div class="auction-card-footer">
+                            <span class="footer-stat"><i class="far fa-clock"></i> 02m 14s</span>
+                            <span class="footer-stat"><i class="far fa-user"></i> ZeraPlay</span>
+                        </div>
+                    </div>
+
+                    <div class="auction-card">
+                        <div class="auction-card-body">
+                            <span class="item-category">Ferramentas</span>
+                            <h3 class="item-name">Picareta Eficiência VI</h3>
+                            <div class="item-value">
+                                <i class="fas fa-coins"></i> 280,000 <span class="currency-tag">Coins</span>
+                            </div>
+                        </div>
+                        <div class="auction-card-footer">
+                            <span class="footer-stat"><i class="far fa-clock"></i> 14h 32m</span>
+                            <span class="footer-stat"><i class="far fa-user"></i> Matheus_Dev</span>
+                        </div>
+                    </div>
+
+                    <div class="auction-card">
+                        <div class="auction-card-body">
+                            <span class="item-category">Cosméticos</span>
+                            <h3 class="item-name">Asas de Dragão (Rank V)</h3>
+                            <div class="item-value">
+                                <i class="fas fa-coins"></i> 1,200,000 <span class="currency-tag">Coins</span>
+                            </div>
+                        </div>
+                        <div class="auction-card-footer">
+                            <span class="footer-stat"><i class="far fa-clock"></i> 1d 04h</span>
+                            <span class="footer-stat"><i class="far fa-user"></i> RusticalPvP</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="mc-reviews-section">
+            <div class="reviews-header">
+                <span class="reviews-subtitle">Community</span>
+                <h2>Player Reviews</h2>
+            </div>
+
+            <div class="reviews-marquee-container">
+                <div class="reviews-marquee">
+
+                    <div class="reviews-track">
+                        <div class="review-card">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">"Best server I've ever played on. BattleWars is insanely fun and the
+                                community is super active. Totally worth it!"</p>
+                            <div class="review-user">
+                                <div class="user-avatar avatar-red">NF</div>
+                                <div class="user-info">
+                                    <span class="user-name">NetherFox</span>
+                                    <span class="user-rank">SuperVIP • 2y playing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">"PvP Arena is perfectly balanced. No pay-to-win — pure skill. Staff
+                                team is very responsive!"</p>
+                            <div class="review-user">
+                                <div class="user-avatar avatar-red">ER</div>
+                                <div class="user-info">
+                                    <span class="user-name">EnderRift</span>
+                                    <span class="user-rank">VIP+ • 1y playing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">"The tournaments are the highlight of my weekend. Everything runs so
+                                smoothly, and the prizes are amazing!"</p>
+                            <div class="review-user">
+                                <div class="user-avatar avatar-red">IW</div>
+                                <div class="user-info">
+                                    <span class="user-name">IronWill</span>
+                                    <span class="user-rank">Sponsor • 6m playing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">"I've been playing for 10 years and Rustical is easily in my top 3.
+                                Custom plugins are very impressive."</p>
+                            <div class="review-user">
+                                <div class="user-avatar avatar-red">BZ</div>
+                                <div class="user-info">
+                                    <span class="user-name">BlockyZen</span>
+                                    <span class="user-rank">VIP+ • 3y playing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reviews-track" aria-hidden="true">
+                        <div class="review-card">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">"Best server I've ever played on. BattleWars is insanely fun and the
+                                community is super active. Totally worth it!"</p>
+                            <div class="review-user">
+                                <div class="user-avatar avatar-red">NF</div>
+                                <div class="user-info">
+                                    <span class="user-name">NetherFox</span>
+                                    <span class="user-rank">SuperVIP • 2y playing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">"PvP Arena is perfectly balanced. No pay-to-win — pure skill. Staff
+                                team is very responsive!"</p>
+                            <div class="review-user">
+                                <div class="user-avatar avatar-red">ER</div>
+                                <div class="user-info">
+                                    <span class="user-name">EnderRift</span>
+                                    <span class="user-rank">VIP+ • 1y playing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">"The tournaments are the highlight of my weekend. Everything runs so
+                                smoothly, and the prizes are amazing!"</p>
+                            <div class="review-user">
+                                <div class="user-avatar avatar-red">IW</div>
+                                <div class="user-info">
+                                    <span class="user-name">IronWill</span>
+                                    <span class="user-rank">Sponsor • 6m playing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">"I've been playing for 10 years and Rustical is easily in my top 3.
+                                Custom plugins are very impressive."</p>
+                            <div class="review-user">
+                                <div class="user-avatar avatar-red">BZ</div>
+                                <div class="user-info">
+                                    <span class="user-name">BlockyZen</span>
+                                    <span class="user-rank">VIP+ • 3y playing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mc-checkout-section">
+            <div class="checkout-container">
+
+                <div class="checkout-left">
+                    <a href="#store" class="back-to-store"><i class="fas fa-arrow-left"></i> Voltar para a Loja</a>
+                    <h2 class="checkout-title">Finalizar <span>Compra</span></h2>
+                    <p class="checkout-subtitle">Preencha os dados abaixo para concluir o seu pedido.</p>
+
+                    <div class="checkout-block">
+                        <h3 class="block-title">Seus Detalhes</h3>
+                        <div class="input-grid">
+                            <div class="input-box">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" placeholder="NICKNAME DO MINECRAFT" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" placeholder="ENDEREÇO DE E-MAIL" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-block">
+                        <h3 class="block-title">Método de Pagamento</h3>
+                        <div class="payment-grid">
+                            <label class="payment-option active">
+                                <input type="radio" name="payment_method" value="pix" checked hidden>
+                                <div class="pay-radio-circle"></div>
+                                <div class="pay-info">
+                                    <span class="pay-name">PIX AUTOMÁTICO</span>
+                                    <span class="pay-desc">Aprovação imediata</span>
+                                </div>
+                                <span class="pay-badge badge-pix">PIX</span>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="card" hidden>
+                                <div class="pay-radio-circle"></div>
+                                <div class="pay-info">
+                                    <span class="pay-name">CARTÃO DE CRÉDITO</span>
+                                    <span class="pay-desc">Visa / Mastercard</span>
+                                </div>
+                                <span class="pay-badge badge-visa">CARD</span>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="boleto" hidden>
+                                <div class="pay-radio-circle"></div>
+                                <div class="pay-info">
+                                    <span class="pay-name">BOLETO BANCÁRIO</span>
+                                    <span class="pay-desc">Processado em até 1 dia</span>
+                                </div>
+                                <span class="pay-badge badge-boleto">BOL</span>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="paypal" hidden>
+                                <div class="pay-radio-circle"></div>
+                                <div class="pay-info">
+                                    <span class="pay-name">PAYPAL</span>
+                                    <span class="pay-desc">Secure online payment</span>
+                                </div>
+                                <span class="pay-badge badge-paypal">PP</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="checkout-block">
+                        <h3 class="block-title">Cupom de Desconto</h3>
+                        <div class="voucher-box">
+                            <input type="text" placeholder="MC-XXXX-XXXX-XXXX">
+                            <button type="button" class="btn-apply-voucher">Aplicar</button>
+                        </div>
+                    </div>
+
+                    <div class="checkout-block terms-block">
+                        <label class="checkbox-container">
+                            <input type="checkbox" required>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">Eu aceito os <span>termos de compra</span> e as <span>regras do
+                                    servidor</span>.</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" required>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">Eu concordo com a entrega imediata do serviço virtual
+                                adquirido.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="checkout-right">
+
+                    <div class="cart-summary-block">
+                        <h3 class="side-block-title">Seu Carrinho</h3>
+                        <div class="cart-items-list">
+                            <div class="cart-item">
+                                <div class="item-avatar"><i class="fas fa-crown"></i></div>
+                                <div class="item-details">
+                                    <span class="cart-item-name">Plano VIP VIPER</span>
+                                    <span class="cart-item-duration">30 Dias</span>
+                                </div>
+                                <span class="cart-item-price">R$ 39,90</span>
+                                <button class="btn-remove-item">&times;</button>
+                            </div>
+                            <div class="cart-item">
+                                <div class="item-avatar"><i class="fas fa-pickaxe"></i></div>
+                                <div class="item-details">
+                                    <span class="cart-item-name">Turbo Drop Booster</span>
+                                    <span class="cart-item-duration">7 Dias</span>
+                                </div>
+                                <span class="cart-item-price">R$ 10,00</span>
+                                <button class="btn-remove-item">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-summary-block">
+                        <h3 class="side-block-title">Adicionar ao pedido?</h3>
+                        <div class="upsell-list">
+                            <div class="upsell-item">
+                                <div class="upsell-avatar"><i class="fas fa-key"></i></div>
+                                <div class="upsell-info">
+                                    <span class="upsell-name">Kit Chaves Lendárias (x3)</span>
+                                    <span class="upsell-price">R$ 15,00</span>
+                                </div>
+                                <button class="btn-add-upsell"><i class="fas fa-plus"></i> ADD</button>
+                            </div>
+                            <div class="upsell-item">
+                                <div class="upsell-avatar"><i class="fas fa-box-open"></i></div>
+                                <div class="upsell-info">
+                                    <span class="upsell-name">Caixa Cosmética Rara</span>
+                                    <span class="upsell-price">R$ 5,00</span>
+                                </div>
+                                <button class="btn-add-upsell"><i class="fas fa-plus"></i> ADD</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="total-summary-block">
+                        <div class="summary-row">
+                            <span>Subtotal Produtos</span>
+                            <span>R$ 49,90</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Descontos / Cupons</span>
+                            <span class="discount-value">- R$ 0,00</span>
+                        </div>
+                        <hr class="summary-divider">
+                        <div class="summary-row total-row">
+                            <span>TOTAL</span>
+                            <span class="final-price">R$ 49,90</span>
+                        </div>
+                        <button type="submit" class="btn-order-pay">Confirmar & Pagar</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="mc-ranking-section">
+            <div class="ranking-container">
+
+                <div class="ranking-podium">
+
+                    <div class="podium-card silver-rank">
+                        <div class="podium-avatar-wrapper">
+                            <img src="https://mc-heads.net/avatar/EnderRift/64" alt="EnderRift" class="podium-head">
+                            <span class="podium-medal"><i class="fas fa-medal"></i></span>
+                        </div>
+                        <h3 class="podium-name">EnderRift <span class="tag-vip vip-plus">VIP+</span></h3>
+                        <div class="podium-stats">
+                            <div class="p-stat"><strong>12,340</strong><span>Kills</span></div>
+                            <div class="p-stat Highlight-red"><strong>88,545</strong><span>Ranking</span></div>
+                            <div class="p-stat"><strong>558</strong><span>Deaths</span></div>
+                        </div>
+                        <a href="#profile-enderrift" class="view-profile-btn">View Profile <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="podium-card gold-rank active-top1">
+                        <div class="podium-avatar-wrapper">
+                            <img src="https://mc-heads.net/avatar/NetherFox/64" alt="NetherFox" class="podium-head">
+                            <span class="podium-medal"><i class="fas fa-trophy"></i></span>
+                        </div>
+                        <h3 class="podium-name">NetherFox <span class="tag-vip svip">SVIP</span></h3>
+                        <div class="podium-stats">
+                            <div class="p-stat"><strong>14,820</strong><span>Kills</span></div>
+                            <div class="p-stat highlight-red"><strong>110,936</strong><span>Ranking</span></div>
+                            <div class="p-stat"><strong>324</strong><span>Deaths</span></div>
+                        </div>
+                        <a href="#profile-netherfox" class="view-profile-btn">View Profile <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="podium-card bronze-rank">
+                        <div class="podium-avatar-wrapper">
+                            <img src="https://mc-heads.net/avatar/MineFlux/64" alt="MineFlux" class="podium-head">
+                            <span class="podium-medal"><i class="fas fa-medal"></i></span>
+                        </div>
+                        <h3 class="podium-name">MineFlux <span class="tag-vip vip">VIP</span></h3>
+                        <div class="podium-stats">
+                            <div class="p-stat"><strong>10,991</strong><span>Kills</span></div>
+                            <div class="p-stat highlight-red"><strong>64,146</strong><span>Ranking</span></div>
+                            <div class="p-stat"><strong>459</strong><span>Deaths</span></div>
+                        </div>
+                        <a href="#profile-mineflux" class="view-profile-btn">View Profile <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                </div>
+
+                <div class="leaderboard-table">
+
+                    <div class="table-row">
+                        <div class="col-position">4.</div>
+                        <div class="col-player">
+                            <img src="https://mc-heads.net/avatar/BlockyZen/24" alt="BlockyZen" class="row-head">
+                            <span class="player-name">BlockyZen</span>
+                            <span class="tag-vip sponsor">Sponsor</span>
+                        </div>
+                        <div class="col-stats-group">
+                            <div class="row-stat"><span class="stat-lbl">RANKING</span> <span
+                                    class="txt-red">58,450</span></div>
+                            <div class="row-stat"><span class="stat-lbl">KILLS</span> 9,450</div>
+                            <div class="row-stat"><span class="stat-lbl">DEATHS</span> 412</div>
+                        </div>
+                        <div class="col-action">
+                            <a href="#profile" class="row-link">View Profile <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="col-position">5.</div>
+                        <div class="col-player">
+                            <img src="https://mc-heads.net/avatar/CraftStor/24" alt="CraftStor" class="row-head">
+                            <span class="player-name">CraftStor</span>
+                            <span class="tag-vip sponsor">Sponsor</span>
+                        </div>
+                        <div class="col-stats-group">
+                            <div class="row-stat"><span class="stat-lbl">RANKING</span> <span
+                                    class="txt-red">52,200</span></div>
+                            <div class="row-stat"><span class="stat-lbl">KILLS</span> 8,200</div>
+                            <div class="row-stat"><span class="stat-lbl">DEATHS</span> 389</div>
+                        </div>
+                        <div class="col-action">
+                            <a href="#profile" class="row-link">View Profile <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="col-position">6.</div>
+                        <div class="col-player">
+                            <img src="https://mc-heads.net/avatar/RedShard/24" alt="RedShard" class="row-head">
+                            <span class="player-name">RedShard</span>
+                            <span class="tag-vip vip">VIP</span>
+                        </div>
+                        <div class="col-stats-group">
+                            <div class="row-stat"><span class="stat-lbl">RANKING</span> <span
+                                    class="txt-red">46,500</span></div>
+                            <div class="row-stat"><span class="stat-lbl">KILLS</span> 7,650</div>
+                            <div class="row-stat"><span class="stat-lbl">DEATHS</span> 521</div>
+                        </div>
+                        <div class="col-action">
+                            <a href="#profile" class="row-link">View Profile <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="col-position">7.</div>
+                        <div class="col-player">
+                            <img src="https://mc-heads.net/avatar/Nether22/24" alt="Nether22" class="row-head">
+                            <span class="player-name">Nether22</span>
+                            <span class="tag-vip default-rank">Default</span>
+                        </div>
+                        <div class="col-stats-group">
+                            <div class="row-stat"><span class="stat-lbl">RANKING</span> <span
+                                    class="txt-red">41,800</span></div>
+                            <div class="row-stat"><span class="stat-lbl">KILLS</span> 6,900</div>
+                            <div class="row-stat"><span class="stat-lbl">DEATHS</span> 644</div>
+                        </div>
+                        <div class="col-action">
+                            <a href="#profile" class="row-link">View Profile <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="rt-premium-section">
+            <div class="rt-premium-container">
+
+                <div class="rt-premium-card">
+                    <div class="rt-premium-header">
+                        <h2 class="rt-premium-plan-name">Free</h2>
+                        <div class="rt-premium-price-box">
+                            <span class="rt-premium-currency">R$</span>
+                            <span class="rt-premium-value">0</span>
+                            <span class="rt-premium-period">/mês</span>
+                        </div>
+                        <p class="rt-premium-subtitle">Confira o que a IA pode fazer</p>
+                        <button class="rt-premium-btn rt-premium-current" disabled>Seu plano atual</button>
+                    </div>
+
+                    <div class="rt-premium-accordion">
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-sparkles"></i>
+                            <span>Modelo principal</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-comment-dots"></i>
+                            <span>Mensagens e carregamentos limitados</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-image"></i>
+                            <span>Criação limitada de imagens</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-hdd"></i>
+                            <span>Memória limitada</span>
+                        </div>
+                    </div>
+                    <div class="rt-premium-footer">
+                        <a href="#help" class="rt-premium-link">Já tem um plano? Exibir ajuda com cobrança</a>
+                    </div>
+                </div>
+
+                <div class="rt-premium-card">
+                    <div class="rt-premium-header">
+                        <h2 class="rt-premium-plan-name">Go</h2>
+                        <div class="rt-premium-price-box">
+                            <span class="rt-premium-currency">R$</span>
+                            <span class="rt-premium-value">39,99</span>
+                            <span class="rt-premium-period">/mês</span>
+                        </div>
+                        <p class="rt-premium-subtitle">Continue conversando com o acesso expandido</p>
+                        <button class="rt-premium-btn rt-premium-upgrade">Fazer upgrade para o Go</button>
+                    </div>
+
+                    <div class="rt-premium-accordion">
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-sparkles"></i>
+                            <span>Modelo principal</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-comments"></i>
+                            <span>Mais mensagens e carregamentos</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-images"></i>
+                            <span>Mais criação de imagens</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-brain"></i>
+                            <span>Mais memória</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-microphone"></i>
+                            <span>Modo voz expandido</span>
+                        </div>
+                    </div>
+                    <div class="rt-premium-footer">
+                        <p class="rt-premium-text">Este plano pode incluir anúncios. <a href="#info">Saiba mais</a></p>
+                    </div>
+                </div>
+
+                <div class="rt-premium-card rt-premium-featured">
+                    <div class="rt-premium-badge"><i class="fas fa-clock"></i> TEMPO LIMITADO</div>
+                    <div class="rt-premium-header">
+                        <h2 class="rt-premium-plan-name">Plus</h2>
+                        <div class="rt-premium-promo-box">
+                            <span class="rt-premium-old-price">R$ 99,90</span>
+                            <div class="rt-premium-current-promo">
+                                <span class="rt-premium-currency">R$</span>
+                                <span class="rt-premium-value">0</span>
+                                <span class="rt-premium-period">BRL no primeiro mês</span>
+                            </div>
+                        </div>
+                        <p class="rt-premium-subtitle">Mais acesso à inteligência avançada</p>
+                        <button class="rt-premium-btn rt-premium-action-promo">Aproveite a promoção gratuita</button>
+                    </div>
+
+                    <div class="rt-premium-accordion">
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-wand-magic-sparkles"></i>
+                            <span>Modelos avançados</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-bolt"></i>
+                            <span>Ainda mais mensagens e carregamentos</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-brain-circuit"></i>
+                            <span>Criação avançada de imagens com Thinking</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-expand-arrows-alt"></i>
+                            <span>Memória expandida entre chats</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-code"></i>
+                            <span>Agente de programação do Codex</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-search-plus"></i>
+                            <span>Pesquisa profunda expandida</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-cubes"></i>
+                            <span>Projetos e GPTs personalizados</span>
+                        </div>
+                    </div>
+                    <div class="rt-premium-footer">
+                        <p class="rt-premium-legal">Os <a href="#terms">termos da promoção se aplicam</a>. O preço
+                            promocional é válido por 1 mês. A partir de 15 de jun. de 2026, o ChatGPT Plus continuará
+                            por R$ 99,9/mês. Cancele quando quiser.</p>
+                    </div>
+                </div>
+
+                <div class="rt-premium-card">
+                    <div class="rt-premium-header">
+                        <p class="rt-premium-prefix">De</p>
+                        <div class="rt-premium-price-box">
+                            <span class="rt-premium-currency">R$</span>
+                            <span class="rt-premium-value">525</span>
+                            <span class="rt-premium-period">/mês</span>
+                        </div>
+                        <p class="rt-premium-subtitle">Aumente sua produtividade ao máximo</p>
+                        <button class="rt-premium-btn rt-premium-upgrade">Fazer upgrade para o Pro</button>
+                    </div>
+
+                    <div class="rt-premium-accordion">
+                        <p class="rt-premium-intro">Tudo do Plus, incluindo:</p>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-chart-line"></i>
+                            <span>5 ou 20 vezes mais uso que o Plus</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-shield-halved"></i>
+                            <span>Modelo Frontier Pro</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-terminal"></i>
+                            <span>Acesso máximo ao Codex</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-microscope"></i>
+                            <span>Pesquisa profunda máxima</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-infinity"></i>
+                            <span>Chat principal ilimitado</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-images"></i>
+                            <span>Criação de imagens ilimitada e mais rápida</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-database"></i>
+                            <span>O máximo de memória e contexto</span>
+                        </div>
+                        <div class="rt-premium-feature">
+                            <i class="rt-premium-icon fas fa-flask"></i>
+                            <span>Acesso antecipado a recursos experimentais</span>
+                        </div>
+                    </div>
+                    <div class="rt-premium-footer">
+                        <p class="rt-premium-legal">Ilimitado, sujeito a proteções contra abuso. <a href="#limits">Saiba
+                                mais sobre limites e promoções nos dois planos</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section class="rt-hub-section">
+            <div class="rt-hub-container">
+
+                <div class="rt-hub-block">
+                    <div class="rt-hub-header-group">
+                        <span class="rt-hub-badge-top">CALENDAR</span>
+                        <h2 class="rt-hub-main-title">ACTIVE EVENTS</h2>
+                        <p class="rt-hub-subtitle">Join upcoming events and win exclusive prizes</p>
+                    </div>
+
+                    <div class="rt-hub-events-grid">
+
+                        <div class="rt-event-card">
+                            <div class="rt-event-date-row">
+                                <span class="rt-event-day">14</span>
+                                <div class="rt-event-time-meta">
+                                    <span class="rt-event-month">MARCH</span>
+                                    <span class="rt-event-hour">19:00 CET</span>
+                                </div>
+                            </div>
+                            <h3 class="rt-event-title">BATTLEWARS TOURNAMENT</h3>
+                            <p class="rt-event-desc">Team combat. Top 3 teams win exclusive rewards.</p>
+                            <div class="rt-event-tag rt-tag-survival">SURVIVAL</div>
+                        </div>
+
+                        <div class="rt-event-card">
+                            <div class="rt-event-date-row">
+                                <span class="rt-event-day">24</span>
+                                <div class="rt-event-time-meta">
+                                    <span class="rt-event-month">MARCH</span>
+                                    <span class="rt-event-hour">19:00 CET</span>
+                                </div>
+                            </div>
+                            <h3 class="rt-event-title">PVP GUILD WARS</h3>
+                            <p class="rt-event-desc">Guilds compete for exclusive territory and rewards.</p>
+                            <div class="rt-event-tag rt-tag-guild">PVP GUILD</div>
+                        </div>
+
+                        <div class="rt-event-card">
+                            <div class="rt-event-date-row">
+                                <span class="rt-event-day">29</span>
+                                <div class="rt-event-time-meta">
+                                    <span class="rt-event-month">MARCH</span>
+                                    <span class="rt-event-hour">12:30 CET</span>
+                                </div>
+                            </div>
+                            <h3 class="rt-event-title">SURVIVAL CHALLENGE</h3>
+                            <p class="rt-event-desc">Last player standing wins 40€ prize pool.</p>
+                            <div class="rt-event-tag rt-tag-survival">SURVIVAL</div>
+                        </div>
+
+                        <div class="rt-event-card">
+                            <div class="rt-event-date-row">
+                                <span class="rt-event-day">30</span>
+                                <div class="rt-event-time-meta">
+                                    <span class="rt-event-month">MARCH</span>
+                                    <span class="rt-event-hour">14:30 CET</span>
+                                </div>
+                            </div>
+                            <h3 class="rt-event-title">PVP CHAMPIONSHIP</h3>
+                            <p class="rt-event-desc">1v1 knockout bracket for the monthly PvP title.</p>
+                            <div class="rt-event-tag rt-tag-pvp">PVP</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="rt-hub-divider"></div>
+
+                <div class="rt-hub-block">
+                    <div class="rt-hub-header-group">
+                        <span class="rt-hub-badge-top">SUPPORT</span>
+                        <h2 class="rt-hub-main-title">FREQUENTLY ASKED QUESTIONS</h2>
+                        <p class="rt-hub-subtitle">Everything you need to know about AetherMC</p>
+                    </div>
+
+                    <div class="rt-faq-wrapper">
+
+                        <div class="rt-faq-column">
+
+                            <div class="rt-faq-item">
+                                <button class="rt-faq-trigger">
+                                    <span>WHY WAS MY ACCOUNT BANNED ON THE SERVER?</span>
+                                    <i class="fas fa-caret-down rt-faq-arrow"></i>
+                                </button>
+                                <div class="rt-faq-panel">
+                                    <p>Sua conta pode ter sido suspensa por violação das nossas diretrizes comunitárias,
+                                        uso de clientes alternativos modificados (hack) ou comportamento tóxico. Você
+                                        pode abrir um ticket de revisão em nosso Discord oficial.</p>
+                                </div>
+                            </div>
+
+                            <div class="rt-faq-item">
+                                <button class="rt-faq-trigger">
+                                    <span>HOW DO I BUY ITEMS FROM THE STORE?</span>
+                                    <i class="fas fa-caret-down rt-faq-arrow"></i>
+                                </button>
+                                <div class="rt-faq-panel">
+                                    <p>Basta navegar até a nossa aba Shop, selecionar a categoria desejada (VIPs, Caixas
+                                        ou Dinheiro), inserir seu nick do Minecraft e escolher um dos métodos de
+                                        pagamento seguros disponíveis.</p>
+                                </div>
+                            </div>
+
+                            <div class="rt-faq-item">
+                                <button class="rt-faq-trigger">
+                                    <span>HOW LONG DOES PURCHASE DELIVERY TAKE?</span>
+                                    <i class="fas fa-caret-down rt-faq-arrow"></i>
+                                </button>
+                                <div class="rt-faq-panel">
+                                    <p>A maioria das compras é processada e entregue in-game dentro de 5 a 15 minutos
+                                        após a confirmação do pagamento. Certifique-se de estar online no servidor para
+                                        o recebimento automático.</p>
+                                </div>
+                            </div>
+
+                            <div class="rt-faq-item">
+                                <button class="rt-faq-trigger">
+                                    <span>CAN I RETURN A PURCHASED ITEM?</span>
+                                    <i class="fas fa-caret-down rt-faq-arrow"></i>
+                                </button>
+                                <div class="rt-faq-panel">
+                                    <p>Devido à natureza imediata dos produtos digitais consumíveis, reembolsos não são
+                                        permitidos após a entrega dos itens. Para problemas técnicos, entre em contato
+                                        com nosso suporte.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="rt-faq-column">
+
+                            <div class="rt-faq-item">
+                                <button class="rt-faq-trigger">
+                                    <span>WHAT IF PURCHASED ITEMS DIDN'T APPEAR IN GAME?</span>
+                                    <i class="fas fa-caret-down rt-faq-arrow"></i>
+                                </button>
+                                <div class="rt-faq-panel">
+                                    <p>Se passaram mais de 30 minutos, verifique se o seu inventário não estava cheio.
+                                        Caso o erro persista, digite nosso comando de resgate ou contate um
+                                        administrador anexando o comprovante.</p>
+                                </div>
+                            </div>
+
+                            <div class="rt-faq-item">
+                                <button class="rt-faq-trigger">
+                                    <span>CAN I TRANSFER PURCHASED ITEMS TO ANOTHER ACCOUNT?</span>
+                                    <i class="fas fa-caret-down rt-faq-arrow"></i>
+                                </button>
+                                <div class="rt-faq-panel">
+                                    <p>Transferências de pacotes VIP ou itens entre contas distintas não são realizadas,
+                                        exceto em casos específicos de troca de plano de segurança aprovados pela
+                                        gerência.</p>
+                                </div>
+                            </div>
+
+                            <div class="rt-faq-item">
+                                <button class="rt-faq-trigger">
+                                    <span>DO I NEED TO BE ONLINE TO RECEIVE PURCHASED ITEMS?</span>
+                                    <i class="fas fa-caret-down rt-faq-arrow"></i>
+                                </button>
+                                <div class="rt-faq-panel">
+                                    <p>Sim, recomendamos fortemente permanecer logado no servidor no momento da compra
+                                        para agilizar a execução dos comandos de entrega automáticos da loja.</p>
+                                </div>
+                            </div>
+
+                            <div class="rt-faq-item">
+                                <button class="rt-faq-trigger">
+                                    <span>IS THERE A MONTHLY PURCHASE LIMIT?</span>
+                                    <i class="fas fa-caret-down rt-faq-arrow"></i>
+                                </button>
+                                <div class="rt-faq-panel">
+                                    <p>Não há limite rígido imposto pelo servidor, contudo, alguns gateways de pagamento
+                                        podem impor limites de segurança diários ou mensais por transação de cartão ou
+                                        Pix.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="rt-team-section">
+            <div class="rt-team-container">
+
+                <div class="rt-stats-grid">
+
+                    <div class="rt-stat-mini-card">
+                        <h3 class="rt-stat-number">Update</h3>
+                        <p class="rt-stat-desc">We regularly monitor updates, you will not be bored with us</p>
+                    </div>
+
+                    <div class="rt-stat-mini-card">
+                        <h3 class="rt-stat-number">40K</h3>
+                        <p class="rt-stat-desc">A huge number of players trust us , we have recorded a large number of
+                            registrations</p>
+                    </div>
+
+                    <div class="rt-stat-mini-card">
+                        <h3 class="rt-stat-number">15+</h3>
+                        <p class="rt-stat-desc">We rent powerful equipment and guarantee minimal ping</p>
+                    </div>
+
+                    <div class="rt-stat-mini-card">
+                        <h3 class="rt-stat-number">24/7</h3>
+                        <p class="rt-stat-desc">We are always open and always working for</p>
+                    </div>
+
+                </div>
+
+                <div class="rt-team-divider"></div>
+            </div>
+
+            </div>
+        </section>
+
+
+        <section class="rt-account-section">
+            <div class="rt-account-container">
+
+                <header class="rt-account-header">
+                    <h1 class="rt-account-main-title">ACCOUNT UNBAN</h1>
+                    <p class="rt-account-main-subtitle">Submit an unban request if your account was banned by the
+                        anti-cheat system</p>
+                </header>
+
+                <div class="rt-account-alert-box">
+                    <h3 class="rt-account-alert-title">
+                        <i class="fa-regular fa-file-lines"></i> UNBAN INFORMATION — AETHERMC
+                    </h3>
+                    <div class="rt-account-alert-content">
+                        <p>Account unbanning on AetherMC server can only be granted once and only applies to accounts
+                            that received a permanent ban from the anti-cheat system.</p>
+                        <p>In the case of an unban, the account will be completely wiped, meaning all items, resources,
+                            currency and achievements will be permanently deleted. After the unban, there will be no
+                            possibility of restoring data.</p>
+                        <p>Please approach the server rules thoughtfully to avoid such situations.</p>
+                    </div>
+                </div>
+
+                <div class="rt-account-layout-grid">
+
+                    <form class="rt-account-form-block" onsubmit="event.preventDefault();">
+                        <h2 class="rt-account-block-title">SUBMIT UNBAN REQUEST</h2>
+
+                        <div class="rt-account-input-group">
+                            <label class="rt-account-label">MINECRAFT NICKNAME</label>
+                            <input type="text" class="rt-account-input" placeholder="Your in-game nickname..." required>
+                        </div>
+
+                        <div class="rt-account-input-group">
+                            <label class="rt-account-label">BAN ID / PID NUMBER</label>
+                            <input type="text" class="rt-account-input" placeholder="Ban number visible when kicked..."
+                                required>
+                        </div>
+
+                        <div class="rt-account-input-group">
+                            <label class="rt-account-label">EMAIL ADDRESS</label>
+                            <input type="email" class="rt-account-input" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="rt-account-input-group">
+                            <label class="rt-account-label">REASON FOR APPEAL</label>
+                            <textarea class="rt-account-textarea"
+                                placeholder="Explain why you think the ban was incorrect..." rows="5"
+                                required></textarea>
+                        </div>
+
+                        <div class="rt-account-checkbox-group">
+                            <label class="rt-account-checkbox-label">
+                                <input type="checkbox" class="rt-account-checkbox" required>
+                                <span>I accept the <a href="#rules" class="rt-account-accent-link">server
+                                        rules</a>.</span>
+                            </label>
+
+                            <label class="rt-account-checkbox-label">
+                                <input type="checkbox" class="rt-account-checkbox" required>
+                                <span>I agree to the permanent deletion of account data for the provided
+                                    username.</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="rt-account-submit-btn">
+                            SUBMIT UNBAN REQUEST <span class="rt-account-btn-arrow">&rarr;</span>
+                        </button>
+                    </form>
+
+                    <div class="rt-account-sidebar">
+
+                        <div class="rt-account-mini-card">
+                            <h4 class="rt-account-mini-card-title">
+                                <i class="fa-regular fa-file-lines"></i> REQUIREMENTS
+                            </h4>
+                            <p class="rt-account-mini-card-desc">Only permanent anti-cheat bans are eligible. Manual
+                                bans by staff are not reversible through this form.</p>
+                        </div>
+
+                        <div class="rt-account-mini-card">
+                            <h4 class="rt-account-mini-card-title">
+                                <i class="fa-regular fa-clock"></i> PROCESSING TIME
+                            </h4>
+                            <p class="rt-account-mini-card-desc">Unban requests are reviewed within 24-72 hours. You
+                                will receive a confirmation email when your request is processed.</p>
+                        </div>
+
+                        <div class="rt-account-mini-card">
+                            <h4 class="rt-account-mini-card-title">
+                                <i class="fa-solid fa-trash-can"></i> ACCOUNT WIPE WARNING
+                            </h4>
+                            <p class="rt-account-mini-card-desc">If approved, your entire account will be wiped: all
+                                items, currency, ranks and progress will be permanently deleted. This cannot be undone.
+                            </p>
+                        </div>
+
+                        <div class="rt-account-mini-card">
+                            <h4 class="rt-account-mini-card-title">
+                                <i class="fa-regular fa-comments"></i> CONTACT SUPPORT
+                            </h4>
+                            <p class="rt-account-mini-card-desc">For urgent issues, join our Discord server and open a
+                                support ticket. Our staff typically responds within 2 hours during business hours.</p>
+                        </div>
+
+                        <div class="rt-account-mini-card">
+                            <h4 class="rt-account-mini-card-title">
+                                <i class="fa-solid fa-lock"></i> ONE TIME ONLY
+                            </h4>
+                            <p class="rt-account-mini-card-desc">Each account can only be unbanned once. A second ban on
+                                an unbanned account is permanent with no exceptions.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="rt-hero-section"
+            style="background-image: linear-gradient(to bottom, rgba(12, 12, 12, 0.6), rgba(12, 12, 12, 0.95)), url('assets/images/geral/banner-fundo.gif');">
+
+            <div class="rt-hero-content">
+                <h1 class="rt-hero-logo">RUSTICAL</h1>
+                <p class="rt-hero-tagline">SURVIVAL EVOLVED & COMPETITIVE PVP</p>
+            </div>
+
+            <nav class="rt-hero-nav-bar">
+                <div class="rt-hero-nav-container">
+                    <a href="#home" class="rt-hero-nav-item rt-active">Home</a>
+                    <a href="#game" class="rt-hero-nav-item">Game</a>
+                    <a href="#community" class="rt-hero-nav-item">Community</a>
+                    <a href="#store" class="rt-hero-nav-item">Store</a>
+                    <a href="#profile" class="rt-hero-nav-item">Profile</a>
+                    <a href="#help" class="rt-hero-nav-item">Help</a>
+                </div>
+            </nav>
+
+        </section>
+
+
+        <section class="rt-section">
+            <div class="rt-section-header">
+                <span class="rt-subtitle">Community</span>
+                <h2 class="rt-title">Player Reviews</h2>
+            </div>
+
+            <div class="rt-reviews-grid">
+                <div class="rt-card-review">
+                    <div class="rt-stars">★★★★★</div>
+                    <p class="rt-review-text">"Best server I've ever played on. Survival is insanely fun and the
+                        community is super active. Totally worth it!"</p>
+                    <div class="rt-user-info">
+                        <div class="rt-avatar-fallback">NF</div>
+                        <div>
+                            <h4 class="rt-user-name">NetherFox</h4>
+                            <span class="rt-user-badge rt-badge-purple">SuperVIP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rt-card-review">
+                    <div class="rt-stars">★★★★★</div>
+                    <p class="rt-review-text">"PvP Arena is perfectly balanced. No pay-to-win — pure skill. Staff team
+                        is very responsive and helpful!"</p>
+                    <div class="rt-user-info">
+                        <div class="rt-avatar-fallback">ER</div>
+                        <div>
+                            <h4 class="rt-user-name">EnderRift</h4>
+                            <span class="rt-user-badge rt-badge-purple">VIP+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rt-section">
+            <div class="rt-section-header-center">
+                <h2 class="rt-title">Server Leaderboard</h2>
+            </div>
+
+            <div class="rt-podium-container">
+                <div class="rt-podium-card rt-pos-2">
+                    <div class="rt-podium-avatar">🥈</div>
+                    <h3 class="rt-podium-name">EnderRift <span class="rt-mini-badge">VIP+</span></h3>
+                    <div class="rt-podium-stats">
+                        <span><strong>12,340</strong> Kills</span>
+                        <span><strong>558</strong> Deaths</span>
+                    </div>
+                </div>
+                <div class="rt-podium-card rt-pos-1">
+                    <div class="rt-podium-avatar">👑</div>
+                    <h3 class="rt-podium-name">NetherFox <span class="rt-mini-badge rt-active-purple">SVIP</span></h3>
+                    <div class="rt-podium-stats">
+                        <span><strong>14,820</strong> Kills</span>
+                        <span><strong>324</strong> Deaths</span>
+                    </div>
+                </div>
+                <div class="rt-podium-card rt-pos-3">
+                    <div class="rt-podium-avatar">🥉</div>
+                    <h3 class="rt-podium-name">MineFlux <span class="rt-mini-badge">VIP</span></h3>
+                    <div class="rt-podium-stats">
+                        <span><strong>10,991</strong> Kills</span>
+                        <span><strong>459</strong> Deaths</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rt-section">
+            <div class="rt-checkout-layout">
+                <div class="rt-checkout-main">
+                    <h3 class="rt-checkout-title">Complete Your <span class="rt-text-purple">Purchase</span></h3>
+
+                    <div class="rt-input-group">
+                        <label class="rt-label">Minecraft Nickname</label>
+                        <input type="text" class="rt-input" placeholder="Your in-game nickname...">
+                    </div>
+
+                    <div class="rt-payment-methods">
+                        <label class="rt-label">Select Payment Method</label>
+                        <div class="rt-payment-grid">
+                            <div class="rt-pay-card rt-selected">
+                                <div class="rt-radio-dot"></div>
+                                <span>PaySafeCard</span>
+                            </div>
+                            <div class="rt-pay-card">
+                                <div class="rt-radio-dot"></div>
+                                <span>PayPal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rt-checkout-sidebar">
+                    <h4 class="rt-sidebar-title">Your Cart</h4>
+                    <div class="rt-cart-item">
+                        <div>
+                            <p class="rt-item-title">VIP Rank</p>
+                            <span class="rt-item-sub">30 days</span>
+                        </div>
+                        <span class="rt-item-price">$4.00</span>
+                    </div>
+                    <div class="rt-cart-summary">
+                        <div class="rt-summary-row">
+                            <span>Total</span>
+                            <span class="rt-total-price">$4.00</span>
+                        </div>
+                        <button class="rt-btn-primary">Order & Pay</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rt-host-reviews-section">
+            <div class="rt-host-reviews-container">
+                <header class="rt-host-section-header">
+                    <span class="rt-host-tag-line">COMMUNITY</span>
+                    <h2 class="rt-host-section-title">PLAYER REVIEWS</h2>
+                </header>
+
+                <div class="rt-host-reviews-carousel">
+                    <div class="rt-host-review-card">
+                        <div class="rt-host-review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="rt-host-review-text">"Best server I've ever played on. BattleWars is insanely fun and
+                            the community is super active. Totally worth it!"</p>
+                        <div class="rt-host-review-user">
+                            <div class="rt-host-avatar avatar-red">NF</div>
+                            <div class="rt-host-user-info">
+                                <span class="rt-host-username">NetherFox</span>
+                                <span class="rt-host-user-badge">SuperVIP • 2y playing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rt-host-review-card">
+                        <div class="rt-host-review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="rt-host-review-text">"PvP Arena is perfectly balanced. No pay-to-win — pure skill.
+                            Staff team is very responsive!"</p>
+                        <div class="rt-host-review-user">
+                            <div class="rt-host-avatar avatar-purple">ER</div>
+                            <div class="rt-host-user-info">
+                                <span class="rt-host-username">EnderRift</span>
+                                <span class="rt-host-user-badge">VIP+ • 1y playing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rt-host-review-card">
+                        <div class="rt-host-review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="rt-host-review-text">"The tournaments are the highlight of my weekend. Everything runs
+                            so smoothly, and the prizes are amazing!"</p>
+                        <div class="rt-host-review-user">
+                            <div class="rt-host-avatar avatar-dark-red">IW</div>
+                            <div class="rt-host-user-info">
+                                <span class="rt-host-username">IronWill</span>
+                                <span class="rt-host-user-badge">Sponsor • 6m playing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="rt-store-grid-section">
+            <div class="rt-store-grid-container">
+                <div class="rt-products-matrix">
+                    <div class="rt-matrix-card">
+                        <div class="rt-matrix-icon-frame">
+                            <div class="rt-matrix-cube-render block-wood"></div>
+                        </div>
+                        <h4 class="rt-matrix-title">PLAN 1</h4>
+                        <div class="rt-matrix-specs">
+                            <div><small>RAM</small> 1 GB</div>
+                            <div><small>DISK</small> 1 GB</div>
+                            <div><small>BACKUPS</small> NO</div>
+                        </div>
+                        <div class="rt-matrix-pricing">
+                            <span class="m-price-mo">$2.99/mo</span>
+                            <span class="m-price-yr">$29.90/yr</span>
+                        </div>
+                        <button class="rt-matrix-buy-btn">Buy now</button>
+                    </div>
+
+                    <div class="rt-matrix-card highlighted-node">
+                        <span class="rt-matrix-badge-alert">Minimum for 1.14+</span>
+                        <div class="rt-matrix-icon-frame">
+                            <div class="rt-matrix-cube-render block-iron"></div>
+                        </div>
+                        <h4 class="rt-matrix-title">PLAN 3</h4>
+                        <div class="rt-matrix-specs">
+                            <div><small>RAM</small> 2 GB</div>
+                            <div><small>DISK</small> 10 GB</div>
+                            <div><small>BACKUPS</small> DAILY</div>
+                        </div>
+                        <div class="rt-matrix-pricing">
+                            <span class="m-price-mo">$9.99/mo</span>
+                            <span class="m-price-yr">$99.90/yr</span>
+                        </div>
+                        <button class="rt-matrix-buy-btn order-btn-red">Buy now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mc-hero">
+            <div class="mc-hero-container">
+                <div class="mc-hero-content">
+                    <span class="mc-hero-badge">OFFICIAL STORE</span>
+                    <h1 class="mc-hero-title">RUSTICAL NETWORK</h1>
+                    <p class="mc-hero-subtitle">Upgrade your gameplay with premium ranks, custom crates, and exclusive
+                        items.</p>
+
+                    <div class="mc-hero-status">
+                        <div class="mc-status-indicator">
+                            <span class="mc-pulse-dot"></span>
+                            <span class="mc-status-text"><strong id="playerCount">542</strong> Players Online</span>
+                        </div>
+                        <div class="mc-status-divider"></div>
+                        <div class="mc-status-record">
+                            <i class="fa-solid fa-trophy"></i>
+                            <span>Record: <strong>1,420</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="mc-hero-actions">
+                        <a href="#store-listings" class="mc-btn-primary">EXPLORE STORE <i
+                                class="fa-solid fa-basket-shopping"></i></a>
+                        <button class="mc-btn-secondary" onclick="navigator.clipboard.writeText('play.rustical.net')">
+                            <i class="fa-solid fa-copy"></i> PLAY.RUSTICAL.NET
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <section class="mc-store" id="store-listings">
+            <div class="mc-store-container">
+
+                <div class="mc-products-grid">
+
+                    <div class="mc-product-card">
+                        <div class="mc-card-visual">
+                            <div class="mc-item-icon block-bronze">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                        </div>
+
+                        <div class="mc-card-details">
+                            <h3 class="mc-product-name">IRON RANK <span class="mc-term">/ 30 Days</span></h3>
+                            <p class="mc-product-desc">Perfect tier entry to boost your resource generation and secure
+                                essential global commands.</p>
+
+                            <ul class="mc-product-features">
+                                <li><i class="fa-solid fa-check"></i> <strong>Green</strong> Chat Prefix & Color</li>
+                                <li><i class="fa-solid fa-check"></i> Access to <strong>/fly</strong> in Lobbies</li>
+                                <li><i class="fa-solid fa-check"></i> 3x Multiplier on Coin Drops</li>
+                                <li><i class="fa-solid fa-check"></i> Join full sub-servers seamlessly</li>
+                            </ul>
+                        </div>
+
+                        <div class="mc-card-footer">
+                            <div class="mc-price-block">
+                                <span class="mc-currency">$</span>
+                                <span class="mc-amount">4.99</span>
+                            </div>
+                            <button class="mc-btn-buy">ADD TO CART <i class="fa-solid fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="mc-product-card mc-featured-item">
+                        <div class="mc-featured-badge"><i class="fa-solid fa-star"></i> BEST VALUE</div>
+
+                        <div class="mc-card-visual">
+                            <div class="mc-item-icon block-gold">
+                                <i class="fa-solid fa-crown"></i>
+                            </div>
+                        </div>
+
+                        <div class="mc-card-details">
+                            <h3 class="mc-product-name">RUSTIC RANK <span class="mc-term">/ Lifetime</span></h3>
+                            <p class="mc-product-desc">The ultimate network experience. Permanent server privileges,
+                                custom cosmetics, and maximum control.</p>
+
+                            <ul class="mc-product-features">
+                                <li><i class="fa-solid fa-check"></i> <strong>Gold</strong> Animated Chat Tag</li>
+                                <li><i class="fa-solid fa-check"></i> Global <strong>/fly</strong> &
+                                    <strong>/feed</strong> enabled
+                                </li>
+                                <li><i class="fa-solid fa-check"></i> 5x Multiplier & Priority Support</li>
+                                <li><i class="fa-solid fa-check"></i> Exclusive Monthly Elite Crate Keys</li>
+                            </ul>
+                        </div>
+
+                        <div class="mc-card-footer">
+                            <div class="mc-price-block">
+                                <span class="mc-currency">$</span>
+                                <span class="mc-amount">19.99</span>
+                            </div>
+                            <button class="mc-btn-buy">ADD TO CART <i class="fa-solid fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="mc-product-card">
+                        <div class="mc-card-visual">
+                            <div class="mc-item-icon block-purple">
+                                <i class="fa-solid fa-box-open"></i>
+                            </div>
+                        </div>
+
+                        <div class="mc-card-details">
+                            <h3 class="mc-product-name">5x MYTHIC KEYS <span class="mc-term">/ Bundle</span></h3>
+                            <p class="mc-product-desc">Unlock massive loot at the spawn crates. Guarantees rare
+                                cosmetics and valuable materials.</p>
+
+                            <ul class="mc-product-features">
+                                <li><i class="fa-solid fa-check"></i> 100% No duplicate drop system</li>
+                                <li><i class="fa-solid fa-check"></i> 15% Chance for legendary mounts</li>
+                                <li><i class="fa-solid fa-check"></i> Global broadcast upon opening</li>
+                                <li><i class="fa-solid fa-check"></i> Keys never expire over resets</li>
+                            </ul>
+                        </div>
+
+                        <div class="mc-card-footer">
+                            <div class="mc-price-block">
+                                <span class="mc-currency">$</span>
+                                <span class="mc-amount">7.50</span>
+                            </div>
+                            <button class="mc-btn-buy">ADD TO CART <i class="fa-solid fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mc-features-block">
+            <div class="mc-features-container">
+
+                <div class="mc-panel-showcase">
+                    <div class="mc-panel-info">
+                        <span class="mc-section-badge">PRÓXIMA GERAÇÃO</span>
+                        <h2 class="mc-panel-title">PAINEL DE CONTROLE EXCLUSIVO</h2>
+                        <p class="mc-panel-text">Gerencie seu servidor com uma interface altamente customizada,
+                            intuitiva e otimizada para máxima performance. Tudo o que você precisa para controlar seu
+                            mundo está a um clique de distância.</p>
+                        <a href="#plans" class="mc-btn-action">Ver Planos <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="mc-panel-grid">
+                        <div class="mc-grid-item">
+                            <div class="mc-icon-wrapper"><i class="fa-solid fa-circle-play"></i></div>
+                            <h3>Vídeo Integrado</h3>
+                            <p>Tutoriais direto no painel.</p>
+                        </div>
+                        <div class="mc-grid-item">
+                            <div class="mc-icon-wrapper"><i class="fa-solid fa-sliders"></i></div>
+                            <h3>Multi-Servidores</h3>
+                            <p>Controle instâncias simultâneas.</p>
+                        </div>
+                        <div class="mc-grid-item">
+                            <div class="mc-icon-wrapper"><i class="fa-solid fa-folder-open"></i></div>
+                            <h3>Acesso FTP Total</h3>
+                            <p>Manipulação de arquivos sem travas.</p>
+                        </div>
+                        <div class="mc-grid-item">
+                            <div class="mc-icon-wrapper"><i class="fa-solid fa-gauge-high"></i></div>
+                            <h3>Customização</h3>
+                            <p>Altere JARs e mods facilmente.</p>
+                        </div>
+                        <div class="mc-grid-item">
+                            <div class="mc-icon-wrapper"><i class="fa-solid fa-terminal"></i></div>
+                            <h3>Console & Chat</h3>
+                            <p>Acesso em tempo real pelo navegador.</p>
+                        </div>
+                        <div class="mc-grid-item">
+                            <div class="mc-icon-wrapper"><i class="fa-solid fa-server"></i></div>
+                            <h3>Alta Performance</h3>
+                            <p>Hardware otimizado para sub-redes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mc-highlights-row">
+                    <div class="mc-highlight-mini-card">
+                        <div class="mc-mini-thumb"
+                            style="background-image: url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=400');">
+                        </div>
+                        <div class="mc-mini-details">
+                            <h4>Minecraft Java/Bedrock</h4>
+                            <span>A partir de $2.99/mês</span>
+                        </div>
+                    </div>
+                    <div class="mc-highlight-mini-card">
+                        <div class="mc-mini-thumb"
+                            style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400');">
+                        </div>
+                        <div class="mc-mini-details">
+                            <h4>TeamSpeak 3 Server</h4>
+                            <span>Ativação Instantânea</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section class="mc-info-host">
+            <div class="mc-info-container">
+
+                <div class="mc-info-layout">
+
+                    <div class="mc-spec-box">
+                        <div class="mc-spec-header">
+                            <i class="fa-solid fa-shield-virus spec-icon-main"></i>
+                            <div>
+                                <h3>PROTEÇÃO INFALÍVEL</h3>
+                                <p>Infraestrutura blindada corporativa</p>
+                            </div>
+                        </div>
+
+                        <div class="mc-spec-body">
+                            <p class="mc-spec-lead">Esqueça quedas causadas por ataques maliciosos. Nossa rede conta com
+                                proteção especializada em tráfego de jogos.</p>
+
+                            <div class="mc-bullet-spec">
+                                <div class="mc-bullet-dot"></div>
+                                <div>
+                                    <strong>Mitigação DDoS de Camada 7:</strong> Filtros customizados que identificam e
+                                    barram exploits específicos de Minecraft instantaneamente.
+                                </div>
+                            </div>
+
+                            <div class="mc-bullet-spec">
+                                <div class="mc-bullet-dot"></div>
+                                <div>
+                                    <strong>Uptime de 99.9% Garantido:</strong> Hardware corporativo com redundância de
+                                    energia e fontes de uplink independentes.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mc-nodes-box">
+                        <div class="mc-nodes-info">
+                            <span class="mc-section-badge">CONECTIVIDADE</span>
+                            <h3 class="mc-nodes-title">LOCALIZAÇÕES GLOBAIS</h3>
+                            <p class="mc-nodes-text">Hospede seu servidor o mais próximo possível de você e da sua
+                                comunidade para garantir o menor ping e zero lag de input.</p>
+                        </div>
+
+                        <div class="mc-locations-list">
+                            <div class="mc-location-tag active-node">
+                                <span class="mc-node-status"></span>
+                                <div class="mc-node-name">
+                                    <strong>São Paulo</strong>
+                                    <span>América do Sul (20-40ms)</span>
+                                </div>
+                            </div>
+                            <div class="mc-location-tag">
+                                <span class="mc-node-status"></span>
+                                <div class="mc-node-name">
+                                    <strong>Virginia</strong>
+                                    <span>América do Norte (90-120ms)</span>
+                                </div>
+                            </div>
+                            <div class="mc-location-tag">
+                                <span class="mc-node-status"></span>
+                                <div class="mc-node-name">
+                                    <strong>Frankfurt</strong>
+                                    <span>Europa (180-220ms)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <div class="mc-video-card">
+
+            <div class="mc-video-viewport">
+
+                <div id="mcYoutubePlayer"
+                    data-raw-url="https://www.youtube.com/watch?v=-uDoyDzv0YA&pp=ygUJbWluZWNyYWZ0"></div>
+
+                <div class="mc-video-callout" id="mcVideoCallout">
+                    <div class="mc-callout-texts">
+                        <span class="mc-callout-head">Jogar agora</span>
+                        <span class="mc-callout-sub">Clique aqui para ver!</span>
+                    </div>
+                    <div class="mc-callout-action">
+                        <a href="#play" class="mc-callout-circle-btn"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mc-video-metadata">
+                <div class="mc-video-author">
+                    <div class="mc-author-avatar-frame">
+                        <div class="mc-author-avatar">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                    </div>
+                    <div class="mc-author-details">
+                        <div class="mc-video-top-actions">
+                            <button class="mc-video-icon-btn" title="Copiar Link" id="mcBtnCopyLink"
+                                title="Copiar Link">
+                                <i class="fas fa-link"></i>
+                                <span class="mc-tooltip">Copiado!</span>
+                            </button>
+                            <button class="mc-video-icon-btn" title="Parar Reprodução" id="mcBtnResetVideo">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <h3 class="mc-video-title">Missão: Rustical Network Early Access Launch</h3>
+                        <span class="mc-video-channel"><i class="fas fa-check-circle"></i> Official Media</span>
+                    </div>
+                </div>
+
+                <div class="mc-video-buttons">
+                    <button class="mc-video-btn btn-sec">
+                        <i class="fas fa-lock"></i> Reivindicar recompensa
+                    </button>
+                    <button class="mc-video-btn btn-pri">
+                        Jogar agora
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <section class="rt-hero-section" id="hero-carousel">
+            <div class="rt-hero-overlay"></div>
+
+            <div class="rt-hero-bg-container">
+                <img src="assets/images/geral/banner-img.jpg" class="rt-hero-bg-img active" data-bg-index="0"
+                    alt="Minecraft Background">
+                <img src="assets/images/geral/banner-fundo.gif" class="rt-hero-bg-img" data-bg-index="1"
+                    alt="Subnautica Background">
+            </div>
+
+            <div class="rt-hero-container">
+                <div class="rt-hero-slides-wrapper">
+
+                    <div class="rt-hero-slide active" data-slide-index="0">
+                        <h1 class="rt-hero-title">
+                            MINECRAFT <span class="rt-badge-discount">50% OFF</span>
+                        </h1>
+                        <p class="rt-hero-description">
+                            With new games, new updates, and new ways to play, join one of the biggest communities in
+                            gaming and start crafting today!
+                        </p>
+                        <div class="rt-hero-actions">
+                            <button class="rt-btn-hero-primary">Get your server</button>
+                        </div>
+                    </div>
+
+                    <div class="rt-hero-slide" data-slide-index="1">
+                        <h1 class="rt-hero-title">
+                            SUBNAUTICA <span class="rt-badge-discount">EARLY ACCESS</span>
+                        </h1>
+                        <p class="rt-hero-description">
+                            Dive back into the depths. Explore breathtaking alien coral reefs, build high-tech bases and
+                            survive the unknown hazards below.
+                        </p>
+                        <div class="rt-hero-actions">
+                            <button class="rt-btn-hero-primary">Explore Now</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="rt-hero-pagination" id="hero-dots-container">
+                    <span class="rt-dot active" data-target="0"></span>
+                    <span class="rt-dot" data-target="1"></span>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="rt-staff-section">
+            <div class="rt-staff-container">
+
+                <div class="rt-staff-group">
+                    <h2 class="rt-group-title">Vedení Serveru</h2>
+                    <div class="rt-staff-grid">
+
+                        <div class="rt-staff-card">
+                            <div class="rt-avatar-wrapper">
+                                <img src="https://crafatar.com/avatars/61699b2e-d327-4a01-9f1e-0dd8c3f97362?size=100&default=MHF_Steve"
+                                    alt="GrootCZ" class="rt-staff-avatar">
+                            </div>
+                            <div class="rt-staff-info">
+                                <h3 class="rt-staff-name">GrootCZ</h3>
+                                <span class="rt-staff-role">Majitel</span>
+                            </div>
+                        </div>
+
+                        <div class="rt-staff-card">
+                            <div class="rt-avatar-wrapper">
+                                <img src="https://crafatar.com/avatars/f1446361-9f8d-472e-839a-14d9e03c9b91?size=100&default=MHF_Steve"
+                                    alt="Pingus" class="rt-staff-avatar">
+                            </div>
+                            <div class="rt-staff-info">
+                                <h3 class="rt-staff-name">Pingus</h3>
+                                <span class="rt-staff-role">Spolumajitel</span>
+                            </div>
+                        </div>
+
+                        <div class="rt-staff-card">
+                            <div class="rt-avatar-wrapper">
+                                <img src="https://crafatar.com/avatars/4a614271-e02d-4dd6-bc4d-cf9b0c9f1361?size=100&default=MHF_Steve"
+                                    alt="Opoetos" class="rt-staff-avatar">
+                            </div>
+                            <div class="rt-staff-info">
+                                <h3 class="rt-staff-name">Opoetos</h3>
+                                <span class="rt-staff-role">Manažer serveru</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="rt-staff-group">
+                    <h2 class="rt-group-title">Developeři</h2>
+                    <div class="rt-staff-grid">
+
+                        <div class="rt-staff-card">
+                            <div class="rt-avatar-wrapper">
+                                <img src="https://crafatar.com/avatars/26ec97f7-b9c2-42da-916c-b3a1a629b352?size=100&default=MHF_Steve"
+                                    alt="Patas" class="rt-staff-avatar">
+                            </div>
+                            <div class="rt-staff-info">
+                                <h3 class="rt-staff-name">Patas</h3>
+                                <span class="rt-staff-role">Developer</span>
+                            </div>
+                        </div>
+
+                        <div class="rt-staff-card">
+                            <div class="rt-avatar-wrapper">
+                                <img src="https://crafatar.com/avatars/a64f33b1-cc72-46eb-bc46-cf9b0c9f91a2?size=100&default=MHF_Steve"
+                                    alt="Kirra" class="rt-staff-avatar">
+                            </div>
+                            <div class="rt-staff-info">
+                                <h3 class="rt-staff-name">Kirra</h3>
+                                <span class="rt-staff-role">Developer</span>
+                            </div>
+                        </div>
+
+                        <div class="rt-staff-card">
+                            <div class="rt-avatar-wrapper">
+                                <img src="https://mc-heads.net/avatar/MatheuZera88/64" alt="Polec"
+                                    class="rt-staff-avatar">
+                            </div>
+                            <div class="rt-staff-info">
+                                <h3 class="rt-staff-name">MatheuZera</h3>
+                                <span class="rt-staff-role">Developer</span>
+                            </div>
+                        </div>
+
+                        <div class="rt-staff-card rt-join-card">
+                            <div class="rt-avatar-wrapper">
+                                <div class="rt-icon-join">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0zM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+        <!--<div class="mc-modal-overlay" id="importantModal">
+    <div class="mc-modal-card">
+        <button class="modal-close-btn" onclick="closeMcModal()">&times;</button>
+        <div class="modal-badge">Aviso Importante</div>
+        <h3 class="modal-title">Grande Inauguração!</h3>
+        <p class="modal-text">
+            2ª Página de Testes da Website (Mundo Zera's Craft)! NÃO ERA PARA VOÇÊ ESTAR AQUI -_-..
+        </p>
+    </div>
+</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <section class="stats-section">
+            <div class="container stats-flex reveal">
+                <div class="stat-item">
+                    <strong class="counter" id="stat-total" data-target="0">0</strong>
+                    <span>MEMBROS TOTAIS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong class="counter" id="stat-online" data-target="0">0</strong>
+                    <span>MEMBROS ONLINE</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <strong>02/07/2025</strong>
+                    <span>CRIADO EM</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--------------------------------------------------------------->
+
+    <div class="music-player-container reveal">
+        <div class="player-controls">
+            <div class="now-playing">
+                <i class="fas fa-music"></i>
+                <span id="musicTitleDisplay">[#] 📌 Clique para Tocar</span>
+            </div>
+
+            <div class="progress-area">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="audioProgressBar" value="0" min="0" max="100">
+                <span id="durationDisplay">0:00</span>
+            </div>
+
+            <div class="main-controls">
+                <button id="audioModeButton" title="Modo"><i class="fas fa-list-ol"></i></button>
+                <button id="audioPrevButton"><i class="fas fa-step-backward"></i></button>
+                <button id="audioControlButton" class="play-pause"><i class="fas fa-play"></i></button>
+                <button id="audioNextButton"><i class="fas fa-step-forward"></i></button>
+
+                <div class="volume-container">
+                    <button id="volumeButton"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="backgroundAudio"></audio>
+
+    <div id="centralMessage" class="central-message">
+        <div class="message-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message-content">
+            <strong>Título</strong>
+            <span>Informação</span>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------->
+
+    <footer class="main-footer">
+        <div class="footer-divider"></div>
+
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <div class="logo">ZERAS<span>CRAFT</span></div>
+                <p class="brand-description">
+                    Esta é o nosso lugar para conversar, mostrar e interagir com nossos Inscritos/Membros de Minecraft,
+                    nossos Crafters sempre buscando novas maneiras de Jogar com a Rapaziada.
+                </p>
+                <div class="newsletter-footer">
+                    <button class="btn-sidebar"
+                        onclick="showClickNotification('Olá Crafter!', 'Acesse nosso Canal! <br> E Nossos Links.')">
+                        <i class="fas fa-bolt"></i> CLIQUE AQUI
+                    </button>
+                    <h5 class="newsletter-footer">FIQUE POR DENTRO</h5>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>EXPLORAR</h4>
+                <ul class="footer-links">
+                    <li><a href="https://www.youtube.com/@MatheuZera88"><i class="fas fa-chevron-right"></i> Canal
+                            Oficial YT</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125436805185656"><i
+                                class="fas fa-chevron-right"></i> Nosso Marketplace Craft</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125442731868180"><i
+                                class="fas fa-chevron-right"></i> Sobre nossas Wikipédias</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125448662614027"><i
+                                class="fas fa-chevron-right"></i> Solicite Parcerias!</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394709165640781975"><i
+                                class="fas fa-chevron-right"></i> Crie sua Página Web!</a></li>
+                    <li><a href="https://www.minecraft.net/"><i class="fas fa-chevron-right"></i> Minecraft.net</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>INFORMATIVOS</h4>
+                <ul class="footer-links">
+                    <li><a href="https://discord.com/channels/1390120239588577482/1404385093493198909"><i
+                                class="fas fa-chevron-right"></i> Criar uma Guilda</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1398008350796546068"><i
+                                class="fas fa-chevron-right"></i> Pixel Legends</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Nossos Eventos</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1390125374695931994"><i
+                                class="fas fa-chevron-right"></i> Feedbacks</a></li>
+                    <li><a href="https://discord.com/channels/1390120239588577482/1394708633010311168"><i
+                                class="fas fa-chevron-right"></i> Seja um(a) Staff</a></li>
+                    <li><a href="https://discord.gg/GYGVBqGEwP" class="status-indicator"><span class="dot"></span>
+                            EXPLORAR MAIS</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>COMUNIDADE</h4>
+                <p class="join-text">
+                    Junte-se a <span id="discord-count"></span> no nosso Discord Oficial.
+                </p>
+                <div class="social-grid">
+                    <a href="https://discord.gg/GYGVBqGEwP" class="social-box discord"><i
+                            class="fab fa-discord"></i></a>
+                    <a href="https://www.youtube.com/@MatheuZera88" class="social-box youtube"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-box twitch"><i class="fab fa-twitch"></i></a>
+                    <a href="#" class="social-box other"><i class="fab fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <div class="legal">
+                    <p class="copyright-text"
+                        style="color: #ffffff !important; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600;">
+                        &copy;
+                        <span id="current-year" style="color: #ffffff !important;"></span>
+                        Zeras Craft. Todos os direitos reservados.
+                    </p>
+
+                    <span class="mojang-disclaimer"
+                        style="color: #555555 !important; font-size: 0.75rem; display: block;">
+                        Não afiliado à Mojang Studios ou Microsoft.
+                    </span>
+                </div>
+                <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+    <script src="effects.js"></script>
+    <script src="player.js"></script>
+</body>
+
+</html>
