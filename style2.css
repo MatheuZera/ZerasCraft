@@ -2639,13 +2639,93 @@
   object-fit: contain;
 }
 
-.tag-adobe {
+.tag-adobe-documento {
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 800;
   color: #ffffff;
   background: rgb(58, 71, 255);
+  text-transform: uppercase;
+}
+
+.tag-adobe-motion {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgb(3, 184, 99);
+  text-transform: uppercase;
+}
+
+.tag-adobe-audio {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgb(43, 46, 94);
+  text-transform: uppercase;
+}
+
+.tag-adobe-midia {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgb(255, 172, 48);
+  text-transform: uppercase;
+}
+
+.tag-adobe-plugin {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgb(105, 105, 105);
+  text-transform: uppercase;
+}
+
+.tag-adobe-3D {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgb(255, 79, 35);
+  text-transform: uppercase;
+}
+
+.tag-adobe-design {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgb(120, 0, 156);
+  text-transform: uppercase;
+}
+
+.tag-adobe-imagem {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgb(182, 185, 0);
+  text-transform: uppercase;
+}
+
+.tag-adobe-video {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgb(255, 31, 31);
   text-transform: uppercase;
 }
 
