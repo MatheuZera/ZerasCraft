@@ -25,6 +25,11 @@ window.changeGuideStep = function (stepNum) {
     });
 };
 
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
+
 window.copyGuideIp = function (element) {
     const ipText = "jogar.zerascraft.net";
 
@@ -131,6 +136,11 @@ window.filterRankTable = function () {
 
 
 
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
+
 /**
  * ECOSSISTEMA ZERA'S CRAFT - MOTOR DE SINCRONIZAÇÃO DO CRONOGRAMA
  */
@@ -231,6 +241,11 @@ function closeMcModal() {
 
 
 
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
+
 /**
  * GERENCIADOR DE METAS DA COMUNIDADE - ZERA'S CRAFT
  * Controla e renderiza dinamicamente as barras de progresso do servidor.
@@ -302,6 +317,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
+
 /**
  * GERENCIADOR DE LIGAS E RANKING - RUSTICAL PVP
  * Script estrutural para ordenação e efeitos visuais
@@ -368,6 +388,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 
 // 1. Carrega a API de Iframe do YouTube de forma assíncrona global
 if (!window.YT) {
@@ -451,6 +476,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
     const bgImages = document.querySelectorAll(".rt-hero-bg-img");
     const slides = document.querySelectorAll(".rt-hero-slide");
@@ -481,3 +511,72 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializa carregando instantaneamente o primeiro slide configurado no HTML
     goToSlide(0);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const statValues = document.querySelectorAll(".z-stat-value");
+
+    statValues.forEach((el) => {
+        const target = parseFloat(el.getAttribute("data-target"));
+        let current = 0;
+        const increment = target / 50;
+
+        const updateCount = () => {
+            current += increment;
+            if (current < target) {
+                el.textContent = current.toFixed(1) + "%";
+                setTimeout(updateCount, 30);
+            } else {
+                el.textContent = target + "%";
+            }
+        };
+        updateCount();
+    });
+});
+
+
+
+
+

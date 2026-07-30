@@ -262,8 +262,8 @@ function runSearch() {
 }
 /* ============================================================================================= */
 /**
- * ZERA'S CRAFT ENGINE - MÓDULO DE DATA
- * Converte Snowflake ID em Data e anima a contagem
+ * ZERA'S CRAFT ENGINE - MÓDULO DE DATA E CONTADORES
+ * Converte Snowflake ID em Data e anima contagens em massa via Classes
  */
 const ZerasEngine = {
   guildID: "1390120239588577482",
@@ -276,17 +276,18 @@ const ZerasEngine = {
       );
       const data = await response.json();
 
-      // 1. Sincroniza Membros (Online e Total) [cite: 153]
-      this.updateCounter("stat-total", data.approximate_member_count || 5000);
-      this.updateCounter("stat-online", data.approximate_presence_count || 0);
-      // Adicione o complemento como uma string no final
-      this.updateCounter(
+      // 1. Sincroniza Membros (Online e Total) usando Classes
+      this.updateCountersByClass("stat-total", data.approximate_member_count || 5000);
+      this.updateCountersByClass("stat-online", data.approximate_presence_count || 0);
+
+      // Sincroniza a frase completa ("X Membros Online agora") em massa
+      this.updateCountersByClass(
         "discord-count",
         data.approximate_presence_count || 0,
         " Membros Online agora",
       );
 
-      // 2. Sincroniza Data de Criação via ID (Snowflake)
+      // 2. Sincroniza Data de Criação via ID (Snowflake) - Mantido por ser único
       this.syncCreationDate();
     } catch (error) {
       console.error("Zera's Craft: Erro de sincronização.");
@@ -309,7 +310,7 @@ const ZerasEngine = {
     this.animateDate("stat-date", targetDate);
   },
 
-  // Animação de Data dd/mm/aaaa a 60fps [cite: 153]
+  // Animação de Data dd/mm/aaaa a 60fps
   animateDate(id, target) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -321,12 +322,12 @@ const ZerasEngine = {
     const step = (now) => {
       const progress = Math.min((now - start) / duration, 1);
 
-      // Lógica de interpolação linear [cite: 106]
+      // Lógica de interpolação linear
       current.day = Math.floor(progress * target.day);
       current.month = Math.floor(progress * target.month);
       current.year = Math.floor(2000 + progress * (target.year - 2000));
 
-      // Formatação com zeros à esquerda (Partial Update) [cite: 190]
+      // Formatação com zeros à esquerda (Partial Update)
       const d = String(current.day).padStart(2, "0");
       const m = String(current.month).padStart(2, "0");
       const y = current.year;
@@ -341,32 +342,32 @@ const ZerasEngine = {
     requestAnimationFrame(step);
   },
 
-  // 1. Prepara o alvo e define o valor final com o complemento
-  updateCounter(id, target, suffix = "") {
-    const el = document.getElementById(id);
-    if (el) {
-      // Define o valor final no atributo para a lógica de animação [cite: 191]
+  // Atualiza múltiplos elementos baseados em classe em vez de ID único
+  updateCountersByClass(className, target, suffix = "") {
+    const elements = document.querySelectorAll(`.${className}`);
+    elements.forEach(el => {
+      // Define o valor final no atributo para a lógica de animação
       el.setAttribute("data-target", target);
-      this.animateNumber(el, suffix);
-    }
+      this.animateNumberClass(el, suffix);
+    });
   },
 
-  // 2. Executa a animação suave via requestAnimationFrame
-  animateNumber(el, suffix) {
+  // Executa a animação suave via requestAnimationFrame para elementos de classe
+  animateNumberClass(el, suffix) {
     const target = +el.getAttribute("data-target");
 
     const update = () => {
-      // Remove caracteres não numéricos para calcular o progresso [cite: 191]
+      // Remove caracteres não numéricos para calcular o progresso
       const current = +el.innerText.replace(/\D/g, "") || 0;
       const increment = Math.ceil(target / 100);
 
       if (current < target) {
         const nextValue = Math.min(target, current + increment);
-        // Atualização parcial: número formatado + complemento [cite: 191]
+        // Atualização parcial: número formatado + complemento
         el.innerText = `${nextValue.toLocaleString()}${suffix}`;
         requestAnimationFrame(update);
       } else {
-        // Garante que o valor final exato seja exibido com o sufixo [cite: 191]
+        // Garante que o valor final exato seja exibido com o sufixo
         el.innerText = `${target.toLocaleString()}${suffix}`;
       }
     };
