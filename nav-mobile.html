@@ -1,0 +1,586 @@
+<body>
+    <nav class="zmob-topbar">
+        <button class="zmob-burger" onclick="openMobileMenu()"><i class="fas fa-bars"></i></button>
+        <a href="/ZerasCraft/" class="zmob-logo">ZERA'S CRAFT</a>
+        <button class="zmob-burger" onclick="openSearch()"><i class="fas fa-search"></i></button>
+    </nav>
+
+    <div class="zmob-overlay" id="zmobOverlay" onclick="closeMobileMenu()"></div>
+
+    <aside class="zmob-sidebar" id="zmobSidebar">
+        <div class="zmob-sidebar-header">
+            <span class="zmob-header-logo">ZERA'S CRAFT</span>
+            <button class="zmob-close-btn" onclick="closeMobileMenu()">&times;</button>
+        </div>
+
+        <div class="zmob-slider-wrapper">
+
+            <div class="zmob-panel" id="zpanel-main">
+                <ul class="zmob-list">
+
+                    <li onclick="slideMobile('zpanel-inicio')">
+                        <div class="zmob-flex-align"><i class="fas fa-home zmob-ic"></i> INÍCIO</div>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+
+                    <li onclick="slideMobile('zpanel-novidades')">
+                        <div class="zmob-flex-align"><i class="fas fa-globe-americas zmob-ic"></i> NOVIDADES</div>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+
+                    <li onclick="slideMobile('zpanel-oficial')">
+                        <div class="zmob-flex-align"><i class="fas fa-book zmob-ic"></i> OFICIAL</div>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+
+                    <li onclick="slideMobile('zpanel-recursos')">
+                        <div class="zmob-flex-align"><i class="fas fa-bolt zmob-ic"></i> RECURSOS</div>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+
+                    <li onclick="slideMobile('zpanel-suporte')">
+                        <div class="zmob-flex-align"><i class="fas fa-user zmob-ic"></i> SUPORTE</div>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+
+                    <li onclick="openSearch(); closeMobileMenu();">
+                        <div class="zmob-flex-align"><i class="fas fa-search zmob-ic"></i> PESQUISAR</div>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+
+                    <li onclick="slideMobile('zpanel-links')">
+                        <div class="zmob-flex-align"><i class="fas fa-list-ul zmob-ic"></i> LINKS EXTERNOS</div>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+
+                    <li class="zmob-flex-align"></li>
+                    
+                    <li class="zmob-flex-align">
+                        <a href="#">
+                            <div class="zmob-flex-align">
+                                <i class="fas fa-external-link zmob-ic"></i>
+                                Link (não disponível..)
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="zmob-panel zpanel-sub" id="zpanel-inicio">
+                <button class="zmob-back-btn" onclick="slideBack()">
+                    <i class="fas fa-chevron-left"></i> VOLTAR
+                </button>
+
+                <h2 class="zmob-title">INÍCIO</h2>
+
+                <ul class="zmob-list">
+                    <div class="zmob-item-list">
+                        <a href="https://matheuzera.github.io/ZerasCraft/">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Home">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Página Inicial</span>
+                                <span class="zmob-item-desc">Volte para a Primeira Página da Website</span>
+                            </div>
+                            <i class="fas fa-home zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-item-list">
+                        <a href="comunidade">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Loja">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Comunidade</span>
+                                <span class="zmob-item-desc">Discord, YouTube, Twitch e Etc..</span>
+                            </div>
+                            <i class="fas fa-users zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-has-dropdown">
+                        <div class="zmob-item-collapse" onclick="toggleDropdown(this)">
+                            <div class="zmob-collapse-label">
+                                <i class="fas fa-globe-americas"></i>
+                                <span>OUTROS</span>
+                            </div>
+                            <i class="fas fa-chevron-down zmob-arrow"></i>
+                        </div>
+
+                        <div class="zmob-dropdown-content">
+                            <ul class="zmob-sub-list">
+                                <li class="zmob-item-list">
+                                    <a href="recursos">
+                                        <img src="assets/images/geral/banner-img.jpg" alt="Discord">
+                                        <div class="zmob-item-info">
+                                            <span class="zmob-item-title">Recursos</span>
+                                            <span class="zmob-item-desc">Nossas coisinhas que a Comunidade Pedem
+                                                hehe..</span>
+                                        </div>
+                                        <i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Jogos">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    Nossos Jogos</span>
+                                <span class="zmob-item-desc">Explore modos de jogo únicos</span>
+                            </div>
+                            <i class="fas fa-gamepad zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Rankings">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    Rankings</span>
+                                <span class="zmob-item-desc">Veja os melhores jogadores</span>
+                            </div>
+                            <i class="fas fa-trophy zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Suporte">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    Suporte</span>
+                                <span class="zmob-item-desc">Dúvidas e Tickets</span>
+                            </div>
+                            <i class="fas fa-life-ring zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Equipe">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    Equipe</span>
+                                <span class="zmob-item-desc">Conheça nossos membros</span>
+                            </div>
+                            <i class="fas fa-user-tie zmob-item-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="zmob-green-line"></div>
+                <ul class="zmob-list-small">
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Termos de Compra</a>
+                    </li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Ver Carrinho</a></li>
+                </ul>
+            </div>
+
+
+
+            <!--========================================================================================================================-->
+
+
+            <div class="zmob-panel zpanel-sub" id="zpanel-novidades">
+                <button class="zmob-back-btn" onclick="slideBack()">
+                    <i class="fas fa-chevron-left"></i> VOLTAR
+                </button>
+
+                <h2 class="zmob-title">NOVIDADES</h2>
+
+                <ul class="zmob-list">
+                    <div class="zmob-item-list">
+                        <a href="https://matheuzera.github.io/ZerasCraft/">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Home">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Últimas Notícias</span>
+                                <span class="zmob-item-desc">não disponível..</span>
+                            </div>
+                            <i class="fas fa-home zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-item-list">
+                        <a href="comunidade">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Loja">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Atualizações</span>
+                                <span class="zmob-item-desc">não disponível...</span>
+                            </div>
+                            <i class="fas fa-users zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-has-dropdown">
+                        <div class="zmob-item-collapse" onclick="toggleDropdown(this)">
+                            <div class="zmob-collapse-label">
+                                <i class="fas fa-globe-americas"></i>
+                                <span>NADA PARA VER AQUI..</span>
+                            </div>
+                            <i class="fas fa-chevron-down zmob-arrow"></i>
+                        </div>
+
+                        <div class="zmob-dropdown-content">
+                            <ul class="zmob-sub-list">
+                                <li class="zmob-item-list">
+                                    <a href="#">
+                                        <img src="assets/images/geral/banner-img.jpg" alt="Discord">
+                                        <div class="zmob-item-info">
+                                            <span class="zmob-item-title">'-'</span>
+                                            <span class="zmob-item-desc">...</span>
+                                        </div>
+                                        <i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Jogos">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    '-'</span>
+                                <span class="zmob-item-desc">...</span>
+                            </div>
+                            <i class="fas fa-gamepad zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Rankings">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    '-'</span>
+                                <span class="zmob-item-desc">...</span>
+                            </div>
+                            <i class="fas fa-trophy zmob-item-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="zmob-green-line"></div>
+                <ul class="zmob-list-small">
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Termos de Compra</a>
+                    </li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Ver Carrinho</a></li>
+                </ul>
+            </div>
+
+
+            <!--========================================================================================================================-->
+
+
+            <div class="zmob-panel zpanel-sub" id="zpanel-oficial">
+                <button class="zmob-back-btn" onclick="slideBack()">
+                    <i class="fas fa-chevron-left"></i> VOLTAR
+                </button>
+
+                <h2 class="zmob-title">OFICIAL</h2>
+
+                <ul class="zmob-list">
+                    <div class="zmob-item-list">
+                        <a href="https://matheuzera.github.io/ZerasCraft/">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Home">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Últimas Notícias</span>
+                                <span class="zmob-item-desc">não disponível..</span>
+                            </div>
+                            <i class="fas fa-home zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-item-list">
+                        <a href="comunidade">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Loja">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Atualizações</span>
+                                <span class="zmob-item-desc">não disponível...</span>
+                            </div>
+                            <i class="fas fa-users zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-has-dropdown">
+                        <div class="zmob-item-collapse" onclick="toggleDropdown(this)">
+                            <div class="zmob-collapse-label">
+                                <i class="fas fa-globe-americas"></i>
+                                <span>NADA PARA VER AQUI..</span>
+                            </div>
+                            <i class="fas fa-chevron-down zmob-arrow"></i>
+                        </div>
+
+                        <div class="zmob-dropdown-content">
+                            <ul class="zmob-sub-list">
+                                <li class="zmob-item-list">
+                                    <a href="#">
+                                        <img src="assets/images/geral/banner-img.jpg" alt="Discord">
+                                        <div class="zmob-item-info">
+                                            <span class="zmob-item-title">'-'</span>
+                                            <span class="zmob-item-desc">...</span>
+                                        </div>
+                                        <i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Jogos">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    '-'</span>
+                                <span class="zmob-item-desc">...</span>
+                            </div>
+                            <i class="fas fa-gamepad zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Rankings">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    '-'</span>
+                                <span class="zmob-item-desc">...</span>
+                            </div>
+                            <i class="fas fa-trophy zmob-item-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="zmob-green-line"></div>
+                <ul class="zmob-list-small">
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Termos de Compra</a>
+                    </li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Ver Carrinho</a></li>
+                </ul>
+            </div>
+
+
+            <!--========================================================================================================================-->
+
+
+            <div class="zmob-panel zpanel-sub" id="zpanel-recursos">
+                <button class="zmob-back-btn" onclick="slideBack()">
+                    <i class="fas fa-chevron-left"></i> VOLTAR
+                </button>
+
+                <h2 class="zmob-title">RECURSOS</h2>
+
+                <ul class="zmob-list">
+                    <div class="zmob-item-list">
+                        <a href="https://matheuzera.github.io/ZerasCraft/">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Home">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Últimas Notícias</span>
+                                <span class="zmob-item-desc">não disponível..</span>
+                            </div>
+                            <i class="fas fa-home zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-item-list">
+                        <a href="comunidade">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Loja">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Atualizações</span>
+                                <span class="zmob-item-desc">não disponível...</span>
+                            </div>
+                            <i class="fas fa-users zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-has-dropdown">
+                        <div class="zmob-item-collapse" onclick="toggleDropdown(this)">
+                            <div class="zmob-collapse-label">
+                                <i class="fas fa-globe-americas"></i>
+                                <span>NADA PARA VER AQUI..</span>
+                            </div>
+                            <i class="fas fa-chevron-down zmob-arrow"></i>
+                        </div>
+
+                        <div class="zmob-dropdown-content">
+                            <ul class="zmob-sub-list">
+                                <li class="zmob-item-list">
+                                    <a href="#">
+                                        <img src="assets/images/geral/banner-img.jpg" alt="Discord">
+                                        <div class="zmob-item-info">
+                                            <span class="zmob-item-title">'-'</span>
+                                            <span class="zmob-item-desc">...</span>
+                                        </div>
+                                        <i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Jogos">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    '-'</span>
+                                <span class="zmob-item-desc">...</span>
+                            </div>
+                            <i class="fas fa-gamepad zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Rankings">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    '-'</span>
+                                <span class="zmob-item-desc">...</span>
+                            </div>
+                            <i class="fas fa-trophy zmob-item-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="zmob-green-line"></div>
+                <ul class="zmob-list-small">
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Termos de Compra</a>
+                    </li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Ver Carrinho</a></li>
+                </ul>
+            </div>
+
+
+            <!--========================================================================================================================-->
+
+
+            <div class="zmob-panel zpanel-sub" id="zpanel-suporte">
+                <button class="zmob-back-btn" onclick="slideBack()">
+                    <i class="fas fa-chevron-left"></i> VOLTAR
+                </button>
+
+                <h2 class="zmob-title">SUPORTE</h2>
+
+                <ul class="zmob-list">
+                    <div class="zmob-item-list">
+                        <a href="https://matheuzera.github.io/ZerasCraft/">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Home">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Últimas Notícias</span>
+                                <span class="zmob-item-desc">não disponível..</span>
+                            </div>
+                            <i class="fas fa-home zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-item-list">
+                        <a href="comunidade">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Loja">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title">Atualizações</span>
+                                <span class="zmob-item-desc">não disponível...</span>
+                            </div>
+                            <i class="fas fa-users zmob-item-icon"></i>
+                        </a>
+                    </div>
+
+                    <div class="zmob-has-dropdown">
+                        <div class="zmob-item-collapse" onclick="toggleDropdown(this)">
+                            <div class="zmob-collapse-label">
+                                <i class="fas fa-globe-americas"></i>
+                                <span>NADA PARA VER AQUI..</span>
+                            </div>
+                            <i class="fas fa-chevron-down zmob-arrow"></i>
+                        </div>
+
+                        <div class="zmob-dropdown-content">
+                            <ul class="zmob-sub-list">
+                                <li class="zmob-item-list">
+                                    <a href="#">
+                                        <img src="assets/images/geral/banner-img.jpg" alt="Discord">
+                                        <div class="zmob-item-info">
+                                            <span class="zmob-item-title">'-'</span>
+                                            <span class="zmob-item-desc">...</span>
+                                        </div>
+                                        <i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-fundo.gif" alt="Jogos">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    '-'</span>
+                                <span class="zmob-item-desc">...</span>
+                            </div>
+                            <i class="fas fa-gamepad zmob-item-icon"></i>
+                        </a>
+                    </li>
+
+                    <li class="zmob-item-list">
+                        <a href="#">
+                            <img src="assets/images/geral/banner-img.jpg" alt="Rankings">
+                            <div class="zmob-item-info">
+                                <span class="zmob-item-title"><i class="fas fa-external-link-alt zmob-item-icon"></i>
+                                    '-'</span>
+                                <span class="zmob-item-desc">...</span>
+                            </div>
+                            <i class="fas fa-trophy zmob-item-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="zmob-green-line"></div>
+                <ul class="zmob-list-small">
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Termos de Compra</a>
+                    </li>
+                    <li><a href="#"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp Ver Carrinho</a></li>
+                </ul>
+            </div>
+
+            <div class="zmob-panel zpanel-sub" id="zpanel-links">
+                <button class="zmob-back-btn" onclick="slideBack()"><i class="fas fa-chevron-left"></i> VOLTAR</button>
+                <h2 class="zmob-title">LINKS EXTERNOS</h2>
+                <ul class="zmob-list">
+                    <li><a href="https://aternos.org/ " style="color: #ffffff;"> Aternos</a></li>
+                    <li><a href="https://www.chunker.app/ " style="color: #ffffff;"> Chunker Convert</a></li>
+                    <li><a href="https://mcpedl.com/ " style="color: #ffffff;"> MCPEDL</a></li>
+                    <li><a href="https://www.planetminecraft.com/ " style="color: #ffffff;"> Planet Minecraft</a></li>
+                    <li><a href="https://minecraft.novaskin.me/" style="color: #ffffff;"> Nova Skin</a></li>
+                    <li><a href="https://www.9minecraft.net/ " style="color: #ffffff;"> 9Minecraft</a></li>
+                    <li><a href="https://pt.minecraft.wiki/" style="color: #797979;"> Minecraft Wiki</a></li>
+                    <li><a href="https://www.minecraft.net/" style="color: #797979;"> Minecraft.net</a></li>
+                </ul>
+                <div class="zmob-green-line"></div>
+                <ul class="zmob-list-small">
+                    <li><a href="#" style="color:#ff5555;"><i class="fas fa-external-link-alt zmob-item-icon"></i> &nbsp
+                            Indisponível..</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </aside>
+
+    <div class="zsearch-modal" id="zSearchModal">
+        <div class="zsearch-container">
+            <div class="zsearch-header">
+                <span>Pesquisar</span>
+                <button onclick="closeSearch()">&times;</button>
+            </div>
+            <div class="zsearch-input-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="zSearchInput" placeholder="Eventos, Suporte..." oninput="runSearch()">
+            </div>
+            <div class="zsearch-results-area">
+                <ul id="zSearchResults" class="zsearch-list"></ul>
+            </div>
+        </div>
+    </div>
+</body>

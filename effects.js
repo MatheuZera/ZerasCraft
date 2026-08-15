@@ -29,16 +29,16 @@ function play(key, vol = 0.3) {
 // =========================================================
 
 // 1. Som 'button' no HOVER
-const HOVER_BUTTON = [".back-to-top", ".btn-primary", ".btn-outline", ".btn-hero-outline", ".znav-tab", ".mc-arrow", ".tab-btn", ".burger", ".faq-item", ".zmob-has-dropdown", ".btn-price", ".btn-hero-green", ".video-frame", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".special-link", ".btn-abrir", ".checkout-btn", ".feat-tab", ".nav-tab-btn", ".thumb-item", ".btn-toggle-text", ".btn-next-img", ".bundle-btn", ".d-thumb", ".znav-tab", ".znav-btn-outline", ".znav-icon-wrapper", ".znav-links", ".small-links", ".zmob-burger", ".zmob-close-btn", ".panel-links"];
+const HOVER_BUTTON = [".back-to-top", ".znav-mega-btn", ".btn-primary", ".btn-outline", ".btn-hero-outline", ".znav-tab", ".mc-arrow", ".tab-btn", ".burger", ".faq-item", ".zmob-has-dropdown", ".btn-price", ".btn-hero-green", ".video-frame", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".special-link", ".btn-abrir", ".checkout-btn", ".feat-tab", ".nav-tab-btn", ".thumb-item", ".btn-toggle-text", ".btn-next-img", ".bundle-btn", ".d-thumb", ".znav-tab", ".znav-btn-outline", ".znav-icon-wrapper", ".znav-links", ".small-links", ".zmob-burger", ".zmob-close-btn", ".panel-links", ".social-icons", ".z-hud-close"];
 
 // 2. Som 'button_click' no CLIQUE (Acordeões e Botões)
-const CLICK_ACTION = [".btn-outline", ".btn-sidebar", ".znav-tab", ".znav-item", ".faq-item", ".zmob-has-dropdown", ".btn-primary", ".btn-green", ".tab-btn", ".btn-price", ".btn-hero-green", ".play-btn", ".mc-arrow", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".btn-abrir", ".checkout-btn", ".feat-tab", ".thumb-item", ".d-thumb", ".mc-acc-item", ".znav-icon-wrapper", ".zmob-burger", ".zmob-close-btn", ".panel-links"];
+const CLICK_ACTION = [".btn-outline", ".znav-mega-btn", ".btn-sidebar", ".znav-tab", ".znav-item", ".faq-item", ".zmob-has-dropdown", ".btn-primary", ".btn-green", ".tab-btn", ".btn-price", ".btn-hero-green", ".play-btn", ".mc-arrow", ".acc-btn", ".w-arrow", ".mc-tab", ".h-arrow", ".btn-elite-plus", ".tip-close-btn", ".btn-abrir", ".checkout-btn", ".feat-tab", ".thumb-item", ".d-thumb", ".mc-acc-item", ".znav-icon-wrapper", ".zmob-burger", ".zmob-close-btn", ".panel-links", ".z-hud-close"];
 
 // 3. Som 'card' no HOVER
 const HOVER_CARD = [".mc-collectible-card", ".gallery-item2", ".game-card2", ".mode-card", ".mc-news-card", ".f-card", ".w-item", ".game-card-simple", ".content-item", ".link-item", ".game-card", ".collectible-unit", ".quest-card"];
 
 // 4. Som 'select' no HOVER (Links de texto)
-const HOVER_SELECT = [".znav-item-img", ".znav-banner", ".footer-col", ".mc-link-all", ".promo-box", ".link-btn-card", ".dl-card", ".testi-card", ".news-card", ".t-row-elite", ".sidebar-link", ".feature-tag", ".btn-demo ", ".dropdown-link", ".table-item", ".discord-link", ".znav-mixed-top", ".znav-btn-outline", ".small-links", ".vault-action-link", ".faq-card"];
+const HOVER_SELECT = [".znav-item-img", ".znav-banner", ".mc-link-all", ".promo-box", ".link-btn-card", ".dl-card", ".testi-card", ".news-card", ".t-row-elite", ".sidebar-link", ".feature-tag", ".btn-demo ", ".dropdown-link", ".table-item", ".discord-link", ".znav-mixed-top", ".znav-btn-outline", ".small-links", ".vault-action-link", ".faq-card", ".pages-links", ".info-links"];
 
 // =========================================================
 // SISTEMA DE ESCUTA GLOBAL
