@@ -43,6 +43,56 @@ function unlockScroll() {
    2. SISTEMA DE AUTOLOAD (nav.html) atualizado
 ========================================== */
 document.addEventListener("DOMContentLoaded", () => {
+  const loadNav = (elementId, navFileName) => {
+    const navPlaceholder = document.getElementById(elementId);
+    if (navPlaceholder) {
+      // Descobre o caminho base do projeto dinamicamente ou tenta buscar relativo à pasta atual
+      // Se a página estiver em uma subpasta, podemos usar um caminho relativo ou verificar a profundidade.
+      // Uma alternativa robusta é checar se estamos em uma subpasta olhando o pathname:
+
+      const depth = window.location.pathname.split("/").filter(Boolean).length;
+
+      // Se o seu servidor local considera a pasta "Mundo Zera's Craft" como raiz do projeto:
+      // Vamos montar o caminho relativo subindo os níveis necessários ou buscando na mesma pasta.
+
+      let pathToRoot = "";
+      // Exemplo: se houver subpastas mapeadas, ajuste aqui. Mas se os arquivos HTML das subpastas 
+      // precisam buscar os navs na raiz, o ideal é usar o caminho relativo exato ou definir uma constante.
+
+      // Tentativa direta na pasta atual e fallback para a pasta pai se falhar:
+      fetch(navFileName)
+        .then(res => {
+          if (!res.ok) {
+            // Se não achou na pasta atual, tenta subir um nível (ex: ../nav-pc.html)
+            return fetch("../" + navFileName);
+          }
+          return res;
+        })
+        .then(res => {
+          if (!res.ok) throw new Error(`Não foi possível carregar ${navFileName}`);
+          return res.text();
+        })
+        .then(html => {
+          navPlaceholder.innerHTML = html;
+
+          // --- Isso faz os scripts dentro do nav.html funcionarem ---
+          const scripts = navPlaceholder.querySelectorAll("script");
+          scripts.forEach(oldScript => {
+            const newScript = document.createElement("script");
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+          });
+        })
+        .catch(err => console.error("Erro ao carregar o menu de navegação:", err));
+    }
+  };
+
+  loadNav("nav-placeholder-pc", "nav-pc.html");
+  loadNav("nav-placeholder-mobile", "nav-mobile.html");
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   const navPlaceholder = document.getElementById("nav-placeholder");
   if (navPlaceholder) {
     fetch("nav.html")
@@ -260,122 +310,215 @@ function runSearch() {
     resultList.innerHTML += `<li><a href="${p.link}"><i class="fas fa-search"></i> ${p.name}</a></li>`;
   });
 }
+
+
+
+
+
+
+
+
+
+
 /* ============================================================================================= */
 /**
- * ZERA'S CRAFT ENGINE - MÓDULO DE DATA
- * Converte Snowflake ID em Data e anima a contagem
+ * ZERA'S CRAFT ENGINE - MÓDULO UNIFICADO DE DADOS, CONTADORES E METAS
  */
 const ZerasEngine = {
   guildID: "1390120239588577482",
   inviteCode: "GYGVBqGEwP",
 
-  async syncAll() {
+  async init() {
+    // Sincroniza a data de criação estaticamente mapeada pelo ID do Discord
+    this.syncCreationDate();
+
+    // Busca os dados da API uma única vez para todos os módulos
     try {
       const response = await fetch(
-        `https://discord.com/api/v9/invites/${this.inviteCode}?with_counts=true`,
+        `https://discord.com/api/v9/invites/${this.inviteCode}?with_counts=true`
       );
+
+      if (!response.ok) throw new Error("Erro ao buscar dados do Discord");
       const data = await response.json();
 
-      // 1. Sincroniza Membros (Online e Total) [cite: 153]
-      this.updateCounter("stat-total", data.approximate_member_count || 5000);
-      this.updateCounter("stat-online", data.approximate_presence_count || 0);
-      // Adicione o complemento como uma string no final
-      this.updateCounter(
-        "discord-count",
-        data.approximate_presence_count || 0,
-        " Membros Online agora",
-      );
+      const totalMembers = data.approximate_member_count || 5000;
+      const onlineMembers = data.approximate_presence_count || 0;
 
-      // 2. Sincroniza Data de Criação via ID (Snowflake)
-      this.syncCreationDate();
+      // 1. Atualiza elementos baseados em classe (Footer e afins)
+      this.updateCountersByClass("stat-total", totalMembers);
+      this.updateCountersByClass("stat-online", onlineMembers);
+      this.updateCountersByClass("discord-count", onlineMembers, " Membros Online agora");
+
+      // 2. Atualiza elementos específicos por ID (Status e Metas)
+      this.initStatusDisplay(totalMembers);
+      this.initGoalsDisplay(totalMembers);
+
     } catch (error) {
-      console.error("Zera's Craft: Erro de sincronização.");
+      console.warn("Zera's Craft: Usando valores padrão devido a restrição de rede/API.", error);
+
+      // Fallbacks de segurança caso a API falhe ou bloqueie (ex: abrindo via file://)
+      const fallbackTotal = 5000;
+      const fallbackOnline = 150;
+
+      this.updateCountersByClass("stat-total", fallbackTotal);
+      this.updateCountersByClass("stat-online", fallbackOnline);
+      this.updateCountersByClass("discord-count", fallbackOnline, " Membros Online agora");
+
+      this.initStatusDisplay(fallbackTotal);
+      this.initGoalsDisplay(fallbackTotal);
     }
   },
 
-  // Converte o ID do Discord para Data Real
+  // Sincroniza a data de criação do servidor (Snowflake ID)
   syncCreationDate() {
+    const el = document.getElementById("stat-date");
+    if (!el) return;
+
     const id = BigInt(this.guildID);
-    // Constante de tempo do Discord (Epoch)
     const timestamp = Number((id >> 22n) + 1420070400000n);
     const date = new Date(timestamp);
 
-    const targetDate = {
+    const target = {
       day: date.getDate(),
       month: date.getMonth() + 1,
       year: date.getFullYear(),
     };
 
-    this.animateDate("stat-date", targetDate);
-  },
-
-  // Animação de Data dd/mm/aaaa a 60fps [cite: 153]
-  animateDate(id, target) {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    let current = { day: 0, month: 0, year: 2000 };
-    const duration = 2000; // 2 segundos
+    const duration = 2000;
     const start = performance.now();
 
     const step = (now) => {
       const progress = Math.min((now - start) / duration, 1);
+      const day = Math.floor(progress * target.day);
+      const month = Math.floor(progress * target.month);
+      const year = Math.floor(2000 + progress * (target.year - 2000));
 
-      // Lógica de interpolação linear [cite: 106]
-      current.day = Math.floor(progress * target.day);
-      current.month = Math.floor(progress * target.month);
-      current.year = Math.floor(2000 + progress * (target.year - 2000));
+      el.innerText = `${String(day).padStart(2, "0")}/${String(month).padStart(2, "0")}/${year}`;
 
-      // Formatação com zeros à esquerda (Partial Update) [cite: 190]
-      const d = String(current.day).padStart(2, "0");
-      const m = String(current.month).padStart(2, "0");
-      const y = current.year;
-
-      el.innerText = `${d}/${m}/${y}`;
-
-      if (progress < 1) requestAnimationFrame(step);
-      else
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
         el.innerText = `${String(target.day).padStart(2, "0")}/${String(target.month).padStart(2, "0")}/${target.year}`;
+      }
     };
 
     requestAnimationFrame(step);
   },
 
-  // 1. Prepara o alvo e define o valor final com o complemento
-  updateCounter(id, target, suffix = "") {
-    const el = document.getElementById(id);
-    if (el) {
-      // Define o valor final no atributo para a lógica de animação [cite: 191]
-      el.setAttribute("data-target", target);
-      this.animateNumber(el, suffix);
-    }
+  // Função genérica de animação de valores numéricos
+  animateValue(obj, start, end, duration, isPercent = false, suffix = "") {
+    if (!obj) return;
+    let startTimestamp = null;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+      // Efeito suave (Ease Out)
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(easeProgress * (end - start) + start);
+
+      let prefix = isPercent && current > 100 ? "+" : "";
+
+      obj.innerText = isPercent
+        ? prefix + current + "%"
+        : current.toLocaleString("pt-BR") + suffix;
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        let finalPrefix = isPercent && end > 100 ? "+" : "";
+        obj.innerText = isPercent
+          ? finalPrefix + Math.floor(end) + "%"
+          : Math.floor(end).toLocaleString("pt-BR") + suffix;
+      }
+    };
+    window.requestAnimationFrame(step);
   },
 
-  // 2. Executa a animação suave via requestAnimationFrame
-  animateNumber(el, suffix) {
-    const target = +el.getAttribute("data-target");
+  updateCountersByClass(className, target, suffix = "") {
+    const elements = document.querySelectorAll(`.${className}`);
+    if (elements.length === 0) return;
 
-    const update = () => {
-      // Remove caracteres não numéricos para calcular o progresso [cite: 191]
-      const current = +el.innerText.replace(/\D/g, "") || 0;
-      const increment = Math.ceil(target / 100);
+    elements.forEach((el) => {
+      this.animateNumberClass(el, target, suffix);
+    });
+  },
 
-      if (current < target) {
-        const nextValue = Math.min(target, current + increment);
-        // Atualização parcial: número formatado + complemento [cite: 191]
-        el.innerText = `${nextValue.toLocaleString()}${suffix}`;
-        requestAnimationFrame(update);
+  animateNumberClass(el, target, suffix) {
+    const duration = 1500;
+    const start = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(easeProgress * target);
+
+      el.innerText = `${current.toLocaleString("pt-BR")}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
       } else {
-        // Garante que o valor final exato seja exibido com o sufixo [cite: 191]
-        el.innerText = `${target.toLocaleString()}${suffix}`;
+        el.innerText = `${target.toLocaleString("pt-BR")}${suffix}`;
       }
     };
 
-    requestAnimationFrame(update);
+    requestAnimationFrame(step);
   },
+
+  initStatusDisplay(totalMembers) {
+    const statusCountEl = document.getElementById("new-status-count");
+    if (statusCountEl) {
+      this.animateValue(statusCountEl, 0, totalMembers, 1500, false, " Membros Totais");
+    }
+  },
+
+  initGoalsDisplay(totalMembers) {
+    const membersCountEl = document.getElementById("new-members-count");
+    const objectiveEl = document.getElementById("new-objective-val");
+    const progressBar = document.getElementById("new-goal-fill");
+    const progressText = document.getElementById("new-percent-text");
+
+    if (membersCountEl) {
+      this.animateValue(membersCountEl, 0, totalMembers, 1500);
+    }
+
+    if (objectiveEl && progressBar && progressText) {
+      let rawText = objectiveEl.textContent || "1";
+      let objectiveVal = parseFloat(rawText.replace(/\D/g, "")) || 1;
+
+      let realPercentage = (totalMembers / objectiveVal) * 100;
+      if (realPercentage < 0) realPercentage = 0;
+
+      let visualPercentage = realPercentage > 100 ? 100 : realPercentage;
+
+      setTimeout(() => {
+        progressBar.style.width = visualPercentage + "%";
+        this.animateValue(progressText, 0, realPercentage, 1500, true);
+      }, 300);
+    }
+  }
 };
 
-window.addEventListener("DOMContentLoaded", () => ZerasEngine.syncAll());
+// Inicialização segura quando o DOM estiver pronto
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", () => ZerasEngine.init());
+} else {
+  ZerasEngine.init();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ============================================================================================= */
 // SISTEMA DO PLAYER DE MÚSICA DESAPARECER
 // SE ESTIVER NO FIM DA PÁGINA
@@ -714,6 +857,70 @@ function moveWorld(direction) {
     }, animDuration);
   }
 }
+
+/* ==========================================
+   CONTROLE DO LIGHTBOX DA GALERIA
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Cria dinamicamente a estrutura HTML do Lightbox no final do body
+  const lightboxHTML = `
+        <div id="gallery-lightbox" class="gallery-lightbox">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-img" src="" alt="Ampliação da Imagem">
+        </div>
+    `;
+
+  // Insere o modal apenas se ele já não existir na página
+  if (!document.getElementById("gallery-lightbox")) {
+    document.body.insertAdjacentHTML("beforeend", lightboxHTML);
+  }
+
+  const lightbox = document.getElementById("gallery-lightbox");
+  const lightboxImg = lightbox.querySelector(".lightbox-img");
+  const closeBtn = lightbox.querySelector(".lightbox-close");
+  const galleryItems = document.querySelectorAll(".gallery-item");
+
+  // 2. Abre o lightbox ao clicar em qualquer card da galeria
+  galleryItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const img = item.querySelector("img");
+      if (img) {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+        document.body.classList.add("z-lock-scroll"); // Trava a rolagem da página (usa sua classe do :root)
+      }
+    });
+  });
+
+  // 3. Função para fechar o lightbox
+  const closeLightbox = () => {
+    lightbox.classList.remove("active");
+    document.body.classList.remove("z-lock-scroll");
+
+    // Limpa o src após a animação para evitar flash da imagem antiga ao reabrir
+    setTimeout(() => {
+      if (!lightbox.classList.contains("active")) {
+        lightboxImg.src = "";
+      }
+    }, 300);
+  };
+
+  // Eventos de fechamento (Botão X, clique no fundo escuro ou tecla ESC)
+  closeBtn.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.classList.contains("active")) {
+      closeLightbox();
+    }
+  });
+});
 /* ============================================================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const bundleBtn = document.querySelector(".bundle-btn");
@@ -1492,50 +1699,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 /* ============================================================================================= */
 /* ==========================================
-   SISTEMA DE PLAYER DE VÍDEO INTELIGENTE
-========================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  const videoFrames = document.querySelectorAll(".video-frame");
-
-  videoFrames.forEach((frame) => {
-    frame.addEventListener("click", function () {
-      // Verifica se o vídeo já está tocando
-      if (this.classList.contains("playing")) return;
-
-      // Pega o ID do vídeo do atributo HTML
-      const videoId = this.getAttribute("data-video-id");
-
-      if (videoId) {
-        this.classList.add("playing");
-
-        // Cria o iframe do YouTube dinamicamente
-        const iframe = document.createElement("iframe");
-        // Adiciona autoplay e oculta elementos desnecessários do Youtube
-        iframe.setAttribute(
-          "src",
-          `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0&modestbranding=1`,
-        );
-        iframe.setAttribute("frameborder", "0");
-        iframe.setAttribute(
-          "allow",
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-        );
-        iframe.setAttribute("allowfullscreen", "true");
-
-        // Limpa a miniatura/botão e insere o vídeo tocando
-        this.innerHTML = "";
-        this.appendChild(iframe);
-      }
-    });
-  });
-});
-
-function toggleAccordion(button) {
-  // Alterna a classe 'active' no botão que foi clicado
-  button.classList.toggle("active");
-}
-/* ============================================================================================= */
-/* ==========================================
    MÓDULO: STATUS DO DISCORD & METAS (+100%)
 ========================================== */
 document.addEventListener("DOMContentLoaded", () => {
@@ -1659,7 +1822,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Dá o pontapé inicial
   fetchDiscordData();
-});
+}); o
 /* ============================================================================================= */
 /* ==========================================
    CONTROLE DO MODAL
@@ -1721,7 +1884,6 @@ function toggleDropdown(element) {
     element.classList.toggle("active");
   }
 }
-
 // Fecha o dropdown se o usuário tocar fora dele
 window.addEventListener("click", function (event) {
   if (!event.target.closest(".dropdown")) {
