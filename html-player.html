@@ -1,0 +1,25 @@
+<!-- ==========================================
+   PLAYER MINIMALISTA: SOMENTE A JUKEBOX
+========================================== -->
+<div class="minecraft-jukebox-wrapper">
+  <audio id="backgroundAudio" preload="auto"></audio>
+
+  <!-- Central Message (UI Compacta com estados customizados) -->
+  <div id="centralMessage" class="central-message">
+    <div id="msgIconWrapper" class="msg-icon-mini">
+      <i id="msgIconType" class="fas fa-music"></i>
+    </div>
+    <div class="msg-text-group">
+      <span id="messageTitle" class="msg-title">Carregando...</span>
+      <span id="messageDuration" class="msg-duration">00:00</span>
+    </div>
+  </div>
+
+  <!-- Container de Partículas e Jukebox -->
+  <div class="jukebox-item-container">
+    <div id="notesContainer" class="notes-container"></div>
+    <div id="jukeboxTrigger" class="jukebox-block" title="1x: Play/Pause | 2x: Próxima | Segurar: Modo">
+      <img src="assets/images/geral/jukebox.webp" alt="Jukebox" class="jukebox-img">
+    </div>
+  </div>
+</div>
