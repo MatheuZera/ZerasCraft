@@ -756,7 +756,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 document.addEventListener("DOMContentLoaded", () => {
   const statValues = document.querySelectorAll(".z-stat-value");
 
@@ -778,10 +781,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-
-
-
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 document.addEventListener("DOMContentLoaded", function () {
   const track = document.getElementById("mpTrack");
   const prevBtn = document.getElementById("mpPrevBtn");
@@ -849,8 +852,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
-
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 document.addEventListener("DOMContentLoaded", function () {
   const track = document.getElementById("colTrack");
   const prevBtn = document.getElementById("colPrevBtn");
@@ -916,7 +921,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 document.addEventListener("DOMContentLoaded", function () {
   const thumbs = document.querySelectorAll(".hero-thumb");
   const heroBgImg = document.getElementById("heroBgImg");
@@ -959,7 +967,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 document.addEventListener("DOMContentLoaded", function () {
   const yearButtons = document.querySelectorAll(".year-btn");
   const timelineGrid = document.getElementById("timelineGrid");
@@ -1102,7 +1113,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 document.addEventListener("DOMContentLoaded", function () {
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabContents = document.querySelectorAll(".realms-tab-content");
@@ -1146,6 +1160,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 document.addEventListener("DOMContentLoaded", function () {
   const faqItems = document.querySelectorAll(".faq-item");
 
@@ -1194,6 +1212,10 @@ function toggleMinecraftAccordion(headerElement) {
   }
 }
 
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
 document.addEventListener("DOMContentLoaded", function () {
   const pauseButton = document.querySelector(".pause-btn");
 
@@ -1383,4 +1405,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Inicialização
   updateView();
+});
+
+
+/* ============================================================================================= */
+/* ==========================================
+   ELEMENTO
+========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const tabButtons = document.querySelectorAll(".guide-tab-btn");
+    const tabPanels = document.querySelectorAll(".guide-panel");
+
+    tabButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Remove a classe 'active' de todos os botões e painéis
+            tabButtons.forEach(btn => btn.classList.remove("active"));
+            tabPanels.forEach(panel => panel.classList.remove("active"));
+
+            // Adiciona a classe 'active' no botão clicado
+            button.classList.add("active");
+
+            // Pega o ID alvo através do data-attribute e ativa o painel correspondente
+            const targetPanelId = button.getAttribute("data-tab");
+            const targetPanel = document.getElementById(targetPanelId);
+            
+            if (targetPanel) {
+                targetPanel.classList.add("active");
+            }
+        });
+    });
 });

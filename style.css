@@ -169,15 +169,6 @@
 }
 
 /* ============================================================================================= */
-/* --- Variáveis e Configurações Globais --- */
-:root {
-  --verde-mc: #55ad4b;
-  --glass-bg: rgba(10, 10, 10, 0.85);
-  --dark-bg: #0c0c0c;
-  --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  --border-light: rgba(255, 255, 255, 0.1);
-}
-
 /* --- RESET BÁSICO --- */
 * {
   margin: 0;
@@ -204,6 +195,11 @@ body {
   --zc-bg-tab: rgba(19, 19, 19, 0.99);
   /* Vidro mínimo: 96% de opacidade */
   --zc-bg-hover: rgba(255, 255, 255, 0.05);
+  --verde-mc: #55ad4b;
+  --glass-bg: rgba(10, 10, 10, 0.85);
+  --dark-bg: #0c0c0c;
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --border-light: rgba(255, 255, 255, 0.1);
 
   /* Cores de Destaque - Agora Neutras (Branco e Cinza) */
   --zc-accent: #ffffff;
@@ -23241,5 +23237,130 @@ ul {
 @media (max-width: 768px) {
   .guidelines-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================
+   SEÇÃO COM BOTÕES E CONTEÚDOS ABAIXO
+   ========================================== */
+.guide-section {
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--zc-text);
+  background-color: var(--bg-dark);
+}
+
+.guide-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.guide-box {
+  background: var(--zc-bg-panel);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  border: 1px solid var(--zc-border);
+  backdrop-filter: blur(10px);
+}
+
+/* Cabeçalho dos Botões */
+.guide-tabs-header {
+  display: flex;
+  background: var(--zc-bg-tab);
+  border-bottom: 1px solid var(--zc-border);
+}
+
+.guide-tab-btn {
+  flex: 1;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  color: var(--zc-muted);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.guide-tab-btn:hover {
+  color: var(--zc-text);
+  background: var(--zc-bg-hover);
+}
+
+.guide-tab-btn.active {
+  color: var(--zc-accent);
+  background: var(--zc-accent-soft);
+  border-bottom: 2px solid var(--zc-accent);
+}
+
+/* Corpo e Painéis */
+.guide-body {
+  padding: 30px;
+}
+
+.guide-panel {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.guide-panel.active {
+  display: block;
+}
+
+/* Tipografia e Elementos internos */
+.guide-panel h3 {
+  color: var(--zc-text);
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.guide-panel p {
+  line-height: 1.6;
+  color: var(--zc-muted);
+  font-size: 0.95rem;
+}
+
+.guide-panel hr {
+  border: none;
+  border-top: 1px solid var(--zc-border);
+  margin: 20px 0;
+}
+
+/* Links de Download (Estilo Neutro) */
+.guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--zc-text);
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1px solid var(--zc-border);
+  transition: background 0.2s ease, transform 0.1s ease;
+  margin-top: 5px;
+}
+
+.guide-link:hover {
+  background: var(--zc-accent-soft);
+  transform: translateY(-1px);
+  border-color: var(--zc-accent);
+}
+
+/* Animação suave para as abas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
