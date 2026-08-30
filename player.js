@@ -1,5 +1,5 @@
 /* ===================================================================
-   LÓGICA: CAMINHOS DINÂMICOS (ÁUDIOS E IMAGEM WEBP), PERSISTÊNCIA & ERROS
+   LÓGICA: PLAYER MINIMALISTA COM TEMPO, PROTOCOLOS E PERSISTÊNCIA
 =================================================================== */
 window.initJukeboxPlayer = function () {
   const backgroundAudio = document.getElementById("backgroundAudio");
@@ -8,13 +8,13 @@ window.initJukeboxPlayer = function () {
   const notesContainer = document.getElementById("notesContainer");
   const centralMessage = document.getElementById("centralMessage");
   const messageTitle = document.getElementById("messageTitle");
+  const messageStatus = document.getElementById("messageStatus");
   const messageDuration = document.getElementById("messageDuration");
   const msgIconWrapper = document.getElementById("msgIconWrapper");
   const msgIconType = document.getElementById("msgIconType");
 
   if (!backgroundAudio || !jukeboxTrigger) return;
 
-  // Detecção automática inteligente do caminho base pelo script DOM
   const getScriptBasePath = () => {
     try {
       const scripts = document.querySelectorAll('script');
@@ -32,7 +32,6 @@ window.initJukeboxPlayer = function () {
 
   const basePath = getScriptBasePath();
 
-  // Corrige o caminho da imagem WebP da Jukebox dinamicamente (raiz ou subpastas)
   if (jukeboxImg) {
     jukeboxImg.src = basePath + "assets/images/geral/jukebox.webp";
   }
@@ -150,7 +149,6 @@ window.initJukeboxPlayer = function () {
         { icon: 'fas fa-water', color: '#03a9f4', playlist: 'Water', title: 'Shuniji', src: 'assets/audios/musics/water/Shuniji.mp3' }
     ];
 
-  // Restaura estados salvos no localStorage (Persistência entre páginas)
   let currentMusicIndex = parseInt(localStorage.getItem('jukebox_index')) || 0;
   let currentMode = localStorage.getItem('jukebox_mode') || 'sequencial';
   let savedTime = parseFloat(localStorage.getItem('jukebox_time')) || 0;
@@ -160,6 +158,11 @@ window.initJukeboxPlayer = function () {
   let messageTimeout = null;
   let retryCount = 0;
   const maxRetries = 2;
+
+  // Controle de transição da mensagem ao pular faixa
+  let isSkipping = false;
+  let skipStartTime = 0;
+  let skipDelayTimeout = null;
 
   let audioCtx = null;
   let analyser = null;
@@ -176,54 +179,68 @@ window.initJukeboxPlayer = function () {
   };
 
   const formatTime = (seconds) => {
-    if (isNaN(seconds)) return "00:00";
+    if (isNaN(seconds) || seconds < 0) return "00m:00s";
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
-    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    return `${String(mins).padStart(2, '0')}m:${String(secs).padStart(2, '0')}s`;
   };
 
-  const showMessage = (title, maxTimeStr, type = 'tocando', duration = 3500) => {
+  const getFormattedTimePair = (curr, dur) => {
+    return `${formatTime(curr)} / ${formatTime(dur)}`;
+  };
+
+  const showMessage = (title, type = 'tocando', duration = 3500) => {
     if (!centralMessage) return;
 
     if (messageTitle) messageTitle.textContent = title;
-    if (messageDuration) messageDuration.textContent = maxTimeStr;
 
     let iconClass = "fa-music";
     let themeColor = "#1db954";
+    let statusLabel = "Tocando";
 
     switch (type) {
       case 'tocando':
         iconClass = "fa-play";
         themeColor = "#1db954";
+        statusLabel = "Tocando";
         break;
       case 'pausado':
         iconClass = "fa-pause";
         themeColor = "#ffa500";
+        statusLabel = "Pausado";
         break;
       case 'pulando':
         iconClass = "fa-forward";
-        themeColor = "#3498db";
+        themeColor = "#f1c40f";
+        statusLabel = "Pulando";
         break;
       case 'modo':
         iconClass = modesConfig[currentMode]?.icon || "fas fa-sync-alt";
         themeColor = "#9b59b6";
+        statusLabel = "Modo";
         break;
       case 'instrucoes':
         iconClass = "fa-circle-info";
         themeColor = "#2ecc71";
+        statusLabel = "Info";
         break;
       case 'erro':
         iconClass = "fa-triangle-exclamation";
         themeColor = "#e74c3c";
+        statusLabel = "Erro";
         break;
-      default:
-        iconClass = "fa-music";
-        themeColor = "#1db954";
     }
 
+    if (messageStatus) {
+      messageStatus.textContent = statusLabel;
+      messageStatus.style.backgroundColor = themeColor;
+    }
     if (msgIconType) msgIconType.className = `fas ${iconClass}`;
     if (msgIconWrapper) msgIconWrapper.style.backgroundColor = themeColor;
-    if (messageDuration) messageDuration.style.color = themeColor;
+    if (messageDuration) {
+      messageDuration.style.color = themeColor;
+      messageDuration.textContent = getFormattedTimePair(backgroundAudio.currentTime, backgroundAudio.duration);
+    }
 
     centralMessage.classList.add('show');
     clearTimeout(messageTimeout);
@@ -257,26 +274,15 @@ window.initJukeboxPlayer = function () {
 
   const getAudioIntensity = () => {
     const music = playlist[currentMusicIndex];
-
-    if (music.title === "Calm 1" && backgroundAudio.currentTime >= 146) {
-      return 60;
-    }
-
+    if (music.title === "Calm 1" && backgroundAudio.currentTime >= 146) return 60;
     if (!analyser) return 55;
     const dataArray = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(dataArray);
-
     let sum = 0;
-    const length = dataArray.length;
-    for (let i = 0; i < length; i++) {
-      sum += dataArray[i];
-    }
-    let avg = sum / length;
-
+    for (let i = 0; i < dataArray.length; i++) { sum += dataArray[i]; }
+    let avg = sum / dataArray.length;
     if (avg < 1) return 0;
-
-    let normalized = Math.min(100, Math.round((avg / 15) * 100));
-    return Math.max(25, normalized);
+    return Math.max(25, Math.min(100, Math.round((avg / 15) * 100)));
   };
 
   const getColorByIntensity = (val) => {
@@ -288,32 +294,20 @@ window.initJukeboxPlayer = function () {
       { pos: 85, color: [255, 69, 0] },
       { pos: 100, color: [138, 43, 226] }
     ];
-
-    if (val <= 0) return 'rgb(0, 255, 0)';
-    if (val >= 100) return 'rgb(138, 43, 226)';
-
-    let lower = stops[0];
-    let upper = stops[1];
-
+    let lower = stops[0], upper = stops[1];
     for (let i = 0; i < stops.length - 1; i++) {
       if (val >= stops[i].pos && val <= stops[i + 1].pos) {
-        lower = stops[i];
-        upper = stops[i + 1];
-        break;
+        lower = stops[i]; upper = stops[i + 1]; break;
       }
     }
-
-    const range = upper.pos - lower.pos;
-    const t = range === 0 ? 0 : (val - lower.pos) / range;
-
+    const t = (upper.pos - lower.pos) === 0 ? 0 : (val - lower.pos) / (upper.pos - lower.pos);
     const r = Math.round(lower.color[0] + t * (upper.color[0] - lower.color[0]));
     const g = Math.round(lower.color[1] + t * (upper.color[1] - lower.color[1]));
     const b = Math.round(lower.color[2] + t * (upper.color[2] - lower.color[2]));
-
     return `rgb(${r}, ${g}, ${b})`;
   };
 
-  const loadMusic = (index, autoPlay = false, isSkipping = false, startAtTime = 0) => {
+  const loadMusic = (index, autoPlay = false, startAtTime = 0) => {
     currentMusicIndex = index;
     const music = playlist[currentMusicIndex];
     backgroundAudio.src = music.src;
@@ -323,94 +317,24 @@ window.initJukeboxPlayer = function () {
       if (startAtTime > 0 && startAtTime < backgroundAudio.duration) {
         backgroundAudio.currentTime = startAtTime;
       }
+      if (centralMessage.classList.contains('show')) {
+        messageDuration.textContent = getFormattedTimePair(backgroundAudio.currentTime, backgroundAudio.duration);
+      }
     };
 
     if (autoPlay) {
       backgroundAudio.play().then(() => {
         retryCount = 0;
-        setTimeout(() => {
-          const actionType = isSkipping ? 'pulando' : 'tocando';
-          const titleLabel = isSkipping ? `Pulando: ${music.title}` : music.title;
-          showMessage(titleLabel, `Max: ${formatTime(backgroundAudio.duration)}`, actionType, 3500);
-        }, 200);
       }).catch((err) => {
-        console.warn("Autoplay bloqueado pelo navegador:", err);
+        console.warn("Autoplay bloqueado:", err);
       });
     }
   };
 
-  backgroundAudio.onerror = () => {
-    const error = backgroundAudio.error;
-    let errorDescription = "Erro desconhecido";
-
-    if (error) {
-      switch (error.code) {
-        case 1: errorDescription = "Carregamento abortado"; break;
-        case 2: errorDescription = "Erro de rede"; break;
-        case 3: errorDescription = "Erro de decodificação"; break;
-        case 4: errorDescription = "Formato não suportado"; break;
-      }
-    }
-
-    if (retryCount < maxRetries) {
-      retryCount++;
-      showMessage(`Tentativa ${retryCount}/${maxRetries}...`, "Reconectando", "erro", 3000);
-      setTimeout(() => {
-        backgroundAudio.load();
-        backgroundAudio.play().catch(() => { });
-      }, 2000);
-    } else {
-      retryCount = 0;
-
-      let nextIndex;
-      if (currentMode === 'aleatorio') {
-        do {
-          nextIndex = Math.floor(Math.random() * playlist.length);
-        } while (nextIndex === currentMusicIndex && playlist.length > 1);
-      } else {
-        nextIndex = (currentMusicIndex + 1) % playlist.length;
-      }
-
-      const nextMusicTitle = playlist[nextIndex].title;
-      showMessage(`Pulando para: ${nextMusicTitle}`, errorDescription, "pulando", 4000);
-
-      setTimeout(() => {
-        loadMusic(nextIndex, true, true, 0);
-      }, 3500);
-    }
-  };
-
-  const spawnNote = () => {
-    if (backgroundAudio.paused) return;
-
-    const intensity = getAudioIntensity();
-    if (intensity === 0) return;
-
-    const note = document.createElement("div");
-    note.className = "floating-note";
-
-    const symbols = ["♩", "♪", "♫", "♬"];
-    note.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-
-    note.style.color = getColorByIntensity(intensity);
-
-    const scaleVal = 0.7 + (intensity / 130);
-    const randX = (Math.random() - 0.5) * 60 + "px";
-    const randRot = (Math.random() - 0.5) * 60 + "deg";
-
-    note.style.setProperty("--rand-x", randX);
-    note.style.setProperty("--rand-rot", randRot);
-    note.style.setProperty("--scale-val", scaleVal);
-
-    if (notesContainer) {
-      notesContainer.appendChild(note);
-    }
-
-    setTimeout(() => { note.remove(); }, 1200);
-  };
-
   const handleNext = () => {
     retryCount = 0;
+    clearTimeout(skipDelayTimeout);
+
     let nextIndex;
     if (currentMode === 'aleatorio') {
       do {
@@ -419,44 +343,75 @@ window.initJukeboxPlayer = function () {
     } else {
       nextIndex = (currentMusicIndex + 1) % playlist.length;
     }
-    loadMusic(nextIndex, true, true, 0);
+
+    const nextMusic = playlist[nextIndex];
+
+    // Registra início do pulo e exibe o estado 'Pulando'
+    isSkipping = true;
+    skipStartTime = Date.now();
+    showMessage(`[${nextMusic.playlist}] ${nextMusic.title}`, 'pulando', 0);
+
+    loadMusic(nextIndex, true, 0);
+  };
+
+  backgroundAudio.onerror = () => {
+    if (retryCount < maxRetries) {
+      retryCount++;
+      showMessage(`Tentativa ${retryCount}/${maxRetries}`, "erro", 3000);
+      setTimeout(() => { backgroundAudio.load(); backgroundAudio.play().catch(() => { }); }, 2000);
+    } else {
+      retryCount = 0;
+      handleNext();
+    }
+  };
+
+  const spawnNote = () => {
+    if (backgroundAudio.paused) return;
+    const intensity = getAudioIntensity();
+    if (intensity === 0) return;
+
+    const note = document.createElement("div");
+    note.className = "floating-note";
+    const symbols = ["♩", "♪", "♫", "♬"];
+    note.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+    note.style.color = getColorByIntensity(intensity);
+
+    const scaleVal = 0.7 + (intensity / 130);
+    note.style.setProperty("--rand-x", (Math.random() - 0.5) * 60 + "px");
+    note.style.setProperty("--rand-rot", (Math.random() - 0.5) * 60 + "deg");
+    note.style.setProperty("--scale-val", scaleVal);
+
+    if (notesContainer) notesContainer.appendChild(note);
+    setTimeout(() => { note.remove(); }, 1200);
   };
 
   const togglePlayPause = () => {
     initAudioAnalyser();
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
 
     const music = playlist[currentMusicIndex];
     if (backgroundAudio.paused) {
       backgroundAudio.play().then(() => {
-        showMessage(music.title, `Max: ${formatTime(backgroundAudio.duration)}`, "tocando", 3500);
+        showMessage(`[${music.playlist}] ${music.title}`, "tocando", 3500);
       }).catch(() => {
-        showMessage("Erro ao iniciar", "00:00", "erro", 3000);
+        showMessage("Erro ao iniciar", "erro", 3000);
       });
     } else {
       backgroundAudio.pause();
-      showMessage("Pausado", `Max: ${formatTime(backgroundAudio.duration)}`, "pausado", 3000);
+      showMessage(`[${music.playlist}] ${music.title}`, "pausado", 3000);
     }
   };
 
   const cycleMode = () => {
     const modeKeys = Object.keys(modesConfig);
-    const nextModeIndex = (modeKeys.indexOf(currentMode) + 1) % modeKeys.length;
-    currentMode = modeKeys[nextModeIndex];
-
-    showMessage(`Modo: ${modesConfig[currentMode].text}`, `Max: ${formatTime(backgroundAudio.duration)}`, "modo", 3500);
+    currentMode = modeKeys[(modeKeys.indexOf(currentMode) + 1) % modeKeys.length];
+    showMessage(`Modo: ${modesConfig[currentMode].text}`, "modo", 3500);
   };
 
   jukeboxTrigger.onmousedown = jukeboxTrigger.ontouchstart = (e) => {
     e.preventDefault();
     isHolding = false;
-
-    holdTimeout = setTimeout(() => {
-      isHolding = true;
-      cycleMode();
-    }, 600);
+    holdTimeout = setTimeout(() => { isHolding = true; cycleMode(); }, 600);
   };
 
   jukeboxTrigger.onmouseup = jukeboxTrigger.ontouchend = (e) => {
@@ -466,12 +421,8 @@ window.initJukeboxPlayer = function () {
 
   jukeboxTrigger.onclick = (e) => {
     if (isHolding) return;
-
     if (clickTimeout === null) {
-      clickTimeout = setTimeout(() => {
-        clickTimeout = null;
-        togglePlayPause();
-      }, 250);
+      clickTimeout = setTimeout(() => { clickTimeout = null; togglePlayPause(); }, 250);
     } else {
       clearTimeout(clickTimeout);
       clickTimeout = null;
@@ -479,10 +430,38 @@ window.initJukeboxPlayer = function () {
     }
   };
 
+  backgroundAudio.ontimeupdate = () => {
+    if (isNaN(backgroundAudio.duration)) return;
+
+    const currentTime = backgroundAudio.currentTime;
+    const duration = backgroundAudio.duration;
+    const progress = (currentTime / duration) * 100;
+
+    jukeboxTrigger.style.setProperty('--timer-progress', `${progress}%`);
+
+    if (centralMessage.classList.contains('show')) {
+      messageDuration.textContent = getFormattedTimePair(currentTime, duration);
+    }
+  };
+
   backgroundAudio.onplaying = () => {
     initAudioAnalyser();
-    if (!noteInterval) {
-      noteInterval = setInterval(spawnNote, 500);
+    if (!noteInterval) noteInterval = setInterval(spawnNote, 500);
+
+    const activeMusic = playlist[currentMusicIndex];
+
+    // Garante que o estado 'Pulando' fique visível por exatamente 1 segundo (1000ms) antes de mudar para 'Tocando'
+    if (isSkipping) {
+      const elapsed = Date.now() - skipStartTime;
+      const remainingTime = Math.max(0, 1000 - elapsed);
+
+      clearTimeout(skipDelayTimeout);
+      skipDelayTimeout = setTimeout(() => {
+        isSkipping = false;
+        showMessage(`[${activeMusic.playlist}] ${activeMusic.title}`, 'tocando', 3500);
+      }, remainingTime);
+    } else {
+      showMessage(`[${activeMusic.playlist}] ${activeMusic.title}`, 'tocando', 3500);
     }
   };
 
@@ -507,9 +486,14 @@ window.initJukeboxPlayer = function () {
     localStorage.setItem('jukebox_playing', !backgroundAudio.paused);
   });
 
-  loadMusic(currentMusicIndex, wasPlaying, false, savedTime);
+  loadMusic(currentMusicIndex, wasPlaying, savedTime);
 
   setTimeout(() => {
-    showMessage("1x: Play/Pause | 2x: Próxima | Seg.: Modo", "Jukebox Pronta", "instrucoes", 4500);
+    const activeMusic = playlist[currentMusicIndex];
+    showMessage(`[${activeMusic.playlist}] ${activeMusic.title}`, "instrucoes", 4000);
   }, 800);
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.initJukeboxPlayer();
+});

@@ -9,8 +9,9 @@
 
     <!-- Fontes e Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -36,8 +37,76 @@
             height: 100vh;
         }
 
+        /* --- BARRA SUPERIOR (ESTILO BEDROCK) --- */
+        .top-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 24px 30px;
+            z-index: 100;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .bedrock-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #272733;
+            border: 2px solid #1a1a24;
+            border-top: 2px solid #4a4a5e;
+            border-left: 2px solid #4a4a5e;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.1s;
+            text-decoration: none;
+            height: 40px;
+        }
+
+        .bedrock-btn:hover {
+            filter: brightness(1.15);
+        }
+
+        .bedrock-btn:active {
+            transform: translateY(2px);
+        }
+
+        .btn-icon-box {
+            width: 36px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .help-icon {
+            background: #6366f1;
+        }
+
+        .login-icon {
+            background: #10b981;
+        }
+
+        .btn-text {
+            padding: 0 14px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
         .minecraft-scene {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100vw;
             height: 100vh;
             background: var(--bg-color);
@@ -47,12 +116,46 @@
             overflow: hidden;
         }
 
-        /* --- CREEPER ACTOR (TRAJETO E ESCALA PROGRESSIVA) --- */
+        /* --- TELA DE FLASHBANG DA EXPLOSÃO --- */
+        .flash-bang {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #fff;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            animation: flash var(--timing) ease-out infinite;
+        }
+
+        @keyframes flash {
+
+            0%,
+            70.9% {
+                opacity: 0;
+            }
+
+            71% {
+                opacity: 1;
+            }
+
+            76%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* --- CREEPER ACTOR --- */
         .creeper-actor {
             position: absolute;
+            top: 50%;
+            left: 50%;
             width: 64px;
             height: 128px;
             z-index: 10;
+            transform: translate(-50%, -50%);
             animation: master-timeline var(--timing) cubic-bezier(0.25, 1, 0.5, 1) infinite;
         }
 
@@ -64,13 +167,34 @@
             filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
         }
 
-        /* --- MEMBROS --- */
         .c-head {
             width: 64px;
             height: 64px;
             background: var(--c-green);
             position: relative;
             z-index: 5;
+            animation: head-turn var(--timing) steps(1) infinite;
+        }
+
+        @keyframes head-turn {
+
+            0%,
+            33% {
+                transform: rotate(0deg);
+            }
+
+            34% {
+                transform: rotate(-10deg);
+            }
+
+            37% {
+                transform: rotate(10deg);
+            }
+
+            40%,
+            100% {
+                transform: rotate(0deg);
+            }
         }
 
         .c-body {
@@ -127,7 +251,7 @@
             65%,
             67%,
             69% {
-                opacity: 0.7;
+                opacity: 0.8;
             }
 
             50%,
@@ -154,82 +278,414 @@
             }
         }
 
-        /* --- CAMINHADA --- */
+        /* --- MOVIMENTO INTENSO DOS PÉS --- */
         .l-front,
         .r-back {
-            animation: walk-8bit 0.35s steps(2) infinite, leg-stopper var(--timing) steps(1) infinite;
+            animation: walk-1 var(--timing) infinite;
         }
 
         .r-front,
         .l-back {
-            animation: walk-8bit 0.35s steps(2) infinite reverse, leg-stopper var(--timing) steps(1) infinite;
+            animation: walk-2 var(--timing) infinite;
         }
 
-        @keyframes walk-8bit {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes leg-stopper {
+        @keyframes walk-1 {
 
             0%,
-            69.9% {
-                animation-play-state: running;
+            1.9% {
+                transform: translateY(0);
             }
 
-            70%,
+            2%,
+            3.9% {
+                transform: translateY(-5px);
+            }
+
+            4%,
+            5.9% {
+                transform: translateY(0);
+            }
+
+            6%,
+            7.9% {
+                transform: translateY(-5px);
+            }
+
+            8%,
+            9.9% {
+                transform: translateY(0);
+            }
+
+            10%,
+            11.9% {
+                transform: translateY(-5px);
+            }
+
+            12%,
+            13.9% {
+                transform: translateY(0);
+            }
+
+            14%,
+            15.9% {
+                transform: translateY(-5px);
+            }
+
+            16%,
+            17.9% {
+                transform: translateY(0);
+            }
+
+            18%,
+            19.9% {
+                transform: translateY(-5px);
+            }
+
+            20%,
+            21.9% {
+                transform: translateY(0);
+            }
+
+            22%,
+            23.9% {
+                transform: translateY(-5px);
+            }
+
+            24%,
+            25.9% {
+                transform: translateY(0);
+            }
+
+            26%,
+            27.9% {
+                transform: translateY(-5px);
+            }
+
+            28%,
+            33% {
+                transform: translateY(0);
+            }
+
+            /* Para no meio */
+
+            33.1%,
+            42% {
+                transform: translateY(0);
+            }
+
+            /* Pausa no susto */
+
+            /* Retomada intensa com os pés correndo no avanço */
+            43%,
+            44.9% {
+                transform: translateY(-6px);
+            }
+
+            45%,
+            46.9% {
+                transform: translateY(0);
+            }
+
+            47%,
+            48.9% {
+                transform: translateY(-6px);
+            }
+
+            49%,
+            50.9% {
+                transform: translateY(0);
+            }
+
+            51%,
+            52.9% {
+                transform: translateY(-6px);
+            }
+
+            53%,
+            54.9% {
+                transform: translateY(0);
+            }
+
+            55%,
+            56.9% {
+                transform: translateY(-6px);
+            }
+
+            57%,
+            58.9% {
+                transform: translateY(0);
+            }
+
+            59%,
+            60.9% {
+                transform: translateY(-6px);
+            }
+
+            61%,
+            62.9% {
+                transform: translateY(0);
+            }
+
+            63%,
+            64.9% {
+                transform: translateY(-6px);
+            }
+
+            65%,
+            66.9% {
+                transform: translateY(0);
+            }
+
+            67%,
+            68.9% {
+                transform: translateY(-6px);
+            }
+
+            69%,
             100% {
-                animation-play-state: paused;
                 transform: translateY(0);
             }
         }
 
-        /* --- TIMELINE MESTRA DO CREEPER --- */
+        @keyframes walk-2 {
+
+            0%,
+            1.9% {
+                transform: translateY(-5px);
+            }
+
+            2%,
+            3.9% {
+                transform: translateY(0);
+            }
+
+            4%,
+            5.9% {
+                transform: translateY(-5px);
+            }
+
+            6%,
+            7.9% {
+                transform: translateY(0);
+            }
+
+            8%,
+            9.9% {
+                transform: translateY(-5px);
+            }
+
+            10%,
+            11.9% {
+                transform: translateY(0);
+            }
+
+            12%,
+            13.9% {
+                transform: translateY(-5px);
+            }
+
+            14%,
+            15.9% {
+                transform: translateY(0);
+            }
+
+            16%,
+            17.9% {
+                transform: translateY(-5px);
+            }
+
+            18%,
+            19.9% {
+                transform: translateY(0);
+            }
+
+            20%,
+            21.9% {
+                transform: translateY(-5px);
+            }
+
+            22%,
+            23.9% {
+                transform: translateY(0);
+            }
+
+            24%,
+            25.9% {
+                transform: translateY(-5px);
+            }
+
+            26%,
+            27.9% {
+                transform: translateY(0);
+            }
+
+            28%,
+            33% {
+                transform: translateY(0);
+            }
+
+            /* Para no meio */
+
+            33.1%,
+            42% {
+                transform: translateY(0);
+            }
+
+            /* Pausa no susto */
+
+            /* Retomada intensa com os pés correndo no avanço */
+            43%,
+            44.9% {
+                transform: translateY(0);
+            }
+
+            45%,
+            46.9% {
+                transform: translateY(-6px);
+            }
+
+            47%,
+            48.9% {
+                transform: translateY(0);
+            }
+
+            49%,
+            50.9% {
+                transform: translateY(-6px);
+            }
+
+            51%,
+            52.9% {
+                transform: translateY(0);
+            }
+
+            53%,
+            54.9% {
+                transform: translateY(-6px);
+            }
+
+            55%,
+            56.9% {
+                transform: translateY(0);
+            }
+
+            57%,
+            58.9% {
+                transform: translateY(-6px);
+            }
+
+            59%,
+            60.9% {
+                transform: translateY(0);
+            }
+
+            61%,
+            62.9% {
+                transform: translateY(-6px);
+            }
+
+            63%,
+            64.9% {
+                transform: translateY(0);
+            }
+
+            65%,
+            66.9% {
+                transform: translateY(-6px);
+            }
+
+            67%,
+            68.9% {
+                transform: translateY(0);
+            }
+
+            69%,
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* --- TIMELINE MESTRA COM ESQUIVAS E INCLINAÇÕES DINÂMICAS --- */
         @keyframes master-timeline {
             0% {
-                transform: translateX(-65vw) scale(1);
+                transform: translate(calc(-50% - 65vw), -50%) scale(1) rotate(0deg);
                 opacity: 0;
-            }
-
-            25% {
-                opacity: 1;
-            }
-
-            80% {
-                transform: translateX(0) scale(1);
-            }
-
-            45% {
-                transform: translateX(0) scale(1) rotate(0deg);
-            }
-
-            52% {
-                transform: translateX(0) scale(1.3) rotate(-3deg);
-            }
-
-            58% {
-                transform: translateX(0) scale(1.6) rotate(3deg);
-            }
-
-            70% {
-                transform: translateX(0) scale(3.2) rotate(0deg);
                 filter: brightness(1);
+            }
+
+            5% {
                 opacity: 1;
+            }
+
+            /* Chega no meio exato da tela e para */
+            33% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+
+            /* Se espanta usando scale e leve balanço de surpresa */
+            36% {
+                transform: translate(-50%, -50%) scale(1.15, 0.85) rotate(-3deg);
+            }
+
+            39% {
+                transform: translate(-50%, -50%) scale(0.95, 1.05) rotate(3deg);
+            }
+
+            42% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+
+            /* Avanço com esquivas laterais combinadas a inclinações corporais expressivas */
+            45% {
+                transform: translate(calc(-50% - 35px), -50%) scale(1.05) rotate(-7deg);
+                filter: brightness(1.05);
+            }
+
+            48% {
+                transform: translate(calc(-50% + 40px), -50%) scale(1.1) rotate(7deg);
+                filter: brightness(1.1);
+            }
+
+            51% {
+                transform: translate(calc(-50% - 30px), -50%) scale(1.25) rotate(-9deg);
+                filter: brightness(1.2);
+            }
+
+            54% {
+                transform: translate(calc(-50% + 35px), -50%) scale(1.5) rotate(9deg);
+                filter: brightness(1.3);
+            }
+
+            57% {
+                transform: translate(calc(-50% - 20px), -50%) scale(1.8) rotate(-5deg);
+                filter: brightness(1.4);
+            }
+
+            60% {
+                transform: translate(calc(-50% + 25px), -50%) scale(2.1) rotate(5deg);
+                filter: brightness(1.6);
+            }
+
+            63% {
+                transform: translate(calc(-50% - 10px), -50%) scale(2.5) rotate(-3deg);
+                filter: brightness(1.9);
+            }
+
+            66% {
+                transform: translate(calc(-50% + 10px), -50%) scale(2.9) rotate(3deg);
+                filter: brightness(2.2);
             }
 
             70.8% {
-                transform: translateX(0) scale(3.8);
-                filter: brightness(20);
+                transform: translate(-50%, -50%) scale(3.8) rotate(0deg);
+                filter: brightness(10);
+                opacity: 1;
             }
 
+            /* Detonação */
             71% {
                 opacity: 0;
-                transform: translateX(0) scale(4.5);
+                transform: translate(-50%, -50%) scale(4.5) rotate(0deg);
             }
 
             100% {
@@ -254,11 +710,11 @@
         @keyframes face-visibility {
 
             0%,
-            29.9% {
+            32.9% {
                 opacity: 0;
             }
 
-            30%,
+            33%,
             70.9% {
                 opacity: 1;
             }
@@ -272,35 +728,106 @@
         @keyframes screen-shake {
 
             0%,
-            50% {
+            47% {
                 transform: translate(0, 0);
             }
 
-            51%,
-            70% {
-                transform: translate(3px, -2px);
+            48%,
+            52%,
+            56%,
+            60%,
+            64%,
+            68% {
+                transform: translate(4px, -3px);
             }
 
-            53%,
-            68% {
-                transform: translate(-3px, 3px);
+            50%,
+            54%,
+            58%,
+            62%,
+            66% {
+                transform: translate(-4px, 4px);
             }
 
             70.5% {
-                transform: translate(5px, -5px);
+                transform: translate(8px, -8px);
+            }
+
+            71%,
+            100% {
+                transform: translate(0, 0);
             }
         }
 
-        /* --- PARTÍCULAS DA EXPLOSÃO --- */
-        .p-white {
+        /* --- ONDA DE CHOQUE E DETRITOS --- */
+        .particle-burst-container {
             position: absolute;
-            width: 14px;
-            height: 14px;
-            background: #4ade80;
-            box-shadow: 0 0 10px #22c55e;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 40;
+        }
+
+        .shockwave {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 15px solid rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            animation: shock var(--timing) cubic-bezier(0.1, 0.8, 0.2, 1) infinite;
+        }
+
+        @keyframes shock {
+
+            0%,
+            70.9% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+
+            71% {
+                opacity: 1;
+                border-width: 15px;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            75% {
+                opacity: 0;
+                border-width: 0px;
+                transform: translate(-50%, -50%) scale(80);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .p-part {
+            position: absolute;
+            width: 18px;
+            height: 18px;
             opacity: 0;
             border-radius: 2px;
             animation: burst var(--timing) cubic-bezier(0.1, 0.8, 0.2, 1) infinite;
+        }
+
+        .c-white {
+            background: #fff;
+            box-shadow: 0 0 14px #fff;
+        }
+
+        .c-green-part {
+            background: #4ade80;
+            box-shadow: 0 0 14px #22c55e;
+        }
+
+        .c-dark {
+            background: #27272a;
+            box-shadow: 0 0 14px #18181b;
         }
 
         @keyframes burst {
@@ -308,121 +835,22 @@
             0%,
             70.9% {
                 opacity: 0;
-                transform: translate(0, 0) scale(0.5);
+                transform: translate(0, 0) scale(0.5) rotate(0deg);
             }
 
             71% {
                 opacity: 1;
-                transform: translate(0, 0) scale(1.5);
+                transform: translate(0, 0) scale(1.5) rotate(0deg);
             }
 
-            95% {
+            90%,
+            100% {
                 opacity: 0;
-                transform: translate(var(--x), var(--y)) scale(0.2) rotate(180deg);
+                transform: translate(var(--x), var(--y)) scale(0) rotate(540deg);
             }
         }
 
-        .p1 {
-            --x: -480px;
-            --y: -320px;
-        }
-
-        .p2 {
-            --x: 480px;
-            --y: -320px;
-        }
-
-        .p3 {
-            --x: -220px;
-            --y: -520px;
-        }
-
-        .p4 {
-            --x: 220px;
-            --y: 520px;
-        }
-
-        .p5 {
-            --x: -580px;
-            --y: 120px;
-        }
-
-        .p6 {
-            --x: 580px;
-            --y: -120px;
-        }
-
-        .p7 {
-            --x: -320px;
-            --y: 420px;
-        }
-
-        .p8 {
-            --x: 320px;
-            --y: -420px;
-        }
-
-        .p9 {
-            --x: 0px;
-            --y: -620px;
-        }
-
-        .p10 {
-            --x: 0px;
-            --y: 620px;
-        }
-
-        .p11 {
-            --x: -620px;
-            --y: 0px;
-        }
-
-        .p12 {
-            --x: 620px;
-            --y: 0px;
-        }
-
-        .p13 {
-            --x: -380px;
-            --y: -480px;
-        }
-
-        .p14 {
-            --x: 380px;
-            --y: 480px;
-        }
-
-        .p15 {
-            --x: -520px;
-            --y: 520px;
-        }
-
-        .p16 {
-            --x: 520px;
-            --y: -520px;
-        }
-
-        .p17 {
-            --x: -200px;
-            --y: 220px;
-        }
-
-        .p18 {
-            --x: 200px;
-            --y: -220px;
-        }
-
-        .p19 {
-            --x: -100px;
-            --y: 380px;
-        }
-
-        .p20 {
-            --x: 100px;
-            --y: -380px;
-        }
-
-        /* --- 404 GLITCH MELHORADO --- */
+        /* --- 404 GLITCH --- */
         .error-display {
             position: absolute;
             text-align: center;
@@ -431,25 +859,29 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            z-index: 60;
         }
 
         @keyframes err-reveal {
 
             0%,
-            73% {
+            70.9% {
                 opacity: 0;
+                visibility: hidden;
                 transform: scale(0.9);
             }
 
-            76%,
-            94% {
+            71%,
+            95% {
                 opacity: 1;
+                visibility: visible;
                 transform: scale(1);
             }
 
             98%,
             100% {
                 opacity: 0;
+                visibility: hidden;
                 transform: scale(1.05);
             }
         }
@@ -547,33 +979,192 @@
         }
 
         .error-subtext {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 3px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
             color: #a1a1aa;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
         }
 
         .back-home-btn {
             margin-top: 15px;
-            padding: 10px 24px;
+            padding: 12px 26px;
             background-color: #fdfdfd;
             color: #0d0e12;
-            font-weight: 700;
+            font-weight: 800;
             border-radius: 6px;
             text-decoration: none;
             transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-transform: uppercase;
         }
 
         .back-home-btn:hover {
-            transform: translateY(-2px);
-            background-color: #9c9c9c;
+            transform: translateY(-3px);
+            background-color: #e5e5e5;
+            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- MODAL DE AJUDA --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            width: 520px;
+            max-width: 90vw;
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: 6px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.9) translateY(15px);
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            background: #18181b;
+            border-bottom: 1px solid #3f3f46;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #fde047;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin: 0;
+            letter-spacing: -0.2px;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid #52525b;
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.15s ease;
+        }
+
+        .modal-close:hover {
+            background: #3f3f46;
+            border-color: #71717a;
+        }
+
+        .modal-body {
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #e4e4e7;
+            line-height: 1.6;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .modal-body ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .btn-text {
+                display: none;
+            }
+
+            .bedrock-btn {
+                width: 40px;
+            }
+
+            .top-header {
+                padding: 16px;
+            }
+
+            .glitch {
+                font-size: 6rem;
+            }
+
+            .error-subtext {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <div class="top-header">
+        <a href="#" class="bedrock-btn" onclick="openModal('help'); return false;">
+            <div class="btn-icon-box help-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <span class="btn-text">HELP</span>
+        </a>
+
+        <a href="#" class="bedrock-btn" onclick="openModal('options'); return false;">
+            <div class="btn-icon-box login-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                    <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                </svg>
+            </div>
+            <span class="btn-text">SEU Wi-Fi</span>
+        </a>
+    </div>
+
+    <!-- Tela do Flash (Cegueira) -->
+    <div class="flash-bang"></div>
+
     <main>
         <section class="minecraft-scene">
             <!-- Creeper Animado -->
@@ -593,43 +1184,121 @@
                 </div>
             </div>
 
-            <!-- Partículas de Explosão -->
+            <!-- Partículas de Explosão e Onda de Choque -->
             <div class="particle-burst-container">
-                <div class="p-white p1"></div>
-                <div class="p-white p2"></div>
-                <div class="p-white p3"></div>
-                <div class="p-white p4"></div>
-                <div class="p-white p5"></div>
-                <div class="p-white p6"></div>
-                <div class="p-white p7"></div>
-                <div class="p-white p8"></div>
-                <div class="p-white p9"></div>
-                <div class="p-white p10"></div>
-                <div class="p-white p11"></div>
-                <div class="p-white p12"></div>
-                <div class="p-white p13"></div>
-                <div class="p-white p14"></div>
-                <div class="p-white p15"></div>
-                <div class="p-white p16"></div>
-                <div class="p-white p17"></div>
-                <div class="p-white p18"></div>
-                <div class="p-white p19"></div>
-                <div class="p-white p20"></div>
+                <div class="shockwave"></div>
+
+                <!-- Detritos Brancos -->
+                <div class="p-part c-white" style="--x: -450px; --y: -350px;"></div>
+                <div class="p-part c-white" style="--x: 450px; --y: -350px;"></div>
+                <div class="p-part c-white" style="--x: 0px; --y: -650px;"></div>
+                <div class="p-part c-white" style="--x: -650px; --y: 0px;"></div>
+                <div class="p-part c-white" style="--x: 650px; --y: 0px;"></div>
+                <div class="p-part c-white" style="--x: 0px; --y: 650px;"></div>
+                <div class="p-part c-white" style="--x: -450px; --y: 350px;"></div>
+                <div class="p-part c-white" style="--x: 450px; --y: 350px;"></div>
+
+                <!-- Detritos Verdes -->
+                <div class="p-part c-green-part" style="--x: -300px; --y: -200px;"></div>
+                <div class="p-part c-green-part" style="--x: 300px; --y: -200px;"></div>
+                <div class="p-part c-green-part" style="--x: 0px; --y: -400px;"></div>
+                <div class="p-part c-green-part" style="--x: -400px; --y: 0px;"></div>
+                <div class="p-part c-green-part" style="--x: 400px; --y: 0px;"></div>
+                <div class="p-part c-green-part" style="--x: 0px; --y: 400px;"></div>
+                <div class="p-part c-green-part" style="--x: -300px; --y: 200px;"></div>
+                <div class="p-part c-green-part" style="--x: 300px; --y: 200px;"></div>
+
+                <!-- Detritos Escuros (Fumaça) -->
+                <div class="p-part c-dark" style="--x: -150px; --y: -500px;"></div>
+                <div class="p-part c-dark" style="--x: 150px; --y: -500px;"></div>
+                <div class="p-part c-dark" style="--x: -500px; --y: -150px;"></div>
+                <div class="p-part c-dark" style="--x: 500px; --y: -150px;"></div>
+                <div class="p-part c-dark" style="--x: -500px; --y: 150px;"></div>
+                <div class="p-part c-dark" style="--x: 500px; --y: 150px;"></div>
+                <div class="p-part c-dark" style="--x: -150px; --y: 500px;"></div>
+                <div class="p-part c-dark" style="--x: 150px; --y: 500px;"></div>
             </div>
 
             <!-- Título Erro 404 Estilizado -->
             <div class="error-display">
                 <h1 class="glitch" data-text="404">404</h1>
-                <span class="error-subtext">Error Page.</span>
+                <span class="error-subtext">PÁGINA NÃO ENCONTRADA!</span>
                 <a href="https://matheuzera.github.io/ZerasCraft/" class="back-home-btn">VOLTAR AO INÍCIO</a>
-                <br>
-                <div class="content">
-                    <h1>Página não Encontrada!</h1>
-                    <div>
-                    </div>
-                </div>
+            </div>
         </section>
     </main>
+
+    <!-- MODAL INTERATIVO -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalBg(event)">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span id="modalTitleText">Título da Solução</span>
+                </div>
+                <button class="modal-close" onclick="closeModal()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const modalContent = {
+            'help': {
+                title: 'Página Não Encontrada',
+                steps: [
+                    'O link que você tentou acessar está quebrado ou a página foi movida.',
+                    'Verifique se a URL digitada no navegador está correta.',
+                    'Aguarde a animação terminar e clique no botão para voltar ao Início do site.'
+                ]
+            },
+            'options': {
+                title: 'Status do seu Wi-Fi e Rede Local',
+                steps: [
+                    'Verifique o estado atual da sua conexão Wi-Fi ou cabo de rede.',
+                    'Caso sua internet esteja instável, reiniciar o roteador pode ajudar a limpar a rota de conexão.',
+                    'Se o erro persistir em várias páginas, verifique o status do provedor.'
+                ]
+            }
+        };
+
+        function openModal(id) {
+            const data = modalContent[id];
+            if (!data) return;
+
+            document.getElementById('modalTitleText').innerText = data.title;
+
+            let html = '<strong>Instruções recomendadas:</strong><ul>';
+            data.steps.forEach(step => {
+                html += `<li>${step}</li>`;
+            });
+            html += '</ul>';
+
+            document.getElementById('modalBody').innerHTML = html;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        function closeModalBg(event) {
+            if (event.target.id === 'modalOverlay') {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 
 </html>
