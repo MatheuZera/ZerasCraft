@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manutenção | Zera's Craft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050608;
+            --accent: #f59e0b;
+            --glow: rgba(245, 158, 11, 0.18);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #f8fafc;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Fundo imersivo com luz ambiente suave */
+        .scene-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 50% 40%, #1f1409 0%, var(--bg) 70%);
+            gap: 40px;
+        }
+
+        /* Brilho sutil de fundo atrás da forja */
+        .scene-container::before {
+            content: '';
+            position: absolute;
+            top: 38%;
+            width: 180px;
+            height: 100px;
+            background: var(--accent);
+            filter: blur(65px);
+            opacity: 0.15;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        /* --- ESTAÇÃO DE TRABALHO ORGÂNICA --- */
+        .workstation {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            transform: scale(1.4);
+            margin-bottom: 10px;
+            width: 140px;
+            height: 70px;
+        }
+
+        /* Cabo do Martelo (Mais elegante e curvado) */
+        .hammer-arm {
+            position: absolute;
+            top: 18px;
+            left: 35px;
+            width: 8px;
+            height: 36px;
+            background: linear-gradient(180deg, #c28e5f, #7c4a23);
+            transform-origin: top center;
+            animation: hammer-strike 0.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 5;
+        }
+
+        /* Cabeça do Martelo (Suave e Metálica) */
+        .hammer {
+            position: absolute;
+            bottom: -6px;
+            left: -12px;
+            width: 32px;
+            height: 14px;
+            background: linear-gradient(135deg, #94a3b8, #475569);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            border-radius: 5px;
+        }
+
+        @keyframes hammer-strike {
+
+            0%,
+            100% {
+                transform: rotate(-240deg);
+            }
+
+            50% {
+                transform: rotate(-85deg);
+            }
+        }
+
+        /* Área da Bigorna e Partículas */
+        .anvil-area {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Partículas delicadas estilo "vagalume de fogo" */
+        .sparks-wrapper {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .spark {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #fff;
+            box-shadow: 0 0 10px #fde047, 0 0 20px #f59e0b;
+            opacity: 0;
+            border-radius: 50%;
+            filter: blur(0.3px);
+            animation: spark-float 0.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+
+        .s1 {
+            --x: -40px;
+            --y: -45px;
+            animation-delay: 0.02s;
+        }
+
+        .s2 {
+            --x: 42px;
+            --y: -50px;
+            animation-delay: 0.06s;
+            width: 6px;
+            height: 6px;
+        }
+
+        .s3 {
+            --x: -22px;
+            --y: -65px;
+            animation-delay: 0.01s;
+        }
+
+        .s4 {
+            --x: 35px;
+            --y: -40px;
+            animation-delay: 0.08s;
+        }
+
+        .s5 {
+            --x: -55px;
+            --y: -30px;
+            animation-delay: 0.04s;
+            width: 3px;
+            height: 3px;
+        }
+
+        .s6 {
+            --x: -70px;
+            --y: -55px;
+            animation-delay: 0.05s;
+            width: 4px;
+            height: 4px;
+        }
+
+        .s7 {
+            --x: 68px;
+            --y: -45px;
+            animation-delay: 0.03s;
+        }
+
+        .s8 {
+            --x: -12px;
+            --y: -35px;
+            animation-delay: 0.09s;
+            width: 3px;
+            height: 3px;
+        }
+
+        .s9 {
+            --x: -45px;
+            --y: -60px;
+            animation-delay: 0.0s;
+        }
+
+        .s10 {
+            --x: 50px;
+            --y: -55px;
+            animation-delay: 0.07s;
+        }
+
+        @keyframes spark-float {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+                background: #ffffff;
+            }
+
+            50% {
+                transform: translate(calc(var(--x) * 0.5), calc(var(--y) * 0.5)) scale(1.4);
+                background: #fef08a;
+            }
+
+            100% {
+                transform: translate(var(--x), var(--y)) scale(0.1);
+                opacity: 0;
+                background: #f97316;
+            }
+        }
+
+        /* Bigorna Orgânica, Suave e Moderna (Sem blocos rígidos) */
+        .anvil {
+            position: relative;
+            width: 58px;
+            height: 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+        }
+
+        .anvil-top {
+            width: 58px;
+            height: 14px;
+            background: linear-gradient(180deg, #94a3b8, #64748b);
+            border-radius: 8px 12px 3px 3px;
+            box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.35), inset 0 -2px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        .anvil-mid {
+            width: 22px;
+            height: 10px;
+            background: linear-gradient(90deg, #475569, #334155, #475569);
+            border-radius: 2px;
+        }
+
+        .anvil-base {
+            width: 52px;
+            height: 12px;
+            background: linear-gradient(180deg, #334155, #1e293b);
+            border-radius: 4px 4px 6px 6px;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- CARD DE CONTEÚDO (Glassmorphism Delicado) --- */
+        .content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            z-index: 10;
+            max-width: 560px;
+            padding: 40px 35px;
+        }
+
+        h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #fde047;
+            text-shadow: 0 2px 15px rgba(245, 158, 11, 0.3);
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 0.98rem;
+            font-weight: 400;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .btn {
+            margin-top: 8px;
+            padding: 13px 28px;
+            background: #5865F2;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.92rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35);
+        }
+
+        .btn:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(88, 101, 242, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scene-container">
+        <!-- Estação de Trabalho Delicada e Orgânica -->
+        <div class="workstation">
+            <div class="hammer-arm">
+                <div class="hammer"></div>
+            </div>
+
+            <div class="anvil-area">
+                <div class="sparks-wrapper">
+                    <div class="spark s1"></div>
+                    <div class="spark s2"></div>
+                    <div class="spark s3"></div>
+                    <div class="spark s4"></div>
+                    <div class="spark s5"></div>
+                    <div class="spark s6"></div>
+                    <div class="spark s7"></div>
+                    <div class="spark s8"></div>
+                    <div class="spark s9"></div>
+                    <div class="spark s10"></div>
+                </div>
+
+                <div class="anvil">
+                    <div class="anvil-top"></div>
+                    <div class="anvil-mid"></div>
+                    <div class="anvil-base"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Textos e Botão[cite: 3] -->
+        <div class="content">
+            <h1>SEGURA AÍ, O SERVIDOR TÁ EM MANUTENÇÃO!</h1>
+            <p>Um Creeper apareceu e decidiu explodir nossa Vila, nossos Aldeões estão fazendo o máximo possível para
+                arrumar esta bagunça, aguarde que assim que possível abriremos os nossos portões novamente para você
+                acessar sua Casa. ;)</p>
+            <div>
+                <a href="https://discord.gg/seudiscord" target="_blank" class="btn">
+                    <i class="fab fa-discord"></i> Cola no Discord pra ver o que aconteceu!
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

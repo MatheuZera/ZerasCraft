@@ -2,80 +2,581 @@
 <html lang="pt-br">
 
 <head>
-    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
     <meta charset="UTF-8">
-    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error 404 Page</title> <!---->
-    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
+    <title>Erro 404 - Chunk Não Encontrada | Zera's Craft</title>
     <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css"> <!---->
-    <link rel="stylesheet" href="404.css"> <!---->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!---->
 
-    <!--é a breve descrição da sua página que pode aparecer no Google-->
-    <meta name="description"
-        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
-    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
-    <meta name="keywords"
-        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
-    <!--Identifica o autor do documento HTML.-->
-    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
-    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
-    <meta name="robots" content="index, follow">
-
-    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
-    <!--O título que aparece na pré-visualização.-->
-    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
-    <!--A descrição que aparece na pré-visualização.-->
-    <meta property="og:description"
-        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
-    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
-    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
-    <!--A URL da página.-->
-    <meta property="og:url" content="https://seusite.com.br/index.html">
-
-    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Mundo Zera's Craft">
-    <meta property="og:locale" content="pt_BR">
-
-    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@SeuTwitterHandle">
-    <meta name="twitter:creator" content="@SeuTwitterHandle">
-    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
-    <meta name="twitter:description"
-        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
-    <!---->
-    <meta name="twitter:image"
-        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
-    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
-    <meta name="theme-color" content="#347C2F">
-    <!-- Links para ScrollReveal e CountUp.js -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fontes e Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --bg-color: #0d0e12;
+            --c-green: #437d34;
+            --c-body: #356329;
+            --c-leg: #24441c;
+            --timing: 14s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #fff;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .minecraft-scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- CREEPER ACTOR (TRAJETO E ESCALA PROGRESSIVA) --- */
+        .creeper-actor {
+            position: absolute;
+            width: 64px;
+            height: 128px;
+            z-index: 10;
+            animation: master-timeline var(--timing) cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+
+        .creeper-body-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: screen-shake var(--timing) linear infinite;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+        }
+
+        /* --- MEMBROS --- */
+        .c-head {
+            width: 64px;
+            height: 64px;
+            background: var(--c-green);
+            position: relative;
+            z-index: 5;
+        }
+
+        .c-body {
+            width: 32px;
+            height: 48px;
+            background: var(--c-body);
+            position: relative;
+        }
+
+        .c-legs {
+            display: flex;
+            justify-content: center;
+            width: 64px;
+        }
+
+        .c-leg {
+            width: 16px;
+            height: 16px;
+            background: var(--c-leg);
+            margin: 0 1px;
+            position: relative;
+        }
+
+        /* --- PISCAR CONSTANTE (SIZZLE) --- */
+        .sizzle-overlay,
+        .c-body::after,
+        .c-leg::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            opacity: 0;
+            animation: sizzle-logic var(--timing) linear infinite;
+        }
+
+        @keyframes sizzle-logic {
+
+            0%,
+            48% {
+                opacity: 0;
+            }
+
+            49%,
+            51%,
+            53%,
+            55%,
+            57%,
+            59%,
+            61%,
+            63%,
+            65%,
+            67%,
+            69% {
+                opacity: 0.7;
+            }
+
+            50%,
+            52%,
+            54%,
+            56%,
+            58%,
+            60%,
+            62%,
+            64%,
+            66%,
+            68%,
+            70% {
+                opacity: 0;
+            }
+
+            70.5% {
+                opacity: 1;
+            }
+
+            71%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* --- CAMINHADA --- */
+        .l-front,
+        .r-back {
+            animation: walk-8bit 0.35s steps(2) infinite, leg-stopper var(--timing) steps(1) infinite;
+        }
+
+        .r-front,
+        .l-back {
+            animation: walk-8bit 0.35s steps(2) infinite reverse, leg-stopper var(--timing) steps(1) infinite;
+        }
+
+        @keyframes walk-8bit {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes leg-stopper {
+
+            0%,
+            69.9% {
+                animation-play-state: running;
+            }
+
+            70%,
+            100% {
+                animation-play-state: paused;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- TIMELINE MESTRA DO CREEPER --- */
+        @keyframes master-timeline {
+            0% {
+                transform: translateX(-65vw) scale(1);
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            80% {
+                transform: translateX(0) scale(1);
+            }
+
+            45% {
+                transform: translateX(0) scale(1) rotate(0deg);
+            }
+
+            52% {
+                transform: translateX(0) scale(1.3) rotate(-3deg);
+            }
+
+            58% {
+                transform: translateX(0) scale(1.6) rotate(3deg);
+            }
+
+            70% {
+                transform: translateX(0) scale(3.2) rotate(0deg);
+                filter: brightness(1);
+                opacity: 1;
+            }
+
+            70.8% {
+                transform: translateX(0) scale(3.8);
+                filter: brightness(20);
+            }
+
+            71% {
+                opacity: 0;
+                transform: translateX(0) scale(4.5);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* --- ROSTO DO CREEPER --- */
+        .c-face-pixel {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            box-shadow:
+                8px 16px #000, 16px 16px #000, 8px 24px #000, 16px 24px #000,
+                40px 16px #000, 48px 16px #000, 40px 24px #000, 48px 24px #000,
+                24px 32px #000, 32px 32px #000, 16px 40px #000, 24px 40px #000,
+                32px 40px #000, 40px 40px #000, 16px 48px #000, 24px 48px #000,
+                32px 48px #000, 40px 48px #000, 16px 56px #000, 40px 56px #000;
+            animation: face-visibility var(--timing) steps(1) infinite;
+        }
+
+        @keyframes face-visibility {
+
+            0%,
+            29.9% {
+                opacity: 0;
+            }
+
+            30%,
+            70.9% {
+                opacity: 1;
+            }
+
+            71%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes screen-shake {
+
+            0%,
+            50% {
+                transform: translate(0, 0);
+            }
+
+            51%,
+            70% {
+                transform: translate(3px, -2px);
+            }
+
+            53%,
+            68% {
+                transform: translate(-3px, 3px);
+            }
+
+            70.5% {
+                transform: translate(5px, -5px);
+            }
+        }
+
+        /* --- PARTÍCULAS DA EXPLOSÃO --- */
+        .p-white {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #4ade80;
+            box-shadow: 0 0 10px #22c55e;
+            opacity: 0;
+            border-radius: 2px;
+            animation: burst var(--timing) cubic-bezier(0.1, 0.8, 0.2, 1) infinite;
+        }
+
+        @keyframes burst {
+
+            0%,
+            70.9% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.5);
+            }
+
+            71% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1.5);
+            }
+
+            95% {
+                opacity: 0;
+                transform: translate(var(--x), var(--y)) scale(0.2) rotate(180deg);
+            }
+        }
+
+        .p1 {
+            --x: -480px;
+            --y: -320px;
+        }
+
+        .p2 {
+            --x: 480px;
+            --y: -320px;
+        }
+
+        .p3 {
+            --x: -220px;
+            --y: -520px;
+        }
+
+        .p4 {
+            --x: 220px;
+            --y: 520px;
+        }
+
+        .p5 {
+            --x: -580px;
+            --y: 120px;
+        }
+
+        .p6 {
+            --x: 580px;
+            --y: -120px;
+        }
+
+        .p7 {
+            --x: -320px;
+            --y: 420px;
+        }
+
+        .p8 {
+            --x: 320px;
+            --y: -420px;
+        }
+
+        .p9 {
+            --x: 0px;
+            --y: -620px;
+        }
+
+        .p10 {
+            --x: 0px;
+            --y: 620px;
+        }
+
+        .p11 {
+            --x: -620px;
+            --y: 0px;
+        }
+
+        .p12 {
+            --x: 620px;
+            --y: 0px;
+        }
+
+        .p13 {
+            --x: -380px;
+            --y: -480px;
+        }
+
+        .p14 {
+            --x: 380px;
+            --y: 480px;
+        }
+
+        .p15 {
+            --x: -520px;
+            --y: 520px;
+        }
+
+        .p16 {
+            --x: 520px;
+            --y: -520px;
+        }
+
+        .p17 {
+            --x: -200px;
+            --y: 220px;
+        }
+
+        .p18 {
+            --x: 200px;
+            --y: -220px;
+        }
+
+        .p19 {
+            --x: -100px;
+            --y: 380px;
+        }
+
+        .p20 {
+            --x: 100px;
+            --y: -380px;
+        }
+
+        /* --- 404 GLITCH MELHORADO --- */
+        .error-display {
+            position: absolute;
+            text-align: center;
+            animation: err-reveal var(--timing) linear infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes err-reveal {
+
+            0%,
+            73% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            76%,
+            94% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            98%,
+            100% {
+                opacity: 0;
+                transform: scale(1.05);
+            }
+        }
+
+        .glitch {
+            font-size: 8.5rem;
+            font-weight: 900;
+            color: #fff;
+            position: relative;
+            letter-spacing: 4px;
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 3px;
+            text-shadow: -3px 0 #ff0055;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -3px;
+            text-shadow: -3px 0 #00ffff, 0 3px #ff0055;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim2 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(15px, 999px, 40px, 0);
+                transform: skew(0.3deg);
+            }
+
+            20% {
+                clip: rect(65px, 999px, 98px, 0);
+                transform: skew(0.8deg);
+            }
+
+            40% {
+                clip: rect(10px, 999px, 55px, 0);
+                transform: skew(0.1deg);
+            }
+
+            60% {
+                clip: rect(80px, 999px, 120px, 0);
+                transform: skew(0.5deg);
+            }
+
+            80% {
+                clip: rect(30px, 999px, 75px, 0);
+                transform: skew(0.2deg);
+            }
+
+            100% {
+                clip: rect(50px, 999px, 100px, 0);
+                transform: skew(0.6deg);
+            }
+        }
+
+        @keyframes glitch-anim2 {
+            0% {
+                clip: rect(70px, 999px, 110px, 0);
+                transform: skew(0.5deg);
+            }
+
+            5% {
+                clip: rect(20px, 999px, 60px, 0);
+                transform: skew(0.2deg);
+            }
+
+            50% {
+                clip: rect(95px, 999px, 130px, 0);
+                transform: skew(0.9deg);
+            }
+
+            75% {
+                clip: rect(5px, 999px, 45px, 0);
+                transform: skew(0.1deg);
+            }
+
+            100% {
+                clip: rect(40px, 999px, 85px, 0);
+                transform: skew(0.4deg);
+            }
+        }
+
+        .error-subtext {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #a1a1aa;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-home-btn {
+            margin-top: 15px;
+            padding: 10px 24px;
+            background-color: #fdfdfd;
+            color: #0d0e12;
+            font-weight: 700;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-2px);
+            background-color: #9c9c9c;
+        }
+    </style>
 </head>
 
 <body>
-    <!--=======================================================================================================-->
-
-    <body>
-        <div id="nav-placeholder"></div>
-
-        <section class="game-section">
-        </section>
-
-        <script src="assets/js/scripts.js"></script>
-    </body>
-    <!--=======================================================================================================-->
-
     <main>
         <section class="minecraft-scene">
+            <!-- Creeper Animado -->
             <div class="creeper-actor">
                 <div class="creeper-body-wrapper">
                     <div class="c-head">
@@ -92,6 +593,7 @@
                 </div>
             </div>
 
+            <!-- Partículas de Explosão -->
             <div class="particle-burst-container">
                 <div class="p-white p1"></div>
                 <div class="p-white p2"></div>
@@ -115,18 +617,19 @@
                 <div class="p-white p20"></div>
             </div>
 
+            <!-- Título Erro 404 Estilizado -->
             <div class="error-display">
                 <h1 class="glitch" data-text="404">404</h1>
-                <span>CHUNK NOT FOUND</span>
-            </div>
+                <span class="error-subtext">Error Page.</span>
+                <a href="https://matheuzera.github.io/ZerasCraft/" class="back-home-btn">VOLTAR AO INÍCIO</a>
+                <br>
+                <div class="content">
+                    <h1>Página não Encontrada!</h1>
+                    <div>
+                    </div>
+                </div>
         </section>
     </main>
-
-    <!--------------------------------------------------------------->
-
-    <script src="script.js"></script>
-    <script src="effects.js"></script>
-    <script src="player.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,24 @@
+(function () {
+  // Evita loop infinito caso o usuário já esteja na página de manutenção
+  const currentPath = window.location.pathname;
+  if (currentPath.includes('manutencao.html')) {
+    return;
+  }
+
+  // Faz a checagem do status
+  fetch('status.json?' + new Date().getTime()) // O parâmetro evita cache do navegador
+    .then(response => response.json())
+    .then(data => {
+      if (data.manutencao === true) {
+        // Redireciona imediatamente para a tela de manutenção
+        window.location.href = 'manutencao.html';
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao verificar o sistema de manutenção:', error);
+    });
+})();
+
 /* ============================================================================================= */
 /**
  * MÓDULO UNIFICADO DE DADOS, CONTADORES E METAS (TOTAIS, ONLINE e etc..)
@@ -1413,25 +1434,25 @@ document.addEventListener("DOMContentLoaded", () => {
    ELEMENTO
 ========================================== */
 document.addEventListener("DOMContentLoaded", () => {
-    const tabButtons = document.querySelectorAll(".guide-tab-btn");
-    const tabPanels = document.querySelectorAll(".guide-panel");
+  const tabButtons = document.querySelectorAll(".guide-tab-btn");
+  const tabPanels = document.querySelectorAll(".guide-panel");
 
-    tabButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            // Remove a classe 'active' de todos os botões e painéis
-            tabButtons.forEach(btn => btn.classList.remove("active"));
-            tabPanels.forEach(panel => panel.classList.remove("active"));
+  tabButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      // Remove a classe 'active' de todos os botões e painéis
+      tabButtons.forEach(btn => btn.classList.remove("active"));
+      tabPanels.forEach(panel => panel.classList.remove("active"));
 
-            // Adiciona a classe 'active' no botão clicado
-            button.classList.add("active");
+      // Adiciona a classe 'active' no botão clicado
+      button.classList.add("active");
 
-            // Pega o ID alvo através do data-attribute e ativa o painel correspondente
-            const targetPanelId = button.getAttribute("data-tab");
-            const targetPanel = document.getElementById(targetPanelId);
-            
-            if (targetPanel) {
-                targetPanel.classList.add("active");
-            }
-        });
+      // Pega o ID alvo através do data-attribute e ativa o painel correspondente
+      const targetPanelId = button.getAttribute("data-tab");
+      const targetPanel = document.getElementById(targetPanelId);
+
+      if (targetPanel) {
+        targetPanel.classList.add("active");
+      }
     });
+  });
 });
