@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const placeholder = document.getElementById("nav-placeholder-pc");
   if (!placeholder) return;
 
-  fetch("html-nav-pc.html")
+  fetch("autoload html/html-nav-pc.html")
     .then((res) => (res.ok ? res : fetch("../html-nav-pc.html")))
     .then((res) => {
       if (!res.ok) throw new Error("Falha ao carregar html-nav-pc.html");
@@ -175,7 +175,7 @@ if (typeof window.unlockScroll !== "function") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const placeholder = document.getElementById("nav-placeholder-mobile");
+  const placeholder = document.getElementById("autoload html/nav-placeholder-mobile");
   if (!placeholder) return;
 
   fetch("html-nav-mobile.html")
@@ -274,7 +274,7 @@ document.addEventListener("keydown", (e) => {
     // Interrompe se o elemento não existir na página
     if (!placeholder) return;
 
-    const filePrimary = "html-footer.html";
+    const filePrimary = "autoload html/html-footer.html";
     const fileFallback = "../html-footer.html";
 
     fetch(filePrimary)
@@ -321,7 +321,7 @@ document.addEventListener("keydown", (e) => {
     const placeholder = document.getElementById("player-container");
     if (!placeholder) return;
 
-    const filePrimary = "html-player.html";
+    const filePrimary = "autoload html/html-player.html";
     const fileFallback = "../html-player.html";
 
     fetch(filePrimary)
