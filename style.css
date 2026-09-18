@@ -242,6 +242,75 @@ body {
   --zc-border: rgba(255, 255, 255, 0.08);
   --zc-text: #ffffff;
   --zc-muted: #a0a0a0;
+
+
+  /* Paleta Oficial Inspirada */
+  --bg-dark: #121212;
+  --bg-card: #1d1d1d;
+  --bg-light: #2a2a2a;
+  --green-mc: #3c8527;
+  /* O verde clássico do botão */
+  --green-hover: #52a535;
+  --gold: #f8cb47;
+  --text-main: #ffffff;
+  --text-muted: #a8a8a8;
+  --border: #333333;
+
+  /* Configurações */
+  --container-width: 1200px;
+  --gutter: 20px;
+  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+
+
+  --mc-green: #ffffff;
+  --mc-dark: #0f0f0f;
+  --mc-border: #333;
+  --mc-card: #141414;
+
+
+  --bg-page: #111111;
+  /* Fundo da página */
+  --bg-card: #181818;
+  /* Fundo das caixas e galeria */
+  --bg-tag: #1f1f1f;
+  /* Fundo das tags */
+  --accent-color: #54bd34;
+  /* Verde Minecraft */
+  --accent-blue: #2b90d9;
+  /* Borda azul de seleção */
+  --border-color: #2a2a2a;
+  /* Bordas gerais */
+  --text-main: #ffffff;
+  --text-muted: #aaaaaa;
+
+  --rt-bg-main: #2cb810;
+  /* Fundo escuro profundo do site */
+  --rt-bg-card: #13131a;
+  /* Fundo dos blocos e cards */
+  --rt-bg-input: #181824;
+  /* Campos de texto internos */
+  --rt-purple-main: #464646;
+  /* Roxo marca Rustical */
+  --rt-purple-glow: #444444;
+  /* Roxo claro para efeitos e hovers */
+  --rt-text-pure: #ffffff;
+  --rt-text-muted: #464646;
+
+
+  --bg-dark: #121212;
+  --bg-card: #1d1d1d;
+  --bg-light: #2a2a2a;
+  --green-mc: #3c8527;
+  --green-hover: #52a535;
+  --gold: #f8cb47;
+  --text-main: #ffffff;
+  --text-muted: #a8a8a8;
+  --border: #333333;
+
+  --container-width: 1200px;
+  --gutter: 20px;
+  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 * {
@@ -1288,37 +1357,6 @@ html.z-lock-scroll {
   color: var(--zc-accent);
   padding-left: 10px;
   border-bottom-color: var(--zc-accent);
-}
-
-/* =============================================================================================== */
-
-
-
-
-:root {
-  /* Paleta Oficial Inspirada */
-  --bg-dark: #121212;
-  --bg-card: #1d1d1d;
-  --bg-light: #2a2a2a;
-  --green-mc: #3c8527;
-  /* O verde clássico do botão */
-  --green-hover: #52a535;
-  --gold: #f8cb47;
-  --text-main: #ffffff;
-  --text-muted: #a8a8a8;
-  --border: #333333;
-
-  /* Configurações */
-  --container-width: 1200px;
-  --gutter: 20px;
-  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* ============================================================================================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 /* ============================================================================================= */
@@ -7099,10 +7137,6 @@ ul {
    SEÇÃO DE CRIADORES DE CONTEÚDO (DARK THEME)
 ======================================================= */
 
-/* =======================================================
-   SEÇÃO DE CRIADORES (SEM :ROOT - USANDO SUAS VARIÁVEIS)
-======================================================= */
-
 .creators-section {
   background-color: var(--dark-bg);
   padding: 30px 16px;
@@ -7451,12 +7485,6 @@ ul {
 }
 
 /* ============================================================================================= */
-:root {
-  --mc-green: #ffffff;
-  --mc-dark: #0f0f0f;
-  --mc-border: #333;
-  --mc-card: #141414;
-}
 
 .archive-section {
   width: 100%;
@@ -8865,25 +8893,6 @@ ul {
 }
 
 /* ============================================================================================= */
-/* ==========================================
-   PALETA DE CORES DO COMPONENTE
-========================================== */
-:root {
-  --bg-page: #111111;
-  /* Fundo da página */
-  --bg-card: #181818;
-  /* Fundo das caixas e galeria */
-  --bg-tag: #1f1f1f;
-  /* Fundo das tags */
-  --accent-color: #54bd34;
-  /* Verde Minecraft */
-  --accent-blue: #2b90d9;
-  /* Borda azul de seleção */
-  --border-color: #2a2a2a;
-  /* Bordas gerais */
-  --text-main: #ffffff;
-  --text-muted: #aaaaaa;
-}
 
 /* ==========================================
    LAYOUT BASE
@@ -10082,7 +10091,7 @@ ul {
 
 /* ============================================================================================= */
 /* ==========================================
-   MOTOR DE TOOLTIPS (SEM ROOT / CORES HEX)
+   MOTOR DE TOOLTIPS (SEM CORES HEX)
 ========================================== */
 
 /* Classes apenas para organizar o visual da vitrine */
@@ -10490,7 +10499,7 @@ ul {
 
 /* ============================================================================================= */
 /* ==========================================
-   COMPONENTES UI (SEM ROOT / CORES HEX / MODULAR)
+   COMPONENTES UI (SEM CORES HEX / MODULAR)
 ========================================== */
 
 /* ==========================================
@@ -11738,23 +11747,6 @@ ul {
 /* DESIGN SYSTEM GLOBAL: RUSTICAL BRANDING (DARK & PURPLE)                                       */
 /* ============================================================================================= */
 
-:root {
-  --rt-bg-main: #2cb810;
-  /* Fundo escuro profundo do site */
-  --rt-bg-card: #13131a;
-  /* Fundo dos blocos e cards */
-  --rt-bg-input: #181824;
-  /* Campos de texto internos */
-  --rt-purple-main: #464646;
-  /* Roxo marca Rustical */
-  --rt-purple-glow: #444444;
-  /* Roxo claro para efeitos e hovers */
-  --rt-text-pure: #ffffff;
-  --rt-text-muted: #464646;
-}
-
-
-
 .mc-guide-section {
   padding: 60px 20px;
   max-width: var(--container-width, 1200px);
@@ -12037,7 +12029,7 @@ ul {
 
 
 /* =========================================================
-   SISTEMA DE LOJA - CONFIGURADO SEGUINDO O SEU ROOT
+   SISTEMA DE LOJA - CONFIGURADO SEGUINDO O SEU ESTILO
    ========================================================= */
 .mc-shop-section {
   padding: 40px var(--gutter) 80px var(--gutter);
@@ -12583,7 +12575,7 @@ ul {
   flex-wrap: wrap;
 }
 
-/* Botões de Filtro baseados no seu root clássico */
+/* Botões de Filtro baseados no seu estilo clássico */
 .rank-filter-btn {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -17985,7 +17977,7 @@ ul {
 /* CSS: INFORMAÇÕES EXTRAS DA HOST */
 .mc-info-host {
   background-color: #161616;
-  /* Uma variação sutil mantendo o tom escuro do root */
+  /* Uma variação sutil mantendo o tom escuro do estilo */
   padding: 80px var(--gutter);
   border-bottom: 1px solid var(--border);
 }
@@ -18158,26 +18150,6 @@ ul {
 /* ============================================================================================= */
 /* MEDIA QUERIES (RESPONSIVIDADE COMPLETA) */
 /* ============================================================================================= */
-
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap");
-
-/* O SEU ROOT OFICIAL INTEGRADO */
-:root {
-  --bg-dark: #121212;
-  --bg-card: #1d1d1d;
-  --bg-light: #2a2a2a;
-  --green-mc: #3c8527;
-  --green-hover: #52a535;
-  --gold: #f8cb47;
-  --text-main: #ffffff;
-  --text-muted: #a8a8a8;
-  --border: #333333;
-
-  --container-width: 1200px;
-  --gutter: 20px;
-  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
 
 /* ESTRUTURA E CARD */
 .mc-video-card {
@@ -18627,7 +18599,7 @@ ul {
   z-index: 1;
 }
 
-/* ALINHAMENTO INTERNO (Largura e Gutter do seu root) */
+/* ALINHAMENTO INTERNO (Largura e Gutter do seu estilo) */
 .rt-hero-container {
   position: relative;
   width: 100%;
@@ -18886,7 +18858,7 @@ ul {
   width: 32px;
   height: 32px;
   color: var(--green-mc);
-  /* Usa o verde clássico do seu root */
+  /* Usa o verde clássico do seu estilo */
   transition: color 0.2s var(--transition);
 }
 
@@ -19120,7 +19092,7 @@ ul {
 
 
 /* ==========================================
-   ESTILOS DOS CARDS DE MODOS DE JOGO (VARIÁVEIS :ROOT)
+   ESTILOS DOS CARDS DE MODOS DE JOGO (VARIÁVEIS :ESTILO)
 ========================================== */
 
 .tab-content {
@@ -21175,11 +21147,6 @@ ul {
 
 .minecraft-symbol-icon {
   font-size: 0.9rem;
-}
-
-.minecraft-action-arrow-icon {
-  color: #666666;
-  font-size: 0.75rem;
 }
 
 .minecraft-support-content-inner {
