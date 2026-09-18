@@ -19,26 +19,29 @@
   user-select: none;
 }
 
+/* Container da Jukebox e Partículas */
 .jukebox-item-container {
   position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  scale: 120%;
+  pointer-events: none;
+  /* Deixa o container transparente a cliques, permitindo tocar nos filhos */
 }
 
+/* O Bloco da Jukebox com Transição Suave */
 .jukebox-block {
-  width: 42px;
-  height: 42px;
-  cursor: pointer;
   position: relative;
-  transition: transform 0.15s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(15, 15, 18, 0.95);
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-  z-index: 1;
+  pointer-events: auto !important;
+  /* Garante o toque no mobile */
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 20;
+
+  /* Adiciona a transição suave para hover in e out */
+  transition: transform 0.25s ease, filter 0.25s ease;
 }
 
 /* Borda Radial Animada */
@@ -53,10 +56,12 @@
   pointer-events: none;
 }
 
+/* Efeito ao passar o mouse ou tocar (Hover In) */
 .jukebox-block:hover {
   transform: scale(1.08);
-  background: rgba(25, 25, 30, 0.95);
-  border-color: rgba(29, 185, 84, 0.6);
+  /* Aumenta levemente */
+  filter: brightness(1.15);
+  /* Dá um brilho sutil */
 }
 
 .jukebox-block:active {
@@ -7090,133 +7095,236 @@ ul {
 }
 
 /* ============================================================================================= */
-/* Container Geral */
+/* =======================================================
+   SEÇÃO DE CRIADORES DE CONTEÚDO (DARK THEME)
+======================================================= */
+
+/* =======================================================
+   SEÇÃO DE CRIADORES (SEM :ROOT - USANDO SUAS VARIÁVEIS)
+======================================================= */
+
 .creators-section {
-  background-color: #080808;
-  padding: 60px 20px;
+  background-color: var(--dark-bg);
+  padding: 30px 16px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Minecraft', monospace, sans-serif;
+  color: var(--zc-text);
 }
 
+/* Header da Categoria com Ícone Grande */
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto 16px auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--zc-border);
+}
+
+.category-header.margin-top {
+  margin-top: 40px;
+}
+
+/* Ícones Grandes da Seção */
+.category-icon {
+  font-size: 2.2rem;
+  flex-shrink: 0;
+}
+
+.category-icon.yt-color {
+  color: #ff3b3b;
+}
+
+.category-icon.twitch-color {
+  color: #a970ff;
+}
+
+.category-header h2 {
+  font-size: 1.1rem;
+  margin: 0 0 2px 0;
+  color: var(--zc-text);
+  letter-spacing: 0.5px;
+}
+
+.category-header p {
+  font-size: 0.78rem;
+  color: var(--zc-muted);
+  margin: 0;
+}
+
+/* Grid Compacta (Cards Lado a Lado) */
 .creators-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
+  gap: 16px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Estrutura do Card */
+/* Card Compacto */
 .creator-card {
-  background: #121212;
-  border: 1px solid #222;
-  padding: 20px;
+  background: var(--zc-bg-panel);
+  border: 1px solid var(--zc-border);
+  border-radius: 6px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  transition: 0.3s ease;
+  gap: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition: var(--transition-smooth);
 }
 
 .creator-card:hover {
-  border-color: #444;
+  background: var(--zc-bg-tab);
+  border-color: var(--border-light);
+  transform: translateY(-2px);
 }
 
-/* Cabeçalho */
-.card-header {
+/* Cabeçalho Compacto do Card */
+.card-header-compact {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .profile-sq {
-  width: 50px;
-  height: 50px;
-  border-radius: 4px;
+  width: 55px;
+  height: 55px;
+  border-radius: 6px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
-.header-text h3 {
-  color: #fff;
-  font-size: 1rem;
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-grow: 1;
+}
+
+.header-info h3 {
   margin: 0;
-  letter-spacing: 1px;
+  color: var(--zc-text);
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
+/* Tag Minimalista */
 .platform-tag {
-  font-size: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.58rem;
+  font-weight: 700;
   padding: 2px 6px;
-  font-weight: 900;
+  border-radius: 4px;
+  background: var(--zc-accent-soft);
+  color: var(--zc-text);
+  border: 1px solid var(--zc-border);
+  width: fit-content;
 }
 
-.youtube {
-  background: #ff0000;
-  color: #fff;
+.platform-tag.twitch {
+  background: rgba(169, 112, 255, 0.12);
+  color: #d8b4fe;
+  border-color: rgba(169, 112, 255, 0.25);
 }
 
-.twitch {
-  background: #9146ff;
-  color: #fff;
-}
-
-.card-description p {
-  color: #d1d1d1;
+/* Botão Link Externo Discreto */
+.btn-icon-link {
+  color: var(--zc-muted);
   font-size: 0.85rem;
-  line-height: 1.4;
-  margin: 0;
-}
-
-/* BANNER CLICÁVEL */
-.card-banner {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #000;
-  display: block;
-  border-radius: 2px;
-}
-
-.card-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: 0.5s ease;
-  opacity: 0.8;
-}
-
-.banner-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  padding: 6px;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: 0.3s ease;
 }
 
-.banner-overlay span {
-  color: #fff;
-  border: 1px solid #fff;
-  padding: 8px 15px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+.btn-icon-link:hover {
+  color: var(--zc-text);
+  background: var(--zc-bg-hover);
 }
 
-.card-banner:hover img {
-  transform: scale(1.05);
-  opacity: 1;
+/* Descrição Compacta */
+.card-description {
+  margin: 0;
+  color: var(--zc-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
 }
 
-.card-banner:hover .banner-overlay {
-  opacity: 1;
+/* Prévia em Vídeo Reduzida (Aspecto 16:9) */
+.media-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--dark-bg);
+  border: 1px solid var(--zc-border);
 }
 
-/* Rodapé e Botão */
+.media-preview iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Rodapé do Card */
+.card-footer-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--zc-border);
+}
+
 .cool-phrase {
-  font-size: 0.8rem;
-  color: #444;
+  font-size: 0.72rem;
   font-style: italic;
+  color: var(--zc-muted);
   text-align: center;
+}
+
+/* Botões de Ação */
+.btn-access {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  background: var(--verde-mc);
+  color: var(--zc-text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.btn-access:hover {
+  filter: brightness(1.1);
+  background-color: var(--verde-mc);
+}
+
+.btn-access.btn-twitch {
+  background: #6441a5;
+}
+
+.btn-access.btn-twitch:hover {
+  filter: brightness(1.15);
+}
+
+.btn-access:active {
+  transform: scale(0.98);
 }
 
 /* ============================================================================================= */

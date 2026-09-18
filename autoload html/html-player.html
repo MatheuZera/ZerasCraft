@@ -1,17 +1,17 @@
-<!-- ==========================================
-   PLAYER MINIMALISTA: SOMENTE A JUKEBOX
-========================================== -->
 <div class="minecraft-jukebox-wrapper">
   <audio id="backgroundAudio" preload="auto"></audio>
 
-  <!-- Central Message (UI Compacta com estados customizados) -->
+  <!-- Central Message com Status e Tempo Atual / Máximo -->
   <div id="centralMessage" class="central-message">
     <div id="msgIconWrapper" class="msg-icon-mini">
       <i id="msgIconType" class="fas fa-music"></i>
     </div>
     <div class="msg-text-group">
-      <span id="messageTitle" class="msg-title">Carregando...</span>
-      <span id="messageDuration" class="msg-duration">00:00</span>
+      <div class="msg-header">
+        <span id="messageStatus" class="msg-status">Tocando</span>
+        <span id="messageTitle" class="msg-title">Carregando...</span>
+      </div>
+      <span id="messageDuration" class="msg-duration">00m:00s / 00m:00s</span>
     </div>
   </div>
 
