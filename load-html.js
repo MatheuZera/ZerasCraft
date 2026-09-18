@@ -175,11 +175,11 @@ if (typeof window.unlockScroll !== "function") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const placeholder = document.getElementById("autoload html/nav-placeholder-mobile");
+  const placeholder = document.getElementById("nav-placeholder-mobile");
   if (!placeholder) return;
 
-  fetch("html-nav-mobile.html")
-    .then((res) => (res.ok ? res : fetch("../html-nav-mobile.html")))
+  fetch("autoload html/html-nav-mobile.html")
+    .then((res) => (res.ok ? res : fetch("autoload html/html-nav-mobile.html")))
     .then((res) => {
       if (!res.ok) throw new Error("Falha ao carregar html-nav-mobile.html");
       return res.text();
