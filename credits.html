@@ -352,10 +352,10 @@
         const ZerasAudio = {
             audioId: 'backgroundAudio',
             playlist: [
-                'assets/audios/musics/end/Credits.mp3',
+                'assets/audios/musics/background/Credits.mp3',
             ],
             currentIndex: 0,
-            startTimeSeconds: 210, // 3 minutos e 30 segundos (3 * 60 + 30)
+            startTimeSeconds: 240, // 3 minutos e 30 segundos (3 * 60 + 30)
 
             init() {
                 let audio = document.getElementById(this.audioId);
@@ -367,7 +367,7 @@
                 }
 
                 const savedVolume = localStorage.getItem('audioBackgroundVolume');
-                audio.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.3;
+                audio.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.5;
 
                 // Quando a música terminar, reinicia a partir de 3:30 e reproduz novamente em loop
                 audio.addEventListener('ended', () => {
