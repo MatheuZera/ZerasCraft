@@ -115,39 +115,34 @@ document.querySelectorAll(".filter-btn").forEach((btn) => {
     });
   });
 });
+
 /* ============================================================================================= */
-// Lógica de Troca de Abas
-window.switchTab = function (evt, tabName) {
-  // Impede o navegador de tentar seguir um link ou recarregar
-  if (evt) evt.preventDefault();
-
-  const tabContents = document.querySelectorAll(".tab-content");
-  const tabBtns = document.querySelectorAll(".tab-btn");
-
-  // 1. Esconde tudo com prioridade máxima
-  tabContents.forEach((content) => {
-    content.style.setProperty("display", "none", "important");
+/* TROCA DE ABAS REGRAS EQUIPE E VOTAÇÃO */
+function switchTab(evt, tabId) {
+  // Oculta todos os conteúdos
+  const contents = document.querySelectorAll(".tab-content");
+  contents.forEach(function (content) {
     content.classList.remove("active");
   });
 
-  // 2. Reseta botões
-  tabBtns.forEach((btn) => {
+  // Remove o estado ativo de todos os botões
+  const buttons = document.querySelectorAll(".tab-btn");
+  buttons.forEach(function (btn) {
     btn.classList.remove("active");
+    btn.setAttribute("aria-selected", "false");
   });
 
-  // 3. Mostra a aba correta
-  const target = document.getElementById(tabName);
-  if (target) {
-    target.style.setProperty("display", "block", "important");
-    setTimeout(() => {
-      target.classList.add("active");
-    }, 10);
+  // Mostra o painel selecionado
+  const activeTab = document.getElementById(tabId);
+  if (activeTab) {
+    activeTab.classList.add("active");
   }
 
-  if (evt && evt.currentTarget) {
-    evt.currentTarget.classList.add("active");
-  }
-};
+  // Ativa o botão clicado
+  evt.currentTarget.classList.add("active");
+  evt.currentTarget.setAttribute("aria-selected", "true");
+}
+
 /* ============================================================================================= */
 function toggleAccordion(element) {
   const item = element.parentElement; // Pega o .acc-item
@@ -325,69 +320,6 @@ function moveWorld(direction) {
   }
 }
 
-/* ==========================================
-   CONTROLE DO LIGHTBOX DA GALERIA
-========================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. Cria dinamicamente a estrutura HTML do Lightbox no final do body
-  const lightboxHTML = `
-        <div id="gallery-lightbox" class="gallery-lightbox">
-            <span class="lightbox-close">&times;</span>
-            <img class="lightbox-img" src="" alt="Ampliação da Imagem">
-        </div>
-    `;
-
-  // Insere o modal apenas se ele já não existir na página
-  if (!document.getElementById("gallery-lightbox")) {
-    document.body.insertAdjacentHTML("beforeend", lightboxHTML);
-  }
-
-  const lightbox = document.getElementById("gallery-lightbox");
-  const lightboxImg = lightbox.querySelector(".lightbox-img");
-  const closeBtn = lightbox.querySelector(".lightbox-close");
-  const galleryItems = document.querySelectorAll(".gallery-item");
-
-  // 2. Abre o lightbox ao clicar em qualquer card da galeria
-  galleryItems.forEach(item => {
-    item.addEventListener("click", () => {
-      const img = item.querySelector("img");
-      if (img) {
-        lightboxImg.src = img.src;
-        lightbox.classList.add("active");
-        document.body.classList.add("z-lock-scroll"); // Trava a rolagem da página (usa sua classe do :root)
-      }
-    });
-  });
-
-  // 3. Função para fechar o lightbox
-  const closeLightbox = () => {
-    lightbox.classList.remove("active");
-    document.body.classList.remove("z-lock-scroll");
-
-    // Limpa o src após a animação para evitar flash da imagem antiga ao reabrir
-    setTimeout(() => {
-      if (!lightbox.classList.contains("active")) {
-        lightboxImg.src = "";
-      }
-    }, 300);
-  };
-
-  // Eventos de fechamento (Botão X, clique no fundo escuro ou tecla ESC)
-  closeBtn.addEventListener("click", closeLightbox);
-
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-      closeLightbox();
-    }
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightbox.classList.contains("active")) {
-      closeLightbox();
-    }
-  });
-});
 /* ============================================================================================= */
 document.addEventListener("DOMContentLoaded", () => {
   const bundleBtn = document.querySelector(".bundle-btn");
@@ -916,6 +848,7 @@ function toggleDescription(evt, btnElement) {
     btnText.innerText = "Mostrar mais";
   }
 }
+
 /* ============================================================================================= */
 /* ==========================================
    BANNER DE CHECKOUT INTELIGENTE (SCROLL)
@@ -1093,77 +1026,7 @@ function toggleExplorer(card) {
 function toggleMcAcc(element) {
   element.classList.toggle("active");
 }
-/* ============================================================================================= */
-/* ==========================================
-   SISTEMA DE GALERIA (LIGHTBOX / TELA CHEIA)
-========================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. Cria o Modal no fundo do site dinamicamente
-  const lightboxHTML = `
-        <div class="gallery-lightbox" id="galleryLightbox">
-            <span class="lightbox-close" id="lightboxClose">&times;</span>
-            <img class="lightbox-img" id="lightboxImg" src="">
-        </div>
-    `;
-  document.body.insertAdjacentHTML("beforeend", lightboxHTML);
 
-  const lightbox = document.getElementById("galleryLightbox");
-  const lightboxImg = document.getElementById("lightboxImg");
-  const closeBtn = document.getElementById("lightboxClose");
-  const galleryItems = document.querySelectorAll(".gallery-item");
-
-  // 2. Abrir a imagem em tela cheia
-  galleryItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      const img = item.querySelector("img");
-      if (img) {
-        lightboxImg.src = img.src; // Copia a foto do card pro modal
-        lightbox.classList.add("active");
-
-        // Trava a rolagem do site usando sua função existente (se houver)
-        if (typeof lockScroll === "function") {
-          lockScroll();
-        } else {
-          document.body.style.overflow = "hidden";
-        }
-      }
-    });
-  });
-
-  // 3. Fechar a imagem (Função central)
-  function closeGallery() {
-    lightbox.classList.remove("active");
-
-    // Limpa o src depois da animação terminar para não piscar
-    setTimeout(() => {
-      lightboxImg.src = "";
-    }, 300);
-
-    // Destrava a rolagem do site
-    if (typeof unlockScroll === "function") {
-      unlockScroll();
-    } else {
-      document.body.style.overflow = "";
-    }
-  }
-
-  // 4. Gatilhos para fechar
-  closeBtn.addEventListener("click", closeGallery); // Clicando no "X"
-
-  lightbox.addEventListener("click", (e) => {
-    // Clicando fora da imagem
-    if (e.target === lightbox) {
-      closeGallery();
-    }
-  });
-
-  document.addEventListener("keydown", (e) => {
-    // Apertando ESC
-    if (e.key === "Escape" && lightbox.classList.contains("active")) {
-      closeGallery();
-    }
-  });
-});
 /* ============================================================================================= */
 /* ==========================================
    MÓDULO: STATUS DO DISCORD & METAS (+100%)

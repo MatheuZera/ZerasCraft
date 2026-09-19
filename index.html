@@ -1030,203 +1030,195 @@
       </div>
     </section>
 
-    <section class="minecraft-custom-portal-wrap">
-      <div class="minecraft-portal-inner-container">
+    <!-- Seção Principal de Downloads e Suporte -->
+    <section class="dl-support-wrapper">
 
-        <nav class="minecraft-portal-nav-bar">
-          <button class="minecraft-tab-navigation-btn active"
-            onclick="switchMinecraftTab(event, 'minecraft-downloads-pane')">
-            <span class="minecraft-tab-icon-symbol">ℹ</span> DOWNLOADS DA VERSÃO DE TESTE
-          </button>
-          <button class="minecraft-tab-navigation-btn" onclick="switchMinecraftTab(event, 'minecraft-support-pane')">
-            <span class="minecraft-tab-icon-symbol">⛏</span> SUPORTE
-          </button>
-        </nav>
+      <!-- Menu de Abas Superior -->
+      <div class="dl-support-tabs-header">
+        <button class="dl-tab-btn active" onclick="switchSupportTab(event, 'downloads-tab')">
+          <span class="dl-tab-icon"><i class="fas fa-box"></i></span> DOWNLOADS DA VERSÃO DE TESTE
+        </button>
+        <button class="dl-tab-btn" onclick="switchSupportTab(event, 'support-tab')">
+          <span class="dl-tab-icon"><i class="fas fa-book"></i></span> SUPORTE
+        </button>
+        <div class="dl-tabs-indicator"></div>
+      </div>
 
-        <div class="minecraft-section-divider-line"></div>
+      <!-- Conteúdo da Aba 1: Downloads da Versão de Teste -->
+      <div id="downloads-tab" class="dl-tab-content active">
 
-        <div class="minecraft-tab-content-pane active" id="minecraft-downloads-pane">
-
-          <div class="minecraft-edition-group-box">
-            <h2 class="minecraft-edition-main-title">MINECRAFT BEDROCK EDITION</h2>
-
-            <div class="minecraft-platforms-grid-row bedrock-layout-row">
-              <a href="#" class="minecraft-platform-card-item">
-                <span class="minecraft-platform-label-text"><span class="minecraft-symbol-icon">🪟</span> WINDOWS
-                  10/11</span>
-                <span class="minecraft-action-arrow-icon">↗</span>
-              </a>
-              <a href="#" class="minecraft-platform-card-item">
-                <span class="minecraft-platform-label-text"><span class="minecraft-symbol-icon">🎮</span>
-                  PLAYSTATION</span>
-                <span class="minecraft-action-arrow-icon">↗</span>
-              </a>
-              <a href="#" class="minecraft-platform-card-item">
-                <span class="minecraft-platform-label-text"><span class="minecraft-symbol-icon">🤖</span> ANDROID</span>
-                <span class="minecraft-action-arrow-icon">↗</span>
-              </a>
-            </div>
+        <!-- Bloco Bedrock Edition -->
+        <div class="dl-category-block">
+          <h2 class="dl-section-heading">MINECRAFT BEDROCK EDITION</h2>
+          <div class="dl-links-grid-3">
+            <a href="#" class="dl-platform-item">
+              <span class="dl-plat-name"><i class="fab fa-windows"></i> WINDOWS 10/11</span>
+              <span class="dl-plat-arrow">↗</span>
+            </a>
+            <a href="#" class="dl-platform-item">
+              <span class="dl-plat-name"><i class="fab fa-playstation"></i> PLAYSTATION</span>
+              <span class="dl-plat-arrow">↗</span>
+            </a>
+            <a href="#" class="dl-platform-item">
+              <span class="dl-plat-name"><i class="fab fa-android"></i> ANDROID</span>
+              <span class="dl-plat-arrow">↗</span>
+            </a>
+            <a href="#" class="dl-platform-item">
+              <span class="dl-plat-name"><i class="fab fa-apple"></i> IOS</span>
+              <span class="dl-plat-arrow">↗</span>
+            </a>
+            <a href="#" class="dl-platform-item">
+              <span class="dl-plat-name"><i class="fas fa-tablet"></i> NINTENDO SWITCH</span>
+              <span class="dl-plat-arrow">↗</span>
+            </a>
           </div>
-
-          <div class="minecraft-edition-group-box">
-            <h2 class="minecraft-edition-main-title">MINECRAFT JAVA EDITION</h2>
-
-            <div class="minecraft-platforms-grid-wrapper java-layout-wrapper">
-              <div class="minecraft-grid-row-three">
-                <a href="#" class="minecraft-platform-card-item">
-                  <span class="minecraft-platform-label-text"><span class="minecraft-symbol-icon">🪟</span> WINDOWS
-                    10/11</span>
-                  <span class="minecraft-action-arrow-icon">📥</span>
-                </a>
-                <a href="#" class="minecraft-platform-card-item">
-                  <span class="minecraft-platform-label-text"><span class="minecraft-symbol-icon">🐧</span> LINUX</span>
-                  <span class="minecraft-action-arrow-icon">📥</span>
-                </a>
-                <a href="#" class="minecraft-platform-card-item">
-                  <span class="minecraft-platform-label-text"><span class="minecraft-symbol-icon">💿</span> DEBIAN +
-                    BASEADO EM DEBIAN</span>
-                  <span class="minecraft-action-arrow-icon">📥</span>
-                </a>
-              </div>
-
-              <div class="minecraft-grid-row-two-corrected">
-                <a href="#" class="minecraft-platform-card-item">
-                  <span class="minecraft-platform-label-text"><span class="minecraft-symbol-icon">🍎</span> MAC</span>
-                  <span class="minecraft-action-arrow-icon">📥</span>
-                </a>
-                <a href="#" class="minecraft-platform-card-item">
-                  <span class="minecraft-platform-label-text"><span class="minecraft-symbol-icon">🔺</span> ARCH +
-                    BASEADO EM ARCH</span>
-                  <span class="minecraft-action-arrow-icon">↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
         </div>
 
-        <div class="minecraft-tab-content-pane" id="minecraft-support-pane">
-          <div class="minecraft-support-content-inner">
-
-            <div class="minecraft-support-header-block">
-              <h2 class="minecraft-edition-main-title">COMO PODEMOS AJUDAR?</h2>
-              <p class="minecraft-support-subtitle-text">Tente buscar nos nossos artigos de suporte do Minecraft.</p>
-            </div>
-
-            <div class="minecraft-support-search-wrap">
-              <span class="minecraft-support-search-label">Pesquisar</span>
-              <div class="minecraft-support-search-box">
-                <span class="minecraft-symbol-icon">🔍</span>
-                <input type="text" placeholder="Pesquisar artigos de suporte" class="minecraft-support-search-input">
-              </div>
-            </div>
-
-            <div class="minecraft-support-section-block">
-              <h2 class="minecraft-edition-main-title">ARTIGOS DE SOLUÇÃO DE PROBLEMAS</h2>
-              <ul class="minecraft-support-links-list">
-                <li><a href="#" class="minecraft-support-link-item">Como baixar e instalar o Minecraft Launcher</a></li>
-                <li><a href="#" class="minecraft-support-link-item">Solução de problemas na instalação do Minecraft
-                    Launcher</a></li>
-                <li><a href="#" class="minecraft-support-link-item">Como usar o Jogo Rápido no Minecraft Launcher</a>
-                </li>
-                <li><a href="#" class="minecraft-support-link-item">Solução de problemas: erro ao conectar aos serviços
-                    do Minecraft após o login no Minecraft Launcher</a></li>
-                <li><a href="#" class="minecraft-support-link-item">O Minecraft Launcher trava ao fazer login</a></li>
-              </ul>
-            </div>
-
-            <div class="minecraft-support-section-block">
-              <h2 class="minecraft-edition-main-title">PERGUNTAS FREQUENTES SOBRE A VERSÃO DE TESTE GRATUITA DO
-                MINECRAFT</h2>
-              <div class="minecraft-support-accordion-list">
-
-                <div class="minecraft-support-accordion-group">
-                  <div class="minecraft-support-accordion-item" onclick="toggleMinecraftAccordion(this)">
-                    <span>COMO OBTER A VERSÃO DE TESTE GRATUITA DO MINECRAFT?</span>
-                    <span class="minecraft-accordion-arrow">▼</span>
-                  </div>
-                  <div class="minecraft-support-accordion-content">
-                    <p>Para obter a versão de teste gratuita, acesse a página oficial do Minecraft na sua plataforma
-                      compatível, faça login com sua conta Microsoft e selecione a opção de baixar a versão de teste
-                      gratuita (Demo).</p>
-                  </div>
-                </div>
-
-                <div class="minecraft-support-accordion-group">
-                  <div class="minecraft-support-accordion-item" onclick="toggleMinecraftAccordion(this)">
-                    <span>POSSO JOGAR NO MODO MULTIJOGADOR DURANTE A VERSÃO DE TESTE GRATUITA DO MINECRAFT?</span>
-                    <span class="minecraft-accordion-arrow">▼</span>
-                  </div>
-                  <div class="minecraft-support-accordion-content">
-                    <p>Não, o modo multijogador online geralmente fica desativado na versão de teste gratuita do
-                      Minecraft. A experiência é focada em testar o mundo single-player por um tempo limitado.</p>
-                  </div>
-                </div>
-
-                <div class="minecraft-support-accordion-group">
-                  <div class="minecraft-support-accordion-item" onclick="toggleMinecraftAccordion(this)">
-                    <span>A VERSÃO DE TESTE GRATUITA DO MINECRAFT É COMPATÍVEL COM MAC E PC?</span>
-                    <span class="minecraft-accordion-arrow">▼</span>
-                  </div>
-                  <div class="minecraft-support-accordion-content">
-                    <p>Sim! A versão de teste do Minecraft Java Edition está disponível para Windows, macOS e Linux
-                      através do Launcher oficial.</p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
+        <!-- Bloco Java Edition -->
+        <div class="dl-category-block">
+          <h2 class="dl-section-heading">MINECRAFT JAVA EDITION</h2>
+          <div class="dl-links-grid-3">
+            <a href="#" class="dl-platform-item">
+              <span class="dl-plat-name"><i class="fab fa-windows"></i> WINDOWS 10/11</span>
+              <span class="dl-plat-arrow">↓</span>
+            </a>
+            <a href="#" class="dl-platform-item">
+              <span class="dl-plat-name"><i class="fab fa-linux"></i> LINUX</span>
+              <span class="dl-plat-arrow">↓</span>
+            </a>
+            <a href="#" class="dl-platform-item">
+              <span class="dl-plat-name"><i class="fab fa-apple"></i> MAC</span>
+              <span class="dl-plat-arrow">↓</span>
+            </a>
           </div>
         </div>
 
       </div>
+
+      <!-- Conteúdo da Aba 2: Suporte -->
+      <div id="support-tab" class="dl-tab-content">
+
+        <!-- Barra de Pesquisa -->
+        <div class="dl-support-intro">
+          <h2 class="dl-section-heading">COMO PODEMOS AJUDAR?</h2>
+          <p class="dl-support-desc">Tente buscar nos nossos artigos de suporte do Minecraft.</p>
+
+          <div class="dl-search-box-wrapper">
+            <label for="dl-support-search" class="dl-search-label">Pesquisar</label>
+            <div class="dl-search-input-container">
+              <span class="dl-search-icon">🔍</span>
+              <input type="text" id="dl-support-search" class="dl-search-input"
+                placeholder="Pesquisar artigos de suporte">
+            </div>
+          </div>
+        </div>
+
+        <!-- Artigos de Solução de Problemas -->
+        <div class="dl-category-block">
+          <h2 class="dl-section-heading">ARTIGOS DE SOLUÇÃO DE PROBLEMAS</h2>
+          <ul class="dl-articles-list">
+            <li><a href="#">Como baixar e instalar o Minecraft Launcher</a></li>
+            <li><a href="#">Solução de problemas na instalação do Minecraft Launcher</a></li>
+            <li><a href="#">Como usar o Jogo Rápido no Minecraft Launcher</a></li>
+            <li><a href="#">Solução de problemas: erro ao conectar aos serviços do Minecraft após o login no Minecraft
+                Launcher</a></li>
+            <li><a href="#">O Minecraft Launcher trava ao fazer login</a></li>
+          </ul>
+        </div>
+
+        <!-- Perguntas Frequentes (Acordeão) -->
+        <div class="dl-category-block">
+          <h2 class="dl-section-heading">PERGUNTAS FREQUENTES SOBRE A VERSÃO DE TESTE GRATUITA DO MINECRAFT</h2>
+
+          <!-- Acordeão 1 -->
+          <div class="dl-accordion-item">
+            <button class="dl-accordion-header" onclick="toggleAccordion(this)">
+              <span>O QUE O TESTE GRATUITO DO MINECRAFT INCLUI?</span>
+              <span class="dl-accordion-arrow"><i class="fa-solid fa-angle-down"></i></span>
+            </button>
+            <div class="dl-accordion-body">
+              <p>O teste gratuito do Minecraft permite que você jogue a experiência completa do jogo principal no
+                <strong>modo Sobrevivência</strong>, incluindo criação, exploração e combate, para que você possa testar
+                a jogabilidade antes de comprar.
+              </p>
+            </div>
+          </div>
+
+          <!-- Acordeão 2 -->
+          <div class="dl-accordion-item">
+            <button class="dl-accordion-header" onclick="toggleAccordion(this)">
+              <span>POSSO JOGAR OFFLINE COM UM TESTE GRATUITO DO MINECRAFT?</span>
+              <span class="dl-accordion-arrow"><i class="fa-solid fa-angle-down"></i></span>
+            </button>
+            <div class="dl-accordion-body">
+              <p>Para iniciar e validar a versão de teste gratuita, é necessária uma conexão com a internet. Dependendo
+                da plataforma, algumas funções podem exigir conexão contínua.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <section class="minecraft-custom-portal-wrap2">
-      <div class="minecraft-portal-inner-container">
+    <!-- Seção: Como Iniciar uma Avaliação Gratuita -->
+    <section class="trial-guide-wrapper">
 
-        <!-- Seção de Passos Baseada na Imagem Oficial -->
-        <div class="minecraft-steps-showcase-section">
-          <h2 class="minecraft-showcase-main-heading">COMO INICIAR UMA AVALIAÇÃO GRATUITA</h2>
+      <div class="trial-container">
 
-          <div class="minecraft-steps-grid-row">
+        <!-- Cabeçalho -->
+        <div class="trial-header">
+          <h2 class="trial-main-title">COMO INICIAR UMA AVALIAÇÃO GRATUITA</h2>
+        </div>
 
-            <div class="minecraft-step-card-item">
-              <div class="minecraft-step-image-container">
-                <img
-                  src="https://imgs.search.brave.com/N5-FwBhBTy4VJ3iRBgcSLmEG19cMjMxN6Z91hipAvwU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbmdp/bWcuY29tL3VwbG9h/ZHMvbWluZWNyYWZ0/L3NtYWxsL21pbmVj/cmFmdF9QTkcxMDIu/cG5n"
-                  alt="Baixar Piston Minecraft" class="minecraft-step-visual-img">
-              </div>
-              <h3 class="minecraft-step-title-text">1: Baixar</h3>
-              <p class="minecraft-step-desc-text">Selecione abaixo a opção de download correspondente ao dispositivo
-                desejado.</p>
+        <!-- Grelha de Passos (3 Colunas) -->
+        <div class="trial-steps-grid">
+
+          <!-- Passo 1: Baixar -->
+          <div class="trial-step-card">
+            <div class="trial-image-box">
+              <img
+                src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7c/Bee_types.gif/revision/latest?cb=20240729213952"
+                alt="Ícone Pistão Minecraft" class="trial-step-img">
             </div>
-
-            <div class="minecraft-step-card-item">
-              <div class="minecraft-step-image-container">
-                <img
-                  src="https://imgs.search.brave.com/5T_UHH5Kf3eu-WBJGJTHxJ-hDnm8N8LQ1e2dsWCA6Jk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzI5L2Ex/L2IwLzI5YTFiMGE5/MTljMTZiNjU3MjJh/MDJhNmY5YjI0YzE0/LmpwZw"
-                  alt="Entrar Conta Microsoft" class="minecraft-step-visual-img">
-              </div>
-              <h3 class="minecraft-step-title-text">2: Entrar</h3>
-              <p class="minecraft-step-desc-text">Entre ou crie uma conta Microsoft para começar.</p>
+            <div class="trial-content-box">
+              <span class="trial-step-number">1: Baixar</span>
+              <p class="trial-step-desc">Selecione abaixo a opção de download correspondente ao dispositivo desejado.
+              </p>
             </div>
-
-            <div class="minecraft-step-card-item">
-              <div class="minecraft-step-image-container">
-                <img
-                  src="https://imgs.search.brave.com/iyg26cMDVDmczDTlBem_kYES8yktherdSpmptBIoHq0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9taW5l/Y3JhZnQud2lraS9p/bWFnZXMvdGh1bWIv/UmFuYS5wbmcvMTUw/cHgtUmFuYS5wbmc_/YTFhODg"
-                  alt="Experimente Gratuitamente" class="minecraft-step-visual-img">
-              </div>
-              <h3 class="minecraft-step-title-text">3: Experimente o Minecraft gratuitamente!</h3>
-              <p class="minecraft-step-desc-text">Inicie a versão de teste gratuita no seu dispositivo.</p>
-            </div>
-
           </div>
+
+          <!-- Passo 2: Entrar -->
+          <div class="trial-step-card">
+            <div class="trial-image-box">
+              <img
+                src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/5a/Blaze.gif/revision/latest?cb=20230214143150"
+                alt="Ícone Árvore e Abelha" class="trial-step-img">
+            </div>
+            <div class="trial-content-box">
+              <span class="trial-step-number">2: Entrar</span>
+              <p class="trial-step-desc">Entre ou crie uma conta Microsoft para começar.</p>
+            </div>
+          </div>
+
+          <!-- Passo 3: Experimentar -->
+          <div class="trial-step-card">
+            <div class="trial-image-box">
+              <img
+                src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/0a/Ender_Dragon.gif/revision/latest?cb=20210107043116"
+                alt="Steve e Alex Minecraft" class="trial-step-img">
+            </div>
+            <div class="trial-content-box">
+              <span class="trial-step-number">3: Experimente o Minecraft gratuitamente!</span>
+              <p class="trial-step-desc">Inicie a versão de teste gratuita no seu dispositivo.</p>
+            </div>
+          </div>
+
         </div>
 
       </div>
+
     </section>
 
     <section class="minecraft-custom-portal-wrap">
@@ -1236,7 +1228,7 @@
         <div class="minecraft-games-showcase-wrapper">
 
           <!-- Imagem Lateral Esquerda -->
-          <div class="minecraft-side-artwork-box1 minecraft-left-artwork">
+          <div class="minecraft-side-artwork-box minecraft-left-artwork">
             <img
               src="https://imgs.search.brave.com/AQV6-3i0DVDdboJK5zQTbgE73jTItFhqIGhJUi_-_Zg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9taW5l/Y3JhZnQud2lraS9p/bWFnZXMvdGh1bWIv/MC4wLjIzYV8wMV8o/cmVtYWtlKV9IdW1h/bl92aWV3LnBuZy8y/NDBweC0wLjAuMjNh/XzAxXyhyZW1ha2Up/X0h1bWFuX3ZpZXcu/cG5nP2I0OWJk"
               alt="Personagens Minecraft Esquerda" class="minecraft-artwork-img">
@@ -1296,12 +1288,13 @@
             </div>
           </div>
 
-          <!-- Imagem Lateral Direita (Corrigida) -->
-          <div class="minecraft-side-artwork-box2 minecraft-right-artwork">
+          <!-- Imagem Lateral Direita -->
+          <div class="minecraft-side-artwork-box minecraft-right-artwork">
             <img
               src="https://imgs.search.brave.com/-LIap5nWoq9F3AyXb2WWW044zpIFf1Ym7xaz2iIXzs4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9taW5l/Y3JhZnQud2lraS9p/bWFnZXMvdGh1bWIv/TUNTTV9DcmVlcGVy/X0V4cGxvZGluZ18o/U2Vhc29uX09uZSku/d2VicC8xNjBweC1N/Q1NNX0NyZWVwZXJf/RXhwbG9kaW5nXyhT/ZWFzb25fT25lKS53/ZWJwPzlmMjkx"
               alt="Personagens Minecraft Direita" class="minecraft-artwork-img">
           </div>
+
         </div>
 
       </div>
@@ -1310,30 +1303,41 @@
     <section class="minecraft-custom-portal-wrap2">
       <div class="minecraft-portal-inner-container">
 
-        <!-- Seção de Artigos e Conteúdos Baseada na Imagem Oficial -->
+        <!-- Seção de Artigos e Conteúdos -->
         <div class="minecraft-articles-showcase-section">
-
           <div class="minecraft-articles-grid-row">
 
             <!-- Coluna 1: Novos Artigos -->
             <div class="minecraft-articles-column-item">
               <h2 class="minecraft-column-main-heading">NOVOS ARTIGOS</h2>
               <ul class="minecraft-articles-links-list">
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-box"></i> Como o Minecraft
-                    armazena arquivos de mundos no seu
-                    dispositivo Android</a></li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-bug"></i> Solucionar erros de login
-                    da conta Microsoft no
-                    Minecraft no PlayStation</a></li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-download"></i> Atualizar Minecraft
-                    manualmente em dispositivos
-                    móveis</a></li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-user"></i> Obtenha ajuda para
-                    entrar no Minecraft com sua conta
-                    Microsoft</a></li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-box minecraft-article-icon"></i>
+                    <span>Como o Minecraft armazena arquivos de mundos no seu dispositivo Android</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-bug minecraft-article-icon"></i>
+                    <span>Solucionar erros de login da conta Microsoft no Minecraft no PlayStation</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-download minecraft-article-icon"></i>
+                    <span>Atualizar Minecraft manualmente em dispositivos móveis</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-user minecraft-article-icon"></i>
+                    <span>Obtenha ajuda para entrar no Minecraft com sua conta Microsoft</span>
+                  </a>
+                </li>
               </ul>
-              <a href="#" class="minecraft-view-all-link"><i class="fas fa-book"></i> Ver todos os artigos <span
-                  class="minecraft-link-arrow">›</span>
+              <a href="#" class="minecraft-view-all-link">
+                <i class="fas fa-book"></i> Ver todos os artigos <span class="minecraft-link-arrow">›</span>
               </a>
             </div>
 
@@ -1341,123 +1345,145 @@
             <div class="minecraft-articles-column-item">
               <h2 class="minecraft-column-main-heading">ARTIGOS EM DESTAQUE</h2>
               <ul class="minecraft-articles-links-list">
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-sun"></i> Saiba mais sobre o modo
-                    gráfico Visuals
-                    Vibrantes</a></li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-video"></i> Otimizando as
-                    configurações de vídeo e desempenho do
-                    Minecraft: Bedrock Edition</a></li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-arrows"></i> Diferenças entre
-                    Minecraft: Java Edition e
-                    Minecraft: Bedrock Edition</a></li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-list"></i> Descubra quais edições
-                    de Minecraft para PC você
-                    possui</a></li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-sun minecraft-article-icon"></i>
+                    <span>Saiba mais sobre o modo gráfico Visuals Vibrantes</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-video minecraft-article-icon"></i>
+                    <span>Otimizando as configurações de vídeo e desempenho do Minecraft: Bedrock Edition</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-arrows-alt minecraft-article-icon"></i>
+                    <span>Diferenças entre Minecraft: Java Edition e Minecraft: Bedrock Edition</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-list minecraft-article-icon"></i>
+                    <span>Descubra quais edições de Minecraft para PC você possui</span>
+                  </a>
+                </li>
               </ul>
-              <a href="#" class="minecraft-view-all-link"><i class="fas fa-book"></i> Ver todos os artigos <span
-                  class="minecraft-link-arrow">›</span>
+              <a href="#" class="minecraft-view-all-link">
+                <i class="fas fa-book"></i> Ver todos os artigos <span class="minecraft-link-arrow">›</span>
               </a>
             </div>
 
-            <!-- Coluna 3: Artistas Populares (Artigos Populares) -->
+            <!-- Coluna 3: Artigos Populares -->
             <div class="minecraft-articles-column-item">
-              <h2 class="minecraft-column-main-heading">ARTISTAS POPULARES</h2>
+              <h2 class="minecraft-column-main-heading">ARTIGOS POPULARES</h2>
               <ul class="minecraft-articles-links-list">
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-users"></i> Gerenciando o acesso ao
-                    jogo multiplayer para uma
-                    conta infantil no Minecraft</a></li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-user"></i> Configurar grupos de
-                    membros da família da Microsoft
-                    para Controle dos Pais no Minecraft</a></li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-gamepad"></i> Atualize o Minecraft
-                    manualmente nos consoles</a>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-users minecraft-article-icon"></i>
+                    <span>Gerenciando o acesso ao jogo multiplayer para uma conta infantil no Minecraft</span>
+                  </a>
                 </li>
-                <li><a href="#" class="minecraft-article-link-item"><i class="fas fa-mobile"></i> Atualizar Minecraft
-                    manualmente em dispositivos
-                    móveis</a></li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-user-shield minecraft-article-icon"></i>
+                    <span>Configurar grupos de membros da família da Microsoft para Controle dos Pais</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-gamepad minecraft-article-icon"></i>
+                    <span>Atualize o Minecraft manualmente nos consoles</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="minecraft-article-link-item">
+                    <i class="fas fa-mobile-alt minecraft-article-icon"></i>
+                    <span>Atualizar Minecraft manualmente em dispositivos móveis</span>
+                  </a>
+                </li>
               </ul>
-              <a href="#" class="minecraft-view-all-link"><i class="fas fa-book"></i> Ver todos os artigos <span
-                  class="minecraft-link-arrow">›</span>
+              <a href="#" class="minecraft-view-all-link">
+                <i class="fas fa-book"></i> Ver todos os artigos <span class="minecraft-link-arrow">›</span>
               </a>
             </div>
 
           </div>
-
         </div>
 
       </div>
     </section>
 
-    <section class="minecraft-custom-portal-wrap">
-      <div class="minecraft-portal-inner-container">
+    <section class="mc-news-portal-section">
+      <div class="mc-news-inner-container">
 
-        <div class="minecraft-news-grid-layout">
+        <div class="mc-news-layout-grid">
 
-          <!-- Card Principal (Esquerda - Vertical) -->
-          <div class="minecraft-news-card-main">
-            <div class="minecraft-news-image-box main-img-box">
+          <!-- Card Principal (Destaque à Esquerda) -->
+          <article class="mc-news-main-card">
+            <div class="mc-news-media-box mc-main-media">
               <img src="https://www.minecraft.net/content/dam/minecraft/home/images/drop-preview.jpg"
-                alt="Test the final features from our upcoming drop" class="minecraft-news-banner-img">
+                alt="Test the final features from our upcoming drop" class="mc-news-img">
             </div>
-            <div class="minecraft-news-content-box">
-              <div class="minecraft-news-text-group">
-                <h3 class="minecraft-news-title-large">Test the final features from our upcoming drop</h3>
-                <p class="minecraft-news-desc-text">This week, find treasure maps in camps and build with concrete slabs
-                  & stairs! And ICYMI, check out the dappled forest, abandoned camp, cushion, and many more features!
-                </p>
+            <div class="mc-news-info-box">
+              <div class="mc-news-text-stack">
+                <h3 class="mc-news-title-main">Test the final features from our upcoming drop</h3>
+                <p class="mc-news-desc-main">This week, find treasure maps in camps and build with concrete slabs &
+                  stairs! And ICYMI, check out the dappled forest, abandoned camp, cushion, and many more features!</p>
               </div>
-              <a href="#" class="minecraft-news-action-btn btn-green">
-                READ MORE <span class="minecraft-btn-arrow">›</span>
+              <a href="#" class="mc-news-cta-btn mc-btn-green">
+                READ MORE <span class="mc-cta-arrow">›</span>
               </a>
             </div>
-          </div>
+          </article>
 
-          <!-- Coluna Direita (Cards com Imagem ao Lado) -->
-          <div class="minecraft-news-column-side">
+          <!-- Coluna Direita (Cards Horizontais) -->
+          <div class="mc-news-side-column">
 
             <!-- Card Lateral 1 -->
-            <div class="minecraft-news-card-horizontal">
-              <div class="minecraft-news-image-box horizontal-img-box">
+            <article class="mc-news-horizontal-card">
+              <div class="mc-news-media-box mc-side-media">
                 <img src="https://www.minecraft.net/content/dam/minecraft/home/images/dungeons-2.jpg"
-                  alt="Minecraft Dungeons II gameplay reveal & date announce" class="minecraft-news-banner-img">
+                  alt="Minecraft Dungeons II gameplay reveal & date announce" class="mc-news-img">
               </div>
-              <div class="minecraft-news-content-box horizontal-content">
-                <div class="minecraft-news-text-group">
-                  <h3 class="minecraft-news-title-side">Minecraft Dungeons II gameplay reveal & date announce</h3>
-                  <p class="minecraft-news-desc-side">Learn all there is to know about Minecraft Dungeons II, launching
+              <div class="mc-news-info-box mc-side-content">
+                <div class="mc-news-text-stack">
+                  <h3 class="mc-news-title-side">Minecraft Dungeons II gameplay reveal & date announce</h3>
+                  <p class="mc-news-desc-side">Learn all there is to know about Minecraft Dungeons II, launching
                     September 29!</p>
                 </div>
-                <a href="#" class="minecraft-news-link-inline">Brave the unknown ↗</a>
+                <a href="#" class="mc-news-inline-link">Brave the unknown ↗</a>
               </div>
-            </div>
+            </article>
 
             <!-- Card Lateral 2 -->
-            <div class="minecraft-news-card-horizontal">
-              <div class="minecraft-news-image-box horizontal-img-box">
+            <article class="mc-news-horizontal-card">
+              <div class="mc-news-media-box mc-side-media">
                 <img src="https://www.minecraft.net/content/dam/minecraft/home/images/dimension-clash.jpg"
-                  alt="Get ready to play Dimension Clash!" class="minecraft-news-banner-img">
+                  alt="Get ready to play Dimension Clash!" class="mc-news-img">
               </div>
-              <div class="minecraft-news-content-box horizontal-content">
-                <div class="minecraft-news-text-group">
-                  <h3 class="minecraft-news-title-side">Get ready to play Dimension Clash!</h3>
+              <div class="mc-news-info-box mc-side-content">
+                <div class="mc-news-text-stack">
+                  <h3 class="mc-news-title-side">Get ready to play Dimension Clash!</h3>
                 </div>
-                <a href="#" class="minecraft-news-link-inline">Let's go! ↗</a>
+                <a href="#" class="mc-news-inline-link">Let's go! ↗</a>
               </div>
-            </div>
+            </article>
 
             <!-- Card Lateral 3 -->
-            <div class="minecraft-news-card-horizontal">
-              <div class="minecraft-news-image-box horizontal-img-box">
+            <article class="mc-news-horizontal-card">
+              <div class="mc-news-media-box mc-side-media">
                 <img src="https://www.minecraft.net/content/dam/minecraft/home/images/switch-2.jpg"
-                  alt="Minecraft for Nintendo Switch™ 2 is coming October 27th!" class="minecraft-news-banner-img">
+                  alt="Minecraft for Nintendo Switch™ 2 is coming October 27th!" class="mc-news-img">
               </div>
-              <div class="minecraft-news-content-box horizontal-content">
-                <div class="minecraft-news-text-group">
-                  <h3 class="minecraft-news-title-side">Minecraft for Nintendo Switch™ 2 is coming October 27th!</h3>
+              <div class="mc-news-info-box mc-side-content">
+                <div class="mc-news-text-stack">
+                  <h3 class="mc-news-title-side">Minecraft for Nintendo Switch™ 2 is coming October 27th!</h3>
                 </div>
-                <a href="#" class="minecraft-news-link-inline">Find out more ↗</a>
+                <a href="#" class="mc-news-inline-link">Find out more ↗</a>
               </div>
-            </div>
+            </article>
 
           </div>
 
@@ -1735,6 +1761,7 @@
 
       </div>
     </div>
+    <br>
 
     <!-- SEÇÃO 1: BEM-VINDO AO MINECRAFT EDUCATION -->
     <section class="edu-welcome-section">
@@ -1745,10 +1772,10 @@
 
         <!-- Botões de Público-Alvo -->
         <div class="edu-audience-grid">
-          <button class="edu-audience-btn">EDUCADORES <span class="edu-arrow">→</span></button>
-          <button class="edu-audience-btn">LÍDERES ESCOLARES <span class="edu-arrow">→</span></button>
-          <button class="edu-audience-btn">ADMINISTRADORES DE TI <span class="edu-arrow">→</span></button>
-          <button class="edu-audience-btn">PAIS <span class="edu-arrow">→</span></button>
+          <button class="edu-audience-btn">EDUCADORES <i class="fas fa-external-link"></i></button>
+          <button class="edu-audience-btn">LÍDERES ESCOLARES <i class="fas fa-external-link"></i></button>
+          <button class="edu-audience-btn">ADMINISTRADORES DE TI <i class="fas fa-external-link"></i></button>
+          <button class="edu-audience-btn">PAIS <i class="fas fa-external-link"></i></button>
         </div>
 
         <!-- Bloco de Vídeo e Futuro do Aprendizado -->
@@ -1828,17 +1855,17 @@
 
     <!-- SEÇÃO 3: DESENVOLVA AULAS NO COPILOT -->
     <section class="edu-copilot-section">
-      <div class="edu-copilot-bg-top"></div>
       <div class="edu-copilot-bg-bottom">
         <div class="edu-container">
           <div class="edu-copilot-character-wrapper">
-            <img src="https://www.minecraft.net/content/dam/minecraft/education/home/copilot-character.png"
+            <img
+              src="https://imgs.search.brave.com/dIItCIPjscLL9OxrutgJvnVP5uGPVanJrwv28hPmvPE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzJkLzZk/L2EwLzJkNmRhMDJh/NTdmMzBiMmNhMTMz/YjA2ODI2YjRkNThj/LmpwZw"
               alt="Personagem Minecraft com Flor" class="edu-copilot-img">
           </div>
           <h2 class="edu-copilot-title">DESENVOLVA AULAS NO COPILOT</h2>
           <p class="edu-copilot-desc">Desenvolva uma aula do Minecraft em minutos com o <strong>Teach do Microsoft 365
               Copilot</strong>, agora disponível para educadores.</p>
-          <button class="edu-copilot-btn">Experimente</button>
+          <button class="edu-copilot-btn">Experimente <i class="fas fa-external-link"></i></button>
         </div>
       </div>
     </section>
@@ -1853,7 +1880,7 @@
           <div class="faq-item">
             <button class="faq-question" type="button">
               <span>O que é o Minecraft Realms?</span>
-              <span class="faq-icon">+</span>
+              <span class="faq-icon"><i class="fa-solid fa-angle-down"></i></span>
             </button>
             <div class="faq-answer">
               <p>O Minecraft Realms é a maneira mais fácil de jogar Minecraft junto com seus amigos em um servidor
@@ -1866,7 +1893,7 @@
           <div class="faq-item">
             <button class="faq-question" type="button">
               <span>Qual é a diferença entre o Realms e o Realms Plus?</span>
-              <span class="faq-icon">+</span>
+              <span class="faq-icon"><i class="fa-solid fa-angle-down"></i></span>
             </button>
             <div class="faq-answer">
               <p>O Realms padrão (Bedrock) permite que você e até mais 2 jogadores joguem simultaneamente. O Realms Plus
@@ -1879,7 +1906,7 @@
           <div class="faq-item">
             <button class="faq-question" type="button">
               <span>Meus amigos precisam pagar para jogar no meu Realm?</span>
-              <span class="faq-icon">+</span>
+              <span class="faq-icon"><i class="fa-solid fa-angle-down"></i></span>
             </button>
             <div class="faq-answer">
               <p>Não! Seus amigos podem se juntar ao seu Realm de forma totalmente gratuita. Apenas o
@@ -1891,7 +1918,7 @@
           <div class="faq-item">
             <button class="faq-question" type="button">
               <span>Posso jogar em multiplataforma com meus amigos?</span>
-              <span class="faq-icon">+</span>
+              <span class="faq-icon"><i class="fa-solid fa-angle-down"></i></span>
             </button>
             <div class="faq-answer">
               <p>Sim, na edição Bedrock o Realms oferece suporte total a multiplataforma. Você pode jogar no celular,
@@ -1903,7 +1930,7 @@
           <div class="faq-item">
             <button class="faq-question" type="button">
               <span>Como funcionam os backups do mundo?</span>
-              <span class="faq-icon">+</span>
+              <span class="faq-icon"><i class="fa-solid fa-angle-down"></i></span>
             </button>
             <div class="faq-answer">
               <p>Nós fazemos backups regulares do seu mundo Realms automaticamente. Se algo der errado ou se você quiser
@@ -2017,52 +2044,75 @@
       </div>
     </section>
 
-    <nav class="internal-nav reveal">
-      <div class="container nav-pills">
-        <a href="#downloads" class="pill-btn tooltip-container">
-          Downloads <i class="fas fa-download"></i>
-          <span class="tooltip-text">Baixe mods e launchers</span>
-        </a>
-        <a href="#recursos" class="pill-btn tooltip-container">
-          Recursos <i class="fas fa-gem"></i>
-          <span class="tooltip-text">Texturas e Shaders</span>
-        </a>
-        <a href="#abas-interativas" class="pill-btn">Avisos</a>
-        <a href="#compras" class="pill-btn gold">Loja VIP</a>
-      </div>
-    </nav>
+    <section class="mk-nav-portal-section">
+      <div class="mk-nav-container">
+        <nav class="mk-nav-pills-wrapper">
 
-    <section class="moments-section">
-      <div class="moments-container reveal">
-        <div class="moments-text">
-          <span class="moments-badge">Coisas que Aconteceram na Nossa Comunidade :)</span>
-          <h2 class="moments-title">Momentos Incríveis!</h2>
+          <!-- Botão Downloads -->
+          <a href="#downloads" class="mk-nav-pill mk-nav-tooltip-trigger">
+            <span>Downloads</span>
+            <i class="fas fa-download"></i>
+            <span class="mk-nav-tooltip-box">Baixe mods e launchers</span>
+          </a>
+
+          <!-- Botão Recursos -->
+          <a href="#recursos" class="mk-nav-pill mk-nav-tooltip-trigger">
+            <span>Recursos</span>
+            <i class="fas fa-gem"></i>
+            <span class="mk-nav-tooltip-box">Texturas e Shaders</span>
+          </a>
+
+          <!-- Botão Avisos -->
+          <a href="#abas-interativas" class="mk-nav-pill">
+            <span>Avisos</span>
+          </a>
+
+          <!-- Botão Loja VIP (Destaque Dourado) -->
+          <a href="#compras" class="mk-nav-pill mk-nav-gold">
+            <span>Loja VIP</span>
+          </a>
+
+        </nav>
+      </div>
+    </section>
+
+    <section class="mk-moments-section">
+      <div class="mk-moments-container">
+        <div class="mk-moments-text">
+          <span class="mk-moments-badge">Coisas que Aconteceram na Nossa Comunidade :)</span>
+          <h2 class="mk-moments-title">Momentos Incríveis!</h2>
         </div>
 
-        <div class="moments-gallery">
-          <div class="gallery-item">
-            <img src="assets/images/geral/banner-img.jpg" alt="Print 1" />
-            <div class="gallery-hover">
+        <div class="mk-moments-gallery">
+          <div class="mk-moments-item">
+            <img src="assets/images/geral/banner-img.jpg" alt="Print 1" class="mk-moments-img" />
+            <div class="mk-moments-hover">
               <i class="fas fa-search-plus"></i>
             </div>
           </div>
-          <div class="gallery-item">
+          <div class="mk-moments-item">
             <img
               src="https://imgs.search.brave.com/Kw0Zr23V_TrP-t8-B8uE3lbyhxRZ43CDmeHnK2bKXBo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvNjU2/MjYyNC5qcGc"
-              alt="Print 2" />
-            <div class="gallery-hover">
+              alt="Print 2" class="mk-moments-img" />
+            <div class="mk-moments-hover">
               <i class="fas fa-search-plus"></i>
             </div>
           </div>
-          <div class="gallery-item">
+          <div class="mk-moments-item">
             <img
-              src="https://imgs.search.brave.com/R9NkY5-ogPl6R9vYNs0g20OuWyrJpUnnB8KB3A7DyLc/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvdGh1bWJu/YWlsL21pbmVjcmFm/dC1oZXJvYnJpbmUt/c3RhbmRpbmctaW4t/ZGFya25lc3MtMm9j/c2F3ZG1odnRsMHF3/cS5qcGc"
-              alt="Print 3" />
-            <div class="gallery-hover">
+              src="https://imgs.search.brave.com/R9NkY5-ogPl6R9vYNs0g20OuWyrJpUnnB8KB3A7DyLc/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvdGh1bWJu/YWlsL21pbmVjcmFmdC1oZXJvYnJpbmUtc3RhbmRpbmctaW4tZGFya25lc3MtMm9jc2F3ZG1odnRsMHF3cS5qcGc"
+              alt="Print 3" class="mk-moments-img" />
+            <div class="mk-moments-hover">
               <i class="fas fa-search-plus"></i>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Lightbox Element -->
+      <div class="mk-lightbox">
+        <span class="mk-lightbox-close">&times;</span>
+        <img class="mk-lightbox-img" src="" alt="Ampliada" />
       </div>
     </section>
 
@@ -2113,6 +2163,8 @@
     <section class="tabs-section">
       <div class="container">
         <div class="tabs-container">
+
+          <!-- Cabeçalho das Abas -->
           <div class="tabs-header" role="tablist">
             <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab(event, 'tab-regras')">
               Regras
@@ -2125,6 +2177,7 @@
             </button>
           </div>
 
+          <!-- Conteúdo das Abas -->
           <div class="tabs-content-wrapper">
             <div id="tab-regras" class="tab-content active" role="tabpanel">
               <h3>Regras da Comunidade</h3>
@@ -2142,6 +2195,7 @@
               <p>Ajude o servidor e receba chaves de caixas misteriosas!</p>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -2201,18 +2255,27 @@
       </div>
     </section>
 
-    <div class="server-status-bar reveal">
-      <div class="container status-flex">
-        <div class="status-info">
-          <span class="pulse-icon"></span>
-          <strong>STATUS:</strong>
-          <span id="new-status-count">Carregando...</span>
-        </div>
-        <div class="status-news">
-          <marquee>
-            🔥 Entre no Nosso <strong>Servidor do Discord</strong> e Receba
-            Cargos Exclusivos!
-          </marquee>
+    <div class="server-status-bar">
+      <div class="status-info">
+        <span class="status-indicator"></span>
+        <span class="status-label">STATUS:</span>
+        <span id="new-status-count" class="status-value">Carregando...</span>
+      </div>
+
+      <div class="status-news">
+        <div class="ticker-track">
+          <!-- Primeiro grupo de frases -->
+          <div class="ticker-group">
+            <span class="ticker-item">🔥 Entre no nosso <strong>Discord</strong> para cargos exclusivos!</span>
+            <span class="ticker-item">⚡ VIP em promoção na <strong>Loja</strong> por tempo limitado!</span>
+            <span class="ticker-item">🏆 Evento PvP neste sábado às <strong>18:00</strong>!</span>
+          </div>
+          <!-- Segundo grupo (Cópia exata para o loop contínuo sem saltos) -->
+          <div class="ticker-group" aria-hidden="true">
+            <span class="ticker-item">🔥 Entre no nosso <strong>Discord</strong> para cargos exclusivos!</span>
+            <span class="ticker-item">⚡ VIP em promoção na <strong>Loja</strong> por tempo limitado!</span>
+            <span class="ticker-item">🏆 Evento PvP neste sábado às <strong>18:00</strong>!</span>
+          </div>
         </div>
       </div>
     </div>
@@ -2526,77 +2589,101 @@
       </div>
     </section>
 
-    <!-- Seção: O Que Fazer -->
-    <section class="guidelines-section">
-      <div class="guidelines-container">
-        <h2 class="section-title green-title">O QUE FAZER</h2>
+    <!-- Seção de Diretrizes (O Que Fazer / O Que Não Fazer) -->
+    <section class="guidelines-wrapper-section">
+      <div class="guidelines-main-container">
 
-        <ul class="guidelines-list">
-          <li>
-            <strong>Caso seu produto, serviço ou solução se integre ao Minecraft Education, informe claramente a
-              relação.</strong>
-            <span class="example-text">Aulas da OceanCraft criadas para o Minecraft Education</span>
-            <span class="example-text">Os professores da OceanCraft ministram aulas/cursos no Minecraft Education</span>
-          </li>
-          <li>
-            <strong>Faça referência de forma verídica e precisa ao Minecraft Education e seus produtos e
-              serviços.</strong>
-            <span class="example-text">A Cidade de Segurança do Trabalhador em Deslocamento é um modelo de cidade
-              tridimensional criado por estudantes usando as aulas da OceanCraft e o software Minecraft Education</span>
-          </li>
-          <li>
-            <strong>Use no título de artigos de notícias, quando verídicos e não enganosos.</strong>
-            <span class="example-text">A OceanCraft adiciona novos recursos avaliativos ao Minecraft Education.</span>
-          </li>
-          <li>
-            <strong>Use nossos Ativos de marca para publicações, seminários ou conferências em conformidade com as <a
-                href="#" class="inline-link">diretrizes para publicações, seminários e conferências</a> da
-              Microsoft.</strong>
-          </li>
-          <li>
-            <strong>Use o nome do Minecraft Education em um nome secundário, título secundário ou na descrição.</strong>
-            <span class="example-text">“OceanCraft: um mundo do Minecraft Education” — (não vemos problemas aqui)</span>
-            <span class="example-text">“Minecraft Education, a melhor forma de vivenciar a educação sobre o clima com a
-              OceanCraft” — (vemos um problema aqui)</span>
-            <span class="example-text">“Codificação do Minecraft Education, o melhor mundo de códigos” — (vemos um
-              problema aqui)</span>
-            <span class="example-text">“Mundo de segurança do trabalhador em deslocamento do Minecraft Education” —
-              (vemos um problema aqui)</span>
-            <span class="example-text">“Mundo de segurança do trabalhador em deslocamento – aprendizagem sobre
-              deslocamento para o trabalho no Minecraft Education” — (não vemos problemas aqui)</span>
-          </li>
-          <li>
-            <strong>Inclua um aviso de isenção de responsabilidade em destaque e semelhante ao seguinte: “NÃO É UM
-              [PRODUTO/SERVIÇO/EVENTO/etc.] OFICIAL DO MINECRAFT EDUCATION. NÃO É APROVADO POR OU ASSOCIADO À MOJANG OU
-              MICROSOFT”</strong> no seu produto, lista, descrição, site/página da Web, materiais de redes
-            sociais/marketing e quaisquer outros materiais associados.
-          </li>
-        </ul>
-      </div>
-    </section>
+        <!-- COLUNA: O QUE FAZER -->
+        <div class="guideline-column do-column">
+          <div class="column-header">
+            <h2 class="section-title green-title">
+              <span class="title-icon">✔</span> O QUE FAZER?
+            </h2>
+            <p class="intro-dont">Com uma aprovação por escrito:</p>
+          </div>
 
-    <!-- Seção: O Que Não Fazer -->
-    <section class="guidelines-section">
-      <div class="guidelines-container">
-        <h2 class="section-title red-title">O QUE NÃO FAZER</h2>
-        <p class="intro-dont">Sem uma aprovação nossa por escrito:</p>
+          <div class="guidelines-card-box">
+            <ul class="guidelines-list">
+              <li>
+                <strong>Caso seu produto, serviço ou solução se integre ao Minecraft Education, informe claramente a
+                  relação.</strong>
+                <div class="examples-group">
+                  <span class="example-badge ok">Ex: Aulas da OceanCraft criadas para o Minecraft Education</span>
+                  <span class="example-badge ok">Ex: Os professores da OceanCraft ministram aulas no Minecraft
+                    Education</span>
+                </div>
+              </li>
+              <li>
+                <strong>Faça referência de forma verídica e precisa ao Minecraft Education e seus produtos e
+                  serviços.</strong>
+                <div class="examples-group">
+                  <span class="example-badge ok">Ex: A Cidade de Segurança em Deslocamento é um modelo tridimensional
+                    criado por estudantes usando aulas da OceanCraft e o Minecraft Education</span>
+                </div>
+              </li>
+              <li>
+                <strong>Use no título de artigos de notícias, quando verídicos e não enganosos.</strong>
+                <div class="examples-group">
+                  <span class="example-badge ok">Ex: A OceanCraft adiciona novos recursos avaliativos ao Minecraft
+                    Education.</span>
+                </div>
+              </li>
+              <li>
+                <strong>Use nossos Ativos de marca para publicações, seminários ou conferências em conformidade com as
+                  <a href="#" class="inline-link">diretrizes da Microsoft</a>.</strong>
+              </li>
+              <li>
+                <strong>Use o nome do Minecraft Education em um nome secundário, título secundário ou na
+                  descrição.</strong>
+                <div class="examples-group">
+                  <span class="example-badge ok">✔ “OceanCraft: um mundo do Minecraft Education”</span>
+                  <span class="example-badge bad">✖ “Minecraft Education, a melhor forma de vivenciar a
+                    educação...”</span>
+                  <span class="example-badge bad">✖ “Codificação do Minecraft Education, o melhor mundo...”</span>
+                  <span class="example-badge ok">✔ “Mundo de segurança – aprendizagem sobre deslocamento no Minecraft
+                    Education”</span>
+                </div>
+              </li>
+              <li>
+                <strong>Inclua um aviso de isenção de responsabilidade em destaque:</strong>
+                <div class="disclaimer-box">
+                  “NÃO É UM [PRODUTO/SERVIÇO/EVENTO] OFICIAL DO MINECRAFT EDUCATION. NÃO É APROVADO POR OU ASSOCIADO À
+                  MOJANG OU MICROSOFT”
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-        <ul class="guidelines-list dont-list">
-          <li>
-            Não use os Ativos de marca do Minecraft Education em nome do seu negócio, produto, serviço, aplicativo, nome
-            de domínio, conta de rede social, outra oferta ou indicador de negócios.
-          </li>
-          <li>
-            Não use os logotipos, ícones ou designs do Minecraft Education de forma alguma.
-          </li>
-          <li>
-            Não sugira afiliação, endosso, patrocínio ou aprovação do Minecraft Education.
-          </li>
-          <li>
-            Não use os Ativos de marca do Minecraft em quaisquer bens tangíveis ou embalagens, incluindo quaisquer itens
-            promocionais, publicitários, de marketing, presentes ou outros itens.
-          </li>
-        </ul>
+        <!-- COLUNA: O QUE NÃO FAZER -->
+        <div class="guideline-column dont-column">
+          <div class="column-header">
+            <h2 class="section-title red-title">
+              <span class="title-icon">✖</span> O QUE NÃO FAZER?
+            </h2>
+            <p class="intro-dont">Sem uma aprovação por escrito:</p>
+          </div>
+
+          <div class="guidelines-card-box">
+            <ul class="guidelines-list dont-list">
+              <li>
+                Não use os Ativos de marca do Minecraft Education em nome do seu negócio, produto, serviço, aplicativo,
+                nome de domínio ou conta de rede social.
+              </li>
+              <li>
+                Não use os logotipos, ícones ou designs do Minecraft Education de forma alguma.
+              </li>
+              <li>
+                Não sugira afiliação, endosso, patrocínio ou aprovação do Minecraft Education.
+              </li>
+              <li>
+                Não use os Ativos de marca do Minecraft em quaisquer bens tangíveis ou embalagens, itens promocionais,
+                publicitários ou brindes.
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>

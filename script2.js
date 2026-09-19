@@ -233,7 +233,29 @@ if (document.readyState === "loading") {
 
 
 
+function switchMkTab(evt, tabId) {
+  // Esconde todos os conteúdos de abas
+  const tabContents = document.querySelectorAll(".mk-tab-content");
+  tabContents.forEach(content => {
+    content.classList.remove("active");
+  });
 
+  // Remove a classe 'active' de todos os botões
+  const tabButtons = document.querySelectorAll(".mk-tab-btn");
+  tabButtons.forEach(btn => {
+    btn.classList.remove("active");
+    btn.setAttribute("aria-selected", "false");
+  });
+
+  // Mostra o painel alvo e ativa o botão correspondente
+  const targetTab = document.getElementById(tabId);
+  if (targetTab) {
+    targetTab.classList.add("active");
+  }
+
+  evt.currentTarget.classList.add("active");
+  evt.currentTarget.setAttribute("aria-selected", "true");
+}
 
 // GARANTIA DE ESCOPO GLOBAL ABSOLUTO - COLOQUE FORA DE QUALQUER OUTRA FUNÇÃO
 window.changeGuideStep = function (stepNum) {
@@ -1221,32 +1243,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function switchMinecraftTab(event, targetPaneId) {
-  const navBar = event.currentTarget.closest('.minecraft-portal-inner-container');
-  const tabNavButtons = navBar.querySelectorAll('.minecraft-tab-navigation-btn');
-  const tabContentPanes = navBar.querySelectorAll('.minecraft-tab-content-pane');
-
-  tabNavButtons.forEach(btn => btn.classList.remove('active'));
-  tabContentPanes.forEach(pane => pane.classList.remove('active'));
-
-  event.currentTarget.classList.add('active');
-  document.getElementById(targetPaneId).classList.add('active');
-}
-
-function toggleMinecraftAccordion(headerElement) {
-  const group = headerElement.closest('.minecraft-support-accordion-group');
-  const wasActive = group.classList.contains('active');
-
-  const container = headerElement.closest('.minecraft-support-accordion-list');
-  container.querySelectorAll('.minecraft-support-accordion-group').forEach(item => {
-    item.classList.remove('active');
-  });
-
-  if (!wasActive) {
-    group.classList.add('active');
-  }
-}
-
 /* ============================================================================================= */
 /* ==========================================
    ELEMENTO
@@ -1468,5 +1464,81 @@ document.addEventListener("DOMContentLoaded", () => {
         targetPanel.classList.add("active");
       }
     });
+  });
+});
+
+/**
+ * Alterna entre as abas de Downloads e Suporte
+ */
+function switchSupportTab(event, tabId) {
+  // Remove a classe active de todos os botões e conteúdos
+  const buttons = document.querySelectorAll('.dl-tab-btn');
+  const contents = document.querySelectorAll('.dl-tab-content');
+
+  buttons.forEach(btn => btn.classList.remove('active'));
+  contents.forEach(content => content.classList.remove('active'));
+
+  // Adiciona a classe active no botão clicado e na aba correspondente
+  event.currentTarget.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+/**
+ * Controla a abertura e fechamento dos itens de acordeão (FAQ)
+ */
+function toggleAccordion(headerElement) {
+  const accordionItem = headerElement.parentElement;
+  const isActive = accordionItem.classList.contains('active');
+
+  // Opcional: Fecha todos os outros itens antes de abrir o atual (comportamento de sanfona única)
+  // document.querySelectorAll('.dl-accordion-item').forEach(item => item.classList.remove('active'));
+
+  if (!isActive) {
+    accordionItem.classList.add('active');
+  } else {
+    accordionItem.classList.remove('active');
+  }
+}
+
+/* ============================================================================================= */
+/* ==========================================
+   FUNÇÃO ABRIR GALERIA E FECHAR COM ZOOM
+========================================== */
+document.addEventListener("DOMContentLoaded", function () {
+  const galleryItems = document.querySelectorAll(".mk-moments-item");
+  const lightbox = document.querySelector(".mk-lightbox");
+  const lightboxImg = document.querySelector(".mk-lightbox-img");
+  const lightboxClose = document.querySelector(".mk-lightbox-close");
+
+  if (!lightbox || !lightboxImg) return;
+
+  galleryItems.forEach(function (item) {
+    item.addEventListener("click", function () {
+      const img = item.querySelector("img");
+      if (img) {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+      }
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+  }
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener("click", closeLightbox);
+  }
+
+  lightbox.addEventListener("click", function (e) {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      closeLightbox();
+    }
   });
 });

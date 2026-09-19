@@ -199,21 +199,50 @@
   margin-top: 2px;
 }
 
+/* =============================================================================================== */
 /* ============================================================================================= */
-/* --- RESET BÁSICO --- */
-* {
+/* --- RESET BÁSICO E BOX-SIZING UNIVERSAL --- */
+/* ============================================================================================= */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background-color: #111;
-  color: white;
-  font-family: "Inter", sans-serif;
+/* ============================================================================================= */
+/* --- CONFIGURAÇÃO DE HTML E BODY --- */
+/* ============================================================================================= */
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Reserva o espaço da barra de rolagem permanentemente para evitar layout shift */
+  scrollbar-gutter: stable;
 }
 
-/* =============================================================================================== */
+body {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  background-color: var(--bg-dark, #111);
+  color: var(--text-main, #fff);
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  /* Suporte para navegadores baseados em Webkit */
+  user-select: none;
+}
+
+/* ============================================================================================= */
+/* --- ESTADOS ESPECIAIS (EX: TRAVA DE SCROLL) --- */
+/* ============================================================================================= */
+body.z-lock-scroll,
+html.z-lock-scroll {
+  overflow: hidden !important;
+}
 
 /* ==========================================
    1. VARIÁVEIS DE COR E ESTILO (VIDRO NEUTRO)
@@ -311,17 +340,6 @@ body {
   --container-width: 1200px;
   --gutter: 20px;
   --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body.z-lock-scroll,
-html.z-lock-scroll {
-  overflow: hidden !important;
 }
 
 /* ==========================================
@@ -882,8 +900,10 @@ html.z-lock-scroll {
   .zmob-sidebar {
     position: fixed;
     top: 0;
-    right: 100vw;
-    width: 100vw;
+    right: -100%;
+    /* Alterado de 100vw para -100% */
+    width: 100%;
+    /* Alterado de 100vw para 100% */
     height: 100vh;
     background: #0d0d0d;
     z-index: 9999;
@@ -1372,38 +1392,6 @@ html.z-lock-scroll {
 }
 
 /* ============================================================================================= */
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-  /* Corta qualquer coisa que tente vazar pela lateral */
-  position: relative;
-}
-
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  font-family: "Inter", sans-serif;
-  line-height: 1.5;
-  overflow-x: hidden;
-  -webkit-user-select: none;
-  /* Suporte para navegadores baseados em Webkit */
-  user-select: none;
-}
-
-/* ============================================================================================= */
-/* ESPAÇO ENTRE O SCROLL LATERAL E OS ELEMENTOS */
-/* Reserva o espaço da barra de rolagem permanentemente no HTML */
-html {
-  scrollbar-gutter: stable;
-}
-
-/* Garante que o body não tente compensar o espaço novamente */
-body {
-  width: 100%;
-}
-
-/* ============================================================================================= */
 /* ==========================================
    TIPOGRAFIA GLOBAL E TÍTULOS (ESTÁVEL)
 ========================================== */
@@ -1525,13 +1513,14 @@ h6 {
 /* Seção com fundo Verde */
 .secao-roxa {
   width: 100%;
-  background-color: #120c72 !important;
+  background: var(--purple-bg);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
   box-sizing: border-box;
+  position: relative;
   z-index: 1;
   /* Z-index alto se precisar ficar sobre algo, mas 1000 costuma ser para menus */
 }
@@ -1680,13 +1669,6 @@ secao-subtitulo {
   transition:
     transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.3s;
-}
-
-/* Classe para links de texto terem um leve brilho no hover */
-.text-link:hover,
-.footer-col a:hover {
-  color: var(--green-mc);
-  text-shadow: 0 0 8px rgba(60, 133, 39, 0.5);
 }
 
 /* ============================================================================================= */
@@ -2689,15 +2671,6 @@ ul {
   border-radius: 2px;
 }
 
-.glow-effect {
-  position: absolute;
-  inset: -10px;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
-  z-index: 1;
-  pointer-events: none;
-  filter: blur(8px);
-}
-
 /* Partículas Douradas (Estilo Pixelado Minecraft) */
 .pixel-particles {
   position: absolute;
@@ -3063,8 +3036,7 @@ ul {
 .acc-content {
   display: grid;
   grid-template-rows: 0fr;
-  /* Altura zero absoluta */
-  transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: grid-template-rows 0.3s ease;
   background: #111;
   /* Fundo preto puro solicitado */
   overflow: hidden;
@@ -3365,7 +3337,7 @@ ul {
 }
 
 .social-box2 {
-  background: #999999;
+  background: #f81313;
   height: 45px;
   display: flex;
   align-items: center;
@@ -3377,24 +3349,58 @@ ul {
 
 .social-box2:hover {
   transform: translateY(-5px);
+  border-color: #8b0202;
+  color: #ffffff;
+}
+
+.social-box3 {
+  background: #8201fa;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border: 1px solid #333;
+  transition: 0.3s;
+}
+
+.social-box3:hover {
+  transform: translateY(-5px);
+  border-color: #ffffff;
+  color: #fff;
+}
+
+.social-box4 {
+  background: #05cc41;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border: 1px solid #333;
+  transition: 0.3s;
+}
+
+.social-box4:hover {
+  transform: translateY(-5px);
   border-color: #fcfffc;
   color: #fff;
 }
 
 .discord:hover {
-  background: #3835ff;
+  background: #050386;
 }
 
 .youtube:hover {
-  background: #ff0000;
+  background: #6b0101;
 }
 
 .twitch:hover {
-  background: #4f0792;
+  background: #430081;
 }
 
 .other:hover {
-  background: #3f3f3f;
+  background: #00631e;
 }
 
 /* SISTEMA DE CONTAGEM DE MEMBROS */
@@ -3800,155 +3806,122 @@ ul {
   background: linear-gradient(transparent, var(--bg-card));
 }
 
-/* ============================================================================================= */
 /* ==========================================
-   1. SERVER STATUS BAR (GLASS-INDUSTRIAL)
+   1. SERVER STATUS BAR (QUADRADO & SIMPLES)
 ========================================== */
 .server-status-bar {
-  background: rgba(15, 15, 15, 0.6);
-  /* Vidro escuro */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  /* Borda fina de vidro */
-  border-radius: 8px;
-  padding: 10px 40px;
-
-  /* ADICIONADO: Margens nas laterais e centralização no PC */
-  margin: 30px auto;
+  background: #111111;
+  border: 1px solid #2a2a2a;
+  border-radius: 0px;
+  /* Layout totalmente quadrado */
+  padding: 10px 16px;
+  margin: 20px auto;
   max-width: 1200px;
-  /* Limita o tamanho para não esticar infinitamente em monitores grandes */
-  width: calc(100% - 40px);
-  /* Garante 20px de margem em cada lado */
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Efeito de brilho de fundo (opcional) */
-.server-status-bar::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.15),
-      transparent);
-}
-
-.status-flex {
+  width: calc(100% - 32px);
   display: flex;
   align-items: center;
-  justify-content: center;
-  /* Centraliza os itens no PC */
-  gap: 50px;
-  /* Bastante respiro entre os blocos */
-  flex-wrap: wrap;
-  /* Previne quebra de layout */
+  gap: 20px;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Textos do Status */
-.status-item {
+/* ==========================================
+   2. STATUS INFO
+========================================== */
+.status-info {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: #fff;
-  font-weight: 800;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  gap: 8px;
+  white-space: nowrap;
+  font-size: 13px;
+  border-right: 1px solid #222;
+  padding-right: 16px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background: #54bd34;
+  border-radius: 0px;
+  /* Indicador quadrado */
 }
 
 .status-label {
-  color: #888;
-  /* Texto de apoio mais apagado */
+  color: #777;
   font-weight: 700;
-  font-size: 12px;
 }
 
-/* ============================================================================================= */
+.status-value {
+  color: #fff;
+  font-weight: 700;
+}
+
 /* ==========================================
-   2. ANIMAÇÃO DO ÍCONE (RADAR PULSE)
+   3. LOOP CONTINUO DE VÁRIAS FRASES
 ========================================== */
-.pulse-icon {
+.status-news {
+  flex: 1;
+  overflow: hidden;
   position: relative;
-  right: 8px;
-  width: 10px;
-  height: 10px;
-  background: #54bd34;
-  /* Verde Zera's */
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 10px rgba(84, 189, 52, 0.5);
+  display: flex;
 }
 
-/* Animação da onda de radar saindo do ponto */
-.pulse-icon::after {
-  content: "";
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  border: 2px solid #54bd34;
-  border-radius: 50%;
-  animation: radar-pulse 2s infinite ease-out;
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 20s linear infinite;
 }
 
-@keyframes radar-pulse {
+/* Pausa a animação ao passar o mouse */
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-group {
+  display: flex;
+  align-items: center;
+}
+
+.ticker-item {
+  color: #aaa;
+  font-size: 13px;
+  white-space: nowrap;
+  padding: 0 30px;
+  /* Espaçamento entre cada frase */
+}
+
+.ticker-item strong {
+  color: #54bd34;
+  font-weight: 700;
+}
+
+/* Anima de 0% até -50% para reiniciar exatamente no mesmo ponto */
+@keyframes scroll-left {
   0% {
-    transform: scale(0.2);
-    opacity: 1;
+    transform: translateX(0);
   }
 
   100% {
-    transform: scale(2);
-    opacity: 0;
+    transform: translateX(-50%);
   }
 }
 
 /* ==========================================
-   3. MOBILE RESPONSIVO (Abaixo de 768px)
+   4. RESPONSIVO
 ========================================== */
 @media (max-width: 768px) {
   .server-status-bar {
-    padding: 20px;
-
-    /* ADICIONADO: Margens laterais soltas para o celular */
-    margin: 20px auto;
-    width: calc(100% - 40px);
-    /* Mantém os 20px de espaço nas laterais da tela */
-
-    border-radius: 8px;
-    /* Um pouco mais arredondado para combinar com as margens */
-  }
-
-  .status-flex {
     flex-direction: column;
-    /* Empilha os itens */
-    gap: 20px;
-    /* Reduz o espaço entre eles */
-    text-align: center;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
   }
 
-  .status-item {
+  .status-info {
+    border-right: none;
+    border-bottom: 1px solid #222;
+    padding-right: 0;
+    padding-bottom: 8px;
     justify-content: center;
-    font-size: 13px;
-    /* Texto um pouco menor */
-    width: 100%;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    /* Divisória entre itens */
-  }
-
-  /* Remove a divisória do último item */
-  .status-item:last-child {
-    padding-bottom: 0;
-    border-bottom: none;
   }
 }
 
@@ -4600,21 +4573,114 @@ ul {
   }
 }
 
-/* ============================================================================================= */
-/* --- NAVEGAÇÃO INTERNA CORRIGIDA --- */
-.internal-nav {
-  background: #1a1a1a;
-  padding: 15px 0;
-  /* O erro estava aqui: faltava o 'position:' */
-  position: -webkit-sticky;
-  /* Suporte para Safari */
-  position: sticky;
-  top: 70px;
-  /* Ajuste este valor conforme a altura do seu header fixo */
-  z-index: 50;
-  border-bottom: 1px solid #333;
-  backdrop-filter: blur(10px);
-  /* Opcional: dá um efeito premium de transparência */
+/* ==========================================
+  ESTILOS BARRA DE NAVEGAÇÃO (ZERO BORDER-RADIUS)
+========================================== */
+.mk-nav-portal-section {
+  width: 100%;
+  background-color: #09090b;
+  padding: 25px 20px;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  border-bottom: 2px solid #27272a;
+}
+
+.mk-nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mk-nav-pills-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Estilo Base dos Botões (Pills) */
+.mk-nav-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #18181b;
+  color: #f4f4f5;
+  text-decoration: none;
+  padding: 12px 24px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid #27272a;
+  box-shadow: 4px 4px 0px #000000;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.mk-nav-pill:hover {
+  transform: translate(-2px, -2px);
+  border-color: #3f3f46;
+  background-color: #27272a;
+  box-shadow: 6px 6px 0px #000000;
+  color: #ffffff;
+}
+
+.mk-nav-pill:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* Variante Dourada (Loja VIP) */
+.mk-nav-gold {
+  background-color: #ca8a04;
+  color: #422006;
+  border-color: #eab308;
+}
+
+.mk-nav-gold:hover {
+  background-color: #eab308;
+  border-color: #facc15;
+  color: #271a00;
+}
+
+/* Tooltip Customizado Integrado */
+.mk-nav-tooltip-box {
+  visibility: hidden;
+  position: absolute;
+  bottom: 135%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #18181b;
+  color: #f4f4f5;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid #3f3f46;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.mk-nav-tooltip-trigger:hover .mk-nav-tooltip-box {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .mk-nav-pills-wrapper {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .mk-nav-pill {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
 }
 
 /* ============================================================================================= */
@@ -4862,22 +4928,13 @@ ul {
   }
 }
 
-/* ============================================================================================= */
-/* SISTEMA DE ABAS */
-
-.tabs-container {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
 /* ==========================================
-   ESTILOS MODERNOS PARA O SISTEMA DE ABAS
+   SISTEMA DE ABAS (COM AS TUAS VARIÁVEIS)
 ========================================== */
-
 .tabs-section {
   padding: 60px 20px;
+  background-color: var(--bg-light);
+  font-family: "Inter", sans-serif;
 }
 
 .container {
@@ -4894,9 +4951,7 @@ ul {
 /* Cabeçalho das Abas */
 .tabs-header {
   display: flex;
-  gap: 12px;
-  margin-bottom: -1px;
-  /* Sobrepõe levemente para unificar a borda */
+  gap: 8px;
   position: relative;
   z-index: 2;
 }
@@ -4904,51 +4959,59 @@ ul {
 /* Estilo Base dos Botões */
 .tab-btn {
   flex: 1;
-  background: var(--zc-bg-main);
-  color: var(--zc-muted);
-  border: 1px solid var(--zc-border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  /* Encaixa visualmente com o painel abaixo */
   padding: 16px 24px;
   font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  border-radius: 12px 12px 0 0;
+  border-radius: 0;
+  /* Cantos retos */
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-smooth);
   outline: none;
   text-align: center;
 }
 
 /* Hover em abas inativas */
 .tab-btn:hover {
-  background: var(--zc-bg-hover);
-  color: var(--zc-text);
+  background: var(--bg-light);
+  color: var(--text-main);
 }
 
-/* Aba Ativa (Destaque limpo sem faixas coloridas) */
+/* Aba Ativa */
 .tab-btn.active {
   background: var(--zc-bg-panel);
   color: var(--zc-accent);
-  border-color: var(--zc-border);
+  border-color: var(--border);
   border-bottom: 1px solid var(--zc-bg-panel);
-  /* Mescla perfeitamente com o painel */
+  /* Mistura perfeitamente com o painel */
 }
 
 /* Container do Conteúdo */
 .tabs-content-wrapper {
   background: var(--zc-bg-panel);
-  border: 1px solid var(--zc-border);
-  border-radius: 0 12px 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  /* Cantos retos */
   backdrop-filter: blur(12px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
+  margin-top: -1px;
+  /* Cola os botões ao painel */
 }
 
 /* Painéis de Conteúdo */
 .tab-content {
   display: none;
   padding: 40px;
-  color: var(--zc-text);
+  color: var(--text-main);
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -4963,41 +5026,29 @@ ul {
 .tab-content h3 {
   font-size: 1.5rem;
   margin-bottom: 16px;
-  color: var(--zc-text);
+  color: var(--text-main);
   letter-spacing: 0.5px;
 }
 
 .tab-content p {
-  color: var(--zc-muted);
+  color: var(--text-muted);
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 10px;
 }
 
-/* ==========================================
-   RESPONSIVIDADE (@MEDIA MOBILE)
-========================================== */
 @media (max-width: 768px) {
   .tabs-header {
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 12px;
   }
 
   .tab-btn {
-    border-radius: 12px;
-    /* Transforma em blocos individuais no celular */
-    border-bottom: 1px solid var(--zc-border);
-    padding: 14px;
-  }
-
-  .tab-btn.active {
-    border-bottom: 1px solid var(--zc-border);
+    border: 1px solid var(--border);
   }
 
   .tabs-content-wrapper {
-    border-radius: 12px;
-    /* Arredonda todas as pontas no mobile */
+    margin-top: 8px;
   }
 
   .tab-content {
@@ -5005,6 +5056,9 @@ ul {
   }
 }
 
+/* ==========================================
+   ELEMENTO
+========================================== */
 /* --- DOWNLOAD CARDS (Glass & Animado) --- */
 /* Seção Geral de Downloads */
 .download-section {
@@ -5185,46 +5239,46 @@ ul {
 
 /* ============================================================================================= */
 /* ==========================================
-   GALERIA DE MOMENTOS (TEXTO ACIMA + IMAGENS SOLTAS)
+   GALERIA DE MOMENTOS (ESTILO RETO / SEM ARREDONDAMENTO)
 ========================================== */
-.moments-section {
+/* ==========================================
+   GALERIA DE MOMENTOS (ESTILO RETO / SEM CONFLITOS)
+========================================== */
+.mk-moments-section {
   padding: 80px 0;
   font-family: "Inter", sans-serif;
+  background-color: #121214;
 }
 
-.moments-container {
+.mk-moments-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Centraliza tudo no eixo horizontal */
   text-align: center;
-  /* Centraliza o texto */
 }
 
-/* ============================================================================================= */
-/* ==========================================
-   TEXTO SUPERIOR
-========================================== */
-.moments-text {
+.mk-moments-text {
   margin-bottom: 50px;
   max-width: 800px;
 }
 
-.moments-badge {
+.mk-moments-badge {
   display: inline-block;
-  color: #54bd34;
-  /* Destaque verde para o badge */
+  background-color: #27272a;
+  color: #22c55e;
   font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
   margin-bottom: 15px;
   letter-spacing: 1px;
+  padding: 6px 12px;
+  border: 1px solid #3f3f46;
 }
 
-.moments-title {
+.mk-moments-title {
   color: #ffffff;
   font-size: 46px;
   font-weight: 900;
@@ -5233,163 +5287,145 @@ ul {
   margin: 0;
 }
 
-/* ============================================================================================= */
-/* ==========================================
-   GALERIA (Imagens Soltas)
-========================================== */
-.moments-gallery {
+.mk-moments-gallery {
   display: flex;
   flex-wrap: wrap;
-  /* Permite que as imagens quebrem para a linha de baixo */
   justify-content: center;
-  /* Centraliza as imagens soltas no meio da tela */
   gap: 30px;
-  /* Espaçamento grande entre elas */
   width: 100%;
 }
 
-/* O Card da Imagem */
-.gallery-item {
+/* O Card da Imagem (Cantos Retos e Sombra Sólida) */
+.mk-moments-item {
   position: relative;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
-  border: 2px solid #333333;
+  border: 2px solid #27272a;
   cursor: pointer;
   flex: 1 1 320px;
-  /* Tamanho base flexível */
   max-width: 360px;
-  /* Não deixa a imagem ficar gigante se sobrar espaço */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  box-shadow: 6px 6px 0px #000000;
+  background-color: #09090b;
 
-  /* Suavidade no movimento do card inteiro */
   transition:
-    transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.gallery-item img {
+.mk-moments-img {
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
-/* ============================================================================================= */
 /* ==========================================
-   EFEITOS DE HOVER (Suavidade e Flutuação)
+   EFEITOS DE HOVER
 ========================================== */
-.gallery-hover {
+.mk-moments-hover {
   position: absolute;
   inset: 0;
-  background: rgba(5, 5, 5, 0.7);
-  /* Fundo similar ao seu lightbox */
+  background: rgba(5, 5, 5, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
-.gallery-hover i {
+.mk-moments-hover i {
   color: #ffffff;
-  font-size: 40px;
-  transform: scale(0.5);
-  /* Começa menor */
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-size: 35px;
+  transform: scale(0.7);
+  transition: transform 0.25s ease;
 }
 
-/* Quando passa o mouse no card inteiro */
-.gallery-item:hover {
-  transform: translateY(-10px);
-  /* O card flutua para cima */
-  border-color: #54bd34;
-  /* A borda acende */
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+.mk-moments-item:hover {
+  transform: translate(-3px, -3px);
+  border-color: #ffffff;
+  box-shadow: 9px 9px 0px #000000;
 }
 
-.gallery-item:hover img {
-  transform: scale(1.08);
-  /* Zoom na foto */
+.mk-moments-item:hover .mk-moments-img {
+  transform: scale(1.06);
 }
 
-.gallery-item:hover .gallery-hover {
+.mk-moments-item:hover .mk-moments-hover {
   opacity: 1;
-  /* Mostra a película preta */
 }
 
-.gallery-item:hover .gallery-hover i {
+.mk-moments-item:hover .mk-moments-hover i {
   transform: scale(1);
-  /* Ícone de Lupa pula pro tamanho normal */
 }
 
-/* ============================================================================================= */
 /* ==========================================
-   SISTEMA DE TELA CHEIA (LIGHTBOX/MODAL)
+   LIGHTBOX (ZOOM COM TAMANHO PADRONIZADO)
 ========================================== */
-.gallery-lightbox {
+.mk-lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(5, 5, 5, 0.95);
-  /* Fundo quase sólido */
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.95);
   z-index: 100000;
-  /* Acima de tudo no site */
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 
-  /* Oculto por padrão */
   opacity: 0;
   visibility: hidden;
   transition: 0.3s ease;
 }
 
-.gallery-lightbox.active {
+.mk-lightbox.active {
   opacity: 1;
   visibility: visible;
 }
 
-.lightbox-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+.mk-lightbox-img {
+  /* Define um tamanho fixo padrão para todas as imagens ao abrirem */
+  width: 60vw;
 
-  /* Efeito de abrir a imagem */
-  transform: scale(0.9);
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Mantém a proporção sem distorcer, centralizando no espaço delimitado */
+  object-fit: contain;
+
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
 }
 
-.gallery-lightbox.active .lightbox-img {
+.mk-lightbox.active .mk-lightbox-img {
   transform: scale(1);
 }
 
-.lightbox-close {
+.mk-lightbox-close {
   position: absolute;
-  top: 25px;
+  top: 30px;
   right: 40px;
-  color: #888;
-  font-size: 45px;
-  font-weight: 300;
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 900;
   cursor: pointer;
-  transition: 0.2s;
+  transition: color 0.2s;
   line-height: 1;
 }
 
-.lightbox-close:hover {
-  color: #fff;
-  transform: scale(1.1);
+.mk-lightbox-close:hover {
+  color: #22c55e;
 }
 
-/* Responsividade de segurança para telas minúsculas */
+/* Responsividade para telemóveis */
 @media (max-width: 600px) {
-  .lightbox-close {
+  .mk-lightbox-img {
+    width: 92vw;
+    height: 70vh;
+  }
+
+  .mk-lightbox-close {
     top: 15px;
     right: 25px;
-    font-size: 35px;
+    font-size: 32px;
   }
 }
 
@@ -5397,25 +5433,25 @@ ul {
    AJUSTES PARA MOBILE (CELULAR)
 ========================================== */
 @media (max-width: 768px) {
-  .moments-section {
+  .mk-moments-section {
     padding: 50px 0;
   }
 
-  .moments-title {
+  .mk-moments-title {
     font-size: 32px;
   }
 
-  .moments-gallery {
+  .mk-moments-gallery {
     gap: 20px;
-    /* Reduz um pouco o buraco entre as fotos no celular */
   }
 
-  .gallery-item {
+  .mk-moments-item {
     flex: 1 1 100%;
-    /* Força a ocupar 100% da largura do celular */
     max-width: 100%;
   }
 }
+
+
 
 /* ============================================================================================= */
 .click-notification {
@@ -19209,237 +19245,236 @@ ul {
 /* ==========================================
    MARKETPLACE SECTION STYLES
 ========================================== */
-.marketplace-section {
-  padding: 80px 20px;
-  background: #141414;
+/* ==========================================
+  ESTILOS LOJA DESTAQUES (ZERO BORDER-RADIUS)
+========================================== */
+
+.mk-shop-portal-section {
+  width: 100%;
+  background-color: #121214;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  color: #f4f4f5;
+}
+
+.mk-shop-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cabeçalho */
+.mk-shop-header {
   display: flex;
-  justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 35px;
+  border-bottom: 2px solid #27272a;
+  padding-bottom: 15px;
+}
+
+.mk-shop-main-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 0;
   color: #ffffff;
 }
 
-.marketplace-container {
-  width: 100%;
-  max-width: 1400px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Lado Esquerdo: Info */
-.marketplace-info {
-  flex: 1;
-  min-width: 280px;
-  max-width: 400px;
-}
-
-.marketplace-info h2 {
-  font-size: 2.5rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: #ffbc00;
-  margin: 0 0 20px 0;
-  line-height: 1.1;
-  letter-spacing: 1px;
-}
-
-.marketplace-info p {
-  color: #b0b0b0;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 30px;
-}
-
-/* Botão Amarelo */
-.znav-btn-yellow {
-  background: #ffbc00;
-  color: #000000;
-  border: none;
-  padding: 16px 30px;
-  font-weight: 900;
-  font-size: 13px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.znav-btn-yellow:hover {
-  background: #ffca2c;
-  transform: translateY(-2px);
-}
-
-/* Lado Direito: Carrossel */
-.marketplace-slider-wrapper {
-  flex: 2;
-  min-width: 300px;
-  overflow: hidden;
+/* Tooltip Customizado */
+.mk-shop-tooltip-box {
   position: relative;
+  cursor: pointer;
+  color: #22c55e;
+  font-size: 1.1rem;
 }
 
-.marketplace-track {
-  display: flex;
-  /* Removemos o gap daqui para controlar via margem exata */
-  gap: 0;
-  will-change: transform;
+.mk-shop-tooltip-popup {
+  visibility: hidden;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #18181b;
+  color: #f4f4f5;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid #3f3f46;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
-.mp-card {
-  background: #1e1e1e;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  overflow: hidden;
-  min-width: 220px;
-  /* O espaçamento agora é aplicado diretamente na margem direita de cada card */
-  flex: 0 0 calc(25% - 15px);
-  margin-right: 20px;
+.mk-shop-tooltip-box:hover .mk-shop-tooltip-popup {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Grelha de Cards */
+.mk-shop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+/* Card Principal */
+.mk-shop-card {
+  background-color: #18181b;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.3s ease;
-}
-
-/* Garante que o último card não empurre layout desnecessariamente para a direita */
-.mp-card:last-child {
-  margin-right: 0;
-}
-
-.mp-card:hover {
-  border-color: #ffbc00;
-}
-
-.mp-card-thumb {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: #000;
+  box-shadow: 6px 6px 0px #000000;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.mp-card-thumb img {
+.mk-shop-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px #000000;
+}
+
+/* Badge de Novidade */
+.mk-shop-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #22c55e;
+  color: #052e16;
+  font-size: 0.7rem;
+  font-weight: 950;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  z-index: 2;
+  border: 1px solid #052e16;
+}
+
+/* Imagem */
+.mk-shop-image-container {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background-color: #09090b;
+  border-bottom: 2px solid #27272a;
+}
+
+.mk-shop-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
 }
 
-.mp-badge {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: #000000;
-  color: #ffbc00;
-  border: 1px solid #ffbc00;
-  padding: 2px 8px;
-  font-size: 0.75rem;
-  font-weight: 900;
-  border-radius: 2px;
+.mk-shop-card:hover .mk-shop-img {
+  transform: scale(1.05);
+}
+
+/* Conteúdo */
+.mk-shop-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.mk-shop-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0;
+  color: #ffffff;
+}
+
+.mk-shop-expandable-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mk-shop-description {
+  font-size: 0.88rem;
+  color: #a1a1aa;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mk-shop-read-toggle {
+  background: none;
+  border: none;
+  color: #38bdf8;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
   text-transform: uppercase;
 }
 
-.mp-card-content {
-  padding: 15px;
+.mk-shop-read-toggle:hover {
+  text-decoration: underline;
+}
+
+/* Rodapé do Card */
+.mk-shop-footer {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.mp-card-content h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.mp-author {
-  font-size: 0.85rem;
-  color: #888888;
-  margin-bottom: 10px;
-}
-
-.mp-card-footer {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  font-size: 0.85rem;
-  font-weight: 700;
+  margin-top: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #27272a;
 }
 
-.mp-rating {
-  color: #ffbc00;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.mp-price {
-  color: #ffbc00;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Controles de Navegação (Setas) */
-.mp-slider-controls {
-  display: flex;
-  gap: 15px;
-  margin-top: 25px;
-}
-
-.mp-nav-btn {
-  background: transparent;
-  border: 1px solid #444;
+.mk-shop-price {
+  font-size: 1.15rem;
+  font-weight: 900;
   color: #ffffff;
-  width: 45px;
-  height: 45px;
-  border-radius: 4px;
+}
+
+/* Botões Estilizados */
+.mk-shop-btn {
+  padding: 12px 20px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.mp-nav-btn:hover {
-  background: #ffbc00;
-  color: #000;
-  border-color: #ffbc00;
+.mk-btn-primary {
+  background-color: #22c55e;
+  color: #052e16;
+  border: 2px solid #22c55e;
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 1024px) {
-  .mp-card {
-    flex: 0 0 calc(33.333% - 14px);
-  }
+.mk-btn-primary:hover {
+  background-color: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff;
 }
 
-@media (max-width: 768px) {
-  .marketplace-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .marketplace-info {
-    max-width: 100%;
-  }
-
-  .mp-card {
-    flex: 0 0 calc(50% - 10px);
-  }
+.mk-btn-ghost {
+  background-color: transparent;
+  color: #f4f4f5;
+  border: 2px solid #3f3f46;
 }
 
-@media (max-width: 480px) {
-  .mp-card {
-    flex: 0 0 100%;
-  }
+.mk-btn-ghost:hover {
+  background-color: #27272a;
+  border-color: #f4f4f5;
 }
 
+/* Responsividade */
+@media (max-width: 900px) {
+  .mk-shop-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
 
 /* ==========================================
    COLLECTIBLE SECTION STYLES (FIXED SIZE)
@@ -20400,7 +20435,9 @@ ul {
   }
 }
 
-
+/* ==========================================
+   ELEMENTO
+========================================== */
 .realms-compare-section {
   position: relative;
   width: 100vw;
@@ -20574,7 +20611,6 @@ ul {
   height: 18px;
   background-color: #333;
   color: #fff;
-  border-radius: 50%;
   font-size: 0.75rem;
   font-weight: bold;
   cursor: pointer;
@@ -20590,7 +20626,6 @@ ul {
   background-color: #1f1f1f;
   color: #ffffff;
   padding: 12px 16px;
-  border-radius: 6px;
   border: 1px solid #333;
   font-size: 0.85rem;
   max-width: 280px;
@@ -20825,7 +20860,6 @@ ul {
   height: 36px;
   background-color: rgba(0, 0, 0, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -20905,7 +20939,6 @@ ul {
   font-size: 0.85rem;
   font-weight: 800;
   text-decoration: none;
-  border-radius: 4px;
   letter-spacing: 1px;
   transition: background-color 0.2s;
 }
@@ -20965,355 +20998,276 @@ ul {
   }
 }
 
-.minecraft-custom-portal-wrap {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  padding: 30px 20px 40px 20px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--mc-green);
-  text-align: center;
-}
+/* ==========================================
+  ESTILOS ISOLADOS - DOWNLOADS & SUPORTE
+========================================== */
 
-.minecraft-custom-portal-wrap2 {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #423ed9;
-  margin: 0;
-  padding: 30px 20px 40px 20px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--mc-green);
-  text-align: center;
-}
-
-.minecraft-portal-inner-container {
+.dl-support-wrapper {
   width: 100%;
-  max-width: 1300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-color: var(--dark-bg);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  padding: 40px 60px;
+  box-sizing: border-box;
 }
 
-.minecraft-portal-nav-bar {
+/* Header das Abas */
+.dl-support-tabs-header {
   display: flex;
-  justify-content: center;
-  gap: 45px;
-  align-items: center;
-  width: 100%;
+  gap: 40px;
+  border-bottom: 2px solid #2a2a2a;
+  position: relative;
+  margin-bottom: 40px;
 }
 
-.minecraft-tab-navigation-btn {
+.dl-tab-btn {
   background: none;
   border: none;
-  color: #777777;
-  font-size: 0.8rem;
-  font-weight: 700;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 800;
   letter-spacing: 1px;
-  padding: 6px 10px;
+  padding: 15px 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
+  transition: var(--transition-smooth);
   position: relative;
-  transition: color 0.2s;
 }
 
-.minecraft-tab-navigation-btn:hover {
-  color: #aaaaaa;
+.dl-tab-btn:hover {
+  color: var(--text-main);
 }
 
-.minecraft-tab-navigation-btn.active {
-  color: #ffffff;
+.dl-tab-btn.active {
+  color: var(--text-main);
 }
 
-.minecraft-tab-navigation-btn.active::after {
+.dl-tab-btn.active::after {
   content: '';
   position: absolute;
-  bottom: -15px;
+  bottom: -2px;
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: #55ff55;
+  background-color: var(--verde-mc);
 }
 
-.minecraft-section-divider-line {
-  width: 100%;
-  height: 1px;
-  background-color: #222222;
-  margin-top: 15px;
-  margin-bottom: 30px;
+.dl-tab-icon {
+  font-size: 1rem;
 }
 
-.minecraft-tab-content-pane {
+/* Conteúdo das Abas */
+.dl-tab-content {
   display: none;
-  flex-direction: column;
-  gap: 30px;
-  width: 100%;
-  align-items: center;
+  animation: fadeInTab 0.3s ease-in-out;
 }
 
-.minecraft-tab-content-pane.active {
-  display: flex;
+.dl-tab-content.active {
+  display: block;
 }
 
-.minecraft-edition-group-box {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  align-items: flex-start;
+@keyframes fadeInTab {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.minecraft-edition-main-title {
-  font-size: 0.8rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  margin: 0;
-  color: #ffffff;
-  text-align: left;
+/* Títulos das Seções */
+.dl-section-heading {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  text-shadow: 1px 1px #000;
 }
 
-.bedrock-layout-row {
-  background-color: #0b0b0b;
-  border: 1px solid #181818;
+.dl-category-block {
+  margin-bottom: 40px;
+}
+
+/* Grid de Links de Plataformas */
+.dl-links-grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 100%;
+  gap: 20px;
 }
 
-.java-layout-wrapper {
-  background-color: #0b0b0b;
-  border: 1px solid #181818;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.minecraft-grid-row-three {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-bottom: 1px solid #151515;
-  width: 100%;
-}
-
-.minecraft-grid-row-two-corrected {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 100%;
-}
-
-.minecraft-platform-card-item {
+.dl-platform-item {
+  background-color: #161618;
+  border: 1px solid var(--border-light);
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
   text-decoration: none;
-  color: #ffffff;
-  font-size: 0.75rem;
+  color: var(--text-main);
   font-weight: 700;
-  letter-spacing: 0.8px;
-  border-right: 1px solid #151515;
-  transition: background-color 0.2s;
-  box-sizing: border-box;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.bedrock-layout-row .minecraft-platform-card-item:last-child,
-.minecraft-grid-row-three .minecraft-platform-card-item:last-child,
-.minecraft-grid-row-two-corrected .minecraft-platform-card-item:last-child {
-  border-right: none;
+.dl-platform-item:hover {
+  border-color: var(--verde-mc);
+  transform: translateY(-2px);
+  background-color: #1f1f23;
 }
 
-.minecraft-platform-card-item:hover {
-  background-color: #121212;
+.dl-plat-arrow {
+  color: var(--verde-mc);
+  font-weight: 900;
+  font-size: 1rem;
 }
 
-.minecraft-platform-label-text {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Área de Suporte e Pesquisa */
+.dl-support-intro {
+  margin-bottom: 30px;
 }
 
-.minecraft-symbol-icon {
+.dl-support-desc {
   font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
 }
 
-.minecraft-support-content-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
-  width: 100%;
-  align-items: flex-start;
+.dl-search-box-wrapper {
+  max-width: 100%;
 }
 
-.minecraft-support-header-block {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.minecraft-support-subtitle-text {
-  font-size: 0.8rem;
-  color: #777777;
-  margin: 0;
-  text-align: left;
-}
-
-.minecraft-support-search-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  align-items: flex-start;
-}
-
-.minecraft-support-search-label {
+.dl-search-label {
+  display: block;
   font-size: 0.75rem;
-  color: #888888;
-  text-align: left;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
-.minecraft-support-search-box {
+.dl-search-input-container {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  background-color: #0b0b0b;
-  border: 1px solid #222222;
-  padding: 12px 18px;
-  box-sizing: border-box;
-  width: 100%;
 }
 
-.minecraft-support-search-input {
-  background: none;
-  border: none;
-  color: #ffffff;
-  font-size: 0.8rem;
+.dl-search-icon {
+  position: absolute;
+  left: 15px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.dl-search-input {
   width: 100%;
+  background-color: #161618;
+  border: 1px solid var(--border-light);
+  padding: 14px 15px 14px 45px;
+  color: var(--text-main);
+  font-size: 0.9rem;
   outline: none;
-  text-align: left;
+  transition: var(--transition-smooth);
 }
 
-.minecraft-support-search-input::placeholder {
-  color: #666666;
+.dl-search-input:focus {
+  border-color: var(--verde-mc);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
 }
 
-.minecraft-support-section-block {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 100%;
-  align-items: flex-start;
-}
-
-.minecraft-support-links-list {
+/* Lista de Artigos de Solução */
+.dl-articles-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  align-items: flex-start;
+  gap: 14px;
 }
 
-.minecraft-support-link-item {
-  color: #55ff55;
+.dl-articles-list li a {
+  color: var(--verde-mc);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.dl-articles-list li a:hover {
   text-decoration: underline;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-align: left;
+  color: #4ade80;
 }
 
-.minecraft-support-link-item:hover {
-  color: #77ff77;
+/* Acordeão de Perguntas Frequentes */
+.dl-accordion-item {
+  background-color: #161618;
+  border: 1px solid var(--border-light);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
 }
 
-.minecraft-support-accordion-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background-color: #181818;
+.dl-accordion-header {
   width: 100%;
-}
-
-.minecraft-support-accordion-group {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.minecraft-support-accordion-item {
+  background: none;
+  border: none;
+  padding: 18px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0b0b0b;
-  padding: 16px 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #ffffff;
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-align: left;
   cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: left;
-  transition: background-color 0.2s;
+  letter-spacing: 0.5px;
 }
 
-.minecraft-support-accordion-item:hover {
-  background-color: #121212;
-}
-
-.minecraft-support-accordion-content {
-  display: none;
-  background-color: #090909;
-  padding: 16px 20px;
-  font-size: 0.75rem;
-  color: #b0b0b0;
-  text-align: left;
-  border-top: 1px solid #151515;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.minecraft-support-accordion-group.active .minecraft-support-accordion-content {
-  display: block;
-}
-
-.minecraft-support-accordion-group.active .minecraft-accordion-arrow {
-  transform: rotate(180deg);
-}
-
-.minecraft-accordion-arrow {
-  color: #777777;
+.dl-accordion-arrow {
+  color: var(--text-muted);
   font-size: 0.8rem;
-  transition: transform 0.2s ease;
-  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
-@media (max-width: 900px) {
+.dl-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
 
-  .bedrock-layout-row,
-  .minecraft-grid-row-three,
-  .minecraft-grid-row-two-corrected {
+.dl-accordion-item.active .dl-accordion-body {
+  max-height: 150px;
+  padding: 0 20px 20px 20px;
+}
+
+.dl-accordion-item.active .dl-accordion-arrow {
+  transform: rotate(180deg);
+  color: var(--verde-mc);
+}
+
+/* Responsividade Mobile */
+@media (max-width: 900px) {
+  .dl-support-wrapper {
+    padding: 20px;
+  }
+
+  .dl-links-grid-3 {
     grid-template-columns: 1fr;
   }
 
-  .minecraft-platform-card-item {
-    border-right: none;
-    border-bottom: 1px solid #151515;
+  .dl-support-tabs-header {
+    gap: 20px;
   }
 }
 
@@ -21360,7 +21314,6 @@ ul {
 .faq-item {
   background-color: #181818;
   border: 1px solid #2a2a2a;
-  border-radius: 6px;
   overflow: hidden;
   transition: border-color 0.2s;
 }
@@ -21437,7 +21390,7 @@ ul {
 }
 
 .faq-item.active .faq-icon {
-  transform: rotate(45deg);
+  transform: rotate(180deg);
   color: #368a2d;
 }
 
@@ -21476,76 +21429,142 @@ ul {
   }
 }
 
-.minecraft-steps-showcase-section {
+/* ==========================================
+  ESTILOS ISOLADOS - GUIA DE AVALIAÇÃO GRATUITA
+========================================== */
+
+.trial-guide-wrapper {
+  width: 100%;
+  background-color: var(--bg-light);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.trial-container {
+  max-width: var(--container-width);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  gap: 50px;
 }
 
-.minecraft-showcase-main-heading {
-  font-size: 1.8rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 0;
-  color: #ffffff;
+/* Cabeçalho */
+.trial-header {
   text-align: center;
+  margin-bottom: 60px;
+  max-width: 700px;
 }
 
-.minecraft-steps-grid-row {
+.trial-main-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  line-height: 1.3;
+  color: var(--text-main);
+  text-shadow: 2px 2px #000;
+}
+
+/* Grelha de Passos */
+.trial-steps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   width: 100%;
-  align-items: flex-start;
 }
 
-.minecraft-step-card-item {
+/* Card de Passo Individual */
+.trial-step-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 15px;
+  padding: 20px;
+  background: transparent;
+  transition: transform 0.3s ease;
 }
 
-.minecraft-step-image-container {
+.trial-step-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Caixa de Imagem/Ícone */
+.trial-image-box {
   width: 100%;
-  height: 180px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
 }
 
-.minecraft-step-visual-img {
+.trial-step-img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   image-rendering: pixelated;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
 }
 
-.minecraft-step-title-text {
-  font-size: 1.1rem;
+/* Conteúdo de Texto */
+.trial-content-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.trial-step-number {
+  font-size: 1.05rem;
   font-weight: 800;
-  margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
 }
 
-.minecraft-step-desc-text {
-  font-size: 0.85rem;
-  color: #b0b0b0;
-  margin: 0;
-  line-height: 1.4;
-  max-width: 280px;
+.trial-step-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 320px;
 }
 
+/* Responsividade Mobile (Média/Pequena escala) */
 @media (max-width: 900px) {
-  .minecraft-steps-grid-row {
+  .trial-steps-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 50px;
+    max-width: 450px;
   }
+
+  .trial-main-title {
+    font-size: 1.4rem;
+  }
+
+  .trial-guide-wrapper {
+    padding: 50px 20px;
+  }
+}
+
+/* ==========================================
+  ESTILOS MELHORADOS - SHOWCASE DE JOGOS
+========================================== */
+/* ==========================================
+  ESTILOS MELHORADOS - SHOWCASE DE JOGOS
+========================================== */
+
+.minecraft-custom-portal-wrap {
+  width: 100%;
+  background-color: #121214;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.minecraft-portal-inner-container {
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .minecraft-games-showcase-wrapper {
@@ -21556,44 +21575,47 @@ ul {
   width: 100%;
 }
 
-/* Aproxima a imagem esquerda para a direita */
+/* Base Comum para as Artes Laterais */
+.minecraft-side-artwork-box {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .minecraft-left-artwork {
-  margin-right: -110px;
-  /* Ajuste esse valor conforme necessário */
-  z-index: 2;
-  /* Garante que fique sobreposta ou integrada ao lado do card */
+  left: -20px;
 }
 
-/* Aproxima a imagem direita para a esquerda e faz aparecer */
 .minecraft-right-artwork {
-  margin-left: -60px;
-  /* Ajuste esse valor conforme necessário */
-  z-index: 2;
-  transform: scaleX(-1);
-  /* Opcional: inverte a skin para olhar pro outro lado */
+  right: -20px;
+  transform: translateY(-50%) scaleX(-1);
+  /* Inverte horizontalmente de forma limpa */
 }
 
-.minecraft-side-artwork-box1 img {
-  max-width: 280px;
-  /* Controle o tamanho do PNG aqui se preferir */
+.minecraft-left-artwork img {
+  max-width: 240px;
   height: auto;
   display: block;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
 }
 
-.minecraft-side-artwork-box2 img {
-  max-width: 180px;
-  /* Controle o tamanho do PNG aqui se preferir */
+.minecraft-right-artwork img {
+  max-width: 160px;
   height: auto;
   display: block;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
 }
 
+/* Bloco Central */
 .minecraft-games-content-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1100px;
-  gap: 40px;
+  max-width: 1050px;
+  gap: 35px;
   z-index: 3;
 }
 
@@ -21605,38 +21627,43 @@ ul {
   margin: 0;
   color: #ffffff;
   text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Grelha de Cards */
 .minecraft-games-grid-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 24px;
   width: 100%;
   align-items: stretch;
 }
 
+/* Card Individual */
 .minecraft-game-card-item {
-  background-color: #1b1b1b;
-  border: 1px solid #282828;
+  background-color: #18181b;
+  border: 1px solid #27272a;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
   text-align: left;
   box-sizing: border-box;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .minecraft-game-card-item:hover {
-  transform: translateY(-4px);
-  border-color: #444444;
+  transform: translateY(-6px);
+  border-color: #3f3f46;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
 }
 
 .minecraft-game-image-box {
   width: 100%;
-  height: 180px;
+  height: 175px;
   overflow: hidden;
-  background-color: #0b0b0b;
+  background-color: #09090b;
 }
 
 .minecraft-game-banner-img {
@@ -21644,79 +21671,460 @@ ul {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s ease;
+}
+
+.minecraft-game-card-item:hover .minecraft-game-banner-img {
+  transform: scale(1.04);
 }
 
 .minecraft-game-details-box {
-  padding: 20px 20px 10px 20px;
+  padding: 20px 20px 12px 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .minecraft-game-title-text {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   margin: 0;
-  color: #ffffff;
+  color: #f4f4f5;
 }
 
 .minecraft-game-price-text {
   font-size: 0.85rem;
-  color: #aaaaaa;
+  color: #a1a1aa;
   font-weight: 600;
 }
 
+/* Botões de Ação */
 .minecraft-game-buy-btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 14px 20px;
   font-size: 0.8rem;
   font-weight: 800;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: opacity 0.2s;
   box-sizing: border-box;
   width: 100%;
+  transition: filter 0.2s ease, padding-left 0.2s ease;
 }
 
 .minecraft-game-buy-btn:hover {
-  opacity: 0.9;
+  filter: brightness(1.15);
 }
 
 .minecraft-btn-green {
-  background-color: #3c8527;
-  color: #ffffff;
+  background-color: #22c55e;
+  color: #052e16;
 }
 
 .minecraft-btn-orange {
-  background-color: #e09224;
-  color: #ffffff;
+  background-color: #f97316;
+  color: #431407;
 }
 
 .minecraft-btn-blue {
-  background-color: #75d1f0;
-  color: #0c0c0c;
+  background-color: #38bdf8;
+  color: #082f49;
 }
 
 .minecraft-btn-arrow {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 900;
+  transition: transform 0.2s ease;
 }
 
-@media (max-width: 1150px) {
+.minecraft-game-buy-btn:hover .minecraft-btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Responsividade Adaptada */
+@media (max-width: 1200px) {
   .minecraft-side-artwork-box {
     display: none;
-  }
-
-  .minecraft-games-grid-row {
-    grid-template-columns: 1fr;
-    gap: 25px;
+    /* Oculta as imagens laterais em ecrãs médios para evitar cortes */
   }
 }
 
+@media (max-width: 900px) {
+  .minecraft-games-grid-row {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
 
+  .minecraft-custom-portal-wrap {
+    padding: 30px 15px;
+  }
+}
+
+/* ==========================================
+  ESTILOS OTIMIZADOS - SEÇÃO DE ARTIGOS
+========================================== */
+.minecraft-custom-portal-wrap2 {
+  width: 100%;
+  background-color: var(--bg-tag);
+  padding: 60px 20px;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.minecraft-portal-inner-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.minecraft-articles-showcase-section {
+  width: 100%;
+}
+
+/* Grade de Colunas */
+.minecraft-articles-grid-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+/* Item de Coluna Individual */
+.minecraft-articles-column-item {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s ease;
+}
+
+.minecraft-articles-column-item:hover {
+  border-color: #3f3f46;
+}
+
+/* Título da Coluna */
+.minecraft-column-main-heading {
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #f4f4f5;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #27272a;
+}
+
+/* Lista de Links */
+.minecraft-articles-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.minecraft-article-link-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #a1a1aa;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.minecraft-article-icon {
+  color: #22c55e;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.minecraft-article-link-item:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+/* Link Inferior: "Ver todos os artigos" */
+.minecraft-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #22c55e;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: auto;
+  transition: color 0.2s ease;
+}
+
+.minecraft-view-all-link:hover {
+  color: #4ade80;
+}
+
+.minecraft-link-arrow {
+  font-size: 1.1rem;
+  font-weight: 900;
+  transition: transform 0.2s ease;
+}
+
+.minecraft-view-all-link:hover .minecraft-link-arrow {
+  transform: translateX(3px);
+}
+
+/* Responsividade Adaptada */
+@media (max-width: 1024px) {
+  .minecraft-articles-grid-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .minecraft-articles-grid-row {
+    grid-template-columns: 1fr;
+  }
+
+  .minecraft-custom-portal-wrap2 {
+    padding: 30px 15px;
+  }
+}
+
+/* ==========================================
+  ESTILOS DO PORTAL DE NOTÍCIAS (EXCLUSIVO)
+========================================== */
+.mc-news-portal-section {
+  width: 100%;
+  background-color: #121214;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.mc-news-inner-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Layout Principal em Grid Assimétrico */
+.mc-news-layout-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Card Principal (Esquerda) */
+.mc-news-main-card {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.mc-news-main-card:hover {
+  transform: translateY(-4px);
+  border-color: #3f3f46;
+}
+
+.mc-main-media {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background-color: #09090b;
+}
+
+/* Coluna Direita (Cards Horizontais) */
+.mc-news-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mc-news-horizontal-card {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  flex: 1;
+}
+
+.mc-news-horizontal-card:hover {
+  transform: translateX(4px);
+  border-color: #3f3f46;
+}
+
+.mc-side-media {
+  width: 180px;
+  min-width: 180px;
+  height: auto;
+  overflow: hidden;
+  background-color: #09090b;
+}
+
+/* Imagens */
+.mc-news-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.mc-news-main-card:hover .mc-news-img,
+.mc-news-horizontal-card:hover .mc-news-img {
+  transform: scale(1.04);
+}
+
+/* Caixas de Conteúdo */
+.mc-news-info-box {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 16px;
+}
+
+.mc-side-content {
+  padding: 18px 20px;
+  gap: 10px;
+}
+
+.mc-news-text-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Tipografia */
+.mc-news-title-main {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #f4f4f5;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.mc-news-desc-main {
+  font-size: 0.9rem;
+  color: #a1a1aa;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mc-news-title-side {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f4f4f5;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.mc-news-desc-side {
+  font-size: 0.82rem;
+  color: #a1a1aa;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Botões e Links */
+.mc-news-cta-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: filter 0.2s ease;
+}
+
+.mc-news-cta-btn:hover {
+  filter: brightness(1.15);
+}
+
+.mc-btn-green {
+  background-color: #22c55e;
+  color: #052e16;
+}
+
+.mc-cta-arrow {
+  font-size: 1.1rem;
+  font-weight: 900;
+  transition: transform 0.2s ease;
+}
+
+.mc-news-cta-btn:hover .mc-cta-arrow {
+  transform: translateX(3px);
+}
+
+.mc-news-inline-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.mc-news-inline-link:hover {
+  color: #7dd3fc;
+  transform: translateX(2px);
+}
+
+/* Responsividade Adaptada */
+@media (max-width: 1024px) {
+  .mc-news-layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mc-main-media {
+    height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mc-news-horizontal-card {
+    flex-direction: column;
+  }
+
+  .mc-side-media {
+    width: 100%;
+    height: 160px;
+    min-width: unset;
+  }
+
+  .mc-news-portal-section {
+    padding: 30px 15px;
+  }
+}
+
+/* ==========================================
+   ELEMENTO
+========================================== */
 .minecraft-articles-showcase-section {
   display: flex;
   flex-direction: column;
@@ -22683,7 +23091,7 @@ ul {
    SEÇÃO 1: BEM-VINDO AO MINECRAFT EDUCATION
    ========================================== */
 .edu-welcome-section {
-  background-color: #ffffff;
+  background-color: #fff5be;
   color: #111111;
 }
 
@@ -22871,19 +23279,12 @@ ul {
   flex-direction: column;
 }
 
-.edu-copilot-bg-top {
-  width: 100%;
-  height: 140px;
-  background-color: #bfdbfe;
-  /* Azul claro superior */
-}
-
 .edu-copilot-bg-bottom {
   width: 100%;
-  background-color: #e8e1fd;
+  background-color: var(--text-main);
   /* Lilás/Roxo claro inferior */
   position: relative;
-  padding-bottom: 60px;
+  padding-top: 80px;
 }
 
 .edu-copilot-character-wrapper {
@@ -22894,7 +23295,7 @@ ul {
 }
 
 .edu-copilot-img {
-  max-width: 180px;
+  max-width: 600px;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -22935,10 +23336,6 @@ ul {
   background-color: #5b21b6;
 }
 
-
-/* ==========================================
-   RESPONSIVIDADE
-   ========================================== */
 @media (max-width: 1024px) {
   .edu-audience-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -22967,10 +23364,13 @@ ul {
   }
 }
 
+/* ==========================================
+   CONFIGURAÇÕES DE REDE
+   ========================================== */
 /* Seção Geral */
 .network-section {
   padding: 60px 20px;
-  background-color: var(--text-muted);
+  background-color: var(--rt-bg-input);
   font-family: 'Inter', sans-serif;
 }
 
@@ -22983,7 +23383,7 @@ ul {
 /* Cabeçalho */
 .network-header h2 {
   font-size: 2.2rem;
-  color: #8B0000;
+  color: #ffffff;
   /* Tom avermelhado estilo Minecraft */
   font-weight: 800;
   margin-bottom: 15px;
@@ -23053,7 +23453,7 @@ ul {
 /* Botões dos Cards */
 .network-btn {
   display: inline-block;
-  background-color: #C93B2B;
+  background-color: var(--accent-color);
   /* Vermelho padrão do botão */
   color: #ffffff;
   padding: 10px 20px;
@@ -23067,7 +23467,7 @@ ul {
 }
 
 .network-btn:hover {
-  background-color: #A82E21;
+  background-color: var(--green-hover);
 }
 
 /* Responsividade para telas menores */
@@ -23080,7 +23480,7 @@ ul {
 /* Seção Geral */
 .brand-assets-section {
   padding: 60px 20px;
-  background-color: var(--rt-bg-card);
+  background-color: var(--bg-dark);
   font-family: 'Inter', sans-serif;
   text-align: center;
 }
@@ -23110,7 +23510,7 @@ ul {
 /* Subtítulo central roxo */
 .brand-subheader h3 {
   font-size: 1rem;
-  color: var(--rt-text-pure);
+  color: var(--rt-text-muted);
   /* Tom roxo escuro idêntico ao da imagem */
   font-weight: 700;
   margin-bottom: 45px;
@@ -23164,180 +23564,193 @@ ul {
   }
 }
 
-/* Configuração Geral das Seções */
-.guidelines-section {
-  padding: 50px 20px;
-  background-color: #bfdbfe;
-  font-family: 'Inter', sans-serif;
-}
+/* ==========================================
+  GUIDELINES - TEMA ESCURO (ESTILO JOGO)
+========================================== */
 
-.guidelines-container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-/* Títulos */
-.section-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin-bottom: 25px;
-  letter-spacing: 0.5px;
-}
-
-.green-title {
-  color: #2E7D32;
-  /* Tom verde escuro estilo Minecraft */
-}
-
-.red-title {
-  color: #C62828;
-  /* Tom vermelho escuro estilo Minecraft */
-}
-
-.intro-dont {
-  font-size: 0.95rem;
-  color: #333333;
-  margin-bottom: 20px;
-}
-
-/* Listas com Marcadores Personalizados */
-.guidelines-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.guidelines-list li {
-  position: relative;
-  padding-left: 25px;
-  margin-bottom: 22px;
-  font-size: 0.95rem;
-  color: #222222;
-  line-height: 1.5;
-}
-
-/* Marcador verde padrão (O que fazer) */
-.guidelines-list li::before {
-  content: "■";
-  position: absolute;
-  left: 0;
-  top: 0px;
-  color: #2E7D32;
-  font-size: 0.8rem;
-}
-
-/* Marcador vermelho padrão (O que não fazer) */
-.dont-list li::before {
-  color: #C62828;
-}
-
-/* Texto de Exemplos Internos */
-.example-text {
-  display: block;
-  font-size: 0.9rem;
-  color: #555555;
-  margin-top: 4px;
-}
-
-/* Link interno estilizado */
-.inline-link {
-  color: #1B5E20;
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-.inline-link:hover {
-  color: #2E7D32;
-}
-
-/* Seção Geral */
-.guidelines-section-grid {
+.guidelines-wrapper-section {
   padding: 60px 20px;
-  background-color: var(--accent-blue);
+  background-color: #0c0c10;
   font-family: 'Inter', sans-serif;
 }
 
-.guidelines-container {
-  max-width: 1100px;
+.guidelines-main-container {
+  max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
-}
-
-/* Título Principal */
-.main-title {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #111111;
-  margin-bottom: 45px;
-  letter-spacing: 1px;
-}
-
-/* Grid de Cards (2 colunas) */
-.guidelines-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px 30px;
-  text-align: left;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  /* IMPORTANTE: Mudado de 'stretch' para 'start' para os cards não esticarem juntos */
+  align-items: start;
 }
 
-/* Card Individual */
-.guideline-card {
+/* Colunas individuais */
+.guideline-column {
   display: flex;
   flex-direction: column;
 }
 
-/* Container da Imagem com proporção limpa e efeito hover opcional */
-.guideline-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 18px;
-  background-color: #f0f0f0;
+.column-header {
+  margin-bottom: 20px;
 }
 
-.guideline-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: 0.5px;
 }
 
-.guideline-card:hover .guideline-image img {
-  transform: scale(1.03);
+.green-title {
+  color: #22c55e;
 }
 
-/* Conteúdo do Card */
-.guideline-content h3 {
-  font-size: 1.15rem;
-  margin-bottom: 12px;
-  font-weight: 700;
+.red-title {
+  color: #ef4444;
 }
 
-.guideline-content h3 a {
-  color: #00ff00;
-  /* Tom verde escuro padrão da imagem */
-  text-decoration: none;
-  transition: color 0.2s ease;
+.intro-dont {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin-top: 6px;
 }
 
-.guideline-content h3 a:hover {
-  text-decoration: underline;
-  color: #2E7D32;
+/* Caixa de Cartão Principal (Altura automática baseada no conteúdo) */
+.guidelines-card-box {
+  background: #14141c;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  border: 1px solid #27273a;
+  height: auto;
+  /* Removemos o height: 100% para ele compactar conforme os itens */
 }
 
-.guideline-content p {
-  font-size: 0.95rem;
-  color: #000000;
-  line-height: 1.6;
+/* Lista de Diretrizes */
+.guidelines-list {
+  list-style: none;
+  padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
-/* Responsividade para telas menores (vira 1 coluna) */
-@media (max-width: 768px) {
-  .guidelines-grid {
+.guidelines-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.92rem;
+  color: #d1d5db;
+  line-height: 1.6;
+  border-bottom: 1px solid #1f1f2e;
+  padding-bottom: 18px;
+}
+
+.guidelines-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Indicadores de lista (pequenos quadrados nas pontas) */
+.guidelines-list li::before {
+  content: "■";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 0.75rem;
+}
+
+.guideline-column.do-column .guidelines-list li::before {
+  color: #22c55e;
+}
+
+.guideline-column.dont-column .guidelines-list li::before {
+  color: #ef4444;
+}
+
+.guidelines-list strong {
+  font-weight: 700;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Agrupamento de Exemplos */
+.examples-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.example-badge {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  line-height: 1.4;
+}
+
+.example-badge.ok {
+  background-color: rgba(20, 83, 45, 0.4);
+  color: #86efac;
+  border-left: 3px solid #22c55e;
+}
+
+.example-badge.bad {
+  background-color: rgba(127, 29, 29, 0.4);
+  color: #fca5a5;
+  border-left: 3px solid #ef4444;
+}
+
+/* Caixa de Aviso de Isenção */
+.disclaimer-box {
+  background-color: #1a1a24;
+  border: 1px dashed #3f3f56;
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: monospace;
+  color: #e5e7eb;
+  margin-top: 8px;
+}
+
+/* Links internos */
+.inline-link {
+  color: #38bdf8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+  RESPONSIVIDADE MOBILE OTIMIZADA
+========================================== */
+@media (max-width: 900px) {
+  .guidelines-wrapper-section {
+    padding: 30px 12px;
+    /* Reduz margens laterais em telas pequenas */
+  }
+
+  .guidelines-main-container {
     grid-template-columns: 1fr;
+    /* Transforma em coluna única */
+    gap: 24px;
+  }
+
+  .guidelines-card-box {
+    padding: 20px;
+    /* Reduz o padding interno dos cards no mobile */
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    /* Ajusta o tamanho do título para cabere em ecrãs menores */
   }
 }
 
@@ -23463,5 +23876,244 @@ ul {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ==========================================
+  ESTILOS ISOLADOS - ABA ASSINATURAS
+========================================== */
+
+.sub-main-wrapper {
+  width: 100%;
+  background-color: var(--dark-bg);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Banner em Largura Total */
+.sub-banner-box {
+  width: 100%;
+  padding: 80px 40px;
+  border: none;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Temas de Fundo */
+.sub-marketplace-theme {
+  background-image: linear-gradient(135deg, rgba(20, 20, 28, 0.95) 0%, rgba(12, 12, 12, 0.98) 100%), var(--sub-bg-url);
+}
+
+.sub-realms-theme {
+  background-image: linear-gradient(135deg, rgba(30, 15, 45, 0.95) 0%, rgba(12, 12, 12, 0.98) 100%), var(--sub-bg-url);
+}
+
+/* ==========================================
+  CAMADA DE PARTÍCULAS FLUTUANTES (INTENSA)
+========================================== */
+.sub-particles-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.sub-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 2px;
+  opacity: 0.7;
+  animation: subFloatAnimation ease-in-out infinite alternate;
+}
+
+.sub-gold-dot {
+  background-color: var(--gold);
+  box-shadow: 0 0 8px var(--gold);
+}
+
+.sub-green-dot {
+  background-color: var(--verde-mc);
+  box-shadow: 0 0 8px var(--verde-mc);
+}
+
+.sub-purple-dot {
+  background-color: #c084fc;
+  box-shadow: 0 0 10px #9333ea;
+}
+
+.sub-pink-dot {
+  background-color: #f472b6;
+  box-shadow: 0 0 10px #db2777;
+}
+
+@keyframes subFloatAnimation {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(0.8);
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translateY(-35px) translateX(20px) scale(1.3);
+    opacity: 0.2;
+  }
+}
+
+/* Layout de Conteúdo Interno */
+.sub-content-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.sub-content-inner.sub-centered-layout {
+  flex-direction: column;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.sub-text-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sub-text-column.sub-text-centered {
+  align-items: center;
+}
+
+.sub-image-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.sub-image-top {
+  margin-bottom: 20px;
+}
+
+.sub-pixel-art-img {
+  max-width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+}
+
+/* Tipografia e Títulos */
+.sub-heading-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.sub-gold-text {
+  color: var(--gold);
+  text-shadow: 0 0 15px rgba(248, 203, 71, 0.3);
+}
+
+.sub-purple-text {
+  color: #c084fc;
+  text-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
+}
+
+.sub-description-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.sub-price-tag {
+  font-size: 0.8rem;
+  color: var(--zc-muted);
+  margin-top: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Botões Customizados */
+.mc-sub-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  text-shadow: 1px 1px #000;
+}
+
+.sub-gold-btn {
+  background-color: var(--gold);
+  color: #121212;
+  border: 2px solid #c79f2b;
+  font-weight: 900;
+  text-shadow: none;
+}
+
+.sub-gold-btn:hover {
+  background-color: #ffd857;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(248, 203, 71, 0.4);
+}
+
+.sub-purple-btn {
+  background-color: #8b5cf6;
+  color: var(--text-main);
+  border: 2px solid #5b21b6;
+}
+
+.sub-purple-btn:hover {
+  background-color: #a78bfa;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* Responsividade Mobile */
+@media (max-width: 900px) {
+  .sub-content-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sub-text-column {
+    align-items: center;
+  }
+
+  .sub-banner-box {
+    padding: 50px 20px;
+  }
+
+  .sub-heading-title {
+    font-size: 1.4rem;
   }
 }
