@@ -9,14 +9,9 @@
     <title>Zera's Craft | Teste 1</title> <!---->
     <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
     <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css"> <!---->
-    <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="style.css">
     <!---->
-    <link rel="stylesheet" href="../style.css"> <!---->
-    <link rel="stylesheet" href="../style2.css">
-    <!---->
-    <link rel="stylesheet" href="../style3.css">
+    <link rel="stylesheet" href="../style.css">
     <!---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!---->
@@ -69,7 +64,7 @@
 </head>
 
 <body>
-    
+
     <!--=======================================================================================================-->
     <div id="nav-placeholder-pc"></div>
     <div id="nav-placeholder-mobile"></div>
@@ -78,7 +73,7 @@
 
     <main>
         <section class="hero">
-            <div class="hero-bg" style="background-image: url('assets/images/geral/banner-fundo.gif');"></div>
+            <div class="hero-bg" style="background-image: url('../assets/images/geral/banner-fundo.gif');"></div>
 
             <div class="hero-content">
                 <span class="hero-tag">Mundo Zera's Craft</span>
@@ -119,20 +114,21 @@
             </div>
         </section>
 
-        <div id="checkout-anchor"></div>
+        <!-- Contentor que segura o espaço exato do banner ao fixar -->
+        <div class="checkout-banner-wrapper" id="checkout-wrapper">
+            <div class="checkout-banner" id="checkout-banner">
+                <div class="checkout-container">
 
-        <div class="checkout-banner" id="checkout-banner">
-            <div class="checkout-container">
+                    <div class="checkout-info">
+                        <img src="../assets/images/geral/icone.png" alt="Thumbnail">
+                        <span class="checkout-title">DELUXE EDITION</span>
+                    </div>
 
-                <div class="checkout-info">
-                    <img src="assets/images/geral/icone.png" alt="Thumbnail">
-                    <span class="checkout-title">DELUXE EDITION</span>
+                    <button class="checkout-btn">
+                        CHECKOUT <i class="fas fa-chevron-right"></i>
+                    </button>
+
                 </div>
-
-                <button class="checkout-btn">
-                    CHECKOUT <i class="fas fa-chevron-right"></i>
-                </button>
-
             </div>
         </div>
 
@@ -961,17 +957,17 @@
         </a>
     </main>
 
-  <!--------------------------------------------------------------->
+    <!--------------------------------------------------------------->
 
-  <!-- Placeholders do Player e Rodapé (caso sejam carregados via JS) -->
-  <div id="player-container"></div>
-  <div id="footer-placeholder"></div>
+    <!-- Placeholders do Player e Rodapé (caso sejam carregados via JS) -->
+    <div id="player-container"></div>
+    <div id="footer-placeholder"></div>
 
-  <script src="script.js"></script>
-  <script src="script2.js"></script>
-  <script src="load-html.js"></script>
-  <script src="effects.js"></script>
-  <script src="player.js"></script>
+    <script src="../script.js"></script>
+    <script src="../script2.js"></script>
+    <script src="../load-html.js"></script>
+    <script src="../effects.js"></script>
+    <script src="../player.js"></script>
 
     <!-- =================================== -->
     <!-- CÓDIGO DO SISTEMA DE MÚSICA ÚNICA E INVISÍVEL (FINAL DO HTML) -->

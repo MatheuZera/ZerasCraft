@@ -1549,3 +1549,517 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+/* ============================================================================================= */
+/* ==========================================
+   CARD DE SERVIDOR DEDICADO BEDROCK (Muda o Link do Check do Card no Botão de Baixar)
+========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.mc-bedrock-card');
+
+  cards.forEach(card => {
+    const checkbox = card.querySelector('.mc-terms-checkbox');
+    const radios = card.querySelectorAll('input[type="radio"]');
+    const downloadBtn = card.querySelector('.mc-btn-submit');
+
+    function updateCardState() {
+      const isAccepted = checkbox.checked;
+      const selectedRadio = card.querySelector('input[type="radio"]:checked');
+
+      if (isAccepted && selectedRadio) {
+        // Remove estado desativado e injeta o valor do radio (URL) no href
+        downloadBtn.classList.remove('disabled');
+        downloadBtn.setAttribute('href', selectedRadio.value);
+      } else {
+        // Desativa o botão e limpa a URL
+        downloadBtn.classList.add('disabled');
+        downloadBtn.setAttribute('href', '#');
+      }
+    }
+
+    checkbox.addEventListener('change', updateCardState);
+    radios.forEach(radio => radio.addEventListener('change', updateCardState));
+
+    updateCardState();
+  });
+});
+
+/* ==========================================================================
+   CARROSSEL INFINITO "COMEMORAÇÕES E PARCERIAS"
+   ========================================================================== */
+(() => {
+  function initCelebrationsCarousel() {
+    const track = document.querySelector('.mc-celebrations-track');
+    const prevBtn = document.querySelector('.mc-celebrations-arrow-prev');
+    const nextBtn = document.querySelector('.mc-celebrations-arrow-next');
+    const viewport = document.querySelector('.mc-celebrations-viewport');
+
+    if (!track || !prevBtn || !nextBtn || !viewport) return;
+
+    if (track.dataset.initialized === 'true') return;
+
+    const originalCards = Array.from(track.children);
+    if (originalCards.length === 0) return;
+
+    // Duplicação múltipla dos cartões para permitir navegação infinita e fluida
+    const cloneCount = 3;
+    for (let i = 0; i < cloneCount; i++) {
+      originalCards.forEach(card => track.appendChild(card.cloneNode(true)));
+      originalCards.slice().reverse().forEach(card => track.insertBefore(card.cloneNode(true), track.firstChild));
+    }
+
+    const allCards = Array.from(track.children);
+    let activeIndex = originalCards.length * cloneCount;
+
+    // Recalcula e aplica o posicionamento central
+    function updateCarousel(smooth = true) {
+      const cardWidth = allCards[0].offsetWidth;
+      const gap = parseFloat(window.getComputedStyle(track).gap) || 60;
+      const viewportWidth = viewport.offsetWidth;
+
+      track.style.transition = smooth ? 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+
+      // Cálculo do deslocamento necessário para centralizar o cartão ativo
+      const targetPosition = (activeIndex * (cardWidth + gap)) + (cardWidth / 2) - (viewportWidth / 2);
+      track.style.transform = `translateX(-${targetPosition}px)`;
+
+      // Atualiza a opacidade/destaque visual do cartão ativo
+      allCards.forEach((card, idx) => {
+        card.classList.toggle('is-active', idx === activeIndex);
+      });
+    }
+
+    // Reinicia a posição de forma invisível quando chega aos limites clonados
+    function handleLoop() {
+      const total = originalCards.length;
+      if (activeIndex < total) {
+        activeIndex += total;
+        updateCarousel(false);
+      } else if (activeIndex >= allCards.length - total) {
+        activeIndex -= total;
+        updateCarousel(false);
+      }
+    }
+
+    // Controlo dos botões
+    nextBtn.addEventListener('click', () => {
+      activeIndex++;
+      updateCarousel(true);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      activeIndex--;
+      updateCarousel(true);
+    });
+
+    track.addEventListener('transitionend', handleLoop);
+    window.addEventListener('resize', () => updateCarousel(false));
+
+    // Ajusta a posição inicial sem animação
+    updateCarousel(false);
+
+    // Exibe a viewport perfeitamente centralizada
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        viewport.classList.add('is-ready');
+        track.dataset.initialized = 'true';
+      });
+    });
+  }
+
+  if (document.readyState === 'complete') {
+    initCelebrationsCarousel();
+  } else {
+    window.addEventListener('load', initCelebrationsCarousel);
+  }
+})();
+
+/* ==========================================================================
+   LÓGICA DO CARROSSEL "UM FILME MINECRAFT" - FINAL E COMPLETO
+   ========================================================================== */
+(() => {
+  function initMovieCarousel() {
+    const track = document.querySelector('.mc-movie-track');
+    const prevBtn = document.querySelector('.mc-movie-arrow-prev');
+    const nextBtn = document.querySelector('.mc-movie-arrow-next');
+    const viewport = document.querySelector('.mc-movie-viewport');
+
+    if (!track || !prevBtn || !nextBtn || !viewport) return;
+
+    // Evita reinicialização duplicada
+    if (track.dataset.initialized === 'true') return;
+
+    const originalCards = Array.from(track.children);
+    if (originalCards.length === 0) return;
+
+    // Duplica os cartões para criar o loop infinito contínuo
+    const cloneCount = 3;
+    for (let i = 0; i < cloneCount; i++) {
+      originalCards.forEach(card => track.appendChild(card.cloneNode(true)));
+      originalCards.slice().reverse().forEach(card => track.insertBefore(card.cloneNode(true), track.firstChild));
+    }
+
+    const allCards = Array.from(track.children);
+    let activeIndex = originalCards.length * cloneCount;
+
+    // Atualiza a posição da faixa e centraliza o cartão ativo
+    function updateCarousel(smooth = true) {
+      const cardWidth = allCards[0].offsetWidth;
+      const gap = parseFloat(window.getComputedStyle(track).gap) || 70;
+      const viewportWidth = viewport.offsetWidth;
+
+      // Aplica a transição suave apenas durante a navegação manual
+      track.style.transition = smooth ? 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+
+      // Posição exata do cartão central na tela
+      const targetPosition = (activeIndex * (cardWidth + gap)) + (cardWidth / 2) - (viewportWidth / 2);
+      track.style.transform = `translateX(-${targetPosition}px)`;
+
+      // Marca o cartão central como ativo
+      allCards.forEach((card, idx) => {
+        card.classList.toggle('is-active', idx === activeIndex);
+      });
+    }
+
+    // Efetua o salto invisível ao atingir as extremidades clonadas
+    function handleLoop() {
+      const total = originalCards.length;
+      if (activeIndex < total) {
+        activeIndex += total;
+        updateCarousel(false);
+      } else if (activeIndex >= allCards.length - total) {
+        activeIndex -= total;
+        updateCarousel(false);
+      }
+    }
+
+    // Cliques nas setas
+    nextBtn.addEventListener('click', () => {
+      activeIndex++;
+      updateCarousel(true);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      activeIndex--;
+      updateCarousel(true);
+    });
+
+    track.addEventListener('transitionend', handleLoop);
+    window.addEventListener('resize', () => updateCarousel(false));
+
+    // Posiciona instantaneamente antes de exibir
+    updateCarousel(false);
+
+    // Revela a viewport no próximo ciclo de renderização já perfeitamente ajustada
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        viewport.classList.add('is-ready');
+        track.dataset.initialized = 'true';
+      });
+    });
+  }
+
+  // Garante que o cálculo ocorra apenas com todas as imagens e fontes prontas
+  if (document.readyState === 'complete') {
+    initMovieCarousel();
+  } else {
+    window.addEventListener('load', initMovieCarousel);
+  }
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. SISTEMA DE GERENCIAMENTO DE ABAS
+  const tabButtons = document.querySelectorAll('.mc-tab-btn');
+  const tabPanels = document.querySelectorAll('.mc-tab-panel');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetTab = button.getAttribute('data-tab');
+
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabPanels.forEach(panel => panel.classList.remove('active'));
+
+      button.classList.add('active');
+      const activePanel = document.getElementById(`tab-${targetTab}`);
+      if (activePanel) {
+        activePanel.classList.add('active');
+      }
+    });
+  });
+
+  // 2. CARROSSEL COM ROLAGEM INFINITA SEM COSTURAS
+  const track = document.querySelector('.mc-carousel-track');
+  const prevBtn = document.querySelector('.mc-arrow-prev');
+  const nextBtn = document.querySelector('.mc-arrow-next');
+
+  if (track && prevBtn && nextBtn) {
+    const originalCards = Array.from(track.children);
+    const totalOriginal = originalCards.length;
+
+    // Duplica os cards para frente e para trás garantindo o efeito infinito
+    originalCards.forEach(card => track.appendChild(card.cloneNode(true)));
+    originalCards.slice().reverse().forEach(card => track.insertBefore(card.cloneNode(true), track.firstChild));
+
+    const allCards = Array.from(track.children);
+    let currentIndex = totalOriginal; // Ponto inicial no conjunto central
+    let isTransitioning = false;
+
+    const getOffset = () => {
+      const cardWidth = allCards[0].offsetWidth;
+      const gap = parseFloat(window.getComputedStyle(track).gap) || 40;
+      return cardWidth + gap;
+    };
+
+    const updatePosition = (smooth = true) => {
+      const offset = getOffset();
+      track.style.transition = smooth ? 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)' : 'none';
+      track.style.transform = `translate3d(-${currentIndex * offset}px, 0, 0)`;
+    };
+
+    // Teleporta a posição para o centro sem animação ao atingir as bordas clonadas
+    track.addEventListener('transitionend', () => {
+      isTransitioning = false;
+      if (currentIndex >= totalOriginal * 2) {
+        currentIndex -= totalOriginal;
+        updatePosition(false);
+      } else if (currentIndex < totalOriginal) {
+        currentIndex += totalOriginal;
+        updatePosition(false);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex++;
+      updatePosition(true);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex--;
+      updatePosition(true);
+    });
+
+    // Reajuste automático ao redimensionar a tela
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => updatePosition(false), 50);
+    });
+
+    // Posição inicial inicializada
+    requestAnimationFrame(() => updatePosition(false));
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".mg-thumb-card");
+  const activeImage = document.getElementById("mgActiveImage");
+  const activeDesc = document.getElementById("mgActiveDescription");
+  const videoLink = document.getElementById("mgVideoLink");
+  const track = document.getElementById("mgCarouselTrack");
+  const viewport = document.getElementById("mgCarouselViewport");
+  const prevBtn = document.getElementById("mgPrevBtn");
+  const nextBtn = document.getElementById("mgNextBtn");
+
+  let currentIndex = 0;
+  const totalCards = cards.length;
+
+  let currentTranslate = 0;
+  let targetTranslate = 0;
+  let isAnimating = false;
+
+  function lerp(start, end, factor) {
+    return start + (end - start) * factor;
+  }
+
+  function smoothScrollToCard(cardEl) {
+    const offsetLeft = cardEl.offsetLeft - (viewport.clientWidth / 2) + (cardEl.clientWidth / 2);
+    targetTranslate = Math.max(0, Math.min(offsetLeft, track.scrollWidth - viewport.clientWidth));
+
+    if (!isAnimating) {
+      runLerpAnimation();
+    }
+  }
+
+  function runLerpAnimation() {
+    isAnimating = true;
+    currentTranslate = lerp(currentTranslate, targetTranslate, 0.12);
+    viewport.scrollLeft = currentTranslate;
+
+    if (Math.abs(targetTranslate - currentTranslate) > 0.5) {
+      requestAnimationFrame(runLerpAnimation);
+    } else {
+      isAnimating = false;
+    }
+  }
+
+  function selectCard(index) {
+    // Loop infinito perfeito nas pontas
+    currentIndex = (index + totalCards) % totalCards;
+
+    cards.forEach((c) => c.classList.remove("active"));
+    const selected = cards[currentIndex];
+    selected.classList.add("active");
+
+    const newImg = selected.getAttribute("data-img");
+    const newDesc = selected.getAttribute("data-desc");
+    const newYt = selected.getAttribute("data-yt");
+
+    // Transição suave de opacidade no ecrã principal
+    activeImage.style.opacity = "0";
+    setTimeout(() => {
+      activeImage.src = newImg;
+      activeDesc.textContent = newDesc;
+      videoLink.href = newYt;
+      activeImage.style.opacity = "1";
+    }, 120);
+
+    smoothScrollToCard(selected);
+  }
+
+  cards.forEach((card, idx) => {
+    card.addEventListener("click", () => {
+      selectCard(idx);
+    });
+  });
+
+  prevBtn.addEventListener("click", () => {
+    selectCard(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener("click", () => {
+    selectCard(currentIndex + 1);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("mzBannerTrack");
+  const originalSlides = Array.from(track.children);
+  const nextBtn = document.getElementById("mzBannerNext");
+  const prevBtn = document.getElementById("mzBannerPrev");
+  const bannerSection = document.querySelector(".mz-superbanner-section");
+
+  // 1. Pré-carregamento imediato em cache de todas as imagens para evitar travadas de rede/renderização
+  originalSlides.forEach(slide => {
+    const img = slide.querySelector("img");
+    if (img && img.src) {
+      const preloadImg = new Image();
+      preloadImg.src = img.src;
+    }
+  });
+
+  const totalSlides = originalSlides.length;
+
+  // 2. Clonagem em ambas as pontas (Permite loop contínuo e suave para a esquerda e para a direita)
+  const firstClone = originalSlides[totalSlides - 1].cloneNode(true);
+  const lastClone = originalSlides[0].cloneNode(true);
+
+  track.insertBefore(firstClone, originalSlides[0]);
+  track.appendChild(lastClone);
+
+  let currentIndex = 1; // Inicia no primeiro slide real (índice 1 por conta do clone inicial)
+  const slideWidth = 100;
+
+  // Ajuste inicial sem transição
+  track.style.transition = "none";
+  track.style.transform = `translate3d(-${currentIndex * slideWidth}%, 0, 0)`;
+
+  function updateSlidePosition(withTransition = true) {
+    if (withTransition) {
+      track.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
+    } else {
+      track.style.transition = "none";
+    }
+    track.style.transform = `translate3d(-${currentIndex * slideWidth}%, 0, 0)`;
+  }
+
+  function nextSlide() {
+    if (currentIndex >= totalSlides + 1) return;
+    currentIndex++;
+    updateSlidePosition(true);
+
+    if (currentIndex === totalSlides + 1) {
+      setTimeout(() => {
+        currentIndex = 1;
+        updateSlidePosition(false);
+      }, 500);
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex <= 0) return;
+    currentIndex--;
+    updateSlidePosition(true);
+
+    if (currentIndex === 0) {
+      setTimeout(() => {
+        currentIndex = totalSlides;
+        updateSlidePosition(false);
+      }, 500);
+    }
+  }
+
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    resetInterval();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+    resetInterval();
+  });
+
+  let slideInterval = setInterval(nextSlide, 6000);
+
+  function resetInterval() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 6000);
+  }
+
+  bannerSection.addEventListener("mouseenter", () => clearInterval(slideInterval));
+  bannerSection.addEventListener("mouseleave", () => slideInterval = setInterval(nextSlide, 6000));
+});
+
+/* ==========================================
+   CONTROLADOR DE FIXAÇÃO DO BANNER
+========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.getElementById("checkout-wrapper");
+  const banner = document.getElementById("checkout-banner");
+
+  if (!wrapper || !banner) return;
+
+  const checkScroll = () => {
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const isMobile = window.innerWidth <= 1024;
+
+    // Altura do gatilho baseada no header (60px mobile / 70px pc)
+    const triggerPoint = isMobile ? 60 : 70;
+
+    // Se o topo do contentor atingir a linha do cabeçalho fixo
+    if (wrapperRect.top <= triggerPoint) {
+      // Bloqueia a altura do contentor para a página não dar "pulo"
+      wrapper.style.height = banner.offsetHeight + "px";
+
+      if (isMobile) {
+        banner.classList.add("is-fixed-mob");
+        banner.classList.remove("is-fixed-pc");
+      } else {
+        banner.classList.add("is-fixed-pc");
+        banner.classList.remove("is-fixed-mob");
+      }
+    } else {
+      // Solta o banner quando voltar para cima
+      banner.classList.remove("is-fixed-pc", "is-fixed-mob");
+      wrapper.style.height = "auto";
+    }
+  };
+
+  window.addEventListener("scroll", checkScroll);
+  window.addEventListener("resize", checkScroll);
+
+  // Executa ao carregar caso a página abra já abaixo
+  checkScroll();
+});

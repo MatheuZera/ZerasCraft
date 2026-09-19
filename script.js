@@ -848,48 +848,6 @@ function toggleDescription(evt, btnElement) {
     btnText.innerText = "Mostrar mais";
   }
 }
-
-/* ============================================================================================= */
-/* ==========================================
-   BANNER DE CHECKOUT INTELIGENTE (SCROLL)
-========================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  const banner = document.getElementById("checkout-banner");
-  const anchor = document.getElementById("checkout-anchor");
-
-  if (!banner || !anchor) return;
-
-  window.addEventListener("scroll", () => {
-    // Pega a posição da âncora invisível em relação ao topo da janela
-    const anchorRect = anchor.getBoundingClientRect();
-
-    // Verifica se é mobile (usando a mesma medida do seu CSS)
-    const isMobile = window.innerWidth <= 1024;
-
-    // No PC, o header tem 70px, então ativamos quando a âncora chegar no 70
-    // No Mobile, o header tem 60px.
-    const triggerPoint = isMobile ? 60 : 70;
-
-    if (anchorRect.top <= triggerPoint) {
-      // Passou do ponto: GRUDAR!
-
-      // Compensa a altura do banner na âncora para a página não "pular"
-      anchor.style.height = banner.offsetHeight + "px";
-
-      if (isMobile) {
-        banner.classList.add("is-fixed-mob");
-        banner.classList.remove("is-fixed-pc");
-      } else {
-        banner.classList.add("is-fixed-pc");
-        banner.classList.remove("is-fixed-mob");
-      }
-    } else {
-      // Voltou para cima: DESGRUDAR!
-      banner.classList.remove("is-fixed-pc", "is-fixed-mob");
-      anchor.style.height = "0px";
-    }
-  });
-});
 /* ============================================================================================= */
 /* ==========================================
    SHOWCASE DE RECURSOS - MOTOR DE TROCA VIA URL
