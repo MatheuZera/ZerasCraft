@@ -5771,196 +5771,592 @@ ul {
   opacity: 1;
 }
 
-/* ============================================================================================= */
-/* --- MANTER ESTILO PC ATUAL --- */
+/* ==========================================================================
+   MINECRAFT COLLECTIBLES COMPONENT (MCC)
+   ========================================================================== */
 
-.collectibles-section {
-  background-color: #000;
+:root {
+  --mcc-card-width: 210px;
+  --mcc-gap: 16px;
+  --mcc-primary: #ffffff;
+  --mcc-bg: #181818;
+  --mcc-card-bg: #222222;
+  --mcc-border: #333333;
+}
+
+.mcc-section,
+.mcc-section *,
+.mcc-section *::before,
+.mcc-section *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.mcc-section {
+  background-color: var(--mcc-bg);
   padding: 60px 20px;
-  display: flex;
-  gap: 40px;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
   overflow: hidden;
 }
 
-.collectibles-header {
-  min-width: 300px;
-  max-width: 350px;
+.mcc-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
 }
 
-.mc-title {
-  color: #fff;
+/* Sidebar */
+.mcc-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mcc-title {
+  color: var(--mcc-primary);
   font-size: 2rem;
   font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.mcc-description {
+  color: #bbbbbb;
+  font-size: 0.95rem;
+  line-height: 1.5;
   margin-bottom: 20px;
 }
 
-.mc-subtitle {
-  color: #fff;
-  font-size: 1rem;
-  margin-bottom: 30px;
-  line-height: 1.6;
-}
-
-.mc-link-all {
-  color: #1db954;
-  text-decoration: none;
+.mcc-link {
+  color: var(--mcc-primary);
+  font-size: 0.88rem;
   font-weight: 700;
-}
-
-.mc-carousel-controls {
-  display: flex;
-  gap: 15px;
-  margin-top: 30px;
-}
-
-.mc-arrow {
-  background: transparent;
-  border: 2px solid #fff;
-  color: #fff;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  display: flex;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+  gap: 8px;
+  margin-bottom: 24px;
+  transition: opacity 0.2s ease;
 }
 
-.mc-arrow:hover {
-  border-color: #1db954;
-  color: #1db954;
+.mcc-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
-.mc-carousel-viewport {
-  overflow: hidden;
-  width: 100%;
+/* Controles */
+.mcc-controls {
   display: flex;
-  /* Garante alinhamento interno */
-  justify-content: flex-start;
+  gap: 12px;
 }
 
-.mc-carousel-track {
-  display: flex;
-  gap: 20px;
-  width: max-content;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-  /* Certifique-se de que não há margens sobrando aqui */
-  margin: 0;
-}
-
-.mc-collectible-card {
-  min-width: 280px;
+.mcc-nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 1.1rem;
   cursor: pointer;
-  position: relative;
-  flex-shrink: 0;
-  /* Impede o card de achatar no mobile */
+  padding: 8px 14px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.card-img-wrapper {
-  height: 200px;
+.mcc-nav-btn:hover {
+  background: var(--mcc-primary);
+  color: #111111;
+  border-color: var(--mcc-primary);
+}
+
+/* Viewport & Track */
+.mcc-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0;
+}
+
+.mcc-track {
+  display: flex;
+  gap: var(--mcc-gap);
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Desativa cliques hover nos cards durante a transição para evitar engasgos de GPU */
+.mcc-track.is-animating {
+  pointer-events: none;
+}
+
+/* Cards com Dimensão Estritamente Fixa */
+.mcc-card {
+  flex: 0 0 var(--mcc-card-width) !important;
+  width: var(--mcc-card-width) !important;
+  background: var(--mcc-card-bg);
+  border: 1px solid var(--mcc-border);
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  overflow: hidden;
+  /* Destaque de hover feito sem utilizar transform para não conflitar com a animação da pista */
+  box-shadow: 0 0 0 0 transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mcc-card:hover {
+  border-color: var(--mcc-primary);
+  box-shadow: 0 4px 12px rgba(235, 208, 53, 0.15);
+}
+
+.mcc-card-thumb {
+  position: relative;
+  width: 100%;
+  height: 125px;
+  background: #111111;
   overflow: hidden;
 }
 
-.card-img-wrapper img {
+.mcc-card-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s;
+  display: block;
 }
 
-.card-info {
-  padding: 20px;
-  background: #212121;
+.mcc-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: var(--mcc-primary);
+  color: #111111;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}
+
+.mcc-card-footer {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mcc-card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.mcc-action-btn {
+  background: none;
+  border: none;
+  color: var(--mcc-primary);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.mcc-action-btn:hover {
+  color: #ffffff;
+  transform: scale(1.15);
+}
+
+/* Responsivo */
+@media (max-width: 960px) {
+  .mcc-container {
+    grid-template-columns: 1fr;
+  }
+
+  .mcc-sidebar {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+/* ==========================================================================
+   MARKETPLACE SECTION - STYLESHEET COMPLETO (ESTILO MINECRAFT BEDROCK)
+========================================================================== */
+
+/* --- Reset e Trava de Box-Sizing Escopado --- */
+.marketplace-section,
+.marketplace-section *,
+.marketplace-section *::before,
+.marketplace-section *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Container Principal da Seção --- */
+.marketplace-section {
+  background: #191919 linear-gradient(180deg, rgba(25, 25, 25, 0) 60%, rgba(180, 130, 20, 0.15) 100%);
+  padding: 60px 20px;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.marketplace-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 35px;
+  align-items: start;
+}
+
+/* --- Lado Esquerdo: Info & Botão --- */
+.marketplace-info {
   display: flex;
   flex-direction: column;
-  position: relative;
+  align-items: flex-start;
 }
 
-.mc-collectible-card:hover .card-img-wrapper img {
-  transform: scale(1.05);
-}
-
-.mc-collectible-card:hover .card-info {
-  background: #333;
-}
-
-.card-tag {
-  color: #aaa;
-  font-size: 0.7rem;
+.marketplace-info h2 {
+  color: #ebd035;
+  font-size: 2rem;
   font-weight: 900;
-  margin-bottom: 10px;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
 }
 
-.card-title {
-  color: #fff;
-  font-size: 1.2rem;
+.marketplace-info p {
+  color: #bbbbbb;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 25px;
 }
 
-.card-icon-dl {
+.znav-btn-yellow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ebd035;
+  color: #111111;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 12px 22px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 0px;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.znav-btn-yellow:hover {
+  background: #f7e25b;
+  transform: translateY(-2px);
+}
+
+/* --- Lado Direito: Wrapper do Carrossel --- */
+.marketplace-slider-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.marketplace-track {
+  display: flex;
+  gap: 16px;
+  will-change: transform;
+  width: max-content;
+}
+
+/* --- Card com Dimensões Estritamente Fixas (Previne bugs no JS) --- */
+.mp-card {
+  flex: 0 0 210px !important;
+  width: 210px !important;
+  min-width: 210px !important;
+  max-width: 210px !important;
+  background: #2b2b2b;
+  border: 1px solid #3e3e3e;
+  border-radius: 0px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+  overflow: hidden;
+}
+
+.mp-card:hover {
+  transform: translateY(-4px);
+  border-color: #ebd035;
+}
+
+/* Thumbnail e Badge */
+.mp-card-thumb {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  background: #1e1e1e;
+  overflow: hidden;
+}
+
+.mp-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mp-badge {
   position: absolute;
-  right: 20px;
-  bottom: 20px;
-  color: #fff;
-  opacity: 0.6;
+  top: 6px;
+  left: 6px;
+  background: #ebd035;
+  color: #111111;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  z-index: 2;
+  border-radius: 0px;
 }
 
-/* --- ADICIONADO PARA MOBILE (ABAIXO DE 768px) --- */
+/* Conteúdo e Informações do Card */
+.mp-card-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
 
-@media (max-width: 768px) {
-  .collectibles-section {
-    flex-direction: column;
-    padding-bottom: 80px;
-    /* Espaço extra para as setas no fundo */
+.mp-card-content h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.mp-author {
+  font-size: 0.75rem;
+  color: #888888;
+  margin-bottom: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* Rodapé do Card (Avaliação e Preço) */
+.mp-card-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: 100%;
+}
+
+.mp-rating {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mp-rating i {
+  color: #ebd035;
+}
+
+.mp-price {
+  color: #ebd035;
+  background: rgba(235, 208, 53, 0.1);
+  padding: 2px 8px;
+  border: 1px solid rgba(235, 208, 53, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* --- Controles de Navegação (Setas) --- */
+.mp-slider-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.mp-nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 0px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.mp-nav-btn:hover {
+  background: #ebd035;
+  color: #111111;
+  border-color: #ebd035;
+}
+
+/* --- Adaptabilidade Responsiva --- */
+@media (max-width: 960px) {
+  .marketplace-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
   }
 
-  .collectibles-header {
-    min-width: 100%;
-    max-width: 100%;
-    text-align: left;
+  .marketplace-info {
+    text-align: center;
+    align-items: center;
   }
 
-  .mc-carousel-controls {
-    order: 3;
-    /* Move para o final do container flex */
-    width: 100%;
+  .mp-slider-controls {
     justify-content: center;
-    /* Centraliza as setas */
-    margin-top: 30px;
-    position: relative;
+  }
+}
+
+/* ==========================================================================
+   DIRETRIZES SECTION GRID
+========================================================================== */
+/* --- Isolamento e Reset Escopado --- */
+.guidelines-section-grid,
+.guidelines-section-grid *,
+.guidelines-section-grid *::before,
+.guidelines-section-grid *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Container Principal --- */
+.guidelines-section-grid {
+  background-color: #121212;
+  padding: 60px 20px;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.guidelines-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Título da Secção --- */
+.guidelines-container .main-title {
+  color: #ebd035;
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #2a2a2a;
+  padding-bottom: 12px;
+}
+
+/* --- Grid de Cards (2 colunas) --- */
+.guidelines-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* --- Estilo do Card --- */
+.guideline-card {
+  background: #222222;
+  border: 1px solid #333333;
+  border-radius: 0px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guideline-card:hover {
+  transform: translateY(-4px);
+  border-color: #ebd035;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Imagem do Card --- */
+.guideline-image {
+  width: 100%;
+  height: 220px;
+  background-color: #111111;
+  overflow: hidden;
+}
+
+.guideline-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.guideline-card:hover .guideline-image img {
+  transform: scale(1.03);
+}
+
+/* --- Conteúdo do Card --- */
+.guideline-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.guideline-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.guideline-content h3 a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.guideline-content h3 a:hover {
+  color: #ebd035;
+}
+
+.guideline-content p {
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* --- Adaptabilidade Responsiva --- */
+@media (max-width: 768px) {
+  .guidelines-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .mc-arrow {
-    width: 60px;
-    /* Um pouco maiores para o polegar no mobile */
-    height: 60px;
+  .guidelines-container .main-title {
+    font-size: 1.75rem;
+    text-align: center;
   }
 
-  .mc-collectible-card {
-    /* Define a largura do quadrado no mobile */
-    min-width: calc(100vw - 40px);
-    width: calc(100vw - 40px);
-  }
-
-  .card-img-wrapper {
-    /* Aumenta a altura no mobile para parecer mais quadrado/imponente */
-    height: 300px;
-  }
-
-  .mc-carousel-track {
-    /* Se você usa o deslize do dedo (scroll), isso evita que passe do limite */
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .mc-collectible-card {
-    /* Garante que o card pare exatamente no início da tela */
-    scroll-snap-align: start;
-  }
-
-  /* Oculta barra de rolagem para manter o design limpo */
-  .mc-carousel-track::-webkit-scrollbar {
-    display: none;
+  .guideline-image {
+    height: 180px;
   }
 }
 

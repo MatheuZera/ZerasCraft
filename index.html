@@ -361,6 +361,22 @@
               </div>
             </div>
 
+            <!-- Card 6 -->
+            <div class="mp-card">
+              <div class="mp-card-thumb">
+                <span class="mp-badge">Add-On</span>
+                <img src="assets/images/marketplace/fantasia.jpg" alt="Blocos de Fantasia" />
+              </div>
+              <div class="mp-card-content">
+                <h4>Blocos de Fantasia</h4>
+                <span class="mp-author">by Lunar Client</span>
+                <div class="mp-card-footer">
+                  <span class="mp-rating"><i class="fas fa-star"></i> 4.6</span>
+                  <span class="mp-price"><i class="fas fa-coins"></i> Free</span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- Controles de Navegação (Setas) -->
@@ -436,102 +452,103 @@
         </div>
       </div>
     </section>
+    <section class="mcc-section">
+      <div class="mcc-container">
 
-    <section class="collectible-section">
-      <div class="collectible-container">
-
-        <!-- Lado Esquerdo: Título, Descrição e Link -->
-        <div class="collectible-info">
-          <h2>Itens Colecionáveis</h2>
-          <p>
+        <!-- Lado Esquerdo: Info e Controles -->
+        <div class="mcc-sidebar">
+          <h2 class="mcc-title">Itens Colecionáveis</h2>
+          <p class="mcc-description">
             O mundo do Minecraft é enorme. Por que não levá-lo além das fronteiras de bloco? Personalize seu dispositivo
-            com nossos papéis de parede favoritos do Minecraft, banners de redes sociais e muito mais!
+            com nossos papéis de parede favoritos, banners de redes sociais e muito mais!
           </p>
-          <a href="#collectibles" class="collectible-link">
-            Ver todos os itens colecionáveis <i class="fas fa-external-link-alt"></i>
+          <a href="#collectibles" class="mcc-link">
+            Ver todos os colecionáveis <i class="fas fa-external-link-alt"></i>
           </a>
 
-          <!-- Controles de Navegação (Setas posicionadas embaixo do texto no layout original) -->
-          <div class="collectible-slider-controls">
-            <button class="collectible-nav-btn" id="colPrevBtn" type="button"><i class="fas fa-arrow-left"></i></button>
-            <button class="collectible-nav-btn" id="colNextBtn" type="button"><i
-                class="fas fa-arrow-right"></i></button>
+          <div class="mcc-controls">
+            <button class="mcc-nav-btn" id="mccPrev" type="button" aria-label="Anterior">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <button class="mcc-nav-btn" id="mccNext" type="button" aria-label="Próximo">
+              <i class="fas fa-arrow-right"></i>
+            </button>
           </div>
         </div>
 
-        <!-- Lado Direito: Carrossel / Lista de Cards -->
-        <div class="collectible-slider-wrapper">
-          <div class="collectible-track" id="colTrack">
+        <!-- Lado Direito: Carrossel -->
+        <div class="mcc-viewport">
+          <div class="mcc-track" id="mccTrack">
 
             <!-- Card 1 -->
-            <div class="col-card">
-              <div class="col-card-thumb">
-                <span class="col-badge">Papel de Parede</span>
+            <article class="mcc-card">
+              <div class="mcc-card-thumb">
+                <span class="mcc-badge">Papel de Parede</span>
                 <img src="assets/images/collectibles/minecraft-base.jpg" alt="Coleção Minecraft" />
               </div>
-              <div class="col-card-content">
-                <h4>Coleção Minecraft</h4>
-                <div class="col-card-action">
+              <div class="mcc-card-footer">
+                <h4 class="mcc-card-title">Coleção Minecraft</h4>
+                <button class="mcc-action-btn" type="button" aria-label="Baixar">
                   <i class="fas fa-download"></i>
-                </div>
+                </button>
               </div>
-            </div>
+            </article>
 
             <!-- Card 2 -->
-            <div class="col-card">
-              <div class="col-card-thumb">
-                <span class="col-badge">Papel de Parede</span>
+            <article class="mcc-card">
+              <div class="mcc-card-thumb">
+                <span class="mcc-badge">Papel de Parede</span>
                 <img src="assets/images/collectibles/dungeons.jpg" alt="Minecraft Dungeons" />
               </div>
-              <div class="col-card-content">
-                <h4>Minecraft Dungeons</h4>
-                <div class="col-card-action">
+              <div class="mcc-card-footer">
+                <h4 class="mcc-card-title">Minecraft Dungeons</h4>
+                <button class="mcc-action-btn" type="button" aria-label="Baixar">
                   <i class="fas fa-download"></i>
-                </div>
+                </button>
               </div>
-            </div>
+            </article>
 
             <!-- Card 3 -->
-            <div class="col-card">
-              <div class="col-card-thumb">
-                <span class="col-badge">Papel de Parede</span>
+            <article class="mcc-card">
+              <div class="mcc-card-thumb">
+                <span class="mcc-badge">Papel de Parede</span>
                 <img src="assets/images/collectibles/legends.jpg" alt="Minecraft Legends" />
               </div>
-              <div class="col-card-content">
-                <h4>Minecraft Legends</h4>
-                <div class="col-card-action">
+              <div class="mcc-card-footer">
+                <h4 class="mcc-card-title">Minecraft Legends</h4>
+                <button class="mcc-action-btn" type="button" aria-label="Baixar">
                   <i class="fas fa-download"></i>
-                </div>
+                </button>
               </div>
-            </div>
+            </article>
 
             <!-- Card 4 -->
-            <div class="col-card">
-              <div class="col-card-thumb">
-                <span class="col-badge">Papel de Parede</span>
+            <article class="mcc-card">
+              <div class="mcc-card-thumb">
+                <span class="mcc-badge">Papel de Parede</span>
                 <img src="assets/images/collectibles/burberry.jpg" alt="Coleção Burberry" />
               </div>
-              <div class="col-card-content">
-                <h4>Coleção Burberry</h4>
-                <div class="col-card-action">
+              <div class="mcc-card-footer">
+                <h4 class="mcc-card-title">Coleção Burberry</h4>
+                <button class="mcc-action-btn" type="button" aria-label="Baixar">
                   <i class="fas fa-download"></i>
-                </div>
+                </button>
               </div>
-            </div>
+            </article>
 
             <!-- Card 5 -->
-            <div class="col-card">
-              <div class="col-card-thumb">
-                <span class="col-badge">Papel de Parede</span>
+            <article class="mcc-card">
+              <div class="mcc-card-thumb">
+                <span class="mcc-badge">Papel de Parede</span>
                 <img src="assets/images/collectibles/crocs.jpg" alt="Coleção Crocs" />
               </div>
-              <div class="col-card-content">
-                <h4>Coleção Crocs</h4>
-                <div class="col-card-action">
+              <div class="mcc-card-footer">
+                <h4 class="mcc-card-title">Coleção Crocs</h4>
+                <button class="mcc-action-btn" type="button" aria-label="Baixar">
                   <i class="fas fa-download"></i>
-                </div>
+                </button>
               </div>
-            </div>
+            </article>
 
           </div>
         </div>

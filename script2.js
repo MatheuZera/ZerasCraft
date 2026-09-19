@@ -842,69 +842,59 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ==========================================
    ELEMENTO
 ========================================== */
-document.addEventListener("DOMContentLoaded", function () {
-  const track = document.getElementById("mpTrack");
-  const prevBtn = document.getElementById("mpPrevBtn");
-  const nextBtn = document.getElementById("mpNextBtn");
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('mpTrack');
+  const prevBtn = document.getElementById('mpPrevBtn');
+  const nextBtn = document.getElementById('mpNextBtn');
 
   if (!track || !prevBtn || !nextBtn) return;
 
   let isAnimating = false;
 
-  // Avançar (Move o primeiro card de forma fluida)
-  nextBtn.addEventListener("click", function () {
+  // Calcula a largura exata de 1 card + o espaçamento (gap)
+  function getStep() {
+    const card = track.querySelector('.mp-card');
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 16;
+    return card.offsetWidth + gap;
+  }
+
+  // Avançar 1 card
+  nextBtn.addEventListener('click', () => {
     if (isAnimating) return;
     isAnimating = true;
 
-    const firstCard = track.firstElementChild;
-    if (!firstCard) {
+    const step = getStep();
+    track.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+    track.style.transform = `translateX(-${step}px)`;
+
+    track.addEventListener('transitionend', function handler() {
+      track.removeEventListener('transitionend', handler);
+      track.style.transition = 'none';
+      track.appendChild(track.firstElementChild); // Joga o primeiro card para o final
+      track.style.transform = 'translateX(0)';
       isAnimating = false;
-      return;
-    }
-
-    const cardStyle = window.getComputedStyle(firstCard);
-    // Pega a largura exata + a margem direita real do card
-    const cardWidth = firstCard.getBoundingClientRect().width + parseFloat(cardStyle.marginRight);
-
-    track.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
-    track.style.transform = `translateX(-${cardWidth}px)`;
-
-    setTimeout(() => {
-      track.style.transition = "none";
-      track.appendChild(firstCard); // Joga pro final sem que o usuário perceba
-      track.style.transform = "translateX(0)";
-      isAnimating = false;
-    }, 500);
+    });
   });
 
-  // Voltar (Puxa o último card instantaneamente e desliza de volta)
-  prevBtn.addEventListener("click", function () {
+  // Voltar 1 card
+  prevBtn.addEventListener('click', () => {
     if (isAnimating) return;
     isAnimating = true;
 
-    const lastCard = track.lastElementChild;
-    if (!lastCard) {
+    const step = getStep();
+    track.style.transition = 'none';
+    track.prepend(track.lastElementChild); // Puxa o último card para a primeira posição
+    track.style.transform = `translateX(-${step}px)`;
+
+    // Força o reflow do navegador para aplicar o deslocamento instantâneo
+    track.offsetHeight;
+
+    track.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+    track.style.transform = 'translateX(0)';
+
+    track.addEventListener('transitionend', function handler() {
+      track.removeEventListener('transitionend', handler);
       isAnimating = false;
-      return;
-    }
-
-    const cardStyle = window.getComputedStyle(lastCard);
-    const cardWidth = lastCard.getBoundingClientRect().width + parseFloat(cardStyle.marginRight);
-
-    track.style.transition = "none";
-    track.insertBefore(lastCard, track.firstElementChild);
-    track.style.transform = `translateX(-${cardWidth}px)`;
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        track.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
-        track.style.transform = "translateX(0)";
-
-        setTimeout(() => {
-          track.style.transition = "none";
-          isAnimating = false;
-        }, 500);
-      });
     });
   });
 });
@@ -913,71 +903,88 @@ document.addEventListener("DOMContentLoaded", function () {
 /* ==========================================
    ELEMENTO
 ========================================== */
-document.addEventListener("DOMContentLoaded", function () {
-  const track = document.getElementById("colTrack");
-  const prevBtn = document.getElementById("colPrevBtn");
-  const nextBtn = document.getElementById("colNextBtn");
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('mccTrack');
+  const prevBtn = document.getElementById('mccPrev');
+  const nextBtn = document.getElementById('mccNext');
 
   if (!track || !prevBtn || !nextBtn) return;
 
   let isAnimating = false;
 
-  // Avançar (Move o primeiro card suavemente e o reposiciona no final)
-  nextBtn.addEventListener("click", function () {
+  // Retorna o valor exato do passo (card + gap) convertido para inteiro perfeito
+  const getStep = () => {
+    const card = track.querySelector('.mcc-card');
+    if (!card) return 0;
+    const cardWidth = card.getBoundingClientRect().width;
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 16;
+    return Math.round(cardWidth + gap);
+  };
+
+  // AVANÇAR (NEXT)
+  nextBtn.addEventListener('click', () => {
     if (isAnimating) return;
     isAnimating = true;
 
-    const firstCard = track.firstElementChild;
-    if (!firstCard) {
+    const step = getStep();
+    track.classList.add('is-animating');
+
+    track.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    track.style.transform = `translate3d(-${step}px, 0, 0)`;
+
+    const onNextEnd = (e) => {
+      if (e && e.target !== track) return;
+      track.removeEventListener('transitionend', onNextEnd);
+
+      track.style.transition = 'none';
+      track.appendChild(track.firstElementChild);
+      track.style.transform = 'translate3d(0, 0, 0)';
+
+      // Força o reflow instantâneo do navegador
+      void track.offsetWidth;
+
+      track.classList.remove('is-animating');
       isAnimating = false;
-      return;
-    }
+    };
 
-    const cardStyle = window.getComputedStyle(firstCard);
-    const cardWidth = firstCard.getBoundingClientRect().width + parseFloat(cardStyle.marginRight);
-
-    track.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
-    track.style.transform = `translateX(-${cardWidth}px)`;
-
-    setTimeout(() => {
-      track.style.transition = "none";
-      track.appendChild(firstCard);
-      track.style.transform = "translateX(0)";
-      isAnimating = false;
-    }, 500);
+    track.addEventListener('transitionend', onNextEnd);
   });
 
-  // Voltar (Puxa o último card para o início instantaneamente e desliza de volta)
-  prevBtn.addEventListener("click", function () {
+  // VOLTAR (PREV)
+  prevBtn.addEventListener('click', () => {
     if (isAnimating) return;
     isAnimating = true;
 
-    const lastCard = track.lastElementChild;
-    if (!lastCard) {
-      isAnimating = false;
-      return;
-    }
+    const step = getStep();
+    track.classList.add('is-animating');
 
-    const cardStyle = window.getComputedStyle(lastCard);
-    const cardWidth = lastCard.getBoundingClientRect().width + parseFloat(cardStyle.marginRight);
+    // 1. Move o último elemento para o início antes da animação sem efeito visual
+    track.style.transition = 'none';
+    track.prepend(track.lastElementChild);
+    track.style.transform = `translate3d(-${step}px, 0, 0)`;
 
-    track.style.transition = "none";
-    track.insertBefore(lastCard, track.firstElementChild);
-    track.style.transform = `translateX(-${cardWidth}px)`;
+    // 2. Sincroniza o DOM instantaneamente
+    void track.offsetWidth;
 
+    // 3. Executa o deslizamento suave de volta à origem
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        track.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
-        track.style.transform = "translateX(0)";
-
-        setTimeout(() => {
-          track.style.transition = "none";
-          isAnimating = false;
-        }, 500);
-      });
+      track.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)';
+      track.style.transform = 'translate3d(0, 0, 0)';
     });
+
+    const onPrevEnd = (e) => {
+      if (e && e.target !== track) return;
+      track.removeEventListener('transitionend', onPrevEnd);
+
+      track.style.transition = 'none';
+      track.classList.remove('is-animating');
+      isAnimating = false;
+    };
+
+    track.addEventListener('transitionend', onPrevEnd);
   });
 });
+
 /* ============================================================================================= */
 /* ==========================================
    ELEMENTO
