@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zera's Craft | Nostalgia</title>
+
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft.">
+    <meta name="theme-color" content="#347C2F">
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- ESTILOS DO SLIDER, BOTÃO E RESPONSIVIDADE MOBILE -->
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* OVERLAY INICIAL TOTALMENTE PRETO */
+        .start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .start-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .btn-start {
+            background: #01a709;
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 800;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 0 15px rgba(1, 167, 9, 0.4);
+        }
+
+        .btn-start:hover,
+        .btn-start:active {
+            transform: scale(1.05);
+            background: #06ec11;
+            box-shadow: 0 0 25px rgba(6, 236, 17, 0.7);
+        }
+
+        /* BANNER E HERO */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #000000;
+        }
+
+        .hero-bg-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-bg-slide.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background-color: #ffce6c;
+            color: #000;
+            font-weight: 800;
+            padding: 6px 16px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .hero-desc {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            min-height: 80px;
+            transition: opacity 0.8s ease-in-out;
+            opacity: 1;
+        }
+
+        .hero-desc.fade-out {
+            opacity: 0;
+        }
+
+        /* MEDIA QUERIES PARA MOBILE */
+        @media (max-width: 768px) {
+            .hero-tag {
+                font-size: 0.78rem;
+                padding: 5px 12px;
+                margin-bottom: 18px;
+            }
+
+            .hero-desc {
+                font-size: 1.15rem;
+                line-height: 1.5;
+                min-height: 90px;
+            }
+
+            .btn-start {
+                font-size: 1rem;
+                padding: 14px 28px;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 0 16px;
+            }
+
+            .hero-desc {
+                font-size: 1rem;
+                min-height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- OVERLAY DE ENTRADA (TELA PRETA INICIAL) -->
+    <div id="startOverlay" class="start-overlay">
+        <button id="startBtn" class="btn-start">
+            <i class="fas fa-play"></i> INICIAR JORNADA
+        </button>
+    </div>
+
+    <div id="nav-placeholder-pc"></div>
+    <div id="nav-placeholder-mobile"></div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg-slider" id="heroBgSlider"></div>
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <span class="hero-tag">Mundo Zera's Craft</span>
+                <p class="hero-desc" id="heroDesc"></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+    <script src="effects.js"></script>
+
+    <!-- MOTOR DO SLIDER E TEXTOS NOSTÁLGICOS -->
+    <script>
+        const NostalgicSlider = {
+            slidesData: [
+                {
+                    url: "https://imgs.search.brave.com/iY5bxEaPDdO_aqraDUTjNxUtocIE-AWYZHkcn0reGFI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9leHRl/cm5hbC1wcmV2aWV3LnJlZGQuaXQvbnJi/bGJmdG55ZDlKUUtt/eTZiOE11bnY1QTRl/ZzY3NDZqYlZuY3hP/elShYy5qcGc_d2lk/dGg9NjQwJmNyb3A9/c21hcnQmYXV0bz13/ZWJwJnM9MmViNDA3/MTU4NDYxOTliMjg5/OGNhZWQ4MjEzMmYy/MTA2NmI1MmI5MA",
+                    text: "“Você nunca soube qual foi o último dia em que todos os seus velhos amigos se conectaram juntos...”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/yGdDL8B5wIZYzmCno9Vr8L2LrKQjwuJt9qY5fBtadjM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/YmV0dGVyLXRoYW4t/YmV0YS1hLW1vZHBh/Y3stdGhhdC1hbGxv/d3MteW91LXRvLXJl/bGl2ZS10aGUtdjAt/MncxaW5wNWhza3Rj/MS5wbmc_d2lkdGg9/MTkyMCZmb3JtYXQ9/cG5nJmF1dG89d2Vi/cCZzPWQ1ODRmNTkw/NzIxYjA1Y2FhYjI5/YmIyOGE5YTRlYTYx/Mzk5OGVjZmE",
+                    text: "“Construíamos castelos em mundos virtuais sem perceber que o tempo construía saudades no mundo real.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/v6ttlsPwLQ_e3AINEDNPf7z2WEFQesdKHlQFkeuNF3w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5mb3JnZWNkbi5u/ZXQvYXR0YWNobWVu/dHMvMjY0Lzc0Ny8y/MDE5LTEwLTA0XzE3/LnBuZw",
+                    text: "“A noite caía no jogo e na vida, mas naquela época a gente não tinha medo do amanhã.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/nduRSEGu4oxYSETeyh9MKkcA9-fxFYnlvrgisONz5_A/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/d2h5LWRvLWktZmVl/bC1zby1ub3N0YWxn/aWMtcGxheWluZy1t/aW5lY3JhZnQtYmV0/YS1ldmVuLXYwLXo0/NXd5bzEwcjBsYzEu/cG5nP3dpZHRoPTY0/MCZjcm9wPXNtYXJ0/JmF1dG89d2VicCZz/PTU1NGEzNjllYmNj/MmMxZGQ5MTcyMjg2/YTdhYmRjNjA2NmVk/Zjg5N2Q",
+                    text: "“O tempo passa, os servidores fecham, mas as histórias e laços criados bloco a bloco permanecem para sempre.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/EoY7GKCw2KpsmKJpBrsAj89psDtmz97_MIos8bO7S7I/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/c29tZS1vZi10aGUt/d2VpcmRlci1zY3Jl/ZW5zaG90cy1pLWhh/dmUtc2F2Utc2F2ZWQtZnJv/bS1iZXRhLXYwLW41/Nzlja2p1N3N4ZTEu/cG5nP3dpZHRoPTY0/MCZjcm9wPXNtYXJ0/JmF1dG89d2VicCZz/PWM3ZWEwMjUxM2E0/Yzg4ZGZhODMxM2Fl/MDhkMjQ5YWFiYTQ1/ZDkyMDg",
+                    text: "“Dormíamos em camas virtuais para pular a noite, mas hoje a vida não nos deixa pular a saudade.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/AbaG1mVXEWDSRjG6br6C4lf2WzmVzCuXW5A7jpTPL3Q/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzgzL2Qw/Lzg1LzgzZDA4NTYz/MWFiMzkwYTdjNzNj/NzFjZDFmYjdhMTkx/LmpwZw",
+                    text: "“A gente só queria minerar até tarde na sexta-feira sem se preocupar com as obrigações do dia seguinte.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/TKkzzODggCDQyvF9QcnicsDTK53NBejgBeEA5bbWCNs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2EwLzVh/LzFkL2EwNWExZDgz/NjI2YmJlYzQ2NTky/NTUxYmEwNTA3MjU2/LmpwZw",
+                    text: "“Aquela melodia suave de fundo parecia simples, mas era o som do período mais tranquilo da nossa vida.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/pnL8rC-BBrXgTyFUTqRxzwLcNrIOYy7lyqcrdT0bu60/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzA4LzM5/LzY2LzA4Mzk2NmI5/NjlmYzlkMDQyN2Jm/MWZmZDA2NmY4NjQ5/LmpwZw",
+                    text: "“Olhar para aquele abrigo simples de madeira traz a certeza de que a felicidade nunca precisou de muito.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/meR-S8qhxX7yLwkARZp5Aguv6WlvjQUwa-2WiCaQcTM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5mb3JnZWNkbi5u/ZXQvYXR0YWNobWVu/dHMvMzc9LzM4My8y/MDIxLTA3LTExXzE4/LnBuZw",
+                    text: "“Procurávamos diamantes nas profundezas, sem notar que o verdadeiro tesouro eram as risadas no áudio.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/80fMmgWbZmk91sJH-14aQ_6TdtBDXukQa8v1T4OHpzg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/MnZtbXZkMnphbnVl/MS5wbmc_d2lkdGg9/NjQwJmNyb3A9c21h/cnQmYXV0bz13ZWJw/JnM9YzMwMDk0Yzgx/MGY4NWJiMjllNWM2/N2U4YjU1M3Y3OGI0/YzkxOWY3Mg",
+                    text: "“Um dia você desconectou achando que jogaria no dia seguinte... e já se passaram anos.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/8xd0ikYdyYRRgfpXiOFr6mM28el7_cdW6fsPxAhVktQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdHls/ZXMucmVkZGl0bWVk/aWEuY29tL3Q1XzZx/OXBiNi9zdHlsZXMv/YmFubmVyQmFja2dy/b3VuZEltYWdlX2hq/cTV1YnlhemdoZDEu/cG5n",
+                    text: "“A névoa do horizonte escondia mundos infinitos, assim como o futuro nos parecia cheio de possibilidades.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/wMkjdA73eAZBDAEcc4Sm-giW2F0ypI0PSTylPSJwnco/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5mb3JnZWNkbi5u/ZXQvYXR0YWNobWVu/dHvMzc9LzMxMy8y/MDIxLTA3LTEwXzIw/LnBuZw",
+                    text: "“Nenhum gráfico ultrarrealista de hoje consegue superar o sentimento daquele mundo pixelado de antigamente.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/Y1F3vTV0clrA84dF7Br5Bt2hxx4CFVAOyz9ZeS54sLU/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly9yMi5t/Y3BlZGwuY29tL3N1/Ym1pc3Npb25zLzIw/OTUzMS9pbWFnZXMv/bm9zdGFsZ2lhY3Jh/ZnQtY29udGludWVk/XzMuanBlZw",
+                    text: "“Deixamos nossas construções abandonadas no mapa, mas a verdadeira casa era a época em que éramos felizes.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/XAGuK5v-LtsNPz5YyeDYCEXprjUxgWFm7ZJOKmP_fsA/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5mb3JnZWNkbi5u/ZXQvYXR0YWNobWVu/dHMvMjc1LzgxMi9u/ZXRoZXIuanBn",
+                    text: "“Enfrentamos portais e perigos virtuais, mas o maior desafio da vida foi ver o tempo nos afastar.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/_pARsgESKzORX2NblHRIVHzZlpW2zgz1Ftc-q9Bgnks/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5mb3JnZWNkbi5u/ZXQvYXR0YWNobWVu/dHMvMzc9LzMxNS8y/MDIxLTA3LTEwXzIw/LnBuZw",
+                    text: "“A música do C418 ecoando enquanto o sol nascia no jogo é a definição mais pura de paz nostálgica.”"
+                },
+                {
+                    url: "https://imgs.search.brave.com/4j3C9A7ufriNSoaM-vOdoNeYqqTq-ePff-SFnVHGsrQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzlkL2E3/LzZiLzlkYTc2Yjhl/NzZmYWQ1ODExMmIx/NjUyZTk2ZmM2YzJm/LmpwZw",
+                    text: "“Tudo mudou e nós crescemos, mas em algum lugar do passado, aquele mundo verde e infinito ainda nos espera.”"
+                }
+            ],
+
+            intervalSeconds: 7,
+            currentIndex: 0,
+            timer: null,
+
+            init() {
+                const container = document.getElementById('heroBgSlider');
+                if (!container || this.slidesData.length === 0) return;
+
+                container.innerHTML = '';
+                this.slidesData.forEach((slide) => {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = 'hero-bg-slide';
+                    slideDiv.style.backgroundImage = `url('${slide.url}')`;
+                    container.appendChild(slideDiv);
+                });
+            },
+
+            start() {
+                const container = document.getElementById('heroBgSlider');
+                const textElement = document.getElementById('heroDesc');
+                if (!container || !textElement) return;
+
+                const slides = container.querySelectorAll('.hero-bg-slide');
+                if (slides.length > 0) {
+                    slides[0].classList.add('active');
+                    textElement.textContent = this.slidesData[0].text;
+                }
+
+                if (this.slidesData.length > 1 && !this.timer) {
+                    this.timer = setInterval(() => this.nextSlide(container, textElement), this.intervalSeconds * 1000);
+                }
+            },
+
+            nextSlide(container, textElement) {
+                const slides = container.querySelectorAll('.hero-bg-slide');
+
+                slides[this.currentIndex].classList.remove('active');
+                this.currentIndex = (this.currentIndex + 1) % slides.length;
+                slides[this.currentIndex].classList.add('active');
+
+                textElement.classList.add('fade-out');
+                setTimeout(() => {
+                    textElement.textContent = this.slidesData[this.currentIndex].text;
+                    textElement.classList.remove('fade-out');
+                }, 800);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => NostalgicSlider.init());
+    </script>
+
+    <!-- MOTOR DE ÁUDIO E CONTROLE DE INÍCIO COM TIMESTAMP DE 3:30 E LOOP -->
+    <script>
+        const ZerasAudio = {
+            audioId: 'backgroundAudio',
+            playlist: [
+                'assets/audios/musics/end/Credits.mp3',
+            ],
+            currentIndex: 0,
+            startTimeSeconds: 210, // 3 minutos e 30 segundos (3 * 60 + 30)
+
+            init() {
+                let audio = document.getElementById(this.audioId);
+                if (!audio) {
+                    audio = document.createElement('audio');
+                    audio.id = this.audioId;
+                    audio.preload = 'auto';
+                    document.body.appendChild(audio);
+                }
+
+                const savedVolume = localStorage.getItem('audioBackgroundVolume');
+                audio.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.3;
+
+                // Quando a música terminar, reinicia a partir de 3:30 e reproduz novamente em loop
+                audio.addEventListener('ended', () => {
+                    audio.currentTime = this.startTimeSeconds;
+                    audio.play().catch(err => console.warn("[Áudio] Erro ao reiniciar áudio em loop:", err));
+                });
+
+                const startBtn = document.getElementById('startBtn');
+                const startOverlay = document.getElementById('startOverlay');
+
+                if (startBtn && startOverlay) {
+                    startBtn.addEventListener('click', () => {
+                        // Toca a música iniciando em 3:30
+                        this.playCurrentTrack(audio);
+
+                        // Dispara o slider de imagens
+                        NostalgicSlider.start();
+
+                        // Oculta a tela preta com fade-out
+                        startOverlay.classList.add('hidden');
+                    });
+                }
+            },
+
+            playCurrentTrack(audio) {
+                if (!this.playlist[this.currentIndex]) return;
+
+                audio.src = this.playlist[this.currentIndex];
+
+                // Ajusta o tempo de início assim que os metadados do áudio forem carregados
+                const setStartTime = () => {
+                    audio.currentTime = this.startTimeSeconds;
+                };
+
+                audio.addEventListener('loadedmetadata', setStartTime, { once: true });
+
+                audio.play().then(() => {
+                    audio.currentTime = this.startTimeSeconds;
+                }).catch(err => {
+                    console.warn("[Áudio] Reprodução bloqueada pelo navegador.");
+                });
+            }
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => ZerasAudio.init());
+        } else {
+            ZerasAudio.init();
+        }
+    </script>
+</body>
+
+</html>

@@ -89,85 +89,79 @@
         </section>
     </main>
 
-  <!--------------------------------------------------------------->
+    <!--------------------------------------------------------------->
 
-  <!-- Placeholders do Player e Rodapé (caso sejam carregados via JS) -->
-  <div id="player-container"></div>
-  <div id="footer-placeholder"></div>
+    <!-- Placeholders do Player e Rodapé (caso sejam carregados via JS) -->
+    <div id="player-container"></div>
+    <div id="footer-placeholder"></div>
 
-  <script src="script.js"></script>
-  <script src="script2.js"></script>
-  <script src="load-html.js"></script>
-  <script src="effects.js"></script>
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+    <script src="load-html.js"></script>
+    <script src="effects.js"></script>
 
-    <!-- =================================== -->
-    <!-- CÓDIGO DO SISTEMA DE MÚSICA ÚNICA E INVISÍVEL (FINAL DO HTML) -->
-    <!-- =================================== -->
+    <!-- MOTOR DE ÁUDIO E CONTROLE DE INÍCIO -->
     <script>
-        /**
-        * ZERA'S CRAFT - MOTOR DE ÁUDIO CÍCLICO
-        * Garante que a playlist retorne ao início (Música 1) após a última faixa.
-        */
         const ZerasAudio = {
             audioId: 'backgroundAudio',
-            // LISTA DE MÚSICAS: Adicione aqui todos os arquivos da sua pasta /musics
-            playlist: ['calm1.mp3', 'calm2.mp3'],
+            playlist: [
+                'assets/audios/musics/background/Credits.mp3',
+            ],
             currentIndex: 0,
-            started: false,
 
             init() {
-                const audio = document.getElementById(this.audioId);
-                if (!audio) return console.error("Erro: Elemento de áudio não encontrado.");
+                let audio = document.getElementById(this.audioId);
+                if (!audio) {
+                    audio = document.createElement('audio');
+                    audio.id = this.audioId;
+                    audio.preload = 'auto';
+                    document.body.appendChild(audio);
+                }
 
-                // Configuração de Volume (Industrial Logic)
                 const savedVolume = localStorage.getItem('audioBackgroundVolume');
                 audio.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.3;
 
-                // EVENTO CHAVE: Detecta o fim da música para disparar a próxima ou resetar
-                audio.addEventListener('ended', () => {
-                    console.log("Faixa encerrada. Reiniciando ciclo ou próxima música...");
-                    this.nextTrack(audio);
-                });
+                audio.addEventListener('ended', () => this.nextTrack(audio));
 
-                // Listeners para iniciar após o toque do usuário (Regra de Autoplay)
-                const startTrigger = () => this.startPlaylist(audio);
-                window.addEventListener('click', startTrigger, { once: true });
-                window.addEventListener('touchstart', startTrigger, { once: true });
-            },
+                const startBtn = document.getElementById('startBtn');
+                const startOverlay = document.getElementById('startOverlay');
 
-            startPlaylist(audio) {
-                if (this.started) return;
-                this.playCurrentTrack(audio);
+                if (startBtn && startOverlay) {
+                    startBtn.addEventListener('click', () => {
+                        // Inicia o áudio
+                        this.playCurrentTrack(audio);
+
+                        // Dispara o slider de imagens
+                        NostalgicSlider.start();
+
+                        // Oculta a tela preta com fade-out
+                        startOverlay.classList.add('hidden');
+                    });
+                }
             },
 
             playCurrentTrack(audio) {
-                // Define o arquivo baseado no índice atual
-                audio.src = `pages/musics/${this.playlist[this.currentIndex]}`;
-                audio.src = `assets/audios/musics/background/${this.playlist[this.currentIndex]}`;
+                if (!this.playlist[this.currentIndex]) return;
 
-                audio.play()
-                    .then(() => {
-                        this.started = true;
-                        console.log(`Zera's Craft: Reproduzindo ${this.playlist[this.currentIndex]}`);
-                    })
-                    .catch(err => {
-                        console.warn("Aguardando interação para áudio...");
-                        this.started = false;
-                    });
+                audio.src = this.playlist[this.currentIndex];
+                audio.load();
+
+                audio.play().catch(err => {
+                    console.warn("[Áudio] Reprodução bloqueada pelo navegador.");
+                });
             },
 
             nextTrack(audio) {
-                // LÓGICA DE LOOP INFINITO: 
-                // (Índice Atual + 1) dividido pelo Total de Músicas. O resto é o novo índice.
-                // Exemplo com 2 músicas: (1 + 1) % 2 = 0 (Volta para a música 1)
                 this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
-
                 this.playCurrentTrack(audio);
             }
         };
 
-        // Inicialização segura sem re-renderização agressiva
-        document.addEventListener('DOMContentLoaded', () => ZerasAudio.init());
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => ZerasAudio.init());
+        } else {
+            ZerasAudio.init();
+        }
     </script>
 </body>
 
