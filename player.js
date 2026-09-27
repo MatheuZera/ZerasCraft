@@ -15,27 +15,6 @@ window.initJukeboxPlayer = function () {
 
   if (!backgroundAudio || !jukeboxTrigger) return;
 
-  const getScriptBasePath = () => {
-    try {
-      const scripts = document.querySelectorAll('script');
-      for (let script of scripts) {
-        if (script.src && script.src.includes('player.js')) {
-          const url = new URL(script.src);
-          return url.origin + url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1);
-        }
-      }
-    } catch (e) {
-      console.warn("Erro ao detectar caminho do script, usando fallback.", e);
-    }
-    return './';
-  };
-
-  const basePath = getScriptBasePath();
-
-  if (jukeboxImg) {
-    jukeboxImg.src = basePath + "assets/images/geral/jukebox.webp";
-  }
-
   const playlist = [
     // AMBIENTE (Background) - Azul Claro
     { icon: 'fas fa-cloud', color: '#00d2ff', playlist: 'Ambiente', title: 'A Familiar Room', src: 'assets/audios/musics/background/a_familiar_room.mp3' },
@@ -408,27 +387,36 @@ window.initJukeboxPlayer = function () {
     showMessage(`Modo: ${modesConfig[currentMode].text}`, "modo", 3500);
   };
 
-  jukeboxTrigger.onmousedown = jukeboxTrigger.ontouchstart = (e) => {
-    e.preventDefault();
+  // ==========================================
+  // CORREÇÃO DOS EVENTOS PARA MOBILE E DESKTOP
+  // ==========================================
+  jukeboxTrigger.addEventListener('pointerdown', (e) => {
     isHolding = false;
-    holdTimeout = setTimeout(() => { isHolding = true; cycleMode(); }, 600);
-  };
+    holdTimeout = setTimeout(() => {
+      isHolding = true;
+      cycleMode();
+    }, 600);
+  });
 
-  jukeboxTrigger.onmouseup = jukeboxTrigger.ontouchend = (e) => {
-    e.preventDefault();
+  jukeboxTrigger.addEventListener('pointerup', (e) => {
     clearTimeout(holdTimeout);
-  };
+  });
 
-  jukeboxTrigger.onclick = (e) => {
+  jukeboxTrigger.addEventListener('click', (e) => {
     if (isHolding) return;
+    
     if (clickTimeout === null) {
-      clickTimeout = setTimeout(() => { clickTimeout = null; togglePlayPause(); }, 250);
+      clickTimeout = setTimeout(() => {
+        clickTimeout = null;
+        togglePlayPause();
+      }, 250);
     } else {
       clearTimeout(clickTimeout);
       clickTimeout = null;
       handleNext();
     }
-  };
+  });
+
 
   backgroundAudio.ontimeupdate = () => {
     if (isNaN(backgroundAudio.duration)) return;
