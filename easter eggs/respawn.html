@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Você Morreu! - Zera's Craft</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      image-rendering: pixelated;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: monospace;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    /* Vinheta vermelha clássica de morte do Minecraft */
+    .death-vignette {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 120px rgba(130, 0, 0, 0.85), inset 0 0 220px rgba(70, 0, 0, 0.95);
+      pointer-events: none;
+      z-index: 10;
+      animation: pulseVignette 3s infinite alternate;
+    }
+
+    @keyframes pulseVignette {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    .screen-container {
+      position: relative;
+      z-index: 20;
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      padding: 20px;
+    }
+
+    /* Tela de Morte Bedrock Style */
+    #deathScreen h1 {
+      font-size: 36px;
+      color: #e0e0e0;
+      text-shadow: 4px 4px #3f0000;
+      margin-bottom: 6px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .death-message {
+      font-size: 12px;
+      color: #b5b5b5;
+      margin-bottom: 30px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      border: 1px solid #444;
+    }
+
+    .menu-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Estilo de Botão Bedrock Edition */
+    .pixel-btn {
+      background-color: #505050;
+      color: #ffffff;
+      border: 2px solid #1a1a1a;
+      box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+      padding: 12px;
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.1s, border-color 0.1s;
+    }
+
+    .pixel-btn:hover {
+      background-color: #686868;
+      border-color: #ffffff;
+      color: #ffff55;
+    }
+
+    .pixel-btn:active {
+      background-color: #383838;
+      box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    /* Painel estilo Modal Bedrock */
+    .quiz-box, .secret-vault {
+      background: rgba(32, 32, 32, 0.95);
+      border: 3px solid #3c3c3c;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9), inset 2px 2px rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      color: #fff;
+      text-align: left;
+      display: none;
+    }
+
+    .quiz-box h2, .secret-vault h2 {
+      font-size: 14px;
+      border-bottom: 2px solid #444;
+      padding-bottom: 8px;
+      margin-top: 0;
+      color: #ffff55;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    /* Placar de Acertos e Erros */
+    .scoreboard {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px 10px;
+      font-size: 11px;
+      border: 1px solid #444;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .score-correct { color: #55ff55; }
+    .score-wrong { color: #ff5555; }
+
+    .question-counter {
+      font-size: 10px;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+
+    .question-text {
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 14px;
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .option-btn {
+      background: #363636;
+      border: 2px solid #1a1a1a;
+      box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.15);
+      padding: 9px 10px;
+      font-family: monospace;
+      font-size: 11px;
+      cursor: pointer;
+      text-align: left;
+      color: #ddd;
+      transition: background 0.1s;
+    }
+
+    .option-btn:hover {
+      background: #4c4c4c;
+      border-color: #ffff55;
+      color: #ffff55;
+    }
+
+    /* Área Secreta (Wallpapers) */
+    .secret-vault {
+      border-color: #d4af37;
+      text-align: center;
+    }
+
+    .vault-desc {
+      font-size: 11px;
+      color: #ccc;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .wallpapers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .wallpaper-card {
+      background: #252528;
+      border: 2px solid #444;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wallpaper-preview {
+      width: 100%;
+      height: 70px;
+      background: #18181a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #d4af37;
+      border: 1px solid #333;
+    }
+
+    .wallpaper-title {
+      font-size: 10px;
+      color: #fff;
+    }
+
+    .download-btn {
+      background: #2e7d32;
+      color: #fff;
+      border: 2px solid #111;
+      padding: 5px 8px;
+      font-size: 9px;
+      font-family: monospace;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+    }
+
+    .download-btn:hover {
+      background: #388e3c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="death-vignette"></div>
+
+  <div class="screen-container">
+    
+    <!-- 1. TELA DE MORTE PRINCIPAL -->
+    <div id="deathScreen">
+      <h1>Você Morreu!</h1>
+      <div class="death-message" id="deathMessage">
+        [Steve] caiu no vazio ao tentar olhar o passado
+      </div>
+      <div class="menu-group">
+        <button class="pixel-btn" onclick="startQuiz()">Renascer</button>
+        <button class="pixel-btn" onclick="goToHome()">Menu Principal</button>
+      </div>
+    </div>
+
+    <!-- 2. QUIZ DE RENASCIMENTO -->
+    <div id="quizBox" class="quiz-box">
+      <h2>Quiz de Renascimento</h2>
+      <div class="scoreboard">
+        <span class="score-correct">Acertos: <span id="acertosCount">0</span></span>
+        <span class="score-wrong">Erros: <span id="errosCount">0</span></span>
+      </div>
+      <div class="question-counter" id="qCounter">Pergunta 1 de 5</div>
+      <div class="question-text" id="qText">Carregando pergunta...</div>
+      <div class="options-list" id="optionsList"></div>
+    </div>
+
+    <!-- 3. ÁREA SECRETA (WALLPAPERS) -->
+    <div id="secretVault" class="secret-vault">
+      <h2><i class="fas fa-crown" style="color: #ffff55;"></i> Área Secreta Desbloqueada</h2>
+      <div class="vault-desc">
+        Renasceu com sucesso! Você provou conhecer os segredos do Zera's Craft. Baixe abaixo seus papéis de parede em alta resolução:
+      </div>
+      
+      <div class="wallpapers-grid">
+        <div class="wallpaper-card">
+          <div class="wallpaper-preview"><i class="fas fa-mountain"></i></div>
+          <span class="wallpaper-title">Zera's Landscape 4K</span>
+          <a href="#" class="download-btn" onclick="alert('Download iniciado: Zera_Landscape_4K.png')">Baixar HD</a>
+        </div>
+        <div class="wallpaper-card">
+          <div class="wallpaper-preview"><i class="fas fa-compact-disc"></i></div>
+          <span class="wallpaper-title">Jukebox Retro Art</span>
+          <a href="#" class="download-btn" onclick="alert('Download iniciado: Jukebox_Retro_Art.png')">Baixar HD</a>
+        </div>
+      </div>
+
+      <button class="pixel-btn" onclick="goToHome()" style="width: 100%;">Voltar ao Menu Principal</button>
+    </div>
+
+  </div>
+
+  <script>
+    const playerName = localStorage.getItem('playerName') || 'Steve';
+    document.getElementById('deathMessage').textContent = `[${playerName}] caiu no vazio ao tentar olhar o passado`;
+
+    // Perguntas puramente sobre Minecraft e Lore dos Discos
+    const quizQuestions = [
+      {
+        question: "Qual é o nome do disco de música exclusivo do Nether composto por Lena Raine?",
+        options: ["Cat", "Stal", "Pigstep", "Mellohi"],
+        answer: 2
+      },
+      {
+        question: "Em qual estrutura do mundo soturno e silencioso é possível encontrar o disco 'Otherside'?",
+        options: ["Cidades Antigas (Ancient Cities)", "Fortalezas do Nether", "Templos da Selva", "Vilas Abandonadas"],
+        answer: 0
+      },
+      {
+        question: "Qual disco clássico possui uma melodia eletrônica rítmica muito associada aos toca-discos antigos?",
+        options: ["Stal", "Blocks", "Ward", "Far"],
+        answer: 0
+      },
+      {
+        question: "No universo de Zera's Craft, o que os discos musicais guardam em suas frequências?",
+        options: ["Apenas ruídos aleatórios", "Memórias e fragmentos perdidos do passado", "Feitiços para invocar o Wither", "Coordenadas de tesouros de ouro"],
+        answer: 1
+      },
+      {
+        question: "Qual criatura agressiva das profundezas vigia os locais onde relíquias como o Otherside repousam?",
+        options: ["Warden", "Piglin Brute", "Ender Dragon", "Phantom"],
+        answer: 0
+      }
+    ];
+
+    let currentQuestion = 0;
+    let acertos = 0;
+    let erros = 0;
+
+    function updateScoreboard() {
+      document.getElementById('acertosCount').textContent = acertos;
+      document.getElementById('errosCount').textContent = erros;
+    }
+
+    function startQuiz() {
+      document.getElementById('deathScreen').style.display = 'none';
+      document.getElementById('quizBox').style.display = 'block';
+      currentQuestion = 0;
+      acertos = 0;
+      erros = 0;
+      updateScoreboard();
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      if (currentQuestion >= quizQuestions.length) {
+        showVault();
+        return;
+      }
+
+      const q = quizQuestions[currentQuestion];
+      document.getElementById('qCounter').textContent = `Pergunta ${currentQuestion + 1} de ${quizQuestions.length}`;
+      document.getElementById('qText').textContent = q.question;
+      
+      const optionsList = document.getElementById('optionsList');
+      optionsList.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = `${String.fromCharCode(65 + idx)}) ${opt}`;
+        btn.onclick = () => selectOption(idx);
+        optionsList.appendChild(btn);
+      });
+    }
+
+    function selectOption(selectedIdx) {
+      const q = quizQuestions[currentQuestion];
+      
+      if (selectedIdx === q.answer) {
+        acertos++;
+        updateScoreboard();
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        // Errou! Incrementa erro, avisa e reinicia imediatamente
+        erros++;
+        updateScoreboard();
+        alert("Você errou a resposta! Retornando à tela de morte...");
+        resetToDeathScreen();
+      }
+    }
+
+    function resetToDeathScreen() {
+      document.getElementById('quizBox').style.display = 'none';
+      document.getElementById('deathScreen').style.display = 'block';
+    }
+
+    function showVault() {
+      document.getElementById('quizBox').style.display = 'none';
+      document.getElementById('secretVault').style.display = 'block';
+    }
+
+    function goToHome() {
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>

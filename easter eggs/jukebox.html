@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jukebox Retro - Discos do Minecraft</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #121214;
+      --accent-color: #ffc107;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: #fff;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      transition: background-color 0.8s ease;
+      cursor: default;
+    }
+
+    /* Canvas para partículas e fundo interativo */
+    #particleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    .player-container {
+      position: relative;
+      z-index: 2;
+      background-color: #c6c6c6;
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555, 0 10px 25px rgba(0,0,0,0.7);
+      padding: 16px;
+      width: 360px;
+      color: #3f3f3f;
+      image-rendering: pixelated;
+    }
+
+    h2 {
+      font-size: 14px;
+      margin-top: 0;
+      border-bottom: 2px solid #373737;
+      padding-bottom: 6px;
+      text-align: center;
+    }
+
+    /* Slot da Jukebox com a imagem WebP como ícone central */
+    .jukebox-slot {
+      background: #5c3a21;
+      border: 3px solid #222;
+      box-shadow: inset 3px 3px #8b5a2b, inset -3px -3px #3d2412;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 12px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .jukebox-slot.drag-over {
+      border-color: #ffeb3b;
+      background: #6d4427;
+    }
+
+    /* Imagem WebP da Jukebox com renderização pixel art */
+    .jukebox-icon-img {
+      width: 56px;
+      height: 56px;
+      image-rendering: pixelated;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+      transition: transform 0.2s;
+    }
+
+    .playing-animation .jukebox-icon-img {
+      animation: bounce 0.6s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-4px) scale(1.1); }
+    }
+
+    .now-playing {
+      font-size: 10px;
+      font-weight: bold;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 3px 8px;
+      border-radius: 3px;
+      text-align: center;
+      max-width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* Inventário de Discos */
+    .tray-title {
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    .records-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      max-height: 160px;
+      overflow-y: auto;
+      background: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #373737;
+      padding: 8px;
+      margin-bottom: 12px;
+    }
+
+    .record-item {
+      background: #c6c6c6;
+      border: 2px solid #222;
+      box-shadow: inset 2px 2px #fff, inset -2px -2px #555;
+      padding: 8px 4px;
+      text-align: center;
+      cursor: grab;
+      font-size: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      user-select: none;
+      transition: transform 0.1s, background 0.1s;
+    }
+
+    .record-item:active {
+      cursor: grabbing;
+    }
+
+    .record-item:hover {
+      background: #d4d4d4;
+      transform: translateY(-1px);
+    }
+
+    .record-item.active {
+      background: #a3a3a3;
+      border-color: #000;
+      box-shadow: inset 2px 2px #555, inset -2px -2px #fff;
+      font-weight: bold;
+    }
+
+    .record-item i {
+      font-size: 16px;
+    }
+
+    .record-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    /* Controles */
+    .controls {
+      display: flex;
+      gap: 6px;
+    }
+
+    .pixel-btn {
+      flex: 1;
+      background-color: #555;
+      color: #fff;
+      border: 2px solid #222;
+      box-shadow: inset 2px 2px #888, inset -2px -2px #333;
+      padding: 6px;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .pixel-btn:active {
+      box-shadow: inset 2px 2px #333, inset -2px -2px #888;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas Interativo -->
+  <canvas id="particleCanvas"></canvas>
+
+  <div class="player-container">
+    <h2>Jukebox - Minecraft</h2>
+    
+    <!-- Vitrola utilizando a imagem .webp como ícone -->
+    <div class="jukebox-slot" id="jukeboxSlot" 
+         ondragover="allowDrop(event)" 
+         ondragleave="removeDropStyle(event)"
+         ondrop="dropRecord(event)" 
+         onclick="togglePlay()"
+         title="Arraste um disco aqui ou clique para tocar/pausar">
+      
+      <img src="../assets/images/geral/jukebox.webp" alt="Jukebox" class="jukebox-icon-img" id="jukeboxIcon">
+      <div class="now-playing" id="nowPlaying">Arraste um disco para a vitrola</div>
+    </div>
+
+    <div class="tray-title">Discos Disponíveis (Arraste ou Clique):</div>
+    
+    <!-- Grade de Discos -->
+    <div class="records-grid" id="recordsGrid">
+      <!-- Gerado via JS -->
+    </div>
+
+    <!-- Botões de Controle -->
+    <div class="controls">
+      <button class="pixel-btn" onclick="togglePlay()"><i class="fas fa-play"></i> / <i class="fas fa-pause"></i></button>
+      <button class="pixel-btn" onclick="nextSong()"><i class="fas fa-forward"></i> Próxima</button>
+    </div>
+  </div>
+
+  <audio id="backgroundAudio"></audio>
+
+  <script>
+    const playlist = [
+      { id: 0, title: 'Blocks', src: '../assets/audios/musics/records/Blocks.mp3', themeBg: '#1b263b', color: '#ffc107' },
+      { id: 1, title: 'Cat', src: '../assets/audios/musics/records/Cat.mp3', themeBg: '#1b4332', color: '#52b788' },
+      { id: 2, title: 'Far', src: '../assets/audios/musics/records/Far.mp3', themeBg: '#22092c', color: '#9d4edd' },
+      { id: 3, title: 'Mall', src: '../assets/audios/musics/records/Mall.mp3', themeBg: '#3a0ca3', color: '#4361ee' },
+      { id: 4, title: 'Mellohi', src: '../assets/audios/musics/records/Mellohi.mp3', themeBg: '#590d22', color: '#ff4d6d' },
+      { id: 5, title: 'Otherside', src: '../assets/audios/musics/records/Otherside.mp3', themeBg: '#240046', color: '#9b5de5' },
+      { id: 6, title: 'Pigstep Master', src: '../assets/audios/musics/records/Pingstep_Master.mp3', themeBg: '#53131e', color: '#f72585' },
+      { id: 7, title: 'Relic', src: '../assets/audios/musics/records/Relic.mp3', themeBg: '#3d3100', color: '#ffb703' },
+      { id: 8, title: 'Stal', src: '../assets/audios/musics/records/Stal.mp3', themeBg: '#1d3557', color: '#457b9d' },
+      { id: 9, title: 'Strad', src: '../assets/audios/musics/records/Strad.mp3', themeBg: '#03045e', color: '#00b4d8' },
+      { id: 10, title: 'Wait', src: '../assets/audios/musics/records/Wait.mp3', themeBg: '#4a154b', color: '#e0aaff' },
+      { id: 11, title: 'Ward', src: '../assets/audios/musics/records/Ward.mp3', themeBg: '#0b090a', color: '#e5e5e5' }
+    ];
+
+    let currentIndex = 0;
+    const audio = document.getElementById('backgroundAudio');
+    const nowPlaying = document.getElementById('nowPlaying');
+    const recordsGrid = document.getElementById('recordsGrid');
+    const jukeboxSlot = document.getElementById('jukeboxSlot');
+    const jukeboxIcon = document.getElementById('jukeboxIcon');
+
+    // Renderiza o inventário de discos
+    function renderRecords() {
+      recordsGrid.innerHTML = '';
+      playlist.forEach((song, idx) => {
+        const div = document.createElement('div');
+        div.className = `record-item ${idx === currentIndex ? 'active' : ''}`;
+        div.draggable = true;
+        div.innerHTML = `
+          <i class="fas fa-compact-disc" style="color: ${song.color}"></i>
+          <span class="record-title">${song.title}</span>
+        `;
+        
+        div.onclick = () => playSong(idx);
+        div.ondragstart = (e) => {
+          e.dataTransfer.setData('text/plain', idx);
+        };
+
+        recordsGrid.appendChild(div);
+      });
+    }
+
+    // Funções de Drag and Drop
+    function allowDrop(e) {
+      e.preventDefault();
+      jukeboxSlot.classList.add('drag-over');
+    }
+
+    function removeDropStyle(e) {
+      jukeboxSlot.classList.remove('drag-over');
+    }
+
+    function dropRecord(e) {
+      e.preventDefault();
+      jukeboxSlot.classList.remove('drag-over');
+      const idx = e.dataTransfer.getData('text/plain');
+      if (idx !== "") {
+        playSong(parseInt(idx));
+      }
+    }
+
+    // Reprodução de música e temas dinâmicos
+    function playSong(idx) {
+      currentIndex = idx;
+      const song = playlist[currentIndex];
+      
+      audio.src = song.src;
+      audio.play().then(() => {
+        jukeboxSlot.classList.add('playing-animation');
+      }).catch(e => console.log("Erro ao reproduzir áudio:", e));
+
+      nowPlaying.textContent = `Tocando: ${song.title}`;
+      
+      document.documentElement.style.setProperty('--bg-color', song.themeBg);
+      document.documentElement.style.setProperty('--accent-color', song.color);
+
+      renderRecords();
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        if (!audio.src) playSong(0);
+        else {
+          audio.play();
+          jukeboxSlot.classList.add('playing-animation');
+        }
+      } else {
+        audio.pause();
+        jukeboxSlot.classList.remove('playing-animation');
+      }
+    }
+
+    function nextSong() {
+      currentIndex = (currentIndex + 1) % playlist.length;
+      playSong(currentIndex);
+    }
+
+    audio.onended = () => {
+      nextSong();
+    };
+
+    audio.onpause = () => {
+      jukeboxSlot.classList.remove('playing-animation');
+    };
+
+    // --- Sistema de Partículas e Fundo Interativo ---
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: null, y: null, active: false };
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.active = false;
+    });
+
+    // Clique na tela gera um burst de notas musicais
+    window.addEventListener('click', (e) => {
+      if (e.target.closest('.player-container')) return;
+      
+      for (let i = 0; i < 5; i++) {
+        particles.push(new Particle(e.clientX, e.clientY, true));
+      }
+    });
+
+    class Particle {
+      constructor(customX, customY, isBurst = false) {
+        this.reset(customX, customY, isBurst);
+      }
+
+      reset(customX, customY, isBurst) {
+        if (isBurst && customX && customY) {
+          this.x = customX;
+          this.y = customY;
+          this.speedX = (Math.random() - 0.5) * 4;
+          this.speedY = (Math.random() - 0.5) * 4 - 1;
+        } else {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + 20;
+          this.speedX = (Math.random() - 0.5) * 1.5;
+          this.speedY = Math.random() * -1.5 - 0.5;
+        }
+        this.size = Math.random() * 8 + 8;
+        this.opacity = Math.random() * 0.6 + 0.3;
+        this.char = Math.random() > 0.5 ? '♪' : '♫';
+        this.color = playlist[currentIndex]?.color || '#ffc107';
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+
+        if (mouse.active) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            this.x += dx * 0.02;
+            this.y += dy * 0.02;
+          }
+        }
+
+        this.opacity -= 0.003;
+        if (this.opacity <= 0 || this.y < -10) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = Math.max(0, this.opacity);
+        ctx.font = `${this.size}px monospace`;
+        ctx.fillText(this.char, this.x, this.y);
+        ctx.globalAlpha = 1.0;
+      }
+    }
+
+    for (let i = 0; i < 30; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      if (!audio.paused || mouse.active) {
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    renderRecords();
+    animateParticles();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zera's Craft - Calculadora de Recursos (/planner)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: monospace;
+            background-color: #181818;
+            background-image: linear-gradient(rgba(24, 18, 14, 0.85), rgba(24, 18, 14, 0.85)), url('../assets/images/geral/banner-fundo.gif');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            color: #fff;
+        }
+
+        .planner-container {
+            background-color: #c6c6c6;
+            border: 4px solid #373737;
+            box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555, 0 20px 40px rgba(0, 0, 0, 0.8);
+            width: 600px;
+            max-width: 95vw;
+            padding: 20px;
+            color: #3f3f3f;
+            image-rendering: pixelated;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .panel-header {
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 2px solid #373737;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .input-group label {
+            font-size: 10px;
+            font-weight: bold;
+            color: #222;
+            text-transform: uppercase;
+        }
+
+        .pixel-input,
+        .pixel-select {
+            background-color: #8b8b8b;
+            border: 2px solid #373737;
+            box-shadow: inset 2px 2px #fff, inset -2px -2px #555;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            font-weight: bold;
+            color: #111;
+            width: 100%;
+        }
+
+        /* Painel de Resultados */
+        .results-panel {
+            background-color: #111;
+            border: 3px solid #373737;
+            box-shadow: inset 3px 3px #000;
+            padding: 14px;
+            color: #55bd34;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .result-value {
+            color: #f8cb47;
+        }
+
+        .chest-visualizer {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            max-height: 70px;
+            overflow-y: auto;
+            margin-top: 4px;
+            background: #1d1d1d;
+            padding: 6px;
+            border: 1px solid #333;
+        }
+
+        .chest-icon {
+            font-size: 16px;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+        }
+
+        .pixel-btn {
+            background-color: #555;
+            color: #fff;
+            border: 2px solid #222;
+            box-shadow: inset 2px 2px #888, inset -2px -2px #333;
+            padding: 10px;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .pixel-btn:hover {
+            background-color: #666;
+        }
+
+        .pixel-btn:active {
+            box-shadow: inset 2px 2px #333, inset -2px -2px #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="planner-container">
+        <div class="panel-header">
+            <span>Calculadora de Recursos (/planner)</span>
+            <span style="font-size: 10px; color: #555;">[Zera's Craft Tools]</span>
+        </div>
+
+        <div class="form-grid">
+            <div class="input-group">
+                <label>Tipo de Estrutura</label>
+                <select class="pixel-select" id="structureType" onchange="calculatePlanner()">
+                    <option value="solid">Cubo / Parede Sólida</option>
+                    <option value="hollow">Cubo Oco / Sala</option>
+                    <option value="pyramid">Pirâmide</option>
+                    <option value="cylinder">Cilindro / Torre</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Largura / Raio (Blocos)</label>
+                <input type="number" class="pixel-input" id="inputWidth" value="31" min="1"
+                    oninput="calculatePlanner()">
+            </div>
+            <div class="input-group">
+                <label>Comprimento (Blocos)</label>
+                <input type="number" class="pixel-input" id="inputLength" value="31" min="1"
+                    oninput="calculatePlanner()">
+            </div>
+            <div class="input-group">
+                <label>Altura (Blocos)</label>
+                <input type="number" class="pixel-input" id="inputHeight" value="15" min="1"
+                    oninput="calculatePlanner()">
+            </div>
+        </div>
+
+        <!-- Resultados -->
+        <div class="results-panel">
+            <div class="result-row">
+                <span>Total de Blocos:</span>
+                <span class="result-value" id="resBlocks">0</span>
+            </div>
+            <div class="result-row">
+                <span>Total de Stacks (64):</span>
+                <span class="result-value" id="resStacks">0</span>
+            </div>
+            <div class="result-row">
+                <span>Baús Duplos Necessários:</span>
+                <span class="result-value" id="resChests">0</span>
+            </div>
+
+            <div>
+                <div style="font-size: 10px; color: #aaa; margin-bottom: 2px;">Visualizador de Baús Duplos:</div>
+                <div class="chest-visualizer" id="chestVisualizer"></div>
+            </div>
+        </div>
+
+        <button class="pixel-btn" onclick="triggerPlannerAchievement()">✨ Registar Projeto & Conquistar</button>
+    </div>
+
+    <script>
+        function calculateStorageRequirements(totalBlocks) {
+            const stackSize = 64;
+            const doubleChestCapacity = 54 * stackSize; // 3.456 blocos por baú duplo
+
+            const totalStacks = Math.ceil(totalBlocks / stackSize);
+            const doubleChestsNeeded = (totalBlocks / doubleChestCapacity).toFixed(1);
+            const chestsInteger = Math.ceil(totalBlocks / doubleChestCapacity);
+
+            return {
+                blocks: totalBlocks,
+                stacks: totalStacks,
+                chests: doubleChestsNeeded,
+                chestsInteger: chestsInteger
+            };
+        }
+
+        function calculatePlanner() {
+            const type = document.getElementById('structureType').value;
+            const w = parseInt(document.getElementById('inputWidth').value) || 0;
+            const l = parseInt(document.getElementById('inputLength').value) || 0;
+            const h = parseInt(document.getElementById('inputHeight').value) || 0;
+
+            let totalBlocks = 0;
+
+            if (type === 'solid') {
+                totalBlocks = w * l * h;
+            } else if (type === 'hollow') {
+                const outer = w * l * h;
+                const inner = Math.max(0, w - 2) * Math.max(0, l - 2) * Math.max(0, h - 2);
+                totalBlocks = outer - inner;
+            } else if (type === 'pyramid') {
+                // Cálculo aproximado de pirâmide por camadas
+                for (let i = 0; i < h; i++) {
+                    let currentW = Math.max(1, w - (i * 2));
+                    let currentL = Math.max(1, l - (i * 2));
+                    totalBlocks += currentW * currentL;
+                }
+            } else if (type === 'cylinder') {
+                const radius = w / 2;
+                totalBlocks = Math.round(Math.PI * radius * radius * h);
+            }
+
+            const req = calculateStorageRequirements(totalBlocks);
+
+            document.getElementById('resBlocks').textContent = req.blocks.toLocaleString('pt-BR');
+            document.getElementById('resStacks').textContent = req.stacks.toLocaleString('pt-BR');
+            document.getElementById('resChests').textContent = `${req.chests} baús duplos`;
+
+            // Renderiza ícones de baús visualmente
+            const viz = document.getElementById('chestVisualizer');
+            viz.innerHTML = '';
+            const displayCount = Math.min(req.chestsInteger, 60); // Limita visualização para não quebrar o layout
+            for (let i = 0; i < displayCount; i++) {
+                const span = document.createElement('span');
+                span.className = 'chest-icon';
+                span.textContent = '📦';
+                viz.appendChild(span);
+            }
+            if (req.chestsInteger > 60) {
+                const more = document.createElement('span');
+                more.style.fontSize = '10px';
+                more.style.color = '#fff';
+                more.textContent = `+${req.chestsInteger - 60} baús`;
+                viz.appendChild(more);
+            }
+        }
+
+        function triggerPlannerAchievement() {
+            // Exemplo de integração com o sistema de conquistas criado acima
+            if (typeof AchievementSystem !== 'undefined') {
+                AchievementSystem.unlock(
+                    'master_builder',
+                    'Mestre Engenheiro',
+                    'Calculou os recursos exatos para uma grande obra.',
+                    'https://minecraft.wiki/images/Diamond_Pickaxe_JE3_BE3.png'
+                );
+            }
+            alert("Projeto guardado com sucesso!");
+        }
+
+        // Executa ao carregar
+        calculatePlanner();
+    </script>
+
+</body>
+
+</html>

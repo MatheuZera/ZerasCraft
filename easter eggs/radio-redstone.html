@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - Rádio Redstone</title>
+  <style>
+    body {
+      background-color: #151515;
+      color: #fff;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Container Principal Estilo GUI Redstone */
+    .redstone-radio-container {
+      background-color: #c6c6c6;
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555, 0 15px 35px rgba(0,0,0,0.7);
+      padding: 20px;
+      width: 380px;
+      max-width: 95%;
+      image-rendering: pixelated;
+      color: #3f3f3f;
+    }
+
+    .radio-header {
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #373737;
+      padding-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Display do Rádio (Efeito Consola / Redstone Lamp) */
+    .radio-display {
+      background-color: #2b0000;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #110000;
+      padding: 12px;
+      color: #ff3333;
+      text-shadow: 0 0 8px rgba(255, 51, 51, 0.6);
+      font-size: 12px;
+      margin-bottom: 12px;
+      min-height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .radio-display .status-channel {
+      font-size: 10px;
+      color: #ff9999;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Barra de Progresso e Tempos */
+    .progress-container {
+      background-color: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #373737;
+      padding: 8px;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      accent-color: #a11;
+      cursor: pointer;
+      margin-bottom: 4px;
+    }
+
+    .time-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #222;
+      font-weight: bold;
+    }
+
+    /* Seletor de Canais (Repetidores de Redstone) */
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .channel-btn {
+      background-color: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #fff, inset -2px -2px #555;
+      padding: 8px;
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: bold;
+      color: #222;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .channel-btn:hover {
+      background-color: #9e9e9e;
+    }
+
+    .channel-btn.active {
+      background-color: #a11;
+      color: #fff;
+      border-color: #500;
+      box-shadow: inset 2px 2px #f44, inset -2px -2px #500;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+
+    /* Lista de Faixas do Canal Ativo */
+    .track-list {
+      background-color: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #373737;
+      max-height: 120px;
+      overflow-y: auto;
+      padding: 4px;
+      margin-bottom: 12px;
+    }
+
+    .track-item {
+      padding: 6px 8px;
+      font-size: 11px;
+      color: #fff;
+      cursor: pointer;
+      border-bottom: 1px solid #666;
+    }
+
+    .track-item:hover {
+      background-color: #9e9e9e;
+    }
+
+    .track-item.playing {
+      background-color: #555;
+      color: #ff3333;
+      font-weight: bold;
+    }
+
+    /* Controles Principais (Alavanca de Redstone) */
+    .player-controls {
+      display: flex;
+      gap: 6px;
+    }
+
+    .pixel-btn {
+      flex: 1;
+      background-color: #555;
+      color: #fff;
+      border: 2px solid #222;
+      box-shadow: inset 2px 2px #888, inset -2px -2px #333;
+      padding: 8px;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .pixel-btn:active {
+      box-shadow: inset 2px 2px #333, inset -2px -2px #888;
+    }
+
+    /* Indicador de Sinal Redstone */
+    .redstone-signal {
+      width: 10px;
+      height: 10px;
+      background-color: #500;
+      border-radius: 50%;
+      box-shadow: 0 0 5px #f00;
+      display: inline-block;
+    }
+    .redstone-signal.powered {
+      background-color: #ff2222;
+      box-shadow: 0 0 10px #ff0000, 0 0 15px #ff5555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="redstone-radio-container">
+    <div class="radio-header">
+      <span>Rádio Redstone v1.0</span>
+      <span class="redstone-signal" id="redstoneIndicator" title="Sinal de Redstone Ativo"></span>
+    </div>
+
+    <!-- Ecrã / Display de Transmissão -->
+    <div class="radio-display">
+      <span class="status-channel" id="displayChannel">Canal: [Nenhum]</span>
+      <span id="displayTitle">Selecione uma frequência...</span>
+    </div>
+
+    <!-- Barra de Progresso e Tempos -->
+    <div class="progress-container">
+      <input type="range" id="progressBar" class="progress-bar" value="0" min="0" max="100" step="0.1" oninput="seekAudio(this.value)">
+      <div class="time-info">
+        <span id="currentTime">00:00</span>
+        <span id="durationTime">00:00</span>
+      </div>
+    </div>
+
+    <!-- Seatores de Canais (Repetidores) -->
+    <div class="channels-grid">
+      <button class="channel-btn" id="btn-discord" onclick="switchChannel('discord')">🎙️ Discord Clips</button>
+      <button class="channel-btn" id="btn-podcasts" onclick="switchChannel('podcasts')">📻 Podcasts</button>
+      <button class="channel-btn" id="btn-discs" onclick="switchChannel('discs')">💿 Discos Custom</button>
+      <button class="channel-btn" id="btn-sfx" onclick="switchChannel('sfx')">🔔 Efeitos SFX</button>
+    </div>
+
+    <!-- Lista de Reprodução do Canal -->
+    <div class="track-list" id="trackList">
+      <div style="padding: 10px; text-align: center; color: #222; font-size: 11px;">Escolha um canal acima para sintonizar a frequência.</div>
+    </div>
+
+    <!-- Controles -->
+    <div class="player-controls">
+      <button class="pixel-btn" id="playPauseBtn" onclick="togglePlayPause()">▶ Play / ⏸ Pause</button>
+      <button class="pixel-btn" onclick="nextTrack()">Próxima ⏭</button>
+    </div>
+  </div>
+
+  <audio id="radioAudio"></audio>
+
+  <script>
+    const radioChannels = {
+      discord: {
+        name: "Áudios do Discord",
+        tracks: [
+          { title: "Gritos na Dungeon (Rage)", src: "../assets/audios/musics/remix/Aria-Math.mp3" },
+          { title: "Risada Coletiva no Canal de Voz", src: "../assets/audios/musics/remix/Sweden.mp3" },
+          { title: "Estratégia do Boss falhada", src: "../assets/audios/musics/remix/Aria-Math-Piano.mp3" }
+        ]
+      },
+      podcasts: {
+        name: "Podcasts da Comunidade",
+        tracks: [
+          { title: "Ep 01: A História do Spawn Original", src: "../assets/audios/musics/remix/Aria-Math.mp3" },
+          { title: "Ep 02: Entrevista com os Builders", src: "../assets/audios/musics/remix/Minecraft-Remix.mp3" }
+        ]
+      },
+      discs: {
+        name: "Discos Customizados",
+        tracks: [
+          { title: "C418 - Cat (Remix)", src: "assets/audio/records/Cat.mp3" },
+          { title: "Lena Raine - Pigstep (Lo-Fi)", src: "assets/audio/records/pigstep_lofi.mp3" },
+          { title: "Aaron Cherof - Relic", src: "assets/audio/records/Relic.mp3" }
+        ]
+      },
+      sfx: {
+        name: "Efeitos Sonoros do Jogo",
+        tracks: [
+          { title: "Level Up Sound", src: "assets/audio/sfx/levelup.ogg" },
+          { title: "Villager Hmmm...", src: "assets/audio/sfx/villager.ogg" },
+          { title: "Chest Open", src: "assets/audio/sfx/chest_open.ogg" },
+          { title: "Redstone Power Click", src: "assets/audio/sfx/click.ogg" }
+        ]
+      }
+    };
+
+    let currentChannelKey = null;
+    let currentTrackIndex = 0;
+    const audio = document.getElementById('radioAudio');
+    const indicator = document.getElementById('redstoneIndicator');
+    const progressBar = document.getElementById('progressBar');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationTimeEl = document.getElementById('durationTime');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+
+    // Formata segundos para o formato mm:ss
+    function formatTime(seconds) {
+      if (isNaN(seconds) || seconds < 0) return "00:00";
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function switchChannel(channelKey) {
+      currentChannelKey = channelKey;
+      currentTrackIndex = 0;
+
+      document.querySelectorAll('.channel-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`btn-${channelKey}`).classList.add('active');
+
+      renderTrackList();
+      playTrack(0);
+    }
+
+    function renderTrackList() {
+      const trackListContainer = document.getElementById('trackList');
+      trackListContainer.innerHTML = '';
+
+      const channel = radioChannels[currentChannelKey];
+      document.getElementById('displayChannel').textContent = `Frequência: ${channel.name}`;
+
+      channel.tracks.forEach((track, idx) => {
+        const item = document.createElement('div');
+        item.className = `track-item ${idx === currentTrackIndex ? 'playing' : ''}`;
+        item.textContent = `▶ ${track.title}`;
+        item.onclick = () => playTrack(idx);
+        trackListContainer.appendChild(item);
+      });
+    }
+
+    function playTrack(idx) {
+      if (!currentChannelKey) return;
+      currentTrackIndex = idx;
+      const channel = radioChannels[currentChannelKey];
+      const track = channel.tracks[currentTrackIndex];
+
+      audio.src = track.src;
+      audio.play().then(() => {
+        indicator.classList.add('powered');
+        playPauseBtn.innerHTML = "⏸ Pausar";
+      }).catch(err => {
+        console.log("Áudio simulado ou ficheiro em falta:", err);
+        indicator.classList.add('powered');
+        playPauseBtn.innerHTML = "⏸ Pausar";
+      });
+
+      document.getElementById('displayTitle').textContent = track.title;
+      
+      const items = document.querySelectorAll('.track-item');
+      items.forEach((item, i) => {
+        if (i === currentTrackIndex) {
+          item.classList.add('playing');
+        } else {
+          item.classList.remove('playing');
+        }
+      });
+    }
+
+    function togglePlayPause() {
+      if (!currentChannelKey) {
+        switchChannel('discord');
+        return;
+      }
+      if (audio.paused) {
+        audio.play();
+        indicator.classList.add('powered');
+        playPauseBtn.innerHTML = "⏸ Pausar";
+      } else {
+        audio.pause();
+        indicator.classList.remove('powered');
+        playPauseBtn.innerHTML = "▶ Play";
+      }
+    }
+
+    function nextTrack() {
+      if (!currentChannelKey) return;
+      const channel = radioChannels[currentChannelKey];
+      currentTrackIndex = (currentTrackIndex + 1) % channel.tracks.length;
+      playTrack(currentTrackIndex);
+    }
+
+    // Atualiza barra de progresso e contadores de tempo em tempo real
+    audio.ontimeupdate = () => {
+      if (isNaN(audio.duration)) return;
+      const progressPercent = (audio.currentTime / audio.duration) * 100;
+      progressBar.value = progressPercent;
+      
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+      durationTimeEl.textContent = formatTime(audio.duration);
+    };
+
+    // Função de Seek (permitir arrastar ou clicar na barra para avançar/retroceder)
+    function seekAudio(value) {
+      if (isNaN(audio.duration)) return;
+      const newTime = (value / 100) * audio.duration;
+      audio.currentTime = newTime;
+    }
+
+    audio.onended = () => {
+      nextTrack();
+    };
+  </script>
+
+</body>
+</html>

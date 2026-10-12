@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - Hall 3D de Skins (Por Nickname)</title>
+  <!-- Importação da biblioteca skinview3d -->
+  <script src="https://unpkg.com/skinview3d@3.0.0/bundles/skinview3d.bundle.js"></script>
+  <style>
+    body {
+      background-color: #121214;
+      background-image: linear-gradient(rgba(18, 18, 20, 0.85), rgba(18, 18, 20, 0.85)), url('../assets/images/geral/banner-fundo.gif');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Janela Principal Estilo Bedrock GUI */
+    .bedrock-showcase {
+      background-color: #c6c6c6;
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555, 0 20px 40px rgba(0,0,0,0.8);
+      width: 750px;
+      max-width: 95%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      image-rendering: pixelated;
+      color: #3f3f3f;
+      box-sizing: border-box;
+    }
+
+    .showcase-header {
+      font-size: 16px;
+      font-weight: bold;
+      border-bottom: 2px solid #373737;
+      padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Palco Central em Motion */
+    .stage-container {
+      display: flex;
+      gap: 16px;
+      background-color: #8b8b8b;
+      border: 3px solid #373737;
+      box-shadow: inset 4px 4px #373737;
+      padding: 16px;
+      min-height: 380px;
+      align-items: center;
+    }
+
+    /* Viewport 3D Principal */
+    .skin-viewport {
+      width: 320px;
+      height: 350px;
+      background-color: #555555;
+      border: 3px solid #222;
+      box-shadow: inset 4px 4px #222, inset -4px -4px #888;
+      position: relative;
+      cursor: grab;
+      flex-shrink: 0;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .skin-viewport:active {
+      cursor: grabbing;
+    }
+
+    .skin-viewport canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    /* Painel de Informações Dinâmicas */
+    .info-panel {
+      flex: 1;
+      background-color: #c6c6c6;
+      border: 3px solid #373737;
+      box-shadow: inset 3px 3px #fff, inset -3px -3px #555;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 350px;
+      box-sizing: border-box;
+      opacity: 1;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .info-panel.fade {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .member-role {
+      font-size: 11px;
+      color: #555;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .member-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #111;
+      margin: 0 0 10px 0;
+      border-bottom: 2px dashed #8b8b8b;
+      padding-bottom: 6px;
+    }
+
+    .member-lore {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    /* Botão Bedrock Style */
+    .pixel-btn {
+      background-color: #555;
+      color: #fff;
+      border: 2px solid #222;
+      box-shadow: inset 2px 2px #888, inset -2px -2px #333;
+      padding: 8px 14px;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 12px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .pixel-btn:hover {
+      background-color: #666;
+    }
+
+    .pixel-btn:active {
+      box-shadow: inset 2px 2px #333, inset -2px -2px #888;
+    }
+
+    /* Seletor Inferior (Abas em Motion) */
+    .character-selector {
+      display: flex;
+      gap: 8px;
+    }
+
+    .char-tab {
+      flex: 1;
+      background-color: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #fff, inset -2px -2px #555;
+      padding: 8px;
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: bold;
+      color: #222;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .char-tab:hover {
+      background-color: #9e9e9e;
+    }
+
+    .char-tab.active {
+      background-color: #555;
+      color: #fff;
+      border-color: #222;
+      box-shadow: inset 2px 2px #222, inset -2px -2px #888;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .stage-container {
+        flex-direction: column;
+      }
+      .skin-viewport {
+        width: 100%;
+        height: 250px;
+      }
+      .info-panel {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bedrock-showcase">
+    <div class="showcase-header">
+      <span>Hall 3D de Skins — Por Nickname</span>
+      <span style="font-size: 11px; color: #555;">[Live API Render]</span>
+    </div>
+
+    <!-- Palco Principal -->
+    <div class="stage-container">
+      <div class="skin-viewport" id="skinViewport"></div>
+      
+      <div class="info-panel" id="infoPanel">
+        <div>
+          <div class="member-role" id="memberRole">Fundador & Dev</div>
+          <div class="member-name" id="memberName">Zera</div>
+          <div class="member-lore" id="memberLore" style="word-break: break-word;">
+            A carregar informações do jogador...
+          </div>
+        </div>
+        <div>
+          <a href="#" id="downloadBtn" class="pixel-btn" target="_blank">📥 Baixar Skin por Nick (.PNG)</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seletor de Personagens -->
+    <div class="character-selector" id="charSelector"></div>
+  </div>
+
+  <script>
+    // Lista de membros baseada apenas nos nicks (username) do Minecraft
+    const roster = [
+      {
+        username: "Zera", // Altera aqui para o teu nick exato do Minecraft
+        role: "Fundador & Dev Principal",
+        lore: "Arquiteto do núcleo do servidor e criador dos sistemas de automação. Presente desde o primeiro bloco gerado."
+      },
+      {
+        username: "Notch", // Exemplo de outro nick lendário
+        role: "Convidado de Honra",
+        lore: "O criador original do universo cúbico que inspirou esta comunidade."
+      },
+      {
+        username: "Dinnerbone", // Exemplo com skin invertida
+        role: "Engenheiro de Sistemas",
+        lore: "Especialista em truques de física avançada e anomalias de gravidade no servidor."
+      }
+    ];
+
+    let currentViewer = null;
+    let activeIndex = 0;
+
+    function initShowcase() {
+      const selector = document.getElementById('charSelector');
+      selector.innerHTML = '';
+
+      roster.forEach((member, idx) => {
+        const tab = document.createElement('button');
+        tab.className = `char-tab ${idx === activeIndex ? 'active' : ''}`;
+        tab.textContent = member.username;
+        tab.onclick = () => switchCharacter(idx);
+        selector.appendChild(tab);
+      });
+
+      loadCharacter(activeIndex);
+    }
+
+    function loadCharacter(idx) {
+      activeIndex = idx;
+      const member = roster[idx];
+
+      document.querySelectorAll('.char-tab').forEach((t, i) => {
+        if (i === idx) t.classList.add('active');
+        else t.classList.remove('active');
+      });
+
+      const panel = document.getElementById('infoPanel');
+      panel.classList.add('fade');
+
+      setTimeout(() => {
+        document.getElementById('memberRole').textContent = member.role;
+        document.getElementById('memberName').textContent = member.username;
+        document.getElementById('memberLore').textContent = member.lore;
+        
+        // Link direto da API para download da skin através do nick
+        const dlBtn = document.getElementById('downloadBtn');
+        dlBtn.href = `https://crafthead.net/skin/${member.username}`;
+        dlBtn.download = `${member.username}_skin.png`;
+
+        panel.classList.remove('fade');
+      }, 150);
+
+      const viewport = document.getElementById('skinViewport');
+      viewport.innerHTML = '';
+
+      try {
+        // Carrega a skin 3D diretamente usando o nickname através da API do Crafthead
+        currentViewer = new skinview3d.SkinViewer({
+          domElement: viewport,
+          width: viewport.clientWidth || 320,
+          height: 350,
+          skin: `https://crafthead.net/skin/${member.username}`
+        });
+
+        currentViewer.animation = new skinview3d.RotatingAnimation(2.5);
+        currentViewer.controls.enableZoom = false;
+      } catch (e) {
+        console.error("Erro ao carregar skin por nickname:", e);
+      }
+    }
+
+    function switchCharacter(idx) {
+      if (idx !== activeIndex) {
+        loadCharacter(idx);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initShowcase);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - Baú do Tempo & Injetor</title>
+  <style>
+    /* Estilos Gerais */
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      gap: 30px;
+    }
+
+    .container-interfaces {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Estilo Base GUI Minecraft */
+    .minecraft-gui {
+      background-color: #c6c6c6;
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555, 0 10px 25px rgba(0,0,0,0.5);
+      padding: 16px;
+      width: fit-content;
+      image-rendering: pixelated;
+      color: #3f3f3f;
+    }
+
+    .gui-header {
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    /* Grid do Baú do Tempo */
+    .chest-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 36px);
+      gap: 4px;
+      background-color: #8b8b8b;
+      padding: 4px;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #373737;
+    }
+
+    /* Injetor de Receitas Layout */
+    .injector-layout {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: #8b8b8b;
+      padding: 8px;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #373737;
+    }
+
+    .slot-column {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mc-slot {
+      width: 36px;
+      height: 36px;
+      background-color: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #fff, inset -2px -2px #373737;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      user-select: none;
+      transition: transform 0.1s ease;
+    }
+
+    .mc-slot:hover {
+      background-color: #9e9e9e;
+      transform: scale(1.05);
+    }
+
+    .mc-slot.selected {
+      background-color: #b5b5b5;
+      border-color: #ffffff;
+    }
+
+    .inject-btn {
+      background-color: #555;
+      color: #fff;
+      border: 2px solid #222;
+      box-shadow: inset 2px 2px #888, inset -2px -2px #333;
+      padding: 8px 12px;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .inject-btn:active {
+      box-shadow: inset 2px 2px #333, inset -2px -2px #888;
+    }
+
+    .arrow-icon {
+      font-size: 20px;
+      color: #373737;
+    }
+
+    /* Slot de Recompensa (Saída) */
+    .output-slot {
+      background-color: #7b9e7b; /* Tom diferenciado para sucesso/saída */
+    }
+
+    /* Modal de Exibição */
+    .capsule-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .capsule-content {
+      background-color: #c6c6c6;
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555;
+      padding: 24px;
+      width: 350px;
+      font-family: monospace;
+      position: relative;
+      color: #3f3f3f;
+    }
+
+    .capsule-content h2 {
+      margin-top: 0;
+      font-size: 15px;
+      border-bottom: 2px solid #373737;
+      padding-bottom: 6px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: #aa0000;
+      color: white;
+      border: 2px solid #373737;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+
+    .status-message {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container-interfaces">
+    
+    <!-- 1. O BAÚ DO TEMPO -->
+    <div class="minecraft-gui">
+      <div class="gui-header">Baú do Tempo</div>
+      <div class="chest-grid">
+        <div class="mc-slot" onclick="openTimeCapsule('sword')" title="Espada Gasta">🗡️</div>
+        <div class="mc-slot" onclick="openTimeCapsule('book')" title="Livro Antigo">📖</div>
+        <div class="mc-slot" onclick="openTimeCapsule('map')" title="Mapa Antigo">🗺️</div>
+        <div class="mc-slot" onclick="openTimeCapsule('disc')" title="Disco Riscado">💿</div>
+      </div>
+    </div>
+
+    <!-- 2. INJETOR DE RECEITAS -->
+    <div class="minecraft-gui">
+      <div class="gui-header">Injetor de Alquimia</div>
+      <div class="injector-layout">
+        <!-- Slots de Ingredientes (O jogador clica para selecionar itens do inventário virtual) -->
+        <div class="slot-column">
+          <div class="mc-slot" id="ing-1" onclick="selectIngredient(1)" title="Slot 1">❓</div>
+          <div class="mc-slot" id="ing-2" onclick="selectIngredient(2)" title="Slot 2">❓</div>
+        </div>
+        
+        <div class="arrow-icon">➔</div>
+        
+        <button class="inject-btn" onclick="injectRecipe()">INJETAR</button>
+        
+        <div class="arrow-icon">➔</div>
+
+        <!-- Slot de Saída / Recompensa -->
+        <div class="mc-slot output-slot" id="output-slot" onclick="claimReward()" title="Recompensa">🎁</div>
+      </div>
+      <div id="injector-status" class="status-message">Coloque os ingredientes corretos!</div>
+    </div>
+
+  </div>
+
+  <!-- Modal Genérico para Conteúdos e Recompensas -->
+  <div id="time-capsule-modal" class="capsule-modal hidden">
+    <div class="capsule-content">
+      <button class="close-btn" onclick="closeModal()">X</button>
+      <div id="capsule-body"></div>
+    </div>
+  </div>
+
+  <!-- Banco de Itens Disponíveis para o Injetor (Exemplo) -->
+  <div class="minecraft-gui" style="width: 320px;">
+    <div class="gui-header">Inventário de Itens</div>
+    <div style="display: flex; gap: 4px; background: #8b8b8b; padding: 4px; border: 2px solid #373737;">
+      <div class="mc-slot" onclick="pickItem('🔥', 'Pó de Blaze')" title="Pó de Blaze">🔥</div>
+      <div class="mc-slot" onclick="pickItem('⭐', 'Nether Star')" title="Nether Star">⭐</div>
+      <div class="mc-slot" onclick="pickItem('🧪', 'Poção Estranha')" title="Poção Estranha">🧪</div>
+      <div class="mc-slot" onclick="pickItem('💎', 'Diamante Puro')" title="Diamante Puro">💎</div>
+    </div>
+    <div style="font-size: 11px; margin-top: 6px; color: #333;">Clica num item acima e depois clica num slot ❓ do Injetor.</div>
+  </div>
+
+  <script>
+    // --- LÓGICA DO BAÚ DO TEMPO ---
+    function openTimeCapsule(itemType) {
+      const chestAudio = new Audio('assets/audio/chest_open.ogg');
+      chestAudio.volume = 0.5;
+      chestAudio.play().catch(err => console.log("Áudio simulado ou bloqueado:", err));
+
+      const modalBody = document.getElementById('capsule-body');
+      const modal = document.getElementById('time-capsule-modal');
+      
+      let contentHtml = '';
+      switch(itemType) {
+        case 'sword':
+          contentHtml = `<h2>Primeira Batalha</h2><p>O dia em que a nossa arena principal foi inaugurada em 2024.</p>`;
+          break;
+        case 'book':
+          contentHtml = `<h2>Logs Antigos do Chat</h2><pre>[14:02] [Server] Zera: Bem-vindos ao servidor!</pre>`;
+          break;
+        case 'map':
+          contentHtml = `<h2>Antigo Spawn</h2><p>Visão aérea da versão 1.16.</p>`;
+          break;
+        case 'disc':
+          contentHtml = `<h2>Clipe Épico</h2><p>Derrota épica do primeiro Boss da comunidade.</p>`;
+          break;
+      }
+      modalBody.innerHTML = contentHtml;
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('time-capsule-modal').classList.add('hidden');
+    }
+
+    // --- LÓGICA DO INJETOR DE RECEITAS ---
+    let selectedSlot = null;
+    let recipeSlots = { 1: null, 2: null };
+    let currentReward = null;
+
+    function selectIngredient(slotNum) {
+      selectedSlot = slotNum;
+      document.getElementById('ing-1').classList.remove('selected');
+      document.getElementById('ing-2').classList.remove('selected');
+      document.getElementById(`ing-${slotNum}`).classList.add('selected');
+    }
+
+    function pickItem(emoji, itemName) {
+      if (!selectedSlot) {
+        alert("Seleciona primeiro um slot ❓ no Injetor!");
+        return;
+      }
+      recipeSlots[selectedSlot] = itemName;
+      document.getElementById(`ing-${selectedSlot}`).innerText = emoji;
+      document.getElementById(`ing-${selectedSlot}`).title = itemName;
+      
+      // Limpa seleção
+      document.getElementById(`ing-${selectedSlot}`).classList.remove('selected');
+      selectedSlot = null;
+      document.getElementById('injector-status').innerText = "Ingrediente inserido. Clica em INJETAR!";
+    }
+
+    function injectRecipe() {
+      const statusEl = document.getElementById('injector-status');
+      const outputSlot = document.getElementById('output-slot');
+
+      // Exemplo de Receita Secreta: Pó de Blaze (🔥) + Nether Star (⭐) = Chave VIP
+      if (recipeSlots[1] === 'Pó de Blaze' && recipeSlots[2] === 'Nether Star' ||
+          recipeSlots[1] === 'Nether Star' && recipeSlots[2] === 'Pó de Blaze') {
+        
+        statusEl.innerText = "Sucesso! Receita alquímica concluída!";
+        outputSlot.innerText = "🗝️";
+        currentReward = "Chave Secreta VIP: ZERA-VIP-2026";
+        
+        // Efeito de som opcional de nível/sucesso
+        const successAudio = new Audio('assets/audio/orb.ogg');
+        successAudio.play().catch(() => {});
+
+      } else {
+        statusEl.innerText = "Receita inválida! Tenta outra combinação.";
+        outputSlot.innerText = "❌";
+        currentReward = null;
+      }
+    }
+
+    function claimReward() {
+      if (!currentReward) {
+        alert("Nenhuma recompensa pronta no slot de saída!");
+        return;
+      }
+      const modalBody = document.getElementById('capsule-body');
+      const modal = document.getElementById('time-capsule-modal');
+      
+      modalBody.innerHTML = `<h2>Recompensa Desbloqueada! 🎉</h2><p>Parabéns, descobriste uma receita secreta do servidor.</p><p style="background:#8b8b8b; padding:8px; color:#fff; text-align:center; font-weight:bold;">${currentReward}</p>`;
+      modal.classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>

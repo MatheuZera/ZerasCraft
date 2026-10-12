@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museu de Lendas e Mitos - Zera's Craft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            image-rendering: pixelated;
+        }
+
+        body {
+            background-color: #0c0c0f;
+            color: #fff;
+            font-family: monospace;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: hidden;
+            padding: 20px;
+            user-select: none;
+        }
+
+        /* Cabeçalho do Museu */
+        .museum-header {
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .museum-header h1 {
+            font-size: 26px;
+            color: #ffff55;
+            text-shadow: 3px 3px #1a1a1a;
+            margin: 0 0 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .museum-subtitle {
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        /* Galeria de Scroll Horizontal */
+        .gallery-container {
+            width: 100%;
+            max-width: 1100px;
+            overflow-x: auto;
+            padding: 20px 10px 30px 10px;
+            display: flex;
+            gap: 24px;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #555 #1a1a1a;
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .gallery-container::-webkit-scrollbar-track {
+            background: #151518;
+            border: 1px solid #333;
+        }
+
+        .gallery-container::-webkit-scrollbar-thumb {
+            background: #505050;
+            border: 1px solid #1a1a1a;
+        }
+
+        /* Card Estilo Bedrock UI */
+        .exhibit-card {
+            min-width: 280px;
+            max-width: 280px;
+            background: #202020;
+            border: 3px solid #3c3c3c;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9), inset 2px 2px rgba(255, 255, 255, 0.1), inset -2px -2px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            cursor: grab;
+            transition: border-color 0.2s, transform 0.2s, background-color 0.3s;
+            flex-shrink: 0;
+        }
+
+        .exhibit-card:active {
+            cursor: grabbing;
+        }
+
+        .exhibit-card:hover {
+            border-color: #ffff55;
+            transform: translateY(-4px);
+        }
+
+        .exhibit-card.dragging {
+            opacity: 0.4;
+            border-style: dashed;
+        }
+
+        .exhibit-card.locked {
+            background: #161618;
+            border-color: #28282e;
+        }
+
+        /* Animação de Alarme ao Resetar pelas Pegadinhas */
+        .exhibit-card.reset-alarm {
+            border-color: #ff5555 !important;
+            background: #3f1111 !important;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-6px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(6px);
+            }
+        }
+
+        /* Spotlight */
+        .spotlight-frame {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.9) 70%);
+            border: 2px solid #2a2a35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            position: relative;
+            box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.9);
+        }
+
+        .exhibit-icon {
+            font-size: 38px;
+            color: #ffd700;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
+        }
+
+        /* Textos da Exibição */
+        .exhibit-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .exhibit-author {
+            font-size: 9px;
+            color: #aaa;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .exhibit-desc {
+            font-size: 10.5px;
+            color: #ddd;
+            text-align: center;
+            line-height: 1.5;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border: 1px solid #333;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Estado Bloqueado: Oculta o conteúdo real completamente */
+        .locked-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            gap: 12px;
+        }
+
+        .locked-view i {
+            font-size: 36px;
+            color: #ff5555;
+        }
+
+        .locked-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #ff5555;
+            text-transform: uppercase;
+        }
+
+        .locked-desc {
+            font-size: 10px;
+            color: #888;
+            line-height: 1.4;
+        }
+
+        .unlocked-view {
+            display: contents;
+        }
+
+        /* Painel de Controle / Rodapé */
+        .museum-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .pixel-input {
+            width: 100%;
+            background: #18181f;
+            border: 2px solid #3c3c3c;
+            color: #fff;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 11px;
+            text-align: center;
+            outline: none;
+        }
+
+        .pixel-input:focus {
+            border-color: #ffff55;
+        }
+
+        .pixel-btn {
+            width: 100%;
+            background-color: #505050;
+            color: #fff;
+            border: 2px solid #1a1a1a;
+            box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.1s, border-color 0.1s;
+        }
+
+        .pixel-btn:hover {
+            background-color: #686868;
+            border-color: #ffff55;
+            color: #ffff55;
+        }
+
+        .pixel-btn:active {
+            background-color: #383838;
+            box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .drag-hint {
+            font-size: 9px;
+            color: #777;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .hidden-secret-trigger {
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="museum-header">
+        <h1>Museu de Lendas & Mitos</h1>
+        <div class="museum-subtitle">"Onde as ruínas esquecidas do servidor encontram a eternidade."</div>
+        <div class="drag-hint"><i class="fas fa-hand-pointer"></i> Clique e segure para arrastar os cards na galeria
+        </div>
+    </div>
+
+    <!-- Galeria Horizontal (Arrastável) -->
+    <div class="gallery-container" id="galleryContainer">
+
+        <!-- Exibição Pública 1 -->
+        <div class="exhibit-card" draggable="true">
+            <div class="spotlight-frame">
+                <i class="fas fa-landmark exhibit-icon"></i>
+            </div>
+            <div class="exhibit-title">A Fundação de Zera</div>
+            <div class="exhibit-author">Por: [Arquiteto Anônimo]</div>
+            <div class="exhibit-desc">
+                "Erguida na primeira lua cheia de 2021. Suas paredes de pedra musgosa ainda guardam o eco dos primeiros
+                passos solitários no mapa vazio."
+            </div>
+        </div>
+
+        <!-- Exibição Pública 2 -->
+        <div class="exhibit-card" draggable="true">
+            <div class="spotlight-frame">
+                <i class="fas fa-shield-alt exhibit-icon" style="color: #ff5555;"></i>
+            </div>
+            <div class="exhibit-title">A Guerra do Abismo</div>
+            <div class="exhibit-author">Por: [Clã da Superfície]</div>
+            <div class="exhibit-desc">
+                "Três dias de batalha contínua nas profundezas da camada Y=-30. O clarão das espadas encantadas rasgou a
+                escuridão para sempre."
+            </div>
+        </div>
+
+        <!-- Exibição Oculta 1 (CÓDIGO LEGÍTIMO: OTHERSIDE) -->
+        <div class="exhibit-card locked" id="card-otherside" draggable="true" data-secret="true">
+            <div class="locked-view">
+                <i class="fas fa-lock"></i>
+                <div class="locked-title">[ Arquivo Oculto #01 ]</div>
+                <div class="locked-desc">Requer código específico do disco Otherside para revelar o registro.</div>
+            </div>
+            <div class="unlocked-view" style="display: none;">
+                <div class="spotlight-frame">
+                    <i class="fas fa-compact-disc exhibit-icon" style="color: #55ff55;"></i>
+                </div>
+                <div class="exhibit-title">O Arquivo Confidencial</div>
+                <div class="exhibit-author">Por: [Os Guardiões do Som]</div>
+                <div class="exhibit-desc">
+                    "Frequências ocultas gravadas nos sulcos mais profundos do disco Otherside, revelando coordenadas
+                    para a cidade perdida."
+                </div>
+            </div>
+        </div>
+
+        <!-- Exibição Oculta 2 (CÓDIGO LEGÍTIMO: PIGSTEP) -->
+        <div class="exhibit-card locked" id="card-pigstep" draggable="true" data-secret="true">
+            <div class="locked-view">
+                <i class="fas fa-lock"></i>
+                <div class="locked-title">[ Arquivo Oculto #02 ]</div>
+                <div class="locked-desc">Requer código de autorização do bastião do Nether.</div>
+            </div>
+            <div class="unlocked-view" style="display: none;">
+                <div class="spotlight-frame">
+                    <i class="fas fa-fire exhibit-icon" style="color: #ff5555;"></i>
+                </div>
+                <div class="exhibit-title">A Forja Piglin</div>
+                <div class="exhibit-author">Por: [Explorador do Nether]</div>
+                <div class="exhibit-desc">
+                    "As ruínas incandescentes onde a melodia de Pigstep foi entalhada em ouro puro antes do grande
+                    colapso."
+                </div>
+            </div>
+        </div>
+
+        <!-- Exibição Oculta 3 (CÓDIGO LEGÍTIMO: ZERACRAFT) -->
+        <div class="exhibit-card locked" id="card-zeracraft" draggable="true" data-secret="true">
+            <div class="locked-view">
+                <i class="fas fa-lock"></i>
+                <div class="locked-title">[ Arquivo Oculto #03 ]</div>
+                <div class="locked-desc">Selo supremo de Zera. Insira a palavra de passe dos fundadores.</div>
+            </div>
+            <div class="unlocked-view" style="display: none;">
+                <div class="spotlight-frame">
+                    <i class="fas fa-crown exhibit-icon" style="color: #ffff55;"></i>
+                </div>
+                <div class="exhibit-title">A Coroa do Vazio</div>
+                <div class="exhibit-author">Por: [Lenda do Fim]</div>
+                <div class="exhibit-desc">
+                    "O artefato abandonado por quem desvendou o abismo e escolheu nunca mais retornar à superfície."
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Controles e Entrada de Código -->
+    <div class="museum-footer">
+        <input type="text" id="secretInput" class="pixel-input" placeholder="Digite um código de acesso..." />
+        <button class="pixel-btn" onclick="checkSecretCode()">Tentar Acesso</button>
+        <button class="pixel-btn" onclick="window.location.href='index.html'" style="background-color: #383838;">Menu
+            Principal</button>
+    </div>
+
+    <!-- Gatilho Secreto (Easter Egg) -->
+    <div class="hidden-secret-trigger" onclick="unlockSecretsDirectly()" title="?"></div>
+
+    <script src="../JavaScript/script.js"></script>
+    <script src="../JavaScript/script2.js"></script>
+    <script src="../JavaScript/load-html.js"></script>
+    <script src="../JavaScript/effects.js"></script>
+    <script src="../JavaScript/player.js"></script>
+
+    <script>
+        /* 
+          ===========================================================
+          BANCO DE DADOS DE SENHAS
+          ===========================================================
+          - Senhas Válidas: Libera APENAS o card associado.
+          - Senhas Pegadinha: Aciona o alarme e RESETARÁ TUDO!
+        */
+
+        const VALID_PASSWORDS = {
+            "OTHERSIDE": "card-otherside",
+            "PIGSTEP": "card-pigstep",
+            "ZERACRAFT": "card-zeracraft"
+        };
+
+        // Senhas falsas/pegadinha aparentes no código para curioseadores
+        const TRAP_PASSWORDS = [
+            "ADMIN", "ADMIN123", "CREEPER", "HEROBRINE", "OP",
+            "ROOT", "PASSWORD", "SECRET", "MINECRAFT", "NOTCH", "MOD"
+        ];
+
+        // --- Drag and Drop ---
+        const gallery = document.getElementById('galleryContainer');
+        let draggedCard = null;
+
+        gallery.addEventListener('dragstart', (e) => {
+            draggedCard = e.target.closest('.exhibit-card');
+            if (draggedCard) draggedCard.classList.add('dragging');
+        });
+
+        gallery.addEventListener('dragend', () => {
+            if (draggedCard) {
+                draggedCard.classList.remove('dragging');
+                draggedCard = null;
+            }
+        });
+
+        gallery.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(gallery, e.clientX);
+            const currentCard = document.querySelector('.dragging');
+            if (currentCard) {
+                if (afterElement == null) gallery.appendChild(currentCard);
+                else gallery.insertBefore(currentCard, afterElement);
+            }
+        });
+
+        function getDragAfterElement(container, x) {
+            const draggableCards = [...container.querySelectorAll('.exhibit-card:not(.dragging)')];
+            return draggableCards.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = x - box.left - box.width / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // --- Lógica de Desbloqueio e Armadilhas ---
+
+        function unlockSpecificCard(cardId) {
+            const card = document.getElementById(cardId);
+            if (card && card.classList.contains('locked')) {
+                card.classList.remove('locked');
+                card.querySelector('.locked-view').style.display = 'none';
+                card.querySelector('.unlocked-view').style.display = 'contents';
+                return true;
+            }
+            return false;
+        }
+
+        function resetAllCards() {
+            const allSecretCards = document.querySelectorAll('.exhibit-card[data-secret="true"]');
+
+            allSecretCards.forEach(card => {
+                card.classList.add('locked', 'reset-alarm');
+                card.querySelector('.locked-view').style.display = 'flex';
+                card.querySelector('.unlocked-view').style.display = 'none';
+
+                setTimeout(() => {
+                    card.classList.remove('reset-alarm');
+                }, 1200);
+            });
+        }
+
+        function checkSecretCode() {
+            const input = document.getElementById('secretInput');
+            const code = input.value.trim().toUpperCase();
+            input.value = '';
+
+            if (!code) return;
+
+            // 1. VERIFICA SE É UMA SENHA PEGADINHA (ARMADILHA)
+            if (TRAP_PASSWORDS.includes(code)) {
+                resetAllCards();
+                alert("🚨 INTRUSO DETECTADO! Sistema de defesa do museu ativado. Todo o progresso foi resetado e os arquivos foram rebloqueados!");
+                return;
+            }
+
+            // 2. VERIFICA SE É UMA SENHA VÁLIDA
+            if (VALID_PASSWORDS[code]) {
+                const targetCardId = VALID_PASSWORDS[code];
+                const success = unlockSpecificCard(targetCardId);
+
+                if (success) {
+                    alert(`✦ Código "${code}" aceito! O arquivo correspondente foi desbloqueado.`);
+                } else {
+                    alert(`ℹ O arquivo referente ao código "${code}" já estava liberado.`);
+                }
+                return;
+            }
+
+            // 3. CÓDIGO INVÁLIDO PADRÃO
+            alert("❌ Código inválido. Nenhuma relíquia respondeu a esta chave.");
+        }
+
+        // Gatilho Secreto Clicável no Canto
+        function unlockSecretsDirectly() {
+            Object.values(VALID_PASSWORDS).forEach(cardId => unlockSpecificCard(cardId));
+            alert("✦ Você encontrou o gatilho direto! Todos os arquivos foram revelados.");
+        }
+    </script>
+
+</body>
+
+</html>

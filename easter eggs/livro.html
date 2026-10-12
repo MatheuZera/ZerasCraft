@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - Livro dos Fundadores</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #333;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Container Principal do Livro */
+    .minecraft-book {
+      background-color: #f4ecd8;
+      border: 6px solid #4a3525;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 40px rgba(180, 150, 110, 0.4);
+      width: 740px;
+      max-width: 100%;
+      height: 440px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    /* Layout de Páginas */
+    .book-content {
+      display: flex;
+      flex: 1;
+      gap: 30px;
+      overflow: hidden;
+    }
+
+    .book-page {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #2b2b2b;
+      word-break: break-word;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    /* Scrollbar personalizada estilo rústico */
+    .book-page::-webkit-scrollbar {
+      width: 4px;
+    }
+    .book-page::-webkit-scrollbar-thumb {
+      background-color: #b5a48b;
+      border-radius: 2px;
+    }
+
+    .book-page h3 {
+      margin-top: 0;
+      font-size: 15px;
+      border-bottom: 2px dashed #b5a48b;
+      padding-bottom: 4px;
+      color: #3a2718;
+    }
+
+    .book-page p {
+      margin: 6px 0;
+    }
+
+    .signature-box {
+      margin-top: 12px;
+      font-style: italic;
+      color: #554230;
+      background: rgba(181, 164, 139, 0.15);
+      padding: 8px;
+      border-left: 3px solid #8b6f4e;
+    }
+
+    /* Lombada central visível apenas em desktop */
+    .book-spine {
+      width: 4px;
+      background-color: rgba(74, 53, 37, 0.15);
+      display: block;
+    }
+
+    /* Rodapé do Livro com Controles */
+    .book-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 2px solid #d4c5a9;
+      padding-top: 14px;
+      margin-top: 10px;
+    }
+
+    .book-btn {
+      background-color: #8b6f4e;
+      color: #fff;
+      border: 2px solid #4a3525;
+      padding: 6px 14px;
+      font-family: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: inset 2px 2px rgba(255,255,255,0.3), inset -2px -2px rgba(0,0,0,0.3);
+      font-size: 12px;
+    }
+
+    .book-btn:hover {
+      background-color: #9c7e5a;
+    }
+
+    .book-btn:active {
+      box-shadow: inset 2px 2px rgba(0,0,0,0.3);
+    }
+
+    .book-btn:disabled {
+      background-color: #c4b59f;
+      color: #887a66;
+      cursor: not-allowed;
+      border-color: #9c8e78;
+      box-shadow: none;
+    }
+
+    .page-indicator {
+      font-size: 13px;
+      font-weight: bold;
+      color: #554230;
+    }
+
+    /* Responsividade para Telemóveis e Ecrãs Pequenos */
+    @media (max-width: 768px) {
+      .minecraft-book {
+        height: 480px;
+        padding: 20px;
+      }
+      .book-spine {
+        display: none;
+      }
+      /* Em dispositivos móveis, esconde a segunda página da dupla para mostrar apenas uma página de cada vez */
+      .book-page:nth-child(3) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="minecraft-book">
+    <div class="book-content" id="book-content">
+      <!-- O conteúdo será injetado dinamicamente via JavaScript -->
+    </div>
+
+    <div class="book-footer">
+      <button class="book-btn" id="prev-btn" onclick="prevPage()">◄ Anterior</button>
+      <span class="page-indicator" id="page-indicator">Página 1 de 8</span>
+      <button class="book-btn" id="next-btn" onclick="nextPage()">Próxima ►</button>
+    </div>
+  </div>
+
+  <script>
+    // Array detalhado com todas as páginas do Livro dos Fundadores
+    const pages = [
+      {
+        title: "Volume I: Prefácio",
+        html: `<p>Este tomo sagrado sela o nascimento oficial de <strong>Zera's Craft</strong>. Criado com o propósito inabalável de unir construtores, aventureiros e entusiastas da sobrevivência pura.</p><p>Aqui jazem registadas as memórias, regras imutáveis e segredos construídos bloco a bloco pela nossa comunidade.</p>`
+      },
+      {
+        title: "A Fundação (2025)",
+        html: `<p>O servidor nasceu da visão de criar um espaço estável, livre de instabilidades e focado na essência clássica do Minecraft.</p><p>Entre rotinas diárias e linhas de código escritas madrugada adentro, o ecossistema evoluiu de um simples teste local para uma rede completa.</p>`
+      },
+      {
+        title: "As Leis Primordiais",
+        html: `<p>1. <strong>Zero Griefing:</strong> As construções alheias são sagradas. Qualquer alteração ou roubo sem consentimento resulta em banimento permanente imediato.</p><p>2. <strong>Chat Respeitoso:</strong> Toxicidade, preconceito ou ofensas no chat global não têm espaço neste mundo.</p>`
+      },
+      {
+        title: "Economia & Comércio",
+        html: `<p>A economia do servidor baseia-se na livre iniciativa. Lojas físicas geridas por baús no Spawn formam o coração comercial.</p><p>O ouro e os diamantes mantêm-se como padrão de referência para transações de grande valor entre os jogadores.</p>`
+      },
+      {
+        title: "Inovações Tecnológicas",
+        html: `<p>O ecossistema conta com ferramentas avançadas desenvolvidas pela equipa:</p><p>• <strong>Baú do Tempo:</strong> Arquivo histórico de mídias e logs.<br>• <strong>Injetor Alquímico:</strong> Sistema de receitas secretas.<br>• <strong>Terminal (/terminal):</strong> Acesso a consolas de comandos ocultos.</p>`
+      },
+      {
+        title: "Hall dos Pioneiros",
+        html: `<p>Reconhecimento eterno aos membros que sustentaram a infraestrutura desde os primeiros dias:</p>
+               <div class="signature-box">
+                 - <strong>Zera</strong> (Fundador & Dev)<br>
+                 - <strong>Parceiro</strong> (Co-desenvolvimento)<br>
+                 - Membros da Alpha & Beta<br>
+                 <br><em>"Do primeiro bloco gerado à eternidade."</em>
+               </div>`
+      },
+      {
+        title: "Segredos & Easter Eggs",
+        html: `<p>Diz a lenda que nem tudo o que está visível no site é o que parece. Há comandos escondidos no terminal e horários específicos que desbloqueiam portais para dimensões esquecidas...</p><p>Fique atento aos sinais deixados nas sombras.</p>`
+      },
+      {
+        title: "Epílogo",
+        html: `<p>Se chegou até à última página, faz agora parte oficial da crónica de Zera's Craft.</p><p>Guarde bem este conhecimento, respeite os seus colegas de equipa e construa um legado digno de ser lembrado.</p><p style="text-align: right; margin-top: 20px;"><em>— Fim do Volume I —</em></p>`
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    function updateBook() {
+      const container = document.getElementById('book-content');
+      container.innerHTML = '';
+
+      if (isMobile()) {
+        // Em telemóveis, mostra apenas 1 página por vez
+        const page = pages[currentIndex];
+        container.innerHTML = `
+          <div class="book-page">
+            <h3>${page.title}</h3>
+            ${page.html}
+          </div>
+        `;
+        document.getElementById('page-indicator').textContent = `Página ${currentIndex + 1} de ${pages.length}`;
+        document.getElementById('prev-btn').disabled = currentIndex === 0;
+        document.getElementById('next-btn').disabled = currentIndex === pages.length - 1;
+      } else {
+        // Em desktops, mostra 2 páginas lado a lado (garantindo índice par à esquerda)
+        if (currentIndex % 2 !== 0) currentIndex--;
+
+        const leftPage = pages[currentIndex];
+        const rightPage = pages[currentIndex + 1] || { title: "Fim", html: "<p>Não há mais páginas neste volume.</p>" };
+
+        container.innerHTML = `
+          <div class="book-page">
+            <h3>${leftPage.title}</h3>
+            ${leftPage.html}
+          </div>
+          <div class="book-spine"></div>
+          <div class="book-page">
+            <h3>${rightPage.title}</h3>
+            ${rightPage.html}
+          </div>
+        `;
+
+        const endPageNum = Math.min(currentIndex + 2, pages.length);
+        document.getElementById('page-indicator').textContent = `Páginas ${currentIndex + 1}-${endPageNum} de ${pages.length}`;
+        document.getElementById('prev-btn').disabled = currentIndex === 0;
+        document.getElementById('next-btn').disabled = currentIndex + 2 >= pages.length;
+      }
+    }
+
+    function playPageTurnSound() {
+      const audio = new Audio('assets/audio/page_turn.ogg');
+      audio.volume = 0.4;
+      audio.play().catch(() => {});
+    }
+
+    function nextPage() {
+      const step = isMobile() ? 1 : 2;
+      if (currentIndex + step < pages.length) {
+        playPageTurnSound();
+        currentIndex += step;
+        updateBook();
+      }
+    }
+
+    function prevPage() {
+      const step = isMobile() ? 1 : 2;
+      if (currentIndex - step >= 0) {
+        playPageTurnSound();
+        currentIndex -= step;
+        updateBook();
+      }
+    }
+
+    // Atualiza o livro ao redimensionar a janela para garantir adaptação fluida
+    window.addEventListener('resize', () => {
+      updateBook();
+    });
+
+    // Inicialização
+    updateBook();
+  </script>
+
+</body>
+</html>

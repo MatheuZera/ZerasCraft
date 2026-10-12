@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - Inspetor 3D de Skins</title>
+  <!-- Importação da biblioteca skinview3d oficial -->
+  <script src="https://bs-community.github.io/skinview3d/js/skinview3d.bundle.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      font-family: monospace;
+      background-color: #121214;
+      background-image: linear-gradient(rgba(18, 18, 20, 0.85), rgba(18, 18, 20, 0.85)), url('../assets/images/geral/banner-fundo.gif');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      color: #fff;
+    }
+
+    /* Container Principal Bedrock GUI */
+    .inspector-container {
+      background-color: #c6c6c6;
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555, 0 20px 40px rgba(0,0,0,0.8);
+      width: 720px;
+      max-width: 95vw;
+      max-height: 94vh;
+      padding: 16px;
+      color: #3f3f3f;
+      image-rendering: pixelated;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .panel-header {
+      font-size: 15px;
+      font-weight: bold;
+      border-bottom: 2px solid #373737;
+      padding-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Layout Interno: Viewport 3D + Painel de Controlos */
+    .inspector-body {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 12px;
+    }
+
+    /* Viewport do Canvas 3D */
+    .viewport-box {
+      background-color: #333;
+      border: 3px solid #222;
+      box-shadow: inset 4px 4px #111, inset -4px -4px #555;
+      height: 380px;
+      position: relative;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .viewport-box:active { cursor: grabbing; }
+
+    .viewport-box canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    /* Painel Lateral de Ferramentas */
+    .tools-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .tool-section {
+      background-color: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #fff, inset -2px -2px #555;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tool-title {
+      font-size: 10px;
+      font-weight: bold;
+      color: #111;
+      text-transform: uppercase;
+    }
+
+    .pixel-input {
+      background-color: #c6c6c6;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #fff, inset -2px -2px #555;
+      padding: 6px;
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: bold;
+      color: #111;
+      width: 100%;
+    }
+
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+
+    .pixel-btn {
+      background-color: #555;
+      color: #fff;
+      border: 2px solid #222;
+      box-shadow: inset 2px 2px #888, inset -2px -2px #333;
+      padding: 6px;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 10px;
+      text-align: center;
+    }
+    .pixel-btn:hover { background-color: #666; }
+    .pixel-btn:active { box-shadow: inset 2px 2px #333, inset -2px -2px #888; }
+    .pixel-btn.active { background-color: #3a753a; }
+
+    /* Barra inferior de estado */
+    .status-footer {
+      font-size: 10px;
+      background: #111;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #000;
+      padding: 6px 10px;
+      color: #55bd34;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .inspector-body {
+        grid-template-columns: 1fr;
+      }
+      .viewport-box {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="inspector-container">
+    <div class="panel-header">
+      <span>Inspetor 3D de Skins (/skins)</span>
+      <span style="font-size: 10px; color: #555;">[SkinView3D Engine]</span>
+    </div>
+
+    <div class="inspector-body">
+      <!-- Palco 3D -->
+      <div class="viewport-box">
+        <canvas id="skinContainer" width="300" height="380"></canvas>
+      </div>
+
+      <!-- Controlos e Ferramentas -->
+      <div class="tools-panel">
+        
+        <!-- Pesquisa por Nick -->
+        <div class="tool-section">
+          <div class="tool-title">🔎 Procurar por Nickname</div>
+          <div style="display: flex; gap: 6px;">
+            <input type="text" id="skinNickInput" class="pixel-input" value="MatheuZera" placeholder="Nick do player...">
+            <button class="pixel-btn" onclick="loadSkinByNick()" style="width: 90px;">Carregar</button>
+          </div>
+        </div>
+
+        <!-- Upload de Ficheiro Local -->
+        <div class="tool-section">
+          <div class="tool-title">📂 Carregar Ficheiro .PNG Local</div>
+          <input type="file" id="skinFileInput" accept="image/png" class="pixel-input" onchange="loadLocalSkin(event)">
+        </div>
+
+        <!-- Controlo de Animações -->
+        <div class="tool-section">
+          <div class="tool-title">🎬 Comportamento & Animação</div>
+          <div class="btn-grid">
+            <button class="pixel-btn active" id="btnWalk" onclick="setAnimation('walk')">🚶 Andar</button>
+            <button class="pixel-btn" id="btnRun" onclick="setAnimation('run')">🏃 Correr</button>
+            <button class="pixel-btn" id="btnFly" onclick="setAnimation('fly')">🦅 Voar (Elytra)</button>
+            <button class="pixel-btn" id="btnIdle" onclick="setAnimation('idle')">🧍 Parado</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="status-footer" id="statusMessage">
+      Pronto. Arraste o rato para rodar a 360° ou use a roda para fazer zoom.
+    </div>
+  </div>
+
+  <script>
+    // Inicialização do Visualizador 3D
+    let skinViewer = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        skinViewer = new skinview3d.SkinViewer({
+          canvas: document.getElementById("skinContainer"),
+          width: 300,
+          height: 380,
+          skin: "https://mc-heads.net/skin/MatheuZera"
+        });
+
+        // Configurações iniciais
+        skinViewer.animation = new skinview3d.WalkingAnimation();
+        skinViewer.animation.speed = 0.6;
+        skinViewer.fov = 70;
+        skinViewer.controls.enableZoom = true;
+
+      } catch (err) {
+        console.error("Erro ao inicializar skinview3d:", err);
+        document.getElementById('statusMessage').textContent = "Erro ao carregar o motor 3D. Verifique a ligação à internet.";
+      }
+    });
+
+    function loadSkinByNick() {
+      const nick = document.getElementById('skinNickInput').value.trim();
+      if (!nick) return;
+
+      const skinUrl = `https://mc-heads.net/skin/${nick}`;
+      skinViewer.loadSkin(skinUrl).then(() => {
+        document.getElementById('statusMessage').textContent = `Skin carregada com sucesso para o utilizador: ${nick}`;
+        
+        // Dispara conquista de inspeção de skin
+        if (typeof AchievementSystem !== 'undefined') {
+          AchievementSystem.unlock('skin_inspector', 'Estilista do Cubo', 'Inspecionou uma skin no Hall 3D.', 'https://minecraft.wiki/images/Leather_Tunic_JE2_BE2.png');
+        }
+      }).catch(() => {
+        document.getElementById('statusMessage').textContent = `Erro ao carregar skin para '${nick}'. Verifique se o nick existe.`;
+      });
+    }
+
+    function loadLocalSkin(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        skinViewer.loadSkin(e.target.result).then(() => {
+          document.getElementById('statusMessage').textContent = `Skin local (${file.name}) carregada com sucesso!`;
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setAnimation(type) {
+      // Remove classe active de todos
+      ['btnWalk', 'btnRun', 'btnFly', 'btnIdle'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
+      });
+
+      if (type === 'walk') {
+        skinViewer.animation = new skinview3d.WalkingAnimation();
+        skinViewer.animation.speed = 0.6;
+        document.getElementById('btnWalk').classList.add('active');
+      } else if (type === 'run') {
+        skinViewer.animation = new skinview3d.RunningAnimation();
+        skinViewer.animation.speed = 1.2;
+        document.getElementById('btnRun').classList.add('active');
+      } else if (type === 'fly') {
+        skinViewer.animation = new skinview3d.FlyingAnimation();
+        document.getElementById('btnFly').classList.add('active');
+      } else if (type === 'idle') {
+        skinViewer.animation = null; // Para a animação
+        document.getElementById('btnIdle').classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

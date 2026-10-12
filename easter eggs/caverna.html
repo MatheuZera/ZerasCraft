@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - A Caverna dos Sons Assustadores</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      font-family: monospace;
+      background-color: #0c0a09;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      user-select: none;
+    }
+
+    /* ================= PALCO DA CAVERNA (DARK FLASHLIGHT VIEW) ================= */
+    .cave-container {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      flex: 1;
+      background-image: 
+        radial-gradient(circle at 30% 40%, rgba(40, 35, 30, 0.9) 0%, rgba(12, 10, 9, 0.98) 80%),
+        repeating-linear-gradient(45deg, #151210 0, #151210 2px, #0c0a09 0, #0c0a09 10px);
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #1a1a1a, inset -4px -4px #555555, 0 15px 35px rgba(0,0,0,0.9);
+      overflow: hidden;
+      cursor: crosshair;
+      margin-bottom: 10px;
+    }
+
+    /* Camada de Escuridão Absoluta com Efeito Lanterna (Mask) */
+    .cave-darkness {
+      position: absolute;
+      inset: 0;
+      background: #000000;
+      z-index: 10;
+      pointer-events: none;
+      mask-image: radial-gradient(circle 140px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, black 85%);
+      -webkit-mask-image: radial-gradient(circle 140px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, black 85%);
+      transition: mask-image 0.05s ease, -webkit-mask-image 0.05s ease;
+    }
+
+    /* Minérios Ocultos nas Paredes da Caverna */
+    .ore-node {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: translate(-50%, -50%);
+      opacity: 0.15;
+      filter: grayscale(80%);
+      transition: opacity 0.4s ease, filter 0.4s ease, transform 0.2s ease;
+      z-index: 5;
+    }
+
+    .ore-node.illuminated {
+      opacity: 1;
+      filter: grayscale(0%) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    /* Tipos de Minérios em Pixel Art simulados */
+    .ore-diamond { background-image: url('https://minecraft.wiki/images/Diamond_Ore_JE3_BE2.png'); }
+    .ore-gold { background-image: url('https://minecraft.wiki/images/Gold_Ore_JE4_BE3.png'); }
+    .ore-redstone { background-image: url('https://minecraft.wiki/images/Redstone_Ore_JE4_BE3.png'); }
+    .ore-emerald { background-image: url('https://minecraft.wiki/images/Emerald_Ore_JE3_BE2.png'); }
+
+    /* HUD Superior Estilo Bedrock */
+    .cave-header {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      border: 2px solid #444;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #ffaa00;
+      z-index: 15;
+      text-shadow: 1px 1px #000;
+    }
+
+    /* ================= PAINEL INFERIOR COMPACTO ================= */
+    .bottom-dashboard {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+
+    .bedrock-card {
+      background-color: #c6c6c6;
+      border: 3px solid #373737;
+      box-shadow: inset 3px 3px #ffffff, inset -3px -3px #555555, 0 8px 20px rgba(0,0,0,0.5);
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      image-rendering: pixelated;
+      color: #3f3f3f;
+    }
+
+    .card-title {
+      font-size: 10px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .status-display {
+      background: #111;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #000;
+      padding: 6px 10px;
+      color: #55bd34;
+      font-size: 11px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+
+    .pixel-btn {
+      background-color: #555;
+      color: #fff;
+      border: 2px solid #222;
+      box-shadow: inset 2px 2px #888, inset -2px -2px #333;
+      padding: 6px 4px;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 10px;
+      text-align: center;
+    }
+    .pixel-btn:hover { background-color: #666; }
+    .pixel-btn:active { box-shadow: inset 2px 2px #333, inset -2px -2px #888; }
+
+    @media (max-width: 768px) {
+      .bottom-dashboard {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CAVERNA COM LANTERNA -->
+  <div class="cave-container" id="caveContainer" onmousemove="updateMouse(event)">
+    <div class="cave-header">🦇 Nível de Profundidade: -52 | Minérios Descobertos: <span id="oreCount">0</span>/6</div>
+    <div class="cave-darkness" id="caveDarkness"></div>
+
+    <!-- Minérios Espalhados Dinamicamente -->
+    <div class="ore-node ore-diamond" style="top: 25%; left: 18%;" data-ore="Diamante"></div>
+    <div class="ore-node ore-gold" style="top: 65%; left: 35%;" data-ore="Ouro"></div>
+    <div class="ore-node ore-redstone" style="top: 30%; left: 75%;" data-ore="Redstone"></div>
+    <div class="ore-node ore-emerald" style="top: 75%; left: 80%;" data-ore="Esmeralda"></div>
+    <div class="ore-node ore-diamond" style="top: 80%; left: 15%;" data-ore="Diamante"></div>
+    <div class="ore-node ore-redstone" style="top: 15%; left: 50%;" data-ore="Redstone"></div>
+  </div>
+
+  <!-- PAINEL INFERIOR -->
+  <div class="bottom-dashboard">
+    
+    <!-- CARD DE STATUS E SENSOR DE SOM -->
+    <div class="bedrock-card">
+      <div class="card-title">🔊 Sensor de Eco & Atmosfera Subterrânea</div>
+      <div class="status-display">
+        <span id="soundStatus">Explorando as sombras... Fique atento aos ecos.</span>
+        <span id="oreTracker" style="color: #ffaa00;">0/6 Minérios</span>
+      </div>
+    </div>
+
+    <!-- CARD DE AÇÕES -->
+    <div class="bedrock-card">
+      <div class="card-title">⚙️ Controles da Lanterna</div>
+      <div class="controls-grid">
+        <button class="pixel-btn" onclick="toggleFlashlight()">🔦 Tocha</button>
+        <button class="pixel-btn" onclick="toggleAudio()">🎵 Ecos</button>
+        <button class="pixel-btn" onclick="resetCave()">🔄 Reset</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Elemento de Áudio para Cave Sounds e Ecos -->
+  <audio id="caveAudio" preload="auto"></audio>
+
+  <script>
+    let flashlightOn = true;
+    let audioEnabled = true;
+    let discoveredOres = new Set();
+    let lastSoundTime = 0;
+
+    // Lista de sons de caverna clássicos do Minecraft (links públicos / CDN)
+    const caveSounds = [
+      "https://p.scdn.co/mp3-preview/3b9991206d2890538006e84d16858e778436cd93?cid=25764b85d3044a1da509b83f069b9f7a", // Simulação de eco profundo
+      "https://actions.google.com/sounds/v1/ambiences/creepy_wind.ogg",
+      "https://actions.google.com/sounds/v1/ambiences/cave_water_drops.ogg"
+    ];
+
+    function updateMouse(e) {
+      const container = document.getElementById('caveContainer');
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      container.style.setProperty('--mouse-x', `${x}px`);
+      container.style.setProperty('--mouse-y', `${y}px`);
+
+      checkOres(x, y, rect.width, rect.height);
+    }
+
+    function checkOres(mouseX, mouseY, width, height) {
+      const ores = document.querySelectorAll('.ore-node');
+      let foundAny = false;
+
+      ores.forEach((ore, index) => {
+        const oreX = (parseFloat(ore.style.left) / 100) * width;
+        const oreY = (parseFloat(ore.style.top) / 100) * height;
+
+        const distance = Math.hypot(mouseX - oreX, mouseY - oreY);
+
+        if (distance < 70 && flashlightOn) {
+          ore.classList.add('illuminated');
+          foundAny = true;
+
+          if (!discoveredOres.has(index)) {
+            discoveredOres.add(index);
+            document.getElementById('oreCount').textContent = discoveredOres.size;
+            document.getElementById('oreTracker').textContent = `${discoveredOres.size}/6 Minérios`;
+            document.getElementById('statusStatus').textContent = `✨ Descoberto filão de ${ore.dataset.ore}!`;
+
+            triggerCaveSound();
+          }
+        } else {
+          // Mantém iluminado brevemente ou apaga se a lanterna estiver longe
+          if (distance > 100) {
+            ore.classList.remove('illuminated');
+          }
+        }
+      });
+
+      // Chance aleatória de tocar um eco assustador ao explorar áreas escuras
+      const now = Date.now();
+      if (Math.random() < 0.008 && now - lastSoundTime > 12000 && audioEnabled) {
+        triggerCaveSound();
+        lastSoundTime = now;
+      }
+    }
+
+    function triggerCaveSound() {
+      if (!audioEnabled) return;
+      const audio = document.getElementById('caveAudio');
+      const randomSound = caveSounds[Math.floor(Math.random() * caveSounds.length)];
+      audio.src = randomSound;
+      audio.volume = 0.4;
+      audio.play().catch(() => {});
+    }
+
+    function toggleFlashlight() {
+      flashlightOn = !flashlightOn;
+      const darkness = document.getElementById('caveDarkness');
+      darkness.style.display = flashlightOn ? 'block' : 'none';
+      document.getElementById('statusStatus').textContent = flashlightOn ? "🔦 Lanterna acesa." : "🌑 Escuridão total (Lanterna apagada).";
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('statusStatus').textContent = audioEnabled ? "🎵 Ecos sonoros ativados." : "🔇 Ecos silenciados.";
+    }
+
+    function resetCave() {
+      discoveredOres.clear();
+      document.getElementById('oreCount').textContent = '0';
+      document.getElementById('oreTracker').textContent = '0/6 Minérios';
+      document.querySelectorAll('.ore-node').forEach(o => o.classList.remove('illuminated'));
+      document.getElementById('statusStatus').textContent = "🔄 Caverna reiniciada. Continue a explorar.";
+    }
+
+    // Inicialização da posição central da luz ao carregar
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('caveContainer');
+      container.style.setProperty('--mouse-x', '50%');
+      container.style.setProperty('--mouse-y', '50%');
+    });
+  </script>
+
+</body>
+</html>

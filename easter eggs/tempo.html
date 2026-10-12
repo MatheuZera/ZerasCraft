@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - Ciclo Orbital Hero View</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      transition: background 1.5s ease;
+      background: linear-gradient(180deg, #6ba3ff 0%, #a2c8ff 100%);
+      color: #1a1a1a;
+    }
+
+    /* ================= HERO CELESTIAL (VIEWPORT GIGANTE) ================= */
+    .hero-view {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      flex: 1;
+      min-height: 280px;
+      background: linear-gradient(180deg, #3b7ad0 0%, #9bc2ff 100%);
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555, 0 15px 35px rgba(0,0,0,0.6);
+      image-rendering: pixelated;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 1.5s ease;
+      margin-bottom: 12px;
+    }
+
+    /* Linha do Horizonte Destaque */
+    .horizon-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      border-top: 3px dashed rgba(255, 255, 255, 0.8);
+      z-index: 1;
+    }
+
+    .horizon-tag {
+      position: absolute;
+      top: calc(50% + 6px);
+      font-size: 10px;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 2px 8px;
+      border: 1px solid #373737;
+      z-index: 2;
+    }
+    .tag-left { left: 12px; }
+    .tag-right { right: 12px; }
+
+    /* Corpos Celestes em Rotação Contínua */
+    .celestial {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      margin-left: -25px;
+      margin-top: -25px;
+      border: 3px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      image-rendering: pixelated;
+      z-index: 3;
+      transition: transform 0.1s linear;
+    }
+
+    /* Local do Usuário (Opaco & Brilhante) */
+    .local-sun { background-color: #ffd700; box-shadow: 0 0 25px #ffaa00; }
+    .local-moon { background-color: #e0e0e0; box-shadow: 0 0 20px rgba(255,255,255,0.9); }
+
+    /* Local Selecionado do Planeta (Translúcido / Simultâneo) */
+    .remote-sun { background-color: rgba(255, 215, 0, 0.35); border: 2px dotted #fff; box-shadow: 0 0 12px rgba(255,170,0,0.4); z-index: 2; }
+    .remote-moon { background-color: rgba(224, 224, 224, 0.35); border: 2px dotted #fff; box-shadow: 0 0 12px rgba(255,255,255,0.4); z-index: 2; }
+
+    /* Overlay de Informação do Hero */
+    .hero-status-overlay {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 2px solid #373737;
+      padding: 6px 12px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      z-index: 4;
+    }
+
+    /* ================= PAINEL INFERIOR DE CARDS COMPACTOS ================= */
+    .bottom-dashboard {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+      box-sizing: border-box;
+    }
+
+    .bedrock-card {
+      background-color: #c6c6c6;
+      border: 3px solid #373737;
+      box-shadow: inset 3px 3px #ffffff, inset -3px -3px #555555, 0 8px 20px rgba(0,0,0,0.5);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      image-rendering: pixelated;
+      color: #3f3f3f;
+    }
+
+    /* Card 1: Horários Duplos */
+    .time-clocks-grid {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: #111;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #000;
+      padding: 6px;
+    }
+
+    .clock-item { text-align: center; }
+    .clock-label { font-size: 9px; color: #888; text-transform: uppercase; margin-bottom: 2px; }
+    .clock-val { font-size: 18px; font-weight: bold; color: #55bd34; text-shadow: 0 0 6px rgba(85,189,52,0.6); }
+    .clock-item.remote .clock-val { color: #ffaa00; text-shadow: 0 0 6px rgba(255,170,0,0.6); }
+
+    /* Card 2: Seletor Global */
+    .card-title {
+      font-size: 10px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .pixel-select {
+      background-color: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #fff, inset -2px -2px #555;
+      padding: 6px;
+      font-family: monospace;
+      font-size: 10px;
+      font-weight: bold;
+      color: #222;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    /* Card 3: Ações Compactas */
+    .btn-compact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+
+    .pixel-btn {
+      background-color: #555;
+      color: #fff;
+      border: 2px solid #222;
+      box-shadow: inset 2px 2px #888, inset -2px -2px #333;
+      padding: 6px 4px;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 9px;
+      text-align: center;
+    }
+    .pixel-btn:hover { background-color: #666; }
+    .pixel-btn:active { box-shadow: inset 2px 2px #333, inset -2px -2px #888; }
+
+    @media (max-width: 768px) {
+      .bottom-dashboard {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body id="pageBody">
+
+  <!-- HERO VIEWPORT GIGANTE -->
+  <div class="hero-view" id="heroView">
+    <div class="hero-status-overlay" id="heroStatus">
+      ☀️ Sol em órbita ativa — Visão Geral Planetária
+    </div>
+
+    <div class="horizon-line"></div>
+    <div class="horizon-tag tag-left">🌅 06:00 (Nascer)</div>
+    <div class="horizon-tag tag-right">🌇 18:00 (Pôr do Sol)</div>
+
+    <!-- Corpos Celestes Locais (Opacos) -->
+    <div class="celestial local-sun" id="localSun">☀️</div>
+    <div class="celestial local-moon" id="localMoon">🌙</div>
+
+    <!-- Corpos Celestes Remotos (Translúcidos / Simultâneos) -->
+    <div class="celestial remote-sun" id="remoteSun" title="Posição no local selecionado">☀️</div>
+    <div class="celestial remote-moon" id="remoteMoon" title="Posição no local selecionado">🌙</div>
+  </div>
+
+  <!-- BARRAS E CARDS INFERIORES COMPACTOS -->
+  <div class="bottom-dashboard">
+    
+    <!-- CARD 1: RELÓGIOS DIGITAIS -->
+    <div class="bedrock-card">
+      <div class="card-title">⏰ Monitores de Tempo Simultâneo</div>
+      <div class="time-clocks-grid">
+        <div class="clock-item">
+          <div class="clock-label">📍 Hora Local</div>
+          <div class="clock-val" id="localClock">00:00:00</div>
+        </div>
+        <div style="color: #555; font-weight: bold;">VS</div>
+        <div class="clock-item remote">
+          <div class="clock-label" id="remoteTitle">🌐 Selecionado</div>
+          <div class="clock-val" id="remoteClock">00:00:00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: SELETOR DE PLANETA -->
+    <div class="bedrock-card">
+      <div class="card-title">🌎 Comparar Posição Global</div>
+      <select class="pixel-select" id="planetLocationSelect" onchange="updateWorldTimes()">
+        <optgroup label="Américas">
+          <option value="America/Sao_Paulo">🇧🇷 Brasília / São Paulo</option>
+          <option value="America/New_York">🇺🇸 Nova Iorque (EST)</option>
+          <option value="America/Los_Angeles">🇺🇸 Los Angeles (PST)</option>
+        </optgroup>
+        <optgroup label="Europa">
+          <option value="Europe/Lisbon" selected>🇵🇹 Lisboa / Portugal</option>
+          <option value="Europe/London">🇬🇧 Londres (GMT)</option>
+          <option value="Europe/Paris">🇫🇷 Paris / Berlim</option>
+        </optgroup>
+        <optgroup label="Ásia & Oceania">
+          <option value="Asia/Tokyo">🇯🇵 Tóquio</option>
+          <option value="Australia/Sydney">🇦🇺 Sydney</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <!-- CARD 3: CONTROLES COMPACTOS -->
+    <div class="bedrock-card">
+      <div class="card-title">⚡ Ações de Teste</div>
+      <div class="btn-compact-grid">
+        <button class="pixel-btn" onclick="setSimHour(12)">☀️ Dia</button>
+        <button class="pixel-btn" onclick="setSimHour(0)">🌙 Noite</button>
+        <button class="pixel-btn" style="grid-column: span 2;" onclick="resetLive()">🔄 Sincronizar</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let isSimulating = false;
+    let simHour = 12;
+
+    const hero = document.getElementById('heroView');
+    const localSun = document.getElementById('localSun');
+    const localMoon = document.getElementById('localMoon');
+    const remoteSun = document.getElementById('remoteSun');
+    const remoteMoon = document.getElementById('remoteMoon');
+
+    function getFractionOfDay(dateObj) {
+      const h = dateObj.getHours();
+      const m = dateObj.getMinutes();
+      const s = dateObj.getSeconds();
+      const ms = dateObj.getMilliseconds();
+      return (h * 3600 + m * 60 + s + ms / 1000) / 86400;
+    }
+
+    function positionCelestialBodies(fraction, sunEl, moonEl) {
+      const width = hero.clientWidth || 800;
+      const height = hero.clientHeight || 300;
+      const centerX = width / 2;
+      const centerY = height / 2; // Eixo central para órbita circular limpa
+      const radiusX = (width / 2) - 50;
+      const radiusY = (height / 2) - 30;
+
+      // Cálculo de Rotação Orbital
+      const sunAngle = (0.75 - fraction) * 2 * Math.PI;
+      const moonAngle = sunAngle + Math.PI;
+
+      const sunX = centerX + (radiusX * Math.cos(sunAngle));
+      const sunY = centerY - (radiusY * Math.sin(sunAngle));
+
+      const moonX = centerX + (radiusX * Math.cos(moonAngle));
+      const moonY = centerY - (radiusY * Math.sin(moonAngle));
+
+      sunEl.style.left = `${sunX}px`;
+      sunEl.style.top = `${sunY}px`;
+
+      moonEl.style.left = `${moonX}px`;
+      moonEl.style.top = `${moonY}px`;
+    }
+
+    function updateOrbits() {
+      const now = new Date();
+      let localDate = new Date();
+      let remoteDate = new Date();
+
+      if (isSimulating) {
+        localDate.setHours(simHour, 0, 0, 0);
+        remoteDate.setHours(simHour, 0, 0, 0);
+      } else {
+        const selectedTz = document.getElementById('planetLocationSelect').value;
+        const remoteStr = now.toLocaleString("en-US", { timeZone: selectedTz });
+        remoteDate = new Date(remoteStr);
+      }
+
+      const localFraction = getFractionOfDay(localDate);
+      const remoteFraction = getFractionOfDay(remoteDate);
+
+      // Atualiza posições celestes simultâneas no Hero
+      positionCelestialBodies(localFraction, localSun, localMoon);
+      positionCelestialBodies(remoteFraction, remoteSun, remoteMoon);
+
+      // Atualiza displays numéricos
+      document.getElementById('localClock').textContent = localDate.toTimeString().split(' ')[0];
+      document.getElementById('remoteClock').textContent = remoteDate.toTimeString().split(' ')[0];
+
+      const selectEl = document.getElementById('planetLocationSelect');
+      const selectedOptionText = selectEl.options[selectEl.selectedIndex].text;
+      document.getElementById('remoteTitle').textContent = selectedOptionText.split(' ')[1] || selectedOptionText;
+
+      // Muda o fundo do Hero e da Página dinamicamente
+      const localHour = localDate.getHours();
+      const body = document.getElementById('pageBody');
+
+      if (localHour >= 6 && localHour < 17) {
+        body.style.background = "linear-gradient(180deg, #6ba3ff 0%, #a2c8ff 100%)";
+        hero.style.background = "linear-gradient(180deg, #3b7ad0 0%, #9bc2ff 100%)";
+        document.getElementById('heroStatus').textContent = "☀️ Sol em órbita superior — Iluminação Diurna";
+      } else if (localHour >= 17 && localHour < 19) {
+        body.style.background = "linear-gradient(180deg, #3a225c 0%, #d97736 100%)";
+        hero.style.background = "linear-gradient(180deg, #2b153b 0%, #e06c28 100%)";
+        document.getElementById('heroStatus').textContent = "🌇 Pôr do sol em andamento — Crepúsculo Celestial";
+      } else {
+        body.style.background = "linear-gradient(180deg, #070914 0%, #151a30 100%)";
+        hero.style.background = "linear-gradient(180deg, #05070d 0%, #101424 100%)";
+        document.getElementById('heroStatus').textContent = "🌙 Noite em órbita — A Lua ilumina a abóbada celestial";
+      }
+    }
+
+    function setSimHour(h) {
+      isSimulating = true;
+      simHour = h;
+      updateOrbits();
+    }
+
+    function resetLive() {
+      isSimulating = false;
+      updateOrbits();
+    }
+
+    function updateWorldTimes() {
+      updateOrbits();
+    }
+
+    setInterval(updateOrbits, 200);
+    window.addEventListener('resize', updateOrbits);
+    updateOrbits();
+  </script>
+
+</body>
+</html>

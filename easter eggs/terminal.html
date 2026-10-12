@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - Terminal Secreto</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Estilo do Terminal Estilo CRT / Linux */
+    .terminal-container {
+      background-color: #0c0c0c;
+      border: 3px solid #333;
+      border-radius: 6px;
+      width: 600px;
+      max-width: 95%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.9);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .terminal-header {
+      background: #222;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 2px solid #333;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+    .terminal-header .title {
+      font-size: 12px;
+      color: #888;
+      margin-left: 8px;
+    }
+
+    .terminal-screen {
+      background-color: #050f05;
+      color: #00ff66;
+      padding: 16px;
+      height: 280px;
+      overflow-y: auto;
+      position: relative;
+      text-shadow: 0 0 6px rgba(0,255,102,0.4);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    /* Efeito CRT (Scanlines e Flicker) */
+    .terminal-screen::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      z-index: 10;
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+    }
+
+    .terminal-output {
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      position: relative;
+      z-index: 11;
+    }
+
+    .terminal-input-line {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 11;
+    }
+
+    .terminal-input-line .prompt {
+      color: #00ff66;
+      font-weight: bold;
+      margin-right: 6px;
+    }
+
+    .terminal-input-line input {
+      background: transparent;
+      border: none;
+      color: #00ff66;
+      font-family: inherit;
+      font-size: inherit;
+      outline: none;
+      flex-grow: 1;
+      text-shadow: 0 0 5px rgba(0,255,102,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="terminal-container">
+    <div class="terminal-header">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <span class="title">root@zerais-craft:~# /terminal</span>
+    </div>
+    
+    <div class="terminal-screen" id="terminal-screen">
+      <div class="terminal-output" id="terminal-output">
+        ZeraOS v4.16 - Kernel 54.2-herobrine
+        Digite <span style="color:#fff">help</span> para listar os comandos disponíveis.
+        
+      </div>
+      <div class="terminal-input-line">
+        <span class="prompt">guest@zerais:~$</span>
+        <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const inputField = document.getElementById('terminal-input');
+    const outputDiv = document.getElementById('terminal-output');
+    const screen = document.getElementById('terminal-screen');
+
+    // Mantém o foco sempre na caixa de texto ao clicar na tela do terminal
+    screen.addEventListener('click', () => {
+      inputField.focus();
+    });
+
+    inputField.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        const fullCmd = inputField.value.trim();
+        if (fullCmd === '') return;
+        
+        // Exibe o comando digitado no histórico da tela
+        outputDiv.innerHTML += `<div><span style="color: #00aa44;">guest@zerais:~$</span> ${escapeHtml(fullCmd)}</div>`;
+        
+        processCommand(fullCmd);
+        inputField.value = '';
+        screen.scrollTop = screen.scrollHeight;
+      }
+    });
+
+    function processCommand(fullCmd) {
+      const parts = fullCmd.split(' ');
+      const cmd = parts[0].toLowerCase();
+      const arg = parts[1] || '';
+
+      let response = '';
+
+      switch(cmd) {
+        case 'help':
+          response = `Comandos do Sistema:\n` +
+                     `  help            - Lista os comandos disponíveis\n` +
+                     `  logs 2024       - Mostra trechos nostálgicos do console\n` +
+                     `  whoami          - Exibe informações sobre a lenda\n` +
+                     `  redeem <codigo> - Resgata um código secreto\n` +
+                     `  clear           - Limpa a tela do terminal`;
+          break;
+
+        case 'logs':
+          if (arg === '2024' || arg === '') {
+            response = `[12:44:02] [Server Thread/INFO]: [Console] Alguém tentou invocar o Herobrine no mundo principal.\n` +
+                       `[13:02:15] [Server Thread/WARN]: Zera perdeu 47 diamantes para a lava.\n` +
+                       `[23:59:59] [Server Thread/INFO]: O servidor quase desabou com tantas entidades na farm!`;
+          } else {
+            response = `Logs para o ano '${arg}' não encontrados ou corrompidos. Tente 'logs 2024'.`;
+          }
+          break;
+
+        case 'whoami':
+          response = `Identidade: [ERRO 404 - ENTIDADE DESCONHECIDA]\n` +
+                     `"Ele observa do código-fonte... Cuidado com os olhos brancos nas sombras do servidor."`;
+          break;
+
+        case 'redeem':
+          if (arg.toUpperCase() === 'HEROBRINE' || arg.toUpperCase() === 'ZERA2026') {
+            response = `[SUCESSO] Código resgatado! Chave VIP secreta: ZERA-VIP-2026`;
+          } else if (arg === '') {
+            response = `Uso incorreto. Digite: redeem <codigo>`;
+          } else {
+            response = `[ERRO] Código inválido ou expirado: "${arg}"`;
+          }
+          break;
+
+        case 'clear':
+          outputDiv.innerHTML = '';
+          return;
+
+        default:
+          response = `Comando desconhecido: "${cmd}". Digite 'help' para ver os comandos.`;
+      }
+
+      outputDiv.innerHTML += `<div style="margin-top: 4px; margin-bottom: 8px; color: #00ff66;">${escapeHtml(response)}</div>`;
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+  </script>
+
+</body>
+</html>

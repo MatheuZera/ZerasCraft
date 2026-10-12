@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zera's Craft - Galeria Bedrock UI</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 30px 20px;
+    }
+
+    .gallery-container {
+      max-width: 1000px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .gallery-title {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: #fff;
+      text-shadow: 2px 2px #000;
+    }
+
+    .gallery-subtitle {
+      font-size: 11px;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    /* Grelha de Quadros */
+    .paintings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      justify-items: center;
+    }
+
+    /* Estrutura do Card 3D Flip */
+    .painting-scene {
+      width: 260px;
+      height: 340px;
+      perspective: 1000px;
+    }
+
+    .painting-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+    }
+
+    .painting-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    /* Estilo Estética Bedrock GUI */
+    .painting-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      background-color: #c6c6c6;
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555, 0 10px 20px rgba(0,0,0,0.5);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      color: #3f3f3f;
+      padding: 10px;
+      image-rendering: pixelated;
+    }
+
+    /* Frente do Card */
+    .painting-front {
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .thumb-box {
+      width: 100%;
+      height: 200px;
+      background: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #373737;
+      overflow: hidden;
+    }
+
+    .thumb-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .front-info h3 {
+      margin: 6px 0 4px 0;
+      font-size: 12px;
+      color: #222;
+    }
+
+    .front-meta {
+      font-size: 10px;
+      color: #555;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Verso do Card (Sem scroll) */
+    .painting-back {
+      transform: rotateY(180deg);
+      background-color: #c6c6c6;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .painting-back h4 {
+      margin: 0 0 4px 0;
+      font-size: 12px;
+      border-bottom: 2px solid #373737;
+      padding-bottom: 4px;
+      color: #222;
+    }
+
+    .painting-meta-back {
+      font-size: 9px;
+      color: #555;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    .painting-back p {
+      margin: 0 0 6px 0;
+      font-size: 10px;
+      line-height: 1.35;
+      color: #333;
+    }
+
+    .history-img-box {
+      width: 100%;
+      height: 90px;
+      background: #8b8b8b;
+      border: 2px solid #373737;
+      box-shadow: inset 2px 2px #373737;
+      cursor: zoom-in;
+      overflow: hidden;
+    }
+
+    .history-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .flip-back-link {
+      font-size: 9px;
+      cursor: pointer;
+      color: #0044aa;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      display: none;
+    }
+    .lightbox-modal.show {
+      display: flex;
+    }
+    .lightbox-content {
+      background: #c6c6c6;
+      border: 4px solid #373737;
+      box-shadow: inset 4px 4px #ffffff, inset -4px -4px #555555;
+      padding: 16px;
+      max-width: 90%;
+      text-align: center;
+      color: #333;
+    }
+    .lightbox-close {
+      margin-top: 10px;
+      background: #aa0000;
+      color: white;
+      border: 2px solid #373737;
+      padding: 4px 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gallery-container">
+    <div class="gallery-title">Galeria de Memórias — Bedrock UI</div>
+    <div class="gallery-subtitle">Clica num quadro para desvendar os detalhes históricos.</div>
+
+    <div class="paintings-grid" id="paintingsGrid"></div>
+  </div>
+
+  <!-- Modal Lightbox -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <h3 id="lightboxTitle" style="margin-top:0; font-size:13px;"></h3>
+      <div style="background:#8b8b8b; padding:4px; border:2px solid #373737;">
+        <img id="lightboxImg" src="" alt="Ampliada" style="max-width: 100%; max-height: 320px; display: block;">
+      </div>
+      <button class="lightbox-close" onclick="closeLightbox()">Fechar [X]</button>
+    </div>
+  </div>
+
+  <script>
+    const galleryData = [
+      {
+        id: 1,
+        title: "O Primeiro Spawn",
+        date: "Jan 2024",
+        author: "Zera",
+        description: "A humilde cabana de madeira e pedra polida que serviu de abrigo no lançamento.",
+        thumb: "https://images.unsplash.com/photo-1627856013091-fed6e4e300d2?w=600&auto=format&fit=crop&q=80",
+        historyImg: "https://images.unsplash.com/photo-1627856013091-fed6e4e300d2?w=1000&auto=format&fit=crop&q=80"
+      },
+      {
+        id: 2,
+        title: "Batalha do Raid",
+        date: "Mar 2024",
+        author: "Comunidade",
+        description: "Defesa épica contra hordas de pillagers na praça central durante a madrugada.",
+        thumb: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80",
+        historyImg: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1000&auto=format&fit=crop&q=80"
+      },
+      {
+        id: 3,
+        title: "Avenida dos Templos",
+        date: "Jun 2024",
+        author: "Builders",
+        description: "Complexo arquitetónico monumental construído para sediar os portais de recursos.",
+        thumb: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop&q=80",
+        historyImg: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1000&auto=format&fit=crop&q=80"
+      }
+    ];
+
+    function renderGallery() {
+      const grid = document.getElementById('paintingsGrid');
+      grid.innerHTML = '';
+
+      galleryData.forEach((item) => {
+        const scene = document.createElement('div');
+        scene.className = 'painting-scene';
+
+        scene.innerHTML = `
+          <div class="painting-card" id="card-${item.id}">
+            <!-- Frente -->
+            <div class="painting-face painting-front" onclick="flipCard(${item.id})">
+              <div class="thumb-box">
+                <img src="${item.thumb}" alt="${item.title}">
+              </div>
+              <div class="front-info">
+                <h3>${item.title}</h3>
+                <div class="front-meta">
+                  <span>📅 ${item.date}</span>
+                  <span>✍️ ${item.author}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Verso (Sem scroll) -->
+            <div class="painting-face painting-back">
+              <div>
+                <h4>${item.title}</h4>
+                <div class="painting-meta-back">Autor: ${item.author} | Data: ${item.date}</div>
+                <p>${item.description}</p>
+              </div>
+              <div class="history-img-box" onclick="openLightbox('${item.title}', '${item.historyImg}')">
+                <img src="${item.historyImg}" alt="${item.title}">
+              </div>
+              <div class="card-footer">
+                <span class="flip-back-link" onclick="flipCard(${item.id})">↩ Voltar</span>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(scene);
+      });
+    }
+
+    function flipCard(id) {
+      const card = document.getElementById(`card-${id}`);
+      card.classList.toggle('flipped');
+    }
+
+    function openLightbox(title, imgUrl) {
+      document.getElementById('lightboxTitle').textContent = title;
+      document.getElementById('lightboxImg').src = imgUrl;
+      document.getElementById('lightboxModal').classList.add('show');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.remove('show');
+    }
+
+    renderGallery();
+  </script>
+
+</body>
+</html>

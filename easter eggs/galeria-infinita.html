@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zera's Craft - Canvas Estilo Obsidian</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            color: #ffffff;
+            user-select: none;
+        }
+
+        /* Container Principal Estilo Obsidian / Bedrock */
+        .obsidian-canvas-card {
+            background-color: #1a1a1a;
+            border: 2px solid #2d2d2d;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            width: 1150px;
+            max-width: 98vw;
+            height: 94vh;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-radius: 8px;
+        }
+
+        .panel-header {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #2d2d2d;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #a0a0a0;
+        }
+
+        /* Viewport do Canvas */
+        .viewport-container {
+            position: relative;
+            flex: 1;
+            background-color: #161616;
+            border: 1px solid #262626;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: grab;
+        }
+
+        .viewport-container:active {
+            cursor: grabbing;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Controles Inferiores Minimalistas */
+        .obsidian-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1e1e;
+            border: 1px solid #2d2d2d;
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+
+        .obsidian-btn {
+            background-color: #2b2b2b;
+            color: #e0e0e0;
+            border: 1px solid #3d3d3d;
+            padding: 6px 12px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .obsidian-btn:hover {
+            background-color: #383838;
+            border-color: #555;
+        }
+
+        .obsidian-btn:active {
+            background-color: #222;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #b0b0b0;
+        }
+
+        /* ================= MODAL ESTILO OBSIDIAN NOTE ================= */
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background-color: #1e1e1e;
+            border: 1px solid #3d3d3d;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+            width: 540px;
+            max-width: 90vw;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            border-radius: 8px;
+            color: #ffffff;
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+        }
+
+        .modal-overlay.open .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8a8a8a;
+            border-bottom: 1px solid #2d2d2d;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-transform: uppercase;
+        }
+
+        .modal-body {
+            background-color: #161616;
+            border: 1px solid #262626;
+            padding: 16px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 340px;
+            overflow-y: auto;
+        }
+
+        .modal-tag {
+            font-size: 11px;
+            color: #79c0ff;
+            font-weight: 600;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .modal-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+
+        .modal-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #2d2d2d;
+            font-size: 12px;
+        }
+
+        .stat-item {
+            color: #999;
+        }
+
+        .stat-item strong {
+            color: #ffffff;
+        }
+
+        /* TOAST DE CONQUISTA MINECRAFT */
+        .mc-achievement-toast {
+            position: fixed;
+            top: -100px;
+            right: 20px;
+            background: #212121;
+            border: 3px solid #555;
+            box-shadow: inset -2px -2px 0px #000, inset 2px 2px 0px #aaa;
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 12px;
+            z-index: 10000;
+            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: monospace;
+        }
+
+        .mc-achievement-toast.show {
+            top: 20px;
+        }
+
+        .mc-toast-heading {
+            color: #ffff55;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .mc-toast-title {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: block;
+        }
+
+        .mc-toast-desc {
+            color: #aaaaaa;
+            font-size: 0.8rem;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="obsidian-canvas-card">
+        <div class="panel-header">
+            <span>ZERA'S CRAFT — CANVAS DE MEMÓRIAS</span>
+            <span style="color: #666;">[Arraste os nós ou use o fundo para mover]</span>
+        </div>
+
+        <!-- Viewport do Canvas -->
+        <div class="viewport-container" id="viewport">
+            <canvas id="obsidianCanvas"></canvas>
+        </div>
+
+        <!-- Rodapé Obsidian -->
+        <div class="obsidian-footer">
+            <span class="info-label" id="activeNodeLabel">💡 Clique num card para inspecionar as notas da época.</span>
+            <div style="display: flex; gap: 6px;">
+                <button class="obsidian-btn" onclick="changeZoom(0.15)">Zoom +</button>
+                <button class="obsidian-btn" onclick="changeZoom(-0.15)">Zoom -</button>
+                <button class="obsidian-btn" onclick="resetView()">Centrar Vista</button>
+            </div>
+        </div>
+
+        <!-- Modal Obsidian Note -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal-box">
+                <div class="modal-header">
+                    <span id="mHeaderTag">NOTA HISTÓRICA</span>
+                    <button class="obsidian-btn" onclick="closeModal()" style="padding: 2px 8px;">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-tag" id="mDateTag">Março 2024</div>
+                    <div class="modal-title" id="mTitle">Nome da Época</div>
+                    <div class="modal-text" id="mDesc">Descrição detalhada...</div>
+
+                    <div class="modal-stats-grid">
+                        <div class="stat-item">Jogadores: <strong id="mStatPlayers">150+</strong></div>
+                        <div class="stat-item">Mapa: <strong id="mStatMap">World_v1</strong></div>
+                        <div class="stat-item">Tecnologia: <strong id="mStatPlugin">Geyser / Python</strong></div>
+                        <div class="stat-item">Modo: <strong id="mStatRules">Survival</strong></div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button class="obsidian-btn" id="modalAudioBtn" onclick="toggleModalAudio()">▶ Ouvir Áudio
+                        Relato</button>
+                    <button class="obsidian-btn" onclick="closeModal()">Fechar Nota</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Conquista -->
+    <div id="toast" class="mc-achievement-toast">
+        <div>
+            <span class="mc-toast-heading">Conquista Realizada!</span>
+            <span class="mc-toast-title" id="toastTitle">Arqueólogo do Passado</span>
+            <span class="mc-toast-desc" id="toastDesc">Abri uma nota no Canvas de Memórias.</span>
+        </div>
+    </div>
+
+    <audio id="bgAudio" preload="auto"></audio>
+
+    <script>
+        const canvas = document.getElementById('obsidianCanvas');
+        const ctx = canvas.getContext('2d');
+        const viewport = document.getElementById('viewport');
+
+        let panX = 0;
+        let panY = 0;
+        let zoom = 1;
+
+        let isPanning = false;
+        let draggedNode = null;
+        let startX = 0;
+        let startY = 0;
+        let clickStartX = 0;
+        let clickStartY = 0;
+
+        const NODE_WIDTH = 240;
+        const NODE_HEIGHT = 100;
+
+        // Nós com alto contraste e visibilidade
+        const nodes = [
+            {
+                id: 'alpha',
+                title: 'Alpha 1.0: Origem',
+                date: 'Março 2024',
+                desc: 'O nascimento oficial do servidor. Árvore gigante de spawn, alinhamento inicial dos fundadores e primeiros abrigos de pedra.',
+                x: -280,
+                y: -120,
+                color: '#2ea043',
+                icon: '🌱',
+                players: '25 Players',
+                map: 'World_Alpha',
+                plugin: 'Vanilla Core',
+                rules: 'Survival Simples',
+                audio: 'https://actions.google.com/sounds/v1/ambiences/forest_birds.ogg'
+            },
+            {
+                id: 'beta',
+                title: 'Beta: Catedrais',
+                date: 'Julho 2024',
+                desc: 'Expansão dos domínios, criação das grandes estradas conectadas por portais e monumentos arquitetónicos icónicos da comunidade.',
+                x: 0,
+                y: 80,
+                color: '#d29922',
+                icon: '🏛️',
+                players: '80 Players',
+                map: 'World_Beta_v2',
+                plugin: 'Towny & Economy',
+                rules: 'PVP Controlado',
+                audio: 'https://actions.google.com/sounds/v1/ambiences/creepy_wind.ogg'
+            },
+            {
+                id: 'pixel',
+                title: 'Pixel Legends',
+                date: 'Dezembro 2024',
+                desc: 'A era competitiva. Integração completa do GeyserMC para permitir jogadores mobile e consoles jogarem no mesmo servidor Java.',
+                x: 300,
+                y: -90,
+                color: '#f85149',
+                icon: '⚔️',
+                players: '150+ Players',
+                map: 'Pixel_Main',
+                plugin: 'Geyser / Floodgate',
+                rules: 'Crossplay Ativo',
+                audio: 'https://actions.google.com/sounds/v1/ambiences/cave_water_drops.ogg'
+            },
+            {
+                id: 'dashboard',
+                title: 'Era Bedrock GUI',
+                date: '2025 - Presente',
+                desc: 'Desenvolvimento do Web Dashboard completo, ferramentas de cálculo de recursos, inspeção 3D de skins e monitorização ao vivo.',
+                x: 580,
+                y: 110,
+                color: '#8957e5',
+                icon: '🖥️',
+                players: 'Comunidade Total',
+                map: 'ZeraCraft_Hub',
+                plugin: 'Python Bot / Web APIs',
+                rules: 'Dashboard Interativo',
+                audio: 'https://actions.google.com/sounds/v1/science/computer_processing.ogg'
+            }
+        ];
+
+        const connections = [
+            { from: 'alpha', to: 'beta' },
+            { from: 'beta', to: 'pixel' },
+            { from: 'pixel', to: 'dashboard' }
+        ];
+
+        let activeModalNode = null;
+
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            const width = viewport.clientWidth;
+            const height = viewport.clientHeight;
+
+            // Ajusta a resolução interna de acordo com o DPI da tela
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+
+            // Mantém o tamanho CSS na página
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+
+            // Normaliza o contexto para trabalhar com as dimensões virtuais sem distorção
+            ctx.resetTransform();
+            ctx.scale(dpr, dpr);
+
+            draw();
+        }
+
+        function draw() {
+            const width = viewport.clientWidth;
+            const height = viewport.clientHeight;
+
+            // Limpa o canvas considerando a escala dpr
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.restore();
+
+            ctx.save();
+
+            // Garante que o centro seja alinhado a números inteiros para evitar subpixel blur
+            const centerX = Math.round(width / 2 + panX);
+            const centerY = Math.round(height / 2 + panY);
+
+            ctx.translate(centerX, centerY);
+            ctx.scale(zoom, zoom);
+
+            // Desativa interpolações suavizadas para manter o texto nítido
+            ctx.imageSmoothingEnabled = false;
+
+            // 1. Desenhar Grelha de Pontos
+            drawObsidianDotGrid();
+
+            // 2. Desenhar Linhas de Conexão (com coordenadas arredondadas)
+            connections.forEach(conn => {
+                const n1 = nodes.find(n => n.id === conn.from);
+                const n2 = nodes.find(n => n.id === conn.to);
+                if (n1 && n2) {
+                    ctx.beginPath();
+                    ctx.moveTo(Math.round(n1.x), Math.round(n1.y));
+                    ctx.lineTo(Math.round(n2.x), Math.round(n2.y));
+                    ctx.strokeStyle = '#383838';
+                    ctx.lineWidth = Math.max(1, 2 / zoom);
+                    ctx.stroke();
+                }
+            });
+
+            // 3. Desenhar Cards (Arredondando x e y com Math.round)
+            nodes.forEach(node => {
+                const w = NODE_WIDTH;
+                const h = NODE_HEIGHT;
+                const x = Math.round(node.x - w / 2);
+                const y = Math.round(node.y - h / 2);
+
+                // Fundo do Card
+                ctx.fillStyle = '#222222';
+                ctx.strokeStyle = '#3a3a3a';
+                ctx.lineWidth = Math.max(1, 1.5 / zoom);
+
+                ctx.beginPath();
+                ctx.roundRect(x, y, w, h, 6);
+                ctx.fill();
+                ctx.stroke();
+
+                // Barra lateral de cor
+                ctx.fillStyle = node.color;
+                ctx.beginPath();
+                ctx.roundRect(x, y, 5, h, [6, 0, 0, 6]);
+                ctx.fill();
+
+                // Título (Usar fonte do sistema sem anti-aliasing exagerado)
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '600 13px system-ui, -apple-system, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${node.icon} ${node.title}`, x + 16, y + 26);
+
+                // Data / Tag
+                ctx.fillStyle = '#79c0ff';
+                ctx.font = '600 10px system-ui, -apple-system, sans-serif';
+                ctx.fillText(node.date.toUpperCase(), x + 16, y + 44);
+
+                // Descrição
+                ctx.fillStyle = '#cccccc';
+                ctx.font = '400 11px system-ui, -apple-system, sans-serif';
+                const shortDesc = node.desc.substring(0, 36) + '...';
+                ctx.fillText(shortDesc, x + 16, y + 68);
+
+                // Botão visual de expandir
+                ctx.fillStyle = '#8a8a8a';
+                ctx.font = '400 10px system-ui, -apple-system, sans-serif';
+                ctx.fillText('Clique para ler nota →', x + 16, y + 88);
+            });
+
+            ctx.restore();
+        }
+
+        function screenToWorld(screenX, screenY) {
+            const rect = viewport.getBoundingClientRect();
+            const x = screenX - rect.left;
+            const y = screenY - rect.top;
+            const worldX = (x - (canvas.width / 2 + panX)) / zoom;
+            const worldY = (y - (canvas.height / 2 + panY)) / zoom;
+            return { x: worldX, y: worldY };
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.save();
+            ctx.translate(canvas.width / 2 + panX, canvas.height / 2 + panY);
+            ctx.scale(zoom, zoom);
+
+            // 1. Grelha de Pontos Estilo Obsidian
+            drawObsidianDotGrid();
+
+            // 2. Linhas de Conexão Suaves
+            connections.forEach(conn => {
+                const n1 = nodes.find(n => n.id === conn.from);
+                const n2 = nodes.find(n => n.id === conn.to);
+                if (n1 && n2) {
+                    ctx.beginPath();
+                    ctx.moveTo(n1.x, n1.y);
+                    ctx.lineTo(n2.x, n2.y);
+                    ctx.strokeStyle = '#383838';
+                    ctx.lineWidth = 2.5 / zoom;
+                    ctx.stroke();
+                }
+            });
+
+            // 3. Cards Estilo Nota do Obsidian (Alta Visibilidade de Texto)
+            nodes.forEach(node => {
+                const w = NODE_WIDTH;
+                const h = NODE_HEIGHT;
+                const x = node.x - w / 2;
+                const y = node.y - h / 2;
+
+                // Fundo do Card
+                ctx.fillStyle = '#222222';
+                ctx.strokeStyle = '#3a3a3a';
+                ctx.lineWidth = 1.5 / zoom;
+
+                // Desenhar retângulo com cantos levemente arredondados
+                ctx.beginPath();
+                ctx.roundRect(x, y, w, h, 6);
+                ctx.fill();
+                ctx.stroke();
+
+                // Barra lateral de cor da nota
+                ctx.fillStyle = node.color;
+                ctx.beginPath();
+                ctx.roundRect(x, y, 5, h, [6, 0, 0, 6]);
+                ctx.fill();
+
+                // Título de Alta Visibilidade (Branco Puro)
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 13px -apple-system, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${node.icon} ${node.title}`, x + 16, y + 26);
+
+                // Data / Tag secundária
+                ctx.fillStyle = '#79c0ff';
+                ctx.font = '600 10px -apple-system, sans-serif';
+                ctx.fillText(node.date.toUpperCase(), x + 16, y + 44);
+
+                // Descrição em Cinza Claro Legível
+                ctx.fillStyle = '#b0b0b0';
+                ctx.font = '11px -apple-system, sans-serif';
+                const shortDesc = node.desc.substring(0, 36) + '...';
+                ctx.fillText(shortDesc, x + 16, y + 68);
+
+                // Botão visual de expandir
+                ctx.fillStyle = '#8a8a8a';
+                ctx.font = '500 10px -apple-system, sans-serif';
+                ctx.fillText('Clique para ler nota →', x + 16, y + 88);
+            });
+
+            ctx.restore();
+        }
+
+        function drawObsidianDotGrid() {
+            const step = 40;
+            ctx.fillStyle = '#262626';
+            const radius = 1.2 / zoom;
+
+            for (let x = -1500; x < 1500; x += step) {
+                for (let y = -1500; y < 1500; y += step) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        // --- INTERAÇÃO DE RATO ---
+        viewport.addEventListener('mousedown', (e) => {
+            clickStartX = e.clientX;
+            clickStartY = e.clientY;
+
+            const worldPos = screenToWorld(e.clientX, e.clientY);
+
+            draggedNode = nodes.find(node => {
+                const w = NODE_WIDTH;
+                const h = NODE_HEIGHT;
+                return (
+                    worldPos.x >= node.x - w / 2 &&
+                    worldPos.x <= node.x + w / 2 &&
+                    worldPos.y >= node.y - h / 2 &&
+                    worldPos.y <= node.y + h / 2
+                );
+            });
+
+            if (!draggedNode) {
+                isPanning = true;
+                startX = e.clientX - panX;
+                startY = e.clientY - panY;
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (draggedNode) {
+                const worldPos = screenToWorld(e.clientX, e.clientY);
+                draggedNode.x = worldPos.x;
+                draggedNode.y = worldPos.y;
+                draw();
+            } else if (isPanning) {
+                panX = e.clientX - startX;
+                panY = e.clientY - startY;
+                draw();
+            }
+        });
+
+        window.addEventListener('mouseup', (e) => {
+            const distMoved = Math.hypot(e.clientX - clickStartX, e.clientY - clickStartY);
+
+            if (distMoved < 5 && draggedNode) {
+                openModal(draggedNode);
+            }
+
+            draggedNode = null;
+            isPanning = false;
+        });
+
+        viewport.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY < 0 ? 0.12 : -0.12;
+            changeZoom(delta);
+        });
+
+        function changeZoom(amount) {
+            zoom = Math.max(0.4, Math.min(2.5, zoom + amount));
+            draw();
+        }
+
+        function resetView() {
+            panX = 0;
+            panY = 0;
+            zoom = 1;
+            draw();
+        }
+
+        // --- MODAL OBSIDIAN ---
+        function openModal(node) {
+            activeModalNode = node;
+            document.getElementById('mHeaderTag').textContent = `NOTA: ${node.title.toUpperCase()}`;
+            document.getElementById('mDateTag').textContent = `📅 Período: ${node.date}`;
+            document.getElementById('mTitle').textContent = `${node.icon} ${node.title}`;
+            document.getElementById('mDesc').textContent = node.desc;
+
+            document.getElementById('mStatPlayers').textContent = node.players;
+            document.getElementById('mStatMap').textContent = node.map;
+            document.getElementById('mStatPlugin').textContent = node.plugin;
+            document.getElementById('mStatRules').textContent = node.rules;
+
+            document.getElementById('modalOverlay').classList.add('open');
+
+            triggerToast("Nota Histórica Aberta", `Inspecionou o registo: ${node.title}`);
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+            const audio = document.getElementById('bgAudio');
+            audio.pause();
+            document.getElementById('modalAudioBtn').textContent = "▶ Ouvir Áudio Relato";
+        }
+
+        function toggleModalAudio() {
+            if (!activeModalNode) return;
+            const audio = document.getElementById('bgAudio');
+            const btn = document.getElementById('modalAudioBtn');
+
+            if (audio.paused) {
+                audio.src = activeModalNode.audio;
+                audio.play().then(() => {
+                    btn.textContent = "⏸ Pausar Áudio";
+                }).catch(() => { });
+            } else {
+                audio.pause();
+                btn.textContent = "▶ Ouvir Áudio Relato";
+            }
+        }
+
+        function triggerToast(title, desc) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastDesc').textContent = desc;
+
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+
+
+---------------------------------------
+
+
+
+
+
+
+
+---------------------------------------
+
+1. O Portal do Nether Invertido (/nether)
+ * Conceito: Acessar esta página aplica uma animação de distorção de portal roxo na tela com som característico (portal.ogg).
+ * Mecânica: Exibe o site do servidor em "modo mundo invertido" (estilo Nether/Upside Down), com esquema de cores em tons de vermelho/obsidiana, partículas de névoa e segredos em texto que só aparecem ao selecionar o conteúdo com o cursor.
+
+
+
+3. Bancada de Crafting Interativa (/crafting)
+ * Conceito: Uma mesa de trabalho 3x3 funcional na Web.
+ * Mecânica: O usuário pode arrastar itens de um inventário inferior para a grade. Ao montar receitas específicas (exemplo: Livro + Pena + Diamante), o slot de resultado gera uma recompensa, como uma página secreta, cupom VIP ou arquivo de download.
+
+4. Minijogo do Carrinho de Mina (/minecart)
+ * Conceito: Um minijogo estilo runner 2D minimalista construído em HTML5 Canvas.
+ * Mecânica: O jogador controla um carrinho de mina nos trilhos, usando a barra de espaço para pular obstáculos (TNTs e Creepers) enquanto coleta diamantes para tentar entrar em um placar de líderes local (localStorage).
+
+5. Mesa de Encantamentos & Spoilers (/enchant)
+ * Conceito: Um modelo da Mesa de Encantamentos rodeado por estantes de livros.
+ * Mecânica: Letras do Standard Galactic Alphabet (as partículas voadoras da mesa) flutuam até o centro. Ao passar o mouse sobre o texto em linguagem secreta, ele se traduz para o português revelando spoilers das próximas atualizações do servidor.
+
+6. Menu Principal Beta 1.7.3 (/retro-menu)
+ * Conceito: Uma recriação exata da tela de início do Minecraft das versões antigas (Alpha / Beta).
+ * Mecânica: Inclui o fundo clássico em panorama pixelado em rotação, fontes cúbicas retrô, os sons originais de clique nos botões e um gerador de Splash Text amarelo com frases marcantes da comunidade.
+
+
+8. Suporte de Poções & Filtros (/alchemy)
+ * Conceito: Uma bancada de alquimia (Brewing Stand) interativa.
+ * Mecânica: O jogador combina ingredientes (como Nether Wart e Glowstone) nos suportes para "tomar uma poção". Cada poção altera temporariamente o visual de todo o site (exemplo: filtro sépia para Visão Noturna, tela invertida para Tontura, ou aceleração de animações para Velocidade).
+
+9. O Farol do Servidor (/beacon)
+ * Conceito: Um Beacon central projetando um feixe de luz colorido que atravessa a tela verticalmente.
+ * Mecânica: O usuário pode trocar o vidro no topo do feixe para mudar a cor de iluminação do tema global do site e escolher quais efeitos visuais deseja ativar durante a navegação.
+
+
+
+11. Página 404 do Creeper (/404)
+ * Conceito: Uma página de erro 404 temática para links quebrados.
+ * Mecânica: Um Creeper pixelado aparece no meio da tela. Conforme o cursor do mouse se aproxima dele, um contador de fusível é ativado (sssss...). Se o usuário não mover o cursor a tempo, a tela pisca e simula uma "explosão" que estilhaça os elementos visuais da página.
+
+12. Mercado do Villager (/trade)
+ * Conceito: Interface de troca simulando o menu de um camponês.
+ * Mecânica: O Villager exige itens virtuais (coletados ao encontrar easter eggs pelo site) em troca de arquivos exclusivos, como wallpapers HD do servidor, ícones para Discord ou cargos especiais.
+
+13. Terminal de Chat Retro (/chat-log)
+ * Conceito: Um terminal em caixa preta imitando o chat ingame do Minecraft.
+ * Mecânica: Simula o envio de mensagens automáticas em tempo real de log de conversas clássicas, entrada e saída de jogadores antigos, conquistas do servidor e mensagens de morte engraçadas.
+
+14. O Mapa de Cartografia (/cartography)
+ * Conceito: Um mapa em pixel art coberto por "névoa de guerra" (fog).
+ * Mecânica: O usuário utiliza a ferramenta de pincel para "raspar" a camada de névoa e revelar o mapa completo do mundo do servidor, destacando as coordenadas da Vila, Spawn, Arenas e Áreas Públicas.
+
+
+
+
+
+18. Mural de Conquistas (/advancements)
+ * Conceito: A aba oficial de Advancements (conquistas) com fundo em textura de pedra.
+ * Mecânica: Mapeia árvores de progresso baseadas na história da própria comunidade (ex: "Entrou no Discord", "Jogou no Primeiro Dia", "Descobriu o Primeiro Easter Egg"), permitindo que o usuário acompanhe quais segredos do site ele já desbloqueou.
+
+19. O Ovo de Dragão Fujão (/dragon-egg)
+ * Conceito: Um Ovo de Dragão posicionado discretamente em alguma seção da página.
+ * Mecânica: Toda vez que o usuário tenta clicar nele, o ovo se teleporta aleatoriamente para outra coordenada do layout com partículas roxas do End. Conseguir clicar nele 5 vezes seguidas desbloqueia o acesso a um redirecionamento secreto.
+
+20. Simulador de Pescaria (/fishing)
+ * Conceito: Um lago sereno em pixel art com água animada.
+ * Mecânica: O jogador clica na água para lançar a boia da vara de pesca. Após alguns segundos de espera e o surgimento das bolhas de água, o jogador deve clicar no momento exato para fisgar "tesouros" aleatórios (livros com histórias, etiquetas com nomes engraçados ou itens raros).
+
+---------------------------------------
+
+Para transformar o site de uma galeria estática num portal vivo e altamente envolvente, a chave é implementar sistemas dinâmicos que combinem dados em tempo real, gráficos 3D interativos e gamificação transversal.
+Aqui estão 5 módulos funcionais e interativos de alto impacto para implementar no Zera's Craft.
+
+
+
+
