@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Legends - Servidor Minecraft</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Barra de Navegação Superior -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="brand-logo" onclick="switchTab('home')" style="cursor: pointer;">
+                <div class="logo-symbol">
+                    <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=100&q=80" alt="Logo">
+                </div>
+                <span class="brand-name">PixelLegends</span>
+            </div>
+            
+            <!-- Navegação Desktop e Mobile Integrada -->
+            <nav class="nav-links" id="navLinks">
+                <a href="#" class="nav-link active" onclick="switchTab('home', event)">Início</a>
+                <a href="#" class="nav-link" onclick="switchTab('about', event)">O Servidor</a>
+                <a href="#" class="nav-link" onclick="switchTab('join', event)">Como Entrar</a>
+                <a href="#" class="nav-link" onclick="switchTab('forums', event)">Fóruns</a>
+                <a href="#" class="nav-link" onclick="switchTab('rules', event)">Regras</a>
+            </nav>
+
+            <div class="header-right">
+                <div class="header-cta">
+                    <a href="#" class="btn-store">
+                        <span>Loja</span>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </div>
+                <!-- Botão Hamburguer para Mobile -->
+                <div class="nav-toggle" id="navToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO DA ABA: INÍCIO (HOME) -->
+    <div id="tab-home" class="page-section active">
+        <section class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">PixelLegends.net</h1>
+                    <p class="hero-description">
+                        O maior e mais imersivo servidor de Minecraft da atualidade. Desfrute de modos de jogo exclusivos, economia dinâmica, comunidade ativa e partidas competitivas sem lag!
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#" class="btn-discord" onclick="switchTab('join', event)">Como Jogar</a>
+                        <a href="#" class="link-forums" onclick="switchTab('about', event)">Saiba Mais &gt;</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="square-image-container">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Minecraft Render 1:1" class="square-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="server-details-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Por que escolher o nosso servidor?</h2>
+                    <p>Oferecemos infraestrutura de ponta e inovação constante para garantir a melhor experiência.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>Anti-Cheat Exclusivo</h3>
+                        <p>Desenvolvido internamente para garantir um ambiente 100% justo, livre de hackers e trapaças.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-gamepad"></i></div>
+                        <h3>Modos Variados</h3>
+                        <p>Jogue BedWars, SkyBlock, Survival Custom e Mini-games atualizados semanalmente com novos mapas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                        <h3>Comunidade Ativa</h3>
+                        <p>Milhares de jogadores online diariamente, eventos com prémios e staff disponível 24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONTEÚDO DA ABA: O SERVIDOR (ABOUT) -->
+    <div id="tab-about" class="page-section">
+        <div class="container static-page-content">
+            <h2>Sobre o PixelLegends</h2>
+            <p>Fundado com o objetivo de revolucionar a experiência multijogador no Minecraft, o PixelLegends combina servidores dedicados de alta performance com mecânicas de jogo inovadoras.</p>
+            <h3>Nossa Missão</h3>
+            <p>Proporcionar um ambiente seguro, divertido e altamente competitivo para jogadores de todas as idades, valorizando a economia interna e a diversão em equipe.</p>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO DA ABA: COMO ENTRAR (JOIN) -->
+    <div id="tab-join" class="page-section">
+        <div class="container static-page-content">
+            <h2>Como Conectar ao Servidor</h2>
+            <p>É muito simples começar a jogar connosco! Siga os passos abaixo:</p>
+            <ol class="steps-list">
+                <li>Abra o seu Minecraft (Versões Java ou Bedrock de 1.19 até à mais recente).</li>
+                <li>Vá em <strong>Multijogador</strong> e clique em <strong>Adicionar Servidor</strong>.</li>
+                <li>Introduza o endereço IP: <code class="ip-code">jogar.pixellegends.net</code></li>
+                <li>Clique em Conectar e divirta-se!</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO DA ABA: FÓRUNS (FORUMS) -->
+    <div id="tab-forums" class="page-section">
+        <div class="container static-page-content">
+            <h2>Fóruns da Comunidade</h2>
+            <p>Participe das discussões, tire dúvidas, sugira novos recursos e reporte bugs diretamente com a nossa equipe e outros membros da comunidade.</p>
+            <div class="forum-categories">
+                <div class="forum-box">
+                    <h4>Anúncios Oficiais</h4>
+                    <p>Fique por dentro das últimas atualizações e eventos.</p>
+                </div>
+                <div class="forum-box">
+                    <h4>Suporte Técnico</h4>
+                    <p>Encontrou um problema? Peça ajuda aqui.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO DA ABA: REGRAS (RULES) -->
+    <div id="tab-rules" class="page-section">
+        <div class="container static-page-content">
+            <h2>Regras do Servidor</h2>
+            <p>Para garantir uma convivência saudável, siga estritamente as nossas diretrizes:</p>
+            <ul class="rules-list">
+                <li>Proibido o uso de qualquer software de alteração de jogo (Hacks, X-Ray, etc.).</li>
+                <li>Respeite todos os jogadores e membros da equipe (Sem ofensas ou racismo).</li>
+                <li>Proibido spam ou divulgação de outros servidores nos chats públicos.</li>
+                <li>O desrespeito às regras poderá resultar em banimento permanente da conta.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Rodapé Fixo -->
+    <footer class="site-footer">
+        <div class="container footer-flex">
+            <p>&copy; 2026 PixelLegends.net. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Termos</a>
+                <a href="#">Privacidade</a>
+                <a href="#">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
