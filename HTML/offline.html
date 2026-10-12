@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>! Sem Conexão ! | Zera's Craft</title>
+    <link rel="icon" href="assets/images/geral/icone.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* RESET GLOBAL PARA REMOVER ESPAÇOS EM BRANCO */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            /* Evita barras de rolagem indesejadas */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
+                url('assets/images/geral/background.png');
+            background-size: cover;
+            background-position: center 20%;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px 30px;
+        }
+
+        /* --- BARRA SUPERIOR (ESTILO BEDROCK) --- */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .bedrock-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #272733;
+            border: 2px solid #1a1a24;
+            border-top: 2px solid #4a4a5e;
+            border-left: 2px solid #4a4a5e;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.1s;
+            text-decoration: none;
+            height: 40px;
+        }
+
+        .bedrock-btn:hover {
+            filter: brightness(1.15);
+        }
+
+        .bedrock-btn:active {
+            transform: translateY(2px);
+        }
+
+        .btn-icon-box {
+            width: 36px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .help-icon {
+            background: #6366f1;
+        }
+
+        .login-icon {
+            background: #10b981;
+        }
+
+        .btn-text {
+            padding: 0 14px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px #000;
+            white-space: nowrap;
+        }
+
+        /* --- GRADE DE CARDS ESTILO BEDROCK --- */
+        .cards-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            width: 100%;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .card-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .card-column:hover {
+            transform: translateY(-10px);
+        }
+
+        .bedrock-card {
+            width: 195px;
+            height: 275px;
+            background: rgba(210, 218, 228, 0.92);
+            backdrop-filter: blur(6px);
+            border: 3px solid rgba(255, 255, 255, 0.75);
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .card-column:hover .bedrock-card {
+            background: rgba(240, 244, 250, 1);
+            border-color: #ffffff;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .card-img-box {
+            width: 80%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-img-box img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-column:hover .card-img-box img {
+            transform: scale(1.18);
+        }
+
+        .card-label {
+            margin-top: 14px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1.2px;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000000, 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        /* --- RODAPÉ --- */
+        .bottom-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+        }
+
+        .offline-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #fca5a5;
+            background: rgba(239, 68, 68, 0.35);
+            border: 1px solid #ef4444;
+            padding: 6px 14px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px #000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .game-version {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 2px 2px 0px #000000;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            width: 520px;
+            max-width: 90vw;
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: 6px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.9) translateY(15px);
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            background: #18181b;
+            border-bottom: 1px solid #3f3f46;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #fde047;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin: 0;
+            letter-spacing: -0.2px;
+        }
+
+        .modal-title svg {
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid #52525b;
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.15s ease;
+        }
+
+        .modal-close:hover {
+            background: #3f3f46;
+            border-color: #71717a;
+        }
+
+        .modal-body {
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #e4e4e7;
+            line-height: 1.6;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .modal-body ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .modal-body strong {
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        @media (max-width: 1100px) {
+            .cards-wrapper {
+                flex-wrap: wrap;
+                gap: 16px;
+                max-width: 650px;
+            }
+
+            .bedrock-card {
+                width: 160px;
+                height: 225px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            html,
+            body {
+                height: auto;
+                min-height: 100vh;
+                overflow-y: auto;
+            }
+
+            body {
+                padding: 16px;
+            }
+
+            .cards-wrapper {
+                flex-direction: column;
+                gap: 18px;
+                margin: 20px auto;
+            }
+
+            .bedrock-card {
+                width: 200px;
+                height: 140px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn-text {
+                display: none;
+            }
+
+            .bedrock-btn {
+                width: 40px;
+            }
+
+            .btn-icon-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="top-header">
+        <a href="#" class="bedrock-btn" onclick="openModal('help'); return false;">
+            <div class="btn-icon-box help-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <span class="btn-text">HELP</span>
+        </a>
+
+        <a href="#" class="bedrock-btn" onclick="openModal('options'); return false;">
+            <div class="btn-icon-box login-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <span class="btn-text">SEU Wi-Fi</span>
+        </a>
+    </div>
+
+    <!-- GRADE DE CARDS CENTRAIS -->
+    <div class="cards-wrapper">
+        <div class="card-column" onclick="openModal('livro')">
+            <div class="bedrock-card">
+                <div class="card-img-box">
+                    <img src="assets/images/icones/Ícone Banner.png" alt="Guia de Ajuda">
+                </div>
+            </div>
+            <div class="card-label">GUIA DE AJUDA</div>
+        </div>
+
+        <div class="card-column" onclick="openModal('bau')">
+            <div class="bedrock-card">
+                <div class="card-img-box">
+                    <img src="assets/images/icones/Ícone Baú.png" alt="Dados Locais">
+                </div>
+            </div>
+            <div class="card-label">DADOS LOCAIS</div>
+        </div>
+
+        <div class="card-column" onclick="openModal('castelo')">
+            <div class="bedrock-card">
+                <div class="card-img-box">
+                    <img src="assets/images/icones/Ícone Castelo.png" alt="Servidor">
+                </div>
+            </div>
+            <div class="card-label">SERVIDOR</div>
+        </div>
+
+        <div class="card-column" onclick="openModal('livro2')">
+            <div class="bedrock-card">
+                <div class="card-img-box">
+                    <img src="assets/images/icones/Ícone Livro.png" alt="Outros">
+                </div>
+            </div>
+            <div class="card-label">OUTROS</div>
+        </div>
+
+        <div class="card-column" onclick="openModal('options')">
+            <div class="bedrock-card">
+                <div class="card-img-box">
+                    <img src="assets/images/icones/Icone Opções.png" alt="Opções de Rede">
+                </div>
+            </div>
+            <div class="card-label">OPÇÕES DE REDE</div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <div class="bottom-footer">
+        <div class="offline-status">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                </path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            Sem Conexão com o Servidor
+        </div>
+        <div class="game-version">
+            v1.14.60
+        </div>
+    </div>
+
+    <!-- MODAL INTERATIVO -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalBg(event)">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span id="modalTitleText">Título da Solução</span>
+                </div>
+                <button class="modal-close" onclick="closeModal()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const modalContent = {
+            'help': {
+                title: 'Central de Ajuda Off-line',
+                steps: [
+                    'Esta página indica que a aplicação está sem conexão com a internet ou com o servidor principal.',
+                    'Utilize as opções dos painéis centrais para diagnosticar problemas comuns.',
+                    'Clique em "Tentar Novamente" ou recarregue a página assim que restabelecer a rede.'
+                ]
+            },
+            'livro': {
+                title: 'Guia de Diagnóstico e Instruções',
+                steps: [
+                    'Consulte este guia para entender falhas comuns de rota e DNS.',
+                    'Certifique-se de que nenhum firewall ou antivírus bloqueou a conexão do aplicativo.',
+                    'Verifique se o arquivo de configuração de rede está apontando para o IP correto.'
+                ]
+            },
+            'bau': {
+                title: 'Gerenciamento de Dados Locais e Cache',
+                steps: [
+                    'Dados temporários podem estar corrompidos devido à queda abrupta de conexão.',
+                    'Limpe o cache do seu navegador ou aplicativo se o erro persistir.',
+                    'Suas informações principais salvas localmente não serão perdidas.'
+                ]
+            },
+            'castelo': {
+                title: 'Status dos Servidores e Mundos',
+                steps: [
+                    'O servidor principal pode estar offline para manutenção programada.',
+                    'Verifique o painel de status da infraestrutura para acompanhar atualizações.',
+                    'Aguarde alguns minutos e tente se reconectar ao ambiente.'
+                ]
+            },
+            'livro2': {
+                title: 'Precisa de Mais Ajuda?',
+                steps: [
+                    'Se o erro persistir, o problema pode ser instabilidade na nossa rede ou provedor.',
+                    'Entre em nosso Discord oficial para verificar avisos em Nossos Canais!',
+                    'Abra um ticket de suporte com o print desta tela para nossa equipe te auxiliar.'
+                ]
+            },
+            'options': {
+                title: 'Status do Seu Wi-Fi e Rede Local',
+                steps: [
+                    'Verifique o estado atual da sua conexão Wi-Fi ou cabo de rede.',
+                    'Caso sua internet esteja instável, reiniciar o roteador pode ajudar a limpar a rota de conexão.',
+                    'Se o seu dispositivo apresentar quedas de driver de rede, atualize-os pelo gerenciador de dispositivos.'
+                ]
+            }
+        };
+
+        function openModal(id) {
+            const data = modalContent[id];
+            if (!data) return;
+
+            document.getElementById('modalTitleText').innerText = data.title;
+
+            let html = '<strong>Instruções recomendadas:</strong><ul>';
+            data.steps.forEach(step => {
+                html += `<li>${step}</li>`;
+            });
+            html += '</ul>';
+
+            document.getElementById('modalBody').innerHTML = html;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        function closeModalBg(event) {
+            if (event.target.id === 'modalOverlay') {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>
