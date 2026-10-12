@@ -1,0 +1,340 @@
+/* ==========================================
+   ESTILOS: CONTÊINER FIXO E JUKEBOX
+========================================== */
+.minecraft-jukebox-wrapper {
+  position: fixed !important;
+  bottom: 25px !important;
+  right: 25px !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Minecraft', monospace;
+  background: transparent;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  user-select: none;
+}
+
+/* Container da Jukebox e Partículas */
+.jukebox-item-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scale: 120%;
+}
+
+/* O Bloco da Jukebox */
+.jukebox-block {
+  position: relative;
+  pointer-events: auto !important;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 20;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+/* Borda Radial Animada do Tempo */
+.jukebox-block::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  background: conic-gradient(#1db954 var(--timer-progress, 0%), rgba(255, 255, 255, 0.15) 0);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.jukebox-block:hover {
+  transform: scale(1.08);
+  filter: brightness(1.15);
+}
+
+.jukebox-block:active {
+  transform: scale(0.95);
+}
+
+.jukebox-img {
+  width: 36px;
+  height: 36px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+/* Partículas Musicais */
+.notes-container {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 70px;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 10;
+  margin-bottom: 6px;
+}
+
+.floating-note {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  animation: floatNoteParticle 1.2s ease-out forwards;
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 0 0 10px currentColor, 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+@keyframes floatNoteParticle {
+  0% {
+    transform: translate(-50%, 0) scale(0.4) rotate(0deg);
+    opacity: 0;
+  }
+
+  20% {
+    transform: translate(calc(-50% + var(--rand-x) * 0.5), -15px) scale(var(--scale-val)) rotate(var(--rand-rot));
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translate(calc(-50% + var(--rand-x)), -75px) scale(calc(var(--scale-val) * 0.8)) rotate(calc(var(--rand-rot) * 1.5));
+    opacity: 0;
+  }
+}
+
+/* Central Message - Alinhamento Vertical Perfeito */
+.central-message {
+  background: rgba(18, 18, 22, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 14px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(15px);
+  pointer-events: none;
+}
+
+.central-message.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.msg-icon-mini {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease;
+}
+
+.msg-icon-mini i {
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+/* Bloco empilhado em coluna para evitar sobreposição */
+.msg-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.msg-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.msg-status {
+  font-size: 0.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.msg-title {
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.msg-duration-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.msg-duration {
+  font-size: 0.65rem;
+  font-weight: bold;
+  display: block;
+}
+
+/* ==========================================
+   MODAL DE PLAYLIST DO JUKEBOX
+========================================== */
+.jukebox-playlist-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.jukebox-playlist-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.jukebox-modal-content {
+  width: 90%;
+  max-width: 650px;
+  height: 80vh;
+  background: rgba(18, 18, 22, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+}
+
+.jukebox-modal-header {
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.jukebox-modal-header h3 {
+  color: #fff;
+  font-size: 1rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jukebox-close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.jukebox-close-btn:hover {
+  color: #1db954;
+}
+
+.jukebox-categories-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  scrollbar-width: thin !important;
+  scrollbar-color: #d6d6d6 #1a1a1a !important;
+}
+
+.jukebox-categories-container::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.jukebox-categories-container::-webkit-scrollbar-track {
+  background: #1a1a1a !important;
+  border-radius: 0px !important;
+}
+
+.jukebox-categories-container::-webkit-scrollbar-thumb {
+  background: #d6d6d6 !important;
+  border-radius: 0px !important;
+  border: 1px solid #000000 !important;
+}
+
+.jukebox-category-group {
+  margin-bottom: 25px;
+}
+
+.jukebox-category-title {
+  color: #1db954;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+  font-weight: bold;
+}
+
+.jukebox-songs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.jukebox-song-item {
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #ccc;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.jukebox-song-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.15);
+  padding-left: 18px;
+}
+
+.jukebox-song-item.active {
+  background: rgba(29, 185, 84, 0.18);
+  border-color: #1db954;
+  color: #fff;
+  font-weight: bold;
+}
+
+.jukebox-song-item i {
+  font-size: 0.9rem;
+  width: 18px;
+  text-align: center;
+}

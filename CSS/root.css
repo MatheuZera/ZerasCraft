@@ -1,0 +1,556 @@
+:root {
+    /* Tons de Fundo - Escuros e opacos para legibilidade máxima */
+    --zc-bg-main: #474747;
+    --zc-bg-panel: rgba(26, 26, 26, 0.8);
+    /* Vidro mínimo: 96% de opacidade */
+    --zc-bg-tab: rgba(19, 19, 19, 0.99);
+    /* Vidro mínimo: 96% de opacidade */
+    --zc-bg-hover: rgba(255, 255, 255, 0.05);
+    --verde-mc: #55ad4b;
+    --glass-bg: rgba(10, 10, 10, 0.85);
+    --dark-bg: #0c0c0c;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    --border-light: rgba(255, 255, 255, 0.1);
+
+    /* Cores de Destaque - Agora Neutras (Branco e Cinza) */
+    --zc-accent: #ffffff;
+    /* Destaque principal agora é branco puro */
+    --zc-accent-soft: rgba(255, 255, 255, 0.1);
+    /* Destaque suave para fundos ativos */
+
+    /* Bordas e Textos */
+    --zc-border: rgba(255, 255, 255, 0.08);
+    --zc-text: #ffffff;
+    --zc-muted: #a0a0a0;
+
+
+    /* Paleta Oficial Inspirada */
+    --bg-dark: #121212;
+    --bg-card: #1d1d1d;
+    --bg-light: #2a2a2a;
+    --green-mc: #3c8527;
+    /* O verde clássico do botão */
+    --green-hover: #52a535;
+    --gold: #f8cb47;
+    --text-main: #ffffff;
+    --text-muted: #a8a8a8;
+    --border: #333333;
+
+    /* Configurações */
+    --container-width: 1200px;
+    --gutter: 20px;
+    --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+
+
+    --mc-green: #ffffff;
+    --mc-dark: #0f0f0f;
+    --mc-border: #333;
+    --mc-card: #141414;
+
+
+    --bg-page: #111111;
+    /* Fundo da página */
+    --bg-card: #181818;
+    /* Fundo das caixas e galeria */
+    --bg-tag: #1f1f1f;
+    /* Fundo das tags */
+    --accent-color: #54bd34;
+    /* Verde Minecraft */
+    --accent-blue: #2b90d9;
+    /* Borda azul de seleção */
+    --border-color: #2a2a2a;
+    /* Bordas gerais */
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+
+    --rt-bg-main: #2cb810;
+    /* Fundo escuro profundo do site */
+    --rt-bg-card: #13131a;
+    /* Fundo dos blocos e cards */
+    --rt-bg-input: #181824;
+    /* Campos de texto internos */
+    --rt-purple-main: #464646;
+    /* Roxo marca Rustical */
+    --rt-purple-glow: #444444;
+    /* Roxo claro para efeitos e hovers */
+    --rt-text-pure: #ffffff;
+    --rt-text-muted: #464646;
+
+
+    --bg-dark: #121212;
+    --bg-card: #1d1d1d;
+    --bg-light: #2a2a2a;
+    --green-mc: #3c8527;
+    --green-hover: #52a535;
+    --gold: #f8cb47;
+    --text-main: #ffffff;
+    --text-muted: #a8a8a8;
+    --border: #333333;
+
+    --container-width: 1200px;
+    --gutter: 20px;
+    --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap");
+
+
+/* 1. SUPORTE FIREFOX (Aplica a todos os elementos e containers injetados) */
+html,
+body,
+*,
+*::before,
+*::after,
+.znav-mega-grid *,
+.znav-tab-content,
+.znav-mega-panel,
+.zmob-panel,
+.zmob-sidebar,
+.zsearch-results-area {
+  scrollbar-width: thin !important;
+  scrollbar-color: #d6d6d6 #242424 !important;
+}
+
+/* 2. LARGURA E ALTURA (Chrome, Edge, Brave, Safari, Opera) */
+::-webkit-scrollbar,
+*::-webkit-scrollbar,
+.znav-mega-grid *::-webkit-scrollbar,
+.znav-tab-content::-webkit-scrollbar,
+.zmob-panel::-webkit-scrollbar {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #242424 !important;
+}
+
+/* 3. REMOÇÃO COMPLETA E FORÇADA DAS SETAS (▲ e ▼) */
+::-webkit-scrollbar-button,
+*::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+*::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* 4. TRILHO / FUNDO (100% Quadrado e Sem Arredondamento) */
+::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+*::-webkit-scrollbar-track-piece {
+  background: #242424 !important;
+  border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 5. PONTEIRO / INDICADOR (Cinzento Claro + Moldura Preta Pixelada) */
+::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  background: #d6d6d6 !important;
+  border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  border: 2px solid #000000 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 6. HOVER E CLIQUE NO PONTEIRO */
+::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+  background: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+::-webkit-scrollbar-thumb:active,
+*::-webkit-scrollbar-thumb:active {
+  background: #a8a8a8 !important;
+  border-color: #000000 !important;
+}
+
+/* 7. CANTO DE ENCONTRO DE SCROLLBARS DUPLAS */
+::-webkit-scrollbar-corner,
+*::-webkit-scrollbar-corner {
+  background: #242424 !important;
+  border-radius: 0px !important;
+}
+
+/*===========================*/
+/* --- FONTE PERSONALIZADA MINECRAFT --- */
+/* --- FONTE PERSONALIZADA MINECRAFT --- */
+@font-face {
+    font-family: 'MinecraftFontTitle';
+    src: url('../assets/fonts/Minecraft-Five-Title.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MinecraftFontText';
+    src: url('../assets/fonts/Minecraft-Regular-Text.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Classe predefinida e direta para aplicar em H1, P ou qualquer elemento */
+.font-mc, h1, h2, h3, h4, h5, h6 {
+    font-family: 'MinecraftFontTitle', sans-serif !important;
+}
+
+.font-mc, p {
+    font-family: 'MinecraftFontText', sans-serif !important;
+}
+
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Reserva o espaço da barra de rolagem permanentemente para evitar layout shift */
+  scrollbar-gutter: stable;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  background-color: var(--bg-dark, #111);
+  color: var(--text-main, #fff);
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  /* Suporte para navegadores baseados em Webkit */
+  user-select: none;
+}
+
+
+body.z-lock-scroll,
+html.z-lock-scroll {
+  overflow: hidden !important;
+}
+
+/* Aplique isso aos elementos que estão mostrando o cursor */
+.status-indicator,
+.join-text,
+.counter,
+.btn-sidebar {
+    user-select: none;
+    /* Impede a seleção de texto e o aparecimento do cursor | */
+    cursor: default;
+    /* Garante que o mouse não mude para o formato de "I" (edição) */
+}
+
+/* ============================================================================================= */
+/* ==========================================
+   TIPOGRAFIA GLOBAL E TÍTULOS (ESTÁVEL)
+========================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Rajdhani", sans-serif;
+    text-transform: uppercase !important;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    /* Margem padrão para evitar que o texto grude */
+}
+
+/* Tamanhos fixos escaláveis */
+h1 {
+    font-size: 2.2rem !important;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+}
+
+h3 {
+    font-size: 1.6rem !important;
+    line-height: 1.3;
+}
+
+h4 {
+    font-size: 1.4rem !important;
+    line-height: 1.4;
+}
+
+h5 {
+    font-size: 1.25rem !important;
+}
+
+h6 {
+    font-size: 1rem !important;
+}
+
+.title-section {
+    color: var(--text-main);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ============================================================================================= */
+/* Mantém os botões grandes com a fonte correta */
+.logo,
+.btn-big-green {
+    font-family: "Rajdhani", sans-serif !important;
+    text-transform: uppercase;
+}
+
+/* ============================================================================================= */
+/*
+  ESTILO GERAIS CSS
+*/
+/* Esta classe permite que o HTML controle a cor */
+.secao-personalizavel {
+    width: 100%;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    /* Aqui acontece a mágica: ele usa a variável --bg que você criar no HTML */
+    background-color: var(--secao, #0b0b0b);
+    color: white;
+}
+
+/* Seção com fundo Verde */
+.secao-verde {
+    width: 100%;
+    background-color: #00b31e !important;
+    /* Usa sua cor verde oficial */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo Verde */
+.secao-verde2 {
+    width: 100%;
+    background-color: #229e00 !important;
+    /* Usa sua cor verde oficial */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo Verde */
+.secao-verde3 {
+    width: 100%;
+    background-color: #187000 !important;
+    /* Usa sua cor verde oficial */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo Verde */
+.secao-roxa {
+    width: 100%;
+    background: var(--purple-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    /* Z-index alto se precisar ficar sobre algo, mas 1000 costuma ser para menus */
+}
+
+/* Seção com fundo a */
+.secao-clara {
+    width: 100%;
+    background-color: var(--text-muted) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-cinza {
+    width: 100%;
+    background-color: var(--zc-bg-main) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo Cinza */
+.secao-cinza2 {
+    width: 100%;
+    background-color: #383838 !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura {
+    width: 100%;
+    background-color: var(--bg-light) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura2 {
+    width: 100%;
+    background-color: var(--bg-card) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-escura3 {
+    width: 100%;
+    background-color: var(--bg-dark) !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo Escuro/Preto */
+.secao-preta {
+    width: 100%;
+    background-color: #0b0b0b !important;
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Seção com fundo a */
+.secao-preto2 {
+    width: 100%;
+    background-color: var(--dark-bg);
+    /* Ou use var(--bg-dark) do seu style.css */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* ============================================================================================= */
+/* Estilo para a tag personalizada <secao-titulo> */
+secao-titulo {
+    display: block;
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
+    color: var(--cor-texto-claro);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+/* Estilo para a tag personalizada <secao-subtitulo> */
+secao-subtitulo {
+    display: block;
+    font-family: var(--fonte-subtitulo);
+    font-size: 1rem;
+    color: var(--cor-texto-claro);
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+/* ============================================================================================= */
+/* Feedback visual para cliques em botões e links */
+.btn-green:active,
+.tab-btn:active,
+.social-box:active {
+    transform: scale(0.95);
+    /* Efeito de botão sendo pressionado */
+    transition: transform 0.1s;
+}
+
+/* Melhorando a transição de hover para combinar com o som */
+.market-card,
+.dl-card {
+    transition:
+        transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        box-shadow 0.3s;
+}
+
+/* ============================================================================================= */
+
+/* --- UTILITÁRIOS --- */
+/* Ajuste global para evitar cortes */
+.container {
+    width: 100%;
+    max-width: 100% !important;
+    /* Remove o limite de 1200px */
+    padding: 0 30px;
+    /* Mantém um espaçamento interno opcional para os textos não colarem nas bordas */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
