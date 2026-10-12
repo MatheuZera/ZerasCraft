@@ -1,0 +1,7 @@
+{
+  "notas 1": "Caso o o site esteja em manutenção, altere o valor de 'manutencao' para true. Caso contrario, deixe como false.", 
+  "manutencao": false,
+
+  "notas 2": "Caso o o site esteja em manutenção, altere o valor de 'manutencao' para true. Caso contrario, deixe como false.", 
+  "teste": false
+}
