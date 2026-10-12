@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
+    <meta charset="UTF-8">
+    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zera's Craft | Adobe Ultimate</title> <!---->
+    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
+    <link rel="icon" href="../assets/images/geral/icone.png" type="image/x-icon">
+
+    <!-- CSS Globais -->
+    <link rel="stylesheet" href="../CSS/elements.css" />
+    <link rel="stylesheet" href="../CSS/nav-header.css" />
+    <link rel="stylesheet" href="../CSS/root.css" />
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <link rel="stylesheet" href="../CSS/ui-styles.css" />
+    
+    <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!---->
+
+    <!--é a breve descrição da sua página que pode aparecer no Google-->
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
+    <meta name="keywords"
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo">
+    <!--Identifica o autor do documento HTML.-->
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft">
+    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
+    <meta name="robots" content="index, follow">
+
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--O título que aparece na pré-visualização.-->
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial">
+    <!--A descrição que aparece na pré-visualização.-->
+    <meta property="og:description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!">
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <meta property="og:image" content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg">
+    <!--A URL da página.-->
+    <meta property="og:url" content="https://seusite.com.br/index.html">
+
+    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mundo Zera's Craft">
+    <meta property="og:locale" content="pt_BR">
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@SeuTwitterHandle">
+    <meta name="twitter:creator" content="@SeuTwitterHandle">
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!">
+    <meta name="twitter:description"
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!">
+    <!---->
+    <meta name="twitter:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg">
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <meta name="theme-color" content="#347C2F">
+    <!-- Links para ScrollReveal e CountUp.js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!--=======================================================================================================-->
+    <div id="nav-placeholder-pc"></div>
+    <div id="nav-placeholder-mobile"></div>
+    <!--=======================================================================================================-->
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg" style="background-image: url('../assets/images/geral/banner-fundo.gif');"></div>
+
+            <div class="hero-content">
+                <span class="hero-tag">Mundo Zera's Craft</span>
+
+                <h1 class="hero-title">ADOBE ULTIMATE</h1>
+
+                <p class="hero-desc">Apenas para Windows, no MacOS voce terá que pesquisar aprofundado para saber como
+                    Instala Apps
+                    de Terceiros.. E no Linux não é Compatível ok.</p>
+
+                <div class="hero-actions">
+                    <a href="#" class="btn-hero-green">DISCORD <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" class="btn-hero-outline">CANAL OFICIAL</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-header section-games">
+            <h2>LEIA ANTES</h2>
+        </div>
+
+        <section class="guide-section">
+            <div class="guide-container">
+                <div class="guide-box">
+                    <!-- Cabeçalho com os Botões -->
+                    <div class="guide-tabs-header">
+                        <button class="guide-tab-btn active" data-tab="panel-aviso">AVISO</button>
+                        <button class="guide-tab-btn" data-tab="panel-baixando">BAIXANDO</button>
+                        <button class="guide-tab-btn" data-tab="panel-notas">NOTAS</button>
+                    </div>
+
+                    <!-- Área de Conteúdo das Abas -->
+                    <div class="guide-body">
+
+                        <!-- Painel 1: Aviso -->
+                        <div id="panel-aviso" class="guide-panel active">
+                            <p>Antes de mais nada, instale este arquivo OneClickFirewall e Execute como Administrador,
+                                após isto este sistema estará integrado no seu PC.</p>
+                            <br>
+                            <a href="https://drive.usercontent.google.com/download?id=16FFKAabLQ_NUqE5uUOdFWHxeLqyWIONl&export=download&authuser=0"
+                                class="guide-link">
+                                <i class="fas fa-download"></i> OneClickFirewall Download
+                            </a>
+                            <br>
+                            <a href="https://www.win-rar.com/" class="guide-link">
+                                <i class="fas fa-download"></i> WinRAR Download
+                            </a>
+                            <br>
+                            <hr>
+                            <br>
+                            <h3>PARA QUE ELE SERVE?</h3>
+                            <p>Bem, este recurso simplesmente desabilita a Internet do Aplicativo ou Software
+                                Selecionado pelo Explorer. Explicarei mais detalhadamente sobre, nesta outra Aba ao
+                                Lado.</p>
+                        </div>
+
+                        <!-- Painel 2: Baixando -->
+                        <div id="panel-baixando" class="guide-panel">
+                            <h3>EXPLICANDO..</h3>
+                            <p>Muito bem, quando abrir o Site para Baixar o seu App da Adobe que estão listadas abaixo
+                                por Cards, você vai baixar em .rar, então precisará do Software WinRAR para extraír as
+                                Pastas.</p>
+                            <br>
+                            <hr>
+                            <br>
+                            <h3>EXTRAINDO & INSTALANDO</h3>
+                            <p># Após baixar o WinRAR, apenas instale no seu PC.
+                                <br>Agora com o .RAR da sua Adobe que você baixou, extraía com o seu WinRAR e lhe pedirá
+                                uma Senha: taiwebs.com, e então após descompactar verá uma pasta, dentro dela poderá ter
+                                (Adobe, Autoplay, Crack+ e alguns Arquivos), eu não sugiro Executar via autoplay.exe
+                                pois não sei se é seguro ou não, então abra a Pasta Adobe e Execute o Set-up.exe ou algo
+                                semelhante (Arquivo para Instalar seu App Adobe).
+                            </p>
+                            <br>
+                            <hr>
+                            <br>
+                            <h3>SEGURANÇA DO WINDOWS</h3>
+                            <p>Um aviso que devo falar rapidamente, é Desativar a Segurança do Windows (Proteção em
+                                tempo real, e etc..), pois se você executar e estiver ativada, o Set-up.exe (Arquivo de
+                                instalação do App Adobe), será deletado como medidas de segurança do Windows. <br>#
+                                Então Desabilite a Segurança nas Configurações ok.</p>
+                        </div>
+
+                        <!-- Painel 3: Notas -->
+                        <div id="panel-notas" class="guide-panel">
+                            <h3>ONE-CLICK-FIREWALL</h3>
+                            <p>Agora, após instalar NÃO ABRA O APLICATIVO! Calma.. <br>1. Agora você deve procurar o
+                                Aplicativo Adobe desejado na aba de Iniciar (Tecla Win), e clicar sobre o Aplicativo da
+                                Adobe com o Botão Direito > Abrir Local do Arquivo > E então aparecerá alguns atalhos de
+                                seus Aplicativos;
+                                <br>2. Clique sobre o Atalho do seu App da Adobe desejado;
+                                <br>3. Clique com o Botão Direito > BLOCK INTERNET ACCESS;
+                                <br>4. Agora, clique novamente com o Botão Direito > Abrir Local do Arquivo;
+                                <br>4.1 (E então você entrará no "Diretório" do App Adobe que você está Modificando) > E
+                                terá um App Adobe já selecionado > Clique com o Botão Direito > BLOCK INTERNET ACCESS
+                            </p>
+                            <br>
+                            <hr>
+                            <br>
+                            <h3>APROVEITE !</h3>
+                            <p>E PRONTO, AGORA FAÇA O MESMO PROCESSO PARA TODOS OS APLICATIVOS ADOBE QUE VOCÊ FOR BAIXAR
+                                E INSTALAR. ESTE PROCEDIMENTO QUE VOCÊ ACABOU DE FAZER, FOI BASICAMENTE DESABILITAR A
+                                INTERNET DO SEU APP ADOBE, ENTÃO MESMO SE ABRIR COM INTERNET, NÃO APARECERÁ AQUELE MENU
+                                CHATO DE COMPRAR E COISAS ASSIM!</p>
+                            <br>
+                            <hr>
+                            <br>
+                            <p>NÃO SE ESQUEÇA DE ATIVAR A SEGURANÇA DO SEU WINDOWS NOVAMENTE QUANDO TERMINAR, E
+                                DESATIVÁ-LA SOMENTE QUANDO FOR INSTALAR ALGUM DELES NOVAMENTE.</p>
+                            <br>
+                            <hr>
+                            <br>
+                            <h3>LEMBRANDO NOVAMENTE.. QUE NÃO SUGIRO EXECUTAR O autoplay.exe, E SIM O Set-up.exe OU ALGO
+                                ASSIM BLZ?</h3>
+                            <p>Senha: taiwebs.com</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <br>
+        <div class="section-header section-games">
+            <h2>MAC & WINDOWS</h2>
+        </div>
+
+        <section class="section-software">
+            <div class="software-grid">
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Acrobat.png">
+                        </div>
+                        <div class="tag-adobe-documento">Documento</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Acrobat Pró</h3>
+                            <p>Permite criar, editar, assinar e gerenciar documentos PDF.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/001en-adobe-acrobat-pro-458-3430.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/After-Effects.png">
+                        </div>
+                        <div class="tag-adobe-motion">Motion</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe After Effects</h3>
+                            <p>Focado em motion graphics e efeitos visuais, permitindo criar animações complexas,
+                                títulos de filmes e efeitos especiais.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/detail/product/nglb6jyUk9LEig7wBDBekwvt4-2793-16448.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Animate.png">
+                        </div>
+                        <div class="tag-adobe-motion">Motion</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Animate</h3>
+                            <p>Utilizado para criar animações vetoriais interativas, como jogos, anúncios e desenhos
+                                animados para a web e plataformas móveis.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/fFydanbqG3tJejBlgA0fplSch-1221-15543.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Audition.png">
+                        </div>
+                        <div class="tag-adobe-audio">Áudio</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Audition</h3>
+                            <p>Um editor de áudio profissional para gravação, mixagem e restauração de áudio para
+                                projetos de vídeo, podcast e música.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/detail/product/ZKl0nlYEau8eqkbRyJvT64scG-1246-15533.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Bridge.png">
+                        </div>
+                        <div class="tag-adobe-midia">Mídia</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Bridge</h3>
+                            <p>Um gerenciador de ativos de mídia que organiza e ajuda a visualizar arquivos de projetos
+                                criativos antes de abri-los em outros aplicativos da Adobe.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/eaibX41DtUPd8kOQ5Y2j0nqBC-1338-16937.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Camera-Raw.png">
+                        </div>
+                        <div class="tag-adobe-plugin">Plugin</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Camera Raw</h3>
+                            <p>Um plugin que permite a edição de imagens em formato RAW (o "negativo digital") dentro do
+                                Photoshop e do Bridge.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/detail/product/3c9435015579e19dc2fb6312a2258ab5-785-4624.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Dimension.png">
+                        </div>
+                        <div class="tag-adobe-3D">3D</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Dimension</h3>
+                            <p>Ele foi desenvolvido para designers gráficos que não têm experiência avançada com 3D,
+                                permitindo que eles combinem facilmente modelos 3D, materiais, texturas e imagens 2D em
+                                uma única cena.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/9bEHdZhxc5f4ew26XzdbCuq4m-254-6925.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Fresco.png">
+                        </div>
+                        <div class="tag-adobe-design">Design</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Fresco</h3>
+                            <p>Proporciona uma experiência de pintura e desenho completamente natural. Para pintores,
+                                ilustradores, artistas, cartunistas, desenhistas e qualquer pessoa que queira descobrir
+                                – ou redescobrir – a alegria de pintar e desenhar.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/adobe-fresco-3453-11537.html" class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/GenP.png">
+                        </div>
+                        <div class="tag-adobe-plugin">Plugin</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe GenP</h3>
+                            <p>Este não é um produto oficial da Adobe; é um tipo de ativador de software que modifica os
+                                aplicativos para ignorar a necessidade de licença, o que é ilegal e pode representar um
+                                risco de segurança. (É Sério..)</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="hhttps://br0wsers.com/blog/detail/a0icqnG3utkRdbPBlMkft95Qv-9964-18722.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/InCopy.png">
+                        </div>
+                        <div class="tag-adobe-design">Design</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe InCopy</h3>
+                            <p>Ele permite que você escreva e revise o conteúdo de um documento ao mesmo tempo em que o
+                                designer trabalha no layout da página usando o InDesign, sem que um atrapalhe o outro.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/3tgfaaFKsdWSTA8wgB6Bpu1RA-3894-18728.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/InDesign.png">
+                        </div>
+                        <div class="tag-adobe-design">Design</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe InDesign</h3>
+                            <p>Software de editoração eletrônica para criar layouts de páginas, como revistas, jornais,
+                                e-books e folhetos.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/detail/product/6ryg3REKBJz1pXe7sZIvSusmD-334-16901.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Illustrator.png">
+                        </div>
+                        <div class="tag-adobe-design">Design</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Illustrator</h3>
+                            <p>Ferramenta de criação de gráficos vetoriais, ideal para logotipos, ícones, ilustrações e
+                                tipografia que podem ser redimensionados infinitamente sem perda de qualidade.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/PyDsc1CEYSBtqoTHjwK6zhX8o-749-15771.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Lightroom.png">
+                        </div>
+                        <div class="tag-adobe-imagem">Imagem</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Lightroom</h3>
+                            <p>O Adobe Lightroom é um software para edição e organização de fotos, amplamente usado por
+                                fotógrafos profissionais e amadores.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/6qx1f3naJuETyupsjfHAa9s5Q-734-15637.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Media-Encoder.png">
+                        </div>
+                        <div class="tag-adobe-midia">Mídia</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Media Encoder</h3>
+                            <p>Um codificador de vídeo que trabalha em conjunto com outros programas da Adobe para
+                                converter arquivos para diversos formatos, otimizando o fluxo de trabalho.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/detail/product/umEPhaOBCpb2fskSmVCw5AWcF-1360-13774.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Photoshop.png">
+                        </div>
+                        <div class="tag-adobe-imagem">Imagem</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Photoshop</h3>
+                            <p>O padrão da indústria para edição de imagens e manipulação de fotos, usado para retocar,
+                                compor e criar designs digitais.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/uDmsixeD9080EdPRnLhMUCzAl-737-18485.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Premiere.png">
+                        </div>
+                        <div class="tag-adobe-video">Vídeo</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Premiere Pró</h3>
+                            <p>Essencial para a edição de vídeo, usado para cortar, montar, e aprimorar produções de
+                                vídeo de todos os tipos.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/adobe-premiere-pro-0021-1361-14616.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Premiere-Rush.png">
+                        </div>
+                        <div class="tag-adobe-video">Vídeo</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Premiere Rush</h3>
+                            <p>Ferramenta dedicada para fotógrafos gerenciarem e editarem grandes bibliotecas de fotos,
+                                com foco no processamento de imagens RAW.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/adobe-premiere-rush-cc-3866-14611.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Substance-3d-Designer.png">
+                        </div>
+                        <div class="tag-adobe-3D">3D</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Substance 3D Designer</h3>
+                            <p>Com ele, você pode criar texturas e materiais complexos do zero, usando um sistema de nós
+                                interligados que geram o resultado final.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/syqv3tsJlpZrHXYwKmtkoC3G7-908-17894.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Substance-3d-Painter.png">
+                        </div>
+                        <div class="tag-adobe-3D">3D</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Susbtance 3D Painter</h3>
+                            <p>Ele funciona como um "Photoshop para modelos 3D". Você pode importar um objeto 3D e
+                                pintar diretamente sobre sua superfície, adicionando detalhes como sujeira, ferrugem,
+                                arranhões ou até mesmo a textura da pele de um personagem.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/jewngIVgTlv6CW0ykHbzhsbwG-1279-5674.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Substance-3d-Sampler.png">
+                        </div>
+                        <div class="tag-adobe-3D">3D</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Substance 3D Sampler</h3>
+                            <p>O Sampler é um aplicativo de criação de materiais a partir de fotos. Ele simplifica o
+                                processo de transformar uma foto real em uma textura 3D.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/dl8Pk2a3Xwv9As1szuqgoRBtp-6625-21844.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/Substance-3d-Stager.png">
+                        </div>
+                        <div class="tag-adobe-3D">3D</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe Substance 3D Stager</h3>
+                            <p>Você pode importar modelos 3D, aplicar os materiais que você criou no Designer ou no
+                                Sampler, e depois ajustar a iluminação, a câmera e a composição da cena para criar uma
+                                imagem final fotorrealista.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/lNChpyYoxwLbO0lf217tI2oEc-6624-13695.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="software-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <img src="../assets/images/adobe/XD.png">
+                        </div>
+                        <div class="tag-adobe-design">Design</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-text">
+                            <h3>Adobe XD</h3>
+                            <p>Usado para design e prototipagem de interfaces de usuário (UI) e experiência de usuário
+                                (UX) para aplicativos móveis e websites</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://br0wsers.com/blog/detail/tJnfCz6vSd07YoCQ9m1EMkD32-776-8166.html"
+                                class="dl-link">
+                                <i class="fab fa-windows"></i> Windows Download
+                            </a>
+                            <a href="LINK" class="dl-link">
+                                <i class="fab fa-apple"></i> MacOS Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--------------------------------------------------------------->
+
+    <!-- Placeholders do Player e Rodapé (caso sejam carregados via JS) -->
+    <div id="player-container"></div>
+    <div id="footer-placeholder"></div>
+
+  <script src="../JavaScript/script.js"></script>
+  <script src="../JavaScript/script2.js"></script>
+  <script src="../JavaScript/load-html.js"></script>
+  <script src="../JavaScript/effects.js"></script>
+  <script src="../JavaScript/player.js"></script>
+</body>
+
+</html>
