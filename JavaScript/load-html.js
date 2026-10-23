@@ -38,15 +38,19 @@ function injectCSS(cssRelativePath) {
 }
 
 // 4. Carregador Universal de Componentes HTML
+// Retorna uma Promise que resolve quando o componente termina de ser injetado
+// (inclui re-execução de scripts internos). Isso permite que o resto do site
+// saiba com certeza o momento em que TODO o HTML dinâmico já está no DOM —
+// o que é essencial, por exemplo, para widgets de tradução (ver seção 10).
 function loadComponent({ placeholderId, htmlPath, cssPath, onLoaded }) {
   const placeholder = document.getElementById(placeholderId);
-  if (!placeholder) return;
+  if (!placeholder) return Promise.resolve();
 
   if (cssPath) injectCSS(cssPath);
 
   const fullHtmlUrl = new URL(htmlPath, ROOT_PATH).href;
 
-  fetch(fullHtmlUrl)
+  return fetch(fullHtmlUrl)
     .then((res) => {
       if (!res.ok) throw new Error(`Falha ao carregar ${fullHtmlUrl}`);
       return res.text();
@@ -70,6 +74,11 @@ function loadComponent({ placeholderId, htmlPath, cssPath, onLoaded }) {
       if (typeof onLoaded === "function") {
         onLoaded();
       }
+
+      // Avisa o resto da página que ESTE componente específico já foi injetado
+      document.dispatchEvent(
+        new CustomEvent("zc:componentLoaded", { detail: { placeholderId } })
+      );
     })
     .catch((err) => console.error(`[Autoload Error - ${placeholderId}]:`, err));
 }
@@ -212,12 +221,22 @@ window.slideBack = function() {
 };
 
 window.toggleDropdown = function(element) {
+  // Dropdown do menu mobile (injetado por este arquivo)
   const parentLi = element.closest(".zmob-has-dropdown");
-  if (!parentLi) return;
-  const content = parentLi.querySelector(".zmob-dropdown-content");
-  if (!content) return;
-  const isActive = parentLi.classList.toggle("active");
-  content.style.maxHeight = isActive ? `${content.scrollHeight}px` : "0px";
+  if (parentLi) {
+    const content = parentLi.querySelector(".zmob-dropdown-content");
+    if (!content) return;
+    const isActive = parentLi.classList.toggle("active");
+    content.style.maxHeight = isActive ? `${content.scrollHeight}px` : "0px";
+    return;
+  }
+
+  // Dropdown genérico usado em outras partes do site (fora do menu mobile).
+  // Unificado aqui para que "toggleDropdown" tenha uma única definição global
+  // e não seja sobrescrita por outro script (ex: script.js).
+  if (window.innerWidth <= 768) {
+    element.classList.toggle("active");
+  }
 };
 
 /* ============================================================
@@ -262,29 +281,31 @@ document.addEventListener("keydown", (e) => {
 ============================================================ */
 
 const initAutoload = () => {
+  const pending = [];
+
   // Menu PC
-  loadComponent({
+  pending.push(loadComponent({
     placeholderId: "nav-placeholder-pc",
     htmlPath: "HTML/html-nav-pc.html",
     cssPath: "CSS/nav-header.css"
-  });
+  }));
 
   // Menu Mobile
-  loadComponent({
+  pending.push(loadComponent({
     placeholderId: "nav-placeholder-mobile",
     htmlPath: "HTML/html-nav-mobile.html",
     cssPath: "CSS/nav-header.css"
-  });
+  }));
 
   // Footer
-  loadComponent({
+  pending.push(loadComponent({
     placeholderId: "footer-placeholder",
     htmlPath: "HTML/html-footer.html",
     cssPath: "CSS/style.css"
-  });
+  }));
 
   // Player Jukebox
-  loadComponent({
+  pending.push(loadComponent({
     placeholderId: "player-container",
     htmlPath: "HTML/html-player.html",
     cssPath: "CSS/jukebox.css",
@@ -293,6 +314,14 @@ const initAutoload = () => {
         window.initJukeboxPlayer();
       }
     }
+  }));
+
+  // Quando TODOS os componentes dinâmicos (nav, footer, player) já
+  // estiverem no DOM, marca a página como "pronta" e avisa quem estiver
+  // esperando (ex: o inicializador do widget de tradução — ver seção 10).
+  Promise.all(pending).then(() => {
+    window.zcAllLoaded = true;
+    document.dispatchEvent(new CustomEvent("zc:allLoaded"));
   });
 };
 
@@ -301,3 +330,51 @@ if (document.readyState === "loading") {
 } else {
   initAutoload();
 }
+
+/* ============================================================
+   10. TRADUÇÃO DO CONTEÚDO INJETADO (Nav/Footer/Player)
+   ------------------------------------------------------------
+   Problema: widgets de tradução de página (ex: Google Website
+   Translator, Weglot, GTranslate) normalmente fazem a varredura
+   do texto assim que a página carrega. Como o menu, o rodapé e o
+   player são injetados DEPOIS via fetch()+innerHTML, esse HTML
+   ainda não existe no DOM no momento da varredura — por isso ele
+   fica sem tradução.
+
+   Solução: não inicialize o widget de tradução no <head>/estático.
+   Em vez disso, chame `window.zcReady(callback)` a partir do seu
+   próprio script de tradução. O callback só roda depois que TODO
+   o HTML dinâmico (nav, footer, player) já estiver no DOM, então
+   a varredura do widget já encontra tudo.
+
+   Exemplo (Google Website Translator):
+
+     <div id="google_translate_element"></div>
+     <script>
+       window.zcReady(function () {
+         function googleTranslateElementInit() {
+           new google.translate.TranslateElement(
+             { pageLanguage: "pt" },
+             "google_translate_element"
+           );
+         }
+         const s = document.createElement("script");
+         s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+         window.googleTranslateElementInit = googleTranslateElementInit;
+         document.body.appendChild(s);
+       });
+     </script>
+
+   Para Weglot/GTranslate: troque a chamada de inicialização do
+   plugin (geralmente algo como `Weglot.initialize(...)`) para
+   dentro de `window.zcReady(function () { ... })` da mesma forma.
+============================================================ */
+
+window.zcReady = function(callback) {
+  if (typeof callback !== "function") return;
+  if (window.zcAllLoaded) {
+    callback();
+  } else {
+    document.addEventListener("zc:allLoaded", callback, { once: true });
+  }
+};

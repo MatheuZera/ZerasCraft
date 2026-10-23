@@ -145,16 +145,31 @@ function switchTab(evt, tabId) {
 
 /* ============================================================================================= */
 function toggleAccordion(element) {
-  const item = element.parentElement; // Pega o .acc-item
+  // Versao unificada: cobre .acc-item, .f-accordion e um fallback generico,
+  // evitando que as 3 implementacoes antigas (mesmo nome) se sobrescrevessem.
+  const accItem = element.closest(".acc-item");
+  if (accItem) {
+    // Fecha outros itens abertos (estilo unico)
+    document.querySelectorAll(".acc-item").forEach((i) => {
+      if (i !== accItem) i.classList.remove("active");
+    });
+    accItem.classList.toggle("active");
+    return;
+  }
 
-  // Opcional: Fecha outros itens abertos (Estilo único)
-  const allItems = document.querySelectorAll(".acc-item");
-  allItems.forEach((i) => {
-    if (i !== item) i.classList.remove("active");
-  });
+  const footerAcc = element.closest(".f-accordion");
+  if (footerAcc) {
+    const icon = element.querySelector("i");
+    const isActive = footerAcc.classList.toggle("active");
+    if (icon) {
+      icon.classList.replace(isActive ? "fa-plus" : "fa-minus", isActive ? "fa-minus" : "fa-plus");
+    }
+    return;
+  }
 
-  // Alterna o estado do item clicado
-  item.classList.toggle("active");
+  // Fallback generico (ex: FAQ de downloads/suporte): alterna a classe no elemento pai
+  const parent = element.parentElement;
+  if (parent) parent.classList.toggle("active");
 }
 /* ============================================================================================= */
 document.addEventListener("DOMContentLoaded", () => {
@@ -595,20 +610,6 @@ const ZerasCountEngine = {
 };
 document.addEventListener("DOMContentLoaded", () => ZerasCountEngine.init());
 /* ============================================================================================= */
-function toggleAccordion(btn) {
-  const accordion = btn.closest(".f-accordion");
-  const icon = btn.querySelector("i");
-
-  // Alterna estado
-  const isActive = accordion.classList.toggle("active");
-
-  // Troca ícone
-  if (isActive) {
-    icon.classList.replace("fa-plus", "fa-minus");
-  } else {
-    icon.classList.replace("fa-minus", "fa-plus");
-  }
-}
 
 // Resete Mobile: Inicia fechado
 if (window.innerWidth <= 768) {
@@ -883,27 +884,6 @@ function changeFeatureImage(clickedTab) {
   }, 200);
 }
 /* ============================================================================================= */
-/* ==========================================
-   AUTOLOADER DE NAVEGAÇÃO CORRIGIDO
-========================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  const navPlaceholder = document.getElementById("nav-placeholder");
-
-  if (navPlaceholder) {
-    // Tentamos carregar da raiz. Se falhar (em subpastas), tentamos subir um nível.
-    fetch("nav.html")
-      .then((response) => {
-        if (!response.ok) return fetch("../nav.html"); // Busca na pasta anterior se não achar na atual
-        return response;
-      })
-      .then((response) => response.text())
-      .then((htmlData) => {
-        navPlaceholder.innerHTML = htmlData;
-      })
-      .catch((error) => console.error("Erro ao carregar nav.html:", error));
-  }
-});
-/* ============================================================================================= */
 /**
  * ZERA'S CRAFT - MOTOR DE NOTÍCIAS
  * Gerencia a entrada suave e as transições dos cards
@@ -987,132 +967,6 @@ function toggleMcAcc(element) {
 
 /* ============================================================================================= */
 /* ==========================================
-   MÓDULO: STATUS DO DISCORD & METAS (+100%)
-========================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  const inviteCode = "GYGVBqGEwP";
-
-  // ==========================================
-  // 1. FUNÇÃO DE ANIMAÇÃO GLOBAL
-  // ==========================================
-  function animateValue(
-    obj,
-    start,
-    end,
-    duration,
-    isPercent = false,
-    suffix = "",
-  ) {
-    if (!obj) return;
-    let startTimestamp = null;
-
-    const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const current = Math.floor(progress * (end - start) + start);
-
-      // Se for porcentagem e passar de 100, exibe o + (Ex: +105%)
-      let prefix = isPercent && current > 100 ? "+" : "";
-
-      obj.innerText = isPercent
-        ? prefix + current + "%"
-        : current.toLocaleString("pt-BR") + suffix;
-
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      } else {
-        let finalPrefix = isPercent && end > 100 ? "+" : "";
-        obj.innerText = isPercent
-          ? finalPrefix + Math.floor(end) + "%"
-          : Math.floor(end).toLocaleString("pt-BR") + suffix;
-      }
-    };
-    window.requestAnimationFrame(step);
-  }
-
-  // ==========================================
-  // 2. SISTEMA INDEPENDENTE: STATUS
-  // ==========================================
-  function initStatusDisplay(totalMembers) {
-    const statusCountEl = document.getElementById("new-status-count");
-    if (statusCountEl) {
-      animateValue(
-        statusCountEl,
-        0,
-        totalMembers,
-        1500,
-        false,
-        " Membros Totais",
-      );
-    }
-  }
-
-  // ==========================================
-  // 3. SISTEMA INDEPENDENTE: METAS
-  // ==========================================
-  function initGoalsDisplay(totalMembers) {
-    const membersCountEl = document.getElementById("new-members-count");
-    const objectiveEl = document.getElementById("new-objective-val");
-    const progressBar = document.getElementById("new-goal-fill");
-    const progressText = document.getElementById("new-percent-text");
-
-    // A. Anima o número de membros solto
-    if (membersCountEl) {
-      animateValue(membersCountEl, 0, totalMembers, 1500);
-    }
-
-    // B. Lógica da Barra de Progresso
-    if (objectiveEl && progressBar && progressText) {
-      let rawText = objectiveEl.textContent || "1";
-      let objectiveVal = parseFloat(rawText.replace(/\D/g, "")) || 1;
-
-      let realPercentage = (totalMembers / objectiveVal) * 100;
-      if (realPercentage < 0) realPercentage = 0;
-
-      let visualPercentage = realPercentage > 100 ? 100 : realPercentage;
-
-      setTimeout(() => {
-        progressBar.style.width = visualPercentage + "%";
-        animateValue(progressText, 0, realPercentage, 1500, true);
-      }, 300);
-    }
-  }
-  /* ============================================================================================= */
-  // ==========================================
-  // 4. MOTOR PRINCIPAL (BUSCA DE DADOS)
-  // ==========================================
-  async function fetchDiscordData() {
-    try {
-      const response = await fetch(
-        `https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`,
-      );
-
-      if (!response.ok)
-        throw new Error("A API do Discord bloqueou a consulta.");
-
-      const data = await response.json();
-      const totalMembers = data.approximate_member_count || 0;
-
-      // Dispara os dois sistemas simultaneamente, mas separados
-      initStatusDisplay(totalMembers);
-      initGoalsDisplay(totalMembers);
-    } catch (error) {
-      console.error("Zera's Craft -> Erro ao buscar dados do Discord:", error);
-
-      // Fallbacks de segurança em caso de erro na internet do jogador
-      const statusCountEl = document.getElementById("new-status-count");
-      const membersCountEl = document.getElementById("new-members-count");
-
-      if (statusCountEl) statusCountEl.innerText = "Servidor Online";
-      if (membersCountEl) membersCountEl.innerText = "---";
-    }
-  }
-
-  // Dá o pontapé inicial
-  fetchDiscordData();
-}); o
-/* ============================================================================================= */
-/* ==========================================
    CONTROLE DO MODAL
 ========================================== */
 function openModal(modalId) {
@@ -1166,12 +1020,8 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ==========================================
    CONTROLE DO DROPDOWN (MOBILE)
 ========================================== */
-function toggleDropdown(element) {
-  // Só aplica o clique se for tela de celular (O PC usa o hover do CSS)
-  if (window.innerWidth <= 768) {
-    element.classList.toggle("active");
-  }
-}
+// NOTA: a logica de toggleDropdown foi unificada em load-html.js (window.toggleDropdown)
+// para evitar conflito de nomes com o dropdown do menu mobile (.zmob-has-dropdown).
 // Fecha o dropdown se o usuário tocar fora dele
 window.addEventListener("click", function (event) {
   if (!event.target.closest(".dropdown")) {
@@ -1197,24 +1047,3 @@ function fecharESalvarBanner(bannerId) {
   }
 }
 // Certifique-se de que NÃO existam mais chaves } abaixo desta linha.
-/* ============================================================================================= */
-/* ==========================================
-   DROPDOWN MENU MOBILE (ACORDEÃO)
-========================================== */
-function toggleDropdown(element) {
-  // 1. Encontra o <li> mais próximo que contém o dropdown
-  const parentLi = element.closest(".zmob-has-dropdown");
-
-  // 2. Encontra a div de conteúdo dentro deste li
-  const content = parentLi.querySelector(".zmob-dropdown-content");
-
-  // 3. Alterna a classe 'active' no li (isso dispara a rotação do CSS acima)
-  const isActive = parentLi.classList.toggle("active");
-
-  // 4. Lógica de expansão suave (Ajuste de altura)
-  if (isActive) {
-    content.style.maxHeight = content.scrollHeight + "px";
-  } else {
-    content.style.maxHeight = "0px";
-  }
-}

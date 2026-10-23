@@ -8,25 +8,78 @@
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
                     <div class="teste1">
-                        <span class="znav-item"><i class="fas fa-home"></i> &nbsp INÍCIO <i
-                                class="fas fa-chevron-down znav-arrow"></i></span>
+                        <span class="znav-item"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                viewBox="0 0 24 24">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <path fill="currentColor"
+                                    d="M2 2h20v2H2zm2 6h16v2H4zM2 20h20v2H2zM2 4h2v16H2zm18 0h2v16h-2zM5 5h2v2H5zm3 0h2v2H8z" />
+                            </svg>
+
+                            &nbsp INÍCIO <i class="fas fa-chevron-down znav-arrow"></i></span>
                     </div>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'inicio-1')"><i
-                                        class="fas fa-home"></i> &nbsp Página
-                                    Inicial</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-2')"><i
-                                        class="fas fa-users"></i> &nbsp Comunidade</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-3')"><i
-                                        class="fas fa-check"></i> &nbsp Parceiros</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-4')"><i
-                                        class="fas fa-server"></i> &nbsp Pixel
-                                    Legends</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-5')"><i
-                                        class="fas fa-box"></i> &nbsp Recursos</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-1')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M2 2h20v2H2zm2 6h16v2H4zM2 20h20v2H2zM2 4h2v16H2zm18 0h2v16h-2zM5 5h2v2H5zm3 0h2v2H8z" />
+                                    </svg>
+
+                                    <span>Página Inicial</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-2')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M3 2h10v2H3zm12 0h6v2h-6zM3 10h10v2H3zm12 0h6v2h-6zm-4-6h2v6h-2zm8 0h2v6h-2zM3 4h2v6H3zM0 14h2v8H0zm14 0h2v8h-2zm8 0h2v8h-2zM2 14h12v2H2zm16 0h4v2h-4z" />
+                                    </svg>
+
+                                    <span>Comunidade</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-3')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M2 2h20v2H2zm0 18h20v2H2zM2 4h2v16H2zm18 0h2v16h-2zM7 12h2v2H7zm2 2h2v2H9zm2-2h2v2h-2zm2-2h2v2h-2zm2-2h2v2h-2z" />
+                                    </svg>
+
+
+                                    <span>Parceiros</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-4')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <g fill="currentColor">
+                                            <path d="M4 4h16v2H4zm0 14h16v2H4zM2 4h2v16H2zm18 0h2v16h-2zM8 9h2v6H8z" />
+                                            <path d="M6 11h6v2H6zm8-2h2v2h-2zm2 4h2v2h-2z" />
+                                        </g>
+                                    </svg>
+
+
+                                    <span>Pixel Legends</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-5')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M2 3h20v2H2zm0 2h2v12H2zm18 0h2v12h-2zM2 17h4v2H2zm16 0h4v2h-4zm-7-2h2v2h-2zm-2 2h4v2H9zm4 0h2v2h-2zm2 2h2v2h-2zm-8 0h8v2H7z" />
+                                    </svg>
+
+
+                                    <span>Recursos</span>
+                                </button>
 
                                 <div class="znav-bottom-links">
                                     <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp Ir
@@ -68,8 +121,22 @@
                                         <div class="edu-links-sidebar">
                                             <a href="#" class="special-link"><i class="fas fa-external-link-alt"></i>
                                                 &nbsp Baixe a demonstração</a>
-                                            <a href="https://matheuzera.github.io/ZerasCraft/" class="sidebar-link"><i
-                                                    class="fas fa-home"></i> &nbsp Abrir Página Inicial</a>
+                                            <button class="znav-tab" onclick="switchZnavTab(event, 'inicio-5')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M2 3h20v2H2zm0 2h2v12H2zm18 0h2v12h-2zM2 17h4v2H2zm16 0h4v2h-4zm-7-2h2v2h-2zm-2 2h4v2H9zm4 0h2v2h-2zm2 2h2v2h-2zm-8 0h8v2H7z" />
+                                    </svg>
+
+
+                                    <span>Recursos</span>
+                                </button>
+                                            <a href="https://matheuzera.github.io/ZerasCraft/" class="sidebar-link"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+	<path d="M0 0h24v24H0z" fill="none" />
+	<path fill="currentColor" d="M3 4h6v2H3zm18 0h-6v2h6zM3 20h6v-2H3zm18 0h-6v-2h6zM3 6h2v12H3zm18 0h-2v12h2zm-10 5h2v2h-2zm-4 0h2v2H7zm8 0h2v2h-2z" />
+</svg>
+ &nbsp Abrir Página Inicial</a>
                                         </div>
                                         <br>
                                         <ul class="znav-link-list-small">
@@ -236,17 +303,43 @@
 
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item"><i class="fas fa-globe-americas"></i> &nbsp NOVIDADES <i
-                            class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                            viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path fill="currentColor"
+                                d="M3 4h18v2H3zm0 16h18v2H3zm0-10h2v10H3zm0-4h2v2H3zm16 0h2v2h-2zm0 4h2v10h-2zM3 8h18v2H3zm12-6h2v2h-2zM7 2h2v2H7zm0 10h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2z" />
+                        </svg>
+                        &nbsp NOVIDADES <i class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'nov-1')"><i
-                                        class="fas fa-star"></i> &nbsp Últimas
-                                    Notícias</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'nov-2')"><i
-                                        class="fas fa-calendar"></i> &nbsp Atualizações</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'nov-1')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <g fill="currentColor">
+                                            <path
+                                                d="M2 2h20v2H2zm0 18h20v2H2zM2 4h2v16H2zm18 0h2v16h-2zm-4 0h2v8h-2zm-4 0h2v8h-2z" />
+                                            <path d="M14 3h2v7h-2z" />
+                                        </g>
+                                    </svg>
+
+
+                                    <span>Últimas Notícias</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'nov-2')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M14 22h-4v-2h4zm-4-2H8v-2h2zm6 0h-2v-2h2zM5 15h14v-2h2v4H3v-4h2zm2-2H5V6h2zm12 0h-2V6h2zM3 6H1V4h2zm6 0H7V4h2zm8 0h-2V4h2zm6 0h-2V4h2zM5 4H3V2h2zm10 0H9V2h6zm6 0h-2V2h2z" />
+                                    </svg>
+
+
+                                    <span>Atualizações</span>
+                                </button>
 
                                 <div class="znav-bottom-links">
                                     <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp Ir
@@ -345,27 +438,96 @@
 
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item"><i class="fas fa-book"></i> &nbsp OFICIAL <i
-                            class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                            viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <g fill="currentColor">
+                                <path
+                                    d="M13 1h10v2H13zm0 2h2v6h-2zm0 6h10v2H13zm8-6h2v6h-2zM1 5h10v2H1zm0 2h2v16H1zm2 14h14v2H3zm14-8h2v10h-2zM3 13h14v2H3z" />
+                                <path d="M9 7h2v14H9z" />
+                            </g>
+                        </svg>
+                        &nbsp OFICIAL <i class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-1')"><i
-                                        class="fas fa-archive"></i> &nbsp Arquivos
-                                    Gerais</button>
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'oficial-2')"><i
-                                        class="fas fa-calendar"></i> &nbsp Eventos</button>
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'oficial-3')"><i
-                                        class="fas fa-trophy"></i> &nbsp MCTU</button>
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'oficial-4')"><i
-                                        class="fas fa-hammer"></i> &nbsp CraftJam</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-5')"><i
-                                        class="fas fa-search"></i> &nbsp Canal
-                                    Oficial</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-6')"><i
-                                        class="fas fa-user-tie"></i> &nbsp Canais
-                                    Parceiros</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-1')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <g fill="currentColor">
+                                            <path
+                                                d="M2 4h10v2H2zm0 14h12v2H2zM20 6h2v8h-2zM2 6h2v12H2zm8 0h10v2H10zm12 12v2h-6v-2z" />
+                                            <path d="M18 16h2v6h-2z" />
+                                        </g>
+                                    </svg>
+
+
+                                    <span>Arquivos Gerais</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-2')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M4 4h16v2H4zm0 2h2v8H4zm0 8h14v2H4zM20 4h2v8h-2zm-2 6h2v2h-2zm-2-4h2v8h-2zM2 18h18v2H2z" />
+                                    </svg>
+
+
+                                    <span>Canal Oficial</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-3')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M2 2h20v2H2zm0 18h20v2H2zM2 4h2v16H2zm18 0h2v16h-2zM6 18h2v2H6zm10 0h2v2h-2zM6 16h12v2H6zm2-4h8v2H8zm0-4h2v4H8zm0-2h8v2H8zm6 2h2v4h-2z" />
+                                    </svg>
+
+
+                                    <span>Canais Parceiros</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-4')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M1 2h22v2H1zm0 5h22v2H1zm0-3h2v3H1zm20 0h2v3h-2zm-2 5h2v11h-2zM3 9h2v11H3zm0 11h18v2H3zm6-9h6v2H9z" />
+                                    </svg>
+
+
+                                    <span>CraftJam</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-5')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M2 2h20v2H2zm2 6h16v2H4zM2 20h20v2H2zM2 4h2v16H2zm18 0h2v16h-2zM5 5h2v2H5zm3 0h2v2H8z" />
+                                    </svg>
+
+                                    <span>Eventos</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'oficial-6')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <g fill="currentColor">
+                                            <path d="M3 3h2v12H3zm16 0h2v12h-2zm-8 0h2v2h-2zM9 5h2v2H9zM5 5h2v2H5z" />
+                                            <path
+                                                d="M3 3h2v2H3zm4 4h2v2H7zm6-2h2v2h-2zm2 2h2v2h-2zm2-2h2v2h-2zM3 15h18v2H3zm0 4h18v2H3z" />
+                                        </g>
+                                    </svg>
+
+
+                                    <span>MC Team Ultimate</span>
+                                </button>
 
                                 <div class="znav-bottom-links">
                                     <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp
@@ -618,27 +780,30 @@
 
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item"><i class="fas fa-bolt"></i> &nbsp RECURSOS <i
-                            class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                            viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <g fill="currentColor">
+                                <path
+                                    d="M2 11h20v2H2zm0 2h2v8H2zm0 8h20v2H2zm18-8h2v8h-2zM9 15h6v2H9zM4 8h2v3H4zm0-2h10v2H4zm8 2h2v3h-2zM8 2h2v4H8zm10 1h2v8h-2z" />
+                                <path d="M8 2h12v2H8z" />
+                            </g>
+                        </svg>
+                        &nbsp RECURSOS <i class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'recursos-1')"><i
-                                        class="fas fa-archive"></i> &nbsp Arquivos
-                                    Gerais</button>
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'recursos-2')"><i
-                                        class="fas fa-calendar"></i> &nbsp Eventos</button>
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'recursos-3')"><i
-                                        class="fas fa-trophy"></i> &nbsp MCTU</button>
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'recursos-4')"><i
-                                        class="fas fa-hammer"></i> &nbsp CraftJam</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'recursos-5')"><i
-                                        class="fas fa-search"></i> &nbsp Canal
-                                    Oficial</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'recursos-6')"><i
-                                        class="fas fa-user-tie"></i> &nbsp Canais
-                                    Parceiros</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'recursos-1')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M2 2h20v2H2zm2 6h16v2H4zM2 20h20v2H2zM2 4h2v16H2zm18 0h2v16h-2zM5 5h2v2H5zm3 0h2v2H8z" />
+                                    </svg>
+
+                                    <span>Recursos</span>
+                                </button>
 
                                 <div class="znav-bottom-links">
                                     <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp
@@ -892,21 +1057,55 @@
 
 
                 <li class="znav-mega-btn" onclick="toggleMegaMenu(event)">
-                    <span class="znav-item"><i class="fas fa-user"></i> &nbsp SUPORTE <i
-                            class="fas fa-chevron-down znav-arrow"></i></span>
+                    <span class="znav-item"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                            viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path fill="currentColor"
+                                d="M7 2h10v2H7zm0 8h10v2H7zm8-6h2v6h-2zM7 4h2v6H7zM4 14h2v8H4zm14 0h2v8h-2zM6 14h12v2H6z" />
+                        </svg>
+                        &nbsp SUPORTE <i class="fas fa-chevron-down znav-arrow"></i></span>
                     <div class="znav-mega-panel" onclick="event.stopPropagation()">
                         <div class="znav-mega-grid">
 
                             <div class="znav-col-left">
-                                <button class="znav-tab active" onclick="switchZnavTab(event, 'sup-1')"><i
-                                        class="fas fa-user"></i> &nbsp Central de
-                                    Ajuda</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-2')"><i
-                                        class="fas fa-ticket"></i> &nbsp Abra seu
-                                    Ticket</button>
-                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-3')"><i
-                                        class="fas fa-user-friends"></i> &nbsp Solicitar Parceria
-                                    (Servidor Discord)</button>
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-1')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <g fill="currentColor">
+                                            <path d="M0 3h13v2H0zm0 16h11v2H0z" />
+                                            <path
+                                                d="M11 3h13v2H11zm2 16h11v2H13zM11 5h2v18h-2zM0 5h2v14H0zm22 0h2v14h-2zm-7 2h5v2h-5zm0 4h5v2h-5zm0 4h2v2h-2z" />
+                                        </g>
+                                    </svg>
+
+
+                                    <span>Central de Ajuda</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-2')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M1 4h22v2H1zm0 2h2v3H1zm0 5h2v7H1zm20 0h2v7h-2zM3 9h2v2H3zm16 0h2v2h-2zm2-3h2v3h-2zM1 18h22v2H1zm2-4h18v2H3zm2 2h2v2H5zm4 0h2v2H9zm4 0h2v2h-2zm4 0h2v2h-2zM7 8h2v4H7zm4 0h2v4h-2zm4 0h2v4h-2z" />
+                                    </svg>
+
+
+                                    <span>Abra seu Ticket</span>
+                                </button>
+
+                                <button class="znav-tab" onclick="switchZnavTab(event, 'sup-3')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"
+                                        viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path fill="currentColor"
+                                            d="M9 21H5v-2h4zm10 0h-4v-2h4zM5 19H3v-2h2zm12-2h-2v2h-2v-2h-2v2H9v-2H7v-2h10zm4 2h-2v-2h2zM3 17H1V7h2zm20 0h-2V7h2zm-12-4H8v-3h3zm5 0h-3v-3h3zM5 7H3V5h2zm10 0H9V5h6zm6 0h-2V5h2zM9 5H5V3h4zm10 0h-4V3h4z" />
+                                    </svg>
+
+
+                                    <span>Solicitar Parceria (Servidor Discord)</span>
+                                </button>
 
                                 <div class="znav-bottom-links">
                                     <a class="small-links" href="#"><i class="fas fa-external-link-alt"></i> &nbsp Ir
@@ -1028,16 +1227,35 @@
 
             <div class="znav-actions">
 
-                <a href="https://discord.gg/GYGVBqGEwP" class="znav-btn-outline"><i class="fab fa-discord"></i> &nbsp
+                <a href="https://discord.gg/GYGVBqGEwP" class="znav-btn-outline"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="1.8em" height="1.8em" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <g fill="currentColor">
+                            <path
+                                d="M11 5H3v2h8zM5 7H3v12h2zm14 12H3v2h16zm0-6h-2v6h2zm-8 0H9v2h2zm2-2h-2v2h2zm2-2h-2v2h2zm2-2h-2v2h2zm2-2h-2v2h2zm2-2h-2v8h2z" />
+                            <path d="M21 3h-8v2h8z" />
+                        </g>
+                    </svg>
+                    &nbsp
                     DISCORD <i class="fas fa-chevron-right"></i></a>
 
                 <div class="znav-icon-wrapper" onclick="openSearch()">
-                    <i class="fas fa-search"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path fill="currentColor"
+                            d="M22 22h-2v-2h2zm-2-2h-2v-2h2zm-6-2H6v-2h8zm4 0h-2v-2h2zM6 16H4v-2h2zm10 0h-2v-2h2zM4 14H2V6h2zm14 0h-2V6h2zM6 6H4V4h2zm10 0h-2V4h2zm-2-2H6V2h8z" />
+                    </svg>
+
                 </div>
 
                 <div class="znav-mega-btn drop-conta" onclick="toggleMegaMenu(event)">
                     <div class="znav-icon-wrapper">
-                        <i class="fas fa-list-ul"></i> EXTERNOS <i class="fas fa-chevron-down znav-arrow-small"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path fill="currentColor"
+                                d="M2 2h20v2H2zm4 5h2v2H6zm4 0h8v2h-8zm-4 4h2v2H6zm4 0h8v2h-8zm-4 4h2v2H6zm4 0h8v2h-8zm-8 5h20v2H2zM2 4h2v16H2zm18 0h2v16h-2z" />
+                        </svg>
+                        EXTERNOS <i class="fas fa-chevron-down znav-arrow-small"></i>
                     </div>
                     <ul class="znav-simple-drop right-align" onclick="event.stopPropagation()">
                         <li><a class="znav-links" href="https://aternos.org/ " style="color: #ffffff;"><i
