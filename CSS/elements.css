@@ -1,0 +1,269 @@
+/* 1. SUPORTE FIREFOX (Aplica a todos os elementos e containers injetados) */
+html,
+body,
+*,
+*::before,
+*::after,
+.znav-mega-grid *,
+.znav-tab-content,
+.znav-mega-panel,
+.zmob-panel,
+.zmob-sidebar,
+.zsearch-results-area {
+  scrollbar-width: thin !important;
+  scrollbar-color: #d6d6d6 #242424 !important;
+}
+
+/* 2. LARGURA E ALTURA (Chrome, Edge, Brave, Safari, Opera) */
+::-webkit-scrollbar,
+*::-webkit-scrollbar,
+.znav-mega-grid *::-webkit-scrollbar,
+.znav-tab-content::-webkit-scrollbar,
+.zmob-panel::-webkit-scrollbar {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #242424 !important;
+}
+
+/* 3. REMOÇÃO COMPLETA E FORÇADA DAS SETAS (▲ e ▼) */
+::-webkit-scrollbar-button,
+*::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+*::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* 4. TRILHO / FUNDO (100% Quadrado e Sem Arredondamento) */
+::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+*::-webkit-scrollbar-track-piece {
+  background: #242424 !important;
+  border-radius: 0 !important;
+  -webkit-border-radius: 0px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 5. PONTEIRO / INDICADOR (Cinzento Claro + Moldura Preta Pixelada) */
+::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  background: #d6d6d6 !important;
+  border-radius: 0 !important;
+  -webkit-border-radius: 0px !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 6. HOVER E CLIQUE NO PONTEIRO */
+::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+::-webkit-scrollbar-thumb:active,
+*::-webkit-scrollbar-thumb:active {
+  background: #a8a8a8 !important;
+  border-color: #ffffff !important;
+}
+
+/* 7. CANTO DE ENCONTRO DE SCROLLBARS DUPLAS */
+::-webkit-scrollbar-corner,
+*::-webkit-scrollbar-corner {
+  background: #242424 !important;
+  border-radius: 0 !important;
+}
+
+/* --- SISTEMA DE SCROLL PARA AS COLUNAS LATERAIS --- */
+.znav-col-left,
+.znav-col,
+.znav-col-right {
+  max-height: 100vh;
+  /* Garante que respeite a altura da tela */
+  overflow-y: auto;
+  /* Ativa o scroll vertical apenas quando necessário */
+  overflow-x: hidden;
+  /* Evita scroll horizontal indesejado */
+  /* Scrollbar customizada geométrica (Compatível com Firefox) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--zc-border, #333a4d) transparent;
+}
+
+/* Scrollbar customizada para Webkit (Chrome, Edge, Safari) - Estritamente quadrada */
+.znav-col-left::-webkit-scrollbar,
+.znav-col::-webkit-scrollbar,
+.znav-col-right::-webkit-scrollbar {
+  width: 6px;
+}
+
+.znav-col-left::-webkit-scrollbar-track,
+.znav-col::-webkit-scrollbar-track,
+.znav-col-right::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.znav-col-left::-webkit-scrollbar-thumb,
+.znav-col::-webkit-scrollbar-thumb,
+.znav-col-right::-webkit-scrollbar-thumb {
+  background: var(--zc-border, #333a4d);
+  border-radius: 0 !important;
+  /* Sem arredondamentos, mantendo a geometria rígida */
+  transition: background-color 0.2s ease;
+}
+
+.znav-col-left::-webkit-scrollbar-thumb:hover,
+.znav-col::-webkit-scrollbar-thumb:hover,
+.znav-col-right::-webkit-scrollbar-thumb:hover {
+  background: var(--zc-accent, #2563eb);
+  /* Destaque sutil ao passar o rato */
+}
+
+/*===========================*/
+/* --- FONTE PERSONALIZADA MINECRAFT --- */
+/* --- FONTE PERSONALIZADA MINECRAFT --- */
+@font-face {
+  font-family: 'MinecraftFontTitle';
+  src: url('../assets/fonts/Minecraft-Five-Title.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MinecraftFontText';
+  src: url('../assets/fonts/Minecraft-Regular-Text.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Classe predefinida e direta para aplicar em H1, P ou qualquer elemento */
+.font-mc,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'MinecraftFontTitle', sans-serif !important;
+}
+
+.font-mc,
+p {
+  font-family: 'MinecraftFontText', sans-serif !important;
+}
+
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Reserva o espaço da barra de rolagem permanentemente para evitar layout shift */
+  scrollbar-gutter: stable;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  background-color: var(--bg-dark, #111);
+  color: var(--text-main, #fff);
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  /* Suporte para navegadores baseados em Webkit */
+  user-select: none;
+}
+
+body.z-lock-scroll,
+html.z-lock-scroll {
+  overflow: hidden !important;
+}
+
+/* Aplique isso aos elementos que estão mostrando o cursor */
+.status-indicator,
+.join-text,
+.counter,
+.btn-sidebar {
+  user-select: none;
+  /* Impede a seleção de texto e o aparecimento do cursor | */
+  cursor: default;
+  /* Garante que o mouse não mude para o formato de "I" (edição) */
+}
+
+/* ============================================================================================= */
+/* ==========================================
+   TIPOGRAFIA GLOBAL E TÍTULOS (ESTÁVEL)
+========================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Rajdhani", sans-serif;
+  text-transform: uppercase !important;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  /* Margem padrão para evitar que o texto grude */
+}
+
+/* Tamanhos fixos escaláveis */
+h1 {
+  font-size: 2.2rem !important;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2rem !important;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.6rem !important;
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 1.4rem !important;
+  line-height: 1.4;
+}
+
+h5 {
+  font-size: 1.25rem !important;
+}
+
+h6 {
+  font-size: 1rem !important;
+}
+
+.title-section {
+  color: var(--text-main);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============================================================================================= */
+/* Mantém os botões grandes com a fonte correta */
+.logo,
+.btn-big-green {
+  font-family: "Rajdhani", sans-serif !important;
+  text-transform: uppercase;
+}

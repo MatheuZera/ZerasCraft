@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&family=Press+Start+2P&display=swap');
+
+/* ==========================================================================================
+   01. TOKENS DO TEMA
+   ========================================================================================== */
+:root {
+  /* Paleta viva */
+  --c-ink: #101114;
+  --c-snow: #ffffff;
+  --c-sun: #ffd60a;
+  --c-paper: #ffe8a3;
+  --c-green: #1fbf3b;
+  --c-green-dk: #0f8a26;
+  --c-lime: #a3e635;
+  --c-blue: #2563eb;
+  --c-sky: #0ea5e9;
+  --c-cyan: #06c3d9;
+  --c-purple: #7c3aed;
+  --c-pink: #ff3d8b;
+  --c-orange: #ff7a1a;
+  --c-red: #ef2b2b;
+
+  /* Cores de fundo das seções */
+  --sec-verde: #1fbf3b;
+  --sec-verde2: #17a832;
+  --sec-verde3: #0f8a26;
+  --sec-roxa: #7c3aed;
+  --sec-amarela: #ffd60a;
+  --sec-azul: #2563eb;
+  --sec-azul2: #0ea5e9;
+  --sec-ciano: #06c3d9;
+  --sec-laranja: #ff7a1a;
+  --sec-rosa: #ff3d8b;
+  --sec-vermelha: #ef2b2b;
+  --sec-lima: #a3e635;
+
+  /* Movimento */
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: steps(6, end);
+  --t-fast: 0.18s;
+  --t-base: 0.32s;
+  --t-slow: 0.6s;
+
+  /* Quadradinhos de fundo (padrão pixel) */
+  --pixel-size: 56px;
+}
+
+
+:root {
+  /* Tons de Fundo - Escuros e opacos para legibilidade máxima */
+  --zc-bg-main: #474747;
+  --zc-bg-panel: rgba(26, 26, 26, 0.8);
+  /* Vidro mínimo: 96% de opacidade */
+  --zc-bg-tab: rgba(19, 19, 19, 0.99);
+  /* Vidro mínimo: 96% de opacidade */
+  --zc-bg-hover: rgba(255, 255, 255, 0.05);
+  --verde-mc: #55ad4b;
+  --glass-bg: rgba(10, 10, 10, 0.85);
+  --dark-bg: #0c0c0c;
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --border-light: rgba(255, 255, 255, 0.1);
+  /* Cores de Destaque - Agora Neutras (Branco e Cinza) */
+  --zc-accent: #ffffff;
+  /* Destaque principal agora é branco puro */
+  --zc-accent-soft: rgba(255, 255, 255, 0.1);
+  /* Destaque suave para fundos ativos */
+  /* Bordas e Textos */
+  --zc-border: rgba(255, 255, 255, 0.08);
+  --zc-text: #ffffff;
+  --zc-muted: #a0a0a0;
+  /* Paleta Oficial Inspirada */
+  --bg-dark: #121212;
+  --bg-card: #1d1d1d;
+  --bg-light: #2a2a2a;
+  --green-mc: #3c8527;
+  /* O verde clássico do botão */
+  --green-hover: #52a535;
+  --gold: #f8cb47;
+  --text-main: #ffffff;
+  --text-muted: #a8a8a8;
+  --border: #333333;
+  /* Configurações */
+  --container-width: 1200px;
+  --gutter: 20px;
+  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --mc-green: #ffffff;
+  --mc-dark: #0f0f0f;
+  --mc-border: #333;
+  --mc-card: #141414;
+  --bg-page: #111111;
+  /* Fundo da página */
+  --bg-card: #181818;
+  /* Fundo das caixas e galeria */
+  --bg-tag: #1f1f1f;
+  /* Fundo das tags */
+  --accent-color: #54bd34;
+  /* Verde Minecraft */
+  --accent-blue: #2b90d9;
+  /* Borda azul de seleção */
+  --border-color: #2a2a2a;
+  /* Bordas gerais */
+  --text-main: #ffffff;
+  --text-muted: #aaaaaa;
+  --rt-bg-main: #2cb810;
+  /* Fundo escuro profundo do site */
+  --rt-bg-card: #13131a;
+  /* Fundo dos blocos e cards */
+  --rt-bg-input: #181824;
+  /* Campos de texto internos */
+  --rt-purple-main: #464646;
+  /* Roxo marca Rustical */
+  --rt-purple-glow: #444444;
+  /* Roxo claro para efeitos e hovers */
+  --rt-text-pure: #ffffff;
+  --rt-text-muted: #464646;
+  --bg-dark: #121212;
+  --bg-card: #1d1d1d;
+  --bg-light: #2a2a2a;
+  --green-mc: #3c8527;
+  --green-hover: #52a535;
+  --gold: #f8cb47;
+  --text-main: #ffffff;
+  --text-muted: #a8a8a8;
+  --border: #333333;
+  --container-width: 1200px;
+  --gutter: 20px;
+  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}

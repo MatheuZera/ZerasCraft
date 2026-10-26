@@ -221,6 +221,7 @@
     font-size: 13px;
   }
 
+  /* ESPAÇADOR ENTRE SEÇÕES DOS BOTÕES NO MENU MOBILE*/
   .zmob-flex-align {
     display: flex;
     align-items: center;
@@ -279,26 +280,47 @@
     margin: 12px 20px;
   }
 
+  /* --- LISTA PEQUENA MÓVEL COM FUNDO QUADRADO SÓLIDO --- */
   .zmob-list-small {
     list-style: none;
-    padding: 0 0 20px 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    /* Espaçamento compacto entre os blocos */
+  }
+
+  .zmob-list-small li {
     margin: 0;
   }
 
   .zmob-list-small li a {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 12px 16px;
+    background-color: #212128;
+    /* Fundo quadrado sólido */
+    border: none;
+    border-radius: 0px;
+    /* Cantos retos e industriais */
     color: var(--zc-muted);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 12px;
-    transition: color 0.25s ease, padding-left 0.25s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-sizing: border-box;
+    width: 100%;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   .zmob-list-small li a:hover {
+    background-color: #454550;
+    /* Elevação do tom no hover */
     color: var(--zc-accent);
-    padding-left: 24px;
+    padding-left: 16px;
+    /* Mantém a estabilidade do layout sem saltos laterais */
   }
 
   .zmob-item-list {
@@ -325,7 +347,6 @@
     height: 48px;
     object-fit: cover;
     flex-shrink: 0;
-    border-radius: 4px;
     border: 1px solid var(--zc-border);
   }
 
@@ -566,6 +587,7 @@
     flex-shrink: 0;
   }
 
+  .znav-tab-page,
   .znav-tab {
     background: transparent;
     border: 1px solid transparent;
@@ -576,10 +598,13 @@
     font-size: 12px;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 4px;
     outline: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    /* Adicionado padding lateral para respiro na borda */
+    border-bottom: 1px solid #222222;
+    /* Linha sutil entre os links */
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.2s ease, color 0.2s ease;
 
     /* ADICIONE */
     display: flex;
@@ -587,7 +612,26 @@
     gap: 10px;
   }
 
+  .znav-tab-page {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--zc-muted);
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Alinha o conteúdo rigorosamente à esquerda */
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 10px 12px;
+    /* Adicionado padding lateral para respiro na borda */
+    border-bottom: 1px solid #222222;
+    /* Linha sutil entre os links */
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.2s ease, color 0.2s ease;
+  }
+
   /* ADICIONE: vale para SVG e para <i> do Font Awesome */
+  .znav-tab-page svg,
   .znav-tab svg,
   .znav-tab i {
     flex-shrink: 0;
@@ -596,6 +640,7 @@
     justify-content: center;
   }
 
+  .znav-tab-page:hover,
   .znav-tab:hover {
     background: var(--zc-bg-hover);
     color: var(--zc-accent);
@@ -610,26 +655,128 @@
     transform: translateX(6px);
   }
 
-  .znav-bottom-links {
-    margin-top: auto;
-    padding-top: 10px;
+  .znav-small-link {
+    background-color: #1a1a1e;
+    border: none;
+    border-radius: 0px;
+    color: #ffffff;
+    padding: 14px 18px;
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+    font-size: 0.8rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .znav-small-link i {
+    font-size: 0.9rem;
+    color: #ffffff;
+  }
+
+  /* O bloco inteiro (fundo + texto + ícone) dá o empurrãozinho para a direita */
+  .znav-small-link:hover {
+    background-color: #242429;
+    transform: translateX(6px);
+  }
+
+  /* --- COLUNA ESQUERDA E FIXAÇÃO DO RODAPÉ --- */
+  .znav-col-left.znav-sidebar-container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
   }
 
-  .znav-bottom-links a {
+  .znav-tabs-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--zc-accent) rgba(255, 255, 255, 0.02);
+  }
+
+  .znav-tabs-scroll-area::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .znav-tabs-scroll-area::-webkit-scrollbar-thumb {
+    background: var(--zc-muted);
+  }
+
+  /* --- BLOCOS DOS LINKS INFERIORES (COMPACTOS E ESTÁTICOS) --- */
+  .znav-bottom-links {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--zc-bg-tab, #121215);
+    border-top: 1px solid var(--zc-border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 0;
+    z-index: 10;
+    box-sizing: border-box;
+    margin-top: auto;
+  }
+
+  .znav-bottom-link {
+    background-color: #16161a;
+    border: none;
+    border-radius: 0px;
     color: var(--zc-muted);
-    font-size: 11px;
+    padding: 10px 12px;
+    font-family: "Inter", sans-serif;
     font-weight: 800;
+    font-size: 0.75rem;
     text-decoration: none;
-    transition: color 0.25s ease, padding-left 0.25s ease;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    /* SEM TRANSLATION/TRANSICÃO DE MOVIMENTO LATERAL */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    transform: none !important;
   }
 
-  .znav-bottom-links a:hover {
+  .znav-bottom-link i {
+    font-size: 0.8rem;
+    color: var(--zc-muted);
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  /* HOVER APENAS DE COR/FUNDO (SEM EMPURRÃO PARA A DIREITA) */
+  .znav-bottom-link:hover {
+    background-color: var(--zc-bg-hover, #212128);
     color: var(--zc-accent);
-    padding-left: 4px;
+    transform: none !important;
+    padding-left: 12px !important;
+    /* Trava o padding lateral fixo */
+  }
+
+  .znav-bottom-link:hover i {
+    color: var(--zc-accent);
   }
 
   .znav-col-main {
@@ -689,7 +836,6 @@
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    border-radius: 4px;
     margin-bottom: 8px;
     border: 1px solid var(--zc-border);
     transition: border-color 0.25s ease, transform 0.25s ease;
@@ -789,26 +935,55 @@
     z-index: 100000;
   }
 
-  .znav-mega-btn.drop-conta.open>.znav-simple-drop {
+  .znav-mega-btn.drop-conta.open > .znav-simple-drop {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
   }
 
   .znav-simple-drop li a {
-    display: block;
-    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background-color: #16161a;
+    border: none;
+    border-left: 2px solid transparent; /* Prepara a borda lateral para o hover */
+    border-radius: 0px;
     color: var(--zc-muted);
     text-decoration: none;
     font-weight: 800;
-    font-size: 12px;
-    transition: background 0.25s ease, color 0.25s ease, padding-left 0.25s ease;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-sizing: border-box;
+    width: 100%;
+    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Blindagem e transição suave para SVGs e ícones */
+  .znav-simple-drop li a svg,
+  .znav-simple-drop li a i {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--zc-muted);
+    transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Hover refinado, sem saltos e com destaque lateral elegante */
   .znav-simple-drop li a:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background-color: #212128;
     color: var(--zc-accent);
-    padding-left: 20px;
+    border-left-color: var(--zc-accent);
+  }
+
+  .znav-simple-drop li a:hover svg,
+  .znav-simple-drop li a:hover i {
+    color: var(--zc-accent);
   }
 
   .znav-icon-wrapper {
@@ -853,7 +1028,6 @@
     align-items: center;
     gap: 6px;
     transition: all 0.25s ease;
-    border-radius: 4px;
     background: rgba(255, 255, 255, 0.03);
   }
 
@@ -1027,7 +1201,6 @@
     font-size: 12px;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 4px;
     outline: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1128,12 +1301,10 @@
 
   .znav-col-center::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.02);
-    border-radius: 10px;
   }
 
   .znav-col-center::-webkit-scrollbar-thumb {
     background: var(--zc-muted);
-    border-radius: 10px;
   }
 
   .znav-banner img,
@@ -1141,7 +1312,6 @@
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    border-radius: 6px;
     margin-bottom: 15px;
     border: 1px solid var(--zc-border);
     transition: border-color 0.25s ease, transform 0.25s ease;
@@ -1305,7 +1475,6 @@
     align-items: center;
     gap: 10px;
     transition: all 0.25s ease;
-    border-radius: 4px;
     background: rgba(255, 255, 255, 0.03);
   }
 
@@ -1330,7 +1499,6 @@
   display: flex;
   justify-content: center;
   font-family: Arial, sans-serif;
-  border-radius: 0 !important;
   box-shadow: none !important;
 }
 
@@ -1384,7 +1552,6 @@
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--zc-border, #333);
   padding: 16px 20px;
-  border-radius: 0 !important;
   /* Estrito e geométrico */
   box-shadow: none !important;
   transition: border-color 0.25s ease;
