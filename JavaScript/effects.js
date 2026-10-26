@@ -39,8 +39,8 @@ const EFFECT_CONFIGS = {
       ".btn-toggle-text", ".btn-next-img", ".bundle-btn", ".d-thumb",
       ".znav-tab", ".znav-btn-outline", ".znav-icon-wrapper", ".znav-links",
       ".small-links", ".zmob-close-btn", ".panel-links", ".zmob-burger",
-      ".social-icons", ".z-hud-close", ".guide-tab-btn", ".zsearch-list",
-      ".zmob-item-list",
+      ".social-icons", ".z-hud-close", ".guide-tab-btn",
+      ".zmob-item-list", ".znav-small-link"
     ]
   },
 
@@ -50,9 +50,9 @@ const EFFECT_CONFIGS = {
     volume: 0.15,
     trigger: "mouseover",
     selectors: [
-      ".mc-collectible-card", ".gallery-item2", ".game-card2", ".mode-card",
+      ".mc-collectible-card", ".gallery-item2", ".game-card2", ".mode-card", ".znav-bottom-link",
       ".mc-news-card", ".f-card", ".w-item", ".game-card-simple", ".button-zmob",
-      ".content-item", ".link-item", ".game-card", ".collectible-unit", ".quest-card"
+      ".content-item", ".link-item", ".game-card", ".collectible-unit", ".quest-card",
     ]
   },
 
@@ -68,7 +68,7 @@ const EFFECT_CONFIGS = {
       ".dropdown-link", ".table-item", ".discord-link", ".znav-mixed-top",
       ".znav-btn-outline", ".small-links", ".vault-action-link", ".faq-card",
       ".pages-links", ".info-links", ".software-card", ".guide-link", ".zmob-list-links",
-      ".zmob-button-section",
+      ".zmob-button-section", ".znav-tab-page"
     ]
   },
 

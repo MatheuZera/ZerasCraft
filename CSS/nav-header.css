@@ -587,31 +587,39 @@
     flex-shrink: 0;
   }
 
+  /* ============================================================
+     BASE UNIFICADA: ZNAV-TAB E ZNAV-TAB-PAGE
+     ============================================================ */
   .znav-tab-page,
   .znav-tab {
+    position: relative;
+    overflow: hidden;
+    /* Trava o efeito firmemente dentro do botão */
     background: transparent;
     border: 1px solid transparent;
     color: var(--zc-muted);
     text-align: left;
-    padding: 10px 12px;
+    padding: 20px 12px;
     font-weight: 800;
     font-size: 12px;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     outline: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    /* Adicionado padding lateral para respiro na borda */
     border-bottom: 1px solid #222222;
     /* Linha sutil entre os links */
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.2s ease, color 0.2s ease;
-
-    /* ADICIONE */
     display: flex;
     align-items: center;
     gap: 10px;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      background 0.2s ease,
+      color 0.2s ease;
   }
 
+
+  /* ============================================================
+     BASE UNIFICADA: ZNAV-TAB E ZNAV-TAB-PAGE
+     ============================================================ */
   .znav-tab-page {
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -620,17 +628,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
-    /* Alinha o conteúdo rigorosamente à esquerda */
     text-decoration: none;
     font-size: 0.8rem;
-    padding: 10px 12px;
-    /* Adicionado padding lateral para respiro na borda */
+    padding: 12px 12px;
     border-bottom: 1px solid #222222;
-    /* Linha sutil entre os links */
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.2s ease, color 0.2s ease;
   }
 
-  /* ADICIONE: vale para SVG e para <i> do Font Awesome */
+  /* Conteúdo interno (SVGs, ícones e textos) fica na camada intermediária */
   .znav-tab-page svg,
   .znav-tab svg,
   .znav-tab i {
@@ -638,6 +642,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 2;
   }
 
   .znav-tab-page:hover,
@@ -653,6 +659,274 @@
     border-left: 3px solid var(--zc-accent);
     color: var(--zc-accent);
     transform: translateX(6px);
+  }
+
+  /* ============================================================
+     CAMADA DE PARTÍCULAS (Z-INDEX 3 - ACIMA DO CONTEÚDO)
+     ============================================================ */
+  .znav-tab .znav-particles-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Permite clicar no botão normalmente através das partículas */
+    z-index: 3;
+    /* Partículas flutuando por cima do conteúdo */
+    opacity: 0.65;
+    transform: scale(1);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .znav-tab:hover .znav-particles-layer {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .znav-particles-layer::before,
+  .znav-particles-layer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* ============================================================
+     CAMADA DE PARTÍCULAS (Z-INDEX 3 - ACIMA DO CONTEÚDO)
+     ============================================================ */
+  .znav-tab .znav-particles-layer {
+    inset: 0;
+    pointer-events: none;
+    /* Permite clicar no botão normalmente através das partículas */
+    z-index: 3;
+    /* Partículas flutuando por cima do conteúdo */
+    opacity: 0.65;
+    transform: scale(1);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .znav-tab:hover .znav-particles-layer {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .znav-particles-layer::before,
+  .znav-particles-layer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* ============================================================
+     EFEITO 1: NETHER PORTAL (Parallax 3 Camadas + Círculos)
+     ============================================================ */
+  /* Camada 1: Fundo (Mais Lenta) */
+  .zfx-nether .znav-particles-layer {
+    background-image:
+      radial-gradient(circle at 8% 20%, #7e22ce 2px, transparent 3px),
+      radial-gradient(circle at 35% 85%, #9333ea 2.5px, transparent 3.5px),
+      radial-gradient(circle at 55% 40%, #a855f7 2px, transparent 3px),
+      radial-gradient(circle at 72% 70%, #6b21a8 1.8px, transparent 2.8px),
+      radial-gradient(circle at 88% 15%, #7e22ce 2px, transparent 3px),
+      radial-gradient(circle at 95% 90%, #9333ea 2.2px, transparent 3.2px);
+    background-size: 260px 100%;
+    animation: netherSlow 6s linear infinite;
+    opacity: 0.5;
+  }
+
+  /* Camada 2: Meio (Velocidade Média) */
+  .zfx-nether .znav-particles-layer::before {
+    background-image:
+      radial-gradient(circle at 12% 75%, #a855f7 2.5px, transparent 3.5px),
+      radial-gradient(circle at 30% 25%, #c084fc 2px, transparent 3px),
+      radial-gradient(circle at 50% 90%, #7e22ce 3px, transparent 4px),
+      radial-gradient(circle at 68% 35%, #9333ea 2.2px, transparent 3.2px),
+      radial-gradient(circle at 82% 80%, #d8b4fe 2.5px, transparent 3.5px),
+      radial-gradient(circle at 92% 45%, #a855f7 2px, transparent 3px);
+    background-size: 200px 100%;
+    animation: netherMid 3.5s linear infinite;
+    opacity: 0.75;
+  }
+
+  /* Camada 3: Frente (Mais Rápida) */
+  .zfx-nether .znav-particles-layer::after {
+    background-image:
+      radial-gradient(circle at 10% 40%, #d8b4fe 3px, transparent 4px),
+      radial-gradient(circle at 35% 90%, #a855f7 2.5px, transparent 3.5px),
+      radial-gradient(circle at 55% 15%, #c084fc 3px, transparent 4px),
+      radial-gradient(circle at 75% 65%, #9333ea 2.8px, transparent 3.8px),
+      radial-gradient(circle at 90% 25%, #7e22ce 3px, transparent 4px);
+    background-size: 140px 100%;
+    animation: netherFast 1.8s linear infinite;
+    opacity: 1;
+  }
+
+  @keyframes netherSlow {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 260px;
+    }
+  }
+
+  @keyframes netherMid {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 200px;
+    }
+  }
+
+  @keyframes netherFast {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 140px;
+    }
+  }
+
+
+  /* ============================================================
+     EFEITO 2: FOGO DO NETHER / BRASAS (Parallax 3 Camadas + Círculos)
+     ============================================================ */
+  .zfx-fire .znav-particles-layer {
+    background-image:
+      radial-gradient(circle at 10% 25%, #b91c1c 2px, transparent 3px),
+      radial-gradient(circle at 38% 80%, #c2410c 2.5px, transparent 3.5px),
+      radial-gradient(circle at 60% 35%, #991b1b 2px, transparent 3px),
+      radial-gradient(circle at 78% 70%, #b91c1c 2.2px, transparent 3.2px),
+      radial-gradient(circle at 92% 20%, #c2410c 2px, transparent 3px);
+    background-size: 280px 100%;
+    animation: fireSlow 5.5s linear infinite;
+    opacity: 0.5;
+  }
+
+  .zfx-fire .znav-particles-layer::before {
+    background-image:
+      radial-gradient(circle at 15% 70%, #ef4444 2.5px, transparent 3.5px),
+      radial-gradient(circle at 35% 25%, #f97316 2px, transparent 3px),
+      radial-gradient(circle at 58% 85%, #dc2626 3px, transparent 4px),
+      radial-gradient(circle at 75% 40%, #ea580c 2.2px, transparent 3.2px),
+      radial-gradient(circle at 90% 75%, #f97316 2.5px, transparent 3.5px);
+    background-size: 210px 100%;
+    animation: fireMid 3.2s linear infinite;
+    opacity: 0.75;
+  }
+
+  .zfx-fire .znav-particles-layer::after {
+    background-image:
+      radial-gradient(circle at 12% 35%, #facc15 3px, transparent 4px),
+      radial-gradient(circle at 38% 90%, #fb923c 2.5px, transparent 3.5px),
+      radial-gradient(circle at 62% 15%, #ef4444 3px, transparent 4px),
+      radial-gradient(circle at 82% 60%, #f97316 2.8px, transparent 3.8px),
+      radial-gradient(circle at 95% 30%, #facc15 3px, transparent 4px);
+    background-size: 150px 100%;
+    animation: fireFast 1.6s linear infinite;
+    opacity: 1;
+  }
+
+  @keyframes fireSlow {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 280px;
+    }
+  }
+
+  @keyframes fireMid {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 210px;
+    }
+  }
+
+  @keyframes fireFast {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 150px;
+    }
+  }
+
+
+  /* ============================================================
+     EFEITO 3: REDSTONE / ENERGIA (Parallax 3 Camadas + Círculos)
+     ============================================================ */
+  .zfx-redstone .znav-particles-layer {
+    background-image:
+      radial-gradient(circle at 12% 30%, #800000 2px, transparent 3px),
+      radial-gradient(circle at 40% 85%, #990000 2.5px, transparent 3.5px),
+      radial-gradient(circle at 65% 40%, #cc0000 2px, transparent 3px),
+      radial-gradient(circle at 85% 75%, #800000 1.8px, transparent 2.8px);
+    background-size: 240px 100%;
+    animation: redstoneSlow 5s linear infinite;
+    opacity: 0.5;
+  }
+
+  .zfx-redstone .znav-particles-layer::before {
+    background-image:
+      radial-gradient(circle at 15% 65%, #ff2a2a 2.5px, transparent 3.5px),
+      radial-gradient(circle at 42% 20%, #ff5555 2px, transparent 3px),
+      radial-gradient(circle at 70% 80%, #cc0000 3px, transparent 4px),
+      radial-gradient(circle at 90% 45%, #ff2a2a 2.2px, transparent 3.2px);
+    background-size: 180px 100%;
+    animation: redstoneMid 3s linear infinite;
+    opacity: 0.75;
+  }
+
+  .zfx-redstone .znav-particles-layer::after {
+    background-image:
+      radial-gradient(circle at 10% 45%, #ff8888 3px, transparent 4px),
+      radial-gradient(circle at 35% 85%, #ff9999 2.5px, transparent 3.5px),
+      radial-gradient(circle at 60% 15%, #ff2a2a 3px, transparent 4px),
+      radial-gradient(circle at 82% 65%, #ff5555 2.8px, transparent 3.8px);
+    background-size: 120px 100%;
+    animation: redstoneFast 1.4s linear infinite;
+    opacity: 1;
+  }
+
+  @keyframes redstoneSlow {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 240px;
+    }
+  }
+
+  @keyframes redstoneMid {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 180px;
+    }
+  }
+
+  @keyframes redstoneFast {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 120px;
+    }
   }
 
   .znav-small-link {
@@ -935,7 +1209,7 @@
     z-index: 100000;
   }
 
-  .znav-mega-btn.drop-conta.open > .znav-simple-drop {
+  .znav-mega-btn.drop-conta.open>.znav-simple-drop {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
@@ -948,7 +1222,8 @@
     padding: 10px 14px;
     background-color: #16161a;
     border: none;
-    border-left: 2px solid transparent; /* Prepara a borda lateral para o hover */
+    border-left: 2px solid transparent;
+    /* Prepara a borda lateral para o hover */
     border-radius: 0px;
     color: var(--zc-muted);
     text-decoration: none;
@@ -958,9 +1233,9 @@
     letter-spacing: 0.5px;
     box-sizing: border-box;
     width: 100%;
-    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* Blindagem e transição suave para SVGs e ícones */
@@ -1234,7 +1509,7 @@
     transform: translateX(10px);
   }
 
-  .znav-bottom-links {
+  .znav-bottom-link {
     margin-top: auto;
     padding-top: 20px;
     display: flex;
@@ -1242,7 +1517,7 @@
     gap: 15px;
   }
 
-  .znav-bottom-links a {
+  .znav-bottom-link a {
     color: var(--zc-muted);
     font-size: 13px;
     font-weight: 800;
@@ -1251,7 +1526,7 @@
     text-transform: uppercase;
   }
 
-  .znav-bottom-links a:hover {
+  .znav-bottom-link a:hover {
     color: var(--zc-accent);
     padding-left: 6px;
   }
