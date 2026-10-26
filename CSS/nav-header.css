@@ -323,23 +323,42 @@
     /* Mantém a estabilidade do layout sem saltos laterais */
   }
 
+  /* ============================================================
+     LISTA DE ITENS MÓVEIS / MENU (.zmob-item-list)
+     ============================================================ */
   .zmob-item-list {
     list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .zmob-item-list a {
+    position: relative;
+    overflow: hidden;
+    /* Trava as partículas estritamente dentro do item */
     display: flex;
     align-items: center;
     padding: 12px 20px;
     gap: 12px;
     text-decoration: none;
     border-left: 3px solid transparent;
-    transition: background 0.25s ease, border-color 0.25s ease;
+    background: transparent;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  }
+
+  /* Conteúdo interno (imagem, textos, spans) fica na camada intermediária (z-index: 2) */
+  .zmob-item-list a img,
+  .zmob-item-list a span,
+  .zmob-item-list a div,
+  .zmob-item-list a p {
+    position: relative;
+    z-index: 2;
   }
 
   .zmob-item-list a:hover {
     background: rgba(255, 255, 255, 0.04);
     border-left-color: var(--zc-accent);
+    transform: translateX(4px);
   }
 
   .zmob-item-list img {
@@ -348,6 +367,242 @@
     object-fit: cover;
     flex-shrink: 0;
     border: 1px solid var(--zc-border);
+  }
+
+  /* ============================================================
+     CAMADA DE PARTÍCULAS PARA OS ITENS DA LISTA (Z-INDEX 3)
+     ============================================================ */
+  .zmob-item-list a .znav-particles-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Permite clicar no link normalmente através das partículas */
+    z-index: 3;
+    /* Partículas flutuando por cima do conteúdo */
+    opacity: 0.65;
+    transform: scale(1);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .zmob-item-list a:hover .znav-particles-layer {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .zmob-item-list a .znav-particles-layer::before,
+  .zmob-item-list a .znav-particles-layer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* ============================================================
+     EFEITOS APLICÁVEIS NO .zmob-item-list a (NETHER, FOGO, REDSTONE)
+     ============================================================ */
+
+  /* --- EFEITO 1: NETHER PORTAL --- */
+  .zmob-item-list a.zfx-nether .znav-particles-layer {
+    background-image:
+      radial-gradient(circle at 8% 20%, #7e22ce 2px, transparent 3px),
+      radial-gradient(circle at 35% 85%, #9333ea 2.5px, transparent 3.5px),
+      radial-gradient(circle at 55% 40%, #a855f7 2px, transparent 3px),
+      radial-gradient(circle at 72% 70%, #6b21a8 1.8px, transparent 2.8px),
+      radial-gradient(circle at 88% 15%, #7e22ce 2px, transparent 3px),
+      radial-gradient(circle at 95% 90%, #9333ea 2.2px, transparent 3.2px);
+    background-size: 260px 100%;
+    animation: mobNetherSlow 6s linear infinite;
+    opacity: 0.5;
+  }
+
+  .zmob-item-list a.zfx-nether .znav-particles-layer::before {
+    background-image:
+      radial-gradient(circle at 12% 75%, #a855f7 2.5px, transparent 3.5px),
+      radial-gradient(circle at 30% 25%, #c084fc 2px, transparent 3px),
+      radial-gradient(circle at 50% 90%, #7e22ce 3px, transparent 4px),
+      radial-gradient(circle at 68% 35%, #9333ea 2.2px, transparent 3.2px),
+      radial-gradient(circle at 82% 80%, #d8b4fe 2.5px, transparent 3.5px),
+      radial-gradient(circle at 92% 45%, #a855f7 2px, transparent 3px);
+    background-size: 200px 100%;
+    animation: mobNetherMid 3.5s linear infinite;
+    opacity: 0.75;
+  }
+
+  .zmob-item-list a.zfx-nether .znav-particles-layer::after {
+    background-image:
+      radial-gradient(circle at 10% 40%, #d8b4fe 3px, transparent 4px),
+      radial-gradient(circle at 35% 90%, #a855f7 2.5px, transparent 3.5px),
+      radial-gradient(circle at 55% 15%, #c084fc 3px, transparent 4px),
+      radial-gradient(circle at 75% 65%, #9333ea 2.8px, transparent 3.8px),
+      radial-gradient(circle at 90% 25%, #7e22ce 3px, transparent 4px);
+    background-size: 140px 100%;
+    animation: mobNetherFast 1.8s linear infinite;
+    opacity: 1;
+  }
+
+  /* --- EFEITO 2: FOGO DO NETHER / BRASAS --- */
+  .zmob-item-list a.zfx-fire .znav-particles-layer {
+    background-image:
+      radial-gradient(circle at 10% 25%, #b91c1c 2px, transparent 3px),
+      radial-gradient(circle at 38% 80%, #c2410c 2.5px, transparent 3.5px),
+      radial-gradient(circle at 60% 35%, #991b1b 2px, transparent 3px),
+      radial-gradient(circle at 78% 70%, #b91c1c 2.2px, transparent 3.2px),
+      radial-gradient(circle at 92% 20%, #c2410c 2px, transparent 3px);
+    background-size: 280px 100%;
+    animation: mobFireSlow 5.5s linear infinite;
+    opacity: 0.5;
+  }
+
+  .zmob-item-list a.zfx-fire .znav-particles-layer::before {
+    background-image:
+      radial-gradient(circle at 15% 70%, #ef4444 2.5px, transparent 3.5px),
+      radial-gradient(circle at 35% 25%, #f97316 2px, transparent 3px),
+      radial-gradient(circle at 58% 85%, #dc2626 3px, transparent 4px),
+      radial-gradient(circle at 75% 40%, #ea580c 2.2px, transparent 3.2px),
+      radial-gradient(circle at 90% 75%, #f97316 2.5px, transparent 3.5px);
+    background-size: 210px 100%;
+    animation: mobFireMid 3.2s linear infinite;
+    opacity: 0.75;
+  }
+
+  .zmob-item-list a.zfx-fire .znav-particles-layer::after {
+    background-image:
+      radial-gradient(circle at 12% 35%, #facc15 3px, transparent 4px),
+      radial-gradient(circle at 38% 90%, #fb923c 2.5px, transparent 3.5px),
+      radial-gradient(circle at 62% 15%, #ef4444 3px, transparent 4px),
+      radial-gradient(circle at 82% 60%, #f97316 2.8px, transparent 3.8px),
+      radial-gradient(circle at 95% 30%, #facc15 3px, transparent 4px);
+    background-size: 150px 100%;
+    animation: mobFireFast 1.6s linear infinite;
+    opacity: 1;
+  }
+
+  /* --- EFEITO 3: REDSTONE / ENERGIA --- */
+  .zmob-item-list a.zfx-redstone .znav-particles-layer {
+    background-image:
+      radial-gradient(circle at 12% 30%, #800000 2px, transparent 3px),
+      radial-gradient(circle at 40% 85%, #990000 2.5px, transparent 3.5px),
+      radial-gradient(circle at 65% 40%, #cc0000 2px, transparent 3px),
+      radial-gradient(circle at 85% 75%, #800000 1.8px, transparent 2.8px);
+    background-size: 240px 100%;
+    animation: mobRedstoneSlow 5s linear infinite;
+    opacity: 0.5;
+  }
+
+  .zmob-item-list a.zfx-redstone .znav-particles-layer::before {
+    background-image:
+      radial-gradient(circle at 15% 65%, #ff2a2a 2.5px, transparent 3.5px),
+      radial-gradient(circle at 42% 20%, #ff5555 2px, transparent 3px),
+      radial-gradient(circle at 70% 80%, #cc0000 3px, transparent 4px),
+      radial-gradient(circle at 90% 45%, #ff2a2a 2.2px, transparent 3.2px);
+    background-size: 180px 100%;
+    animation: mobRedstoneMid 3s linear infinite;
+    opacity: 0.75;
+  }
+
+  .zmob-item-list a.zfx-redstone .znav-particles-layer::after {
+    background-image:
+      radial-gradient(circle at 10% 45%, #ff8888 3px, transparent 4px),
+      radial-gradient(circle at 35% 85%, #ff9999 2.5px, transparent 3.5px),
+      radial-gradient(circle at 60% 15%, #ff2a2a 3px, transparent 4px),
+      radial-gradient(circle at 82% 65%, #ff5555 2.8px, transparent 3.8px);
+    background-size: 120px 100%;
+    animation: mobRedstoneFast 1.4s linear infinite;
+    opacity: 1;
+  }
+
+  /* ============================================================
+     KEYFRAMES DE PARALLAX DOS ITENS DA LISTA
+     ============================================================ */
+  @keyframes mobNetherSlow {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 260px;
+    }
+  }
+
+  @keyframes mobNetherMid {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 200px;
+    }
+  }
+
+  @keyframes mobNetherFast {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 140px;
+    }
+  }
+
+  @keyframes mobFireSlow {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 280px;
+    }
+  }
+
+  @keyframes mobFireMid {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 210px;
+    }
+  }
+
+  @keyframes mobFireFast {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 150px;
+    }
+  }
+
+  @keyframes mobRedstoneSlow {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 240px;
+    }
+  }
+
+  @keyframes mobRedstoneMid {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 180px;
+    }
+  }
+
+  @keyframes mobRedstoneFast {
+    0% {
+      background-position-x: 0px;
+    }
+
+    100% {
+      background-position-x: 120px;
+    }
   }
 
   .zmob-item-info {
