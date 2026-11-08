@@ -689,11 +689,32 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* ============================================================
-   2. NOTEBOOK (1024px até 1440px)
-   Efeito Gaveta (Top para Baixo com Clip-Path) + Transições Suaves
+   2. NOTEBOOK + DESKTOP (a partir de 1024px)
+   Layout único (Gaveta Top → Baixo com Clip-Path).
+   Todos os tamanhos são multiplicados por --znav-s:
+     notebook (1024–1440px) = 1  → exatamente como já estava
+     desktop  (1441px+)     = 1.1 / 1.2 (telas maiores)
+   Só o fator muda; as demais propriedades são as mesmas.
 ============================================================ */
-@media (min-width: 1024px) and (max-width: 1440px) {
+@media (min-width: 1024px) {
+
+  .znav-pc {
+    --znav-s: 1;
+  }
+
 
   .zmob-topbar,
   .zmob-overlay,
@@ -706,7 +727,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px;
+    height: calc(60px * var(--znav-s));
     background: var(--zc-bg-panel);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -717,10 +738,10 @@
 
   .znav-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: calc(1400px * var(--znav-s));
     margin: 0 auto;
     height: 100%;
-    padding: 0 20px;
+    padding: 0 calc(20px * var(--znav-s));
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -730,7 +751,7 @@
     justify-self: start;
     color: var(--zc-text);
     font-weight: 900;
-    font-size: 20px;
+    font-size: calc(20px * var(--znav-s));
     text-decoration: none;
     letter-spacing: 1px;
   }
@@ -740,7 +761,7 @@
     display: flex;
     list-style: none;
     height: 100%;
-    gap: 4px;
+    gap: calc(4px * var(--znav-s));
     align-items: center;
   }
 
@@ -750,7 +771,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 0 10px;
+    padding: 0 calc(10px * var(--znav-s));
     transition: background 0.25s ease;
   }
 
@@ -762,16 +783,16 @@
   .znav-item {
     color: var(--zc-muted);
     font-weight: 800;
-    font-size: 12px;
+    font-size: calc(12px * var(--znav-s));
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: calc(5px * var(--znav-s));
     text-transform: uppercase;
     transition: color 0.25s ease;
   }
 
   .znav-arrow {
-    font-size: 9px;
+    font-size: calc(9px * var(--znav-s));
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
     color: var(--zc-muted);
   }
@@ -793,7 +814,7 @@
   /* GAVETA NOTEBOOK - DESCE DE CIMA PARA BAIXO COMO UMA CORTINA/GAVETA */
   .znav-mega-panel {
     position: absolute;
-    top: 60px;
+    top: calc(60px * var(--znav-s));
     left: 0;
     width: 100%;
     background: var(--zc-bg-tab);
@@ -824,21 +845,21 @@
   }
 
   .znav-mega-grid {
-    max-width: 1200px;
+    max-width: calc(1200px * var(--znav-s));
     margin: 0 auto;
     display: flex;
-    height: 440px;
-    padding: 20px 15px;
+    height: calc(440px * var(--znav-s));
+    padding: calc(20px * var(--znav-s)) calc(15px * var(--znav-s));
     align-items: stretch;
   }
 
   .znav-col-left {
-    width: 220px;
+    width: calc(220px * var(--znav-s));
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: calc(5px * var(--znav-s));
     border-right: 1px solid var(--zc-border);
-    padding-right: 15px;
+    padding-right: calc(15px * var(--znav-s));
     flex-shrink: 0;
   }
 
@@ -854,9 +875,9 @@
     border: 1px solid transparent;
     color: var(--zc-muted);
     text-align: left;
-    padding: 20px 12px;
+    padding: calc(20px * var(--znav-s)) calc(12px * var(--znav-s));
     font-weight: 800;
-    font-size: 12px;
+    font-size: calc(12px * var(--znav-s));
     cursor: pointer;
     outline: none;
     text-transform: uppercase;
@@ -865,7 +886,7 @@
     /* Linha sutil entre os links */
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: calc(10px * var(--znav-s));
     transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       background 0.2s ease,
       color 0.2s ease;
@@ -884,8 +905,8 @@
     align-items: center;
     justify-content: flex-start;
     text-decoration: none;
-    font-size: 0.8rem;
-    padding: 12px 12px;
+    font-size: calc(0.8rem * var(--znav-s));
+    padding: calc(12px * var(--znav-s)) calc(12px * var(--znav-s));
     border-bottom: 1px solid #222222;
   }
 
@@ -1189,10 +1210,10 @@
     border: none;
     border-radius: 0px;
     color: #ffffff;
-    padding: 14px 18px;
+    padding: calc(14px * var(--znav-s)) calc(18px * var(--znav-s));
     font-family: "Inter", sans-serif;
     font-weight: 900;
-    font-size: 0.8rem;
+    font-size: calc(0.8rem * var(--znav-s));
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1201,14 +1222,14 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
+    gap: calc(12px * var(--znav-s));
     transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       background-color 0.2s ease,
       color 0.2s ease;
   }
 
   .znav-small-link i {
-    font-size: 0.9rem;
+    font-size: calc(0.9rem * var(--znav-s));
     color: #ffffff;
   }
 
@@ -1234,13 +1255,13 @@
     overflow-x: hidden !important;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: calc(4px * var(--znav-s));
     scrollbar-width: thin;
     scrollbar-color: var(--zc-accent) rgba(255, 255, 255, 0.02);
   }
 
   .znav-tabs-scroll-area::-webkit-scrollbar {
-    width: 4px;
+    width: calc(4px * var(--znav-s));
   }
 
   .znav-tabs-scroll-area::-webkit-scrollbar-thumb {
@@ -1257,8 +1278,8 @@
     border-top: 1px solid var(--zc-border);
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 8px 0;
+    gap: calc(4px * var(--znav-s));
+    padding: calc(8px * var(--znav-s)) 0;
     z-index: 10;
     box-sizing: border-box;
     margin-top: auto;
@@ -1269,10 +1290,10 @@
     border: none;
     border-radius: 0px;
     color: var(--zc-muted);
-    padding: 10px 12px;
+    padding: calc(10px * var(--znav-s)) calc(12px * var(--znav-s));
     font-family: "Inter", sans-serif;
     font-weight: 800;
-    font-size: 0.75rem;
+    font-size: calc(0.75rem * var(--znav-s));
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1280,7 +1301,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: calc(10px * var(--znav-s));
     width: 100%;
     box-sizing: border-box;
     /* SEM TRANSLATION/TRANSICÃO DE MOVIMENTO LATERAL */
@@ -1289,7 +1310,7 @@
   }
 
   .znav-bottom-link i {
-    font-size: 0.8rem;
+    font-size: calc(0.8rem * var(--znav-s));
     color: var(--zc-muted);
     transition: color 0.2s ease;
     flex-shrink: 0;
@@ -1341,7 +1362,7 @@
 
   .znav-col-center {
     flex: 1;
-    padding: 0 25px;
+    padding: 0 calc(25px * var(--znav-s));
     overflow-y: auto;
     scrollbar-width: thin !important;
     scrollbar-color: #d6d6d6 #1a1a1a !important;
@@ -1365,7 +1386,7 @@
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    margin-bottom: 8px;
+    margin-bottom: calc(8px * var(--znav-s));
     border: 1px solid var(--zc-border);
     transition: border-color 0.25s ease, transform 0.25s ease;
   }
@@ -1379,55 +1400,55 @@
   .znav-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 15px;
+    gap: calc(12px * var(--znav-s));
+    margin-bottom: calc(15px * var(--znav-s));
   }
 
   .znav-grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: calc(15px * var(--znav-s));
+    margin-bottom: calc(15px * var(--znav-s));
   }
 
   .znav-tab-content h4 {
     color: var(--zc-accent);
-    font-size: 14px;
+    font-size: calc(14px * var(--znav-s));
     font-weight: 900;
-    margin: 0 0 6px 0;
+    margin: 0 0 calc(6px * var(--znav-s)) 0;
     text-transform: uppercase;
   }
 
   .znav-tab-content p {
     color: var(--zc-muted);
-    font-size: 12px;
+    font-size: calc(12px * var(--znav-s));
     line-height: 1.4;
-    margin-bottom: 15px;
+    margin-bottom: calc(15px * var(--znav-s));
   }
 
   .znav-col-right {
-    width: 220px;
+    width: calc(220px * var(--znav-s));
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding-left: 15px;
+    gap: calc(8px * var(--znav-s));
+    padding-left: calc(15px * var(--znav-s));
     border-left: 1px solid var(--zc-border);
     flex-shrink: 0;
   }
 
   .znav-divider-gray {
     border-top: 1px solid var(--zc-border);
-    margin: 8px 0;
-    width: 30px;
+    margin: calc(8px * var(--znav-s)) 0;
+    width: calc(30px * var(--znav-s));
   }
 
   .znav-link-list-small li {
-    margin-bottom: 10px;
+    margin-bottom: calc(10px * var(--znav-s));
   }
 
   .znav-link-list-small a {
     color: var(--zc-muted);
-    font-size: 11px;
+    font-size: calc(11px * var(--znav-s));
     font-weight: 700;
     text-decoration: none;
     transition: color 0.25s ease, padding-left 0.25s ease;
@@ -1435,14 +1456,14 @@
 
   .znav-link-list-small a:hover {
     color: var(--zc-accent);
-    padding-left: 4px;
+    padding-left: calc(4px * var(--znav-s));
   }
 
   .znav-actions {
     justify-self: end;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: calc(12px * var(--znav-s));
     height: 100%;
   }
 
@@ -1453,9 +1474,9 @@
     background: var(--zc-bg-tab);
     backdrop-filter: blur(15px);
     border: 1px solid var(--zc-border);
-    min-width: 180px;
+    min-width: calc(180px * var(--znav-s));
     list-style: none;
-    padding: 6px 0;
+    padding: calc(6px * var(--znav-s)) 0;
     visibility: hidden;
     opacity: 0;
     transform: translateY(8px);
@@ -1473,8 +1494,8 @@
   .znav-simple-drop li a {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
+    gap: calc(10px * var(--znav-s));
+    padding: calc(10px * var(--znav-s)) calc(14px * var(--znav-s));
     background-color: #16161a;
     border: none;
     border-left: 2px solid transparent;
@@ -1483,7 +1504,7 @@
     color: var(--zc-muted);
     text-decoration: none;
     font-weight: 800;
-    font-size: 11px;
+    font-size: calc(11px * var(--znav-s));
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-sizing: border-box;
@@ -1519,21 +1540,21 @@
   .znav-icon-wrapper {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: calc(5px * var(--znav-s));
     color: var(--zc-text);
     font-weight: 800;
-    font-size: 11px;
+    font-size: calc(11px * var(--znav-s));
     cursor: pointer;
     transition: color 0.25s ease;
-    padding: 6px 0;
+    padding: calc(6px * var(--znav-s)) 0;
   }
 
   .znav-icon-wrapper i:first-child {
-    font-size: 13px;
+    font-size: calc(13px * var(--znav-s));
   }
 
   .znav-arrow-small {
-    font-size: 9px;
+    font-size: calc(9px * var(--znav-s));
     color: var(--zc-muted);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
   }
@@ -1551,12 +1572,12 @@
   .znav-btn-outline {
     border: 1px solid var(--text-main);
     color: var(--zc-accent);
-    padding: 6px 12px;
+    padding: calc(6px * var(--znav-s)) calc(12px * var(--znav-s));
     font-weight: 800;
-    font-size: 10px;
+    font-size: calc(10px * var(--znav-s));
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: calc(6px * var(--znav-s));
     transition: all 0.25s ease;
     background: rgba(255, 255, 255, 0.03);
   }
@@ -1567,450 +1588,21 @@
   }
 }
 
-
-/* ============================================================
-   3. DESKTOP / PC (Acima de 1441px)
-   Efeito Gaveta (Top para Baixo com Clip-Path) + Fluidez Máxima
-============================================================ */
+/* DESKTOP: mesmo layout, redimensionado proporcionalmente */
 @media (min-width: 1441px) {
-
-  .zmob-topbar,
-  .zmob-overlay,
-  .zmob-sidebar {
-    display: none !important;
-  }
-
   .znav-pc {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: var(--zc-bg-panel);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    z-index: 10000;
-    border-bottom: 1px solid var(--zc-border);
-    display: flex !important;
+    --znav-s: 1.1;
   }
 
   .znav-container {
-    width: 100%;
     max-width: 1800px;
-    margin: 0 auto;
-    height: 100%;
     padding: 0 40px;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
   }
+}
 
-  .znav-logo {
-    justify-self: start;
-    color: var(--zc-text);
-    font-weight: 900;
-    font-size: 24px;
-    text-decoration: none;
-    letter-spacing: 1px;
-  }
-
-  .znav-menu {
-    justify-self: center;
-    display: flex;
-    list-style: none;
-    height: 100%;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .znav-mega-btn {
-    position: static;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 0 15px;
-    transition: background 0.25s ease;
-  }
-
-  .znav-mega-btn.drop-conta,
-  .has-simple-drop {
-    position: relative;
-  }
-
-  .znav-item {
-    color: var(--zc-muted);
-    font-weight: 800;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-transform: uppercase;
-    transition: color 0.25s ease;
-  }
-
-  .znav-arrow {
-    font-size: 11px;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
-    color: var(--zc-muted);
-  }
-
-  .znav-mega-btn:hover .znav-item,
-  .znav-mega-btn.open .znav-item {
-    color: var(--zc-accent);
-  }
-
-  .znav-mega-btn:hover .znav-arrow,
-  .znav-mega-btn.open .znav-arrow {
-    color: var(--zc-accent);
-  }
-
-  .znav-mega-btn.open .znav-arrow {
-    transform: rotate(180deg);
-  }
-
-  /* GAVETA DESKTOP - DESCE DE CIMA PARA BAIXO COM CLIPE DE REVELAÇÃO SUAVE */
-  .znav-mega-panel {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: var(--zc-bg-tab);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-bottom: 1px solid var(--zc-border);
-    border-top: 1px solid var(--zc-border);
-    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.9);
-    cursor: default;
-    overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
-    clip-path: inset(0 0 100% 0);
-    transform: translateY(-15px);
-    transition: clip-path 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      visibility 0.5s;
-    pointer-events: none;
-  }
-
-  .znav-mega-btn.open>.znav-mega-panel {
-    visibility: visible;
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .znav-mega-grid {
-    max-width: 1600px;
-    margin: 0 auto;
-    display: flex;
-    height: 600px;
-    padding: 50px 30px;
-    align-items: stretch;
-  }
-
-  .znav-col-left {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border-right: 1px solid var(--zc-border);
-    padding-right: 40px;
-    flex-shrink: 0;
-  }
-
-  .znav-tab {
-    background: transparent;
-    border: 1px solid transparent;
-    color: var(--zc-muted);
-    text-align: left;
-    padding: 10px 12px;
-    font-weight: 800;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    outline: none;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    /* ADICIONE */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  /* ADICIONE: vale para SVG e para <i> do Font Awesome */
-  .znav-tab svg,
-  .znav-tab i {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .znav-tab:hover {
-    background: var(--zc-bg-hover);
-    color: var(--zc-accent);
-    transform: translateX(6px);
-  }
-
-  .znav-tab.active {
-    background: var(--zc-accent-soft);
-    border-color: var(--zc-border);
-    border-left: 4px solid var(--zc-accent);
-    color: var(--zc-accent);
-    transform: translateX(10px);
-  }
-
-  .znav-bottom-link {
-    margin-top: auto;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .znav-bottom-link a {
-    color: var(--zc-muted);
-    font-size: 13px;
-    font-weight: 800;
-    text-decoration: none;
-    transition: color 0.25s ease, padding-left 0.25s ease;
-    text-transform: uppercase;
-  }
-
-  .znav-bottom-link a:hover {
-    color: var(--zc-accent);
-    padding-left: 6px;
-  }
-
-  .znav-col-main {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .znav-tab-content {
-    display: none !important;
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-  }
-
-  .znav-tab-content.active {
-    display: flex !important;
-    opacity: 1;
-    animation: fadeTabDesktop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  @keyframes fadeTabDesktop {
-    from {
-      opacity: 0;
-      transform: translateX(-15px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .znav-col-center {
-    flex: 1;
-    padding: 0 50px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--zc-accent) rgba(255, 255, 255, 0.02);
-  }
-
-  .znav-col-center::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .znav-col-center::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.02);
-  }
-
-  .znav-col-center::-webkit-scrollbar-thumb {
-    background: var(--zc-muted);
-  }
-
-  .znav-banner img,
-  .znav-card img {
-    width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    margin-bottom: 15px;
-    border: 1px solid var(--zc-border);
-    transition: border-color 0.25s ease, transform 0.25s ease;
-  }
-
-  .znav-banner:hover img,
-  .znav-card:hover img {
-    border-color: var(--zc-accent);
-    transform: scale(1.015);
-  }
-
-  .znav-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-bottom: 30px;
-  }
-
-  .znav-grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-bottom: 30px;
-  }
-
-  .znav-tab-content h4 {
-    color: var(--zc-accent);
-    font-size: 18px;
-    font-weight: 900;
-    margin: 0 0 10px 0;
-    text-transform: uppercase;
-  }
-
-  .znav-tab-content p {
-    color: var(--zc-muted);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-  }
-
-  .znav-col-right {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-left: 40px;
-    border-left: 1px solid var(--zc-border);
-    flex-shrink: 0;
-  }
-
-  .znav-divider-gray {
-    border-top: 1px solid var(--zc-border);
-    margin: 15px 0;
-    width: 50px;
-  }
-
-  .znav-link-list-small li {
-    margin-bottom: 15px;
-  }
-
-  .znav-link-list-small a {
-    color: var(--zc-muted);
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: color 0.25s ease, padding-left 0.25s ease;
-  }
-
-  .znav-link-list-small a:hover {
-    color: var(--zc-accent);
-    padding-left: 6px;
-  }
-
-  .znav-actions {
-    justify-self: end;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    height: 100%;
-  }
-
-  .znav-simple-drop {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: var(--zc-bg-tab);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--zc-border);
-    min-width: 220px;
-    list-style: none;
-    padding: 10px 0;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
-    z-index: 100000;
-  }
-
-  .znav-mega-btn.drop-conta.open>.znav-simple-drop {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .znav-simple-drop li a {
-    display: block;
-    padding: 14px 25px;
-    color: var(--zc-muted);
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 14px;
-    transition: background 0.25s ease, color 0.25s ease, padding-left 0.25s ease;
-  }
-
-  .znav-simple-drop li a:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--zc-accent);
-    padding-left: 30px;
-  }
-
-  .znav-icon-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--zc-text);
-    font-weight: 800;
-    font-size: 13px;
-    cursor: pointer;
-    transition: color 0.25s ease;
-    padding: 10px 0;
-  }
-
-  .znav-icon-wrapper i:first-child {
-    font-size: 16px;
-  }
-
-  .znav-arrow-small {
-    font-size: 11px;
-    color: var(--zc-muted);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
-  }
-
-  .znav-icon-wrapper:hover,
-  .znav-mega-btn.open .znav-icon-wrapper {
-    color: var(--zc-accent);
-  }
-
-  .znav-mega-btn.open .znav-arrow-small {
-    transform: rotate(180deg);
-    color: var(--zc-accent);
-  }
-
-  .znav-btn-outline {
-    border: 1px solid var(--text-main);
-    color: var(--zc-accent);
-    padding: 10px 20px;
-    font-weight: 800;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.25s ease;
-    background: rgba(255, 255, 255, 0.03);
-  }
-
-  .znav-btn-outline:hover {
-    background: var(--text-main);
-    color: #000;
+@media (min-width: 1700px) {
+  .znav-pc {
+    --znav-s: 1.2;
   }
 }
 
