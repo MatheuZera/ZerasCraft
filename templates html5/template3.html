@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
+    <meta charset="UTF-8" />
+    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!---->
+    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon" />
+
+    <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!---->
+
+    <!--é a breve descrição da sua página que pode aparecer no Google-->
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!" />
+    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
+    <meta name="keywords"
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo" />
+    <!--Identifica o autor do documento HTML.-->
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft" />
+    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
+    <meta name="robots" content="index, follow" />
+
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--O título que aparece na pré-visualização.-->
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial" />
+    <!--A descrição que aparece na pré-visualização.-->
+    <meta property="og:description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!" />
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <meta property="og:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg" />
+    <!--A URL da página.-->
+    <meta property="og:url" content="https://seusite.com.br/index.html" />
+
+    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mundo Zera's Craft" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SeuTwitterHandle" />
+    <meta name="twitter:creator" content="@SeuTwitterHandle" />
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!" />
+    <meta name="twitter:description"
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!" />
+    <!---->
+    <meta name="twitter:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg" />
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <meta name="theme-color" content="#347C2F" />
+    <!-- Links para ScrollReveal e CountUp.js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- CSS Globais -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Zera's Craft Home</title>
+</head>
+
+<body>
+
+    <!-- OVERLAY ESCURO -->
+    <div id="zc-drawer-backdrop" class="zc-drawer-backdrop" onclick="closeAllDrawers()"></div>
+
+    <!-- ==========================================================
+   GAVETA 1: PAINEL PRINCIPAL (ZERA'S CRAFT)
+   ========================================================== -->
+    <aside id="drawer-primary" class="zc-slide-drawer primary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-inicio')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Início">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">INÍCIO</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-novidades')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Book_and_Quill.png" alt="Novidades">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">NOVIDADES</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-oficial')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Emerald.png" alt="Oficial">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">OFICIAL</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-recursos')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Recursos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">RECURSOS</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-suporte')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Suporte">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">SUPORTE</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <div class="zc-drawer-divider"></div>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-pesquisar')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Pesquisar">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">PESQUISAR</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-links')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Links">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">LINKS EXTERNOS</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <div class="zc-drawer-divider"></div>
+
+            <a href="#discord" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Discord">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">NOSSO DISCORD</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </a>
+        </div>
+
+        <!-- RODAPÉ PERMANENTE FIXO NA BASE DO MENU PRINCIPAL -->
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU INÍCIO (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-inicio" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-inicio')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">DESTAQUES DO INÍCIO</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Início">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Página Inicial</span>
+                    <span class="zc-item-sub">Volte para a página principal da wiki</span>
+                </div>
+            </a>
+
+            <!-- Botão com partículas sutis da esquerda para a direita -->
+            <a href="#" class="zc-drawer-item particle-btn" data-particles="#2ea043,#54aeff,#8250df"
+                onclick="closeAllDrawers()">
+                <div class="zc-particles-canvas"></div>
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Player_Head.png" alt="Comunidade">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Comunidade em Foco</span>
+                    <span class="zc-item-sub">Participe dos eventos e chats oficiais</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Pixel Legends">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Pixel Legends</span>
+                    <span class="zc-item-sub">Explore o novo modo RPG de masmorras</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Recursos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Recursos & Guias</span>
+                    <span class="zc-item-sub">Manuais completos de sobrevivência</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU NOVIDADES (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-novidades" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-novidades')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">ATUALIZAÇÕES RECENTES</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Book_and_Quill.png" alt="Patch">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Patch 1.21.4</span>
+                    <span class="zc-item-sub">Novos itens e correções de segurança</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Eventos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Eventos de Natal</span>
+                    <span class="zc-item-sub">Confira a premiação da semana</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU OFICIAL (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-oficial" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-oficial')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">LINKS OFICIAIS</div>
+
+            <a href="https://minecraft.wiki" target="_blank" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Emerald.png" alt="Site">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Site Oficial</span>
+                    <span class="zc-item-sub">Visite nosso portal na web</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond.png" alt="Loja">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Loja VIP</span>
+                    <span class="zc-item-sub">Adquira vantagens exclusivas</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU RECURSOS (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-recursos" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-recursos')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">FERRAMENTAS & WIKI</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Mapa">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Mapa Online</span>
+                    <span class="zc-item-sub">Visualizador de mundo em tempo real</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Crafting_Table.png" alt="Banco">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Banco de Dados</span>
+                    <span class="zc-item-sub">Lista de receitas e itens</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU SUPORTE (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-suporte" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-suporte')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">ATENDIMENTO AO JOGADOR</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Ticket">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Abrir Ticket</span>
+                    <span class="zc-item-sub">Suporte técnico e denúncias</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Paper.png" alt="Regras">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Regras do Servidor</span>
+                    <span class="zc-item-sub">Diretrizes de convivência</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU PESQUISAR (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-pesquisar" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-pesquisar')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">BUSCA RÁPIDA</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Busca">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Pesquisar na Wiki</span>
+                    <span class="zc-item-sub">Encontre itens, tutoriais e regras</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU LINKS EXTERNOS (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-links" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-links')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">PARCEIROS & REDES</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Pickaxe.png" alt="YouTube">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Canal do YouTube</span>
+                    <span class="zc-item-sub">Vídeos e tutoriais da staff</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Painting.png" alt="Instagram">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Instagram Oficial</span>
+                    <span class="zc-item-sub">Siga bastidores da equipe</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- BARRA LATERAL ESQUERDA REESTRUTURADA -->
+    <aside class="wiki-left-sidebar">
+        <div class="wiki-left-logo-box">
+            <img src="https://minecraft.wiki/images/Minecraft_Wiki_Logo.png" alt="Minecraft Wiki">
+        </div>
+
+        <div class="wiki-left-stats-bar">
+            <div><span>18.5k</span> páginas</div>
+            <div><span>177.5k</span> edições</div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Navegação</button>
+            <div class="wiki-left-links">
+                <a href="#ajuda">Como ajudar</a>
+                <a href="#recentes">Alterações recentes</a>
+                <a href="#aleatoria">Página aleatória</a>
+                <a href="https://discord.com" target="_blank" class="wiki-left-discord-btn">💬 Wiki Discord</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Comunidade Wiki</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#">Portal da Comunidade</a>
+                <a href="#">Regras da Comunidade</a>
+                <a href="#">Discussões</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-promo-box">
+            <span class="wiki-left-promo-close" onclick="this.parentElement.style.display='none'">×</span>
+            <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Grass Block">
+            <p>Tired of seeing Fandom results on Google?</p>
+            <span class="wiki-left-promo-highlight">Hide them forever with two clicks</span>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Franquia</button>
+            <div class="wiki-left-links">
+                <a href="#">Minecraft</a>
+                <a href="#">Minecraft Dungeons</a>
+                <a href="#">Um filme de Minecraft</a>
+                <a href="#">Lendas do Minecraft</a>
+                <a href="#">Minecraft: Modo História</a>
+                <a href="#">Minecraft Terra</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Versões recentes</button>
+            <div class="wiki-left-links">
+                <a href="#java">Edição Java: 26.3</a>
+                <a href="#bedrock">Edição Bedrock: 26.63</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Páginas úteis</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#comercio">Negociação</a>
+                <a href="#fermentacao">Cervejaria</a>
+                <a href="#encantamento">Encantamentos</a>
+                <a href="#tutoriais">Tutoriais</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Ferramentas</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#">Páginas afluentes</a>
+                <a href="#">Carregar arquivo</a>
+                <a href="#">Páginas especiais</a>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="main-container">
+
+        <!-- CABEÇALHO SUPERIOR REORDENADO -->
+        <header class="wiki-header" data-bg="https://media.forgecdn.net/attachments/1951/255/plains_village_3-jpg.jpg">
+            <!-- seus botões e conteúdo -->
+
+            <div class="header-left-group">
+                <!-- Botão Hambúrguer Principal alinhado e estruturado igual ao Minecraft Wiki -->
+                <button class="wiki-header-btn zc-hamburger-btn" onclick="openPrimaryDrawer()" aria-label="Abrir Menu">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Menu"
+                        style="width: 18px; height: 18px; image-rendering: pixelated; margin-right: 4px;">
+                    <span>Menu</span>
+                </button>
+
+                <button class="wiki-header-btn active" onclick="setActiveNav(this)">Página principal</button>
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Falar</button>
+            </div>
+
+            <div class="header-right-group">
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Ler</button>
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Ver código-fonte</button>
+
+                <div class="dropdown-historico">
+                    <button class="wiki-header-btn" title="Páginas revisadas desta página [h]" accesskey="h">
+                        <span>Ver histórico</span>
+                    </button>
+
+                    <!-- Card Flutuante Estilizado -->
+                    <div class="card-historico-dropdown">
+                        <div class="grid-ferramentas">
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🔔</span>
+                                <span class="texto-item">Status de servidor</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧥</span>
+                                <span class="texto-item">Criador de skins</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧪</span>
+                                <span class="texto-item">Gerador de conquistas</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">💰</span>
+                                <span class="texto-item">Calculadora de recursos</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🌾</span>
+                                <span class="texto-item">Trocas e presentes</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧭</span>
+                                <span class="texto-item">Qual é o seu quadrante?</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">📦</span>
+                                <span class="texto-item">Blocos e itens para baixar</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🗺️</span>
+                                <span class="texto-item">Mapa da seed</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">📖</span>
+                                <span class="texto-item">Encantamentos</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🛡️</span>
+                                <span class="texto-item">Armaduras e enfeites</span>
+                            </a>
+                        </div>
+                        <div class="rodape-card">
+                            <a href="#">Ver todas as ferramentas &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="more-dropdown">
+                    <button class="wiki-header-btn" onclick="toggleMoreModal(event)">Mais ▾</button>
+                    <div id="moreModal" class="more-modal">
+                        <a href="https://minecraft.wiki" target="_blank">🌐 Wiki Oficial Global</a>
+                        <a href="https://mojang.com" target="_blank">📦 Mojang Studios</a>
+                        <a href="https://xbox.com" target="_blank">🎮 Xbox Game Pass</a>
+                    </div>
+                </div>
+
+                <!-- Barra de Pesquisa Ordenada -->
+                <div class="header-search-box">
+                    <input type="text" id="searchInput" placeholder="Pesquisar no Zera's Craft..."
+                        onkeyup="filterPageStrings()">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- SUB-TOPO IDIOMAS -->
+        <div class="top-sub-header">
+            <a href="#">Português</a>
+            <span style="color:#c8cbd1;">|</span>
+            <button class="lang-dropdown-btn">🌐 14 idiomas ▾</button>
+        </div>
+
+        <!-- ABAS DE FRANQUIA (APENAS ÍCONES PNG LIMPOS) -->
+        <nav class="franchise-nav" aria-label="Franquias">
+            <a href="#minecraft" class="franchise-tab active" title="Minecraft">
+                <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Minecraft">
+            </a>
+            <a href="#masmorras" class="franchise-tab" title="Masmorras">
+                <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Masmorras">
+            </a>
+            <a href="#filme" class="franchise-tab" title="Filme">
+                <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Filme">
+            </a>
+            <a href="#lendas" class="franchise-tab" title="Lendas">
+                <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Lendas">
+            </a>
+            <a href="#modo-historia" class="franchise-tab" title="Modo História">
+                <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Modo História">
+            </a>
+            <a href="#terra" class="franchise-tab" title="Terra">
+                <img src="https://minecraft.wiki/images/Oak_Sapling.png" alt="Terra">
+            </a>
+        </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- GRID DE CONTEÚDO CENTRALIZADO E ISOLADO EM QUADRADINHOS/CARDS -->
+        <div class="content-grid">
+
+            <div class="left-column">
+
+                <!-- FOOTER DA WIKI (TEMA CLARO / RETINHO / SEM SOMBRAS NO TOPO) -->
+                <footer class="searchable-section wiki-footer-section">
+                    <div class="wiki-footer-container">
+
+                        <!-- Linha Superior de Colunas -->
+                        <div class="wiki-footer-grid">
+
+                            <!-- Coluna 1: Comunidade Unida! -->
+                            <div class="footer-col">
+                                <div class="footer-col-header">
+                                    <span class="footer-discord-icon">💬</span>
+                                    <h4 class="footer-title">COMUNIDADE UNIDA!</h4>
+                                </div>
+                                <p class="footer-text">
+                                    Somos uma Comunidade que gosta de criar coisas legais e divertidas, sempre buscando
+                                    ampliar os recursos tanto para Minecraft quanto para outros Jogos do interesse da
+                                    nossa comunidade, quanto resoluções de dúvidas, e coisas em geral. Nossa Comunidade
+                                    e a Administração sempre intuitiva nosso pessoal a criar suas coisas e se divertir
+                                    com isto, podendo postar suas Criações conosco, fazer feedbacks, dar ideias e etc..
+                                    Temos vários Eventos para incentivar a todos, criarem suas coisas e ganhar
+                                    recompensas por isto!
+                                </p>
+                            </div>
+
+                            <!-- Coluna 2: Redes Sociais -->
+                            <div class="footer-col">
+                                <h4 class="footer-title">REDES SOCIAIS (MATHEUZERA)</h4>
+                                <ul class="footer-links-list">
+                                    <li><a href="#"><span class="link-arrow">›</span> Canal Oficial YT</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Nosso Marketplace Craft</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Sobre nossas Wikipédias</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Solicite Parcerias!</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Crie sua Página Web!</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Minecraft.net</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Coluna 3: Nossos Recursos -->
+                            <div class="footer-col">
+                                <h4 class="footer-title">NOSSOS RECURSOS</h4>
+                                <ul class="footer-links-list">
+                                    <li><a href="#"><span class="link-arrow">›</span> Criar uma Guilda</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Pixel Legends</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Nossos Eventos</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Feedbacks</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Seja um(a) Staff</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> EXPLORE MAIS!</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Coluna 4: Explorar -->
+                            <div class="footer-col">
+                                <h4 class="footer-title">EXPLORAR</h4>
+                                <ul class="footer-links-list">
+                                    <li><a href="#"><span class="link-arrow">›</span> Canal Oficial YT</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Nosso Marketplace Craft</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Sobre nossas Wikipédias</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Solicite Parcerias!</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Crie sua Página Web!</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Minecraft.net</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <!-- Linha Inferior de Colunas -->
+                        <div class="wiki-footer-grid bottom-row">
+
+                            <!-- Coluna Inferior 1: Feedbacks -->
+                            <div class="footer-col">
+                                <div class="footer-col-header">
+                                    <span class="footer-alert-icon">⚠️</span>
+                                    <h4 class="footer-title">FEEDBACKS</h4>
+                                </div>
+                                <p class="footer-text">
+                                    Aceitamos sugestões, ideias e até críticas sobre a nossa Website, pois pode ter
+                                    alguma coisa que deixamos passar despercebidos, então se você notar algo de
+                                    estranho, entre no nosso Servidor do Discord, abra um Ticket ou simplesmente fale
+                                    conosco sobre, que iremos corrigir o mais rápido possível!
+                                </p>
+                                <p class="footer-text">
+                                    Esta é o nosso lugar para conversar, mostrar e interagir com nossos
+                                    Inscritos/Membros de Minecraft, nossos Crafters sempre buscando novas maneiras de
+                                    Jogar com a Rapaziada.
+                                </p>
+                            </div>
+
+                            <!-- Coluna Inferior 2: Parcerias -->
+                            <div class="footer-col">
+                                <h4 class="footer-title">PARCERIAS</h4>
+                                <ul class="footer-links-list">
+                                    <li><a href="#"><span class="link-arrow">›</span> Canal Oficial YT</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Nosso Marketplace Craft</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Sobre nossas Wikipédias</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Solicite Parcerias!</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Crie sua Página Web!</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Minecraft.net</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Coluna Inferior 3: Nossa Equipe -->
+                            <div class="footer-col">
+                                <h4 class="footer-title">NOSSA EQUIPE</h4>
+                                <ul class="footer-links-list">
+                                    <li><a href="#"><span class="link-arrow">›</span> Criar uma Guilda</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Pixel Legends</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Nossos Eventos</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Feedbacks</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> Seja um(a) Staff</a></li>
+                                    <li><a href="#"><span class="link-arrow">›</span> EXPLORE MAIS!</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Coluna Inferior 4: Junte-se à Nossa Comunidade -->
+                            <div class="footer-col">
+                                <h4 class="footer-title">JUNTE-SE À NOSSA COMUNIDADE</h4>
+
+                                <!-- Caixa de status do Discord -->
+                                <div class="footer-discord-widget-box">
+                                    Junte-se a <strong id="footerOnlineCount" class="green-text">43</strong> Membros
+                                    Online agora no nosso Discord Oficial.
+                                </div>
+
+                                <!-- Botões de Redes Sociais -->
+                                <div class="footer-social-buttons">
+                                    <a href="https://discord.gg/1390120239588577482" target="_blank"
+                                        class="social-btn discord">discord</a>
+                                    <a href="#" target="_blank" class="social-btn youtube">youtube</a>
+                                    <a href="#" target="_blank" class="social-btn twitch">twitch</a>
+                                    <a href="#" target="_blank" class="social-btn plus">+</a>
+                                </div>
+                            </div>
+
+                            <!-- BOTÃO QUE ACIONA O CARD LATERAL -->
+                            <button class="wiki-action-btn green"
+                                onclick="abrirCardLateral('Olá Crafter!', 'Acesse nosso Canal!<br>E Nossos Links.')">
+                                ⚡ ABRIR CARD
+                            </button>
+
+                            <!-- CARDZINHO LATERAL ANIMADO (FLUTUANTE) -->
+                            <div id="wikiSideCard" class="wiki-side-card-wrapper">
+                                <div class="wiki-side-card-box">
+                                    <button class="wiki-side-card-close" onclick="fecharCardLateral()">✕</button>
+                                    <h3 id="sideCardTitle" class="wiki-side-card-title">Título</h3>
+                                    <p id="sideCardText" class="wiki-side-card-text">Texto...</p>
+                                </div>
+                            </div>
+
+                            <!-- BOTÃO QUE ACIONA O MODAL -->
+                            <button class="wiki-action-btn green"
+                                onclick="abrirModal('Olá Crafter!', 'Acesse nosso Canal!<br>E Nossos Links.')">
+                                ⚡ CLIQUE AQUI
+                            </button>
+
+                            <!-- ESTRUTURA DO MODAL (DESLIZA DA DIREITA PARA A ESQUERDA) -->
+                            <div id="wikiAnimatedModal" class="wiki-modal-overlay" onclick="fecharModalFora(event)">
+                                <div class="wiki-modal-content">
+                                    <button class="wiki-modal-close" onclick="fecharModal()">✕</button>
+                                    <h3 id="modalTitle" class="wiki-modal-title">Título</h3>
+                                    <p id="modalText" class="wiki-modal-text">Texto...</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </footer>
+
+
+
+                <!-- HERO SHOWCASE CORRIGIDO (PROPORÇÃO EXATA E POSICIONAMENTO) -->
+                <section class="searchable-section minecraft-hero-showcase" id="heroShowcase"
+                    style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1600&auto=format&fit=crop');">
+                    <div class="hero-overlay-content">
+
+                        <!-- Área Inferior: Card à Esquerda e Miniaturas à Direita dentro do Banner -->
+                        <div class="hero-bottom-flex">
+
+                            <!-- Card de Informações Flutuante (Alinhado à Margem Esquerda) -->
+                            <div class="hero-info-card">
+                                <h3 id="heroTitle" class="hero-card-title">Pacotes de efeitos sonoros</h3>
+                                <p id="heroDesc" class="hero-card-desc">
+                                    Que tal dar uma nova cara ao seu mundo de Minecraft? Aumente o volume com sete novos
+                                    pacotes de efeitos sonoros que transformam blocos, mobs, combates e muito mais.
+                                </p>
+                                <button id="heroBtn" class="hero-action-btn"
+                                    onclick="abrirModal(document.getElementById('heroTitle').innerText, document.getElementById('heroDesc').innerText)">
+                                    OBTER DETALHES <span>›</span>
+                                </button>
+                            </div>
+
+                            <!-- Miniaturas (Thumbs) Proporcionais e Alinhadas à Direita -->
+                            <div class="hero-thumbs-row">
+                                <div class="hero-thumb-item active" onclick="mudarBannerHero(this)"
+                                    data-bg="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1600&auto=format&fit=crop"
+                                    data-titulo="Pacotes de efeitos sonoros"
+                                    data-desc="Que tal dar uma nova cara ao seu mundo de Minecraft? Aumente o volume com sete novos pacotes de efeitos sonoros que transformam blocos, mobs, combates e muito mais."
+                                    data-btntext="OBTER DETALHES"
+                                    style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=300&auto=format&fit=crop');">
+                                </div>
+
+                                <div class="hero-thumb-item" onclick="mudarBannerHero(this)"
+                                    data-bg="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1600&auto=format&fit=crop"
+                                    data-titulo="Minecraft Realms Pro"
+                                    data-desc="Aproveite todo o potencial do Realms Pro e hospede até 50 jogadores ao mesmo tempo! Construam juntos e transformem seu mundo com controles administrativos avançados."
+                                    data-btntext="ASSINE JÁ"
+                                    style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=300&auto=format&fit=crop');">
+                                </div>
+
+                                <div class="hero-thumb-item" onclick="mudarBannerHero(this)"
+                                    data-bg="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1600&auto=format&fit=crop"
+                                    data-titulo="Jogar Wilderness Bound"
+                                    data-desc="Aventure-se pela floresta de atmosfera envolvente, com a luz do sol filtrada entre as árvores, explore acampamentos abandonados e transforme a natureza selvagem em seu próprio mundo com novos blocos de construção."
+                                    data-btntext="CONFIRA A ATUALIZAÇÃO DO JOGO"
+                                    style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=300&auto=format&fit=crop');">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+                <!-- SEÇÃO DE OFERTA / MARKETPLACE (WIKI / TEMA CLARO / RETINHO) -->
+                <section class="searchable-section marketplace-offer-section">
+                    <div class="marketplace-offer-container">
+
+                        <!-- Coluna Esquerda: Textos e Botões -->
+                        <div class="offer-text-content">
+                            <h2 class="offer-main-title">NÃO PERCA ESSA CHANCE</h2>
+                            <p class="offer-desc">
+                                Atualize sua jogabilidade com o Minecraft DLC! Comece a explorar hoje mesmo com esta
+                                oferta gratuita do marketplace. Basta fazer login para aproveitá-la!
+                            </p>
+                            <div class="offer-actions">
+                                <!-- Botão Amarelo Padrão Retinho -->
+                                <button class="wiki-yellow-btn"
+                                    onclick="abrirModal('Entrar e Obter', 'Faça login na sua conta para resgatar o seu pacote gratuito no marketplace!')">
+                                    ENTRAR E OBTER <span>›</span>
+                                </button>
+                                <a href="#" class="offer-link-secondary">VER TUDO PACOTES DE CAPAS <span>›</span></a>
+                            </div>
+                        </div>
+
+                        <!-- Coluna Direita: Card do Produto Retinho -->
+                        <div class="offer-product-card">
+                            <div class="product-banner-img"
+                                style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400&auto=format&fit=crop');">
+                                <span class="product-tag-top">Minecraft Clássico!</span>
+                            </div>
+                            <div class="product-info-box">
+                                <h3 class="product-title">1º Pacote de Capas de Aniversário</h3>
+                                <div class="product-meta-row">
+                                    <span class="product-type">👤 Pacote de skins</span>
+                                    <span class="product-author">por Minecraft</span>
+                                </div>
+                                <div class="product-footer-row">
+                                    <span class="product-rating">⭐ 4.7</span>
+                                    <span class="product-price-tag">GRÁTIS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+                <!-- SEÇÃO RESPONSIVA: DESKTOP (SIDEBAR + PLAYER) / MOBILE (ACORDEÃO EXPANSÍVEL) -->
+                <section class="searchable-section wiki-responsive-showcase">
+                    <div class="wiki-showcase-container">
+
+                        <!-- VERSÃO DESKTOP: Sidebar à Esquerda + Player de Vídeo à Direita -->
+                        <div class="desktop-showcase-wrapper">
+
+                            <!-- Lista / Sidebar de Abas -->
+                            <div class="showcase-sidebar">
+                                <div class="sidebar-item active" onclick="mudarVideoDesktop(this, 'dQw4w9WgXcQ')"
+                                    style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=200&auto=format&fit=crop');">
+                                    <img src="https://api.iconify.design/lucide:box.svg?color=white"
+                                        class="item-png-icon" alt="Ícone">
+                                    <span class="item-text">Minecraft</span>
+                                </div>
+                                <div class="sidebar-item" onclick="mudarVideoDesktop(this, 'L_LUpnjgPso')"
+                                    style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=200&auto=format&fit=crop');">
+                                    <img src="https://api.iconify.design/lucide:shield.svg?color=white"
+                                        class="item-png-icon" alt="Ícone">
+                                    <span class="item-text">Minecraft Dungeons II</span>
+                                </div>
+                                <div class="sidebar-item" onclick="mudarVideoDesktop(this, '3JZ_D3ELwOQ')"
+                                    style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=200&auto=format&fit=crop');">
+                                    <img src="https://api.iconify.design/lucide:sword.svg?color=white"
+                                        class="item-png-icon" alt="Ícone">
+                                    <span class="item-text">Minecraft Dungeons</span>
+                                </div>
+                                <div class="sidebar-item" onclick="mudarVideoDesktop(this, 'kJQP7kiw5Fk')"
+                                    style="background-image: url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?q=80&w=200&auto=format&fit=crop');">
+                                    <img src="https://api.iconify.design/lucide:sparkles.svg?color=white"
+                                        class="item-png-icon" alt="Ícone">
+                                    <span class="item-text">Minecraft Legends</span>
+                                </div>
+                                <div class="sidebar-item" onclick="mudarVideoDesktop(this, '9bZkp7q19f0')"
+                                    style="background-image: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=200&auto=format&fit=crop');">
+                                    <img src="https://api.iconify.design/lucide:book-open.svg?color=white"
+                                        class="item-png-icon" alt="Ícone">
+                                    <span class="item-text">Minecraft Education</span>
+                                </div>
+                            </div>
+
+                            <!-- Display do Player de Vídeo do YouTube -->
+                            <div class="showcase-video-display">
+                                <iframe id="desktopYoutubePlayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+
+                        </div>
+
+
+                        <!-- VERSÃO MOBILE: Seções Expansíveis (Acordeão) com Ícone PNG e Player Interno -->
+                        <div class="mobile-accordion-wrapper">
+
+                            <!-- Item Expansível 1 -->
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <div class="accordion-title-area">
+                                        <img src="https://api.iconify.design/lucide:box.svg?color=white"
+                                            class="accordion-png-icon" alt="Ícone">
+                                        <span>Minecraft</span>
+                                    </div>
+                                    <span class="accordion-arrow">▼</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="mobile-video-box">
+                                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video"
+                                            frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item Expansível 2 -->
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <div class="accordion-title-area">
+                                        <img src="https://api.iconify.design/lucide:shield.svg?color=white"
+                                            class="accordion-png-icon" alt="Ícone">
+                                        <span>Minecraft Dungeons II</span>
+                                    </div>
+                                    <span class="accordion-arrow">▼</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="mobile-video-box">
+                                        <iframe src="https://www.youtube.com/embed/L_LUpnjgPso" title="YouTube video"
+                                            frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item Expansível 3 -->
+                            <div class="accordion-item">
+                                <div class="accordion-header" onclick="toggleAccordion(this)">
+                                    <div class="accordion-title-area">
+                                        <img src="https://api.iconify.design/lucide:sword.svg?color=white"
+                                            class="accordion-png-icon" alt="Ícone">
+                                        <span>Minecraft Dungeons</span>
+                                    </div>
+                                    <span class="accordion-arrow">▼</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="mobile-video-box">
+                                        <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="YouTube video"
+                                            frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- SEÇÃO DE CARDS COM OVERLAY TRANSPARENTE E REVELAÇÃO NO HOVER (WIKI / RETINHO) -->
+                <section class="searchable-section wiki-news-section">
+                    <div class="wiki-news-container">
+
+                        <div class="wiki-news-header">
+                            <h2 class="wiki-news-main-title">NOTÍCIAS MAIS RECENTES</h2>
+                            <a href="#" class="wiki-news-see-all">Ver todas as notícias <span>›</span></a>
+                        </div>
+
+                        <div class="wiki-overlay-grid">
+
+                            <!-- Card 1 -->
+                            <a href="#" class="wiki-overlay-card"
+                                style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=600&auto=format&fit=crop');">
+                                <div class="overlay-glass-panel">
+                                    <span class="overlay-tag market">MARKETPLACE</span>
+                                    <h3 class="overlay-title">Marketplace Spotlight: The Sound Effects Edition</h3>
+                                    <div class="overlay-desc-reveal">
+                                        <p>Welcome to the loudest article you've ever read</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Card 2 -->
+                            <a href="#" class="wiki-overlay-card"
+                                style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop');">
+                                <div class="overlay-glass-panel">
+                                    <span class="overlay-tag news">NEWS</span>
+                                    <h3 class="overlay-title">New watch time challenge</h3>
+                                    <div class="overlay-desc-reveal">
+                                        <p>Participe dos novos desafios semanais da comunidade e desbloqueie recompensas
+                                            exclusivas.</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Card 3 -->
+                            <a href="#" class="wiki-overlay-card"
+                                style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop');">
+                                <div class="overlay-glass-panel">
+                                    <span class="overlay-tag market">MARKETPLACE</span>
+                                    <h3 class="overlay-title">Introducing Realms Pro</h3>
+                                    <div class="overlay-desc-reveal">
+                                        <p>Hospede servidores para até 50 jogadores simultâneos com ferramentas
+                                            avançadas.</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Card 4 -->
+                            <a href="#" class="wiki-overlay-card"
+                                style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop');">
+                                <div class="overlay-glass-panel">
+                                    <span class="overlay-tag news">NEWS</span>
+                                    <h3 class="overlay-title">Minecraft 26.4 Snapshot 8</h3>
+                                    <div class="overlay-desc-reveal">
+                                        <p>Confira todas as correções de bugs e novos blocos experimentais desta
+                                            atualização.</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+                <!-- SEÇÃO DE ITENS COLECIONÁVEIS (WIKI / TEMA CLARO / RETINHO) -->
+                <section class="searchable-section collectibles-section">
+                    <div class="collectibles-container">
+
+                        <!-- Cabeçalho Esquerdo -->
+                        <div class="collectibles-header">
+                            <h2 class="collectibles-title">ITENS COLECIONÁVEIS</h2>
+                            <p class="collectibles-desc">
+                                O mundo do Minecraft é enorme. Por que não levá-lo além das fronteiras de bloco?
+                                Personalize seu dispositivo com nossos papéis de parede favoritos do Minecraft, banners
+                                de redes sociais e muito mais!
+                            </p>
+                            <a href="#" class="collectibles-link">Ver todos os itens colecionáveis <span>›</span></a>
+                        </div>
+
+                        <!-- Grid / Carrossel de Cards -->
+                        <div class="collectibles-slider-wrap">
+                            <div class="collectibles-grid">
+
+                                <!-- Card 1 -->
+                                <div class="collectible-card">
+                                    <div class="collectible-img"
+                                        style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop');">
+                                        <span class="collectible-tag">PAPEL DE PAREDE</span>
+                                    </div>
+                                    <div class="collectible-footer">
+                                        <span class="collectible-name">Aniversário de 15 anos</span>
+                                        <span class="collectible-download-icon">📥</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="collectible-card">
+                                    <div class="collectible-img"
+                                        style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400&auto=format&fit=crop');">
+                                        <span class="collectible-tag">PAPEL DE PAREDE</span>
+                                    </div>
+                                    <div class="collectible-footer">
+                                        <span class="collectible-name">Coleção Minecraft</span>
+                                        <span class="collectible-download-icon">📥</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="collectible-card">
+                                    <div class="collectible-img"
+                                        style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400&auto=format&fit=crop');">
+                                        <span class="collectible-tag">PAPEL DE PAREDE</span>
+                                    </div>
+                                    <div class="collectible-footer">
+                                        <span class="collectible-name">Minecraft Dungeons II</span>
+                                        <span class="collectible-download-icon">📥</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card 4 -->
+                                <div class="collectible-card">
+                                    <div class="collectible-img"
+                                        style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop');">
+                                        <span class="collectible-tag">PAPEL DE PAREDE</span>
+                                    </div>
+                                    <div class="collectibles-footer">
+                                        <span class="collectible-name">Minecraft Dungeons</span>
+                                        <span class="collectible-download-icon">📥</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Setas de Navegação Inferiores -->
+                            <div class="collectibles-nav-arrows">
+                                <button class="arrow-btn" onclick="rolarColecionaveis('left')">←</button>
+                                <button class="arrow-btn" onclick="rolarColecionaveis('right')">→</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- SEÇÃO DE DOWNLOAD / BANNER SUPERIOR (WIKI / TEMA CLARO / RETINHO) -->
+                <section class="searchable-section download-banner-section">
+                    <div class="download-banner-container">
+
+                        <!-- Ícone do Creeper à Esquerda -->
+                        <div class="download-creeper-icon"></div>
+
+                        <!-- Textos Centrais -->
+                        <div class="download-text-box">
+                            <h4 class="download-title">Precisa baixar novamente?</h4>
+                            <p class="download-desc">
+                                Já possui o jogo, mas precisa do inicializador? Procurando a distribuição do Linux ou os
+                                arquivos do servidor? Confira nossa página de downloads.
+                            </p>
+                        </div>
+
+                        <!-- Botão à Direita -->
+                        <a href="#" class="download-action-btn">
+                            IR PARA DOWNLOADS <span>›</span>
+                        </a>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- SEÇÃO DE NEWSLETTER (WIKI / TEMA CLARO / RETINHO) -->
+                <section class="searchable-section newsletter-section">
+                    <div class="newsletter-container">
+
+                        <div class="newsletter-header">
+                            <h2 class="newsletter-title">RECEBA AS ÚLTIMAS NOTÍCIAS SOBRE O MINECRAFT!</h2>
+                            <p class="newsletter-subtitle">
+                                Insira seu endereço de e-mail, selecione seu país ou região e clique em enviar. Cancele
+                                sua inscrição a qualquer momento. Prometemos não enviar spam.
+                            </p>
+                        </div>
+
+                        <form class="newsletter-form"
+                            onsubmit="event.preventDefault(); abrirModal('Inscrição Realizada', 'Obrigado por se inscrever! Verifique sua caixa de entrada.');">
+
+                            <div class="newsletter-inputs-row">
+                                <div class="form-group">
+                                    <label>Endereço de e-mail *</label>
+                                    <input type="email" placeholder="seu-email@exemplo.com" required class="wiki-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>País ou região *</label>
+                                    <select class="wiki-select">
+                                        <option value="Brazil">Brazil</option>
+                                        <option value="Portugal">Portugal</option>
+                                        <option value="United States">United States</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="newsletter-footer-row">
+                                <div class="newsletter-required-info">
+                                    <span class="required-star">* Campos obrigatórios</span>
+                                    <p class="terms-text">
+                                        Ao escolher participar, você receberá comunicados sobre o Minecraft. Sempre é
+                                        possível cancelar sua inscrição.
+                                        <label class="checkbox-container">
+                                            <input type="checkbox" checked>
+                                            <span class="checkmark"></span>
+                                            Receberei informações, dicas e ofertas sobre o Minecraft. <a href="#"
+                                                target="_blank">Política de Privacidade</a>.
+                                        </label>
+                                    </p>
+                                </div>
+
+                                <!-- Botão de Enviar Retinho -->
+                                <button type="submit" class="wiki-submit-btn">
+                                    ENVIAR <span>›</span>
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+                <!-- SEÇÃO DE DESTAQUES EM GRID (WIKI / TEMA CLARO / RETINHO) -->
+                <section class="searchable-section wiki-launcher-grid-section">
+                    <div class="wiki-launcher-grid-container">
+
+                        <!-- CARD GRANDE DA ESQUERDA (Destaque Principal com Botão Verde) -->
+                        <div class="launcher-main-card"
+                            style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop');">
+                            <div class="launcher-main-content">
+                                <span class="launcher-badge">Add-On</span>
+                                <h3 class="launcher-main-title">Tune in during TwitchCon</h3>
+                                <p class="launcher-main-desc">Watch time quests to earn a free add-on by Tubbo!</p>
+                                <button class="wiki-green-btn"
+                                    onclick="abrirModal('Tune in during TwitchCon', 'Assista às transmissões na TwitchCon para resgatar o seu add-on gratuito!')">
+                                    TUNE IN TO TWITCHCON <span>›</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- COLUNA DA DIREITA (3 Cards Secundários) -->
+                        <div class="launcher-side-column">
+
+                            <!-- Card Superior Direito (Imagem à Esquerda + Texto à Direita) -->
+                            <a href="#" class="launcher-side-top-card">
+                                <div class="side-top-img"
+                                    style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400&auto=format&fit=crop');">
+                                </div>
+                                <div class="side-top-text">
+                                    <h4 class="side-top-title">Introducing Realms Pro</h4>
+                                    <p class="side-top-desc">Bring your community together with a bigger, more powerful
+                                        server!</p>
+                                    <span class="side-link-text">Find out more <span>›</span></span>
+                                </div>
+                            </a>
+
+                            <!-- Linha Inferior Direita (2 Cards com Overlay Transparente) -->
+                            <div class="launcher-side-bottom-row">
+
+                                <!-- Card Inferior Esquerdo -->
+                                <a href="#" class="launcher-overlay-card"
+                                    style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400&auto=format&fit=crop');">
+                                    <div class="overlay-glass-panel">
+                                        <h4 class="overlay-card-title">Marketplace Spotlight: The Sound Effects Edition
+                                        </h4>
+                                        <span class="side-link-text">Check it out <span>›</span></span>
+                                    </div>
+                                </a>
+
+                                <!-- Card Inferior Direito -->
+                                <a href="#" class="launcher-overlay-card"
+                                    style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop');">
+                                    <div class="overlay-glass-panel">
+                                        <h4 class="overlay-card-title">Play Minecraft on your Nintendo Switch 2™ today!
+                                        </h4>
+                                        <span class="side-link-text">Read more <span>›</span></span>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+                <!-- SEÇÃO DE HISTÓRICO DE ATUALIZAÇÕES (WIKI / TEMA CLARO / RETINHO) -->
+                <section class="searchable-section wiki-updates-history-section">
+                    <div class="updates-history-container">
+
+                        <!-- Cabeçalho Verde de Destaque -->
+                        <div class="updates-header-banner">
+                            <h2 class="updates-main-title">HISTÓRICO DAS ATUALIZAÇÕES DE MINECRAFT</h2>
+                            <p class="updates-header-desc">
+                                Desde seu lançamento, Minecraft continua evoluindo. Se você chegou agora à comunidade,
+                                está voltando após um tempo ou joga desde o primeiro dia, esta página mostra como o jogo
+                                de blocos continua se expandindo e crescendo com cada atualização e lançamento!
+                            </p>
+                        </div>
+
+                        <!-- Seção de Lançamento Mais Recente -->
+                        <div class="latest-release-box">
+                            <span class="latest-subtitle">Nosso lançamento mais recente</span>
+                            <h3 class="latest-title">WILDERNESS BOUND</h3>
+                            <button class="wiki-green-btn"
+                                onclick="abrirModal('Wilderness Bound', 'Confira todas as novidades e melhorias trazidas pela atualização Wilderness Bound!')">
+                                CONFIRA AS NOVIDADES <span>›</span>
+                            </button>
+                        </div>
+
+                        <!-- Grid de Cards de Atualizações -->
+                        <div class="updates-cards-grid">
+
+                            <!-- Card 1 -->
+                            <a href="#" class="update-card-item">
+                                <div class="update-card-img"
+                                    style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop');">
+                                </div>
+                                <div class="update-card-content">
+                                    <h4 class="update-card-title">Jogue A Atualização Do Jogo Wilderness Bound</h4>
+                                    <span class="update-read-more">Leia mais <span>›</span></span>
+                                </div>
+                            </a>
+
+                            <!-- Card 2 -->
+                            <a href="#" class="update-card-item">
+                                <div class="update-card-img"
+                                    style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400&auto=format&fit=crop');">
+                                </div>
+                                <div class="update-card-content">
+                                    <h4 class="update-card-title">O Nosso Próximo Lançamento Tem Um Nome</h4>
+                                    <span class="update-read-more">Leia mais <span>›</span></span>
+                                </div>
+                            </a>
+
+                            <!-- Card 3 -->
+                            <a href="#" class="update-card-item">
+                                <div class="update-card-img"
+                                    style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400&auto=format&fit=crop');">
+                                    <div class="update-card-content">
+                                        <h4 class="update-card-title">Promoções De Capas De Minecraft Dungeons II</h4>
+                                        <span class="update-read-more">Leia mais <span>›</span></span>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- SEÇÃO: LINHA DO TEMPO DAS ATUALIZAÇÕES (ESTILO ORIGINAL DO SITE) -->
+                <section class="searchable-section original-timeline-section">
+                    <div class="original-timeline-container">
+
+                        <h2 class="original-timeline-title">LINHA DO TEMPO DAS ATUALIZAÇÕES DE MINECRAFT</h2>
+                        <p class="original-timeline-desc">
+                            Volte no tempo e veja como Minecraft evoluiu desde seu lançamento, começando pelas
+                            atualizações de jogo mais recentes! De Mounts of Mayhem a Spring to Life, de Village &
+                            Pillager à Nether Update, explore tudo que acrescentamos ao jogo desde a época em que ele
+                            ainda se chamava Cave Game.
+                        </p>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- SEÇÃO: INTRODUÇÃO AO MINECRAFT (CARROSSEL COM ROLAGEM INFINITA) -->
+                <section class="searchable-section intro-infinite-section">
+                    <div class="intro-infinite-container">
+
+                        <!-- Cabeçalho -->
+                        <div class="intro-header">
+                            <h2 class="intro-main-title">INTRODUÇÃO AO MINECRAFT</h2>
+                            <p class="intro-subtitle">
+                                Está se perguntando: "Como começar a jogar Minecraft?" Assista a estes vídeos como um
+                                guia para começar a jogar Minecraft.
+                            </p>
+                        </div>
+
+                        <!-- Área do Carrossel Infinito -->
+                        <div class="infinite-carousel-wrapper">
+
+                            <!-- Seta Esquerda -->
+                            <button class="carousel-nav-btn prev-btn" onclick="moverCarrosselInfinito(-1)"
+                                title="Anterior">←</button>
+
+                            <!-- Janela de Visualização -->
+                            <div class="infinite-carousel-viewport">
+                                <div class="infinite-carousel-track" id="introCarouselTrack">
+
+                                    <!-- Card 1 -->
+                                    <a href="https://youtube.com" target="_blank" class="intro-video-card">
+                                        <div class="intro-card-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=600&auto=format&fit=crop');">
+                                            <span class="yt-badge">▶ YouTube</span>
+                                        </div>
+                                        <div class="intro-card-body">
+                                            <h3 class="intro-card-title">Como: Jogar no modo Sobrevivência ou Criativo
+                                            </h3>
+                                            <span class="intro-card-link">Assistir agora <span>›</span></span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Card 2 (Inicia no centro) -->
+                                    <a href="https://youtube.com" target="_blank" class="intro-video-card">
+                                        <div class="intro-card-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop');">
+                                            <span class="yt-badge">▶ YouTube</span>
+                                        </div>
+                                        <div class="intro-card-body">
+                                            <h3 class="intro-card-title">Como: Usar os controles do Bedrock</h3>
+                                            <span class="intro-card-link">Assistir agora <span>›</span></span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Card 3 -->
+                                    <a href="https://youtube.com" target="_blank" class="intro-video-card">
+                                        <div class="intro-card-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop');">
+                                            <span class="yt-badge">▶ YouTube</span>
+                                        </div>
+                                        <div class="intro-card-body">
+                                            <h3 class="intro-card-title">Como: Criar e usar itens diferentes</h3>
+                                            <span class="intro-card-link">Assistir agora <span>›</span></span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Card 4 -->
+                                    <a href="https://youtube.com" target="_blank" class="intro-video-card">
+                                        <div class="intro-card-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop');">
+                                            <span class="yt-badge">▶ YouTube</span>
+                                        </div>
+                                        <div class="intro-card-body">
+                                            <h3 class="intro-card-title">Como: Construir seu primeiro abrigo seguro</h3>
+                                            <span class="intro-card-link">Assistir agora <span>›</span></span>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <!-- Seta Direita -->
+                            <button class="carousel-nav-btn next-btn" onclick="moverCarrosselInfinito(1)"
+                                title="Próximo">→</button>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+                <!-- SEÇÃO: COMO JOGAR NO MINECRAFT (ESTILO ORIGINAL DA WEB) -->
+                <section class="searchable-section how-to-play-section">
+                    <div class="how-to-play-container">
+
+                        <!-- Cabeçalho Escuro -->
+                        <div class="how-to-header">
+                            <h2 class="how-to-main-title">COMO JOGAR NO MINECRAFT</h2>
+                            <p class="how-to-subtitle">
+                                Este guia para iniciantes em Minecraft vai ajudar você a dar os primeiros passos e a
+                                descobrir dicas valiosas para construir, explorar e se aventurar pelos incríveis mundos
+                                do jogo.
+                            </p>
+                        </div>
+
+                        <!-- Grid Inferior (Fundo Claro com 3 Colunas) -->
+                        <div class="how-to-grid">
+
+                            <!-- Card 1: Introdução -->
+                            <div class="how-to-card">
+                                <div class="how-to-img"
+                                    style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=500&auto=format&fit=crop');">
+                                </div>
+                                <div class="how-to-content">
+                                    <h3 class="how-to-card-title">Introdução</h3>
+                                    <p class="how-to-card-desc">Tudo o que você precisa saber antes de começar a jogar o
+                                        Minecraft.</p>
+                                    <a href="#" class="how-to-action-link">COMEÇAR AGORA</a>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Para iniciantes -->
+                            <div class="how-to-card">
+                                <div class="how-to-img"
+                                    style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop');">
+                                </div>
+                                <div class="how-to-content">
+                                    <h3 class="how-to-card-title">Para iniciantes</h3>
+                                    <p class="how-to-card-desc">Dicas e truques úteis para sobreviver e criar no mundo
+                                        superior e além.</p>
+                                    <a href="#" class="how-to-action-link">EXPLORAR DICAS</a>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Aumente seu nível! -->
+                            <div class="how-to-card">
+                                <div class="how-to-img"
+                                    style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=500&auto=format&fit=crop');">
+                                </div>
+                                <div class="how-to-content">
+                                    <h3 class="how-to-card-title">Aumente seu nível!</h3>
+                                    <p class="how-to-card-desc">Para os jogadores que querem levar sua experiência para
+                                        outra dimensão.</p>
+                                    <a href="#" class="how-to-action-link">SAIBA MAIS</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- SEÇÃO: GALERIA DE CAPTURAS DE TELA (LIGHTBOX / MODAL) -->
+                <section class="searchable-section wiki-gallery-section">
+                    <div class="wiki-gallery-container">
+
+                        <div class="gallery-header">
+                            <h2 class="gallery-main-title">CAPTURAS DE TELA DO JOGO</h2>
+                            <p class="gallery-subtitle">Explore os momentos épicos, ambientes e batalhas capturadas
+                                diretamente no universo de Zera's Craft.</p>
+                        </div>
+
+                        <!-- Grid de Miniaturas -->
+                        <div class="wiki-gallery-grid" id="wikiGalleryGrid">
+
+                            <div class="gallery-thumbnail-item" onclick="abrirLightbox(0)"
+                                style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop');">
+                                <div class="thumbnail-overlay">
+                                    <span class="view-icon">↗↙</span>
+                                    <span class="view-text">Exibir</span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-thumbnail-item" onclick="abrirLightbox(1)"
+                                style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=400&auto=format&fit=crop');">
+                                <div class="thumbnail-overlay">
+                                    <span class="view-icon">↗↙</span>
+                                    <span class="view-text">Exibir</span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-thumbnail-item" onclick="abrirLightbox(2)"
+                                style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop');">
+                                <div class="thumbnail-overlay">
+                                    <span class="view-icon">↗↙</span>
+                                    <span class="view-text">Exibir</span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-thumbnail-item" onclick="abrirLightbox(3)"
+                                style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=400&auto=format&fit=crop');">
+                                <div class="thumbnail-overlay">
+                                    <span class="view-icon">↗↙</span>
+                                    <span class="view-text">Exibir</span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-thumbnail-item" onclick="abrirLightbox(4)"
+                                style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop');">
+                                <div class="thumbnail-overlay">
+                                    <span class="view-icon">↗↙</span>
+                                    <span class="view-text">Exibir</span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-thumbnail-item" onclick="abrirLightbox(5)"
+                                style="background-image: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=400&auto=format&fit=crop');">
+                                <div class="thumbnail-overlay">
+                                    <span class="view-icon">↗↙</span>
+                                    <span class="view-text">Exibir</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- MODAL LIGHTBOX EM TELA CHEIA -->
+                <div id="wikiLightboxModal" class="lightbox-modal-overlay">
+                    <div class="lightbox-modal-content">
+
+                        <!-- Botão Fechar -->
+                        <button class="lightbox-close-btn" onclick="fecharLightbox()">×</button>
+
+                        <!-- Imagem em Destaque -->
+                        <div class="lightbox-image-container">
+                            <img id="lightboxImageElement" src="" alt="Captura de tela ampliadas">
+                        </div>
+
+                        <!-- Rodapé do Modal (Paginação por Pontos e Setas) -->
+                        <div class="lightbox-footer-controls">
+                            <div class="lightbox-dots-pagination" id="lightboxDotsContainer"></div>
+                            <div class="lightbox-arrows-row">
+                                <button class="lightbox-arrow-btn" onclick="mudarFotoLightbox(-1)">←</button>
+                                <button class="lightbox-arrow-btn" onclick="mudarFotoLightbox(1)">→️</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- MENU LATERAL DIREITO -->
+            <aside class="right-column">
+                <div class="wiki-card-box">
+                    <div class="wiki-main-logo-box">
+                        <div class="right-logo-banner">
+                            <span class="r-main">MINECRAFT</span>
+                            <span class="r-sub">WIKI</span>
+                        </div>
+                        <p>Bem-vindo(a) à <a href="#">wiki</a> mais completa sobre <a href="#">a franquia
+                                <em>Minecraft</em></a>, orgulhosamente administrada pela comunidade desde 2009.<br><a
+                                href="#"><strong>Qualquer pessoa pode contribuir!</strong></a></p>
+                        <div class="wiki-stats-summary">
+                            <strong>18.528</strong> artigos • <strong>177.551</strong> arquivos • <strong>2.561</strong>
+                            usuários ativos
+                        </div>
+                    </div>
+
+                    <div class="social-icons-grid">
+                        <a href="https://bsky.app" target="_blank" class="social-btn s-bluesky" title="Bluesky">🦋</a>
+                        <a href="https://twitter.com" target="_blank" class="social-btn s-twitter"
+                            title="Twitter">🐦</a>
+                        <a href="https://mastodon.social" target="_blank" class="social-btn s-mastodon"
+                            title="Mastodon">🐘</a>
+                        <a href="https://zotero.org" target="_blank" class="social-btn s-zotero" title="Zotero">Z</a>
+                        <a href="https://discord.com" target="_blank" class="social-btn s-discord"
+                            title="Discord">💬</a>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Você sabia...</h4>
+                    <ul
+                        style="padding-left:16px; font-size:13px; display:flex; flex-direction:column; gap:7px; line-height:1.45;">
+                        <li>... que as texturas da <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">prismarina</a> e <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">das lanternas-do-mar</a> são
+                            animadas?</li>
+                        <li>... que o nome original do <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">bioma do Fim</a> era "Céu"?</li>
+                        <li>... que a textura original <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">da espada de ferro</a> foi tirada
+                            do jogo abandonado de <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">Notch, <em>Legend of the
+                                    Chambered</em></a>?</li>
+                    </ul>
+                    <div class="btn-row" style="margin-top:12px;">
+                        <button class="wiki-action-btn">Mais fatos!</button>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:8px;">Ajude a melhorar a wiki!</h4>
+                    <p style="font-size:13px; color:var(--text-dark); line-height:1.45; margin-bottom:10px;">A wiki é
+                        feita por pessoas como você. Se você vir algo que acha que pode ser melhorado em uma página,
+                        basta clicar no botão <strong>"Editar"</strong> ou <strong>"Editar código-fonte"</strong>.</p>
+                    <div class="btn-row">
+                        <button class="wiki-action-btn green">Comece aqui</button>
+                        <button class="wiki-action-btn">Precisar de ajuda?</button>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Ferramentas Wiki</h4>
+                    <div class="tools-grid-3">
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Experience_Bottle.png"
+                                    alt="Calc"></div>
+                            <div class="cat-label-bottom">Calculadoras</div>
+                        </a>
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Player_Head.png"
+                                    alt="Mod"></div>
+                            <div class="cat-label-bottom">Olá, mod Wiki</div>
+                        </a>
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Compass.png" alt="Indie">
+                            </div>
+                            <div class="cat-label-bottom">Indie Wiki Buddy</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Notícias da Wiki</h4>
+                    <p style="font-size:12.5px; line-height:1.45; margin-bottom:9px;"><strong>30 de agosto de
+                            2026</strong> – A Wiki de Minecraft em inglês <a href="#"
+                            style="color:var(--link-blue); text-decoration:none;">agora está disponível offline</a> como
+                        um único arquivo para download.</p>
+                    <p style="font-size:12.5px; line-height:1.45; margin-bottom:9px;"><strong>27 de maio de
+                            2026</strong> – O espaço de nomes <em>Dungeons II</em> foi criado, sendo o local para
+                        páginas sobre <a href="#" style="color:var(--link-blue); text-decoration:none;"><em>Minecraft
+                                Dungeons II</em></a>.</p>
+                    <p style="font-size:12.5px; line-height:1.45;"><strong>20 de abril de 2026</strong> – O Hypixel
+                        SkyBlock Wiki foi transferido para hypixelskyblock.minecraft.wiki após <a href="#"
+                            style="color:var(--link-blue); text-decoration:none;">ser derivado do Fandom</a>.</p>
+                </div>
+
+                <div class="communities-box">
+                    <div class="communities-inner">
+                        <h4 style="font-size:15px; font-weight:700; margin-bottom:8px;">Comunidades relacionadas</h4>
+                        <div class="communities-grid-2">
+                            <div>
+                                <strong style="font-size:12.5px; display:block; margin-bottom:5px;">Sites da
+                                    Web</strong>
+                                <ul>
+                                    <li><a href="#">Wiki do Hypixel SkyBlock</a></li>
+                                    <li><a href="#">Wiki de Feed The Beast</a> ( <a href="#">mods</a> )</li>
+                                    <li><a href="#">Wiki de Recursos Descontinuados do Minecraft</a></li>
+                                    <li><a href="#">Wiki do Bedrock</a> <span
+                                            style="color:var(--text-muted);">(técnico)</span></li>
+                                    <li><a href="#">Omniarquivo</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="font-size:12.5px; display:block; margin-bottom:5px;">Sites
+                                    oficiais</strong>
+                                <ul>
+                                    <li><a href="#">Site</a></li>
+                                    <li><a href="#">Servidor do Discord</a></li>
+                                    <li><a href="#">mídias sociais</a></li>
+                                    <li><a href="#">Feedback</a> ( <a href="#">Discord</a> )</li>
+                                    <li><a href="#">Central de Ajuda</a> ( <a href="#">Educação</a> )</li>
+                                    <li><a href="#">Rastreador de bugs</a> ( <a href="#">Discord</a> )</li>
+                                    <li><a href="#">Documentação do criador</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="communities-full-width-section">
+                        <div class="communities-grid-2" style="margin-top:0;">
+                            <div>
+                                <strong style="display:block; margin-bottom:5px; font-size:12.5px;">Comunidades do
+                                    Reddit</strong>
+                                <ul>
+                                    <li><a href="#">r/Minecraft</a></li>
+                                    <li><a href="#">r/realms</a></li>
+                                    <li><a href="#">r/feedthebeast</a> ( <a href="#">mods</a> )</li>
+                                    <li><a href="#">r/admincraft</a> ( <a href="#">administrador do servidor</a> )</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="display:block; margin-bottom:5px; font-size:12.5px;">Servidores do
+                                    Discord</strong>
+                                <ul>
+                                    <li><a href="#">Comandos do Minecraft</a></li>
+                                    <li><a href="#">Apoio comunitário</a></li>
+                                    <li><a href="#">Protocolo Minecraft</a></li>
+                                    <li><a href="#">Complementos para Bedrock</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- RODAPÉ DA PÁGINA -->
+        <footer class="wiki-root-footer">
+            <div class="footer-content">
+                <div class="footer-text-col">
+                    <p>Esta página foi editada pela última vez em 8 de novembro de 2026, às 06:03.</p>
+                    <p>O conteúdo deste site está licenciado sob <strong>CC BY-NC-SA 3.0</strong>, salvo indicação em
+                        contrário; <a href="#" style="color:#79b8ff; text-decoration:none;">termos adicionais podem ser
+                            aplicados</a>.<br>Este não é um site oficial do Minecraft. Não temos qualquer ligação com a
+                        Mojang ou a Microsoft.</p>
+                    <div class="footer-links-row">
+                        <a href="#">Política de Privacidade</a>
+                        <a href="#">Sobre a Wiki do Minecraft</a>
+                        <a href="#">Avisos legais</a>
+                        <a href="#">Termos de Uso</a>
+                        <a href="#">Contate a gosma estranha</a>
+                        <a href="#">Visualização em dispositivos móveis</a>
+                    </div>
+                </div>
+                <div class="footer-badges-col">
+                    <div class="footer-badge-pill">CC BY-NC-SA<br><span style="font-weight:400; font-size:9px;">3.0
+                            Unported</span></div>
+                    <div class="footer-badge-pill">hosted by<br><span style="font-size:11px;">Weird Gloop</span></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

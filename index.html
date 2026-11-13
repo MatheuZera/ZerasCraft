@@ -69,6 +69,458 @@
 
 <body>
 
+    <!-- OVERLAY ESCURO -->
+    <div id="zc-drawer-backdrop" class="zc-drawer-backdrop" onclick="closeAllDrawers()"></div>
+
+    <!-- ==========================================================
+   GAVETA 1: PAINEL PRINCIPAL (ZERA'S CRAFT)
+   ========================================================== -->
+    <aside id="drawer-primary" class="zc-slide-drawer primary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-inicio')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Início">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">INÍCIO</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-novidades')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Book_and_Quill.png" alt="Novidades">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">NOVIDADES</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-oficial')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Emerald.png" alt="Oficial">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">OFICIAL</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-recursos')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Recursos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">RECURSOS</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-suporte')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Suporte">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">SUPORTE</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <div class="zc-drawer-divider"></div>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-pesquisar')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Pesquisar">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">PESQUISAR</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-links')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Links">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">LINKS EXTERNOS</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <div class="zc-drawer-divider"></div>
+
+            <a href="#discord" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Discord">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">NOSSO DISCORD</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </a>
+        </div>
+
+        <!-- RODAPÉ PERMANENTE FIXO NA BASE DO MENU PRINCIPAL -->
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU INÍCIO (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-inicio" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-inicio')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">DESTAQUES DO INÍCIO</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Início">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Página Inicial</span>
+                    <span class="zc-item-sub">Volte para a página principal da wiki</span>
+                </div>
+            </a>
+
+            <!-- Botão com partículas sutis da esquerda para a direita -->
+            <a href="#" class="zc-drawer-item particle-btn" data-particles="#2ea043,#54aeff,#8250df"
+                onclick="closeAllDrawers()">
+                <div class="zc-particles-canvas"></div>
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Player_Head.png" alt="Comunidade">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Comunidade em Foco</span>
+                    <span class="zc-item-sub">Participe dos eventos e chats oficiais</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Pixel Legends">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Pixel Legends</span>
+                    <span class="zc-item-sub">Explore o novo modo RPG de masmorras</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Recursos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Recursos & Guias</span>
+                    <span class="zc-item-sub">Manuais completos de sobrevivência</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU NOVIDADES (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-novidades" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-novidades')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">ATUALIZAÇÕES RECENTES</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Book_and_Quill.png" alt="Patch">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Patch 1.21.4</span>
+                    <span class="zc-item-sub">Novos itens e correções de segurança</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Eventos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Eventos de Natal</span>
+                    <span class="zc-item-sub">Confira a premiação da semana</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU OFICIAL (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-oficial" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-oficial')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">LINKS OFICIAIS</div>
+
+            <a href="https://minecraft.wiki" target="_blank" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Emerald.png" alt="Site">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Site Oficial</span>
+                    <span class="zc-item-sub">Visite nosso portal na web</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond.png" alt="Loja">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Loja VIP</span>
+                    <span class="zc-item-sub">Adquira vantagens exclusivas</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU RECURSOS (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-recursos" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-recursos')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">FERRAMENTAS & WIKI</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Mapa">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Mapa Online</span>
+                    <span class="zc-item-sub">Visualizador de mundo em tempo real</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Crafting_Table.png" alt="Banco">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Banco de Dados</span>
+                    <span class="zc-item-sub">Lista de receitas e itens</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU SUPORTE (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-suporte" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-suporte')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">ATENDIMENTO AO JOGADOR</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Ticket">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Abrir Ticket</span>
+                    <span class="zc-item-sub">Suporte técnico e denúncias</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Paper.png" alt="Regras">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Regras do Servidor</span>
+                    <span class="zc-item-sub">Diretrizes de convivência</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU PESQUISAR (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-pesquisar" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-pesquisar')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">BUSCA RÁPIDA</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Busca">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Pesquisar na Wiki</span>
+                    <span class="zc-item-sub">Encontre itens, tutoriais e regras</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU LINKS EXTERNOS (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-links" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-links')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">PARCEIROS & REDES</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Pickaxe.png" alt="YouTube">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Canal do YouTube</span>
+                    <span class="zc-item-sub">Vídeos e tutoriais da staff</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Painting.png" alt="Instagram">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Instagram Oficial</span>
+                    <span class="zc-item-sub">Siga bastidores da equipe</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- BARRA LATERAL ESQUERDA REESTRUTURADA -->
     <aside class="wiki-left-sidebar">
         <div class="wiki-left-logo-box">
@@ -150,15 +602,18 @@
     <!-- CONTAINER PRINCIPAL -->
     <div class="main-container">
 
-        <!-- CABEÇALHO SUPERIOR COM ABAS INTERATIVAS E MODAL NO HOVER -->
-        <header class="wiki-header">
-            <div class="top-account-bar">
-                <span>🌙</span>
-                <a href="#">Criar uma conta</a>
-                <a href="#">Conecte-se</a>
-            </div>
+        <!-- CABEÇALHO SUPERIOR REORDENADO -->
+        <header class="wiki-header" data-bg="https://media.forgecdn.net/attachments/1951/255/plains_village_3-jpg.jpg">
+            <!-- seus botões e conteúdo -->
 
             <div class="header-left-group">
+                <!-- Botão Hambúrguer Principal alinhado e estruturado igual ao Minecraft Wiki -->
+                <button class="wiki-header-btn zc-hamburger-btn" onclick="openPrimaryDrawer()" aria-label="Abrir Menu">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Menu"
+                        style="width: 18px; height: 18px; image-rendering: pixelated; margin-right: 4px;">
+                    <span>Menu</span>
+                </button>
+
                 <button class="wiki-header-btn active" onclick="setActiveNav(this)">Página principal</button>
                 <button class="wiki-header-btn" onclick="setActiveNav(this)">Falar</button>
             </div>
@@ -167,14 +622,58 @@
                 <button class="wiki-header-btn" onclick="setActiveNav(this)">Ler</button>
                 <button class="wiki-header-btn" onclick="setActiveNav(this)">Ver código-fonte</button>
 
-                <!-- Botão Ver Histórico com Modal no Hover e Link Original ao Clicar -->
-                <div class="history-dropdown-wrapper">
-                    <a href="https://minecraft.wiki" class="wiki-header-btn" onclick="setActiveNav(this)">Ver
-                        histórico</a>
-                    <div class="history-hover-modal">
-                        <a href="https://minecraft.wiki">🌐 Histórico Global da Wiki</a>
-                        <a href="https://minecraft.wiki">📊 Estatísticas de Edição</a>
-                        <a href="https://minecraft.wiki">🕒 Revisões Anteriores</a>
+                <div class="dropdown-historico">
+                    <button class="wiki-header-btn" title="Páginas revisadas desta página [h]" accesskey="h">
+                        <span>Ver histórico</span>
+                    </button>
+
+                    <!-- Card Flutuante Estilizado -->
+                    <div class="card-historico-dropdown">
+                        <div class="grid-ferramentas">
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🔔</span>
+                                <span class="texto-item">Status de servidor</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧥</span>
+                                <span class="texto-item">Criador de skins</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧪</span>
+                                <span class="texto-item">Gerador de conquistas</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">💰</span>
+                                <span class="texto-item">Calculadora de recursos</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🌾</span>
+                                <span class="texto-item">Trocas e presentes</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧭</span>
+                                <span class="texto-item">Qual é o seu quadrante?</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">📦</span>
+                                <span class="texto-item">Blocos e itens para baixar</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🗺️</span>
+                                <span class="texto-item">Mapa da seed</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">📖</span>
+                                <span class="texto-item">Encantamentos</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🛡️</span>
+                                <span class="texto-item">Armaduras e enfeites</span>
+                            </a>
+                        </div>
+                        <div class="rodape-card">
+                            <a href="#">Ver todas as ferramentas &rarr;</a>
+                        </div>
                     </div>
                 </div>
 
@@ -187,8 +686,9 @@
                     </div>
                 </div>
 
+                <!-- Barra de Pesquisa Ordenada -->
                 <div class="header-search-box">
-                    <input type="text" id="searchInput" placeholder="Pesquisar na Wiki do Minecraft"
+                    <input type="text" id="searchInput" placeholder="Pesquisar no Zera's Craft..."
                         onkeyup="filterPageStrings()">
                     <svg viewBox="0 0 24 24">
                         <path
@@ -205,25 +705,25 @@
             <button class="lang-dropdown-btn">🌐 14 idiomas ▾</button>
         </div>
 
-        <!-- ABAS DE FRANQUIA (EXATAMENTE COMO NA PRINT SOLICITADA) -->
-        <nav class="franchise-nav">
-            <a href="#minecraft" class="franchise-tab">
-                <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Minecraft"> Minecraft
+        <!-- ABAS DE FRANQUIA (APENAS ÍCONES PNG LIMPOS) -->
+        <nav class="franchise-nav" aria-label="Franquias">
+            <a href="#minecraft" class="franchise-tab active" title="Minecraft">
+                <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Minecraft">
             </a>
-            <a href="#masmorras" class="franchise-tab">
-                <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Masmorras"> Masmorras
+            <a href="#masmorras" class="franchise-tab" title="Masmorras">
+                <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Masmorras">
             </a>
-            <a href="#filme" class="franchise-tab">
-                <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Filme"> Filme
+            <a href="#filme" class="franchise-tab" title="Filme">
+                <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Filme">
             </a>
-            <a href="#lendas" class="franchise-tab">
-                <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Lendas"> Lendas
+            <a href="#lendas" class="franchise-tab" title="Lendas">
+                <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Lendas">
             </a>
-            <a href="#modo-historia" class="franchise-tab">
-                <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Modo História"> Modo História
+            <a href="#modo-historia" class="franchise-tab" title="Modo História">
+                <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Modo História">
             </a>
-            <a href="#terra" class="franchise-tab tab-terra">
-                <img src="https://minecraft.wiki/images/Oak_Sapling.png" alt="Terra"> Terra
+            <a href="#terra" class="franchise-tab" title="Terra">
+                <img src="https://minecraft.wiki/images/Oak_Sapling.png" alt="Terra">
             </a>
         </nav>
 
@@ -234,7 +734,7 @@
 
                 <!-- Section 1: Hero cards (Rumo à natureza selvagem & Quarta queda 2026) -->
                 <section class="searchable-section featured-hero-row">
-                    <div class="hero-card">
+                    <div>
                         <div class="hero-card-img"
                             style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop');">
                             <div class="hero-card-header">
@@ -250,7 +750,7 @@
                         </div>
                     </div>
 
-                    <div class="hero-card">
+                    <div>
                         <div class="hero-card-img"
                             style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop');">
                             <div class="hero-card-header">
@@ -294,61 +794,72 @@
                     </div>
                 </section>
 
-                <!-- Section 3: Todas as versões (Expansível) -->
-                <section class="searchable-section all-versions-dropdown">
-                    <button class="all-versions-bar" onclick="toggleVersionsDropdown(this)">
+                <div class="all-versions-dropdown">
+                    <!-- Barra Superior / Botão de Expansão -->
+                    <button class="all-versions-bar"
+                        onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
                         <span>Todas as versões</span>
                         <svg viewBox="0 0 24 24">
-                            <path d="M7 10l5 5 5-5z" />
+                            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
                         </svg>
                     </button>
-                    <div id="versionsContent" class="all-versions-content">
+
+                    <!-- Conteúdo Expansível -->
+                    <div class="all-versions-content">
+                        <!-- Grid principal de itens -->
                         <div class="versions-sub-grid">
-                            <div class="version-box">
-                                <img src="https://minecraft.wiki/images/Education_Edition.png" alt="Educação">
-                                <div class="version-info">
-                                    <h4>Educação Minecraft</h4>
-                                    <ul>
-                                        <li><a href="#">26,33</a> <span>(atual)</span></li>
-                                        <li><a href="#">Pré-visualização 26.33.0</a></li>
-                                    </ul>
-                                </div>
+                            <!-- Bloco 1 -->
+                            <div class="content-section-box" style="padding: 12px; margin: 0;">
+                                <div style="font-weight: 700; color: #0645ad; margin-bottom: 4px;">Editor de Base</div>
+                                <div style="font-size: 13px; color: #54595d;">26,60 <span
+                                        style="color: #72777d;">(atual)</span></div>
+                                <div style="font-size: 13px; color: #0645ad;">26.70.24 <span
+                                        style="color: #72777d;">(Beta)</span></div>
                             </div>
-                            <div class="version-box">
-                                <img src="https://minecraft.wiki/images/Creeper_Face.png" alt="Launcher">
-                                <div class="version-info">
-                                    <h4>Lançador do Minecraft</h4>
-                                    <ul>
-                                        <li><a href="#">3.43.21</a></li>
-                                    </ul>
-                                </div>
+
+                            <!-- Bloco 2 -->
+                            <div class="content-section-box" style="padding: 12px; margin: 0;">
+                                <div style="font-weight: 700; color: #0645ad; margin-bottom: 4px;">Servidor Dedicado
+                                    Bedrock</div>
+                                <div style="font-size: 13px; color: #54595d;">1.26.63.1 <span
+                                        style="color: #72777d;">(atual)</span></div>
+                                <div style="font-size: 13px; color: #0645ad;">1.26.70.24 <span
+                                        style="color: #72777d;">(Pré-visualização)</span></div>
                             </div>
                         </div>
 
-                        <div class="platforms-heading">Plataformas <em>da Edição Bedrock</em></div>
+                        <!-- Subtítulo de Seção Interna -->
+                        <div
+                            style="margin: 16px 0 8px 0; font-size: 13px; font-weight: 700; color: #202122; font-style: italic;">
+                            Plataformas da Edição Bedrock
+                        </div>
+
+                        <!-- Grid de Plataformas (Exemplo com Windows e iOS/iPadOS) -->
                         <div class="versions-sub-grid">
-                            <div class="version-box">
-                                <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Windows">
-                                <div class="version-info">
-                                    <h4 style="color:var(--text-dark);">Windows</h4>
-                                    <ul>
-                                        <li><a href="#">26,63</a> <span>(atual)</span></li>
-                                        <li><a href="#">Pré-visualização 26.70.24</a></li>
-                                    </ul>
+                            <!-- Windows -->
+                            <div class="content-section-box" style="padding: 12px; margin: 0;">
+                                <div style="font-weight: 700; color: #202122; margin-bottom: 4px;">Windows</div>
+                                <div style="font-size: 13px; color: #54595d; margin-bottom: 2px;">26,63 <span
+                                        style="color: #72777d;">(atual)</span></div>
+                                <div style="font-size: 13px;"><a href="#"
+                                        style="color: #0645ad; text-decoration: none;">Pré-visualização 26.70.24</a>
+                                    <span style="color: #72777d; font-size: 12px;">(para 26.70)</span>
                                 </div>
                             </div>
-                            <div class="version-box">
-                                <img src="https://minecraft.wiki/images/Player_Head.png" alt="iOS">
-                                <div class="version-info">
-                                    <h4 style="color:var(--text-dark);">iOS e iPadOS</h4>
-                                    <ul>
-                                        <li><a href="#">26,62</a> <span>(atual)</span></li>
-                                    </ul>
+
+                            <!-- iOS e iPadOS -->
+                            <div class="content-section-box" style="padding: 12px; margin: 0;">
+                                <div style="font-weight: 700; color: #202122; margin-bottom: 4px;">iOS e iPadOS</div>
+                                <div style="font-size: 13px; color: #54595d; margin-bottom: 2px;">26,62 <span
+                                        style="color: #72777d;">(atual)</span></div>
+                                <div style="font-size: 13px;"><a href="#"
+                                        style="color: #0645ad; text-decoration: none;">Pré-visualização 26.70.24</a>
+                                    <span style="color: #72777d; font-size: 12px;">(para 26.70)</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
                 <!-- Section 4: Grade de 16 Ícones de Atalhos -->
                 <section class="searchable-section categories-grid-16">

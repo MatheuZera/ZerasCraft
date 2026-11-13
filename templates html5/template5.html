@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
+    <meta charset="UTF-8" />
+    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!---->
+    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon" />
+
+    <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!---->
+
+    <!--é a breve descrição da sua página que pode aparecer no Google-->
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!" />
+    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
+    <meta name="keywords"
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo" />
+    <!--Identifica o autor do documento HTML.-->
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft" />
+    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
+    <meta name="robots" content="index, follow" />
+
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--O título que aparece na pré-visualização.-->
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial" />
+    <!--A descrição que aparece na pré-visualização.-->
+    <meta property="og:description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!" />
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <meta property="og:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg" />
+    <!--A URL da página.-->
+    <meta property="og:url" content="https://seusite.com.br/index.html" />
+
+    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mundo Zera's Craft" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SeuTwitterHandle" />
+    <meta name="twitter:creator" content="@SeuTwitterHandle" />
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!" />
+    <meta name="twitter:description"
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!" />
+    <!---->
+    <meta name="twitter:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg" />
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <meta name="theme-color" content="#347C2F" />
+    <!-- Links para ScrollReveal e CountUp.js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- CSS Globais -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Zera's Craft Home</title>
+</head>
+
+<body>
+
+    <!-- OVERLAY ESCURO -->
+    <div id="zc-drawer-backdrop" class="zc-drawer-backdrop" onclick="closeAllDrawers()"></div>
+
+    <!-- ==========================================================
+   GAVETA 1: PAINEL PRINCIPAL (ZERA'S CRAFT)
+   ========================================================== -->
+    <aside id="drawer-primary" class="zc-slide-drawer primary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-inicio')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Início">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">INÍCIO</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-novidades')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Book_and_Quill.png" alt="Novidades">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">NOVIDADES</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-oficial')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Emerald.png" alt="Oficial">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">OFICIAL</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-recursos')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Recursos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">RECURSOS</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-suporte')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Suporte">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">SUPORTE</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <div class="zc-drawer-divider"></div>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-pesquisar')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Pesquisar">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">PESQUISAR</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <button class="zc-drawer-item" onclick="openSubMenu('drawer-links')">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Links">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">LINKS EXTERNOS</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </button>
+
+            <div class="zc-drawer-divider"></div>
+
+            <a href="#discord" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Discord">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">NOSSO DISCORD</span>
+                </div>
+                <span class="zc-arrow-right">›</span>
+            </a>
+        </div>
+
+        <!-- RODAPÉ PERMANENTE FIXO NA BASE DO MENU PRINCIPAL -->
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU INÍCIO (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-inicio" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-inicio')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">DESTAQUES DO INÍCIO</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Início">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Página Inicial</span>
+                    <span class="zc-item-sub">Volte para a página principal da wiki</span>
+                </div>
+            </a>
+
+            <!-- Botão com partículas sutis da esquerda para a direita -->
+            <a href="#" class="zc-drawer-item particle-btn" data-particles="#2ea043,#54aeff,#8250df"
+                onclick="closeAllDrawers()">
+                <div class="zc-particles-canvas"></div>
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Player_Head.png" alt="Comunidade">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Comunidade em Foco</span>
+                    <span class="zc-item-sub">Participe dos eventos e chats oficiais</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Pixel Legends">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Pixel Legends</span>
+                    <span class="zc-item-sub">Explore o novo modo RPG de masmorras</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Recursos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Recursos & Guias</span>
+                    <span class="zc-item-sub">Manuais completos de sobrevivência</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU NOVIDADES (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-novidades" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-novidades')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">ATUALIZAÇÕES RECENTES</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Book_and_Quill.png" alt="Patch">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Patch 1.21.4</span>
+                    <span class="zc-item-sub">Novos itens e correções de segurança</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Eventos">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Eventos de Natal</span>
+                    <span class="zc-item-sub">Confira a premiação da semana</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU OFICIAL (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-oficial" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-oficial')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">LINKS OFICIAIS</div>
+
+            <a href="https://minecraft.wiki" target="_blank" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Emerald.png" alt="Site">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Site Oficial</span>
+                    <span class="zc-item-sub">Visite nosso portal na web</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Diamond.png" alt="Loja">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Loja VIP</span>
+                    <span class="zc-item-sub">Adquira vantagens exclusivas</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU RECURSOS (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-recursos" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-recursos')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">FERRAMENTAS & WIKI</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Mapa">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Mapa Online</span>
+                    <span class="zc-item-sub">Visualizador de mundo em tempo real</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Crafting_Table.png" alt="Banco">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Banco de Dados</span>
+                    <span class="zc-item-sub">Lista de receitas e itens</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU SUPORTE (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-suporte" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-suporte')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">ATENDIMENTO AO JOGADOR</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Ticket">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Abrir Ticket</span>
+                    <span class="zc-item-sub">Suporte técnico e denúncias</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Paper.png" alt="Regras">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Regras do Servidor</span>
+                    <span class="zc-item-sub">Diretrizes de convivência</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU PESQUISAR (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-pesquisar" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-pesquisar')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">BUSCA RÁPIDA</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Compass.png" alt="Busca">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Pesquisar na Wiki</span>
+                    <span class="zc-item-sub">Encontre itens, tutoriais e regras</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+    <!-- ==========================================================
+   GAVETA 2: SUBMENU LINKS EXTERNOS (EM CASCATA - SOBREPOSTO)
+   ========================================================== -->
+    <aside id="drawer-links" class="zc-slide-drawer secondary-drawer">
+        <div class="zc-drawer-header">
+            <span class="zc-brand-title">ZERA'S CRAFT</span>
+            <button class="zc-drawer-close" onclick="closeAllDrawers()" aria-label="Fechar Menu">✕</button>
+        </div>
+
+        <div class="zc-submenu-toolbar">
+            <button class="zc-drawer-back" onclick="closeSubMenu('drawer-links')">
+                <span>❮</span> VOLTAR
+            </button>
+        </div>
+
+        <div class="zc-drawer-body">
+            <div class="zc-drawer-section-label">PARCEIROS & REDES</div>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Golden_Pickaxe.png" alt="YouTube">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Canal do YouTube</span>
+                    <span class="zc-item-sub">Vídeos e tutoriais da staff</span>
+                </div>
+            </a>
+
+            <a href="#" class="zc-drawer-item" onclick="closeAllDrawers()">
+                <div class="zc-icon-square">
+                    <img src="https://minecraft.wiki/images/Painting.png" alt="Instagram">
+                </div>
+                <div class="zc-item-info">
+                    <span class="zc-item-title">Instagram Oficial</span>
+                    <span class="zc-item-sub">Siga bastidores da equipe</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="zc-drawer-footer">
+            <a href="#termos" onclick="closeAllDrawers()"><span>📄</span> Termos de Compra</a>
+            <a href="#carrinho" onclick="closeAllDrawers()"><span>🛒</span> Ver Carrinho</a>
+        </div>
+    </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- BARRA LATERAL ESQUERDA REESTRUTURADA -->
+    <aside class="wiki-left-sidebar">
+        <div class="wiki-left-logo-box">
+            <img src="https://minecraft.wiki/images/Minecraft_Wiki_Logo.png" alt="Minecraft Wiki">
+        </div>
+
+        <div class="wiki-left-stats-bar">
+            <div><span>18.5k</span> páginas</div>
+            <div><span>177.5k</span> edições</div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Navegação</button>
+            <div class="wiki-left-links">
+                <a href="#ajuda">Como ajudar</a>
+                <a href="#recentes">Alterações recentes</a>
+                <a href="#aleatoria">Página aleatória</a>
+                <a href="https://discord.com" target="_blank" class="wiki-left-discord-btn">💬 Wiki Discord</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Comunidade Wiki</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#">Portal da Comunidade</a>
+                <a href="#">Regras da Comunidade</a>
+                <a href="#">Discussões</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-promo-box">
+            <span class="wiki-left-promo-close" onclick="this.parentElement.style.display='none'">×</span>
+            <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Grass Block">
+            <p>Tired of seeing Fandom results on Google?</p>
+            <span class="wiki-left-promo-highlight">Hide them forever with two clicks</span>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Franquia</button>
+            <div class="wiki-left-links">
+                <a href="#">Minecraft</a>
+                <a href="#">Minecraft Dungeons</a>
+                <a href="#">Um filme de Minecraft</a>
+                <a href="#">Lendas do Minecraft</a>
+                <a href="#">Minecraft: Modo História</a>
+                <a href="#">Minecraft Terra</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Versões recentes</button>
+            <div class="wiki-left-links">
+                <a href="#java">Edição Java: 26.3</a>
+                <a href="#bedrock">Edição Bedrock: 26.63</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Páginas úteis</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#comercio">Negociação</a>
+                <a href="#fermentacao">Cervejaria</a>
+                <a href="#encantamento">Encantamentos</a>
+                <a href="#tutoriais">Tutoriais</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Ferramentas</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#">Páginas afluentes</a>
+                <a href="#">Carregar arquivo</a>
+                <a href="#">Páginas especiais</a>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="main-container">
+
+        <!-- CABEÇALHO SUPERIOR REORDENADO -->
+        <header class="wiki-header" data-bg="https://media.forgecdn.net/attachments/1951/255/plains_village_3-jpg.jpg">
+            <!-- seus botões e conteúdo -->
+
+            <div class="header-left-group">
+                <!-- Botão Hambúrguer Principal alinhado e estruturado igual ao Minecraft Wiki -->
+                <button class="wiki-header-btn zc-hamburger-btn" onclick="openPrimaryDrawer()" aria-label="Abrir Menu">
+                    <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Menu"
+                        style="width: 18px; height: 18px; image-rendering: pixelated; margin-right: 4px;">
+                    <span>Menu</span>
+                </button>
+
+                <button class="wiki-header-btn active" onclick="setActiveNav(this)">Página principal</button>
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Falar</button>
+            </div>
+
+            <div class="header-right-group">
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Ler</button>
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Ver código-fonte</button>
+
+                <div class="dropdown-historico">
+                    <button class="wiki-header-btn" title="Páginas revisadas desta página [h]" accesskey="h">
+                        <span>Ver histórico</span>
+                    </button>
+
+                    <!-- Card Flutuante Estilizado -->
+                    <div class="card-historico-dropdown">
+                        <div class="grid-ferramentas">
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🔔</span>
+                                <span class="texto-item">Status de servidor</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧥</span>
+                                <span class="texto-item">Criador de skins</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧪</span>
+                                <span class="texto-item">Gerador de conquistas</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">💰</span>
+                                <span class="texto-item">Calculadora de recursos</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🌾</span>
+                                <span class="texto-item">Trocas e presentes</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🧭</span>
+                                <span class="texto-item">Qual é o seu quadrante?</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">📦</span>
+                                <span class="texto-item">Blocos e itens para baixar</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🗺️</span>
+                                <span class="texto-item">Mapa da seed</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">📖</span>
+                                <span class="texto-item">Encantamentos</span>
+                            </a>
+                            <a href="#" class="item-ferramenta">
+                                <span class="icone-box">🛡️</span>
+                                <span class="texto-item">Armaduras e enfeites</span>
+                            </a>
+                        </div>
+                        <div class="rodape-card">
+                            <a href="#">Ver todas as ferramentas &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="more-dropdown">
+                    <button class="wiki-header-btn" onclick="toggleMoreModal(event)">Mais ▾</button>
+                    <div id="moreModal" class="more-modal">
+                        <a href="https://minecraft.wiki" target="_blank">🌐 Wiki Oficial Global</a>
+                        <a href="https://mojang.com" target="_blank">📦 Mojang Studios</a>
+                        <a href="https://xbox.com" target="_blank">🎮 Xbox Game Pass</a>
+                    </div>
+                </div>
+
+                <!-- Barra de Pesquisa Ordenada -->
+                <div class="header-search-box">
+                    <input type="text" id="searchInput" placeholder="Pesquisar no Zera's Craft..."
+                        onkeyup="filterPageStrings()">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- SUB-TOPO IDIOMAS -->
+        <div class="top-sub-header">
+            <a href="#">Português</a>
+            <span style="color:#c8cbd1;">|</span>
+            <button class="lang-dropdown-btn">🌐 14 idiomas ▾</button>
+        </div>
+
+        <!-- ABAS DE FRANQUIA (APENAS ÍCONES PNG LIMPOS) -->
+        <nav class="franchise-nav" aria-label="Franquias">
+            <a href="#minecraft" class="franchise-tab active" title="Minecraft">
+                <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Minecraft">
+            </a>
+            <a href="#masmorras" class="franchise-tab" title="Masmorras">
+                <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Masmorras">
+            </a>
+            <a href="#filme" class="franchise-tab" title="Filme">
+                <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Filme">
+            </a>
+            <a href="#lendas" class="franchise-tab" title="Lendas">
+                <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Lendas">
+            </a>
+            <a href="#modo-historia" class="franchise-tab" title="Modo História">
+                <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Modo História">
+            </a>
+            <a href="#terra" class="franchise-tab" title="Terra">
+                <img src="https://minecraft.wiki/images/Oak_Sapling.png" alt="Terra">
+            </a>
+        </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- GRID DE CONTEÚDO CENTRALIZADO E ISOLADO EM QUADRADINHOS/CARDS -->
+        <div class="content-grid">
+
+            <div class="left-column">
+
+                <!-- ==========================================================
+     SEÇÃO: RECURSOS DO LAUNCHER (TEMA CLARO / RETINHO / GRID)
+     ========================================================== -->
+                <section class="searchable-section launcher-features-section">
+                    <div class="launcher-features-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="lf-header-box">
+                            <h2 class="lf-main-title">RECURSOS DO LAUNCHER</h2>
+                            <p class="lf-subtitle">Explore todas as ferramentas e funcionalidades integradas para
+                                gerenciar sua experiência.</p>
+                        </div>
+
+                        <!-- Grid de Recursos (Cards) -->
+                        <div class="lf-grid-wrapper">
+
+                            <!-- Card 1 -->
+                            <div class="lf-card">
+                                <div class="lf-card-top">
+                                    <div class="lf-icon-box">📖</div>
+                                    <h3 class="lf-card-title">Jogue todos os seus jogos Minecraft</h3>
+                                </div>
+                                <div class="lf-card-body">
+                                    <p class="lf-card-desc">Inicie seus jogos favoritos da Mojang Studios diretamente
+                                        por uma única interface unificada.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="lf-card">
+                                <div class="lf-card-top">
+                                    <div class="lf-icon-box">📦</div>
+                                    <h3 class="lf-card-title">Atualizações de jogo e snapshots</h3>
+                                </div>
+                                <div class="lf-card-body">
+                                    <p class="lf-card-desc">Jogue as versões mais recentes e experimente as próximas
+                                        novidades em primeira mão nos snapshots.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="lf-card">
+                                <div class="lf-card-top">
+                                    <div class="lf-icon-box">🗺️</div>
+                                    <h3 class="lf-card-title">Acessar jogo rápido</h3>
+                                </div>
+                                <div class="lf-card-body">
+                                    <p class="lf-card-desc">Crie atalhos personalizados para carregar instantaneamente
+                                        os seus mundos favoritos.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 4 -->
+                            <div class="lf-card">
+                                <div class="lf-card-top">
+                                    <div class="lf-icon-box">⚙️</div>
+                                    <h3 class="lf-card-title">Configurações e recursos</h3>
+                                </div>
+                                <div class="lf-card-body">
+                                    <p class="lf-card-desc">Atualize idioma, opções de acessibilidade, recursos de
+                                        desempenho e muito mais.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 5 -->
+                            <div class="lf-card">
+                                <div class="lf-card-top">
+                                    <div class="lf-icon-box">👤</div>
+                                    <h3 class="lf-card-title">Gerencie seu perfil</h3>
+                                </div>
+                                <div class="lf-card-body">
+                                    <p class="lf-card-desc">Atualize skins das versões Java e acesse as informações
+                                        completas da sua conta.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 6 -->
+                            <div class="lf-card">
+                                <div class="lf-card-top">
+                                    <div class="lf-icon-box">📰</div>
+                                    <h3 class="lf-card-title">Notícias e promoções</h3>
+                                </div>
+                                <div class="lf-card-body">
+                                    <p class="lf-card-desc">Fique por dentro das últimas novidades, atualizações de
+                                        conteúdo e eventos do Minecraft.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+                <!-- SEÇÃO: MARKETPLACE PASS COM PARTÍCULAS (SEM CARDS EXTERNOS) -->
+                <section class="searchable-section raw-particle-section">
+
+                    <!-- Camada de Partículas Pixeladas Flutuantes -->
+                    <div class="raw-particles-layer">
+                        <span class="r-part p1"></span>
+                        <span class="r-part p2"></span>
+                        <span class="r-part p3"></span>
+                        <span class="r-part p4"></span>
+                        <span class="r-part p5"></span>
+                        <span class="r-part p6"></span>
+                        <span class="r-part p7"></span>
+                        <span class="r-part p8"></span>
+                    </div>
+
+                    <div class="raw-particle-container">
+
+                        <!-- Coluna de Texto e Botão -->
+                        <div class="raw-text-column">
+                            <h2 class="raw-main-title">MARKETPLACE PASS</h2>
+                            <p class="raw-description">
+                                Jogue mais de 150 conteúdos incríveis por um pequeno valor mensal com o Marketplace
+                                Pass! Explore mundos, pacotes de mash-ups, skins, texturas e muito mais. Com novos
+                                conteúdos adicionados todos os meses, sempre há algo novo para jogar com o Marketplace
+                                Pass! *
+                            </p>
+
+                            <div class="raw-action-group">
+                                <button class="raw-cta-btn"
+                                    onclick="abrirModal('Marketplace Pass', 'Abrindo detalhes da assinatura...')">
+                                    CONSULTE DETALHES DA ASSINATURA >
+                                </button>
+                                <span class="raw-footer-note">Grátis por 30 dias, depois US$ 3,99/mês</span>
+                            </div>
+                        </div>
+
+                        <!-- Coluna de Preview (Apenas a imagem/texto flutuando sem caixa externa) -->
+                        <div class="raw-preview-column">
+                            <div class="raw-preview-holder">
+                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=500&auto=format&fit=crop"
+                                    alt="Marketplace Pass Preview" class="raw-preview-img">
+                                <span class="raw-preview-label">Marketplace Pass Preview</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+                <!-- SEÇÃO: REALMS PASS COM TEMA ROXO CLARO VIBRANTE -->
+                <section class="searchable-section realms-lightpurple-section">
+
+                    <!-- Camada de Partículas Pixeladas Flutuantes (Tons Claros) -->
+                    <div class="realms-lightpurple-particles">
+                        <span class="r-part p1"></span>
+                        <span class="r-part p2"></span>
+                        <span class="r-part p3"></span>
+                        <span class="r-part p4"></span>
+                        <span class="r-part p5"></span>
+                        <span class="r-part p6"></span>
+                        <span class="r-part p7"></span>
+                        <span class="r-part p8"></span>
+                    </div>
+
+                    <div class="realms-lightpurple-container">
+
+                        <!-- Preview Superior (Realms Preview) -->
+                        <div class="realms-preview-holder">
+                            <span class="realms-preview-label">Realms Preview</span>
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=500&auto=format&fit=crop"
+                                alt="Realms Preview" class="realms-preview-img">
+                        </div>
+
+                        <!-- Título Principal em Roxo Claro / Lilás Brilhante -->
+                        <h2 class="realms-main-title">COMPARTILHE SEU CONTEÚDO COM UMA ASSINATURA DO REALMS</h2>
+
+                        <!-- Descrição -->
+                        <p class="realms-description">
+                            Administre seu próprio servidor de Minecraft e compartilhe seus itens do Marketplace Pass
+                            com até 10 amigos! Você dita as regras: quem pode participar e como jogar. Os membros jogam
+                            de graça, mesmo quando você está offline. Fácil de configurar, gerenciar e acessar de
+                            qualquer dispositivo.
+                        </p>
+
+                        <!-- Botão de Ação Roxo Claro -->
+                        <div class="realms-action-group">
+                            <button class="realms-lightpurple-cta-btn"
+                                onclick="abrirModal('Realms Pass', 'Abrindo detalhes da assinatura do Realms...')">
+                                CONSULTE DETALHES DA ASSINATURA >
+                            </button>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: COMO JOGAR? - PASSOS INTERATIVOS (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section how-to-play-section">
+                    <div class="how-to-play-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="htp-header-box">
+                            <h2 class="htp-main-title">COMO JOGAR?</h2>
+                            <p class="htp-subtitle">Siga estes passos simples para entrar e construir sua história no
+                                servidor.</p>
+                        </div>
+
+                        <!-- Estrutura de Abas por Rádio (CSS PURO - Sem JavaScript) -->
+                        <div class="htp-tabs-wrapper">
+
+                            <input type="radio" name="htp-step" id="step-1" checked class="htp-radio">
+                            <input type="radio" name="htp-step" id="step-2" class="htp-radio">
+                            <input type="radio" name="htp-step" id="step-3" class="htp-radio">
+
+                            <!-- Coluna Esquerda: Botões de Navegação dos Passos -->
+                            <div class="htp-nav-sidebar">
+                                <label for="step-1" class="htp-nav-btn" id="lbl-step-1">
+                                    <span class="step-num">01</span>
+                                    <span class="step-label-text">Conectar ao IP</span>
+                                </label>
+                                <label for="step-2" class="htp-nav-btn" id="lbl-step-2">
+                                    <span class="step-num">02</span>
+                                    <span class="step-label-text">Versão Correta</span>
+                                </label>
+                                <label for="step-3" class="htp-nav-btn" id="lbl-step-3">
+                                    <span class="step-num">03</span>
+                                    <span class="step-label-text">Entrar no Jogo</span>
+                                </label>
+                            </div>
+
+                            <!-- Coluna Direita: Conteúdo Dinâmico por Passo -->
+                            <div class="htp-content-display">
+
+                                <!-- PASSO 1 -->
+                                <div class="htp-pane pane-1">
+                                    <h3 class="htp-pane-title">PASSO 1: COPIE O ENDEREÇO DO SERVIDOR</h3>
+                                    <p class="htp-pane-desc">
+                                        O primeiro passo é garantir o nosso endereço de conexão. Você pode copiar o IP
+                                        clicando diretamente na caixa abaixo.
+                                    </p>
+                                    <div class="htp-ip-box"
+                                        onclick="navigator.clipboard.writeText('PixelLegends88.aternos.me:0000'); alert('IP copiado para a área de transferência!');">
+                                        <span class="ip-address-text">PixelLegends88.aternos.me:0000</span>
+                                        <span class="ip-copy-icon">📋</span>
+                                    </div>
+                                </div>
+
+                                <!-- PASSO 2 -->
+                                <div class="htp-pane pane-2">
+                                    <h3 class="htp-pane-title">PASSO 2: SELECIONE A VERSÃO RECOMENDADA</h3>
+                                    <p class="htp-pane-desc">
+                                        Abra o launcher do seu Minecraft (Seja Original, Prism, TLauncher, etc.) e
+                                        configure o seu perfil de jogo para iniciar em nossa versão de compatibilidade
+                                        ideal.
+                                    </p>
+                                    <div class="htp-version-badge">
+                                        <span>Recomendado: 1.20.4</span>
+                                    </div>
+                                </div>
+
+                                <!-- PASSO 3 -->
+                                <div class="htp-pane pane-3">
+                                    <h3 class="htp-pane-title">PASSO 3: ADICIONE À SUA LISTA</h3>
+                                    <p class="htp-pane-desc">
+                                        Dentro do jogo, clique em <strong>Multiplayer</strong>, depois em <strong>Add
+                                            Server</strong>. Cole o IP copiado no campo correspondente, clique em
+                                        <strong>Concluído</strong> e entre no mundo!
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: GAMEPLAY PLAN - CRONOGRAMA DE DIAS (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section gameplay-plan-section">
+                    <div class="gp-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="gp-header-box">
+                            <h2 class="gp-main-title">GAMEPLAY PLAN</h2>
+                            <p class="gp-subtitle">We have a transparent system for players, check out our plan now</p>
+                        </div>
+
+                        <!-- Estrutura de Abas por Rádio (CSS PURO - Sem JavaScript) -->
+                        <div class="gp-tabs-wrapper">
+
+                            <input type="radio" name="gp-day" id="gp-day-1" checked class="gp-radio">
+                            <input type="radio" name="gp-day" id="gp-day-2" class="gp-radio">
+                            <input type="radio" name="gp-day" id="gp-day-3" class="gp-radio">
+                            <input type="radio" name="gp-day" id="gp-day-4" class="gp-radio">
+
+                            <!-- Coluna Esquerda: Navegação dos Dias -->
+                            <div class="gp-nav-sidebar">
+                                <label for="gp-day-1" class="gp-nav-btn" id="lbl-gp-1">
+                                    <span class="gp-day-tag">DAY 1</span>
+                                    <span class="gp-day-name">OPENING PHASE</span>
+                                </label>
+                                <label for="gp-day-2" class="gp-nav-btn" id="lbl-gp-2">
+                                    <span class="gp-day-tag">DAY 2</span>
+                                    <span class="gp-day-name">FACTION EVENTS</span>
+                                </label>
+                                <label for="gp-day-3" class="gp-nav-btn" id="lbl-gp-3">
+                                    <span class="gp-day-tag">DAY 3</span>
+                                    <span class="gp-day-name">MAP EXPANSION</span>
+                                </label>
+                                <label for="gp-day-4" class="gp-nav-btn" id="lbl-gp-4">
+                                    <span class="gp-day-tag">DAY 4</span>
+                                    <span class="gp-day-name">GLOBAL RAID</span>
+                                </label>
+                            </div>
+
+                            <!-- Coluna Direita: Display de Detalhes do Cronograma -->
+                            <div class="gp-content-display">
+
+                                <!-- PAINEL 1 -->
+                                <div class="gp-pane pane-gp-1">
+                                    <div class="gp-pane-meta">
+                                        <span class="gp-time-icon">🕒</span> <span>20:00 October 10</span>
+                                    </div>
+                                    <h3 class="gp-pane-title">THE OPENING OF THE PROJECT IS SCHEDULED FOR 20:00 ON
+                                        OCTOBER 10.</h3>
+                                    <p class="gp-pane-desc">
+                                        We are waiting for you on the server, the subject of which will remain a mystery
+                                        until you come to us.
+                                    </p>
+                                    <div class="gp-pagination-bar">
+                                        <label for="gp-day-4" class="gp-page-arrow">‹</label>
+                                        <span class="gp-page-indicator">1 / 4</span>
+                                        <label for="gp-day-2" class="gp-page-arrow">›</label>
+                                    </div>
+                                </div>
+
+                                <!-- PAINEL 2 -->
+                                <div class="gp-pane pane-gp-2">
+                                    <div class="gp-pane-meta">
+                                        <span class="gp-time-icon">🕒</span> <span>18:00 October 11</span>
+                                    </div>
+                                    <h3 class="gp-pane-title">DAY 2 BRINGS EXCLUSIVE REWARDS AND FACTION EVENTS.</h3>
+                                    <p class="gp-pane-desc">
+                                        Make sure your team is online to secure the drop at 18:00 sharp. Prepare your
+                                        armor and arsenal.
+                                    </p>
+                                    <div class="gp-pagination-bar">
+                                        <label for="gp-day-1" class="gp-page-arrow">‹</label>
+                                        <span class="gp-page-indicator">2 / 4</span>
+                                        <label for="gp-day-3" class="gp-page-arrow">›</label>
+                                    </div>
+                                </div>
+
+                                <!-- PAINEL 3 -->
+                                <div class="gp-pane pane-gp-3">
+                                    <div class="gp-pane-meta">
+                                        <span class="gp-time-icon">🕒</span> <span>20:00 October 12</span>
+                                    </div>
+                                    <h3 class="gp-pane-title">THE CUSTOM MAP SURVIVAL BOUNDARIES EXPAND TONIGHT.</h3>
+                                    <p class="gp-pane-desc">
+                                        New dangerous dungeons and ancient structures will unlock across the border
+                                        lines at 20:00.
+                                    </p>
+                                    <div class="gp-pagination-bar">
+                                        <label for="gp-day-2" class="gp-page-arrow">‹</label>
+                                        <span class="gp-page-indicator">3 / 4</span>
+                                        <label for="gp-day-4" class="gp-page-arrow">›</label>
+                                    </div>
+                                </div>
+
+                                <!-- PAINEL 4 -->
+                                <div class="gp-pane pane-gp-4">
+                                    <div class="gp-pane-meta">
+                                        <span class="gp-time-icon">🕒</span> <span>20:00 October 13</span>
+                                    </div>
+                                    <h3 class="gp-pane-title">FINAL PREPARATION PHASE FOR THE WEEKLY GLOBAL BOSS RAID.
+                                    </h3>
+                                    <p class="gp-pane-desc">
+                                        Special community challenges unlock, giving double XP and rare keys to all
+                                        active players.
+                                    </p>
+                                    <div class="gp-pagination-bar">
+                                        <label for="gp-day-3" class="gp-page-arrow">‹</label>
+                                        <span class="gp-page-indicator">4 / 4</span>
+                                        <label for="gp-day-1" class="gp-page-arrow">›</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: CARD DE SERVIDOR COM THUMBNAIL PNG DE FUNDO (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section server-thumb-card-section">
+                    <div class="stc-container">
+
+                        <!-- Card Principal com Background PNG/Thumbnail -->
+                        <div class="stc-card-box">
+
+                            <!-- Camada de Overlay para legibilidade perfeita sobre a thumb -->
+                            <div class="stc-bg-overlay"></div>
+
+                            <!-- Conteúdo Interno do Card -->
+                            <div class="stc-card-content">
+
+                                <!-- Badge de Status Online -->
+                                <div class="stc-status-badge">
+                                    <span class="status-dot"></span>
+                                    <span>SERVER ONLINE</span>
+                                </div>
+
+                                <!-- Título do Servidor -->
+                                <h2 class="stc-server-title">ZERA'S CRAFT<br>SURVIVAL</h2>
+
+                                <!-- Descrição -->
+                                <p class="stc-server-desc">
+                                    Explore dungeons misteriosas, construa o seu império com economia viva e domine
+                                    territórios em eventos diários épicos.
+                                </p>
+
+                                <!-- Caixa de Copiar IP -->
+                                <div class="stc-ip-box"
+                                    onclick="navigator.clipboard.writeText('jogar.zerascraft.net'); alert('IP copiado com sucesso!');">
+                                    <div class="stc-ip-info">
+                                        <span class="stc-ip-label">ENDEREÇO IP</span>
+                                        <span class="stc-ip-text">jogar.zerascraft.net</span>
+                                    </div>
+                                    <span class="stc-copy-icon">📋</span>
+                                </div>
+
+                                <!-- Botões de Ação -->
+                                <div class="stc-actions-row">
+                                    <a href="#" class="stc-btn primary">COMEÇAR JORNADA</a>
+                                    <a href="#" class="stc-btn secondary">DISCORD</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: CHANGELOG / ATUALIZAÇÕES (TEMA CLARO / RETINHO / ABAS CSS)
+     ========================================================== -->
+                <section class="searchable-section changelog-section">
+                    <div class="changelog-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="cl-header-box">
+                            <h2 class="cl-main-title">NOTAS DE ATUALIZAÇÃO</h2>
+                            <p class="cl-subtitle">Acompanhe as últimas novidades, adições e correções implementadas no
+                                servidor.</p>
+                        </div>
+
+                        <!-- Estrutura de Abas por Rádio (CSS PURO - Sem JavaScript) -->
+                        <div class="cl-tabs-wrapper">
+
+                            <input type="radio" name="cl-tab" id="cl-tab-added" checked class="cl-radio">
+                            <input type="radio" name="cl-tab" id="cl-tab-fixed" class="cl-radio">
+
+                            <!-- Barra Superior de Abas -->
+                            <div class="cl-tabs-header-bar">
+                                <label for="cl-tab-added" class="cl-tab-label" id="lbl-cl-added">
+                                    ADICIONADO
+                                </label>
+                                <label for="cl-tab-fixed" class="cl-tab-label" id="lbl-cl-fixed">
+                                    CORRIGIDO
+                                </label>
+                            </div>
+
+                            <!-- Corpo de Conteúdo das Abas -->
+                            <div class="cl-content-display">
+
+                                <!-- ABA 1: ADICIONADO -->
+                                <div class="cl-pane pane-added">
+
+                                    <div class="cl-item-row">
+                                        <span class="cl-badge novo">NOVO</span>
+                                        <p class="cl-item-text">Novo evento de boss no mundo Survival às 19h.</p>
+                                    </div>
+
+                                    <div class="cl-item-row">
+                                        <span class="cl-badge novo">NOVO</span>
+                                        <p class="cl-item-text">Sistema de crates cosméticas adicionado ao Spawn.</p>
+                                    </div>
+
+                                    <div class="cl-item-row">
+                                        <span class="cl-badge novo">NOVO</span>
+                                        <p class="cl-item-text">Adicionado suporte para a versão 1.20.4 do Minecraft.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <!-- ABA 2: CORRIGIDO -->
+                                <div class="cl-pane pane-fixed">
+
+                                    <div class="cl-item-row">
+                                        <span class="cl-badge fix">FIX</span>
+                                        <p class="cl-item-text">Corrigido bug visual de duplicação no mercado de blocos.
+                                        </p>
+                                    </div>
+
+                                    <div class="cl-item-row">
+                                        <span class="cl-badge fix">FIX</span>
+                                        <p class="cl-item-text">Otimização de latência nos blocos de comandos de
+                                            portais.</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: CLASSIFICAÇÃO GERAL / LEADERBOARD (DADOS NO HTML)
+     ========================================================== -->
+                <section class="searchable-section leaderboard-section">
+                    <div class="lb-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="lb-header-box">
+                            <h2 class="lb-main-title">CLASSIFICAÇÃO GERAL</h2>
+                            <p class="lb-subtitle">Acompanhe em tempo real os líderes e os dados mais competitivos do
+                                servidor.</p>
+                        </div>
+
+                        <!-- Estrutura de Abas e Pesquisa -->
+                        <div class="lb-tabs-wrapper">
+
+                            <!-- Inputs de Rádio para Controle das Categorias -->
+                            <input type="radio" name="lb-category" id="lb-money" checked class="lb-radio"
+                                data-category="money">
+                            <input type="radio" name="lb-category" id="lb-clans" class="lb-radio" data-category="clans">
+                            <input type="radio" name="lb-category" id="lb-kills" class="lb-radio" data-category="kills">
+                            <input type="radio" name="lb-category" id="lb-time" class="lb-radio" data-category="time">
+                            <input type="radio" name="lb-category" id="lb-events" class="lb-radio"
+                                data-category="events">
+                            <input type="radio" name="lb-category" id="lb-quests" class="lb-radio"
+                                data-category="quests">
+
+                            <!-- Barra de Filtros e Pesquisa -->
+                            <div class="lb-controls-bar">
+                                <div class="lb-filters-group">
+                                    <label for="lb-money" class="lb-filter-btn" data-cat="money">🪙 Money</label>
+                                    <label for="lb-clans" class="lb-filter-btn" data-cat="clans">🛡️ Clãs</label>
+                                    <label for="lb-kills" class="lb-filter-btn" data-cat="kills">⚔️ Kills</label>
+                                    <label for="lb-time" class="lb-filter-btn" data-cat="time">⏱️ Tempo</label>
+                                    <label for="lb-events" class="lb-filter-btn" data-cat="events">🏆 Eventos</label>
+                                    <label for="lb-quests" class="lb-filter-btn" data-cat="quests">📜 Quests</label>
+                                </div>
+
+                                <div class="lb-search-box">
+                                    <span class="lb-search-icon">🔍</span>
+                                    <input type="text" id="lbSearchInput" placeholder="Pesquisar jogador ou clã..."
+                                        class="lb-search-input">
+                                </div>
+                            </div>
+
+                            <!-- Display de Tabela onde o JS vai injetar os dados ativos -->
+                            <div class="lb-table-display" id="lbTableBody"></div>
+
+                            <!-- ==========================================================
+                 FONTE DE DADOS OCULTA NO HTML (FACILITA EDIÇÃO DIRETA)
+                 ========================================================== -->
+                            <div id="lbRawData" style="display: none;">
+
+                                <!-- Categoria: Money -->
+                                <div data-category="money">
+                                    <div data-rank="1" data-name="Gabriel_BR"
+                                        data-uuid="64c35f2e-0a56-4229-8738-8e6840798e91" data-score="3.250.000 Coins">
+                                    </div>
+                                    <div data-rank="2" data-name="ZerasFan"
+                                        data-uuid="8538ef67-d86b-43e6-991f-0b31e9a7e8b6" data-score="1.500.000 Coins">
+                                    </div>
+                                    <div data-rank="3" data-name="Player1"
+                                        data-uuid="e58d9981-6458-45e3-8208-4e12e3e9d892" data-score="950.000 Coins">
+                                    </div>
+                                    <div data-rank="4" data-name="RusticalPvP"
+                                        data-uuid="417f77a8-3642-4f73-9ea8-22f87a0db3af" data-score="520.000 Coins">
+                                    </div>
+                                    <div data-rank="5" data-name="Alok_Mine"
+                                        data-uuid="987aef67-123b-4112-881b-7a3219b12a45" data-score="410.000 Coins">
+                                    </div>
+                                </div>
+
+                                <!-- Categoria: Clãs (Usa tag em vez de uuid) -->
+                                <div data-category="clans">
+                                    <div data-rank="1" data-name="ZerasCraft Guild" data-tag="[ZERA]"
+                                        data-score="14.800 XP" data-is-clan="true"></div>
+                                    <div data-rank="2" data-name="Lords Sombrios" data-tag="[LORD]"
+                                        data-score="11.200 XP" data-is-clan="true"></div>
+                                    <div data-rank="3" data-name="Vanguarda Elite" data-tag="[VANG]"
+                                        data-score="8.950 XP" data-is-clan="true"></div>
+                                    <div data-rank="4" data-name="Shadow Syndicate" data-tag="[SHDW]"
+                                        data-score="5.400 XP" data-is-clan="true"></div>
+                                </div>
+
+                                <!-- Categoria: Kills -->
+                                <div data-category="kills">
+                                    <div data-rank="1" data-name="Gabriel_BR"
+                                        data-uuid="64c35f2e-0a56-4229-8738-8e6840798e91" data-score="1.420 Kills"></div>
+                                    <div data-rank="2" data-name="RusticalPvP"
+                                        data-uuid="417f77a8-3642-4f73-9ea8-22f87a0db3af" data-score="1.110 Kills"></div>
+                                    <div data-rank="3" data-name="ZerasFan"
+                                        data-uuid="8538ef67-d86b-43e6-991f-0b31e9a7e8b6" data-score="980 Kills"></div>
+                                    <div data-rank="4" data-name="Player1"
+                                        data-uuid="e58d9981-6458-45e3-8208-4e12e3e9d892" data-score="640 Kills"></div>
+                                    <div data-rank="5" data-name="Alok_Mine"
+                                        data-uuid="987aef67-123b-4112-881b-7a3219b12a45" data-score="230 Kills"></div>
+                                </div>
+
+                                <!-- Categoria: Tempo Online -->
+                                <div data-category="time">
+                                    <div data-rank="1" data-name="ZerasFan"
+                                        data-uuid="8538ef67-d86b-43e6-991f-0b31e9a7e8b6" data-score="342 Horas"></div>
+                                    <div data-rank="2" data-name="Gabriel_BR"
+                                        data-uuid="64c35f2e-0a56-4229-8738-8e6840798e91" data-score="289 Horas"></div>
+                                    <div data-rank="3" data-name="RusticalPvP"
+                                        data-uuid="417f77a8-3642-4f73-9ea8-22f87a0db3af" data-score="215 Horas"></div>
+                                </div>
+
+                                <!-- Categoria: Eventos -->
+                                <div data-category="events">
+                                    <div data-rank="1" data-name="Player1"
+                                        data-uuid="e58d9981-6458-45e3-8208-4e12e3e9d892" data-score="45 Vitórias"></div>
+                                    <div data-rank="2" data-name="Gabriel_BR"
+                                        data-uuid="64c35f2e-0a56-4229-8738-8e6840798e91" data-score="38 Vitórias"></div>
+                                    <div data-rank="3" data-name="Alok_Mine"
+                                        data-uuid="987aef67-123b-4112-881b-7a3219b12a45" data-score="29 Vitórias"></div>
+                                </div>
+
+                                <!-- Categoria: Quests -->
+                                <div data-category="quests">
+                                    <div data-rank="1" data-name="ZerasFan"
+                                        data-uuid="8538ef67-d86b-43e6-991f-0b31e9a7e8b6" data-score="182 Concluídas">
+                                    </div>
+                                    <div data-rank="2" data-name="Player1"
+                                        data-uuid="e58d9981-6458-45e3-8208-4e12e3e9d892" data-score="156 Concluídas">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: CARDS DE METAS DA COMUNIDADE (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section goals-cards-section">
+                    <div class="gc-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="gc-header-box">
+                            <h2 class="gc-main-title">METAS DA COMUNIDADE</h2>
+                            <p class="gc-subtitle">Acompanhe o progresso coletivo e desbloqueie recompensas exclusivas.
+                            </p>
+                        </div>
+
+                        <!-- Grid de Cards de Metas -->
+                        <div class="gc-grid">
+
+                            <!-- Card 1: Meta da Comunidade (Discord) -->
+                            <div class="gc-card" data-current="150" data-target="200">
+                                <div class="gc-card-header">
+                                    <span class="gc-card-title">💬 META DA COMUNIDADE</span>
+                                    <span class="gc-percentage-text">0%</span>
+                                </div>
+
+                                <!-- Barra de Progresso Retinha -->
+                                <div class="gc-progress-track">
+                                    <div class="gc-progress-fill"></div>
+                                </div>
+
+                                <p class="gc-card-desc">
+                                    Alcance a meta de membros para desbloquear o evento de <strong>Double XP &
+                                        Drops!</strong>
+                                </p>
+                                <div class="gc-card-footer">
+                                    <span class="gc-status-info">Progresso: <b class="gc-current-val">150</b> / <b
+                                            class="gc-target-val">200</b> membros</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Meta do Canal YT -->
+                            <div class="gc-card" data-current="90" data-target="200">
+                                <div class="gc-card-header">
+                                    <span class="gc-card-title">📺 META DO CANAL YT</span>
+                                    <span class="gc-percentage-text">0%</span>
+                                </div>
+
+                                <div class="gc-progress-track">
+                                    <div class="gc-progress-fill"></div>
+                                </div>
+
+                                <p class="gc-card-desc">
+                                    Alcance a meta de inscritos para desbloquear o evento de <strong>Double XP &
+                                        Drops!</strong>
+                                </p>
+                                <div class="gc-card-footer">
+                                    <span class="gc-status-info">Progresso: <b class="gc-current-val">90</b> / <b
+                                            class="gc-target-val">200</b> inscritos</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Meta Geral -->
+                            <div class="gc-card" data-current="184" data-target="200">
+                                <div class="gc-card-header">
+                                    <span class="gc-card-title">⭐ META GERAL</span>
+                                    <span class="gc-percentage-text">0%</span>
+                                </div>
+
+                                <div class="gc-progress-track">
+                                    <div class="gc-progress-fill"></div>
+                                </div>
+
+                                <p class="gc-card-desc">
+                                    Alcance 100% de votos para desbloquear o evento de <strong>Double XP &
+                                        Drops!</strong>
+                                </p>
+                                <div class="gc-card-footer">
+                                    <span class="gc-status-info">Progresso: <b class="gc-current-val">184</b> / <b
+                                            class="gc-target-val">200</b> votos</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: MERCADO GLOBAL / LEILÕES (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section auction-market-section">
+                    <div class="am-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="am-header-box">
+                            <h2 class="am-main-title">MERCADO GLOBAL / LEILÕES</h2>
+                            <p class="am-subtitle">Acompanhe os lances mais altos e disputas ativas em tempo real no
+                                servidor.</p>
+                        </div>
+
+                        <!-- Grid de Cards de Leilões -->
+                        <div class="am-grid">
+
+                            <!-- Card 1 (Destaque / Live) -->
+                            <div class="am-card active-live">
+                                <div class="am-card-top">
+                                    <span class="am-category-tag">ARMAMENTOS</span>
+                                    <span class="am-live-badge">● LIVE</span>
+                                </div>
+
+                                <h3 class="am-item-name">ESPADA DE NETHERITA V</h3>
+
+                                <div class="am-price-box">
+                                    <span class="am-coin-icon">🪙</span>
+                                    <span class="am-price-value">450,000</span>
+                                    <span class="am-coin-label">Coins</span>
+                                </div>
+
+                                <div class="am-card-footer">
+                                    <span class="am-time-left">🕒 02m 14s</span>
+                                    <span class="am-seller">👤 ZeraPlay</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="am-card">
+                                <div class="am-card-top">
+                                    <span class="am-category-tag">FERRAMENTAS</span>
+                                </div>
+
+                                <h3 class="am-item-name">PICARETA EFICIÊNCIA VI</h3>
+
+                                <div class="am-price-box">
+                                    <span class="am-coin-icon">🪙</span>
+                                    <span class="am-price-value">280,000</span>
+                                    <span class="am-coin-label">Coins</span>
+                                </div>
+
+                                <div class="am-card-footer">
+                                    <span class="am-time-left">🕒 14h 32m</span>
+                                    <span class="am-seller">👤 Matheus_Dev</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="am-card">
+                                <div class="am-card-top">
+                                    <span class="am-category-tag">COSMÉTICOS</span>
+                                </div>
+
+                                <h3 class="am-item-name">ASAS DE DRAGÃO (RANK V)</h3>
+
+                                <div class="am-price-box">
+                                    <span class="am-coin-icon">🪙</span>
+                                    <span class="am-price-value">1,200,000</span>
+                                    <span class="am-coin-label">Coins</span>
+                                </div>
+
+                                <div class="am-card-footer">
+                                    <span class="am-time-left">🕒 1d 04h</span>
+                                    <span class="am-seller">👤 RusticalPvP</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: LOJA / VIP STORE CARDS (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section store-ranks-section">
+                    <div class="sr-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="sr-header-box">
+                            <h2 class="sr-main-title">LOJA DO SERVIDOR / RANKS</h2>
+                            <p class="sr-subtitle">Adquira pacotes exclusivos e apoie o desenvolvimento do Zera's Craft.
+                            </p>
+                        </div>
+
+                        <!-- Grid de Cards da Loja -->
+                        <div class="sr-grid">
+
+                            <!-- Card 1: Iron Rank -->
+                            <div class="sr-card">
+                                <div class="sr-card-top">
+                                    <div class="sr-icon-box orange">🛡️</div>
+                                    <div class="sr-title-group">
+                                        <h3 class="sr-item-title">IRON RANK</h3>
+                                        <span class="sr-duration">/ 30 DIAS</span>
+                                    </div>
+                                </div>
+
+                                <p class="sr-item-desc">
+                                    Perfect tier entry to boost your resource generation and secure essential global
+                                    commands.
+                                </p>
+
+                                <div class="sr-features-list">
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span><strong>Green</strong> Chat Prefix &
+                                            Color</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>Access to <strong>/fly</strong> in
+                                            Lobbies</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>3x Multiplier on Coin Drops</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>Join full sub-servers seamlessly</span>
+                                    </div>
+                                </div>
+
+                                <div class="sr-card-footer">
+                                    <div class="sr-price-tag">
+                                        <span class="currency">$</span>4.99
+                                    </div>
+                                    <button class="sr-buy-btn" onclick="abrirCarrinho('Iron Rank', 4.99)">
+                                        ADD TO CART 🛒
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Rustic Rank (Destaque / Best Value) -->
+                            <div class="sr-card best-value-card">
+                                <div class="sr-best-badge">★ BEST VALUE</div>
+
+                                <div class="sr-card-top">
+                                    <div class="sr-icon-box yellow">👑</div>
+                                    <div class="sr-title-group">
+                                        <h3 class="sr-item-title">RUSTIC RANK</h3>
+                                        <span class="sr-duration">/ LIFETIME</span>
+                                    </div>
+                                </div>
+
+                                <p class="sr-item-desc">
+                                    The ultimate network experience. Permanent server privileges, custom cosmetics, and
+                                    maximum control.
+                                </p>
+
+                                <div class="sr-features-list">
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span><strong>Gold</strong> Animated Chat
+                                            Tag</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>Global <strong>/fly</strong> &
+                                            <strong>/feed</strong> enabled</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>5x Multiplier & Priority Support</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>Exclusive Monthly Elite Crate Keys</span>
+                                    </div>
+                                </div>
+
+                                <div class="sr-card-footer">
+                                    <div class="sr-price-tag">
+                                        <span class="currency">$</span>19.99
+                                    </div>
+                                    <button class="sr-buy-btn primary" onclick="abrirCarrinho('Rustic Rank', 19.99)">
+                                        ADD TO CART 🛒
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Mythic Keys Bundle -->
+                            <div class="sr-card">
+                                <div class="sr-card-top">
+                                    <div class="sr-icon-box purple">📦</div>
+                                    <div class="sr-title-group">
+                                        <h3 class="sr-item-title">5X MYTHIC KEYS</h3>
+                                        <span class="sr-duration">/ BUNDLE</span>
+                                    </div>
+                                </div>
+
+                                <p class="sr-item-desc">
+                                    Unlock massive loot at the spawn crates. Guarantees rare cosmetics and valuable
+                                    materials.
+                                </p>
+
+                                <div class="sr-features-list">
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>100% No duplicate drop system</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>15% Chance for legendary mounts</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>Global broadcast upon opening</span>
+                                    </div>
+                                    <div class="sr-feature-item">
+                                        <span class="sr-check">✓</span> <span>Keys never expire over resets</span>
+                                    </div>
+                                </div>
+
+                                <div class="sr-card-footer">
+                                    <div class="sr-price-tag">
+                                        <span class="currency">$</span>7.50
+                                    </div>
+                                    <button class="sr-buy-btn" onclick="abrirCarrinho('5x Mythic Keys', 7.50)">
+                                        ADD TO CART 🛒
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: VÍDEO DESTAQUE COM PLAYER REAL DO YOUTUBE (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section video-launch-section">
+                    <div class="vl-container">
+
+                        <!-- Cabeçalho da Seção -->
+                        <div class="vl-header-box">
+                            <h2 class="vl-main-title">MÍDIA EM DESTAQUE</h2>
+                            <p class="vl-subtitle">Acompanhe as séries oficiais e os lançamentos do servidor.</p>
+                        </div>
+
+                        <!-- Card Principal do Player -->
+                        <div class="vl-card">
+
+                            <!-- Container do Player Real do YouTube (Iframe) -->
+                            <div class="vl-video-preview">
+                                <!-- Substitua 'dQw4w9WgXcQ' pelo ID real do vídeo do YouTube que deseja exibir -->
+                                <iframe class="vl-youtube-iframe"
+                                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                    ></iframe>
+                            </div>
+
+                            <!-- Rodapé Informativo (Missão / Ações) -->
+                            <div class="vl-card-footer-row">
+                                <div class="vl-mission-info">
+                                    <span class="vl-mission-icon">🎯</span>
+                                    <div class="vl-mission-text-group">
+                                        <h3 class="vl-mission-title">MISSÃO: RUSTICAL NETWORK EARLY ACCESS LAUNCH</h3>
+                                        <span class="vl-official-badge">🟢 Official Media</span>
+                                    </div>
+                                </div>
+
+                                <div class="vl-action-buttons">
+                                    <button class="vl-btn secondary"
+                                        onclick="alert('Recompensa reivindicada com sucesso!')">
+                                        🔒 Reivindicar recompensa
+                                    </button>
+                                    <button class="vl-btn primary" onclick="alert('Redirecionando para o servidor...')">
+                                        Jogar agora
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: PROTEÇÃO E LOCALIZAÇÕES GLOBAIS (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section infra-security-section">
+                    <div class="is-container">
+
+                        <!-- Grid de Duas Colunas (Proteção à Esquerda / Localizações à Direita) -->
+                        <div class="is-grid">
+
+                            <!-- Coluna Esquerda: Proteção Infalível -->
+                            <div class="is-card">
+                                <div class="is-card-header">
+                                    <span class="is-header-icon">🛡️</span>
+                                    <div class="is-header-titles">
+                                        <h2 class="is-main-title">PROTEÇÃO INFALÍVEL</h2>
+                                        <span class="is-subtitle-tag">Infraestrutura blindada corporativa</span>
+                                    </div>
+                                </div>
+
+                                <p class="is-desc">
+                                    Esqueça quedas causadas por ataques maliciosos. Nossa rede conta com proteção
+                                    especializada em tráfego de jogos.
+                                </p>
+
+                                <div class="is-feature-list">
+                                    <div class="is-feature-item">
+                                        <span class="is-bullet">▪</span>
+                                        <p><strong>Mitigação DDoS de Camada 7:</strong> Filtros customizados que
+                                            identificam e barram exploits específicos de Minecraft instantaneamente.</p>
+                                    </div>
+                                    <div class="is-feature-item">
+                                        <span class="is-bullet">▪</span>
+                                        <p><strong>Uptime de 99.9% Garantido:</strong> Hardware corporativo com
+                                            redundância de energia e fontes de uplink independentes.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Coluna Direita: Localizações Globais -->
+                            <div class="is-card">
+                                <div class="is-card-header">
+                                    <div class="is-header-titles">
+                                        <span class="is-top-label">CONECTIVIDADE</span>
+                                        <h2 class="is-main-title">LOCALIZAÇÕES GLOBAIS</h2>
+                                    </div>
+                                </div>
+
+                                <p class="is-desc">
+                                    Hospede seu servidor o mais próximo possível de você e da sua comunidade para
+                                    garantir o menor ping e zero lag de input.
+                                </p>
+
+                                <div class="is-locations-list">
+
+                                    <!-- Local 1: São Paulo (Ativo / Destaque) -->
+                                    <div class="is-loc-item active">
+                                        <div class="is-loc-info">
+                                            <span class="loc-status-dot green"></span>
+                                            <span class="loc-name">São Paulo</span>
+                                        </div>
+                                        <span class="loc-ping">América do Sul (20-40ms)</span>
+                                    </div>
+
+                                    <!-- Local 2: Virgínia -->
+                                    <div class="is-loc-item">
+                                        <div class="is-loc-info">
+                                            <span class="loc-status-dot gray"></span>
+                                            <span class="loc-name">Virgínia</span>
+                                        </div>
+                                        <span class="loc-ping">América do Norte (90-120ms)</span>
+                                    </div>
+
+                                    <!-- Local 3: Frankfurt -->
+                                    <div class="is-loc-item">
+                                        <div class="is-loc-info">
+                                            <span class="loc-status-dot gray"></span>
+                                            <span class="loc-name">Frankfurt</span>
+                                        </div>
+                                        <span class="loc-ping">Europa (180-220ms)</span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: PAINEL DE CONTROLE EXCLUSIVO (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section exclusive-panel-section">
+                    <div class="ep-container">
+
+                        <!-- Coluna Esquerda: Texto Descritivo e CTA -->
+                        <div class="ep-info-col">
+                            <span class="ep-top-tag">PRÓXIMA GERAÇÃO</span>
+                            <h2 class="ep-main-title">PAINEL DE CONTROLE<br>EXCLUSIVO</h2>
+                            <p class="ep-description">
+                                Gerencie seu servidor com uma interface altamente customizada, intuitiva e otimizada
+                                para máxima performance. Tudo o que você precisa para controlar seu mundo está a um
+                                clique de distância.
+                            </p>
+                            <div class="ep-cta-wrapper">
+                                <a href="#planos" class="ep-cta-btn">
+                                    Ver Planos <span>→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Coluna Direita: Grid de 6 Recursos do Painel -->
+                        <div class="ep-grid-col">
+
+                            <!-- Card 1 -->
+                            <div class="ep-feature-card">
+                                <div class="ep-card-icon">▶</div>
+                                <div class="ep-card-text">
+                                    <h3 class="ep-card-title">VÍDEO INTEGRADO</h3>
+                                    <p class="ep-card-desc">Tutoriais direto no painel.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="ep-feature-card">
+                                <div class="ep-card-icon">🎛️</div>
+                                <div class="ep-card-text">
+                                    <h3 class="ep-card-title">MULTI-SERVIDORES</h3>
+                                    <p class="ep-card-desc">Controle instâncias simultâneas.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="ep-feature-card">
+                                <div class="ep-card-icon">📁</div>
+                                <div class="ep-card-text">
+                                    <h3 class="ep-card-title">ACESSO FTP TOTAL</h3>
+                                    <p class="ep-card-desc">Manipulação de arquivos sem travas.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 4 -->
+                            <div class="ep-feature-card">
+                                <div class="ep-card-icon">⚙️</div>
+                                <div class="ep-card-text">
+                                    <h3 class="ep-card-title">CUSTOMIZAÇÃO</h3>
+                                    <p class="ep-card-desc">Altere JARs e mods facilmente.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 5 -->
+                            <div class="ep-feature-card">
+                                <div class="ep-card-icon">&gt;_</div>
+                                <div class="ep-card-text">
+                                    <h3 class="ep-card-title">CONSOLE & CHAT</h3>
+                                    <p class="ep-card-desc">Acesso em tempo real pelo navegador.</p>
+                                </div>
+                            </div>
+
+                            <!-- Card 6 -->
+                            <div class="ep-feature-card">
+                                <div class="ep-card-icon">💻</div>
+                                <div class="ep-card-text">
+                                    <h3 class="ep-card-title">ALTA PERFORMANCE</h3>
+                                    <p class="ep-card-desc">Hardware otimizado para sub-redes.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: EQUIPA / STAFF (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section staff-section">
+                    <div class="sf-container">
+
+                        <!-- Categoria 1: Liderança / Vedení Serveru -->
+                        <div class="sf-category-block">
+                            <h2 class="sf-section-title">VEDENÍ SERVERU</h2>
+
+                            <div class="sf-grid">
+                                <!-- Membro 1 -->
+                                <div class="sf-card">
+                                    <img src="https://crafatar.com/avatars/64c35f2e-0a56-4229-8738-8e6840798e91?size=64&overlay"
+                                        alt="GrootCZ" class="sf-avatar pixelated">
+                                    <h3 class="sf-name">GROOTCZ</h3>
+                                    <span class="sf-role">Majitel</span>
+                                </div>
+
+                                <!-- Membro 2 -->
+                                <div class="sf-card">
+                                    <img src="https://crafatar.com/avatars/8538ef67-d86b-43e6-991f-0b31e9a7e8b6?size=64&overlay"
+                                        alt="Pingus" class="sf-avatar pixelated">
+                                    <h3 class="sf-name">PINGUS</h3>
+                                    <span class="sf-role">Spolumajitel</span>
+                                </div>
+
+                                <!-- Membro 3 -->
+                                <div class="sf-card">
+                                    <img src="https://crafatar.com/avatars/e58d9981-6458-45e3-8208-4e12e3e9d892?size=64&overlay"
+                                        alt="Opoetos" class="sf-avatar pixelated">
+                                    <h3 class="sf-name">OPOETOS</h3>
+                                    <span class="sf-role">Manažer serveru</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Categoria 2: Desenvolvedores / Developeři -->
+                        <div class="sf-category-block">
+                            <h2 class="sf-section-title">DEVELOPEŘI</h2>
+
+                            <div class="sf-grid">
+                                <!-- Membro 4 -->
+                                <div class="sf-card">
+                                    <img src="https://crafatar.com/avatars/417f77a8-3642-4f73-9ea8-22f87a0db3af?size=64&overlay"
+                                        alt="Patas" class="sf-avatar pixelated">
+                                    <h3 class="sf-name">PATAS</h3>
+                                    <span class="sf-role">Developer</span>
+                                </div>
+
+                                <!-- Membro 5 -->
+                                <div class="sf-card">
+                                    <img src="https://crafatar.com/avatars/Notch" alt="Kirra"
+                                        class="sf-avatar pixelated">
+                                    <h3 class="sf-name">KIRRA</h3>
+                                    <span class="sf-role">Developer</span>
+                                </div>
+
+                                <!-- Membro 6 (Matheuzera) -->
+                                <div class="sf-card">
+                                    <img src="https://crafatar.com/avatars/64c35f2e-0a56-4229-8738-8e6840798e91?size=64&overlay"
+                                        alt="Matheuzera" class="sf-avatar pixelated">
+                                    <h3 class="sf-name">MATHEUZERA</h3>
+                                    <span class="sf-role">Developer</span>
+                                </div>
+
+                                <!-- Slot de Recrutamento (Vaga Aberta) -->
+                                <div class="sf-card sf-recruit-card" onclick="alert('Inscrições abertas para equipe!')">
+                                    <div class="sf-recruit-icon">👤+</div>
+                                    <h3 class="sf-name">VAGA ABERTA</h3>
+                                    <span class="sf-role">Junte-se a nós</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: REDES SOCIAIS COM FONT AWESOME E TOOLTIPS (RETINHO)
+     ========================================================== -->
+                <section class="searchable-section social-links-section">
+                    <div class="sl-container">
+
+                        <!-- Título da Seção -->
+                        <h2 class="sl-main-title">SIGA O MINECRAFT</h2>
+
+                        <!-- Grid de Ícones Sociais com Tooltip -->
+                        <div class="sl-social-grid">
+
+                            <!-- YouTube -->
+                            <a href="https://youtube.com" target="_blank" class="sl-social-card"
+                                data-tooltip="Minecraft no YouTube">
+                                <i class="fa-brands fa-youtube sl-icon yt"></i>
+                            </a>
+
+                            <!-- Instagram -->
+                            <a href="https://instagram.com" target="_blank" class="sl-social-card"
+                                data-tooltip="Minecraft no Instagram">
+                                <i class="fa-brands fa-instagram sl-icon ig"></i>
+                            </a>
+
+                            <!-- Facebook -->
+                            <a href="https://facebook.com" target="_blank" class="sl-social-card"
+                                data-tooltip="Minecraft no Facebook">
+                                <i class="fa-brands fa-facebook-f sl-icon fb"></i>
+                            </a>
+
+                            <!-- X / Twitter -->
+                            <a href="https://twitter.com" target="_blank" class="sl-social-card"
+                                data-tooltip="Minecraft no X">
+                                <i class="fa-brands fa-x-twitter sl-icon x"></i>
+                            </a>
+
+                            <!-- TikTok -->
+                            <a href="https://tiktok.com" target="_blank" class="sl-social-card"
+                                data-tooltip="Minecraft no TikTok">
+                                <i class="fa-brands fa-tiktok sl-icon tk"></i>
+                            </a>
+
+                            <!-- WhatsApp -->
+                            <a href="https://whatsapp.com" target="_blank" class="sl-social-card"
+                                data-tooltip="Minecraft no WhatsApp">
+                                <i class="fa-brands fa-whatsapp sl-icon wa"></i>
+                            </a>
+
+                            <!-- Discord -->
+                            <a href="https://discord.com" target="_blank" class="sl-social-card"
+                                data-tooltip="Minecraft no Discord">
+                                <i class="fa-brands fa-discord sl-icon dc"></i>
+                            </a>
+
+                            <!-- Spotify -->
+                            <a href="https://spotify.com" target="_blank" class="sl-social-card"
+                                data-tooltip="Minecraft no Spotify">
+                                <i class="fa-brands fa-spotify sl-icon sp"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: EFEITO ZIG-ZAG (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section zigzag-section">
+                    <div class="zz-container">
+
+                        <!-- Linha 1: Imagem à Esquerda, Texto à Direita -->
+                        <div class="zz-row">
+                            <div class="zz-media-box">
+                                <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1000&auto=format&fit=crop"
+                                    alt="NovaEgg" class="zz-img">
+                                <div class="zz-img-title-overlay">NOVAEGG</div>
+                            </div>
+                            <div class="zz-content-box">
+                                <h3 class="zz-title">NOVAEGG</h3>
+                                <p class="zz-desc">
+                                    "Ter as ferramentas desde o início para criar uma quantidade enorme de aventuras e
+                                    diversão é o que nos motivou a criar conteúdo há mais de dez anos. As limitações
+                                    físicas do computador são a única coisa que deve nos limitar como criadores. E essa
+                                    sempre foi nossa dinâmica com o Minecraft."
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Linha 2: Texto à Esquerda, Imagem à Direita (Inversão do Zig-Zag) -->
+                        <div class="zz-row reverse">
+                            <div class="zz-media-box">
+                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop"
+                                    alt="Tomhmagic Creations" class="zz-img">
+                                <div class="zz-img-title-overlay">TOMHMAGIC CREATIONS</div>
+                            </div>
+                            <div class="zz-content-box">
+                                <h3 class="zz-title">TOMHMAGIC CREATIONS</h3>
+                                <p class="zz-desc">
+                                    "Ser um parceiro do Marketplace me permitiu ter um negócio sem ter que sair de casa,
+                                    conectar-me com pessoas do mundo inteiro e criar alguns projetos fantásticos que são
+                                    muito divertidos. Eu comecei com a edição do PS4, que passou para o Bedrock, e
+                                    fiquei apaixonado pelos comandos."
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+                <!-- ==========================================================
+     SEÇÃO: PERGUNTAS FREQUENTES / FAQ (TEMA CLARO / RETINHO)
+     ========================================================== -->
+                <section class="searchable-section faq-section">
+                    <div class="faq-container">
+
+                        <!-- Título Principal -->
+                        <h2 class="faq-main-title">PERGUNTAS FREQUENTES</h2>
+
+                        <!-- Grid de Perguntas (Estilo Duas Colunas) -->
+                        <div class="faq-grid">
+
+                            <!-- Coluna Esquerda -->
+                            <div class="faq-column">
+
+                                <!-- Pergunta 1 -->
+                                <div class="faq-card">
+                                    <h3 class="faq-question">COMO SE ADICIONA COMPLEMENTOS AO MINECRAFT?</h3>
+                                    <p class="faq-answer">
+                                        Depois de escolher os complementos do Minecraft que você quer usar, basta
+                                        instalar e aplicá-los a diferentes mundos em seu jogo. Siga as instruções para
+                                        <a href="#" class="faq-link">instalar complementos do Minecraft</a> e descubra
+                                        como você pode começar a usá-los em seu jogo.
+                                    </p>
+                                </div>
+
+                                <!-- Pergunta 2 -->
+                                <div class="faq-card">
+                                    <h3 class="faq-question">ONDE CONSIGO COMPLEMENTOS DO MINECRAFT?</h3>
+                                    <p class="faq-answer">
+                                        Existem muitos complementos do Minecraft gratuitos e mundos personalizados que
+                                        você pode usar, bem como outros mundos personalizados disponíveis no Marketplace
+                                        do Minecraft. Se você quer criar seus próprios complementos do Minecraft,
+                                        explore diferentes pacotes de recurso e comportamento para despertar sua
+                                        criatividade.
+                                    </p>
+                                </div>
+
+                                <!-- Pergunta 3 -->
+                                <div class="faq-card">
+                                    <h3 class="faq-question">É POSSÍVEL MODIFICAR O MINECRAFT: BEDROCK EDITION?</h3>
+                                    <p class="faq-answer">
+                                        Sim! Com pacotes de comportamento e recursos personalizados, você pode alterar
+                                        texturas, mecânicas e comportamentos de entidades no Bedrock Edition.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <!-- Coluna Direita -->
+                            <div class="faq-column">
+
+                                <!-- Pergunta 4 -->
+                                <div class="faq-card">
+                                    <h3 class="faq-question">COMO FAÇO PARA CRIAR UM PACOTE DE TEXTURAS DO MINECRAFT NO
+                                        BEDROCK?</h3>
+                                    <p class="faq-answer">
+                                        Leia a <a href="#" class="faq-link">Introdução aos pacotes de recursos</a> para
+                                        saber mais sobre como criar pacotes de texturas e modificar a aparência do seu
+                                        mundo.
+                                    </p>
+                                </div>
+
+                                <!-- Pergunta 5 -->
+                                <div class="faq-card">
+                                    <h3 class="faq-question">COMO FAÇO PARA CRIAR UM PACOTE DE COMPORTAMENTOS DO
+                                        MINECRAFT NO BEDROCK?</h3>
+                                    <p class="faq-answer">
+                                        Comece modificando sua experiência do Minecraft com a criação de complementos de
+                                        pacotes de comportamentos. Leia o tutorial <a href="#"
+                                            class="faq-link">Introdução aos pacotes de comportamentos</a> para saber
+                                        mais.
+                                    </p>
+                                </div>
+
+                                <!-- Pergunta 6 -->
+                                <div class="faq-card">
+                                    <h3 class="faq-question">COMO FAÇO PARA ADICIONAR UM NOVO BLOCO NO MINECRAFT:
+                                        BEDROCK EDITION?</h3>
+                                    <p class="faq-answer">
+                                        Adicione novos blocos ao Minecraft com pacotes de comportamento personalizados
+                                        usando o <a href="#" class="faq-link">Studio Criativo</a>.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- MENU LATERAL DIREITO -->
+            <aside class="right-column">
+                <div class="wiki-card-box">
+                    <div class="wiki-main-logo-box">
+                        <div class="right-logo-banner">
+                            <span class="r-main">MINECRAFT</span>
+                            <span class="r-sub">WIKI</span>
+                        </div>
+                        <p>Bem-vindo(a) à <a href="#">wiki</a> mais completa sobre <a href="#">a franquia
+                                <em>Minecraft</em></a>, orgulhosamente administrada pela comunidade desde 2009.<br><a
+                                href="#"><strong>Qualquer pessoa pode contribuir!</strong></a></p>
+                        <div class="wiki-stats-summary">
+                            <strong>18.528</strong> artigos • <strong>177.551</strong> arquivos • <strong>2.561</strong>
+                            usuários ativos
+                        </div>
+                    </div>
+
+                    <div class="social-icons-grid">
+                        <a href="https://bsky.app" target="_blank" class="social-btn s-bluesky" title="Bluesky">🦋</a>
+                        <a href="https://twitter.com" target="_blank" class="social-btn s-twitter"
+                            title="Twitter">🐦</a>
+                        <a href="https://mastodon.social" target="_blank" class="social-btn s-mastodon"
+                            title="Mastodon">🐘</a>
+                        <a href="https://zotero.org" target="_blank" class="social-btn s-zotero" title="Zotero">Z</a>
+                        <a href="https://discord.com" target="_blank" class="social-btn s-discord"
+                            title="Discord">💬</a>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Você sabia...</h4>
+                    <ul
+                        style="padding-left:16px; font-size:13px; display:flex; flex-direction:column; gap:7px; line-height:1.45;">
+                        <li>... que as texturas da <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">prismarina</a> e <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">das lanternas-do-mar</a> são
+                            animadas?</li>
+                        <li>... que o nome original do <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">bioma do Fim</a> era "Céu"?</li>
+                        <li>... que a textura original <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">da espada de ferro</a> foi tirada
+                            do jogo abandonado de <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">Notch, <em>Legend of the
+                                    Chambered</em></a>?</li>
+                    </ul>
+                    <div class="btn-row" style="margin-top:12px;">
+                        <button class="wiki-action-btn">Mais fatos!</button>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:8px;">Ajude a melhorar a wiki!</h4>
+                    <p style="font-size:13px; color:var(--text-dark); line-height:1.45; margin-bottom:10px;">A wiki é
+                        feita por pessoas como você. Se você vir algo que acha que pode ser melhorado em uma página,
+                        basta clicar no botão <strong>"Editar"</strong> ou <strong>"Editar código-fonte"</strong>.</p>
+                    <div class="btn-row">
+                        <button class="wiki-action-btn green">Comece aqui</button>
+                        <button class="wiki-action-btn">Precisar de ajuda?</button>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Ferramentas Wiki</h4>
+                    <div class="tools-grid-3">
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Experience_Bottle.png"
+                                    alt="Calc"></div>
+                            <div class="cat-label-bottom">Calculadoras</div>
+                        </a>
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Player_Head.png"
+                                    alt="Mod"></div>
+                            <div class="cat-label-bottom">Olá, mod Wiki</div>
+                        </a>
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Compass.png" alt="Indie">
+                            </div>
+                            <div class="cat-label-bottom">Indie Wiki Buddy</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Notícias da Wiki</h4>
+                    <p style="font-size:12.5px; line-height:1.45; margin-bottom:9px;"><strong>30 de agosto de
+                            2026</strong> – A Wiki de Minecraft em inglês <a href="#"
+                            style="color:var(--link-blue); text-decoration:none;">agora está disponível offline</a> como
+                        um único arquivo para download.</p>
+                    <p style="font-size:12.5px; line-height:1.45; margin-bottom:9px;"><strong>27 de maio de
+                            2026</strong> – O espaço de nomes <em>Dungeons II</em> foi criado, sendo o local para
+                        páginas sobre <a href="#" style="color:var(--link-blue); text-decoration:none;"><em>Minecraft
+                                Dungeons II</em></a>.</p>
+                    <p style="font-size:12.5px; line-height:1.45;"><strong>20 de abril de 2026</strong> – O Hypixel
+                        SkyBlock Wiki foi transferido para hypixelskyblock.minecraft.wiki após <a href="#"
+                            style="color:var(--link-blue); text-decoration:none;">ser derivado do Fandom</a>.</p>
+                </div>
+
+                <div class="communities-box">
+                    <div class="communities-inner">
+                        <h4 style="font-size:15px; font-weight:700; margin-bottom:8px;">Comunidades relacionadas</h4>
+                        <div class="communities-grid-2">
+                            <div>
+                                <strong style="font-size:12.5px; display:block; margin-bottom:5px;">Sites da
+                                    Web</strong>
+                                <ul>
+                                    <li><a href="#">Wiki do Hypixel SkyBlock</a></li>
+                                    <li><a href="#">Wiki de Feed The Beast</a> ( <a href="#">mods</a> )</li>
+                                    <li><a href="#">Wiki de Recursos Descontinuados do Minecraft</a></li>
+                                    <li><a href="#">Wiki do Bedrock</a> <span
+                                            style="color:var(--text-muted);">(técnico)</span></li>
+                                    <li><a href="#">Omniarquivo</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="font-size:12.5px; display:block; margin-bottom:5px;">Sites
+                                    oficiais</strong>
+                                <ul>
+                                    <li><a href="#">Site</a></li>
+                                    <li><a href="#">Servidor do Discord</a></li>
+                                    <li><a href="#">mídias sociais</a></li>
+                                    <li><a href="#">Feedback</a> ( <a href="#">Discord</a> )</li>
+                                    <li><a href="#">Central de Ajuda</a> ( <a href="#">Educação</a> )</li>
+                                    <li><a href="#">Rastreador de bugs</a> ( <a href="#">Discord</a> )</li>
+                                    <li><a href="#">Documentação do criador</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="communities-full-width-section">
+                        <div class="communities-grid-2" style="margin-top:0;">
+                            <div>
+                                <strong style="display:block; margin-bottom:5px; font-size:12.5px;">Comunidades do
+                                    Reddit</strong>
+                                <ul>
+                                    <li><a href="#">r/Minecraft</a></li>
+                                    <li><a href="#">r/realms</a></li>
+                                    <li><a href="#">r/feedthebeast</a> ( <a href="#">mods</a> )</li>
+                                    <li><a href="#">r/admincraft</a> ( <a href="#">administrador do servidor</a> )</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="display:block; margin-bottom:5px; font-size:12.5px;">Servidores do
+                                    Discord</strong>
+                                <ul>
+                                    <li><a href="#">Comandos do Minecraft</a></li>
+                                    <li><a href="#">Apoio comunitário</a></li>
+                                    <li><a href="#">Protocolo Minecraft</a></li>
+                                    <li><a href="#">Complementos para Bedrock</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- RODAPÉ DA PÁGINA -->
+        <footer class="wiki-root-footer">
+            <div class="footer-content">
+                <div class="footer-text-col">
+                    <p>Esta página foi editada pela última vez em 8 de novembro de 2026, às 06:03.</p>
+                    <p>O conteúdo deste site está licenciado sob <strong>CC BY-NC-SA 3.0</strong>, salvo indicação em
+                        contrário; <a href="#" style="color:#79b8ff; text-decoration:none;">termos adicionais podem ser
+                            aplicados</a>.<br>Este não é um site oficial do Minecraft. Não temos qualquer ligação com a
+                        Mojang ou a Microsoft.</p>
+                    <div class="footer-links-row">
+                        <a href="#">Política de Privacidade</a>
+                        <a href="#">Sobre a Wiki do Minecraft</a>
+                        <a href="#">Avisos legais</a>
+                        <a href="#">Termos de Uso</a>
+                        <a href="#">Contate a gosma estranha</a>
+                        <a href="#">Visualização em dispositivos móveis</a>
+                    </div>
+                </div>
+                <div class="footer-badges-col">
+                    <div class="footer-badge-pill">CC BY-NC-SA<br><span style="font-weight:400; font-size:9px;">3.0
+                            Unported</span></div>
+                    <div class="footer-badge-pill">hosted by<br><span style="font-size:11px;">Weird Gloop</span></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
