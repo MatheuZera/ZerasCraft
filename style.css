@@ -9,6 +9,396 @@
     --link-blue: #0645ad;
 }
 
+
+
+
+
+
+
+/* ==========================================================
+   TEMA CLARO - GAVETAS E EFEITO 3D QUADRADO
+   ========================================================== */
+.zc-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 9990;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.zc-drawer-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.zc-slide-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    max-width: 88vw;
+    height: 100vh;
+    background-color: #f6f8fa;
+    color: #24292f;
+    border-right: 2px solid #d0d7de;
+    box-shadow: 6px 0 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-105%);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 9995;
+    border-radius: 0;
+}
+
+.primary-drawer.open {
+    transform: translateX(0);
+}
+
+/* Gavetas secundárias (sobrepõem da esquerda para a direita) */
+.secondary-drawer {
+    z-index: 9998;
+    border-right: 2px solid #2ea043;
+    box-shadow: 12px 0 32px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-drawer.open {
+    transform: translateX(0);
+}
+
+/* Cabeçalho Fixo (ZERA'S CRAFT) */
+.zc-drawer-header {
+    background-color: #ffffff;
+    border-bottom: 2px solid #d0d7de;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.zc-brand-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #24292f;
+    letter-spacing: 1px;
+}
+
+.zc-drawer-close {
+    background: #eaeef2;
+    border: 1px solid #d0d7de;
+    border-bottom: 3px solid #8c959f;
+    color: #57606a;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.zc-drawer-close:hover {
+    background: #f3f4f6;
+    color: #24292f;
+}
+
+.zc-drawer-close:active {
+    transform: translateY(2px);
+    border-bottom-width: 1px;
+}
+
+/* Barra com o Botão Voltar */
+.zc-submenu-toolbar {
+    background-color: #eaeef2;
+    border-bottom: 2px solid #d0d7de;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+}
+
+.zc-drawer-back {
+    background: #ffffff;
+    color: #24292f;
+    border: 1px solid #d0d7de;
+    border-bottom: 3px solid #8c959f;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s ease;
+}
+
+.zc-drawer-back:hover {
+    background: #f3f4f6;
+}
+
+.zc-drawer-back:active {
+    transform: translateY(2px);
+    border-bottom-width: 1px;
+}
+
+/* Corpo e Divisores */
+.zc-drawer-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.zc-drawer-divider {
+    height: 2px;
+    background-color: #d0d7de;
+    margin: 6px 4px;
+}
+
+.zc-drawer-section-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: #57606a;
+    letter-spacing: 1px;
+    padding: 4px 4px 6px 4px;
+}
+
+/* Itens de Menu com Efeito 3D Quadrado Relevo */
+.zc-drawer-item {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    border-bottom: 4px solid #afb8c1;
+    border-radius: 6px;
+    padding: 11px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #24292f;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+}
+
+.zc-drawer-item:hover {
+    background-color: #f3f4f6;
+    border-color: #8c959f;
+    border-bottom-color: #656d76;
+}
+
+.zc-drawer-item:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+/* Caixa de Ícone Quadrada 3D */
+.zc-icon-square {
+    width: 38px;
+    height: 38px;
+    background-color: #eaeef2;
+    border: 1px solid #d0d7de;
+    border-bottom: 3px solid #afb8c1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.zc-icon-square img {
+    width: 22px;
+    height: 22px;
+    image-rendering: pixelated;
+}
+
+.zc-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.zc-item-title {
+    font-size: 13px;
+    font-weight: 900;
+    color: #24292f;
+    letter-spacing: 0.4px;
+}
+
+.zc-item-sub {
+    font-size: 10.5px;
+    color: #57606a;
+}
+
+.zc-arrow-right {
+    font-size: 16px;
+    color: #57606a;
+    font-weight: 900;
+    position: relative;
+    z-index: 2;
+}
+
+/* Rodapé Permanente Fixo */
+.zc-drawer-footer {
+    background-color: #eaeef2;
+    border-top: 2px solid #d0d7de;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.zc-drawer-footer a {
+    font-size: 11px;
+    font-weight: 800;
+    color: #24292f;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.zc-drawer-footer a:hover {
+    color: #0969da;
+}
+
+/* ==========================================================
+   PARTÍCULAS SUTIS DA ESQUERDA PARA A DIREITA
+   ========================================================== */
+.zc-particles-canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.zc-sq-particle {
+    position: absolute;
+    bottom: -6px;
+    border-radius: 1px;
+    opacity: 0;
+    animation: zcSubtleParticles linear infinite;
+}
+
+@keyframes zcSubtleParticles {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.65;
+    }
+
+    85% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-50px) translateX(var(--drift-x, 22px)) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+   PADRÃO GLOBAL DE CONTORNO SUTIL PARA TODAS AS SECTIONS
+   ========================================================== */
+section,
+.content-section-box,
+.marketplace-addons-section,
+.timeline-updates-section,
+.realms-compare-section,
+.realms-features-section,
+.downloads-test-section,
+.free-trial-steps-section,
+.news-highlights-section,
+.latest-news-section,
+.product-page-section,
+.minecraft-education-unified-section,
+.community-moments-section,
+.performance-optimization-section,
+.pricing-plans-section,
+.testimonials-section,
+.discord-goal-section,
+.zeras-hero-banner-section,
+.brand-assets-section,
+.guidelines-section,
+.wiki-footer-section,
+.marketplace-offer-section,
+.wiki-responsive-showcase,
+.wiki-news-section,
+.collectibles-section,
+.download-banner-section,
+.newsletter-section,
+.wiki-launcher-grid-section,
+.wiki-updates-history-section,
+.intro-infinite-section,
+.wiki-gallery-section,
+.update-feature-split-section,
+.realms-pricing-section,
+.realms-guides-section,
+.realms-features-light-section,
+.refined-ranking-section,
+.wiki-did-you-know-section,
+.windows-apps-section,
+.leia-antes-section,
+.mac-windows-section,
+.faq-section,
+.wiki-tabs-navigation-section,
+.wiki-carousel-section,
+.tooltips-showcase-section,
+.launcher-features-section,
+.raw-particle-section,
+.realms-lightpurple-section,
+.how-to-play-section,
+.gameplay-plan-section,
+.server-thumb-card-section,
+.changelog-section,
+.leaderboard-section,
+.goals-cards-section,
+.auction-market-section,
+.store-ranks-section,
+.video-launch-section,
+.infra-security-section,
+.exclusive-panel-section,
+.staff-section,
+.social-links-section,
+.zigzag-section,
+.server-download-section,
+.os-download-section,
+.gallery-carousel-section {
+    background-color: #ffffff !important;
+    border: 1px solid #c8cbd1 !important;
+    border-bottom: 4px solid #a2a9b1 !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    margin: 16px 0 !important;
+    padding: 32px 24px !important;
+    box-sizing: border-box !important;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -187,6 +577,87 @@ body {
         margin-top: 20px !important;
         left: 0 !important;
         right: 0 !important;
+    }
+}
+
+/* ==========================================================
+   CORREÇÃO DE ALINHAMENTO MOBILE: HISTÓRICO, MAIS E HAMBÚRGUER
+   ========================================================== */
+@media (max-width: 1120px) {
+
+    /* Força o cabeçalho a organizar os grupos de forma limpa e em bloco */
+    .wiki-header {
+        order: 1 !important;
+        width: 100% !important;
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 10px !important;
+        gap: 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Grupos esquerdo e direito empilhados e alinhados */
+    .header-left-group,
+    .header-right-group {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+    }
+
+    /* Padroniza os botões de navegação no topo mobile */
+    .wiki-header-btn,
+    .wiki-header-btn.zc-hamburger-btn {
+        flex: 1 !important;
+        min-width: calc(50% - 4px) !important;
+        text-align: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        padding: 10px 8px !important;
+        font-size: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Ajuste específico para o dropdown de Histórico e o botão Mais no mobile */
+    .dropdown-historico,
+    .more-dropdown {
+        flex: 1 !important;
+        min-width: calc(50% - 4px) !important;
+        display: inline-block !important;
+        box-sizing: border-box !important;
+    }
+
+    .dropdown-historico>a,
+    .more-dropdown>a,
+    .wiki-header-btn {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Transforma os cards flutuantes em modais de largura total no mobile para evitar estouro de tela */
+    .card-historico-dropdown,
+    .more-modal {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90% !important;
+        max-width: 360px !important;
+        box-sizing: border-box !important;
+        z-index: 100000 !important;
+    }
+
+    /* Barra de pesquisa ocupando toda a largura */
+    .header-search-box {
+        width: 100% !important;
+        margin: 4px 0 0 0 !important;
+        box-sizing: border-box !important;
     }
 }
 
@@ -455,41 +926,15 @@ aside.wiki-left-sidebar {
 }
 
 header.wiki-header {
-    background: url('https://minecraft.wiki/images/Site-header-bg.png') repeat-x bottom left,
-        linear-gradient(to bottom, #5b9bd5 0%, #9ec8f0 68%, #5da130 68%, #4b8724 76%, #79553a 76%, #5c3f28 100%);
-    background-size: auto 100%;
-    border-bottom: 1px solid #a2a9b1;
+    /* Remova a linha 'background: url(...)', mantendo apenas as propriedades de layout */
+    background-size: cover;
+    background-position: center;
     position: relative;
-    height: 68px;
+    height: 250px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 0 16px;
-}
-
-.top-account-bar {
-    position: absolute;
-    top: 4px;
-    right: 16px;
-    background: rgba(22, 24, 26, 0.92);
-    border: 1px solid #000;
-    padding: 4px 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11px;
-    color: #e2e5e9;
-    z-index: 10;
-}
-
-.top-account-bar a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.top-account-bar a:hover {
-    text-decoration: underline;
+    padding: 0 10px;
 }
 
 .header-left-group,
@@ -505,7 +950,7 @@ header.wiki-header {
     border: 1px solid #a2a9b1;
     border-bottom: none;
     color: #54595d;
-    padding: 6px 14px;
+    padding: 6px 15px;
     font-family: inherit;
     font-size: 12px;
     font-weight: 600;
@@ -531,6 +976,20 @@ header.wiki-header {
     border-top: 2px solid #369e43;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.08);
     z-index: 2;
+}
+
+/* Botão Hambúrguer Integrado na Barra de Navegação */
+.wiki-header-btn.zc-hamburger-btn {
+    background-color: #eaecf0;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.wiki-header-btn.zc-hamburger-btn:hover {
+    background-color: #f3f4f6;
 }
 
 .header-search-box {
@@ -561,72 +1020,230 @@ header.wiki-header {
     flex-shrink: 0;
 }
 
-/* MODAL DE HOVER PARA "VER HISTÓRICO" */
-.history-dropdown-wrapper {
-    position: relative;
+/* Correção do Alinhamento e Borda (Bug 1) */
+#p-views ul li {
     display: inline-block;
+    margin: 0;
+    padding: 0;
 }
 
-.history-hover-modal {
+/* ==========================================================
+   ESTILOS AJUSTADOS: TEMA CLARO, QUADRADO E COM SOMBRAS
+   ========================================================== */
+
+.dropdown-historico {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+}
+
+/* Card Flutuante: Tema Claro, Quadrado e com Sombra Estilizada (Desktop) */
+.card-historico-dropdown {
     display: none;
     position: absolute;
-    right: 0;
-    top: 100%;
-    background: #202327;
-    border: 1px solid #111;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-    z-index: 200;
-    min-width: 210px;
-    padding: 6px 0;
+    top: calc(100% + 2px);
+    left: 0;
+    background: #ffffff;
+    border: 2px solid #222222;
+    /* Contorno externo firme estilo pixel/retro */
+    border-radius: 0px;
+    /* Cantos totalmente quadrados */
+    width: 440px;
+    padding: 20px;
+    /* Sombra deslocada sem desfoque excessivo para dar o efeito de contorno/sombra marcado */
+    box-shadow: 4px 4px 0px #222222, 8px 8px 0px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    box-sizing: border-box;
 }
 
-.history-dropdown-wrapper:hover .history-hover-modal {
+/* Exibir no Hover do Container no Desktop */
+.dropdown-historico:hover .card-historico-dropdown {
     display: block;
+    animation: fadeInDropdown 0.15s ease-in-out;
 }
 
-.history-hover-modal a {
-    display: block;
-    padding: 8px 14px;
-    color: #c9d1d9;
+/* Grid de Ferramentas Internas */
+.grid-ferramentas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+}
+
+.item-ferramenta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 8px;
+    border: 1px solid transparent;
+    border-radius: 0px;
+    /* Quadrado */
     text-decoration: none;
-    font-size: 12px;
-    border-bottom: 1px solid #1a1c20;
+    transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-.history-hover-modal a:hover {
-    background-color: #2c313a;
-    color: #fff;
+.item-ferramenta:hover {
+    background-color: #f7f7f7;
+    border-color: #cccccc;
+    /* Contorno leve ao passar o mouse */
 }
 
+.icone-box {
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 0px;
+    /* Quadrado */
+    border: 1px solid #bbbbbb;
+    /* Contorno nos ícones */
+}
+
+.texto-item {
+    color: #222222;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+
+/* Rodapé do Card */
+.rodape-card {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 2px solid #e0e0e0;
+    text-align: center;
+}
+
+.rodape-card a {
+    color: #0055aa;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.rodape-card a:hover {
+    color: #003366;
+    text-decoration: underline;
+}
+
+/* ==========================================================
+   ADAPTAÇÃO RESPONSIVA PARA DISPOSITIVOS MÓVEIS (<= 1120px)
+   ========================================================== */
+@media (max-width: 1120px) {
+    .dropdown-historico {
+        flex: 1 !important;
+        min-width: calc(50% - 4px) !important;
+        display: inline-block !important;
+        box-sizing: border-box !important;
+    }
+
+    .dropdown-historico>button,
+    .dropdown-historico>a {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+
+    .card-historico-dropdown {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90% !important;
+        max-width: 360px !important;
+        max-height: 85vh !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
+        z-index: 100000 !important;
+        border-radius: 0px !important;
+        box-shadow: 2px 6px 0px #222222, 12px 12px 0px rgba(0, 0, 0, 0.25) !important;
+    }
+}
+
+/* ==========================================================
+   POSICIONAMENTO E ESTILO CLARO DO MENU "MAIS" ABAIXO DO BOTÃO
+   ========================================================== */
 .more-dropdown {
-    position: relative;
-    display: inline-block;
+    position: relative !important;
+    display: inline-block !important;
 }
 
+/* O dropdown agora aparece limpo logo abaixo do botão */
 .more-modal {
     display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: #202327;
-    border: 1px solid #111;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-    min-width: 180px;
+    position: absolute !important;
+    top: calc(100% + 4px) !important;
+    /* Exatamente abaixo do botão com respiro de 4px */
+    left: 0 !important;
+    right: auto !important;
+    background: #ffffff !important;
+    border: 1px solid #c8cbd1 !important;
+    border-top: 1px solid #c8cbd1 !important;
+    border-radius: 0px !important;
+    /* Retinho estrito */
+
+    /* Sombra deslocada sem desfoque excessivo para dar o efeito de contorno/sombra marcado */
+    box-shadow: 4px 4px 0px #222222, 8px 8px 0px rgba(0, 0, 0, 0.15);
+    z-index: 100000 !important;
+    min-width: 200px !important;
+    padding: 4px 0 !important;
+}
+
+/* Exibe o modal no hover ou quando ativo */
+.more-dropdown:hover .more-modal {
+    display: block !important;
 }
 
 .more-modal a {
-    display: block;
-    padding: 8px 12px;
-    color: #c9d1d9;
-    text-decoration: none;
-    font-size: 12px;
-    border-bottom: 1px solid #1a1c20;
+    display: block !important;
+    padding: 10px 16px !important;
+    color: #202122 !important;
+    text-decoration: none !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #eaecf0 !important;
+    border-radius: 0px !important;
+}
+
+.more-modal a:last-child {
+    border-bottom: none !important;
 }
 
 .more-modal a:hover {
-    background-color: #2c313a;
-    color: #fff;
+    background-color: #f3f4f6 !important;
+    color: #2d8a39 !important;
+    /* Destaque verde clássico da Wiki no hover */
+}
+
+/* ==========================================================
+   AJUSTES RESPONSIVOS PARA MOBILE
+   ========================================================== */
+@media screen and (max-width: 768px) {
+    .more-dropdown {
+        position: static !important;
+        /* Permite que o menu se alinhe ao container da tela no mobile */
+    }
+
+    .more-modal {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        /* Centraliza o menu perfeitamente na tela do celular */
+        width: 90.5% !important;
+        /* Ocupa quase a largura toda da tela com margens seguras */
+        max-width: 320px !important;
+        top: calc(100% + 8px) !important;
+    }
+
+    .more-modal a {
+        padding: 12px 16px !important;
+        /* Aumenta a área de toque (touch target) para dedos */
+        font-size: 13px !important;
+    }
 }
 
 .top-sub-header {
@@ -660,73 +1277,173 @@ header.wiki-header {
 }
 
 /* ==========================================
-           ABAS DE FRANQUIA (EXATAMENTE COMO NA PRINT)
-           ========================================== */
+   ABAS DE FRANQUIA - ALINHADAS E COM CORES EXCLUSIVAS
+   ========================================== */
 .franchise-nav {
     background-color: #eaecf0;
-    border-bottom: 1px solid var(--border-color);
-    padding: 6px 16px;
+    border-bottom: 2px solid #a2a9b1;
+    padding: 10px 16px;
     display: flex;
     gap: 0px;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .franchise-tab {
-    background: #e2e5e9;
-    border: 1px solid #a2a9b1;
+    background-color: #eeeeee;
+    border: 2px solid #888888;
     border-left: none;
-    border-bottom: 5px solid #70757a;
-    /* Efeito 3D extenso e fundura detalhada */
-    padding: 10px 14px;
+    border-bottom: 4px solid #bcbcbc;
+    /* Base 3D inferior inicial */
+    padding: 12px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     text-decoration: none;
-    color: var(--text-dark);
+    color: #1e1e1e;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     flex: 1;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 0 rgba(0, 0, 0, 0.12);
     position: relative;
-    transition: background 0.12s, color 0.12s;
+    /* Sombra interna de relevo estilo bloco */
+    box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.9),
+        inset -1px 0px 0px rgba(255, 255, 255, 0.4);
+    transition: background-color 0.08s ease, transform 0.05s ease, border-bottom-width 0.05s ease;
 }
 
 .franchise-tab:first-child {
-    border-left: 1px solid #a2a9b1;
+    border-left: 2px solid #888888;
 }
 
-/* Aba Terra Ativa em Verde */
-.franchise-tab.tab-terra {
-    background: #2d8a39;
-    color: #ffffff;
-    border-color: #1e5c26;
-    border-bottom: 5px solid #143d19;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
+/* Estado Hover Comum */
+.franchise-tab:hover {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.45);
+    box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.35),
+        inset -1px 0px 0px rgba(255, 255, 255, 0.2);
+    z-index: 2;
 }
 
-.franchise-tab.tab-terra:hover {
-    background: #369e43;
-    color: #ffffff;
-}
-
-.franchise-tab:hover:not(.tab-terra) {
-    background-color: #d8dde3;
-}
-
-.franchise-tab:active {
-    transform: translateY(3px);
+/* Estado Ativo / Clique perfeitamente alinhado */
+.franchise-tab:active,
+.franchise-tab.active {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.45);
     border-bottom-width: 2px !important;
+    /* Reduz a borda de 4px para 2px */
+    transform: translateY(2px);
+    /* Desce exatamente 2px para compensar a borda */
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.3) !important;
+    /* Sombra de profundidade interna */
+    z-index: 2;
 }
 
-/* Borda preta nítida ao redor do PNG */
+/* ==========================================
+   1. MINECRAFT (Verde Clássico)
+   ========================================== */
+.franchise-tab[href="#minecraft"]:hover {
+    background-color: #3c8527;
+    border-color: #1d4d13;
+    border-bottom-color: #2a641c;
+}
+
+.franchise-tab[href="#minecraft"]:active,
+.franchise-tab[href="#minecraft"].active {
+    background-color: #2e6d1d !important;
+    border-color: #1d4d13 !important;
+    border-bottom-color: #15380d !important;
+}
+
+/* ==========================================
+   2. MASMORRAS (Azul Turquesa)
+   ========================================== */
+.franchise-tab[href="#masmorras"]:hover {
+    background-color: #1c9eb8;
+    border-color: #0b4f5c;
+    border-bottom-color: #13768a;
+}
+
+.franchise-tab[href="#masmorras"]:active,
+.franchise-tab[href="#masmorras"].active {
+    background-color: #148399 !important;
+    border-color: #09424d !important;
+    border-bottom-color: #05262c !important;
+}
+
+/* ==========================================
+   3. FILME (Laranja)
+   ========================================== */
+.franchise-tab[href="#filme"]:hover {
+    background-color: #d96b27;
+    border-color: #6e310c;
+    border-bottom-color: #a64d16;
+}
+
+.franchise-tab[href="#filme"]:active,
+.franchise-tab[href="#filme"].active {
+    background-color: #b85518 !important;
+    border-color: #5c2809 !important;
+    border-bottom-color: #381805 !important;
+}
+
+/* ==========================================
+   4. LENDAS (Azul Real)
+   ========================================== */
+.franchise-tab[href="#lendas"]:hover {
+    background-color: #2667c9;
+    border-color: #102f61;
+    border-bottom-color: #1b4b94;
+}
+
+.franchise-tab[href="#lendas"]:active,
+.franchise-tab[href="#lendas"].active {
+    background-color: #1d52a3 !important;
+    border-color: #0d2752 !important;
+    border-bottom-color: #061329 !important;
+}
+
+/* ==========================================
+   5. MODO HISTÓRIA (Vermelho)
+   ========================================== */
+.franchise-tab[href="#modo-historia"]:hover {
+    background-color: #c93232;
+    border-color: #611212;
+    border-bottom-color: #962020;
+}
+
+.franchise-tab[href="#modo-historia"]:active,
+.franchise-tab[href="#modo-historia"].active {
+    background-color: #a32222 !important;
+    border-color: #4f0e0e !important;
+    border-bottom-color: #290707 !important;
+}
+
+/* ==========================================
+   6. TERRA (Azul Celeste)
+   ========================================== */
+.franchise-tab[href="#terra"]:hover {
+    background-color: #288bd1;
+    border-color: #114366;
+    border-bottom-color: #1d699e;
+}
+
+.franchise-tab[href="#terra"]:active,
+.franchise-tab[href="#terra"].active {
+    background-color: #1f73ad !important;
+    border-color: #0d3654 !important;
+    border-bottom-color: #061b2b !important;
+}
+
+/* ==========================================
+   ÍCONES PIXELADOS
+   ========================================== */
 .franchise-tab img {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
     image-rendering: pixelated;
     flex-shrink: 0;
-    filter: drop-shadow(1px 0 0 #000) drop-shadow(-1px 0 0 #000) drop-shadow(0 1px 0 #000) drop-shadow(0 -1px 0 #000);
 }
 
 /* ==========================================
@@ -755,7 +1472,8 @@ header.wiki-header {
 .left-column {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: -5px !important;
+    /* Antes era 16px */
     min-width: 0;
 }
 
@@ -801,119 +1519,126 @@ header.wiki-header {
     text-decoration: underline;
 }
 
-/* Thumbnails com tags transparentes e links */
+/* ==========================================================================
+   Estilo Hero Cards & Versões (Wiki Standard Grid)
+   ========================================================================== */
+
+/* Seção de Destaque (Hero Row) em Grid de 2 colunas */
 .featured-hero-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    background: transparent;
-    border: none;
-    padding: 0;
-    box-shadow: none;
+    gap: 12px;
+    margin: 8px 0 !important;
 }
 
-@media(max-width: 780px) {
-    .featured-hero-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-.hero-card {
-    background-color: #1a1a1a;
-    border: 1px solid #a2a9b1;
-    border-bottom: 4px solid #72777d;
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
-}
-
+/* Imagem de fundo cobrindo o card com altura proporcional */
 .hero-card-img {
-    height: 225px;
+    position: relative;
     background-size: cover;
     background-position: center;
-    position: relative;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
 }
 
-.hero-card-img::after {
+/* Sombra gradiente superior para destacar o título e o badge */
+.hero-card-img::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
-    right: 0;
-    height: 115px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.92), transparent);
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
 }
 
+/* Cabeçalho do Card (Título + Badge) */
 .hero-card-header {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    right: 12px;
+    position: relative;
+    z-index: 2;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    z-index: 2;
+    align-items: flex-start;
+    gap: 8px;
 }
 
 .hero-card-header h2 {
-    font-size: 16px;
+    color: #ffffff;
+    font-size: 15px;
     font-weight: 700;
-    color: #fff;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    font-family: inherit;
 }
 
+/* Badges de Status (Mais recente / Por vir) */
 .badge-recent {
-    background-color: #2d8a39;
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 2px;
+    background-color: #28a745;
+    color: #ffffff;
     font-size: 11px;
     font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 2px;
     text-transform: uppercase;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .badge-soon {
-    background-color: #673ab7;
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 2px;
+    background-color: #6f42c1;
+    color: #ffffff;
     font-size: 11px;
     font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 2px;
     text-transform: uppercase;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+/* Overlay de Tags Transparentes na parte inferior */
 .hero-tags-overlay {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    z-index: 2;
 }
 
+/* Estilo individual de cada tag semitransparente */
 .hero-tag {
-    background-color: rgba(18, 20, 22, 0.75);
+    background-color: rgba(0, 0, 0, 0.65);
+    /* Fundo preto transparente */
+    backdrop-filter: blur(2px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #f1f3f5;
-    padding: 5px 10px;
-    border-radius: 2px;
-    font-size: 12px;
+    color: #ffffff;
+    font-size: 11px;
     font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 2px;
     text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    transition: background 0.12s;
+    gap: 4px;
 }
 
 .hero-tag:hover {
-    background-color: rgba(45, 50, 56, 0.95);
-    color: #fff;
+    background-color: rgba(0, 0, 0, 0.85);
     border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Responsividade para telas menores (Dispositivos Móveis)
+   ========================================================================== */
+@media (max-width: 780px) {
+    .featured-hero-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Edições Java & Bedrock */
@@ -984,37 +1709,46 @@ header.wiki-header {
     margin-left: 4px;
 }
 
-/* Aba expansiva "Todas as versões" */
+/* ==========================================================================
+   Estilo "Todas as versões" (Wiki Standard UI)
+   ========================================================================== */
+
 .all-versions-dropdown {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background-color: var(--card-bg, #ffffff);
+    border: 1px solid #c8cbd1;
     border-bottom: 4px solid #a2a9b1;
     border-radius: 2px;
     overflow: hidden;
-    padding: 0;
+    margin: 8px 0 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .all-versions-bar {
-    background-color: #e2e5e9;
+    background-color: #eaecf0;
     border: none;
-    border-bottom: 4px solid #72777d;
-    padding: 14px 18px;
+    border-bottom: 1px solid #c8cbd1;
+    padding: 12px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
-    color: var(--text-dark);
+    color: #202122;
     width: 100%;
     text-align: left;
+    transition: background-color 0.15s ease;
+}
+
+.all-versions-bar:hover {
+    background-color: #e2e5e9;
 }
 
 .all-versions-bar svg {
     width: 16px;
     height: 16px;
-    fill: var(--text-dark);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    fill: #202122;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .all-versions-bar.open svg {
@@ -1026,22 +1760,38 @@ header.wiki-header {
     overflow: hidden;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
     padding: 0 16px;
-    background-color: #f8f9fa;
+    background-color: #ffffff;
 }
 
 .all-versions-content.open {
-    max-height: 800px;
+    max-height: 1200px;
     padding: 16px;
-    border-top: 1px solid var(--border-color);
 }
 
 .versions-sub-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+    margin-bottom: 12px;
 }
 
-@media(max-width: 780px) {
+.versions-sub-grid:last-child {
+    margin-bottom: 0;
+}
+
+/* Estilização automática dos cards internos dentro do dropdown de versões */
+.versions-sub-grid .content-section-box,
+.versions-sub-grid>div {
+    background-color: #ffffff !important;
+    border: 1px solid #c8cbd1 !important;
+    border-bottom: 3px solid #a2a9b1 !important;
+    border-radius: 2px !important;
+    padding: 12px 14px !important;
+    margin: 0 !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 780px) {
     .versions-sub-grid {
         grid-template-columns: 1fr;
     }
@@ -1257,10 +2007,10 @@ aside.right-column {
     gap: 16px;
     flex-shrink: 0;
 
-    /* Comportamento Sticky: Acompanha o scroll e preenche o espaço */
+    /* Alinha o topo da barra lateral exatamente com a barra de navegação/conteúdo */
     position: sticky;
-    top: 16px;
-    max-height: calc(100vh - 32px);
+    top: 0px;
+    max-height: calc(100vh);
     overflow-y: auto;
     scrollbar-width: thin;
 }
@@ -10053,6 +10803,35 @@ footer.wiki-root-footer {
     color: #202122;
 }
 
+/* ==========================================================
+   PADRÃO CORRETO: O CONTORNO GROSSO FICA NOS ELEMENTOS INTERNOS
+   ========================================================== */
+
+/* A section serve apenas como container lógico/espaçador */
+section,
+.searchable-section {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 16px 0 !important;
+    padding: 0 !important;
+}
+
+/* Garante que os containers internos tenham espaçamento interno (respiro) nas bordas */
+.content-section-box,
+.version-box,
+.cat-card,
+.hero-card,
+.wiki-card-box {
+    background-color: #ffffff !important;
+    border: 1px solid #c8cbd1 !important;
+    border-bottom: 4px solid #a2a9b1 !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    padding: 14px 16px !important;
+    /* Adiciona respiro nas bordas para o conteúdo não colar */
+}
 
 /* ==========================================================
    1. MENU DROPDOWN DE LINKS ÚTEIS (ESTILO CLARO / RETINHO)
@@ -14439,10 +15218,12 @@ footer.wiki-root-footer {
 .faq-section {
     background-color: #f4f5f7 !important;
     border: none !important;
-    border-radius: 0px !important;              /* Retinho estrito */
+    border-radius: 0px !important;
+    /* Retinho estrito */
     padding: 60px 24px;
     margin: 20px 0;
-    box-shadow: none !important;               /* Sem sombras externas */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     font-family: 'Inter', sans-serif;
     color: #202122;
 }
@@ -14488,9 +15269,12 @@ footer.wiki-root-footer {
 .faq-card {
     background-color: #ffffff !important;
     border: 1px solid #c8cbd1 !important;
-    border-bottom: 5px solid #8c939b !important; /* Borda 3D tridimensional sólida */
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-bottom: 5px solid #8c939b !important;
+    /* Borda 3D tridimensional sólida */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -14547,10 +15331,12 @@ footer.wiki-root-footer {
 .server-download-section {
     background-color: #f4f5f7 !important;
     border: none !important;
-    border-radius: 0px !important;              /* Retinho estrito */
+    border-radius: 0px !important;
+    /* Retinho estrito */
     padding: 60px 24px;
     margin: 20px 0;
-    box-shadow: none !important;               /* Sem sombras externas */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     font-family: 'Inter', sans-serif;
     color: #202122;
 }
@@ -14564,9 +15350,12 @@ footer.wiki-root-footer {
 .sd-card {
     background-color: #ffffff !important;
     border: 1px solid #c8cbd1 !important;
-    border-bottom: 5px solid #8c939b !important; /* Borda 3D tridimensional sólida */
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-bottom: 5px solid #8c939b !important;
+    /* Borda 3D tridimensional sólida */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -14654,10 +15443,12 @@ footer.wiki-root-footer {
 .os-download-section {
     background-color: #f4f5f7 !important;
     border: none !important;
-    border-radius: 0px !important;              /* Retinho estrito */
+    border-radius: 0px !important;
+    /* Retinho estrito */
     padding: 60px 24px;
     margin: 20px 0;
-    box-shadow: none !important;               /* Sem sombras externas */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     font-family: 'Inter', sans-serif;
     color: #202122;
 }
@@ -14735,9 +15526,12 @@ footer.wiki-root-footer {
 .os-card {
     background-color: #ffffff !important;
     border: 1px solid #c8cbd1 !important;
-    border-bottom: 5px solid #8c939b !important; /* Borda 3D sólida inferior */
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-bottom: 5px solid #8c939b !important;
+    /* Borda 3D sólida inferior */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -14830,7 +15624,8 @@ footer.wiki-root-footer {
     border: 1px solid #1b6b28;
     border-top: 1px solid #68d391;
     border-bottom: 4px solid #104418;
-    border-radius: 0px !important;              /* Retinho */
+    border-radius: 0px !important;
+    /* Retinho */
     box-shadow: none !important;
     font-size: 11px;
     font-weight: 900;
@@ -14871,13 +15666,16 @@ footer.wiki-root-footer {
 .gallery-carousel-section {
     background-color: #f4f5f7 !important;
     border: none !important;
-    border-radius: 0px !important;              /* Retinho estrito */
+    border-radius: 0px !important;
+    /* Retinho estrito */
     padding: 60px 24px;
     margin: 20px 0;
-    box-shadow: none !important;               /* Sem sombras externas */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     font-family: 'Inter', sans-serif;
     color: #202122;
-    overflow: hidden;                          /* Impede qualquer vazamento visual */
+    overflow: hidden;
+    /* Impede qualquer vazamento visual */
 }
 
 .gc-container {
@@ -14923,7 +15721,8 @@ footer.wiki-root-footer {
 
 .gc-track-wrapper {
     width: 100%;
-    overflow: hidden !important;               /* Esconde completamente qualquer barra indesejada */
+    overflow: hidden !important;
+    /* Esconde completamente qualquer barra indesejada */
     padding: 20px 0;
     position: relative;
 }
@@ -14973,9 +15772,12 @@ footer.wiki-root-footer {
     background-color: #ffffff !important;
     border: 1px solid #c8cbd1 !important;
     border-bottom: 5px solid #8c939b !important;
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
-    width: 280px;                              /* Tamanho lateral menor */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
+    width: 280px;
+    /* Tamanho lateral menor */
     flex-shrink: 0;
     opacity: 0.65;
     transform: scale(0.85);
@@ -14987,7 +15789,8 @@ footer.wiki-root-footer {
 
 /* Card Central Ativo (Grande) */
 .gc-card.active {
-    width: 480px !important;                   /* Tamanho central grande */
+    width: 480px !important;
+    /* Tamanho central grande */
     opacity: 1;
     transform: scale(1);
     border-color: #2d8a39;
@@ -15003,7 +15806,8 @@ footer.wiki-root-footer {
 }
 
 .gc-card.active .gc-img-box {
-    height: 300px;                             /* Imagem central maior */
+    height: 300px;
+    /* Imagem central maior */
 }
 
 .gc-img-box img {
@@ -15068,8 +15872,13 @@ footer.wiki-root-footer {
 }
 
 @media(max-width: 900px) {
-    .gc-card { width: 220px; }
-    .gc-card.active { width: 320px !important; }
+    .gc-card {
+        width: 220px;
+    }
+
+    .gc-card.active {
+        width: 320px !important;
+    }
 }
 
 
@@ -15088,10 +15897,12 @@ footer.wiki-root-footer {
 .leaderboard-section {
     background-color: #f4f5f7 !important;
     border: none !important;
-    border-radius: 0px !important;              /* Retinho estrito */
+    border-radius: 0px !important;
+    /* Retinho estrito */
     padding: 60px 24px;
     margin: 20px 0;
-    box-shadow: none !important;               /* Sem sombras externas */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     font-family: 'Inter', sans-serif;
     color: #202122;
 }
@@ -15143,8 +15954,10 @@ footer.wiki-root-footer {
     background-color: #ffffff !important;
     border: 1px solid #c8cbd1 !important;
     border-bottom: 5px solid #8c939b !important;
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -15157,7 +15970,8 @@ footer.wiki-root-footer {
     border-color: #2d8a39 !important;
     border-bottom: 5px solid #1b6b28 !important;
     background-color: #fbfdfc !important;
-    transform: translateY(-6px); /* Elevação sutil sem sombra */
+    transform: translateY(-6px);
+    /* Elevação sutil sem sombra */
 }
 
 .lb-player-top {
@@ -15180,7 +15994,8 @@ footer.wiki-root-footer {
     width: 44px;
     height: 44px;
     border: 1px solid #c8cbd1;
-    border-radius: 0px !important;             /* Retinho */
+    border-radius: 0px !important;
+    /* Retinho */
     background-color: #eaecf0;
 }
 
@@ -15208,11 +16023,30 @@ footer.wiki-root-footer {
     width: fit-content;
 }
 
-.lb-badge.vip-plus { background-color: #3b82f6; color: #fff; }
-.lb-badge.svip { background-color: #d97706; color: #fff; }
-.lb-badge.vip { background-color: #ef4444; color: #fff; }
-.lb-badge.sponsor { background-color: #06b6d4; color: #fff; }
-.lb-badge.default { background-color: #64748b; color: #fff; }
+.lb-badge.vip-plus {
+    background-color: #3b82f6;
+    color: #fff;
+}
+
+.lb-badge.svip {
+    background-color: #d97706;
+    color: #fff;
+}
+
+.lb-badge.vip {
+    background-color: #ef4444;
+    color: #fff;
+}
+
+.lb-badge.sponsor {
+    background-color: #06b6d4;
+    color: #fff;
+}
+
+.lb-badge.default {
+    background-color: #64748b;
+    color: #fff;
+}
 
 .lb-stats-row {
     display: flex;
@@ -15270,8 +16104,10 @@ footer.wiki-root-footer {
     background-color: #ffffff !important;
     border: 1px solid #c8cbd1 !important;
     border-bottom: 4px solid #8c939b !important;
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     padding: 16px 24px;
     display: flex;
     justify-content: space-between;
@@ -15354,6 +16190,7 @@ footer.wiki-root-footer {
         align-items: flex-start;
         gap: 14px;
     }
+
     .lb-row-right {
         width: 100%;
         justify-content: space-between;
@@ -15376,10 +16213,12 @@ footer.wiki-root-footer {
 .pricing-section {
     background-color: #f4f5f7 !important;
     border: none !important;
-    border-radius: 0px !important;              /* Retinho estrito */
+    border-radius: 0px !important;
+    /* Retinho estrito */
     padding: 60px 24px;
     margin: 20px 0;
-    box-shadow: none !important;               /* Sem sombras externas */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     font-family: 'Inter', sans-serif;
     color: #202122;
 }
@@ -15436,9 +16275,12 @@ footer.wiki-root-footer {
 .pr-card {
     background-color: #ffffff !important;
     border: 1px solid #c8cbd1 !important;
-    border-bottom: 5px solid #8c939b !important; /* Borda 3D tridimensional sólida */
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-bottom: 5px solid #8c939b !important;
+    /* Borda 3D tridimensional sólida */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -15567,7 +16409,8 @@ footer.wiki-root-footer {
     color: #202122;
     border: 1px solid #c8cbd1;
     border-bottom: 3px solid #8c939b;
-    border-radius: 0px !important;              /* Retinho */
+    border-radius: 0px !important;
+    /* Retinho */
     box-shadow: none !important;
     font-size: 11px;
     font-weight: 900;
@@ -15664,10 +16507,12 @@ footer.wiki-root-footer {
 .hero-banner-section {
     background-color: #f4f5f7 !important;
     border: none !important;
-    border-radius: 0px !important;              /* Retinho estrito */
+    border-radius: 0px !important;
+    /* Retinho estrito */
     padding: 40px 24px;
     margin: 20px 0;
-    box-shadow: none !important;               /* Sem sombras externas */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     font-family: 'Inter', sans-serif;
     color: #202122;
 }
@@ -15682,9 +16527,12 @@ footer.wiki-root-footer {
     position: relative;
     background-color: #121019;
     border: 1px solid #c8cbd1 !important;
-    border-bottom: 6px solid #8c939b !important; /* Borda 3D tridimensional sólida */
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-bottom: 6px solid #8c939b !important;
+    /* Borda 3D tridimensional sólida */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     overflow: hidden;
     padding: 60px 40px;
     display: flex;
@@ -15707,7 +16555,8 @@ footer.wiki-root-footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.35; /* Mantém o clima gamer sem perder o foco no texto */
+    opacity: 0.35;
+    /* Mantém o clima gamer sem perder o foco no texto */
     border-radius: 0px !important;
 }
 
@@ -15718,7 +16567,7 @@ footer.wiki-root-footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(18,16,25,0.85), rgba(18,16,25,0.95));
+    background: linear-gradient(to bottom, rgba(18, 16, 25, 0.85), rgba(18, 16, 25, 0.95));
 }
 
 /* Conteúdo em cima do fundo */
@@ -15806,7 +16655,8 @@ footer.wiki-root-footer {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
-    border-radius: 0px !important;              /* Retinho */
+    border-radius: 0px !important;
+    /* Retinho */
     box-shadow: none !important;
     transition: background-color 0.15s;
     display: inline-flex;
@@ -15845,9 +16695,18 @@ footer.wiki-root-footer {
 }
 
 @media(max-width: 650px) {
-    .hb-title { font-size: 26px; }
-    .hb-stats-bar { flex-direction: column; gap: 6px; }
-    .hb-card { padding: 40px 20px; }
+    .hb-title {
+        font-size: 26px;
+    }
+
+    .hb-stats-bar {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .hb-card {
+        padding: 40px 20px;
+    }
 }
 
 
@@ -15866,10 +16725,12 @@ footer.wiki-root-footer {
 .hero-server-section {
     background-color: #f4f5f7 !important;
     border: none !important;
-    border-radius: 0px !important;              /* Retinho estrito */
+    border-radius: 0px !important;
+    /* Retinho estrito */
     padding: 40px 24px;
     margin: 20px 0;
-    box-shadow: none !important;               /* Sem sombras externas */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     font-family: 'Inter', sans-serif;
     color: #202122;
 }
@@ -15884,9 +16745,12 @@ footer.wiki-root-footer {
     position: relative;
     background-color: #121019;
     border: 1px solid #c8cbd1 !important;
-    border-bottom: 6px solid #8c939b !important; /* Borda 3D tridimensional sólida */
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-bottom: 6px solid #8c939b !important;
+    /* Borda 3D tridimensional sólida */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     overflow: hidden;
     padding: 70px 40px;
     display: flex;
@@ -15909,7 +16773,8 @@ footer.wiki-root-footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.4; /* Mantém o visual imersivo e escurecido */
+    opacity: 0.4;
+    /* Mantém o visual imersivo e escurecido */
     border-radius: 0px !important;
 }
 
@@ -15920,7 +16785,7 @@ footer.wiki-root-footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(18,16,25,0.8), rgba(18,16,25,0.95));
+    background: linear-gradient(to bottom, rgba(18, 16, 25, 0.8), rgba(18, 16, 25, 0.95));
 }
 
 /* Conteúdo em cima do fundo */
@@ -15978,7 +16843,8 @@ footer.wiki-root-footer {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
-    border-radius: 0px !important;              /* Retinho */
+    border-radius: 0px !important;
+    /* Retinho */
     box-shadow: none !important;
     transition: background-color 0.15s;
     display: inline-flex;
@@ -16018,8 +16884,13 @@ footer.wiki-root-footer {
 }
 
 @media(max-width: 650px) {
-    .hs-title { font-size: 24px; }
-    .hs-card { padding: 50px 20px; }
+    .hs-title {
+        font-size: 24px;
+    }
+
+    .hs-card {
+        padding: 50px 20px;
+    }
 }
 
 
@@ -16048,9 +16919,12 @@ footer.wiki-root-footer {
     color: #ffffff;
     border: 1px solid #404eed;
     border-top: 1px solid #858ff8;
-    border-bottom: 4px solid #363fbc;          /* Borda 3D tridimensional sólida */
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras externas */
+    border-bottom: 4px solid #363fbc;
+    /* Borda 3D tridimensional sólida */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras externas */
     padding: 10px 16px;
     font-size: 11px;
     font-weight: 900;
@@ -16077,16 +16951,20 @@ footer.wiki-root-footer {
 /* Caixa do Tooltip UI (Invisível por padrão) */
 .ui-tooltip-box {
     position: absolute;
-    top: calc(100% + 12px);                   /* Posicionado à direita por padrão */
+    top: calc(100% + 12px);
+    /* Posicionado à direita por padrão */
     top: 50%;
     transform: translateY(-50%) scale(0.95);
-    background-color: #121019;                 /* Fundo escuro elegante da UI */
+    background-color: #121019;
+    /* Fundo escuro elegante da UI */
     color: #ffffff;
     padding: 8px 14px;
     border: 1px solid #2d2638;
     border-bottom: 3px solid #08070b;
-    border-radius: 0px !important;              /* Retinho estrito */
-    box-shadow: none !important;               /* Sem sombras */
+    border-radius: 0px !important;
+    /* Retinho estrito */
+    box-shadow: none !important;
+    /* Sem sombras */
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;

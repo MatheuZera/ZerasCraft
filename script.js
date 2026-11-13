@@ -1,3 +1,118 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector('.wiki-header');
+    if (header) {
+        const bgUrl = header.getAttribute('data-bg');
+        if (bgUrl) {
+            header.style.backgroundImage = `url('${bgUrl}')`;
+        }
+    }
+});
+
+
+
+/* ==========================================================
+   CONTROLADOR SIMPLES DE CLASSES E PARTÍCULAS
+   ========================================================== */
+function openPrimaryDrawer() {
+    document.getElementById('zc-drawer-backdrop').classList.add('open');
+    document.getElementById('drawer-primary').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function openSubMenu(drawerId) {
+    const submenu = document.getElementById(drawerId);
+    if (submenu) {
+        submenu.classList.add('open');
+        initSubmenuParticles(submenu);
+    }
+}
+
+function closeSubMenu(drawerId) {
+    const submenu = document.getElementById(drawerId);
+    if (submenu) {
+        submenu.classList.remove('open');
+    }
+}
+
+function closeAllDrawers() {
+    document.getElementById('zc-drawer-backdrop').classList.remove('open');
+    document.getElementById('drawer-primary').classList.remove('open');
+
+    // Fecha todas as gavetas secundárias abertas
+    document.querySelectorAll('.secondary-drawer').forEach(drawer => {
+        drawer.classList.remove('open');
+    });
+
+    document.body.style.overflow = '';
+}
+
+// Atalho ESC
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        const openSecondaries = document.querySelectorAll('.secondary-drawer.open');
+        if (openSecondaries.length > 0) {
+            openSecondaries[openSecondaries.length - 1].classList.remove('open');
+        } else {
+            closeAllDrawers();
+        }
+    }
+});
+
+// Inicializador de partículas sutis fixas no HTML
+function initSubmenuParticles(scopeElement) {
+    const particleButtons = scopeElement.querySelectorAll('.particle-btn[data-particles]');
+
+    particleButtons.forEach((btn) => {
+        const container = btn.querySelector('.zc-particles-canvas');
+        if (!container || container.children.length > 0) return;
+
+        const colors = btn.getAttribute('data-particles').split(',').map(c => c.trim());
+        const count = 10;
+
+        for (let i = 0; i < count; i++) {
+            const sq = document.createElement('span');
+            sq.className = 'zc-sq-particle';
+
+            const size = Math.floor(Math.random() * 3) + 2;
+            const leftPos = Math.random() * 90;
+            const duration = (Math.random() * 2.0 + 1.6).toFixed(2);
+            const delay = (Math.random() * -3).toFixed(2);
+            const driftX = (Math.random() * 28 - 8).toFixed(0) + 'px'; // Move da esquerda para a direita
+            const color = colors[i % colors.length];
+
+            sq.style.width = `${size}px`;
+            sq.style.height = `${size}px`;
+            sq.style.left = `${leftPos}%`;
+            sq.style.backgroundColor = color;
+            sq.style.animationDuration = `${duration}s`;
+            sq.style.animationDelay = `${delay}s`;
+            sq.style.setProperty('--drift-x', driftX);
+
+            container.appendChild(sq);
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function copiarIP(textoIP) {
     navigator.clipboard.writeText(textoIP).then(() => {
         alert('IP copiado para a área de transferência: ' + textoIP);
@@ -1185,7 +1300,7 @@ function mudarOS(osName) {
         card.classList.remove('highlight-os');
         card.style.display = 'flex'; // Mantém todos visíveis no grid
     });
-    
+
     document.querySelectorAll('.os-tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
@@ -1197,11 +1312,11 @@ function mudarOS(osName) {
     // Ativa o card e aba selecionados
     const targetCard = document.getElementById('card-' + osName);
     const targetBadge = document.getElementById('badge-' + osName);
-    
+
     if (targetCard) {
         targetCard.classList.add('highlight-os');
         targetBadge.style.display = 'inline-block';
-        
+
         // Opcional: Dá um leve scroll suave para o card detectado se necessário em mobile
         // targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -1213,7 +1328,7 @@ function mudarOS(osName) {
 function eventosAtivarAba(osName) {
     const buttons = document.querySelectorAll('.os-tab-btn');
     buttons.forEach(btn => {
-        if (btn.textContent.toLowerCase().includes(osName) || 
+        if (btn.textContent.toLowerCase().includes(osName) ||
             (osName === 'ios' && btn.textContent.toLowerCase().includes('iphone')) ||
             (osName === 'macos' && btn.textContent.toLowerCase().includes('macos'))) {
             btn.classList.add('active');
@@ -1261,11 +1376,11 @@ function atualizarCarrossel(comTransicao = true) {
     // Centraliza o card ativo no container
     const activeCard = cards[currentIndex];
     const trackWrapper = track.parentElement;
-    
+
     const cardOffsetLeft = activeCard.offsetLeft;
     const cardWidth = activeCard.clientWidth;
     const wrapperWidth = trackWrapper.clientWidth;
-    
+
     const targetTranslateX = (wrapperWidth / 2) - cardOffsetLeft - (cardWidth / 2);
     track.style.transform = `translateX(${targetTranslateX}px)`;
 }
@@ -1281,7 +1396,7 @@ function rolarInfinito(direcao) {
         track.appendChild(primeiroCard); // Pega o primeiro card da esquerda e joga para o final da direita
         currentIndex = cards.length - 1; // Ajusta o índice para o novo último card
         atualizarCarrossel(false);
-        
+
         // Retoma a transição no próximo frame
         setTimeout(() => {
             track.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -1296,7 +1411,7 @@ function rolarInfinito(direcao) {
         track.insertBefore(ultimoCard, track.firstElementChild); // Pega o último card da direita e joga para o início da esquerda
         currentIndex = 0; // Ajusta o índice para o novo primeiro card
         atualizarCarrossel(false);
-        
+
         // Retoma a transição no próximo frame
         setTimeout(() => {
             track.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
