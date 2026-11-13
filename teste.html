@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!--Estas tags são a base do seu site. O charset="UTF-8" garante que todos os caracteres, como acentos e emojis, sejam exibidos corretamente.-->
+    <meta charset="UTF-8" />
+    <!--Diz ao navegador para ajustar a largura da página à largura do dispositivo, tornando seu site responsivo em celulares e tablets.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!---->
+    <!--A primeira é para o favicon, o pequeno ícone que aparece na aba do navegador-->
+    <link rel="icon" href="assets/images/geral/icone.png" type="image/x-icon" />
+
+    <!---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!---->
+
+    <!--é a breve descrição da sua página que pode aparecer no Google-->
+    <meta name="description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!" />
+    <!--são palavras-chave que ajudam a categorizar o conteúdo-->
+    <meta name="keywords"
+        content="Minecraft, Servidor Minecraft, Zera's Craft, comunidade, eventos, multiplayer, sobrevivência, construções, mods, jogo" />
+    <!--Identifica o autor do documento HTML.-->
+    <meta name="author" content="Seu Nome ou Nome da Equipe Zera's Craft" />
+    <!--instrui o Google a "indexar" (adicionar aos resultados de busca) e "seguir" os links da sua página-->
+    <meta name="robots" content="index, follow" />
+
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <!--O título que aparece na pré-visualização.-->
+    <meta property="og:title" content="Mundo Zera's Craft - Início Oficial" />
+    <!--A descrição que aparece na pré-visualização.-->
+    <meta property="og:description"
+        content="Seu universo Minecraft para construir, aventurar e criar memórias inesquecíveis no Mundo Zera's Craft. Junte-se à nossa comunidade vibrante!" />
+    <!--A URL da imagem que aparecerá como miniatura. Esta é a tag mais importante para criar uma pré-visualização visualmente atraente.-->
+    <meta property="og:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/og-image-home.jpg" />
+    <!--A URL da página.-->
+    <meta property="og:url" content="https://seusite.com.br/index.html" />
+
+    <!--Fornecem contexto adicional sobre o tipo de conteúdo (p. ex., "website"), o nome do site e o idioma.-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mundo Zera's Craft" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!--Elas garantem que, mesmo em uma plataforma diferente, a pré-visualização do seu link seja profissional e visualmente atraente.-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SeuTwitterHandle" />
+    <meta name="twitter:creator" content="@SeuTwitterHandle" />
+    <meta name="twitter:title" content="Mundo Zera's Craft - O Melhor Servidor de Minecraft!" />
+    <meta name="twitter:description"
+        content="Aventure-se em um mundo épico, construa, explore e faça amigos. Junte-se à comunidade do Zera's Craft!" />
+    <!---->
+    <meta name="twitter:image"
+        content="https://matheuzera.github.io/ZerasCraft/assets/images/1.site/twitter-card-home.jpg" />
+    <!--Ela define a cor da barra de endereço em navegadores de celular Android, como o Chrome-->
+    <meta name="theme-color" content="#347C2F" />
+    <!-- Links para ScrollReveal e CountUp.js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- CSS Globais -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Zera's Craft Home</title>
+</head>
+
+<body>
+
+    <!-- BARRA LATERAL ESQUERDA REESTRUTURADA -->
+    <aside class="wiki-left-sidebar">
+        <div class="wiki-left-logo-box">
+            <img src="https://minecraft.wiki/images/Minecraft_Wiki_Logo.png" alt="Minecraft Wiki">
+        </div>
+
+        <div class="wiki-left-stats-bar">
+            <div><span>18.5k</span> páginas</div>
+            <div><span>177.5k</span> edições</div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Navegação</button>
+            <div class="wiki-left-links">
+                <a href="#ajuda">Como ajudar</a>
+                <a href="#recentes">Alterações recentes</a>
+                <a href="#aleatoria">Página aleatória</a>
+                <a href="https://discord.com" target="_blank" class="wiki-left-discord-btn">💬 Wiki Discord</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Comunidade Wiki</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#">Portal da Comunidade</a>
+                <a href="#">Regras da Comunidade</a>
+                <a href="#">Discussões</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-promo-box">
+            <span class="wiki-left-promo-close" onclick="this.parentElement.style.display='none'">×</span>
+            <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Grass Block">
+            <p>Tired of seeing Fandom results on Google?</p>
+            <span class="wiki-left-promo-highlight">Hide them forever with two clicks</span>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Franquia</button>
+            <div class="wiki-left-links">
+                <a href="#">Minecraft</a>
+                <a href="#">Minecraft Dungeons</a>
+                <a href="#">Um filme de Minecraft</a>
+                <a href="#">Lendas do Minecraft</a>
+                <a href="#">Minecraft: Modo História</a>
+                <a href="#">Minecraft Terra</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle" onclick="toggleSidebarSection(this)">Versões recentes</button>
+            <div class="wiki-left-links">
+                <a href="#java">Edição Java: 26.3</a>
+                <a href="#bedrock">Edição Bedrock: 26.63</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Páginas úteis</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#comercio">Negociação</a>
+                <a href="#fermentacao">Cervejaria</a>
+                <a href="#encantamento">Encantamentos</a>
+                <a href="#tutoriais">Tutoriais</a>
+            </div>
+        </div>
+
+        <div class="wiki-left-group">
+            <button class="wiki-left-toggle collapsed" onclick="toggleSidebarSection(this)">Ferramentas</button>
+            <div class="wiki-left-links collapsed">
+                <a href="#">Páginas afluentes</a>
+                <a href="#">Carregar arquivo</a>
+                <a href="#">Páginas especiais</a>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="main-container">
+
+        <!-- CABEÇALHO SUPERIOR COM ABAS INTERATIVAS E MODAL NO HOVER -->
+        <header class="wiki-header">
+            <div class="top-account-bar">
+                <span>🌙</span>
+                <a href="#">Criar uma conta</a>
+                <a href="#">Conecte-se</a>
+            </div>
+
+            <div class="header-left-group">
+                <button class="wiki-header-btn active" onclick="setActiveNav(this)">Página principal</button>
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Falar</button>
+            </div>
+
+            <div class="header-right-group">
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Ler</button>
+                <button class="wiki-header-btn" onclick="setActiveNav(this)">Ver código-fonte</button>
+
+                <!-- Botão Ver Histórico com Modal no Hover e Link Original ao Clicar -->
+                <div class="history-dropdown-wrapper">
+                    <a href="https://minecraft.wiki" class="wiki-header-btn" onclick="setActiveNav(this)">Ver
+                        histórico</a>
+                    <div class="history-hover-modal">
+                        <a href="https://minecraft.wiki">🌐 Histórico Global da Wiki</a>
+                        <a href="https://minecraft.wiki">📊 Estatísticas de Edição</a>
+                        <a href="https://minecraft.wiki">🕒 Revisões Anteriores</a>
+                    </div>
+                </div>
+
+                <div class="more-dropdown">
+                    <button class="wiki-header-btn" onclick="toggleMoreModal(event)">Mais ▾</button>
+                    <div id="moreModal" class="more-modal">
+                        <a href="https://minecraft.wiki" target="_blank">🌐 Wiki Oficial Global</a>
+                        <a href="https://mojang.com" target="_blank">📦 Mojang Studios</a>
+                        <a href="https://xbox.com" target="_blank">🎮 Xbox Game Pass</a>
+                    </div>
+                </div>
+
+                <div class="header-search-box">
+                    <input type="text" id="searchInput" placeholder="Pesquisar na Wiki do Minecraft"
+                        onkeyup="filterPageStrings()">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- SUB-TOPO IDIOMAS -->
+        <div class="top-sub-header">
+            <a href="#">Português</a>
+            <span style="color:#c8cbd1;">|</span>
+            <button class="lang-dropdown-btn">🌐 14 idiomas ▾</button>
+        </div>
+
+        <!-- ABAS DE FRANQUIA (EXATAMENTE COMO NA PRINT SOLICITADA) -->
+        <nav class="franchise-nav">
+            <a href="#minecraft" class="franchise-tab">
+                <img src="https://minecraft.wiki/images/Grass_Block.png" alt="Minecraft"> Minecraft
+            </a>
+            <a href="#masmorras" class="franchise-tab">
+                <img src="https://minecraft.wiki/images/Redstone_Dust.png" alt="Masmorras"> Masmorras
+            </a>
+            <a href="#filme" class="franchise-tab">
+                <img src="https://minecraft.wiki/images/Golden_Apple.png" alt="Filme"> Filme
+            </a>
+            <a href="#lendas" class="franchise-tab">
+                <img src="https://minecraft.wiki/images/Diamond_Sword.png" alt="Lendas"> Lendas
+            </a>
+            <a href="#modo-historia" class="franchise-tab">
+                <img src="https://minecraft.wiki/images/Enchanted_Book.png" alt="Modo História"> Modo História
+            </a>
+            <a href="#terra" class="franchise-tab tab-terra">
+                <img src="https://minecraft.wiki/images/Oak_Sapling.png" alt="Terra"> Terra
+            </a>
+        </nav>
+
+        <!-- GRID DE CONTEÚDO CENTRALIZADO E ISOLADO EM QUADRADINHOS/CARDS -->
+        <div class="content-grid">
+
+            <div class="left-column">
+
+                <section class="marketplace-addons-section">
+                    <div class="marketplace-addons-container">
+                        <div class="marketplace-info-col">
+                            <h2 class="marketplace-title">COMPLEMENTOS DO MARKETPLACE</h2>
+                            <p class="marketplace-desc">Agora há ainda mais maneiras de mudar seu jogo no
+                                Bedrock, do
+                                seu jeito! Explore os novos complementos pagos e gratuitos no Marketplace do
+                                Minecraft
+                                hoje mesmo.</p>
+                            <a href="#" class="marketplace-btn">EXPLORAR MARKETPLACE &gt;</a>
+                        </div>
+
+                        <div class="marketplace-slider-wrapper">
+                            <div class="marketplace-cards-track" id="marketplaceTrack">
+                                <div class="mp-card">
+                                    <div class="mp-card-thumb">
+                                        <span class="mp-badge">ADD-ON</span>
+                                        <span class="mp-thumb-title">Brainrot</span>
+                                    </div>
+                                    <div class="mp-card-body">
+                                        <h4 class="mp-card-name">ARMAS BR...</h4>
+                                        <span class="mp-card-author">by Master Duckies</span>
+                                        <div class="mp-card-footer">
+                                            <span class="mp-rating">★ 4.8</span>
+                                            <span class="mp-price">🪙 830</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mp-card">
+                                    <div class="mp-card-thumb">
+                                        <span class="mp-badge">ADD-ON</span>
+                                        <span class="mp-thumb-title">ts Add-On</span>
+                                    </div>
+                                    <div class="mp-card-body">
+                                        <h4 class="mp-card-name">GADGETS ...</h4>
+                                        <span class="mp-card-author">by Block Studios</span>
+                                        <div class="mp-card-footer">
+                                            <span class="mp-rating">★ 5</span>
+                                            <span class="mp-price">🪙 490</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mp-card">
+                                    <div class="mp-card-thumb">
+                                        <span class="mp-badge">ADD-ON</span>
+                                        <span class="mp-thumb-title">s Add-On 1.0</span>
+                                    </div>
+                                    <div class="mp-card-body">
+                                        <h4 class="mp-card-name">DRONES A...</h4>
+                                        <span class="mp-card-author">by Maker Camp srls</span>
+                                        <div class="mp-card-footer">
+                                            <span class="mp-rating">★ 4.8</span>
+                                            <span class="mp-price">🪙 830</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mp-card">
+                                    <div class="mp-card-thumb">
+                                        <span class="mp-badge">ADD-ON</span>
+                                        <span class="mp-thumb-title">as e Além Add-On</span>
+                                    </div>
+                                    <div class="mp-card-body">
+                                        <h4 class="mp-card-name">CAVERNAS...</h4>
+                                        <span class="mp-card-author">by Ninja Block</span>
+                                        <div class="mp-card-footer">
+                                            <span class="mp-rating">★ 4.5</span>
+                                            <span class="mp-price">🪙 990</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="marketplace-arrows">
+                                <button class="mp-arrow-btn" onclick="slideMarketplace(-1)">←</button>
+                                <button class="mp-arrow-btn" onclick="slideMarketplace(1)">→</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="timeline-updates-section">
+                    <!-- Cabeçalho da Linha do Tempo -->
+                    <div class="timeline-header">
+                        <h2 class="timeline-main-title">LINHA DO TEMPO DAS ATUALIZAÇÕES DE MINECRAFT</h2>
+                        <p class="timeline-main-desc">Volte no tempo e veja como Minecraft evoluiu desde seu
+                            lançamento,
+                            começando pelas atualizações de jogo mais recentes! De Mounts of Mayhem a Spring to
+                            Life, de
+                            Village & Pillage à Nether Update, explore tudo que acrescentamos ao jogo desde a
+                            época em
+                            que ele ainda se chamava Cave Game.</p>
+
+                        <!-- Anos da Linha do Tempo -->
+                        <div class="timeline-years-bar">
+                            <button class="timeline-year-btn" onclick="filterTimeline('2026', this)">2026</button>
+                            <button class="timeline-year-btn" onclick="filterTimeline('2025', this)">2025</button>
+                            <button class="timeline-year-btn active"
+                                onclick="filterTimeline('2024', this)">2024</button>
+                            <button class="timeline-year-btn" onclick="filterTimeline('2023', this)">2023</button>
+                            <button class="timeline-year-btn" onclick="filterTimeline('mais', this)">MAIS</button>
+                        </div>
+                    </div>
+
+                    <!-- Grid de Cards de Atualizações (Organizados por Ano) -->
+                    <div class="timeline-cards-grid" id="timelineCardsGrid">
+
+                        <!-- ================= ANO 2024 ================= -->
+                        <div class="timeline-card-group" data-year="2024">
+                            <!-- Card 1 -->
+                            <div class="timeline-card">
+                                <div class="timeline-card-media-wrapper">
+                                    <div class="timeline-main-thumb" id="main-thumb-2024-0"
+                                        style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop');">
+                                        <span class="timeline-thumb-title-overlay">THE GARDEN AWAKENS</span>
+                                    </div>
+                                    <div class="timeline-thumbs-sidebar">
+                                        <div class="timeline-thumb-item active-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2024-0', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 1</span>
+                                        </div>
+                                        <div class="timeline-thumb-item"
+                                            style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2024-0', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 2</span>
+                                        </div>
+                                        <div class="timeline-thumb-item"
+                                            style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2024-0', 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-card-body">
+                                    <div class="timeline-card-header-row">
+                                        <h3 class="timeline-card-title">THE GARDEN AWAKENS</h3>
+                                        <button class="timeline-toggle-btn"
+                                            onclick="toggleReadMore('text-2024-0', this)">Mostrar mais
+                                            ▾</button>
+                                    </div>
+                                    <span class="timeline-card-date">DEZEMBRO DE 2024</span>
+                                    <p class="timeline-card-text" id="text-2024-0"
+                                        data-fulltext="Algo se agita no jardim pálido! Explore um bioma inquietante repleto de carvalhos pálidos e musgo suspenso. Siga uma trilha de flores mágicas até as profundezas da escuridão e encare perigos inusitados!">
+                                        Algo se agita no jardim pálido! Explore um bioma inquietante repleto de
+                                        carvalhos...
+                                    </p>
+                                    <div class="timeline-card-footer-info">Destaques do conteúdo...</div>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="timeline-card">
+                                <div class="timeline-card-media-wrapper">
+                                    <div class="timeline-main-thumb" id="main-thumb-2024-1"
+                                        style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=600&auto=format&fit=crop');">
+                                        <span class="timeline-thumb-title-overlay">BUNDLES OF BRAVERY</span>
+                                    </div>
+                                    <div class="timeline-thumbs-sidebar">
+                                        <div class="timeline-thumb-item active-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2024-1', 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 1</span>
+                                        </div>
+                                        <div class="timeline-thumb-item"
+                                            style="background-image: url('https://images.unsplash.com/photo-1511497584788-876761192569?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2024-1', 'https://images.unsplash.com/photo-1511497584788-876761192569?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 2</span>
+                                        </div>
+                                        <div class="timeline-thumb-item"
+                                            style="background-image: url('https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2024-1', 'https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-card-body">
+                                    <div class="timeline-card-header-row">
+                                        <h3 class="timeline-card-title">BUNDLES OF BRAVERY</h3>
+                                        <button class="timeline-toggle-btn"
+                                            onclick="toggleReadMore('text-2024-1', this)">Mostrar mais
+                                            ▾</button>
+                                    </div>
+                                    <span class="timeline-card-date">OUTUBRO DE 2024</span>
+                                    <p class="timeline-card-text" id="text-2024-1"
+                                        data-fulltext="Reúna coragem e reorganize seu inventário com os pacotes e o modo Hardcore! Organize seus itens com pacotes coloríveis que economizam espaço e desafiem seus limites.">
+                                        Reúna coragem e reorganize seu inventário com os pacotes e o modo
+                                        Hardcore!...
+                                    </p>
+                                    <div class="timeline-card-footer-info">Destaques do conteúdo...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= ANO 2025 ================= -->
+                        <div class="timeline-card-group" data-year="2025" style="display: none;">
+                            <div class="timeline-card">
+                                <div class="timeline-card-media-wrapper">
+                                    <div class="timeline-main-thumb" id="main-thumb-2025-0"
+                                        style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=600&auto=format&fit=crop');">
+                                        <span class="timeline-thumb-title-overlay">VILLAGE & SPIRES</span>
+                                    </div>
+                                    <div class="timeline-thumbs-sidebar">
+                                        <div class="timeline-thumb-item active-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2025-0', 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 1</span>
+                                        </div>
+                                        <div class="timeline-thumb-item"
+                                            style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2025-0', 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-card-body">
+                                    <div class="timeline-card-header-row">
+                                        <h3 class="timeline-card-title">VILLAGE & SPIRES</h3>
+                                        <button class="timeline-toggle-btn"
+                                            onclick="toggleReadMore('text-2025-0', this)">Mostrar mais
+                                            ▾</button>
+                                    </div>
+                                    <span class="timeline-card-date">JUNHO DE 2025</span>
+                                    <p class="timeline-card-text" id="text-2025-0"
+                                        data-fulltext="Novas vilas fortificadas e torres misteriosas surgem nas montanhas. Descubra novas profissões de aldeões e negocie itens raros.">
+                                        Novas vilas fortificadas e torres misteriosas surgem nas montanhas...
+                                    </p>
+                                    <div class="timeline-card-footer-info">Destaques do conteúdo...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= ANO 2026 ================= -->
+                        <div class="timeline-card-group" data-year="2026" style="display: none;">
+                            <div class="timeline-card">
+                                <div class="timeline-card-media-wrapper">
+                                    <div class="timeline-main-thumb" id="main-thumb-2026-0"
+                                        style="background-image: url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=600&auto=format&fit=crop');">
+                                        <span class="timeline-thumb-title-overlay">WILDERNESS BOUND</span>
+                                    </div>
+                                    <div class="timeline-thumbs-sidebar">
+                                        <div class="timeline-thumb-item active-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2026-0', 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 1</span>
+                                        </div>
+                                        <div class="timeline-thumb-item"
+                                            style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2026-0', 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-card-body">
+                                    <div class="timeline-card-header-row">
+                                        <h3 class="timeline-card-title">WILDERNESS BOUND</h3>
+                                        <button class="timeline-toggle-btn"
+                                            onclick="toggleReadMore('text-2026-0', this)">Mostrar mais
+                                            ▾</button>
+                                    </div>
+                                    <span class="timeline-card-date">MARÇO DE 2026</span>
+                                    <p class="timeline-card-text" id="text-2026-0"
+                                        data-fulltext="Aventuras selvagens atualizadas com novas criaturas interativas, biomas dinâmicos e mecânicas aprimoradas de acampamento.">
+                                        Aventuras selvagens atualizadas com novas criaturas interativas...
+                                    </p>
+                                    <div class="timeline-card-footer-info">Destaques do conteúdo...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= ANO 2023 ================= -->
+                        <div class="timeline-card-group" data-year="2023" style="display: none;">
+                            <div class="timeline-card">
+                                <div class="timeline-card-media-wrapper">
+                                    <div class="timeline-main-thumb" id="main-thumb-2023-0"
+                                        style="background-image: url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=600&auto=format&fit=crop');">
+                                        <span class="timeline-thumb-title-overlay">TRAILS & TALES</span>
+                                    </div>
+                                    <div class="timeline-thumbs-sidebar">
+                                        <div class="timeline-thumb-item active-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2023-0', 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 1</span>
+                                        </div>
+                                        <div class="timeline-thumb-item"
+                                            style="background-image: url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('2023-0', 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-card-body">
+                                    <div class="timeline-card-header-row">
+                                        <h3 class="timeline-card-title">TRAILS & TALES</h3>
+                                        <button class="timeline-toggle-btn"
+                                            onclick="toggleReadMore('text-2023-0', this)">Mostrar mais
+                                            ▾</button>
+                                    </div>
+                                    <span class="timeline-card-date">JUNHO DE 2023</span>
+                                    <p class="timeline-card-text" id="text-2023-0"
+                                        data-fulltext="Expresse sua criatividade com archeologia, armaduras customizadas, blocos de bambu e os adoráveis camelos!">
+                                        Expresse sua criatividade com archeologia, armaduras customizadas...
+                                    </p>
+                                    <div class="timeline-card-footer-info">Destaques do conteúdo...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= MAIS ================= -->
+                        <div class="timeline-card-group" data-year="mais" style="display: none;">
+                            <div class="timeline-card">
+                                <div class="timeline-card-media-wrapper">
+                                    <div class="timeline-main-thumb" id="main-thumb-mais-0"
+                                        style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=600&auto=format&fit=crop');">
+                                        <span class="timeline-thumb-title-overlay">THE NETHER UPDATE</span>
+                                    </div>
+                                    <div class="timeline-thumbs-sidebar">
+                                        <div class="timeline-thumb-item active-thumb"
+                                            style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('mais-0', 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 1</span>
+                                        </div>
+                                        <div class="timeline-thumb-item"
+                                            style="background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=600&auto=format&fit=crop');"
+                                            onclick="changeMainThumb('mais-0', 'https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=600&auto=format&fit=crop', this)">
+                                            <span>Thumb 2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-card-body">
+                                    <div class="timeline-card-header-row">
+                                        <h3 class="timeline-card-title">THE NETHER UPDATE</h3>
+                                        <button class="timeline-toggle-btn"
+                                            onclick="toggleReadMore('text-mais-0', this)">Mostrar mais
+                                            ▾</button>
+                                    </div>
+                                    <span class="timeline-card-date">AGOSTO DE 2020</span>
+                                    <p class="timeline-card-text" id="text-mais-0"
+                                        data-fulltext="Uma reformulação completa da dimensão do Nether, adicionando novos biomas, criaturas hostis e amigáveis, e o cobiçado Netherite.">
+                                        Uma reformulação completa da dimensão do Nether, adicionando novos
+                                        biomas...
+                                    </p>
+                                    <div class="timeline-card-footer-info">Destaques do conteúdo...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+                <section class="realms-compare-section">
+                    <div class="realms-compare-container">
+
+                        <!-- Título Principal -->
+                        <h2 class="realms-main-title">COMPARE OS PLANOS DE ASSINATURA DO REALMS</h2>
+
+                        <!-- Botões de Alternância de Versão (Bedrock / Java) -->
+                        <div class="realms-tabs-bar">
+                            <button class="realms-tab-btn active" id="btnBedrock" onclick="switchRealmsTab('bedrock')">
+                                REALMS PARA BEDROCK
+                            </button>
+                            <button class="realms-tab-btn" id="btnJava" onclick="switchRealmsTab('java')">
+                                REALMS PARA JAVA
+                            </button>
+                        </div>
+
+                        <!-- Tabela Bedrock -->
+                        <div class="realms-table-wrapper" id="tableBedrock">
+                            <div class="realms-sub-heading">
+                                PRINCIPAIS RECURSOS DO REALMS E DO REALMS PLUS PARA BEDROCK
+                                <span>Plataforma: Android, iOS, Windows, Amazon Fire, Xbox, PlayStation,
+                                    Nintendo e
+                                    Chromebook</span>
+                            </div>
+                            <table class="realms-matrix-table">
+                                <thead>
+                                    <tr>
+                                        <th>RECURSO</th>
+                                        <th>REALMS</th>
+                                        <th>REALMS PLUS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Taxa de assinatura mensal (recorrente)</td>
+                                        <td>US$ 3,99/mês</td>
+                                        <td>US$ 7,99/mês</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jogadores que podem jogar simultaneamente</td>
+                                        <td>Você + 2 jogadores</td>
+                                        <td>Você + 10 jogadores</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Número de amigos convidados</td>
+                                        <td>10</td>
+                                        <td>10.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Servidor pessoal disponível ininterruptamente</td>
+                                        <td><span class="check-green">✓</span></td>
+                                        <td><span class="check-green">✓</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amigos jogam gratuitamente</td>
+                                        <td><span class="check-green">✓</span></td>
+                                        <td><span class="check-green">✓</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Tabela Java -->
+                        <div class="realms-table-wrapper" id="tableJava" style="display: none;">
+                            <div class="realms-sub-heading">
+                                PRINCIPAIS RECURSOS DO REALMS PARA JAVA
+                                <span>Plataforma: PC (Java Edition)</span>
+                            </div>
+                            <table class="realms-matrix-table">
+                                <thead>
+                                    <tr>
+                                        <th>RECURSO</th>
+                                        <th>REALMS PARA JAVA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Taxa de assinatura mensal (recorrente)</td>
+                                        <td>Preço padrão para Java/mês</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jogadores que podem jogar simultaneamente</td>
+                                        <td>Você + 10 jogadores</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Servidor pessoal disponível ininterruptamente</td>
+                                        <td><span class="check-green">✓</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amigos jogam gratuitamente</td>
+                                        <td><span class="check-green">✓</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Backups gratuitos do mundo</td>
+                                        <td><span class="check-green">✓</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Suporte para mods e minigames personalizados</td>
+                                        <td><span class="check-green">✓</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+                <section class="realms-features-section">
+                    <!-- Container de Partículas Flutuantes de Fundo -->
+                    <div class="floating-particles-container" id="particlesContainer"></div>
+
+                    <div class="realms-features-wrapper">
+
+                        <!-- Bloco 1: Realms Stories -->
+                        <div class="feature-row">
+                            <div class="feature-media-box">
+                                <div class="feature-video-mockup"
+                                    style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=600&auto=format&fit=crop');">
+                                    <button class="feature-pause-btn">❚❚</button>
+                                </div>
+                            </div>
+                            <div class="feature-content-box">
+                                <h3 class="feature-title">SOCIALIZE-SE COM O REALMS STORIES</h3>
+                                <p class="feature-desc">O Realms Stories é um feed social do jogo que permite
+                                    que você
+                                    mantenha contato com os membros do Realm, mesmo que vocês não joguem
+                                    simultaneamente. Planeje, construa e comemore com eles, mesmo quando vocês
+                                    estiverem
+                                    distantes.</p>
+                                <div class="feature-btn-row">
+                                    <a href="#" class="feature-btn purple">ASSISTIR AO TRAILER</a>
+                                    <a href="#" class="feature-link">Saiba mais</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bloco 2: Acesso ao Catálogo do Marketplace Pass -->
+                        <div class="feature-row reverse">
+                            <div class="feature-media-box">
+                                <div class="feature-video-mockup"
+                                    style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=600&auto=format&fit=crop');">
+                                </div>
+                            </div>
+                            <div class="feature-content-box">
+                                <h3 class="feature-title">ACESSO AO CATÁLOGO DO MARKETPLACE PASS</h3>
+                                <p class="feature-desc">As assinaturas do Realms Plus incluem o Marketplace
+                                    Pass! Acesso
+                                    gratuito a um catálogo rotativo de conteúdo Premium selecionado por
+                                    criadores,
+                                    incluindo os favoritos dos jogadores. Os assinantes também aproveitam
+                                    grandes
+                                    descontos em conteúdo no catálogo do Marketplace Pass. Compre seu conteúdo
+                                    favorito
+                                    antes que ele saia do catálogo para tê-lo para sempre.</p>
+                                <div class="feature-btn-row">
+                                    <a href="#" class="feature-btn yellow">ASSISTIR AO TRAILER</a>
+                                    <a href="#" class="feature-link">Saiba mais</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+                <section class="downloads-test-section">
+                    <!-- Abas de Navegação Superior -->
+                    <div class="test-tabs-header">
+                        <button class="test-tab-btn" onclick="switchTestTab('downloads', this)">📥 DOWNLOADS DA
+                            VERSÃO
+                            DE TESTE</button>
+                        <button class="test-tab-btn active" onclick="switchTestTab('suporte', this)">📖
+                            SUPORTE</button>
+                    </div>
+
+                    <!-- Conteúdo: Downloads (Oculto por padrão nesta aba) -->
+                    <div class="test-tab-content" id="contentDownloads" style="display: none;">
+                        <!-- Bloco Bedrock Edition -->
+                        <h3 class="test-group-title">MINECRAFT BEDROCK EDITION</h3>
+                        <div class="test-platforms-grid">
+                            <a href="#" class="platform-card"><span class="platform-name">🪟 WINDOWS
+                                    10/11</span><span class="platform-arrow">↗</span></a>
+                            <a href="#" class="platform-card"><span class="platform-name">🎮
+                                    PLAYSTATION</span><span class="platform-arrow">↗</span></a>
+                            <a href="#" class="platform-card"><span class="platform-name">🤖 ANDROID</span><span
+                                    class="platform-arrow">↗</span></a>
+                            <a href="#" class="platform-card"><span class="platform-name">🍎 IOS</span><span
+                                    class="platform-arrow">↗</span></a>
+                            <a href="#" class="platform-card"><span class="platform-name">🕹️ NINTENDO
+                                    SWITCH</span><span class="platform-arrow">↗</span></a>
+                        </div>
+
+                        <h3 class="test-group-title" style="margin-top: 24px;">MINECRAFT JAVA EDITION</h3>
+                        <div class="test-platforms-grid">
+                            <a href="#" class="platform-card"><span class="platform-name">🪟 WINDOWS
+                                    10/11</span><span class="platform-arrow download">📥</span></a>
+                            <a href="#" class="platform-card"><span class="platform-name">🐧 LINUX</span><span
+                                    class="platform-arrow download">📥</span></a>
+                            <a href="#" class="platform-card"><span class="platform-name">🍎 MAC</span><span
+                                    class="platform-arrow download">📥</span></a>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo: Suporte (Unificado no mesmo container e com pesquisa funcional) -->
+                    <section class="support-section" id="contentSuporte">
+
+                        <div class="support-header-box">
+                            <h2 class="support-main-title">COMO PODEMOS AJUDAR?</h2>
+                            <p class="support-desc">Tente buscar nos nossos artigos de suporte do Minecraft.</p>
+
+                            <div class="support-search-container">
+                                <span class="support-search-label">PESQUISAR</span>
+                                <div class="support-search-input-box">
+                                    <span class="search-icon">🔍</span>
+                                    <input type="text" placeholder="Pesquisar artigos de suporte"
+                                        id="supportSearchInput" onkeyup="filterSupportArticles()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Artigos de Solução de Problemas -->
+                        <div class="support-articles-block">
+                            <h3 class="support-group-title">ARTIGOS DE SOLUÇÃO DE PROBLEMAS</h3>
+                            <ul class="support-articles-list" id="supportArticlesList">
+                                <li><a href="#">Como baixar e instalar o Minecraft Launcher</a></li>
+                                <li><a href="#">Solução de problemas na instalação do Minecraft Launcher</a>
+                                </li>
+                                <li><a href="#">Como usar o Jogo Rápido no Minecraft Launcher</a></li>
+                                <li><a href="#">Solução de problemas: erro ao conectar aos serviços do Minecraft
+                                        após o
+                                        login no Minecraft Launcher</a></li>
+                                <li><a href="#">O Minecraft Launcher trava ao fazer login</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Perguntas Frequentes (FAQ Acordeão) -->
+                        <div class="support-faq-block" style="margin-top: 24px;">
+                            <h3 class="support-group-title">PERGUNTAS FREQUENTES SOBRE A VERSÃO DE TESTE
+                                GRATUITA DO
+                                MINECRAFT</h3>
+
+                            <div class="faq-accordion-item">
+                                <button class="faq-question-bar" onclick="toggleFaqAccordion(this)">
+                                    <span>O QUE O TESTE GRATUITO DO MINECRAFT INCLUI?</span>
+                                    <span class="faq-arrow">▼</span>
+                                </button>
+                                <div class="faq-answer-content">
+                                    <p>O teste gratuito permite que você experimente o jogo base por um período
+                                        limitado
+                                        (geralmente de 90 a 100 minutos de jogo efetivo), com acesso a mundos de
+                                        sobrevivência para testar a mecânica antes de comprar a versão completa.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-accordion-item">
+                                <button class="faq-question-bar" onclick="toggleFaqAccordion(this)">
+                                    <span>POSSO JOGAR OFFLINE COM UM TESTE GRATUITO DO MINECRAFT?</span>
+                                    <span class="faq-arrow">▼</span>
+                                </button>
+                                <div class="faq-answer-content">
+                                    <p>Depende da plataforma escolhida. Na Edição Java e em alguns dispositivos
+                                        Bedrock,
+                                        é necessário estar conectado à internet na primeira inicialização para
+                                        validar a
+                                        licença do teste.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+                </section>
+
+
+
+
+
+                <section class="free-trial-steps-section">
+                    <div class="free-trial-container">
+
+                        <h2 class="free-trial-main-title">COMO INICIAR UMA AVALIAÇÃO GRATUITA</h2>
+
+                        <div class="free-trial-steps-grid">
+
+                            <!-- Passo 1: Baixar -->
+                            <div class="trial-step-card">
+                                <div class="trial-step-icon-box">
+                                    <img src="https://minecraft.wiki/images/Bee.png" alt="Abelha"
+                                        class="pixel-art-icon">
+                                </div>
+                                <div class="trial-step-content">
+                                    <span class="trial-step-number">1: Baixar</span>
+                                    <p class="trial-step-desc">Selecione abaixo a opção de download
+                                        correspondente ao
+                                        dispositivo desejado.</p>
+                                </div>
+                            </div>
+
+                            <!-- Passo 2: Entrar -->
+                            <div class="trial-step-card">
+                                <div class="trial-step-icon-box">
+                                    <img src="https://minecraft.wiki/images/Blaze.png" alt="Blaze"
+                                        class="pixel-art-icon">
+                                </div>
+                                <div class="trial-step-content">
+                                    <span class="trial-step-number">2: Entrar</span>
+                                    <p class="trial-step-desc">Entre ou crie uma conta Microsoft para começar.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Passo 3: Experimentar -->
+                            <div class="trial-step-card">
+                                <div class="trial-step-icon-box">
+                                    <img src="https://minecraft.wiki/images/Ender_Dragon.png" alt="Ender Dragon"
+                                        class="pixel-art-icon">
+                                </div>
+                                <div class="trial-step-content">
+                                    <span class="trial-step-number">3: Experimente o Minecraft
+                                        gratuitamente!</span>
+                                    <p class="trial-step-desc">Inicie a versão de teste gratuita no seu
+                                        dispositivo.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+                <section class="news-highlights-section">
+                    <div class="news-highlights-container">
+
+                        <!-- Card Principal à Esquerda -->
+                        <div class="news-main-card">
+                            <div class="news-main-thumb"
+                                style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop');">
+                                <span class="thumb-top-label">Test the final features from our upcoming
+                                    drop</span>
+                            </div>
+                            <div class="news-main-body">
+                                <h3 class="news-main-title">TEST THE FINAL FEATURES FROM OUR UPCOMING DROP</h3>
+                                <p class="news-main-desc">This week, find treasure maps in camps and build with
+                                    concrete
+                                    slabs & stairs! And ICYMI, check out the dappled forest, abandoned camp,
+                                    cushion,
+                                    and many more features!</p>
+                                <a href="#" class="news-action-btn">READ MORE &gt;</a>
+                            </div>
+                        </div>
+
+                        <!-- Coluna de Cards Secundários à Direita -->
+                        <div class="news-side-stack">
+
+                            <!-- Side Card 1 -->
+                            <div class="news-side-card">
+                                <div class="news-side-thumb"
+                                    style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop');">
+                                    <span class="thumb-top-label-small">Minecraft Dungeons II gameplay reveal &
+                                        date
+                                        announce</span>
+                                </div>
+                                <div class="news-side-body">
+                                    <h4 class="news-side-title">MINECRAFT DUNGEONS II GAMEPLAY REVEAL & DATE
+                                        ANNOUNCE
+                                    </h4>
+                                    <p class="news-side-desc">Learn all there is to know about Minecraft
+                                        Dungeons II,
+                                        launching September 29!</p>
+                                </div>
+                            </div>
+
+                            <!-- Side Card 2 -->
+                            <div class="news-side-card">
+                                <div class="news-side-thumb"
+                                    style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=400&auto=format&fit=crop');">
+                                    <span class="thumb-top-label-small">Get ready to play Dimension
+                                        Clash!</span>
+                                </div>
+                                <div class="news-side-body">
+                                    <h4 class="news-side-title">GET READY TO PLAY DIMENSION CLASH!</h4>
+                                    <a href="#" class="news-side-link">Let's go! ↗</a>
+                                </div>
+                            </div>
+
+                            <!-- Side Card 3 -->
+                            <div class="news-side-card">
+                                <div class="news-side-thumb"
+                                    style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=400&auto=format&fit=crop');">
+                                    <span class="thumb-top-label-small">Minecraft for Nintendo Switch™ 2 is
+                                        coming
+                                        October 27th!</span>
+                                </div>
+                                <div class="news-side-body">
+                                    <h4 class="news-side-title">MINECRAFT FOR NINTENDO SWITCH™ 2 IS COMING
+                                        OCTOBER 27TH!
+                                    </h4>
+                                    <a href="#" class="news-side-link">Find out more ↗</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+
+                <section class="latest-news-section">
+                    <!-- Cabeçalho com Contador, Ordenação e Botão de Filtros -->
+                    <div class="news-top-bar">
+                        <div class="news-title-group">
+                            <h2 class="news-section-title">LATEST NEWS</h2>
+                            <span class="news-counter" id="newsCounter">9 Cards</span>
+                        </div>
+                        <div class="news-controls-group">
+                            <!-- Dropdown de Ordenação -->
+                            <div class="sort-dropdown-wrapper">
+                                <button class="sort-toggle-btn" onclick="toggleSortMenu()">SORT BY: <span
+                                        id="currentSortLabel">MOST RECENT</span> ▾</button>
+                                <div class="sort-menu-dropdown" id="sortMenuDropdown">
+                                    <button onclick="changeSort('recent', 'MOST RECENT')">Most Recent</button>
+                                    <button onclick="changeSort('oldest', 'OLDEST')">Oldest</button>
+                                    <button onclick="changeSort('popular', 'MOST POPULAR')">Most
+                                        Popular</button>
+                                </div>
+                            </div>
+                            <!-- Botão de Filtro -->
+                            <button class="filter-toggle-btn" onclick="toggleFilterModal()">FILTERS 🔍</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Simples de Filtros por Checkbox -->
+                    <div class="filter-modal-box" id="filterModalBox" style="display: none;">
+                        <h3 class="filter-modal-title">FILTER NEWS</h3>
+                        <div class="filter-checkboxes-row">
+                            <label class="filter-checkbox-label"><input type="checkbox" checked value="java"
+                                    class="news-filter-chk"> Java Edition</label>
+                            <label class="filter-checkbox-label"><input type="checkbox" checked value="bedrock"
+                                    class="news-filter-chk"> Bedrock Edition</label>
+                            <label class="filter-checkbox-label"><input type="checkbox" checked value="community"
+                                    class="news-filter-chk"> Marketplace & Community</label>
+                        </div>
+                        <button class="news-action-btn apply-btn" onclick="applyFilters()">APPLY
+                            FILTERS</button>
+                    </div>
+
+                    <!-- Grid de Cards de Notícias -->
+                    <div class="news-cards-grid" id="newsCardsGrid">
+                        <!-- Os cards serão renderizados dinamicamente pelo JS com base na paginação -->
+                    </div>
+
+                    <!-- Barra de Paginação (< 1 de 2 >) -->
+                    <div class="news-pagination-bar">
+                        <button class="page-nav-arrow" onclick="changePage(-1)">‹</button>
+                        <div class="page-numbers" id="pageNumbersContainer">
+                            <!-- Gerado via JS -->
+                        </div>
+                        <span class="page-text-info">of <span id="totalPagesSpan">2</span></span>
+                        <button class="page-nav-arrow" onclick="changePage(1)">›</button>
+                    </div>
+                </section>
+
+
+
+
+                <section class="product-page-section">
+                    <!-- Breadcrumb de Navegação -->
+                    <nav class="product-breadcrumb">
+                        <a href="#">MINECRAFT LEGENDS</a> &gt; <span>PACOTE DE SKINS DELUXE</span>
+                    </nav>
+
+                    <div class="product-main-container">
+
+                        <!-- Coluna Esquerda: Vitrine/Banner do Produto -->
+                        <div class="product-media-box">
+                            <div class="product-banner-screen"
+                                style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop');">
+                                <div class="banner-overlay-text">Minecraft Legends: Pacote de Skins Deluxe</div>
+                            </div>
+                            <div class="product-platform-footer">
+                                <span class="platform-icon-windows">🪟</span> Windows
+                            </div>
+                        </div>
+
+                        <!-- Coluna Direita: Informações de Compra -->
+                        <div class="product-details-box">
+                            <div class="product-header-info">
+                                <span class="product-category-tag">PRODUTO</span>
+                                <span class="promo-badge-green">EM PROMOÇÃO</span>
+                            </div>
+
+                            <h1 class="product-title">MINECRAFT LEGENDS: PACOTE DE SKINS DELUXE</h1>
+
+                            <div class="product-age-rating">
+                                <span>🔞</span> Para maiores de 10 anos
+                            </div>
+
+                            <!-- Tags de Itens Inclusos -->
+                            <div class="product-features-tags">
+                                <span class="feature-tag-item">Uma skin de herói</span>
+                                <span class="feature-tag-item">Quatro skins de montaria</span>
+                            </div>
+
+                            <div class="product-divider"></div>
+
+                            <!-- Preços e Avisos -->
+                            <div class="product-pricing-block">
+                                <span class="old-price">R$ 79,95</span>
+                                <span class="current-price">R$ 31,98</span>
+                                <span class="requirement-notice">É necessário ter a Edição Padrão</span>
+                            </div>
+
+                            <!-- Botão de Checkout 3D Isolado -->
+                            <a href="#" class="checkout-action-btn">CHECKOUT &gt;</a>
+
+                            <div class="redeem-copy-top">
+                                <a href="#" class="redeem-link">Resgatar uma cópia</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+
+                <section class="minecraft-education-unified-section">
+
+                    <!-- SEÇÃO 1: BEM-VINDO AO MINECRAFT EDUCATION -->
+                    <div class="edu-hero-block">
+                        <h2 class="edu-main-title">BEM-VINDO AO MINECRAFT EDUCATION</h2>
+                        <p class="edu-main-subtitle">Capacite os alunos com as habilidades e a mentalidade de
+                            que
+                            precisam, dentro do universo Minecraft que eles adoram.</p>
+
+                        <div class="edu-profile-cards-grid">
+                            <a href="#" class="edu-profile-card">
+                                <span>EDUCADORES</span>
+                                <span class="square-arrow-icon">↗</span>
+                            </a>
+                            <a href="#" class="edu-profile-card">
+                                <span>LÍDERES ESCOLARES</span>
+                                <span class="square-arrow-icon">↗</span>
+                            </a>
+                            <a href="#" class="edu-profile-card">
+                                <span>ADMINISTRADORES DE TI</span>
+                                <span class="square-arrow-icon">↗</span>
+                            </a>
+                            <a href="#" class="edu-profile-card">
+                                <span>PAIS</span>
+                                <span class="square-arrow-icon">↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="edu-section-divider"></div>
+
+                    <!-- SEÇÃO 2: VÍDEO DO YOUTUBE + FUTURO DO APRENDIZADO -->
+                    <div class="edu-video-feature-block">
+                        <!-- Player do YouTube Integrado na Thumb -->
+                        <div class="edu-video-player-wrapper">
+                            <iframe src="https://www.youtube-nocookie.com/embed/3wbcmj3cJv8?autoplay=0&controls=1&rel=0"
+                                title="Minecraft Education Video" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="edu-video-content-box">
+                            <h3 class="edu-sub-title">COMO SERÁ O FUTURO DO APRENDIZADO?</h3>
+                            <p class="edu-text-desc">Acaba sendo bem "quadradão", na verdade! Baseado no jogo
+                                mais
+                                vendido de todos os tempos, o Minecraft Education é uma plataforma de
+                                aprendizado
+                                imersiva, criada para uso em sala de aula e confiada por escolas do mundo todo.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="edu-section-divider"></div>
+
+                    <!-- SEÇÃO 3: DESENVOLVA AULAS NO COPILOT -->
+                    <div class="edu-copilot-block">
+                        <div class="edu-copilot-banner"
+                            style="background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1000&auto=format&fit=crop');">
+                        </div>
+                        <h3 class="edu-sub-title">DESENVOLVA AULAS NO COPILOT</h3>
+                        <p class="edu-text-desc center">Desenvolva uma aula do Minecraft em minutos com o Teach
+                            do
+                            Microsoft 365 Copilot, agora disponível para educadores.</p>
+                        <a href="#" class="edu-action-btn purple">Experimente ↗</a>
+                    </div>
+
+                    <div class="edu-section-divider"></div>
+
+                    <!-- SEÇÃO 4: COMECE SUA JORNADA NO MINECRAFT -->
+                    <div class="edu-journey-block">
+                        <h3 class="edu-main-title">COMECE SUA JORNADA NO MINECRAFT</h3>
+
+                        <div class="edu-journey-cards-grid">
+                            <!-- Card 1 -->
+                            <div class="edu-journey-card">
+                                <div class="journey-card-inner">
+                                    <h4>FAZER TREINAMENTO GRATUITO</h4>
+                                    <p>Cursos gratuitos sob demanda são oferecidos para educadores e líderes
+                                        escolares.
+                                        Inscreva-se ainda hoje!</p>
+                                </div>
+                                <a href="#" class="journey-arrow-btn">
+                                    <span class="square-arrow-icon">›</span>
+                                </a>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="edu-journey-card">
+                                <div class="journey-card-inner">
+                                    <h4>JUNTE-SE À NOSSA COMUNIDADE GLOBAL</h4>
+                                    <p>Conheça outros educadores no Minecraft Teachers’ Lounge para obter
+                                        inspiração e
+                                        apoio.</p>
+                                </div>
+                                <a href="#" class="journey-arrow-btn">
+                                    <span class="square-arrow-icon">›</span>
+                                </a>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="edu-journey-card">
+                                <div class="journey-card-inner">
+                                    <h4>EXPLORE RECURSOS DE SALA DE AULA</h4>
+                                    <p>Explore aulas prontas para ensinar e crie desafios para qualquer
+                                        disciplina
+                                        escolar.</p>
+                                </div>
+                                <a href="#" class="journey-arrow-btn">
+                                    <span class="square-arrow-icon">›</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+
+            <!-- MENU LATERAL DIREITO -->
+            <aside class="right-column">
+                <div class="wiki-card-box">
+                    <div class="wiki-main-logo-box">
+                        <div class="right-logo-banner">
+                            <span class="r-main">MINECRAFT</span>
+                            <span class="r-sub">WIKI</span>
+                        </div>
+                        <p>Bem-vindo(a) à <a href="#">wiki</a> mais completa sobre <a href="#">a franquia
+                                <em>Minecraft</em></a>, orgulhosamente administrada pela comunidade desde 2009.<br><a
+                                href="#"><strong>Qualquer pessoa pode contribuir!</strong></a></p>
+                        <div class="wiki-stats-summary">
+                            <strong>18.528</strong> artigos • <strong>177.551</strong> arquivos • <strong>2.561</strong>
+                            usuários ativos
+                        </div>
+                    </div>
+
+                    <div class="social-icons-grid">
+                        <a href="https://bsky.app" target="_blank" class="social-btn s-bluesky" title="Bluesky">🦋</a>
+                        <a href="https://twitter.com" target="_blank" class="social-btn s-twitter"
+                            title="Twitter">🐦</a>
+                        <a href="https://mastodon.social" target="_blank" class="social-btn s-mastodon"
+                            title="Mastodon">🐘</a>
+                        <a href="https://zotero.org" target="_blank" class="social-btn s-zotero" title="Zotero">Z</a>
+                        <a href="https://discord.com" target="_blank" class="social-btn s-discord"
+                            title="Discord">💬</a>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Você sabia...</h4>
+                    <ul
+                        style="padding-left:16px; font-size:13px; display:flex; flex-direction:column; gap:7px; line-height:1.45;">
+                        <li>... que as texturas da <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">prismarina</a> e <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">das lanternas-do-mar</a> são
+                            animadas?</li>
+                        <li>... que o nome original do <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">bioma do Fim</a> era "Céu"?</li>
+                        <li>... que a textura original <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">da espada de ferro</a> foi tirada
+                            do jogo abandonado de <a href="#"
+                                style="color:var(--link-blue); text-decoration:none;">Notch, <em>Legend of the
+                                    Chambered</em></a>?</li>
+                    </ul>
+                    <div class="btn-row" style="margin-top:12px;">
+                        <button class="wiki-action-btn">Mais fatos!</button>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:8px;">Ajude a melhorar a wiki!</h4>
+                    <p style="font-size:13px; color:var(--text-dark); line-height:1.45; margin-bottom:10px;">A wiki é
+                        feita por pessoas como você. Se você vir algo que acha que pode ser melhorado em uma página,
+                        basta clicar no botão <strong>"Editar"</strong> ou <strong>"Editar código-fonte"</strong>.</p>
+                    <div class="btn-row">
+                        <button class="wiki-action-btn green">Comece aqui</button>
+                        <button class="wiki-action-btn">Precisar de ajuda?</button>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Ferramentas Wiki</h4>
+                    <div class="tools-grid-3">
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Experience_Bottle.png"
+                                    alt="Calc"></div>
+                            <div class="cat-label-bottom">Calculadoras</div>
+                        </a>
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Player_Head.png"
+                                    alt="Mod"></div>
+                            <div class="cat-label-bottom">Olá, mod Wiki</div>
+                        </a>
+                        <a href="#" class="tool-card-item">
+                            <div class="cat-icon-top"><img src="https://minecraft.wiki/images/Compass.png" alt="Indie">
+                            </div>
+                            <div class="cat-label-bottom">Indie Wiki Buddy</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="wiki-card-box">
+                    <h4 style="font-size:15px; font-weight:700; margin-bottom:10px;">Notícias da Wiki</h4>
+                    <p style="font-size:12.5px; line-height:1.45; margin-bottom:9px;"><strong>30 de agosto de
+                            2026</strong> – A Wiki de Minecraft em inglês <a href="#"
+                            style="color:var(--link-blue); text-decoration:none;">agora está disponível offline</a> como
+                        um único arquivo para download.</p>
+                    <p style="font-size:12.5px; line-height:1.45; margin-bottom:9px;"><strong>27 de maio de
+                            2026</strong> – O espaço de nomes <em>Dungeons II</em> foi criado, sendo o local para
+                        páginas sobre <a href="#" style="color:var(--link-blue); text-decoration:none;"><em>Minecraft
+                                Dungeons II</em></a>.</p>
+                    <p style="font-size:12.5px; line-height:1.45;"><strong>20 de abril de 2026</strong> – O Hypixel
+                        SkyBlock Wiki foi transferido para hypixelskyblock.minecraft.wiki após <a href="#"
+                            style="color:var(--link-blue); text-decoration:none;">ser derivado do Fandom</a>.</p>
+                </div>
+
+                <div class="communities-box">
+                    <div class="communities-inner">
+                        <h4 style="font-size:15px; font-weight:700; margin-bottom:8px;">Comunidades relacionadas</h4>
+                        <div class="communities-grid-2">
+                            <div>
+                                <strong style="font-size:12.5px; display:block; margin-bottom:5px;">Sites da
+                                    Web</strong>
+                                <ul>
+                                    <li><a href="#">Wiki do Hypixel SkyBlock</a></li>
+                                    <li><a href="#">Wiki de Feed The Beast</a> ( <a href="#">mods</a> )</li>
+                                    <li><a href="#">Wiki de Recursos Descontinuados do Minecraft</a></li>
+                                    <li><a href="#">Wiki do Bedrock</a> <span
+                                            style="color:var(--text-muted);">(técnico)</span></li>
+                                    <li><a href="#">Omniarquivo</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="font-size:12.5px; display:block; margin-bottom:5px;">Sites
+                                    oficiais</strong>
+                                <ul>
+                                    <li><a href="#">Site</a></li>
+                                    <li><a href="#">Servidor do Discord</a></li>
+                                    <li><a href="#">mídias sociais</a></li>
+                                    <li><a href="#">Feedback</a> ( <a href="#">Discord</a> )</li>
+                                    <li><a href="#">Central de Ajuda</a> ( <a href="#">Educação</a> )</li>
+                                    <li><a href="#">Rastreador de bugs</a> ( <a href="#">Discord</a> )</li>
+                                    <li><a href="#">Documentação do criador</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="communities-full-width-section">
+                        <div class="communities-grid-2" style="margin-top:0;">
+                            <div>
+                                <strong style="display:block; margin-bottom:5px; font-size:12.5px;">Comunidades do
+                                    Reddit</strong>
+                                <ul>
+                                    <li><a href="#">r/Minecraft</a></li>
+                                    <li><a href="#">r/realms</a></li>
+                                    <li><a href="#">r/feedthebeast</a> ( <a href="#">mods</a> )</li>
+                                    <li><a href="#">r/admincraft</a> ( <a href="#">administrador do servidor</a> )</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="display:block; margin-bottom:5px; font-size:12.5px;">Servidores do
+                                    Discord</strong>
+                                <ul>
+                                    <li><a href="#">Comandos do Minecraft</a></li>
+                                    <li><a href="#">Apoio comunitário</a></li>
+                                    <li><a href="#">Protocolo Minecraft</a></li>
+                                    <li><a href="#">Complementos para Bedrock</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- RODAPÉ DA PÁGINA -->
+        <footer class="wiki-root-footer">
+            <div class="footer-content">
+                <div class="footer-text-col">
+                    <p>Esta página foi editada pela última vez em 8 de novembro de 2026, às 06:03.</p>
+                    <p>O conteúdo deste site está licenciado sob <strong>CC BY-NC-SA 3.0</strong>, salvo indicação em
+                        contrário; <a href="#" style="color:#79b8ff; text-decoration:none;">termos adicionais podem ser
+                            aplicados</a>.<br>Este não é um site oficial do Minecraft. Não temos qualquer ligação com a
+                        Mojang ou a Microsoft.</p>
+                    <div class="footer-links-row">
+                        <a href="#">Política de Privacidade</a>
+                        <a href="#">Sobre a Wiki do Minecraft</a>
+                        <a href="#">Avisos legais</a>
+                        <a href="#">Termos de Uso</a>
+                        <a href="#">Contate a gosma estranha</a>
+                        <a href="#">Visualização em dispositivos móveis</a>
+                    </div>
+                </div>
+                <div class="footer-badges-col">
+                    <div class="footer-badge-pill">CC BY-NC-SA<br><span style="font-weight:400; font-size:9px;">3.0
+                            Unported</span></div>
+                    <div class="footer-badge-pill">hosted by<br><span style="font-size:11px;">Weird Gloop</span></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
